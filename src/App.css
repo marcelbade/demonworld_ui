@@ -2,6 +2,28 @@
   text-align: center;
 }
 
+.font-face-BreatheOfFire {
+  font-family: "BreatheOfFire";
+}
+.font-face-gonjuring {
+  font-family: "gonjuring";
+}
+
+.font-face-notMaryKate {
+  font-family: "notMaryKate";
+}
+.font-face-Berylium {
+  font-family: "Berylium";
+}
+.font-face-Beryliumbold {
+  font-family: "Beryliumbold";
+}
+.font-face-jaapokki-regular {
+  font-family: "jaapokki-regular";
+}
+ 
+
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;

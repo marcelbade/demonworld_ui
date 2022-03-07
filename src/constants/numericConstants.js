@@ -1,0 +1,1 @@
+  export const DEFAULT_ARMY_SIZE = 2000;

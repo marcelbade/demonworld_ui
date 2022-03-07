@@ -1,13 +1,46 @@
+@font-face {
+  font-family: "BreatheOfFire";
+  src: local("BreatheOfFire"),
+    url("./fonts/BreatheOfFire.ttf") format("truetype");
+  font-weight: normal;
+}
+@font-face {
+  font-family: "gonjuring";
+  src: local("gonjuring"), url("./fonts/gonjuring.ttf") format("truetype");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "notMaryKate";
+  src: local("notMaryKate"), url("./fonts/notMaryKate.ttf") format("truetype");
+  font-weight: normal;
+}
+@font-face {
+  font-family: "Berylium";
+  src: local("Berylium"), url("./fonts/Berylium.ttf") format("truetype");
+  font-weight: normal;
+}
+@font-face {
+  font-family: "Beryliumbold";
+  src: local("Beryliumbold"), url("./fonts/Beryliumbold.ttf") format("truetype");
+  font-weight: normal;
+}
+@font-face {
+  font-family: "jaapokki-regular";
+  src: local("jaapokki-regular"), url("./fonts/jaapokki-regular.ttf") format("truetype");
+  font-weight: normal;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
