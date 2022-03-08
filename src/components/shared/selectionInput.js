@@ -5,12 +5,13 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Autocomplete } from "@material-ui/lab";
 import { ALL_FACTIONS_ARRAY } from "../../constants/factions";
 import { TextField } from "@material-ui/core";
+import { getByLabelText } from "@testing-library/react";
 
 const useStyles = makeStyles({
-  root: { width: "300px" },
+  root: { width: "600px", marginLeft: "40px" },
   textField: {
     "& .MuiAutocomplete-input": {
-      fontSize :"40px", 
+      fontSize: "40px",
       fontFamily: "BreatheOfFire",
     },
   },
@@ -18,31 +19,23 @@ const useStyles = makeStyles({
 
 /**
  *Function creates the army selection Autocomplete element used by all pages.
- * @param {*} props 
- * @returns 
+ * @param {*} props
+ * @returns
  */
-const ArmySelection = (props) => {
+const SelectionInput = (props) => {
   const classes = useStyles();
 
   return (
     <Autocomplete
       id="arymSelection"
       className={classes.root}
-      options={ALL_FACTIONS_ARRAY}
-      // ALL_FACTIONS_ARRAY already is an array, so: array => array
-      getOptionLabel={(ALL_FACTIONS_ARRAY) => ALL_FACTIONS_ARRAY}
-      //select a faction
-      onChange={(event, value) => props.filterData(value)}
-      renderInput={(params) => (
-        <TextField
-          className={classes.textField}
-          {...params}
-          label="Fraktion"
-          variant="standard"
-        />
-      )}
+      options={props.options}
+      onChange={(event, value) => {
+        if (value) props.filterData(value);
+      }}
+      renderInput={(params) => <TextField className={classes.textField} {...params} label={props.label} variant="standard" />}
     />
   );
 };
 
-export default ArmySelection;
+export default SelectionInput;

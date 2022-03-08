@@ -11,7 +11,7 @@ import { Grid } from "@material-ui/core";
 // import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 // components & functions
 import {
-  generatHitPoints,
+  generateHitPoints,
   renderMagicPoints,
   renderCommandPoints,
 } from "../compendiums/factionTable/depencies/factionTableFunctions";
@@ -172,7 +172,7 @@ const StatCardUnit = (props) => {
           </p>
         </Grid>
         <Grid container direction="row" justify="space-around">
-          {generatHitPoints(props.rowData.hitpoints)}
+          {generateHitPoints(props.rowData.hitpoints)}
         </Grid>
       </Grid>
       <Grid item xs={2} className={classes.divider}>

@@ -10,7 +10,7 @@ import { Grid } from "@material-ui/core";
 // import BowIcon from "./customIcons/bow.jpg";
 // import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 //custom
-import { generatHitPoints } from "../compendiums/factionTable/depencies/factionTableFunctions";
+import { generateHitPoints } from "../compendiums/factionTable/depencies/factionTableFunctions";
 // clsx
 import clsx from "clsx";
 
@@ -166,7 +166,7 @@ const StatCardUnit = (props) => {
           </p>
         </Grid>
         <Grid container direction="row" justify="space-around">
-          {generatHitPoints(props.rowData.hitpoints)}
+          {generateHitPoints(props.rowData.hitpoints)}
         </Grid>
       </Grid>
       <Grid item xs={2} className={classes.divider}>

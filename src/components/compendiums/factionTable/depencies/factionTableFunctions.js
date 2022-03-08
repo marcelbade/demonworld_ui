@@ -75,13 +75,13 @@ export const showTommysAnalysis = (cardData) => {
 };
 
 /**
- * Function that renders the correct icon for the boolean unit stats. Units show either check or cross,
- * heroes  and commanders show  a "-".
+ * Function that renders the correct icon for those unit stats that are booleans. For a Unit the function displays either a check mark or X icon,
+ * for heroes  and commanders it shows  a "-".
  *
  * @param {boolean} flag
  * @returns Material UI icon or "-"
  */
-export const renderBoolean = (numberOfElements, flag) => {
+export const renderBooleanAsIcon = (numberOfElements, flag) => {
   const SINGLE_ELEMENT = 1;
 
   if (numberOfElements !== SINGLE_ELEMENT) {
@@ -100,7 +100,7 @@ export const renderBoolean = (numberOfElements, flag) => {
  * @param {integer} hitpoints
  * @returns  String
  */
-export const generatHitPoints = (hitpoints) => {
+export const generateHitPoints = (hitpoints) => {
   let hitpointMarker = "";
 
   for (let i = 0; i < hitpoints; i++) {

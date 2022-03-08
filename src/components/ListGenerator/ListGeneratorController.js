@@ -6,11 +6,13 @@ import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 // components and functions
-import ArmySelection from "../shared/armySelection";
+import SelectionInput from "../shared/selectionInput";
 import FactionTreeView from "./treeView";
 import ArmyListDisplay from "./armyListDisplay";
 import { uuidGenerator } from "../shared/sharedFunctions";
 import { alliesMapping } from "../gameLogic/allies";
+import { ALL_FACTIONS_ARRAY } from "../../constants/factions";
+
 
 const useStyles = makeStyles({
   root: {},
@@ -135,7 +137,7 @@ const ListGeneratorController = () => {
     <Grid container direction="row">
       <Grid container xs={2} item direction="column" className={classes.root}>
         <Grid item className={classes.selector}>
-          <ArmySelection filterData={setSelectedFaction} />
+          <SelectionInput filterData={setSelectedFaction} options={ALL_FACTIONS_ARRAY} label="Suche nach Fraktion"  />
         </Grid>
 
         <FactionTreeView

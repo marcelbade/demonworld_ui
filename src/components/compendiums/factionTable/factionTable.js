@@ -4,87 +4,41 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
-import MaterialTable, { MTableToolbar } from "material-table";
-import { Button, Grid, Paper } from "@material-ui/core";
- // icons
+import { Grid, IconButton, Paper, Checkbox, FormControl, FormGroup, FormControlLabel, Typography } from "@material-ui/core";
+
+// icons
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import CloseIcon from "@material-ui/icons/Close";
 // clsx
 import clsx from "clsx";
 // components & functions
 import {
-  renderBoolean,
+  renderBooleanAsIcon,
+  renderMagicPoints,
   renderSpecialRules,
   unitOrCmdCard,
+  renderCommandPoints,
 } from "./depencies/factionTableFunctions";
-import { tableIcons } from "./depencies/tableIcons";
 import TableOptions from "./OptionsMenuDialog";
-import ArmySelection from "../../shared/armySelection";
- 
+import SelectionInput from "../../shared/selectionInput";
+import { uuidGenerator } from "../../shared/sharedFunctions";
+import { ALL_FACTIONS_ARRAY } from "../../../constants/factions";
+
 const useStyles = makeStyles({
-  root: {
-    height: "100%",
+  table: {
     width: "100%",
-    fontSize: "20px",
-    fontWeight: "bold",
-    "& th": {
-      fontFamily: "Beryliumbold",
-      fontWeight: "bold",
-      fontSize: "20px",
-    },
-    "&  td": {
-      textAlign: "center",
-      padding: "0px",
-    },
-  },
-  tableTitle: {
-    fontWeight: "bold",
-    fontFamily: "notMaryKate",
-    color: "red",
-    fontSize: "50px",
-    marginBottom: "10px",
-    marginLeft: "60px",
-    textAlign: "left",
-  },
-  armySelector: {
-    marginLeft: "60px",
-    position: "relative",
-    // right :"10px",
-    // top: "52px",
-    // zIndex:"800"
-  },
-  options: {
-    fontFamily: "notMaryKate",
-    fontSize: "20px",
-    marginBottom: "10px",
-    marginLeft: "60px",
-    textAlign: "left",
-  },
-  optionsBttn: {
-    // fontWeight: "bold",
-    fontFamily: "notMaryKate",
-    color: "red",
-    fontSize: "30px",
-    paddingTop: "15px",
-    paddingRight: "350px",
-  },
-  titleIcons: {
-    height: "24px",
-    width: "24px",
-  },
-  unitCardStripe: {
-    padding: "10px",
-    color: "white",
-    backgroundColor: "black",
-  },
-  unitCardBox: {
-    width: "20%",
-  },
-  cardTitle: {
     textAlign: "center",
-    fontSize: "40px",
-    color: "red",
-    borderWidth: "0px",
-    "& .MuiGrid-item": { border: "none", padding: "0px", margin: "0px" },
+  },
+  pageTitle: {
+    marginLeft: "40px",
+    fontFamily: "BreatheOfFire",
+  },
+  checkBoxLabel: {
+    margin: "10px",
+    width: "250px",
+    "& .MuiFormControlLabel-label": {
+      fontFamily: "BreatheOfFire",
+    },
   },
 });
 
@@ -93,9 +47,45 @@ const OverviewTable = () => {
 
   // intialize local state
   const [localFactions, setLocalFactions] = useState([]);
-  const [singleFilteredFaction, setSingleFilteredFaction] = useState();
+  const [singleFilteredFaction, setSingleFilteredFaction] = useState([]);
   const [showOptions, setShowOptions] = useState(false);
-  //const [hideColumns, setHideColumns] = useState();
+  const [showUnitCard, setShowUnitCard] = useState(false);
+  const [columnHeaders, setColumnHeaders] = useState({
+    button: ["", true, "button"],
+    faction: ["Fraktion", true],
+    subFaction: ["Unterfraktion", true],
+    name: ["Name", true],
+    unitType: ["Typ", true],
+    numberOfElements: ["Elemente", true],
+    banner: ["Banner", true, "boolean"],
+    musician: ["Musiker", true, "boolean"],
+    wedgeFormation: ["Keil", true, "boolean"],
+    skirmishFormation: ["Plänkler", true, "boolean"],
+    squareFormation: ["Kare", true, "boolean"],
+    horde: ["Horde", true, "boolean"],
+    move: ["B", true],
+    charge: ["A", true],
+    skirmish: ["P", true],
+    hold_maneuvers: ["H", true],
+    unitSize: ["Größe", true],
+    armourRange: ["Rüstung", true],
+    armourMelee: ["Rüstung", true],
+    weapon1: ["1. Waffe", true],
+    weapon2: ["2. Waffe", true],
+    rangedWeapon: ["Fernkampf", true],
+    skillMelee: ["NK-Fertigkeit", true],
+    skillRange: ["FK-Fertigkeit", true],
+    initiative: ["Initiative", true],
+    commandStars: ["Befehle", true, "command"],
+    magic: ["Magie", true, "magic"],
+    controlZone_OverRun: ["Kontrolbereich/Überrennen", true],
+    hitpoints: ["Trefferpunkte", true],
+    fear: ["Furcht", true],
+    moral1: ["Moral", true],
+    moral2: ["Moral", true],
+    specialRules: ["Sonderregeln", true, "specialRules"],
+    points: ["Punkte", true],
+  });
 
   useEffect(() => {
     fetchData();
@@ -107,15 +97,19 @@ const OverviewTable = () => {
   };
 
   /**
-   * filters the factions JSON by faction.
+   * filters the factions JSON to get the desired faction.
    * @param {[{}]} selectedFaction
    */
-  const filterData = (selectedFaction) => {
-    setSingleFilteredFaction(
-      localFactions.filter(
-        (lf) => lf.faction.toLowerCase() === selectedFaction.toLowerCase()
-      )
-    );
+  const selectFaction = (selectedFaction) => {
+    setSingleFilteredFaction(localFactions.filter((lf) => lf.faction.toLowerCase() === selectedFaction.toLowerCase()));
+  };
+
+  /**
+   *filters the unit names for the ones containing the search string.
+   * @param {[{}]} nameSearchString
+   */
+  const selectUnit = (nameSearchString) => {
+    setSingleFilteredFaction(localFactions.filter((lf) => lf.name.toLowerCase().includes(nameSearchString.toLowerCase())));
   };
 
   /**
@@ -126,297 +120,112 @@ const OverviewTable = () => {
   };
 
   /**
+   * generates the options for the unit name selector. If a faction has been selected, only the names of that faction
+   * are shown as options (singleFilteredFaction), otherwise ALL unit names in the games are displayed (localFactions).
+   * @returns [String]
+   */
+  const getUnitNames = () => {
+    return singleFilteredFaction.length === 0 ? localFactions.map((u) => u.name) : singleFilteredFaction.map((u) => u.name);
+  };
+
+  const openUnitCard = () => {
+    setShowUnitCard(!showUnitCard);
+  };
+
+  const chooseColumnstoDisplay = (field, value) => {
+    console.log(field);
+    console.log(value);
+  };
+
+  // TODO: READ ME: see the columnHeader state? you need to turn that array property into a nested object.
+  // TODO: READ ME: see if you can change the logic so it doesnt show all unit cards :D
+  // TODO: READ ME: the selectors dont work properly.
+  /**
    * THE TABLE
    */
-  return localFactions ? (
-    <Paper className={clsx(classes.root, "font-face-gonjuring")}>
-      <Grid container alignItems="center">
-        <Grid item xs={6}>
-          {/* TITLE  */}
-          <p className={classes.tableTitle}>Kompendium</p>
-          <Grid className={classes.armySelector}>
-            <ArmySelection filterData={filterData} />
-          </Grid>
+  return (
+    <>
+      <Grid container spacing={6}>
+        <Grid item xs={12}>
+          <Typography variant="h3" className={classes.pageTitle}>
+            Kompendium
+          </Typography>
         </Grid>
+        <Grid item container xs={12} direction="column" justifyContent="space-around" alignItems="flex-start">
+          <SelectionInput filterData={selectFaction} options={ALL_FACTIONS_ARRAY} label="Suche nach Fraktion" />
+          <SelectionInput className={classes.selectorInputs} filterData={selectUnit} options={getUnitNames()} label="Suche nach Einheit" />
+        </Grid>
+        <Grid item container xs={12}>
+          {Object.entries(columnHeaders)
+            .filter((cH) => cH[0] !== "button")
+            .map((cH) => (
+              <FormControlLabel
+                key={uuidGenerator()}
+                className={classes.checkBoxLabel}
+                control={
+                  <Checkbox
+                    key={uuidGenerator()}
+                    checked={cH[1][1]}
+                    onChange={() => {
+                      chooseColumnstoDisplay(cH[0], cH[1][1]);
+                    }}
+                  />
+                }
+                label={cH[1][0]}
+              />
+            ))}
+        </Grid>
+        <Grid item xs={12}>
+          {localFactions ? (
+            <table className={classes.table}>
+              <thead>
+                <tr>
+                  {Object.values(columnHeaders).map((cH) => {
+                    let element = cH[1] ? <th key={uuidGenerator()}>{cH[0]}</th> : null;
+                    return element;
+                  })}
+                </tr>
+              </thead>
+              <tbody>
+                {singleFilteredFaction.map((l) => {
+                  return (
+                    <>
+                      <tr key={uuidGenerator()}>
+                        {Object.entries(columnHeaders).map((cH) => {
 
-        <Grid item xs={6}>
-          {/* <p className={classes.options}>Fraktionen</p>
-          <Switch />
-          <p className={classes.options}>Gegenstände</p> */}
+                          console.log(cH)  
+
+                          if (cH[1][2] === "boolean") {
+                            return cH[1] ? <td key={uuidGenerator()}> {renderBooleanAsIcon(l.numberOfElements, l[cH[0]])} </td> : null;
+                          } else if (cH[1][2] === "command") {
+                            return cH[1] ? <td key={uuidGenerator()}> {renderCommandPoints(l[cH[0]])} </td> : null;
+                          } else if (cH[1][2] === "magic") {
+                            return cH[1] ? <td key={uuidGenerator()}> {renderMagicPoints(l[cH[0]])} </td> : null;
+                          } else if (cH[1][2] === "specialRules") {
+                            return cH[1] ? <td key={uuidGenerator()}> {renderSpecialRules(l[cH[0]])} </td> : null;
+                          } else if (cH[1][2] === "button") {
+                            return cH[1] ? (
+                              <td key={uuidGenerator()}>
+                                <IconButton onClick={openUnitCard}>{showUnitCard ? <CloseIcon /> : <ArrowForwardIosIcon />}</IconButton>
+                              </td>
+                            ) : null;
+                          } else return cH[1] ? <td key={uuidGenerator()}> {l[cH[0]]} </td> : null;
+                        })}
+                      </tr>
+                      <tr key={uuidGenerator()}>
+                        <td key={uuidGenerator()} colSpan="100%">
+                          {showUnitCard ? unitOrCmdCard(l) : null}
+                        </td>
+                      </tr>
+                    </>
+                  );
+                })}
+              </tbody>
+            </table>
+          ) : null}
         </Grid>
       </Grid>
-      <MaterialTable
-        columns={[
-          {
-            title: "Fraktion",
-            field: "faction",
-            hidden: false,
-            headerStyle: {
-              width: "500px",
-              padding: "10px",
-            },
-            cellStyle: {
-              width: "500px",
-              padding: "10px",
-            },
-          },
-          {
-            title: "Unterfraktion",
-            field: "subFaction",
-            headerStyle: {
-              padding: "10px",
-              width: 200,
-            },
-            cellStyle: {
-              textAlign: "center",
-              padding: "10px",
-              width: 200,
-            },
-          },
-          {
-            title: "Name",
-            field: "unitName",
-            headerStyle: {
-              padding: "10px",
-              width: "500px",
-            },
-            cellStyle: {
-              textAlign: "center",
-              padding: "10px",
-              width: "500px",
-            },
-          },
-          {
-            title: "Typ",
-            field: "unitType",
-          },
-          {
-            title: "Elemente",
-            field: "numberOfElements",
-          },
-          {
-            title: "Banner",
-            field: "standardBearer",
-            cellStyle: {
-              width: "5px",
-              maxWidth: "5px",
-            },
-            headerStyle: {
-              width: "5%",
-              maxWidth: "5%",
-            },
-            render: (rowData) =>
-              renderBoolean(rowData.numberOfElements, rowData.standardBearer),
-          },
-          {
-            title: "Musiker",
-            field: "musician",
-
-            render: (rowData) =>
-              renderBoolean(rowData.numberOfElements, rowData.musician),
-          },
-          //formations
-          {
-            title: "Keil",
-            field: "wedgeFormation",
-
-            render: (rowData) =>
-              renderBoolean(rowData.numberOfElements, rowData.wedgeFormation),
-          },
-          {
-            title: "Plänkler",
-            field: "skirmishFormation",
-
-            render: (rowData) =>
-              renderBoolean(
-                rowData.numberOfElements,
-                rowData.skirmishFormation
-              ),
-          },
-          {
-            title: "Kare",
-            field: "squareFormation",
-
-            render: (rowData) =>
-              renderBoolean(rowData.numberOfElements, rowData.squareFormation),
-          },
-          {
-            title: "Horde",
-            field: "horde",
-
-            render: (rowData) =>
-              renderBoolean(rowData.numberOfElements, rowData.horde),
-          },
-          // movement
-          {
-            title: "B",
-            field: "move",
-          },
-          {
-            title: "A",
-            field: "charge",
-          },
-          {
-            title: "P",
-            field: "skirmish",
-          },
-          {
-            title: "H/Manöver",
-            field: "hold_maneuvers",
-          },
-          // combat stats
-          {
-            title: "Größe",
-            field: "unitSize",
-          },
-          {
-            title: "Rüstung",
-            render: (rowData) => {
-              return rowData.armourRange + " / " + rowData.armourMelee;
-            },
-            // field: "armourRange",
-          },
-
-          {
-            title: "1. Waffe",
-            field: "weapon1",
-          },
-          {
-            title: "2. Waffe",
-            field: "weapon2",
-          },
-          {
-            title: "Fernkampf",
-            field: "rangedWeapon",
-          },
-          {
-            title: "NK-Fertigkeit",
-            field: "skillMelee",
-          },
-          {
-            title: "FK-Fertigkeit",
-            field: "skillRange",
-          },
-          {
-            title: "Initiative",
-            field: "initiative",
-          },
-          {
-            title: "Größe",
-            field: "unitSize",
-          },
-          {
-            title: "Befehle",
-            field: "commandStars",
-          },
-          {
-            title: "Magie",
-            field: "magic",
-          },
-
-          {
-            title: "Kontrolbereich/Überrennen",
-            field: "controlZone_OverRun",
-            headerStyle: {
-              width: "5%",
-              maxWidth: "5%",
-            },
-            cellStyle: {
-              width: "5%",
-              maxWidth: "5%",
-            },
-          },
-          {
-            title: "Trefferpunkte",
-            field: "hitpoints",
-          },
-          //moral
-          {
-            title: "Furcht",
-            field: "fear",
-          },
-          {
-            title: "Moral",
-            render: (rowData) => {
-              return rowData.moral1 + " / " + rowData.moral1;
-            },
-          },
-
-          //special rules
-          {
-            title: "Sonderregeln",
-            field: "specialRules",
-            cellStyle: {
-              fontSize: "20px",
-            },
-            render: (rowData) => renderSpecialRules(rowData.specialRules),
-          },
-          //points
-          {
-            title: "Punkte",
-            field: "points",
-          },
-        ]}
-        data={singleFilteredFaction}
-        icons={tableIcons}
-        options={{
-          sorting: true,
-          paging: false,
-          showTitle: false,
-          search: true,
-          searchFieldStyle: {
-            width: "300px",
-            marginLeft: "350px",
-          },
-          pageSize: 20,
-          pageSizeOptions: [5, 10, 20, 50, 100],
-          headerStyle: {
-            backgroundColor: "black",
-            color: "white",
-            textAlign: "center",
-            "&:hover": {
-              color: "#bbdefb",
-            },
-          },
-        }}
-        localization={{
-          toolbar: {
-            searchPlaceholder: "Detailsuche",
-          },
-        }}
-        components={{
-          Toolbar: (props) => (
-            <Grid
-              container
-              direction="row"
-              justify="space-between"
-              alignItems="center"
-            >
-              <Grid xs={6} item container direction="row">
-                <MTableToolbar {...props} />
-              </Grid>
-              <Button className={classes.optionsBttn} onClick={handleBttn}>
-                Optionen
-              </Button>
-            </Grid>
-          ),
-        }}
-        detailPanel={[
-          {
-            icon: ArrowForwardIosIcon,
-            disabled: false,
-            tooltip: "Karte anzeigen",
-            render: (rowData) => {
-              return unitOrCmdCard(rowData);
-            },
-          },
-        ]}
-      />
-      {/* OPTIONS DIALOG  - opens new window */}
-      <TableOptions showOptions={showOptions} closeDialog={handleBttn} />
-    </Paper>
-  ) : (
-    <p>no data</p>
+    </>
   );
 };
 
