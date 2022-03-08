@@ -51,40 +51,40 @@ const OverviewTable = () => {
   const [showOptions, setShowOptions] = useState(false);
   const [showUnitCard, setShowUnitCard] = useState(false);
   const [columnHeaders, setColumnHeaders] = useState({
-    button: ["", true, "button"],
-    faction: ["Fraktion", true],
-    subFaction: ["Unterfraktion", true],
-    name: ["Name", true],
-    unitType: ["Typ", true],
-    numberOfElements: ["Elemente", true],
-    banner: ["Banner", true, "boolean"],
-    musician: ["Musiker", true, "boolean"],
-    wedgeFormation: ["Keil", true, "boolean"],
-    skirmishFormation: ["Plänkler", true, "boolean"],
-    squareFormation: ["Kare", true, "boolean"],
-    horde: ["Horde", true, "boolean"],
-    move: ["B", true],
-    charge: ["A", true],
-    skirmish: ["P", true],
-    hold_maneuvers: ["H", true],
-    unitSize: ["Größe", true],
-    armourRange: ["Rüstung", true],
-    armourMelee: ["Rüstung", true],
-    weapon1: ["1. Waffe", true],
-    weapon2: ["2. Waffe", true],
-    rangedWeapon: ["Fernkampf", true],
-    skillMelee: ["NK-Fertigkeit", true],
-    skillRange: ["FK-Fertigkeit", true],
-    initiative: ["Initiative", true],
-    commandStars: ["Befehle", true, "command"],
-    magic: ["Magie", true, "magic"],
-    controlZone_OverRun: ["Kontrolbereich/Überrennen", true],
-    hitpoints: ["Trefferpunkte", true],
-    fear: ["Furcht", true],
-    moral1: ["Moral", true],
-    moral2: ["Moral", true],
-    specialRules: ["Sonderregeln", true, "specialRules"],
-    points: ["Punkte", true],
+    button: { label: "", displayed: true, type: "button" },
+    faction: { label: "Fraktion", displayed: true },
+    subFaction: { label: "Unterfraktion", displayed: true },
+    name: { label: "Name", displayed: true },
+    unitType: { label: "Typ", displayed: true },
+    numberOfElements: { label: "Elemente", displayed: true },
+    banner: { label: "Banner", displayed: true, type: "boolean" },
+    musician: { label: "Musiker", displayed: true, type: "boolean" },
+    wedgeFormation: { label: "Keil", displayed: true, type: "boolean" },
+    skirmishFormation: { label: "Plänkler", displayed: true, type: "boolean" },
+    squareFormation: { label: "Kare", displayed: true, type: "boolean" },
+    horde: { label: "Horde", displayed: true, type: "boolean" },
+    move: { label: "B", displayed: true },
+    charge: { label: "A", displayed: true },
+    skirmish: { label: "P", displayed: true },
+    hold_maneuvers: { label: "H", displayed: true },
+    unitSize: { label: "Größe", displayed: true },
+    armourRange: { label: "Rüstung", displayed: true },
+    armourMelee: { label: "Rüstung", displayed: true },
+    weapon1: { label: "1. Waffe", displayed: true },
+    weapon2: { label: "2. Waffe", displayed: true },
+    rangedWeapon: { label: "Fernkampf", displayed: true },
+    skillMelee: { label: "NK-Fertigkeit", displayed: true },
+    skillRange: { label: "FK-Fertigkeit", displayed: true },
+    initiative: { label: "Initiative", displayed: true },
+    commandStars: { label: "Befehle", displayed: true, type: "command" },
+    magic: { label: "Magie", displayed: true, type: "magic" },
+    controlZone_OverRun: { label: "Kontrolbereich/Überrennen", displayed: true },
+    hitpoints: { label: "Trefferpunkte", displayed: true },
+    fear: { label: "Furcht", displayed: true },
+    moral1: { label: "Moral", displayed: true },
+    moral2: { label: "Moral", displayed: true },
+    specialRules: { label: "Sonderregeln", displayed: true, type: "specialRules" },
+    points: { label: "Punkte", displayed: true },
   });
 
   useEffect(() => {
@@ -97,26 +97,11 @@ const OverviewTable = () => {
   };
 
   /**
-   * filters the factions JSON to get the desired faction.
-   * @param {[{}]} selectedFaction
-   */
-  const selectFaction = (selectedFaction) => {
-    setSingleFilteredFaction(localFactions.filter((lf) => lf.faction.toLowerCase() === selectedFaction.toLowerCase()));
-  };
-
-  /**
    *filters the unit names for the ones containing the search string.
    * @param {[{}]} nameSearchString
    */
   const selectUnit = (nameSearchString) => {
     setSingleFilteredFaction(localFactions.filter((lf) => lf.name.toLowerCase().includes(nameSearchString.toLowerCase())));
-  };
-
-  /**
-   * show the options menu
-   */
-  const handleBttn = () => {
-    setShowOptions(!showOptions);
   };
 
   /**
@@ -128,16 +113,34 @@ const OverviewTable = () => {
     return singleFilteredFaction.length === 0 ? localFactions.map((u) => u.name) : singleFilteredFaction.map((u) => u.name);
   };
 
+  /**
+   * filters the factions JSON to get the desired faction.
+   * @param {[{}]} selectedFaction
+   */
+  const selectFaction = (selectedFaction) => {
+    setSingleFilteredFaction(localFactions.filter((lf) => lf.faction.toLowerCase() === selectedFaction.toLowerCase()));
+  };
+
   const openUnitCard = () => {
     setShowUnitCard(!showUnitCard);
   };
 
-  const chooseColumnstoDisplay = (field, value) => {
-    console.log(field);
-    console.log(value);
+  /**
+   * Function triggered by the Checkboxes. Controls which columns of the table are displayed by
+   * setting the displayed property.
+   * @param {String} column
+   * @param {boolean} isChecked
+   */
+  const chooseColumnstoDisplay = (column, isChecked) => {
+    setColumnHeaders({
+      ...columnHeaders,
+      [column]: {
+        ...columnHeaders[column],
+        displayed: !isChecked,
+      },
+    });
   };
 
-  // TODO: READ ME: see the columnHeader state? you need to turn that array property into a nested object.
   // TODO: READ ME: see if you can change the logic so it doesnt show all unit cards :D
   // TODO: READ ME: the selectors dont work properly.
   /**
@@ -151,27 +154,27 @@ const OverviewTable = () => {
             Kompendium
           </Typography>
         </Grid>
-        <Grid item container xs={12} direction="column" justifyContent="space-around" alignItems="flex-start">
+        <Grid item container xs={12} direction="column" alignItems="flex-start">
           <SelectionInput filterData={selectFaction} options={ALL_FACTIONS_ARRAY} label="Suche nach Fraktion" />
           <SelectionInput className={classes.selectorInputs} filterData={selectUnit} options={getUnitNames()} label="Suche nach Einheit" />
         </Grid>
         <Grid item container xs={12}>
           {Object.entries(columnHeaders)
-            .filter((cH) => cH[0] !== "button")
-            .map((cH) => (
+            .filter(([column, value]) => column !== "button")
+            .map(([column, value]) => (
               <FormControlLabel
                 key={uuidGenerator()}
                 className={classes.checkBoxLabel}
                 control={
                   <Checkbox
                     key={uuidGenerator()}
-                    checked={cH[1][1]}
+                    checked={value.displayed}
                     onChange={() => {
-                      chooseColumnstoDisplay(cH[0], cH[1][1]);
+                      chooseColumnstoDisplay(column, value.displayed);
                     }}
                   />
                 }
-                label={cH[1][0]}
+                label={value.label}
               />
             ))}
         </Grid>
@@ -180,8 +183,8 @@ const OverviewTable = () => {
             <table className={classes.table}>
               <thead>
                 <tr>
-                  {Object.values(columnHeaders).map((cH) => {
-                    let element = cH[1] ? <th key={uuidGenerator()}>{cH[0]}</th> : null;
+                  {Object.values(columnHeaders).map((value) => {
+                    let element = value.displayed ? <th key={uuidGenerator()}>{value.label}</th> : null;
                     return element;
                   })}
                 </tr>
@@ -191,25 +194,32 @@ const OverviewTable = () => {
                   return (
                     <>
                       <tr key={uuidGenerator()}>
-                        {Object.entries(columnHeaders).map((cH) => {
+                        {Object.entries(columnHeaders).map(([column, value]) => {
+                          switch (value.type) {
+                            case "boolean":
+                              return value.displayed ? (
+                                <td column={uuidGenerator()}> {renderBooleanAsIcon(l.numberOfElements, l[column])} </td>
+                              ) : null;
 
-                          console.log(cH)  
+                            case "command":
+                              return value.displayed ? <td column={uuidGenerator()}> {renderCommandPoints(l[column])} </td> : null;
 
-                          if (cH[1][2] === "boolean") {
-                            return cH[1] ? <td key={uuidGenerator()}> {renderBooleanAsIcon(l.numberOfElements, l[cH[0]])} </td> : null;
-                          } else if (cH[1][2] === "command") {
-                            return cH[1] ? <td key={uuidGenerator()}> {renderCommandPoints(l[cH[0]])} </td> : null;
-                          } else if (cH[1][2] === "magic") {
-                            return cH[1] ? <td key={uuidGenerator()}> {renderMagicPoints(l[cH[0]])} </td> : null;
-                          } else if (cH[1][2] === "specialRules") {
-                            return cH[1] ? <td key={uuidGenerator()}> {renderSpecialRules(l[cH[0]])} </td> : null;
-                          } else if (cH[1][2] === "button") {
-                            return cH[1] ? (
-                              <td key={uuidGenerator()}>
-                                <IconButton onClick={openUnitCard}>{showUnitCard ? <CloseIcon /> : <ArrowForwardIosIcon />}</IconButton>
-                              </td>
-                            ) : null;
-                          } else return cH[1] ? <td key={uuidGenerator()}> {l[cH[0]]} </td> : null;
+                            case "magic":
+                              return value.displayed ? <td column={uuidGenerator()}> {renderMagicPoints(l[column])} </td> : null;
+
+                            case "specialRules":
+                              return value.displayed ? <td column={uuidGenerator()}> {renderSpecialRules(l[column])} </td> : null;
+
+                            case "button":
+                              return value.displayed ? (
+                                <td key={uuidGenerator()}>
+                                  <IconButton onClick={openUnitCard}>{showUnitCard ? <CloseIcon /> : <ArrowForwardIosIcon />}</IconButton>
+                                </td>
+                              ) : null;
+
+                            default:
+                              return value.displayed ? <td key={uuidGenerator()}> {l[column]} </td> : null;
+                          }
                         })}
                       </tr>
                       <tr key={uuidGenerator()}>
