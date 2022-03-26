@@ -4,13 +4,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
-import { Grid, IconButton, Paper, Checkbox, FormControl, FormGroup, FormControlLabel, Typography } from "@material-ui/core";
+import { Grid, IconButton, Checkbox, FormControlLabel, Typography, FormGroup } from "@material-ui/core";
 
 // icons
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import CloseIcon from "@material-ui/icons/Close";
-// clsx
-import clsx from "clsx";
 // components & functions
 import {
   renderBooleanAsIcon,
@@ -19,7 +17,6 @@ import {
   unitOrCmdCard,
   renderCommandPoints,
 } from "./depencies/factionTableFunctions";
-import TableOptions from "./OptionsMenuDialog";
 import SelectionInput from "../../shared/selectionInput";
 import { uuidGenerator } from "../../shared/sharedFunctions";
 import { ALL_FACTIONS_ARRAY } from "../../../constants/factions";
@@ -33,11 +30,20 @@ const useStyles = makeStyles({
     marginLeft: "40px",
     fontFamily: "BreatheOfFire",
   },
+  toggleGroupBox: {
+    border: 1,
+    borderColor: "pink",
+  },
   checkBoxLabel: {
     margin: "10px",
     width: "250px",
     "& .MuiFormControlLabel-label": {
       fontFamily: "BreatheOfFire",
+    },
+  },
+  tableRow: {
+    "& :hover": {
+      backgroundColor: "lightgrey",
     },
   },
 });
@@ -46,46 +52,63 @@ const OverviewTable = () => {
   const classes = useStyles();
 
   // intialize local state
-  const [localFactions, setLocalFactions] = useState([]);
+  const [allFactions, setAllFactions] = useState([]);
   const [singleFilteredFaction, setSingleFilteredFaction] = useState([]);
-  const [showOptions, setShowOptions] = useState(false);
+  const [tableData, setTableData] = useState([]);
   const [showUnitCard, setShowUnitCard] = useState(false);
-  const [columnHeaders, setColumnHeaders] = useState({
-    button: { label: "", displayed: true, type: "button" },
-    faction: { label: "Fraktion", displayed: true },
-    subFaction: { label: "Unterfraktion", displayed: true },
-    name: { label: "Name", displayed: true },
-    unitType: { label: "Typ", displayed: true },
-    numberOfElements: { label: "Elemente", displayed: true },
-    banner: { label: "Banner", displayed: true, type: "boolean" },
-    musician: { label: "Musiker", displayed: true, type: "boolean" },
-    wedgeFormation: { label: "Keil", displayed: true, type: "boolean" },
-    skirmishFormation: { label: "Plänkler", displayed: true, type: "boolean" },
-    squareFormation: { label: "Kare", displayed: true, type: "boolean" },
-    horde: { label: "Horde", displayed: true, type: "boolean" },
-    move: { label: "B", displayed: true },
-    charge: { label: "A", displayed: true },
-    skirmish: { label: "P", displayed: true },
-    hold_maneuvers: { label: "H", displayed: true },
-    unitSize: { label: "Größe", displayed: true },
-    armourRange: { label: "Rüstung", displayed: true },
-    armourMelee: { label: "Rüstung", displayed: true },
-    weapon1: { label: "1. Waffe", displayed: true },
-    weapon2: { label: "2. Waffe", displayed: true },
-    rangedWeapon: { label: "Fernkampf", displayed: true },
-    skillMelee: { label: "NK-Fertigkeit", displayed: true },
-    skillRange: { label: "FK-Fertigkeit", displayed: true },
-    initiative: { label: "Initiative", displayed: true },
-    commandStars: { label: "Befehle", displayed: true, type: "command" },
-    magic: { label: "Magie", displayed: true, type: "magic" },
-    controlZone_OverRun: { label: "Kontrolbereich/Überrennen", displayed: true },
-    hitpoints: { label: "Trefferpunkte", displayed: true },
-    fear: { label: "Furcht", displayed: true },
-    moral1: { label: "Moral", displayed: true },
-    moral2: { label: "Moral", displayed: true },
-    specialRules: { label: "Sonderregeln", displayed: true, type: "specialRules" },
-    points: { label: "Punkte", displayed: true },
-  });
+  const [allBoxes, setAllBoxes] = useState(true);
+
+  const [columns, setColumns] = useState([
+    { column: "button", label: "", displayed: true, type: "button" },
+    { column: "faction", label: "Fraktion", displayed: true },
+    { column: "subFaction", label: "Unterfraktion", displayed: true },
+    { column: "name", label: "Name", displayed: true },
+    { column: "unitType", label: "Typ", displayed: true },
+    { column: "numberOfElements", label: "Elemente", displayed: true },
+    { column: "banner", label: "Banner", displayed: true, type: "boolean" },
+    { column: "musician", label: "Musiker", displayed: true, type: "boolean" },
+    { column: "wedgeFormation", label: "Keil", displayed: true, type: "boolean" },
+    { column: "skirmishFormation", label: "Plänkler", displayed: true, type: "boolean" },
+    { column: "squareFormation", label: "Kare", displayed: true, type: "boolean" },
+    { column: "horde", label: "Horde", displayed: true, type: "boolean" },
+    { column: "move", label: "Bewegen", displayed: true },
+    { column: "charge", label: "Angriff", displayed: true },
+    { column: "skirmish", label: "Plänkeln", displayed: true },
+    { column: "hold_maneuvers", label: "Halten", displayed: true },
+    { column: "unitSize", label: "Größe", displayed: true },
+    { column: "armourRange", label: "Rüstung", displayed: true },
+    { column: "armourMelee", label: "Rüstung", displayed: true },
+    { column: "weapon1", label: "1. Waffe", displayed: true },
+    { column: "weapon2", label: "2. Waffe", displayed: true },
+    { column: "rangedWeapon", label: "Fernkampf", displayed: true },
+    { column: "skillMelee", label: "NK-Fertigkeit", displayed: true },
+    { column: "skillRange", label: "FK-Fertigkeit", displayed: true },
+    { column: "initiative", label: "Initiative", displayed: true },
+    { column: "commandStars", label: "Befehle", displayed: true, type: "command" },
+    { column: "magic", label: "Magie", displayed: true, type: "magic" },
+    { column: "controlZone_OverRun", label: "Kontrolbereich/Überrennen", displayed: true },
+    { column: "hitpoints", label: "Trefferpunkte", displayed: true },
+    { column: "fear", label: "Furcht", displayed: true },
+    { column: "moral1", label: "Moral", displayed: true },
+    { column: "moral2", label: "Moral", displayed: true },
+    { column: "specialRules", label: "Sonderregeln", displayed: true, type: "specialRules" },
+    { column: "points", label: "Punkte", displayed: true },
+  ]);
+
+  const [toggleGroups, setToggleGroups] = useState([
+    { name: "naming", stats: ["faction", "subFaction", "name"], displayed: true },
+    {
+      name: "unitCharacteristics",
+      stats: ["banner", "musician", "wedgeFormation", "skirmishFormation", "squareFormation", "horde"],
+      displayed: true,
+    },
+    { name: "movement", stats: ["move", "charge", "skirmish", "hold_maneuvers"], displayed: true },
+    { name: "defense", stats: ["unitSize", "armourRange", "armourMelee"], displayed: true },
+    { name: "offense", stats: ["weapon1", "weapon2", "rangedWeapon", "skillMelee", "skillRange", "initiative"], displayed: true },
+    { name: "heroCharacteristics", stats: ["commandStars", "magic", "controlZone_OverRun"], displayed: true },
+    { name: "vigor", stats: ["hitpoints", "fear", "moral1", "moral2"], displayed: true },
+    { name: "napoints_rules", stats: ["specialRules", "points"], displayed: true },
+  ]);
 
   useEffect(() => {
     fetchData();
@@ -93,32 +116,53 @@ const OverviewTable = () => {
 
   const fetchData = async () => {
     const result = await axios(`http://localhost:8080/factions`);
-    setLocalFactions(result.data);
+    setAllFactions(result.data);
+    setTableData(result.data);
   };
 
   /**
-   *filters the unit names for the ones containing the search string.
-   * @param {[{}]} nameSearchString
+   * Generates the options for the faction name selector.
+   * @returns [String]
    */
-  const selectUnit = (nameSearchString) => {
-    setSingleFilteredFaction(localFactions.filter((lf) => lf.name.toLowerCase().includes(nameSearchString.toLowerCase())));
+  const setSelectorFactionNames = () => {
+    return ALL_FACTIONS_ARRAY;
   };
 
   /**
-   * generates the options for the unit name selector. If a faction has been selected, only the names of that faction
+   * Generates the options for the unit name selector. If a faction has been selected, only the names of that faction
    * are shown as options (singleFilteredFaction), otherwise ALL unit names in the games are displayed (localFactions).
    * @returns [String]
    */
-  const getUnitNames = () => {
-    return singleFilteredFaction.length === 0 ? localFactions.map((u) => u.name) : singleFilteredFaction.map((u) => u.name);
+  const setSelectorUnitNames = () => {
+    return singleFilteredFaction.length === 0 ? allFactions.map((u) => u.name) : singleFilteredFaction.map((u) => u.name);
   };
 
   /**
-   * filters the factions JSON to get the desired faction.
+   * OnChange function for faction name selector. Allows user to type and see the matching factions in real time.
+   * setTableData changes table content after selection.
    * @param {[{}]} selectedFaction
    */
   const selectFaction = (selectedFaction) => {
-    setSingleFilteredFaction(localFactions.filter((lf) => lf.faction.toLowerCase() === selectedFaction.toLowerCase()));
+    setSingleFilteredFaction(allFactions.filter((u) => u.faction === selectedFaction));
+    setTableData(allFactions.filter((u) => u.faction === selectedFaction));
+  };
+
+  /**
+   *  "onChange" function for the unit name selector. getUnitNames() resets it
+   *  after the selection to show all units of the faction.
+   * @param {[{}]} nameSearchString
+   */
+  const selectUnit = (nameSearchString) => {
+    setSelectorUnitNames();
+    setTableData(allFactions.filter((lf) => lf.name.toLowerCase().includes(nameSearchString.toLowerCase())));
+  };
+
+  const clearFaction = () => {
+    setTableData(allFactions);
+  };
+
+  const clearUnit = () => {
+    setTableData(singleFilteredFaction);
   };
 
   const openUnitCard = () => {
@@ -131,21 +175,44 @@ const OverviewTable = () => {
    * @param {String} column
    * @param {boolean} isChecked
    */
-  const chooseColumnstoDisplay = (column, isChecked) => {
-    setColumnHeaders({
-      ...columnHeaders,
-      [column]: {
-        ...columnHeaders[column],
-        displayed: !isChecked,
-      },
-    });
+  const chooseColumnsToDisplay = (column, isChecked) => {
+    setColumns(
+      columns.map((c) => {
+        if (c.column === column) {
+          c.displayed = !isChecked;
+        }
+        return c;
+      })
+    );
+  };
+
+  const toggleAllColumns = () => {
+    setAllBoxes(!allBoxes);
+    columns.forEach((u) => (u.displayed = !allBoxes));
+  };
+
+  const toggleGroupsOfColumns = (name, stats, isChecked) => {
+    setToggleGroups(
+      toggleGroups.map((t) => {
+        if (t.name === name) {
+          t.displayed = !isChecked;
+        }
+        return t;
+      })
+    );
+
+    setColumns(
+      columns.map((c) => {
+        if (stats.includes(c.column)) {
+          c.displayed = !isChecked;
+        }
+        return c;
+      })
+    );
   };
 
   // TODO: READ ME: see if you can change the logic so it doesnt show all unit cards :D
-  // TODO: READ ME: the selectors dont work properly.
-  /**
-   * THE TABLE
-   */
+
   return (
     <>
       <Grid container spacing={6}>
@@ -155,76 +222,110 @@ const OverviewTable = () => {
           </Typography>
         </Grid>
         <Grid item container xs={12} direction="column" alignItems="flex-start">
-          <SelectionInput filterData={selectFaction} options={ALL_FACTIONS_ARRAY} label="Suche nach Fraktion" />
-          <SelectionInput className={classes.selectorInputs} filterData={selectUnit} options={getUnitNames()} label="Suche nach Einheit" />
+          <SelectionInput
+            className={classes.selectorInputs}
+            options={setSelectorFactionNames()}
+            filterFunction={selectFaction}
+            clearFunction={clearFaction}
+            label="Suche nach Fraktion"
+          />
+          <SelectionInput
+            className={classes.selectorInputs}
+            options={setSelectorUnitNames()}
+            filterFunction={selectUnit}
+            clearFunction={clearUnit}
+            label="Suche nach Einheit"
+          />
         </Grid>
-        <Grid item container xs={12}>
-          {Object.entries(columnHeaders)
-            .filter(([column, value]) => column !== "button")
-            .map(([column, value]) => (
-              <FormControlLabel
+        <Grid item container xs={12} direction="row">
+          {/* outer loop that goes through toogle groups and creates one box each */}
+          {toggleGroups.map((g) => (
+            <FormGroup className="classes.toggleGroupBox" key={uuidGenerator()}>
+              <Checkbox
                 key={uuidGenerator()}
-                className={classes.checkBoxLabel}
-                control={
-                  <Checkbox
-                    key={uuidGenerator()}
-                    checked={value.displayed}
-                    onChange={() => {
-                      chooseColumnstoDisplay(column, value.displayed);
-                    }}
-                  />
-                }
-                label={value.label}
+                checked={g.displayed}
+                onChange={() => {
+                  toggleGroupsOfColumns(g.name, g.stats, g.displayed);
+                }}
               />
-            ))}
+              {columns
+                .filter((col) => col.column !== "button")
+                .filter((col) => g.stats.includes(col.column))
+                .map((col) => (
+                  <FormControlLabel
+                    key={uuidGenerator()}
+                    className={classes.checkBoxLabel}
+                    control={
+                      <Checkbox
+                        key={uuidGenerator()}
+                        checked={col.displayed}
+                        onChange={() => {
+                          chooseColumnsToDisplay(col.column, col.displayed);
+                        }}
+                      />
+                    }
+                    label={col.label}
+                  />
+                ))}
+            </FormGroup>
+          ))}
+          <FormGroup>
+            <FormControlLabel
+              className={classes.checkBoxLabel}
+              control={<Checkbox checked={!allBoxes} onChange={toggleAllColumns} />}
+              label="Blende alle Spalten aus."
+            />
+          </FormGroup>
         </Grid>
         <Grid item xs={12}>
-          {localFactions ? (
+          {allFactions ? (
             <table className={classes.table}>
               <thead>
-                <tr>
-                  {Object.values(columnHeaders).map((value) => {
-                    let element = value.displayed ? <th key={uuidGenerator()}>{value.label}</th> : null;
+                <tr key={uuidGenerator()}>
+                  {columns.map((col) => {
+                    let element = col.displayed ? <th key={uuidGenerator()}>{col.label}</th> : null;
                     return element;
                   })}
                 </tr>
               </thead>
-              <tbody>
-                {singleFilteredFaction.map((l) => {
+              <tbody className={classes.tableRow}>
+                {tableData.map((unit) => {
                   return (
                     <>
                       <tr key={uuidGenerator()}>
-                        {Object.entries(columnHeaders).map(([column, value]) => {
-                          switch (value.type) {
+                        {columns.map((col) => {
+                          switch (col.type) {
                             case "boolean":
-                              return value.displayed ? (
-                                <td column={uuidGenerator()}> {renderBooleanAsIcon(l.numberOfElements, l[column])} </td>
+                              return col.displayed ? (
+                                <td class key={uuidGenerator()}>
+                                  {renderBooleanAsIcon(unit.numberOfElements, unit[col.column])}
+                                </td>
                               ) : null;
 
                             case "command":
-                              return value.displayed ? <td column={uuidGenerator()}> {renderCommandPoints(l[column])} </td> : null;
+                              return col.displayed ? <td key={uuidGenerator()}> {renderCommandPoints(unit[col.column])} </td> : null;
 
                             case "magic":
-                              return value.displayed ? <td column={uuidGenerator()}> {renderMagicPoints(l[column])} </td> : null;
+                              return col.displayed ? <td key={uuidGenerator()}> {renderMagicPoints(unit[col.column])} </td> : null;
 
                             case "specialRules":
-                              return value.displayed ? <td column={uuidGenerator()}> {renderSpecialRules(l[column])} </td> : null;
+                              return col.displayed ? <td key={uuidGenerator()}> {renderSpecialRules(unit[col.column])} </td> : null;
 
                             case "button":
-                              return value.displayed ? (
+                              return col.displayed ? (
                                 <td key={uuidGenerator()}>
                                   <IconButton onClick={openUnitCard}>{showUnitCard ? <CloseIcon /> : <ArrowForwardIosIcon />}</IconButton>
                                 </td>
                               ) : null;
 
                             default:
-                              return value.displayed ? <td key={uuidGenerator()}> {l[column]} </td> : null;
+                              return col.displayed ? <td key={uuidGenerator()}> {unit[col.column]} </td> : null;
                           }
                         })}
                       </tr>
                       <tr key={uuidGenerator()}>
                         <td key={uuidGenerator()} colSpan="100%">
-                          {showUnitCard ? unitOrCmdCard(l) : null}
+                          {showUnitCard ? unitOrCmdCard(unit) : null}
                         </td>
                       </tr>
                     </>
