@@ -19,7 +19,7 @@ const useStyles = makeStyles({
   
     return (
         <div>
-            <p>show this wehen nothing was selected :D</p>
+            <p>show this when nothing was selected :D</p>
         </div>
     );
   };

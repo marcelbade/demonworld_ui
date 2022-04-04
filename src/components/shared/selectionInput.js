@@ -3,10 +3,8 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 // components and functions
 import { Autocomplete } from "@material-ui/lab";
-import { ALL_FACTIONS_ARRAY } from "../../constants/factions";
-import { TextField } from "@material-ui/core";
-import { getByLabelText } from "@testing-library/react";
-
+ import { TextField } from "@material-ui/core";
+ 
 const useStyles = makeStyles({
   root: { width: "600px", marginLeft: "40px" },
   textField: {
@@ -24,14 +22,17 @@ const useStyles = makeStyles({
  */
 const SelectionInput = (props) => {
   const classes = useStyles();
-
+ 
   return (
     <Autocomplete
       id="arymSelection"
       className={classes.root}
       options={props.options}
-      onChange={(event, value) => {
-        if (value) props.filterData(value);
+      onChange={(event, value, reason) => {
+        if ((reason === "clear")) {
+        props.clearFunction(); 
+        }
+        if (value) props.filterFunction(value);
       }}
       renderInput={(params) => <TextField className={classes.textField} {...params} label={props.label} variant="standard" />}
     />
