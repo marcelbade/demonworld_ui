@@ -25,7 +25,6 @@ const useStyles = makeStyles({
     backgroundColor: "lightgrey",
     fontFamily: "Beryliumbold",
     fontWeight: "bold",
-    width: "60%",
     fontSize: "20px",
     tableLayout: "fixed",
     width: "1800px",
