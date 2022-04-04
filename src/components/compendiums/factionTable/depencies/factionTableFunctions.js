@@ -33,7 +33,6 @@ export const renderSpecialRules = (rule) => {
     </RulesToolTip>
   );
 };
- 
 
 // eslint-disable-next-line no-unused-vars
 const renderDetailsPanel = (cardData, showTommysStuff) => {
@@ -43,13 +42,11 @@ const renderDetailsPanel = (cardData, showTommysStuff) => {
         {unitOrCmdCard(cardData)}
       </Grid>
       <Grid item xs={6}>
-        {showTommysStuff ? showTommysAnalysis(cardData) : null}
+        {showTommysStuff ? tommysAnalysis(cardData) : null}
       </Grid>
     </Grid>
   );
 };
- 
-
 
 /**
  *  Function controls which kind of stat card (unit or Hero/commander) is displayed in the details panel.
@@ -69,7 +66,7 @@ export const unitOrCmdCard = (cardData) => {
 };
 
 //TODO: finish this function
-export const showTommysAnalysis = (cardData) => {
+export const tommysAnalysis = (cardData) => {
   //#############
   return <Grid container direction="column"></Grid>;
 };
@@ -85,11 +82,7 @@ export const renderBooleanAsIcon = (numberOfElements, flag) => {
   const SINGLE_ELEMENT = 1;
 
   if (numberOfElements !== SINGLE_ELEMENT) {
-    return flag ? (
-      <CheckCircleOutlineIcon style={{ color: "black" }} />
-    ) : (
-      <CancelIcon style={{ color: "black" }} />
-    );
+    return flag ? <CheckCircleOutlineIcon style={{ color: "black" }} /> : <CancelIcon style={{ color: "black" }} />;
   } else {
     return "-";
   }
@@ -136,4 +129,10 @@ export const renderCommandPoints = (stars) => {
     starMarker = starMarker + "*";
   }
   return starMarker;
+};
+
+export const renderSkillValues = (rangeSkill, meleeSkill) => {
+  let result = rangeSkill !== 0 || meleeSkill !== 0 ? `Kampfgeschick: ${rangeSkill} / ${meleeSkill} ` : "";
+
+  return result;
 };
