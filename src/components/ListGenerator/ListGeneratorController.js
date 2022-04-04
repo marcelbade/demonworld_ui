@@ -13,11 +13,11 @@ import { uuidGenerator } from "../shared/sharedFunctions";
 import { alliesMapping } from "../gameLogic/allies";
 import { ALL_FACTIONS_ARRAY } from "../../constants/factions";
 
-
 const useStyles = makeStyles({
   root: {},
   selector: {
     marginTop: "10px",
+    paddingLeft: "10px",
     marginBottom: "60px",
   },
   list: {},
@@ -83,9 +83,7 @@ const ListGeneratorController = () => {
    * @param {[{}]} selectedFaction
    */
   const filterForSelectedFaction = (selectedFaction) => {
-    let result = suppliedFactions.filter(
-      (f) => f.faction.toLowerCase() === selectedFaction.toLowerCase()
-    );
+    let result = suppliedFactions.filter((f) => f.faction.toLowerCase() === selectedFaction.toLowerCase());
     return result;
   };
 
@@ -135,12 +133,15 @@ const ListGeneratorController = () => {
 
   return suppliedFactions ? (
     <Grid container direction="row">
-      <Grid container xs={2} item direction="column" className={classes.root}>
-        <Grid item className={classes.selector}>
-          <SelectionInput filterData={setSelectedFaction} options={ALL_FACTIONS_ARRAY} label="Suche nach Fraktion"  />
-        </Grid>
-
+      <Grid container xs={4} item direction="column" className={classes.root}>
+        <SelectionInput
+          className={classes.selector}
+          filterFunction={setSelectedFaction}
+          options={ALL_FACTIONS_ARRAY}
+          label="Suche nach Fraktion"
+        />
         <FactionTreeView
+          className={classes.selector}
           addPoints={addPoints}
           selectUnit={selectUnit}
           factionName={selectedFaction}
@@ -154,7 +155,7 @@ const ListGeneratorController = () => {
         />
       </Grid>
 
-      <Grid xs={10} item>
+      <Grid xs={6} item>
         <ArmyListDisplay
           remainingPoints={remainingPoints}
           setTotalPointValue={setTotalPointValue}

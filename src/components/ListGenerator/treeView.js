@@ -8,12 +8,7 @@ import TreeItem from "@material-ui/lab/TreeItem";
 // icons
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 // components and functions
-import {
-  MinusSquare,
-  PlusSquare,
-  CloseSquare,
-  TransitionComponent,
-} from "./dependencies/treeViewFunctions";
+import { MinusSquare, PlusSquare, CloseSquare, TransitionComponent } from "./dependencies/treeViewFunctions";
 import { Fragment } from "react";
 import { uuidGenerator } from "../shared/sharedFunctions";
 
@@ -38,13 +33,12 @@ const StyledTreeItem = withStyles((theme) => ({
     paddingLeft: 18,
     borderLeft: `1px dashed ${fade(theme.palette.text.primary, 0.4)}`,
   },
-}))((props) => (
-  <TreeItem {...props} TransitionComponent={TransitionComponent} />
-));
+}))((props) => <TreeItem {...props} TransitionComponent={TransitionComponent} />);
 
 const useStyles = makeStyles({
-  root: {
+  treeViewBox: {
     height: "auto",
+    paddingLeft: "60px",
   },
   node: {
     fontFamily: "BreatheOfFire",
@@ -63,6 +57,7 @@ const useStyles = makeStyles({
     paddingRight: "30px",
   },
   allyTitle: {
+    paddingLeft: "60px",
     fontFamily: "BreatheOfFire",
     fontSize: "40px",
     color: "black",
@@ -83,11 +78,7 @@ const FactionTreeView = (props) => {
       const nodeID = createNodeID(distinctSubFactions.indexOf(subFaction));
 
       return (
-        <StyledTreeItem
-          key={uuidGenerator()}
-          nodeId={nodeID}
-          label={subFaction}
-        >
+        <StyledTreeItem key={uuidGenerator()} nodeId={nodeID} label={subFaction}>
           {createLeafNodes(units, subFaction, nodeID)}
         </StyledTreeItem>
       );
@@ -105,9 +96,7 @@ const FactionTreeView = (props) => {
    */
   const createLeafNodes = (units, distinctSubFaction, parentNodeId) => {
     // get all units w. this subFaction
-    let allUnitsOfSubFaction = units.filter(
-      (f) => f.subFaction === distinctSubFaction
-    );
+    let allUnitsOfSubFaction = units.filter((f) => f.subFaction === distinctSubFaction);
 
     return allUnitsOfSubFaction.map((u) => {
       // give every leave a nodeID bassed on the id of its branch and the element index.
@@ -116,11 +105,7 @@ const FactionTreeView = (props) => {
       return (
         <Grid container alignItems="center" key={uuidGenerator()}>
           <Grid item xs={9}>
-            <StyledTreeItem
-              nodeId={nodeID}
-              label={`${u.name} - ${u.points}`}
-              className={classes.treeNode}
-            ></StyledTreeItem>
+            <StyledTreeItem nodeId={nodeID} label={`${u.name} - ${u.points}`} className={classes.treeNode}></StyledTreeItem>
           </Grid>
           <Grid item xs={3}>
             <IconButton
@@ -152,7 +137,7 @@ const FactionTreeView = (props) => {
   return props.faction ? (
     <Fragment>
       <TreeView
-        className={classes.root}
+        className={classes.treeViewBox}
         defaultExpanded={["1"]}
         defaultCollapseIcon={<MinusSquare />}
         defaultExpandIcon={<PlusSquare />}
@@ -161,11 +146,13 @@ const FactionTreeView = (props) => {
           {createTree(props.faction, props.distinctSubFactions)}
         </StyledTreeItem>
       </TreeView>
+      {/* ALLIED FACTION */}
       {props.allyName ? (
         <Fragment>
           <div className={classes.allyTitle}>Alliierte: {props.allyName}</div>
 
           <TreeView
+            className={classes.treeViewBox}
             defaultExpanded={["1"]}
             defaultCollapseIcon={<MinusSquare />}
             defaultExpandIcon={<PlusSquare />}
