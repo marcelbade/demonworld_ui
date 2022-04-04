@@ -10,7 +10,7 @@ import { Grid, Typography, IconButton, TextField } from "@material-ui/core";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 
 // custom imports
-import { DEFAULT_ARMY_SIZE } from "../../constants/numericConstants";
+// import { DEFAULT_ARMY_SIZE } from "../../constants/numericConstants";
 import { uuidGenerator } from "../shared/sharedFunctions";
 
 //TODO: this needs to change :D
@@ -60,7 +60,7 @@ const ArmyListDisplay = (props) => {
 
   // TODO : PUT THIS IN A CONSTANT FILE :D
 
-  const maximum = DEFAULT_ARMY_SIZE;
+  //const maximum = DEFAULT_ARMY_SIZE;
 
   const [addedUnits, setAddedUnits] = useState([]);
   // eslint-disable-next-line  no-unused-vars
@@ -141,18 +141,12 @@ const ArmyListDisplay = (props) => {
         {props.distinctSubFactions.map((subFactionName) => (
           <ListItem key={uuidGenerator()}>
             <Grid container direction={"column"}>
-              <Typography className={classes.HeaderBox}>
-                {" "}
-                {subFactionName}
-              </Typography>
+              <Typography className={classes.HeaderBox}>{subFactionName}</Typography>
               <SubList
                 factionName={props.factionName}
                 className={classes.subList}
                 subFactionName={subFactionName}
-                subFactionUnits={filterUnitsForSubFaction(
-                  addedUnits,
-                  subFactionName
-                )}
+                subFactionUnits={filterUnitsForSubFaction(addedUnits, subFactionName)}
                 removeUnit={removeUnit}
               />
             </Grid>

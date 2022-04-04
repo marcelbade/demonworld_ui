@@ -10,7 +10,7 @@ import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 
 // import ClearIcon from "@material-ui/icons/Clear";
 // components and functions
-import { alliesMapping } from "../gameLogic/allies";
+//import { alliesMapping } from "../gameLogic/allies";
 import GearButtonList from "./gearButtons";
 
 const useStyles = makeStyles({
