@@ -64,14 +64,17 @@ const SubList = (props) => {
   }, [props.subFactionUnits]);
 
   /**
-   * useffEct calculates the total for the sub faction.
+   * useffEct calculates the total for the sub faction and validates it.
    */
   useEffect(() => {
-    let temp = 0;
+    let total = 0;
     if (props.subFactionUnits) {
-      props.subFactionUnits.forEach((u) => (temp += u.points));
+      props.subFactionUnits.forEach((u) => (total += u.points));
+
+      // TODO: Validate here!
+      props.validator();
     }
-    setSubFactionTotal(temp);
+    setSubFactionTotal(total);
   }, [props.subFactionUnits]);
 
   const removeUnit = (identifier) => {

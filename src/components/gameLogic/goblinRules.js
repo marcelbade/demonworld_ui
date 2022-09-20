@@ -12,7 +12,7 @@ import { operators } from "../../constants/operators";
 // TODO: this still contains the dwarf values !!
 
 // eslint-disable-next-line no-unused-vars
-const GoblinRules = (selectedUnit, armyPointsTotal, operator) => {
+export const GoblinRules = (selectedUnit, armyPointsTotal, operator) => {
   const [selectedUnits, setSelectedUnits] = useState([]);
 
   // subFaction Allowances

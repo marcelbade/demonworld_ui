@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { operators } from "../../constants/operators";
 
 /**
@@ -8,7 +8,7 @@ import { operators } from "../../constants/operators";
  * @param {*} operator - gives the math operator to use - add or subtract
  * @returns
  */
-export const DwarvesRules = (selectedUnit, armyPointsTotal, operator) => {
+export const DwarfRules = (selectedUnit, armyPointsTotal, operator) => {
   const [selectedUnits, setSelectedUnits] = useState([]);
 
   // checkbox array! -> check of a box by deleting the element from the array.
@@ -44,13 +44,7 @@ export const DwarvesRules = (selectedUnit, armyPointsTotal, operator) => {
       occurences: 2,
       min: 0.0,
       max: 0.5,
-      cardNames: [
-        "Held",
-        "Befehlshaber",
-        "Erdpriester",
-        "Erzpriester",
-        "Feuerpriester",
-      ],
+      cardNames: ["Held", "Befehlshaber", "Erdpriester", "Erzpriester", "Feuerpriester"],
       verify: (selectedUnit) => {
         verifyUnit(selectedUnit);
       },
@@ -139,9 +133,7 @@ export const DwarvesRules = (selectedUnit, armyPointsTotal, operator) => {
           });
 
       // TODO: TEST THIS
-      setSelectedUnits(
-        selectedUnits.filter((su) => su.name !== selectedUnit.name)
-      );
+      setSelectedUnits(selectedUnits.filter((su) => su.name !== selectedUnit.name));
       setSubFactionAllowance({
         ...subFactionAllowance,
         [type]: {
@@ -176,7 +168,7 @@ export const DwarvesRules = (selectedUnit, armyPointsTotal, operator) => {
    */
   const alterList = (operator, subFaction) => {
     // variable declarations to shorten the expressions below
-    const occurences = selectedUnits.filter((u) => u.name == selectedUnit.name);
+    const occurences = selectedUnits.filter((u) => u.name === selectedUnit.name);
     const maxOccurences = subFactionAllowance[subFaction].occurences;
     const minPoints = subFactionAllowance[subFaction].min;
     const maxPoints = subFactionAllowance[subFaction].max;
@@ -190,17 +182,14 @@ export const DwarvesRules = (selectedUnit, armyPointsTotal, operator) => {
         armyPointsTotal * maxPoints > total + selectedUnit.points
       );
     } else if (operator === operators.SUBTRACT) {
-      return (
-        armyPointsTotal * minPoints < total - selectedUnit.points ||
-        armyPointsTotal * maxPoints > total - selectedUnit.points
-      );
+      return armyPointsTotal * minPoints < total - selectedUnit.points || armyPointsTotal * maxPoints > total - selectedUnit.points;
     }
   };
 
   /**
    * function takes care of the dwarf army list special rule: of the three opions (2 dwarven kingdoms and one ally), only one can make upp a max.
    * of 40% of the force. Once the choice is made, the player can only take the second kingdom OR the ally and only to a max. of 20%.
-   * 
+   *
    * specials
    * ==================
    * The function works with a "checkbox array", [specials]: the array contains the three factions. Once a coice is made, the faction is "checked off" (removed from the
@@ -211,7 +200,9 @@ export const DwarvesRules = (selectedUnit, armyPointsTotal, operator) => {
   const applySpecialRules = (selectedUnit) => {
     //TODO: when unit gets deselected?? -> selectedUnit,
 
-    selectedUnits.filter((u) => {});
+    selectedUnits.filter((u) => {
+      return u;
+    });
 
     checkOffSubFaction(selectedUnit);
 
@@ -226,9 +217,7 @@ export const DwarvesRules = (selectedUnit, armyPointsTotal, operator) => {
   };
 
   const checkOffSubFaction = (selectedUnit) => {
-    let temp = specials.filter(
-      (sF) => sF !== selectedUnit.subFaction || sF !== selectedUnit.Faction
-    );
+    let temp = specials.filter((sF) => sF !== selectedUnit.subFaction || sF !== selectedUnit.Faction);
 
     setSpecials(temp);
   };

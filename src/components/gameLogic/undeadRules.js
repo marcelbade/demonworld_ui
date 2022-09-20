@@ -1,22 +1,12 @@
-/**
-   Object contains 
-   - the point allowances for every subfaction
-   - some subfaction count again the same limit.
-   - wether they are minimums or maximums
- */
+/* TODO SQL: the giant mummy and the "Werkstatt", "altar der Totenbeschwörer" are unique!
+ *
+ *
+ * */
 
-//TODO: correct this :)
+// TODO: correct subfations, percentages
 
-//    Tiermenschen 10% – 60%
-//    Menschen    10% – 60%
-//    Eishexen  10% – 60%
-//    Dämonen   höchstens 50%
-//    Untote     höchstens 50%
-//    Eisriesen   höchstens 30%
-
-export const IshtakRules = [
+export const UndeadRules = [
   {
-    // TODO: braucht man das hier??? Prüf mal bitte
     names: ["Befehlshaber", "Held"],
     min: 0.1,
     max: 0.1,

@@ -6,6 +6,7 @@ import axios from "axios";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 // components and functions
+import { ruleValidation as selectvalidatorFor } from "../gameLogic/useRuleValidation";
 import SelectionInput from "../shared/selectionInput";
 import FactionTreeView from "./treeView";
 import ArmyListDisplay from "./armyListDisplay";
@@ -29,68 +30,69 @@ const ListGeneratorController = () => {
   // intialize local states
   const [suppliedFactions, setSuppliedFactions] = useState([]);
   const [selectedFaction, setSelectedFaction] = useState("");
-  const [selectedUnit, setSelectedUnit] = useState(null);
+  const [selectedUnits, setSelectedUnits] = useState([]);
   const [disableAllUnitSelection, setDisableAllUnitSelection] = useState(false); //  eslint-disable-line no-unused-vars
-  const [maxPointsValue, setMaxPointsValue] = useState(500); //  eslint-disable-line no-unused-vars
+  const [maxPointsValue, setMaxPointsValue] = useState(2000); //  eslint-disable-line no-unused-vars
   const [pointsLeft, setPointsLeft] = useState(maxPointsValue);
+  const [validator, setValidator] = useState(null);
   //the current total point value of all selected units
   const [totalPointValue, setTotalPointValue] = useState(0);
   const [distinctSubFactions, setDistinctSubFactions] = useState([]);
   const [ally, setAlly] = useState("");
   const [distinctAllySubFactions, setDistinctAllySubFactions] = useState([]);
 
-  const addPoints = (points) => {
-    setTotalPointValue(totalPointValue + points);
-  };
-
   useEffect(() => {
     fetchData();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // when faction selected from drop down
   useEffect(() => {
     findSubFactions();
     setAlly(findAlly());
     setDistinctAllySubFactions(findDistinctSubfactions(findAlly()));
+    setValidator(selectvalidatorFor(selectedFaction));
   }, [selectedFaction]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  /**
-   * Function finds subfactions for the selected faction.
-   */
-  const findSubFactions = () => {
-    setDistinctSubFactions(findDistinctSubfactions(selectedFaction));
-  };
+  //TODO TEST ONLY; PLEASE DELETE
+  useEffect(() => {
+    console.log("validator ->");
+    console.log(validator);
+    if (validator) console.log(validator.testSubFactionRules());
+  }, [validator]);
 
-  /**
-   * Function returns the allied faction, if it exists.
-   *
-   * @returns String The allied Faction or an empty String.
-   */
-  const findAlly = () => {
-    return alliesMapping[selectedFaction] ? alliesMapping[selectedFaction] : "";
-  };
+  //calculate total point value for army
+  useEffect(() => {
+    let pointTotal = 0;
+    if (selectedUnits) {
+      selectedUnits.forEach((u) => (pointTotal += u.points));
+    }
+    setTotalPointValue(pointTotal);
 
-  /**
-   * call BE to get all game factions as JSON.
-   */
+    //TODO here the custom hook neeeds to be added...
+  }, [selectedUnits]);
+
   const fetchData = async () => {
     const result = await axios(`http://localhost:8080/factions`);
     setSuppliedFactions(result.data);
   };
 
-  /**
-   * Function filters the localFactions JSON  down to the selected faction.
-   *
-   * @param {[{}]} selectedFaction
-   */
+  // Function filters the localFactions JSON down to the selected faction.
   const filterForSelectedFaction = (selectedFaction) => {
     let result = suppliedFactions.filter((f) => f.faction.toLowerCase() === selectedFaction.toLowerCase());
     return result;
   };
 
-  /**
-   * Function returns all distinct subFactions of a selected faction.
-   * @returns []
-   */
+  // Function finds subfactions for the selected faction.
+  const findSubFactions = () => {
+    setDistinctSubFactions(findDistinctSubfactions(selectedFaction));
+  };
+
+  // returns allied faction, if it exists
+  const findAlly = () => {
+    return alliesMapping[selectedFaction] ? alliesMapping[selectedFaction] : "";
+  };
+
+  // Function returns all distinct subFactions of a selected faction.
   const findDistinctSubfactions = (faction) => {
     let distinctSubFactions = [];
 
@@ -101,6 +103,15 @@ const ListGeneratorController = () => {
     });
 
     return distinctSubFactions;
+  };
+
+  const selectUnit = (unit) => {
+    setSelectedUnits([...selectedUnits, addUniqueIdToUnit(unit)]);
+
+    //TODO: This were you add the validation and show the error  :D
+
+    // if (isChoiceValid()) setSelectedUnits([...selectedUnits, addUniqueIdToUnit(unit)]);
+    // else console.log("toast message!");
   };
 
   /**
@@ -116,15 +127,13 @@ const ListGeneratorController = () => {
     return { ...unit, uniqueID: randomID };
   };
 
-  /**
-   * Abstraction layer function. Is passed to every button
-   * in the tree view for calls. sets the SelectedUnit variable that is passed
-   * to the list to be added.
-   *  calls the
-   * @param {} unit
-   */
-  const selectUnit = (unit) => {
-    setSelectedUnit(addUniqueIdToUnit(unit));
+  const removeUnit = (identifier) => {
+    let filtered = selectedUnits.filter((u) => u.name + u.uniqueID !== identifier);
+    setSelectedUnits(filtered);
+  };
+
+  const clearList = () => {
+    setSelectedUnits([]);
   };
 
   const remainingPoints = (pointValue) => {
@@ -142,13 +151,13 @@ const ListGeneratorController = () => {
         />
         <FactionTreeView
           className={classes.selector}
-          addPoints={addPoints}
+          // addPoints={addPoints}
           selectUnit={selectUnit}
-          factionName={selectedFaction}
+          ally={filterForSelectedFaction(ally)}
           faction={filterForSelectedFaction(selectedFaction)}
           distinctSubFactions={distinctSubFactions}
           allyName={ally}
-          ally={filterForSelectedFaction(ally)}
+          factionName={selectedFaction}
           distinctAllySubFactions={distinctAllySubFactions}
           pointsLeft={pointsLeft}
           disableAllUnitSelection={disableAllUnitSelection}
@@ -159,13 +168,17 @@ const ListGeneratorController = () => {
         <ArmyListDisplay
           remainingPoints={remainingPoints}
           setTotalPointValue={setTotalPointValue}
+          clearList={clearList}
+          removeUnit={removeUnit}
+          selectedFaction={selectedFaction}
+          addedUnits={selectedUnits}
           factionName={selectedFaction}
           distinctSubFactions={distinctSubFactions}
           allyName={ally}
           distinctAllySubFactions={distinctAllySubFactions}
           maxPointsValue={maxPointsValue}
-          selectedUnit={selectedUnit}
           totalPointValue={totalPointValue}
+          validator={validator}
           //CSS
           className={classes.list}
         />

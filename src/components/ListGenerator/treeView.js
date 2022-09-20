@@ -113,7 +113,6 @@ const FactionTreeView = (props) => {
               className={classes.button}
               onClick={() => {
                 props.selectUnit(u);
-                props.addPoints(u.points);
               }}
             >
               <AddCircleOutlineIcon />
@@ -125,7 +124,7 @@ const FactionTreeView = (props) => {
   };
 
   /**
-   * Function creates an ID for every node. The id has to be larger than the root ID of 1, hence the offset.
+   * Function creates an ID for every node. The id must be larger than the root ID of 1, hence the offset.
    * @param {*} index of the subfaction in the array.
    * @returns int nodeID
    */

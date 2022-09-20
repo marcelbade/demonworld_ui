@@ -1,0 +1,17 @@
+
+How to do validation (final version)
+
+- every validator (named after the faction) returns an object
+- all objects have the same composition
+
+<<faction>> {
+ testSubFactionRules
+ testSubFactionPoints
+ test total points
+ test 2 units max
+
+}
+
+
+Dazu wird das rules object als table für die table-drien 
+functions genutzt

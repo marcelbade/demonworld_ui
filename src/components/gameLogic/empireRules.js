@@ -1,14 +1,15 @@
-/* TODO SQL: the giant mummy and the "Werkstatt", "altar der Totenbeschwörer" are unique!
- *
- *
- * */
 
+/**
+ * additional rules for the empire
+ * <p>
+ * - only one border mark!
+ * - one ** commander
+ * TODO: the border mark must be picked in the frontend. is stored in the resultContainer
+ */
 
-// TODO: correct subfations, percentages
-
-
- export const pointAllowances = [
+export const EmpireRules = [
     {
+      // TODO: braucht man das hier??? Prüf mal bitte 
       names: ["Befehlshaber", "Held"],
       min: 0.10,
       max: 0.10,

@@ -13,7 +13,7 @@
 
 // TODO: correct subfations for thain, percentages
 
-export const pointAllowances = [
+export const ThainRules = [
     {
       // TODO: braucht man das hier??? Prüf mal bitte 
       names: ["Befehlshaber", "Held"],

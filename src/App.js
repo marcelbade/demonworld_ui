@@ -1,7 +1,7 @@
 // React
 import * as React from "react";
 // Material UI
-import { Drawer, List, IconButton, ListItem, ListItemIcon, Box, CssBaseline, styled, useTheme, Grid } from "@material-ui/core";
+import { Drawer, List, IconButton, ListItem, ListItemIcon, Box, CssBaseline, styled, Grid } from "@material-ui/core";
 // router
 import { Route, Switch, Link } from "react-router-dom";
 // components and functions
@@ -45,7 +45,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 // correct Header
 
 function App() {
-  const theme = useTheme();
+  //const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
@@ -55,12 +55,6 @@ function App() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
-  const linkTable = [
-    { name: "/", link: "Startseite" },
-    { name: "/compendium", link: "Kompendium" },
-    { name: "/listGenerator", link: "Armeegenerator" },
-  ];
 
   return (
     <Box sx={{ display: "flex" }}>

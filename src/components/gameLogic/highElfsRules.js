@@ -10,7 +10,7 @@
 // TODO: correct subfations, percentages
 
 
-export const pointAllowances = [
+export const ElfRules = [
     {
        names: ["Befehlshaber", "Held"],
       min: 0.10,

@@ -24,7 +24,7 @@
  **/ 
 
 
-export const pointAllowances = [
+export const OrkRules = [
     {
       // TODO: braucht man das hier??? Prüf mal bitte 
       names: ["Befehlshaber", "Held"],
