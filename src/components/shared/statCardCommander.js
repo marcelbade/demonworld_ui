@@ -2,7 +2,6 @@
 import React from "react";
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
-import { Grid } from "@material-ui/core";
 // icons
 // import SecurityIcon from "@material-ui/icons/Security";
 // import Icon from "@material-ui/core/Icon";
@@ -11,48 +10,50 @@ import { Grid } from "@material-ui/core";
 // import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 // components & functions
 import {
-  generatHitPoints,
+  generateHitPoints,
   renderMagicPoints,
   renderCommandPoints,
+  renderSkillValues,
+  displayAllSpecialRules,
+  displayUnitCost,
 } from "../compendiums/factionTable/depencies/factionTableFunctions";
 // clsx
 import clsx from "clsx";
 
 const useStyles = makeStyles({
-  root: {
+  cardBox: {
+    border: "1px solid black",
+    borderCollapse: "collapse",
+    backgroundColor: "lightgrey",
     fontFamily: "Beryliumbold",
-    height: "100%",
-    width: "100%",
-    fontSize: "20px",
     fontWeight: "bold",
+    fontSize: "20px",
+    tableLayout: "fixed",
+    width: "1800px",
   },
-  titleIcons: {
-    height: "24px",
-    width: "24px",
+  movementCell: {
+    textAlign: "left",
+  },
+  leftCell: {
+    paddingLeft: "0px",
+    width: "30%",
+  },
+  centerCell: {
+    width: "40%",
+  },
+  rightCell: {
+    width: "30%",
+  },
+  cardBorder: {
+    borderRight: "1px solid black",
+  },
+  spanCellTwo: {
+    textAlign: "end",
   },
   unitCardStripe: {
-    fontFamily: "Beryliumbold",
     padding: "10px",
     color: "white",
     backgroundColor: "black",
-  },
-  cardBox: {
-    fontFamily: "Beryliumbold",
-    fontWeight: "bold",
-    width: "60%",
-    fontSize: "20px",
-    "& p": { marginBottom: "0px", marginTop: "0px" },
-  },
-  cardSide: {
-    backgroundColor: "lightgrey",
-  },
-  specialRules: {
-    fontFamily: "Beryliumbold",
-    paddingTop: "10px",
-    paddingLeft: "10px",
-    paddingRight: "10px",
-    fontSize: "20px",
-    "& p": { marginBottom: "0px", marginTop: "0px" },
   },
   cardTitle: {
     fontFamily: "notMaryKate",
@@ -60,19 +61,9 @@ const useStyles = makeStyles({
     marginBottom: "0px",
     marginTop: "0px",
     textAlign: "center",
-    fontSize: "40px",
+    fontSize: "30px",
     color: "red",
     borderWidth: "0px",
-    "& .MuiGrid-item": { border: "none", padding: "0px", margin: "0px" },
-  },
-  cardSubfaction: {
-    fontFamily: "Beryliumbold",
-    marginLeft: "10px",
-    marginRight: "10px",
-  },
-  divider: {
-    backgroundColor: "white",
-    maxWidth: "1%",
   },
 });
 
@@ -80,163 +71,88 @@ const StatCardUnit = (props) => {
   const classes = useStyles();
 
   return (
-    <Grid
-      container
-      direction="row"
-      justify="center"
-      className={classes.cardBox}
-    >
-      {/* FRONTSIDE OF THE CARD */}
-      <Grid
-        container
-        item
-        xs={5}
-        className={classes.cardSide}
-        direction="column"
-      >
-        <Grid container item direction="row" justify="space-between">
-          <Grid item xs={3}>
-            <p className={classes.cardSubfaction}>
-              {renderCommandPoints(props.rowData.commandStars)}
-            </p>
-          </Grid>
-          <Grid container item xs={6} justify="center">
-            <p className={classes.cardTitle}>{props.rowData.unitName}</p>
-          </Grid>
-          <Grid container item xs={3} justify="flex-end">
-            <p className={classes.cardSubfaction}>
-              {renderMagicPoints(props.rowData.magic)}
-            </p>
-          </Grid>
-        </Grid>
-        <Grid
-          item
-          container
-          direction="row"
-          justify="space-around"
-          className={classes.unitCardStripe}
-        >
-          <p>
-            B: {props.rowData.move} / A: {props.rowData.charge} / P:
-            {props.rowData.skirmish}
-          </p>
-          <p>{props.rowData.hold_maneuvers} Manoever</p>
-          <p>
-            {props.rowData.wedgeFormation ? "Ke / " : null}
-            {props.rowData.skirmishFormation ? "Pl / " : null}
-            {props.rowData.squareFormation ? "Ka / " : null}
-            {props.rowData.horde ? "Horde" : null}
-          </p>
-        </Grid>
-        {props.rowData.rangedWeapon ? (
-          <Grid container direction="row" justify="center">
-            <p> {props.rowData.rangedWeapon} </p>
-            <p> {props.rowData.rangedAttackStats} </p>
-          </Grid>
-        ) : null}
-        <Grid container direction="row" justify="center">
-          <p> Waffe 1: </p>
-          <p> {props.rowData.weapon1} </p>
-        </Grid>
-        {props.rowData.weapon2 === 0 ? null : (
-          <Grid container direction="row" justify="center">
-            <p> Waffe 2: </p>
-            <p>{props.rowData.weapon2} </p>
-          </Grid>
+    <table className={classes.cardBox}>
+      {/* 1st Row - title*/}
+      <tr className={classes.cardSide}>
+        {/* FS */}
+        <td className={classes.leftCell}>{renderCommandPoints(props.rowData.commandStars)}</td>
+        <td className={clsx(classes.centerCell, classes.cardTitle)}>{props.rowData.unitName}</td>
+        <td className={clsx(classes.cardBorder, classes.rightCell)}>{renderMagicPoints(props.rowData.magic)}</td>
+        {/* BS */}
+        <td className={classes.leftCell}>{props.rowData.faction}</td>
+        <td className={clsx(classes.centerCell, classes.cardTitle)}>{props.rowData.unitName}</td>
+        <td className={clsx(classes.cardBorder, classes.rightCell)}>{props.rowData.subFaction}</td>
+      </tr>
+      {/* 2nd Row - black Stripe  - movement*/}
+      <tr className={clsx(classes.cardSide, classes.unitCardStripe)}>
+        {/* FS */}
+        <td colSpan={"2"} className={clsx(classes.leftCell, classes.movementCell, classes.unitCardStripe)}>
+          B: {props.rowData.move} / A: {props.rowData.charge} / P:{props.rowData.skirmish} / M: {props.rowData.hold_maneuvers}
+        </td>
+        <td className={clsx(classes.spanCellTwo, classes.unitCardStripe)}></td>
+        {/* BS */}
+        <td colSpan={"3"} className={classes.unitCardStripe}>
+          {props.rowData.numberOfElements} {props.rowData.numberOfElements === 1 ? "Element" : "Elemente"}
+        </td>
+      </tr>
+      <tr>
+        {/* 3rd Row - ranged weapons, special rules */}
+        {/* FS */}
+        {props.rowData.rangedWeapon !== "x" ? (
+          <td colSpan={"3"} className={classes.cardBorder}>
+            {props.rowData.rangedWeapon} {props.rowData.rangedAttackStats}
+          </td>
+        ) : (
+          <td colSpan={"3"} className={classes.cardBorder}></td>
         )}
-        <Grid container direction="row" justify="space-around">
-          <p> Groesse: {props.rowData.unitSize} </p>
-          <p>
-            Panzerung: {props.rowData.armourRange} / {props.rowData.armourMelee}{" "}
-          </p>
-        </Grid>
-        {props.rowData.skillMelee && props.rowData.skillRange ? (
-          <Grid container direction="row" justify="space-around">
-            <p>
-              Kampfgeschick:{" "}
-              {props.rowData.skillRange ? props.rowData.skillRange + "/" : null}
-              {props.rowData.skillMelee ? props.rowData.skillMelee : null}
-            </p>
-          </Grid>
-        ) : null}
-        <Grid
-          container
-          direction="row"
-          justify="space-around"
-          className={classes.unitCardStripe}
-        >
-          <p>Furchtfaktor: {props.rowData.fear}</p>
-          <p>
-            Moral: {props.rowData.moral2 ? props.rowData.moral2 : "-"}/
-            {props.rowData.moral2 ? props.rowData.moral2 : "-"}
-          </p>
-        </Grid>
-        <Grid container direction="row" justify="space-around">
-          {generatHitPoints(props.rowData.hitpoints)}
-        </Grid>
-      </Grid>
-      <Grid item xs={2} className={classes.divider}>
-        {" "}
-      </Grid>
-      {/* BACKSIDE OF THE CARD */}
-      <Grid
-        className={classes.cardSide}
-        container
-        item
-        xs={5}
-        direction="column"
-      >
-        <Grid container item justify="space-between">
-          <Grid item xs={3}>
-            <p className={classes.cardSubfaction}>{props.rowData.faction}</p>
-          </Grid>
-          <Grid item xs={6}>
-            <p className={classes.cardTitle}>{props.rowData.unitName}</p>
-          </Grid>
-          <Grid item container xs={3} justify="flex-end">
-            <p className={classes.cardSubfaction}>{props.rowData.subFaction}</p>
-          </Grid>
-        </Grid>
-        <Grid
-          item
-          container
-          direction="row"
-          justify="space-around"
-          className={classes.unitCardStripe}
-        >
-          <p>
-            {props.rowData.leader ? "Anfuehrer / " : null}
-            {props.rowData.standardBearer ? "Standarte / " : null}
-            {props.rowData.musician ? "Musiker" : null}
-          </p>
-          <p>
-            {props.rowData.numberOfElements}{" "}
-            {props.rowData.numberOfElements === 1 ? "Element" : "Elemente"}
-          </p>
-        </Grid>
-        <Grid
-          container
-          direction="row"
-          justify="space-around"
-          className={clsx(classes.specialRules, "font-face-gonjuring")}
-        >
-          <p>
-            {props.rowData.specialRules.length === 0
-              ? "Keine besonderen Spielregeln."
-              : props.rowData.specialRules}{" "}
-          </p>
-        </Grid>
-        <Grid
-          item
-          container
-          direction="row"
-          justify="space-around"
-          className={classes.unitCardStripe}
-        >
-          <p>{props.rowData.points} Punkte</p>
-        </Grid>
-      </Grid>
-    </Grid>
+        <td colSpan={"3"} rowSpan={"5"}>
+          {/* TODO: Special_Rules: Change this */}
+          {/* {props.rowData.specialRules.length === 0 ? "Keine besonderen Spielregeln." : displayAllSpecialRules(props.rowData.specialRules, props.rowData.allRules)} */}
+          {displayAllSpecialRules(props.rowData)}
+        </td>
+      </tr>
+      <tr>
+        <td colSpan={"3"} className={classes.cardBorder}>
+          Waffe 1: {props.rowData.weapon1}
+        </td>
+      </tr>
+      <tr>
+        <td colSpan={"3"} className={classes.cardBorder}>
+          {props.rowData.weapon2 === 0 ? null : "Waffe 2: " + props.rowData.weapon2}
+        </td>
+      </tr>
+      <tr>
+        <td className={classes.leftCell}>Größe: {props.rowData.unitSize}</td>
+        <td className={classes.centerCell}></td>
+        <td className={clsx(classes.cardBorder, classes.rightCell)}>
+          Panzerung: {props.rowData.armourRange} / {props.rowData.armourMelee}{" "}
+        </td>
+      </tr>
+      <tr>
+        <td colSpan={"3"} className={classes.cardBorder}>
+          {renderSkillValues(props.rowData.skillRange, props.rowData.skillMelee)}
+        </td>
+      </tr>
+      {/* 4rd Row - black Stripe #2 */}
+      {/* FS */}
+      <tr>
+        <td className={clsx(classes.leftCell, classes.unitCardStripe)}>Furchtfaktor: {props.rowData.fear}</td>
+        <td className={clsx(classes.centerCell, classes.unitCardStripe)}></td>
+        <td className={clsx(classes.rightCell, classes.unitCardStripe)}>
+          Moral: {props.rowData.moral2 ? props.rowData.moral2 : "-"}/{props.rowData.moral2 ? props.rowData.moral2 : "-"}
+        </td>
+        {/* BS */}
+        <td colSpan={"3"} className={classes.unitCardStripe}>
+          {displayUnitCost(props.rowData)} Punkte
+        </td>
+      </tr>
+      {/* 5th Row - hit points */}
+      <tr>
+        <td colSpan={"3"} className={classes.cardBorder}>
+          {generateHitPoints(props.rowData.hitpoints)}
+        </td>
+      </tr>
+    </table>
   );
 };
 

@@ -1,0 +1,61 @@
+
+React FR
+=============================
+
+ TODO: Logic
+
+- do not exceed total army points -> not working 
+- subfaction below minimum -> how to display / Block
+- dwarven special rule not working
+- model all faction validators after dwarves!
+- Allies stopped working
+- lag syndrom in item shop
+- tommysAnalysis function
+
+TODO: missing features
+- card preview in item shop
+- show finished list
+- print finished list
+- save list in MongoDB(!!)
+- Fast Loss Calculator (FLC) 
+- user accounts (!!)
+
+
+TODO: Design
+- fonts: choose fonts for:
+    - item lists in item shop
+    - entries in army tree 
+    - in table 
+    OBVIOUS CHOICE : Beryliumbold
+
+
+
+
+ITEM SHOP
+=============================
+
+TODO: when changing the army, close the item shop
+
+ TODO: Items fuck up your commander/unit cards!
+    - adding the items destroys the layout 
+    - first idea: isntead of adding it to the end of the backside, add a third card with the equipment
+
+
+-------------CURRENTLY WORKING ON-----------------
+TODO: you can only choose one poison!
+
+- well it's not working. It should. seems like a state problem (surprise :D). The button that opens the shop sets 
+  two state variables, that's a fucking issue. You need to make it one! 
+
+
+ 
+ TODO: when selecting an item add the following to the unit card 
+        - the special rules [DONE] 
+        - change the stats
+               
+ 
+
+
+
+
+

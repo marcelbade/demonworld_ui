@@ -6,11 +6,10 @@ import Tooltip from "@material-ui/core/Tooltip";
 import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 import CancelIcon from "@material-ui/icons/Cancel";
 // components & functions
-import StatCardCommander from "../../../shared/statCardCommander";
-import StatCardUnit from "../../../shared/statCardUnit";
+import { unitOrCmdCard } from "../../../shared/sharedFunctions";
 // constants
-import { HERO, MAGE, AUTOMATON, GIANT } from "../../../../constants/unitTypes";
 import { Grid } from "@material-ui/core";
+import { Fragment } from "react";
 
 const RulesToolTip = withStyles({
   tooltip: {
@@ -33,7 +32,6 @@ export const renderSpecialRules = (rule) => {
     </RulesToolTip>
   );
 };
- 
 
 // eslint-disable-next-line no-unused-vars
 const renderDetailsPanel = (cardData, showTommysStuff) => {
@@ -43,53 +41,30 @@ const renderDetailsPanel = (cardData, showTommysStuff) => {
         {unitOrCmdCard(cardData)}
       </Grid>
       <Grid item xs={6}>
-        {showTommysStuff ? showTommysAnalysis(cardData) : null}
+        {showTommysStuff ? tommysAnalysis(cardData) : null}
       </Grid>
     </Grid>
   );
 };
- 
-
-
-/**
- *  Function controls which kind of stat card (unit or Hero/commander) is displayed in the details panel.
- *
- * @param {[{*}]} cardData
- * @returns  JSX element
- */
-export const unitOrCmdCard = (cardData) => {
-  let element;
-  const singleElements = [HERO, MAGE, AUTOMATON, GIANT];
-
-  singleElements.includes(cardData.unitType)
-    ? (element = <StatCardCommander rowData={cardData} />)
-    : (element = <StatCardUnit rowData={cardData} />);
-
-  return element;
-};
 
 //TODO: finish this function
-export const showTommysAnalysis = (cardData) => {
+export const tommysAnalysis = (cardData) => {
   //#############
   return <Grid container direction="column"></Grid>;
 };
 
 /**
- * Function that renders the correct icon for the boolean unit stats. Units show either check or cross,
- * heroes  and commanders show  a "-".
+ * Function that renders the correct icon for those unit stats that are booleans. For a Unit the function displays either a check mark or X icon,
+ * for heroes  and commanders it shows  a "-".
  *
  * @param {boolean} flag
  * @returns Material UI icon or "-"
  */
-export const renderBoolean = (numberOfElements, flag) => {
+export const renderBooleanAsIcon = (numberOfElements, flag) => {
   const SINGLE_ELEMENT = 1;
 
   if (numberOfElements !== SINGLE_ELEMENT) {
-    return flag ? (
-      <CheckCircleOutlineIcon style={{ color: "black" }} />
-    ) : (
-      <CancelIcon style={{ color: "black" }} />
-    );
+    return flag ? <CheckCircleOutlineIcon style={{ color: "black" }} /> : <CancelIcon style={{ color: "black" }} />;
   } else {
     return "-";
   }
@@ -100,7 +75,7 @@ export const renderBoolean = (numberOfElements, flag) => {
  * @param {integer} hitpoints
  * @returns  String
  */
-export const generatHitPoints = (hitpoints) => {
+export const generateHitPoints = (hitpoints) => {
   let hitpointMarker = "";
 
   for (let i = 0; i < hitpoints; i++) {
@@ -136,4 +111,53 @@ export const renderCommandPoints = (stars) => {
     starMarker = starMarker + "*";
   }
   return starMarker;
+};
+
+/**
+ * Function creates the html for the displayed unit card's special rule section.
+ *
+ * @param {unitCard} unit
+ * @returns html containing the unit's special rule (if it has any), and optionally, the rules for any
+ * pieces of equipment added to the unit.
+ */
+export const displayAllSpecialRules = (unit) => {
+  return (
+    <Fragment>
+      {unit.specialRules === "" ? "Keine Besonderen Spielregeln" : unit.specialRules}
+      {"equipment" in unit && unit.equipment.length !== 0
+        ? unit.equipment.map((e) => {
+            return (
+              <Fragment>
+                <hr></hr>
+                <div> {e.name} </div>
+                <div> {e.rule} </div>
+              </Fragment>
+            );
+          })
+        : null}
+    </Fragment>
+  );
+};
+
+export const renderSkillValues = (rangeSkill, meleeSkill) => {
+  let result = rangeSkill !== 0 || meleeSkill !== 0 ? `Kampfgeschick: ${rangeSkill} / ${meleeSkill} ` : "";
+
+  return result;
+};
+
+/**
+ * Returns the total point cost for the unit + all equipment selected for it
+ * @param {unitCard} unit
+ * @returns total point cost for the unit + equipment
+ */
+export const displayUnitCost = (unit) => {
+  if ("equipment" in unit && unit.equipment.length !== 0) {
+    let pointTotal = 0;
+    unit.equipment.forEach((pieceOfGear) => {
+      pointTotal += pieceOfGear.points;
+    });
+    return unit.points + pointTotal;
+  } else {
+    return unit.points;
+  }
 };

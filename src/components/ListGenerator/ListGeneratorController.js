@@ -3,105 +3,197 @@ import React, { useEffect, useState } from "react";
 // Axios
 import axios from "axios";
 // Material UI
+import { Drawer, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { Grid } from "@material-ui/core";
 // components and functions
-import ArmySelection from "../shared/armySelection";
-import FactionTreeView from "./treeView";
-import ArmyListDisplay from "./armyListDisplay";
+import ArmyProvider from "../../contexts/armyContext";
+import SelectionInput from "../shared/selectionInput";
+import FactionTreeView from "./ArmyTreeView/treeView";
+import ArmyListDisplay from "./ArmyListView/armyListDisplay";
+import ItemShop from "./ItemShop/ItemShop";
 import { uuidGenerator } from "../shared/sharedFunctions";
 import { alliesMapping } from "../gameLogic/allies";
+import { ALL_FACTIONS_ARRAY } from "../../constants/factions";
+import { ruleValidation } from "../gameLogic/useRuleValidation";
+import { isObjectEmtpy } from "../shared/sharedFunctions";
+import { unitOrCmdCard } from "../shared/sharedFunctions";
 
 const useStyles = makeStyles({
   root: {},
   selector: {
     marginTop: "10px",
+    paddingLeft: "10px",
     marginBottom: "60px",
   },
-  list: {},
+  itemScreen: {
+    backgroundColor: "yellow",
+  },
 });
 
 const ListGeneratorController = () => {
   const classes = useStyles();
 
   // intialize local states
-  const [suppliedFactions, setSuppliedFactions] = useState([]);
-  const [selectedFaction, setSelectedFaction] = useState("");
-  const [selectedUnit, setSelectedUnit] = useState(null);
-  const [disableAllUnitSelection, setDisableAllUnitSelection] = useState(false); //  eslint-disable-line no-unused-vars
-  const [maxPointsValue, setMaxPointsValue] = useState(500); //  eslint-disable-line no-unused-vars
-  const [pointsLeft, setPointsLeft] = useState(maxPointsValue);
+  const [fetchedFactions, setfetchedFactions] = useState([]);
+  const [fetchedItems, setfetchedItems] = useState([]);
+  const [selectedFactionName, setSelectedFactionName] = useState("");
+  const [selectedFaction, setSelectedFaction] = useState([]);
+  const [allyName, setAllyName] = useState("");
+  const [mappedAlly, setMappedAlly] = useState([]);
+  const [selectedUnits, setSelectedUnits] = useState([]);
+  const [maxPointsValue, setMaxPointsValue] = useState(2000); //  eslint-disable-line no-unused-vars
   //the current total point value of all selected units
   const [totalPointValue, setTotalPointValue] = useState(0);
   const [distinctSubFactions, setDistinctSubFactions] = useState([]);
-  const [ally, setAlly] = useState("");
   const [distinctAllySubFactions, setDistinctAllySubFactions] = useState([]);
+  // validation
+  const [blockedUnits, setblockedUnits] = useState({
+    unitsBlockedbyRules: [],
+    subFactionBelowMinimum: [],
+  });
+  const [drawerState, setDrawerState] = useState(false);
+  // ItemShop view
+  const [unitSelectedForShop, setUnitSelectedForShop] = useState({});
+  const [allItems, setAllItems] = useState([]);
+  // unit card view
+  const [showStatCard, setShowStatCard] = useState({
+    clickedUnit: {},
+    lastclickedUnit: {},
+    show: false,
+  });
 
-  const addPoints = (points) => {
-    setTotalPointValue(totalPointValue + points);
+  /**
+   * functions opens the item shop. Function is called in the <SubList> module.
+   * @param {*} unit
+   */
+  const openItemShop = () => {
+    setDrawerState(true);
+  };
+
+  const closeItemShop = () => {
+    setDrawerState(false);
   };
 
   useEffect(() => {
-    fetchData();
+    fetchFactionData();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const fetchFactionData = async () => {
+    const result = await axios(`http://localhost:8080/factions`);
+    setfetchedFactions(result.data);
+  };
+
+  useEffect(() => {
+    fetchItemData();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const fetchItemData = async () => {
+    const result = await axios(`http://localhost:8080/items`);
+    setfetchedItems(result.data);
+  };
+
+  // when faction selected from drop down
+  useEffect(() => {
+    narrowDownToSelectedArmy();
+  }, [selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     findSubFactions();
-    setAlly(findAlly());
-    setDistinctAllySubFactions(findDistinctSubfactions(findAlly()));
+    findAllyName();
+    narrowDownToAlly();
+    findAlliedSubFactions();
   }, [selectedFaction]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  /**
-   * Function finds subfactions for the selected faction.
-   */
+  const narrowDownToSelectedArmy = () => {
+    setSelectedFaction(fetchedFactions.filter((f) => f.faction.toLowerCase() === selectedFactionName.toLowerCase()));
+  };
+
+  const narrowDownToAlly = () => {
+    if (allyName) {
+      setMappedAlly(fetchedFactions.filter((f) => f.faction.toLowerCase() === allyName.toLowerCase()));
+    }
+  };
+
+  // Function finds subfactions for the selected faction.
   const findSubFactions = () => {
     setDistinctSubFactions(findDistinctSubfactions(selectedFaction));
   };
 
-  /**
-   * Function returns the allied faction, if it exists.
-   *
-   * @returns String The allied Faction or an empty String.
-   */
-  const findAlly = () => {
-    return alliesMapping[selectedFaction] ? alliesMapping[selectedFaction] : "";
+  const findAlliedSubFactions = () => {
+    if (allyName) {
+      const ally = fetchedFactions.filter((f) => f.faction.toLowerCase() === allyName.toLowerCase());
+      setDistinctAllySubFactions(findDistinctSubfactions(ally));
+    }
   };
 
-  /**
-   * call BE to get all game factions as JSON.
-   */
-  const fetchData = async () => {
-    const result = await axios(`http://localhost:8080/factions`);
-    setSuppliedFactions(result.data);
-  };
-
-  /**
-   * Function filters the localFactions JSON  down to the selected faction.
-   *
-   * @param {[{}]} selectedFaction
-   */
-  const filterForSelectedFaction = (selectedFaction) => {
-    let result = suppliedFactions.filter(
-      (f) => f.faction.toLowerCase() === selectedFaction.toLowerCase()
-    );
-    return result;
-  };
-
-  /**
-   * Function returns all distinct subFactions of a selected faction.
-   * @returns []
-   */
-  const findDistinctSubfactions = (faction) => {
+  // Function returns all distinct subFactions of a selected faction.
+  const findDistinctSubfactions = (units) => {
     let distinctSubFactions = [];
 
-    filterForSelectedFaction(faction).forEach((f) => {
+    units.forEach((f) => {
       if (!distinctSubFactions.includes(f.subFaction)) {
         distinctSubFactions.push(f.subFaction);
       }
     });
-
     return distinctSubFactions;
   };
+
+  //calculate total point value for army
+  useEffect(() => {
+    let pointTotal = 0;
+    if (selectedUnits) {
+      selectedUnits.forEach((u) => (pointTotal += u.points));
+    }
+    setTotalPointValue(pointTotal);
+  }, [selectedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // returns allied faction, if it exists
+  const findAllyName = () => {
+    const name = alliesMapping[selectedFactionName] ? alliesMapping[selectedFactionName] : "";
+    setAllyName(name);
+  };
+
+  const selectUnit = (unit) => {
+    setSelectedUnits([...selectedUnits, addEquipmentSlotsToUnit(addUniqueIdToUnit(unit))]);
+  };
+
+  useEffect(() => {
+    if (selectedFactionName) {
+      let validator = ruleValidation(selectedFactionName);
+      let result = validator.testSubFactionRules(selectedFaction, selectedUnits, maxPointsValue);
+
+      findInvalidUnits(result);
+    }
+  }, [selectedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const findInvalidUnits = (validationResult) => {
+    setblockedUnits({
+      ...blockedUnits,
+      unitsBlockedbyRules: validationResult.unitsBlockedbyRules,
+      subFactionBelowMinimum: validationResult.subFactionBelowMinimum,
+    });
+  };
+
+  /**
+   *
+   */
+  useEffect(() => {
+    let temp = allItems;
+    let allCurrentItems = [];
+
+    selectedUnits.forEach((unit) => {
+      allCurrentItems = [...allCurrentItems, unit.equipment];
+    });
+
+    temp.forEach((item) => {
+      if (!allCurrentItems.includes(item)) {
+        const position = temp.indexOf(item);
+        temp.splice(position, 1);
+      }
+    });
+
+    setAllItems(temp);
+  }, [selectedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * Functions adds a UUID as unique id so the user can select the
@@ -116,58 +208,126 @@ const ListGeneratorController = () => {
     return { ...unit, uniqueID: randomID };
   };
 
+  const addEquipmentSlotsToUnit = (unit) => {
+    const maxItemNumber = calculateMaxNumberMagicItems(unit);
+
+    return {
+      ...unit,
+      equipment: [],
+      equipmentTypes: {
+        poison: false,
+        warpaint: false,
+        maxMagic: maxItemNumber,
+      },
+    };
+  };
+
   /**
-   * Abstraction layer function. Is passed to every button
-   * in the tree view for calls. sets the SelectedUnit variable that is passed
-   * to the list to be added.
-   *  calls the
-   * @param {} unit
+   * Function calculates how many magical items the unit is allowed to have. +1 per special element.
+   * @param {unit card} unit
    */
-  const selectUnit = (unit) => {
-    setSelectedUnit(addUniqueIdToUnit(unit));
+  const calculateMaxNumberMagicItems = (unit) => {
+    let total = 1;
+
+    if (unit.standardBearer) {
+      ++total;
+    }
+    if (unit.musician) {
+      ++total;
+    }
+
+    return total;
   };
 
-  const remainingPoints = (pointValue) => {
-    setPointsLeft(pointValue);
+  const removeUnit = (identifier) => {
+    let filtered = selectedUnits.filter((u) => u.name + u.uniqueID !== identifier);
+    setSelectedUnits(filtered);
   };
 
-  return suppliedFactions ? (
-    <Grid container direction="row">
-      <Grid container xs={2} item direction="column" className={classes.root}>
-        <Grid item className={classes.selector}>
-          <ArmySelection filterData={setSelectedFaction} />
+  const removeItem = (identifier, position) => {
+    let temp = [...selectedUnits];
+
+    for (let i = 0; i < temp.length; i++) {
+      if (temp[i].name + temp[i].uniqueID === identifier) {
+        temp[i].equipment.splice(position, 1);
+      }
+    }
+
+    setSelectedUnits(temp);
+  };
+
+  const clearList = () => {
+    setSelectedUnits([]);
+  };
+
+  //TEST
+
+  return fetchedFactions && fetchedItems ? (
+    <ArmyProvider
+      value={{
+        name: selectedFactionName,
+        subfactions: distinctSubFactions,
+        units: selectedFaction,
+        //
+        allyName: allyName,
+        allySubFactions: distinctAllySubFactions,
+        alliedUnits: mappedAlly,
+        //
+        maxPointsValue: maxPointsValue,
+        totalPointValue: totalPointValue,
+        addedUnits: selectedUnits,
+        //
+        selectUnit: selectUnit,
+        removeUnit: removeUnit,
+        removeItem: removeItem,
+        //
+        blockedUnits: blockedUnits,
+        //
+        fetchedItems: fetchedItems,
+        unitSelectedForShop: unitSelectedForShop,
+        allItems: allItems,
+        openItemShop: openItemShop,
+        setUnitSelectedForShop: setUnitSelectedForShop,
+        closeItemShop: closeItemShop,
+        setAllItems: setAllItems,
+        //
+        selectedUnits: selectedUnits,
+        setSelectedUnits: setSelectedUnits,
+        //
+        showStatCard: showStatCard,
+        setShowStatCard: setShowStatCard,
+      }}
+    >
+      <Grid container direction="row">
+        <Grid container item xs={4} direction="column" className={classes.root}>
+          <SelectionInput
+            className={classes.selector}
+            filterFunction={setSelectedFactionName}
+            options={ALL_FACTIONS_ARRAY}
+            label="Suche nach Fraktion"
+          />
+          <FactionTreeView className={classes.selector} />
         </Grid>
+        <u>
+          {selectedFaction.forEach((u) => (
+            <li>{u.name}</li>
+          ))}
+        </u>
 
-        <FactionTreeView
-          addPoints={addPoints}
-          selectUnit={selectUnit}
-          factionName={selectedFaction}
-          faction={filterForSelectedFaction(selectedFaction)}
-          distinctSubFactions={distinctSubFactions}
-          allyName={ally}
-          ally={filterForSelectedFaction(ally)}
-          distinctAllySubFactions={distinctAllySubFactions}
-          pointsLeft={pointsLeft}
-          disableAllUnitSelection={disableAllUnitSelection}
-        />
+        <Grid item xs={5}>
+          <ArmyListDisplay setTotalPointValue={setTotalPointValue} clearList={clearList} />
+        </Grid>
+        <Grid item xs={3}>
+          <Drawer anchor={"right"} variant="persistent" open={drawerState} className={classes.itemScreen}>
+            <ItemShop />
+          </Drawer>
+          {/* UNITCARD */}
+          {showStatCard.show ? (
+            <Grid item>{!isObjectEmtpy(showStatCard.clickedUnit) ? unitOrCmdCard(showStatCard.clickedUnit) : null}</Grid>
+          ) : null}
+        </Grid>
       </Grid>
-
-      <Grid xs={10} item>
-        <ArmyListDisplay
-          remainingPoints={remainingPoints}
-          setTotalPointValue={setTotalPointValue}
-          factionName={selectedFaction}
-          distinctSubFactions={distinctSubFactions}
-          allyName={ally}
-          distinctAllySubFactions={distinctAllySubFactions}
-          maxPointsValue={maxPointsValue}
-          selectedUnit={selectedUnit}
-          totalPointValue={totalPointValue}
-          //CSS
-          className={classes.list}
-        />
-      </Grid>
-    </Grid>
+    </ArmyProvider>
   ) : null;
 };
 
