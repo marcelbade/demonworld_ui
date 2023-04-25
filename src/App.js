@@ -8,6 +8,8 @@ import { Route, Switch, Link } from "react-router-dom";
 import landingPage from "./components/landingPage/landingPage";
 import factionTable from "./components/compendiums/factionTable/components/factionTable";
 import ListGeneratorController from "./components/ListGenerator/ListGeneratorController";
+ 
+
 // icons
 import HomeIcon from "@material-ui/icons/Home";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
@@ -57,59 +59,61 @@ function App() {
   };
 
   return (
-    <Box sx={{ display: "flex" }}>
-      <CssBaseline />
-      <Drawer
-        sx={{
-          width: DRAWER_WIDTH,
-          flexShrink: 0,
-          "& .MuiDrawer-paper": {
+    
+      <Box sx={{ display: "flex" }}>
+        <CssBaseline />
+        <Drawer
+          sx={{
             width: DRAWER_WIDTH,
-            boxSizing: "border-box",
-          },
-        }}
-        variant="persistent"
-        anchor="left"
-        open={open}
-      >
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
-          </IconButton>
-        </DrawerHeader>
-        <List>
-          <ListItem>
-            <ListItemIcon>
-              <HomeIcon />
-            </ListItemIcon>
-            <Link to="/">Startseite</Link>
-          </ListItem>
-          <ListItem>
-            <ListItemIcon>
-              <MenuBookIcon />
-            </ListItemIcon>
-            <Link to="/compendium">Kompendium</Link>
-          </ListItem>
-          <ListItem>
-            <ListItemIcon></ListItemIcon>
-            <Link to="/listGenerator">Armeegenerator</Link>
-          </ListItem>
-        </List>
-      </Drawer>
-      <Main open={open}>
-        <DrawerHeader />
-        <Grid container>
-          <IconButton aria-label="open drawer" onClick={handleDrawerOpen}>
-            {!open ? <MenuIcon /> : null}
-          </IconButton>
-          <Switch>
-            <Route path="/" component={landingPage} exact />
-            <Route path="/compendium" component={factionTable} exact />
-            <Route path="/listGenerator" component={ListGeneratorController} />
-          </Switch>
-        </Grid>
-      </Main>
-    </Box>
+            flexShrink: 0,
+            "& .MuiDrawer-paper": {
+              width: DRAWER_WIDTH,
+              boxSizing: "border-box",
+            },
+          }}
+          variant="persistent"
+          anchor="left"
+          open={open}
+        >
+          <DrawerHeader>
+            <IconButton onClick={handleDrawerClose}>
+              <ChevronLeftIcon />
+            </IconButton>
+          </DrawerHeader>
+          <List>
+            <ListItem>
+              <ListItemIcon>
+                <HomeIcon />
+              </ListItemIcon>
+              <Link to="/">Startseite</Link>
+            </ListItem>
+            <ListItem>
+              <ListItemIcon>
+                <MenuBookIcon />
+              </ListItemIcon>
+              <Link to="/compendium">Kompendium</Link>
+            </ListItem>
+            <ListItem>
+              <ListItemIcon></ListItemIcon>
+              <Link to="/listGenerator">Armeegenerator</Link>
+            </ListItem>
+          </List>
+        </Drawer>
+        <Main open={open}>
+          <DrawerHeader />
+          <Grid container>
+            <IconButton aria-label="open drawer" onClick={handleDrawerOpen}>
+              {!open ? <MenuIcon /> : null}
+            </IconButton>
+            <Switch>
+              <Route path="/" component={landingPage} exact />
+              <Route path="/compendium" component={factionTable} exact />
+              <Route path="/listGenerator" component={ListGeneratorController} />
+            </Switch>
+          </Grid>
+        </Main>
+      </Box>
+     
   );
 }
 

@@ -14,6 +14,8 @@ import {
   renderMagicPoints,
   renderCommandPoints,
   renderSkillValues,
+  displayAllSpecialRules,
+  displayUnitCost,
 } from "../compendiums/factionTable/depencies/factionTableFunctions";
 // clsx
 import clsx from "clsx";
@@ -28,9 +30,6 @@ const useStyles = makeStyles({
     fontSize: "20px",
     tableLayout: "fixed",
     width: "1800px",
-    "& :hover": {
-      backgroundColor: "lightgrey",
-    },
   },
   leftCell: {
     width: "30%",
@@ -116,7 +115,7 @@ const StatCardUnit = (props) => {
           <td colSpan={"3"} className={classes.cardBorder}></td>
         )}
         <td colSpan={"3"} rowSpan={"5"}>
-          {props.rowData.specialRules.length === 0 ? "Keine besonderen Spielregeln." : props.rowData.specialRules}
+          {displayAllSpecialRules(props.rowData)}
         </td>
       </tr>
       <tr>
@@ -151,7 +150,7 @@ const StatCardUnit = (props) => {
         </td>
         {/* BS */}
         <td colSpan={"3"} className={classes.unitCardStripe}>
-          {props.rowData.points} Punkte
+          {displayUnitCost(props.rowData)} Punkte
         </td>
       </tr>
       {/* 5th Row - hit points */}

@@ -1,12 +1,13 @@
 // React
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useContext } from "react";
 // Material UI
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Typography, TextField, InputAdornment } from "@material-ui/core";
 // components and functions
-import { uuidGenerator } from "../shared/sharedFunctions";
+import { ArmyContext } from "../../../contexts/armyContext";
+import { uuidGenerator } from "../../shared/sharedFunctions";
 import SubList from "./subList";
 
 // TODO: remove unneeded styles
@@ -57,7 +58,9 @@ const useStyles = makeStyles({
 });
 
 const ArmyListDisplay = (props) => {
-  const [MaximumPoints, setMaximumPoints] = useState(props.maxPointsValue);
+  const contextArmy = useContext(ArmyContext);
+
+  const [MaximumPoints, setMaximumPoints] = useState(contextArmy.maxPointsValue);
   const [errorMessage, setErrorMessage] = useState("");
 
   const classes = useStyles();
@@ -69,15 +72,15 @@ const ArmyListDisplay = (props) => {
   const handleChange = (event) => {
     setMaximumPoints(event.target.value);
     let isValid = new RegExp(/^[0-9]*$/).test(event.target.value);
-    console.log(isValid);
+
     isValid ? setErrorMessage("") : setErrorMessage("Bitte nur Zahlen eingeben.");
   };
 
-  // Component creates the overall list structure. lists for the subFaction are done via the SubList component.
-  return props.selectedFaction !== "" ? (
+  // Component creates the overall list structure. lists for the subFaction are done via the SubList component!
+  return contextArmy  ? (
     <Fragment>
       <Grid container directiom="row" alignContent="center">
-        <Typography className={classes.armyName}>{props.factionName}</Typography>
+        <Typography className={classes.armyName}>{contextArmy.unitName}</Typography>
         <button
           className={classes.removeButton}
           variant="outlined"
@@ -90,24 +93,21 @@ const ArmyListDisplay = (props) => {
       </Grid>
 
       <List>
-        {props.distinctSubFactions.map((sfn) => (
+        {contextArmy.subfactions.map((subFaction) => (
           <ListItem key={uuidGenerator()}>
             <Grid container direction={"column"}>
-              <Typography className={classes.HeaderBox}>{sfn}</Typography>
+              <Typography className={classes.HeaderBox}>{subFaction}</Typography>
               <SubList
                 className={classes.subList}
-                subFactionUnits={filterUnitsForSubFaction(props.addedUnits, sfn)}
-                factionName={props.factionName}
-                subFactionName={sfn}
-                removeUnit={props.removeUnit}
-                validator={props.validator}
+                subFactionUnits={filterUnitsForSubFaction(contextArmy.addedUnits, subFaction)}
+                subFactionName={subFaction}
               />
             </Grid>
           </ListItem>
         ))}
       </List>
       <Grid container directiom="row" alignContent="center">
-        <Typography className={classes.total}>Gesamtpunktzahl: {props.totalPointValue} / </Typography>
+        <Typography className={classes.total}>Gesamtpunktzahl: {contextArmy.totalPointValue} / </Typography>
         <TextField
           id="outlined-basic"
           autoComplete="off"

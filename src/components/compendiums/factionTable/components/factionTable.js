@@ -1,4 +1,3 @@
-
 // React
 import React, { useEffect, useState } from "react";
 // Axios
@@ -23,7 +22,7 @@ const useStyles = makeStyles({
     marginLeft: "40px",
     fontFamily: "BreatheOfFire",
   },
-  toggleGroupBox: { 
+  toggleGroupBox: {
     border: 1,
     borderColor: "pink",
   },
@@ -132,7 +131,7 @@ const OverviewTable = () => {
    * @returns [String]
    */
   const setSelectorUnitNames = () => {
-    return singleFilteredFaction.length === 0 ? allFactions.map((u) => u.name) : singleFilteredFaction.map((u) => u.name);
+    return singleFilteredFaction.length === 0 ? allFactions.map((u) => u.unitName) : singleFilteredFaction.map((u) => u.unitName);
   };
 
   /**
@@ -152,7 +151,7 @@ const OverviewTable = () => {
    */
   const selectUnit = (nameSearchString) => {
     setSelectorUnitNames();
-    setTableData(allFactions.filter((lf) => lf.name.toLowerCase().includes(nameSearchString.toLowerCase())));
+    setTableData(allFactions.filter((lf) => lf.unitName.toLowerCase().includes(nameSearchString.toLowerCase())));
   };
 
   const clearFaction = () => {
@@ -164,7 +163,7 @@ const OverviewTable = () => {
   };
 
   const toggleUnitCard = (unit) => {
-    const id = unit.faction + unit.name;
+    const id = unit.faction + unit.unitName;
 
     selectedStatCards.includes(id)
       ? setSelectedStatCards(selectedStatCards.filter((c) => c !== id))
@@ -206,7 +205,7 @@ const OverviewTable = () => {
   const toggleGroupsOfColumns = (name, columnGroup, isChecked) => {
     setToggleGroups(
       toggleGroups.map((t) => {
-        if (t.name === name) {
+        if (t.unitName === name) {
           t.displayed = !isChecked;
         }
         return t;
@@ -223,7 +222,7 @@ const OverviewTable = () => {
     );
   };
 
-  return (
+  return receivedData ? (
     <>
       <Grid container spacing={6}>
         <Grid item xs={12}>
@@ -279,7 +278,7 @@ const OverviewTable = () => {
         </Grid>
       </Grid>
     </>
-  );
+  ) : null;
 };
 
 export default OverviewTable;

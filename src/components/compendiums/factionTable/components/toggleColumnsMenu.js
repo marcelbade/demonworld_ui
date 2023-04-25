@@ -31,7 +31,7 @@ const ToggleColumnsMenu = (props) => {
             key={uuidGenerator()}
             checked={toggle.displayed}
             onChange={() => {
-              props.toggleGroupsOfColumns(toggle.name, toggle.stats, toggle.displayed);
+              props.toggleGroupsOfColumns(toggle.unitName, toggle.stats, toggle.displayed);
             }}
           />
           {props.columns

@@ -8,16 +8,17 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles({
-  p: {
+  message: {
     fontSize: "50px",
     fontFamily: "BreatheOfFire",
+    display: "block",
   },
 });
 
 const NoSelectionDisplay = (props) => {
   const classes = useStyles();
 
-  return <p>show this when nothing was selected :D</p>;
+  return <span className={classes.message}>show this when nothing was selected :D</span>;
 };
 
 export default NoSelectionDisplay;

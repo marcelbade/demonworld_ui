@@ -3,26 +3,16 @@ import axios from "axios";
 /**
  * Returns all item cards in the game.
  */
-export const getAllItems = () => {
-  response = {};
-
-  axios
-    .get(`http://localhost:8080/items`)
-    .then((data) => {
-      response = { ...response, data };
-      //    TODO test response
-    })
-    // TODO  proper error handling!
-    .catch((error) => console.log(error));
-
-  return response;
+export const getAllItems = async () => {
+  const response = await axios(`http://localhost:8080/items`);
+  return response.data;
 };
 
 /**
- * Returns all item cards in the game.
+ * Returns all item cards for a faction.
  */
-export const getAllItems = (faction) => {
-  response = {};
+export const getfactionItems = (faction) => {
+  let response = {};
 
   axios
     .get(`http://localhost:8080/items/${faction}`)
@@ -37,10 +27,10 @@ export const getAllItems = (faction) => {
 };
 
 /**
- * Returns all item cards in the game.
+ * Returns all item cards for a unit type.
  */
-export const getAllItems = (unitType) => {
-  response = {};
+export const getUnitTypeItems = (unitType) => {
+  let response = {};
 
   axios
     .get(`http://localhost:8080/items/${unitType}`)
@@ -55,10 +45,10 @@ export const getAllItems = (unitType) => {
 };
 
 /**
- * Returns all item cards in the game.
+ * Returns all item cards fora unit type and a faction.
  */
-export const getAllItems = (faction, unitType) => {
-  response = {};
+export const getItemsForUnitTypeAndFaction = (faction, unitType) => {
+  let response = {};
 
   axios
     .get(`http://localhost:8080/items/${faction}/${unitType}`)

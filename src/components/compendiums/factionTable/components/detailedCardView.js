@@ -4,7 +4,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 // components & functions
 import { uuidGenerator } from "../../../shared/sharedFunctions";
-import { unitOrCmdCard } from "../depencies/factionTableFunctions";
+import { unitOrCmdCard } from "../../../shared/sharedFunctions";
 
 const useStyles = makeStyles({
   backGround: {
@@ -21,7 +21,7 @@ const DetailedCardView = (props) => {
   return (
     <tr key={uuidGenerator()} className={classes.backGround}>
       <td key={uuidGenerator()} colSpan="100%">
-        {props.selectedCards.includes(props.unit.faction + props.unit.name) ? unitOrCmdCard(props.unit) : null}
+        {props.selectedCards.includes(props.unit.faction + props.unit.unitName) ? unitOrCmdCard(props.unit) : null}
       </td>
     </tr>
   );
