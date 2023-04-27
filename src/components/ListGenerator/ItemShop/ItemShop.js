@@ -1,7 +1,7 @@
 // React
 import React, { useState, useContext, useEffect } from "react";
 //Material UI
-import { Button, Grid, ButtonGroup, Typography } from "@material-ui/core";
+import { Button, Grid, ButtonGroup, Typography, Tooltip, Zoom } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { IconButton } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
@@ -14,36 +14,41 @@ import { uuidGenerator } from "../../shared/sharedFunctions";
 // Returns complet tabs panel with three tabs.
 
 const useStyles = makeStyles({
-  navBarIcons: {
-    height: "20px",
-    width: "20px",
-  },
+ 
   overlay: {
     height: "100vh",
     width: "30vw",
-    // backgroundColor: "wh",
   },
-  closeButton: {
-    // backgroundColor: "green",
-    // color: "white"
-  },
-  itemPanel: {
-    // backgroundColor: "pink",
-  },
+  closeButton: {},
+  itemPanel: {},
+
   panelButtons: {
     fontFamily: "notMaryKate",
-    // backgroundColor: "blue",
+    fontWeight: "bold",
+    border: 0,
+    "&:hover": {
+      backgroundColor: "grey",
+      color: "red",
+    },
   },
   itemList: {
-    // color: "white",
-    fontFamily: "Beryliumbold",
+    fontFamily: "notMaryKate",
     fontWeight: "bold",
     width: "50%",
+    marginLeft: "10em",
+    "&:hover": {
+      backgroundColor: "grey",
+      color: "red",
+    },
   },
+
   unitName: {
     fontFamily: "notMaryKate",
     fontWeight: "bold",
     borderBottom: "solid 4px black",
+  },
+  ItemText: {
+    marginLeft: "5em",
   },
 });
 
@@ -59,7 +64,7 @@ const NAME_MAPPING = {
   warpaint: "Kriegsbemalung",
 };
 
-// unitcard UT => itemCard uT
+// map item card types to unit types. I.e., mounted units can receive all items for mounted units, infantery units and items for all units.
 const UNIT_TO_ITEM_UNITTYPE_MAPPING = {
   C: ["C", "U", "A"],
   I: ["U", "A"],
@@ -68,13 +73,13 @@ const UNIT_TO_ITEM_UNITTYPE_MAPPING = {
   A: ["C", "U", "M", "H", "A"],
 };
 
-// All item types excempt from the 1-per-element rule
+// All item types that are excempt from the 1-item-per-element rule. These items can be rquipped in addition to a magic item
 const NON_MAGIC_ITEMS = ["potion", "crystal", "warpaint", "poison"];
 
 const ItemShop = () => {
   const classes = useStyles();
-
   const contextArmy = useContext(ArmyContext);
+
   //state
   const [ItemTypes, setItemTypes] = useState([]);
   const [displayThisItemType, setDisplayThisItemType] = useState(ItemTypes[0]);
@@ -110,6 +115,7 @@ const ItemShop = () => {
     }
   };
 
+  // creates a set of item types, i.e., a list w. no duplicates
   const findDistinctItemTypes = () => {
     let temp = [];
 
@@ -120,15 +126,13 @@ const ItemShop = () => {
     return temp;
   };
 
+  // shows all items of the type whose button was pressed.
   const showTab = (type) => {
     setDisplayThisItemType(type);
   };
 
-  
-
-
   /**
-   * Function enforces the item selection rules by toggling its corresponding button on/off.
+   * Function enforces the item selection rules by toggling the item's corresponding button on/off.
    * Any unit,hero,... can only gain 1 magical item (+ 1 for every special element
    * if it is a unit). In addition it may gain additional "non-magical" generic items like potions.
    * @param {itemCard Object} item
@@ -180,11 +184,9 @@ const ItemShop = () => {
         unit.equipmentTypes[item.type] = false;
       }
 
-     
-
       return isGenericType;
     }
-    
+
     return false;
   };
 
@@ -203,7 +205,6 @@ const ItemShop = () => {
 
     return false;
   };
-
 
   const addItemToUnit = (item) => {
     let changedUnit = contextArmy.unitSelectedForShop;
@@ -224,7 +225,7 @@ const ItemShop = () => {
     <Grid container direction="column" className={classes.overlay}>
       <Grid item container direction="row">
         {/* CLOSING BUTTON */}
-        <Grid item xs={1} className={classes.closeButton}>
+        <Grid item xs={3} className={classes.closeButton}>
           <IconButton
             onClick={(event) => {
               event.stopPropagation();
@@ -235,20 +236,22 @@ const ItemShop = () => {
             <CloseIcon />
           </IconButton>
         </Grid>
-        <Grid item xs={10}>
+        {/*UNIT NAME */}
+        <Grid item xs={9}>
           <Typography variant="h5" align="center" className={classes.unitName}>
             {contextArmy.unitSelectedForShop ? contextArmy.unitSelectedForShop.unitName : null}
           </Typography>
         </Grid>
       </Grid>
-      <Grid item container direction="row">
-        <Grid item xs={2} className={classes.panelButtons}>
+      <Grid item container direction="row" className={classes.dynamicPart}>
+        <Grid item xs={3} className={classes.panelButtonsBackground}>
           {/* PANEL BUTTONS */}
-          <ButtonGroup fullWidth={true} variant="contained" size="large" orientation="vertical">
+          <ButtonGroup fullWidth={true} variant="contained" size="large" orientation="vertical" disableElevation>
             {ItemTypes.map((type) => {
               return (
                 <Button
                   className={classes.panelButtons}
+                  variant="text"
                   key={uuidGenerator()}
                   onClick={() => {
                     showTab(type);
@@ -260,9 +263,9 @@ const ItemShop = () => {
             })}
           </ButtonGroup>
         </Grid>
-        <Grid item xs={10} className={classes.itemPanel}>
+        <Grid item xs={9} className={classes.itemPanel}>
           {/* ITEMLIST */}
-          <ButtonGroup variant="text" orientation="vertical" fullWidth={true}>
+          <ButtonGroup variant="text" orientation="vertical" fullWidth={true} disableElevation>
             {filterFetchedItemsForUnit()
               .filter((item) => item.type === displayThisItemType)
               .map((item) => {
@@ -280,8 +283,10 @@ const ItemShop = () => {
                         {item.itemName}
                       </Button>
                     </Grid>
-                    <Grid item xs={2}>
-                      <HelpIcon />
+                    <Grid item xs={2} className={classes.ItemText}>
+                      <Tooltip title={item.specialRules} placement="right-start" TransitionComponent={Zoom}>
+                        <HelpIcon />
+                      </Tooltip>
                     </Grid>
                   </Grid>
                 );

@@ -21,6 +21,8 @@ const useStyles = makeStyles({
   buttons: {
     fontFamily: "Beryliumbold",
     marginRight: "3em",
+    width: "15em",
+    margin: "56,5px",
   },
   equipment: {
     paddingLeft: "3em",
