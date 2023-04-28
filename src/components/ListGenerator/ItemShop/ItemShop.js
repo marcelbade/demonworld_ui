@@ -25,17 +25,17 @@ const useStyles = makeStyles({
   panelButtons: {
     fontFamily: "notMaryKate",
     fontWeight: "bold",
-    border: 0,
+    border: "none",
     "&:hover": {
       backgroundColor: "grey",
       color: "red",
     },
   },
   itemList: {
+    marginLeft: "3em",
     fontFamily: "notMaryKate",
     fontWeight: "bold",
-    width: "50%",
-    marginLeft: "10em",
+    border: "none",
     "&:hover": {
       backgroundColor: "grey",
       color: "red",
@@ -73,7 +73,7 @@ const UNIT_TO_ITEM_UNITTYPE_MAPPING = {
   A: ["C", "U", "M", "H", "A"],
 };
 
-// All item types that are excempt from the 1-item-per-element rule. These items can be rquipped in addition to a magic item
+// All item types that are excempt from the 1-item-per-element rule. These items can be equipped in addition to a magic item
 const NON_MAGIC_ITEMS = ["potion", "crystal", "warpaint", "poison"];
 
 const ItemShop = () => {
@@ -250,6 +250,7 @@ const ItemShop = () => {
             {ItemTypes.map((type) => {
               return (
                 <Button
+                 
                   className={classes.panelButtons}
                   variant="text"
                   key={uuidGenerator()}
