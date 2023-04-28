@@ -28,6 +28,10 @@ const useStyles = makeStyles({
     fontFamily: "notMaryKate",
     padding: "10px",
     marginLeft: "550px",
+    "&:hover": {
+      backgroundColor: "grey",
+      color: "red",
+    },
   },
   total: {
     fontFamily: "notMaryKate",
@@ -71,13 +75,17 @@ const ArmyListDisplay = (props) => {
 
   const handleChange = (event) => {
     setMaximumPoints(event.target.value);
+
+    // validate user 
     let isValid = new RegExp(/^[0-9]*$/).test(event.target.value);
 
     isValid ? setErrorMessage("") : setErrorMessage("Bitte nur Zahlen eingeben.");
   };
 
-  // Component creates the overall list structure. lists for the subFaction are done via the SubList component!
-  return contextArmy  ? (
+  /**
+   * This creates the centre of the UI: the actual army list consisting of the selected units and the display of the maximum * army points.
+   */
+  return contextArmy ? (
     <Fragment>
       <Grid container directiom="row" alignContent="center">
         <Typography className={classes.armyName}>{contextArmy.unitName}</Typography>
