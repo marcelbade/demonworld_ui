@@ -9,6 +9,7 @@ import { MinusSquare, PlusSquare, CloseSquare, TransitionComponent } from "../de
 import { Fragment } from "react";
 import Tree from "./Tree";
 import { StyledTreeItem } from "../dependencies/styledTreeItem";
+import { colors } from "@material-ui/core";
 
 TransitionComponent.propTypes = {
   /**
@@ -21,6 +22,9 @@ const useStyles = makeStyles({
   treeViewBox: {
     height: "auto",
     paddingLeft: "60px",
+   
+   
+
   },
   allyTitle: {
     paddingLeft: "60px",
@@ -36,7 +40,9 @@ const FactionTreeView = () => {
   const contextArmy = useContext(ArmyContext);
   const SHOW_SUBFACTIONS = ["1"];
 
- 
+ /**
+  * The entire treeView of the army
+  */
   return contextArmy ? (
     <>
       <TreeView

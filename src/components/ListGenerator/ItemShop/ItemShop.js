@@ -14,7 +14,6 @@ import { uuidGenerator } from "../../shared/sharedFunctions";
 // Returns complet tabs panel with three tabs.
 
 const useStyles = makeStyles({
- 
   overlay: {
     height: "100vh",
     width: "30vw",
@@ -22,17 +21,7 @@ const useStyles = makeStyles({
   closeButton: {},
   itemPanel: {},
 
-  panelButtons: {
-    fontFamily: "notMaryKate",
-    fontWeight: "bold",
-    border: "none",
-    "&:hover": {
-      backgroundColor: "grey",
-      color: "red",
-    },
-  },
-  itemList: {
-    marginLeft: "3em",
+  buttons: {
     fontFamily: "notMaryKate",
     fontWeight: "bold",
     border: "none",
@@ -250,8 +239,7 @@ const ItemShop = () => {
             {ItemTypes.map((type) => {
               return (
                 <Button
-                 
-                  className={classes.panelButtons}
+                  className={classes.buttons}
                   variant="text"
                   key={uuidGenerator()}
                   onClick={() => {
@@ -279,7 +267,7 @@ const ItemShop = () => {
                           addItemToUnit(item);
                         }}
                         key={uuidGenerator()}
-                        className={classes.itemList}
+                        className={classes.buttons}
                       >
                         {item.itemName}
                       </Button>

@@ -8,6 +8,8 @@ import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 import { ArmyContext } from "../../../contexts/armyContext";
 import { displayUnitCost } from "../../compendiums/factionTable/depencies/factionTableFunctions";
 import { isObjectEmtpy } from "../../shared/sharedFunctions";
+// clsx
+import clsx from "clsx";
 
 const useStyles = makeStyles({
   gearListHeader: {
@@ -16,7 +18,7 @@ const useStyles = makeStyles({
   },
   deleteBttn: {
     padding: "0",
-    marginRight: "2em",
+    marginRight: "1.5em",
   },
   buttons: {
     fontFamily: "NotMaryKate",
@@ -30,12 +32,21 @@ const useStyles = makeStyles({
     paddingLeft: "3em",
   },
   line: {
+    marginTop: "0.5em",
     marginBottom: "0.5em",
     borderBottom: "solid black 0.1em",
     display: "block",
   },
-  itemDescription: {
-    display: "block",
+  typographyFont: {
+    fontFamily: "NotMaryKate",
+    fontWeight: "lighter",
+    fontSize: "14px",
+  },
+  subTotal: {
+    fontFamily: "NotMaryKate",
+  },
+  textMargin: {
+    marginRight: "3em",
   },
 });
 
@@ -105,21 +116,21 @@ const SubList = (props) => {
                   {/* REMOVE BUTTON */}
                   <Grid item xs={1}>
                     <IconButton
+                      className={classes.deleteBttn}
                       onClick={() => {
                         removeUnit(identifier);
                       }}
-                      className={classes.deleteBttn}
                     >
                       <RemoveCircleOutlineIcon />
                     </IconButton>
                   </Grid>
                   {/* NAME */}
                   <Grid item xs={2}>
-                    <Typography>{u.unitName} </Typography>
+                    <Typography className={classes.typographyFont}>{u.unitName} </Typography>
                   </Grid>
                   {/* POINTS */}
                   <Grid item xs={1}>
-                    <Typography>{u.points}</Typography>
+                    <Typography className={classes.typographyFont}>{u.points}</Typography>
                   </Grid>
                   {/* BUTTONS */}
                   <Grid item xs={8} direction="row">
@@ -154,21 +165,21 @@ const SubList = (props) => {
                         ? u.equipment.map((e, i) => {
                             return (
                               <Grid item xs={12} container direction="row" className={classes.equipment} key={identifier}>
-                                <Grid item xs={2}>
+                                <Grid item xs={3}>
                                   <IconButton
+                                    className={clsx(classes.deleteBttn, classes.textMargin)}
                                     onClick={() => {
                                       removeItem(identifier, i);
                                     }}
-                                    className={classes.deleteBttn}
                                   >
                                     <RemoveCircleOutlineIcon />
                                   </IconButton>
                                 </Grid>
-                                <Grid item xs={9}>
-                                  <Typography className={classes.itemDescription}>{e.name} </Typography>
+                                <Grid item xs={8}>
+                                  <Typography className={classes.typographyFont}>{e.name} </Typography>
                                 </Grid>
                                 <Grid item xs={1}>
-                                  <Typography>{e.points}</Typography>
+                                  <Typography className={classes.typographyFont}>{e.points}</Typography>
                                 </Grid>
                               </Grid>
                             );
@@ -182,7 +193,7 @@ const SubList = (props) => {
           );
         })}
       </List>
-      <Typography>Gesamt: {subFactionTotal} </Typography>
+      <Typography className={classes.subTotal}>Gesamt: {subFactionTotal} </Typography>
     </Fragment>
   );
 };
