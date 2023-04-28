@@ -26,7 +26,7 @@ TODO: Design
     - item lists in item shop
     - entries in army tree 
     - in table 
-    OBVIOUS CHOICE : Beryliumbold
+    OBVIOUS CHOICE : Beryliumbold , ehm actually; notMaryKate
 
 
 

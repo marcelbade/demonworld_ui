@@ -19,16 +19,22 @@ const useStyles = makeStyles({
     marginRight: "2em",
   },
   buttons: {
-    fontFamily: "Beryliumbold",
-    marginRight: "3em",
-    width: "15em",
-    margin: "56,5px",
+    fontFamily: "NotMaryKate",
+    marginRight: "1em",
+    "&:hover": {
+      backgroundColor: "grey",
+      color: "red",
+    },
   },
   equipment: {
     paddingLeft: "3em",
   },
   line: {
+    marginBottom: "0.5em",
     borderBottom: "solid black 0.1em",
+    display: "block",
+  },
+  itemDescription: {
     display: "block",
   },
 });
@@ -91,62 +97,85 @@ const SubList = (props) => {
       <List>
         {props.subFactionUnits.map((u) => {
           const identifier = u.unitName + u.uniqueID;
-
           return (
             <ListItem key={identifier}>
-              <Grid container direction="row">
-                <Grid container item xs={5} direction="row">
-                  <IconButton
-                    onClick={() => {
-                      removeUnit(identifier);
-                    }}
-                    className={classes.deleteBttn}
-                  >
-                    <RemoveCircleOutlineIcon />
-                  </IconButton>
-
-                  <Typography className={classes.decrption}>
-                    {u.unitName} - {u.points}
-                    {u.equipment.length !== 0 ? <span className={classes.line}></span> : null}
-                    {u.equipment.length !== 0
-                      ? u.equipment.map((e, i) => {
-                          return (
-                            <div className={classes.equipment} key={identifier}>
-                              <IconButton
-                                onClick={() => {
-                                  removeItem(identifier, i);
-                                }}
-                                className={classes.deleteBttn}
-                              >
-                                <RemoveCircleOutlineIcon />
-                              </IconButton>
-                              {e.name} - {e.points}
-                            </div>
-                          );
-                        })
-                      : null}
-                  </Typography>
+              <Grid container direction="column">
+                {/* FIRST ROW  */}
+                <Grid container item direction="row">
+                  {/* REMOVE BUTTON */}
+                  <Grid item xs={1}>
+                    <IconButton
+                      onClick={() => {
+                        removeUnit(identifier);
+                      }}
+                      className={classes.deleteBttn}
+                    >
+                      <RemoveCircleOutlineIcon />
+                    </IconButton>
+                  </Grid>
+                  {/* NAME */}
+                  <Grid item xs={2}>
+                    <Typography>{u.unitName} </Typography>
+                  </Grid>
+                  {/* POINTS */}
+                  <Grid item xs={1}>
+                    <Typography>{u.points}</Typography>
+                  </Grid>
+                  {/* BUTTONS */}
+                  <Grid item xs={8} direction="row">
+                    <Button
+                      className={classes.buttons}
+                      variant="outlined"
+                      onClick={() => {
+                        contextArmy.openItemShop();
+                        contextArmy.setUnitSelectedForShop(u);
+                      }}
+                    >
+                      Gegenstände
+                    </Button>
+                    <Button
+                      className={classes.buttons}
+                      variant="outlined"
+                      onClick={() => {
+                        toggleBetweenCards(u);
+                      }}
+                    >
+                      Kartenvorschau
+                    </Button>
+                  </Grid>
                 </Grid>
-                <Grid container item xs={3} direction="row">
-                  <Button
-                    className={classes.buttons}
-                    variant="outlined"
-                    onClick={() => {
-                      contextArmy.openItemShop();
-                      contextArmy.setUnitSelectedForShop(u);
-                    }}
-                  >
-                    Gegenstände
-                  </Button>
-                  <Button
-                    className={classes.buttons}
-                    variant="outlined"
-                    onClick={() => {
-                      toggleBetweenCards(u);
-                    }}
-                  >
-                    Kartenvorschau
-                  </Button>
+                {/* SECOND ROW  */}
+                <Grid container item xs={12} direction="row">
+                  {/* ITEMS */}
+                  <Grid container item direction="row">
+                    <Typography>
+                      {u.equipment.length !== 0 ? <span className={classes.line}></span> : null}
+                      {u.equipment.length !== 0
+                        ? u.equipment.map((e, i) => {
+                            return (
+                              <Grid item xs={12} container direction="row" className={classes.equipment} key={identifier}>
+                                <Grid item xs={2}>
+                                  <IconButton
+                                    onClick={() => {
+                                      removeItem(identifier, i);
+                                    }}
+                                    className={classes.deleteBttn}
+                                  >
+                                    <RemoveCircleOutlineIcon />
+                                  </IconButton>
+                                </Grid>
+                                <Grid item xs={9}>
+                                  <Typography className={classes.itemDescription}>{e.name} </Typography>
+                                </Grid>
+                                <Grid item xs={1}>
+                                  <Typography>{e.points}</Typography>
+                                </Grid>
+                              </Grid>
+                            );
+                          })
+                        : null}
+                    </Typography>
+                  </Grid>
                 </Grid>
               </Grid>
             </ListItem>
