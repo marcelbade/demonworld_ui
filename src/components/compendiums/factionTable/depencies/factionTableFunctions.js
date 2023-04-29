@@ -1,5 +1,5 @@
 //material
-
+import { makeStyles, Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import Tooltip from "@material-ui/core/Tooltip";
 //icons
@@ -19,6 +19,17 @@ const RulesToolTip = withStyles({
     backgroundColor: "black",
   },
 })(Tooltip);
+
+const useStyles = makeStyles({
+  specialRules: {
+    fontFamily: "Beryliumbold",
+    fontWeight: "bold",
+  },
+
+  itemRuleText: {
+    fontFamily: "Beryliumbold",
+  },
+});
 
 /**
  * Cut special rule to a max of 30 characters. If there is no rule, show "-".
@@ -120,22 +131,27 @@ export const renderCommandPoints = (stars) => {
  * @returns html containing the unit's special rule (if it has any), and optionally, the rules for any
  * pieces of equipment added to the unit.
  */
-export const displayAllSpecialRules = (unit) => {
+export const DisplayAllSpecialRules = (unit) => {
+  const classes = useStyles();
   return (
-    <Fragment>
+    <Typography variant="h6" align="center" className={classes.specialRules}>
       {unit.specialRules === "" ? "Keine Besonderen Spielregeln" : unit.specialRules}
       {"equipment" in unit && unit.equipment.length !== 0
         ? unit.equipment.map((e) => {
             return (
               <Fragment>
                 <hr></hr>
-                <div> {e.name} </div>
-                <div> {e.rule} </div>
+                <Typography variant="body1" className={classes.specialRules}>
+                  {e.name}
+                </Typography>
+                <Typography variant="body1" className={classes.itemRuleText}>
+                  {e.rule}
+                </Typography>
               </Fragment>
             );
           })
         : null}
-    </Fragment>
+    </Typography>
   );
 };
 

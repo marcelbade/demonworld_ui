@@ -52,10 +52,10 @@ const ListGeneratorController = () => {
     subFactionBelowMinimum: [],
   });
   const [drawerState, setDrawerState] = useState(false);
-  // ItemShop view
+  // ItemShop
   const [unitSelectedForShop, setUnitSelectedForShop] = useState({});
   const [allItems, setAllItems] = useState([]);
-  // unit card view
+  // unit card
   const [showStatCard, setShowStatCard] = useState({
     clickedUnit: {},
     lastclickedUnit: {},
@@ -63,7 +63,7 @@ const ListGeneratorController = () => {
   });
 
   /**
-   * functions opens the item shop. Function is called in the <SubList> module.
+   * functions openand close the item shop. Function is called in the <SubList> module.
    * @param {*} unit
    */
   const openItemShop = () => {
@@ -74,6 +74,9 @@ const ListGeneratorController = () => {
     setDrawerState(false);
   };
 
+  /**
+   * fetch units from BE via REST
+   */
   useEffect(() => {
     fetchFactionData();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -83,6 +86,9 @@ const ListGeneratorController = () => {
     setfetchedFactions(result.data);
   };
 
+  /**
+   * fetch items from BE via REST
+   */
   useEffect(() => {
     fetchItemData();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -92,41 +98,54 @@ const ListGeneratorController = () => {
     setfetchedItems(result.data);
   };
 
-  // when faction selected from drop down
+  /**
+   * Set the selected faction ans sends it to the treeview
+   */
   useEffect(() => {
-    narrowDownToSelectedArmy();
+    setSelectedFaction(fetchedFactions.filter((f) => f.faction.toLowerCase() === selectedFactionName.toLowerCase()));
   }, [selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  /**
+   * Find all distinct subfactions in the selected faction and create a set of them.
+   */
   useEffect(() => {
-    findSubFactions();
-    findAllyName();
-    narrowDownToAlly();
-    findAlliedSubFactions();
+    setDistinctSubFactions(findDistinctSubfactions(selectedFaction));
   }, [selectedFaction]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const narrowDownToSelectedArmy = () => {
-    setSelectedFaction(fetchedFactions.filter((f) => f.faction.toLowerCase() === selectedFactionName.toLowerCase()));
-  };
+  // ALLY LOGIC
+  /**
+   * Find The allied faction, if it exists. If no ally exists, return "none" instead of null.
+   */
+  useEffect(() => {
+    const NONE = "none";
+    const name = alliesMapping[selectedFactionName] ? alliesMapping[selectedFactionName] : NONE;
+    setAllyName(name);
+  }, [selectedFaction]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const narrowDownToAlly = () => {
+  /**
+   * set the ally name
+   */
+  useEffect(() => {
     if (allyName) {
       setMappedAlly(fetchedFactions.filter((f) => f.faction.toLowerCase() === allyName.toLowerCase()));
     }
-  };
+  }, [allyName]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Function finds subfactions for the selected faction.
-  const findSubFactions = () => {
-    setDistinctSubFactions(findDistinctSubfactions(selectedFaction));
-  };
-
-  const findAlliedSubFactions = () => {
+  /**
+   * Find the ally's distinct subfactions in the selected faction and create a set of them.
+   */
+  useEffect(() => {
     if (allyName) {
       const ally = fetchedFactions.filter((f) => f.faction.toLowerCase() === allyName.toLowerCase());
       setDistinctAllySubFactions(findDistinctSubfactions(ally));
     }
-  };
+  }, [allyName]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Function returns all distinct subFactions of a selected faction.
+  /**
+   * Function returns all distinct subFactions of a selected faction.
+   * @param {[unitCard object]} units
+   * @returns [String] name of all distinct subfactions
+   */
   const findDistinctSubfactions = (units) => {
     let distinctSubFactions = [];
 
@@ -138,7 +157,9 @@ const ListGeneratorController = () => {
     return distinctSubFactions;
   };
 
-  //calculate total point value for army
+  /**
+   * Calculate total point value for army.
+   */
   useEffect(() => {
     let pointTotal = 0;
     if (selectedUnits) {
@@ -147,16 +168,19 @@ const ListGeneratorController = () => {
     setTotalPointValue(pointTotal);
   }, [selectedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // returns allied faction, if it exists
-  const findAllyName = () => {
-    const name = alliesMapping[selectedFactionName] ? alliesMapping[selectedFactionName] : "";
-    setAllyName(name);
-  };
-
+  /**
+   * Adds the selected units to a central list of units selected by the user and adds 2 things:
+   * - a unique Id so the same unit can be selected more than once and all instances can be differentiated
+   * - equipment slots so items can be added
+   * @param {unitCard object} unit
+   */
   const selectUnit = (unit) => {
     setSelectedUnits([...selectedUnits, addEquipmentSlotsToUnit(addUniqueIdToUnit(unit))]);
   };
 
+  /**
+   * Validate the current army list everytime a unit is added. Validation works through a validator object.
+   */
   useEffect(() => {
     if (selectedFactionName) {
       let validator = ruleValidation(selectedFactionName);
@@ -166,6 +190,10 @@ const ListGeneratorController = () => {
     }
   }, [selectedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  /**
+   * add all invalid units to the block list.
+   * @param {*} validationResult
+   */
   const findInvalidUnits = (validationResult) => {
     setblockedUnits({
       ...blockedUnits,
@@ -175,16 +203,18 @@ const ListGeneratorController = () => {
   };
 
   /**
-   *
+   * Everytime the unit selections changes, recalculate which items are currently selected and store it in the central item list.
    */
   useEffect(() => {
     let temp = allItems;
     let allCurrentItems = [];
 
+    // current items in the army
     selectedUnits.forEach((unit) => {
       allCurrentItems = [...allCurrentItems, unit.equipment];
     });
 
+    // compare
     temp.forEach((item) => {
       if (!allCurrentItems.includes(item)) {
         const position = temp.indexOf(item);
@@ -260,29 +290,28 @@ const ListGeneratorController = () => {
     setSelectedUnits([]);
   };
 
-  //TEST
-
   return fetchedFactions && fetchedItems ? (
     <ArmyProvider
       value={{
+        // ARMY
         name: selectedFactionName,
         subfactions: distinctSubFactions,
         units: selectedFaction,
-        //
+        // ALLY
         allyName: allyName,
         allySubFactions: distinctAllySubFactions,
         alliedUnits: mappedAlly,
-        //
+        // NET POINT VALUES
         maxPointsValue: maxPointsValue,
         totalPointValue: totalPointValue,
         addedUnits: selectedUnits,
-        //
+        // BUTTON FUNCTIONS
         selectUnit: selectUnit,
         removeUnit: removeUnit,
         removeItem: removeItem,
-        //
+        // BLOCKED UNITS
         blockedUnits: blockedUnits,
-        //
+        // ITEMSHOP
         fetchedItems: fetchedItems,
         unitSelectedForShop: unitSelectedForShop,
         allItems: allItems,
@@ -290,16 +319,17 @@ const ListGeneratorController = () => {
         setUnitSelectedForShop: setUnitSelectedForShop,
         closeItemShop: closeItemShop,
         setAllItems: setAllItems,
-        //
+        //  SELECTED UNITS
         selectedUnits: selectedUnits,
         setSelectedUnits: setSelectedUnits,
-        //
+        // STAT CARD DISPLAY
         showStatCard: showStatCard,
         setShowStatCard: setShowStatCard,
       }}
     >
       <Grid container direction="row">
         <Grid container item xs={4} direction="column" className={classes.root}>
+          {/* ARMY SELECTION */}
           <SelectionInput
             className={classes.selector}
             filterFunction={setSelectedFactionName}
@@ -313,11 +343,12 @@ const ListGeneratorController = () => {
             <li>{u.name}</li>
           ))}
         </u>
-
+        {/* ARMYLIST */}
         <Grid item xs={5}>
           <ArmyListDisplay setTotalPointValue={setTotalPointValue} clearList={clearList} />
         </Grid>
         <Grid item xs={3}>
+          {/* ITEMSHOP */}
           <Drawer anchor={"right"} variant="persistent" open={drawerState} className={classes.itemScreen}>
             <ItemShop />
           </Drawer>

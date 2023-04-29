@@ -8,12 +8,9 @@ React FR
 - subfaction below minimum -> how to display / Block
 - dwarven special rule not working
 - model all faction validators after dwarves!
-- Allies stopped working
-- lag syndrom in item shop
 - tommysAnalysis function
 
-TODO: missing features
-- card preview in item shop
+TODO: missing features // Version 2  - disregard for now :)
 - show finished list
 - print finished list
 - save list in MongoDB(!!)
@@ -23,12 +20,12 @@ TODO: missing features
 
 TODO: Design
 - fonts: choose fonts for:
-    - item lists in item shop
-    - entries in army tree 
     - in table 
-    OBVIOUS CHOICE : Beryliumbold , ehm actually; notMaryKate
+    OBVIOUS CHOICE : notMaryKate
 
-
+- allItems 
+    - is not working! 
+    - The use Effect in the GeneratorController must be reowrked, its silly!
 
 ITEM SHOP
 =============================

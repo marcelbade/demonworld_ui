@@ -14,7 +14,7 @@ import {
   renderMagicPoints,
   renderCommandPoints,
   renderSkillValues,
-  displayAllSpecialRules,
+  DisplayAllSpecialRules,
   displayUnitCost,
 } from "../compendiums/factionTable/depencies/factionTableFunctions";
 // clsx
@@ -115,7 +115,7 @@ const StatCardUnit = (props) => {
           <td colSpan={"3"} className={classes.cardBorder}></td>
         )}
         <td colSpan={"3"} rowSpan={"5"}>
-          {displayAllSpecialRules(props.rowData)}
+          {DisplayAllSpecialRules(props.rowData)}
         </td>
       </tr>
       <tr>

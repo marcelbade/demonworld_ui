@@ -117,7 +117,7 @@ const EmpireRules = {
       ...exceedingMaxResult,
     ];
     validationResults.subFactionBelowMinimum = minimumResult;
-    validationResults.commanderIsPresent = globalRules.isComanderPresent(selectedUnits);
+    validationResults.commanderIsPresent = globalRules.isArmyCommanderPresent(selectedUnits);
 
     return validationResults;
   },

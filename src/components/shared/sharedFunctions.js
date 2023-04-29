@@ -35,7 +35,7 @@ export const unitOrCmdCard = (unit) => {
   let element;
   const singleElements = [HERO, MAGE, AUTOMATON, GIANT];
 
-  singleElements.includes(unit.unitType) ? (element = <StatCardCommander rowData={unit} />) : (element = <StatCardUnit rowData={unit} />);
+  singleElements.includes(unit.unitType) ? (element = <StatCardCommander unit={unit} />) : (element = <StatCardUnit unit={unit} />);
 
   return element;
 };

@@ -9,7 +9,6 @@ import { MinusSquare, PlusSquare, CloseSquare, TransitionComponent } from "../de
 import { Fragment } from "react";
 import Tree from "./Tree";
 import { StyledTreeItem } from "../dependencies/styledTreeItem";
-import { colors } from "@material-ui/core";
 
 TransitionComponent.propTypes = {
   /**
@@ -22,9 +21,6 @@ const useStyles = makeStyles({
   treeViewBox: {
     height: "auto",
     paddingLeft: "60px",
-   
-   
-
   },
   allyTitle: {
     paddingLeft: "60px",
@@ -39,10 +35,12 @@ const FactionTreeView = () => {
   const classes = useStyles();
   const contextArmy = useContext(ArmyContext);
   const SHOW_SUBFACTIONS = ["1"];
+  // no ally found
+  const NONE = "none";
 
- /**
-  * The entire treeView of the army
-  */
+  /**
+   * The entire treeView of the army
+   */
   return contextArmy ? (
     <>
       <TreeView
@@ -56,7 +54,7 @@ const FactionTreeView = () => {
         </StyledTreeItem>
       </TreeView>
       {/* ALLIED FACTION */}
-      {contextArmy.allyName ? (
+      {contextArmy.allyName !== NONE ? (
         <Fragment>
           <div className={classes.allyTitle}>Alliierte: {contextArmy.allyName}</div>
 
