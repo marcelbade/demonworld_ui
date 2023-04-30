@@ -32,6 +32,8 @@ const useStyles = makeStyles({
 
 const ListGeneratorController = () => {
   const classes = useStyles();
+  // front and back side of the displayed unit cards are alligned vertically.
+  const COLUMN = "column";
 
   // intialize local states
   const [fetchedFactions, setfetchedFactions] = useState([]);
@@ -354,7 +356,7 @@ const ListGeneratorController = () => {
           </Drawer>
           {/* UNITCARD */}
           {showStatCard.show ? (
-            <Grid item>{!isObjectEmtpy(showStatCard.clickedUnit) ? unitOrCmdCard(showStatCard.clickedUnit) : null}</Grid>
+            <Grid item>{!isObjectEmtpy(showStatCard.clickedUnit) ? unitOrCmdCard(showStatCard.clickedUnit, COLUMN) : null}</Grid>
           ) : null}
         </Grid>
       </Grid>

@@ -15,13 +15,16 @@ const useStyles = makeStyles({
   },
 });
 
+// front and back side of the displayed unit cards are alligned horizontally.
+const ROW = "row";
+
 const DetailedCardView = (props) => {
- const classes = useStyles();
+  const classes = useStyles();
 
   return (
     <tr key={uuidGenerator()} className={classes.backGround}>
       <td key={uuidGenerator()} colSpan="100%">
-        {props.selectedCards.includes(props.unit.faction + props.unit.unitName) ? unitOrCmdCard(props.unit) : null}
+        {props.selectedCards.includes(props.unit.faction + props.unit.unitName) ? unitOrCmdCard(props.unit, ROW) : null}
       </td>
     </tr>
   );

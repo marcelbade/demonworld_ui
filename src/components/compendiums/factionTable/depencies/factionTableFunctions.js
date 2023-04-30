@@ -1,5 +1,7 @@
+// React
+import { Fragment } from "react";
 //material
-import { makeStyles, Typography } from "@material-ui/core";
+import { makeStyles, Typography, Grid } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles";
 import Tooltip from "@material-ui/core/Tooltip";
 //icons
@@ -7,9 +9,9 @@ import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 import CancelIcon from "@material-ui/icons/Cancel";
 // components & functions
 import { unitOrCmdCard } from "../../../shared/sharedFunctions";
-// constants
-import { Grid } from "@material-ui/core";
-import { Fragment } from "react";
+// icons
+import blackBowIcon from "../../../customIcons/bow.jpg";
+import blackSwordIcon from "../../../customIcons/crossedSwords.png";
 
 const RulesToolTip = withStyles({
   tooltip: {
@@ -28,6 +30,13 @@ const useStyles = makeStyles({
 
   itemRuleText: {
     fontFamily: "Beryliumbold",
+  },
+  Icon: {
+    width: "1em",
+    height: "1em",
+  },
+  skillBox: {
+    marginLeft: "1em",
   },
 });
 
@@ -155,10 +164,34 @@ export const DisplayAllSpecialRules = (unit) => {
   );
 };
 
-export const renderSkillValues = (rangeSkill, meleeSkill) => {
-  let result = rangeSkill !== 0 || meleeSkill !== 0 ? `Kampfgeschick: ${rangeSkill} / ${meleeSkill} ` : "";
-
-  return result;
+/**
+ * Function renders the Skill part of the stat card display.
+ * @param {unitCard rangeSkill property} rangeSkill
+ * @param {unitCard meleeSkill property} meleeSkill
+ * @returns a JSX element with the unitCard melee and range skills displayed.
+ */
+export const RenderSkillValues = (rangeSkill, meleeSkill) => {
+  const classes = useStyles();
+  return (
+    <Grid container direction="row" className={classes.skillBox}>
+      <Grid item container direction="row" alignContent="center" alignItems="center" className={classes.alignIcons}>
+        {meleeSkill !== 0 ? (
+          <Fragment>
+            <img alt="Fernkampffertigkeit" src={blackSwordIcon} className={classes.Icon} />
+            <Typography variant="h6"> {meleeSkill} </Typography>
+          </Fragment>
+        ) : null}
+      </Grid>
+      <Grid item container direction="row" className={classes.alignIcons}>
+        {rangeSkill !== 0 ? (
+          <Fragment>
+            <img alt="Fernkampffertigkeit" src={blackBowIcon} className={classes.Icon} />
+            <Typography variant="h6"> {rangeSkill} </Typography>
+          </Fragment>
+        ) : null}
+      </Grid>
+    </Grid>
+  );
 };
 
 /**

@@ -31,11 +31,13 @@ export const isObjectEmtpy = (obj) => {
  * @param {[{*}]} unit
  * @returns  JSX element
  */
-export const unitOrCmdCard = (unit) => {
+export const unitOrCmdCard = (unit, alignment) => {
   let element;
   const singleElements = [HERO, MAGE, AUTOMATON, GIANT];
 
-  singleElements.includes(unit.unitType) ? (element = <StatCardCommander unit={unit} />) : (element = <StatCardUnit unit={unit} />);
+  singleElements.includes(unit.unitType)
+    ? (element = <StatCardCommander unit={unit} alignment={alignment} />)
+    : (element = <StatCardUnit unit={unit} alignment={alignment} />);
 
   return element;
 };

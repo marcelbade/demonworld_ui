@@ -13,7 +13,7 @@ import {
   generateHitPoints,
   renderMagicPoints,
   renderCommandPoints,
-  renderSkillValues,
+  RenderSkillValues,
   DisplayAllSpecialRules,
   displayUnitCost,
 } from "../compendiums/factionTable/depencies/factionTableFunctions";
@@ -137,7 +137,7 @@ const StatCardUnit = (props) => {
       </tr>
       <tr>
         <td colSpan={"3"} className={classes.cardBorder}>
-          {renderSkillValues(props.rowData.skillRange, props.rowData.skillMelee)}
+          {RenderSkillValues(props.rowData.skillRange, props.rowData.skillMelee)}
         </td>
       </tr>
       {/* 4rd Row - black Stripe #2 */}

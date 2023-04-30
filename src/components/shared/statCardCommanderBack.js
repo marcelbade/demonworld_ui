@@ -3,13 +3,7 @@ import React from "react";
 // Material UI
 import { Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-// icons
-// import SecurityIcon from "@material-ui/icons/Security";
-// import Icon from "@material-ui/core/Icon";
-// import SwordIcon from "./customIcons/blackSword.png";
-// import BowIcon from "./customIcons/bow.jpg";
-// import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
-// components & functions
+// modules
 import { DisplayAllSpecialRules, displayUnitCost } from "../compendiums/factionTable/depencies/factionTableFunctions";
 // clsx
 import clsx from "clsx";
@@ -70,7 +64,7 @@ const useStyles = makeStyles({
   },
 });
 
-const StatCardUnitBack = (props) => {
+const StatCardCommanderBack = (props) => {
   const classes = useStyles();
 
   return (
@@ -96,9 +90,7 @@ const StatCardUnitBack = (props) => {
       </Grid>
       <Grid>
         {/* 3rd Row   special rules */}
-        <Grid item  >
-          {DisplayAllSpecialRules(props.unit)}
-        </Grid>
+        <Grid item>{DisplayAllSpecialRules(props.unit)}</Grid>
       </Grid>
       {/* 4rd Row - black SGridipe #2 */}
       <Grid>
@@ -110,4 +102,4 @@ const StatCardUnitBack = (props) => {
   );
 };
 
-export default StatCardUnitBack;
+export default StatCardCommanderBack;

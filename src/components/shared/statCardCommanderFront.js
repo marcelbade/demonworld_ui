@@ -8,12 +8,14 @@ import { makeStyles } from "@material-ui/core/styles";
 // import SwordIcon from "./customIcons/blackSword.png";
 // import BowIcon from "./customIcons/bow.jpg";
 // import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import blackShieldIcon from "../customIcons/icons8-shield-black.png";
+
 // components & functions
 import {
   generateHitPoints,
   renderMagicPoints,
   renderCommandPoints,
-  renderSkillValues,
+  RenderSkillValues,
 } from "../compendiums/factionTable/depencies/factionTableFunctions";
 // clsx
 import clsx from "clsx";
@@ -74,9 +76,18 @@ const useStyles = makeStyles({
   font: {
     fontFamily: "Beryliumbold",
   },
+  Icon: {
+    height: "1em",
+    width: "1em",
+  },
+  alignIcons: {
+    display: "flex",
+    alignItems: "center",
+    marginLeft: "1em",
+  },
 });
 
-const StatCardUnitFront = (props) => {
+const StatCardCommanderFront = (props) => {
   const classes = useStyles();
 
   return (
@@ -108,7 +119,9 @@ const StatCardUnitFront = (props) => {
         )}
       </Grid>
       <Grid>
-        <Typography variant="h6"  className={classes.font}>Waffe 1: {props.unit.weapon1}</Typography>
+        <Typography variant="h6" className={classes.font}>
+          Waffe 1: {props.unit.weapon1}
+        </Typography>
       </Grid>
       <Grid item>
         <Typography>{props.unit.weapon2 === 0 ? null : "Waffe 2: " + props.unit.weapon2}</Typography>
@@ -117,12 +130,19 @@ const StatCardUnitFront = (props) => {
         <Typography variant="h6" className={classes.font}>
           Größe: {props.unit.unitSize}
         </Typography>
+        <div className={classes.alignIcons}>
+          <img alt="FK-Panzerung" src={blackShieldIcon} className={classes.Icon} />
+        </div>
         <Typography variant="h6" className={classes.font}>
-          Panzerung: {props.unit.armourRange} / {props.unit.armourMelee}{" "}
+          {props.unit.armourRange}
         </Typography>
-        <Typography variant="h6" className={classes.cardBorder}>
-          {renderSkillValues(props.unit.skillRange, props.unit.skillMelee)}
+        <div className={classes.alignIcons}>
+          <img alt="NK-Panzerung" src={blackShieldIcon} className={classes.Icon} />
+        </div>
+        <Typography variant="h6" className={classes.font}>
+          {props.unit.armourMelee}
         </Typography>
+        <Typography  variant="h6">{RenderSkillValues(props.unit.skillRange, props.unit.skillMelee)}</Typography>
       </Grid>
       {/* 4rd Row - black Stripe #2 */}
 
@@ -141,4 +161,7 @@ const StatCardUnitFront = (props) => {
   );
 };
 
-export default StatCardUnitFront;
+export default StatCardCommanderFront;
+
+
+
