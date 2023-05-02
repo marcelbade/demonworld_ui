@@ -12,8 +12,7 @@ import {
   renderCommandPoints,
   RenderSkillValues,
 } from "../compendiums/factionTable/depencies/factionTableFunctions";
-// clsx
-import clsx from "clsx";
+
 import { Grid, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles({
@@ -80,14 +79,8 @@ const useStyles = makeStyles({
     alignItems: "center",
     marginLeft: "1em",
   },
-  rangedWeapon: {},
-  titleLeftSide: {
-    width: "30%",
-    fontFamily: "Beryliumbold",
-  },
   titleLeftSide: {
     flexWrap: "nowrap",
-
     fontFamily: "Beryliumbold",
   },
   sizeArmourSkill: {
@@ -174,7 +167,7 @@ const StatCardCommanderFront = (props) => {
           {RenderSkillValues(props.unit.skillRange, props.unit.skillMelee)}
         </Grid>
       </Grid>
-      {/* 4rd Row - black Stripe #2 */}
+      {/* 4rd Row - black Stripe #2 FEAR FACTOR */}
       <Grid item>
         <Typography variant="h6" align="center" className={classes.unitCardStripe}>
           Furchtfaktor: {props.unit.fear}

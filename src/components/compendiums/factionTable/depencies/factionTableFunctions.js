@@ -25,7 +25,6 @@ const RulesToolTip = withStyles({
 const useStyles = makeStyles({
   specialRules: {
     fontFamily: "Beryliumbold",
-    fontWeight: "bold",
   },
   Icon: {
     width: "1em",
@@ -176,7 +175,7 @@ export const DisplayAllSpecialRules = (unit) => {
 export const RenderSkillValues = (rangeSkill, meleeSkill) => {
   const classes = useStyles();
   return (
-    <Grid container direction="row" alignContent="center" alignItems="center" className={classes.skillBox}>
+    <Grid container direction="row" justify="center" alignItems="center" className={classes.skillBox}>
       {meleeSkill !== 0 ? (
         <Fragment>
           <img alt="NK-Fertigkeit" src={blackSwordIcon} className={classes.Icon} />
@@ -189,6 +188,34 @@ export const RenderSkillValues = (rangeSkill, meleeSkill) => {
           <Typography variant="h6"> {rangeSkill} </Typography>
         </Fragment>
       ) : null}
+    </Grid>
+  );
+};
+
+export const DisplayUnitElements = (unit) => {
+  const classes = useStyles();
+
+  let specialElements = 0;
+  if (unit.leader) {
+    ++specialElements;
+  }
+  if (unit.standardBearer) {
+    ++specialElements;
+  }
+  if (unit.musician) {
+    ++specialElements;
+  }
+
+  return (
+    <Grid container direction="row" justify="center" alignItems="center" className={classes.skillBox}>
+      <Typography variant="h6" className={classes.specialRules}>
+        {unit.leader ? "Anführer / " : null}
+        {unit.standardBearer ? "Standarte / " : null}
+        {unit.musician ? "Musiker / " : null}
+      </Typography>
+      <Typography variant="h6" className={classes.specialRules}>
+        {unit.numberOfElements - specialElements} {unit.numberOfElements === 1 ? "Element" : "Elemente"}
+      </Typography>
     </Grid>
   );
 };

@@ -9,6 +9,9 @@ import {
   renderCommandPoints,
   RenderSkillValues,
 } from "../compendiums/factionTable/depencies/factionTableFunctions";
+// icons
+import blackShieldIcon from "../customIcons/icons8-shield-black.png";
+
 // clsx
 import clsx from "clsx";
 import { Grid, Typography } from "@material-ui/core";
@@ -80,6 +83,9 @@ const useStyles = makeStyles({
   maneuvers: {
     marginLeft: "2em",
   },
+  sizeArmourSkill: {
+    flexWrap: "nowrap",
+  },
 });
 
 const StatCardUnitFront = (props) => {
@@ -88,7 +94,7 @@ const StatCardUnitFront = (props) => {
   return (
     <Grid container direction="row" className={classes.cardBox}>
       {/* 1st Row - title*/}
-      <Grid item container direction="row" className={classes.cardSide}>
+      <Grid item container direction="row">
         <Typography variant="h6" className={classes.leftCell}>
           {renderCommandPoints(props.unit.commandStars)}
         </Typography>
@@ -100,7 +106,7 @@ const StatCardUnitFront = (props) => {
         </Typography>
       </Grid>
       {/* 2nd Row - black Stripe  - MOVEMENT / CONTROL AREA*/}
-      <Grid item container direction="row" className={clsx(classes.cardSide, classes.unitCardStripe)}>
+      <Grid item container direction="row" justify="center" className={classes.unitCardStripe}>
         <Typography variant="h6" className={classes.font}>
           B: {props.unit.move} / A: {props.unit.charge} / P:{props.unit.skirmish}
         </Typography>
@@ -114,10 +120,10 @@ const StatCardUnitFront = (props) => {
           {props.unit.horde ? "Horde" : null}
         </Typography>
       </Grid>
-      <Grid item container direction="row">
-        {/* 3rd Row - RANGED WEAPONS  */}
+      {/* 3rd Row - RANGED WEAPONS  */}
+      <Grid item container direction="row" justify="center">
         {props.unit.rangedWeapon !== "x" ? (
-          <Typography variant="h6">
+          <Typography variant="h6" className={classes.font}>
             {props.unit.rangedWeapon} {props.unit.rangedAttackStats}
           </Typography>
         ) : null}
@@ -134,26 +140,35 @@ const StatCardUnitFront = (props) => {
         </Typography>
       </Grid>
       {/* 6th Row - SIZE, ARMOR, SKILLS*/}
-      <Grid container direction="row" justify="center">
-        <Typography variant="h6" className={classes.font}>
-          Größe: {props.unit.unitSize}
-        </Typography>
-        <Typography variant="h6" className={classes.font}></Typography>
-        <Typography variant="h6" className={classes.font}>
-          Panzerung: {props.unit.armourRange} / {props.unit.armourMelee}
-        </Typography>
-      </Grid>
-      <Grid container direction="row">
-        <Typography variant="h6" className={classes.cardBorder}>
+      <Grid item container alignItems="center" direction="row" className={classes.sizeArmourSkill}>
+        <Grid item container justify="center">
+          <Typography variant="h6" className={classes.font}>
+            Größe: {props.unit.unitSize}
+          </Typography>
+        </Grid>
+        <Grid item container alignItems="center" justify="center">
+          <div className={classes.alignIcons}>
+            <img alt="FK-Panzerung" src={blackShieldIcon} className={classes.Icon} />
+          </div>
+          <Typography variant="h6" className={classes.font}>
+            {props.unit.armourRange}
+          </Typography>
+          <div className={classes.alignIcons}>
+            <img alt="NK-Panzerung" src={blackShieldIcon} className={classes.Icon} />
+          </div>
+          <Typography variant="h6" className={classes.font}>
+            {props.unit.armourMelee}
+          </Typography>
+        </Grid>
+        <Grid item container direction="row" justify="center" className={classes.sizeArmourSkill}>
           {RenderSkillValues(props.unit.skillRange, props.unit.skillMelee)}
-        </Typography>
+        </Grid>
       </Grid>
-      {/* 4rd Row - black Stripe #2 */}
-      <Grid container direction="row" className={classes.unitCardStripe}>
+      {/* 7th Row - FEAR & MORAL */}
+      <Grid container direction="row" justify="center" className={classes.unitCardStripe}>
         <Typography variant="h6" className={classes.font}>
           Furchtfaktor: {props.unit.fear}
         </Typography>
-        <Typography variant="h6" className={classes.font}></Typography>
         <Typography variant="h6" className={classes.font}>
           Moral: {props.unit.moral1 ? props.unit.moral1 : "-"} / {props.unit.moral2 ? props.unit.moral2 : "-"}
         </Typography>

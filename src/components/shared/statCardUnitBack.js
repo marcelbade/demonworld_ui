@@ -3,13 +3,8 @@ import React from "react";
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
 // icons
-// import SecurityIcon from "@material-ui/icons/Security";
-// import Icon from "@material-ui/core/Icon";
-// import SwordIcon from "./customIcons/blackSword.png";
-// import BowIcon from "./customIcons/bow.jpg";
-// import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
-// components & functions
-import { DisplayAllSpecialRules, displayUnitCost } from "../compendiums/factionTable/depencies/factionTableFunctions";
+
+import { DisplayAllSpecialRules, DisplayUnitElements, displayUnitCost } from "../compendiums/factionTable/depencies/factionTableFunctions";
 // clsx
 import clsx from "clsx";
 import { Grid, Typography } from "@material-ui/core";
@@ -25,9 +20,7 @@ const useStyles = makeStyles({
     tableLayout: "fixed",
     width: "inherit",
   },
-  movementCell: {
-    textAlign: "left",
-  },
+
   leftCell: {
     fontFamily: "Beryliumbold",
     fontWeight: "bold",
@@ -48,12 +41,8 @@ const useStyles = makeStyles({
   cardBorder: {
     borderRight: "1px solid black",
   },
-  spanCellTwo: {
-    textAlign: "end",
-  },
   blackStripe: {
     fontFamily: "Beryliumbold",
-    fontWeight: "bold",
     padding: "10px",
     color: "white",
     backgroundColor: "black",
@@ -75,7 +64,7 @@ const StatCardUnitBack = (props) => {
 
   return (
     <Grid container direction="column" className={classes.cardBox}>
-      {/* 1st Row - title*/}
+      {/* 1st Row - TITLE*/}
       <Grid item container direction="row">
         <Typography variant="h6" align="left" className={classes.leftCell}>
           {props.unit.faction}
@@ -87,26 +76,17 @@ const StatCardUnitBack = (props) => {
           {props.unit.subFaction}
         </Typography>
       </Grid>
-      {/* 2nd Row - black Stripe - movement*/}
+      {/* 2nd Row - black Stripe - ELEMENTS */}
       <Grid item container direction="row" className={classes.blackStripe}>
-        <Typography variant="h6" className={classes.font}>
-          {props.unit.leader ? "Anführer / " : null}
-          {props.unit.standardBearer ? "Standarte / " : null}
-          {props.unit.musician ? "Musiker" : null}
-        </Typography>
-        <Typography variant="h6" className={classes.font}>
-          {props.unit.numberOfElements} {props.unit.numberOfElements === 1 ? "Element" : "Elemente"}
-        </Typography>
+        {DisplayUnitElements(props.unit)}
       </Grid>
-      <Grid item container direction="row">
-        {/* 3rd Row special rules */}
-        <Typography variant="h6" className={classes.font}>
-          {DisplayAllSpecialRules(props.unit)}
-        </Typography>
+      <Grid item container justify="center" direction="row">
+        {/* 3rd Row  SPECIAL RULES*/}
+        <Typography variant="h6">{DisplayAllSpecialRules(props.unit)}</Typography>
       </Grid>
-      {/* 4rd Row - black Stripe #2 */}
-      <Grid item container direction="row" className={classes.blackStripe}>
-        <Typography variant="h6" className={classes.font}>
+      {/* 4rd Row - POINT COST */}
+      <Grid>
+        <Typography variant="h6" align="center" className={classes.blackStripe}>
           {displayUnitCost(props.unit)} Punkte
         </Typography>
       </Grid>
