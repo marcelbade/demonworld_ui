@@ -2,45 +2,19 @@
 import React from "react";
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
-// icons
-
-import { DisplayAllSpecialRules, DisplayUnitElements, displayUnitCost } from "../compendiums/factionTable/depencies/factionTableFunctions";
-// clsx
-import clsx from "clsx";
 import { Grid, Typography } from "@material-ui/core";
+// functions and modules
+import { DisplayAllSpecialRules, DisplayUnitElements, displayUnitCost } from "../compendiums/factionTable/depencies/factionTableFunctions";
 
 const useStyles = makeStyles({
   cardBox: {
     border: "1px solid black",
-    borderCollapse: "collapse",
     backgroundColor: "lightgrey",
-    fontFamily: "Beryliumbold",
-    fontWeight: "bold",
     fontSize: "20px",
     tableLayout: "fixed",
-    width: "inherit",
+    width: "30em",
   },
 
-  leftCell: {
-    fontFamily: "Beryliumbold",
-    fontWeight: "bold",
-    paddingLeft: "5px",
-    width: "30%",
-  },
-  centerCell: {
-    fontFamily: "Beryliumbold",
-    fontWeight: "bold",
-    width: "40%",
-  },
-  rightCell: {
-    fontFamily: "Beryliumbold",
-    fontWeight: "bold",
-    width: "30%",
-    paddingRight: "5px",
-  },
-  cardBorder: {
-    borderRight: "1px solid black",
-  },
   blackStripe: {
     fontFamily: "Beryliumbold",
     padding: "10px",
@@ -57,6 +31,16 @@ const useStyles = makeStyles({
     color: "red",
     borderWidth: "0px",
   },
+  font: {
+    fontFamily: "Beryliumbold",
+    fontWeight: "bold",
+  },
+  paddingLeft: {
+    paddingLeft: "0.5em",
+  },
+  paddingRight: {
+    paddingRight: "0.5em",
+  },
 });
 
 const StatCardUnitBack = (props) => {
@@ -65,16 +49,22 @@ const StatCardUnitBack = (props) => {
   return (
     <Grid container direction="column" className={classes.cardBox}>
       {/* 1st Row - TITLE*/}
-      <Grid item container direction="row">
-        <Typography variant="h6" align="left" className={classes.leftCell}>
-          {props.unit.faction}
-        </Typography>
-        <Typography variant="h6" className={clsx(classes.centerCell, classes.cardTitle)}>
-          {props.unit.unitName}
-        </Typography>
-        <Typography variant="h6" align="right" className={clsx(classes.cardBorder, classes.rightCell)}>
-          {props.unit.subFaction}
-        </Typography>
+      <Grid item container justify="space-around" alignItems="center" direction="row">
+        <Grid item xs={3} className={classes.paddingLeft}>
+          <Typography variant="h6" align="left" className={classes.font}>
+            {props.unit.faction}
+          </Typography>
+        </Grid>
+        <Grid item xs={6}>
+          <Typography variant="h6" className={classes.cardTitle}>
+            {props.unit.unitName}
+          </Typography>
+        </Grid>
+        <Grid item xs={3} className={classes.paddingRight}>
+          <Typography variant="h6" align="right" className={classes.font}>
+            {props.unit.subFaction}
+          </Typography>
+        </Grid>
       </Grid>
       {/* 2nd Row - black Stripe - ELEMENTS */}
       <Grid item container direction="row" className={classes.blackStripe}>

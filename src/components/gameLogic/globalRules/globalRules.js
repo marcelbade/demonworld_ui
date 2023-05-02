@@ -3,11 +3,10 @@ const MAXIMUM_OF_TWO_OF_EACH_MESSAGE = "Die Liste darf eine Einheit maximal 2x e
 const MAXIMUM_OF_35_PERCENT_HEROES_MESSAGE = "Die Liste darf maximal 35% Characktere und Helden enthalten.";
 
 const globalRules = {
-
   /**
-   * 
+   *
    * @param {*} selectedUnits  array of selected units
-   * @returns all unique units that have been selected. 
+   * @returns all unique units that have been selected.
    */
   noDuplicateUniques: (selectedUnits) => {
     const result = [];
@@ -28,6 +27,7 @@ const globalRules = {
    * @returns object with an array containing all units that must be blocked and an error message to
    * be displayed as a tool tip.
    */
+  //TODO : ignore is missing
   maximumOfTwo: (selectedUnits) => {
     const result = [];
 
@@ -71,8 +71,9 @@ const globalRules = {
 
     return result;
   },
+
   /**
-   * test if the amount of points spent on the subfaction is between max and min values. 
+   * test if the amount of points spent on the subfaction is between max and min values.
    */
   BlockUnitsExceedingMaxPoints: (rules, selectedUnits, maxArmyPoints, availableUnits) => {
     let result = [];
@@ -113,8 +114,8 @@ const globalRules = {
   },
 
   /**
-   * Test whether the army has a valid army commander in accordance w. the tournament rules. 
-   * @param {*} selectedUnits array of all selected unit objects   
+   * Test whether the army has a valid army commander in accordance w. the tournament rules.
+   * @param {*} selectedUnits array of all selected unit objects
    * @returns boolean flag
    */
   isArmyCommanderPresent: (selectedUnits) => {
@@ -130,10 +131,10 @@ const globalRules = {
 const calculateActualPoints = (selectedUnits, subFaction) => {
   let actualValue = 0;
 
+  console.log("subFaction");
+  console.log(subFaction);
+
   selectedUnits.forEach((selectedUnit) => {
-
-
-
     if (subFaction.includes(selectedUnit.subFaction)) {
       actualValue += selectedUnit.points;
     }

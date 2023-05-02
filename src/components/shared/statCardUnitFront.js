@@ -2,6 +2,7 @@
 import React from "react";
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
+import { Grid, Typography } from "@material-ui/core";
 // components & functions
 import {
   generateHitPoints,
@@ -12,46 +13,15 @@ import {
 // icons
 import blackShieldIcon from "../customIcons/icons8-shield-black.png";
 
-// clsx
-import clsx from "clsx";
-import { Grid, Typography } from "@material-ui/core";
-
 const useStyles = makeStyles({
   cardBox: {
     border: "1px solid black",
-    borderCollapse: "collapse",
     backgroundColor: "lightgrey",
-    fontFamily: "Beryliumbold",
-    fontWeight: "bold",
     fontSize: "20px",
     GridLayout: "fixed",
-    width: "inherit",
+    width: "30em",
   },
-  movementCell: {
-    textAlign: "left",
-    fontFamily: "Beryliumbold",
-  },
-  leftCell: {
-    paddingLeft: "0px",
-    width: "30%",
-    fontFamily: "Beryliumbold",
-  },
-  centerCell: {
-    width: "40%",
-    fontFamily: "Beryliumbold",
-  },
-  rightCell: {
-    width: "30%",
-    fontFamily: "Beryliumbold",
-  },
-  cardBorder: {
-    borderRight: "1px solid black",
-    fontFamily: "Beryliumbold",
-  },
-  spanCellTwo: {
-    textAlign: "end",
-    fontFamily: "Beryliumbold",
-  },
+
   unitCardStripe: {
     padding: "10px",
     color: "white",
@@ -80,9 +50,7 @@ const useStyles = makeStyles({
     alignItems: "center",
     marginLeft: "1em",
   },
-  maneuvers: {
-    marginLeft: "2em",
-  },
+
   sizeArmourSkill: {
     flexWrap: "nowrap",
   },
@@ -94,26 +62,28 @@ const StatCardUnitFront = (props) => {
   return (
     <Grid container direction="row" className={classes.cardBox}>
       {/* 1st Row - title*/}
-      <Grid item container direction="row">
-        <Typography variant="h6" className={classes.leftCell}>
-          {renderCommandPoints(props.unit.commandStars)}
-        </Typography>
-        <Typography variant="h6" className={clsx(classes.centerCell, classes.cardTitle)}>
-          {props.unit.unitName}
-        </Typography>
-        <Typography variant="h6" className={clsx(classes.cardBorder, classes.rightCell)}>
-          {renderMagicPoints(props.unit.magic)}
-        </Typography>
+      <Grid item container justify="space-around" direction="row">
+        <Grid item xs={3}>
+          <Typography variant="h6">{renderCommandPoints(props.unit.commandStars)}</Typography>
+        </Grid>
+        <Grid item xs={6}>
+          <Typography variant="h6" className={classes.cardTitle}>
+            {props.unit.unitName}
+          </Typography>
+        </Grid>
+        <Grid item xs={3}>
+          <Typography variant="h6">{renderMagicPoints(props.unit.magic)}</Typography>
+        </Grid>
       </Grid>
-      {/* 2nd Row - black Stripe  - MOVEMENT / CONTROL AREA*/}
-      <Grid item container direction="row" justify="center" className={classes.unitCardStripe}>
-        <Typography variant="h6" className={classes.font}>
+      {/* 2nd Row - black Stripe  - MOVEMENT & MANEUVERS & FORMATUIONS*/}
+      <Grid item container direction="row" justify="space-between" className={classes.unitCardStripe}>
+        <Typography variant="h6" align="center" className={classes.font}>
           B: {props.unit.move} / A: {props.unit.charge} / P:{props.unit.skirmish}
         </Typography>
-        <Typography variant="h6" className={clsx(classes.font, classes.maneuvers)}>
+        <Typography variant="h6" align="center" className={classes.font}>
           {props.unit.hold_maneuvers} Manöver
         </Typography>
-        <Typography variant="h6" className={classes.font}>
+        <Typography variant="h6" align="center" className={classes.font}>
           {props.unit.wedgeFormation ? "Ke / " : null}
           {props.unit.skirmishFormation ? "Pl / " : null}
           {props.unit.squareFormation ? "Ka / " : null}
@@ -165,7 +135,7 @@ const StatCardUnitFront = (props) => {
         </Grid>
       </Grid>
       {/* 7th Row - FEAR & MORAL */}
-      <Grid container direction="row" justify="center" className={classes.unitCardStripe}>
+      <Grid container direction="row" justify="space-around" className={classes.unitCardStripe}>
         <Typography variant="h6" className={classes.font}>
           Furchtfaktor: {props.unit.fear}
         </Typography>
@@ -174,7 +144,7 @@ const StatCardUnitFront = (props) => {
         </Typography>
       </Grid>
       {/* 5th Row - HIT POINTS */}
-      <Grid container direction="row">
+      <Grid container justify="center" direction="row">
         <Typography variant="h6" className={classes.font}>
           {generateHitPoints(props.unit.hitpoints)}
         </Typography>

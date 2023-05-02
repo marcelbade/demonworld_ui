@@ -24,24 +24,7 @@ const useStyles = makeStyles({
     fontWeight: "bold",
     fontSize: "20px",
     GridLayout: "fixed",
-    width: "inherit",
-  },
-  movementCell: {
-    textAlign: "left",
-    fontFamily: "Beryliumbold",
-  },
-  leftCell: {
-    paddingLeft: "0px",
-    width: "50%",
-    fontFamily: "Beryliumbold",
-  },
-  centerCell: {
-    width: "30%",
-    fontFamily: "Beryliumbold",
-  },
-  rightCell: {
-    width: "450%",
-    fontFamily: "Beryliumbold",
+    width: "30em",
   },
 
   unitCardStripe: {
@@ -51,6 +34,9 @@ const useStyles = makeStyles({
     fontFamily: "Beryliumbold",
   },
   cardTitle: {
+   
+    wordSpacing: "100vw",
+    flexWrap: "nowrap",
     fontFamily: "notMaryKate",
     fontWeight: "normal",
     fontSize: "30px",
@@ -61,12 +47,6 @@ const useStyles = makeStyles({
     fontFamily: "Beryliumbold",
   },
 
-  magicPoints: {
-    paddingRight: "0.5em",
-  },
-  commandStars: {
-    paddingLeft: "0.5em",
-  },
   font: {
     fontFamily: "Beryliumbold",
   },
@@ -79,11 +59,8 @@ const useStyles = makeStyles({
     alignItems: "center",
     marginLeft: "1em",
   },
-  titleLeftSide: {
-    flexWrap: "nowrap",
-    fontFamily: "Beryliumbold",
-  },
-  sizeArmourSkill: {
+
+  noWrap: {
     flexWrap: "nowrap",
   },
 });
@@ -93,26 +70,26 @@ const StatCardCommanderFront = (props) => {
 
   return (
     <Grid container direction="column" className={classes.cardBox}>
-      {/* 1st Row - TITLE*/}
-      <Grid item container justify="center" alignContent="center" className={classes.titleLeftSide}>
-        <Grid item container>
-          <Typography align="left" className={classes.commandStars}>
+      {/* 1st Row - title*/}
+      <Grid item container justify="space-around" direction="row">
+        <Grid item xs={3}>
+          <Typography variant="h6" align="center">
             {renderCommandPoints(props.unit.commandStars)}
           </Typography>
         </Grid>
-        <Grid item container className={classes.titelCenter}>
-          <Typography align="center" className={classes.cardTitle}>
+        <Grid item xs={6}>
+          <Typography variant="h6" align="center" className={classes.cardTitle}>
             {props.unit.unitName}
           </Typography>
         </Grid>
-        <Grid item container justify="flex-end" className={classes.titleRightSide}>
-          <Typography align="right" className={classes.magicPoints}>
+        <Grid item xs={3}>
+          <Typography variant="h6" align="center">
             {renderMagicPoints(props.unit.magic)}
           </Typography>
         </Grid>
       </Grid>
       {/* 2nd Row - black Stripe  - MOVEMENT / CONTROL AREA*/}
-      <Grid item container justify="center" className={classes.unitCardStripe}>
+      <Grid item container justify="space-around" className={classes.unitCardStripe}>
         <Typography variant="h6" textAlign="left" className={classes.font}>
           {props.unit.move} Bewegungspunkte
         </Typography>
@@ -143,7 +120,7 @@ const StatCardCommanderFront = (props) => {
         </Grid>
       </Grid>
       {/* 6th Row - SIZE, ARMOR, SKILLS*/}
-      <Grid item container alignItems="center" direction="row" className={classes.sizeArmourSkill}>
+      <Grid item container alignItems="center" direction="row" className={classes.noWrap}>
         <Grid item container justify="center">
           <Typography variant="h6" className={classes.font}>
             Größe: {props.unit.unitSize}
@@ -163,7 +140,7 @@ const StatCardCommanderFront = (props) => {
             {props.unit.armourMelee}
           </Typography>
         </Grid>
-        <Grid item container direction="row" justify="center" className={classes.sizeArmourSkill}>
+        <Grid item container direction="row" justify="center" className={classes.noWrap}>
           {RenderSkillValues(props.unit.skillRange, props.unit.skillMelee)}
         </Grid>
       </Grid>

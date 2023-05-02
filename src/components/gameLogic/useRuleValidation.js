@@ -10,7 +10,7 @@ import UndeadRules from "./factionValidationRules/undeadRules";
 import ThainRules from "./factionValidationRules/thainRules";
 
 /**
- * Logic and abstraction layer for validatiing army list. returns a validator object with a testSubFactionRules function that differs for every faction.
+ * Logic and abstraction layer for validating army lists. Returns a validator object with a testSubFactionRules function that differs for every faction.
  * @param {String} faction
  * @returns the validator object for the selected faction.
  */

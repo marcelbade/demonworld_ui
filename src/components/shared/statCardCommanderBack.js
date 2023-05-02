@@ -3,10 +3,8 @@ import React from "react";
 // Material UI
 import { Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-// modules
+// functions and modules
 import { DisplayAllSpecialRules, displayUnitCost } from "../compendiums/factionTable/depencies/factionTableFunctions";
-// clsx
-import clsx from "clsx";
 
 const useStyles = makeStyles({
   cardBox: {
@@ -17,31 +15,13 @@ const useStyles = makeStyles({
     fontWeight: "bold",
     fontSize: "20px",
     tableLayout: "fixed",
-    width: "inherit",
+    width: "30em",
   },
-  movementCell: {
-    textAlign: "left",
-  },
-  leftCell: {
+  font: {
     fontFamily: "Beryliumbold",
     fontWeight: "bold",
-    paddingLeft: "5px",
-    width: "30%",
   },
-  centerCell: {
-    fontFamily: "Beryliumbold",
-    fontWeight: "bold",
-    width: "40%",
-  },
-  rightCell: {
-    fontFamily: "Beryliumbold",
-    fontWeight: "bold",
-    width: "30%",
-    paddingRight: "5px",
-  },
-  spanCellTwo: {
-    textAlign: "end",
-  },
+
   blackStripe: {
     fontFamily: "Beryliumbold",
     fontWeight: "bold",
@@ -50,14 +30,14 @@ const useStyles = makeStyles({
     backgroundColor: "black",
   },
   cardTitle: {
+   
+    wordSpacing: "100vw",
+    flexWrap: "nowrap",
     fontFamily: "notMaryKate",
     fontWeight: "normal",
-    marginBottom: "0px",
-    marginTop: "0px",
     textAlign: "center",
     fontSize: "30px",
     color: "red",
-    borderWidth: "0px",
   },
 });
 
@@ -66,29 +46,36 @@ const StatCardCommanderBack = (props) => {
 
   return (
     <Grid container direction="column" className={classes.cardBox}>
-      {/* 1st Row - title*/}
-      <Grid item container direction="row">
-        <Typography variant="h6" align="left" className={classes.leftCell}>
-          {props.unit.faction}
-        </Typography>
-        <Typography variant="h6" className={clsx(classes.centerCell, classes.cardTitle)}>
-          {props.unit.unitName}
-        </Typography>
-        <Typography variant="h6" align="right" className={classes.rightCell}>
-          {props.unit.subFaction}
-        </Typography>
+      {/* 1st Row - TITLE*/}
+      <Grid item container justify="space-around" direction="row">
+        <Grid item xs={3}>
+          <Typography variant="h6" align="center" className={classes.font}>
+            {props.unit.faction}
+          </Typography>
+        </Grid>
+        <Grid item xs={6}>
+          <Typography variant="h6" align="center" className={classes.cardTitle}>
+            {props.unit.unitName}
+          </Typography>
+        </Grid>
+        <Grid item xs={3}>
+          <Typography variant="h6" align="center" className={classes.font}>
+            {props.unit.subFaction}
+          </Typography>
+        </Grid>
       </Grid>
-      {/* 2nd Row - black stripe  - movement*/}
+
+      {/* 2nd Row - black stripe  - ELEMENT*/}
       <Grid item>
         <Typography variant="h6" align="center" className={classes.blackStripe}>
           {props.unit.numberOfElements} {props.unit.numberOfElements === 1 ? "Element" : "Elemente"}
         </Typography>
       </Grid>
       <Grid>
-        {/* 3rd Row   special rules */}
+        {/* 3rd Row   SPECIAL RULES */}
         <Grid item>{DisplayAllSpecialRules(props.unit)}</Grid>
       </Grid>
-      {/* 4rd Row - black SGridipe #2 */}
+      {/* 4rd Row - POINT COSTS  */}
       <Grid>
         <Typography variant="h6" align="center" className={classes.blackStripe}>
           {displayUnitCost(props.unit)} Punkte

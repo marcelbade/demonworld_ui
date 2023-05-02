@@ -1,70 +1,68 @@
 import globalRules from "../globalRules/globalRules";
 
+//TODO: change the error messages!!
 const rules = [
   {
     subFaction: "heroesCharacters",
-    names: ["Befehlshaber", "Held"],
+    cardNames: ["Befehlshaber", "Held"],
     min: 0.1,
     max: 0.1,
-    error: "Deine Armeeliste darf zu höchstens 40% aus Einheiten aus Gaeta bestehen.",
+    error: "Deine Armeeliste darf zu höchstens 40% aus Befehlshabern und Helden bestehen.",
   },
 
   {
     subFaction: "humans",
-    names: ["Menschen"],
+    cardNames: ["Menschen"],
     min: 0.1,
     max: 0.6,
-    error: "Deine Armeeliste darf zu höchstens 40% aus Einheiten aus Gaeta bestehen.",
+    error: "Deine Armeeliste darf zu höchstens 40% aus Menschen bestehen.",
   },
   {
     subFaction: "beastmen",
-    names: ["Tiermenschen"],
+    cardNames: ["Tiermenschen"],
     min: 0.1,
     max: 0.6,
-    error: "Deine Armeeliste darf zu höchstens 40% aus Einheiten aus Gaeta bestehen.",
+    error: "Deine Armeeliste darf zu höchstens 40% aus Tiermenschen bestehen.",
   },
   {
     subFaction: "icewitches",
-    names: ["Eishexen"],
+    cardNames: ["Eishexen"],
     min: 0.1,
     max: 0.6,
-    error: "Deine Armeeliste darf zu höchstens 40% aus Einheiten aus Gaeta bestehen.",
+    error: "Deine Armeeliste darf zu höchstens 40% aus Eishexen bestehen.",
   },
   {
     subFaction: "demons",
-    names: ["Dämonen"],
+    cardNames: ["Dämonen"],
     min: 0.0,
     max: 0.5,
-    error: "Deine Armeeliste darf zu höchstens 40% aus Einheiten aus Gaeta bestehen.",
+    error: "Deine Armeeliste darf zu höchstens 40% aus Dämonen bestehen.",
   },
   {
     subFaction: "undead",
-    names: ["Untote"],
+    cardNames: ["Untote"],
     min: 0.0,
     max: 0.5,
-    error: "Deine Armeeliste darf zu höchstens 40% aus Einheiten aus Gaeta bestehen.",
+    error: "Deine Armeeliste darf zu höchstens 40% aus Untoten bestehen.",
   },
   {
     subFaction: "icegiants",
-    names: ["Eisriesen"],
+    cardNames: ["Eisriesen"],
     min: 0.0,
     max: 0.3,
-    error: "Deine Armeeliste darf zu höchstens 40% aus Einheiten aus Gaeta bestehen.",
+    error: "Deine Armeeliste darf zu höchstens 40% aus Eisriesen bestehen.",
   },
 ];
 
 const validationResults = {
   unitsBlockedbyRules: [],
   subFactionBelowMinimum: [],
-  // Ishtak does not have this required - hence, this must always be true
+  // Ishtak does not have this requirement - hence, this must always be true
   commanderIsPresent: true,
 };
 
 const IshtakRules = {
   testSubFactionRules: (availableUnits, selectedUnits, maxArmyPoints) => {
-    // dwarven special rule
-    percentageKingdomsAndAlly(selectedUnits);
-
     //tournament rules
     let twoRuleResult = globalRules.maximumOfTwo(selectedUnits);
     let heroRuleResult = globalRules.maxOf35PercentHeroes(selectedUnits, maxArmyPoints, availableUnits);
@@ -82,12 +80,7 @@ const IshtakRules = {
   },
 };
 
-//SEPCIAL FACTION RULES
-
-// function takes care of the dwarf army list special rule: of the three opions (2 dwarven kingdoms and one ally), only one can make upp a max.
-// of 40% of the force. Once the choice is made, the player can only take the second kingdom OR the ally and only to a max. of 20%.
-const percentageKingdomsAndAlly = (selectedUnits) => {
-  //const MESSAGE = "Die Armee kann nicht Einheiten beider Zwergeneinheiten und des Alliierten enthalten!";
-};
+//SPECIAL FACTION RULES
+//TODO
 
 export default IshtakRules;

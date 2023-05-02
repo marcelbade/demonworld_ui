@@ -206,7 +206,7 @@ const ListGeneratorController = () => {
       let validator = ruleValidation(selectedFactionName);
       let result = validator.testSubFactionRules(selectedFaction, selectedUnits, maxPointsValue);
 
-      findInvalidUnits(result);
+      collectAllBlockedUnits(result);
     }
   }, [selectedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -214,7 +214,7 @@ const ListGeneratorController = () => {
    * add all invalid units to the block list.
    * @param {*} validationResult
    */
-  const findInvalidUnits = (validationResult) => {
+  const collectAllBlockedUnits = (validationResult) => {
     setblockedUnits({
       ...blockedUnits,
       unitsBlockedbyRules: validationResult.unitsBlockedbyRules,
