@@ -1,12 +1,18 @@
 // React
 import React from "react";
 // Material UI
-import { Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-// modules
+// icons
+// import SecurityIcon from "@material-ui/icons/Security";
+// import Icon from "@material-ui/core/Icon";
+// import SwordIcon from "./customIcons/blackSword.png";
+// import BowIcon from "./customIcons/bow.jpg";
+// import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+// components & functions
 import { DisplayAllSpecialRules, displayUnitCost } from "../compendiums/factionTable/depencies/factionTableFunctions";
 // clsx
 import clsx from "clsx";
+import { Grid, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles({
   cardBox: {
@@ -39,6 +45,9 @@ const useStyles = makeStyles({
     width: "30%",
     paddingRight: "5px",
   },
+  cardBorder: {
+    borderRight: "1px solid black",
+  },
   spanCellTwo: {
     textAlign: "end",
   },
@@ -61,7 +70,7 @@ const useStyles = makeStyles({
   },
 });
 
-const StatCardCommanderBack = (props) => {
+const StatCardUnitBack = (props) => {
   const classes = useStyles();
 
   return (
@@ -74,23 +83,30 @@ const StatCardCommanderBack = (props) => {
         <Typography variant="h6" className={clsx(classes.centerCell, classes.cardTitle)}>
           {props.unit.unitName}
         </Typography>
-        <Typography variant="h6" align="right" className={classes.rightCell}>
+        <Typography variant="h6" align="right" className={clsx(classes.cardBorder, classes.rightCell)}>
           {props.unit.subFaction}
         </Typography>
       </Grid>
-      {/* 2nd Row - black stripe  - movement*/}
-      <Grid item>
-        <Typography variant="h6" align="center" className={classes.blackStripe}>
+      {/* 2nd Row - black Stripe - movement*/}
+      <Grid item container direction="row" className={classes.blackStripe}>
+        <Typography variant="h6" className={classes.font}>
+          {props.unit.leader ? "Anführer / " : null}
+          {props.unit.standardBearer ? "Standarte / " : null}
+          {props.unit.musician ? "Musiker" : null}
+        </Typography>
+        <Typography variant="h6" className={classes.font}>
           {props.unit.numberOfElements} {props.unit.numberOfElements === 1 ? "Element" : "Elemente"}
         </Typography>
       </Grid>
-      <Grid>
-        {/* 3rd Row   special rules */}
-        <Grid item>{DisplayAllSpecialRules(props.unit)}</Grid>
+      <Grid item container direction="row">
+        {/* 3rd Row special rules */}
+        <Typography variant="h6" className={classes.font}>
+          {DisplayAllSpecialRules(props.unit)}
+        </Typography>
       </Grid>
-      {/* 4rd Row - black SGridipe #2 */}
-      <Grid>
-        <Typography variant="h6" align="center" className={classes.blackStripe}>
+      {/* 4rd Row - black Stripe #2 */}
+      <Grid item container direction="row" className={classes.blackStripe}>
+        <Typography variant="h6" className={classes.font}>
           {displayUnitCost(props.unit)} Punkte
         </Typography>
       </Grid>
@@ -98,4 +114,4 @@ const StatCardCommanderBack = (props) => {
   );
 };
 
-export default StatCardCommanderBack;
+export default StatCardUnitBack;

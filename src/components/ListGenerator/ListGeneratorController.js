@@ -28,12 +28,16 @@ const useStyles = makeStyles({
   itemScreen: {
     backgroundColor: "yellow",
   },
+  UnitCardDisplay: {
+    position: "fixed",
+  },
 });
 
 const ListGeneratorController = () => {
   const classes = useStyles();
   // front and back side of the displayed unit cards are alligned vertically.
   const COLUMN = "column";
+  const NONE = "none";
 
   // intialize local states
   const [fetchedFactions, setfetchedFactions] = useState([]);
@@ -77,7 +81,7 @@ const ListGeneratorController = () => {
   };
 
   /**
-   * fetch units from BE via REST
+   * fetch units  from the Back End via REST.
    */
   useEffect(() => {
     fetchFactionData();
@@ -89,7 +93,7 @@ const ListGeneratorController = () => {
   };
 
   /**
-   * fetch items from BE via REST
+   * fetch items from the Back End via REST.
    */
   useEffect(() => {
     fetchItemData();
@@ -119,7 +123,6 @@ const ListGeneratorController = () => {
    * Find The allied faction, if it exists. If no ally exists, return "none" instead of null.
    */
   useEffect(() => {
-    const NONE = "none";
     const name = alliesMapping[selectedFactionName] ? alliesMapping[selectedFactionName] : NONE;
     setAllyName(name);
   }, [selectedFaction]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -144,6 +147,20 @@ const ListGeneratorController = () => {
   }, [allyName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
+   * If the army has an ally, then the allied faction's name is added as an additional subfaction. Otherwise the "none" value is ignored.
+   */
+  useEffect(() => {
+    if (allyName) {
+      let temp = distinctSubFactions;
+
+      if (allyName !== NONE) {
+        temp.push(allyName);
+      }
+      setDistinctSubFactions(temp);
+    }
+  }, [allyName]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  /**
    * Function returns all distinct subFactions of a selected faction.
    * @param {[unitCard object]} units
    * @returns [String] name of all distinct subfactions
@@ -156,6 +173,7 @@ const ListGeneratorController = () => {
         distinctSubFactions.push(f.subFaction);
       }
     });
+
     return distinctSubFactions;
   };
 
@@ -356,7 +374,9 @@ const ListGeneratorController = () => {
           </Drawer>
           {/* UNITCARD */}
           {showStatCard.show ? (
-            <Grid item>{!isObjectEmtpy(showStatCard.clickedUnit) ? unitOrCmdCard(showStatCard.clickedUnit, COLUMN) : null}</Grid>
+            <Grid item className={classes.UnitCardDisplay}>
+              {!isObjectEmtpy(showStatCard.clickedUnit) ? unitOrCmdCard(showStatCard.clickedUnit, COLUMN) : null}
+            </Grid>
           ) : null}
         </Grid>
       </Grid>

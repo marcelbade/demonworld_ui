@@ -18,6 +18,11 @@ const useStyles = makeStyles({
 // front and back side of the displayed unit cards are alligned horizontally.
 const ROW = "row";
 
+/**
+ * displays the unit card in the compendium table
+ * @param {*} props
+ * @returns
+ */
 const DetailedCardView = (props) => {
   const classes = useStyles();
 

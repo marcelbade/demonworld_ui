@@ -8,6 +8,8 @@ import { Grid, Typography, TextField, InputAdornment } from "@material-ui/core";
 // components and functions
 import { ArmyContext } from "../../../contexts/armyContext";
 import { uuidGenerator } from "../../shared/sharedFunctions";
+import { alliesMapping } from "../../gameLogic/allies";
+
 import SubList from "./subList";
 
 // TODO: remove unneeded styles
@@ -69,16 +71,23 @@ const ArmyListDisplay = (props) => {
 
   const classes = useStyles();
 
+  /**
+   * Filters the selected units by subFaction. If allied units have been selected, then their subFaction name is replaced with their faction name.
+   * @param {[unitCard Objects]} allUnits
+   * @param {String} subFaction
+   * @returns
+   */
   const filterUnitsForSubFaction = (allUnits, subFaction) => {
+    allUnits.forEach((u) => (u.faction === alliesMapping[contextArmy.name] ? (u.subFaction = u.faction) : null));
+
     return allUnits.filter((u) => u.subFaction === subFaction);
   };
 
   const handleChange = (event) => {
     setMaximumPoints(event.target.value);
 
-    // validate user 
+    // validate user
     let isValid = new RegExp(/^[0-9]*$/).test(event.target.value);
-
     isValid ? setErrorMessage("") : setErrorMessage("Bitte nur Zahlen eingeben.");
   };
 
@@ -99,13 +108,13 @@ const ArmyListDisplay = (props) => {
           Liste löschen
         </button>
       </Grid>
-
       <List>
         {contextArmy.subfactions.map((subFaction) => (
           <ListItem key={uuidGenerator()}>
             <Grid container direction={"column"}>
               <Typography className={classes.HeaderBox}>{subFaction}</Typography>
               <SubList
+                ally={false}
                 className={classes.subList}
                 subFactionUnits={filterUnitsForSubFaction(contextArmy.addedUnits, subFaction)}
                 subFactionName={subFaction}
@@ -114,6 +123,7 @@ const ArmyListDisplay = (props) => {
           </ListItem>
         ))}
       </List>
+      {/* TOTAL ARMY POINTS */}
       <Grid container directiom="row" alignContent="center">
         <Typography className={classes.total}>Gesamtpunktzahl: {contextArmy.totalPointValue} / </Typography>
         <TextField

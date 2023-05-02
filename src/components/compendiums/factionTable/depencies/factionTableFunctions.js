@@ -10,8 +10,8 @@ import CancelIcon from "@material-ui/icons/Cancel";
 // components & functions
 import { unitOrCmdCard } from "../../../shared/sharedFunctions";
 // icons
-import blackBowIcon from "../../../customIcons/bow.jpg";
-import blackSwordIcon from "../../../customIcons/crossedSwords.png";
+import blackBowIcon from "../../../customIcons/bow2.png";
+import blackSwordIcon from "../../../customIcons/sword2.png";
 
 const RulesToolTip = withStyles({
   tooltip: {
@@ -27,15 +27,17 @@ const useStyles = makeStyles({
     fontFamily: "Beryliumbold",
     fontWeight: "bold",
   },
-
-  itemRuleText: {
-    fontFamily: "Beryliumbold",
-  },
   Icon: {
     width: "1em",
     height: "1em",
   },
   skillBox: {
+    marginLeft: "1em",
+    flexWrap: "nowrap",
+  },
+  secondSkillIcon: {
+    width: "1em",
+    height: "1em",
     marginLeft: "1em",
   },
 });
@@ -143,7 +145,7 @@ export const renderCommandPoints = (stars) => {
 export const DisplayAllSpecialRules = (unit) => {
   const classes = useStyles();
   return (
-    <Typography variant="h6" align="center" className={classes.specialRules}>
+    <Typography variant="body1" align="center" className={classes.specialRules}>
       {unit.specialRules === "" ? "Keine Besonderen Spielregeln" : unit.specialRules}
       {"equipment" in unit && unit.equipment.length !== 0
         ? unit.equipment.map((e) => {
@@ -153,7 +155,8 @@ export const DisplayAllSpecialRules = (unit) => {
                 <Typography variant="body1" className={classes.specialRules}>
                   {e.name}
                 </Typography>
-                <Typography variant="body1" className={classes.itemRuleText}>
+                <Typography>_______</Typography>
+                <Typography variant="body1" className={classes.specialRules}>
                   {e.rule}
                 </Typography>
               </Fragment>
@@ -173,23 +176,19 @@ export const DisplayAllSpecialRules = (unit) => {
 export const RenderSkillValues = (rangeSkill, meleeSkill) => {
   const classes = useStyles();
   return (
-    <Grid container direction="row" className={classes.skillBox}>
-      <Grid item container direction="row" alignContent="center" alignItems="center" className={classes.alignIcons}>
-        {meleeSkill !== 0 ? (
-          <Fragment>
-            <img alt="Fernkampffertigkeit" src={blackSwordIcon} className={classes.Icon} />
-            <Typography variant="h6"> {meleeSkill} </Typography>
-          </Fragment>
-        ) : null}
-      </Grid>
-      <Grid item container direction="row" className={classes.alignIcons}>
-        {rangeSkill !== 0 ? (
-          <Fragment>
-            <img alt="Fernkampffertigkeit" src={blackBowIcon} className={classes.Icon} />
-            <Typography variant="h6"> {rangeSkill} </Typography>
-          </Fragment>
-        ) : null}
-      </Grid>
+    <Grid container direction="row" alignContent="center" alignItems="center" className={classes.skillBox}>
+      {meleeSkill !== 0 ? (
+        <Fragment>
+          <img alt="NK-Fertigkeit" src={blackSwordIcon} className={classes.Icon} />
+          <Typography variant="h6"> {meleeSkill} </Typography>
+        </Fragment>
+      ) : null}
+      {rangeSkill !== 0 ? (
+        <Fragment>
+          <img alt="Fernkampffertigkeit" src={blackBowIcon} className={classes.secondSkillIcon} />
+          <Typography variant="h6"> {rangeSkill} </Typography>
+        </Fragment>
+      ) : null}
     </Grid>
   );
 };

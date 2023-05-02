@@ -3,11 +3,6 @@ import React from "react";
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
 // icons
-// import SecurityIcon from "@material-ui/icons/Security";
-// import Icon from "@material-ui/core/Icon";
-// import SwordIcon from "./customIcons/blackSword.png";
-// import BowIcon from "./customIcons/bow.jpg";
-// import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import blackShieldIcon from "../customIcons/icons8-shield-black.png";
 
 // components & functions
@@ -38,25 +33,18 @@ const useStyles = makeStyles({
   },
   leftCell: {
     paddingLeft: "0px",
-    width: "30%",
+    width: "50%",
     fontFamily: "Beryliumbold",
   },
   centerCell: {
-    width: "40%",
-    fontFamily: "Beryliumbold",
-  },
-  rightCell: {
     width: "30%",
     fontFamily: "Beryliumbold",
   },
-  cardBorder: {
-    borderRight: "1px solid black",
+  rightCell: {
+    width: "450%",
     fontFamily: "Beryliumbold",
   },
-  spanCellTwo: {
-    textAlign: "end",
-    fontFamily: "Beryliumbold",
-  },
+
   unitCardStripe: {
     padding: "10px",
     color: "white",
@@ -66,12 +54,19 @@ const useStyles = makeStyles({
   cardTitle: {
     fontFamily: "notMaryKate",
     fontWeight: "normal",
-    marginBottom: "0px",
-    marginTop: "0px",
-    textAlign: "center",
     fontSize: "30px",
     color: "red",
-    borderWidth: "0px",
+  },
+  titelCenter: {
+    flexWrap: "nowrap",
+    fontFamily: "Beryliumbold",
+  },
+
+  magicPoints: {
+    paddingRight: "0.5em",
+  },
+  commandStars: {
+    paddingLeft: "0.5em",
   },
   font: {
     fontFamily: "Beryliumbold",
@@ -85,6 +80,19 @@ const useStyles = makeStyles({
     alignItems: "center",
     marginLeft: "1em",
   },
+  rangedWeapon: {},
+  titleLeftSide: {
+    width: "30%",
+    fontFamily: "Beryliumbold",
+  },
+  titleLeftSide: {
+    flexWrap: "nowrap",
+
+    fontFamily: "Beryliumbold",
+  },
+  sizeArmourSkill: {
+    flexWrap: "nowrap",
+  },
 });
 
 const StatCardCommanderFront = (props) => {
@@ -92,60 +100,81 @@ const StatCardCommanderFront = (props) => {
 
   return (
     <Grid container direction="column" className={classes.cardBox}>
-      {/* 1st Row - title*/}
-      <Grid item container direction="row" className={classes.cardSide}>
-        <Typography className={classes.leftCell}>{renderCommandPoints(props.unit.commandStars)}</Typography>
-        <Typography className={clsx(classes.centerCell, classes.cardTitle)}> {props.unit.unitName}</Typography>
-        <Typography className={clsx(classes.cardBorder, classes.rightCell)}>{renderMagicPoints(props.unit.magic)}</Typography>
+      {/* 1st Row - TITLE*/}
+      <Grid item container justify="center" alignContent="center" className={classes.titleLeftSide}>
+        <Grid item container>
+          <Typography align="left" className={classes.commandStars}>
+            {renderCommandPoints(props.unit.commandStars)}
+          </Typography>
+        </Grid>
+        <Grid item container className={classes.titelCenter}>
+          <Typography align="center" className={classes.cardTitle}>
+            {props.unit.unitName}
+          </Typography>
+        </Grid>
+        <Grid item container justify="flex-end" className={classes.titleRightSide}>
+          <Typography align="right" className={classes.magicPoints}>
+            {renderMagicPoints(props.unit.magic)}
+          </Typography>
+        </Grid>
       </Grid>
-      {/* 2nd Row - black Stripe  - movement*/}
-      <Grid item className={classes.unitCardStripe}>
-        <Typography variant="h6" align="left" className={classes.font}>
+      {/* 2nd Row - black Stripe  - MOVEMENT / CONTROL AREA*/}
+      <Grid item container justify="center" className={classes.unitCardStripe}>
+        <Typography variant="h6" textAlign="left" className={classes.font}>
           {props.unit.move} Bewegungspunkte
         </Typography>
-        <Typography variant="h6" align="right" className={classes.font}>
+        <Grid item className={classes.centerCell}></Grid>
+        <Typography variant="h6" textAlign="right" className={classes.font}>
           Kontrollbereich: {props.unit.controlZone_OverRun}
         </Typography>
       </Grid>
-      <Grid item>
-        {/* 3rd Row - ranged weapons, special rules */}
-
+      <Grid item container justify="center" className={classes.rangedWeapon}>
+        {/* 3rd Row - RANGED WEAPONS  */}
         {props.unit.rangedWeapon !== "x" ? (
-          <Typography>
+          <Typography variant="h6" align="right" className={classes.font}>
             {props.unit.rangedWeapon} {props.unit.rangedAttackStats}
           </Typography>
-        ) : (
-          <Typography></Typography>
-        )}
+        ) : null}
+      </Grid>{" "}
+      {/* 4th & 5th Row - WEAPONS  */}
+      <Grid item container direction="column">
+        <Grid item container justify="center">
+          <Typography variant="h6" className={classes.font}>
+            Waffe 1: {props.unit.weapon1}
+          </Typography>
+        </Grid>
+        <Grid item container justify="center">
+          <Typography variant="h6" className={classes.font}>
+            {props.unit.weapon2 === 0 ? null : "Waffe 2: " + props.unit.weapon2}
+          </Typography>
+        </Grid>
       </Grid>
-      <Grid>
-        <Typography variant="h6" className={classes.font}>
-          Waffe 1: {props.unit.weapon1}
-        </Typography>
-      </Grid>
-      <Grid item>
-        <Typography>{props.unit.weapon2 === 0 ? null : "Waffe 2: " + props.unit.weapon2}</Typography>
-      </Grid>
-      <Grid item container direction="row">
-        <Typography variant="h6" className={classes.font}>
-          Größe: {props.unit.unitSize}
-        </Typography>
-        <div className={classes.alignIcons}>
-          <img alt="FK-Panzerung" src={blackShieldIcon} className={classes.Icon} />
-        </div>
-        <Typography variant="h6" className={classes.font}>
-          {props.unit.armourRange}
-        </Typography>
-        <div className={classes.alignIcons}>
-          <img alt="NK-Panzerung" src={blackShieldIcon} className={classes.Icon} />
-        </div>
-        <Typography variant="h6" className={classes.font}>
-          {props.unit.armourMelee}
-        </Typography>
-        <Typography  variant="h6">{RenderSkillValues(props.unit.skillRange, props.unit.skillMelee)}</Typography>
+      {/* 6th Row - SIZE, ARMOR, SKILLS*/}
+      <Grid item container alignItems="center" direction="row" className={classes.sizeArmourSkill}>
+        <Grid item container justify="center">
+          <Typography variant="h6" className={classes.font}>
+            Größe: {props.unit.unitSize}
+          </Typography>
+        </Grid>
+        <Grid item container alignItems="center" justify="center">
+          <div className={classes.alignIcons}>
+            <img alt="FK-Panzerung" src={blackShieldIcon} className={classes.Icon} />
+          </div>
+          <Typography variant="h6" className={classes.font}>
+            {props.unit.armourRange}
+          </Typography>
+          <div className={classes.alignIcons}>
+            <img alt="NK-Panzerung" src={blackShieldIcon} className={classes.Icon} />
+          </div>
+          <Typography variant="h6" className={classes.font}>
+            {props.unit.armourMelee}
+          </Typography>
+        </Grid>
+        <Grid item container direction="row" justify="center" className={classes.sizeArmourSkill}>
+          {RenderSkillValues(props.unit.skillRange, props.unit.skillMelee)}
+        </Grid>
       </Grid>
       {/* 4rd Row - black Stripe #2 */}
-
       <Grid item>
         <Typography variant="h6" align="center" className={classes.unitCardStripe}>
           Furchtfaktor: {props.unit.fear}
@@ -162,6 +191,3 @@ const StatCardCommanderFront = (props) => {
 };
 
 export default StatCardCommanderFront;
-
-
-
