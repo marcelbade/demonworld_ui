@@ -12,6 +12,7 @@ import { unitOrCmdCard } from "../../../shared/sharedFunctions";
 // icons
 import blackBowIcon from "../../../customIcons/bow2.png";
 import blackSwordIcon from "../../../customIcons/sword2.png";
+import clsx from "clsx";
 
 const RulesToolTip = withStyles({
   tooltip: {
@@ -25,6 +26,7 @@ const RulesToolTip = withStyles({
 const useStyles = makeStyles({
   specialRules: {
     fontFamily: "Beryliumbold",
+    paddingLeft: "0.5em",
   },
   Icon: {
     width: "1em",
@@ -206,6 +208,9 @@ export const DisplayUnitElements = (unit) => {
     ++specialElements;
   }
 
+  let number = `${unit.numberOfElements - specialElements}`;
+  let ending = unit.numberOfElements === 1 ? "Element" : "Elemente";
+
   return (
     <Grid container direction="row" justify="center" alignItems="center" className={classes.skillBox}>
       <Typography variant="h6" className={classes.specialRules}>
@@ -214,7 +219,10 @@ export const DisplayUnitElements = (unit) => {
         {unit.musician ? "Musiker / " : null}
       </Typography>
       <Typography variant="h6" className={classes.specialRules}>
-        {unit.numberOfElements - specialElements} {unit.numberOfElements === 1 ? "Element" : "Elemente"}
+        {number}
+      </Typography>
+      <Typography variant="h6" className={classes.specialRules}>
+        {ending}
       </Typography>
     </Grid>
   );
@@ -235,4 +243,25 @@ export const displayUnitCost = (unit) => {
   } else {
     return unit.points;
   }
+};
+
+export const displayFormationsn = (unit) => {
+  let formationString = "";
+
+  if (unit.wedgeFormation) {
+    formationString += "Ke";
+  }
+  if (unit.skirmishFormation) {
+    formationString += "Pl";
+  }
+  if (unit.squareFormation) {
+    formationString += "Ka";
+  }
+  if (unit.squareFormation) {
+    formationString += "Horde";
+  }
+
+  formationString = formationString.replace(/([A-Z])/g, " $1").trim();
+
+  return formationString;
 };

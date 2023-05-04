@@ -15,7 +15,7 @@ const useStyles = makeStyles({
     fontWeight: "bold",
     fontSize: "20px",
     tableLayout: "fixed",
-    width: "30em",
+    width: "28em",
   },
   font: {
     fontFamily: "Beryliumbold",

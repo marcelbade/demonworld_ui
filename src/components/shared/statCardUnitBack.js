@@ -12,7 +12,7 @@ const useStyles = makeStyles({
     backgroundColor: "lightgrey",
     fontSize: "20px",
     tableLayout: "fixed",
-    width: "30em",
+    width: "28em",
   },
 
   blackStripe: {

@@ -24,7 +24,7 @@ const useStyles = makeStyles({
     fontWeight: "bold",
     fontSize: "20px",
     GridLayout: "fixed",
-    width: "30em",
+    width: "28em",
   },
 
   unitCardStripe: {

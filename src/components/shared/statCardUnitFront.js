@@ -9,6 +9,7 @@ import {
   renderMagicPoints,
   renderCommandPoints,
   RenderSkillValues,
+  displayFormationsn,
 } from "../compendiums/factionTable/depencies/factionTableFunctions";
 // icons
 import blackShieldIcon from "../customIcons/icons8-shield-black.png";
@@ -19,7 +20,7 @@ const useStyles = makeStyles({
     backgroundColor: "lightgrey",
     fontSize: "20px",
     GridLayout: "fixed",
-    width: "30em",
+    width: "28em",
   },
 
   unitCardStripe: {
@@ -84,10 +85,7 @@ const StatCardUnitFront = (props) => {
           {props.unit.hold_maneuvers} Manöver
         </Typography>
         <Typography variant="h6" align="center" className={classes.font}>
-          {props.unit.wedgeFormation ? "Ke / " : null}
-          {props.unit.skirmishFormation ? "Pl / " : null}
-          {props.unit.squareFormation ? "Ka / " : null}
-          {props.unit.horde ? "Horde" : null}
+          {displayFormationsn(props.unit)}
         </Typography>
       </Grid>
       {/* 3rd Row - RANGED WEAPONS  */}
