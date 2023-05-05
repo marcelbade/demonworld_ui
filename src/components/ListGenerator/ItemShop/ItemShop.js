@@ -1,11 +1,11 @@
 // React
 import React, { useState, useContext, useEffect } from "react";
 //Material UI
-import { Button, Grid, ButtonGroup, Typography, Tooltip, Zoom } from "@material-ui/core";
+import { Button, Grid, ButtonGroup, Typography, Accordion, AccordionSummary, AccordionDetails } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { IconButton } from "@material-ui/core";
 import CloseIcon from "@material-ui/icons/Close";
-import HelpIcon from "@material-ui/icons/Help";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 // components and functions
 import { ArmyContext } from "../../../contexts/armyContext";
 import { isObjectEmtpy } from "../../shared/sharedFunctions";
@@ -18,9 +18,6 @@ const useStyles = makeStyles({
     height: "100vh",
     width: "30vw",
   },
-  closeButton: {},
-  itemPanel: {},
-
   buttons: {
     fontFamily: "notMaryKate",
     fontWeight: "bold",
@@ -30,14 +27,16 @@ const useStyles = makeStyles({
       color: "red",
     },
   },
-
   unitName: {
     fontFamily: "notMaryKate",
     fontWeight: "bold",
     borderBottom: "solid 4px black",
   },
-  ItemText: {
-    marginLeft: "5em",
+  itemName: {
+    fontFamily: "notMaryKate",
+  },
+  itemText: {
+    fontFamily: "Beryliumbold",
   },
   errorNoItems: {
     paddingTop: "3em",
@@ -239,13 +238,12 @@ const ItemShop = () => {
     <Grid container direction="column" className={classes.overlay}>
       <Grid item container direction="row">
         {/* CLOSING BUTTON */}
-        <Grid item xs={3} className={classes.closeButton}>
+        <Grid item xs={3}>
           <IconButton
             onClick={(event) => {
               event.stopPropagation();
               contextArmy.closeItemShop();
             }}
-            className={classes.closeButton}
           >
             <CloseIcon />
           </IconButton>
@@ -277,7 +275,7 @@ const ItemShop = () => {
             })}
           </ButtonGroup>
         </Grid>
-        <Grid item xs={9} className={classes.itemPanel}>
+        <Grid item xs={9}>
           {/* ITEMLIST */}
 
           {contextArmy.unitSelectedForShop.unitType !== "G" ? (
@@ -286,25 +284,27 @@ const ItemShop = () => {
                 .filter((item) => item.type === displayThisItemType)
                 .map((item) => {
                   return (
-                    <Grid key={uuidGenerator()} item container direction="row" alignItems="center">
-                      <Grid item xs={7}>
+                    <Accordion key={uuidGenerator()}>
+                      <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
                         <Button
+                          className={classes.ItemName}
                           disabled={disableButton(item)}
                           onClick={() => {
                             addItemToUnit(item);
                           }}
                           key={uuidGenerator()}
-                          className={classes.buttons}
                         >
-                          {item.itemName}
+                          <Typography className={classes.itemName} variant="body1">
+                            {item.itemName}
+                          </Typography>
                         </Button>
-                      </Grid>
-                      <Grid item xs={2} className={classes.ItemText}>
-                        <Tooltip title={item.specialRules} placement="right-start" TransitionComponent={Zoom}>
-                          <HelpIcon />
-                        </Tooltip>
-                      </Grid>
-                    </Grid>
+                      </AccordionSummary>
+                      <AccordionDetails>
+                        <Typography className={classes.itemText} variant="body1">
+                          {item.specialRules}
+                        </Typography>
+                      </AccordionDetails>
+                    </Accordion>
                   );
                 })}
             </ButtonGroup>

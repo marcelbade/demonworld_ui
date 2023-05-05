@@ -75,50 +75,6 @@ const ListGeneratorController = () => {
     show: false,
   });
 
-  const toggleBetweenItemShops = (u) => {
-    closeCardDisplay();
-
-    // first click on page (no card displayed)
-    if (itemShopState.clickedUnit === undefined) {
-      setItemShopState({ clickedUnit: u, lastclickedUnit: u, show: true });
-    }
-    // click on same unit again to toggle the card view on
-    else if (itemShopState.lastclickedUnit.unitName === u.unitName && itemShopState.show === true)
-      setItemShopState({ clickedUnit: u, lastclickedUnit: u, show: false });
-    // click on same unit again to toggle the card view off
-    else if (itemShopState.lastclickedUnit.unitName === u.unitName && itemShopState.show === false)
-      setItemShopState({ clickedUnit: u, lastclickedUnit: u, show: true });
-    // click on a different unit to show a different card
-    else if (itemShopState.lastclickedUnit.unitName !== u.unitName) {
-      setItemShopState({ clickedUnit: u, lastclickedUnit: u, show: true });
-    }
-  };
-
-  /**
-   * function toggles the unit card view on and off as well as switches between card views for different units. TO do this, the card view is not toggled by a booelan flag, but an object that stores the previouslyx clickedUnit
-   * @param {unitCard} u
-   */
-  const toggleBetweenCards = (u) => {
-    closeItemShop();
-
-    // first click on page (no card displayed)
-    if (showStatCard.clickedUnit === undefined) {
-      setShowStatCard({ clickedUnit: u, lastclickedUnit: u, show: true });
-    }
-    // click on same unit again to toggle the card view on
-    else if (showStatCard.lastclickedUnit.unitName === u.unitName && showStatCard.show === true) {
-      setShowStatCard({ clickedUnit: u, lastclickedUnit: u, show: false });
-    }
-    // click on same unit again to toggle the card view off
-    else if (showStatCard.lastclickedUnit.unitName === u.unitName && showStatCard.show === false) {
-      setShowStatCard({ clickedUnit: u, lastclickedUnit: u, show: true });
-    }
-    // click on a different unit to show a different card
-    else if (showStatCard.lastclickedUnit.unitName !== u.unitName) {
-      setShowStatCard({ clickedUnit: u, lastclickedUnit: u, show: true });
-    }
-  };
-
   /**
    * fetch units  from the Back End via REST.
    */
@@ -367,6 +323,49 @@ const ListGeneratorController = () => {
     closeItemShop();
   };
 
+  const toggleBetweenItemShops = (u) => {
+    closeCardDisplay();
+
+    // first click on page (no card displayed)
+    if (itemShopState.clickedUnit === undefined) {
+      setItemShopState({ clickedUnit: u, lastclickedUnit: u, show: true });
+    }
+    // click on same unit again to toggle the card view on
+    else if (itemShopState.lastclickedUnit.unitName === u.unitName && itemShopState.show === true)
+      setItemShopState({ clickedUnit: u, lastclickedUnit: u, show: false });
+    // click on same unit again to toggle the card view off
+    else if (itemShopState.lastclickedUnit.unitName === u.unitName && itemShopState.show === false)
+      setItemShopState({ clickedUnit: u, lastclickedUnit: u, show: true });
+    // click on a different unit to show a different card
+    else if (itemShopState.lastclickedUnit.unitName !== u.unitName) {
+      setItemShopState({ clickedUnit: u, lastclickedUnit: u, show: true });
+    }
+  };
+
+  /**
+   * function toggles the unit card view on and off as well as switches between card views for different units. TO do this, the card view is not toggled by a booelan flag, but an object that stores the previouslyx clickedUnit
+   * @param {unitCard} u
+   */
+  const toggleBetweenCards = (u) => {
+    closeItemShop();
+
+    // first click on page (no card displayed)
+    if (showStatCard.clickedUnit === undefined) {
+      setShowStatCard({ clickedUnit: u, lastclickedUnit: u, show: true });
+    }
+    // click on same unit again to toggle the card view on
+    else if (showStatCard.lastclickedUnit.unitName === u.unitName && showStatCard.show === true) {
+      setShowStatCard({ clickedUnit: u, lastclickedUnit: u, show: false });
+    }
+    // click on same unit again to toggle the card view off
+    else if (showStatCard.lastclickedUnit.unitName === u.unitName && showStatCard.show === false) {
+      setShowStatCard({ clickedUnit: u, lastclickedUnit: u, show: true });
+    }
+    // click on a different unit to show a different card
+    else if (showStatCard.lastclickedUnit.unitName !== u.unitName) {
+      setShowStatCard({ clickedUnit: u, lastclickedUnit: u, show: true });
+    }
+  };
   /**
    * in order to work, the state setter needs a unit. Since the card view is toggled off, the first unit in the list is used.
    */
