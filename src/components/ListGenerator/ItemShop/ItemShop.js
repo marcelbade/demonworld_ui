@@ -61,15 +61,15 @@ const NAME_MAPPING = {
 
 /**
  * Map item card types to unit types. I.e., mounted units can receive all items for mounted units, infantery units and items for all units.
- * C = Cavalery
- * I = Infantery
- * M = Mage
- * H = Hero
- * A = Artillery
- * G = Giant
+ * C = CAVALERY
+ * I = INFANTERY
+ * M = MAGE
+ * H = HERO
+ * A = ARTILLERY
+ * G = GIANT
  *
- * U = Unit
- * A = All (every unit)
+ * U = UNIT
+ * A = ALL (every unit)
  *
  * Giant units (i.e., giants, wyfern, giant insects cant get an item )
  */
@@ -216,6 +216,10 @@ const ItemShop = () => {
     return false;
   };
 
+  /**
+   * Add the item card object to the selected unit.
+   * @param {itemCard object} item
+   */
   const addItemToUnit = (item) => {
     let changedUnit = contextArmy.unitSelectedForShop;
 

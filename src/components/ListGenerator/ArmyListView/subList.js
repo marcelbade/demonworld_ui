@@ -7,7 +7,6 @@ import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 // components and functions
 import { ArmyContext } from "../../../contexts/armyContext";
 import { displayUnitCost } from "../../compendiums/factionTable/depencies/factionTableFunctions";
-import { isObjectEmtpy } from "../../shared/sharedFunctions";
 // clsx
 import clsx from "clsx";
 
@@ -75,25 +74,6 @@ const SubList = (props) => {
   };
 
   /**
-   * function toggles the unit card view on and off as well as switches between card views for different units. TO do this, the card view is not toggled by a booelan flag, but an object that stores the previouslyx clickedUnit
-   * @param {unitCard} u
-   */
-  const toggleBetweenCards = (u) => {
-    // first click on page (no card displayed)
-    if (isObjectEmtpy(contextArmy.showStatCard.lastclickedUnit))
-      contextArmy.setShowStatCard({ clickedUnit: u, lastclickedUnit: u, show: true });
-    // click on same unit again to toggle the card view on
-    else if (contextArmy.showStatCard.lastclickedUnit.unitName === u.unitName && contextArmy.showStatCard.show === true)
-      // click on same unit again to toggle the card view off
-      contextArmy.setShowStatCard({ clickedUnit: u, lastclickedUnit: u, show: false });
-    else if (contextArmy.showStatCard.lastclickedUnit.unitName === u.unitName && contextArmy.showStatCard.show === false)
-      contextArmy.setShowStatCard({ clickedUnit: u, lastclickedUnit: u, show: true });
-    // click on a different unit to show a different card
-    else if (contextArmy.showStatCard.lastclickedUnit.unitName !== u.unitName)
-      contextArmy.setShowStatCard({ clickedUnit: u, lastclickedUnit: u, show: true });
-  };
-
-  /**
    * The component creates the list for a single sub faction.
    * An entry contains:
    *  - the unit name
@@ -141,8 +121,8 @@ const SubList = (props) => {
                       className={classes.buttons}
                       variant="outlined"
                       onClick={() => {
-                        contextArmy.toggleItemShop();
                         contextArmy.setUnitSelectedForShop(u);
+                        contextArmy.toggleBetweenItemShops(u);
                       }}
                     >
                       Gegenstände
@@ -151,7 +131,7 @@ const SubList = (props) => {
                       className={classes.buttons}
                       variant="outlined"
                       onClick={() => {
-                        toggleBetweenCards(u);
+                        contextArmy.toggleBetweenCards(u);
                       }}
                     >
                       Kartenvorschau

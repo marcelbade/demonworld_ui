@@ -1,7 +1,7 @@
 
 React FR
 =============================
-TODO: package json^
+TODO: package json
 - 
 
 
@@ -27,7 +27,7 @@ ITEM SHOP
 =============================
 
 TODO: 
-- magic numbers: the Letters for the item and unit types
+ - Item text displayed
  
 
 -------------CURRENTLY WORKING ON-----------------
@@ -40,7 +40,7 @@ TODO: when selecting an item add the following to the unit card
                
  
 
-TODO: missing features // Version 2  - disregard for now :)
+TODO: missing features // Version 2  - disregard for now 
 - show finished list
 - print finished list
 - save list in MongoDB(!!)

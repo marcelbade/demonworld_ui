@@ -60,8 +60,12 @@ const ListGeneratorController = () => {
     unitsBlockedbyRules: [],
     subFactionBelowMinimum: [],
   });
-  const [drawerState, setDrawerState] = useState(false);
   // ItemShop
+  const [itemShopState, setItemShopState] = useState({
+    clickedUnit: {},
+    lastclickedUnit: {},
+    show: false,
+  });
   const [unitSelectedForShop, setUnitSelectedForShop] = useState({});
   const [allItems, setAllItems] = useState([]);
   // unit card
@@ -71,16 +75,48 @@ const ListGeneratorController = () => {
     show: false,
   });
 
-  /**
-   * functions toggle amd close the item shop.
-   * @param {*} unit
-   */
-  const closeItemShop = () => {
-    setDrawerState(false);
+  const toggleBetweenItemShops = (u) => {
+    closeCardDisplay();
+
+    // first click on page (no card displayed)
+    if (itemShopState.clickedUnit === undefined) {
+      setItemShopState({ clickedUnit: u, lastclickedUnit: u, show: true });
+    }
+    // click on same unit again to toggle the card view on
+    else if (itemShopState.lastclickedUnit.unitName === u.unitName && itemShopState.show === true)
+      setItemShopState({ clickedUnit: u, lastclickedUnit: u, show: false });
+    // click on same unit again to toggle the card view off
+    else if (itemShopState.lastclickedUnit.unitName === u.unitName && itemShopState.show === false)
+      setItemShopState({ clickedUnit: u, lastclickedUnit: u, show: true });
+    // click on a different unit to show a different card
+    else if (itemShopState.lastclickedUnit.unitName !== u.unitName) {
+      setItemShopState({ clickedUnit: u, lastclickedUnit: u, show: true });
+    }
   };
 
-  const toggleItemShop = () => {
-    setDrawerState(!drawerState);
+  /**
+   * function toggles the unit card view on and off as well as switches between card views for different units. TO do this, the card view is not toggled by a booelan flag, but an object that stores the previouslyx clickedUnit
+   * @param {unitCard} u
+   */
+  const toggleBetweenCards = (u) => {
+    closeItemShop();
+
+    // first click on page (no card displayed)
+    if (showStatCard.clickedUnit === undefined) {
+      setShowStatCard({ clickedUnit: u, lastclickedUnit: u, show: true });
+    }
+    // click on same unit again to toggle the card view on
+    else if (showStatCard.lastclickedUnit.unitName === u.unitName && showStatCard.show === true) {
+      setShowStatCard({ clickedUnit: u, lastclickedUnit: u, show: false });
+    }
+    // click on same unit again to toggle the card view off
+    else if (showStatCard.lastclickedUnit.unitName === u.unitName && showStatCard.show === false) {
+      setShowStatCard({ clickedUnit: u, lastclickedUnit: u, show: true });
+    }
+    // click on a different unit to show a different card
+    else if (showStatCard.lastclickedUnit.unitName !== u.unitName) {
+      setShowStatCard({ clickedUnit: u, lastclickedUnit: u, show: true });
+    }
   };
 
   /**
@@ -126,7 +162,7 @@ const ListGeneratorController = () => {
   }, [selectedFaction]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    clearList(); 
+    clearList();
   }, [selectedFaction]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ALLY LOGIC
@@ -327,9 +363,19 @@ const ListGeneratorController = () => {
   //TODO
   const clearList = () => {
     setSelectedUnits([]);
-    // in order to work, this state setter needs a unit. since the card view is toggled off, the first unit in the list is selected.
-    setShowStatCard({ clickedUnit: selectedUnits[0], lastclickedUnit: selectedUnits[0], show: false });
+    closeCardDisplay();
     closeItemShop();
+  };
+
+  /**
+   * in order to work, the state setter needs a unit. Since the card view is toggled off, the first unit in the list is used.
+   */
+  const closeCardDisplay = () => {
+    setShowStatCard({ clickedUnit: selectedUnits[0], lastclickedUnit: selectedUnits[0], show: false });
+  };
+
+  const closeItemShop = () => {
+    setItemShopState({ clickedUnit: selectedUnits[0], lastclickedUnit: selectedUnits[0], show: false });
   };
 
   return fetchedFactions && fetchedItems ? (
@@ -358,7 +404,7 @@ const ListGeneratorController = () => {
         unitSelectedForShop: unitSelectedForShop,
         allItems: allItems,
         closeItemShop: closeItemShop,
-        toggleItemShop: toggleItemShop,
+        toggleBetweenItemShops: toggleBetweenItemShops,
         setUnitSelectedForShop: setUnitSelectedForShop,
         setAllItems: setAllItems,
         //  SELECTED UNITS
@@ -367,6 +413,7 @@ const ListGeneratorController = () => {
         // STAT CARD DISPLAY
         showStatCard: showStatCard,
         setShowStatCard: setShowStatCard,
+        toggleBetweenCards: toggleBetweenCards,
       }}
     >
       <Grid container direction="row">
@@ -387,7 +434,7 @@ const ListGeneratorController = () => {
         {/* RIGHT SIDE */}
         <Grid item xs={3}>
           {/* ITEMSHOP */}
-          <Drawer anchor={"right"} variant="persistent" open={drawerState} className={classes.itemScreen}>
+          <Drawer anchor={"right"} variant="persistent" open={itemShopState.show} className={classes.itemScreen}>
             <ItemShop />
           </Drawer>
           {/* UNITCARD */}

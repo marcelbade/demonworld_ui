@@ -131,8 +131,6 @@ const globalRules = {
 const calculateActualPoints = (selectedUnits, subFaction) => {
   let actualValue = 0;
 
-  console.log("subFaction");
-  console.log(subFaction);
 
   selectedUnits.forEach((selectedUnit) => {
     if (subFaction.includes(selectedUnit.subFaction)) {
