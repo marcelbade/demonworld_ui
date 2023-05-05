@@ -1,11 +1,5 @@
 
-React FR
-=============================
-TODO: package json
-- 
-
-
-
+ 
 
  TODO: Logic
 - do not exceed total army points -> not working 
@@ -16,18 +10,12 @@ TODO: package json
 
 
 TODO:  RESPONSIVE DESIGN 
-
 ooppss...... Everything. you need to do everything here. 
 
 TODO: allItems 
     - is not working! 
     - The use Effect in the GeneratorController must be reowrked, its silly!
 
-ITEM SHOP
-=============================
-
-TODO: 
- - Item text displayed
  
 
 -------------CURRENTLY WORKING ON-----------------
