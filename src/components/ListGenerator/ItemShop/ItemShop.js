@@ -238,7 +238,7 @@ const ItemShop = () => {
     <Grid container direction="column" className={classes.overlay}>
       <Grid item container direction="row">
         {/* CLOSING BUTTON */}
-        <Grid item xs={3}>
+        <Grid item xs={1}>
           <IconButton
             onClick={(event) => {
               event.stopPropagation();
@@ -287,7 +287,7 @@ const ItemShop = () => {
                     <Accordion key={uuidGenerator()}>
                       <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
                         <Button
-                          className={classes.ItemName}
+                          className={classes.buttons}
                           disabled={disableButton(item)}
                           onClick={() => {
                             addItemToUnit(item);
