@@ -72,9 +72,13 @@ const ListGeneratorController = () => {
   });
 
   /**
-   * functions opens and closes the item shop.
+   * functions toggle amd close the item shop.
    * @param {*} unit
    */
+  const closeItemShop = () => {
+    setDrawerState(false);
+  };
+
   const toggleItemShop = () => {
     setDrawerState(!drawerState);
   };
@@ -115,6 +119,14 @@ const ListGeneratorController = () => {
    */
   useEffect(() => {
     setDistinctSubFactions(findDistinctSubfactions(selectedFaction));
+  }, [selectedFaction]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    closeItemShop();
+  }, [selectedFaction]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    clearList(); 
   }, [selectedFaction]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ALLY LOGIC
@@ -310,13 +322,14 @@ const ListGeneratorController = () => {
   };
 
   /**
-   * Funtion deletes the entire army list and closes the stat card display, if open.
+   * Funtion deletes the entire army list and closes the stat card display and item shop, if open.
    */
   //TODO
   const clearList = () => {
     setSelectedUnits([]);
     // in order to work, this state setter needs a unit. since the card view is toggled off, the first unit in the list is selected.
     setShowStatCard({ clickedUnit: selectedUnits[0], lastclickedUnit: selectedUnits[0], show: false });
+    closeItemShop();
   };
 
   return fetchedFactions && fetchedItems ? (
@@ -344,6 +357,7 @@ const ListGeneratorController = () => {
         fetchedItems: fetchedItems,
         unitSelectedForShop: unitSelectedForShop,
         allItems: allItems,
+        closeItemShop: closeItemShop,
         toggleItemShop: toggleItemShop,
         setUnitSelectedForShop: setUnitSelectedForShop,
         setAllItems: setAllItems,
