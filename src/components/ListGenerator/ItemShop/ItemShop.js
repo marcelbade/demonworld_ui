@@ -39,6 +39,12 @@ const useStyles = makeStyles({
   ItemText: {
     marginLeft: "5em",
   },
+  errorNoItems: {
+    paddingTop: "3em",
+    fontFamily: "notMaryKate",
+    fontWeight: "bold",
+    color: "red",
+  },
 });
 
 const NAME_MAPPING = {
@@ -53,13 +59,28 @@ const NAME_MAPPING = {
   warpaint: "Kriegsbemalung",
 };
 
-// map item card types to unit types. I.e., mounted units can receive all items for mounted units, infantery units and items for all units.
+/**
+ * Map item card types to unit types. I.e., mounted units can receive all items for mounted units, infantery units and items for all units.
+ * C = Cavalery
+ * I = Infantery
+ * M = Mage
+ * H = Hero
+ * A = Artillery
+ * G = Giant
+ *
+ * U = Unit
+ * A = All (every unit)
+ *
+ * Giant units (i.e., giants, wyfern, giant insects cant get an item )
+ */
+
 const UNIT_TO_ITEM_UNITTYPE_MAPPING = {
   C: ["C", "U", "A"],
   I: ["U", "A"],
   M: ["M", "A"],
   H: ["H", "A"],
   A: ["C", "U", "M", "H", "A"],
+  G: [],
 };
 
 // All item types that are excempt from the 1-item-per-element rule. These items can be equipped in addition to a magic item
@@ -254,33 +275,40 @@ const ItemShop = () => {
         </Grid>
         <Grid item xs={9} className={classes.itemPanel}>
           {/* ITEMLIST */}
-          <ButtonGroup variant="text" orientation="vertical" fullWidth={true} disableElevation>
-            {filterFetchedItemsForUnit()
-              .filter((item) => item.type === displayThisItemType)
-              .map((item) => {
-                return (
-                  <Grid key={uuidGenerator()} item container direction="row" alignItems="center">
-                    <Grid item xs={7}>
-                      <Button
-                        disabled={disableButton(item)}
-                        onClick={() => {
-                          addItemToUnit(item);
-                        }}
-                        key={uuidGenerator()}
-                        className={classes.buttons}
-                      >
-                        {item.itemName}
-                      </Button>
+
+          {contextArmy.unitSelectedForShop.unitType !== "G" ? (
+            <ButtonGroup variant="text" orientation="vertical" fullWidth={true} disableElevation>
+              {filterFetchedItemsForUnit()
+                .filter((item) => item.type === displayThisItemType)
+                .map((item) => {
+                  return (
+                    <Grid key={uuidGenerator()} item container direction="row" alignItems="center">
+                      <Grid item xs={7}>
+                        <Button
+                          disabled={disableButton(item)}
+                          onClick={() => {
+                            addItemToUnit(item);
+                          }}
+                          key={uuidGenerator()}
+                          className={classes.buttons}
+                        >
+                          {item.itemName}
+                        </Button>
+                      </Grid>
+                      <Grid item xs={2} className={classes.ItemText}>
+                        <Tooltip title={item.specialRules} placement="right-start" TransitionComponent={Zoom}>
+                          <HelpIcon />
+                        </Tooltip>
+                      </Grid>
                     </Grid>
-                    <Grid item xs={2} className={classes.ItemText}>
-                      <Tooltip title={item.specialRules} placement="right-start" TransitionComponent={Zoom}>
-                        <HelpIcon />
-                      </Tooltip>
-                    </Grid>
-                  </Grid>
-                );
-              })}
-          </ButtonGroup>
+                  );
+                })}
+            </ButtonGroup>
+          ) : (
+            <Typography className={classes.errorNoItems} variant="h6">
+              Es Gibt Keine Gegenstände für diese Einheit.
+            </Typography>
+          )}
         </Grid>
       </Grid>
     </Grid>

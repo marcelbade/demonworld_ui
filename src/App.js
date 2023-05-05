@@ -1,20 +1,32 @@
 // React
 import * as React from "react";
 // Material UI
-import { Drawer, List, IconButton, ListItem, ListItemIcon, Box, CssBaseline, styled, Grid } from "@material-ui/core";
+import {
+  ThemeProvider,
+  createMuiTheme,
+  Drawer,
+  List,
+  IconButton,
+  ListItem,
+  ListItemIcon,
+  Box,
+  CssBaseline,
+  styled,
+  Grid,
+} from "@material-ui/core";
 // router
 import { Route, Switch, Link } from "react-router-dom";
 // components and functions
 import landingPage from "./components/landingPage/landingPage";
 import factionTable from "./components/compendiums/factionTable/components/factionTable";
 import ListGeneratorController from "./components/ListGenerator/ListGeneratorController";
- 
-
 // icons
 import HomeIcon from "@material-ui/icons/Home";
 import MenuBookIcon from "@material-ui/icons/MenuBook";
 import ChevronLeftIcon from "@material-ui/icons/ArrowBackIos";
 import MenuIcon from "@material-ui/icons/Menu";
+
+const theme = createMuiTheme();
 
 const DRAWER_WIDTH = 240;
 
@@ -59,7 +71,7 @@ function App() {
   };
 
   return (
-    
+    <ThemeProvider theme={theme}>
       <Box sx={{ display: "flex" }}>
         <CssBaseline />
         <Drawer
@@ -113,7 +125,7 @@ function App() {
           </Grid>
         </Main>
       </Box>
-     
+    </ThemeProvider>
   );
 }
 

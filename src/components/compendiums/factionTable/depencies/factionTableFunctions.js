@@ -12,7 +12,7 @@ import { unitOrCmdCard } from "../../../shared/sharedFunctions";
 // icons
 import blackBowIcon from "../../../customIcons/bow2.png";
 import blackSwordIcon from "../../../customIcons/sword2.png";
-import clsx from "clsx";
+ 
 
 const RulesToolTip = withStyles({
   tooltip: {

@@ -18,20 +18,23 @@ import { ruleValidation } from "../gameLogic/useRuleValidation";
 import { isObjectEmtpy } from "../shared/sharedFunctions";
 import { unitOrCmdCard } from "../shared/sharedFunctions";
 
-const useStyles = makeStyles({
-  root: {},
+const useStyles = makeStyles((theme) => ({
+  armySelectionBox: {
+    backgroundColor: "white",
+    [theme.breakpoints.down("lg")]: {
+      backgroundColor: "red",
+    },
+  },
   selector: {
-    marginTop: "10px",
-    paddingLeft: "10px",
-    marginBottom: "60px",
+    marginTop: "10em",
+    paddingLeft: "10em",
+    marginBottom: "60em",
   },
-  itemScreen: {
-    backgroundColor: "yellow",
-  },
+  itemScreen: {},
   UnitCardDisplay: {
     position: "fixed",
   },
-});
+}));
 
 const ListGeneratorController = () => {
   const classes = useStyles();
@@ -289,6 +292,10 @@ const ListGeneratorController = () => {
     return total;
   };
 
+  /**
+   * removes a unit from the current list.
+   * @param {*} identifier unit.name + unique hash value
+   */
   const removeUnit = (identifier) => {
     let filtered = selectedUnits.filter((u) => u.name + u.uniqueID !== identifier);
     setSelectedUnits(filtered);
@@ -306,8 +313,14 @@ const ListGeneratorController = () => {
     setSelectedUnits(temp);
   };
 
+  /**
+   * Funtion deletes the entire army list and closes the stat card display, if open.
+   */
+  //TODO
   const clearList = () => {
     setSelectedUnits([]);
+    // in order to work, this state setter needs a unit. since the card view is toggled off, the first unit in the list is selected.
+    setShowStatCard({ clickedUnit: selectedUnits[0], lastclickedUnit: selectedUnits[0], show: false });
   };
 
   return fetchedFactions && fetchedItems ? (
@@ -336,8 +349,8 @@ const ListGeneratorController = () => {
         unitSelectedForShop: unitSelectedForShop,
         allItems: allItems,
         openItemShop: openItemShop,
-        setUnitSelectedForShop: setUnitSelectedForShop,
         closeItemShop: closeItemShop,
+        setUnitSelectedForShop: setUnitSelectedForShop,
         setAllItems: setAllItems,
         //  SELECTED UNITS
         selectedUnits: selectedUnits,
@@ -348,25 +361,21 @@ const ListGeneratorController = () => {
       }}
     >
       <Grid container direction="row">
-        <Grid container item xs={4} direction="column" className={classes.root}>
+        <Grid container item xs={3} direction="column" className={classes.armySelectionBox}>
           {/* ARMY SELECTION */}
           <SelectionInput
             className={classes.selector}
             filterFunction={setSelectedFactionName}
             options={ALL_FACTIONS_ARRAY}
-            label="Suche nach Fraktion"
+            label="Wähle Eine Fraktion"
           />
           <FactionTreeView className={classes.selector} />
         </Grid>
-        <u>
-          {selectedFaction.forEach((u) => (
-            <li>{u.name}</li>
-          ))}
-        </u>
         {/* ARMYLIST */}
         <Grid item xs={5}>
           <ArmyListDisplay setTotalPointValue={setTotalPointValue} clearList={clearList} />
         </Grid>
+        {/* RIGHT SIDE */}
         <Grid item xs={3}>
           {/* ITEMSHOP */}
           <Drawer anchor={"right"} variant="persistent" open={drawerState} className={classes.itemScreen}>

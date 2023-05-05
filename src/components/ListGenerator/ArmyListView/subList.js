@@ -39,8 +39,6 @@ const useStyles = makeStyles({
   },
   typographyFont: {
     fontFamily: "NotMaryKate",
-    fontWeight: "lighter",
-    fontSize: "14px",
   },
   subTotal: {
     fontFamily: "NotMaryKate",
@@ -77,15 +75,16 @@ const SubList = (props) => {
   };
 
   /**
-   * function toggles the unit card view on and off as well as switches between card views for different units.
+   * function toggles the unit card view on and off as well as switches between card views for different units. TO do this, the card view is not toggled by a booelan flag, but an object that stores the previouslyx clickedUnit
    * @param {unitCard} u
    */
   const toggleBetweenCards = (u) => {
-    // first click on page
+    // first click on page (no card displayed)
     if (isObjectEmtpy(contextArmy.showStatCard.lastclickedUnit))
       contextArmy.setShowStatCard({ clickedUnit: u, lastclickedUnit: u, show: true });
-    // click on same unit again to toggle the card view
+    // click on same unit again to toggle the card view on
     else if (contextArmy.showStatCard.lastclickedUnit.unitName === u.unitName && contextArmy.showStatCard.show === true)
+      // click on same unit again to toggle the card view off
       contextArmy.setShowStatCard({ clickedUnit: u, lastclickedUnit: u, show: false });
     else if (contextArmy.showStatCard.lastclickedUnit.unitName === u.unitName && contextArmy.showStatCard.show === false)
       contextArmy.setShowStatCard({ clickedUnit: u, lastclickedUnit: u, show: true });
@@ -126,11 +125,15 @@ const SubList = (props) => {
                   </Grid>
                   {/* NAME */}
                   <Grid item xs={2}>
-                    <Typography className={classes.typographyFont}>{u.unitName} </Typography>
+                    <Typography variant="button" className={classes.typographyFont}>
+                      {u.unitName}{" "}
+                    </Typography>
                   </Grid>
                   {/* POINTS */}
                   <Grid item xs={1}>
-                    <Typography className={classes.typographyFont}>{u.points}</Typography>
+                    <Typography variant="button" className={classes.typographyFont}>
+                      {u.points}
+                    </Typography>
                   </Grid>
                   {/* BUTTONS */}
                   <Grid item xs={8} direction="row">
@@ -176,10 +179,14 @@ const SubList = (props) => {
                                   </IconButton>
                                 </Grid>
                                 <Grid item xs={8}>
-                                  <Typography className={classes.typographyFont}>{e.name} </Typography>
+                                  <Typography variant="button" className={classes.typographyFont}>
+                                    {e.name}
+                                  </Typography>
                                 </Grid>
                                 <Grid item xs={1}>
-                                  <Typography className={classes.typographyFont}>{e.points}</Typography>
+                                  <Typography variant="button" className={classes.typographyFont}>
+                                    {e.points}
+                                  </Typography>
                                 </Grid>
                               </Grid>
                             );

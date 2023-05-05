@@ -20,7 +20,17 @@ TransitionComponent.propTypes = {
 const Tree = (props) => {
   const contextArmy = useContext(ArmyContext);
 
-  const subfactions = props.showsFaction ? contextArmy.subfactions : contextArmy.allySubFactions;
+  const createSubFactionList = () => {
+    let subfactions;
+    if (props.showsFaction) {
+      subfactions = contextArmy.subfactions.filter((f) => f !== contextArmy.allyName);
+    } else {
+      subfactions = contextArmy.allySubFactions;
+    }
+    return subfactions;
+  };
+
+  const subfactions = createSubFactionList();
   const units = props.showsFaction ? contextArmy.units : contextArmy.alliedUnits;
 
   //TODO mark subFaction below minimum and block army list!
