@@ -72,15 +72,11 @@ const ListGeneratorController = () => {
   });
 
   /**
-   * functions openand close the item shop. Function is called in the <SubList> module.
+   * functions opens and closes the item shop.
    * @param {*} unit
    */
-  const openItemShop = () => {
-    setDrawerState(true);
-  };
-
-  const closeItemShop = () => {
-    setDrawerState(false);
+  const toggleItemShop = () => {
+    setDrawerState(!drawerState);
   };
 
   /**
@@ -348,8 +344,7 @@ const ListGeneratorController = () => {
         fetchedItems: fetchedItems,
         unitSelectedForShop: unitSelectedForShop,
         allItems: allItems,
-        openItemShop: openItemShop,
-        closeItemShop: closeItemShop,
+        toggleItemShop: toggleItemShop,
         setUnitSelectedForShop: setUnitSelectedForShop,
         setAllItems: setAllItems,
         //  SELECTED UNITS

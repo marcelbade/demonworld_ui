@@ -141,7 +141,7 @@ const SubList = (props) => {
                       className={classes.buttons}
                       variant="outlined"
                       onClick={() => {
-                        contextArmy.openItemShop();
+                        contextArmy.toggleItemShop();
                         contextArmy.setUnitSelectedForShop(u);
                       }}
                     >
