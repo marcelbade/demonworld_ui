@@ -27,7 +27,6 @@ ITEM SHOP
 =============================
 
 TODO: 
-- when changing the army, close the item shop
 - magic numbers: the Letters for the item and unit types
  
 
