@@ -1,9 +1,7 @@
 import React, { useContext } from "react";
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
-import { Grid, IconButton, Tooltip } from "@material-ui/core";
-
-//
+import { Grid, IconButton, Tooltip, Typography } from "@material-ui/core";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 // components and functions
 import { ArmyContext } from "../../../contexts/armyContext";
@@ -11,28 +9,16 @@ import { uuidGenerator } from "../../shared/sharedFunctions";
 import { StyledTreeItem } from "../dependencies/styledTreeItem";
 
 const useStyles = makeStyles({
-  treeNode: {
-    backgroundColor: "white",
-  },
   button: {
-    fontFamily: "BreatheOfFire",
     color: "black",
-    backgroundColor: "white",
-    padding: "0 px",
   },
   blockedLeafNode: {
     fontFamily: "NotMaryKate",
     color: "grey",
-    backgroundColor: "white",
-    padding: "0 px",
-    fontSize: "14px",
   },
   unblockedLeafNode: {
     fontFamily: "NotMaryKate",
     color: "black",
-    backgroundColor: "white",
-    padding: "0 px",
-    fontSize: "14px",
   },
 });
 
@@ -48,7 +34,7 @@ const LeafNodes = (props) => {
 
   const blockResults = contextArmy.blockedUnits.unitsBlockedbyRules;
 
-  // no need for useState - must be recalculated for every rerender
+  // no need for a useState hook - must be recalculated for every rerender
   let blockedUnitNames = [];
 
   // collect all blocked units in one array
@@ -80,12 +66,26 @@ const LeafNodes = (props) => {
    */
   const generateLabel = (unit) => {
     return (
-      <Grid container className={classes.unblockedLeafNode} direction="row">
-        <Grid item xs={10}>
-          {unit.unitName}
+      <Grid container alignItems="center" direction="row">
+        <Grid item sm={3} md={7}>
+          <Typography variant="button" className={classes.unblockedLeafNode}>
+            {unit.unitName}
+          </Typography>
         </Grid>
-        <Grid item xs={2}>
-          {unit.points}
+        <Grid item xs={2} md={2}>
+          <Typography variant="button" className={classes.unblockedLeafNode}>
+            {unit.points}
+          </Typography>
+        </Grid>
+        <Grid item xs={1} md={1}>
+          <IconButton
+            className={classes.button}
+            onClick={() => {
+              contextArmy.selectUnit(unit);
+            }}
+          >
+            <AddCircleOutlineIcon />
+          </IconButton>
         </Grid>
       </Grid>
     );
@@ -98,12 +98,16 @@ const LeafNodes = (props) => {
     return blockedUnitNames.includes(unit.unitName) ? (
       <Tooltip title={findBlockMessage(blockResults, unit.unitName)} key={uuidGenerator()}>
         <Grid container alignItems="center" key={uuidGenerator()}>
-          <Grid container item xs={9} className={classes.blockedLeafNode}>
-            <Grid item  xs={9} className={classes.treeNode}>
-              {unit.unitName}
+          <Grid container item xs={6} className={classes.blockedLeafNode}>
+            <Grid item xs={9}>
+              <Typography variant="button" className={classes.blockedLeafNode}>
+                {unit.unitName}
+              </Typography>
             </Grid>
             <Grid item xs={3} className={classes.treeNode}>
-              {unit.points}
+              <Typography variant="button" className={classes.blockedLeafNode}>
+                {unit.points}
+              </Typography>
             </Grid>
           </Grid>
           <Grid item xs={3}>
@@ -114,22 +118,8 @@ const LeafNodes = (props) => {
         </Grid>
       </Tooltip>
     ) : (
-    // unit not blocked
-      <Grid container alignItems="center" key={uuidGenerator()}>
-        <Grid item xs={9}>
-          <StyledTreeItem nodeId={NODE_ID} label={generateLabel(unit)} className={classes.treeNode} key={uuidGenerator()}></StyledTreeItem>
-        </Grid>
-        <Grid item xs={3}>
-          <IconButton
-            className={classes.button}
-            onClick={() => {
-              contextArmy.selectUnit(unit);
-            }}
-          >
-            <AddCircleOutlineIcon />
-          </IconButton>
-        </Grid>
-      </Grid>
+      // unit not blocked
+      <StyledTreeItem nodeId={NODE_ID} label={generateLabel(unit)} key={uuidGenerator()}></StyledTreeItem>
     );
   });
 };
