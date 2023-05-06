@@ -50,10 +50,13 @@ const ListGeneratorController = () => {
   const [allyName, setAllyName] = useState("");
   const [mappedAlly, setMappedAlly] = useState([]);
   const [selectedUnits, setSelectedUnits] = useState([]);
+  // maximum point allowance 
   const [maxPointsValue, setMaxPointsValue] = useState(2000); //  eslint-disable-line no-unused-vars
-  //the current total point value of all selected units
+  // the current total point value of all selected units
   const [totalPointValue, setTotalPointValue] = useState(0);
+  // sub factions of currrently selected army
   const [distinctSubFactions, setDistinctSubFactions] = useState([]);
+  // sub factions of ally 
   const [distinctAllySubFactions, setDistinctAllySubFactions] = useState([]);
   // validation
   const [blockedUnits, setblockedUnits] = useState({

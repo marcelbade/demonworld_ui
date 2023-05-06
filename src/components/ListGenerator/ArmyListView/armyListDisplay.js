@@ -66,7 +66,6 @@ const useStyles = makeStyles({
 const ArmyListDisplay = (props) => {
   const contextArmy = useContext(ArmyContext);
 
-  const [MaximumPoints, setMaximumPoints] = useState(contextArmy.maxPointsValue);
   const [errorMessage, setErrorMessage] = useState("");
 
   const classes = useStyles();
@@ -83,10 +82,10 @@ const ArmyListDisplay = (props) => {
     return allUnits.filter((u) => u.subFaction === subFaction);
   };
 
-  const handleChange = (event) => {
-    setMaximumPoints(event.target.value);
+  const changeMaximumPointValue = (event) => {
+    contextArmy.setMaxPointsValue(event.target.value);
 
-    // validate user
+    // validate user input
     let isValid = new RegExp(/^[0-9]*$/).test(event.target.value);
     isValid ? setErrorMessage("") : setErrorMessage("Bitte nur Zahlen eingeben.");
   };
@@ -123,13 +122,15 @@ const ArmyListDisplay = (props) => {
           </ListItem>
         ))}
       </List>
-      {/* TOTAL ARMY POINTS */}
+
       <Grid container directiom="row" alignContent="center">
+        {/* TOTAL SPENT POINTS */}
         <Typography className={classes.total}>Gesamtpunktzahl: {contextArmy.totalPointValue} / </Typography>
+        {/* TOTAL POINT ALLOWANCE */}
         <TextField
           id="outlined-basic"
           autoComplete="off"
-          value={MaximumPoints}
+          value={contextArmy.maxPointsValue}
           InputProps={{
             style: {
               fontFamily: "notMaryKate",
@@ -140,7 +141,7 @@ const ArmyListDisplay = (props) => {
             },
             endAdornment: <InputAdornment position="end">Punkte</InputAdornment>,
           }}
-          onChange={handleChange}
+          onChange={changeMaximumPointValue}
           required
           error={Boolean(errorMessage)}
           helperText={errorMessage}

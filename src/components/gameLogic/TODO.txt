@@ -20,7 +20,7 @@ TODO: allItems
 
 -------------CURRENTLY WORKING ON-----------------
 TODO: You can choose only one poison
-- it somwhow 
+- it somwhow doesnt work 
 
 
 TODO: when selecting an item add the following to the unit card 
