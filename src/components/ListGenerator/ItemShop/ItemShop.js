@@ -237,17 +237,6 @@ const ItemShop = () => {
   return (
     <Grid container direction="column" className={classes.overlay}>
       <Grid item container direction="row">
-        {/* CLOSING BUTTON */}
-        <Grid item xs={1}>
-          <IconButton
-            onClick={(event) => {
-              event.stopPropagation();
-              contextArmy.closeItemShop();
-            }}
-          >
-            <CloseIcon />
-          </IconButton>
-        </Grid>
         {/*UNIT NAME */}
         <Grid item xs={9}>
           <Typography variant="h5" align="center" className={classes.unitName}>
@@ -275,9 +264,8 @@ const ItemShop = () => {
             })}
           </ButtonGroup>
         </Grid>
-        <Grid item xs={9}>
+        <Grid item xs={8}>
           {/* ITEMLIST */}
-
           {contextArmy.unitSelectedForShop.unitType !== "G" ? (
             <ButtonGroup variant="text" orientation="vertical" fullWidth={true} disableElevation>
               {filterFetchedItemsForUnit()
