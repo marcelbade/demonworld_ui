@@ -193,11 +193,11 @@ const SubList = (props) => {
       <Grid container justify="flex-end" direction="column">
         <Grid container item xs={2} direction="row" className={classes.pointsAndpercentageBorder}>
           <Typography className={classes.subTotal}>Gesamt: {subFactionTotal} </Typography>
-          <Typography className={classes.subTotal}> / {subFactionPercentage} % </Typography>
+          {/* <Typography className={classes.subTotal}> / {subFactionPercentage} % </Typography> */}
         </Grid>
         <Grid container item xs={2} direction="column">
-          <Typography className={classes.subTotal}>{allowedMinPercentage === 0 ? null : `Minimum: ${allowedMinPercentage} %`}</Typography>
-          <Typography className={classes.subTotal}>{allowedMaxPercentage === 1 ? null : `Maximum ${allowedMaxPercentage} %`}</Typography>
+          {/* <Typography className={classes.subTotal}>{allowedMinPercentage === 0 ? null : `Minimum: ${allowedMinPercentage} %`}</Typography>
+          <Typography className={classes.subTotal}>{allowedMaxPercentage === 1 ? null : `Maximum ${allowedMaxPercentage} %`}</Typography> */}
         </Grid>
       </Grid>
     </Fragment>
