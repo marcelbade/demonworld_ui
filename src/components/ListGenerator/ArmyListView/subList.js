@@ -7,9 +7,10 @@ import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 // components and functions
 import { ArmyContext } from "../../../contexts/armyContext";
 import { displayUnitCost } from "../../compendiums/factionTable/depencies/factionTableFunctions";
+
 // clsx
 import clsx from "clsx";
-
+ 
 const useStyles = makeStyles({
   gearListHeader: {
     testAlign: "right",
@@ -55,7 +56,7 @@ const SubList = (props) => {
   const [subFactionTotal, setSubFactionTotal] = useState(0);
 
   /**
-   * The useffect calculates the point total for the sub faction and validates it.
+   * Useffect calculates the point total for the sub faction and validates it.
    */
   useEffect(() => {
     let total = 0;
@@ -65,10 +66,19 @@ const SubList = (props) => {
     setSubFactionTotal(total);
   }, [props.subFactionUnits]);
 
+  /**
+   * Removes the unit.
+   * @param {unit.name + hash code} identifier
+   */
   const removeUnit = (identifier) => {
     contextArmy.removeUnit(identifier);
   };
 
+  /**
+   * Removes the item.
+   * @param {unit.name + hash code} identifier
+   * @param {array index } i
+   */
   const removeItem = (identifier, i) => {
     contextArmy.removeItem(identifier, i);
   };
@@ -180,7 +190,16 @@ const SubList = (props) => {
           );
         })}
       </List>
-      <Typography className={classes.subTotal}>Gesamt: {subFactionTotal} </Typography>
+      <Grid container justify="flex-end" direction="column">
+        <Grid container item xs={2} direction="row" className={classes.pointsAndpercentageBorder}>
+          <Typography className={classes.subTotal}>Gesamt: {subFactionTotal} </Typography>
+          <Typography className={classes.subTotal}> / {subFactionPercentage} % </Typography>
+        </Grid>
+        <Grid container item xs={2} direction="column">
+          <Typography className={classes.subTotal}>{allowedMinPercentage === 0 ? null : `Minimum: ${allowedMinPercentage} %`}</Typography>
+          <Typography className={classes.subTotal}>{allowedMaxPercentage === 1 ? null : `Maximum ${allowedMaxPercentage} %`}</Typography>
+        </Grid>
+      </Grid>
     </Fragment>
   );
 };
