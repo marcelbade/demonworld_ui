@@ -20,6 +20,10 @@ TransitionComponent.propTypes = {
 const Tree = (props) => {
   const contextArmy = useContext(ArmyContext);
 
+  /**
+   * Function creates a list the ally name has to be removed fro  the array so it is not displayed as a subFaction in the tree.
+   * @returns
+   */
   const createSubFactionList = () => {
     let subfactions;
     if (props.showsFaction) {
@@ -31,6 +35,7 @@ const Tree = (props) => {
   };
 
   const subfactions = createSubFactionList();
+
   const units = props.showsFaction ? contextArmy.units : contextArmy.alliedUnits;
 
   //TODO mark subFaction below minimum and block army list!
