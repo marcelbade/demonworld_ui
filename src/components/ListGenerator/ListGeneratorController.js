@@ -116,10 +116,16 @@ const ListGeneratorController = () => {
     setDistinctSubFactions(findDistinctSubfactions(selectedFaction));
   }, [selectedFaction]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  /**
+   * Close the item shop when a new army is selected.
+   */
   useEffect(() => {
     closeItemShop();
   }, [selectedFaction]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  /**
+   *  Clear all selected units from the army list  when a new army is selected.
+   */
   useEffect(() => {
     clearList();
   }, [selectedFaction]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -317,9 +323,8 @@ const ListGeneratorController = () => {
   };
 
   /**
-   * Funtion deletes the entire army list and closes the stat card display and item shop, if open.
+   * Function deletes the entire army list and closes the stat card display and item shop, if open.
    */
-  //TODO
   const clearList = () => {
     setSelectedUnits([]);
     closeCardDisplay();
