@@ -77,13 +77,13 @@ const ArmyListDisplay = (props) => {
    * @returns
    */
   const filterUnitsForSubFaction = (allUnits, subFaction) => {
-    allUnits.forEach((u) => (u.faction === alliesMapping[contextArmy.name] ? (u.subFaction = u.faction) : null));
+    allUnits.forEach((u) => (u.faction === alliesMapping[contextArmy.selectedFactionName] ? (u.subFaction = u.faction) : null));
 
     return allUnits.filter((u) => u.subFaction === subFaction);
   };
 
   const changeMaximumPointValue = (event) => {
-    contextArmy.setMaxPointsValue(event.target.value);
+    contextArmy.setMaxPointsAllowance(event.target.value);
 
     // validate user input
     let isValid = new RegExp(/^[0-9]*$/).test(event.target.value);
@@ -112,7 +112,9 @@ const ArmyListDisplay = (props) => {
           <ListItem key={uuidGenerator()}>
             <Grid container direction={"column"}>
               <Typography className={classes.HeaderBox}>{subFaction}</Typography>
+              {/* DISPLAY UNITS FOR ONE SUBFACTION */}
               <SubList
+                //  TODO add claraification what this means!
                 ally={false}
                 className={classes.subList}
                 subFactionUnits={filterUnitsForSubFaction(contextArmy.addedUnits, subFaction)}
