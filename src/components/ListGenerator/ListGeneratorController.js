@@ -50,13 +50,13 @@ const ListGeneratorController = () => {
   const [allyName, setAllyName] = useState("");
   const [mappedAlly, setMappedAlly] = useState([]);
   const [selectedUnits, setSelectedUnits] = useState([]);
-  // maximum point allowance 
-  const [maxPointsValue, setMaxPointsValue] = useState(2000); //  eslint-disable-line no-unused-vars
+  // maximum point allowance
+  const [maxPointsAllowance, setMaxPointsAllowance] = useState(2000); //  eslint-disable-line no-unused-vars
   // the current total point value of all selected units
   const [totalPointValue, setTotalPointValue] = useState(0);
   // sub factions of currrently selected army
   const [distinctSubFactions, setDistinctSubFactions] = useState([]);
-  // sub factions of ally 
+  // sub factions of ally
   const [distinctAllySubFactions, setDistinctAllySubFactions] = useState([]);
   // validation
   const [blockedUnits, setblockedUnits] = useState({
@@ -103,7 +103,7 @@ const ListGeneratorController = () => {
   };
 
   /**
-   * Set the selected faction ans sends it to the treeview
+   * Sets the selected faction and sends it to the treeview by filtering ALL units down to the faction's units.
    */
   useEffect(() => {
     setSelectedFaction(fetchedFactions.filter((f) => f.faction.toLowerCase() === selectedFactionName.toLowerCase()));
@@ -210,7 +210,7 @@ const ListGeneratorController = () => {
   useEffect(() => {
     if (selectedFactionName) {
       let validator = ruleValidation(selectedFactionName);
-      let result = validator.testSubFactionRules(selectedFaction, selectedUnits, maxPointsValue);
+      let result = validator.testSubFactionRules(selectedFaction, selectedUnits, maxPointsAllowance);
 
       collectAllBlockedUnits(result);
     }
@@ -384,7 +384,7 @@ const ListGeneratorController = () => {
     <ArmyProvider
       value={{
         // ARMY
-        name: selectedFactionName,
+        selectedFactionName: selectedFactionName,
         subfactions: distinctSubFactions,
         units: selectedFaction,
         // ALLY
@@ -392,9 +392,10 @@ const ListGeneratorController = () => {
         allySubFactions: distinctAllySubFactions,
         alliedUnits: mappedAlly,
         // NET POINT VALUES
-        maxPointsValue: maxPointsValue,
+        maxPointsValue: maxPointsAllowance,
         totalPointValue: totalPointValue,
         addedUnits: selectedUnits,
+        setMaxPointsAllowance: setMaxPointsAllowance,
         // BUTTON FUNCTIONS
         selectUnit: selectUnit,
         removeUnit: removeUnit,
