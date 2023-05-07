@@ -1,13 +1,13 @@
-import DarkElveRules from "./factionValidationRules/darkElves";
-import DwarfRules from "./factionValidationRules/dwarfs";
-import ElveRules from "./factionValidationRules/highElfsRules";
-import EmpireRules from "./factionValidationRules/empireRules";
-import GoblinRules from "./factionValidationRules/goblinRules";
-import IshtakRules from "./factionValidationRules/ishtakRules";
-import OrkRules from "./factionValidationRules/orkRules";
-import NorwingerRules from "./factionValidationRules/norwingerRules";
-import UndeadRules from "./factionValidationRules/undeadRules";
-import ThainRules from "./factionValidationRules/thainRules";
+import  { DarkElveRules } from "./factionValidationRules/darkElves";
+import  { DwarfRules } from "./factionValidationRules/dwarfs";
+import  { ElveRules } from "./factionValidationRules/highElfsRules";
+import  { EmpireRules } from "./factionValidationRules/empireRules";
+import  { GoblinRules } from "./factionValidationRules/goblinRules";
+import  { IshtakRules } from "./factionValidationRules/ishtakRules";
+import  { OrkRules } from "./factionValidationRules/orkRules";
+import  { NorwingerRules } from "./factionValidationRules/norwingerRules";
+import  { UndeadRules } from "./factionValidationRules/undeadRules";
+import  { ThainRules } from "./factionValidationRules/thainRules";
 
 /**
  * Logic and abstraction layer for validating army lists. Returns a validator object with a testSubFactionRules function that differs for every faction.

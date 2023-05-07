@@ -100,4 +100,4 @@ const maxLimitForAllChars = (availableUnits, selectedUnits, maxArmyPoints) => {
   // TODO: mach das fertig :D
 };
 
-export default NorwingerRules;
+export { NorwingerRules, rules };

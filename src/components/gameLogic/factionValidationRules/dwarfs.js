@@ -11,7 +11,7 @@ const rules = [
 
   {
     subFaction: "characters",
-    cardNames: ["Held", "Befehlshaber", "Erdpriester", "Erzpriester", "Feuerpriester"],
+    cardNames: ["Held", "Befehlshaber", "Helden / Befehlshaber", "Erdpriester", "Erzpriester", "Feuerpriester"],
     min: 0.0,
     max: 0.5,
     error: "Deine Armeeliste darf zu höchstens 50% aus Helden bestehen.",
@@ -115,4 +115,4 @@ const percentageKingdomsAndAlly = (selectedUnits) => {
   }
 };
 
-export default DwarfRules;
+export { DwarfRules, rules };

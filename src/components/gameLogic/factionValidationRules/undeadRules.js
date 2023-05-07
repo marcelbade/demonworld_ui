@@ -101,8 +101,8 @@ const necromancerOrCommanderPresent = (selectedUnits, availableUnits) => {
 /**
  * The army list can have a maximum of 50% characters.
  */
-// eslint-disable-next-line 
- const maxLimitForAllChars = (availableUnits, selectedUnits, maxArmyPoints) => {
+// eslint-disable-next-line
+const maxLimitForAllChars = (availableUnits, selectedUnits, maxArmyPoints) => {
   let characterSubFactions = ["Sturmlord", "Hexe", "Helden", " Befehlshaber"];
   let sum = 0;
   let result = [];
@@ -123,12 +123,8 @@ const necromancerOrCommanderPresent = (selectedUnits, availableUnits) => {
   // TODO: mach das fertig :D
 };
 
-
-
 // legal allies
-// eslint-disable-next-line 
-const limitAllies = (availlableAlliedUnits) => {
+// eslint-disable-next-line
+const limitAllies = (availlableAlliedUnits) => {};
 
-};
-
-export default UndeadRules;
+export { UndeadRules, rules };

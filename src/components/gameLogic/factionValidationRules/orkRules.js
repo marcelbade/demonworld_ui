@@ -1,4 +1,3 @@
-
 /**
  * TODO: WYVERN -> count as item
  * TODO: LIMIT TO ONE CLAN
@@ -10,7 +9,7 @@
  * ALSO:
  * The lieutenants are Trazzag,  Fherniak,  Ärrig,  Khazzar  and  Nallian
  * <p>
- *  
+ *
  * ======================
  * - check for clangett lt. method
  * - check if clangett or clan, make max numbers dependent on that choice
@@ -90,7 +89,6 @@ const OrkRules = {
 
 //SEPCIAL FACTION RULES
 
-const percentageKingdomsAndAlly = (selectedUnits) => {
- };
+const percentageKingdomsAndAlly = (selectedUnits) => {};
 
-export default OrkRules;
+export { OrkRules, rules };

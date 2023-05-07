@@ -26,14 +26,14 @@ const rules = [
   },
   {
     subFaction: "heroesAndCommanders",
-    cardNames: ["Held/Befehlshaber", "Held"],
+    cardNames: ["Helden / Befehlshaber", "Held"],
     min: 0.0,
     max: 0.3,
     error: "Deine Armeeliste darf zu höchstens 30% aus Helden und Befehlshabern bestehen.",
   },
   {
     subFaction: "spellcasters",
-    cardNames: ["Magier", "Priester"],
+    cardNames: ["Zauberer", "Priester"],
     min: 0.0,
     max: 0.3,
     error: "Deine Armeeliste darf zu höchstens 30% aus Magiern und Priestern bestehen.",
@@ -151,4 +151,4 @@ const marchesRule = (selectedUnits, availableUnits) => {
   return result;
 };
 
-export default EmpireRules;
+export { EmpireRules, rules };

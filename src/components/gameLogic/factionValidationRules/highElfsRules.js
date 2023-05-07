@@ -2,45 +2,30 @@ import globalRules from "../globalRules/globalRules";
 
 const rules = [
   {
-    subFaction: "ThanarilTroops",
-    cardNames: ["Thanaril"],
-    min: 0.3,
-    max: 0.7,
-    error: "Deine Armeeliste darf zu höchstens 70% aus Thanariltruppen bestehen",
-  },
-
-  {
     subFaction: "ThanarielCovens",
-    cardNames: ["Thanaril-Kriegerbd", "Held/Befehlsh. Kriegerbd"],
+    cardNames: ["Thanaril-Kriegerbd", "Thanaril"],
     min: 0.0,
     max: 0.3,
     error: "Deine Armeeliste darf zu höchstens 30% aus Thanaril-Kriegerbünden und Ihren Anführern bestehen.",
   },
 
   {
-    subFaction: "ThanarilCommanders",
-    cardNames: ["Befehlshaber Thanaril", "Barde"],
-    min: 0.0,
-    max: 0.3,
-    error: "Deine Armeeliste darf zu höchstens 30% aus Thanaril-Befehlshabern, -Lords und Barden bestehen.",
-  },
-  {
-    subFaction: "treelords",
+    subFaction: "Treelords",
     cardNames: ["Baumherren"],
     min: 0.0,
     max: 0.25,
     error: "Deine Armeeliste darf zu höchstens 25% aus Einheiten aus Baumherren bestehen.",
   },
   {
-    subFaction: "CouncilArmyAndCommanders",
-    cardNames: ["Ilah Ri/Ratsarmee", "Befehlshaber/Ilah Ri/Ratsarmee"],
+    subFaction: "Ilah Ri",
+    cardNames: ["Ilah Ri"],
     min: 0.0,
     max: 0.5,
     error: "Deine Armeeliste darf zu höchstens 20% aus Einheiten und Anführern der Ratsarmee bestehen.",
   },
   {
     subFaction: "Dyrea/Loreath",
-    cardNames: ["Loreath", "Dyrea"],
+    cardNames: ["Barde / Dyrea / Loreaths"],
     min: 0.0,
     max: 0.4,
     error: "Deine Armeeliste darf zu höchstens 40% aus Einheiten der Dyrea und Loreath bestehen.",
@@ -48,22 +33,24 @@ const rules = [
 
   {
     subFaction: "Orea Vanar",
-    cardNames: [
-      "Orea Vanar/Ratsarmee",
-      "Orea Vanar/Ratsarmee/Avandril Bellir",
-      "Orea Vanar/Ratsarmee/Galorea",
-      "Orea Vanar/Ratsarmee/Til Dolandor",
-    ],
+    cardNames: ["Orea Vanar"],
     min: 0.0,
     max: 0.3,
     error: "Deine Armeeliste darf zu höchstens 30% aus Einheiten der Orea Vanar bestehen.",
   },
   {
-    subFaction: "Zentauren",
+    subFaction: "Centaurs",
     cardNames: ["Zentauren"],
     min: 0.0,
     max: 0.25,
     error: "Deine Armeeliste darf zu höchstens 25% aus Einheiten der Zentauren bestehen.",
+  },
+  {
+    subFaction: "Old Hero",
+    cardNames: ["alter Held"],
+    min: 0.0,
+    max: 0.25,
+    error: "SPECIAL",
   },
 ];
 
@@ -255,4 +242,4 @@ const entsOrCentaurs = (selectedUnits, availableUnits) => {
   return result;
 };
 
-export default ElveRules;
+export { ElveRules, rules };

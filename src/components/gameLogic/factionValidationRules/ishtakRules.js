@@ -83,4 +83,4 @@ const IshtakRules = {
 //SPECIAL FACTION RULES
 //TODO
 
-export default IshtakRules;
+export { IshtakRules, rules };

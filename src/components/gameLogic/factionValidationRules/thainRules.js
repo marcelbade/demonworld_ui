@@ -89,4 +89,4 @@ const percentageKingdomsAndAlly = (selectedUnits) => {
   //const MESSAGE = "Die Armee kann nicht Einheiten beider Zwergeneinheiten und des Alliierten enthalten!";
 };
 
-export default ThainRules;
+export { ThainRules, rules };

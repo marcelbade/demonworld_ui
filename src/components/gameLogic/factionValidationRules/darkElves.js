@@ -31,7 +31,7 @@ const rules = [
   },
   {
     subFaction: "heroes",
-    cardNames: ["Befehlshaber", "Held"],
+    cardNames: ["Befehlshaber", "Held", "Helden / Befehlshaber"],
     min: 0.0,
     max: 0.4,
     error: "Deine Armee darf höchstens zu 40% aus Helden oder Befehlshabern bestehen.",
@@ -42,6 +42,13 @@ const rules = [
     min: 0.0,
     max: 0.5,
     error: "Deine Armee darf höchstens zur Hälfte aus Magiern, Priestern, Helden, o. Befehlshabern bestehen",
+  },
+  {
+    subFaction: "summons",
+    cardNames: ["Beschwörung"],
+    min: 0.0,
+    max: 0.0,
+    error: "",
   },
 ];
 
@@ -102,4 +109,4 @@ const maxLimitForAllChars = (availableUnits, selectedUnits, maxArmyPoints) => {
   // TODO: mach das fertig :D
 };
 
-export default DarkElveRules;
+export { DarkElveRules, rules };

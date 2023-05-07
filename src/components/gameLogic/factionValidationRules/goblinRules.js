@@ -19,7 +19,7 @@ const rules = [
     subFaction: "characters",
     min: 0.0,
     max: 0.3,
-    cardNames: ["Held", "Befehlshaber"],
+    cardNames: ["Held", "Befehlshaber","Helden / Befehlshaber"],
     error: "Deine Armeeliste darf zu maximal zu 30% aus Helden und Befehlshabern bestehen.",
   },
   {
@@ -34,7 +34,7 @@ const rules = [
     subFaction: "giantInsects",
     min: 0.0,
     max: 0.4,
-    cardNames: [" Rieseninsekten"],
+    cardNames: ["Rieseninsekten"],
     error: "Deine Armeeliste  darf zu maximal zu 40% aus Rieseninsekten bestehen.",
   },
 
@@ -87,4 +87,4 @@ const GoblinRules = {
   },
 };
 
-export default GoblinRules;
+export   {GoblinRules, rules};
