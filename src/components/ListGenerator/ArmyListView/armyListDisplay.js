@@ -4,7 +4,7 @@ import React, { Fragment, useState, useContext } from "react";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import { makeStyles } from "@material-ui/core/styles";
-import { Grid, Typography, TextField, InputAdornment } from "@material-ui/core";
+import { Grid, Typography, TextField, InputAdornment, Button } from "@material-ui/core";
 // components and functions
 import { ArmyContext } from "../../../contexts/armyContext";
 import { uuidGenerator } from "../../shared/sharedFunctions";
@@ -58,9 +58,6 @@ const useStyles = makeStyles({
   bottom: { bottom: "100px" },
   withinLimit: { color: "black" },
   exceeded: { color: "red" },
-  subList: {
-    textAlign: "end",
-  },
 });
 
 const ArmyListDisplay = (props) => {
@@ -96,30 +93,24 @@ const ArmyListDisplay = (props) => {
   return contextArmy ? (
     <Fragment>
       <Grid container directiom="row" alignContent="center">
-        <Typography className={classes.armyName}>{contextArmy.unitName}</Typography>
-        <button
+        <Button
           className={classes.removeButton}
           variant="outlined"
           onClick={() => {
-            props.clearList();
+            contextArmy.clearList();
           }}
         >
           Liste löschen
-        </button>
+        </Button>
       </Grid>
       <List>
         {contextArmy.subfactions.map((subFaction) => (
           <ListItem key={uuidGenerator()}>
             <Grid container direction={"column"}>
               <Typography className={classes.HeaderBox}>{subFaction}</Typography>
-              {/* DISPLAY UNITS FOR ONE SUBFACTION */}
-              <SubList
-                //  TODO add claraification what this means!
-                ally={false}
-                className={classes.subList}
-                subFactionUnits={filterUnitsForSubFaction(contextArmy.addedUnits, subFaction)}
-                subFactionName={subFaction}
-              />
+              {/* DISPLAY UNITS, PONT COST, PERCENTAGES FOR ONE SUBFACTION */}
+              <SubList subFactionUnits={filterUnitsForSubFaction(contextArmy.addedUnits, subFaction)} 
+              subFactionName={subFaction} />
             </Grid>
           </ListItem>
         ))}
