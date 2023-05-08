@@ -3,14 +3,6 @@ import globalRules from "../globalRules/globalRules";
 //TODO: change the error messages!!
 const rules = [
   {
-    subFaction: "heroesCharacters",
-    cardNames: ["Befehlshaber", "Held"],
-    min: 0.1,
-    max: 0.1,
-    error: "Deine Armeeliste darf zu höchstens 40% aus Befehlshabern und Helden bestehen.",
-  },
-
-  {
     subFaction: "humans",
     cardNames: ["Menschen"],
     min: 0.1,
