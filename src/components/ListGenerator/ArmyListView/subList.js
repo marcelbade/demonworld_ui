@@ -7,10 +7,10 @@ import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 // components and functions
 import { ArmyContext } from "../../../contexts/armyContext";
 import { displayUnitCost } from "../../compendiums/factionTable/depencies/factionTableFunctions";
-
+import { ruleObjectProvider } from "../../gameLogic/globalRules/ruleObjectProvider";
 // clsx
 import clsx from "clsx";
- 
+
 const useStyles = makeStyles({
   gearListHeader: {
     testAlign: "right",
@@ -54,6 +54,10 @@ const SubList = (props) => {
   const contextArmy = useContext(ArmyContext);
 
   const [subFactionTotal, setSubFactionTotal] = useState(0);
+  const [percentages, setPercentages] = useState({
+    min: 0,
+    max: 0,
+  });
 
   /**
    * Useffect calculates the point total for the sub faction and validates it.
@@ -65,6 +69,10 @@ const SubList = (props) => {
     }
     setSubFactionTotal(total);
   }, [props.subFactionUnits]);
+
+  useEffect(() => {
+    setPercentages({ min: displayPercentages().min, max: displayPercentages().max });
+  }, [contextArmy.selectedFactionName]);
 
   /**
    * Removes the unit.
@@ -81,6 +89,34 @@ const SubList = (props) => {
    */
   const removeItem = (identifier, i) => {
     contextArmy.removeItem(identifier, i);
+  };
+
+  /**
+   * Function calculates the minimum and maximum percentage allowance for the subfaction.
+   * @returns Object with min and
+   */
+  const displayPercentages = () => {
+    const subFaction = props.subFactionName;
+    const ruleArray = ruleObjectProvider(contextArmy.selectedFactionName);
+    const filteredArray = ruleArray.filter((r) => r.cardNames.includes(subFaction));
+
+    let minPercentage = 0;
+    let maxPercentage = 0;
+
+    // when changing armies, the rulearray briefly becomes undefined.
+    if (filteredArray.length !== 0) {
+      minPercentage = filteredArray[0].min * 100;
+      maxPercentage = filteredArray[0].max * 100;
+    }
+
+    return {
+      min: minPercentage,
+      max: maxPercentage,
+    };
+  };
+
+  const displayCurrentPercentage = () => {
+    return (subFactionTotal / contextArmy.maxPointsValue) * 100;
   };
 
   /**
@@ -193,11 +229,12 @@ const SubList = (props) => {
       <Grid container justify="flex-end" direction="column">
         <Grid container item xs={2} direction="row" className={classes.pointsAndpercentageBorder}>
           <Typography className={classes.subTotal}>Gesamt: {subFactionTotal} </Typography>
-          {/* <Typography className={classes.subTotal}> / {subFactionPercentage} % </Typography> */}
+
+          <Typography className={classes.subTotal}>  Prozent {displayCurrentPercentage()} % </Typography>
         </Grid>
         <Grid container item xs={2} direction="column">
-          {/* <Typography className={classes.subTotal}>{allowedMinPercentage === 0 ? null : `Minimum: ${allowedMinPercentage} %`}</Typography>
-          <Typography className={classes.subTotal}>{allowedMaxPercentage === 1 ? null : `Maximum ${allowedMaxPercentage} %`}</Typography> */}
+          <Typography className={classes.subTotal}>{`Minimum: ${percentages.min} %`}</Typography>
+          <Typography className={classes.subTotal}> {`Maximum ${percentages.max} %`}</Typography>
         </Grid>
       </Grid>
     </Fragment>
