@@ -405,6 +405,7 @@ const ListGeneratorController = () => {
         selectUnit: selectUnit,
         removeUnit: removeUnit,
         removeItem: removeItem,
+        clearList: clearList,
         // BLOCKED UNITS
         blockedUnits: blockedUnits,
         // ITEMSHOP
@@ -437,7 +438,7 @@ const ListGeneratorController = () => {
         </Grid>
         {/* ARMYLIST */}
         <Grid item xs={5}>
-          <ArmyListDisplay setTotalPointValue={setTotalPointValue} clearList={clearList} />
+          <ArmyListDisplay setTotalPointValue={setTotalPointValue} />
         </Grid>
         {/* RIGHT SIDE */}
         <Grid item xs={3}>
