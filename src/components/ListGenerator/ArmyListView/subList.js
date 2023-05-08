@@ -226,11 +226,10 @@ const SubList = (props) => {
           );
         })}
       </List>
-      <Grid container justify="flex-end" direction="column">
-        <Grid container item xs={2} direction="row" className={classes.pointsAndpercentageBorder}>
+      <Grid container justify="flex-start" direction="row">
+        <Grid container item xs={2} direction="row">
           <Typography className={classes.subTotal}>Gesamt: {subFactionTotal} </Typography>
-
-          <Typography className={classes.subTotal}>  Prozent {displayCurrentPercentage()} % </Typography>
+          <Typography className={classes.subTotal}> Prozent {displayCurrentPercentage()} % </Typography>
         </Grid>
         <Grid container item xs={2} direction="column">
           <Typography className={classes.subTotal}>{`Minimum: ${percentages.min} %`}</Typography>
