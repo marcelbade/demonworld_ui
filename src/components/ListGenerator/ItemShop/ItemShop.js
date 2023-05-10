@@ -265,35 +265,35 @@ const ItemShop = () => {
         <Grid item xs={8}>
           {/* ITEMLIST */}
           {contextArmy.unitSelectedForShop.unitType !== "G" ? (
-            <ButtonGroup variant="text" orientation="vertical" fullWidth={true} disableElevation>
-              {filterFetchedItemsForUnit()
-                .filter((item) => item.type === displayThisItemType)
-                .map((item) => {
-                  return (
-                    <Accordion key={uuidGenerator()}>
-                      <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
-                        <Button
-                          className={classes.buttons}
-                          disabled={disableButton(item)}
-                          onClick={() => {
-                            addItemToUnit(item);
-                          }}
-                          key={uuidGenerator()}
-                        >
-                          <Typography className={classes.itemName} variant="body1">
-                            {item.itemName}
-                          </Typography>
-                        </Button>
-                      </AccordionSummary>
-                      <AccordionDetails>
-                        <Typography className={classes.itemText} variant="body1">
-                          {item.specialRules}
+          <ButtonGroup variant="text" orientation="vertical" fullWidth={true} disableElevation>
+            {filterFetchedItemsForUnit()
+              .filter((item) => item.type === displayThisItemType)
+              .map((item) => {
+                return (
+                  <Accordion key={uuidGenerator()}>
+                    <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
+                      <Button
+                        className={classes.buttons}
+                        disabled={disableButton(item)}
+                        onClick={() => {
+                          addItemToUnit(item);
+                        }}
+                        key={uuidGenerator()}
+                      >
+                        <Typography className={classes.itemName} variant="body1">
+                          {item.itemName}
                         </Typography>
-                      </AccordionDetails>
-                    </Accordion>
-                  );
-                })}
-            </ButtonGroup>
+                      </Button>
+                    </AccordionSummary>
+                    <AccordionDetails>
+                      <Typography className={classes.itemText} variant="body1">
+                        {item.specialRules}
+                      </Typography>
+                    </AccordionDetails>
+                  </Accordion>
+                );
+              })}
+          </ButtonGroup>
           ) : (
             <Typography className={classes.errorNoItems} variant="h6">
               Es Gibt Keine Gegenstände für diese Einheit.
