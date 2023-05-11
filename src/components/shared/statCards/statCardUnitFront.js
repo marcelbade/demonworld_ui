@@ -10,9 +10,9 @@ import {
   renderCommandPoints,
   RenderSkillValues,
   displayFormationsn,
-} from "../compendiums/factionTable/depencies/factionTableFunctions";
+} from "../../compendiums/factionTable/depencies/factionTableFunctions";
 // icons
-import blackShieldIcon from "../customIcons/icons8-shield-black.png";
+import blackShieldIcon from "../../customIcons/icons8-shield-black.png";
 
 const useStyles = makeStyles({
   cardBox: {

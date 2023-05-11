@@ -13,7 +13,11 @@ const useStyles = makeStyles({
     marginRight: "2em",
   },
 });
-
+/**
+ * Wrapper Element. Allows for vertical or horizontal layout of the cards.
+ * @param {String} props A value for the alignment property of the MUI grid element.
+ * @returns jsx
+ */
 const StatCardCommander = (props) => {
   const classes = useStyles();
 

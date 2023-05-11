@@ -9,13 +9,18 @@ import StatCardUnitFront from "./statCardUnitFront";
 
 const useStyles = makeStyles({
   CardBox: {
-    marginRight: "2em",
+    marginRight: "2em",   
   },
 });
 
 const StatCardUnit = (props) => {
   const classes = useStyles();
 
+  /**
+   * Wrapper Element. Allows for vertical or horizontal layout of the cards.
+   * @param {String} props A value for the alignment property of the MUI grid element.
+   * @returns jsx
+   */
   return (
     <Grid direction={props.alignment} className={classes.CardBox} spacing={3}>
       <Grid item>

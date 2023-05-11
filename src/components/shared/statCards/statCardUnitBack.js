@@ -4,7 +4,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Typography } from "@material-ui/core";
 // functions and modules
-import { DisplayAllSpecialRules, DisplayUnitElements, displayUnitCost } from "../compendiums/factionTable/depencies/factionTableFunctions";
+import { DisplayAllSpecialRules, DisplayUnitElements, displayUnitCost } from "../../compendiums/factionTable/depencies/factionTableFunctions";
 
 const useStyles = makeStyles({
   cardBox: {

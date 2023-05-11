@@ -3,7 +3,7 @@ import React from "react";
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
 // icons
-import blackShieldIcon from "../customIcons/icons8-shield-black.png";
+import blackShieldIcon from "../../customIcons/icons8-shield-black.png";
 
 // components & functions
 import {
@@ -11,7 +11,7 @@ import {
   renderMagicPoints,
   renderCommandPoints,
   RenderSkillValues,
-} from "../compendiums/factionTable/depencies/factionTableFunctions";
+} from "../../compendiums/factionTable/depencies/factionTableFunctions";
 
 import { Grid, Typography } from "@material-ui/core";
 
