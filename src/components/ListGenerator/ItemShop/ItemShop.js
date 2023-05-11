@@ -8,6 +8,8 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { ArmyContext } from "../../../contexts/armyContext";
 import { isObjectEmtpy } from "../../shared/sharedFunctions";
 import { uuidGenerator } from "../../shared/sharedFunctions";
+// constants for component
+import { BOW_TYPES, CROSSBOW_TYPES, NAME_MAPPING, NON_MAGIC_ITEMS, UNIT_TO_ITEM_UNITTYPE_MAPPING } from "../../../constants/itemShopConstants";
 
 // Returns complet tabs panel with three tabs.
 
@@ -44,45 +46,6 @@ const useStyles = makeStyles({
   },
 });
 
-const NAME_MAPPING = {
-  armor: "Rüstung",
-  banner: "Banner",
-  instrument: "Trommeln & Hörner",
-  weapon: "Waffen",
-  potion: "Tränke",
-  ringsAndAmulets: "Ringe und Amulette",
-  item: "Gegenstände",
-  poison: "Gift",
-  warpaint: "Kriegsbemalung",
-};
-
-/**
- * Map item card types to unit types. I.e., mounted units can receive all items for mounted units, infantery units and items for all units.
- * C = CAVALERY
- * I = INFANTERY
- * M = MAGE
- * H = HERO
- * A = ARTILLERY
- * G = GIANT
- *
- * U = UNIT
- * A = ALL (every unit)
- *
- * Giant units (i.e., giants, wyfern, giant insects cant get an item )
- */
-
-const UNIT_TO_ITEM_UNITTYPE_MAPPING = {
-  C: ["C", "U", "A"],
-  I: ["U", "A"],
-  M: ["M", "A"],
-  H: ["H", "A"],
-  A: ["C", "U", "M", "H", "A"],
-  G: [],
-};
-
-// All item types that are excempt from the 1-item-per-element rule. These items can be equipped in addition to a magic item
-const NON_MAGIC_ITEMS = ["potion", "crystal", "warpaint", "poison"];
-
 const ItemShop = () => {
   const classes = useStyles();
   const contextArmy = useContext(ArmyContext);
@@ -110,19 +73,34 @@ const ItemShop = () => {
    * @returns an array of item objects. array can be emtpy.
    */
   const filterFetchedItemsForUnit = () => {
-    if (!isObjectEmtpy(contextArmy.unitSelectedForShop)) {
-      return contextArmy.fetchedItems
-        .filter(
-          (item) =>
-            item.faction.toLowerCase() === contextArmy.unitSelectedForShop.faction.toLowerCase() || item.faction.toLowerCase() === "all"
-        )
-        .filter((item) => UNIT_TO_ITEM_UNITTYPE_MAPPING[contextArmy.unitSelectedForShop.unitType].includes(item.unitType));
+    const unit = contextArmy.unitSelectedForShop;
+    const isUnitSelected = !isObjectEmtpy(contextArmy.unitSelectedForShop);
+
+    if (isUnitSelected) {
+      let filteredUnits = contextArmy.fetchedItems;
+      filteredUnits = filteredUnits
+        .filter((item) => item.faction === unit.faction || item.faction === "all")
+        .filter((item) => UNIT_TO_ITEM_UNITTYPE_MAPPING[unit.unitType].includes(item.unitType))
+        .filter((item) => {
+          if (!unit.standardBearer) {
+            return item.type !== "banner";
+          }
+          return true;
+        })
+        .filter((item) => {
+          if (unit.rangedWeapon === "x" || !BOW_TYPES.includes(unit.rangedWeapon) || !CROSSBOW_TYPES.includes(unit.rangedWeapon)) {
+            return item.type !== "boltsAndCrossbows" || item.type !== "arrowsAndBows";
+          }
+          return true;
+        });
+
+      return filteredUnits;
     } else {
       return [];
     }
   };
 
-  // creates a set of item types, i.e., a list w. no duplicates
+  // Function creates a set of item types, i.e., a list w. no duplicates
   const findDistinctItemTypes = () => {
     let temp = [];
 
@@ -264,7 +242,6 @@ const ItemShop = () => {
         </Grid>
         <Grid item xs={8}>
           {/* ITEMLIST */}
-          {contextArmy.unitSelectedForShop.unitType !== "G" ? (
           <ButtonGroup variant="text" orientation="vertical" fullWidth={true} disableElevation>
             {filterFetchedItemsForUnit()
               .filter((item) => item.type === displayThisItemType)
@@ -294,11 +271,6 @@ const ItemShop = () => {
                 );
               })}
           </ButtonGroup>
-          ) : (
-            <Typography className={classes.errorNoItems} variant="h6">
-              Es Gibt Keine Gegenstände für diese Einheit.
-            </Typography>
-          )}
         </Grid>
       </Grid>
     </Grid>
