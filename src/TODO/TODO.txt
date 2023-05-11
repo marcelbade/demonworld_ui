@@ -1,0 +1,69 @@
+
+TODO: src\components\shared\NoSelectionDisplay.js
+You need a pic, if you want to use this :D.
+ 
+ 
+TODO:  Goblins 
+- fix subfactions DONE
+- finish limit rules !
+- dont foget all heroes + shamans <= 40% !
+
+
+TODO: ItemShop
+- remember: there is, according to Patrick, a banner undead can get even though they have no standard bearer
+- its just one banner....
+- I cannot find it :O 
+- You can choose only one poison - it somwhow doesnt work 
+- when selecting an item add the following to the unit card 
+        - change the stats
+               
+
+TODO: mark subFaction below minimum and block army list!
+const subFactionBelowMinimum = contextArmy.blockedUnits.subFactionBelowMinimum;
+
+
+ TODO: Logic
+- do not exceed total army points -> not working 
+- subfaction below minimum -> how to display / Block
+- dwarven special rule not working
+- model all faction validators after dwarves!
+- tommysAnalysis function
+
+
+TODO:  RESPONSIVE DESIGN 
+ooppss...... Everything. you need to do everything here. 
+
+TODO: allItems 
+    - is not working! 
+    - The use Effect in the GeneratorController must be reowrked, its silly!
+
+ 
+
+ 
+
+TODO: missing features // Version 2  - disregard for now 
+- show finished list
+- print finished list
+- save list in MongoDB(!!)
+- Fast Loss Calculator (FLC) 
+- user accounts (!!)
+
+
+
+TODO:
+You accidentally deleted the input element for the army list's name. The element is still there, under shared - just fix it (selectionInput.js).
+
+
+
+    .sort((a, b) => {
+      if (a > b) return 1;
+      else return -1;
+    })
+    .sort((a, b) => {
+      if (a.unitType > b.unitType) return 1;
+      else return -1;
+    })
+    .sort((a, b) => {
+      if (a.points > b.points) return 1;
+      else return -1;
+    })
