@@ -119,7 +119,6 @@ const SubList = (props) => {
     };
   };
 
- 
   const displayCurrentPercentage = () => {
     return Math.round((subFactionTotal / contextArmy.maxPointsValue) * 100);
   };
@@ -233,8 +232,10 @@ const SubList = (props) => {
       </List>
       <Grid container direction="column">
         <Grid container item xs={4} direction="row">
-          <Typography className={classes.font}>{`Gesamt: ${subFactionTotal} Punkte`}</Typography>
-          <Typography className={clsx(classes.font, classes.currentPercentage)}> {`Prozent ${displayCurrentPercentage()} %`}</Typography>
+          <Typography className={classes.font}>{subFactionTotal === 0 ? null : `Gesamt: ${subFactionTotal} Punkte`}</Typography>
+          <Typography className={clsx(classes.font, classes.currentPercentage)}>
+            {displayCurrentPercentage() === 0 ? null : `Prozent ${displayCurrentPercentage()} %`}
+          </Typography>
         </Grid>
         <Grid container item xs={4} direction="row">
           <Typography className={classes.font}>{`Minimum: ${percentages.min} %`}</Typography>
