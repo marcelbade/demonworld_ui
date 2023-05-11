@@ -41,11 +41,14 @@ const useStyles = makeStyles({
   typographyFont: {
     fontFamily: "NotMaryKate",
   },
-  subTotal: {
+  font: {
     fontFamily: "NotMaryKate",
   },
   textMargin: {
     marginRight: "3em",
+  },
+  currentPercentage: {
+    marginLeft: "1em",
   },
 });
 
@@ -116,8 +119,9 @@ const SubList = (props) => {
     };
   };
 
+ 
   const displayCurrentPercentage = () => {
-    return (subFactionTotal / contextArmy.maxPointsValue) * 100;
+    return Math.round((subFactionTotal / contextArmy.maxPointsValue) * 100);
   };
 
   /**
@@ -227,14 +231,14 @@ const SubList = (props) => {
           );
         })}
       </List>
-      <Grid container justify="flex-start" direction="row">
-        <Grid container item xs={2} direction="row">
-          <Typography className={classes.subTotal}>Gesamt: {subFactionTotal} </Typography>
-          <Typography className={classes.subTotal}> Prozent {displayCurrentPercentage()} % </Typography>
+      <Grid container direction="column">
+        <Grid container item xs={4} direction="row">
+          <Typography className={classes.font}>{`Gesamt: ${subFactionTotal} Punkte`}</Typography>
+          <Typography className={clsx(classes.font, classes.currentPercentage)}> {`Prozent ${displayCurrentPercentage()} %`}</Typography>
         </Grid>
-        <Grid container item xs={2} direction="column">
-          <Typography className={classes.subTotal}>{`Minimum: ${percentages.min} %`}</Typography>
-          <Typography className={classes.subTotal}> {`Maximum ${percentages.max} %`}</Typography>
+        <Grid container item xs={4} direction="row">
+          <Typography className={classes.font}>{`Minimum: ${percentages.min} %`}</Typography>
+          <Typography className={clsx(classes.font, classes.currentPercentage)}> {`Maximum ${percentages.max} %`}</Typography>
         </Grid>
       </Grid>
     </Fragment>
