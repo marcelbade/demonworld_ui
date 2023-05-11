@@ -128,12 +128,12 @@ export const renderMagicPoints = (arcana) => {
  * @returns String
  */
 export const renderCommandPoints = (stars) => {
-  let starMarker = "";
+  let starIcons = "";
 
   for (let i = 0; i < stars; i++) {
-    starMarker = starMarker + "*";
+    starIcons = starIcons + "*";
   }
-  return starMarker;
+  return starIcons;
 };
 
 /**
