@@ -8,6 +8,7 @@ import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 import { ArmyContext } from "../../../contexts/armyContext";
 import { displayUnitCost } from "../../compendiums/factionTable/depencies/factionTableFunctions";
 import { ruleObjectProvider } from "../../gameLogic/globalRules/ruleObjectProvider";
+import { unitCardMultiSort } from "../../shared/sharedFunctions";
 // clsx
 import clsx from "clsx";
 
@@ -72,7 +73,7 @@ const SubList = (props) => {
 
   useEffect(() => {
     setPercentages({ min: displayPercentages().min, max: displayPercentages().max });
-  }, [contextArmy.selectedFactionName]);
+  }, [contextArmy.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * Removes the unit.
@@ -131,7 +132,7 @@ const SubList = (props) => {
   return (
     <Fragment>
       <List>
-        {props.subFactionUnits.map((u) => {
+        {unitCardMultiSort(props.subFactionUnits).map((u) => {
           const identifier = u.unitName + u.uniqueID;
           return (
             <ListItem key={identifier}>

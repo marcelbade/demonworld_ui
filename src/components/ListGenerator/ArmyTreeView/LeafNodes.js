@@ -5,7 +5,7 @@ import { Grid, IconButton, Tooltip, Typography } from "@material-ui/core";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 // components and functions
 import { ArmyContext } from "../../../contexts/armyContext";
-import { uuidGenerator } from "../../shared/sharedFunctions";
+import { uuidGenerator, unitCardMultiSort } from "../../shared/sharedFunctions";
 import { StyledTreeItem } from "../dependencies/styledTreeItem";
 
 const useStyles = makeStyles({
@@ -23,18 +23,18 @@ const useStyles = makeStyles({
 });
 
 /**
- * Element generates the leaf nodes in the TreeView. One leafNode == one unit. The leafNodes can be rendered in one of two states: blocked or default.
- * By default, the unit name, point cost and button and an "add" button are shown. If the unit is blocked by the army's rule, the add button is dusabled
+ * This element generates the leaf nodes in the TreeView. One leafNode == one unit. The leafNodes can be rendered in one of two states: blocked or default.
+ * By default, the unit name, point cost and button and an "add" button are shown. If the unit is
+ * blocked by the army's rule(s), the add button is disabled
  * and a tooltip with the reason for blocking it is shown on mouse hover.
  */
 const LeafNodes = (props) => {
   const classes = useStyles();
   const contextArmy = useContext(ArmyContext);
-  const allUnitsOfSubFaction = props.units.filter((f) => f.subFaction === props.subFaction);
 
   const blockResults = contextArmy.blockedUnits.unitsBlockedbyRules;
 
-  // no need for a useState hook - must be recalculated for every rerender
+  // no need for a useState hook - must be recalculated for every rerender!
   let blockedUnitNames = [];
 
   // collect all blocked units in one array
@@ -90,6 +90,10 @@ const LeafNodes = (props) => {
       </Grid>
     );
   };
+
+  
+  let allUnitsOfSubFaction = props.units.filter((f) => f.subFaction === props.subFaction);
+  allUnitsOfSubFaction = unitCardMultiSort(allUnitsOfSubFaction);
 
   return allUnitsOfSubFaction.map((unit) => {
     const NODE_ID = `${props.parentNodeId}${contextArmy.subfactions.indexOf(unit)}`;

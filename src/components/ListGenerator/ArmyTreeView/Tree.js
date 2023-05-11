@@ -21,7 +21,7 @@ const Tree = (props) => {
   const contextArmy = useContext(ArmyContext);
 
   /**
-   * Function creates a list the ally name has to be removed fro  the array so it is not displayed as a subFaction in the tree.
+   * Function creates a list. The ally name has to be removed from the array so it is not displayed as a army subFaction in the tree.
    * @returns
    */
   const createSubFactionList = () => {
@@ -31,6 +31,7 @@ const Tree = (props) => {
     } else {
       subfactions = contextArmy.allySubFactions;
     }
+
     return subfactions;
   };
 
@@ -38,17 +39,18 @@ const Tree = (props) => {
 
   const units = props.showsFaction ? contextArmy.units : contextArmy.alliedUnits;
 
-  //TODO mark subFaction below minimum and block army list!
-  //const subFactionBelowMinimum = contextArmy.blockedUnits.subFactionBelowMinimum;
-
-  return subfactions.map((subF) => {
-    const NODE_ID = createNodeID(subfactions.indexOf(subF));
-    return (
-      <StyledTreeItem key={uuidGenerator()} nodeId={NODE_ID} label={subF}>
-        <LeafNodes units={units} subFaction={subF} nodeID={NODE_ID} />
-      </StyledTreeItem>
-    );
-  });
+  return subfactions
+    .sort((a, b) => {
+      return a > b;
+    })
+    .map((subF) => {
+      const NODE_ID = createNodeID(subfactions.indexOf(subF));
+      return (
+        <StyledTreeItem key={uuidGenerator()} nodeId={NODE_ID} label={subF}>
+          <LeafNodes units={units} subFaction={subF} nodeID={NODE_ID} />
+        </StyledTreeItem>
+      );
+    });
 };
 
 export default Tree;
