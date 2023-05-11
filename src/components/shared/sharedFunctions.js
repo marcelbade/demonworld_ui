@@ -1,6 +1,6 @@
 import { HERO, MAGE, AUTOMATON, GIANT } from "../../constants/unitTypes";
-import StatCardCommander from "../shared/statCardCommander";
-import StatCardUnit from "../shared/statCardUnit";
+import StatCardCommander from "./statCards/statCardCommander";
+import StatCardUnit from "../shared/statCards/statCardUnit";
 
 /**
  *  Function is a compact UUID generator. Credit to
@@ -33,11 +33,13 @@ export const isObjectEmtpy = (obj) => {
  */
 export const unitOrCmdCard = (unit, alignment) => {
   let element;
-  const singleElements = [HERO, MAGE, AUTOMATON, GIANT];
+  const SINGLE_ELEMENTS_LIST = [HERO, MAGE, AUTOMATON, GIANT];
 
-  singleElements.includes(unit.unitType)
+  SINGLE_ELEMENTS_LIST.includes(unit.unitType)
     ? (element = <StatCardCommander unit={unit} alignment={alignment} />)
     : (element = <StatCardUnit unit={unit} alignment={alignment} />);
 
   return element;
 };
+
+ 
