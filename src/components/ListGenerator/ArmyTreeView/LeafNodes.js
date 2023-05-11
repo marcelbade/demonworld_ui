@@ -7,6 +7,7 @@ import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import { ArmyContext } from "../../../contexts/armyContext";
 import { uuidGenerator, unitCardMultiSort } from "../../shared/sharedFunctions";
 import { StyledTreeItem } from "../dependencies/styledTreeItem";
+import NodeLabelGenerator from "./NodeLabelGenerator";
 
 const useStyles = makeStyles({
   button: {
@@ -59,39 +60,6 @@ const LeafNodes = (props) => {
     return message;
   };
 
-  /**
-   * Generates a layouted label for the unblocked units.
-   * @param {unit Object} unit
-   * @returns jsx for the label
-   */
-  const generateLabel = (unit) => {
-    return (
-      <Grid container alignItems="center" direction="row">
-        <Grid item sm={3} md={7}>
-          <Typography variant="button" className={classes.unblockedLeafNode}>
-            {unit.unitName}
-          </Typography>
-        </Grid>
-        <Grid item xs={2} md={2}>
-          <Typography variant="button" className={classes.unblockedLeafNode}>
-            {unit.points}
-          </Typography>
-        </Grid>
-        <Grid item xs={1} md={1}>
-          <IconButton
-            className={classes.button}
-            onClick={() => {
-              contextArmy.selectUnit(unit);
-            }}
-          >
-            <AddCircleOutlineIcon />
-          </IconButton>
-        </Grid>
-      </Grid>
-    );
-  };
-
-  
   let allUnitsOfSubFaction = props.units.filter((f) => f.subFaction === props.subFaction);
   allUnitsOfSubFaction = unitCardMultiSort(allUnitsOfSubFaction);
 
@@ -123,7 +91,7 @@ const LeafNodes = (props) => {
       </Tooltip>
     ) : (
       // unit not blocked
-      <StyledTreeItem nodeId={NODE_ID} label={generateLabel(unit)} key={uuidGenerator()}></StyledTreeItem>
+      <StyledTreeItem nodeId={NODE_ID} label={NodeLabelGenerator(unit)} key={uuidGenerator()}></StyledTreeItem>
     );
   });
 };
