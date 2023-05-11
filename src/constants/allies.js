@@ -1,4 +1,4 @@
-export const alliesMapping = {
+export const ALLIES_MAPPING = {
   Goblins: "Orks",
   Orks: "Goblins",
   Imperium: "Zwerge",

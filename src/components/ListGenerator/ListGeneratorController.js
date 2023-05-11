@@ -12,7 +12,7 @@ import FactionTreeView from "./ArmyTreeView/treeView";
 import ArmyListDisplay from "./ArmyListView/armyListDisplay";
 import ItemShop from "./ItemShop/ItemShop";
 import { uuidGenerator } from "../shared/sharedFunctions";
-import { alliesMapping } from "../gameLogic/allies";
+import { ALLIES_MAPPING } from "../../constants/allies";
 import { ALL_FACTIONS_ARRAY } from "../../constants/factions";
 import { ruleValidation } from "../gameLogic/useRuleValidation";
 import { isObjectEmtpy } from "../shared/sharedFunctions";
@@ -135,7 +135,7 @@ const ListGeneratorController = () => {
    * Find The allied faction, if it exists. If no ally exists, return "none" instead of null.
    */
   useEffect(() => {
-    const name = alliesMapping[selectedFactionName] ? alliesMapping[selectedFactionName] : NONE;
+    const name = ALLIES_MAPPING[selectedFactionName] ? ALLIES_MAPPING[selectedFactionName] : NONE;
     setAllyName(name);
   }, [selectedFaction]); // eslint-disable-line react-hooks/exhaustive-deps
 

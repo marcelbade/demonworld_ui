@@ -8,7 +8,7 @@ import { Grid, Typography, TextField, InputAdornment, Button } from "@material-u
 // components and functions
 import { ArmyContext } from "../../../contexts/armyContext";
 import { uuidGenerator } from "../../shared/sharedFunctions";
-import { alliesMapping } from "../../gameLogic/allies";
+import { ALLIES_MAPPING } from "../../../constants/allies";
 
 import SubList from "./subList";
 
@@ -74,7 +74,7 @@ const ArmyListDisplay = (props) => {
    * @returns
    */
   const filterUnitsForSubFaction = (allUnits, subFaction) => {
-    allUnits.forEach((u) => (u.faction === alliesMapping[contextArmy.selectedFactionName] ? (u.subFaction = u.faction) : null));
+    allUnits.forEach((u) => (u.faction === ALLIES_MAPPING[contextArmy.selectedFactionName] ? (u.subFaction = u.faction) : null));
 
     return allUnits.filter((u) => u.subFaction === subFaction);
   };
