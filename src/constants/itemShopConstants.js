@@ -1,12 +1,11 @@
-
-// Item Types 
+// Item Types
 export const ITEM_TYPE_BANNER = "banner";
-export const ITEM_TYPE_CROSSBOWS = "banner";
+export const ITEM_TYPE_MUSICIAN = "instrument";
+export const ITEM_TYPE_CROSSBOWS = "boltsAndCrossbows";  
 export const ITEM_TYPE_BOWS = "arrowsAndBows";
 
-// Item can be used by any faction  
-export const FACTIONLESS_ITEM = "all";
-
+// Item can be used by any faction
+export const FACTIONLESS_ITEM = "*";
 
 // unit types
 export const CAVALRY = "C";
@@ -15,13 +14,14 @@ export const GIANT = "G";
 // unit has no range weapons
 export const NO_RANGE_WEAPON = "x";
 
-
 // Mapps item types in the itemCard obj to the displayed German name.
 export const NAME_MAPPING = {
   armor: "Rüstung",
   banner: "Banner",
   instrument: "Trommeln & Hörner",
   weapon: "Waffen",
+  boltsAndCrossbows: "Armbrüste",
+  arrowsAndBows: "Bögen",
   potion: "Tränke",
   ringsAndAmulets: "Ringe und Amulette",
   item: "Gegenstände",
@@ -39,15 +39,15 @@ export const NAME_MAPPING = {
  * G = GIANT
  * - The following two abbreviations are only used in item card objects:
  * U = UNIT
- * A = ALL (every unit)
+ * * = WILDCARD (every unit)
  */
 export const UNIT_TO_ITEM_UNITTYPE_MAPPING = {
-  C: ["C", "U", "A"],
-  I: ["U", "A"],
-  M: ["M", "A"],
-  H: ["H", "A"],
-  A: ["C", "U", "M", "H", "A"],
-  G: ["C", "U", "M", "H", "A"], 
+  C: ["C", "U", "*"],
+  I: ["U", "*"],
+  M: ["M", "H", "*"],
+  H: ["H", "*"],
+  A: ["C", "U", "M", "H", "*"],
+  G: ["C", "U", "M", "H", "*"],
 };
 
 // List of all item types that are excempt from the 1-item-per-element rule. These items can be equipped in addition to a magic item
