@@ -4,7 +4,6 @@ You need a pic, if you want to use this :D.
  
  
 TODO:  Goblins 
-- fix subfactions DONE
 - finish limit rules !
 - dont foget all heroes + shamans <= 40% !
 
@@ -54,16 +53,4 @@ TODO:
 You accidentally deleted the input element for the army list's name. The element is still there, under shared - just fix it (selectionInput.js).
 
 
-
-    .sort((a, b) => {
-      if (a > b) return 1;
-      else return -1;
-    })
-    .sort((a, b) => {
-      if (a.unitType > b.unitType) return 1;
-      else return -1;
-    })
-    .sort((a, b) => {
-      if (a.points > b.points) return 1;
-      else return -1;
-    })
+ 
