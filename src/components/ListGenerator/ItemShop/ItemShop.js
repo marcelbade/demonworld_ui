@@ -8,10 +8,17 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { ArmyContext } from "../../../contexts/armyContext";
 import { isObjectEmtpy } from "../../shared/sharedFunctions";
 import { uuidGenerator } from "../../shared/sharedFunctions";
-// constants for component
-import { BOW_TYPES, CROSSBOW_TYPES, NAME_MAPPING, NON_MAGIC_ITEMS, UNIT_TO_ITEM_UNITTYPE_MAPPING } from "../../../constants/itemShopConstants";
-
-// Returns complet tabs panel with three tabs.
+import { NAME_MAPPING, NON_MAGIC_ITEMS } from "../../../constants/itemShopConstants";
+import {
+  forBanner,
+  forFactionAndGenericItems,
+  forBows,
+  whenUnitHasNoLeader,
+  forUnitAndItemType,
+  forMusicians,
+  forCrossBows,
+  whenUnitIsGiant,
+} from "./itemShopFilterLogic";
 
 const useStyles = makeStyles({
   overlay: {
@@ -77,24 +84,17 @@ const ItemShop = () => {
     const isUnitSelected = !isObjectEmtpy(contextArmy.unitSelectedForShop);
 
     if (isUnitSelected) {
-      let filteredUnits = contextArmy.fetchedItems;
-      filteredUnits = filteredUnits
-        .filter((item) => item.faction === unit.faction || item.faction === "all")
-        .filter((item) => UNIT_TO_ITEM_UNITTYPE_MAPPING[unit.unitType].includes(item.unitType))
-        .filter((item) => {
-          if (!unit.standardBearer) {
-            return item.type !== "banner";
-          }
-          return true;
-        })
-        .filter((item) => {
-          if (unit.rangedWeapon === "x" || !BOW_TYPES.includes(unit.rangedWeapon) || !CROSSBOW_TYPES.includes(unit.rangedWeapon)) {
-            return item.type !== "boltsAndCrossbows" || item.type !== "arrowsAndBows";
-          }
-          return true;
-        });
+      let items = contextArmy.fetchedItems;
 
-      return filteredUnits;
+      return items
+        .filter((item) => forFactionAndGenericItems(item, unit))
+        .filter((item) => forUnitAndItemType(item, unit))
+        .filter((item) => forBanner(item, unit))
+        .filter((item) => forMusicians(item, unit))
+        .filter((item) => forBows(item, unit))
+        .filter((item) => forCrossBows(item, unit))
+        .filter((item) => whenUnitHasNoLeader(item, unit))
+        .filter((item) => whenUnitIsGiant(item, unit));
     } else {
       return [];
     }
