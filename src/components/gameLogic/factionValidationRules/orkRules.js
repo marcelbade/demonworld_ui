@@ -22,38 +22,52 @@ const rules = [
   {
     subFaction: "unit",
     cardNames: ["Einheit"],
-    min: 0.3,
+    min: 0.25,
     max: 1.0,
     error: "Deine Armeeliste muss zu mindestens 30% aus Einheiten bestehen.",
   },
 
   {
     subFaction: "characters",
-    cardNames: ["Held", "Befehlshaber", "Erdpriester", "Erzpriester", "Feuerpriester"],
+    cardNames: ["Helden / Befehlshaber"],
     min: 0.0,
-    max: 0.5,
+    max: 0.3,
     error: "Deine Armeeliste darf zu höchstens 50% aus Helden bestehen.",
   },
 
   {
-    subFaction: "gaeta",
-    cardNames: ["Gaeta"],
+    subFaction: "Clanngett",
+    cardNames: ["Clanngett"],
     min: 0.0,
-    max: 0.4,
+    max: 0.5,
     error: "Deine Armeeliste darf zu höchstens 40% aus Einheiten aus Gaeta bestehen.",
   },
   {
-    subFaction: "zahra",
-    cardNames: ["Zah'ra"],
+    subFaction: "machines",
+    cardNames: ["Geräte"],
     min: 0.0,
-    max: 0.4,
+    max: 0.3,
     error: "Deine Armeeliste darf zu höchstens 40% aus Einheiten aus Zah'ra bestehen.",
   },
   {
-    subFaction: "ally",
-    cardNames: ["Imperium"],
+    subFaction: "giants",
+    cardNames: ["Giganten"],
     min: 0.0,
-    max: 0.2,
+    max: 0.3,
+    error: "Deine Armeeliste darf zu höchstens 20% aus Einheiten aus Alliierten bestehen.",
+  },
+  {
+    subFaction: "clantroops",
+    cardNames: ["Sondertruppen des Clans"],
+    min: 0.0,
+    max: 0.4,
+    error: "Deine Armeeliste darf zu höchstens 20% aus Einheiten aus Alliierten bestehen.",
+  },
+  {
+    subFaction: "wizards",
+    cardNames: ["Zauberer"],
+    min: 0.0,
+    max: 0.3,
     error: "Deine Armeeliste darf zu höchstens 20% aus Einheiten aus Alliierten bestehen.",
   },
 ];
@@ -66,8 +80,7 @@ const validationResults = {
 
 const OrkRules = {
   testSubFactionRules: (availableUnits, selectedUnits, maxArmyPoints) => {
-    // dwarven special rule
-    percentageKingdomsAndAlly(selectedUnits);
+    
 
     //tournament rules
     let twoRuleResult = globalRules.maximumOfTwo(selectedUnits);
@@ -87,8 +100,8 @@ const OrkRules = {
   },
 };
 
-//SEPCIAL FACTION RULES
+//SPECIAL FACTION RULES
+ 
 
-const percentageKingdomsAndAlly = (selectedUnits) => {};
 
 export { OrkRules, rules };
