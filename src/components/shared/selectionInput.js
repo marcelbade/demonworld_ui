@@ -1,18 +1,24 @@
 // React
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-// components and functions
+// Material UI
 import { Autocomplete } from "@material-ui/lab";
- import { TextField } from "@material-ui/core";
- 
+import { TextField } from "@material-ui/core";
+
 const useStyles = makeStyles({
   root: { width: "600px", marginLeft: "40px" },
-  textField: {
+  armySelector: {
     "& .MuiAutocomplete-input": {
       fontSize: "40px",
       fontFamily: "BreatheOfFire",
     },
   },
+  AlternativeList:{
+    "& .MuiAutocomplete-input": {
+      fontSize: "14px",
+      fontFamily: "notMaryKate",
+    },
+  }
 });
 
 /**
@@ -22,19 +28,21 @@ const useStyles = makeStyles({
  */
 const SelectionInput = (props) => {
   const classes = useStyles();
- 
+
   return (
     <Autocomplete
       id="arymSelection"
       className={classes.root}
       options={props.options}
       onChange={(event, value, reason) => {
-        if ((reason === "clear")) {
-        props.clearFunction(); 
+        if (reason === "clear") {
+          props.clearFunction();
         }
         if (value) props.filterFunction(value);
       }}
-      renderInput={(params) => <TextField className={classes.textField} {...params} label={props.label} variant="standard" />}
+      renderInput={(params) => (
+        <TextField className={props.isArmySelector ? classes.armySelector : classes.AlternativeList} {...params} label={props.label} variant="standard" />
+      )}
     />
   );
 };
