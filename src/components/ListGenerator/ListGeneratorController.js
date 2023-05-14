@@ -17,6 +17,9 @@ import { ALL_FACTIONS_ARRAY } from "../../constants/factions";
 import { ruleValidation } from "../gameLogic/useRuleValidation";
 import { isObjectEmtpy } from "../shared/sharedFunctions";
 import { unitOrCmdCard } from "../shared/sharedFunctions";
+import AlternativeArmyListSelector from "./AlternativeArmyListSelection/AlternativeArmyListSelector";
+// constants
+import { ARMIES_WITH_ALTERNATIVE_LISTS } from "../../constants/factions";
 
 const useStyles = makeStyles((theme) => ({
   armySelectionBox: {
@@ -77,6 +80,9 @@ const ListGeneratorController = () => {
     lastclickedUnit: {},
     show: false,
   });
+  // alternative lists
+  const [armyHasAlternativeLists, setArmyHasAlternativeLists] = useState(false);
+  const [selectedAlternativeList, setSelectedAlternativeList] = useState("");
 
   /**
    * fetch units  from the Back End via REST.
@@ -172,6 +178,22 @@ const ListGeneratorController = () => {
     }
   }, [allyName]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  useEffect(() => {
+    setArmyHasAlternativeLists(ARMIES_WITH_ALTERNATIVE_LISTS.includes(selectedFactionName));
+    // here
+  }, [selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  /**
+   * Calculate total point value for army.
+   */
+  useEffect(() => {
+    let pointTotal = 0;
+    if (selectedUnits) {
+      selectedUnits.forEach((u) => (pointTotal += u.points));
+    }
+    setTotalPointValue(pointTotal);
+  }, [selectedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
+
   /**
    * Function returns all distinct subFactions of a selected faction.
    * @param {[unitCard object]} units
@@ -188,17 +210,6 @@ const ListGeneratorController = () => {
 
     return distinctSubFactions;
   };
-
-  /**
-   * Calculate total point value for army.
-   */
-  useEffect(() => {
-    let pointTotal = 0;
-    if (selectedUnits) {
-      selectedUnits.forEach((u) => (pointTotal += u.points));
-    }
-    setTotalPointValue(pointTotal);
-  }, [selectedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * Adds the selected units to a central list of units selected by the user and adds 2 things:
@@ -392,6 +403,7 @@ const ListGeneratorController = () => {
         selectedFactionName: selectedFactionName,
         subfactions: distinctSubFactions,
         units: selectedFaction,
+        armyHasAlternativeLists: armyHasAlternativeLists,
         // ALLY
         allyName: allyName,
         allySubFactions: distinctAllySubFactions,
@@ -423,17 +435,23 @@ const ListGeneratorController = () => {
         showStatCard: showStatCard,
         setShowStatCard: setShowStatCard,
         toggleBetweenCards: toggleBetweenCards,
+        // ALTERNATIVE LISTS
+        selectedAlternativeList: selectedAlternativeList,
+        setSelectedAlternativeList: setSelectedAlternativeList,
       }}
     >
       <Grid container direction="row">
+        {/* ARMY SELECTION */}
         <Grid container item xs={3} direction="column" className={classes.armySelectionBox}>
-          {/* ARMY SELECTION */}
           <SelectionInput
             className={classes.selector}
             filterFunction={setSelectedFactionName}
+            isArmySelector={true}
             options={ALL_FACTIONS_ARRAY}
             label="Wähle Eine Fraktion"
           />
+          {armyHasAlternativeLists ? <AlternativeArmyListSelector /> : null}
+
           <FactionTreeView className={classes.selector} />
         </Grid>
         {/* ARMYLIST */}
