@@ -8,7 +8,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { ArmyContext } from "../../../contexts/armyContext";
 import { isObjectEmtpy } from "../../shared/sharedFunctions";
 import { uuidGenerator } from "../../shared/sharedFunctions";
-import { NAME_MAPPING, NON_MAGIC_ITEMS } from "../../../constants/itemShopConstants";
+import { NAME_MAPPING } from "../../../constants/itemShopConstants";
 import {
   forBanner,
   forFactionAndGenericItems,
@@ -19,6 +19,7 @@ import {
   forCrossBows,
   whenUnitIsGiant,
 } from "./itemShopFilterLogic";
+import { hasItemBeenPicked, hasItemBeenPickedByOtherUnit, ownsMaxNumberMagicItems, hasItemTypeBeenPicked } from "./itemShopSelectionLogic";
 
 const useStyles = makeStyles({
   overlay: {
@@ -61,10 +62,12 @@ const ItemShop = () => {
   const [ItemTypes, setItemTypes] = useState([]);
   const [displayThisItemType, setDisplayThisItemType] = useState(ItemTypes[0]);
 
+  // When the selected unit changes, set the correct items in the shop
   useEffect(() => {
     setItemTypes(findDistinctItemTypes());
   }, [contextArmy.unitSelectedForShop]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // Wehn the selected unit changes, take all items it has been equipped with and add them to the "allItems" state variable. This serves as a central regeistry of all items allready taken.
   useEffect(() => {
     let unit = contextArmy.unitSelectedForShop;
 
@@ -100,15 +103,18 @@ const ItemShop = () => {
     }
   };
 
-  // Function creates a set of item types, i.e., a list w. no duplicates
+  /**
+   * Function finds the distinct item types of the filtered item list and returns it.
+   * @returns [String] an array of item type names.
+   */
   const findDistinctItemTypes = () => {
-    let temp = [];
+    let distinctTypes = [];
 
     filterFetchedItemsForUnit().forEach((item) => {
-      if (!temp.includes(item.type)) return temp.push(item.type);
+      if (!distinctTypes.includes(item.type)) return distinctTypes.push(item.type);
     });
 
-    return temp;
+    return distinctTypes;
   };
 
   // shows all items of the type whose button was pressed.
@@ -125,70 +131,14 @@ const ItemShop = () => {
    */
   const disableButton = (item) => {
     let unit = contextArmy.unitSelectedForShop;
+    let allItems = contextArmy.allItems;
 
-    //item has already been picked by different unit
-    const itemPickedByOtherUnit = hasItemBeenPickedByOtherUnit(item);
-
-    // item has already been picked (same name)
+    const itemPickedByOtherUnit = hasItemBeenPickedByOtherUnit(allItems, item);
     const itemPicked = hasItemBeenPicked(unit, item);
-
-    // maximum number of magic items reached
     const maxNumber = ownsMaxNumberMagicItems(unit, item);
-
-    // item type has already been picked (type of non-magical item has already been picked)
     const itemTypePicked = hasItemTypeBeenPicked(unit, item);
 
     return itemPicked || itemPickedByOtherUnit || maxNumber || itemTypePicked;
-  };
-
-  const hasItemBeenPickedByOtherUnit = (item) => {
-    if (contextArmy.allItems.includes(item.itemName)) {
-      return true;
-    }
-    return false;
-  };
-
-  const hasItemBeenPicked = (unit, item) => {
-    if (unit.equipment.filter((e) => e.name === item.itemName).length > 0) {
-      //  updateEquipmentFlags(unit, item);
-      return true;
-    }
-    return false;
-  };
-
-  const hasItemTypeBeenPicked = (unit, item) => {
-    if (NON_MAGIC_ITEMS.includes(item.type)) {
-      const isGenericType = unit.equipmentTypes[item.type];
-      const typeAlreadyPicked = unit.equipment.filter((e) => e.type === item.type).length > 0;
-
-      if (!isGenericType && typeAlreadyPicked) {
-        unit.equipmentTypes[item.type] = true;
-      }
-
-      if (isGenericType && typeAlreadyPicked) {
-        unit.equipmentTypes[item.type] = false;
-      }
-
-      return isGenericType;
-    }
-
-    return false;
-  };
-
-  const ownsMaxNumberMagicItems = (unit, item) => {
-    let magicItemNumber = 0;
-    let isMagicItem = false;
-
-    if ("equipment" in unit && unit.equipment.length > 0) {
-    }
-    magicItemNumber = unit.equipment.filter((e) => !NON_MAGIC_ITEMS.includes(e.type)).length;
-    isMagicItem = !NON_MAGIC_ITEMS.includes(item.type);
-
-    if (isMagicItem && magicItemNumber === unit.equipmentTypes.maxMagic) {
-      return true;
-    }
-
-    return false;
   };
 
   /**
