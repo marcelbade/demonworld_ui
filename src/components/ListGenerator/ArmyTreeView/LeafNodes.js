@@ -25,8 +25,8 @@ const useStyles = makeStyles({
 
 /**
  * This element generates the leaf nodes in the TreeView. One leafNode == one unit. The leafNodes can be rendered in one of two states: blocked or default.
- * By default, the unit name, point cost and button and an "add" button are shown. If the unit is
- * blocked by the army's rule(s), the add button is disabled
+ * By default, the unit name, point cost and an "add" button are shown. If the unit is
+ * blocked by the army's rule(s), this add button is disabled
  * and a tooltip with the reason for blocking it is shown on mouse hover.
  */
 const LeafNodes = (props) => {
