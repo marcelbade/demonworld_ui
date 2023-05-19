@@ -42,11 +42,11 @@ export const hasItemTypeBeenPicked = (unit, item) => {
     if (!isGenericType && typeAlreadyPicked) {
       unit.equipmentTypes[item.type] = true;
     }
-
+    
     if (isGenericType && typeAlreadyPicked) {
       unit.equipmentTypes[item.type] = false;
     }
-
+ 
     return isGenericType;
   }
 
