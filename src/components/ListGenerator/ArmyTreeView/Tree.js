@@ -21,7 +21,7 @@ const Tree = (props) => {
   const contextArmy = useContext(ArmyContext);
 
   /**
-   * Function creates a list. The ally name has to be removed from the array so it is not displayed as a army subFaction in the tree.
+   * Function creates a list. The ally name has to be removed from the array so it is not displayed as an army subFaction in the tree.
    * @returns
    */
   const createSubFactionList = () => {
@@ -37,6 +37,7 @@ const Tree = (props) => {
 
   const subfactions = createSubFactionList();
 
+  // tree for army or ally?
   const units = props.showsFaction ? contextArmy.units : contextArmy.alliedUnits;
 
   return subfactions
