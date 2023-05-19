@@ -1,19 +1,15 @@
 // React
 import React, { useState, useContext, useEffect } from "react";
-//Material UI
-import { Grid } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-// components and functions
+ 
+ // components and functions
 import { ArmyContext } from "../../../contexts/armyContext";
 import SelectionInput from "../../shared/selectionInput";
 
 // constants
 import { ARMY_TO_ALTERNATIVES_MAPPER, ALTERNATIVE_ARMY_SELECTION_TEXT } from "../../../constants/factions";
 
-const useStyles = makeStyles({});
 
 const AlternativeArmyListSelector = () => {
-  const classes = useStyles();
   const contextArmy = useContext(ArmyContext);
 
   //state
@@ -53,17 +49,7 @@ const AlternativeArmyListSelector = () => {
     }
   };
 
-  return (
-    <Grid container direction="column" className={classes.overlay}>
-      <SelectionInput
-        className={classes.selector}
-        filterFunction={setAlternativeArmyListOption}
-        isArmySelector={false}
-        options={options}
-        label={labelText}
-      />
-    </Grid>
-  );
+  return <SelectionInput filterFunction={setAlternativeArmyListOption} isArmySelector={false} options={options} label={labelText} />;
 };
 
 export default AlternativeArmyListSelector;
