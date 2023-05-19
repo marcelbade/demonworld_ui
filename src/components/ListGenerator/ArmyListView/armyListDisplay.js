@@ -1,5 +1,5 @@
 // React
-import React, { Fragment, useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 // Material UI
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -14,6 +14,8 @@ import SubList from "./subList";
 
 // TODO: remove unneeded styles
 const useStyles = makeStyles({
+  ArmyListDisplay: {},
+
   root: { fontFamily: "gonjuring" },
   list: { height: "70%", minHeight: "70%", maxHeight: "70%" },
 
@@ -29,7 +31,7 @@ const useStyles = makeStyles({
   removeButton: {
     fontFamily: "notMaryKate",
     padding: "10px",
-    marginLeft: "550px",
+
     "&:hover": {
       backgroundColor: "grey",
       color: "red",
@@ -91,8 +93,8 @@ const ArmyListDisplay = (props) => {
    * This creates the centre of the UI: the actual army list consisting of the selected units and the display of the maximum * army points.
    */
   return contextArmy ? (
-    <Fragment>
-      <Grid container directiom="row" alignContent="center">
+    <Grid container direction="column" className={classes.ArmyListDisplay}>
+      <Grid item container justify="flex-end">
         <Button
           className={classes.removeButton}
           variant="outlined"
@@ -103,20 +105,20 @@ const ArmyListDisplay = (props) => {
           Liste löschen
         </Button>
       </Grid>
-      <List>
-        {contextArmy.subfactions.map((subFaction) => (
-          <ListItem key={uuidGenerator()}>
-            <Grid container direction={"column"}>
-              <Typography className={classes.HeaderBox}>{subFaction}</Typography>
-              {/* DISPLAY UNITS, PONT COST, PERCENTAGES FOR ONE SUBFACTION */}
-              <SubList subFactionUnits={filterUnitsForSubFaction(contextArmy.addedUnits, subFaction)} 
-              subFactionName={subFaction} />
-            </Grid>
-          </ListItem>
-        ))}
-      </List>
-
-      <Grid container directiom="row" alignContent="center">
+      <Grid item>
+        <List>
+          {contextArmy.subfactions.map((subFaction) => (
+            <ListItem key={uuidGenerator()}>
+              <Grid container direction={"column"}>
+                <Typography className={classes.HeaderBox}>{subFaction}</Typography>
+                {/* DISPLAY UNITS, PONT COST, PERCENTAGES FOR ONE SUBFACTION */}
+                <SubList subFactionUnits={filterUnitsForSubFaction(contextArmy.addedUnits, subFaction)} subFactionName={subFaction} />
+              </Grid>
+            </ListItem>
+          ))}
+        </List>
+      </Grid>
+      <Grid item container directiom="row" alignContent="center">
         {/* TOTAL SPENT POINTS */}
         <Typography className={classes.total}>Gesamtpunktzahl: {contextArmy.totalPointValue} / </Typography>
         {/* TOTAL POINT ALLOWANCE */}
@@ -142,7 +144,7 @@ const ArmyListDisplay = (props) => {
           variant="standard"
         />
       </Grid>
-    </Fragment>
+    </Grid>
   ) : null;
 };
 

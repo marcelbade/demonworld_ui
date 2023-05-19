@@ -5,21 +5,28 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Autocomplete } from "@material-ui/lab";
 import { TextField } from "@material-ui/core";
 
-const useStyles = makeStyles({
-  root: { width: "600px", marginLeft: "40px" },
-  armySelector: {
-    "& .MuiAutocomplete-input": {
-      fontSize: "40px",
+const useStyles = makeStyles((theme) => ({
+
+  root: {
+    marginLeft: "1em",
+    [theme.breakpoints.up("md")]: {
+      fontSize: "3em",
       fontFamily: "BreatheOfFire",
+      width: "10em",
     },
-  },
-  AlternativeList:{
-    "& .MuiAutocomplete-input": {
-      fontSize: "14px",
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "2em",
+      fontFamily: "BreatheOfFire",
+      width: "10em",
+    },
+
+    "& .MuiFormLabel-root": {
+      fontSize: "20px",
       fontFamily: "notMaryKate",
     },
-  }
-});
+
+  },
+}));
 
 /**
  *Function creates the army selection Autocomplete element used by all pages.
@@ -38,10 +45,17 @@ const SelectionInput = (props) => {
         if (reason === "clear") {
           props.clearFunction();
         }
-        if (value) props.filterFunction(value);
+        if (value) {
+          props.filterFunction(value);
+        }
       }}
       renderInput={(params) => (
-        <TextField className={props.isArmySelector ? classes.armySelector : classes.AlternativeList} {...params} label={props.label} variant="standard" />
+        <TextField
+          className={props.isArmySelector ? classes.armySelector : classes.AlternativeList}
+          {...params}
+          label={props.label}
+          variant="standard"
+        />
       )}
     />
   );

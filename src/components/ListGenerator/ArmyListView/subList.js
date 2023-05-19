@@ -154,7 +154,7 @@ const SubList = (props) => {
                     </IconButton>
                   </Grid>
                   {/* NAME */}
-                  <Grid item xs={2}>
+                  <Grid item xs={5}>
                     <Typography variant="button" className={classes.typographyFont}>
                       {u.unitName}{" "}
                     </Typography>
@@ -166,7 +166,7 @@ const SubList = (props) => {
                     </Typography>
                   </Grid>
                   {/* BUTTONS */}
-                  <Grid item xs={8} direction="row">
+                  <Grid item xs={5} direction="row">
                     <Button
                       className={classes.buttons}
                       variant="outlined"

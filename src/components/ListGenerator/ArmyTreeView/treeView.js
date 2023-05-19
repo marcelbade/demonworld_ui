@@ -17,19 +17,26 @@ TransitionComponent.propTypes = {
   in: PropTypes.bool,
 };
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   treeViewBox: {
     height: "auto",
-    paddingLeft: "60px",
+    paddingLeft: "5em",
+    [theme.breakpoints.up("md")]: {
+      width: "45em",
+    },
+    [theme.breakpoints.down("md")]: {
+      width: "25em",
+    },
+
   },
   allyTitle: {
-    paddingLeft: "60px",
+    paddingLeft: "5em",
     fontFamily: "BreatheOfFire",
-    fontSize: "40px",
+    fontSize: "3em",
     color: "black",
     paddingTop: "1em",
   },
-});
+}));
 
 const FactionTreeView = () => {
   const classes = useStyles();
