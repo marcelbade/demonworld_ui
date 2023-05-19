@@ -22,16 +22,24 @@ import AlternativeArmyListSelector from "./AlternativeArmyListSelection/Alternat
 import { ARMIES_WITH_ALTERNATIVE_LISTS } from "../../constants/factions";
 
 const useStyles = makeStyles((theme) => ({
-  armySelectionBox: {
-    backgroundColor: "white",
-    [theme.breakpoints.down("lg")]: {
-      backgroundColor: "red",
+  displayBox: {
+    backgroundColor: "green",
+
+    [theme.breakpoints.up("md")]: {
+      flexDirection: "row",
+    },
+    [theme.breakpoints.down("md")]: {
+      flexDirection: "column",
     },
   },
-  selector: {
-    marginTop: "10em",
-    paddingLeft: "10em",
-    marginBottom: "60em",
+
+  armySelectionBox: {
+    [theme.breakpoints.down("lg")]: {
+      backgroundColor: "yellow",
+    },
+    [theme.breakpoints.down("sm")]: {
+      backgroundColor: "red",
+    },
   },
   itemScreen: {},
   UnitCardDisplay: {
@@ -180,7 +188,6 @@ const ListGeneratorController = () => {
 
   useEffect(() => {
     setArmyHasAlternativeLists(ARMIES_WITH_ALTERNATIVE_LISTS.includes(selectedFactionName));
-    // here
   }, [selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
@@ -396,6 +403,8 @@ const ListGeneratorController = () => {
     setItemShopState({ clickedUnit: selectedUnits[0], lastclickedUnit: selectedUnits[0], show: false });
   };
 
+  console.log(selectedUnits);
+
   return fetchedFactions && fetchedItems ? (
     <ArmyProvider
       value={{
@@ -440,9 +449,9 @@ const ListGeneratorController = () => {
         setSelectedAlternativeList: setSelectedAlternativeList,
       }}
     >
-      <Grid container direction="row">
+      <Grid container className={classes.displayBox}>
         {/* ARMY SELECTION */}
-        <Grid container item xs={3} direction="column" className={classes.armySelectionBox}>
+        <Grid item className={classes.armySelectionBox}>
           <SelectionInput
             className={classes.selector}
             filterFunction={setSelectedFactionName}
@@ -455,11 +464,11 @@ const ListGeneratorController = () => {
           <FactionTreeView className={classes.selector} />
         </Grid>
         {/* ARMYLIST */}
-        <Grid item xs={5}>
+        <Grid item>
           <ArmyListDisplay setTotalPointValue={setTotalPointValue} />
         </Grid>
         {/* RIGHT SIDE */}
-        <Grid item xs={3}>
+        <Grid item>
           {/* ITEMSHOP */}
           <Drawer anchor={"right"} variant="persistent" open={itemShopState.show} className={classes.itemScreen}>
             <ItemShop />
