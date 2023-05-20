@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 //Material UI
 import { Typography, Grid, ButtonGroup, Button, Tooltip, IconButton } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+
 // components and functions
 import { ListItem } from "@mui/material";
 import { uuidGenerator } from "../shared/sharedFunctions";
@@ -12,6 +13,7 @@ import clsx from "clsx";
 // icons
 import skullsIcon from "../../icons/skulls.png";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 
@@ -62,19 +64,32 @@ const LossListElement = (props) => {
   //state
   const [numberOfLostfElements, setNumberOfLostfElements] = useState(0);
   const [unitPointsLost, setUnitPointsLost] = useState(0);
+  const [itemsLost, setItemsLost] = useState(0);
+  const [itemClicked, setItemClicked] = useState([]);
 
   const TEXT = "Verlorene Elemente:";
 
   useEffect(() => {
     const points = props.unit.points;
     const elements = props.unit.numberOfElements;
-    const pointsLost = numberOfLostfElements * (points / elements);
+    let pointsLost = numberOfLostfElements * (points / elements);
+    pointsLost += itemsLost;
     setUnitPointsLost(pointsLost);
-  }, [numberOfLostfElements]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [numberOfLostfElements, itemsLost]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     props.addToTotalLostPoints(props.unit.unitName, props.unit.uniqueID, unitPointsLost);
   }, [unitPointsLost]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (props.unit.equipment.length !== 0) {
+      let temp = [];
+
+      for (let i = 0; i < props.unit.equipment.length; i++) {
+        temp.push(false);
+      }
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * Function lets the user add lost elements.
@@ -115,12 +130,32 @@ const LossListElement = (props) => {
     return numberOfLostfElements === 0;
   };
 
-  /**
-   * Function prevents the user from choosing a negative number of lost elements.
-   * @returns  boolean flag
-   */
-  const addItemToLosses = () => {
-    return 1;
+  const addItemToLosses = (points) => {
+    let temp = itemsLost;
+    temp += points;
+
+    setItemsLost(temp);
+  };
+
+  const subtractItemFromLosses = (points) => {
+    let temp = itemsLost;
+    temp -= points;
+
+    setItemsLost(temp);
+  };
+
+  const markItemLost = (index) => {
+    let tempArray = [...itemClicked];
+    tempArray[index] = true;
+
+    setItemClicked(tempArray);
+  };
+
+  const removeLostMarker = (index) => {
+    let tempArray = [...itemClicked];
+    tempArray[index] = false;
+
+    setItemClicked(tempArray);
   };
 
   return (
@@ -140,14 +175,27 @@ const LossListElement = (props) => {
                   return (
                     <Grid item xs={12} container direction="row" className={classes.equipment} key={uuidGenerator()}>
                       <Grid item xs={3}>
-                        <Button
-                          className={clsx(classes.deleteBttn, classes.textMargin)}
-                          onClick={() => {
-                            addItemToLosses();
-                          }}
-                        >
-                          <AddCircleOutlineIcon />
-                        </Button>
+                        {itemClicked[i] ? (
+                          <Button
+                            className={clsx(classes.deleteBttn, classes.textMargin)}
+                            onClick={() => {
+                              subtractItemFromLosses(e.points);
+                              removeLostMarker(i);
+                            }}
+                          >
+                            <RemoveCircleOutlineIcon />
+                          </Button>
+                        ) : (
+                          <Button
+                            className={clsx(classes.deleteBttn, classes.textMargin)}
+                            onClick={() => {
+                              addItemToLosses(e.points);
+                              markItemLost(i);
+                            }}
+                          >
+                            <AddCircleOutlineIcon />
+                          </Button>
+                        )}
                       </Grid>
                       <Grid item xs={8}>
                         <Typography variant="button" className={classes.typographyFont}>
