@@ -71,7 +71,7 @@ const LossListElement = (props) => {
   }, [numberOfLostfElements]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    props.addToTotalLostPoints(unitPointsLost);
+    props.addToTotalLostPoints(props.unit.unitName, unitPointsLost);
   }, [unitPointsLost]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**

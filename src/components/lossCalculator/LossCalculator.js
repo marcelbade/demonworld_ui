@@ -25,22 +25,46 @@ const LossCalculator = () => {
 
   //state
   const [totalPointsLost, setTotalPointsLost] = useState(0);
+  const [trackUnitLoss, setTrackUnitLoss] = useState([]);
 
-  useEffect(() => {}, []); // eslint-disable-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    let tempArray = MOCK_LIST.map((u) => {
+      return {
+        name: u.unitName,
+        lostPoints: 0,
+      };
+    });
 
-  const addToTotalLostPoints = (points) => {
-    let temp = totalPointsLost;
-    temp += points;
+    setTrackUnitLoss(tempArray);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-    setTotalPointsLost(temp);
+  useEffect(() => {
+    let sum = 0;
+
+    trackUnitLoss.forEach((u) => {
+      sum += u.lostPoints;
+    });
+
+    setTotalPointsLost(sum);
+  }, [trackUnitLoss]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const addToTotalLostPoints = (name, lostPoints) => {
+    let tempArray = [...trackUnitLoss];
+
+    tempArray.forEach((u) => {
+      if (u.name === name) {
+        u.lostPoints = lostPoints;
+      }
+    });
+
+    setTrackUnitLoss(tempArray);
   };
 
- 
   return (
     <Grid container direction="column">
       <List>
         {unitCardMultiSort(MOCK_LIST).map((u) => {
-          return <LossListElement unit={u} addToTotalLostPoints={addToTotalLostPoints}   />;
+          return <LossListElement unit={u} addToTotalLostPoints={addToTotalLostPoints} />;
         })}
       </List>
       <Grid item container direction="row">
