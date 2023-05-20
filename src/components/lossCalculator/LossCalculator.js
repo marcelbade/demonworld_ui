@@ -72,7 +72,7 @@ const LossCalculator = () => {
     <Grid container direction="column">
       <List>
         {unitCardMultiSort(MOCK_LIST).map((u) => {
-          return <LossListElement unit={u} addToTotalLostPoints={addToTotalLostPoints} key={ u.uniqueID} />;
+          return <LossListElement unit={u} addToTotalLostPoints={addToTotalLostPoints} key={uuidGenerator()} />;
         })}
       </List>
       <Grid item container direction="row">
