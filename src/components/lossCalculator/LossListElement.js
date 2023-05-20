@@ -5,7 +5,8 @@ import { Typography, Grid, ButtonGroup, Button, Tooltip, IconButton } from "@mat
 import { makeStyles } from "@material-ui/core/styles";
 // components and functions
 import { ListItem } from "@mui/material";
-// constants
+import { uuidGenerator } from "../shared/sharedFunctions";
+
 // clsx
 import clsx from "clsx";
 // icons
@@ -19,8 +20,8 @@ const useStyles = makeStyles((theme) => ({
     border: "solid black 0.1em",
     borderRadius: "4px",
     padding: "2em",
-    width: "30vw",
-    height: "15vh",
+    width: "30%",
+    height: "15%",
 
     [theme.breakpoints.up("md")]: {
       flexDirection: "row",
@@ -107,11 +108,19 @@ const LossListElement = (props) => {
   };
 
   /**
-   * FGunction prevents the user from choosing a negative number of lost elements.
+   * Function prevents the user from choosing a negative number of lost elements.
    * @returns  boolean flag
    */
   const notUnderZero = () => {
     return numberOfLostfElements === 0;
+  };
+
+  /**
+   * Function prevents the user from choosing a negative number of lost elements.
+   * @returns  boolean flag
+   */
+  const addItemToLosses = () => {
+    return 1;
   };
 
   return (
@@ -129,9 +138,14 @@ const LossListElement = (props) => {
             {props.unit.equipment.length !== 0
               ? props.unit.equipment.map((e, i) => {
                   return (
-                    <Grid item xs={12} container direction="row" className={classes.equipment} key={props.unit.uniqueID}>
+                    <Grid item xs={12} container direction="row" className={classes.equipment} key={uuidGenerator()}>
                       <Grid item xs={3}>
-                        <Button className={clsx(classes.deleteBttn, classes.textMargin)} onClick={() => {}}>
+                        <Button
+                          className={clsx(classes.deleteBttn, classes.textMargin)}
+                          onClick={() => {
+                            addItemToLosses();
+                          }}
+                        >
                           <AddCircleOutlineIcon />
                         </Button>
                       </Grid>
