@@ -4,9 +4,10 @@ import React, { useEffect, useState } from "react";
 import { Grid, List, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 // components and functions
-import { unitCardMultiSort } from "../shared/sharedFunctions";
+import { unitCardMultiSort, uuidGenerator } from "../shared/sharedFunctions";
 import LossListElement from "./LossListElement";
 import { MOCK_LIST } from "./mockList";
+
 // constants
 // clsx
 import clsx from "clsx";
@@ -71,7 +72,7 @@ const LossCalculator = () => {
     <Grid container direction="column">
       <List>
         {unitCardMultiSort(MOCK_LIST).map((u) => {
-          return <LossListElement unit={u} addToTotalLostPoints={addToTotalLostPoints} />;
+          return <LossListElement unit={u} addToTotalLostPoints={addToTotalLostPoints} key={ u.uniqueID} />;
         })}
       </List>
       <Grid item container direction="row">
