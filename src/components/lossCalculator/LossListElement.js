@@ -130,6 +130,10 @@ const LossListElement = (props) => {
     return numberOfLostfElements === 0;
   };
 
+  /**
+   * Function adds the point cost of all items marked lost
+   * @param {int} points
+   */
   const addItemToLosses = (points) => {
     let temp = itemsLost;
     temp += points;
@@ -137,6 +141,10 @@ const LossListElement = (props) => {
     setItemsLost(temp);
   };
 
+  /**
+   * Function subtracts the point cost of all items not marked lost.
+   * @param {int} points
+   */
   const subtractItemFromLosses = (points) => {
     let temp = itemsLost;
     temp -= points;
@@ -144,6 +152,10 @@ const LossListElement = (props) => {
     setItemsLost(temp);
   };
 
+  /**
+   * An array of boolean flags is used to keep track of which items are marked lost. The index in the boolean array corresponds to the same index in the item list. A boolean flag set to true means the item was lost. The boolean flag then toggles the item's button between "add item to losses" / "remove item from losses".
+   * @param {int} index
+   */
   const markItemLost = (index) => {
     let tempArray = [...itemClicked];
     tempArray[index] = true;
@@ -151,6 +163,7 @@ const LossListElement = (props) => {
     setItemClicked(tempArray);
   };
 
+  // see comment for the "markItemLost" function.
   const removeLostMarker = (index) => {
     let tempArray = [...itemClicked];
     tempArray[index] = false;
