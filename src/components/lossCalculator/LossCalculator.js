@@ -30,7 +30,7 @@ const LossCalculator = () => {
   useEffect(() => {
     let tempArray = MOCK_LIST.map((u) => {
       return {
-        name: u.unitName,
+        identifier: u.unitName + u.uniqueID,
         lostPoints: 0,
       };
     });
@@ -48,11 +48,18 @@ const LossCalculator = () => {
     setTotalPointsLost(sum);
   }, [trackUnitLoss]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const addToTotalLostPoints = (name, lostPoints) => {
+  /**
+   * Function calculates the total points lost.
+   * @param {String} name
+   * @param {String} uniqueId
+   * @param {int } lostPoints
+   */
+  const addToTotalLostPoints = (name, uniqueId, lostPoints) => {
     let tempArray = [...trackUnitLoss];
+    let identifier = name + uniqueId;
 
     tempArray.forEach((u) => {
-      if (u.name === name) {
+      if (u.identifier === identifier) {
         u.lostPoints = lostPoints;
       }
     });

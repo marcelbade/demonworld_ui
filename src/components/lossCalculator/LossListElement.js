@@ -10,6 +10,7 @@ import { ListItem } from "@mui/material";
 import clsx from "clsx";
 // icons
 import skullsIcon from "../../icons/skulls.png";
+import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 
@@ -71,7 +72,7 @@ const LossListElement = (props) => {
   }, [numberOfLostfElements]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    props.addToTotalLostPoints(props.unit.unitName, unitPointsLost);
+    props.addToTotalLostPoints(props.unit.unitName, props.unit.uniqueID, unitPointsLost);
   }, [unitPointsLost]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
@@ -123,6 +124,7 @@ const LossListElement = (props) => {
             </Typography>
           </Grid>
           <Grid item>
+            {/* ITTEM LIST */}
             {props.unit.equipment.length !== 0 ? <span className={classes.line}></span> : null}
             {props.unit.equipment.length !== 0
               ? props.unit.equipment.map((e, i) => {
@@ -130,7 +132,7 @@ const LossListElement = (props) => {
                     <Grid item xs={12} container direction="row" className={classes.equipment} key={props.unit.uniqueID}>
                       <Grid item xs={3}>
                         <Button className={clsx(classes.deleteBttn, classes.textMargin)} onClick={() => {}}>
-                          <ChevronRightIcon />
+                          <AddCircleOutlineIcon />
                         </Button>
                       </Grid>
                       <Grid item xs={8}>
