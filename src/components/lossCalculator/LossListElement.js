@@ -98,6 +98,8 @@ const LossListElement = (props) => {
   useEffect(() => {
     if (numberOfLostElements === props.unit.numberOfElements) {
       setStrikeTroughText(true);
+    }else{
+      setStrikeTroughText(false);
     }
   }, [numberOfLostElements]); // eslint-disable-line react-hooks/exhaustive-deps
 
