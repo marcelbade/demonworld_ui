@@ -14,8 +14,8 @@ import clsx from "clsx";
 // icons
 
 const useStyles = makeStyles((theme) => ({
-  page: {
-    border: "solid black 0.1em",
+  listElement: {
+    border: "solid 0.1em",
     borderRadius: "4px",
     padding: "2em",
     width: "40%",
@@ -32,6 +32,12 @@ const useStyles = makeStyles((theme) => ({
         padding: "1em",
       },
     },
+  },
+  borderNormal: {
+    borderColor: "black",
+  },
+  borderLost: {
+    borderColor: "red",
   },
 
   typographyFont: {
@@ -64,7 +70,7 @@ const LossListElement = (props) => {
   const [unitPointsLost, setUnitPointsLost] = useState(0);
   const [itemsLost, setItemsLost] = useState(0);
   const [itemClicked, setItemClicked] = useState([]);
-  const [strikeTroughText, setStrikeTroughText] = useState(false);
+  const [markAsLost, setMarkAsLost] = useState(false);
 
   const TEXT = "Verlorene Elemente:";
 
@@ -96,18 +102,24 @@ const LossListElement = (props) => {
 
   // when the entire unit is lost, make the name red and striketrough.
   useEffect(() => {
-    numberOfLostElements === props.unit.numberOfElements ? setStrikeTroughText(true) : setStrikeTroughText(false);
+    numberOfLostElements === props.unit.numberOfElements ? setMarkAsLost(true) : setMarkAsLost(false);
   }, [numberOfLostElements]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <ListItem>
-      <Grid container justify="space-between" alignItems="center" alignContent="center" className={classes.page}>
+      <Grid
+        container
+        justify="space-between"
+        alignItems="center"
+        alignContent="center"
+        className={markAsLost ? clsx(classes.listElement, classes. borderLost ) : clsx(classes.listElement, classes.borderNormal)}
+      >
         <Grid container item xs={3} direction="column">
           <Grid item>
             <Typography
               variant="button"
               className={
-                strikeTroughText ? clsx(classes.typographyFont, classes.strikeTroughText) : clsx(classes.typographyFont, classes.text)
+                markAsLost ? clsx(classes.typographyFont, classes.strikeTroughText) : clsx(classes.typographyFont, classes.text)
               }
             >
               {props.unit.name}
@@ -122,7 +134,7 @@ const LossListElement = (props) => {
                     <EquipmentListEntry
                       itemsLost={itemsLost}
                       itemClicked={itemClicked}
-                      strikeTroughText={strikeTroughText}
+                      strikeTroughText={markAsLost}
                       setItemsLost={setItemsLost}
                       setItemClicked={setItemClicked}
                       element={e}
