@@ -1,20 +1,17 @@
 // React
 import React, { useState, useEffect } from "react";
 //Material UI
-import { Typography, Grid, Button } from "@material-ui/core";
+import { Typography, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 // components and functions
 import { ListItem } from "@mui/material";
-import { uuidGenerator } from "../shared/sharedFunctions";
 import ListElementBttns from "./ListElementBttns";
+import EquipmentList from "./EquipmentList";
 
 // clsx
 import clsx from "clsx";
 // icons
-
-import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
-import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 
 const useStyles = makeStyles((theme) => ({
   page: {
@@ -51,10 +48,6 @@ const useStyles = makeStyles((theme) => ({
     borderBottom: "solid black 0.1em",
     display: "block",
   },
-  bttn: {
-    width: "1em",
-    height: "4em",
-  },
 }));
 
 const LossListElement = (props) => {
@@ -68,7 +61,7 @@ const LossListElement = (props) => {
 
   const TEXT = "Verlorene Elemente:";
 
-  // Calculate total point loss for this unit
+  // Calculate the total point loss for this unit
   useEffect(() => {
     const points = props.unit.points;
     const elements = props.unit.numberOfElements;
@@ -77,12 +70,12 @@ const LossListElement = (props) => {
     setUnitPointsLost(pointsLost);
   }, [numberOfLostElements, itemsLost]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Send point total for this unit to the parent.
+  // Send the point total for this unit to the parent.
   useEffect(() => {
     props.updateUnitLossTracker(unitPointsLost, props.index);
   }, [unitPointsLost]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // On first render, if the unit has equipment, create a booelan array ton control the state of the corresponding buttons.
+  // On first render, if the unit has equipment, create a booelan array to control the state of the corresponding buttons used to add/subtract an item's point cost from the net total.
   useEffect(() => {
     let tempArray = [];
     if (props.unit.equipment.length !== 0) {
@@ -93,45 +86,6 @@ const LossListElement = (props) => {
 
     setItemClicked(tempArray);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  /**
-   * Function adds the point cost of all items marked lost
-   * @param {int} points
-   */
-  const addItemToLosses = (points) => {
-    let temp = itemsLost;
-    temp += points;
-
-    setItemsLost(temp);
-  };
-
-  /**
-   * Function subtracts the point cost of all items not marked lost.
-   * @param {int} points
-   */
-  const subtractItemFromLosses = (points) => {
-    let temp = itemsLost;
-    temp -= points;
-
-    setItemsLost(temp);
-  };
-
-  /**
-   * An array of boolean flags is used to keep track of which items are marked lost. The index in the boolean array corresponds to the same index in the item list. A boolean flag set to true means the item was lost. The boolean flag then toggles the item's button between "add item to losses" / "remove item from losses".
-   * @param {int} index
-   */
-  const markItemLost = (index) => {
-    let tempArray = [...itemClicked];
-    tempArray[index] = true;
-    setItemClicked(tempArray);
-  };
-
-  // see comment for the "markItemLost" function.
-  const removeLostMarker = (index) => {
-    let tempArray = [...itemClicked];
-    tempArray[index] = false;
-    setItemClicked(tempArray);
-  };
 
   return (
     <ListItem>
@@ -148,41 +102,14 @@ const LossListElement = (props) => {
             {props.unit.equipment.length !== 0
               ? props.unit.equipment.map((e, i) => {
                   return (
-                    <Grid item xs={12} container direction="row" className={classes.equipment} key={uuidGenerator()}>
-                      <Grid item xs={3}>
-                        {itemClicked[i] ? (
-                          <Button
-                            className={clsx(classes.deleteBttn, classes.textMargin)}
-                            onClick={() => {
-                              subtractItemFromLosses(e.points);
-                              removeLostMarker(i);
-                            }}
-                          >
-                            <RemoveCircleOutlineIcon />
-                          </Button>
-                        ) : (
-                          <Button
-                            className={clsx(classes.deleteBttn, classes.textMargin)}
-                            onClick={() => {
-                              addItemToLosses(e.points);
-                              markItemLost(i);
-                            }}
-                          >
-                            <AddCircleOutlineIcon />
-                          </Button>
-                        )}
-                      </Grid>
-                      <Grid item xs={8}>
-                        <Typography variant="button" className={classes.typographyFont}>
-                          {e.name}
-                        </Typography>
-                      </Grid>
-                      <Grid item xs={1}>
-                        <Typography variant="button" className={classes.typographyFont}>
-                          {e.points}
-                        </Typography>
-                      </Grid>
-                    </Grid>
+                    <EquipmentList
+                      itemsLost={itemsLost}
+                      itemClicked={itemClicked}
+                      setItemsLost={setItemsLost}
+                      setItemClicked={setItemClicked}
+                      element={e}
+                      index={i}
+                    />
                   );
                 })
               : null}
@@ -193,7 +120,6 @@ const LossListElement = (props) => {
             {TEXT}
           </Typography>
         </Grid>
-
         <ListElementBttns
           itemClicked={itemClicked}
           numberOfLostElements={numberOfLostElements}
@@ -202,7 +128,6 @@ const LossListElement = (props) => {
           setItemClicked={setItemClicked}
           setItemsLost={setItemsLost}
         />
-
         <Grid item xs={1}>
           <Typography variant="h6" align="center" className={classes.typographyFont}>
             {unitPointsLost}
