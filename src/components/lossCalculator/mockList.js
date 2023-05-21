@@ -100,6 +100,31 @@ export const MOCK_LIST = [
         rule: "regeneriert einmal 2 TP, beliebig, vor oder nach NK-phase, generisch",
         points: 40,
       },
+      {
+        name: "Das Dornenschild",
+        type: "armor",
+        rule: "Es erlaubt dem Träger einmal pro Runde in einer beliebigen Fernkampfphase einen Fernkampf mit 6 Felder KF 7 durchzuführen.\r\n\r\nSollte das Element einen eigenen Fernkampfangriff haben, muss sich der Spieler entscheiden, ob er mit seiner regul?ren Bewaffnung oder mit dem Dornenschild fernk?mpfen m?chte. Sollte das Element über eine Fernkampffertigkeiten verfügen wird diese zum Angriff hinzugerechnet.",
+        points: 30,
+      },
+      {
+        name: "Heiltrank",
+        type: "potion",
+        rule: "regeneriert einmal 2 TP, beliebig, vor oder nach NK-phase, generisch",
+        points: 40,
+      },
+      {
+        name: "Das Dornenschild",
+        type: "armor",
+        rule: "Es erlaubt dem Träger einmal pro Runde in einer beliebigen Fernkampfphase einen Fernkampf mit 6 Felder KF 7 durchzuführen.\r\n\r\nSollte das Element einen eigenen Fernkampfangriff haben, muss sich der Spieler entscheiden, ob er mit seiner regul?ren Bewaffnung oder mit dem Dornenschild fernk?mpfen m?chte. Sollte das Element über eine Fernkampffertigkeiten verfügen wird diese zum Angriff hinzugerechnet.",
+        points: 30,
+      },
+      {
+        name: "Heiltrank",
+        type: "potion",
+        rule: "regeneriert einmal 2 TP, beliebig, vor oder nach NK-phase, generisch",
+        points: 40,
+      },
+      
     ],
     equipmentTypes: {
       poison: false,
