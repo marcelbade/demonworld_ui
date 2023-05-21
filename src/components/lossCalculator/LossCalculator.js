@@ -70,7 +70,7 @@ const LossCalculator = () => {
               unit={u} //
               index={i}
               updateUnitLossTracker={updateUnitLossTracker}
-              key={uuidGenerator}
+              key={u.uniqueID}
             />
           );
         })}

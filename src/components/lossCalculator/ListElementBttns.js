@@ -142,7 +142,7 @@ const ListElementBttns = (props) => {
         )}
       </Grid>
       <Grid item xs={1}>
-        <Tooltip title={<Typography className={classes.tooltipText}>{displayToolTip()}</Typography>}>
+        <Tooltip  title={<Typography color = "default"  className={classes.tooltipText}>{displayToolTip()}</Typography>}>
           <IconButton
             variant="contained"
             component={Button}

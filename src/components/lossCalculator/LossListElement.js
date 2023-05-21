@@ -139,6 +139,7 @@ const LossListElement = (props) => {
                       setItemClicked={setItemClicked}
                       element={e}
                       index={i}
+                      key={e.name +i}
                     />
                   );
                 })
