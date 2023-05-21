@@ -7,7 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 // components and functions
 import { ListItem } from "@mui/material";
 import ListElementBttns from "./ListElementBttns";
-import EquipmentList from "./EquipmentList";
+import EquipmentListEntry from "./EquipmentListEntry";
 
 // clsx
 import clsx from "clsx";
@@ -42,6 +42,12 @@ const useStyles = makeStyles((theme) => ({
   text: {
     paddingLeft: "1em",
   },
+  strikeTroughText: {
+    paddingLeft: "1em",
+    color: "red",
+    textDecorationLine: "line-through",
+    textDecorationThickness: "0.2em",
+  },
   line: {
     marginTop: "0.5em",
     marginBottom: "0.5em",
@@ -58,6 +64,7 @@ const LossListElement = (props) => {
   const [unitPointsLost, setUnitPointsLost] = useState(0);
   const [itemsLost, setItemsLost] = useState(0);
   const [itemClicked, setItemClicked] = useState([]);
+  const [strikeTroughText, setStrikeTroughText] = useState(false);
 
   const TEXT = "Verlorene Elemente:";
 
@@ -87,12 +94,24 @@ const LossListElement = (props) => {
     setItemClicked(tempArray);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // when the entire unit is lost, make the name red and striketrough.
+  useEffect(() => {
+    if (numberOfLostElements === props.unit.numberOfElements) {
+      setStrikeTroughText(true);
+    }
+  }, [numberOfLostElements]); // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
     <ListItem>
       <Grid container justify="space-between" alignItems="center" alignContent="center" className={classes.page}>
         <Grid container item xs={3} direction="column">
           <Grid item>
-            <Typography variant="button" className={clsx(classes.typographyFont, classes.text)}>
+            <Typography
+              variant="button"
+              className={
+                strikeTroughText ? clsx(classes.typographyFont, classes.strikeTroughText) : clsx(classes.typographyFont, classes.text)
+              }
+            >
               {props.unit.name}
             </Typography>
           </Grid>
@@ -102,9 +121,10 @@ const LossListElement = (props) => {
             {props.unit.equipment.length !== 0
               ? props.unit.equipment.map((e, i) => {
                   return (
-                    <EquipmentList
+                    <EquipmentListEntry
                       itemsLost={itemsLost}
                       itemClicked={itemClicked}
+                      strikeTroughText={strikeTroughText}
                       setItemsLost={setItemsLost}
                       setItemClicked={setItemClicked}
                       element={e}
