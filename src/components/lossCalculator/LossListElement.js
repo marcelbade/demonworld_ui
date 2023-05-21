@@ -96,11 +96,7 @@ const LossListElement = (props) => {
 
   // when the entire unit is lost, make the name red and striketrough.
   useEffect(() => {
-    if (numberOfLostElements === props.unit.numberOfElements) {
-      setStrikeTroughText(true);
-    }else{
-      setStrikeTroughText(false);
-    }
+    numberOfLostElements === props.unit.numberOfElements ? setStrikeTroughText(true) : setStrikeTroughText(false);
   }, [numberOfLostElements]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
