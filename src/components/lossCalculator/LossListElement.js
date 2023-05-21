@@ -1,21 +1,20 @@
 // React
 import React, { useState, useEffect } from "react";
 //Material UI
-import { Typography, Grid, ButtonGroup, Button, Tooltip, IconButton } from "@material-ui/core";
+import { Typography, Grid, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 // components and functions
 import { ListItem } from "@mui/material";
 import { uuidGenerator } from "../shared/sharedFunctions";
+import ListElementBttns from "./ListElementBttns";
 
 // clsx
 import clsx from "clsx";
 // icons
-import skullsIcon from "../../icons/skulls.png";
+
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 
 const useStyles = makeStyles((theme) => ({
   page: {
@@ -62,7 +61,7 @@ const LossListElement = (props) => {
   const classes = useStyles();
 
   //state
-  const [numberOfLostfElements, setNumberOfLostfElements] = useState(0);
+  const [numberOfLostElements, setNumberOfLostElements] = useState(0);
   const [unitPointsLost, setUnitPointsLost] = useState(0);
   const [itemsLost, setItemsLost] = useState(0);
   const [itemClicked, setItemClicked] = useState([]);
@@ -73,10 +72,10 @@ const LossListElement = (props) => {
   useEffect(() => {
     const points = props.unit.points;
     const elements = props.unit.numberOfElements;
-    let pointsLost = numberOfLostfElements * (points / elements);
+    let pointsLost = numberOfLostElements * (points / elements);
     pointsLost += itemsLost;
     setUnitPointsLost(pointsLost);
-  }, [numberOfLostfElements, itemsLost]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [numberOfLostElements, itemsLost]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Send point total for this unit to the parent.
   useEffect(() => {
@@ -94,68 +93,6 @@ const LossListElement = (props) => {
 
     setItemClicked(tempArray);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  /**
-   * Function lets the user add lost elements.
-   */
-  const addLoss = () => {
-    let temp = numberOfLostfElements;
-    setNumberOfLostfElements(++temp);
-  };
-
-  /**
-   * Function lets the user subtract lost elements.
-   */
-  const subtractLoss = () => {
-    let temp = numberOfLostfElements;
-    setNumberOfLostfElements(--temp);
-  };
-
-  /**
-   * Function immediately sets the number of lost elements to the maximum number possible.
-   */
-  const unitDestroyed = () => {
-    setNumberOfLostfElements(props.unit.numberOfElements);
-  };
-
-  /**
-   * Function makrs all itms as lost by setting all flags to true.
-   */
-  const allItemsMarkedLost = () => {
-    let tempArray = [...itemClicked];
-    tempArray = tempArray.map((i) => (i = true));
-
-    setItemClicked(tempArray);
-  };
-
-  /**
-   * Function calculates the points when all items are marked lost together.
-   */
-  const allItemsLost = () => {
-    let sum = 0;
-
-    props.unit.equipment.forEach((i) => {
-      sum += i.points;
-    });
-
-    setItemsLost(sum);
-  };
-
-  /**
-   * Function prevents the user from choosing a number of lost elements larger than the number of elements the unit has.
-   * @returns boolean flag
-   */
-  const notOverNumberOfElements = () => {
-    return numberOfLostfElements === props.unit.numberOfElements;
-  };
-
-  /**
-   * Function prevents the user from choosing a negative number of lost elements.
-   * @returns  boolean flag
-   */
-  const notUnderZero = () => {
-    return numberOfLostfElements === 0;
-  };
 
   /**
    * Function adds the point cost of all items marked lost
@@ -256,47 +193,15 @@ const LossListElement = (props) => {
             {TEXT}
           </Typography>
         </Grid>
-        <Grid item xs={2}>
-          <ButtonGroup variant="contained" aria-label="outlined primary button group">
-            <Button
-              onClick={() => {
-                subtractLoss();
-              }}
-              disabled={notUnderZero()}
-              className={classes.bttn}
-            >
-              <ChevronLeftIcon />
-            </Button>
-            <Typography variant="h6" className={classes.typographyFont}>
-              {numberOfLostfElements}
-            </Typography>
-            <Button
-              onClick={() => {
-                addLoss();
-              }}
-              disabled={notOverNumberOfElements()}
-              className={classes.bttn}
-            >
-              <ChevronRightIcon />
-            </Button>
-          </ButtonGroup>
-        </Grid>
-        <Grid item xs={1}>
-          <Tooltip title={<Typography className={classes.tooltipText}>Einheit aufgerieben</Typography>}>
-            <IconButton
-              variant="contained"
-              component={Button}
-              onClick={() => {
-                unitDestroyed();
-                allItemsMarkedLost();
-                allItemsLost();
-              }}
-              className={classes.bttn}
-            >
-              <img src={skullsIcon} alt="Einheit aufgerieben" height={40} width={40} />
-            </IconButton>
-          </Tooltip>
-        </Grid>
+
+        <ListElementBttns
+          itemClicked={itemClicked}
+          numberOfLostElements={numberOfLostElements}
+          unit={props.unit}
+          setNumberOfLostElements={setNumberOfLostElements}
+          setItemClicked={setItemClicked}
+          setItemsLost={setItemsLost}
+        />
 
         <Grid item xs={1}>
           <Typography variant="h6" align="center" className={classes.typographyFont}>
