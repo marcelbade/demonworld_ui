@@ -3,12 +3,12 @@ import React from "react";
 //Material UI
 import { Typography, Grid, ButtonGroup, Button, Tooltip, IconButton } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-
 // icons
 import skullsIcon from "../../icons/skulls.png";
-
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+// constants
+import { GIANT, HERO, MAGE } from "../../constants/unitTypes";
 
 const useStyles = makeStyles((theme) => ({
   typographyFont: {
@@ -23,6 +23,10 @@ const useStyles = makeStyles((theme) => ({
   bttn: {
     width: "1em",
     height: "4em",
+  },
+  tooltipText: {
+    fontFamily: "NotMaryKate",
+    fontSize: "20px",
   },
 }));
 
@@ -91,35 +95,54 @@ const ListElementBttns = (props) => {
     return props.numberOfLostElements === 0;
   };
 
+  const displayToolTip = () => {
+    let message;
+
+    if (props.unit.unitType === HERO) {
+      message = "Held verloren";
+    } else if (props.unit.unitType === MAGE) {
+      message = "Magier verloren";
+    } else if (props.unit.unitType === GIANT) {
+      message = "Großelement verloren";
+    } else {
+      message = "Einheit aufgerieben";
+    }
+
+    return message;
+  };
+
   return (
     <Grid item xs={2} container justify="space-between">
       <Grid item>
-        <ButtonGroup variant="contained" aria-label="outlined primary button group">
-          <Button
-            onClick={() => {
-              subtractLoss();
-            }}
-            disabled={notUnderZero()}
-            className={classes.bttn}
-          >
-            <ChevronLeftIcon />
-          </Button>
-          <Typography variant="h6" className={classes.typographyFont}>
-            {props.numberOfLostElements}
-          </Typography>
-          <Button
-            onClick={() => {
-              addLoss();
-            }}
-            disabled={notOverNumberOfElements()}
-            className={classes.bttn}
-          >
-            <ChevronRightIcon />
-          </Button>
-        </ButtonGroup>
+        {/* units that have only a single element do not need these buttons */}
+        {props.unit.numberOfElements === 1 ? null : (
+          <ButtonGroup variant="contained" aria-label="outlined primary button group">
+            <Button
+              onClick={() => {
+                subtractLoss();
+              }}
+              disabled={notUnderZero()}
+              className={classes.bttn}
+            >
+              <ChevronLeftIcon />
+            </Button>
+            <Typography variant="h6" className={classes.typographyFont}>
+              {props.numberOfLostElements}
+            </Typography>
+            <Button
+              onClick={() => {
+                addLoss();
+              }}
+              disabled={notOverNumberOfElements()}
+              className={classes.bttn}
+            >
+              <ChevronRightIcon />
+            </Button>
+          </ButtonGroup>
+        )}
       </Grid>
       <Grid item xs={1}>
-        <Tooltip title={<Typography className={classes.tooltipText}>Einheit aufgerieben</Typography>}>
+        <Tooltip title={<Typography className={classes.tooltipText}>{displayToolTip()}</Typography>}>
           <IconButton
             variant="contained"
             component={Button}
