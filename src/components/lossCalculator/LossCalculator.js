@@ -28,6 +28,7 @@ const LossCalculator = () => {
   const [totalPointsLost, setTotalPointsLost] = useState(0);
   const [trackUnitLoss, setTrackUnitLoss] = useState({});
 
+  // Calculates the total point loss of the army list.
   useEffect(() => {
     let sum = 0;
 
@@ -40,6 +41,7 @@ const LossCalculator = () => {
     setTotalPointsLost(sum);
   }, [trackUnitLoss]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // On the first render, set up an object to track the point loss for every unit. The object uses indizes as property keys.
   useEffect(() => {
     let tempObj = {};
 
@@ -50,6 +52,11 @@ const LossCalculator = () => {
     setTrackUnitLoss({ ...tempObj });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  /**
+   * Function updates the tracking object everytime the amountg of lost points for a unit changes.
+   * @param {int} pointsLost
+   * @param {int} index
+   */
   const updateUnitLossTracker = (pointsLost, index) => {
     setTrackUnitLoss({ ...trackUnitLoss, [index]: pointsLost });
   };
