@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
     border: "solid black 0.1em",
     borderRadius: "4px",
     padding: "2em",
-    width: "30%",
+    width: "40%",
     height: "15%",
 
     [theme.breakpoints.up("md")]: {
@@ -69,6 +69,7 @@ const LossListElement = (props) => {
 
   const TEXT = "Verlorene Elemente:";
 
+  // Calculate total point loss for this unit
   useEffect(() => {
     const points = props.unit.points;
     const elements = props.unit.numberOfElements;
@@ -77,18 +78,21 @@ const LossListElement = (props) => {
     setUnitPointsLost(pointsLost);
   }, [numberOfLostfElements, itemsLost]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // Send point total for this unit to the parent.
   useEffect(() => {
-    props.addToTotalLostPoints(props.unit.unitName, props.unit.uniqueID, unitPointsLost);
+    props.updateUnitLossTracker(unitPointsLost, props.index);
   }, [unitPointsLost]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // On first render, if the unit has equipment, create a booelan array ton control the state of the corresponding buttons.
   useEffect(() => {
+    let tempArray = [];
     if (props.unit.equipment.length !== 0) {
-      let temp = [];
-
       for (let i = 0; i < props.unit.equipment.length; i++) {
-        temp.push(false);
+        tempArray.push(false);
       }
     }
+
+    setItemClicked(tempArray);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
@@ -108,10 +112,33 @@ const LossListElement = (props) => {
   };
 
   /**
-   * Function immdeialtey sets the number of lost elements to the maximum number possible.
+   * Function immediately sets the number of lost elements to the maximum number possible.
    */
   const unitDestroyed = () => {
     setNumberOfLostfElements(props.unit.numberOfElements);
+  };
+
+  /**
+   * Function makrs all itms as lost by setting all flags to true.
+   */
+  const allItemsMarkedLost = () => {
+    let tempArray = [...itemClicked];
+    tempArray = tempArray.map((i) => (i = true));
+
+    setItemClicked(tempArray);
+  };
+
+  /**
+   * Function calculates the points when all items are marked lost together.
+   */
+  const allItemsLost = () => {
+    let sum = 0;
+
+    props.unit.equipment.forEach((i) => {
+      sum += i.points;
+    });
+
+    setItemsLost(sum);
   };
 
   /**
@@ -159,7 +186,6 @@ const LossListElement = (props) => {
   const markItemLost = (index) => {
     let tempArray = [...itemClicked];
     tempArray[index] = true;
-
     setItemClicked(tempArray);
   };
 
@@ -167,7 +193,6 @@ const LossListElement = (props) => {
   const removeLostMarker = (index) => {
     let tempArray = [...itemClicked];
     tempArray[index] = false;
-
     setItemClicked(tempArray);
   };
 
@@ -263,6 +288,8 @@ const LossListElement = (props) => {
               component={Button}
               onClick={() => {
                 unitDestroyed();
+                allItemsMarkedLost();
+                allItemsLost();
               }}
               className={classes.bttn}
             >

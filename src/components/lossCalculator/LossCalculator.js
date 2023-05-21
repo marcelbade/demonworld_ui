@@ -26,53 +26,46 @@ const LossCalculator = () => {
 
   //state
   const [totalPointsLost, setTotalPointsLost] = useState(0);
-  const [trackUnitLoss, setTrackUnitLoss] = useState([]);
-
-  useEffect(() => {
-    let tempArray = MOCK_LIST.map((u) => {
-      return {
-        identifier: u.unitName + u.uniqueID,
-        lostPoints: 0,
-      };
-    });
-
-    setTrackUnitLoss(tempArray);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  const [trackUnitLoss, setTrackUnitLoss] = useState({});
 
   useEffect(() => {
     let sum = 0;
 
-    trackUnitLoss.forEach((u) => {
-      sum += u.lostPoints;
-    });
+    for (const key in trackUnitLoss) {
+      if (trackUnitLoss.hasOwnProperty.call(trackUnitLoss, key)) {
+        sum += trackUnitLoss[key];
+      }
+    }
 
     setTotalPointsLost(sum);
   }, [trackUnitLoss]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  /**
-   * Function calculates the total points lost.
-   * @param {String} name
-   * @param {String} uniqueId
-   * @param {int } lostPoints
-   */
-  const addToTotalLostPoints = (name, uniqueId, lostPoints) => {
-    let tempArray = [...trackUnitLoss];
-    let identifier = name + uniqueId;
+  useEffect(() => {
+    let tempObj = {};
 
-    tempArray.forEach((u) => {
-      if (u.identifier === identifier) {
-        u.lostPoints = lostPoints;
-      }
-    });
+    for (let i = 0; i < MOCK_LIST.length; i++) {
+      tempObj = { ...tempObj, [i]: 0 };
+    }
 
-    setTrackUnitLoss(tempArray);
+    setTrackUnitLoss({ ...tempObj });
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const updateUnitLossTracker = (pointsLost, index) => {
+    setTrackUnitLoss({ ...trackUnitLoss, [index]: pointsLost });
   };
 
   return (
     <Grid container direction="column">
       <List>
-        {unitCardMultiSort(MOCK_LIST).map((u) => {
-          return <LossListElement unit={u} addToTotalLostPoints={addToTotalLostPoints} key={uuidGenerator()} />;
+        {unitCardMultiSort(MOCK_LIST).map((u, i) => {
+          return (
+            <LossListElement
+              unit={u} //
+              index={i}
+              updateUnitLossTracker={updateUnitLossTracker}
+              key={uuidGenerator}
+            />
+          );
         })}
       </List>
       <Grid item container direction="row">
