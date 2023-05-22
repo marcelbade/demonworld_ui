@@ -11,6 +11,7 @@ import { uuidGenerator } from "../../shared/sharedFunctions";
 import { ALLIES_MAPPING } from "../../../constants/allies";
 
 import SubList from "./subList";
+import { Stack } from "@mui/material";
 
 // TODO: remove unneeded styles
 const useStyles = makeStyles({
@@ -93,58 +94,52 @@ const ArmyListDisplay = (props) => {
    * This creates the centre of the UI: the actual army list consisting of the selected units and the display of the maximum * army points.
    */
   return contextArmy ? (
-    <Grid container direction="column" className={classes.ArmyListDisplay}>
-      <Grid item container justify="flex-end">
-        <Button
-          className={classes.removeButton}
-          variant="outlined"
-          onClick={() => {
-            contextArmy.clearList();
-          }}
-        >
-          Liste löschen
-        </Button>
-      </Grid>
-      <Grid item>
-        <List>
-          {contextArmy.subfactions.map((subFaction) => (
-            <ListItem key={uuidGenerator()}>
-              <Grid container direction={"column"}>
-                <Typography className={classes.HeaderBox}>{subFaction}</Typography>
-                {/* DISPLAY UNITS, PONT COST, PERCENTAGES FOR ONE SUBFACTION */}
-                <SubList subFactionUnits={filterUnitsForSubFaction(contextArmy.addedUnits, subFaction)} subFactionName={subFaction} />
-              </Grid>
-            </ListItem>
-          ))}
-        </List>
-      </Grid>
-      <Grid item container directiom="row" alignContent="center">
-        {/* TOTAL SPENT POINTS */}
-        <Typography className={classes.total}>Gesamtpunktzahl: {contextArmy.totalPointValue} / </Typography>
-        {/* TOTAL POINT ALLOWANCE */}
-        <TextField
-          id="outlined-basic"
-          autoComplete="off"
-          value={contextArmy.maxPointsValue}
-          InputProps={{
-            style: {
-              fontFamily: "notMaryKate",
-              fontSize: "20px",
-              fontWeight: "bold",
-              pading: "50px",
-              width: "130px",
-            },
-            endAdornment: <InputAdornment position="end">Punkte</InputAdornment>,
-          }}
-          onChange={changeMaximumPointValue}
-          required
-          error={Boolean(errorMessage)}
-          helperText={errorMessage}
-          // endAdornment={}
-          variant="standard"
-        />
-      </Grid>
-    </Grid>
+    <Stack direction="column" className={classes.ArmyListDisplay}>
+      {/* <Grid item container justify="flex-end"> */}
+      <Button
+        className={classes.removeButton}
+        variant="outlined"
+        onClick={() => {
+          contextArmy.clearList();
+        }}
+      >
+        Liste löschen
+      </Button>
+      <List>
+        {contextArmy.subfactions.map((subFaction) => (
+          <ListItem key={uuidGenerator()}>
+            <Grid container direction={"column"}>
+              <Typography className={classes.HeaderBox}>{subFaction}</Typography>
+              {/* DISPLAY UNITS, PONT COST, PERCENTAGES FOR ONE SUBFACTION */}
+              <SubList subFactionUnits={filterUnitsForSubFaction(contextArmy.addedUnits, subFaction)} subFactionName={subFaction} />
+            </Grid>
+          </ListItem>
+        ))}
+      </List>
+      {/* TOTAL SPENT POINTS */}
+      <Typography className={classes.total}>Gesamtpunktzahl: {contextArmy.totalPointValue} / </Typography>
+      {/* TOTAL POINT ALLOWANCE */}
+      <TextField
+        id="outlined-basic"
+        autoComplete="off"
+        value={contextArmy.maxPointsValue}
+        InputProps={{
+          style: {
+            fontFamily: "notMaryKate",
+            fontSize: "20px",
+            fontWeight: "bold",
+            pading: "50px",
+            width: "130px",
+          },
+          endAdornment: <InputAdornment position="end">Punkte</InputAdornment>,
+        }}
+        onChange={changeMaximumPointValue}
+        required
+        error={Boolean(errorMessage)}
+        helperText={errorMessage}
+        variant="standard"
+      />
+    </Stack>
   ) : null;
 };
 
