@@ -32,7 +32,8 @@ const useStyles = makeStyles({
   removeButton: {
     fontFamily: "notMaryKate",
     padding: "10px",
-
+    width: "10em",
+    height: "5em",
     "&:hover": {
       backgroundColor: "grey",
       color: "red",
