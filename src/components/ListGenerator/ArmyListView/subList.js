@@ -1,7 +1,7 @@
 // React
 import React, { Fragment, useEffect, useContext, useState } from "react";
 // Material UI
-import { List, ListItem, IconButton, Typography, Button, Grid, makeStyles } from "@material-ui/core";
+import { List, ListItem, IconButton, Typography, Grid, makeStyles } from "@material-ui/core";
 // icons
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 // components and functions
@@ -9,17 +9,14 @@ import { ArmyContext } from "../../../contexts/armyContext";
 import { displayUnitCost } from "../../compendiums/factionTable/depencies/factionTableFunctions";
 import { ruleObjectProvider } from "../../gameLogic/globalRules/ruleObjectProvider";
 import { unitCardMultiSort } from "../../shared/sharedFunctions";
-// clsx
-import clsx from "clsx";
+import EquipmentList from "./EquipmentList";
+import SubListStats from "./SubListStats";
+import ItemCardButtons from "./ItemCardButtons";
 
 const useStyles = makeStyles({
   gearListHeader: {
     testAlign: "right",
     color: "red",
-  },
-  deleteBttn: {
-    padding: "0",
-    marginRight: "1.5em",
   },
   buttons: {
     fontFamily: "NotMaryKate",
@@ -29,26 +26,8 @@ const useStyles = makeStyles({
       color: "red",
     },
   },
-  equipment: {
-    paddingLeft: "3em",
-  },
-  line: {
-    marginTop: "0.5em",
-    marginBottom: "0.5em",
-    borderBottom: "solid black 0.1em",
-    display: "block",
-  },
   typographyFont: {
     fontFamily: "NotMaryKate",
-  },
-  font: {
-    fontFamily: "NotMaryKate",
-  },
-  textMargin: {
-    marginRight: "3em",
-  },
-  currentPercentage: {
-    marginLeft: "1em",
   },
 });
 
@@ -87,15 +66,6 @@ const SubList = (props) => {
   };
 
   /**
-   * Removes the item.
-   * @param {unit.name + hash code} identifier
-   * @param {array index } i
-   */
-  const removeItem = (identifier, i) => {
-    contextArmy.removeItem(identifier, i);
-  };
-
-  /**
    * Function calculates the minimum and maximum percentage allowance for the subfaction.
    * @returns Object with min and
    */
@@ -119,10 +89,6 @@ const SubList = (props) => {
     };
   };
 
-  const displayCurrentPercentage = () => {
-    return Math.round((subFactionTotal / contextArmy.maxPointsValue) * 100);
-  };
-
   /**
    * The component creates the list for a single sub faction.
    * An entry contains:
@@ -140,7 +106,6 @@ const SubList = (props) => {
           return (
             <ListItem key={identifier}>
               <Grid container direction="column">
-                {/* FIRST ROW  */}
                 <Grid container item direction="row">
                   {/* REMOVE BUTTON */}
                   <Grid item xs={1}>
@@ -156,7 +121,7 @@ const SubList = (props) => {
                   {/* NAME */}
                   <Grid item xs={5}>
                     <Typography variant="button" className={classes.typographyFont}>
-                      {u.unitName}{" "}
+                      {u.unitName}
                     </Typography>
                   </Grid>
                   {/* POINTS */}
@@ -166,82 +131,19 @@ const SubList = (props) => {
                     </Typography>
                   </Grid>
                   {/* BUTTONS */}
-                  <Grid item xs={5} direction="row">
-                    <Button
-                      className={classes.buttons}
-                      variant="outlined"
-                      onClick={() => {
-                        contextArmy.setUnitSelectedForShop(u);
-                        contextArmy.toggleBetweenItemShops(u);
-                      }}
-                    >
-                      Gegenstände
-                    </Button>
-                    <Button
-                      className={classes.buttons}
-                      variant="outlined"
-                      onClick={() => {
-                        contextArmy.toggleBetweenCards(u);
-                      }}
-                    >
-                      Kartenvorschau
-                    </Button>
-                  </Grid>
+                  <ItemCardButtons u={u} />
                 </Grid>
-                {/* SECOND ROW  */}
                 <Grid container item xs={12} direction="row">
                   {/* ITEMS */}
-                  <Grid container item direction="row">
-                    <Typography>
-                      {u.equipment.length !== 0 ? <span className={classes.line}></span> : null}
-                      {u.equipment.length !== 0
-                        ? u.equipment.map((e, i) => {
-                            return (
-                              <Grid item xs={12} container direction="row" className={classes.equipment} key={identifier}>
-                                <Grid item xs={3}>
-                                  <IconButton
-                                    className={clsx(classes.deleteBttn, classes.textMargin)}
-                                    onClick={() => {
-                                      removeItem(identifier, i);
-                                    }}
-                                  >
-                                    <RemoveCircleOutlineIcon />
-                                  </IconButton>
-                                </Grid>
-                                <Grid item xs={8}>
-                                  <Typography variant="button" className={classes.typographyFont}>
-                                    {e.name}
-                                  </Typography>
-                                </Grid>
-                                <Grid item xs={1}>
-                                  <Typography variant="button" className={classes.typographyFont}>
-                                    {e.points}
-                                  </Typography>
-                                </Grid>
-                              </Grid>
-                            );
-                          })
-                        : null}
-                    </Typography>
-                  </Grid>
+                  <EquipmentList u={u} identifier={identifier} />
                 </Grid>
               </Grid>
             </ListItem>
           );
         })}
       </List>
-      <Grid container direction="column">
-        <Grid container item xs={4} direction="row">
-          <Typography className={classes.font}>{subFactionTotal === 0 ? null : `Gesamt: ${subFactionTotal} Punkte`}</Typography>
-          <Typography className={clsx(classes.font, classes.currentPercentage)}>
-            {displayCurrentPercentage() === 0 ? null : `Prozent ${displayCurrentPercentage()} %`}
-          </Typography>
-        </Grid>
-        <Grid container item xs={4} direction="row">
-          <Typography className={classes.font}>{`Minimum: ${percentages.min} %`}</Typography>
-          <Typography className={clsx(classes.font, classes.currentPercentage)}> {`Maximum ${percentages.max} %`}</Typography>
-        </Grid>
-      </Grid>
+      {/* SUB LIST STATS */}
+      <SubListStats subFactionTotal={subFactionTotal} percentages={percentages} />
     </Fragment>
   );
 };
