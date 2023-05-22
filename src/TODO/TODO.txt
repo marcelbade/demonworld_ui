@@ -1,3 +1,13 @@
+TODO: WAFFENNAMEN NACHTRAGEN 
+    ERLEDIGT: Goblins, Dunkelelfen, Elfen, Imperium, ishtak
+
+ 
+  
+TODO: PDF VIEWER
+
+
+TODO: "Gor'Daris Dragon has 3 attacks....
+
 
 TODO: src\components\shared\NoSelectionDisplay.js
 You need a pic, if you want to use this :D.
@@ -29,9 +39,6 @@ const subFactionBelowMinimum = contextArmy.blockedUnits.subFactionBelowMinimum;
 - tommysAnalysis function
 
 
-TODO:  RESPONSIVE DESIGN 
-ooppss...... Everything. you need to do everything here. 
-
 TODO: allItems 
     - is not working! 
     - The use Effect in the GeneratorController must be reowrked, its silly!
@@ -53,4 +60,17 @@ TODO:
 You accidentally deleted the input element for the army list's name. The element is still there, under shared - just fix it (selectionInput.js).
 
 
- 
+ TODO:
+Broch Karutin, der Stinker
+Terios, der Minotaurus
+Thonder, der Riesenwolf
+
+These are the 3 units that make up the "giants" subfaction of the orks - they are all missing! :(
+
+
+
+WORKING ON
+TODO:  RESPONSIVE DESIGN 
+
+SelectionInput. Army -> done, tested for smartphones
+
