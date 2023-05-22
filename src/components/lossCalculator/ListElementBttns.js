@@ -1,7 +1,9 @@
 // React
-import React from "react";
+import React, { Fragment } from "react";
 //Material UI
 import { Typography, Grid, ButtonGroup, Button, Tooltip, IconButton } from "@material-ui/core";
+
+import Stack from "@mui/material/Stack";
 import { makeStyles } from "@material-ui/core/styles";
 // icons
 import skullsIcon from "../../icons/skulls.png";
@@ -11,6 +13,21 @@ import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import { GIANT, HERO, MAGE } from "../../constants/unitTypes";
 
 const useStyles = makeStyles((theme) => ({
+  bttns: {
+    backgroundColor: "pink",
+
+    [theme.breakpoints.up("md")]: {
+      flexDirection: "row",
+    },
+    [theme.breakpoints.down("md")]: {
+      flexDirection: "row",
+
+      "@media (orientation:landscape)": {
+        flexDirection: "row",
+      },
+    },
+  },
+
   typographyFont: {
     fontFamily: "NotMaryKate",
     textAlign: "center",
@@ -112,52 +129,48 @@ const ListElementBttns = (props) => {
   };
 
   return (
-    <Grid item xs={2} container justify="space-between">
-      <Grid item>
-        {/* units that have only a single element do not need these buttons */}
-        {props.unit.numberOfElements === 1 ? null : (
-          <ButtonGroup variant="contained" aria-label="outlined primary button group">
-            <Button
-              onClick={() => {
-                subtractLoss();
-              }}
-              disabled={notUnderZero()}
-              className={classes.bttn}
-            >
-              <ChevronLeftIcon />
-            </Button>
-            <Typography variant="h6" className={classes.typographyFont}>
-              {props.numberOfLostElements}
-            </Typography>
-            <Button
-              onClick={() => {
-                addLoss();
-              }}
-              disabled={notOverNumberOfElements()}
-              className={classes.bttn}
-            >
-              <ChevronRightIcon />
-            </Button>
-          </ButtonGroup>
-        )}
-      </Grid>
-      <Grid item xs={1}>
-        <Tooltip  title={<Typography className={classes.tooltipText}>{displayToolTip()}</Typography>}>
-          <IconButton
-            variant="contained"
-            component={Button}
-            onClick={() => {
-              unitDestroyed();
-              allItemsMarkedLost();
-              allItemsLost();
-            }}
-            className={classes.bttn}
-          >
-            <img src={skullsIcon} alt="Einheit aufgerieben" height={40} width={40} />
-          </IconButton>
-        </Tooltip>
-      </Grid>
-    </Grid>
+    <Stack direction="row" spacing={2}>
+      {/* units that have only a single element do not need these buttons */}
+
+      <ButtonGroup variant="contained" aria-label="outlined primary button group">
+        <Button
+          onClick={() => {
+            subtractLoss();
+          }}
+          disabled={notUnderZero()}
+          className={classes.bttn}
+        >
+          <ChevronLeftIcon />
+        </Button>
+        <Typography variant="h6" className={classes.typographyFont}>
+          {props.numberOfLostElements}
+        </Typography>
+        <Button
+          onClick={() => {
+            addLoss();
+          }}
+          disabled={notOverNumberOfElements()}
+          className={classes.bttn}
+        >
+          <ChevronRightIcon />
+        </Button>
+      </ButtonGroup>
+
+      <Tooltip title={<Typography className={classes.tooltipText}>{displayToolTip()}</Typography>}>
+        <IconButton
+          variant="contained"
+          component={Button}
+          onClick={() => {
+            unitDestroyed();
+            allItemsMarkedLost();
+            allItemsLost();
+          }}
+          className={classes.bttn}
+        >
+          <img src={skullsIcon} alt="Einheit aufgerieben" height={40} width={40} />
+        </IconButton>
+      </Tooltip>
+    </Stack>
   );
 };
 
