@@ -1,8 +1,11 @@
 // React
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 //Material UI
-import { Grid, List, Typography } from "@material-ui/core";
+import { Grid, IconButton, List, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+// icons
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 // components and functions
 import { unitCardMultiSort } from "../shared/sharedFunctions";
 import LossListElement from "./LossListElement";
@@ -19,10 +22,15 @@ const useStyles = makeStyles({
   pointsTotal: {
     marginLeft: "2em",
   },
+  BackBttn: {
+    width: "2em",
+    height: "2em",
+  },
 });
 
 const LossCalculator = () => {
   const classes = useStyles();
+  const history = useHistory();
 
   //state
   const [totalPointsLost, setTotalPointsLost] = useState(0);
@@ -61,8 +69,24 @@ const LossCalculator = () => {
     setTrackUnitLoss({ ...trackUnitLoss, [index]: pointsLost });
   };
 
+  /**
+   *
+   */
+  const backToMainmenu = () => {
+    history.push("/");
+  };
+
   return (
     <Grid container direction="column">
+      <Grid>
+        <IconButton
+          onClick={() => {
+            backToMainmenu();
+          }}
+        >
+          <ChevronLeftIcon className={classes.BackBttn} />
+        </IconButton>
+      </Grid>
       <List>
         {unitCardMultiSort(MOCK_LIST).map((u, i) => {
           return (
