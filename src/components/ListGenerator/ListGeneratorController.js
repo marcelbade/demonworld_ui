@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 
   armySelectionBox: {
     [theme.breakpoints.down("lg")]: {
-      backgroundColor: "yellow",
+     
     },
     [theme.breakpoints.down("sm")]: {
       backgroundColor: "red",
