@@ -1,7 +1,7 @@
 // React
 import React from "react";
 //Material UI
-import { Typography, Grid, Button } from "@material-ui/core";
+import { Typography, Grid, Button, ListItem, ListItemIcon, ListItemText } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 // components and functions
@@ -13,16 +13,32 @@ import clsx from "clsx";
 
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
+import { ListItemButton } from "@mui/material";
 
 const useStyles = makeStyles((theme) => ({
+  entry: {
+    backgroundColor: "yellow",
+
+    [theme.breakpoints.up("md")]: {
+      flexDirection: "row",
+    },
+    [theme.breakpoints.down("md")]: {
+      flexDirection: "row",
+
+      "@media (orientation:landscape)": {
+        flexDirection: "row",
+        // justifyContent: "space-between",
+      },
+    },
+  },
   typographyFont: {
     fontFamily: "NotMaryKate",
-    textAlign: "center",
+    textAlign: "left",
     marginTop: "0.5em",
   },
   strikeTroughText: {
     fontFamily: "NotMaryKate",
-    textAlign: "center",
+    textAlign: "left",
     marginTop: "0.5em",
     color: "red",
     textDecorationLine: "line-through",
@@ -79,41 +95,45 @@ const EquipmentListEntry = (props) => {
   };
 
   return (
-    <Grid item xs={12} container direction="row" className={classes.equipment} key={uuidGenerator()}>
-      <Grid item xs={3}>
-        {props.itemClicked[props.index] ? (
-          <Button
-            className={clsx(classes.deleteBttn, classes.textMargin)}
-            onClick={() => {
-              subtractItemFromLosses(props.element.points);
-              removeLostMarker(props.index);
-            }}
-          >
+    <ListItem className={classes.entry} key={uuidGenerator()}>
+      {props.itemClicked[props.index] ? (
+        <ListItemButton
+          className={clsx(classes.deleteBttn, classes.textMargin)}
+          onClick={() => {
+            subtractItemFromLosses(props.element.points);
+            removeLostMarker(props.index);
+          }}
+        >
+          <ListItemIcon>
             <RemoveCircleOutlineIcon />
-          </Button>
-        ) : (
-          <Button
-            className={clsx(classes.deleteBttn, classes.textMargin)}
-            onClick={() => {
-              addItemToLosses(props.element.points);
-              markItemLost(props.index);
-            }}
-          >
+          </ListItemIcon>
+        </ListItemButton>
+      ) : (
+        <ListItemButton
+          className={clsx(classes.deleteBttn, classes.textMargin)}
+          onClick={() => {
+            addItemToLosses(props.element.points);
+            markItemLost(props.index);
+          }}
+        >
+          <ListItemIcon>
             <AddCircleOutlineIcon />
-          </Button>
-        )}
+          </ListItemIcon>
+        </ListItemButton>
+      )}
+      <Grid container justify="space-between">
+        <Grid item>
+          <Typography variant="button" className={props.itemClicked[props.index] ? classes.strikeTroughText : classes.typographyFont}>
+            {props.element.name}
+          </Typography>
+        </Grid>
+        <Grid item>
+          <Typography variant="button" className={props.itemClicked[props.index] ? classes.strikeTroughText : classes.typographyFont}>
+            {props.element.points}
+          </Typography>
+        </Grid>
       </Grid>
-      <Grid item xs={8}>
-        <Typography variant="button" className={props.itemClicked[props.index] ? classes.strikeTroughText : classes.typographyFont}>
-          {props.element.name}
-        </Typography>
-      </Grid>
-      <Grid item xs={1}>
-        <Typography variant="button" className={props.itemClicked[props.index] ? classes.strikeTroughText : classes.typographyFont}>
-          {props.element.points}
-        </Typography>
-      </Grid>
-    </Grid>
+    </ListItem>
   );
 };
 
