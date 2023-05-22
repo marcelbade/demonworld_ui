@@ -1,7 +1,7 @@
 // React
 import React, { useState, useEffect } from "react";
 //Material UI
-import { Typography, Grid } from "@material-ui/core";
+import { Typography, Grid, List } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 // components and functions
@@ -17,19 +17,21 @@ const useStyles = makeStyles((theme) => ({
   listElement: {
     border: "solid 0.1em",
     borderRadius: "4px",
-    padding: "2em",
-    width: "40%",
-    height: "15%",
 
     [theme.breakpoints.up("md")]: {
       flexDirection: "row",
+      padding: "2em",
+      width: "40%",
+      height: "15%",
     },
     [theme.breakpoints.down("md")]: {
       flexDirection: "column",
+
+      width: "100%",
+      height: "35%",
       "@media (orientation:landscape)": {
         flexDirection: "row",
-        justifyContent: "space-between",
-        padding: "1em",
+       
       },
     },
   },
@@ -112,54 +114,58 @@ const LossListElement = (props) => {
         justify="space-between"
         alignItems="center"
         alignContent="center"
-        className={markAsLost ? clsx(classes.listElement, classes. borderLost ) : clsx(classes.listElement, classes.borderNormal)}
+        className={markAsLost ? clsx(classes.listElement, classes.borderLost) : clsx(classes.listElement, classes.borderNormal)}
       >
-        <Grid container item xs={3} direction="column">
-          <Grid item>
+        {/* NAME*/}
+        <Grid container item md={4} direction="column">
+          <Grid item   >
             <Typography
               variant="button"
-              className={
-                markAsLost ? clsx(classes.typographyFont, classes.strikeTroughText) : clsx(classes.typographyFont, classes.text)
-              }
+              className={markAsLost ? clsx(classes.typographyFont, classes.strikeTroughText) : clsx(classes.typographyFont, classes.text)}
             >
               {props.unit.name}
             </Typography>
           </Grid>
-          <Grid item>
-            {/* ITTEM LIST */}
-            {props.unit.equipment.length !== 0 ? <span className={classes.line}></span> : null}
-            {props.unit.equipment.length !== 0
-              ? props.unit.equipment.map((e, i) => {
-                  return (
-                    <EquipmentListEntry
-                      itemsLost={itemsLost}
-                      itemClicked={itemClicked}
-                      strikeTroughText={markAsLost}
-                      setItemsLost={setItemsLost}
-                      setItemClicked={setItemClicked}
-                      element={e}
-                      index={i}
-                      key={e.name +i}
-                    />
-                  );
-                })
-              : null}
+          <Grid item xs={12}>
+            <List>
+              {/* ITTEM LIST */}
+              {props.unit.equipment.length !== 0 ? <span className={classes.line}></span> : null}
+              {props.unit.equipment.length !== 0
+                ? props.unit.equipment.map((e, i) => {
+                    return (
+                      <EquipmentListEntry
+                        itemsLost={itemsLost}
+                        itemClicked={itemClicked}
+                        strikeTroughText={markAsLost}
+                        setItemsLost={setItemsLost}
+                        setItemClicked={setItemClicked}
+                        element={e}
+                        index={i}
+                        key={e.name + i}
+                      />
+                    );
+                  })
+                : null}
+            </List>
           </Grid>
         </Grid>
-        <Grid item xs={3}>
+        <Grid item      >
           <Typography variant="button" className={clsx(classes.typographyFont, classes.text)}>
             {TEXT}
           </Typography>
         </Grid>
-        <ListElementBttns
-          itemClicked={itemClicked}
-          numberOfLostElements={numberOfLostElements}
-          unit={props.unit}
-          setNumberOfLostElements={setNumberOfLostElements}
-          setItemClicked={setItemClicked}
-          setItemsLost={setItemsLost}
-        />
-        <Grid item xs={1}>
+        <Grid  item      >
+          {/*  BUTTONS */}
+          <ListElementBttns
+            itemClicked={itemClicked}
+            numberOfLostElements={numberOfLostElements}
+            unit={props.unit}
+            setNumberOfLostElements={setNumberOfLostElements}
+            setItemClicked={setItemClicked}
+            setItemsLost={setItemsLost}
+          />
+        </Grid>
+        <Grid item     >
           <Typography variant="h6" align="center" className={classes.typographyFont}>
             {unitPointsLost}
           </Typography>
