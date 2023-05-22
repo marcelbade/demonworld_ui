@@ -14,8 +14,6 @@ import { GIANT, HERO, MAGE } from "../../constants/unitTypes";
 
 const useStyles = makeStyles((theme) => ({
   bttns: {
-    backgroundColor: "pink",
-
     [theme.breakpoints.up("md")]: {
       flexDirection: "row",
     },

@@ -17,8 +17,6 @@ import { ListItemButton } from "@mui/material";
 
 const useStyles = makeStyles((theme) => ({
   entry: {
-    backgroundColor: "yellow",
-
     [theme.breakpoints.up("md")]: {
       flexDirection: "row",
     },
