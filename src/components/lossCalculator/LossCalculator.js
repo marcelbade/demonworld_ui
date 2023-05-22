@@ -70,7 +70,7 @@ const LossCalculator = () => {
   };
 
   /**
-   *
+   * Function calls history objects to take user back to main menu.
    */
   const backToMainmenu = () => {
     history.push("/");

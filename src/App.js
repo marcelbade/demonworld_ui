@@ -10,7 +10,7 @@ import { Route, Switch } from "react-router-dom";
 import landingPage from "./components/landingPage/landingPage";
 import factionTable from "./components/compendiums/factionTable/components/factionTable";
 import ListGeneratorController from "./components/ListGenerator/ListGeneratorController";
-import LossCalculator from "./components/lossCalculator/LossCalculator";
+import LossCalculator from "./components/LossCalculator/LossCalculator";
 
 function App() {
   return (
