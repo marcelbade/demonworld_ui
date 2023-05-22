@@ -1,29 +1,31 @@
 // React
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 // Axios
 import axios from "axios";
 // Material UI
-import { Drawer, Grid } from "@material-ui/core";
+import { Drawer, Grid, IconButton } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+// icons
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 // components and functions
 import ArmyProvider from "../../contexts/armyContext";
 import SelectionInput from "../shared/selectionInput";
 import FactionTreeView from "./ArmyTreeView/treeView";
 import ArmyListDisplay from "./ArmyListView/armyListDisplay";
 import ItemShop from "./ItemShop/ItemShop";
-import { uuidGenerator } from "../shared/sharedFunctions";
 import { ALLIES_MAPPING } from "../../constants/allies";
 import { ALL_FACTIONS_ARRAY } from "../../constants/factions";
 import { ruleValidation } from "../gameLogic/useRuleValidation";
-import { isObjectEmtpy } from "../shared/sharedFunctions";
-import { unitOrCmdCard } from "../shared/sharedFunctions";
+import { isObjectEmtpy, unitOrCmdCard, uuidGenerator } from "../shared/sharedFunctions";
 import AlternativeArmyListSelector from "./AlternativeArmyListSelection/AlternativeArmyListSelector";
 // constants
 import { ARMIES_WITH_ALTERNATIVE_LISTS } from "../../constants/factions";
+import { Stack } from "@mui/material";
 
 const useStyles = makeStyles((theme) => ({
   displayBox: {
-    backgroundColor: "green",
+    // backgroundColor: "green",
 
     [theme.breakpoints.up("md")]: {
       flexDirection: "row",
@@ -34,9 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   armySelectionBox: {
-    [theme.breakpoints.down("lg")]: {
-     
-    },
+    [theme.breakpoints.down("lg")]: {},
     [theme.breakpoints.down("sm")]: {
       backgroundColor: "red",
     },
@@ -45,10 +45,16 @@ const useStyles = makeStyles((theme) => ({
   UnitCardDisplay: {
     position: "fixed",
   },
+  BackBttn: {
+    width: "2em",
+    height: "2em",
+  },
 }));
 
 const ListGeneratorController = () => {
   const classes = useStyles();
+  const history = useHistory();
+
   // front and back side of the displayed unit cards are alligned vertically.
   const COLUMN = "column";
   const NONE = "none";
@@ -403,7 +409,12 @@ const ListGeneratorController = () => {
     setItemShopState({ clickedUnit: selectedUnits[0], lastclickedUnit: selectedUnits[0], show: false });
   };
 
-  console.log(selectedUnits);
+  /**
+   * Function calls history objects to take user back to main menu.
+   */
+  const backToMainmenu = () => {
+    history.push("/");
+  };
 
   return fetchedFactions && fetchedItems ? (
     <ArmyProvider
@@ -450,8 +461,15 @@ const ListGeneratorController = () => {
       }}
     >
       <Grid container className={classes.displayBox}>
+        <IconButton
+          onClick={() => {
+            backToMainmenu();
+          }}
+        >
+          <ChevronLeftIcon className={classes.BackBttn} />
+        </IconButton>
         {/* ARMY SELECTION */}
-        <Grid item className={classes.armySelectionBox}>
+        <Stack direction={"column"} item className={classes.armySelectionBox}>
           <SelectionInput
             className={classes.selector}
             filterFunction={setSelectedFactionName}
@@ -462,11 +480,9 @@ const ListGeneratorController = () => {
           {armyHasAlternativeLists ? <AlternativeArmyListSelector /> : null}
 
           <FactionTreeView className={classes.selector} />
-        </Grid>
+        </Stack>
         {/* ARMYLIST */}
-        <Grid item>
-          <ArmyListDisplay setTotalPointValue={setTotalPointValue} />
-        </Grid>
+        <ArmyListDisplay setTotalPointValue={setTotalPointValue} />
         {/* RIGHT SIDE */}
         <Grid item>
           {/* ITEMSHOP */}
