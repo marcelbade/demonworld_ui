@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
 // Material UI
-
+import { makeStyles } from "@material-ui/core/styles";
 // components and functions
 import { ArmyContext } from "../../../contexts/armyContext";
 import { TransitionComponent } from "../dependencies/treeViewFunctions";
@@ -17,7 +17,14 @@ TransitionComponent.propTypes = {
   in: PropTypes.bool,
 };
 
+const useStyles = makeStyles({
+  branch: {
+    width: "20em",
+  },
+});
+
 const Tree = (props) => {
+  const classes = useStyles();
   const contextArmy = useContext(ArmyContext);
 
   /**
@@ -47,7 +54,7 @@ const Tree = (props) => {
     .map((subF) => {
       const NODE_ID = createNodeID(subfactions.indexOf(subF));
       return (
-        <StyledTreeItem key={uuidGenerator()} nodeId={NODE_ID} label={subF}>
+        <StyledTreeItem key={uuidGenerator()} nodeId={NODE_ID} label={subF} className={classes.branch}>
           <LeafNodes units={units} subFaction={subF} nodeID={NODE_ID} />
         </StyledTreeItem>
       );

@@ -25,9 +25,8 @@ const useStyles = makeStyles((theme) => ({
       width: "45em",
     },
     [theme.breakpoints.down("md")]: {
-      width: "25em",
+      width: "100%",
     },
-
   },
   allyTitle: {
     paddingLeft: "5em",
@@ -61,10 +60,10 @@ const FactionTreeView = () => {
         </StyledTreeItem>
       </TreeView>
       {/* ALLIED FACTION */}
+      {/* test if there is an ally */}
       {contextArmy.allyName !== NONE ? (
         <Fragment>
           <div className={classes.allyTitle}>Alliierte: {contextArmy.allyName}</div>
-
           <TreeView
             className={classes.treeViewBox}
             defaultExpanded={SHOW_SUBFACTIONS}
