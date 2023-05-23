@@ -1,7 +1,7 @@
 // React
 import React, { useContext } from "react";
 // Material UI
-import { Typography, ListItemText, makeStyles } from "@material-ui/core";
+import { Typography, ListItemText, makeStyles,ListItem } from "@material-ui/core";
 
 // components and functions
 import { ArmyContext } from "../../../../contexts/armyContext";
@@ -31,7 +31,7 @@ const SubListStats = (props) => {
   };
 
   return (
-    <Fragment>
+    <ListItem>
       <ListItemText
         className={classes.text}
         primary={
@@ -47,7 +47,7 @@ const SubListStats = (props) => {
           </Fragment>
         }
       />
-    </Fragment>
+    </ListItem>
   );
 };
 

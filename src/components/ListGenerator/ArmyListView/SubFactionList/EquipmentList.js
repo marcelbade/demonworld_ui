@@ -1,7 +1,7 @@
 // React
-import React, { useContext } from "react";
+import React, { useContext, Fragment } from "react";
 // Material UI
-import { IconButton, Typography, Grid, makeStyles } from "@material-ui/core";
+import { IconButton, Typography, Grid, makeStyles, List, ListItemText } from "@material-ui/core";
 // icons
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 // components and functions
@@ -15,15 +15,16 @@ const useStyles = makeStyles({
     padding: "0",
     marginRight: "1.5em",
   },
-  equipment: {
-    paddingLeft: "3em",
+  equipmentList: {
+    display: "flex",
+    flexDirection: "row", 
   },
   line: {
     marginTop: "0.5em",
     marginBottom: "0.5em",
     borderBottom: "solid black 0.1em",
     display: "block",
-    // width: "1em",
+     width: "75%",
   },
   typographyFont: {
     fontFamily: "NotMaryKate",
@@ -49,39 +50,41 @@ const EquipmentList = (props) => {
   };
 
   return (
-    <Grid container item direction="row">
-      <Typography>
-        {props.u.equipment.length !== 0 ? <span className={classes.line}></span> : null}
-        {props.u.equipment.length !== 0
-          ? props.u.equipment.map((e, i) => {
-              return (
-                <Grid item xs={12} container direction="row" className={classes.equipment} key={props.identifier}>
-                  <Grid item xs={3}>
-                    <IconButton
-                      className={clsx(classes.deleteBttn, classes.textMargin)}
-                      onClick={() => {
-                        removeItem(props.identifier, i);
-                      }}
-                    >
-                      <RemoveCircleOutlineIcon />
-                    </IconButton>
-                  </Grid>
-                  <Grid item xs={8}>
-                    <Typography variant="button" className={classes.typographyFont}>
-                      {e.name}
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={1}>
-                    <Typography variant="button" className={classes.typographyFont}>
-                      {e.points}
-                    </Typography>
-                  </Grid>
-                </Grid>
-              );
-            })
-          : null}
-      </Typography>
-    </Grid>
+    <Typography>
+      {props.u.equipment.length !== 0 ? <span className={classes.line}></span> : null}
+      {props.u.equipment.length !== 0
+        ? props.u.equipment.map((e, i) => {
+            return (
+              <List   className={classes.equipmentList} key={props.identifier}>
+                <IconButton
+                  className={clsx(classes.deleteBttn, classes.textMargin)}
+                  onClick={() => {
+                    removeItem(props.identifier, i);
+                  }}
+                >
+                  <RemoveCircleOutlineIcon />
+                </IconButton>
+                <ListItemText
+                  primary={
+                    <Fragment>
+                      <Typography variant="button" className={classes.typographyFont}>
+                        {e.name}
+                      </Typography>
+                    </Fragment>
+                  }
+                  secondary={
+                    <Fragment>
+                      <Typography variant="button" className={classes.typographyFont}>
+                        {e.points}
+                      </Typography>
+                    </Fragment>
+                  }
+                />
+              </List>
+            );
+          })
+        : null}
+    </Typography>
   );
 };
 

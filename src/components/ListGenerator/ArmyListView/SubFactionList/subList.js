@@ -1,7 +1,7 @@
 // React
 import React, { Fragment, useEffect, useContext, useState } from "react";
 // Material UI
-import { List, ListItem, Typography, makeStyles, ListItemText, ListItemIcon } from "@material-ui/core";
+import { List, ListItem, Typography, makeStyles, ListItemText, ListItemIcon, IconButton } from "@material-ui/core";
 // icons
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 // components and functions
@@ -15,23 +15,27 @@ import ItemCardButtons from "./ItemCardButtons";
 import { ListItemButton } from "@mui/material";
 
 const useStyles = makeStyles({
-  gearListHeader: {
-    testAlign: "right",
-    color: "red",
-  },
   buttons: {
     fontFamily: "NotMaryKate",
     marginRight: "1em",
-    "&:hover": { 
+    "&:hover": {
       backgroundColor: "grey",
       color: "red",
     },
   },
   text: {
-    width: "100%",
+    width: "20%",
   },
   typographyFont: {
     fontFamily: "NotMaryKate",
+  },
+  list: {
+    padding: "0px",
+    margin: "0px",
+  },
+  deleteBttn: {
+    marginRight: "1em",
+    margin: "0px",
   },
 });
 
@@ -104,49 +108,50 @@ const SubList = (props) => {
    */
   return (
     <Fragment>
-      <List>
-        {unitCardMultiSort(props.subFactionUnits).map((u) => {
+      <List className={classes.list}>
+        {unitCardMultiSort(props.subFactionUnits).map((u, i) => {
           const identifier = u.unitName + u.uniqueID;
           return (
-            <ListItem key={identifier}>
-              {/* REMOVE BUTTON */}
-              <ListItemButton
-                className={classes.deleteBttn}
-                onClick={() => {
-                  removeUnit(identifier);
-                }}
-              >
-                <ListItemIcon>
+            <Fragment>
+              <ListItem key={identifier}>
+                {/* REMOVE BUTTON */}
+                <IconButton
+                  className={classes.deleteBttn}
+                  onClick={() => {
+                    removeUnit(identifier);
+                  }}
+                >
                   <RemoveCircleOutlineIcon />
-                </ListItemIcon>
-              </ListItemButton>
-              {/* NAME + POINTS */}
-              <ListItemText     className={classes.text}
-                primary={
-                  <Fragment>
-                    <Typography variant="button" className={classes.typographyFont}>
-                      {u.unitName}
-                    </Typography>
-                  </Fragment>
-                }
-                secondary={
-                  <Fragment>
-                    <Typography variant="button" className={classes.typographyFont}>
-                      {u.points}
-                    </Typography>
-                  </Fragment>
-                }
-              />
-              {/* BUTTONS */}
-              <ItemCardButtons u={u} />
-              {/* ITEMS */}
-              <EquipmentList u={u} identifier={identifier} />
-            </ListItem>
+                </IconButton>
+                {/* NAME + POINTS + EQUIPMENTLIST*/}
+                <ListItemText
+                  key={identifier}
+                  className={classes.text}
+                  primary={
+                    <Fragment>
+                      <Typography variant="button" className={classes.typographyFont}>
+                        {u.unitName}
+                      </Typography>
+                    </Fragment>
+                  }
+                  secondary={
+                    <Fragment>
+                      <Typography variant="button" className={classes.typographyFont}>
+                        {u.points}
+                      </Typography>
+                      <EquipmentList u={u} identifier={identifier} />
+                    </Fragment>
+                  }
+                />
+                {/* BUTTONS */}
+                <ItemCardButtons u={u} key={identifier} />
+              </ListItem>
+            </Fragment>
           );
         })}
+        {/* SUB LIST STATS */}
+        <SubListStats subFactionTotal={subFactionTotal} percentages={percentages} />
       </List>
-      {/* SUB LIST STATS */}
-      <SubListStats subFactionTotal={subFactionTotal} percentages={percentages} />
     </Fragment>
   );
 };
