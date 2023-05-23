@@ -173,7 +173,7 @@ const ItemShop = () => {
       <Grid item container direction="row" className={classes.dynamicPart}>
         <Grid item xs={3} className={classes.panelButtonsBackground}>
           {/* PANEL BUTTONS */}
-          <ButtonGroup fullwidth={true} variant="contained" size="large" orientation="vertical" >
+          <ButtonGroup variant="contained" size="large" orientation="vertical" >
             {ItemTypes.map((type) => {
               return (
                 <Button
