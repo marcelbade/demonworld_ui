@@ -1,7 +1,7 @@
 // React
 import React, { Fragment, useEffect, useContext, useState } from "react";
 // Material UI
-import { List, ListItem, IconButton, Typography, Grid, makeStyles } from "@material-ui/core";
+import { List, ListItem, Typography, makeStyles, ListItemText, ListItemIcon } from "@material-ui/core";
 // icons
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 // components and functions
@@ -12,6 +12,7 @@ import { unitCardMultiSort } from "../../shared/sharedFunctions";
 import EquipmentList from "./EquipmentList";
 import SubListStats from "./SubListStats";
 import ItemCardButtons from "./ItemCardButtons";
+import { ListItemButton } from "@mui/material";
 
 const useStyles = makeStyles({
   gearListHeader: {
@@ -25,6 +26,9 @@ const useStyles = makeStyles({
       backgroundColor: "grey",
       color: "red",
     },
+  },
+  text: {
+    width: "100%",
   },
   typographyFont: {
     fontFamily: "NotMaryKate",
@@ -105,39 +109,38 @@ const SubList = (props) => {
           const identifier = u.unitName + u.uniqueID;
           return (
             <ListItem key={identifier}>
-              <Grid container direction="column">
-                <Grid container item direction="row">
-                  {/* REMOVE BUTTON */}
-                  <Grid item xs={1}>
-                    <IconButton
-                      className={classes.deleteBttn}
-                      onClick={() => {
-                        removeUnit(identifier);
-                      }}
-                    >
-                      <RemoveCircleOutlineIcon />
-                    </IconButton>
-                  </Grid>
-                  {/* NAME */}
-                  <Grid item xs={5}>
+              {/* REMOVE BUTTON */}
+              <ListItemButton
+                className={classes.deleteBttn}
+                onClick={() => {
+                  removeUnit(identifier);
+                }}
+              >
+                <ListItemIcon>
+                  <RemoveCircleOutlineIcon />
+                </ListItemIcon>
+              </ListItemButton>
+              {/* NAME + POINTS */}
+              <ListItemText     className={classes.text}
+                primary={
+                  <Fragment>
                     <Typography variant="button" className={classes.typographyFont}>
                       {u.unitName}
                     </Typography>
-                  </Grid>
-                  {/* POINTS */}
-                  <Grid item xs={1}>
+                  </Fragment>
+                }
+                secondary={
+                  <Fragment>
                     <Typography variant="button" className={classes.typographyFont}>
                       {u.points}
                     </Typography>
-                  </Grid>
-                  {/* BUTTONS */}
-                  <ItemCardButtons u={u} />
-                </Grid>
-                <Grid container item xs={12} direction="row">
-                  {/* ITEMS */}
-                  <EquipmentList u={u} identifier={identifier} />
-                </Grid>
-              </Grid>
+                  </Fragment>
+                }
+              />
+              {/* BUTTONS */}
+              <ItemCardButtons u={u} />
+              {/* ITEMS */}
+              <EquipmentList u={u} identifier={identifier} />
             </ListItem>
           );
         })}

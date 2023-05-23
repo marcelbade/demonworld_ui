@@ -1,7 +1,8 @@
 // React
-import React, { useContext } from "react";
+import React, { useContext,   } from "react";
 // Material UI
-import { Button, Grid, makeStyles } from "@material-ui/core";
+import {  makeStyles } from "@material-ui/core";
+import { ListItemButton, Stack } from "@mui/material";
 // components and functions
 import { ArmyContext } from "../../../contexts/armyContext";
 
@@ -14,6 +15,10 @@ const useStyles = makeStyles({
       color: "red",
     },
   },
+  teest: {
+    display: "flex",
+    flexDirection: "column",
+  },
 });
 
 const ItemCardButtons = (props) => {
@@ -22,8 +27,8 @@ const ItemCardButtons = (props) => {
   const contextArmy = useContext(ArmyContext);
 
   return (
-    <Grid item xs={5} direction="row">
-      <Button
+    <Stack direction={"column"}>
+      <ListItemButton
         className={classes.buttons}
         variant="outlined"
         onClick={() => {
@@ -32,8 +37,8 @@ const ItemCardButtons = (props) => {
         }}
       >
         Gegenstände
-      </Button>
-      <Button
+      </ListItemButton>
+      <ListItemButton
         className={classes.buttons}
         variant="outlined"
         onClick={() => {
@@ -41,8 +46,8 @@ const ItemCardButtons = (props) => {
         }}
       >
         Kartenvorschau
-      </Button>
-    </Grid>
+      </ListItemButton>
+    </Stack>
   );
 };
 
