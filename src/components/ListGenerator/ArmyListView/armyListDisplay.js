@@ -12,15 +12,10 @@ import { ALLIES_MAPPING } from "../../../constants/allies";
 
 import SubList from "./SubFactionList/subList";
 import { Stack } from "@mui/material";
+import { Fragment } from "react";
 
 // TODO: remove unneeded styles
 const useStyles = makeStyles((theme) => ({
-  listDisplay: {
-    [theme.breakpoints.down("md")]: {
-      paddingTop: "4em",
-      paddingLeft: "1em"
-    },
-  },
   HeaderBox: {
     fontFamily: "notMaryKate",
     fontSize: "20px",
@@ -35,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
     padding: "10px",
     width: "10em",
     height: "5em",
+
     "&:hover": {
       backgroundColor: "grey",
       color: "red",
@@ -65,12 +61,11 @@ const useStyles = makeStyles((theme) => ({
   exceeded: { color: "red" },
 }));
 
-const ArmyListDisplay = (props) => {
+const ArmyListDisplay = () => {
   const contextArmy = useContext(ArmyContext);
+  const classes = useStyles();
 
   const [errorMessage, setErrorMessage] = useState("");
-
-  const classes = useStyles();
 
   /**
    * Filters the selected units by subFaction. If allied units have been selected, then their subFaction name is replaced with their faction name.
@@ -96,7 +91,7 @@ const ArmyListDisplay = (props) => {
    * This creates the centre of the UI: the actual army list consisting of the selected units and the display of the maximum * army points.
    */
   return contextArmy ? (
-    <Stack direction="column" className={classes.listDisplay}>
+    <Fragment>
       {/* <Grid item container justify="flex-end"> */}
       <Button
         className={classes.removeButton}
@@ -141,7 +136,7 @@ const ArmyListDisplay = (props) => {
         helperText={errorMessage}
         variant="standard"
       />
-    </Stack>
+    </Fragment>
   ) : null;
 };
 

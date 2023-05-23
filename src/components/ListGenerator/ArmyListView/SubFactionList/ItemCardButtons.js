@@ -1,7 +1,7 @@
 // React
-import React, { useContext,   } from "react";
+import React, { useContext } from "react";
 // Material UI
-import {  makeStyles } from "@material-ui/core";
+import { makeStyles, Button } from "@material-ui/core";
 import { ListItemButton, Stack } from "@mui/material";
 // components and functions
 import { ArmyContext } from "../../../../contexts/armyContext";
@@ -28,7 +28,7 @@ const ItemCardButtons = (props) => {
 
   return (
     <Stack direction={"column"}>
-      <ListItemButton
+      <Button
         className={classes.buttons}
         variant="outlined"
         onClick={() => {
@@ -37,8 +37,8 @@ const ItemCardButtons = (props) => {
         }}
       >
         Gegenstände
-      </ListItemButton>
-      <ListItemButton
+      </Button>
+      <Button
         className={classes.buttons}
         variant="outlined"
         onClick={() => {
@@ -46,7 +46,7 @@ const ItemCardButtons = (props) => {
         }}
       >
         Kartenvorschau
-      </ListItemButton>
+      </Button>
     </Stack>
   );
 };
