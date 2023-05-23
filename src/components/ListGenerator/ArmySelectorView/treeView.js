@@ -5,10 +5,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import TreeView from "@material-ui/lab/TreeView";
 // components and functions
 import { ArmyContext } from "../../../contexts/armyContext";
-import { MinusSquare, PlusSquare, CloseSquare, TransitionComponent } from "../dependencies/treeViewFunctions";
+import { MinusSquare, PlusSquare, CloseSquare, TransitionComponent } from "./treeViewFunctions";
 import { Fragment } from "react";
 import Tree from "./Tree";
-import { StyledTreeItem } from "../dependencies/styledTreeItem";
+import { StyledTreeItem } from "./styledTreeItem";
 
 TransitionComponent.propTypes = {
   /**

@@ -1,11 +1,19 @@
 import React, { useContext } from "react";
 // Material UI
 import { Tooltip } from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 // components and functions
 import { ArmyContext } from "../../../contexts/armyContext";
 import { uuidGenerator, unitCardMultiSort } from "../../shared/sharedFunctions";
-import { StyledTreeItem } from "../dependencies/styledTreeItem";
+import { StyledTreeItem } from "./styledTreeItem";
 import LeafNode from "./LeafNode";
+
+const useStyles = makeStyles({
+  node: {
+    width: "110%",
+    paddingBottom:"1em",
+  },
+});
 
 /**
  * This element generates the leaf nodes in the TreeView. One leafNode == one unit. The leafNodes can be rendered in one of two states: blocked or default.
@@ -14,8 +22,8 @@ import LeafNode from "./LeafNode";
  * and a tooltip with the reason for blocking it is shown on mouse hover.
  */
 const LeafNodeSelector = (props) => {
+  const classes = useStyles();
   const contextArmy = useContext(ArmyContext);
-
   const blockResults = contextArmy.blockedUnits.unitsBlockedbyRules;
 
   // no need for a useState hook - must be recalculated for every rerender!
@@ -60,7 +68,7 @@ const LeafNodeSelector = (props) => {
    *
    * @returns Function creates a node ID. The node ID needs the node ID of a branch so the leafs are correctly allocated to one of the branches and a unique id for the leave itself.
    */
-  const createNodeId = (unit) => {
+  const createLeafNodeId = (unit) => {
     return `${props.parentNodeId}${contextArmy.subfactions.indexOf(unit)}`;
   };
 
@@ -68,15 +76,17 @@ const LeafNodeSelector = (props) => {
     // unit blocked
     return blockedUnitNames.includes(unit.unitName) ? (
       <Tooltip
+        className={classes.node}
         title={findBlockMessage(blockResults, unit.unitName)} //
         key={uuidGenerator()}
       >
-        <LeafNode unit={unit} blocked={true} />
+        <LeafNode unit={unit} isBlocked={true} />
       </Tooltip>
     ) : (
       // unit not blocked
       <StyledTreeItem
-        nodeId={createNodeId(unit)} //
+        className={classes.node}
+        nodeId={createLeafNodeId(unit)} //
         label={<LeafNode unit={unit} isBlocked={false} />}
         key={uuidGenerator()}
       ></StyledTreeItem>

@@ -4,11 +4,11 @@ import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 // components and functions
 import { ArmyContext } from "../../../contexts/armyContext";
-import { TransitionComponent } from "../dependencies/treeViewFunctions";
+import { TransitionComponent } from "./treeViewFunctions";
 import { uuidGenerator } from "../../shared/sharedFunctions";
 import LeafNodeSelector from "./LeafNodeSelector";
-import { createNodeID } from "../dependencies/nodeIdCreator";
-import { StyledTreeItem } from "../dependencies/styledTreeItem";
+
+import { StyledTreeItem } from "./styledTreeItem";
 
 TransitionComponent.propTypes = {
   /**
@@ -20,6 +20,7 @@ TransitionComponent.propTypes = {
 const useStyles = makeStyles({
   branch: {
     width: "20em",
+    
   },
 });
 
@@ -42,20 +43,34 @@ const Tree = (props) => {
     return subfactions;
   };
 
-  const subfactions = createSubFactionList();
+  /**
+   * Function creates an ID for every node. The id must be larger than the root ID of 1, hence the offset.
+   * @param {*} index of the subfaction in the array.
+   * @returns int nodeID
+   */
+  const createNodeID = (index) => {
+    const ID_OFFSET = 2;
+    return `${ID_OFFSET}${index}`;
+  };
 
-  // tree for army or ally?
-  const units = props.showsFaction ? contextArmy.units : contextArmy.alliedUnits;
-
-  return subfactions
+  return createSubFactionList()
     .sort((a, b) => {
       return a > b;
     })
     .map((subF) => {
-      const NODE_ID = createNodeID(subfactions.indexOf(subF));
       return (
-        <StyledTreeItem key={uuidGenerator()} nodeId={NODE_ID} label={subF} className={classes.branch}>
-          <LeafNodeSelector units={units} subFaction={subF} nodeID={NODE_ID} />
+        <StyledTreeItem
+          key={uuidGenerator()} //
+          nodeId={createNodeID(createSubFactionList().indexOf(subF))}
+          label={subF}
+          className={classes.branch}
+        >
+          <LeafNodeSelector
+            // tree for army or ally?
+            units={props.showsFaction ? contextArmy.units : contextArmy.alliedUnits}
+            subFaction={subF}
+            nodeID={createNodeID(createSubFactionList().indexOf(subF))}
+          />
         </StyledTreeItem>
       );
     });
