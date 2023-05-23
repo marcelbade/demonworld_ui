@@ -3,7 +3,9 @@ import React from "react";
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
 // icons
-import blackShieldIcon from "../../customIcons/icons8-shield-black.png";
+
+ 
+import blackShieldIcon from "../../../icons/icons8-shield-black.png";
 
 // components & functions
 import {

@@ -12,7 +12,7 @@ import {
   displayFormationsn,
 } from "../../compendiums/factionTable/depencies/factionTableFunctions";
 // icons
-import blackShieldIcon from "../../customIcons/icons8-shield-black.png";
+import blackShieldIcon from "../../../icons/icons8-shield-black.png";
 
 const useStyles = makeStyles({
   cardBox: {

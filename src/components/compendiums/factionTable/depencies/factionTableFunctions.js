@@ -10,8 +10,8 @@ import CancelIcon from "@material-ui/icons/Cancel";
 // components & functions
 import { unitOrCmdCard } from "../../../shared/sharedFunctions";
 // icons
-import blackBowIcon from "../../../customIcons/bow2.png";
-import blackSwordIcon from "../../../customIcons/sword2.png";
+import blackBowIcon from "../../../../icons/bow2.png";
+import blackSwordIcon from "../../../../icons/sword2.png";
  
 
 const RulesToolTip = withStyles({
