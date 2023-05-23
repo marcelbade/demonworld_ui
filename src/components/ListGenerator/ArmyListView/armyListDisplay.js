@@ -10,7 +10,7 @@ import { ArmyContext } from "../../../contexts/armyContext";
 import { uuidGenerator } from "../../shared/sharedFunctions";
 import { ALLIES_MAPPING } from "../../../constants/allies";
 
-import SubList from "./subList";
+import SubList from "./SubFactionList/subList";
 import { Stack } from "@mui/material";
 
 // TODO: remove unneeded styles

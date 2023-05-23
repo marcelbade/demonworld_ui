@@ -4,7 +4,7 @@ import React, { useContext,   } from "react";
 import {  makeStyles } from "@material-ui/core";
 import { ListItemButton, Stack } from "@mui/material";
 // components and functions
-import { ArmyContext } from "../../../contexts/armyContext";
+import { ArmyContext } from "../../../../contexts/armyContext";
 
 const useStyles = makeStyles({
   buttons: {

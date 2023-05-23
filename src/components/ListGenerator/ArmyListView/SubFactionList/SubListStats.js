@@ -4,7 +4,7 @@ import React, { useContext } from "react";
 import { Typography, ListItemText, makeStyles } from "@material-ui/core";
 
 // components and functions
-import { ArmyContext } from "../../../contexts/armyContext";
+import { ArmyContext } from "../../../../contexts/armyContext";
 // clsx
 import { Fragment } from "react";
 

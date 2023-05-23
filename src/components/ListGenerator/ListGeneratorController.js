@@ -12,14 +12,14 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 // components and functions
 import ArmyProvider from "../../contexts/armyContext";
 import SelectionInput from "../shared/selectionInput";
-import FactionTreeView from "./ArmyTreeView/treeView";
+import FactionTreeView from "./ArmySelectorView/treeView";
 import ArmyListDisplay from "./ArmyListView/armyListDisplay";
 import ItemShop from "./ItemShop/ItemShop";
 import { ALLIES_MAPPING } from "../../constants/allies";
 import { ALL_FACTIONS_ARRAY } from "../../constants/factions";
 import { ruleValidation } from "../gameLogic/useRuleValidation";
 import { isObjectEmtpy, unitOrCmdCard, uuidGenerator } from "../shared/sharedFunctions";
-import AlternativeArmyListSelector from "./AlternativeArmyListSelection/AlternativeArmyListSelector";
+import AlternativeArmyListSelector from "./ArmySelectorView/AlternativeArmyListSelection/AlternativeArmyListSelector";
 // constants
 import { ARMIES_WITH_ALTERNATIVE_LISTS } from "../../constants/factions";
 
@@ -479,7 +479,7 @@ const ListGeneratorController = () => {
           <FactionTreeView className={classes.selector} />
         </Stack>
         {/* ARMYLIST */}
-        <Grid item xs={5} md={5}  >
+        <Grid item xs={5} md={5}>
           <ArmyListDisplay setTotalPointValue={setTotalPointValue} />
         </Grid>
         {/* ITEMSHOP */}

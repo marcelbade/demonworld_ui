@@ -5,7 +5,7 @@ import { IconButton, Typography, Grid, makeStyles } from "@material-ui/core";
 // icons
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 // components and functions
-import { ArmyContext } from "../../../contexts/armyContext";
+import { ArmyContext } from "../../../../contexts/armyContext";
 
 // clsx
 import clsx from "clsx";

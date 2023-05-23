@@ -1,13 +1,11 @@
 // React
 import React, { useState, useContext, useEffect } from "react";
- 
- // components and functions
-import { ArmyContext } from "../../../contexts/armyContext";
-import SelectionInput from "../../shared/selectionInput";
 
+// components and functions
+import { ArmyContext } from "../../../../contexts/armyContext";
+import SelectionInput from "../../../shared/selectionInput";
 // constants
-import { ARMY_TO_ALTERNATIVES_MAPPER, ALTERNATIVE_ARMY_SELECTION_TEXT } from "../../../constants/factions";
-
+import { ARMY_TO_ALTERNATIVES_MAPPER, ALTERNATIVE_ARMY_SELECTION_TEXT } from "../../../../constants/factions";
 
 const AlternativeArmyListSelector = () => {
   const contextArmy = useContext(ArmyContext);

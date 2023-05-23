@@ -5,10 +5,10 @@ import { List, ListItem, Typography, makeStyles, ListItemText, ListItemIcon } fr
 // icons
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 // components and functions
-import { ArmyContext } from "../../../contexts/armyContext";
-import { displayUnitCost } from "../../compendiums/factionTable/depencies/factionTableFunctions";
-import { ruleObjectProvider } from "../../gameLogic/globalRules/ruleObjectProvider";
-import { unitCardMultiSort } from "../../shared/sharedFunctions";
+import { ArmyContext } from "../../../../contexts/armyContext";
+import { displayUnitCost } from "../../../compendiums/factionTable/depencies/factionTableFunctions";
+import { ruleObjectProvider } from "../../../gameLogic/globalRules/ruleObjectProvider";
+import { unitCardMultiSort } from "../../../shared/sharedFunctions";
 import EquipmentList from "./EquipmentList";
 import SubListStats from "./SubListStats";
 import ItemCardButtons from "./ItemCardButtons";
@@ -22,7 +22,7 @@ const useStyles = makeStyles({
   buttons: {
     fontFamily: "NotMaryKate",
     marginRight: "1em",
-    "&:hover": {
+    "&:hover": { 
       backgroundColor: "grey",
       color: "red",
     },
