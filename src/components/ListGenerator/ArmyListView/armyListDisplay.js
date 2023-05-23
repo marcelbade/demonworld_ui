@@ -14,12 +14,13 @@ import SubList from "./subList";
 import { Stack } from "@mui/material";
 
 // TODO: remove unneeded styles
-const useStyles = makeStyles({
-  ArmyListDisplay: {},
-
-  root: { fontFamily: "gonjuring" },
-  list: { height: "70%", minHeight: "70%", maxHeight: "70%" },
-
+const useStyles = makeStyles((theme) => ({
+  listDisplay: {
+    [theme.breakpoints.down("md")]: {
+      paddingTop: "4em",
+      paddingLeft: "1em"
+    },
+  },
   HeaderBox: {
     fontFamily: "notMaryKate",
     fontSize: "20px",
@@ -62,7 +63,7 @@ const useStyles = makeStyles({
   bottom: { bottom: "100px" },
   withinLimit: { color: "black" },
   exceeded: { color: "red" },
-});
+}));
 
 const ArmyListDisplay = (props) => {
   const contextArmy = useContext(ArmyContext);
@@ -95,7 +96,7 @@ const ArmyListDisplay = (props) => {
    * This creates the centre of the UI: the actual army list consisting of the selected units and the display of the maximum * army points.
    */
   return contextArmy ? (
-    <Stack direction="column" className={classes.ArmyListDisplay}>
+    <Stack direction="column" className={classes.listDisplay}>
       {/* <Grid item container justify="flex-end"> */}
       <Button
         className={classes.removeButton}

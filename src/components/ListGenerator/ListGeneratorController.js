@@ -23,11 +23,8 @@ import AlternativeArmyListSelector from "./AlternativeArmyListSelection/Alternat
 // constants
 import { ARMIES_WITH_ALTERNATIVE_LISTS } from "../../constants/factions";
 
-
 const useStyles = makeStyles((theme) => ({
   displayBox: {
-    // backgroundColor: "green",
-
     [theme.breakpoints.up("md")]: {
       flexDirection: "row",
     },
@@ -38,9 +35,7 @@ const useStyles = makeStyles((theme) => ({
 
   armySelectionBox: {
     [theme.breakpoints.down("lg")]: {},
-    [theme.breakpoints.down("sm")]: {
-      backgroundColor: "red",
-    },
+    [theme.breakpoints.down("sm")]: {},
   },
   itemScreen: {},
   UnitCardDisplay: {
@@ -469,6 +464,7 @@ const ListGeneratorController = () => {
         >
           <ChevronLeftIcon className={classes.BackBttn} />
         </IconButton>
+
         {/* ARMY SELECTION */}
         <Stack direction={"column"} item className={classes.armySelectionBox}>
           <SelectionInput
@@ -483,20 +479,17 @@ const ListGeneratorController = () => {
           <FactionTreeView className={classes.selector} />
         </Stack>
         {/* ARMYLIST */}
-        <ArmyListDisplay setTotalPointValue={setTotalPointValue} />
-        {/* RIGHT SIDE */}
-        <Grid item>
-          {/* ITEMSHOP */}
-          <Drawer anchor={"right"} variant="persistent" open={itemShopState.show} className={classes.itemScreen}>
-            <ItemShop />
-          </Drawer>
-          {/* UNITCARD */}
-          {showStatCard.show ? (
-            <Grid item className={classes.UnitCardDisplay}>
-              {!isObjectEmtpy(showStatCard.clickedUnit) ? unitOrCmdCard(showStatCard.clickedUnit, COLUMN) : null}
-            </Grid>
-          ) : null}
+        <Grid item xs={5} md={5}  >
+          <ArmyListDisplay setTotalPointValue={setTotalPointValue} />
         </Grid>
+        {/* ITEMSHOP */}
+        <Drawer anchor={"right"} variant="persistent" open={itemShopState.show} className={classes.itemScreen}>
+          <ItemShop />
+        </Drawer>
+        {/* UNITCARD */}
+        <Drawer anchor={"right"} variant="persistent" open={showStatCard.show} className={classes.UnitCardDisplay}>
+          {!isObjectEmtpy(showStatCard.clickedUnit) ? unitOrCmdCard(showStatCard.clickedUnit, COLUMN) : <p></p>}
+        </Drawer>
       </Grid>
     </ArmyProvider>
   ) : null;
