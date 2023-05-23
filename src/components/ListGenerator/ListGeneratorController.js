@@ -6,6 +6,7 @@ import axios from "axios";
 // Material UI
 import { Drawer, Grid, IconButton } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { Stack } from "@mui/material";
 // icons
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 // components and functions
@@ -21,7 +22,7 @@ import { isObjectEmtpy, unitOrCmdCard, uuidGenerator } from "../shared/sharedFun
 import AlternativeArmyListSelector from "./AlternativeArmyListSelection/AlternativeArmyListSelector";
 // constants
 import { ARMIES_WITH_ALTERNATIVE_LISTS } from "../../constants/factions";
-import { Stack } from "@mui/material";
+
 
 const useStyles = makeStyles((theme) => ({
   displayBox: {
