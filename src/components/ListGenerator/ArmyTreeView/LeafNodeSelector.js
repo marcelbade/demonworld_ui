@@ -13,7 +13,7 @@ import LeafNode from "./LeafNode";
  * blocked by the army's rule(s), this add button is disabled
  * and a tooltip with the reason for blocking it is shown on mouse hover.
  */
-const LeafNodes = (props) => {
+const LeafNodeSelector = (props) => {
   const contextArmy = useContext(ArmyContext);
 
   const blockResults = contextArmy.blockedUnits.unitsBlockedbyRules;
@@ -84,4 +84,4 @@ const LeafNodes = (props) => {
   });
 };
 
-export default LeafNodes;
+export default LeafNodeSelector;
