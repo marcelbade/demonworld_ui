@@ -1,27 +1,11 @@
 import React, { useContext } from "react";
 // Material UI
-import { makeStyles } from "@material-ui/core/styles";
-import { Grid, IconButton, Tooltip, Typography } from "@material-ui/core";
-import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+import { Tooltip } from "@material-ui/core";
 // components and functions
 import { ArmyContext } from "../../../contexts/armyContext";
 import { uuidGenerator, unitCardMultiSort } from "../../shared/sharedFunctions";
 import { StyledTreeItem } from "../dependencies/styledTreeItem";
-import NodeLabelGenerator from "./NodeLabelGenerator";
-
-const useStyles = makeStyles({
-  button: {
-    color: "black",
-  },
-  blockedLeafNode: {
-    fontFamily: "NotMaryKate",
-    color: "grey",
-  },
-  unblockedLeafNode: {
-    fontFamily: "NotMaryKate",
-    color: "black",
-  },
-});
+import LeafNode from "./LeafNode";
 
 /**
  * This element generates the leaf nodes in the TreeView. One leafNode == one unit. The leafNodes can be rendered in one of two states: blocked or default.
@@ -30,7 +14,6 @@ const useStyles = makeStyles({
  * and a tooltip with the reason for blocking it is shown on mouse hover.
  */
 const LeafNodes = (props) => {
-  const classes = useStyles();
   const contextArmy = useContext(ArmyContext);
 
   const blockResults = contextArmy.blockedUnits.unitsBlockedbyRules;
@@ -60,38 +43,43 @@ const LeafNodes = (props) => {
     return message;
   };
 
-  let allUnitsOfSubFaction = props.units.filter((f) => f.subFaction === props.subFaction);
-  allUnitsOfSubFaction = unitCardMultiSort(allUnitsOfSubFaction);
+  /**
+   * Functions filters the units down to the sub faction and sorts the result.
+   * @returns sorted and filtered array of unitCard objects.
+   */
+  const filterAndSortSubFaction = () => {
+    let allUnitsOfSubFaction = [];
 
-  return allUnitsOfSubFaction.map((unit) => {
-    const NODE_ID = `${props.parentNodeId}${contextArmy.subfactions.indexOf(unit)}`;
+    allUnitsOfSubFaction = props.units.filter((f) => f.subFaction === props.subFaction);
+    allUnitsOfSubFaction = unitCardMultiSort(allUnitsOfSubFaction);
 
+    return allUnitsOfSubFaction;
+  };
+
+  /**
+   *
+   * @returns Function creates a node ID. The node ID needs the node ID of a branch so the leafs are correctly allocated to one of the branches and a unique id for the leave itself.
+   */
+  const createNodeId = (unit) => {
+    return `${props.parentNodeId}${contextArmy.subfactions.indexOf(unit)}`;
+  };
+
+  return filterAndSortSubFaction().map((unit) => {
     // unit blocked
     return blockedUnitNames.includes(unit.unitName) ? (
-      <Tooltip title={findBlockMessage(blockResults, unit.unitName)} key={uuidGenerator()}>
-        <Grid container alignItems="center" key={uuidGenerator()}>
-          <Grid container item xs={6} className={classes.blockedLeafNode}>
-            <Grid item xs={9}>
-              <Typography variant="button" className={classes.blockedLeafNode}>
-                {unit.unitName}
-              </Typography>
-            </Grid>
-            <Grid item xs={3} className={classes.treeNode}>
-              <Typography variant="button" className={classes.blockedLeafNode}>
-                {unit.points}
-              </Typography>
-            </Grid>
-          </Grid>
-          <Grid item xs={3}>
-            <IconButton disabled={true} className={classes.button}>
-              <AddCircleOutlineIcon />
-            </IconButton>
-          </Grid>
-        </Grid>
+      <Tooltip
+        title={findBlockMessage(blockResults, unit.unitName)} //
+        key={uuidGenerator()}
+      >
+        <LeafNode unit={unit} blocked={true} />
       </Tooltip>
     ) : (
       // unit not blocked
-      <StyledTreeItem nodeId={NODE_ID} label={NodeLabelGenerator(unit)} key={uuidGenerator()}></StyledTreeItem>
+      <StyledTreeItem
+        nodeId={createNodeId(unit)} //
+        label={<LeafNode unit={unit} isBlocked={false} />}
+        key={uuidGenerator()}
+      ></StyledTreeItem>
     );
   });
 };
