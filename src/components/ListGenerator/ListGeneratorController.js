@@ -32,10 +32,11 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: "column",
     },
   },
-
   armySelectionBox: {
-    [theme.breakpoints.down("lg")]: {},
-    [theme.breakpoints.down("sm")]: {},
+    paddingTop: "2em",
+  },
+  armyListBox: {
+    paddingTop: "2em",
   },
   itemScreen: {},
   UnitCardDisplay: {
@@ -394,6 +395,7 @@ const ListGeneratorController = () => {
       setShowStatCard({ clickedUnit: u, lastclickedUnit: u, show: true });
     }
   };
+
   /**
    * in order to work, the state setter needs a unit. Since the card view is toggled off, the first unit in the list is used.
    */
@@ -479,7 +481,7 @@ const ListGeneratorController = () => {
           <FactionTreeView className={classes.selector} />
         </Stack>
         {/* ARMYLIST */}
-        <Grid item xs={5} md={5}>
+        <Grid item container direction="column" justify="flex-end" xs={3} className={classes.armyListBox}>
           <ArmyListDisplay setTotalPointValue={setTotalPointValue} />
         </Grid>
         {/* ITEMSHOP */}
