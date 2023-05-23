@@ -1,23 +1,13 @@
-import React, { Fragment, useContext } from "react";
+import React, { useContext } from "react";
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
-import { List, ListItemIcon, ListItemText, Typography } from "@material-ui/core";
-import { ListItemButton, Stack } from "@mui/material";
+import { Typography, Grid, IconButton } from "@material-ui/core";
 // components and functions
 import { ArmyContext } from "../../../contexts/armyContext";
-
 // Icons
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 
 const useStyles = makeStyles({
-  unblockedBttn: {
-    alignContent: "center",
-    color: "black",
-  },
-  blockedBttn: {
-    alignContent: "center",
-    color: "grey",
-  },
   textBlock: {
     width: "25em",
   },
@@ -29,8 +19,19 @@ const useStyles = makeStyles({
   },
   unblockedLeafNode: {
     paddingRight: "0.5em",
-
     fontFamily: "NotMaryKate",
+  },
+  points:{
+    fontFamily: "NotMaryKate",
+    color: "grey",
+  },
+
+  unblockedBttn: {
+    alignContent: "center",
+    color: "black",
+  },
+  blockedBttn: {
+    paddingLeft: "1em",
   },
 });
 
@@ -46,36 +47,28 @@ const LeafNode = (props) => {
   };
 
   return (
-    <List component={Stack} direction="row" alignItems="center">
-      <ListItemText
-        className={classes.text}
-        primary={
-          <Fragment>
-            <Typography variant="button" className={displayLeaf(props.isBlocked)}>
-              {props.unit.unitName}
-            </Typography>
-          </Fragment>
-        }
-        secondary={
-          <Fragment>
-            <Typography variant="button" className={displayLeaf(props.isBlocked)}>
-              {props.unit.points}
-            </Typography>
-          </Fragment>
-        }
-      />
-      <ListItemButton
-        onClick={() => {
-          contextArmy.selectUnit(props.unit);
-        }}
-        disabled={props.isBlocked}
-        className={displayBttn(props.isBlocked)}
-      >
-        <ListItemIcon>
+    <Grid container direction="row" alignItems="center" justify="space-around">
+      <Grid xs={6} item container direction="column">
+        <Typography variant="button" className={displayLeaf(props.isBlocked)}>
+          {props.unit.unitName}
+        </Typography>
+
+        <Typography variant="button" className={classes.points}>
+          {props.unit.points}
+        </Typography>
+      </Grid>
+      <Grid item xs={5}>
+        <IconButton
+          onClick={() => {
+            contextArmy.selectUnit(props.unit);
+          }}
+          disabled={props.isBlocked}
+          className={displayBttn(props.isBlocked)}
+        >
           <AddCircleOutlineIcon />
-        </ListItemIcon>
-      </ListItemButton>
-    </List>
+        </IconButton>
+      </Grid>
+    </Grid>
   );
 };
 export default LeafNode;
