@@ -1,6 +1,6 @@
 import TreeItem from "@material-ui/lab/TreeItem";
 import { fade, withStyles } from "@material-ui/core/styles";
-import { TransitionComponent } from "../dependencies/treeViewFunctions";
+import { TransitionComponent } from "./treeViewFunctions";
 
 export const StyledTreeItem = withStyles((theme) => ({
   // CSS for icons that expend/collapse the treeview ("+/-")
