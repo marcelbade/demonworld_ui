@@ -22,7 +22,11 @@ export const uuidGenerator = () => {
  * @returns true if object is emtpy, false if not.
  */
 export const isObjectEmtpy = (obj) => {
-  return Object.keys(obj).length === 0;
+  if (obj !== undefined) {
+    return Object.keys(obj).length === 0;
+  } else {
+    return true;
+  }
 };
 
 /**
