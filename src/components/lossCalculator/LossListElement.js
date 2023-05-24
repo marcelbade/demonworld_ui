@@ -8,6 +8,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { ListItem } from "@mui/material";
 import ListElementBttns from "./ListElementBttns";
 import EquipmentListEntry from "./EquipmentListEntry";
+import { uuidGenerator } from "../shared/sharedFunctions";
 
 // clsx
 import clsx from "clsx";
@@ -31,7 +32,6 @@ const useStyles = makeStyles((theme) => ({
       height: "35%",
       "@media (orientation:landscape)": {
         flexDirection: "row",
-       
       },
     },
   },
@@ -118,7 +118,7 @@ const LossListElement = (props) => {
       >
         {/* NAME*/}
         <Grid container item md={4} direction="column">
-          <Grid item   >
+          <Grid item>
             <Typography
               variant="button"
               className={markAsLost ? clsx(classes.typographyFont, classes.strikeTroughText) : clsx(classes.typographyFont, classes.text)}
@@ -141,7 +141,7 @@ const LossListElement = (props) => {
                         setItemClicked={setItemClicked}
                         element={e}
                         index={i}
-                        key={e.name + i}
+                        key={uuidGenerator()}
                       />
                     );
                   })
@@ -149,12 +149,12 @@ const LossListElement = (props) => {
             </List>
           </Grid>
         </Grid>
-        <Grid item      >
+        <Grid item>
           <Typography variant="button" className={clsx(classes.typographyFont, classes.text)}>
             {TEXT}
           </Typography>
         </Grid>
-        <Grid  item      >
+        <Grid item>
           {/*  BUTTONS */}
           <ListElementBttns
             itemClicked={itemClicked}
@@ -165,7 +165,7 @@ const LossListElement = (props) => {
             setItemsLost={setItemsLost}
           />
         </Grid>
-        <Grid item     >
+        <Grid item>
           <Typography variant="h6" align="center" className={classes.typographyFont}>
             {unitPointsLost}
           </Typography>

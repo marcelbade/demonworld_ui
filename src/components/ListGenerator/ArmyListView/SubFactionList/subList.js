@@ -1,18 +1,17 @@
 // React
 import React, { Fragment, useEffect, useContext, useState } from "react";
 // Material UI
-import { List, ListItem, Typography, makeStyles, ListItemText, ListItemIcon, IconButton } from "@material-ui/core";
+import { List, ListItem, Typography, makeStyles, ListItemText, IconButton } from "@material-ui/core";
 // icons
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 // components and functions
 import { ArmyContext } from "../../../../contexts/armyContext";
 import { displayUnitCost } from "../../../compendiums/factionTable/depencies/factionTableFunctions";
 import { ruleObjectProvider } from "../../../gameLogic/globalRules/ruleObjectProvider";
-import { unitCardMultiSort } from "../../../shared/sharedFunctions";
+import { unitCardMultiSort, uuidGenerator } from "../../../shared/sharedFunctions";
 import EquipmentList from "./EquipmentList";
 import SubListStats from "./SubListStats";
 import ItemCardButtons from "./ItemCardButtons";
-import { ListItemButton } from "@mui/material";
 
 const useStyles = makeStyles({
   buttons: {
@@ -113,44 +112,45 @@ const SubList = (props) => {
           const identifier = u.unitName + u.uniqueID;
           return (
             <Fragment>
-              <ListItem key={identifier}>
+              <ListItem key={uuidGenerator()}>
                 {/* REMOVE BUTTON */}
                 <IconButton
+                  key={uuidGenerator()}
                   className={classes.deleteBttn}
                   onClick={() => {
                     removeUnit(identifier);
                   }}
                 >
-                  <RemoveCircleOutlineIcon />
+                  <RemoveCircleOutlineIcon key={uuidGenerator()} />
                 </IconButton>
                 {/* NAME + POINTS + EQUIPMENTLIST*/}
                 <ListItemText
-                  key={identifier}
+                  key={uuidGenerator()}
                   className={classes.text}
                   primary={
                     <Fragment>
-                      <Typography variant="button" className={classes.typographyFont}>
+                      <Typography key={uuidGenerator()} variant="button" className={classes.typographyFont}>
                         {u.unitName}
                       </Typography>
                     </Fragment>
                   }
                   secondary={
                     <Fragment>
-                      <Typography variant="button" className={classes.typographyFont}>
+                      <Typography key={uuidGenerator()} variant="button" className={classes.typographyFont}>
                         {u.points}
                       </Typography>
-                      <EquipmentList u={u} identifier={identifier} />
+                      <EquipmentList key={uuidGenerator()} u={u} identifier={identifier} />
                     </Fragment>
                   }
                 />
                 {/* BUTTONS */}
-                <ItemCardButtons u={u} key={identifier} />
+                <ItemCardButtons u={u} key={uuidGenerator()} />
               </ListItem>
             </Fragment>
           );
         })}
         {/* SUB LIST STATS */}
-        <SubListStats subFactionTotal={subFactionTotal} percentages={percentages} />
+        <SubListStats key={uuidGenerator()} subFactionTotal={subFactionTotal} percentages={percentages} />
       </List>
     </Fragment>
   );

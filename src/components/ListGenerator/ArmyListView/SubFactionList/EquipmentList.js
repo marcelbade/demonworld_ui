@@ -1,7 +1,7 @@
 // React
 import React, { useContext, Fragment } from "react";
 // Material UI
-import { IconButton, Typography, Grid, makeStyles, List, ListItemText } from "@material-ui/core";
+import { IconButton, Typography, makeStyles, List, ListItemText } from "@material-ui/core";
 // icons
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 // components and functions
@@ -17,14 +17,14 @@ const useStyles = makeStyles({
   },
   equipmentList: {
     display: "flex",
-    flexDirection: "row", 
+    flexDirection: "row",
   },
   line: {
     marginTop: "0.5em",
     marginBottom: "0.5em",
     borderBottom: "solid black 0.1em",
     display: "block",
-     width: "75%",
+    width: "75%",
   },
   typographyFont: {
     fontFamily: "NotMaryKate",
@@ -55,7 +55,7 @@ const EquipmentList = (props) => {
       {props.u.equipment.length !== 0
         ? props.u.equipment.map((e, i) => {
             return (
-              <List   className={classes.equipmentList} key={props.identifier}>
+              <List className={classes.equipmentList} key={props.identifier}>
                 <IconButton
                   className={clsx(classes.deleteBttn, classes.textMargin)}
                   onClick={() => {

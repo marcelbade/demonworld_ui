@@ -7,7 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 // icons
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 // components and functions
-import { unitCardMultiSort } from "../shared/sharedFunctions";
+import { unitCardMultiSort, uuidGenerator } from "../shared/sharedFunctions";
 import LossListElement from "./LossListElement";
 import { MOCK_LIST } from "./mockList";
 
@@ -94,7 +94,7 @@ const LossCalculator = () => {
               unit={u} //
               index={i}
               updateUnitLossTracker={updateUnitLossTracker}
-              key={u.uniqueID}
+              key={uuidGenerator()}
             />
           );
         })}
