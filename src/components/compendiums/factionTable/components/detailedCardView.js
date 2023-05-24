@@ -3,8 +3,7 @@ import React from "react";
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
 // components & functions
-import { uuidGenerator } from "../../../shared/sharedFunctions";
-import { unitOrCmdCard } from "../../../shared/sharedFunctions";
+import { uuidGenerator, unitOrCmdCard } from "../../../shared/sharedFunctions";
 
 const useStyles = makeStyles({
   backGround: {
