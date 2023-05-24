@@ -9,7 +9,7 @@ import StatCardUnitFront from "./statCardUnitFront";
 
 const useStyles = makeStyles({
   CardBox: {
-    marginRight: "2em",   
+    marginRight: "2em",
   },
 });
 
@@ -22,7 +22,7 @@ const StatCardUnit = (props) => {
    * @returns jsx
    */
   return (
-    <Grid direction={props.alignment} className={classes.CardBox} spacing={3}>
+    <Grid container direction={props.alignment} className={classes.CardBox} spacing={3}>
       <Grid item>
         <StatCardUnitFront unit={props.unit} />
       </Grid>

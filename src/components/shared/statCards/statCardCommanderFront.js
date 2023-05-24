@@ -3,10 +3,7 @@ import React from "react";
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
 // icons
-
- 
 import blackShieldIcon from "../../../icons/icons8-shield-black.png";
-
 // components & functions
 import {
   generateHitPoints,
@@ -36,7 +33,6 @@ const useStyles = makeStyles({
     fontFamily: "Beryliumbold",
   },
   cardTitle: {
-   
     wordSpacing: "100vw",
     flexWrap: "nowrap",
     fontFamily: "notMaryKate",
@@ -49,8 +45,13 @@ const useStyles = makeStyles({
     fontFamily: "Beryliumbold",
   },
 
-  font: {
+  fontRight: {
     fontFamily: "Beryliumbold",
+    textAlign: "right",
+  },
+  fontLeft: {
+    fontFamily: "Beryliumbold",
+    textAlign: "Left",
   },
   Icon: {
     height: "1em",
@@ -92,11 +93,11 @@ const StatCardCommanderFront = (props) => {
       </Grid>
       {/* 2nd Row - black Stripe  - MOVEMENT / CONTROL AREA*/}
       <Grid item container justify="space-around" className={classes.unitCardStripe}>
-        <Typography variant="h6" textAlign="left" className={classes.font}>
+        <Typography variant="h6" className={classes.fontLeft}>
           {props.unit.move} Bewegungspunkte
         </Typography>
         <Grid item className={classes.centerCell}></Grid>
-        <Typography variant="h6" textAlign="right" className={classes.font}>
+        <Typography variant="h6" className={classes.fontRight}>
           Kontrollbereich: {props.unit.controlZone_OverRun}
         </Typography>
       </Grid>

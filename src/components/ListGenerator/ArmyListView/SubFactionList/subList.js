@@ -1,7 +1,7 @@
 // React
 import React, { Fragment, useEffect, useContext, useState } from "react";
 // Material UI
-import { List, ListItem, Typography, makeStyles, ListItemText, IconButton } from "@material-ui/core";
+import { List, ListItem, makeStyles, ListItemText, Button } from "@material-ui/core";
 // icons
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 // components and functions
@@ -23,18 +23,17 @@ const useStyles = makeStyles({
     },
   },
   text: {
-    width: "20%",
-  },
-  typographyFont: {
+    width: "40%",
     fontFamily: "NotMaryKate",
   },
   list: {
     padding: "0px",
     margin: "0px",
   },
-  deleteBttn: {
-    marginRight: "1em",
-    margin: "0px",
+  element: {
+    width: "80%",
+    margin: "-1em",
+    padding: "0em",
   },
 });
 
@@ -107,51 +106,37 @@ const SubList = (props) => {
    */
   return (
     <Fragment>
-      <List className={classes.list}>
-        {unitCardMultiSort(props.subFactionUnits).map((u, i) => {
-          const identifier = u.unitName + u.uniqueID;
-          return (
-            <Fragment>
-              <ListItem key={uuidGenerator()}>
-                {/* REMOVE BUTTON */}
-                <IconButton
-                  key={uuidGenerator()}
-                  className={classes.deleteBttn}
-                  onClick={() => {
-                    removeUnit(identifier);
-                  }}
-                >
-                  <RemoveCircleOutlineIcon key={uuidGenerator()} />
-                </IconButton>
-                {/* NAME + POINTS + EQUIPMENTLIST*/}
-                <ListItemText
-                  key={uuidGenerator()}
-                  className={classes.text}
-                  primary={
-                    <Fragment>
-                      <Typography key={uuidGenerator()} variant="button" className={classes.typographyFont}>
-                        {u.unitName}
-                      </Typography>
-                    </Fragment>
-                  }
-                  secondary={
-                    <Fragment>
-                      <Typography key={uuidGenerator()} variant="button" className={classes.typographyFont}>
-                        {u.points}
-                      </Typography>
-                      <EquipmentList key={uuidGenerator()} u={u} identifier={identifier} />
-                    </Fragment>
-                  }
-                />
-                {/* BUTTONS */}
-                <ItemCardButtons u={u} key={uuidGenerator()} />
-              </ListItem>
-            </Fragment>
-          );
-        })}
-        {/* SUB LIST STATS */}
-        <SubListStats key={uuidGenerator()} subFactionTotal={subFactionTotal} percentages={percentages} />
-      </List>
+      {unitCardMultiSort(props.subFactionUnits).map((u, i) => {
+        const identifier = u.unitName + u.uniqueID;
+        return (
+          <List className={classes.list} key={uuidGenerator()}>
+            <ListItem key={uuidGenerator()} className={classes.element}>
+              {/* REMOVE BUTTON */}
+              <Button
+                key={uuidGenerator()}
+                onClick={() => {
+                  removeUnit(identifier);
+                }}
+              >
+                <RemoveCircleOutlineIcon key={uuidGenerator()} />
+              </Button>
+              {/* NAME + POINTS + BUTTONS*/}
+              <ListItemText
+                key={uuidGenerator()}
+                primary={<span className={classes.text}>{u.unitName}</span>}
+                secondary={<span className={classes.text}>{u.points}</span>}
+              />
+              {/* BUTTONS */}
+              <ItemCardButtons u={u} key={uuidGenerator()} />
+            </ListItem>
+            <ListItem key={uuidGenerator()}>
+              <EquipmentList key={uuidGenerator()} u={u} identifier={identifier} />
+            </ListItem>
+          </List>
+        );
+      })}
+      {/* SUB LIST STATS */}
+      <SubListStats key={uuidGenerator()} subFactionTotal={subFactionTotal} percentages={percentages} />
     </Fragment>
   );
 };

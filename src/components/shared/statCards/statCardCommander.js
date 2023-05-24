@@ -22,7 +22,7 @@ const StatCardCommander = (props) => {
   const classes = useStyles();
 
   return (
-    <Grid direction={props.alignment} className={classes.CardBox} spacing={3}>
+    <Grid container direction={props.alignment} className={classes.CardBox} spacing={3}>
       <Grid item>
         <StatCardCommanderFront unit={props.unit} />
       </Grid>

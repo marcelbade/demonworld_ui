@@ -1,12 +1,12 @@
 // React
-import React, { useContext, Fragment } from "react";
+import React, { useContext } from "react";
 // Material UI
-import { IconButton, Typography, makeStyles, List, ListItemText } from "@material-ui/core";
+import { makeStyles, List, ListItemText, ListItem, Button } from "@material-ui/core";
 // icons
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 // components and functions
 import { ArmyContext } from "../../../../contexts/armyContext";
-
+import { uuidGenerator } from "../../../shared/sharedFunctions";
 // clsx
 import clsx from "clsx";
 
@@ -17,21 +17,19 @@ const useStyles = makeStyles({
   },
   equipmentList: {
     display: "flex",
-    flexDirection: "row",
+    flexDirection: "column",
   },
   line: {
     marginTop: "0.5em",
-    marginBottom: "0.5em",
-    borderBottom: "solid black 0.1em",
-    display: "block",
-    width: "75%",
+    borderTop: "solid black 0.1em",
+    width: "55%",
   },
-  typographyFont: {
+  element: {
+    padding: "0px",
+    margin: "0px",
+  },
+  text: {
     fontFamily: "NotMaryKate",
-  },
-
-  textMargin: {
-    marginRight: "3em",
   },
 });
 
@@ -42,49 +40,46 @@ const EquipmentList = (props) => {
 
   /**
    * Removes the item.
-   * @param {unit.name + hash code} identifier
+   * @param {unit.name + uuid} identifier
    * @param {array index } i
    */
   const removeItem = (identifier, i) => {
     contextArmy.removeItem(identifier, i);
   };
 
+  /**
+   * Function makes sure a horizontal divider is displayed when the equipment list is not emtpy.
+   * @returns css class
+   */
+  const displayListTop = () => {
+    return props.u.equipment.length === 0 ? classes.equipmentList : clsx(classes.line, classes.equipmentList);
+  };
+
   return (
-    <Typography>
-      {props.u.equipment.length !== 0 ? <span className={classes.line}></span> : null}
+    <List className={displayListTop()} key={uuidGenerator()}>
       {props.u.equipment.length !== 0
         ? props.u.equipment.map((e, i) => {
             return (
-              <List className={classes.equipmentList} key={props.identifier}>
-                <IconButton
-                  className={clsx(classes.deleteBttn, classes.textMargin)}
+              <ListItem key={uuidGenerator()} className={classes.element}>
+                <Button
+                  key={uuidGenerator()}
+                  className={clsx(classes.deleteBttn)}
                   onClick={() => {
                     removeItem(props.identifier, i);
                   }}
                 >
-                  <RemoveCircleOutlineIcon />
-                </IconButton>
+                  <RemoveCircleOutlineIcon key={uuidGenerator()} />
+                </Button>
                 <ListItemText
-                  primary={
-                    <Fragment>
-                      <Typography variant="button" className={classes.typographyFont}>
-                        {e.name}
-                      </Typography>
-                    </Fragment>
-                  }
-                  secondary={
-                    <Fragment>
-                      <Typography variant="button" className={classes.typographyFont}>
-                        {e.points}
-                      </Typography>
-                    </Fragment>
-                  }
+                  key={uuidGenerator()}
+                  primary={<span className={classes.text}>{e.name}</span>}
+                  secondary={<span className={classes.text}>{e.points}</span>}
                 />
-              </List>
+              </ListItem>
             );
           })
         : null}
-    </Typography>
+    </List>
   );
 };
 

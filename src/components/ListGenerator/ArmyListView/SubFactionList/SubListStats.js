@@ -1,14 +1,21 @@
 // React
 import React, { useContext } from "react";
 // Material UI
-import { Typography, ListItemText, makeStyles,ListItem } from "@material-ui/core";
-
+import { ListItemText, makeStyles, List } from "@material-ui/core";
+import { Stack } from "@mui/material";
 // components and functions
 import { ArmyContext } from "../../../../contexts/armyContext";
+import { uuidGenerator } from "../../../shared/sharedFunctions";
 // clsx
-import { Fragment } from "react";
 
 const useStyles = makeStyles({
+  listElement: {
+    display: "flex",
+    flexDirection: "column",
+  },
+  textBox: {
+    gap: "1em",
+  },
   font: {
     fontFamily: "NotMaryKate",
   },
@@ -23,7 +30,7 @@ const SubListStats = (props) => {
   };
 
   const displayPoints = () => {
-    return props.subFactionTotal === 0 ? null : `Gesamt: ${props.subFactionTotal} Punkte`;
+    return props.subFactionTotal === 0 ? null : `${props.subFactionTotal} Punkte`;
   };
 
   const displayPercents = () => {
@@ -31,23 +38,25 @@ const SubListStats = (props) => {
   };
 
   return (
-    <ListItem>
+    <List>
+      <ListItemText className={classes.listElement} key={uuidGenerator()} primary={<span className={classes.font}>Gesamt</span>} />
       <ListItemText
-        className={classes.text}
+        className={classes.listElement}
+        key={uuidGenerator()}
         primary={
-          <Fragment>
-            <Typography className={classes.font}>{displayPoints()}</Typography>
-            <Typography className={classes.font}>{displayPercents()}</Typography>
-          </Fragment>
+          <Stack direction={"row"} className={classes.textBox}>
+            <span className={classes.font}>{displayPoints()}</span>
+            <span className={classes.font}> {displayPercents()}</span>
+          </Stack>
         }
         secondary={
-          <Fragment>
-            <Typography className={classes.font}>{`Minimum: ${props.percentages.min} %`}</Typography>
-            <Typography className={classes.font}> {`Maximum ${props.percentages.max} %`}</Typography>
-          </Fragment>
+          <Stack direction={"row"} className={classes.textBox}>
+            <span className={classes.font}>{`Minimum: ${props.percentages.min} %`}</span>
+            <span className={classes.font}>{`Maximum ${props.percentages.max} %`}</span>
+          </Stack>
         }
       />
-    </ListItem>
+    </List>
   );
 };
 

@@ -173,7 +173,7 @@ const ItemShop = () => {
       <Grid item container direction="row" className={classes.dynamicPart}>
         <Grid item xs={3} className={classes.panelButtonsBackground}>
           {/* PANEL BUTTONS */}
-          <ButtonGroup variant="contained" size="large" orientation="vertical" >
+          <ButtonGroup size="large" orientation="vertical">
             {ItemTypes.map((type) => {
               return (
                 <Button
@@ -192,7 +192,7 @@ const ItemShop = () => {
         </Grid>
         <Grid item xs={8}>
           {/* ITEMLIST */}
-          <ButtonGroup variant="text" orientation="vertical" fullWidth={true} >
+          <ButtonGroup orientation="vertical">
             {filterFetchedItemsForUnit()
               .filter((item) => item.type === displayThisItemType)
               .map((item) => {

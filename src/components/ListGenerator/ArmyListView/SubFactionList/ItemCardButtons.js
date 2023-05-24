@@ -1,10 +1,11 @@
 // React
 import React, { useContext } from "react";
 // Material UI
-import { makeStyles, Button } from "@material-ui/core";
-import { Stack } from "@mui/material";
+import { makeStyles, List } from "@material-ui/core";
+import { ListItemButton } from "@mui/material";
 // components and functions
 import { ArmyContext } from "../../../../contexts/armyContext";
+import { uuidGenerator } from "../../../shared/sharedFunctions";
 
 const useStyles = makeStyles({
   buttons: {
@@ -27,8 +28,9 @@ const ItemCardButtons = (props) => {
   const contextArmy = useContext(ArmyContext);
 
   return (
-    <Stack direction={"column"}>
-      <Button
+    <List key={uuidGenerator()}>
+      <ListItemButton
+        key={uuidGenerator()}
         className={classes.buttons}
         variant="outlined"
         onClick={() => {
@@ -37,8 +39,9 @@ const ItemCardButtons = (props) => {
         }}
       >
         Gegenstände
-      </Button>
-      <Button
+      </ListItemButton>
+      <ListItemButton
+        key={uuidGenerator()}
         className={classes.buttons}
         variant="outlined"
         onClick={() => {
@@ -46,8 +49,8 @@ const ItemCardButtons = (props) => {
         }}
       >
         Kartenvorschau
-      </Button>
-    </Stack>
+      </ListItemButton>
+    </List>
   );
 };
 

@@ -1,5 +1,5 @@
 // React
-import React, { useState, useContext,Fragment } from "react";
+import React, { useState, useContext, Fragment } from "react";
 // Material UI
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -10,7 +10,6 @@ import { ArmyContext } from "../../../contexts/armyContext";
 import { uuidGenerator } from "../../shared/sharedFunctions";
 import { ALLIES_MAPPING } from "../../../constants/allies";
 import SubList from "./SubFactionList/subList";
- 
 
 // TODO: remove unneeded styles
 const useStyles = makeStyles((theme) => ({
@@ -18,17 +17,15 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "notMaryKate",
     fontSize: "20px",
     fontWeight: "bold",
-    display: "flex",
-    justifyContent: "space-between",
     width: "60%",
     borderBottom: "solid 4px black",
+    marginBottom:"1em"
   },
   removeButton: {
     fontFamily: "notMaryKate",
     padding: "10px",
     width: "10em",
-    height: "5em",
-
+    height: "5em",  
     "&:hover": {
       backgroundColor: "grey",
       color: "red",
