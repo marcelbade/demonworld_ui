@@ -2,7 +2,7 @@
 import React, { useContext } from "react";
 // Material UI
 import { makeStyles, Button } from "@material-ui/core";
-import { ListItemButton, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 // components and functions
 import { ArmyContext } from "../../../../contexts/armyContext";
 

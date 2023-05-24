@@ -13,7 +13,6 @@ const useStyles = makeStyles({
   },
   blockedLeafNode: {
     paddingRight: "0.5em",
-    width: "15em",
     fontFamily: "NotMaryKate",
     color: "grey",
   },
@@ -21,7 +20,7 @@ const useStyles = makeStyles({
     paddingRight: "0.5em",
     fontFamily: "NotMaryKate",
   },
-  points:{
+  points: {
     fontFamily: "NotMaryKate",
     color: "grey",
   },

@@ -1,5 +1,5 @@
 // React
-import React, { useState, useContext } from "react";
+import React, { useState, useContext,Fragment } from "react";
 // Material UI
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -9,10 +9,8 @@ import { Grid, Typography, TextField, InputAdornment, Button } from "@material-u
 import { ArmyContext } from "../../../contexts/armyContext";
 import { uuidGenerator } from "../../shared/sharedFunctions";
 import { ALLIES_MAPPING } from "../../../constants/allies";
-
 import SubList from "./SubFactionList/subList";
-import { Stack } from "@mui/material";
-import { Fragment } from "react";
+ 
 
 // TODO: remove unneeded styles
 const useStyles = makeStyles((theme) => ({

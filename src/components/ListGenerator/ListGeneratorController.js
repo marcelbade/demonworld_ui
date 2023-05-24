@@ -29,20 +29,42 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: "row",
     },
     [theme.breakpoints.down("md")]: {
+      display: "block",
       flexDirection: "column",
     },
   },
   armySelectionBox: {
-    paddingTop: "2em",
+    [theme.breakpoints.up("md")]: {
+      paddingTop: "2em",
+      paddingLeft: "4em",
+    },
+
+    [theme.breakpoints.down("md")]: {},
   },
   armyListBox: {
     paddingTop: "2em",
+    [theme.breakpoints.up("md")]: {
+      position: "absolute",
+      left: "30%",
+    },
+    [theme.breakpoints.down("md")]: {
+      position: "relative",
+
+      left: "10%",
+    },
   },
   itemScreen: {},
   UnitCardDisplay: {
     position: "fixed",
   },
   BackBttn: {
+    [theme.breakpoints.up("md")]: {
+      position: "fixed",
+      top: "0%",
+      left: "1%",
+    },
+  },
+  BackBttnIcon: {
     width: "2em",
     height: "2em",
   },
@@ -460,15 +482,16 @@ const ListGeneratorController = () => {
     >
       <Grid container className={classes.displayBox}>
         <IconButton
+          className={classes.BackBttn}
           onClick={() => {
             backToMainmenu();
           }}
         >
-          <ChevronLeftIcon className={classes.BackBttn} />
+          <ChevronLeftIcon className={classes.BackBttnIcon} />
         </IconButton>
 
         {/* ARMY SELECTION */}
-        <Stack direction={"column"} item className={classes.armySelectionBox}>
+        <Stack direction={"column"} className={classes.armySelectionBox}>
           <SelectionInput
             className={classes.selector}
             filterFunction={setSelectedFactionName}
