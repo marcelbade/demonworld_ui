@@ -20,6 +20,7 @@ import { ALL_FACTIONS_ARRAY } from "../../constants/factions";
 import { ruleValidation } from "../gameLogic/useRuleValidation";
 import { isObjectEmtpy, unitOrCmdCard, uuidGenerator } from "../shared/sharedFunctions";
 import AlternativeArmyListSelector from "./ArmySelectorView/AlternativeArmyListSelection/AlternativeArmyListSelector";
+import OptionButtons from "./OptionButtons/OptionButtons";
 // constants
 import { ARMIES_WITH_ALTERNATIVE_LISTS } from "../../constants/factions";
 
@@ -99,7 +100,10 @@ const ListGeneratorController = () => {
     unitsBlockedbyRules: [],
     subFactionBelowMinimum: [],
   });
-  // ItemShop
+  // alternative lists
+  const [armyHasAlternativeLists, setArmyHasAlternativeLists] = useState(false);
+  const [selectedAlternativeList, setSelectedAlternativeList] = useState("");
+  // item shop
   const [itemShopState, setItemShopState] = useState({
     clickedUnit: {},
     lastclickedUnit: {},
@@ -113,9 +117,8 @@ const ListGeneratorController = () => {
     lastclickedUnit: {},
     show: false,
   });
-  // alternative lists
-  const [armyHasAlternativeLists, setArmyHasAlternativeLists] = useState(false);
-  const [selectedAlternativeList, setSelectedAlternativeList] = useState("");
+  // option buttons
+  const [showOptionButtons, setShowOptionButtons] = useState(true);
 
   /**
    * fetch units  from the Back End via REST.
@@ -507,6 +510,10 @@ const ListGeneratorController = () => {
         <Grid item container direction="column" justify="flex-end" xs={3} className={classes.armyListBox}>
           <ArmyListDisplay setTotalPointValue={setTotalPointValue} />
         </Grid>
+        {/* OPTION BUTTON GROUP */}
+        <Drawer anchor={"right"} variant="persistent" open={showOptionButtons} className={classes.optionButtons}>
+          <OptionButtons />
+        </Drawer>
         {/* ITEMSHOP */}
         <Drawer anchor={"right"} variant="persistent" open={itemShopState.show} className={classes.itemScreen}>
           <ItemShop />
