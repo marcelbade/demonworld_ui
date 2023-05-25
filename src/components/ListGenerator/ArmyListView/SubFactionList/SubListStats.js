@@ -15,6 +15,8 @@ const useStyles = makeStyles({
   },
   textBox: {
     gap: "1em",
+    display: "flex",
+    flexDirection: "row",
   },
   font: {
     fontFamily: "NotMaryKate",
@@ -44,16 +46,16 @@ const SubListStats = (props) => {
         className={classes.listElement}
         key={uuidGenerator()}
         primary={
-          <Stack direction={"row"} className={classes.textBox}>
+          <span className={classes.textBox}>
             <span className={classes.font}>{displayPoints()}</span>
             <span className={classes.font}> {displayPercents()}</span>
-          </Stack>
+          </span>
         }
         secondary={
-          <Stack direction={"row"} className={classes.textBox}>
+          <span className={classes.textBox}>
             <span className={classes.font}>{`Minimum: ${props.percentages.min} %`}</span>
             <span className={classes.font}>{`Maximum ${props.percentages.max} %`}</span>
-          </Stack>
+          </span>
         }
       />
     </List>
