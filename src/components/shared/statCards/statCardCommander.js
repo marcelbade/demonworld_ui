@@ -11,6 +11,7 @@ import StatCardCommanderFront from "./statCardCommanderFront";
 const useStyles = makeStyles({
   CardBox: {
     marginRight: "2em",
+    marginTop: "2em", 
   },
 });
 /**

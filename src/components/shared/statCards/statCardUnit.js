@@ -10,6 +10,7 @@ import StatCardUnitFront from "./statCardUnitFront";
 const useStyles = makeStyles({
   CardBox: {
     marginRight: "2em",
+    marginTop: "2em", 
   },
 });
 

@@ -19,18 +19,9 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
     width: "60%",
     borderBottom: "solid 4px black",
-    marginBottom:"1em"
+    marginBottom: "1em",
   },
-  removeButton: {
-    fontFamily: "notMaryKate",
-    padding: "10px",
-    width: "10em",
-    height: "5em",  
-    "&:hover": {
-      backgroundColor: "grey",
-      color: "red",
-    },
-  },
+
   total: {
     fontFamily: "notMaryKate",
     fontSize: "20px",
@@ -57,8 +48,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ArmyListDisplay = () => {
-  const contextArmy = useContext(ArmyContext);
   const classes = useStyles();
+  const contextArmy = useContext(ArmyContext);
 
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -88,15 +79,7 @@ const ArmyListDisplay = () => {
   return contextArmy ? (
     <Fragment>
       {/* <Grid item container justify="flex-end"> */}
-      <Button
-        className={classes.removeButton}
-        variant="outlined"
-        onClick={() => {
-          contextArmy.clearList();
-        }}
-      >
-        Liste löschen
-      </Button>
+
       <List>
         {contextArmy.subfactions.map((subFaction) => (
           <ListItem key={uuidGenerator()}>

@@ -110,7 +110,7 @@ const StatCardCommanderFront = (props) => {
         ) : null}
       </Grid>{" "}
       {/* 4th & 5th Row - WEAPONS  */}
-      <Grid item container direction="column">
+      <Grid item container direction="column">  
         <Grid item container justify="center">
           <Typography variant="h6" className={classes.font}>
             Waffe 1: {props.unit.weapon1}
