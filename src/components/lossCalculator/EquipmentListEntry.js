@@ -1,16 +1,14 @@
 // React
-import React from "react";
+import React, { useContext } from "react";
 //Material UI
 import { Typography, Grid, ListItem, ListItemIcon } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-
 // components and functions
 import { uuidGenerator } from "../shared/sharedFunctions";
-
+import { LossCalcContext } from "../../contexts/LossCalculatorContext";
 // clsx
 import clsx from "clsx";
 // icons
-
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 import { ListItemButton } from "@mui/material";
@@ -52,54 +50,15 @@ const useStyles = makeStyles((theme) => ({
 
 const EquipmentListEntry = (props) => {
   const classes = useStyles();
-
-  /**
-   * Function adds the point cost of all items marked lost
-   * @param {int} points
-   */
-  const addItemToLosses = (points) => {
-    let temp = props.itemsLost;
-    temp += points;
-
-    props.setItemsLost(temp);
-  };
-
-  /**
-   * Function subtracts the point cost of all items not marked lost.
-   * @param {int} points
-   */
-  const subtractItemFromLosses = (points) => {
-    let temp = props.itemsLost;
-    temp -= points;
-
-    props.setItemsLost(temp);
-  };
-
-  /**
-   * An array of boolean flags is used to keep track of which items are marked lost. The index in the boolean array corresponds to the same index in the item list. A boolean flag set to true means the item was lost. The boolean flag then toggles the item's button between "add item to losses" / "remove item from losses".
-   * @param {int} index
-   */
-  const markItemLost = (index) => {
-    let tempArray = [...props.itemClicked];
-    tempArray[index] = true;
-    props.setItemClicked(tempArray);
-  };
-
-  // see comment for the "markItemLost" function.
-  const removeLostMarker = (index) => {
-    let tempArray = [...props.itemClicked];
-    tempArray[index] = false;
-    props.setItemClicked(tempArray);
-  };
+  const calcContext = useContext(LossCalcContext);
 
   return (
     <ListItem className={classes.entry} key={uuidGenerator()}>
-      {props.itemClicked[props.index] ? (
+      {props.element.itemLost ? (
         <ListItemButton
           className={clsx(classes.deleteBttn, classes.textMargin)}
           onClick={() => {
-            subtractItemFromLosses(props.element.points);
-            removeLostMarker(props.index);
+            calcContext.setItemIsLostFlag(props.unit, props.element.name, false);
           }}
         >
           <ListItemIcon>
@@ -110,8 +69,7 @@ const EquipmentListEntry = (props) => {
         <ListItemButton
           className={clsx(classes.deleteBttn, classes.textMargin)}
           onClick={() => {
-            addItemToLosses(props.element.points);
-            markItemLost(props.index);
+            calcContext.setItemIsLostFlag(props.unit, props.element.name, true);
           }}
         >
           <ListItemIcon>
@@ -119,14 +77,15 @@ const EquipmentListEntry = (props) => {
           </ListItemIcon>
         </ListItemButton>
       )}
+
       <Grid container justify="space-between">
         <Grid item>
-          <Typography variant="button" className={props.itemClicked[props.index] ? classes.strikeTroughText : classes.typographyFont}>
+          <Typography variant="button" className={props.element.itemLost ? classes.strikeTroughText : classes.typographyFont}>
             {props.element.name}
           </Typography>
         </Grid>
         <Grid item>
-          <Typography variant="button" className={props.itemClicked[props.index] ? classes.strikeTroughText : classes.typographyFont}>
+          <Typography variant="button" className={props.element.itemLost ? classes.strikeTroughText : classes.typographyFont}>
             {props.element.points}
           </Typography>
         </Grid>

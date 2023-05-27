@@ -7,7 +7,8 @@ import { makeStyles } from "@material-ui/core/styles";
 // icons
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 // components and functions
-import { isObjectEmtpy, unitCardMultiSort, uuidGenerator } from "../shared/sharedFunctions";
+import LossCalcProvider from "../../contexts/LossCalculatorContext";
+import { unitCardMultiSort, uuidGenerator } from "../shared/sharedFunctions";
 import LossListElement from "./LossListElement";
 // import { MOCK_LIST } from "./mockList";
 
@@ -50,50 +51,71 @@ const LossCalculator = () => {
   const location = useLocation();
 
   //state
-  const [totalPointsLost, setTotalPointsLost] = useState(0);
-  const [trackUnitLoss, setTrackUnitLoss] = useState({});
   const [list, setList] = useState([]);
+  const [totalPointsLost, setTotalPointsLost] = useState(0);
 
+  // Initializes the state by pulling the list from the history object.
   useEffect(() => {
     if (location.state !== undefined && location.state.selectedArmy !== undefined && location.state.selectedArmy.length !== 0) {
       setList(location.state.selectedArmy);
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Calculates the total point loss of the army list.
+  // Caculate current total point loss.
   useEffect(() => {
     let sum = 0;
 
-    for (const key in trackUnitLoss) {
-      if (trackUnitLoss.hasOwnProperty.call(trackUnitLoss, key)) {
-        sum += trackUnitLoss[key];
-      }
-    }
+    list.forEach((u) => {
+      let pointCostLostElements = u.lossCounter * (u.points / u.numberOfElements);
+      sum += pointCostLostElements;
+
+      u.equipment.forEach((e) => {
+        if (e.itemLost) {
+          sum += e.points;
+        }
+      });
+    });
 
     setTotalPointsLost(sum);
-  }, [trackUnitLoss]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [list]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // On the first render, set up an object to track the point loss for every unit. The object uses indizes as property keys.
+  // set falg "unitDestroyed" to change CSS.
   useEffect(() => {
-    let tempObj = {};
+    let tempArray = [...list];
 
-    if (isObjectEmtpy(list)) {
-      for (let i = 0; i < list.length; i++) {
-        tempObj = { ...tempObj, [i]: 0 };
-      }
-
-      setTrackUnitLoss({ ...tempObj });
-    }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    tempArray.forEach((u) => setUnitDestroyedFlag(u));
+  }, [list]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
-   * Function updates the tracking object everytime the amount of lost points for a unit changes.
-   * @param {int} pointsLost
-   * @param {int} index
+   * Function sets the unitDestroyed flag for a unit card object.
+   * @param {unitCard obj} u
+   * @returns unitCard obj
    */
-  const updateUnitLossTracker = (pointsLost, index) => {
-    //TODO CAUSES INFINTE RERENDERS - FIX ME! :D
-    // setTrackUnitLoss({ ...trackUnitLoss, [index]: pointsLost });
+  const setUnitDestroyedFlag = (u) => {
+    if (u.lossCounter === u.numberOfElements) {
+      u.unitDestroyed = true;
+    } else {
+      u.unitDestroyed = false;
+    }
+    return u;
+  };
+
+  /**
+   * Function sets the value of the itemLost flag for one element (item) in the equipment array.
+   * @param {String} itemName Name of the item the unit was equipped with.
+   * @param {boolean} isLost  flag shows whether the element is lost or not.
+   */
+  const setItemIsLostFlag = (selectedUnit, itemName, isLost) => {
+    let tempArray = [...list];
+
+    let unitIndex = tempArray.findIndex((u) => u.uniqueID === selectedUnit.uniqueID);
+    tempArray[unitIndex].equipment.forEach((e) => {
+      if (e.name === itemName) {
+        e.itemLost = isLost;
+      }
+    });
+
+    setList([...tempArray]);
   };
 
   /**
@@ -103,71 +125,80 @@ const LossCalculator = () => {
     history.push(`/${destination}`);
   };
 
-  return list.length !== 0 ? (
-    <Grid container direction="column">
-      <Grid>
-        <IconButton
-          onClick={() => {
-            navigateToPage(location.state.lastPage);
-          }}
-        >
-          <ChevronLeftIcon className={classes.BackBttn} />
-        </IconButton>
-      </Grid>
-      <List>
-        {unitCardMultiSort(list).map((u, i) => {
-          return (
-            <LossListElement
-              unit={u} //
-              index={i}
-              updateUnitLossTracker={updateUnitLossTracker}
-              key={uuidGenerator()}
-            />
-          );
-        })}
-      </List>
-      <Grid item container direction="row">
-        <Typography variant="h6" className={clsx(classes.typographyFont, classes.pointsTotal)}>
-          Verlorene Punkte:
-        </Typography>
-        <Typography variant="h6" className={clsx(classes.typographyFont, classes.pointsTotal)}>
-          {totalPointsLost}
-        </Typography>
-      </Grid>
-    </Grid>
-  ) : (
-    <Grid container direction="column">
-      <Grid>
-        <IconButton
-          onClick={() => {
-            // navigate to landing page
-            navigateToPage("");
-          }}
-        >
-          <ChevronLeftIcon className={classes.BackBttn} />
-        </IconButton>
-      </Grid>
-      <Grid container direction="column" alignContent="center" justify="center">
-        <Button
-          variant="outlined"
-          className={classes.noListButtons}
-          onClick={() => {
-            navigateToPage("ListGenerator");
-          }}
-        >
-          Liste Erstellen
-        </Button>
-        <Button
-          variant="outlined"
-          className={classes.noListButtons}
-          onClick={() => {
-            //TODO open login prompt
-          }}
-        >
-          Ins Konto einloggen und Liste Laden
-        </Button>
-      </Grid>
-    </Grid>
+  return (
+    <LossCalcProvider
+      value={{
+        list: list,
+        setList: setList,
+        setItemIsLostFlag: setItemIsLostFlag,
+      }}
+    >
+      {list.length !== 0 ? (
+        <Grid container direction="column">
+          <Grid>
+            <IconButton
+              onClick={() => {
+                navigateToPage(location.state.lastPage);
+              }}
+            >
+              <ChevronLeftIcon className={classes.BackBttn} />
+            </IconButton>
+          </Grid>
+          <List>
+            {unitCardMultiSort(list).map((u, i) => {
+              return (
+                <LossListElement
+                  unit={u} //
+                  index={i}
+                  key={uuidGenerator()}
+                />
+              );
+            })}
+          </List>
+          <Grid item container direction="row">
+            <Typography variant="h6" className={clsx(classes.typographyFont, classes.pointsTotal)}>
+              Verlorene Punkte:
+            </Typography>
+            <Typography variant="h6" className={clsx(classes.typographyFont, classes.pointsTotal)}>
+              {totalPointsLost}
+            </Typography>
+          </Grid>
+        </Grid>
+      ) : (
+        <Grid container direction="column">
+          <Grid>
+            <IconButton
+              onClick={() => {
+                // navigate to landing page
+                navigateToPage("");
+              }}
+            >
+              <ChevronLeftIcon className={classes.BackBttn} />
+            </IconButton>
+          </Grid>
+          <Grid container direction="column" alignContent="center" justify="center">
+            <Button
+              variant="outlined"
+              className={classes.noListButtons}
+              onClick={() => {
+                navigateToPage("ListGenerator");
+              }}
+            >
+              Liste Erstellen
+            </Button>
+            <Button
+              variant="outlined"
+              className={classes.noListButtons}
+              onClick={() => {
+                //TODO open login prompt
+              }}
+            >
+              Ins Konto einloggen und Liste Laden
+            </Button>
+          </Grid>
+        </Grid>
+      )}
+    </LossCalcProvider>
   );
 };
 

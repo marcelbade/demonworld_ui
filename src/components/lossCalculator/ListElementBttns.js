@@ -1,8 +1,7 @@
 // React
-import React from "react";
+import React, { useContext } from "react";
 //Material UI
 import { Typography, ButtonGroup, Button, Tooltip, IconButton } from "@material-ui/core";
-
 import Stack from "@mui/material/Stack";
 import { makeStyles } from "@material-ui/core/styles";
 // icons
@@ -11,6 +10,8 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 // constants
 import { GIANT, HERO, MAGE } from "../../constants/unitTypes";
+// components and functions
+import { LossCalcContext } from "../../contexts/LossCalculatorContext";
 
 const useStyles = makeStyles((theme) => ({
   bttns: {
@@ -47,38 +48,53 @@ const useStyles = makeStyles((theme) => ({
 
 const ListElementBttns = (props) => {
   const classes = useStyles();
+  const calcContext = useContext(LossCalcContext);
 
   /**
    * Function lets the user add lost elements.
    */
   const addLoss = () => {
-    let temp = props.numberOfLostElements;
-    props.setNumberOfLostElements(++temp);
+    let tempArray = [...calcContext.list];
+
+    let unitIndex = tempArray.findIndex((u) => u.uniqueID === props.unit.uniqueID);
+    ++tempArray[unitIndex].lossCounter;
+
+    calcContext.setList([...tempArray]);
   };
 
   /**
    * Function lets the user subtract lost elements.
    */
   const subtractLoss = () => {
-    let temp = props.numberOfLostElements;
-    props.setNumberOfLostElements(--temp);
+    let tempArray = [...calcContext.list];
+
+    let unitIndex = tempArray.findIndex((u) => u.uniqueID === props.unit.uniqueID);
+    --tempArray[unitIndex].lossCounter;
+
+    calcContext.setList([...tempArray]);
   };
 
   /**
    * Function immediately sets the number of lost elements to the maximum number possible.
    */
   const unitDestroyed = () => {
-    props.setNumberOfLostElements(props.unit.numberOfElements);
+    let tempArray = [...calcContext.list];
+
+    let unitIndex = tempArray.findIndex((u) => u.uniqueID === props.unit.uniqueID);
+    tempArray[unitIndex].lossCounter = props.unit.numberOfElements;
+    tempArray[unitIndex].unitDestroyed = true; 
+
+    calcContext.setList([...tempArray]);
   };
 
   /**
-   * Function makrs all itms as lost by setting all flags to true.
+   * Function marks all itms as lost by setting all flags to true.
    */
   const allItemsMarkedLost = () => {
-    let tempArray = [...props.itemClicked];
+    let tempArray = [...calcContext.itemClicked];
     tempArray = tempArray.map((i) => (i = true));
 
-    props.setItemClicked(tempArray);
+    calcContext.setItemClicked(tempArray);
   };
 
   /**
@@ -87,11 +103,13 @@ const ListElementBttns = (props) => {
   const allItemsLost = () => {
     let sum = 0;
 
-    props.unit.equipment.forEach((i) => {
-      sum += i.points;
-    });
+    if (props.unit.equipment !== undefined) {
+      props.unit.equipment.forEach((i) => {
+        sum += i.points;
+      });
 
-    props.setItemsLost(sum);
+      calcContext.setItemsLost(sum);
+    }
   };
 
   /**
@@ -99,7 +117,7 @@ const ListElementBttns = (props) => {
    * @returns boolean flag
    */
   const notOverNumberOfElements = () => {
-    return props.numberOfLostElements === props.unit.numberOfElements;
+    return props.unit.lossCounter === props.unit.numberOfElements;
   };
 
   /**
@@ -107,7 +125,7 @@ const ListElementBttns = (props) => {
    * @returns  boolean flag
    */
   const notUnderZero = () => {
-    return props.numberOfLostElements === 0;
+    return props.unit.lossCounter === 0;
   };
 
   const displayToolTip = () => {
@@ -141,7 +159,7 @@ const ListElementBttns = (props) => {
           <ChevronLeftIcon />
         </Button>
         <Typography variant="h6" className={classes.typographyFont}>
-          {props.numberOfLostElements}
+          {props.unit.lossCounter}
         </Typography>
         <Button
           onClick={() => {
