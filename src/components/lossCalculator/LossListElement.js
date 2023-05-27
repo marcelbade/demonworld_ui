@@ -22,8 +22,8 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("md")]: {
       flexDirection: "row",
       padding: "2em",
-      width: "40%",
-      height: "15%",
+      width: "70%",
+      height: "10%",
     },
     [theme.breakpoints.down("md")]: {
       flexDirection: "column",

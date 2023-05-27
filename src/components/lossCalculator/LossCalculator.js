@@ -31,9 +31,7 @@ const useStyles = makeStyles({
   noListButtons: {
     margin: "2em",
     width: "30em",
-
     height: "3em",
-
     fontFamily: "NotMaryKate",
     "&:hover": {
       backgroundColor: "grey",
@@ -131,28 +129,34 @@ const LossCalculator = () => {
       }}
     >
       {list.length !== 0 ? (
-        <Grid container direction="column">
-          <Grid>
-            <IconButton
-              onClick={() => {
-                navigateToPage(location.state.lastPage);
-              }}
-            >
-              <ChevronLeftIcon className={classes.BackBttn} />
-            </IconButton>
+        <Grid container direction="row">
+          <Grid container item xs={6} direction="column">
+            {/* RETURN BUTTON */}
+            <Grid item>
+              <IconButton
+                onClick={() => {
+                  navigateToPage(location.state.lastPage);
+                }}
+              >
+                <ChevronLeftIcon className={classes.BackBttn} />
+              </IconButton>
+            </Grid>
+            {/* LIST */}
+            <Grid item>
+              <List>
+                {unitCardMultiSort(list).map((u, i) => {
+                  return (
+                    <LossListElement
+                      unit={u} //
+                      index={i}
+                      key={uuidGenerator()}
+                    />
+                  );
+                })}
+              </List>
+            </Grid>
           </Grid>
-          <List>
-            {unitCardMultiSort(list).map((u, i) => {
-              return (
-                <LossListElement
-                  unit={u} //
-                  index={i}
-                  key={uuidGenerator()}
-                />
-              );
-            })}
-          </List>
-          <Grid item container direction="row">
+          <Grid container xs={6} item direction="row" alignItems="center" justify="flex-start">
             <Typography variant="h6" className={clsx(classes.typographyFont, classes.pointsTotal)}>
               Verlorene Punkte:
             </Typography>
