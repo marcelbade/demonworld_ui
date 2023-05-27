@@ -4,7 +4,7 @@ import React, { useState, useContext, Fragment } from "react";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import { makeStyles } from "@material-ui/core/styles";
-import { Grid, Typography, TextField, InputAdornment, Button } from "@material-ui/core";
+import { Grid, Typography, TextField, InputAdornment } from "@material-ui/core";
 // components and functions
 import { ArmyContext } from "../../../contexts/armyContext";
 import { uuidGenerator } from "../../shared/sharedFunctions";
