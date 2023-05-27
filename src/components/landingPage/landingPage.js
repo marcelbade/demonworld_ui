@@ -1,6 +1,6 @@
 // React
 import React from "react";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 // Material UI
 import { IconButton, Grid, Tooltip, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -60,7 +60,6 @@ const useStyles = makeStyles((theme) => ({
 const LandingPage = () => {
   const classes = useStyles();
   const history = useHistory();
-  const location = useLocation();
 
   const toLossCalculator = () => {
     history.push({
