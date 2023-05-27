@@ -1,15 +1,15 @@
 // React
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 //Material UI
-import { Grid, IconButton, List, Typography } from "@material-ui/core";
+import { Button, Grid, IconButton, List, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 // icons
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 // components and functions
-import { unitCardMultiSort, uuidGenerator } from "../shared/sharedFunctions";
+import { isObjectEmtpy, unitCardMultiSort, uuidGenerator } from "../shared/sharedFunctions";
 import LossListElement from "./LossListElement";
-import { MOCK_LIST } from "./mockList";
+// import { MOCK_LIST } from "./mockList";
 
 // constants
 // clsx
@@ -25,16 +25,40 @@ const useStyles = makeStyles({
   BackBttn: {
     width: "2em",
     height: "2em",
+    "&:hover": {
+      backgroundColor: "grey",
+      color: "red",
+    },
+  },
+  noListButtons: {
+    margin: "2em",
+    width: "30em",
+
+    height: "3em",
+
+    fontFamily: "NotMaryKate",
+    "&:hover": {
+      backgroundColor: "grey",
+      color: "red",
+    },
   },
 });
 
 const LossCalculator = () => {
   const classes = useStyles();
   const history = useHistory();
+  const location = useLocation();
 
   //state
   const [totalPointsLost, setTotalPointsLost] = useState(0);
   const [trackUnitLoss, setTrackUnitLoss] = useState({});
+  const [list, setList] = useState([]);
+
+  useEffect(() => {
+    if (location.state !== undefined && location.state.selectedArmy !== undefined && location.state.selectedArmy.length !== 0) {
+      setList(location.state.selectedArmy);
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Calculates the total point loss of the army list.
   useEffect(() => {
@@ -53,42 +77,45 @@ const LossCalculator = () => {
   useEffect(() => {
     let tempObj = {};
 
-    for (let i = 0; i < MOCK_LIST.length; i++) {
-      tempObj = { ...tempObj, [i]: 0 };
-    }
+    if (isObjectEmtpy(list)) {
+      for (let i = 0; i < list.length; i++) {
+        tempObj = { ...tempObj, [i]: 0 };
+      }
 
-    setTrackUnitLoss({ ...tempObj });
+      setTrackUnitLoss({ ...tempObj });
+    }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
-   * Function updates the tracking object everytime the amountg of lost points for a unit changes.
+   * Function updates the tracking object everytime the amount of lost points for a unit changes.
    * @param {int} pointsLost
    * @param {int} index
    */
   const updateUnitLossTracker = (pointsLost, index) => {
-    setTrackUnitLoss({ ...trackUnitLoss, [index]: pointsLost });
+    //TODO CAUSES INFINTE RERENDERS - FIX ME! :D
+    // setTrackUnitLoss({ ...trackUnitLoss, [index]: pointsLost });
   };
 
   /**
    * Function calls history objects to take user back to main menu.
    */
-  const backToMainmenu = () => {
-    history.push("/");
+  const navigateToPage = (destination) => {
+    history.push(`/${destination}`);
   };
 
-  return (
+  return list.length !== 0 ? (
     <Grid container direction="column">
       <Grid>
         <IconButton
           onClick={() => {
-            backToMainmenu();
+            navigateToPage(location.state.lastPage);
           }}
         >
           <ChevronLeftIcon className={classes.BackBttn} />
         </IconButton>
       </Grid>
       <List>
-        {unitCardMultiSort(MOCK_LIST).map((u, i) => {
+        {unitCardMultiSort(list).map((u, i) => {
           return (
             <LossListElement
               unit={u} //
@@ -106,6 +133,39 @@ const LossCalculator = () => {
         <Typography variant="h6" className={clsx(classes.typographyFont, classes.pointsTotal)}>
           {totalPointsLost}
         </Typography>
+      </Grid>
+    </Grid>
+  ) : (
+    <Grid container direction="column">
+      <Grid>
+        <IconButton
+          onClick={() => {
+            // navigate to landing page
+            navigateToPage("");
+          }}
+        >
+          <ChevronLeftIcon className={classes.BackBttn} />
+        </IconButton>
+      </Grid>
+      <Grid container direction="column" alignContent="center" justify="center">
+        <Button
+          variant="outlined"
+          className={classes.noListButtons}
+          onClick={() => {
+            navigateToPage("ListGenerator");
+          }}
+        >
+          Liste Erstellen
+        </Button>
+        <Button
+          variant="outlined"
+          className={classes.noListButtons}
+          onClick={() => {
+            //TODO open login prompt
+          }}
+        >
+          Ins Konto einloggen und Liste Laden
+        </Button>
       </Grid>
     </Grid>
   );
