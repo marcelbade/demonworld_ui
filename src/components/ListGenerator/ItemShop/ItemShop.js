@@ -142,7 +142,7 @@ const ItemShop = () => {
   };
 
   /**
-   * Add the item card object to the selected unit.
+   * Add the item card object to the selected unit. Only a subSet is added as well as a flag to track whether the item was lost for the lossCalculator component.
    * @param {itemCard object} item
    */
   const addItemToUnit = (item) => {
@@ -153,6 +153,7 @@ const ItemShop = () => {
       type: item.type,
       rule: item.specialRules,
       points: item.points,
+      itemLost: false,
     });
 
     contextArmy.setUnitSelectedForShop({
