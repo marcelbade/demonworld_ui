@@ -82,34 +82,16 @@ const ListElementBttns = (props) => {
 
     let unitIndex = tempArray.findIndex((u) => u.uniqueID === props.unit.uniqueID);
     tempArray[unitIndex].lossCounter = props.unit.numberOfElements;
-    tempArray[unitIndex].unitDestroyed = true; 
+    tempArray[unitIndex].unitDestroyed = true;
 
     calcContext.setList([...tempArray]);
   };
 
   /**
-   * Function marks all itms as lost by setting all flags to true.
+   * Function marks all items as lost by setting all flags to true.
    */
   const allItemsMarkedLost = () => {
-    let tempArray = [...calcContext.itemClicked];
-    tempArray = tempArray.map((i) => (i = true));
-
-    calcContext.setItemClicked(tempArray);
-  };
-
-  /**
-   * Function calculates the points when all items are marked lost together.
-   */
-  const allItemsLost = () => {
-    let sum = 0;
-
-    if (props.unit.equipment !== undefined) {
-      props.unit.equipment.forEach((i) => {
-        sum += i.points;
-      });
-
-      calcContext.setItemsLost(sum);
-    }
+    props.unit.equipment.forEach((e) => (e.itemLost = true));
   };
 
   /**
@@ -148,7 +130,7 @@ const ListElementBttns = (props) => {
     <Stack direction="row" spacing={2}>
       {/* units that have only a single element do not need these buttons */}
 
-      <ButtonGroup variant="contained" aria-label="outlined primary button group">
+      <ButtonGroup variant="contained">
         <Button
           onClick={() => {
             subtractLoss();
@@ -179,7 +161,6 @@ const ListElementBttns = (props) => {
           onClick={() => {
             unitDestroyed();
             allItemsMarkedLost();
-            allItemsLost();
           }}
           className={classes.bttn}
         >

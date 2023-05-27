@@ -10,9 +10,6 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import LossCalcProvider from "../../contexts/LossCalculatorContext";
 import { unitCardMultiSort, uuidGenerator } from "../shared/sharedFunctions";
 import LossListElement from "./LossListElement";
-// import { MOCK_LIST } from "./mockList";
-
-// constants
 // clsx
 import clsx from "clsx";
 
@@ -54,14 +51,14 @@ const LossCalculator = () => {
   const [list, setList] = useState([]);
   const [totalPointsLost, setTotalPointsLost] = useState(0);
 
-  // Initializes the state by pulling the list from the history object.
+  // Initializes the state by pulling the list from the history object. If none is present, an alternative UI is displayed
   useEffect(() => {
     if (location.state !== undefined && location.state.selectedArmy !== undefined && location.state.selectedArmy.length !== 0) {
       setList(location.state.selectedArmy);
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Caculate current total point loss.
+  // Calculate current total point loss.
   useEffect(() => {
     let sum = 0;
 
@@ -79,7 +76,7 @@ const LossCalculator = () => {
     setTotalPointsLost(sum);
   }, [list]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // set falg "unitDestroyed" to change CSS.
+  // Set flag "unitDestroyed" to change CSS.
   useEffect(() => {
     let tempArray = [...list];
 

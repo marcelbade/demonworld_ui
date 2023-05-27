@@ -23,7 +23,6 @@ const useStyles = makeStyles((theme) => ({
 
       "@media (orientation:landscape)": {
         flexDirection: "row",
-        // justifyContent: "space-between",
       },
     },
   },
