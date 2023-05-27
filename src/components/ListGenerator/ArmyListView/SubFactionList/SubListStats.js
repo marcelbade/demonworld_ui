@@ -2,7 +2,6 @@
 import React, { useContext } from "react";
 // Material UI
 import { ListItemText, makeStyles, List } from "@material-ui/core";
-import { Stack } from "@mui/material";
 // components and functions
 import { ArmyContext } from "../../../../contexts/armyContext";
 import { uuidGenerator } from "../../../shared/sharedFunctions";
