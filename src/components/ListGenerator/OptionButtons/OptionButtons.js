@@ -49,6 +49,7 @@ const OptionButtons = (props) => {
     history.push({
       pathname: "/lossCalculator",
       state: {
+        lastPage: "listGenerator",
         selectedArmy: contextArmy.selectedUnits,
       },
     });

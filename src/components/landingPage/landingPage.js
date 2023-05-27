@@ -1,6 +1,6 @@
 // React
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 // Material UI
 import { IconButton, Grid, Tooltip, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -59,6 +59,18 @@ const useStyles = makeStyles((theme) => ({
 
 const LandingPage = () => {
   const classes = useStyles();
+  const history = useHistory();
+  const location = useLocation();
+
+  const toLossCalculator = () => {
+    history.push({
+      pathname: "/lossCalculator",
+      state: {
+        lastPage: "landingPage",
+        selectedArmy: [],
+      },
+    });
+  };
 
   return (
     <Grid container justify="center" alignContent="center" className={classes.homePage}>
@@ -80,7 +92,11 @@ const LandingPage = () => {
       </Grid>
       <Grid item className={classes.iconContainer}>
         <Tooltip title={<Typography className={classes.tooltipText}>Verlustrechner</Typography>}>
-          <IconButton component={Link} to="/lossCalculator">
+          <IconButton
+            onClick={() => {
+              toLossCalculator();
+            }}
+          >
             <img src={deathIcon} alt="Verlustrechner" height={100} width={100} />
           </IconButton>
         </Tooltip>
