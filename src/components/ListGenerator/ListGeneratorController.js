@@ -131,6 +131,7 @@ const ListGeneratorController = () => {
   const [showOptionButtons, setShowOptionButtons] = useState(true);
   //pdf viewer
   const [showPdfView, setShowPdfView] = useState(false);
+  const [pdfMasterList, setPdfMasterList] = useState([]);
 
   /**
    * fetch units  from the Back End via REST.
@@ -314,6 +315,21 @@ const ListGeneratorController = () => {
 
     setAllItems(temp);
   }, [selectedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // TODO: comment
+  useEffect(() => {
+    let tempArray = [];
+
+    distinctSubFactions.forEach((sF) => {
+      tempArray.push({ subFaction: sF, units: filterForSubFaction(sF) });
+      setPdfMasterList([...tempArray]);
+    });
+  }, [distinctSubFactions, selectedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // TODO: comment
+  const filterForSubFaction = (subFaction) => {
+    return selectedUnits.filter((u) => u.subFaction === subFaction);
+  };
 
   /**
    * Functions adds a UUID as unique id so the user can select the
@@ -565,7 +581,7 @@ const ListGeneratorController = () => {
         <Drawer anchor={"left"} variant="persistent" open={showPdfView}>
           <Grid container direction="row" className={classes.pdfViewer}>
             <Grid>
-              <PdfBox units={selectedUnits} distinctSubFactions={distinctSubFactions} />
+              <PdfBox pdfMasterList={pdfMasterList} />
             </Grid>
             <Grid item className={classes.pdfViewerButton}>
               <IconButton
