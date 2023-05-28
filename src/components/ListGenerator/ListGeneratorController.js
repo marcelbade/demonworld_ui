@@ -21,6 +21,7 @@ import { ruleValidation } from "../gameLogic/useRuleValidation";
 import { isObjectEmtpy, unitOrCmdCard, uuidGenerator } from "../shared/sharedFunctions";
 import AlternativeArmyListSelector from "./ArmySelectorView/AlternativeArmyListSelection/AlternativeArmyListSelector";
 import OptionButtons from "./OptionButtons/OptionButtons";
+import PdfBox from "../PDFGenerator/PDFBox";
 // constants
 import { ARMIES_WITH_ALTERNATIVE_LISTS } from "../../constants/factions";
 
@@ -68,6 +69,15 @@ const useStyles = makeStyles((theme) => ({
   BackBttnIcon: {
     width: "2em",
     height: "2em",
+  },
+  pdfViewer: {
+    width: "100%",
+    height: " 100%",
+    backgroundColor: "pink",
+  },
+  pdfViewerButton: {
+    top: "0%",
+    right: "0%",
   },
 }));
 
@@ -119,6 +129,8 @@ const ListGeneratorController = () => {
   });
   // option buttons
   const [showOptionButtons, setShowOptionButtons] = useState(true);
+  //pdf viewer
+  const [showPdfView, setShowPdfView] = useState(false);
 
   /**
    * fetch units  from the Back End via REST.
@@ -457,6 +469,13 @@ const ListGeneratorController = () => {
     history.push("/");
   };
 
+  const closePdfView = () => {
+    setShowPdfView(false);
+  };
+  const openPdfView = () => {
+    setShowPdfView(true);
+  };
+
   return fetchedFactions && fetchedItems ? (
     <ArmyProvider
       value={{
@@ -499,6 +518,9 @@ const ListGeneratorController = () => {
         // ALTERNATIVE LISTS
         selectedAlternativeList: selectedAlternativeList,
         setSelectedAlternativeList: setSelectedAlternativeList,
+        // PDF VIEWER
+        closePdfView: closePdfView,
+        openPdfView: openPdfView,
       }}
     >
       <Grid container className={classes.displayBox}>
@@ -539,6 +561,22 @@ const ListGeneratorController = () => {
         {/* UNITCARD */}
         <Drawer anchor={"right"} variant="persistent" open={showStatCard.show} className={classes.UnitCardDisplay}>
           {!isObjectEmtpy(showStatCard.clickedUnit) ? unitOrCmdCard(showStatCard.clickedUnit, COLUMN) : <p></p>}
+        </Drawer>
+        <Drawer anchor={"left"} variant="persistent" open={showPdfView}>
+          <Grid container direction="row" className={classes.pdfViewer}>
+            <Grid>
+              <PdfBox units={selectedUnits} distinctSubFactions={distinctSubFactions} />
+            </Grid>
+            <Grid item className={classes.pdfViewerButton}>
+              <IconButton
+                onClick={() => {
+                  closePdfView();
+                }}
+              >
+                <ChevronLeftIcon />
+              </IconButton>
+            </Grid>
+          </Grid>
         </Drawer>
       </Grid>
     </ArmyProvider>
