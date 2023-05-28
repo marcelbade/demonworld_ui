@@ -1,5 +1,5 @@
 // Reac
-import React, { useEffect, useState } from "react";
+import React from "react";
 // react-pdf
 import { PDFViewer } from "@react-pdf/renderer";
 //Material UI
