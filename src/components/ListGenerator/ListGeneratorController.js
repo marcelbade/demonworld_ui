@@ -15,8 +15,6 @@ import SelectionInput from "../shared/selectionInput";
 import FactionTreeView from "./ArmySelectorView/treeView";
 import ArmyListDisplay from "./ArmyListView/armyListDisplay";
 import ItemShop from "./ItemShop/ItemShop";
-import { ALLIES_MAPPING } from "../../constants/allies";
-import { ALL_FACTIONS_ARRAY } from "../../constants/factions";
 import { ruleValidation } from "../gameLogic/useRuleValidation";
 import { isObjectEmtpy, unitOrCmdCard, uuidGenerator } from "../shared/sharedFunctions";
 import AlternativeArmyListSelector from "./ArmySelectorView/AlternativeArmyListSelection/AlternativeArmyListSelector";
@@ -24,6 +22,8 @@ import OptionButtons from "./OptionButtons/OptionButtons";
 import PdfBox from "../PDFGenerator/PDFBox";
 // constants
 import { ARMIES_WITH_ALTERNATIVE_LISTS } from "../../constants/factions";
+import { ALLIES_MAPPING } from "../../constants/allies";
+import { ALL_FACTIONS_ARRAY } from "../../constants/factions";
 
 const useStyles = makeStyles((theme) => ({
   displayBox: {
@@ -331,6 +331,12 @@ const ListGeneratorController = () => {
     return selectedUnits.filter((u) => u.subFaction === subFaction);
   };
 
+  // TODO: here
+  useEffect(() => {
+    if (!showPdfView && !showStatCard.show && !itemShopState.show) setShowOptionButtons(true);
+    if (showPdfView || showStatCard.show || itemShopState.show) setShowOptionButtons(false);
+  }, [showPdfView, showStatCard, itemShopState]); // eslint-disable-line react-hooks/exhaustive-deps
+
   /**
    * Functions adds a UUID as unique id so the user can select the
    * same unit twice in a row. Without it, the useEffect does not fire, since the
@@ -423,6 +429,10 @@ const ListGeneratorController = () => {
     closeItemShop();
   };
 
+  /**
+   * Function toggles the unit card view on and off as well as switches between card views for different units. In order to do this, the card view is not toggled by a booelan flag, but an object that stores the previously clicked unit.
+   * @param {unitCard} u
+   */
   const toggleBetweenItemShops = (u) => {
     closeCardDisplay();
 
@@ -443,7 +453,7 @@ const ListGeneratorController = () => {
   };
 
   /**
-   * function toggles the unit card view on and off as well as switches between card views for different units. TO do this, the card view is not toggled by a booelan flag, but an object that stores the previouslyx clickedUnit
+   * Function toggles the unit card view on and off as well as switches between card views for different units. In order to do this, the card view is not toggled by a booelan flag, but an object that stores the previously clicked unit.
    * @param {unitCard} u
    */
   const toggleBetweenCards = (u) => {
