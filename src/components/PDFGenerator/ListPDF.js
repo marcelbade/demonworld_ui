@@ -7,17 +7,25 @@ Font.register({ family: "notMaryKate", src: notMaryKate });
 
 // Create Document Component
 const ListPDF = (props) => {
-  // units={props.units} distinctSubFactions={props.distinctSubFactions}
-
   let units = props.units;
   // let distinctSubFactions = props.distinctSubFactions;
 
   const DynamicList = () => {
     return units.map((u) => (
-      <View style={{ marginLeft: 15, marginTop: 8}}>
+      <View style={{ marginLeft: 15, marginTop: 8 }}>
         <Text style={{ textAlign: "left", fontFamily: "notMaryKate", fontSize: 10 }}>
           {u.unitName} - {u.points}
         </Text>
+        {u.equipment.length > 0 ? (
+          <Text
+            style={{
+              marginRight: 400,
+              borderBottomColor: "black",
+              borderBottomWidth: 1,
+              marginBorder: 2,
+            }}
+          ></Text>
+        ) : null}
         {u.equipment.length > 0
           ? u.equipment.map((e) => (
               <View style={{ marginLeft: 35 }}>
