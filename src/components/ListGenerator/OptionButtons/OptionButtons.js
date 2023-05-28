@@ -5,7 +5,6 @@ import { useHistory } from "react-router-dom";
 import { Grid, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 // components and functions
-
 import { ArmyContext } from "../../../contexts/armyContext";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -54,18 +53,12 @@ const OptionButtons = (props) => {
       },
     });
   };
-  const navigateToPDFGenerator = () => {
-    history.push({
-      pathname: "/PDFGenerator",
-      state: {
-        selectedArmy: contextArmy.selectedUnits,
-      },
-    });
-  };
+
   const storeList = () => {
     // Call REST
   };
 
+ 
   return (
     <Grid container direction="column" alignItems="flex-start" spacing={4} className={classes.overlay}>
       <Grid item>
@@ -86,7 +79,7 @@ const OptionButtons = (props) => {
           variant="outlined"
           disabled={disableButton}
           onClick={() => {
-            navigateToPDFGenerator();
+            contextArmy.openPdfView();
           }}
         >
           PDF Erzeugen
