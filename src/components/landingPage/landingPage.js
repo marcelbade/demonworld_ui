@@ -5,7 +5,6 @@ import { Link, useHistory } from "react-router-dom";
 import { IconButton, Grid, Tooltip, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 // icons
-// import ChevronLeftIcon from "@material-ui/icons/ArrowBackIos";
 import deathIcon from "../../icons/icons8-death-64.png";
 import calculatorIcon from "../../icons/icons8-calculator-64.png";
 import bookIcon from "../../icons/icons8-book-64.png";
