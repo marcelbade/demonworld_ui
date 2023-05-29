@@ -15,7 +15,7 @@ import SelectionInput from "../shared/selectionInput";
 import FactionTreeView from "./ArmySelectorView/treeView";
 import ArmyListDisplay from "./ArmyListView/armyListDisplay";
 import ItemShop from "./ItemShop/ItemShop";
-import { ruleValidation } from "../gameLogic/useRuleValidation";
+import { ruleValidation } from "../../gameLogic/useRuleValidation";
 import { isObjectEmtpy, unitOrCmdCard, uuidGenerator } from "../shared/sharedFunctions";
 import AlternativeArmyListSelector from "./ArmySelectorView/AlternativeArmyListSelection/AlternativeArmyListSelector";
 import OptionButtons from "./OptionButtons/OptionButtons";
@@ -55,7 +55,6 @@ const useStyles = makeStyles((theme) => ({
       left: "10%",
     },
   },
-  itemScreen: {},
   UnitCardDisplay: {
     position: "fixed",
   },
@@ -122,7 +121,7 @@ const ListGeneratorController = () => {
   const [unitSelectedForShop, setUnitSelectedForShop] = useState({});
   const [allItems, setAllItems] = useState([]);
   // unit card
-  const [showStatCard, setShowStatCard] = useState({
+  const [statCardState, setStatCardState] = useState({
     clickedUnit: {},
     lastclickedUnit: {},
     show: false,
@@ -140,17 +139,17 @@ const ListGeneratorController = () => {
     fetchFactionData();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const fetchFactionData = async () => {
-    const result = await axios(`http://localhost:8080/factions`);
-    setfetchedFactions(result.data);
-  };
-
   /**
    * fetch items from the Back End via REST.
    */
   useEffect(() => {
     fetchItemData();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const fetchFactionData = async () => {
+    const result = await axios(`http://localhost:8080/factions`);
+    setfetchedFactions(result.data);
+  };
 
   const fetchItemData = async () => {
     const result = await axios(`http://localhost:8080/items`);
@@ -316,7 +315,7 @@ const ListGeneratorController = () => {
     setAllItems(temp);
   }, [selectedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // TODO: comment
+  // Set master list for pdf viewer
   useEffect(() => {
     let tempArray = [];
 
@@ -326,16 +325,20 @@ const ListGeneratorController = () => {
     });
   }, [distinctSubFactions, selectedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // TODO: comment
+  /**
+   * Function filters unit card arrays for a sub faction.
+   * @param {String} subFaction
+   * @returns An array of unit card objects filtered for a a sub faction.
+   */
   const filterForSubFaction = (subFaction) => {
     return selectedUnits.filter((u) => u.subFaction === subFaction);
   };
 
-  // TODO: here
+  // Open the option button drawer when everything else is closed, else close it.
   useEffect(() => {
-    if (!showPdfView && !showStatCard.show && !itemShopState.show) setShowOptionButtons(true);
-    if (showPdfView || showStatCard.show || itemShopState.show) setShowOptionButtons(false);
-  }, [showPdfView, showStatCard, itemShopState]); // eslint-disable-line react-hooks/exhaustive-deps
+    if (!showPdfView && !statCardState.show && !itemShopState.show) setShowOptionButtons(true);
+    if (showPdfView || statCardState.show || itemShopState.show) setShowOptionButtons(false);
+  }, [showPdfView, statCardState, itemShopState]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * Functions adds a UUID as unique id so the user can select the
@@ -436,8 +439,8 @@ const ListGeneratorController = () => {
   const toggleMenuState = (u, isCards) => {
     isCards ? closeItemShop() : closeCardDisplay();
 
-    let stateObj = isCards ? showStatCard : itemShopState;
-    let stateObjSetter = isCards ? setShowStatCard : setItemShopState;
+    let stateObj = isCards ? statCardState : itemShopState;
+    let stateObjSetter = isCards ? setStatCardState : setItemShopState;
 
     // first click on page (no card displayed)
     if (stateObj.clickedUnit === undefined) {
@@ -461,7 +464,7 @@ const ListGeneratorController = () => {
    * in order to work, the state setter needs a unit. Since the card view is toggled off, the first unit in the list is used.
    */
   const closeCardDisplay = () => {
-    setShowStatCard({ clickedUnit: selectedUnits[0], lastclickedUnit: selectedUnits[0], show: false });
+    setStatCardState({ clickedUnit: selectedUnits[0], lastclickedUnit: selectedUnits[0], show: false });
   };
 
   const closeItemShop = () => {
@@ -510,6 +513,7 @@ const ListGeneratorController = () => {
         fetchedItems: fetchedItems,
         unitSelectedForShop: unitSelectedForShop,
         allItems: allItems,
+        setUnitSelectedForShop: setUnitSelectedForShop,
         setAllItems: setAllItems,
         //  SELECTED UNITS
         selectedUnits: selectedUnits,
@@ -556,12 +560,12 @@ const ListGeneratorController = () => {
           <OptionButtons />
         </Drawer>
         {/* ITEMSHOP */}
-        <Drawer anchor={"right"} variant="persistent" open={itemShopState.show} className={classes.itemScreen}>
+        <Drawer anchor={"right"} variant="persistent" open={itemShopState.show}>
           <ItemShop />
         </Drawer>
         {/* UNITCARD */}
-        <Drawer anchor={"right"} variant="persistent" open={showStatCard.show} className={classes.UnitCardDisplay}>
-          {!isObjectEmtpy(showStatCard.clickedUnit) ? unitOrCmdCard(showStatCard.clickedUnit, COLUMN) : <p></p>}
+        <Drawer anchor={"right"} variant="persistent" open={statCardState.show} className={classes.UnitCardDisplay}>
+          {!isObjectEmtpy(statCardState.clickedUnit) ? unitOrCmdCard(statCardState.clickedUnit, COLUMN) : <p></p>}
         </Drawer>
         <Drawer anchor={"left"} variant="persistent" open={showPdfView}>
           <Grid container direction="row" className={classes.pdfViewer}>
