@@ -19,12 +19,9 @@ const useStyles = makeStyles((theme) => ({
       fontFamily: "BreatheOfFire",
       width: "10em",
     },
-
     "& .MuiFormLabel-root": {
       fontSize: "20px",
-      fontFamily: "notMaryKate",
     },
-
   },
 }));
 

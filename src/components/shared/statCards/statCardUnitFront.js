@@ -30,7 +30,6 @@ const useStyles = makeStyles({
     fontFamily: "Beryliumbold",
   },
   cardTitle: {
-    fontFamily: "notMaryKate",
     fontWeight: "normal",
     marginBottom: "0px",
     marginTop: "0px",

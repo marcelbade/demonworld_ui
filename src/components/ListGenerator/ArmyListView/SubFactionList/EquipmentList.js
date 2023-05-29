@@ -28,9 +28,6 @@ const useStyles = makeStyles({
     padding: "0px",
     margin: "0px",
   },
-  text: {
-    fontFamily: "NotMaryKate",
-  },
 });
 
 const EquipmentList = (props) => {
@@ -70,11 +67,7 @@ const EquipmentList = (props) => {
                 >
                   <RemoveCircleOutlineIcon key={uuidGenerator()} />
                 </Button>
-                <ListItemText
-                  key={uuidGenerator()}
-                  primary={<span className={classes.text}>{e.name}</span>}
-                  secondary={<span className={classes.text}>{e.points}</span>}
-                />
+                <ListItemText key={uuidGenerator()} primary={<span>{e.name}</span>} secondary={<span>{e.points}</span>} />
               </ListItem>
             );
           })

@@ -9,16 +9,7 @@ import { uuidGenerator } from "../../../shared/sharedFunctions";
 
 const useStyles = makeStyles({
   buttons: {
-    fontFamily: "NotMaryKate",
     marginRight: "1em",
-    "&:hover": {
-      backgroundColor: "grey",
-      color: "red",
-    },
-  },
-  teest: {
-    display: "flex",
-    flexDirection: "column",
   },
 });
 
@@ -42,7 +33,7 @@ const ItemCardButtons = (props) => {
       </ListItemButton>
       <ListItemButton
         key={uuidGenerator()}
-        className={classes.buttons}
+        className={classes.cardButtons}
         variant="outlined"
         onClick={() => {
           contextArmy.toggleMenuState(props.u, true);

@@ -7,24 +7,15 @@ import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 // components and functions
 import { ArmyContext } from "../../../../contexts/armyContext";
 import { displayUnitCost } from "../../../compendiums/factionTable/depencies/factionTableFunctions";
-import { ruleObjectProvider } from "../../../../gameLogic/globalRules/ruleObjectProvider"
+import { ruleObjectProvider } from "../../../../gameLogic/globalRules/ruleObjectProvider";
 import { unitCardMultiSort, uuidGenerator } from "../../../shared/sharedFunctions";
 import EquipmentList from "./EquipmentList";
 import SubListStats from "./SubListStats";
 import ItemCardButtons from "./ItemCardButtons";
 
 const useStyles = makeStyles({
-  buttons: {
-    fontFamily: "NotMaryKate",
-    marginRight: "1em",
-    "&:hover": {
-      backgroundColor: "grey",
-      color: "red",
-    },
-  },
   text: {
     width: "40%",
-    fontFamily: "NotMaryKate",
   },
   list: {
     padding: "0px",

@@ -27,28 +27,18 @@ const useStyles = makeStyles({
     width: "30vw",
   },
   buttons: {
-    fontFamily: "notMaryKate",
     fontWeight: "bold",
     border: "none",
-    "&:hover": {
-      backgroundColor: "grey",
-      color: "red",
-    },
   },
   unitName: {
-    fontFamily: "notMaryKate",
     fontWeight: "bold",
     borderBottom: "solid 4px black",
-  },
-  itemName: {
-    fontFamily: "notMaryKate",
   },
   itemText: {
     fontFamily: "Beryliumbold",
   },
   errorNoItems: {
     paddingTop: "3em",
-    fontFamily: "notMaryKate",
     fontWeight: "bold",
     color: "red",
   },
@@ -208,15 +198,11 @@ const ItemShop = () => {
                         }}
                         key={uuidGenerator()}
                       >
-                        <Typography className={classes.itemName} variant="body1">
-                          {item.itemName}
-                        </Typography>
+                        <Typography variant="body1">{item.itemName}</Typography>
                       </Button>
                     </AccordionSummary>
                     <AccordionDetails>
-                      <Typography className={classes.itemText} variant="body1">
-                        {item.specialRules}
-                      </Typography>
+                      <Typography variant="body1">{item.specialRules}</Typography>
                     </AccordionDetails>
                   </Accordion>
                 );

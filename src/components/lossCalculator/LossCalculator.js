@@ -10,33 +10,20 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import LossCalcProvider from "../../contexts/LossCalculatorContext";
 import { unitCardMultiSort, uuidGenerator } from "../shared/sharedFunctions";
 import LossListElement from "./LossListElement";
-// clsx
-import clsx from "clsx";
 
 const useStyles = makeStyles({
-  typographyFont: {
-    fontFamily: "NotMaryKate",
-  },
+  typographyFont: {},
   pointsTotal: {
     marginLeft: "2em",
   },
   BackBttn: {
     width: "2em",
     height: "2em",
-    "&:hover": {
-      backgroundColor: "grey",
-      color: "red",
-    },
   },
   noListButtons: {
     margin: "2em",
     width: "30em",
     height: "3em",
-    fontFamily: "NotMaryKate",
-    "&:hover": {
-      backgroundColor: "grey",
-      color: "red",
-    },
   },
 });
 
@@ -157,10 +144,10 @@ const LossCalculator = () => {
             </Grid>
           </Grid>
           <Grid container xs={6} item direction="row" alignItems="center" justify="flex-start">
-            <Typography variant="h6" className={clsx(classes.typographyFont, classes.pointsTotal)}>
+            <Typography variant="h6" className={classes.pointsTotal}>
               Verlorene Punkte:
             </Typography>
-            <Typography variant="h6" className={clsx(classes.typographyFont, classes.pointsTotal)}>
+            <Typography variant="h6" className={classes.pointsTotal}>
               {totalPointsLost}
             </Typography>
           </Grid>

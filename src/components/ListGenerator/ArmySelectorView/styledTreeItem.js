@@ -5,7 +5,7 @@ import { TransitionComponent } from "./treeViewFunctions";
 export const StyledTreeItem = withStyles((theme) => ({
   // CSS for icons that expend/collapse the treeview ("+/-")
   label: {
-    fontFamily: "NotMaryKate",
+    
     fontWeight: "bold",
   },
 

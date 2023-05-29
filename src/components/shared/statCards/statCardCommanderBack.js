@@ -30,10 +30,8 @@ const useStyles = makeStyles({
     backgroundColor: "black",
   },
   cardTitle: {
-   
     wordSpacing: "100vw",
     flexWrap: "nowrap",
-    fontFamily: "notMaryKate",
     fontWeight: "normal",
     textAlign: "center",
     fontSize: "30px",

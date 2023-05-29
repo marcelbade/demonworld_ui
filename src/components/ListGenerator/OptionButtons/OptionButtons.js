@@ -13,20 +13,13 @@ const useStyles = makeStyles({
   overlay: {
     height: "100vh",
     width: "30vw",
-
     padding: "2em",
   },
   bttnGroup: {},
   button: {
     width: "15em",
-    fontFamily: "notMaryKate",
     padding: "2em",
-
     height: "5em",
-    "&:hover": {
-      backgroundColor: "grey",
-      color: "red",
-    },
   },
 });
 
@@ -58,7 +51,6 @@ const OptionButtons = (props) => {
     // Call REST
   };
 
- 
   return (
     <Grid container direction="column" alignItems="flex-start" spacing={4} className={classes.overlay}>
       <Grid item>

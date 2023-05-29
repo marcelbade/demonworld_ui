@@ -43,7 +43,6 @@ const useStyles = makeStyles((theme) => ({
   },
 
   typographyFont: {
-    fontFamily: "NotMaryKate",
     textAlign: "center",
     marginTop: "0.5em",
   },

@@ -14,16 +14,13 @@ import SubList from "./SubFactionList/subList";
 // TODO: remove unneeded styles
 const useStyles = makeStyles((theme) => ({
   HeaderBox: {
-    fontFamily: "notMaryKate",
     fontSize: "20px",
     fontWeight: "bold",
     width: "60%",
     borderBottom: "solid 4px black",
     marginBottom: "1em",
   },
-
   total: {
-    fontFamily: "notMaryKate",
     fontSize: "20px",
     fontWeight: "bold",
     paddingRight: "5px",
@@ -36,12 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
   armyName: {
     fontSize: "30px",
-    fontFamily: "notMaryKate",
-    "& .MuiTextField": {
-      fontFamily: "notMaryKate",
-    },
   },
-
   bottom: { bottom: "100px" },
   withinLimit: { color: "black" },
   exceeded: { color: "red" },
@@ -100,7 +92,6 @@ const ArmyListDisplay = () => {
         value={contextArmy.maxPointsValue}
         InputProps={{
           style: {
-            fontFamily: "notMaryKate",
             fontSize: "20px",
             fontWeight: "bold",
             pading: "50px",

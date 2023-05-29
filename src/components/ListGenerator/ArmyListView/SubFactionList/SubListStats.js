@@ -18,7 +18,7 @@ const useStyles = makeStyles({
     flexDirection: "row",
   },
   font: {
-    fontFamily: "NotMaryKate",
+    
   },
 });
 

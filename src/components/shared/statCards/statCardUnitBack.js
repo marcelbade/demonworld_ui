@@ -22,7 +22,6 @@ const useStyles = makeStyles({
     backgroundColor: "black",
   },
   cardTitle: {
-    fontFamily: "notMaryKate",
     fontWeight: "normal",
     marginBottom: "0px",
     marginTop: "0px",

@@ -27,12 +27,10 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   typographyFont: {
-    fontFamily: "NotMaryKate",
     textAlign: "left",
     marginTop: "0.5em",
   },
   strikeTroughText: {
-    fontFamily: "NotMaryKate",
     textAlign: "left",
     marginTop: "0.5em",
     color: "red",

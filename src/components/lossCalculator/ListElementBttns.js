@@ -28,20 +28,17 @@ const useStyles = makeStyles((theme) => ({
   },
 
   typographyFont: {
-    fontFamily: "NotMaryKate",
     textAlign: "center",
     marginTop: "0.5em",
   },
   text: {
     paddingLeft: "1em",
   },
-
   bttn: {
     width: "1em",
     height: "4em",
   },
   tooltipText: {
-    fontFamily: "NotMaryKate",
     fontSize: "20px",
   },
 }));

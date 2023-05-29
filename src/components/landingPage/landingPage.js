@@ -42,7 +42,6 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   mobileToolTip: {
-    fontFamily: "NotMaryKate",
     fontSize: "15px",
     [theme.breakpoints.up("md")]: {
       display: "none",
@@ -51,7 +50,6 @@ const useStyles = makeStyles((theme) => ({
   },
 
   tooltipText: {
-    fontFamily: "NotMaryKate",
     fontSize: "20px",
   },
 }));
