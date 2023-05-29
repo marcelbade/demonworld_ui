@@ -430,50 +430,30 @@ const ListGeneratorController = () => {
   };
 
   /**
-   * Function toggles the unit card view on and off as well as switches between card views for different units. In order to do this, the card view is not toggled by a booelan flag, but an object that stores the previously clicked unit.
+   * Function toggles the unit card view and Item shop view on and off, as well as switches between views for different units. In order to do this, both views are not toggled by a booelan flag, but an object that stores the previously clicked unit.
    * @param {unitCard} u
    */
-  const toggleBetweenItemShops = (u) => {
-    closeCardDisplay();
+  const toggleMenuState = (u, isCards) => {
+    isCards ? closeItemShop() : closeCardDisplay();
+
+    let stateObj = isCards ? showStatCard : itemShopState;
+    let stateObjSetter = isCards ? setShowStatCard : setItemShopState;
 
     // first click on page (no card displayed)
-    if (itemShopState.clickedUnit === undefined) {
-      setItemShopState({ clickedUnit: u, lastclickedUnit: u, show: true });
+    if (stateObj.clickedUnit === undefined) {
+      stateObjSetter({ clickedUnit: u, lastclickedUnit: u, show: true });
     }
     // click on same unit again to toggle the card view on
-    else if (itemShopState.lastclickedUnit.unitName === u.unitName && itemShopState.show === true)
-      setItemShopState({ clickedUnit: u, lastclickedUnit: u, show: false });
-    // click on same unit again to toggle the card view off
-    else if (itemShopState.lastclickedUnit.unitName === u.unitName && itemShopState.show === false)
-      setItemShopState({ clickedUnit: u, lastclickedUnit: u, show: true });
-    // click on a different unit to show a different card
-    else if (itemShopState.lastclickedUnit.unitName !== u.unitName) {
-      setItemShopState({ clickedUnit: u, lastclickedUnit: u, show: true });
-    }
-  };
-
-  /**
-   * Function toggles the unit card view on and off as well as switches between card views for different units. In order to do this, the card view is not toggled by a booelan flag, but an object that stores the previously clicked unit.
-   * @param {unitCard} u
-   */
-  const toggleBetweenCards = (u) => {
-    closeItemShop();
-
-    // first click on page (no card displayed)
-    if (showStatCard.clickedUnit === undefined) {
-      setShowStatCard({ clickedUnit: u, lastclickedUnit: u, show: true });
-    }
-    // click on same unit again to toggle the card view on
-    else if (showStatCard.lastclickedUnit.unitName === u.unitName && showStatCard.show === true) {
-      setShowStatCard({ clickedUnit: u, lastclickedUnit: u, show: false });
+    else if (stateObj.lastclickedUnit.unitName === u.unitName && stateObj.show === true) {
+      stateObjSetter({ clickedUnit: u, lastclickedUnit: u, show: false });
     }
     // click on same unit again to toggle the card view off
-    else if (showStatCard.lastclickedUnit.unitName === u.unitName && showStatCard.show === false) {
-      setShowStatCard({ clickedUnit: u, lastclickedUnit: u, show: true });
+    else if (stateObj.lastclickedUnit.unitName === u.unitName && stateObj.show === false) {
+      stateObjSetter({ clickedUnit: u, lastclickedUnit: u, show: true });
     }
     // click on a different unit to show a different card
-    else if (showStatCard.lastclickedUnit.unitName !== u.unitName) {
-      setShowStatCard({ clickedUnit: u, lastclickedUnit: u, show: true });
+    else if (stateObj.lastclickedUnit.unitName !== u.unitName) {
+      stateObjSetter({ clickedUnit: u, lastclickedUnit: u, show: true });
     }
   };
 
@@ -530,23 +510,18 @@ const ListGeneratorController = () => {
         fetchedItems: fetchedItems,
         unitSelectedForShop: unitSelectedForShop,
         allItems: allItems,
-        closeItemShop: closeItemShop,
-        toggleBetweenItemShops: toggleBetweenItemShops,
-        setUnitSelectedForShop: setUnitSelectedForShop,
         setAllItems: setAllItems,
         //  SELECTED UNITS
         selectedUnits: selectedUnits,
         setSelectedUnits: setSelectedUnits,
-        // STAT CARD DISPLAY
-        showStatCard: showStatCard,
-        setShowStatCard: setShowStatCard,
-        toggleBetweenCards: toggleBetweenCards,
         // ALTERNATIVE LISTS
         selectedAlternativeList: selectedAlternativeList,
         setSelectedAlternativeList: setSelectedAlternativeList,
         // PDF VIEWER
         closePdfView: closePdfView,
         openPdfView: openPdfView,
+        // MENU STATES
+        toggleMenuState: toggleMenuState,
       }}
     >
       <Grid container className={classes.displayBox}>

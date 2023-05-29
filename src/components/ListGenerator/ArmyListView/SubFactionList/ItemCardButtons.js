@@ -35,7 +35,7 @@ const ItemCardButtons = (props) => {
         variant="outlined"
         onClick={() => {
           contextArmy.setUnitSelectedForShop(props.u);
-          contextArmy.toggleBetweenItemShops(props.u);
+          contextArmy.toggleMenuState(props.u, false);
         }}
       >
         Gegenstände
@@ -45,7 +45,7 @@ const ItemCardButtons = (props) => {
         className={classes.buttons}
         variant="outlined"
         onClick={() => {
-          contextArmy.toggleBetweenCards(props.u);
+          contextArmy.toggleMenuState(props.u, true);
         }}
       >
         Kartenvorschau
