@@ -7,7 +7,7 @@ import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 // components and functions
 import { ArmyContext } from "../../../../contexts/armyContext";
 import { displayUnitCost } from "../../../compendiums/factionTable/depencies/factionTableFunctions";
-import { ruleObjectProvider } from "../../../gameLogic/globalRules/ruleObjectProvider";
+import { ruleObjectProvider } from "../../../../gameLogic/globalRules/ruleObjectProvider"
 import { unitCardMultiSort, uuidGenerator } from "../../../shared/sharedFunctions";
 import EquipmentList from "./EquipmentList";
 import SubListStats from "./SubListStats";
