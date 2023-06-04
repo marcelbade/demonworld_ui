@@ -1,3 +1,6 @@
+import { uuidGenerator } from "../shared/sharedFunctions";
+
+
 /**
  * Function returns all distinct subFactions of a selected faction.
  * @param {[unitCard object]} units
@@ -15,7 +18,13 @@ export const findDistinctSubfactions = (units) => {
   return distinctSubFactions;
 };
 
+export const enrichUnitCardObject = (unit) => {
+  unit = addUniqueIdToUnit(unit);
+  unit = addLossCounterToUnit(unit);
+  unit = addEquipmentSlotsToUnit(unit);
 
+  return unit;
+};
 
 /**
  * Functions adds a UUID as unique id so the user can select the
@@ -35,7 +44,7 @@ const addUniqueIdToUnit = (unit) => {
  * @param {*} unit
  * @returns {} unit object with a lossCounter property
  */
-export const addLossCounterToUnit = (unit) => {
+ const addLossCounterToUnit = (unit) => {
   return {
     ...unit,
     lossCounter: 0,
@@ -48,7 +57,7 @@ export const addLossCounterToUnit = (unit) => {
  * @param {*} unit
  * @returns unit object with equipment + equipmentTypes property.
  */
-export const addEquipmentSlotsToUnit = (unit) => {
+ const addEquipmentSlotsToUnit = (unit) => {
   const maxItemNumber = calculateMaxNumberMagicItems(unit);
 
   return {

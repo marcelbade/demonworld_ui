@@ -16,9 +16,10 @@ import FactionTreeView from "./ArmySelectorView/treeView";
 import ArmyListDisplay from "./ArmyListView/armyListDisplay";
 import ItemShop from "./ItemShop/ItemShop";
 import { ruleValidation } from "../../gameLogic/useRuleValidation";
-import { isObjectEmtpy, unitOrCmdCard, uuidGenerator } from "../shared/sharedFunctions";
+import { isObjectEmtpy, unitOrCmdCard } from "../shared/sharedFunctions";
 import AlternativeArmyListSelector from "./ArmySelectorView/AlternativeArmyListSelection/AlternativeArmyListSelector";
 import OptionButtons from "./OptionButtons/OptionButtons";
+import { enrichUnitCardObject } from "./ListGeneratorFunctions";
 // constants
 import { ARMIES_WITH_ALTERNATIVE_LISTS } from "../../constants/factions";
 import { ALLIES_MAPPING } from "../../constants/allies";
@@ -67,15 +68,6 @@ const useStyles = makeStyles((theme) => ({
   BackBttnIcon: {
     width: "2em",
     height: "2em",
-  },
-  pdfViewer: {
-    width: "100%",
-    height: " 100%",
-    backgroundColor: "pink",
-  },
-  pdfViewerButton: {
-    top: "0%",
-    right: "0%",
   },
 }));
 
@@ -240,33 +232,6 @@ const ListGeneratorController = () => {
   }, [selectedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
-   * Function returns all distinct subFactions of a selected faction.
-   * @param {[unitCard object]} units
-   * @returns [String] name of all distinct subfactions
-   */
-  const findDistinctSubfactions = (units) => {
-    let distinctSubFactions = [];
-
-    units.forEach((f) => {
-      if (!distinctSubFactions.includes(f.subFaction)) {
-        distinctSubFactions.push(f.subFaction);
-      }
-    });
-
-    return distinctSubFactions;
-  };
-
-  /**
-   * Adds the selected units to a central list of units selected by the user and adds 2 things:
-   * - a unique Id so the same unit can be selected more than once and all instances can be differentiated
-   * - equipment slots so items can be added
-   * @param {unitCard object} unit
-   */
-  const selectUnit = (unit) => {
-    setSelectedUnits([...selectedUnits, addLossCounterToUnit(addEquipmentSlotsToUnit(addUniqueIdToUnit(unit)))]);
-  };
-
-  /**
    * Validate the current army list everytime a unit is added. Validation works through a validator object.
    */
   useEffect(() => {
@@ -277,18 +242,6 @@ const ListGeneratorController = () => {
       collectAllBlockedUnits(result);
     }
   }, [selectedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  /**
-   * add all invalid units to the block list.
-   * @param {*} validationResult
-   */
-  const collectAllBlockedUnits = (validationResult) => {
-    setblockedUnits({
-      ...blockedUnits,
-      unitsBlockedbyRules: validationResult.unitsBlockedbyRules,
-      subFactionBelowMinimum: validationResult.subFactionBelowMinimum,
-    });
-  };
 
   /**
    * Everytime the unit selections changes, recalculate which items are currently selected and store it in the central item list.
@@ -313,6 +266,12 @@ const ListGeneratorController = () => {
     setAllItems(temp);
   }, [selectedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // Open the option button drawer when everything else is closed, else close it.
+  useEffect(() => {
+    if (!statCardState.show && !itemShopState.show) setShowOptionButtons(true);
+    if (statCardState.show || itemShopState.show) setShowOptionButtons(false);
+  }, [statCardState, itemShopState]); // eslint-disable-line react-hooks/exhaustive-deps
+
   // Set master list for pdf viewer
   useEffect(() => {
     let tempArray = [];
@@ -324,80 +283,51 @@ const ListGeneratorController = () => {
   }, [distinctSubFactions, selectedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
+   * Function returns all distinct subFactions of a selected faction.
+   * @param {[unitCard object]} units
+   * @returns [String] name of all distinct subfactions
+   */
+  const findDistinctSubfactions = (units) => {
+    let distinctSubFactions = [];
+
+    units.forEach((f) => {
+      if (!distinctSubFactions.includes(f.subFaction)) {
+        distinctSubFactions.push(f.subFaction);
+      }
+    });
+
+    return distinctSubFactions;
+  };
+
+  /**
+   * Adds the selected units to a central list of units selected by the user and adds 2 things:
+   * - a unique Id so the same unit can be selected more than once and all instances can be differentiated
+   * - equipment slots so items can be added
+   * @param {unitCard object} unit
+   */
+  const selectUnit = (unit) => {
+    setSelectedUnits([...selectedUnits, enrichUnitCardObject(unit)]);
+  };
+
+  /**
+   * add all invalid units to the block list.
+   * @param {*} validationResult
+   */
+  const collectAllBlockedUnits = (validationResult) => {
+    setblockedUnits({
+      ...blockedUnits,
+      unitsBlockedbyRules: validationResult.unitsBlockedbyRules,
+      subFactionBelowMinimum: validationResult.subFactionBelowMinimum,
+    });
+  };
+
+  /**
    * Function filters unit card arrays for a sub faction.
    * @param {String} subFaction
    * @returns An array of unit card objects filtered for a a sub faction.
    */
   const filterForSubFaction = (subFaction) => {
     return selectedUnits.filter((u) => u.subFaction === subFaction);
-  };
-
-  // Open the option button drawer when everything else is closed, else close it.
-  useEffect(() => {
-    if (!statCardState.show && !itemShopState.show) setShowOptionButtons(true);
-    if (statCardState.show || itemShopState.show) setShowOptionButtons(false);
-  }, [statCardState, itemShopState]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  /**
-   * Functions adds a UUID as unique id so the user can select the
-   * same unit twice in a row. Without it, the useEffect does not fire, since the
-   * unit objects are identical!
-   *
-   * @param {} unit
-   * @returns {} unit object with a random ID
-   */
-  const addUniqueIdToUnit = (unit) => {
-    const randomID = uuidGenerator();
-    return { ...unit, uniqueID: randomID };
-  };
-
-  /**
-   * Function adds a property that counts the number of lost elements the unit has suffered. Needed for the loss calculator module.
-   * @param {*} unit
-   * @returns {} unit object with a lossCounter property
-   */
-  const addLossCounterToUnit = (unit) => {
-    return {
-      ...unit,
-      lossCounter: 0,
-      unitDestroyed: false,
-    };
-  };
-
-  /**
-   * Function adds a property which allows equipment to be added as well as check what equipment can be added.
-   * @param {*} unit
-   * @returns unit object with equipment + equipmentTypes property.
-   */
-  const addEquipmentSlotsToUnit = (unit) => {
-    const maxItemNumber = calculateMaxNumberMagicItems(unit);
-
-    return {
-      ...unit,
-      equipment: [],
-      equipmentTypes: {
-        poison: false,
-        warpaint: false,
-        maxMagic: maxItemNumber,
-      },
-    };
-  };
-
-  /**
-   * Function calculates how many magical items the unit is allowed to have. +1 per special element.
-   * @param {unit card} unit
-   */
-  const calculateMaxNumberMagicItems = (unit) => {
-    let total = 1;
-
-    if (unit.standardBearer) {
-      ++total;
-    }
-    if (unit.musician) {
-      ++total;
-    }
-
-    return total;
   };
 
   /**
