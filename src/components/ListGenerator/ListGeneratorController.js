@@ -19,7 +19,6 @@ import { ruleValidation } from "../../gameLogic/useRuleValidation";
 import { isObjectEmtpy, unitOrCmdCard, uuidGenerator } from "../shared/sharedFunctions";
 import AlternativeArmyListSelector from "./ArmySelectorView/AlternativeArmyListSelection/AlternativeArmyListSelector";
 import OptionButtons from "./OptionButtons/OptionButtons";
-import PdfBox from "../PDFGenerator/PDFBox";
 // constants
 import { ARMIES_WITH_ALTERNATIVE_LISTS } from "../../constants/factions";
 import { ALLIES_MAPPING } from "../../constants/allies";
@@ -129,7 +128,6 @@ const ListGeneratorController = () => {
   // option buttons
   const [showOptionButtons, setShowOptionButtons] = useState(true);
   //pdf viewer
-  const [showPdfView, setShowPdfView] = useState(false);
   const [pdfMasterList, setPdfMasterList] = useState([]);
 
   /**
@@ -336,9 +334,9 @@ const ListGeneratorController = () => {
 
   // Open the option button drawer when everything else is closed, else close it.
   useEffect(() => {
-    if (!showPdfView && !statCardState.show && !itemShopState.show) setShowOptionButtons(true);
-    if (showPdfView || statCardState.show || itemShopState.show) setShowOptionButtons(false);
-  }, [showPdfView, statCardState, itemShopState]); // eslint-disable-line react-hooks/exhaustive-deps
+    if (!statCardState.show && !itemShopState.show) setShowOptionButtons(true);
+    if (statCardState.show || itemShopState.show) setShowOptionButtons(false);
+  }, [statCardState, itemShopState]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * Functions adds a UUID as unique id so the user can select the
@@ -478,13 +476,6 @@ const ListGeneratorController = () => {
     history.push("/");
   };
 
-  const closePdfView = () => {
-    setShowPdfView(false);
-  };
-  const openPdfView = () => {
-    setShowPdfView(true);
-  };
-
   return fetchedFactions && fetchedItems ? (
     <ArmyProvider
       value={{
@@ -522,8 +513,7 @@ const ListGeneratorController = () => {
         selectedAlternativeList: selectedAlternativeList,
         setSelectedAlternativeList: setSelectedAlternativeList,
         // PDF VIEWER
-        closePdfView: closePdfView,
-        openPdfView: openPdfView,
+        pdfMasterList: pdfMasterList,
         // MENU STATES
         toggleMenuState: toggleMenuState,
       }}
@@ -566,22 +556,6 @@ const ListGeneratorController = () => {
         {/* UNITCARD */}
         <Drawer anchor={"right"} variant="persistent" open={statCardState.show} className={classes.UnitCardDisplay}>
           {!isObjectEmtpy(statCardState.clickedUnit) ? unitOrCmdCard(statCardState.clickedUnit, COLUMN) : <p></p>}
-        </Drawer>
-        <Drawer anchor={"left"} variant="persistent" open={showPdfView}>
-          <Grid container direction="row" className={classes.pdfViewer}>
-            <Grid>
-              <PdfBox pdfMasterList={pdfMasterList} />
-            </Grid>
-            <Grid item className={classes.pdfViewerButton}>
-              <IconButton
-                onClick={() => {
-                  closePdfView();
-                }}
-              >
-                <ChevronLeftIcon />
-              </IconButton>
-            </Grid>
-          </Grid>
         </Drawer>
       </Grid>
     </ArmyProvider>

@@ -1,41 +1,39 @@
+// react
 import React from "react";
+// react-pdf
 import { Page, Text, View, Document, Font } from "@react-pdf/renderer";
+// fonts
 import notMaryKate from "../../fonts/notMaryKate.ttf";
 import Beryliumbold from "../../fonts/Beryliumbold.ttf";
+// functions and components
+import { uuidGenerator } from "../shared/sharedFunctions";
+// styles
+import styles from "./pdfStyles";
 
 // Register font
 Font.register({ family: "notMaryKate", src: notMaryKate });
 Font.register({ family: "Beryliumbold", src: Beryliumbold });
 
-// Create Document Component
+// Create the dynamic PDF content.
 const ListPDF = (props) => {
   const DynamicList = () => {
     return props.pdfMasterList
       .filter((obj) => obj.units.length > 0)
       .map((obj) => (
-        <View style={{ marginLeft: 15, marginTop: 8 }}>
-          <Text style={{ textAlign: "left", fontFamily: "notMaryKate", fontSize: 15 }}>
+        <View key={uuidGenerator()} style={styles.globalMargin}>
+          <Text key={uuidGenerator()} style={styles.subFactionNameStyle}>
             {/* SUBFACTION */}
             {obj.subFaction}
           </Text>
           {obj.units.map((u) => (
-            <Text style={{ textAlign: "left", fontFamily: "Beryliumbold", fontSize: 10 }}>
+            <Text key={uuidGenerator()} style={styles.unitEntryStyle}>
               {/* UNIT */}
               {u.unitName} - {u.points}
-              {u.equipment.length > 0 ? (
-                <Text
-                  style={{
-                    marginRight: 400,
-                    borderBottomColor: "black",
-                    borderBottomWidth: 1,
-                    marginBorder: 2,
-                  }}
-                ></Text>
-              ) : null}
+              {u.equipment.length > 0 ? <Text key={uuidGenerator()} style={styles.equipmentLineStyle}></Text> : null}
               {u.equipment.length > 0
                 ? u.equipment.map((e) => (
-                    <View style={{ marginLeft: 35 }}>
-                      <Text style={{ textAlign: "left", fontFamily: "Beryliumbold", fontSize: 10 }}>
+                    <View key={uuidGenerator()} style={styles.equipmentListMargin}>
+                      <Text key={uuidGenerator()} style={styles.equipmentEntryStyle}>
                         {/* EQUIPMENT */}
                         {e.name} - {e.points}
                       </Text>

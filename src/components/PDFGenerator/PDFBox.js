@@ -1,5 +1,5 @@
 // Reac
-import React from "react";
+import React, { useEffect, useState } from "react";
 // react-pdf
 import { PDFViewer } from "@react-pdf/renderer";
 //Material UI
@@ -9,21 +9,27 @@ import ListPDF from "./ListPDF";
 
 // Create styles
 const useStyles = makeStyles((theme) => ({
-  pdfModal: {
+  pdfTab: {
     position: "fixed",
-    background: "lightblue",
-    width: "90%",
+    width: "100%",
     height: " 100%",
   },
 }));
 
-// Create Document Component
-const PdfBox = (props) => {
+// Create the PDF Document. The document view opens in a new tab.
+const PdfBox = () => {
   const classes = useStyles();
 
-  return props.pdfMasterList.length > 0 ? (
-    <PDFViewer className={classes.pdfModal}>
-      <ListPDF pdfMasterList={props.pdfMasterList} />
+  const [pdfData, setPdfData] = useState([]);
+
+  useEffect(() => {
+    const transportObj = JSON.parse(localStorage.getItem("transportObj"));
+    setPdfData(transportObj.pdfData);
+  }, []);
+
+  return pdfData.length > 0 ? (
+    <PDFViewer className={classes.pdfTab}>
+      <ListPDF pdfMasterList={pdfData} />
     </PDFViewer>
   ) : null;
 };

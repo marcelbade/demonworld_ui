@@ -9,6 +9,7 @@ import landingPage from "./components/landingPage/landingPage";
 import factionTable from "./components/compendiums/factionTable/components/factionTable";
 import ListGeneratorController from "./components/ListGenerator/ListGeneratorController";
 import LossCalculator from "./components/LossCalculator/LossCalculator";
+import PdfBox from "./components/PDFGenerator/PDFBox";
 // theme
 import theme from "./AppTheme/theme";
 
@@ -21,6 +22,7 @@ function App() {
           <Route path="/compendium" component={factionTable} exact />
           <Route path="/listGenerator" component={ListGeneratorController} />
           <Route path="/lossCalculator" component={LossCalculator} />
+          <Route path="/PdfBox" component={PdfBox} />
         </Switch>
       </Grid>
     </ThemeProvider>

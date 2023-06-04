@@ -46,6 +46,15 @@ const OptionButtons = (props) => {
       },
     });
   };
+  const openPDfInNewTab = () => {
+    //TODO: replace in production!!
+    const URL = "http://localhost:3000/PdfBox";
+
+    let transportObj = { pdfData: contextArmy.pdfMasterList };
+
+    window.localStorage.setItem("transportObj", JSON.stringify(transportObj));
+    window.open(URL, "_blank", "noopener,noreferrer");
+  };
 
   const storeList = () => {
     // Call REST
@@ -71,7 +80,7 @@ const OptionButtons = (props) => {
           variant="outlined"
           disabled={disableButton}
           onClick={() => {
-            contextArmy.openPdfView();
+            openPDfInNewTab();
           }}
         >
           PDF Erzeugen
