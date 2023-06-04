@@ -1,6 +1,5 @@
 // React
 import React from "react";
-import { useHistory } from "react-router-dom";
 // Material UI
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
