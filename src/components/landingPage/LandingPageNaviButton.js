@@ -49,7 +49,7 @@ const LandingPageNaviButton = (props) => {
 
   return (
     <Grid item className={classes.iconContainer}>
-      <Tooltip title={<Typography className={classes.tooltipText}>Verlustrechner</Typography>}>
+      <Tooltip title={<Typography className={classes.tooltipText}>{props.altText}</Typography>}>
         <IconButton
           onClick={() => {
             toPage(props.relativeURL);
@@ -58,7 +58,7 @@ const LandingPageNaviButton = (props) => {
           <img src={props.icon} alt={props.altText} height={100} width={100} />
         </IconButton>
       </Tooltip>
-      <Typography className={classes.mobileToolTip}>Verlustrechner</Typography>
+      <Typography className={classes.mobileToolTip}>{props.altText}</Typography>
     </Grid>
   );
 };
