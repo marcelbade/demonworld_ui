@@ -106,7 +106,7 @@ const globalRules = {
         const spentPoints = calculateActualPoints(selectedUnits, factionRule.cardNames);
 
         if (spentPoints < subFactionMin && !result.includes(factionRule.subFaction)) {
-          result.push({ underMinimum: factionRule.subFaction, message: factionRule.error });
+          result.push({ underMinimum: factionRule.cardNames, message: factionRule.error });
         }
       });
 
