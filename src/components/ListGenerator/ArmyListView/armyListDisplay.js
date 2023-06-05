@@ -2,14 +2,12 @@
 import React, { useState, useContext, Fragment } from "react";
 // Material UI
 import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
 import { makeStyles } from "@material-ui/core/styles";
-import { Grid, Typography, TextField, InputAdornment } from "@material-ui/core";
+import { Typography, TextField, InputAdornment } from "@material-ui/core";
 // components and functions
 import { ArmyContext } from "../../../contexts/armyContext";
+import SubFactionEntry from "./SubFactionEntry";
 import { uuidGenerator } from "../../shared/sharedFunctions";
-import { ALLIES_MAPPING } from "../../../constants/allies";
-import SubList from "./SubFactionList/subList";
 
 // TODO: remove unneeded styles
 const useStyles = makeStyles((theme) => ({
@@ -45,18 +43,6 @@ const ArmyListDisplay = () => {
 
   const [errorMessage, setErrorMessage] = useState("");
 
-  /**
-   * Filters the selected units by subFaction. If allied units have been selected, then their subFaction name is replaced with their faction name.
-   * @param {[unitCard Objects]} allUnits
-   * @param {String} subFaction
-   * @returns
-   */
-  const filterUnitsForSubFaction = (allUnits, subFaction) => {
-    allUnits.forEach((u) => (u.faction === ALLIES_MAPPING[contextArmy.selectedFactionName] ? (u.subFaction = u.faction) : null));
-
-    return allUnits.filter((u) => u.subFaction === subFaction);
-  };
-
   const changeMaximumPointValue = (event) => {
     contextArmy.setMaxPointsAllowance(event.target.value);
 
@@ -65,6 +51,9 @@ const ArmyListDisplay = () => {
     isValid ? setErrorMessage("") : setErrorMessage("Bitte nur Zahlen eingeben.");
   };
 
+
+
+ 
   /**
    * This creates the centre of the UI: the actual army list consisting of the selected units and the display of the maximum * army points.
    */
@@ -73,14 +62,8 @@ const ArmyListDisplay = () => {
       {/* <Grid item container justify="flex-end"> */}
 
       <List>
-        {contextArmy.subfactions.map((subFaction) => (
-          <ListItem key={uuidGenerator()}>
-            <Grid container direction={"column"}>
-              <Typography className={classes.HeaderBox}>{subFaction}</Typography>
-              {/* DISPLAY UNITS, PONT COST, PERCENTAGES FOR ONE SUBFACTION */}
-              <SubList subFactionUnits={filterUnitsForSubFaction(contextArmy.addedUnits, subFaction)} subFactionName={subFaction} />
-            </Grid>
-          </ListItem>
+        {contextArmy.subfactions.map((sF) => (
+          <SubFactionEntry subFaction={sF} key={uuidGenerator()} />
         ))}
       </List>
       {/* TOTAL SPENT POINTS */}
