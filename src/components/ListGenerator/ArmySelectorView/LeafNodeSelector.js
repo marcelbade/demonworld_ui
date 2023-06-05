@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 // Material UI
-import { Tooltip } from "@material-ui/core";
+import { Tooltip, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 // components and functions
 import { ArmyContext } from "../../../contexts/armyContext";
@@ -11,7 +11,7 @@ import LeafNode from "./LeafNode";
 const useStyles = makeStyles({
   node: {
     width: "110%",
-    paddingBottom:"1em",
+    paddingBottom: "1em",
   },
 });
 
@@ -77,10 +77,12 @@ const LeafNodeSelector = (props) => {
     return blockedUnitNames.includes(unit.unitName) ? (
       <Tooltip
         className={classes.node}
-        title={findBlockMessage(blockResults, unit.unitName)} //
+        title={<Typography variant="caption">{findBlockMessage(blockResults, unit.unitName)}</Typography>} //
         key={uuidGenerator()}
       >
-        <LeafNode unit={unit} isBlocked={true} />
+        <div>
+          <LeafNode unit={unit} isBlocked={true} />
+        </div>
       </Tooltip>
     ) : (
       // unit not blocked
