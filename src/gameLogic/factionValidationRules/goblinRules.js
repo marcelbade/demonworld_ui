@@ -6,7 +6,7 @@ const rules = [
     min: 0.3,
     max: 1.0,
     cardNames: ["Infanterie"],
-    error: "Deine Armeeliste muss zu mindestens 30% aus Einheiten der Kriegerkaste bestehen.",
+    error: "Deine Armeeliste muss zu mindestens 30% aus Infanterie bestehen.",
   },
   {
     subFaction: "engines",
