@@ -64,25 +64,33 @@ const validationResults = {
 
 const GoblinRules = {
   testSubFactionRules: (availableUnits, selectedUnits, totalPointsAllowance) => {
-    //tournament rules
-    let testForMax2Result = globalRules.maximumOfTwo(selectedUnits);
-    let testForHeroCapResult = globalRules.belowMaxPercentageHeroes(selectedUnits, totalPointsAllowance, availableUnits, MAX_HERO_PERCENTAGE);
-
     //  general rules
-    let blockUnitsExceedingMax = globalRules.unitsAboveSubFactionMax(rules, selectedUnits, totalPointsAllowance, availableUnits);
-    let testForUniquesResult = globalRules.noDuplicateUniques(selectedUnits);
+    let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(selectedUnits, availableUnits, totalPointsAllowance);
+    let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(rules, selectedUnits, totalPointsAllowance, availableUnits);
+    let isAboveSubFactionMax = globalRules.unitsAboveSubFactionMax(rules, selectedUnits, totalPointsAllowance, availableUnits);
+    let isUnique = globalRules.noDuplicateUniques(selectedUnits);
 
-    //  check for sub faction below minimum
-    let testForBelowSFMin = globalRules.unitsBelowSubfactionMinimum(rules, selectedUnits, totalPointsAllowance, availableUnits);
+    // tournament rules
+    let testForMax2Result = globalRules.maximumOfTwo(selectedUnits);
+    let testForHeroCapResult = globalRules.belowMaxPercentageHeroes(
+      selectedUnits,
+      totalPointsAllowance,
+      availableUnits,
+      MAX_HERO_PERCENTAGE
+    );
+
+    // special faction rules - no special rules for Goblins exist.
 
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [
-      ...testForUniquesResult,
+      ...isExceedingPointAllowance,
+      ...isUnique,
       ...testForHeroCapResult,
       ...testForMax2Result,
-      ...blockUnitsExceedingMax,
+      ...isAboveSubFactionMax,
     ];
-    validationResults.subFactionBelowMinimum = testForBelowSFMin;
+    // result for sub factions below limit.
+    validationResults.subFactionBelowMinimum = isBelowSubFactionMin;
     validationResults.commanderIsPresent = globalRules.isArmyCommanderPresent(selectedUnits);
 
     return validationResults;
