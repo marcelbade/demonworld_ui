@@ -232,7 +232,7 @@ const ListGeneratorController = () => {
   }, [selectedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
-   * Validate the current army list everytime a unit is added. Validation works through a validator object.
+   * Validate the current army list everytime a unit is added or the max point allowance changes. Validation works through a validator object.
    */
   useEffect(() => {
     if (selectedFactionName) {
@@ -241,7 +241,7 @@ const ListGeneratorController = () => {
 
       collectAllBlockedUnits(result);
     }
-  }, [selectedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [selectedUnits, maxPointsAllowance]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * Everytime the unit selections changes, recalculate which items are currently selected and store it in the central item list.
