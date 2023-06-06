@@ -48,7 +48,7 @@ const globalRules = {
 
   /**
    * Function tests whether a non-unique unit has been selected twice.
-   * @ignore when flag "noUnitMorethanTwice" is false!
+   * @param {[unitCard obj]} selectedUnits
    * @returns array consisting of objects. Every object contains a unit that must be blocked and an error message to
    * be displayed as a tool tip.
    */
@@ -68,8 +68,11 @@ const globalRules = {
   },
 
   /**
-   * Function tests if no more than 35% of the army list are heroes (or magic users)!
-   * @ignore when flag "tournamentHeroLimit" is false!
+   * Function tests if a heroe's / magic User's point cost exceeds the max. if added.
+   * @param {[unitCard obj]} selectedUnits array of already selected units.
+   * @param {int} armyPointsAllowance Maximum number of points that can be spent.
+   * @param {[unitCard obj]} availableUnits array of all units available for the list.
+   * @param {int} allowedPercentage max percenttage that can be spent on heroes / magic users.
    * @returns array consisting of objects. Every object contains a unit that must be blocked and an error message to
    * be displayed as a tool tip.
    */
