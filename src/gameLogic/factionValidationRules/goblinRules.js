@@ -54,6 +54,8 @@ const rules = [
   },
 ];
 
+const MAX_HERO_PERCENTAGE = 35;
+
 const validationResults = {
   unitsBlockedbyRules: [],
   subFactionBelowMinimum: [],
@@ -61,17 +63,17 @@ const validationResults = {
 };
 
 const GoblinRules = {
-  testSubFactionRules: (availableUnits, selectedUnits, maxArmyPoints) => {
+  testSubFactionRules: (availableUnits, selectedUnits, totalPointsAllowance) => {
     //tournament rules
     let testForMax2Result = globalRules.maximumOfTwo(selectedUnits);
-    let testForHeroCapResult = globalRules.maxOf35PercentHeroes(selectedUnits, maxArmyPoints, availableUnits);
+    let testForHeroCapResult = globalRules.belowMaxPercentageHeroes(selectedUnits, totalPointsAllowance, availableUnits, MAX_HERO_PERCENTAGE);
 
     //  general rules
-    let blockUnitsExceedingMax = globalRules.BlockUnitsExceedingMaxPoints(rules, selectedUnits, maxArmyPoints, availableUnits);
+    let blockUnitsExceedingMax = globalRules.unitsAboveSubFactionMax(rules, selectedUnits, totalPointsAllowance, availableUnits);
     let testForUniquesResult = globalRules.noDuplicateUniques(selectedUnits);
 
     //  check for sub faction below minimum
-    let subFactionLimitsResult = globalRules.subFactionsBelowMinimum(rules, selectedUnits, maxArmyPoints, availableUnits);
+    let testForBelowSFMin = globalRules.unitsBelowSubfactionMinimum(rules, selectedUnits, totalPointsAllowance, availableUnits);
 
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [
@@ -80,11 +82,11 @@ const GoblinRules = {
       ...testForMax2Result,
       ...blockUnitsExceedingMax,
     ];
-    validationResults.subFactionBelowMinimum = subFactionLimitsResult;
+    validationResults.subFactionBelowMinimum = testForBelowSFMin;
     validationResults.commanderIsPresent = globalRules.isArmyCommanderPresent(selectedUnits);
 
     return validationResults;
   },
 };
 
-export   {GoblinRules, rules};
+export { GoblinRules, rules };

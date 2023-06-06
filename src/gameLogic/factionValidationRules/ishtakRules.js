@@ -57,12 +57,12 @@ const IshtakRules = {
   testSubFactionRules: (availableUnits, selectedUnits, maxArmyPoints) => {
     //tournament rules
     let twoRuleResult = globalRules.maximumOfTwo(selectedUnits);
-    let heroRuleResult = globalRules.maxOf35PercentHeroes(selectedUnits, maxArmyPoints, availableUnits);
+    let heroRuleResult = globalRules.belowMaxPercentageHeroes(selectedUnits, maxArmyPoints, availableUnits);
     //  general rules
-    let exceedingMaxResult = globalRules.BlockUnitsExceedingMaxPoints(rules, selectedUnits, maxArmyPoints, availableUnits);
+    let exceedingMaxResult = globalRules.unitsAboveSubFactionMax(rules, selectedUnits, maxArmyPoints, availableUnits);
     let DuplicateResult = globalRules.noDuplicateUniques(selectedUnits);
     //  check for sub faction below minimum
-    let minimumResult = globalRules.subFactionsBelowMinimum(rules, selectedUnits, maxArmyPoints, availableUnits);
+    let minimumResult = globalRules.unitsBelowSubfactionMinimum(rules, selectedUnits, maxArmyPoints, availableUnits);
 
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [...DuplicateResult, ...heroRuleResult, ...twoRuleResult, ...exceedingMaxResult];
