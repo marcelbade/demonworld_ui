@@ -38,7 +38,7 @@ const SubFactionEntry = (props) => {
   };
 
   /**
-   *
+   * Function checks for every sub faction with a minimum point allowance > 0 if the condition has been fullfilled. If not, the sub faction name appears in red and a tooltip is displayed.
    */
   const isSubFactionValid = () => {
     contextArmy.blockedUnits.subFactionBelowMinimum.forEach((entry) => {
@@ -49,9 +49,6 @@ const SubFactionEntry = (props) => {
       }
     });
   };
-
-  console.log("underMinimum");
-  console.log(underMinimum);
 
   return contextArmy ? (
     <ListItem key={uuidGenerator()}>
