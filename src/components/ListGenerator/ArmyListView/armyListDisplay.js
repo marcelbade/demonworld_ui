@@ -3,7 +3,7 @@ import React, { useState, useContext, Fragment } from "react";
 // Material UI
 import List from "@material-ui/core/List";
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography, TextField, InputAdornment } from "@material-ui/core";
+import { Typography, TextField, InputAdornment, Grid } from "@material-ui/core";
 // components and functions
 import { ArmyContext } from "../../../contexts/armyContext";
 import SubFactionEntry from "./SubFactionEntry";
@@ -43,17 +43,20 @@ const ArmyListDisplay = () => {
 
   const [errorMessage, setErrorMessage] = useState("");
 
+  /**
+   * Function takes the user input for maximum point allowance, validates it, and sets the state.
+   * @param {event object} event
+   */
   const changeMaximumPointValue = (event) => {
     contextArmy.setMaxPointsAllowance(event.target.value);
 
-    // validate user input
     let isValid = new RegExp(/^[0-9]*$/).test(event.target.value);
     isValid ? setErrorMessage("") : setErrorMessage("Bitte nur Zahlen eingeben.");
   };
 
+  console.log(" contextArmy.maxPointsAllowance");
+  console.log(contextArmy.maxPointsAllowance);
 
-
- 
   /**
    * This creates the centre of the UI: the actual army list consisting of the selected units and the display of the maximum * army points.
    */
@@ -66,28 +69,29 @@ const ArmyListDisplay = () => {
           <SubFactionEntry subFaction={sF} key={uuidGenerator()} />
         ))}
       </List>
-      {/* TOTAL SPENT POINTS */}
-      <Typography className={classes.total}>Gesamtpunktzahl: {contextArmy.totalPointValue} / </Typography>
-      {/* TOTAL POINT ALLOWANCE */}
-      <TextField
-        id="outlined-basic"
-        autoComplete="off"
-        value={contextArmy.maxPointsValue}
-        InputProps={{
-          style: {
-            fontSize: "20px",
-            fontWeight: "bold",
-            pading: "50px",
-            width: "130px",
-          },
-          endAdornment: <InputAdornment position="end">Punkte</InputAdornment>,
-        }}
-        onChange={changeMaximumPointValue}
-        required
-        error={Boolean(errorMessage)}
-        helperText={errorMessage}
-        variant="standard"
-      />
+      {/* TOTAL SPENT POINTS +  TOTAL POINT ALLOWANCE*/}
+      <Grid container direction="row">
+        <Typography className={classes.total}>Gesamtpunktzahl: {contextArmy.totalPointValue} / </Typography>
+        <TextField
+          id="outlined-basic"
+          autoComplete="off"
+          value={contextArmy.maxPointsAllowance}
+          InputProps={{
+            style: {
+              fontSize: "20px",
+              fontWeight: "bold",
+              pading: "50px",
+              width: "130px",
+            },
+            endAdornment: <InputAdornment position="end">Punkte</InputAdornment>,
+          }}
+          onChange={changeMaximumPointValue}
+          required
+          error={Boolean(errorMessage)}
+          helperText={errorMessage}
+          variant="standard"
+        />
+      </Grid>
     </Fragment>
   ) : null;
 };
