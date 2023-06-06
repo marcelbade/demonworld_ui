@@ -419,7 +419,7 @@ const ListGeneratorController = () => {
         allySubFactions: distinctAllySubFactions,
         alliedUnits: mappedAlly,
         // NET POINT VALUES
-        maxPointsValue: maxPointsAllowance,
+        maxPointsAllowance: maxPointsAllowance,
         totalPointValue: totalPointValue,
         addedUnits: selectedUnits,
         setMaxPointsAllowance: setMaxPointsAllowance,
