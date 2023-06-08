@@ -54,7 +54,7 @@ const rules = [
   },
 ];
 
-const MAX_HERO_PERCENTAGE = 35;
+const MAX_HERO_PERCENTAGE = 40;
 
 const validationResults = {
   unitsBlockedbyRules: [],
