@@ -23,7 +23,7 @@ const useStyles = makeStyles({
   },
 });
 
-const OptionButtons = (props) => {
+const OptionButtons = () => {
   const classes = useStyles();
   const contextArmy = useContext(ArmyContext);
   const history = useHistory();
@@ -31,8 +31,12 @@ const OptionButtons = (props) => {
   const [disableButton, setDisableButton] = useState(true);
 
   useEffect(() => {
-    contextArmy.selectedUnits.length === 0 ? setDisableButton(true) : setDisableButton(false);
-  }, [contextArmy.selectedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
+    contextArmy.selectedUnits.length === 0 || violatesRules(contextArmy.blockedUnits) ? setDisableButton(true) : setDisableButton(false);
+  }, [contextArmy.selectedUnits, contextArmy.blockedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const violatesRules = (blockedUnits) => {
+    return blockedUnits.subFactionBelowMinimum.length > 0 || blockedUnits.commanderIspresent === false;
+  };
 
   /**
    * Function graps the current army list as an object, stores it in the history object and naviagat3s to the LossCalculator component.
