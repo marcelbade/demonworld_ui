@@ -2,7 +2,6 @@
 import React, { useContext, useEffect, useState } from "react";
 // Material UI
 import ListItem from "@material-ui/core/ListItem";
-import { makeStyles } from "@material-ui/core/styles";
 import { Grid } from "@material-ui/core";
 // components and functions
 import { ArmyContext } from "../../../contexts/armyContext";
@@ -23,7 +22,7 @@ const SubFactionEntry = (props) => {
 
   useEffect(() => {
     isSubFactionValid();
-  }, [contextArmy.addedUnits]);
+  }, [contextArmy.addedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * Filters the selected units by subFaction. If allied units have been selected, then their subFaction name is replaced with their faction name.
