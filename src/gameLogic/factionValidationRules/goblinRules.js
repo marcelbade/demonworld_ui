@@ -68,7 +68,8 @@ const GoblinRules = {
     let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(selectedUnits, availableUnits, totalPointsAllowance);
     let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(rules, selectedUnits, totalPointsAllowance, availableUnits);
     let isAboveSubFactionMax = globalRules.unitsAboveSubFactionMax(rules, selectedUnits, totalPointsAllowance, availableUnits);
-    let isUnique = globalRules.noDuplicateUniques(selectedUnits);
+    let hasDuplicateUniques = globalRules.noDuplicateUniques(selectedUnits);
+    let hasNoCommander = globalRules.isArmyCommanderPresent(selectedUnits);
 
     // tournament rules
     let testForMax2Result = globalRules.maximumOfTwo(selectedUnits);
@@ -84,14 +85,14 @@ const GoblinRules = {
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [
       ...isExceedingPointAllowance,
-      ...isUnique,
+      ...hasDuplicateUniques,
       ...testForHeroCapResult,
       ...testForMax2Result,
       ...isAboveSubFactionMax,
     ];
     // result for sub factions below limit.
     validationResults.subFactionBelowMinimum = isBelowSubFactionMin;
-    validationResults.commanderIsPresent = globalRules.isArmyCommanderPresent(selectedUnits);
+    validationResults.commanderIsPresent = hasNoCommander;
 
     return validationResults;
   },

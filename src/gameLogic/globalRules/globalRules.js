@@ -158,7 +158,8 @@ const globalRules = {
    * @returns boolean flag
    */
   isArmyCommanderPresent: (selectedUnits) => {
-    return selectedUnits.filter((selectedUnit) => selectedUnit.commandStars >= 2) > 0;
+    const potentialCommanders = selectedUnits.filter((selectedUnit) => selectedUnit.commandStars >= 2);
+    return potentialCommanders.length > 0;
   },
 };
 
