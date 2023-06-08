@@ -12,7 +12,8 @@ import {
   displayFormationsn,
 } from "../../compendiums/factionTable/depencies/factionTableFunctions";
 // icons
-import blackShieldIcon from "../../../icons/icons8-shield-black.png";
+import rangeArmorIcon from "../../../icons/range-armor.png";
+import meleeArmorIcon from "../../../icons/melee-armor.png";
 
 const useStyles = makeStyles({
   cardBox: {
@@ -115,13 +116,13 @@ const StatCardUnitFront = (props) => {
         </Grid>
         <Grid item container alignItems="center" justify="center">
           <div className={classes.alignIcons}>
-            <img alt="FK-Panzerung" src={blackShieldIcon} className={classes.Icon} />
+            <img alt="FK-Panzerung" src={rangeArmorIcon} className={classes.Icon} />
           </div>
           <Typography variant="h6" className={classes.font}>
             {props.unit.armourRange}
           </Typography>
           <div className={classes.alignIcons}>
-            <img alt="NK-Panzerung" src={blackShieldIcon} className={classes.Icon} />
+            <img alt="NK-Panzerung" src={meleeArmorIcon} className={classes.Icon} />
           </div>
           <Typography variant="h6" className={classes.font}>
             {props.unit.armourMelee}
