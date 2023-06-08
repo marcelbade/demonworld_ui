@@ -3,7 +3,8 @@ import React from "react";
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
 // icons
-import blackShieldIcon from "../../../icons/icons8-shield-black.png";
+import rangeArmorIcon from "../../../icons/range-armor.png";
+import meleeArmorIcon from "../../../icons/melee-armor.png";
 // components & functions
 import {
   generateHitPoints,
@@ -35,7 +36,7 @@ const useStyles = makeStyles({
   cardTitle: {
     wordSpacing: "100vw",
     flexWrap: "nowrap",
-    
+
     fontWeight: "normal",
     fontSize: "30px",
     color: "red",
@@ -54,8 +55,8 @@ const useStyles = makeStyles({
     textAlign: "Left",
   },
   Icon: {
-    height: "1em",
-    width: "1em",
+    height: "1.2em",
+    width: "1.2em",
   },
   alignIcons: {
     display: "flex",
@@ -110,7 +111,7 @@ const StatCardCommanderFront = (props) => {
         ) : null}
       </Grid>{" "}
       {/* 4th & 5th Row - WEAPONS  */}
-      <Grid item container direction="column">  
+      <Grid item container direction="column">
         <Grid item container justify="center">
           <Typography variant="h6" className={classes.font}>
             Waffe 1: {props.unit.weapon1}
@@ -131,13 +132,13 @@ const StatCardCommanderFront = (props) => {
         </Grid>
         <Grid item container alignItems="center" justify="center">
           <div className={classes.alignIcons}>
-            <img alt="FK-Panzerung" src={blackShieldIcon} className={classes.Icon} />
+            <img alt="FK-Panzerung" src={rangeArmorIcon} className={classes.Icon} />
           </div>
           <Typography variant="h6" className={classes.font}>
             {props.unit.armourRange}
           </Typography>
           <div className={classes.alignIcons}>
-            <img alt="NK-Panzerung" src={blackShieldIcon} className={classes.Icon} />
+            <img alt="NK-Panzerung" src={meleeArmorIcon} className={classes.Icon} />
           </div>
           <Typography variant="h6" className={classes.font}>
             {props.unit.armourMelee}
