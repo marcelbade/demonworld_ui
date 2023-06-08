@@ -318,6 +318,7 @@ const ListGeneratorController = () => {
       ...blockedUnits,
       unitsBlockedbyRules: validationResult.unitsBlockedbyRules,
       subFactionBelowMinimum: validationResult.subFactionBelowMinimum,
+      commanderIspresent: validationResult.commanderIsPresent, 
     });
   };
 
