@@ -54,9 +54,6 @@ const ArmyListDisplay = () => {
     isValid ? setErrorMessage("") : setErrorMessage("Bitte nur Zahlen eingeben.");
   };
 
-  console.log(" contextArmy.maxPointsAllowance");
-  console.log(contextArmy.maxPointsAllowance);
-
   /**
    * This creates the centre of the UI: the actual army list consisting of the selected units and the display of the maximum * army points.
    */
