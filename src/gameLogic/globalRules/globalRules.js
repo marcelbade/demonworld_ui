@@ -1,7 +1,7 @@
-const NO_DUPLICATE_UNIQUES = "Die Liste darf einzigartige Einheiten nur einmal enthalten";
+const NO_DUPLICATE_UNIQUES_MESSAGE = "Die Liste darf einzigartige Einheiten nur einmal enthalten";
 const MAXIMUM_OF_TWO_OF_EACH_MESSAGE = "Die Liste darf eine Einheit maximal 2x enthalten.";
 const MAXIMUM_OF_35_PERCENT_HEROES_MESSAGE = "Die Liste darf maximal 35% Characktere und Helden enthalten.";
-const DONT_EXCEED_THE_POINT_ALLOWANCE = "Die Liste darf die maximale Punktzahl nicht überschreiten.";
+const DONT_EXCEED_THE_POINT_ALLOWANCE_MESSAGE = "Die Liste darf die maximale Punktzahl nicht überschreiten.";
 
 const globalRules = {
   /**
@@ -17,11 +17,9 @@ const globalRules = {
     let spentPoints = 0;
     selectedUnits.forEach((u) => (spentPoints += u.points));
 
-    selectedUnits.forEach((u) => u.points);
-
     availableUnits.forEach((aU) => {
       if (aU.points + spentPoints > armyPointsAllowance) {
-        result.push({ unitBlockedbyRules: aU.unitName, message: DONT_EXCEED_THE_POINT_ALLOWANCE });
+        result.push({ unitBlockedbyRules: aU.unitName, message: DONT_EXCEED_THE_POINT_ALLOWANCE_MESSAGE });
       }
     });
 
@@ -40,7 +38,7 @@ const globalRules = {
     selectedUnits
       .filter((unit) => unit.uniqueUnit === true)
       .forEach((uniqueUnit) => {
-        result.push({ unitBlockedbyRules: uniqueUnit.unitName, message: NO_DUPLICATE_UNIQUES });
+        result.push({ unitBlockedbyRules: uniqueUnit.unitName, message: NO_DUPLICATE_UNIQUES_MESSAGE });
       });
 
     return result;
