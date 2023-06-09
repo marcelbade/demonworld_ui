@@ -1,13 +1,28 @@
 // React
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 // Material UI
-import { Grid, Button } from "@material-ui/core";
+import {
+  Grid,
+  Button,
+  Fade,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemAvatar,
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Avatar,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 // components and functions
+import { uuidGenerator } from "../../shared/sharedFunctions";
+// Icons
+import ErrorIcon from "@mui/icons-material/Error";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+// context
 import { ArmyContext } from "../../../contexts/armyContext";
-import { useState } from "react";
-import { useEffect } from "react";
 
 const useStyles = makeStyles({
   overlay: {
@@ -15,11 +30,22 @@ const useStyles = makeStyles({
     width: "30vw",
     padding: "2em",
   },
-  bttnGroup: {},
+
   button: {
     width: "15em",
     padding: "2em",
     height: "5em",
+  },
+  cardTest: {
+    width: "100%",
+  },
+  errorIcon: {
+    color: "red",
+  },
+  warningBox: {
+    border: "red 0.2em solid ",
+    borderRadius: "1em",
+    marginBottom: "0.2em",
   },
 });
 
@@ -28,14 +54,42 @@ const OptionButtons = () => {
   const contextArmy = useContext(ArmyContext);
   const history = useHistory();
 
-  const [disableButton, setDisableButton] = useState(true);
+  const NO_COMMANDER_WARNING = `Die Armeeliste muss mindestens 1 Helden, Befehlshaber oder Magier mit 2 oder mehr ★ enthalten.`;
 
+  const [disableButton, setDisableButton] = useState(true);
+  const [displayMessages, setDisplayMessages] = useState([]);
+  const [displayCount, setDisplayCount] = useState(true);
+
+  // enable buttons if lit is valid
   useEffect(() => {
     contextArmy.selectedUnits.length === 0 || violatesRules(contextArmy.blockedUnits) ? setDisableButton(true) : setDisableButton(false);
   }, [contextArmy.selectedUnits, contextArmy.blockedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // set the display messages
+  useEffect(() => {
+    let tempArray = [];
+
+    if (contextArmy.blockedUnits.subFactionBelowMinimum.length > 0) {
+      contextArmy.blockedUnits.subFactionBelowMinimum.forEach((u) => tempArray.push(u.message));
+    }
+    if (!contextArmy.blockedUnits.commanderIspresent) {
+      tempArray.push(NO_COMMANDER_WARNING);
+    }
+
+    setDisplayMessages([...tempArray]);
+  }, [contextArmy.blockedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  /**
+   * Function checks whether the list is valid.
+   * @param {[unitCard Obj]} blockedUnits
+   * @returns boolean flag; true if list is invalid (no commander OR 1 or more subfaction below min. )
+   */
   const violatesRules = (blockedUnits) => {
     return blockedUnits.subFactionBelowMinimum.length > 0 || blockedUnits.commanderIspresent === false;
+  };
+
+  const showCount = () => {
+    setDisplayCount(!displayCount);
   };
 
   /**
@@ -50,6 +104,10 @@ const OptionButtons = () => {
       },
     });
   };
+
+  /**
+   * Function opens the pdf generator in a new tab and sends all data needed via the window object.
+   */
   const openPDfInNewTab = () => {
     //TODO: replace in production!!
     const URL = "http://localhost:3000/PdfBox";
@@ -60,6 +118,7 @@ const OptionButtons = () => {
     window.open(URL, "_blank", "noopener,noreferrer");
   };
 
+  // TODO STUD. Replace with REST Call once DB and BE are parts are done.
   const storeList = () => {
     // Call REST
   };
@@ -113,6 +172,37 @@ const OptionButtons = () => {
         >
           Zum Verlustrechner
         </Button>
+      </Grid>
+      <Grid item className={classes.cardTest}>
+        <Accordion
+          onChange={() => {
+            showCount();
+          }}
+        >
+          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            {displayCount ? (
+              <Fade in timeout={500}>
+                <Avatar>{displayMessages.length}</Avatar>
+              </Fade>
+            ) : null}
+          </AccordionSummary>
+          <AccordionDetails>
+            <List>
+              {displayMessages.map((m) => {
+                return (
+                  <Fade in key={uuidGenerator()} timeout={2500}>
+                    <ListItem key={uuidGenerator()} className={classes.warningBox}>
+                      <ListItemAvatar key={uuidGenerator()}>
+                        <ErrorIcon key={uuidGenerator()} className={classes.errorIcon} />
+                      </ListItemAvatar>
+                      <ListItemText key={uuidGenerator()} primary={m} />
+                    </ListItem>
+                  </Fade>
+                );
+              })}
+            </List>
+          </AccordionDetails>
+        </Accordion>
       </Grid>
     </Grid>
   );
