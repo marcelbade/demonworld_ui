@@ -17,14 +17,14 @@ const rules = [
   },
   {
     subFaction: "magicianCaste",
-    cardNames: ["Magierkaste"],
+    cardNames: ["Magierkaste", "Magier"],
     min: 0.0,
     max: 0.4,
     error: "Deine Armee darf höchstens zu 40% aus Einheiten der Magierkaste bestehen.",
   },
   {
     subFaction: "priestCaste",
-    cardNames: ["Priesterkaste"],
+    cardNames: ["Priesterkaste", "Priesterin"],
     min: 0.0,
     max: 0.4,
     error: "Deine Armee darf höchstens zu 40% aus Einheiten der Priesterkaste bestehen.",
@@ -35,13 +35,6 @@ const rules = [
     min: 0.0,
     max: 0.4,
     error: "Deine Armee darf höchstens zu 40% aus Helden oder Befehlshabern bestehen.",
-  },
-  {
-    subFaction: "heroesMagiciansPriestsTotal",
-    cardNames: ["Magier", "Priesterin", "Befehlshaber", "Held"],
-    min: 0.0,
-    max: 0.5,
-    error: "Deine Armee darf höchstens zur Hälfte aus Magiern, Priestern, Helden, o. Befehlshabern bestehen",
   },
   {
     subFaction: "summons",
@@ -59,54 +52,103 @@ const validationResults = {
 };
 
 const DarkElveRules = {
-  testSubFactionRules: (availableUnits, selectedUnits, maxArmyPoints) => {
-    // dwarven special rule
-    maxLimitForAllChars(availableUnits, selectedUnits, maxArmyPoints);
-
-    //tournament rules
-    let twoRuleResult = globalRules.maximumOfTwo(selectedUnits);
-    let heroRuleResult = globalRules.belowMaxPercentageHeroes(selectedUnits, maxArmyPoints, availableUnits);
+  testSubFactionRules: (availableUnits, selectedUnits, totalPointsAllowance) => {
     //  general rules
-    let exceedingMaxResult = globalRules.unitsAboveSubFactionMax(rules, selectedUnits, maxArmyPoints, availableUnits);
-    let DuplicateResult = globalRules.noDuplicateUniques(selectedUnits);
-    //  check for sub faction below minimum
-    let minimumResult = globalRules.unitsBelowSubfactionMinimum(rules, selectedUnits, maxArmyPoints, availableUnits);
+    let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(selectedUnits, availableUnits, totalPointsAllowance);
+    let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(rules, selectedUnits, totalPointsAllowance, availableUnits);
+    let isAboveSubFactionMax = globalRules.unitsAboveSubFactionMax(rules, selectedUnits, totalPointsAllowance, availableUnits);
+    let hasDuplicateUniques = globalRules.noDuplicateUniques(selectedUnits);
+    let hasNoCommander = globalRules.isArmyCommanderPresent(selectedUnits);
+
+    // tournament rules
+    let testForMax2Result = globalRules.maximumOfTwo(selectedUnits);
+
+    // special faction rule - no more than 50% may be spent on all heroes, mages, and commanders.
+    let isAboveCharLimit = globalRules.NoMoreThanHalfOnCharacters(selectedUnits, availableUnits, totalPointsAllowance);
+
+    // special faction rule - per full 10% of the max point allowance spent on the priest caste, your point allowance for the magicians caste decreases by 10% and vice versa.
+    const magiciansVsPriests = () => {
+      const INCREMENT = 10;
+      const NET_TOTAL = 4;
+
+      if (selectedUnits !== undefined && selectedUnits.length > 0) {
+        for (let i = selectedUnits.length - 1; i >= 0; i--) {
+          if (selectedUnits[i].subFaction === "Priesterin" || selectedUnits[i].subFaction === "Priesterkaste") {
+            decreaseMagicianAllowance(INCREMENT, NET_TOTAL);
+          }
+          if (selectedUnits[i].subFaction === "Magier" || selectedUnits[i].subFaction === "Magierkaste") {
+            decreasePriestAllowance(INCREMENT, NET_TOTAL);
+          }
+        }
+      }
+    };
+
+    const decreaseMagicianAllowance = (increment, netTotal) => {
+      let pointsForPriests = 0;
+
+      selectedUnits
+        .filter((sU) => sU.subFaction === "Priesterin" || sU.subFaction === "Priesterkaste")
+        .forEach((priest) => {
+          pointsForPriests += priest.points;
+        });
+
+      const percentagePriests = pointsForPriests * (100 / totalPointsAllowance);
+      const share = Math.floor(percentagePriests / increment);
+
+      const remainder = netTotal - share;
+
+      let foundRules = rules.filter((r) => r.subFaction === "magicianCaste");
+
+      console.log("remainder");
+      console.log(remainder);
+
+      foundRules[0].max = remainder * 0.1;
+    };
+
+    const decreasePriestAllowance = (increment, netTotal) => {
+      let pointsForMagicians = 0;
+
+      selectedUnits
+        .filter((sU) => sU.subFaction === "Magier" || sU.subFaction === "Magierkaste")
+        .forEach((magician) => {
+          pointsForMagicians += magician.points;
+        });
+
+      const percentageMagicians = pointsForMagicians * (100 / totalPointsAllowance);
+      const share = Math.floor(percentageMagicians / increment);
+
+      const remainder = netTotal - share;
+
+      let foundRules = rules.filter((r) => r.subFaction === "priestCaste");
+
+      console.log("remainder");
+      console.log(remainder);
+
+      foundRules[0].max = remainder * 0.1;
+    };
+
+    // execute
+    magiciansVsPriests();
+
+    console.log("rules");
+    console.log(rules);
 
     //result for maximum limits
-    validationResults.unitsBlockedbyRules = [...DuplicateResult, ...heroRuleResult, ...twoRuleResult, ...exceedingMaxResult];
-    validationResults.subFactionBelowMinimum = minimumResult;
-    validationResults.commanderIsPresent = globalRules.isArmyCommanderPresent(selectedUnits);
+    validationResults.unitsBlockedbyRules = [
+      ...isExceedingPointAllowance,
+      ...hasDuplicateUniques,
+      ...testForMax2Result,
+      ...isAboveSubFactionMax,
+      ...isAboveCharLimit,
+    ];
+    // result for sub factions below limit.
+    validationResults.subFactionBelowMinimum = isBelowSubFactionMin;
+
+    // result - is a commander present?
+    validationResults.commanderIsPresent = hasNoCommander;
 
     return validationResults;
   },
-};
-
-//SEPCIAL FACTION RULES
-
-//SEPCIAL FACTION RULES
-
-/**
- * The army list can have a maximum of 50% characters.
- */
-const maxLimitForAllChars = (availableUnits, selectedUnits, maxArmyPoints) => {
-  let characterSubFactions = ["Sturmlord", "Hexe", "Helden", " Befehlshaber"];
-  let sum = 0;
-  let result = [];
-  const MESSAGE = "Die Armeekann zu max. 50% aus Hexen, Sturmlords, Befehlshabern und Helden bestehen!";
-
-  selectedUnits
-    .filter((unit) => characterSubFactions.includes(unit.subFaction))
-    .forEach((characterUnit) => {
-      sum += characterUnit.points;
-    });
-
-  availableUnits.forEach((availableUnit) => {
-    if (availableUnit.points + sum > 0.5 * maxArmyPoints) {
-      result.push({ unitBlockedbyRules: availableUnit.unitName, message: MESSAGE });
-    }
-  });
-
-  // TODO: mach das fertig :D
 };
 
 export { DarkElveRules, rules };
