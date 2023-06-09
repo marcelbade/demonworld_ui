@@ -73,7 +73,7 @@ const IshtakRules = {
     let NoMoreThanHalfOnCharacters = () => {
       let result = [];
       let pointsSpentOnChars = 0;
-      selectedUnits.forEach((u) => (pointsSpentOnChars += u.points));
+      selectedUnits.filter((sU) => sU.unitType === "H" || sU.unitType === "M").forEach((char) => (pointsSpentOnChars += char.points));
 
       availableUnits
         .filter((aU) => aU.unitType === "H" || aU.unitType === "M")
@@ -88,9 +88,6 @@ const IshtakRules = {
 
     let isAboveIshtakCharLimit = NoMoreThanHalfOnCharacters();
 
-    console.log("isAboveIshtakCharLimit");
-    console.log(isAboveIshtakCharLimit);
-
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [
       ...isExceedingPointAllowance,
@@ -104,10 +101,6 @@ const IshtakRules = {
 
     // result - is a commander present?
     validationResults.commanderIsPresent = hasNoCommander;
-
-
-    console.log("Ishtak validationResults")
-    console.log(validationResults)
 
     return validationResults;
   },
