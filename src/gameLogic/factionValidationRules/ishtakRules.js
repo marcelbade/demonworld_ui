@@ -46,8 +46,6 @@ const rules = [
   },
 ];
 
-const ISHTAK_HEROES_CAP = 0.5;
-
 const validationResults = {
   unitsBlockedbyRules: [],
   subFactionBelowMinimum: [],
