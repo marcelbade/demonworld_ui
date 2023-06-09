@@ -6,14 +6,14 @@ const rules = [
     cardNames: ["Barbaren"],
     min: 0.2,
     max: 0.75,
-    error: "Deine Armeeliste darf zu höchstens 75% aus Barbaren bestehen",
+    error: "Deine Armeeliste muss zu 20% bis 75% aus Barbaren bestehen",
   },
   {
     subFaction: "veterans",
     cardNames: ["Veteranen"],
     min: 0.0,
     max: 0.4,
-    error: "Deine Armeeliste muss zu mindestens 40% aus Veteranen bestehen.",
+    error: "Deine Armeeliste darf zu höchstens 40% aus Veteranen bestehen.",
   },
 
   {
@@ -53,51 +53,36 @@ const validationResults = {
 };
 
 const NorwingerRules = {
-  testSubFactionRules: (availableUnits, selectedUnits, maxArmyPoints) => {
-    // Norwinger special rule
-    maxLimitForAllChars(availableUnits, selectedUnits, maxArmyPoints);
-
-    //tournament rules
-    let twoRuleResult = globalRules.maximumOfTwo(selectedUnits);
-    let heroRuleResult = globalRules.belowMaxPercentageHeroes(selectedUnits, maxArmyPoints, availableUnits);
+  testSubFactionRules: (availableUnits, selectedUnits, totalPointsAllowance) => {
     //  general rules
-    let exceedingMaxResult = globalRules.unitsAboveSubFactionMax(rules, selectedUnits, maxArmyPoints, availableUnits);
-    let DuplicateResult = globalRules.noDuplicateUniques(selectedUnits);
-    //  check for sub faction below minimum
-    let minimumResult = globalRules.unitsBelowSubfactionMinimum(rules, selectedUnits, maxArmyPoints, availableUnits);
+    let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(selectedUnits, availableUnits, totalPointsAllowance);
+    let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(rules, selectedUnits, totalPointsAllowance, availableUnits);
+    let isAboveSubFactionMax = globalRules.unitsAboveSubFactionMax(rules, selectedUnits, totalPointsAllowance, availableUnits);
+    let hasDuplicateUniques = globalRules.noDuplicateUniques(selectedUnits);
+    let hasNoCommander = globalRules.isArmyCommanderPresent(selectedUnits);
+
+    // tournament rules
+    let testForMax2Result = globalRules.maximumOfTwo(selectedUnits);
+
+    // special faction rule - no more than 50% may be spent on all heroes, mages, and commanders.
+    let isAboveCharLimit = globalRules.NoMoreThanHalfOnCharacters(selectedUnits, availableUnits, totalPointsAllowance);
 
     //result for maximum limits
-    validationResults.unitsBlockedbyRules = [...DuplicateResult, ...heroRuleResult, ...twoRuleResult, ...exceedingMaxResult];
-    validationResults.subFactionBelowMinimum = minimumResult;
+    validationResults.unitsBlockedbyRules = [
+      ...isExceedingPointAllowance,
+      ...hasDuplicateUniques,
+      ...testForMax2Result,
+      ...isAboveSubFactionMax,
+      ...isAboveCharLimit,
+    ];
+    // result for sub factions below limit.
+    validationResults.subFactionBelowMinimum = isBelowSubFactionMin;
+
+    // result - is a commander present?
+    validationResults.commanderIsPresent = hasNoCommander;
 
     return validationResults;
   },
-};
-
-//SEPCIAL FACTION RULES
-
-/**
- * The army list can have a maximum of 50% characters.
- */
-const maxLimitForAllChars = (availableUnits, selectedUnits, maxArmyPoints) => {
-  let characterSubFactions = ["Sturmlord", "Hexe", "Helden", " Befehlshaber"];
-  let sum = 0;
-  let result = [];
-  const MESSAGE = "Die Armeekann zu max. 50% aus Hexen, Sturmlords, Befehlshabern und Helden bestehen!";
-
-  selectedUnits
-    .filter((unit) => characterSubFactions.includes(unit.subFaction))
-    .forEach((characterUnit) => {
-      sum += characterUnit.points;
-    });
-
-  availableUnits.forEach((availableUnit) => {
-    if (availableUnit.points + sum > 0.5 * maxArmyPoints) {
-      result.push({ unitBlockedbyRules: availableUnit.unitName, message: MESSAGE });
-    }
-  });
-
-  // TODO: mach das fertig :D
 };
 
 export { NorwingerRules, rules };

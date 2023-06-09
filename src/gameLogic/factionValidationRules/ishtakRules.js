@@ -46,7 +46,6 @@ const rules = [
   },
 ];
 
-const NO_MORE_THAN_HALF_ON_ISHTAK_CHARS_MESSAGE = "Du darfst höchstens 50% der Punkte für Helden, Befehlshaber und Magier ausgeben.";
 const ISHTAK_HEROES_CAP = 0.5;
 
 const validationResults = {
@@ -69,24 +68,7 @@ const IshtakRules = {
     let testForMax2Result = globalRules.maximumOfTwo(selectedUnits);
 
     // special faction rules -  all heroes, mages, commanders count towards their repsective subFaction limit (ice witches, beastmen,...). In addition, no more than 50% may be spent on them in total.
-
-    let NoMoreThanHalfOnCharacters = () => {
-      let result = [];
-      let pointsSpentOnChars = 0;
-      selectedUnits.filter((sU) => sU.unitType === "H" || sU.unitType === "M").forEach((char) => (pointsSpentOnChars += char.points));
-
-      availableUnits
-        .filter((aU) => aU.unitType === "H" || aU.unitType === "M")
-        .forEach((char) => {
-          if (char.points + pointsSpentOnChars > totalPointsAllowance * ISHTAK_HEROES_CAP) {
-            result.push({ unitBlockedbyRules: char.unitName, message: NO_MORE_THAN_HALF_ON_ISHTAK_CHARS_MESSAGE });
-          }
-        });
-
-      return result;
-    };
-
-    let isAboveIshtakCharLimit = NoMoreThanHalfOnCharacters();
+    let isAboveIshtakCharLimit = globalRules.NoMoreThanHalfOnCharacters(selectedUnits, availableUnits, totalPointsAllowance);
 
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [
