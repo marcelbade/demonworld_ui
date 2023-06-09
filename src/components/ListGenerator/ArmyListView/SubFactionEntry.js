@@ -15,9 +15,10 @@ import { ALLIES_MAPPING } from "../../../constants/allies";
 const SubFactionEntry = (props) => {
   const contextArmy = useContext(ArmyContext);
 
-  const [underMinimum, setUnderMinimum] = useState({
+  const [validatedSubFaction, setValidatedSubFaction] = useState({
+    subFactionName: props.subFaction,
     valid: true,
-    message: "",
+    validationMessage: "",
   });
 
   useEffect(() => {
@@ -40,22 +41,24 @@ const SubFactionEntry = (props) => {
    * Function checks for every sub faction with a minimum point allowance > 0 if the condition has been fullfilled. If not, the sub faction name appears in red and a tooltip is displayed.
    */
   const isSubFactionValid = () => {
-    contextArmy.blockedUnits.subFactionBelowMinimum.forEach((entry) => {
-      if (entry.underMinimum.includes(props.subFaction)) {
-        setUnderMinimum({ ...underMinimum, valid: false, message: entry.message });
-      } else {
-        setUnderMinimum({ ...underMinimum, valid: true, message: "" });
+    let tempObj = { ...validatedSubFaction };
+
+    contextArmy.blockedUnits.subFactionBelowMinimum.forEach((sF) => {
+      if (sF.underMinimum.includes(props.subFaction)) {
+        tempObj = { ...tempObj, valid: false, validationMessage: sF.message };
       }
     });
+
+    setValidatedSubFaction({ ...tempObj });
   };
 
   return contextArmy ? (
     <ListItem key={uuidGenerator()}>
       <Grid container direction={"column"} key={uuidGenerator()}>
-        {underMinimum.valid ? (
-          <ValidHeader subFaction={props.subFaction} />
+        {validatedSubFaction.valid ? (
+          <ValidHeader subFaction={validatedSubFaction.subFactionName} />
         ) : (
-          <InvalidHeader subFaction={props.subFaction} message={underMinimum.message} />
+          <InvalidHeader subFaction={validatedSubFaction.subFactionName} message={validatedSubFaction.validationMessage} />
         )}
         {/* DISPLAY UNITS, PONT COST, PERCENTAGES FOR ONE SUBFACTION */}
         <SubList
