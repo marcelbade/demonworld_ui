@@ -92,6 +92,8 @@ const GoblinRules = {
     ];
     // result for sub factions below limit.
     validationResults.subFactionBelowMinimum = isBelowSubFactionMin;
+
+    // result - is a commander present?
     validationResults.commanderIsPresent = hasNoCommander;
 
     return validationResults;
