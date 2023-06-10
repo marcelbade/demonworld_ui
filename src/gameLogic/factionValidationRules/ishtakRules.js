@@ -60,7 +60,7 @@ const IshtakRules = {
     let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(rules, selectedUnits, totalPointsAllowance, availableUnits);
     let isAboveSubFactionMax = globalRules.unitsAboveSubFactionMax(rules, selectedUnits, totalPointsAllowance, availableUnits);
     let hasDuplicateUniques = globalRules.noDuplicateUniques(selectedUnits);
-    let hasNoCommander = globalRules.isArmyCommanderPresent(selectedUnits);
+   
 
     // tournament rules
     let testForMax2Result = globalRules.maximumOfTwo(selectedUnits);
@@ -79,8 +79,8 @@ const IshtakRules = {
     // result for sub factions below limit.
     validationResults.subFactionBelowMinimum = isBelowSubFactionMin;
 
-    // result - is a commander present?
-    validationResults.commanderIsPresent = hasNoCommander;
+    //Ishtak is the ONLY faction without the "two star commander" requirement - hence this validation must always return true.
+    validationResults.commanderIsPresent = true;
 
     return validationResults;
   },
