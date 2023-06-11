@@ -16,7 +16,7 @@ import FactionTreeView from "./ArmySelectorView/treeView";
 import ArmyListDisplay from "./ArmyListView/ArmyListDisplay";
 import ItemShop from "./ItemShop/ItemShop";
 import { ruleValidation } from "../../gameLogic/useRuleValidation";
-import { isObjectEmtpy, unitOrCmdCard } from "../shared/sharedFunctions";
+import { calculateTotalUnitPointCost, isObjectEmtpy, unitOrCmdCard } from "../shared/sharedFunctions";
 import AlternativeArmyListSelector from "./ArmySelectorView/AlternativeArmyListSelection/AlternativeArmyListSelector";
 import OptionButtons from "./OptionButtons/OptionButtons";
 import { enrichUnitCardObject } from "./ListGeneratorFunctions";
@@ -221,13 +221,17 @@ const ListGeneratorController = () => {
   }, [selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
-   * Calculate total point value for army.
+   * Calculate the total point value for the army.
    */
   useEffect(() => {
     let pointTotal = 0;
     if (selectedUnits) {
-      selectedUnits.forEach((u) => (pointTotal += u.points));
+      selectedUnits.forEach((u) => {
+        const totalUnitCost = calculateTotalUnitPointCost(u);
+        pointTotal += totalUnitCost;
+      });
     }
+
     setTotalPointValue(pointTotal);
   }, [selectedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
 

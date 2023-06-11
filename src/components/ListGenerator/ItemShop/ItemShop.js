@@ -135,7 +135,7 @@ const ItemShop = () => {
    * @param {itemCard object} item
    */
   const addItemToUnit = (item) => {
-    let tempObj = contextArmy.unitSelectedForShop;
+    let tempObj = { ...contextArmy.unitSelectedForShop };
 
     tempObj.equipment.push({
       name: item.itemName,
@@ -148,6 +148,14 @@ const ItemShop = () => {
     contextArmy.setUnitSelectedForShop({
       ...tempObj,
     });
+  };
+
+  /**
+   * Function causes the list of all selected units to change (w/o actually changing it). This is necessary to correctly calculate the list's point cost whenever an item is added. Without this, the point cost of the item is only added whenever a unit is added or removed from the list, not when the item is added.
+   */
+  const triggerArymListReCalculation = () => {
+    let tempArray = [...contextArmy.selectedUnits];
+    contextArmy.setSelectedUnits([...tempArray]);
   };
 
   return (
@@ -194,6 +202,7 @@ const ItemShop = () => {
                         disabled={disableButton(item)}
                         onClick={() => {
                           addItemToUnit(item);
+                          triggerArymListReCalculation();
                         }}
                         key={uuidGenerator()}
                       >
