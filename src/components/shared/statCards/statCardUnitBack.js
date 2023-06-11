@@ -4,7 +4,9 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Typography } from "@material-ui/core";
 // functions and modules
-import { DisplayAllSpecialRules, DisplayUnitElements, displayUnitCost } from "../../compendiums/factionTable/depencies/factionTableFunctions";
+import { DisplayAllSpecialRules, DisplayUnitElements } from "../../compendiums/factionTable/depencies/factionTableFunctions";
+import {calculatetotalUnitPointCost}from "../../../components/shared/sharedFunctions"; 
+
 
 const useStyles = makeStyles({
   cardBox: {
@@ -76,7 +78,7 @@ const StatCardUnitBack = (props) => {
       {/* 4rd Row - POINT COST */}
       <Grid>
         <Typography variant="h6" align="center" className={classes.blackStripe}>
-          {displayUnitCost(props.unit)} Punkte
+          {calculatetotalUnitPointCost(props.unit)} Punkte
         </Typography>
       </Grid>
     </Grid>

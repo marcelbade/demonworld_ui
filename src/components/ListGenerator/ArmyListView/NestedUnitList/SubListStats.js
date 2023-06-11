@@ -5,7 +5,7 @@ import { ListItemText, makeStyles, List } from "@material-ui/core";
 // components and functions
 import { ArmyContext } from "../../../../contexts/armyContext";
 import { uuidGenerator } from "../../../shared/sharedFunctions";
-import { displayUnitCost } from "../../../compendiums/factionTable/depencies/factionTableFunctions";
+import { calculatetotalUnitPointCost } from "../../../shared/sharedFunctions";
 import { ruleObjectProvider } from "../../../../gameLogic/globalRules/ruleObjectProvider";
 // clsx
 
@@ -27,6 +27,7 @@ const SubListStats = (props) => {
   const contextArmy = useContext(ArmyContext);
 
   const [subFactionTotal, setSubFactionTotal] = useState(0);
+
   const [percentages, setPercentages] = useState({
     min: 0,
     max: 0,
@@ -38,7 +39,7 @@ const SubListStats = (props) => {
   useEffect(() => {
     let total = 0;
     if (props.subFactionUnits) {
-      props.subFactionUnits.forEach((u) => (total += displayUnitCost(u)));
+      props.subFactionUnits.forEach((u) => (total += calculatetotalUnitPointCost(u)));
     }
     setSubFactionTotal(total);
   }, [props.subFactionUnits]);
