@@ -10,7 +10,7 @@ import { displayUnitCost } from "../../../compendiums/factionTable/depencies/fac
 import { ruleObjectProvider } from "../../../../gameLogic/globalRules/ruleObjectProvider";
 import { unitCardMultiSort, uuidGenerator } from "../../../shared/sharedFunctions";
 import EquipmentList from "./EquipmentList";
-import SubListStats from "./SubListStats";
+import SubListStats from "../SubFactionList/SubListStats";
 import ItemCardButtons from "./ItemCardButtons";
 
 const useStyles = makeStyles({
@@ -87,7 +87,7 @@ const SubList = (props) => {
   };
 
   /**
-   * The component creates the list for a single sub faction.
+   * The component creates the nested unit list for a single sub faction.
    * An entry contains:
    *  - the unit name
    *  - points
