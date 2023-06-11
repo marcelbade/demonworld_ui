@@ -20,7 +20,6 @@ TransitionComponent.propTypes = {
 const useStyles = makeStyles({
   branch: {
     width: "20em",
-    
   },
 });
 
