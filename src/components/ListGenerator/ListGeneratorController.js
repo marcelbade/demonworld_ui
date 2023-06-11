@@ -13,7 +13,7 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ArmyProvider from "../../contexts/armyContext";
 import SelectionInput from "../shared/selectionInput";
 import FactionTreeView from "./ArmySelectorView/treeView";
-import ArmyListDisplay from "./ArmyListView/armyListDisplay";
+import ArmyListDisplay from "./ArmyListView/ArmyListDisplay";
 import ItemShop from "./ItemShop/ItemShop";
 import { ruleValidation } from "../../gameLogic/useRuleValidation";
 import { isObjectEmtpy, unitOrCmdCard } from "../shared/sharedFunctions";
