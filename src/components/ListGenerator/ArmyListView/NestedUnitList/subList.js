@@ -10,7 +10,7 @@ import { displayUnitCost } from "../../../compendiums/factionTable/depencies/fac
 import { ruleObjectProvider } from "../../../../gameLogic/globalRules/ruleObjectProvider";
 import { unitCardMultiSort, uuidGenerator } from "../../../shared/sharedFunctions";
 import EquipmentList from "./EquipmentList";
-import SubListStats from "../SubFactionList/SubListStats";
+import SubListStats from "./SubListStats";
 import SublistEntryButtons from "./SubListEntryButtons";
 
 const useStyles = makeStyles({
