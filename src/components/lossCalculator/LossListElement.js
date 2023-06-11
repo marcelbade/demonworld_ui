@@ -67,7 +67,8 @@ const LossListElement = (props) => {
   const classes = useStyles();
   const calcContext = useContext(LossCalcContext);
 
-  const TEXT = "Verlorene Elemente:";
+  const TEXT_UNITS = "Verlorene Elemente:";
+  const TEXT_SINGLE_ELEMENTS = "Verlorene Lenenspunkte:";
 
   return (
     <ListItem>
@@ -108,7 +109,7 @@ const LossListElement = (props) => {
         </Grid>
         <Grid item>
           <Typography variant="button" className={clsx(classes.typographyFont, classes.text)}>
-            {TEXT}
+            {calcContext.isHeroMageOrGiantElement(props.unit) ? TEXT_SINGLE_ELEMENTS : TEXT_UNITS}
           </Typography>
         </Grid>
         <Grid item>

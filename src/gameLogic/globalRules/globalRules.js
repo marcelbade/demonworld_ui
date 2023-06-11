@@ -175,10 +175,10 @@ const globalRules = {
     let result = [];
     let pointsSpentOnChars = 0;
 
-    selectedUnits.filter((su) => su.unitType === "H" || su.unitType === "M").forEach((char) => (pointsSpentOnChars += char.points));
+    selectedUnits.filter((su) => su.unitType === HERO || su.unitType === MAGE).forEach((char) => (pointsSpentOnChars += char.points));
 
     availableUnits
-      .filter((aU) => aU.unitType === "H" || aU.unitType === "M")
+      .filter((aU) => aU.unitType === HERO || aU.unitType === MAGE)
       .forEach((char) => {
         if (char.points + pointsSpentOnChars > totalPointsAllowance * HERO_CAP) {
           result.push({ unitBlockedbyRules: char.unitName, message: NO_MORE_THAN_HALF_ON_CHARS_MESSAGE });
