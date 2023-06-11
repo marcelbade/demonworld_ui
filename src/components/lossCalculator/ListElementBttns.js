@@ -78,7 +78,7 @@ const ListElementBttns = (props) => {
     let tempArray = [...calcContext.list];
 
     let unitIndex = tempArray.findIndex((u) => u.uniqueID === props.unit.uniqueID);
-    tempArray[unitIndex].lossCounter = props.unit.numberOfElements;
+    tempArray[unitIndex].lossCounter = calcContext.selectIncrement(props.unit);
     tempArray[unitIndex].unitDestroyed = true;
 
     calcContext.setList([...tempArray]);
@@ -95,15 +95,16 @@ const ListElementBttns = (props) => {
    * Function prevents the user from choosing a number of lost elements larger than the number of elements the unit has.
    * @returns boolean flag
    */
-  const notOverNumberOfElements = () => {
-    return props.unit.lossCounter === props.unit.numberOfElements;
+  const notGreaterThanNumberOfElements = () => {
+    const increment = calcContext.selectIncrement(props.unit);
+    return props.unit.lossCounter === increment;
   };
 
   /**
    * Function prevents the user from choosing a negative number of lost elements.
    * @returns  boolean flag
    */
-  const notUnderZero = () => {
+  const notLessThanZero = () => {
     return props.unit.lossCounter === 0;
   };
 
@@ -132,7 +133,7 @@ const ListElementBttns = (props) => {
           onClick={() => {
             subtractLoss();
           }}
-          disabled={notUnderZero()}
+          disabled={notLessThanZero()}
           className={classes.bttn}
         >
           <ChevronLeftIcon />
@@ -144,7 +145,7 @@ const ListElementBttns = (props) => {
           onClick={() => {
             addLoss();
           }}
-          disabled={notOverNumberOfElements()}
+          disabled={notGreaterThanNumberOfElements()}
           className={classes.bttn}
         >
           <ChevronRightIcon />

@@ -10,6 +10,8 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import LossCalcProvider from "../../contexts/LossCalculatorContext";
 import { unitCardMultiSort, uuidGenerator } from "../shared/sharedFunctions";
 import LossListElement from "./LossListElement";
+// constants
+import { GIANT, HERO, MAGE } from "../../constants/unitTypes";
 
 const useStyles = makeStyles({
   typographyFont: {},
@@ -45,18 +47,7 @@ const LossCalculator = () => {
 
   // Calculate current total point loss.
   useEffect(() => {
-    let sum = 0;
-
-    list.forEach((u) => {
-      let pointCostLostElements = u.lossCounter * (u.points / u.numberOfElements);
-      sum += pointCostLostElements;
-
-      u.equipment.forEach((e) => {
-        if (e.itemLost) {
-          sum += e.points;
-        }
-      });
-    });
+    const sum = calculatLostUnitPoints();
 
     setTotalPointsLost(sum);
   }, [list]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -69,12 +60,52 @@ const LossCalculator = () => {
   }, [list]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
+   * Function calculates the total point loss.
+   */
+  const calculatLostUnitPoints = () => {
+    let sum = 0;
+
+    list.forEach((u) => {
+      const increment = selectIncrement(u);
+
+      let pointCostLostElements = u.lossCounter * (u.points / increment);
+      sum += pointCostLostElements;
+
+      u.equipment.forEach((e) => {
+        if (e.itemLost) {
+          sum += e.points;
+        }
+      });
+    });
+
+    return sum;
+  };
+
+  /**
+   *
+   * @param {*} unit
+   * @returns
+   */
+  const selectIncrement = (unit) => {
+    return isHeroMageOrGiantElement(unit) ? unit.hitpoints : unit.numberOfElements;
+  };
+  /**
+   *
+   * @param {*} unit
+   * @returns
+   */
+  const isHeroMageOrGiantElement = (unit) => {
+    return unit.unitType === HERO || unit.unitType === MAGE || unit.unitType === GIANT;
+  };
+
+  /**
    * Function sets the unitDestroyed flag for a unit card object.
    * @param {unitCard obj} u
    * @returns unitCard obj
    */
   const setUnitDestroyedFlag = (u) => {
-    if (u.lossCounter === u.numberOfElements) {
+    const increment = selectIncrement(u);
+    if (u.lossCounter === increment) {
       u.unitDestroyed = true;
     } else {
       u.unitDestroyed = false;
@@ -113,6 +144,8 @@ const LossCalculator = () => {
         list: list,
         setList: setList,
         setItemIsLostFlag: setItemIsLostFlag,
+        selectIncrement: selectIncrement,
+        isHeroMageOrGiantElement: isHeroMageOrGiantElement,
       }}
     >
       {list.length !== 0 ? (
@@ -143,12 +176,13 @@ const LossCalculator = () => {
               </List>
             </Grid>
           </Grid>
+          {/* TOTAL POINTS LOST */}
           <Grid container xs={6} item direction="row" alignItems="center" justify="flex-start">
             <Typography variant="h6" className={classes.pointsTotal}>
               Verlorene Punkte:
             </Typography>
             <Typography variant="h6" className={classes.pointsTotal}>
-              {totalPointsLost}
+              {totalPointsLost.toFixed(2)}
             </Typography>
           </Grid>
         </Grid>
