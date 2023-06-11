@@ -413,7 +413,7 @@ const ListGeneratorController = () => {
         // ARMY
         selectedFactionName: selectedFactionName,
         subfactions: distinctSubFactions,
-        units: listOfAllFactionUnits,
+        listOfAllFactionUnits: listOfAllFactionUnits,
         armyHasAlternativeLists: armyHasAlternativeLists,
         // ALLY
         allyName: allyName,
