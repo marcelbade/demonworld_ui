@@ -62,22 +62,22 @@ const OptionButtons = () => {
 
   // enable buttons if lit is valid
   useEffect(() => {
-    contextArmy.selectedUnits.length === 0 || violatesRules(contextArmy.blockedUnits) ? setDisableButtons(true) : setDisableButtons(false);
-  }, [contextArmy.selectedUnits, contextArmy.blockedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
+    contextArmy.selectedUnits.length === 0 || violatesRules(contextArmy.listValidationResults) ? setDisableButtons(true) : setDisableButtons(false);
+  }, [contextArmy.selectedUnits, contextArmy.listValidationResults]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // set the display messages
   useEffect(() => {
     let tempArray = [];
 
-    if (contextArmy.blockedUnits.subFactionBelowMinimum.length > 0) {
-      contextArmy.blockedUnits.subFactionBelowMinimum.forEach((u) => tempArray.push(u.message));
+    if (contextArmy.listValidationResults.subFactionBelowMinimum.length > 0) {
+      contextArmy.listValidationResults.subFactionBelowMinimum.forEach((u) => tempArray.push(u.message));
     }
-    if (!contextArmy.blockedUnits.commanderIspresent) {
+    if (!contextArmy.listValidationResults.commanderIspresent) {
       tempArray.push(NO_COMMANDER_WARNING);
     }
 
     setDisplayMessages([...tempArray]);
-  }, [contextArmy.blockedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [contextArmy.listValidationResults]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * Function checks whether the list is valid.

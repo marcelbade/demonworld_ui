@@ -24,7 +24,7 @@ const useStyles = makeStyles({
 const LeafNodeSelector = (props) => {
   const classes = useStyles();
   const contextArmy = useContext(ArmyContext);
-  const blockResults = contextArmy.blockedUnits.unitsBlockedbyRules;
+  const blockResults = contextArmy.listValidationResults.unitsBlockedbyRules;
 
   // no need for a useState hook - must be recalculated for every rerender!
   let blockedUnitNames = [];

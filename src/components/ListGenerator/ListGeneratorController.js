@@ -96,7 +96,7 @@ const ListGeneratorController = () => {
   // sub factions of ally
   const [distinctAllySubFactions, setDistinctAllySubFactions] = useState([]);
   // validation
-  const [blockedUnits, setblockedUnits] = useState({
+  const [listValidationResults, SetListValidationResults] = useState({
     unitsBlockedbyRules: [],
     subFactionBelowMinimum: [],
   });
@@ -239,7 +239,7 @@ const ListGeneratorController = () => {
       let validator = ruleValidation(selectedFactionName);
       let result = validator.testSubFactionRules(listOfAllFactionUnits, selectedUnits, maxPointsAllowance);
 
-      collectAllBlockedUnits(result);
+      collectValidatioResults(result);
     }
   }, [selectedUnits, maxPointsAllowance]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -313,12 +313,12 @@ const ListGeneratorController = () => {
    * add all invalid units to the block list.
    * @param {*} validationResult
    */
-  const collectAllBlockedUnits = (validationResult) => {
-    setblockedUnits({
-      ...blockedUnits,
+  const collectValidatioResults = (validationResult) => {
+    SetListValidationResults({
+      ...listValidationResults,
       unitsBlockedbyRules: validationResult.unitsBlockedbyRules,
       subFactionBelowMinimum: validationResult.subFactionBelowMinimum,
-      commanderIspresent: validationResult.commanderIsPresent, 
+      commanderIspresent: validationResult.commanderIsPresent,
     });
   };
 
@@ -419,27 +419,24 @@ const ListGeneratorController = () => {
         allyName: allyName,
         allySubFactions: distinctAllySubFactions,
         listOfAllAlliedUnits: listOfAllAlliedUnits,
-        // NET POINT VALUES
+        // SELECTED UNIT LIST
+        selectedUnits: selectedUnits,
         maxPointsAllowance: maxPointsAllowance,
         totalPointValue: totalPointValue,
-        addedUnits: selectedUnits,
+        setSelectedUnits: setSelectedUnits,
         setMaxPointsAllowance: setMaxPointsAllowance,
-        // BUTTON FUNCTIONS
         selectUnit: selectUnit,
         removeUnit: removeUnit,
         removeItem: removeItem,
         clearList: clearList,
-        // BLOCKED UNITS
-        blockedUnits: blockedUnits,
+        // ARMY LIST VALIDATION
+        listValidationResults: listValidationResults,
         // ITEMSHOP
         fetchedItems: fetchedItems,
         unitSelectedForShop: unitSelectedForShop,
         allItems: allItems,
         setUnitSelectedForShop: setUnitSelectedForShop,
         setAllItems: setAllItems,
-        //  SELECTED UNITS
-        selectedUnits: selectedUnits,
-        setSelectedUnits: setSelectedUnits,
         // ALTERNATIVE LISTS
         selectedAlternativeList: selectedAlternativeList,
         setSelectedAlternativeList: setSelectedAlternativeList,

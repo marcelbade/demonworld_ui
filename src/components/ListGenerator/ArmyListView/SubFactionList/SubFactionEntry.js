@@ -24,7 +24,7 @@ const SubFactionEntry = (props) => {
 
   useEffect(() => {
     isSubFactionValid();
-  }, [contextArmy.addedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [contextArmy.selectedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * Filters the selected units by subFaction. If allied units have been selected, then their subFaction name is replaced with their faction name.
@@ -32,6 +32,7 @@ const SubFactionEntry = (props) => {
    * @param {String} subFaction
    * @returns
    */
+  //TODO: The part where you replace the subfaction w. the faction name should be a separate function - and it should happen in a different file!
   const filterUnitsForSubFaction = (allSelectedUnits, subFaction) => {
     allSelectedUnits.forEach((u) => (u.faction === ALLIES_MAPPING[contextArmy.selectedFactionName] ? (u.subFaction = u.faction) : null));
 
@@ -44,7 +45,7 @@ const SubFactionEntry = (props) => {
   const isSubFactionValid = () => {
     let tempObj = { ...validatedSubFaction };
 
-    contextArmy.blockedUnits.subFactionBelowMinimum.forEach((sF) => {
+    contextArmy.listValidationResults.subFactionBelowMinimum.forEach((sF) => {
       if (sF.underMinimum.includes(props.subFaction)) {
         tempObj = { ...tempObj, valid: false, validationMessage: sF.message };
       }
@@ -64,7 +65,7 @@ const SubFactionEntry = (props) => {
         {/* DISPLAY UNITS, PONT COST, PERCENTAGES FOR ONE SUBFACTION */}
         <SubList
           key={uuidGenerator()}
-          subFactionUnits={filterUnitsForSubFaction(contextArmy.addedUnits, props.subFaction)} //
+          subFactionUnits={filterUnitsForSubFaction(contextArmy.selectedUnits, props.subFaction)} //
           subFactionName={props.subFaction}
         />
       </Grid>
