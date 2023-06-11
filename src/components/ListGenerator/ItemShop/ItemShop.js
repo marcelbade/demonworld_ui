@@ -57,7 +57,7 @@ const ItemShop = () => {
     setItemTypes(findDistinctItemTypes());
   }, [contextArmy.unitSelectedForShop]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Wehn the selected unit changes, take all items it has been equipped with and add them to the "allItems" state variable. This serves as a central regeistry of all items allready taken.
+  // When the selected unit changes, take all items it has been equipped with and add them to the "allItems" state variable. This serves as a central registry of all items allready taken.
   useEffect(() => {
     let unit = contextArmy.unitSelectedForShop;
 
