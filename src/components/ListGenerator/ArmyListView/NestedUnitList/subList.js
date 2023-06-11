@@ -88,10 +88,11 @@ const SubList = (props) => {
 
   /**
    * The component creates the nested unit list for a single sub faction.
-   * An entry contains:
+   * Every entry contains:
    *  - the unit name
    *  - points
-   *  - button row to select different kinds of items |< in flux :D
+   *  - buttons to display item shop and card view for that unit
+   *  - the list of items selected for this unit  
    *  - a button to delete the entire entry.
    * The buttons only appear when the user hovers the mouse over the entry.
    */
