@@ -5,7 +5,7 @@ import { ListItemText, makeStyles, List } from "@material-ui/core";
 // components and functions
 import { ArmyContext } from "../../../../contexts/armyContext";
 import { uuidGenerator } from "../../../shared/sharedFunctions";
-import { calculatetotalUnitPointCost } from "../../../shared/sharedFunctions";
+import { calculateTotalUnitPointCost } from "../../../shared/sharedFunctions";
 import { ruleObjectProvider } from "../../../../gameLogic/globalRules/ruleObjectProvider";
 // clsx
 
@@ -39,7 +39,7 @@ const SubListStats = (props) => {
   useEffect(() => {
     let total = 0;
     if (props.subFactionUnits) {
-      props.subFactionUnits.forEach((u) => (total += calculatetotalUnitPointCost(u)));
+      props.subFactionUnits.forEach((u) => (total += calculateTotalUnitPointCost(u)));
     }
     setSubFactionTotal(total);
   }, [props.subFactionUnits]);

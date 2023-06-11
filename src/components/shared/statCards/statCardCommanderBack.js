@@ -5,7 +5,7 @@ import { Grid, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 // functions and modules
 import { DisplayAllSpecialRules } from "../../compendiums/factionTable/depencies/factionTableFunctions";
-import {calculatetotalUnitPointCost}from "../../../components/shared/sharedFunctions"; 
+import {calculateTotalUnitPointCost}from "../../../components/shared/sharedFunctions"; 
  
 
 const useStyles = makeStyles({
@@ -78,7 +78,7 @@ const StatCardCommanderBack = (props) => {
       {/* 4rd Row - POINT COSTS  */}
       <Grid>
         <Typography variant="h6" align="center" className={classes.blackStripe}>
-          {calculatetotalUnitPointCost(props.unit)} Punkte
+          {calculateTotalUnitPointCost(props.unit)} Punkte
         </Typography>
       </Grid>
     </Grid>
