@@ -29,7 +29,7 @@ const Tree = (props) => {
   const contextArmy = useContext(ArmyContext);
 
   /**
-   * Function creates a list. The ally name has to be removed from the array so it is not displayed as an army subFaction in the tree.
+   * Function creates a list of all sub factions of the army. The ally name has to be removed from the array so it is not displayed as an army sub faction in the tree.
    * @returns
    */
   const createSubFactionList = () => {
