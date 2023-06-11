@@ -1,3 +1,5 @@
+import { HERO, MAGE } from "../../constants/unitTypes";
+
 const NO_DUPLICATE_UNIQUES_MESSAGE = "Die Liste darf einzigartige Einheiten nur einmal enthalten";
 const MAXIMUM_OF_TWO_OF_EACH_MESSAGE = "Die Liste darf eine Einheit maximal 2x enthalten.";
 const MAXIMUM_OF_35_PERCENT_HEROES_MESSAGE = "Die Liste darf maximal 35% Characktere und Helden enthalten.";
@@ -80,13 +82,13 @@ const globalRules = {
     let result = [];
 
     selectedUnits
-      .filter((unit) => unit.unitType === "H" || unit.unitType === "M")
+      .filter((unit) => unit.unitType === HERO || unit.unitType === MAGE)
       .forEach((unit) => {
         heroTotal += unit.points;
       });
 
     availableUnits
-      .filter((unit) => unit.unitType === "H" || unit.unitType === "M")
+      .filter((unit) => unit.unitType === HERO || unit.unitType === MAGE)
       .forEach((hero) => {
         if (hero.points + heroTotal > max) {
           result.push({ unitBlockedbyRules: hero.unitName, message: MAXIMUM_OF_35_PERCENT_HEROES_MESSAGE });
