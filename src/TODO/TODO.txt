@@ -1,9 +1,14 @@
 TODO: WAFFENNAMEN NACHTRAGEN 
     ERLEDIGT: Goblins, Dunkelelfen, Elfen, Imperium, ishtak
 
+
+TODO: Spähfaktor
+- before you can add this feature you need:
+    - isMounted flag for all units
  
   
 TODO: PDF VIEWER
+- layout, alternative layout (full cards)
 
 
 TODO: "Gor'Daris Dragon has 3 attacks....
@@ -13,9 +18,11 @@ TODO: src\components\shared\NoSelectionDisplay.js
 You need a pic, if you want to use this :D.
  
  
-TODO:  Goblins 
-- finish limit rules !
-- dont foget all heroes + shamans <= 40% !
+TODO:  FACTION RULES
+==================================
+GOBLINS - done!
+Ishtak- done!
+Norwinger - done!
 
 
 TODO: ItemShop
