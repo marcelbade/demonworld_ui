@@ -1,13 +1,11 @@
 // React
-import React, { Fragment, useEffect, useContext, useState } from "react";
+import React, { Fragment, useContext } from "react";
 // Material UI
 import { List, ListItem, makeStyles, ListItemText, Button } from "@material-ui/core";
 // icons
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 // components and functions
 import { ArmyContext } from "../../../../contexts/armyContext";
-import { displayUnitCost } from "../../../compendiums/factionTable/depencies/factionTableFunctions";
-import { ruleObjectProvider } from "../../../../gameLogic/globalRules/ruleObjectProvider";
 import { unitCardMultiSort, uuidGenerator } from "../../../shared/sharedFunctions";
 import EquipmentList from "./EquipmentList";
 import SubListStats from "./SubListStats";
@@ -33,27 +31,6 @@ const SubList = (props) => {
   const classes = useStyles();
   const contextArmy = useContext(ArmyContext);
 
-  const [subFactionTotal, setSubFactionTotal] = useState(0);
-  const [percentages, setPercentages] = useState({
-    min: 0,
-    max: 0,
-  });
-
-  /**
-   * Useffect calculates the point total for the sub faction and validates it.
-   */
-  useEffect(() => {
-    let total = 0;
-    if (props.subFactionUnits) {
-      props.subFactionUnits.forEach((u) => (total += displayUnitCost(u)));
-    }
-    setSubFactionTotal(total);
-  }, [props.subFactionUnits]);
-
-  useEffect(() => {
-    setPercentages({ min: displayPercentages().min, max: displayPercentages().max });
-  }, [contextArmy.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
-
   /**
    * Removes the unit.
    * @param {unit.name + hash code} identifier
@@ -63,36 +40,12 @@ const SubList = (props) => {
   };
 
   /**
-   * Function calculates the minimum and maximum percentage allowance for the subfaction.
-   * @returns Object with min and
-   */
-  const displayPercentages = () => {
-    const subFaction = props.subFactionName;
-    const ruleArray = ruleObjectProvider(contextArmy.selectedFactionName);
-    const filteredArray = ruleArray.filter((r) => r.cardNames.includes(subFaction));
-
-    let minPercentage = 0;
-    let maxPercentage = 0;
-
-    // when changing armies, the rulearray briefly becomes undefined.
-    if (filteredArray.length !== 0) {
-      minPercentage = filteredArray[0].min * 100;
-      maxPercentage = filteredArray[0].max * 100;
-    }
-
-    return {
-      min: minPercentage,
-      max: maxPercentage,
-    };
-  };
-
-  /**
    * The component creates the nested unit list for a single sub faction.
    * Every entry contains:
    *  - the unit name
    *  - points
    *  - buttons to display item shop and card view for that unit
-   *  - the list of items selected for this unit  
+   *  - the list of items selected for this unit
    *  - a button to delete the entire entry.
    * The buttons only appear when the user hovers the mouse over the entry.
    */
@@ -128,7 +81,7 @@ const SubList = (props) => {
         );
       })}
       {/* SUB LIST STATS */}
-      <SubListStats key={uuidGenerator()} subFactionTotal={subFactionTotal} percentages={percentages} />
+      <SubListStats key={uuidGenerator()} subFactionName={props.subFactionName} subFactionUnits={props.subFactionUnits} />
     </Fragment>
   );
 };
