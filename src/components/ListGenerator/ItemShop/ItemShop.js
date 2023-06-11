@@ -136,9 +136,9 @@ const ItemShop = () => {
    * @param {itemCard object} item
    */
   const addItemToUnit = (item) => {
-    let changedUnit = contextArmy.unitSelectedForShop;
+    let tempObj = contextArmy.unitSelectedForShop;
 
-    changedUnit.equipment.push({
+    tempObj.equipment.push({
       name: item.itemName,
       type: item.type,
       rule: item.specialRules,
@@ -147,7 +147,7 @@ const ItemShop = () => {
     });
 
     contextArmy.setUnitSelectedForShop({
-      ...changedUnit,
+      ...tempObj,
     });
   };
 
