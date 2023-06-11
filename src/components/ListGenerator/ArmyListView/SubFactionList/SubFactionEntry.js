@@ -6,7 +6,7 @@ import { Grid } from "@material-ui/core";
 // components and functions
 import { ArmyContext } from "../../../../contexts/armyContext";
 import { uuidGenerator } from "../../../shared/sharedFunctions";
-import SubList from "../NestedUnitList/subList";
+import SubList from "../NestedUnitList/SubList";
 import InvalidHeader from "./InvalidHeader";
 import ValidHeader from "./ValidHeader";
 // constants
