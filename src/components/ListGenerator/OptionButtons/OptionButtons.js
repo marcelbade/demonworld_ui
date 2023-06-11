@@ -56,13 +56,13 @@ const OptionButtons = () => {
 
   const NO_COMMANDER_WARNING = `Die Armeeliste muss mindestens 1 Helden, Befehlshaber oder Magier mit 2 oder mehr ★ enthalten.`;
 
-  const [disableButton, setDisableButton] = useState(true);
+  const [disableButtons, setDisableButtons] = useState(true);
   const [displayMessages, setDisplayMessages] = useState([]);
   const [displayCount, setDisplayCount] = useState(true);
 
   // enable buttons if lit is valid
   useEffect(() => {
-    contextArmy.selectedUnits.length === 0 || violatesRules(contextArmy.blockedUnits) ? setDisableButton(true) : setDisableButton(false);
+    contextArmy.selectedUnits.length === 0 || violatesRules(contextArmy.blockedUnits) ? setDisableButtons(true) : setDisableButtons(false);
   }, [contextArmy.selectedUnits, contextArmy.blockedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // set the display messages
@@ -129,7 +129,7 @@ const OptionButtons = () => {
         <Button
           className={classes.button}
           variant="outlined"
-          disabled={disableButton}
+          disabled={disableButtons}
           onClick={() => {
             contextArmy.clearList();
           }}
@@ -141,7 +141,7 @@ const OptionButtons = () => {
         <Button
           className={classes.button}
           variant="outlined"
-          disabled={disableButton}
+          disabled={disableButtons}
           onClick={() => {
             openPDfInNewTab();
           }}
@@ -153,7 +153,7 @@ const OptionButtons = () => {
         <Button
           className={classes.button}
           variant="outlined"
-          disabled={disableButton}
+          disabled={disableButtons}
           onClick={() => {
             storeList();
           }}
@@ -165,7 +165,7 @@ const OptionButtons = () => {
         <Button
           className={classes.button}
           variant="outlined"
-          disabled={disableButton}
+          disabled={disableButtons}
           onClick={() => {
             navigateToLossCalculator();
           }}
