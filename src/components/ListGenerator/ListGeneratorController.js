@@ -433,8 +433,8 @@ const ListGeneratorController = () => {
         listValidationResults: listValidationResults,
         // ITEMSHOP
         fetchedItems: fetchedItems,
-        unitSelectedForShop: unitSelectedForShop,
         allItems: allItems,
+        unitSelectedForShop: unitSelectedForShop,
         setUnitSelectedForShop: setUnitSelectedForShop,
         setAllItems: setAllItems,
         // ALTERNATIVE LISTS
