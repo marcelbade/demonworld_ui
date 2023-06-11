@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Typography, TextField, InputAdornment, Grid } from "@material-ui/core";
 // components and functions
 import { ArmyContext } from "../../../contexts/armyContext";
-import SubFactionEntry from "./SubFactionEntry";
+import SubFactionEntry from "./SubFactionList/SubFactionEntry";
 import { uuidGenerator } from "../../shared/sharedFunctions";
 
 // TODO: remove unneeded styles
