@@ -12,8 +12,7 @@ import ValidHeader from "./ValidHeader";
 // constants
 import { ALLIES_MAPPING } from "../../../../constants/allies";
 
-
-// Creates the suFaction entry of the army list: Head and current and total points. 
+// Creates the suFaction entry of the army list: Head and current and total points.
 const SubFactionEntry = (props) => {
   const contextArmy = useContext(ArmyContext);
 
@@ -40,7 +39,7 @@ const SubFactionEntry = (props) => {
   };
 
   /**
-   * Function checks for every sub faction with a minimum point allowance > 0 if the condition has been fullfilled. If not, the sub faction name appears in red and a tooltip is displayed.
+   * Function checks for every sub faction with a minimum point allowance > 0 if the condition has been fullfilled. If not, the sub faction name appears in red and a tooltip displays the validation error message.
    */
   const isSubFactionValid = () => {
     let tempObj = { ...validatedSubFaction };
