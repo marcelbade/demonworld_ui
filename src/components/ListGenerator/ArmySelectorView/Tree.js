@@ -67,7 +67,7 @@ const Tree = (props) => {
         >
           <LeafNodeSelector
             // tree for army or ally?
-            units={props.showsFaction ? contextArmy.units : contextArmy.alliedUnits}
+            units={props.showsFaction ? contextArmy.listOfAllFactionUnits : contextArmy.listOfAllAlliedUnits}
             subFaction={subF}
             nodeID={createNodeID(createSubFactionList().indexOf(subF))}
           />

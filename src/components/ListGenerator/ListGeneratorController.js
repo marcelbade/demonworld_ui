@@ -83,9 +83,9 @@ const ListGeneratorController = () => {
   const [fetchedFactions, setfetchedFactions] = useState([]);
   const [fetchedItems, setfetchedItems] = useState([]);
   const [selectedFactionName, setSelectedFactionName] = useState("");
-  const [selectedFaction, setSelectedFaction] = useState([]);
+  const [listOfAllFactionUnits, setListOfAllFactionUnits] = useState([]);
   const [allyName, setAllyName] = useState("");
-  const [mappedAlly, setMappedAlly] = useState([]);
+  const [listOfAllAlliedUnits, setListOfAllAlliedUnits] = useState([]);
   const [selectedUnits, setSelectedUnits] = useState([]);
   // maximum point allowance
   const [maxPointsAllowance, setMaxPointsAllowance] = useState(2000); //  eslint-disable-line no-unused-vars
@@ -147,32 +147,32 @@ const ListGeneratorController = () => {
   };
 
   /**
-   * Sets the selected faction and sends it to the treeview by filtering ALL units down to the faction's units.
+   * Sets the selected faction and sends it to the treeview by filtering ALL units down to that faction's units.
    */
   useEffect(() => {
-    setSelectedFaction(fetchedFactions.filter((f) => f.faction.toLowerCase() === selectedFactionName.toLowerCase()));
+    setListOfAllFactionUnits(fetchedFactions.filter((f) => f.faction.toLowerCase() === selectedFactionName.toLowerCase()));
   }, [selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * Find all distinct subfactions in the selected faction and create a set of them.
    */
   useEffect(() => {
-    setDistinctSubFactions(findDistinctSubfactions(selectedFaction));
-  }, [selectedFaction]); // eslint-disable-line react-hooks/exhaustive-deps
+    setDistinctSubFactions(findDistinctSubfactions(listOfAllFactionUnits));
+  }, [listOfAllFactionUnits]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * Close the item shop when a new army is selected.
    */
   useEffect(() => {
     closeItemShop();
-  }, [selectedFaction]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [listOfAllFactionUnits]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    *  Clear all selected units from the army list  when a new army is selected.
    */
   useEffect(() => {
     clearList();
-  }, [selectedFaction]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [listOfAllFactionUnits]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ALLY LOGIC
   /**
@@ -181,14 +181,14 @@ const ListGeneratorController = () => {
   useEffect(() => {
     const name = ALLIES_MAPPING[selectedFactionName] ? ALLIES_MAPPING[selectedFactionName] : NONE;
     setAllyName(name);
-  }, [selectedFaction]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [listOfAllFactionUnits]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * set the ally name
    */
   useEffect(() => {
     if (allyName) {
-      setMappedAlly(fetchedFactions.filter((f) => f.faction.toLowerCase() === allyName.toLowerCase()));
+      setListOfAllAlliedUnits(fetchedFactions.filter((f) => f.faction.toLowerCase() === allyName.toLowerCase()));
     }
   }, [allyName]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -237,7 +237,7 @@ const ListGeneratorController = () => {
   useEffect(() => {
     if (selectedFactionName) {
       let validator = ruleValidation(selectedFactionName);
-      let result = validator.testSubFactionRules(selectedFaction, selectedUnits, maxPointsAllowance);
+      let result = validator.testSubFactionRules(listOfAllFactionUnits, selectedUnits, maxPointsAllowance);
 
       collectAllBlockedUnits(result);
     }
@@ -413,12 +413,12 @@ const ListGeneratorController = () => {
         // ARMY
         selectedFactionName: selectedFactionName,
         subfactions: distinctSubFactions,
-        units: selectedFaction,
+        units: listOfAllFactionUnits,
         armyHasAlternativeLists: armyHasAlternativeLists,
         // ALLY
         allyName: allyName,
         allySubFactions: distinctAllySubFactions,
-        alliedUnits: mappedAlly,
+        listOfAllAlliedUnits: listOfAllAlliedUnits,
         // NET POINT VALUES
         maxPointsAllowance: maxPointsAllowance,
         totalPointValue: totalPointValue,
