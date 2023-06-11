@@ -114,8 +114,7 @@ const ItemShop = () => {
 
   /**
    * Function enforces the item selection rules by toggling the item's corresponding button on/off.
-   * Any unit,hero,... can only gain 1 magical item (+ 1 for every special element
-   * if it is a unit). In addition it may gain additional "non-magical" generic items like potions.
+   * Any unit,hero,... can only gain 1 magical item. In addition it may gain additional "non-magical" generic items like potions. If a standard bearer or musician is present, a standard or intrument can be selected in addition to trhese two.
    * @param {itemCard Object} item
    * @returns a boolean that toggles the button on or off.
    */
