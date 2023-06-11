@@ -11,7 +11,7 @@ import { ruleObjectProvider } from "../../../../gameLogic/globalRules/ruleObject
 import { unitCardMultiSort, uuidGenerator } from "../../../shared/sharedFunctions";
 import EquipmentList from "./EquipmentList";
 import SubListStats from "../SubFactionList/SubListStats";
-import ItemCardButtons from "./ItemCardButtons";
+import SublistEntryButtons from "./SubListEntryButtons";
 
 const useStyles = makeStyles({
   text: {
@@ -119,7 +119,7 @@ const SubList = (props) => {
                 secondary={<span className={classes.text}>{u.points}</span>}
               />
               {/* BUTTONS */}
-              <ItemCardButtons u={u} key={uuidGenerator()} />
+              <SublistEntryButtons u={u} key={uuidGenerator()} />
             </ListItem>
             <ListItem key={uuidGenerator()}>
               <EquipmentList key={uuidGenerator()} u={u} identifier={identifier} />
