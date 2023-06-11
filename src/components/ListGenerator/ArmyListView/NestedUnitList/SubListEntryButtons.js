@@ -13,7 +13,7 @@ const useStyles = makeStyles({
   },
 });
 
-const ItemCardButtons = (props) => {
+const SublistEntryButtons = (props) => {
   // eslint-disable-next-line no-unused-vars
   const classes = useStyles();
   const contextArmy = useContext(ArmyContext);
@@ -45,4 +45,4 @@ const ItemCardButtons = (props) => {
   );
 };
 
-export default ItemCardButtons;
+export default SublistEntryButtons;
