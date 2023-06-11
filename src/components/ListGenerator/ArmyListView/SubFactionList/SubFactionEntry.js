@@ -28,14 +28,14 @@ const SubFactionEntry = (props) => {
 
   /**
    * Filters the selected units by subFaction. If allied units have been selected, then their subFaction name is replaced with their faction name.
-   * @param {[unitCard Objects]} allUnits
+   * @param {[unitCard Objects]} allSelectedUnits
    * @param {String} subFaction
    * @returns
    */
-  const filterUnitsForSubFaction = (allUnits, subFaction) => {
-    allUnits.forEach((u) => (u.faction === ALLIES_MAPPING[contextArmy.selectedFactionName] ? (u.subFaction = u.faction) : null));
+  const filterUnitsForSubFaction = (allSelectedUnits, subFaction) => {
+    allSelectedUnits.forEach((u) => (u.faction === ALLIES_MAPPING[contextArmy.selectedFactionName] ? (u.subFaction = u.faction) : null));
 
-    return allUnits.filter((u) => u.subFaction === subFaction);
+    return allSelectedUnits.filter((u) => u.subFaction === subFaction);
   };
 
   /**
