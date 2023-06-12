@@ -66,72 +66,45 @@ const DarkElveRules = {
     // special faction rule - no more than 50% may be spent on all heroes, mages, and commanders.
     let isAboveCharLimit = globalRules.NoMoreThanHalfOnCharacters(selectedUnits, availableUnits, totalPointsAllowance);
 
-    // special faction rule - per full 10% of the max point allowance spent on the priest caste, your point allowance for the magicians caste decreases by 10% and vice versa.
+    // special faction rule - per full 10% of the max point allowance spent on the priest caste, your point allowance for the magicians caste decreases by 10% and vice versa. Note that the algorithm is different from all the other validator logic- it does not create a list of unit Card objects that are added to a "block list", it instead directly decreases the limit.
     const magiciansVsPriests = () => {
       const INCREMENT = 10;
       const NET_TOTAL = 4;
+      const PRIEST = ["Priesterin", "Priesterkaste", "magicianCaste"];
+      const MAGICIANS = ["Magier", "Magierkaste", "priestCaste"];
 
       if (selectedUnits !== undefined && selectedUnits.length > 0) {
         for (let i = selectedUnits.length - 1; i >= 0; i--) {
           if (selectedUnits[i].subFaction === "Priesterin" || selectedUnits[i].subFaction === "Priesterkaste") {
-            decreaseMagicianAllowance(INCREMENT, NET_TOTAL);
+            decreaseAllowance(INCREMENT, NET_TOTAL, PRIEST);
           }
           if (selectedUnits[i].subFaction === "Magier" || selectedUnits[i].subFaction === "Magierkaste") {
-            decreasePriestAllowance(INCREMENT, NET_TOTAL);
+            decreaseAllowance(INCREMENT, NET_TOTAL, MAGICIANS);
           }
         }
       }
     };
 
-    const decreaseMagicianAllowance = (increment, netTotal) => {
-      let pointsForPriests = 0;
+    const decreaseAllowance = (increment, netTotal, subFaction) => {
+      let pointSpent = 0;
 
       selectedUnits
-        .filter((sU) => sU.subFaction === "Priesterin" || sU.subFaction === "Priesterkaste")
-        .forEach((priest) => {
-          pointsForPriests += priest.points;
+        .filter((sU) => sU.subFaction === subFaction[0] || sU.subFaction === subFaction[1])
+        .forEach((unit) => {
+          pointSpent += unit.points;
         });
 
-      const percentagePriests = pointsForPriests * (100 / totalPointsAllowance);
-      const share = Math.floor(percentagePriests / increment);
+      const percentage = pointSpent * (100 / totalPointsAllowance);
+      const share = Math.floor(percentage / increment);
 
       const remainder = netTotal - share;
-
-      let foundRules = rules.filter((r) => r.subFaction === "magicianCaste");
-
-      console.log("remainder");
-      console.log(remainder);
-
-      foundRules[0].max = remainder * 0.1;
-    };
-
-    const decreasePriestAllowance = (increment, netTotal) => {
-      let pointsForMagicians = 0;
-
-      selectedUnits
-        .filter((sU) => sU.subFaction === "Magier" || sU.subFaction === "Magierkaste")
-        .forEach((magician) => {
-          pointsForMagicians += magician.points;
-        });
-
-      const percentageMagicians = pointsForMagicians * (100 / totalPointsAllowance);
-      const share = Math.floor(percentageMagicians / increment);
-
-      const remainder = netTotal - share;
-
-      let foundRules = rules.filter((r) => r.subFaction === "priestCaste");
-
-      console.log("remainder");
-      console.log(remainder);
+      let foundRules = rules.filter((r) => r.subFaction === subFaction[2]);
 
       foundRules[0].max = remainder * 0.1;
     };
 
     // execute
     magiciansVsPriests();
-
-    console.log("rules");
-    console.log(rules);
 
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [
