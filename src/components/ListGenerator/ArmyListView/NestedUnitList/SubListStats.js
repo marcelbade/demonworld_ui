@@ -62,8 +62,8 @@ const SubListStats = (props) => {
     const maxPercentage = filteredArray.length !== 0 ? filteredArray[0].max * 100 : 0;
 
     return {
-      min: minPercentage,
-      max: maxPercentage,
+      min: Math.trunc(minPercentage),
+      max: Math.trunc(maxPercentage),
     };
   };
 
@@ -76,12 +76,13 @@ const SubListStats = (props) => {
   };
 
   const displayPercents = () => {
-    return calculateCurrentPercentage() === 0 ? null : `Prozent ${calculateCurrentPercentage()} %`;
+    const result = calculateCurrentPercentage() === 0 ? null : `Prozent ${calculateCurrentPercentage()} %`;
+    return Math.trunc(result);
   };
 
   const remainingPoints = () => {
     let maxPoints = (percentages.max / 100) * contextArmy.maxPointsAllowance;
-    return maxPoints - subFactionTotal;
+    return Math.trunc(maxPoints - subFactionTotal);
   };
 
   return (
