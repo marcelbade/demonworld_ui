@@ -13,7 +13,7 @@ export const ALL_FACTIONS_ARRAY = [DUNKELFELFEN, ELFEN, GOBLINS, IMPERIUM, ISHTA
 
 export const ARMIES_WITH_ALTERNATIVE_LISTS = ["Imperium", "Zwerge", "Orks"];
 
-export const ARMY_TO_ALTERNATIVES_MAPPER = {
+export const ARMY_ALTERNATIVES_LIST_MAPPER = {
   Imperium: ["Nordmark", "Südmark", "Westmark", "Ostmark"],
   Zwerge: ["Gaeta", "Zah'ra", "Imperium"],
   Orks: ["Clanngetts", "Steinclan", "Wyvernclan", "Tierclan", "Eisclan", "Pfeilclan", "Blutclan", "Eisenclan", "Bergclan"],
@@ -22,7 +22,7 @@ export const ARMY_TO_ALTERNATIVES_MAPPER = {
 
 export const ALTERNATIVE_ARMY_SELECTION_TEXT = {
   Imperium: "Wähle eine der Marken",
-  Zwerge: "Wähle eines der Königreiche oder das Imperium als Alliierte",
+  Zwerge: ["Wähle eines der Königreiche", "Zweites Königreich oder Alliierte?"],
   Orks: "Wähle einen der Clans oder Clanngett",  
 }
  
