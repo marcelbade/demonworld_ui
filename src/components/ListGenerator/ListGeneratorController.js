@@ -6,7 +6,6 @@ import axios from "axios";
 // Material UI
 import { Drawer, Grid, IconButton } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { Stack } from "@mui/material";
 // icons
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 // components and functions
@@ -21,9 +20,10 @@ import AlternativeArmyListSelector from "./ArmySelectorView/AlternativeArmyListS
 import OptionButtons from "./OptionButtons/OptionButtons";
 import { enrichUnitCardObject } from "./ListGeneratorFunctions";
 // constants
-import { ARMIES_WITH_ALTERNATIVE_LISTS } from "../../constants/factions";
+import { ARMIES_WITH_ALTERNATIVE_LISTS, ZWERGE } from "../../constants/factions";
 import { ALLIES_MAPPING } from "../../constants/allies";
 import { ALL_FACTIONS_ARRAY } from "../../constants/factions";
+import DwarfsSecondSelector from "./ArmySelectorView/AlternativeArmyListSelection/DwarfsSecondSelector";
 
 const useStyles = makeStyles((theme) => ({
   displayBox: {
@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   armySelectionBox: {
+    width: "10em",
     [theme.breakpoints.up("md")]: {
       paddingTop: "2em",
       paddingLeft: "4em",
@@ -58,6 +59,10 @@ const useStyles = makeStyles((theme) => ({
   UnitCardDisplay: {
     position: "fixed",
   },
+  BackBttnBox: {
+    height: " 3em",
+  },
+
   BackBttn: {
     [theme.breakpoints.up("md")]: {
       position: "fixed",
@@ -66,8 +71,11 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   BackBttnIcon: {
-    width: "2em",
-    height: "2em",
+    width: "1em",
+    height: "1em",
+  },
+  alternativeListSelector: {
+    marginTop: "13em",
   },
 }));
 
@@ -103,6 +111,8 @@ const ListGeneratorController = () => {
   // alternative lists
   const [armyHasAlternativeLists, setArmyHasAlternativeLists] = useState(false);
   const [selectedAlternativeList, setSelectedAlternativeList] = useState("");
+  const [secondDwarvenOption, setSecondDwarvenOption] = useState("");
+
   // item shop
   const [itemShopState, setItemShopState] = useState({
     clickedUnit: {},
@@ -443,52 +453,61 @@ const ListGeneratorController = () => {
         setAllItems: setAllItems,
         // ALTERNATIVE LISTS
         selectedAlternativeList: selectedAlternativeList,
+        secondDwarvenOption: secondDwarvenOption,
         setSelectedAlternativeList: setSelectedAlternativeList,
+        setSecondDwarvenOption: setSecondDwarvenOption,
         // PDF VIEWER
         pdfMasterList: pdfMasterList,
         // MENU STATES
         toggleMenuState: toggleMenuState,
       }}
     >
-      <Grid container className={classes.displayBox}>
-        <IconButton
-          className={classes.BackBttn}
-          onClick={() => {
-            backToMainmenu();
-          }}
-        >
-          <ChevronLeftIcon className={classes.BackBttnIcon} />
-        </IconButton>
-
-        {/* ARMY SELECTION */}
-        <Stack direction={"column"} className={classes.armySelectionBox}>
-          <SelectionInput
-            className={classes.selector}
-            filterFunction={setSelectedFactionName}
-            isArmySelector={true}
-            options={ALL_FACTIONS_ARRAY}
-            label="Wähle Eine Fraktion"
-          />
-          {armyHasAlternativeLists ? <AlternativeArmyListSelector /> : null}
-
-          <FactionTreeView className={classes.selector} />
-        </Stack>
-        {/* ARMYLIST */}
-        <Grid item container direction="column" justify="flex-end" xs={3} className={classes.armyListBox}>
-          <ArmyListDisplay setTotalPointValue={setTotalPointValue} />
+      <Grid container className={classes.displayBox} direction="column">
+        <Grid item xs={12} className={classes.BackBttnBox}>
+          <IconButton
+            className={classes.BackBttn}
+            onClick={() => {
+              backToMainmenu();
+            }}
+          >
+            <ChevronLeftIcon className={classes.BackBttnIcon} />
+          </IconButton>
         </Grid>
-        {/* OPTION BUTTON GROUP */}
-        <Drawer anchor={"right"} variant="persistent" open={showOptionButtons} className={classes.optionButtons}>
-          <OptionButtons />
-        </Drawer>
-        {/* ITEMSHOP */}
-        <Drawer anchor={"right"} variant="persistent" open={itemShopState.show}>
-          <ItemShop />
-        </Drawer>
-        {/* UNITCARD */}
-        <Drawer anchor={"right"} variant="persistent" open={statCardState.show} className={classes.UnitCardDisplay}>
-          {!isObjectEmtpy(statCardState.clickedUnit) ? unitOrCmdCard(statCardState.clickedUnit, COLUMN) : <p></p>}
-        </Drawer>
+        {/* ARMY SELECTION */}
+        <Grid container item direction="row">
+          <Grid direction={"column"} xs={3} className={classes.armySelectionBox}>
+            <SelectionInput
+              className={classes.selector}
+              filterFunction={setSelectedFactionName}
+              isArmySelector={true}
+              options={ALL_FACTIONS_ARRAY}
+              label="Wähle Eine Fraktion"
+            />
+            {armyHasAlternativeLists ? <AlternativeArmyListSelector isArmySelector={false} className={classes.selector} /> : null}
+            {/* DWARFS ONLY */}
+            {selectedFactionName === ZWERGE && selectedAlternativeList !== "" ? (
+              <DwarfsSecondSelector isArmySelector={false} className={classes.selector} />
+            ) : null}
+
+            <FactionTreeView className={classes.selector} />
+          </Grid>
+          {/* ARMYLIST */}
+          <Grid item container direction="column" justify="flex-end" xs={3} className={classes.armyListBox}>
+            <ArmyListDisplay setTotalPointValue={setTotalPointValue} />
+          </Grid>
+          {/* OPTION BUTTON GROUP */}
+          <Drawer anchor={"right"} variant="persistent" open={showOptionButtons} className={classes.optionButtons}>
+            <OptionButtons />
+          </Drawer>
+          {/* ITEMSHOP */}
+          <Drawer anchor={"right"} variant="persistent" open={itemShopState.show}>
+            <ItemShop />
+          </Drawer>
+          {/* UNITCARD */}
+          <Drawer anchor={"right"} variant="persistent" open={statCardState.show} className={classes.UnitCardDisplay}>
+            {!isObjectEmtpy(statCardState.clickedUnit) ? unitOrCmdCard(statCardState.clickedUnit, COLUMN) : <p></p>}
+          </Drawer>
+        </Grid>
       </Grid>
     </ArmyProvider>
   ) : null;
