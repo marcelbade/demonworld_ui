@@ -47,23 +47,40 @@ const validationResults = {
 };
 
 const DwarfRules = {
-  testSubFactionRules: (availableUnits, selectedUnits, maxArmyPoints) => {
-    // dwarven special rule
+  testSubFactionRules: (availableUnits, selectedUnits, totalPointsAllowance) => {
+    //  general rules
+    let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(selectedUnits, availableUnits, totalPointsAllowance);
+    let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(rules, selectedUnits, totalPointsAllowance, availableUnits);
+    let isAboveSubFactionMax = globalRules.unitsAboveSubFactionMax(rules, selectedUnits, totalPointsAllowance, availableUnits);
+    let hasDuplicateUniques = globalRules.noDuplicateUniques(selectedUnits);
+    // let hasNoCommander = globalRules.isArmyCommanderPresent(selectedUnits);
+
+    // tournament rules
+    let testForMax2Result = globalRules.maximumOfTwo(selectedUnits);
+    let testForHeroCapResult = globalRules.belowMaxPercentageHeroes(
+      selectedUnits,
+      totalPointsAllowance,
+      availableUnits,
+      // MAX_HERO_PERCENTAGE
+    );
+
+    // special faction rule: dwarf kingdoms and allies - the player has to choose one. That Kondom can make up up to 40% of the list, the other one up to 20%. Instead of the second kingdom, the player can take up to 20% of imperial allies
     percentageKingdomsAndAlly(selectedUnits);
 
-    //tournament rules
-    let twoRuleResult = globalRules.maximumOfTwo(selectedUnits);
-    let heroRuleResult = globalRules.belowMaxPercentageHeroes(selectedUnits, maxArmyPoints, availableUnits);
-    //  general rules
-    let exceedingMaxResult = globalRules.unitsAboveSubFactionMax(rules, selectedUnits, maxArmyPoints, availableUnits);
-    let DuplicateResult = globalRules.noDuplicateUniques(selectedUnits);
-    //  check for sub faction below minimum
-    let minimumResult = globalRules.unitsBelowSubfactionMinimum(rules, selectedUnits, maxArmyPoints, availableUnits);
 
     //result for maximum limits
-    validationResults.unitsBlockedbyRules = [...DuplicateResult, ...heroRuleResult, ...twoRuleResult, ...exceedingMaxResult];
-    validationResults.subFactionBelowMinimum = minimumResult;
-    validationResults.commanderIsPresent = globalRules.isArmyCommanderPresent(selectedUnits);
+    validationResults.unitsBlockedbyRules = [
+      ...isExceedingPointAllowance,
+      ...hasDuplicateUniques,
+      ...testForHeroCapResult,
+      ...testForMax2Result,
+      ...isAboveSubFactionMax,
+    ];
+    // result for sub factions below limit.
+    validationResults.subFactionBelowMinimum = isBelowSubFactionMin;
+
+    // result - is a commander present?
+    // validationResults.commanderIsPresent = hasNoCommander;
 
     return validationResults;
   },
@@ -71,7 +88,7 @@ const DwarfRules = {
 
 //SEPCIAL FACTION RULES
 
-// function takes care of the dwarf army list special rule: of the three opions (2 dwarven kingdoms and one ally), only one can make upp a max.
+// function takes care of the dwarf army list special rule:max.
 // of 40% of the force. Once the choice is made, the player can only take the second kingdom OR the ally and only to a max. of 20%.
 const percentageKingdomsAndAlly = (selectedUnits) => {
   let options = ["Gaeta", "Zah'ra", "Imperium"];
