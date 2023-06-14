@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
@@ -44,10 +44,30 @@ const FactionTreeView = () => {
   // no ally found
   const NONE = "none";
 
+  const [alternativeArmyPresentAndSelected, setAlternativeArmyPresentAndSelected] = useState(false);
+
+  useEffect(() => {
+    if (contextArmy && contextArmy.selectedFactionName && !contextArmy.armyHasAlternativeLists) {
+      setAlternativeArmyPresentAndSelected(true);
+    } else if (checkForExistence() && contextArmy.selectedAlternativeList !== "NONE") {
+      setAlternativeArmyPresentAndSelected(true);
+    } else if (checkForExistence() && contextArmy.selectedAlternativeList === "NONE") {
+      setAlternativeArmyPresentAndSelected(false);
+    }
+  }, [contextArmy, contextArmy.selectedFactionName, contextArmy.selectedAlternativeList]);
+
   /**
-   * The entire treeView of the army
+   * Function checks for the existence of the state variables contextArmy, contextArmy.selectedFactionName & contextArmy.armyHasAlternativeLists.
+   * @returns boolean flag (true if all three exist).
    */
-  return contextArmy ? (
+  const checkForExistence = () => {
+    return contextArmy && contextArmy.selectedFactionName && contextArmy.armyHasAlternativeLists;
+  };
+
+  /**
+   * The entire treeView for the army.
+   */
+  return contextArmy && alternativeArmyPresentAndSelected ? (
     <>
       <TreeView
         className={classes.treeViewBox}
