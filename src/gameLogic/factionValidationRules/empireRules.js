@@ -6,7 +6,7 @@ const rules = [
     cardNames: ["Kaiserheer"],
     min: 0.1,
     max: 0.5,
-    error: "Deine Armeeliste darf zu höchstens 50% aus Einheiten des Kaiserheeres bestehen.",
+    error: "Deine Armeeliste muss zu 10% bis 50% aus Einheiten des Kaiserheeres bestehen.",
   },
 
   {
@@ -14,7 +14,7 @@ const rules = [
     cardNames: ["Provinzheer"],
     min: 0.2,
     max: 0.5,
-    error: "Deine Armeeliste darf zu höchstens 50% aus Einheiten des Provinzheeres bestehen.",
+    error: "Deine Armeeliste muss zu 20% bis 50% aus Einheiten des Provinzheeres bestehen.",
   },
 
   {
@@ -52,7 +52,7 @@ const rules = [
     cardNames: ["Ostmark"],
     min: 0.1,
     max: 0.5,
-    error: "Deine Armeeliste darf zu höchstens 40% aus Einheiten aus Einheiten der Ostmark bestehen.",
+    error: "Deine Armeeliste muss zu 10% bis 50% aus Einheiten aus Einheiten der Ostmark bestehen.",
   },
 
   {
@@ -60,7 +60,7 @@ const rules = [
     cardNames: ["Westmark"],
     min: 0.1,
     max: 0.5,
-    error: "Deine Armeeliste darf zu höchstens 40% aus Einheiten aus Einheiten der Westmark bestehen.",
+    error: "Deine Armeeliste muss zu 10% bis 50% aus Einheiten aus Einheiten der Westmark bestehen.",
   },
 
   {
@@ -68,7 +68,7 @@ const rules = [
     cardNames: ["Südmark"],
     min: 0.1,
     max: 0.5,
-    error: "Deine Armeeliste darf zu höchstens 40% aus Einheiten aus Einheiten der Südmark bestehen.",
+    error: "Deine Armeeliste muss zu 10% bis 50% aus Einheiten aus Einheiten der Südmark bestehen.",
   },
 
   {
@@ -76,7 +76,7 @@ const rules = [
     cardNames: ["Nordmark"],
     min: 0.1,
     max: 0.5,
-    error: "Deine Armeeliste darf zu höchstens 40% aus Einheiten aus Einheiten der Nordmark bestehen.",
+    error: "Deine Armeeliste muss zu 10% bis 50% aus aus Einheiten aus Einheiten der Nordmark bestehen.",
   },
 
   {
@@ -88,6 +88,8 @@ const rules = [
   },
 ];
 
+const MAX_HERO_PERCENTAGE = 40;
+
 const validationResults = {
   unitsBlockedbyRules: [],
   subFactionBelowMinimum: [],
@@ -95,60 +97,41 @@ const validationResults = {
 };
 
 const EmpireRules = {
-  testSubFactionRules: (availableUnits, selectedUnits, maxArmyPoints) => {
-    // empire special rule
-    let marchResult = marchesRule(selectedUnits, availableUnits);
-
-    //tournament rules
-    let twoRuleResult = globalRules.maximumOfTwo(selectedUnits);
-    let heroRuleResult = globalRules.belowMaxPercentageHeroes(selectedUnits, maxArmyPoints, availableUnits);
+  testSubFactionRules: (availableUnits, selectedUnits, totalPointsAllowance) => {
     //  general rules
-    let exceedingMaxResult = globalRules.unitsAboveSubFactionMax(rules, selectedUnits, maxArmyPoints, availableUnits);
-    let DuplicateResult = globalRules.noDuplicateUniques(selectedUnits);
-    //  check for sub faction below minimum
-    let minimumResult = globalRules.unitsBelowSubfactionMinimum(rules, selectedUnits, maxArmyPoints, availableUnits);
+    let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(selectedUnits, availableUnits, totalPointsAllowance);
+    let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(rules, selectedUnits, totalPointsAllowance, availableUnits);
+    let isAboveSubFactionMax = globalRules.unitsAboveSubFactionMax(rules, selectedUnits, totalPointsAllowance, availableUnits);
+    let hasDuplicateUniques = globalRules.noDuplicateUniques(selectedUnits);
+    let hasNoCommander = globalRules.isArmyCommanderPresent(selectedUnits);
+
+    // tournament rules
+    let testForMax2Result = globalRules.maximumOfTwo(selectedUnits);
+    let testForHeroCapResult = globalRules.belowMaxPercentageHeroes(
+      selectedUnits,
+      totalPointsAllowance,
+      availableUnits,
+      MAX_HERO_PERCENTAGE
+    );
+
+    // special faction rules - no special rules for Goblins exist.
 
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [
-      ...marchResult,
-      ...DuplicateResult,
-      ...heroRuleResult,
-      ...twoRuleResult,
-      ...exceedingMaxResult,
+      ...isExceedingPointAllowance,
+      ...hasDuplicateUniques,
+      ...testForHeroCapResult,
+      ...testForMax2Result,
+      ...isAboveSubFactionMax,
     ];
-    validationResults.subFactionBelowMinimum = minimumResult;
-    validationResults.commanderIsPresent = globalRules.isArmyCommanderPresent(selectedUnits);
+    // result for sub factions below limit.
+    validationResults.subFactionBelowMinimum = isBelowSubFactionMin;
+
+    // result - is a commander present?
+    validationResults.commanderIsPresent = hasNoCommander;
 
     return validationResults;
   },
-};
-
-//SEPCIAL FACTION RULES
-
-/**
- * An Army can only have troops from one of the border marches.
- */
-const marchesRule = (selectedUnits, availableUnits) => {
-  const MESSAGE = "Die Armee kann nur Einheiten aus einer der vier Marken enthalten.";
-
-  let marches = ["Nordmark", "Südmark", "Westmark", "Ostmark"];
-  let result = [];
-
-  for (let i = 0; i < selectedUnits.length; i++) {
-    const selectedUnit = selectedUnits[i];
-    if (marches.includes(selectedUnit.subFaction)) {
-      marches = marches.filter((march) => march !== selectedUnit.subFaction);
-      break;
-    }
-  }
-
-  availableUnits.forEach((availableUnit) => {
-    if (marches.includes(availableUnit.subFaction)) {
-      result.push({ unitBlockedbyRules: availableUnit.unitName, message: MESSAGE });
-    }
-  });
-
-  return result;
 };
 
 export { EmpireRules, rules };
