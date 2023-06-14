@@ -4,11 +4,11 @@ import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 import TreeView from "@material-ui/lab/TreeView";
 // components and functions
-import { ArmyContext } from "../../../contexts/armyContext";
+import { ArmyContext } from "../../../../contexts/armyContext";
 import { MinusSquare, PlusSquare, CloseSquare, TransitionComponent } from "./treeViewFunctions";
 import { Fragment } from "react";
 import Tree from "./Tree";
-import { StyledTreeItem } from "./styledTreeItem";
+import { StyledTreeItem } from "./StyledTreeItem";
 
 TransitionComponent.propTypes = {
   /**

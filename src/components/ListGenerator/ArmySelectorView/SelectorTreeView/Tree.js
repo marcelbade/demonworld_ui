@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
 // components and functions
-import { ArmyContext } from "../../../contexts/armyContext";
+import { ArmyContext } from "../../../../contexts/armyContext";
 import { TransitionComponent } from "./treeViewFunctions";
-import { uuidGenerator } from "../../shared/sharedFunctions";
+import { uuidGenerator } from "../../../shared/sharedFunctions";
 import LeafNodeSelector from "./LeafNodeSelector";
 
-import { StyledTreeItem } from "./styledTreeItem";
+import { StyledTreeItem } from "./StyledTreeItem";
 
 TransitionComponent.propTypes = {
   /**

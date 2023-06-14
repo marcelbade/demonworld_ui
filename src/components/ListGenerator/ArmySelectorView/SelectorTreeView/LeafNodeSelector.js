@@ -3,9 +3,9 @@ import React, { useContext } from "react";
 import { Tooltip, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 // components and functions
-import { ArmyContext } from "../../../contexts/armyContext";
-import { uuidGenerator, unitCardMultiSort } from "../../shared/sharedFunctions";
-import { StyledTreeItem } from "./styledTreeItem";
+import { ArmyContext } from "../../../../contexts/armyContext";
+import { uuidGenerator, unitCardMultiSort } from "../../../shared/sharedFunctions";
+import { StyledTreeItem } from "./StyledTreeItem";
 import LeafNode from "./LeafNode";
 
 const useStyles = makeStyles({
