@@ -40,7 +40,7 @@ const AlternativeArmyListSelector = () => {
    */
   const optionSelector = () => {
     if (contextArmy.armyHasAlternativeLists) {
-      if (contextArmy.selectedFactionName == ZWERGE) {
+      if (contextArmy.selectedFactionName === ZWERGE) {
         const result = [...ARMY_ALTERNATIVES_LIST_MAPPER[contextArmy.selectedFactionName]];
 
         result.pop(); 
