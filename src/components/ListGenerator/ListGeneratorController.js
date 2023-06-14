@@ -114,9 +114,6 @@ const ListGeneratorController = () => {
   // The dwarf faction needs two sselections
   const [secondDwarvenOption, setSecondDwarvenOption] = useState("");
 
-  console.log("selectedAlternativeList");
-  console.log(selectedAlternativeList);
-
   // item shop
   const [itemShopState, setItemShopState] = useState({
     clickedUnit: {},
@@ -229,13 +226,6 @@ const ListGeneratorController = () => {
       setDistinctSubFactions(temp);
     }
   }, [allyName]); // eslint-disable-line react-hooks/exhaustive-deps
-
-
-
-  
-
-
-
 
   // If the army's rules specify different alternative lists, set to true.
   useEffect(() => {
