@@ -2,7 +2,7 @@
 import React, { useState, useContext, useEffect } from "react";
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
-import { Typography, Grid, TextField } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 // components and functions
 import { ArmyContext } from "../../../../contexts/armyContext";
 import SelectionInput from "../../../shared/selectionInput";
@@ -35,7 +35,7 @@ const DwarfsSecondSelector = () => {
   }, [contextArmy.selectedAlternativeList]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
-   *
+   * functions generates the options for the autocomplete dynmaically by checking which option was selected in the first dropdown.
    * @returns
    */
   const SelectOptionsDynamically = () => {
