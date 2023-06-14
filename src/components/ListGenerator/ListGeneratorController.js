@@ -110,7 +110,7 @@ const ListGeneratorController = () => {
   });
   // alternative lists
   const [armyHasAlternativeLists, setArmyHasAlternativeLists] = useState(false);
-  const [selectedAlternativeList, setSelectedAlternativeList] = useState("");
+  const [selectedAlternativeList, setSelectedAlternativeList] = useState("NONE");
   const [secondDwarvenOption, setSecondDwarvenOption] = useState("");
 
   // item shop
@@ -296,6 +296,11 @@ const ListGeneratorController = () => {
     });
   }, [distinctSubFactions, selectedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // reset when another army is selected.
+  useEffect(() => {
+    setSelectedAlternativeList("NONE");
+  }, [selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
+
   /**
    * Function returns all distinct subFactions of a selected faction.
    * @param {[unitCard object]} units
@@ -428,7 +433,6 @@ const ListGeneratorController = () => {
         selectedFactionName: selectedFactionName,
         subfactions: distinctSubFactions,
         listOfAllFactionUnits: listOfAllFactionUnits,
-        armyHasAlternativeLists: armyHasAlternativeLists,
         // ALLY
         allyName: allyName,
         allySubFactions: distinctAllySubFactions,
@@ -452,6 +456,7 @@ const ListGeneratorController = () => {
         setUnitSelectedForShop: setUnitSelectedForShop,
         setAllItems: setAllItems,
         // ALTERNATIVE LISTS
+        armyHasAlternativeLists: armyHasAlternativeLists,
         selectedAlternativeList: selectedAlternativeList,
         secondDwarvenOption: secondDwarvenOption,
         setSelectedAlternativeList: setSelectedAlternativeList,
