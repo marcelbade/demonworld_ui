@@ -11,7 +11,7 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 // components and functions
 import ArmyProvider from "../../contexts/armyContext";
 import SelectionInput from "../shared/selectionInput";
-import FactionTreeView from "./ArmySelectorView/treeView";
+import FactionTreeView from "./ArmySelectorView/SelectorTreeView/TreeView";
 import ArmyListDisplay from "./ArmyListView/ArmyListDisplay";
 import ItemShop from "./ItemShop/ItemShop";
 import { ruleValidation } from "../../gameLogic/useRuleValidation";
