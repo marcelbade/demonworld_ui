@@ -65,8 +65,9 @@ const LeafNodeSelector = (props) => {
   };
 
   /**
-   *
-   * @returns Function creates a node ID. The node ID needs the node ID of a branch so the leafs are correctly allocated to one of the branches and a unique id for the leave itself.
+   *  Function creates a node ID. The node ID needs the node ID of a branch so the leafs are correctly allocated to one of the branches and a unique id for the leave itself.
+   * @param {unitCard obj} unit
+   * @returns an int number representing a node ID.
    */
   const createLeafNodeId = (unit) => {
     return `${props.parentNodeId}${contextArmy.subfactions.indexOf(unit)}`;
