@@ -44,7 +44,7 @@ const rules = [
     cardNames: ["Zentralmark"],
     min: 0.0,
     max: 0.3,
-    error: "Deine Armeeliste darf zu höchstens 40% aus Einheiten aus Einheiten der Zentralmark bestehen.",
+    error: "Deine Armeeliste darf zu höchstens 40% aus Einheiten der Zentralmark bestehen.",
   },
 
   {
@@ -52,7 +52,7 @@ const rules = [
     cardNames: ["Ostmark"],
     min: 0.1,
     max: 0.5,
-    error: "Deine Armeeliste muss zu 10% bis 50% aus Einheiten aus Einheiten der Ostmark bestehen.",
+    error: "Deine Armeeliste muss zu 10% bis 50% aus Einheiten der Ostmark bestehen.",
   },
 
   {
@@ -60,7 +60,7 @@ const rules = [
     cardNames: ["Westmark"],
     min: 0.1,
     max: 0.5,
-    error: "Deine Armeeliste muss zu 10% bis 50% aus Einheiten aus Einheiten der Westmark bestehen.",
+    error: "Deine Armeeliste muss zu 10% bis 50% aus Einheiten der Westmark bestehen.",
   },
 
   {
@@ -68,7 +68,7 @@ const rules = [
     cardNames: ["Südmark"],
     min: 0.1,
     max: 0.5,
-    error: "Deine Armeeliste muss zu 10% bis 50% aus Einheiten aus Einheiten der Südmark bestehen.",
+    error: "Deine Armeeliste muss zu 10% bis 50% aus Einheiten der Südmark bestehen.",
   },
 
   {
@@ -76,7 +76,7 @@ const rules = [
     cardNames: ["Nordmark"],
     min: 0.1,
     max: 0.5,
-    error: "Deine Armeeliste muss zu 10% bis 50% aus aus Einheiten aus Einheiten der Nordmark bestehen.",
+    error: "Deine Armeeliste muss zu 10% bis 50% aus Einheiten aus Einheiten der Nordmark bestehen.",
   },
 
   {
@@ -97,10 +97,11 @@ const validationResults = {
 };
 
 const EmpireRules = {
-  testSubFactionRules: (availableUnits, selectedUnits, totalPointsAllowance) => {
+  testSubFactionRules: (availableUnits, selectedUnits, totalPointsAllowance, subFactions) => {
+ 
     //  general rules
     let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(selectedUnits, availableUnits, totalPointsAllowance);
-    let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(rules, selectedUnits, totalPointsAllowance, availableUnits);
+    let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(rules, selectedUnits, totalPointsAllowance, subFactions);
     let isAboveSubFactionMax = globalRules.unitsAboveSubFactionMax(rules, selectedUnits, totalPointsAllowance, availableUnits);
     let hasDuplicateUniques = globalRules.noDuplicateUniques(selectedUnits);
     let hasNoCommander = globalRules.isArmyCommanderPresent(selectedUnits);
