@@ -135,7 +135,7 @@ const globalRules = {
    * @returns array consisting of objects. Every object contains a unit that must be blocked and an error message to
    * be displayed as a tool tip.
    */
-  unitsBelowSubfactionMinimum: (rules, selectedUnits, maxArmyPoints) => {
+  unitsBelowSubfactionMinimum: (rules, selectedUnits, maxArmyPoints, subFactions) => {
     let result = [];
 
     rules
@@ -144,7 +144,7 @@ const globalRules = {
         const subFactionMin = maxArmyPoints * factionRule.min;
         const spentPoints = calculateCurrentlySpentPoints(selectedUnits, factionRule.cardNames);
 
-        if (spentPoints < subFactionMin && !result.includes(factionRule.subFaction)) {
+        if (spentPoints < subFactionMin && !result.includes(factionRule.subFaction) && subFactions.includes(factionRule.cardNames[0])) {
           result.push({ underMinimum: factionRule.cardNames, message: factionRule.error });
         }
       });
