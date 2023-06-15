@@ -7,9 +7,7 @@ import { ArmyContext } from "../../../../contexts/armyContext";
 import { TransitionComponent } from "./treeViewFunctions";
 import { uuidGenerator } from "../../../shared/sharedFunctions";
 import LeafNodeSelector from "./LeafNodeSelector";
-
 import { StyledTreeItem } from "./StyledTreeItem";
-import { ARMY_ALTERNATIVES_LIST_MAPPER, ZWERGE } from "../../../../constants/factions";
 
 TransitionComponent.propTypes = {
   /**
@@ -43,22 +41,6 @@ const Tree = (props) => {
     return subfactions;
   };
 
-  const alternateListSelectionFilter = (subFaction) => {
-    if (contextArmy.armyHasAlternativeLists) {
-      const tempArray = [...ARMY_ALTERNATIVES_LIST_MAPPER[contextArmy.selectedFactionName]];
-      const choice = tempArray.indexOf(contextArmy.selectedAlternativeList);
-      tempArray.splice(choice, 1);
-
-      if (contextArmy.selectedFactionName === ZWERGE) {
-        const secondChoice = tempArray.indexOf(contextArmy.secondDwarvenOption);
-        tempArray.splice(secondChoice, 1);
-      }
-
-      return !tempArray.includes(subFaction);
-    }
-    return true;
-  };
-
   /**
    * Function creates an ID for every node. The id must be larger than the root ID of 1, hence the offset.
    * @param {*} index of the subfaction in the array.
@@ -69,28 +51,29 @@ const Tree = (props) => {
     return `${ID_OFFSET}${index}`;
   };
 
-  return createSubFactionList()
-    .sort((a, b) => {
-      return a > b;
-    })
-    .filter((subFaction) => alternateListSelectionFilter(subFaction))
-    .map((subFaction) => {
-      return (
-        <StyledTreeItem
-          key={uuidGenerator()} //
-          nodeId={createNodeID(createSubFactionList().indexOf(subFaction))}
-          label={subFaction}
-          className={classes.branch}
-        >
-          <LeafNodeSelector
-            // tree for army or ally?
-            units={props.showsFaction ? contextArmy.listOfAllFactionUnits : contextArmy.listOfAllAlliedUnits}
-            subFaction={subFaction}
-            nodeID={createNodeID(createSubFactionList().indexOf(subFaction))}
-          />
-        </StyledTreeItem>
-      );
-    });
+  return (
+    createSubFactionList()
+      .sort((a, b) => {
+        return a > b;
+      })
+      .map((subFaction) => {
+        return (
+          <StyledTreeItem
+            key={uuidGenerator()} //
+            nodeId={createNodeID(createSubFactionList().indexOf(subFaction))}
+            label={subFaction}
+            className={classes.branch}
+          >
+            <LeafNodeSelector
+              // tree for army or ally?
+              units={props.showsFaction ? contextArmy.listOfAllFactionUnits : contextArmy.listOfAllAlliedUnits}
+              subFaction={subFaction}
+              nodeID={createNodeID(createSubFactionList().indexOf(subFaction))}
+            />
+          </StyledTreeItem>
+        );
+      })
+  );
 };
 
 export default Tree;

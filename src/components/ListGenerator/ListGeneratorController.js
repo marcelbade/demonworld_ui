@@ -20,7 +20,7 @@ import AlternativeArmyListSelector from "./ArmySelectorView/AlternativeArmyListS
 import OptionButtons from "./OptionButtons/OptionButtons";
 import { enrichUnitCardObject } from "./ListGeneratorFunctions";
 // constants
-import { ARMIES_WITH_ALTERNATIVE_LISTS, ZWERGE } from "../../constants/factions";
+import { ARMIES_WITH_ALTERNATIVE_LISTS, ARMY_ALTERNATIVES_LIST_MAPPER, ZWERGE } from "../../constants/factions";
 import { ALLIES_MAPPING } from "../../constants/allies";
 import { ALL_FACTIONS_ARRAY } from "../../constants/factions";
 import DwarfsSecondSelector from "./ArmySelectorView/AlternativeArmyListSelection/DwarfsSecondSelector";
@@ -253,11 +253,11 @@ const ListGeneratorController = () => {
   useEffect(() => {
     if (selectedFactionName) {
       let validator = ruleValidation(selectedFactionName);
-      let result = validator.testSubFactionRules(listOfAllFactionUnits, selectedUnits, maxPointsAllowance);
+      let result = validator.testSubFactionRules(listOfAllFactionUnits, selectedUnits, maxPointsAllowance, distinctSubFactions);
 
       collectValidatioResults(result);
     }
-  }, [selectedUnits, maxPointsAllowance]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [selectedUnits, maxPointsAllowance, selectedAlternativeList, distinctSubFactions]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * Everytime the unit selections changes, recalculate which items are currently selected and store it in the central item list.
@@ -303,6 +303,36 @@ const ListGeneratorController = () => {
     setSelectedAlternativeList("NONE");
   }, [selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // reset army's subFaction if alternate lists exist and one has been selected.
+  useEffect(() => {
+    let tempArray = [...findDistinctSubfactions(listOfAllFactionUnits)];
+
+    tempArray = tempArray.filter((subFaction) => alternateListSelectionFilter(subFaction));
+
+    setDistinctSubFactions([...tempArray]);
+  }, [selectedFactionName, selectedAlternativeList]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  /**
+   * Function filters sub factions in case the army has alternative lists
+   * @param {String} subFaction
+   * @returns true, if no alternative lists exist or if the subfaction has been selected by the user.
+   */
+  const alternateListSelectionFilter = (subFaction) => {
+    if (armyHasAlternativeLists) {
+      const tempArray = [...ARMY_ALTERNATIVES_LIST_MAPPER[selectedFactionName]];
+      const choice = tempArray.indexOf(selectedAlternativeList);
+      tempArray.splice(choice, 1);
+
+      if (selectedFactionName === ZWERGE) {
+        const secondChoice = tempArray.indexOf(secondDwarvenOption);
+        tempArray.splice(secondChoice, 1);
+      }
+
+      return !tempArray.includes(subFaction);
+    }
+    return true;
+  };
+
   /**
    * Function returns all distinct subFactions of a selected faction.
    * @param {[unitCard object]} units
@@ -324,6 +354,7 @@ const ListGeneratorController = () => {
    * Adds the selected units to a central list of units selected by the user and adds 2 things:
    * - a unique Id so the same unit can be selected more than once and all instances can be differentiated
    * - equipment slots so items can be added
+   *  -a loss counter for the loss calculator
    * @param {unitCard object} unit
    */
   const selectUnit = (unit) => {
