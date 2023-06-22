@@ -8,25 +8,16 @@ import { makeStyles } from "@material-ui/core/styles";
 import skullsIcon from "../../icons/skulls.png";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
+import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 // constants
 import { GIANT, HERO, MAGE } from "../../constants/unitTypes";
 // components and functions
 import { LossCalcContext } from "../../contexts/LossCalculatorContext";
+import LossCalculatorButton from "./LossCalculatorButton";
 
 const useStyles = makeStyles((theme) => ({
-  bttns: {
-    [theme.breakpoints.up("md")]: {
-      flexDirection: "row",
-    },
-    [theme.breakpoints.down("md")]: {
-      flexDirection: "row",
-
-      "@media (orientation:landscape)": {
-        flexDirection: "row",
-      },
-    },
-  },
-
+ 
   typographyFont: {
     textAlign: "center",
     marginTop: "0.5em",
@@ -59,6 +50,12 @@ const ListElementBttns = (props) => {
     calcContext.setList([...tempArray]);
   };
 
+  const addFullUnit = () => {
+    for (let i = 0; i < props.unit.hitpoints; i++) {
+      addLoss();
+    }
+  };
+
   /**
    * Function lets the user subtract lost elements.
    */
@@ -71,14 +68,20 @@ const ListElementBttns = (props) => {
     calcContext.setList([...tempArray]);
   };
 
+  const subtractFullUnit = () => {
+    for (let i = 0; i < props.unit.hitpoints; i++) {
+      subtractLoss();
+    }
+  };
+
   /**
-   * Function immediately sets the number of lost elements to the maximum number possible.
+   * Function immediately sets the number of lost elements or hitpoints to the maximum number possible.
    */
   const unitDestroyed = () => {
     let tempArray = [...calcContext.list];
 
     let unitIndex = tempArray.findIndex((u) => u.uniqueID === props.unit.uniqueID);
-    tempArray[unitIndex].lossCounter = calcContext.selectIncrement(props.unit);
+    tempArray[unitIndex].lossCounter = props.unit.maxCounter;
     tempArray[unitIndex].unitDestroyed = true;
 
     calcContext.setList([...tempArray]);
@@ -92,12 +95,14 @@ const ListElementBttns = (props) => {
   };
 
   /**
-   * Function prevents the user from choosing a number of lost elements larger than the number of elements the unit has.
+   * Function prevents the user from choosing a number of lost elements larger than the number of elements or hitpoints the unit has.
    * @returns boolean flag
    */
-  const notGreaterThanNumberOfElements = () => {
-    const increment = calcContext.selectIncrement(props.unit);
-    return props.unit.lossCounter === increment;
+  const notGreaterThanNumberOfIncrements = () => {
+    return props.unit.lossCounter === props.unit.maxCounter;
+  };
+  const noGreaterThanNumberOfHitpoints = () => {
+    return props.unit.lossCounter + props.unit.hitpoints > props.unit.maxCounter;
   };
 
   /**
@@ -106,6 +111,9 @@ const ListElementBttns = (props) => {
    */
   const notLessThanZero = () => {
     return props.unit.lossCounter === 0;
+  };
+  const notLessThanOneUnit = () => {
+    return props.unit.lossCounter < props.unit.hitpoints;
   };
 
   const displayToolTip = () => {
@@ -124,32 +132,44 @@ const ListElementBttns = (props) => {
     return message;
   };
 
-  return (
-    <Stack direction="row" spacing={2}>
-      {/* units that have only a single element do not need these buttons */}
+  /**
+   * Function checks, if a unit has more than 1 element and more than 1 HP per element.
+   * @returns true, if the unit has multiple elements and HP.
+   */
+  const morethanOneElementAndMultipleHP = () => {
+    return props.unit.hitpoints > 1 && props.unit.numberOfElements > 1;
+  };
 
+  return (
+    <Stack direction="row"  spacing={2}>
       <ButtonGroup variant="contained">
-        <Button
-          onClick={() => {
-            subtractLoss();
-          }}
-          disabled={notLessThanZero()}
-          className={classes.bttn}
-        >
-          <ChevronLeftIcon />
-        </Button>
+        <LossCalculatorButton
+          displayButton={morethanOneElementAndMultipleHP()}
+          function={subtractFullUnit}
+          disablerExpression={notLessThanZero() || notLessThanOneUnit()}
+          icon={<KeyboardDoubleArrowLeftIcon />}
+        />
+        <LossCalculatorButton
+          displayButton={true}
+          function={subtractLoss}
+          disablerExpression={notLessThanZero()}
+          icon={<ChevronLeftIcon />}
+        />
         <Typography variant="h6" className={classes.typographyFont}>
           {props.unit.lossCounter}
         </Typography>
-        <Button
-          onClick={() => {
-            addLoss();
-          }}
-          disabled={notGreaterThanNumberOfElements()}
-          className={classes.bttn}
-        >
-          <ChevronRightIcon />
-        </Button>
+        <LossCalculatorButton
+          displayButton={true}
+          function={addLoss}
+          disablerExpression={notGreaterThanNumberOfIncrements()}
+          icon={<ChevronRightIcon />}
+        />
+        <LossCalculatorButton
+          displayButton={morethanOneElementAndMultipleHP()}
+          function={addFullUnit}
+          disablerExpression={notGreaterThanNumberOfIncrements() || noGreaterThanNumberOfHitpoints()}
+          icon={<KeyboardDoubleArrowRightIcon />}
+        />
       </ButtonGroup>
 
       <Tooltip title={<Typography className={classes.tooltipText}>{displayToolTip()}</Typography>}>
