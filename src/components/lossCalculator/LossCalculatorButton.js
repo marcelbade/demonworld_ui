@@ -27,7 +27,7 @@ const LossCalculatorButton = (props) => {
       <Button
         variant="contained"
         onClick={() => {
-          props.function();
+          props.action();
         }}
         disabled={props.disablerExpression}
         className={classes.bttn}
