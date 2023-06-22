@@ -17,7 +17,6 @@ import { LossCalcContext } from "../../contexts/LossCalculatorContext";
 import LossCalculatorButton from "./LossCalculatorButton";
 
 const useStyles = makeStyles((theme) => ({
- 
   typographyFont: {
     textAlign: "center",
     marginTop: "0.5em",
@@ -37,6 +36,11 @@ const useStyles = makeStyles((theme) => ({
 const ListElementBttns = (props) => {
   const classes = useStyles();
   const calcContext = useContext(LossCalcContext);
+
+  const MINUS_1_HP = "- 1 Lebenspunkt";
+  const MINUS_1_ELEMENT = "- 1 Element";
+  const PLUS_1_HP = "+ 1 Lebenspunkt";
+  const PLUS_1_ELEMENT = "+ 1 Element";
 
   /**
    * Function lets the user add lost elements.
@@ -116,7 +120,7 @@ const ListElementBttns = (props) => {
     return props.unit.lossCounter < props.unit.hitpoints;
   };
 
-  const displayToolTip = () => {
+  const displayToolTipUnitLost = () => {
     let message;
 
     if (props.unit.unitType === HERO) {
@@ -141,15 +145,17 @@ const ListElementBttns = (props) => {
   };
 
   return (
-    <Stack direction="row"  spacing={2}>
+    <Stack direction="row" spacing={2}>
       <ButtonGroup variant="contained">
         <LossCalculatorButton
+          tooltipText={MINUS_1_ELEMENT}
           displayButton={morethanOneElementAndMultipleHP()}
           function={subtractFullUnit}
           disablerExpression={notLessThanZero() || notLessThanOneUnit()}
           icon={<KeyboardDoubleArrowLeftIcon />}
         />
         <LossCalculatorButton
+          tooltipText={props.unit.hitpoints > 1 ? MINUS_1_HP : MINUS_1_ELEMENT}
           displayButton={true}
           function={subtractLoss}
           disablerExpression={notLessThanZero()}
@@ -159,12 +165,14 @@ const ListElementBttns = (props) => {
           {props.unit.lossCounter}
         </Typography>
         <LossCalculatorButton
+          tooltipText={props.unit.hitpoints > 1 ? PLUS_1_HP : PLUS_1_ELEMENT}
           displayButton={true}
           function={addLoss}
           disablerExpression={notGreaterThanNumberOfIncrements()}
           icon={<ChevronRightIcon />}
         />
         <LossCalculatorButton
+          tooltipText={PLUS_1_ELEMENT}
           displayButton={morethanOneElementAndMultipleHP()}
           function={addFullUnit}
           disablerExpression={notGreaterThanNumberOfIncrements() || noGreaterThanNumberOfHitpoints()}
@@ -172,7 +180,7 @@ const ListElementBttns = (props) => {
         />
       </ButtonGroup>
 
-      <Tooltip title={<Typography className={classes.tooltipText}>{displayToolTip()}</Typography>}>
+      <Tooltip title={<Typography className={classes.tooltipText}>{displayToolTipUnitLost()}</Typography>}>
         <IconButton
           variant="contained"
           component={Button}

@@ -1,7 +1,7 @@
 // React
 import React from "react";
 //Material UI
-import { Button } from "@material-ui/core";
+import { Button, Tooltip, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -23,16 +23,18 @@ const LossCalculatorButton = (props) => {
   const classes = useStyles();
 
   return props.displayButton ? (
-    <Button
-      variant="contained"
-      onClick={() => {
-        props.function();
-      }}
-      disabled={props.disablerExpression}
-      className={classes.bttn}
-    >
-      {props.icon}
-    </Button>
+    <Tooltip title={<Typography className={classes.tooltipText}>{props.tooltipText}</Typography>}>
+      <Button
+        variant="contained"
+        onClick={() => {
+          props.function();
+        }}
+        disabled={props.disablerExpression}
+        className={classes.bttn}
+      >
+        {props.icon}
+      </Button>
+    </Tooltip>
   ) : null;
 };
 
