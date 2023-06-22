@@ -1,6 +1,5 @@
 import { uuidGenerator } from "../shared/sharedFunctions";
 
-
 /**
  * Function returns all distinct subFactions of a selected faction.
  * @param {[unitCard object]} units
@@ -44,10 +43,13 @@ const addUniqueIdToUnit = (unit) => {
  * @param {*} unit
  * @returns {} unit object with a lossCounter property
  */
- const addLossCounterToUnit = (unit) => {
+const addLossCounterToUnit = (unit) => {
+  const max = unit.numberOfElements * unit.hitpoints;
+
   return {
     ...unit,
     lossCounter: 0,
+    maxCounter: max,
     unitDestroyed: false,
   };
 };
@@ -57,7 +59,7 @@ const addUniqueIdToUnit = (unit) => {
  * @param {*} unit
  * @returns unit object with equipment + equipmentTypes property.
  */
- const addEquipmentSlotsToUnit = (unit) => {
+const addEquipmentSlotsToUnit = (unit) => {
   const maxItemNumber = calculateMaxNumberMagicItems(unit);
 
   return {
