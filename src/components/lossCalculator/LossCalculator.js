@@ -66,9 +66,7 @@ const LossCalculator = () => {
     let sum = 0;
 
     list.forEach((u) => {
-      const increment = selectIncrement(u);
-
-      let pointCostLostElements = u.lossCounter * (u.points / increment);
+      let pointCostLostElements = u.lossCounter * (u.points / u.maxCounter);
       sum += pointCostLostElements;
 
       u.equipment.forEach((e) => {
@@ -82,20 +80,12 @@ const LossCalculator = () => {
   };
 
   /**
-   *
+   * Function determines if a unit has more than 1 hit point, i.e, if it is a hero, giant, mage or a unit with multiple hit points per element.
    * @param {*} unit
-   * @returns
-   */
-  const selectIncrement = (unit) => {
-    return isHeroMageOrGiantElement(unit) ? unit.hitpoints : unit.numberOfElements;
-  };
-  /**
-   *
-   * @param {*} unit
-   * @returns
+   * @returns true if the unit is a hero, mage, giant, or unit with more than 1 HP per element.
    */
   const isHeroMageOrGiantElement = (unit) => {
-    return unit.unitType === HERO || unit.unitType === MAGE || unit.unitType === GIANT;
+    return unit.hitpoints > 1;
   };
 
   /**
@@ -104,8 +94,7 @@ const LossCalculator = () => {
    * @returns unitCard obj
    */
   const setUnitDestroyedFlag = (u) => {
-    const increment = selectIncrement(u);
-    if (u.lossCounter === increment) {
+    if (u.lossCounter === u.maxCounter) {
       u.unitDestroyed = true;
     } else {
       u.unitDestroyed = false;
@@ -144,7 +133,6 @@ const LossCalculator = () => {
         list: list,
         setList: setList,
         setItemIsLostFlag: setItemIsLostFlag,
-        selectIncrement: selectIncrement,
         isHeroMageOrGiantElement: isHeroMageOrGiantElement,
       }}
     >
@@ -162,7 +150,7 @@ const LossCalculator = () => {
               </IconButton>
             </Grid>
             {/* LIST */}
-            <Grid item>
+            <Grid item alignItems>
               <List>
                 {unitCardMultiSort(list).map((u, i) => {
                   return (
