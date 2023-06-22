@@ -150,14 +150,14 @@ const ListElementBttns = (props) => {
         <LossCalculatorButton
           tooltipText={MINUS_1_ELEMENT}
           displayButton={morethanOneElementAndMultipleHP()}
-          function={subtractFullUnit}
+          action={subtractFullUnit}
           disablerExpression={notLessThanZero() || notLessThanOneUnit()}
           icon={<KeyboardDoubleArrowLeftIcon />}
         />
         <LossCalculatorButton
           tooltipText={props.unit.hitpoints > 1 ? MINUS_1_HP : MINUS_1_ELEMENT}
           displayButton={true}
-          function={subtractLoss}
+          action={subtractLoss}
           disablerExpression={notLessThanZero()}
           icon={<ChevronLeftIcon />}
         />
@@ -167,14 +167,14 @@ const ListElementBttns = (props) => {
         <LossCalculatorButton
           tooltipText={props.unit.hitpoints > 1 ? PLUS_1_HP : PLUS_1_ELEMENT}
           displayButton={true}
-          function={addLoss}
+          action={addLoss}
           disablerExpression={notGreaterThanNumberOfIncrements()}
           icon={<ChevronRightIcon />}
         />
         <LossCalculatorButton
           tooltipText={PLUS_1_ELEMENT}
           displayButton={morethanOneElementAndMultipleHP()}
-          function={addFullUnit}
+          action={addFullUnit}
           disablerExpression={notGreaterThanNumberOfIncrements() || noGreaterThanNumberOfHitpoints()}
           icon={<KeyboardDoubleArrowRightIcon />}
         />
