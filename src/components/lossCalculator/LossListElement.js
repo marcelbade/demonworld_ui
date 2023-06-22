@@ -68,7 +68,11 @@ const LossListElement = (props) => {
   const calcContext = useContext(LossCalcContext);
 
   const TEXT_UNITS = "Verlorene Elemente:";
-  const TEXT_SINGLE_ELEMENTS = "Verlorene Lenenspunkte:";
+  const TEXT_SINGLE_ELEMENTS = "Verlorene Lebenspunkte:";
+
+  const doesUnithaveEquipment = () => {
+    return props.unit.equipment !== undefined && props.unit.equipment.length !== 0;
+  };
 
   return (
     <ListItem>
@@ -98,8 +102,8 @@ const LossListElement = (props) => {
           <Grid item xs={12}>
             <List>
               {/* ITTEM LIST */}
-              {props.unit.equipment !== undefined && props.unit.equipment.length !== 0 ? <span className={classes.line}></span> : null}
-              {props.unit.equipment !== undefined && props.unit.equipment.length !== 0
+              {doesUnithaveEquipment() ? <span className={classes.line}></span> : null}
+              {doesUnithaveEquipment()
                 ? props.unit.equipment.map((e, i) => {
                     return <EquipmentListEntry unit={props.unit} element={e} index={i} key={uuidGenerator()} />;
                   })
