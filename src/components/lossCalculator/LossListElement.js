@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 // components and functions
 import { LossCalcContext } from "../../contexts/LossCalculatorContext";
 import { ListItem } from "@mui/material";
-import ListElementBttns from "./ListElementBttns";
+import ListElementBttns from "./ListElementBttnGroup";
 import EquipmentListEntry from "./EquipmentListEntry";
 import { uuidGenerator } from "../shared/sharedFunctions";
 
