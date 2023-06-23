@@ -6,12 +6,13 @@ import { makeStyles } from "@material-ui/core/styles";
 // components and functions
 import { LossCalcContext } from "../../contexts/LossCalculatorContext";
 import { ListItem } from "@mui/material";
-import ListElementBttns from "./ListElementBttnGroup";
-import EquipmentListEntry from "./EquipmentListEntry";
+import ListElementBttns from "./LossInputButtons/ListElementBttnGroup";
+import EquipmentListEntry from "./EquipmentList/EquipmentListEntry";
 import { uuidGenerator } from "../shared/sharedFunctions";
 
 // clsx
 import clsx from "clsx";
+import EquipmentList from "./EquipmentList/EquipmentList";
 // icons
 
 const useStyles = makeStyles((theme) => ({
@@ -22,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("md")]: {
       flexDirection: "row",
       padding: "2em",
-      width: "70%",
+      width: "190%",
       height: "10%",
     },
     [theme.breakpoints.down("md")]: {
@@ -78,7 +79,6 @@ const LossListElement = (props) => {
     <ListItem>
       <Grid
         container
-        justify="space-between"
         alignItems="center"
         alignContent="center"
         className={
@@ -100,15 +100,7 @@ const LossListElement = (props) => {
             </Typography>
           </Grid>
           <Grid item xs={12}>
-            <List>
-              {/* ITTEM LIST */}
-              {doesUnithaveEquipment() ? <span className={classes.line}></span> : null}
-              {doesUnithaveEquipment()
-                ? props.unit.equipment.map((e, i) => {
-                    return <EquipmentListEntry unit={props.unit} element={e} index={i} key={uuidGenerator()} />;
-                  })
-                : null}
-            </List>
+            <EquipmentList unit={props.unit} />
           </Grid>
         </Grid>
         <Grid item>

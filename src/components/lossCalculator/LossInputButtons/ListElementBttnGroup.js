@@ -5,15 +5,15 @@ import { Typography, ButtonGroup, Button, Tooltip, IconButton } from "@material-
 import Stack from "@mui/material/Stack";
 import { makeStyles } from "@material-ui/core/styles";
 // icons
-import skullsIcon from "../../icons/skulls.png";
+import skullsIcon from "../../../icons/skulls.png";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 // constants
-import { GIANT, HERO, MAGE } from "../../constants/unitTypes";
+import { GIANT, HERO, MAGE } from "../../../constants/unitTypes";
 // components and functions
-import { LossCalcContext } from "../../contexts/LossCalculatorContext";
+import { LossCalcContext } from "../../../contexts/LossCalculatorContext";
 import LossCalculatorButton from "./LossCalculatorButton";
 
 const useStyles = makeStyles((theme) => ({
@@ -30,6 +30,11 @@ const useStyles = makeStyles((theme) => ({
   },
   tooltipText: {
     fontSize: "20px",
+  },
+  test1: {
+    
+    padding: "2em",
+    backgroundColor: "pink",
   },
 }));
 
@@ -145,7 +150,7 @@ const ListElementBttns = (props) => {
   };
 
   return (
-    <Stack direction="row" spacing={2}>
+    <Stack direction="row"  justifyContent="center" className={classes.test1}  spacing={2}>
       <ButtonGroup variant="contained">
         <LossCalculatorButton
           tooltipText={MINUS_1_ELEMENT}
