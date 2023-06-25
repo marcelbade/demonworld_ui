@@ -128,7 +128,7 @@ const globalRules = {
   },
 
   /**
-   *Function tests for all sub factions in the list whether they are above the min. point allowance for that sub faction.
+   *Function tests for all sub factions in the list whether they are above the minimum point allowance for that sub faction.
    * @param {rule obj} rules rule object for army.
    * @param {[unitCard obj]} selectedUnits an array of unit card objects.
    * @param {int} maxArmyPoints max. army points allowance.
@@ -192,7 +192,7 @@ const globalRules = {
 // private, non-exported functions
 
 /**
- * Returns how many points have already been spent for a subfaction.
+ * Function returns how many points have already been spent for a subfaction.
  */
 const calculateCurrentlySpentPoints = (selectedUnits, subFaction) => {
   let actualValue = 0;
@@ -201,9 +201,28 @@ const calculateCurrentlySpentPoints = (selectedUnits, subFaction) => {
     if (subFaction.includes(selectedUnit.subFaction)) {
       actualValue += selectedUnit.points;
     }
+    if (subFaction.includes(selectedUnit.subFaction) && selectedUnit.equipment.length > 0) {
+      const equipmentTotal = calculateEquipmentCost(selectedUnit);
+      actualValue += equipmentTotal;
+    }
   });
 
   return actualValue;
+};
+
+/**
+ * Function calculates the net cost for a unit's equipment.
+ * @param {unitCard Obj} selectedUnit
+ * @returns  total point cost for a unit's equipment.
+ */
+const calculateEquipmentCost = (selectedUnit) => {
+  let sum = 0;
+
+  selectedUnit.equipment.forEach((item) => {
+    sum += item.points;
+  });
+
+  return sum;
 };
 
 export default globalRules;
