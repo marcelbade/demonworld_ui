@@ -68,7 +68,7 @@ const SubListStats = (props) => {
   };
 
   const calculateCurrentPercentage = () => {
-    return ((subFactionTotal / contextArmy.maxPointsAllowance) * 100);
+    return (subFactionTotal / contextArmy.maxPointsAllowance) * 100;
   };
 
   const displayPoints = () => {
@@ -76,13 +76,9 @@ const SubListStats = (props) => {
   };
 
   const displayPercents = () => {
-    const result = calculateCurrentPercentage() === 0 ? null : `Prozent ${calculateCurrentPercentage()} %`;
+    // Number(Math.round(100 - (price / listprice) * 100 + 'e2') + 'e-2').toFixed(2);
+    const result = calculateCurrentPercentage() === 0 ? null : `Prozent ${Number(Math.round(calculateCurrentPercentage())).toFixed(2)} %`;
     return result;
-  };
-
-  const remainingPoints = () => {
-    let maxPoints = (percentages.max / 100) * contextArmy.maxPointsAllowance;
-    return Math.trunc(maxPoints - subFactionTotal);
   };
 
   return (
@@ -101,7 +97,6 @@ const SubListStats = (props) => {
           <span className={classes.textBox}>
             <span className={classes.font}>{`Minimum: ${percentages.min} %`}</span>
             <span className={classes.font}>{`Maximum ${percentages.max} %`}</span>
-            {subFactionTotal > 0 ? <span className={classes.font}>{`(Noch ${remainingPoints()} Punkte)`}</span> : null}
           </span>
         }
       />
