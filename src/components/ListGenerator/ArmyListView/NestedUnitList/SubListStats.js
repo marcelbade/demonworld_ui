@@ -68,7 +68,7 @@ const SubListStats = (props) => {
   };
 
   const calculateCurrentPercentage = () => {
-    return Math.round((subFactionTotal / contextArmy.maxPointsAllowance) * 100);
+    return ((subFactionTotal / contextArmy.maxPointsAllowance) * 100);
   };
 
   const displayPoints = () => {
@@ -77,7 +77,7 @@ const SubListStats = (props) => {
 
   const displayPercents = () => {
     const result = calculateCurrentPercentage() === 0 ? null : `Prozent ${calculateCurrentPercentage()} %`;
-    return Math.trunc(result);
+    return result;
   };
 
   const remainingPoints = () => {
