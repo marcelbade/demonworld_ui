@@ -77,7 +77,7 @@ const SubListStats = (props) => {
 
   const displayPercents = () => {
     // Number(Math.round(100 - (price / listprice) * 100 + 'e2') + 'e-2').toFixed(2);
-    const result = calculateCurrentPercentage() === 0 ? null : `Prozent ${Number(Math.round(calculateCurrentPercentage())).toFixed(2)} %`;
+    const result = calculateCurrentPercentage() === 0 ? null : `Prozent ${Number(calculateCurrentPercentage()).toFixed(2)} %`;
     return result;
   };
 
