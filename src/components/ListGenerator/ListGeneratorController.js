@@ -307,18 +307,22 @@ const ListGeneratorController = () => {
   useEffect(() => {
     let tempArray = [...findDistinctSubfactions(listOfAllFactionUnits)];
 
-    tempArray = tempArray.filter((subFaction) => alternateListSelectionFilter(subFaction));
-
+    if (armyHasAlternativeLists) {
+      tempArray = tempArray.filter((subFaction) => alternateListSelectionFilter(subFaction));
+    }
     setDistinctSubFactions([...tempArray]);
   }, [selectedFactionName, selectedAlternativeList]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
-   * Function filters sub factions in case the army has alternative lists
+   * Function filters down the choices for alternative army lists. Alternative army lists work by excluding certain sub factions from the list
+   * of sub factions available to the user. This function takes an array of all possible choices (sub factions), removes the one picked by the user and
+   * then uses the resulting array to filter out all units that belong the other sub factions.
+   * There is one faction (dwarfs) that requires 2 choices, the second being hard coded.
    * @param {String} subFaction
    * @returns true, if no alternative lists exist or if the subfaction has been selected by the user.
    */
   const alternateListSelectionFilter = (subFaction) => {
-    if (armyHasAlternativeLists) {
+    if (ARMY_ALTERNATIVES_LIST_MAPPER[selectedFactionName] !== undefined) {
       const tempArray = [...ARMY_ALTERNATIVES_LIST_MAPPER[selectedFactionName]];
       const choice = tempArray.indexOf(selectedAlternativeList);
       tempArray.splice(choice, 1);
@@ -330,6 +334,7 @@ const ListGeneratorController = () => {
 
       return !tempArray.includes(subFaction);
     }
+
     return true;
   };
 
