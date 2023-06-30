@@ -20,6 +20,10 @@ const useStyles = makeStyles({
   branch: {
     width: "20em",
   },
+  disabledBranch: {
+    width: "20em",
+    color: "grey",
+  },
 });
 
 const Tree = (props) => {
@@ -41,6 +45,13 @@ const Tree = (props) => {
     return subfactions;
   };
 
+  const isSubFactionEmpty = (subFaction) => {
+    return (
+      contextArmy.listOfAllFactionUnits.filter((f) => f.subFaction === subFaction).length == 0 &&
+      contextArmy.listOfAllAlliedUnits.filter((f) => f.subFaction === subFaction).length == 0
+    );
+  };
+
   /**
    * Function creates an ID for every node. The id must be larger than the root ID of 1, hence the offset.
    * @param {*} index of the subfaction in the array.
@@ -51,29 +62,27 @@ const Tree = (props) => {
     return `${ID_OFFSET}${index}`;
   };
 
-  return (
-    createSubFactionList()
-      .sort((a, b) => {
-        return a > b;
-      })
-      .map((subFaction) => {
-        return (
-          <StyledTreeItem
-            key={uuidGenerator()} //
-            nodeId={createNodeID(createSubFactionList().indexOf(subFaction))}
-            label={subFaction}
-            className={classes.branch}
-          >
-            <LeafNodeSelector
-              // tree for army or ally?
-              units={props.showsFaction ? contextArmy.listOfAllFactionUnits : contextArmy.listOfAllAlliedUnits}
-              subFaction={subFaction}
-              nodeID={createNodeID(createSubFactionList().indexOf(subFaction))}
-            />
-          </StyledTreeItem>
-        );
-      })
-  );
+  return createSubFactionList()
+    .sort((a, b) => {
+      return a > b;
+    })
+    .map((subFaction) => {
+      return (
+        <StyledTreeItem
+          key={uuidGenerator()} //
+          nodeId={createNodeID(createSubFactionList().indexOf(subFaction))}
+          label={subFaction}
+          className={isSubFactionEmpty(subFaction) ? classes.disabledBranch : classes.branch}
+        >
+          <LeafNodeSelector
+            // tree for army or ally?
+            units={props.showsFaction ? contextArmy.listOfAllFactionUnits : contextArmy.listOfAllAlliedUnits}
+            subFaction={subFaction}
+            nodeID={createNodeID(createSubFactionList().indexOf(subFaction))}
+          />
+        </StyledTreeItem>
+      );
+    });
 };
 
 export default Tree;

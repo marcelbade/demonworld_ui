@@ -20,7 +20,13 @@ import AlternativeArmyListSelector from "./ArmySelectorView/AlternativeArmyListS
 import OptionButtons from "./OptionButtons/OptionButtons";
 import { enrichUnitCardObject } from "./ListGeneratorFunctions";
 // constants
-import { ARMIES_WITH_ALTERNATIVE_LISTS, ARMY_ALTERNATIVES_LIST_MAPPER, ZWERGE } from "../../constants/factions";
+import {
+  ARMIES_TWO_CHOICES_PER_ALTERNATIVE_LIST,
+  ARMIES_WITH_ALTERNATIVE_LISTS,
+  ARMY_ALTERNATIVES_LIST_MAPPER,
+  IMPERIUM,
+  ZWERGE,
+} from "../../constants/factions";
 import { ALLIES_MAPPING } from "../../constants/allies";
 import { ALL_FACTIONS_ARRAY } from "../../constants/factions";
 import DwarfsSecondSelector from "./ArmySelectorView/AlternativeArmyListSelection/DwarfsSecondSelector";
@@ -90,11 +96,13 @@ const ListGeneratorController = () => {
   // intialize local states
   const [fetchedFactions, setfetchedFactions] = useState([]);
   const [fetchedItems, setfetchedItems] = useState([]);
+  // selected faction
   const [selectedFactionName, setSelectedFactionName] = useState("");
   const [listOfAllFactionUnits, setListOfAllFactionUnits] = useState([]);
+  const [selectedUnits, setSelectedUnits] = useState([]);
+  // allied faction
   const [allyName, setAllyName] = useState("");
   const [listOfAllAlliedUnits, setListOfAllAlliedUnits] = useState([]);
-  const [selectedUnits, setSelectedUnits] = useState([]);
   // maximum point allowance
   const [maxPointsAllowance, setMaxPointsAllowance] = useState(2000); //  eslint-disable-line no-unused-vars
   // the current total point value of all selected units
@@ -310,8 +318,12 @@ const ListGeneratorController = () => {
     if (armyHasAlternativeLists) {
       tempArray = tempArray.filter((subFaction) => alternateListSelectionFilter(subFaction));
     }
+
+    // else if (selectedFactionName === ZWERGE) {
+    //   tempArray = tempArray.filter((subFaction) => alternateListSelectionFilter(subFaction));
+    // }
     setDistinctSubFactions([...tempArray]);
-  }, [selectedFactionName, selectedAlternativeList]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [selectedFactionName, selectedAlternativeList, secondDwarvenOption]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * Function filters down the choices for alternative army lists. Alternative army lists work by excluding certain sub factions from the list
@@ -327,9 +339,15 @@ const ListGeneratorController = () => {
       const choice = tempArray.indexOf(selectedAlternativeList);
       tempArray.splice(choice, 1);
 
-      if (selectedFactionName === ZWERGE) {
+      if (ARMIES_TWO_CHOICES_PER_ALTERNATIVE_LIST.includes(selectedFactionName)) {
         const secondChoice = tempArray.indexOf(secondDwarvenOption);
+
         tempArray.splice(secondChoice, 1);
+      }
+
+      if (tempArray.includes(ALLIES_MAPPING[selectedFactionName])) {
+        setAllyName(""); 
+        setListOfAllAlliedUnits([]);
       }
 
       return !tempArray.includes(subFaction);

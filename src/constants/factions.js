@@ -26,3 +26,5 @@ export const ALTERNATIVE_ARMY_SELECTION_TEXT = {
   Orks: "Wähle einen der Clans oder Clanngett",  
 }
  
+
+export const ARMIES_TWO_CHOICES_PER_ALTERNATIVE_LIST=[ZWERGE]; 
