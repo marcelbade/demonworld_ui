@@ -8,7 +8,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { ArmyContext } from "../../../contexts/armyContext";
 import { isObjectEmtpy } from "../../shared/sharedFunctions";
 import { uuidGenerator } from "../../shared/sharedFunctions";
-import { NAME_MAPPING } from "../../../constants/itemShopConstants";
+import { NAME_MAPPING as ITEM_CATEGORY_NAME_MAPPING } from "../../../constants/itemShopConstants";
 import {
   forBanner,
   forFactionAndGenericItems,
@@ -185,7 +185,7 @@ const ItemShop = () => {
                     showTab(type);
                   }}
                 >
-                  {NAME_MAPPING[type]}
+                  {ITEM_CATEGORY_NAME_MAPPING[type]}
                 </Button>
               );
             })}
