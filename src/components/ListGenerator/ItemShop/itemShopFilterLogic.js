@@ -26,7 +26,7 @@ export const forUnitAndItemType = (item, unit) => {
 // Only show banners if the unit has a standard bearer special element.
 export const forBanner = (item, unit) => {
   if (!unit.standardBearer) {
-    return item.type !== ITEM_TYPE_BANNER;
+    return item.itemType !== ITEM_TYPE_BANNER;
   }
   return true;
 };
@@ -34,7 +34,7 @@ export const forBanner = (item, unit) => {
 // Only show instruments if the unit has a musician special element.
 export const forMusicians = (item, unit) => {
   if (!unit.musician) {
-    return item.type !== ITEM_TYPE_MUSICIAN;
+    return item.itemType !== ITEM_TYPE_MUSICIAN;
   }
   return true;
 };
@@ -42,7 +42,7 @@ export const forMusicians = (item, unit) => {
 // Filter out all bows
 export const forCrossBows = (item, unit) => {
   if (unit.rangedWeapon === NO_RANGE_WEAPON || !CROSSBOW_TYPES.includes(unit.rangedWeapon)) {
-    return item.type !== ITEM_TYPE_BOWS;
+    return item.itemType !== ITEM_TYPE_BOWS;
   }
   return true;
 };
@@ -50,7 +50,7 @@ export const forCrossBows = (item, unit) => {
 // Only show instruments if the unit has a musician special element.
 export const forBows = (item, unit) => {
   if (unit.rangedWeapon === NO_RANGE_WEAPON || !BOW_TYPES.includes(unit.rangedWeapon)) {
-    return item.type !== ITEM_TYPE_CROSSBOWS;
+    return item.itemType !== ITEM_TYPE_CROSSBOWS;
   }
   return true;
 };
@@ -66,7 +66,7 @@ export const whenUnitHasNoLeader = (item, unit) => {
 // Giants with a crew sporting bows or crossbows can be equipeed with the fitting artifacts. Everything else is not rated for giants at the moment.
 export const whenUnitIsGiant = (item, unit) => {
   if (unit.unitType === GIANT && BOW_TYPES.includes(unit.rangedWeapon) ) {
-    return item.type === ITEM_TYPE_CROSSBOWS || item.type === ITEM_TYPE_BOWS;
+    return item.itemType === ITEM_TYPE_CROSSBOWS || item.itemType === ITEM_TYPE_BOWS;
   }
   return true;
 };

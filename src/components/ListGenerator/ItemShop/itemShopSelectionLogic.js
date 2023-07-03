@@ -35,16 +35,16 @@ export const hasItemBeenPicked = (unit, item) => {
  * @returns boolean flag
  */
 export const hasItemTypeBeenPicked = (unit, item) => {
-  if (NON_MAGIC_ITEMS.includes(item.type)) {
-    const isGenericType = unit.equipmentTypes[item.type];
-    const typeAlreadyPicked = unit.equipment.filter((e) => e.type === item.type).length > 0;
+  if (NON_MAGIC_ITEMS.includes(item.itemType)) {
+    const isGenericType = unit.equipmentTypes[item.itemType];
+    const typeAlreadyPicked = unit.equipment.filter((e) => e.type === item.itemType).length > 0;
 
     if (!isGenericType && typeAlreadyPicked) {
-      unit.equipmentTypes[item.type] = true;
+      unit.equipmentTypes[item.itemType] = true;
     }
     
     if (isGenericType && typeAlreadyPicked) {
-      unit.equipmentTypes[item.type] = false;
+      unit.equipmentTypes[item.itemType] = false;
     }
  
     return isGenericType;
@@ -66,7 +66,7 @@ export const ownsMaxNumberMagicItems = (unit, item) => {
   if ("equipment" in unit && unit.equipment.length > 0) {
   }
   magicItemNumber = unit.equipment.filter((e) => !NON_MAGIC_ITEMS.includes(e.type)).length;
-  isMagicItem = !NON_MAGIC_ITEMS.includes(item.type);
+  isMagicItem = !NON_MAGIC_ITEMS.includes(item.itemType);
 
   if (isMagicItem && magicItemNumber === unit.equipmentTypes.maxMagic) {
     return true;

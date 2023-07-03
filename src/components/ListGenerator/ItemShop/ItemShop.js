@@ -24,7 +24,7 @@ import { hasItemBeenPicked, hasItemBeenPickedByOtherUnit, ownsMaxNumberMagicItem
 const useStyles = makeStyles({
   overlay: {
     height: "100vh",
-    width: "30vw",
+    width: "20vw",
   },
   buttons: {
     fontWeight: "bold",
@@ -101,7 +101,7 @@ const ItemShop = () => {
     let distinctTypes = [];
 
     filterFetchedItemsForUnit().forEach((item) => {
-      if (!distinctTypes.includes(item.type)) return distinctTypes.push(item.type);
+      if (!distinctTypes.includes(item.itemType)) return distinctTypes.push(item.itemType);
     });
 
     return distinctTypes;
@@ -139,7 +139,7 @@ const ItemShop = () => {
 
     tempObj.equipment.push({
       name: item.itemName,
-      type: item.type,
+      type: item.itemType,
       rule: item.specialRules,
       points: item.points,
       itemLost: false,
@@ -164,7 +164,7 @@ const ItemShop = () => {
         {/*UNIT NAME */}
         <Grid item xs={9}>
           <Typography variant="h5" align="center" className={classes.unitName}>
-            {contextArmy.unitSelectedForShop ? contextArmy.unitSelectedForShop.unitName : null}
+            {contextArmy.unitSelectedForShop.unitName}
           </Typography>
         </Grid>
       </Grid>
@@ -173,6 +173,9 @@ const ItemShop = () => {
           {/* PANEL BUTTONS */}
           <ButtonGroup size="large" orientation="vertical">
             {ItemTypes.map((type) => {
+              console.log("type");
+              console.log(type);
+
               return (
                 <Button
                   className={classes.buttons}
@@ -192,7 +195,7 @@ const ItemShop = () => {
           {/* ITEMLIST */}
           <ButtonGroup orientation="vertical">
             {filterFetchedItemsForUnit()
-              .filter((item) => item.type === displayThisItemType)
+              .filter((item) => item.itemType === displayThisItemType)
               .map((item) => {
                 return (
                   <Accordion key={uuidGenerator()}>
