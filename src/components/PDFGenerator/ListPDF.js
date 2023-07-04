@@ -16,46 +16,64 @@ Font.register({ family: "Beryliumbold", src: Beryliumbold });
 
 // Create the dynamic PDF content.
 const ListPDF = (props) => {
-  const DynamicList = () => {
-    return props.pdfMasterList
-      .filter((subFaction) => subFaction.units.length > 0)
-      .map((obj) => (
-        <View key={uuidGenerator()} style={styles.globalMargin}>
-          <Text key={uuidGenerator()} style={styles.subFactionNameStyle}>
-            {/* SUBFACTION */}
-            {obj.subFaction}
-          </Text>
-          {obj.units.map((u) => (
-            <Text key={uuidGenerator()} style={styles.unitEntryStyle}>
-              {/* UNIT */}
-              <Text style={styles.textcolumn}> {u.unitName} </Text>
-              <Text style={styles.textcolumn}> {u.points} </Text>
-
-              {/* EQUIPMENT */}
-              {u.equipment.length > 0 ? <Text key={uuidGenerator()} style={styles.equipmentLineStyle}></Text> : null}
-              {u.equipment.length > 0
-                ? u.equipment.map((e) => (
-                    <View key={uuidGenerator()} style={styles.equipmentEntryStyle}>
-                      {"\n"}
-                      <Text key={uuidGenerator()}>
-                        {"\t"}
-                        {"\t"}
-                        {"\t"} {e.name} {"\t"} - {e.points}
-                      </Text>
-                    </View>
-                  ))
-                : null}
-            </Text>
-          ))}
-        </View>
-      ));
-  };
-
   return (
     <Document>
-      <Page>
-        <View style={{ marginTop: 15 }}></View>
-        <View children={<DynamicList />} />
+      <Page style={styles.body}>
+        <View style={styles.table}>
+          {/* row */}
+
+          {props.pdfMasterList
+            .filter((subFaction) => subFaction.units.length > 0)
+            .map((obj) => (
+              <View style={styles.table}>
+                {/* SUBFACTION NAME */}
+                <View key={uuidGenerator()} style={styles.tableRowSubFactionName}>
+                  <View key={uuidGenerator()} style={styles.tableColSubFactionName}>
+                    <Text style={styles.tableCellSubFactioName}>{obj.subFaction}</Text>
+                  </View>
+                </View>
+                {obj.units.map((u) => (
+                  //  UNIT
+                  <View key={uuidGenerator()} style={styles.table}>
+                    <View key={uuidGenerator()} style={styles.tableRow}>
+                      <View key={uuidGenerator()} style={styles.tableColUnit}>
+                        <Text key={uuidGenerator()} style={styles.tableCellUnit}>
+                          {u.unitName}
+                        </Text>
+                      </View>
+                      <View key={uuidGenerator()} style={styles.tableColUnit}>
+                        <Text key={uuidGenerator()} style={styles.tableCellUnit}>
+                          {u.points}
+                        </Text>
+                      </View>
+                      <View key={uuidGenerator()} style={styles.tableColUnitFiller}></View>
+                    </View>
+                    {/* EQUIPMENT */}
+                    <View key={uuidGenerator()} style={styles.tableRow}>
+                      {u.equipment.length > 0 ? <Text key={uuidGenerator()} style={styles.equipmentLineStyle}></Text> : null}
+                    </View>
+                    {u.equipment.length > 0
+                      ? u.equipment.map((e) => (
+                          <View key={uuidGenerator()} style={styles.tableRow}>
+                            <View key={uuidGenerator()} style={styles.tableColEquipment}>
+                              <Text key={uuidGenerator()} style={styles.tableCellEquipment}>
+                                {e.name}
+                              </Text>
+                            </View>
+                            <View key={uuidGenerator()} style={styles.tableColUnit}>
+                              <Text key={uuidGenerator()} style={styles.tableCellEquipment}>
+                                {e.points}
+                              </Text>
+                            </View>
+                            <View style={styles.tableColEquipmentFiller}></View>
+                          </View>
+                        ))
+                      : null}
+                  </View>
+                ))}
+              </View>
+            ))}
+        </View>
       </Page>
     </Document>
   );
