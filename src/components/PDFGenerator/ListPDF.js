@@ -18,7 +18,7 @@ Font.register({ family: "Beryliumbold", src: Beryliumbold });
 const ListPDF = (props) => {
   const DynamicList = () => {
     return props.pdfMasterList
-      .filter((obj) => obj.units.length > 0)
+      .filter((subFaction) => subFaction.units.length > 0)
       .map((obj) => (
         <View key={uuidGenerator()} style={styles.globalMargin}>
           <Text key={uuidGenerator()} style={styles.subFactionNameStyle}>
@@ -28,14 +28,19 @@ const ListPDF = (props) => {
           {obj.units.map((u) => (
             <Text key={uuidGenerator()} style={styles.unitEntryStyle}>
               {/* UNIT */}
-              {u.unitName} - {u.points}
+              <Text style={styles.textcolumn}> {u.unitName} </Text>
+              <Text style={styles.textcolumn}> {u.points} </Text>
+
+              {/* EQUIPMENT */}
               {u.equipment.length > 0 ? <Text key={uuidGenerator()} style={styles.equipmentLineStyle}></Text> : null}
               {u.equipment.length > 0
                 ? u.equipment.map((e) => (
-                    <View key={uuidGenerator()} style={styles.equipmentListMargin}>
-                      <Text key={uuidGenerator()} style={styles.equipmentEntryStyle}>
-                        {/* EQUIPMENT */}
-                        {e.name} - {e.points}
+                    <View key={uuidGenerator()} style={styles.equipmentEntryStyle}>
+                      {"\n"}
+                      <Text key={uuidGenerator()}>
+                        {"\t"}
+                        {"\t"}
+                        {"\t"} {e.name} {"\t"} - {e.points}
                       </Text>
                     </View>
                   ))

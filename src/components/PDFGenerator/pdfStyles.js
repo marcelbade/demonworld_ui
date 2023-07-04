@@ -8,6 +8,12 @@ const styles = {
     textAlign: "left", //
     fontFamily: "Beryliumbold",
     fontSize: 10,
+    fontWeight: "bold",
+    marginBottom: 5,
+  },
+  textcolumn: {
+    textAlign: "left",
+    width: "100%",
   },
   equipmentLineStyle: {
     marginRight: 400,
@@ -19,9 +25,11 @@ const styles = {
     textAlign: "left", //
     fontFamily: "Beryliumbold",
     fontSize: 10,
+    marginLeft: 80,
+    // paddingLeft: 40,
   },
   globalMargin: {
-    marginLeft: 15, //
+    marginLeft: 35, //
     marginTop: 8,
   },
   equipmentListMargin: { marginLeft: 35 },
