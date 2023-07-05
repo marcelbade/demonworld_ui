@@ -7,11 +7,10 @@ const calculateScoutingFactor = (selectedUnitList) => {
   const MULTIPLICATOR = 2;
 
   const cav = selectedUnitList.filter((unit) => unit.isMounted === true && unit.move < 40).length;
-  const fastCav = MULTIPLICATOR * selectedUnitList.filter((unit) => unit.isMounted === true && unit.move >= 40).length;
-
   const lowFlyer = selectedUnitList.filter((unit) => unit.isLowFlyer === true && unit.move < 40).length;
-  const fastlowFlyer = MULTIPLICATOR * selectedUnitList.filter((unit) => unit.isLowFlyer === true && unit.move >= 40).length;
 
+  const fastCav = MULTIPLICATOR * selectedUnitList.filter((unit) => unit.isMounted === true && unit.move >= 40).length;
+  const fastlowFlyer = MULTIPLICATOR * selectedUnitList.filter((unit) => unit.isLowFlyer === true && unit.move >= 40).length;
   const highFlyer = MULTIPLICATOR * selectedUnitList.filter((unit) => unit.isHighFlyer === true).length;
 
   return cav + fastCav + lowFlyer + fastlowFlyer + highFlyer;
