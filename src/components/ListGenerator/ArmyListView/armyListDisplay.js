@@ -8,6 +8,7 @@ import { Typography, TextField, InputAdornment, Grid } from "@material-ui/core";
 import { ArmyContext } from "../../../contexts/armyContext";
 import SubFactionEntry from "./SubFactionList/SubFactionEntry";
 import { uuidGenerator } from "../../shared/sharedFunctions";
+import calculateScoutingFactor from "../../../gameLogic/scoutFactorCalculator/scoutingFactorCalculator";
 
 // TODO: remove unneeded styles
 const useStyles = makeStyles((theme) => ({
@@ -67,27 +68,30 @@ const ArmyListDisplay = () => {
         ))}
       </List>
       {/* TOTAL SPENT POINTS +  TOTAL POINT ALLOWANCE*/}
-      <Grid container direction="row">
-        <Typography className={classes.total}>Gesamtpunktzahl: {contextArmy.totalPointValue} / </Typography>
-        <TextField
-          id="outlined-basic"
-          autoComplete="off"
-          value={contextArmy.maxPointsAllowance}
-          InputProps={{
-            style: {
-              fontSize: "20px",
-              fontWeight: "bold",
-              pading: "50px",
-              width: "130px",
-            },
-            endAdornment: <InputAdornment position="end">Punkte</InputAdornment>,
-          }}
-          onChange={changeMaximumPointValue}
-          required
-          error={Boolean(errorMessage)}
-          helperText={errorMessage}
-          variant="standard"
-        />
+      <Grid container direction="column">
+        <Grid container direction="row">
+          <Typography className={classes.total}>Gesamtpunktzahl: {contextArmy.totalPointValue} / </Typography>
+          <TextField
+            id="outlined-basic"
+            autoComplete="off"
+            value={contextArmy.maxPointsAllowance}
+            InputProps={{
+              style: {
+                fontSize: "20px",
+                fontWeight: "bold",
+                pading: "50px",
+                width: "130px",
+              },
+              endAdornment: <InputAdornment position="end">Punkte</InputAdornment>,
+            }}
+            onChange={changeMaximumPointValue}
+            required
+            error={Boolean(errorMessage)}
+            helperText={errorMessage}
+            variant="standard"
+          />
+        </Grid>
+        <Typography className={classes.total}>Spähfaktor: {calculateScoutingFactor(contextArmy.selectedUnits)}</Typography>
       </Grid>
     </Fragment>
   ) : null;
