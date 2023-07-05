@@ -1,16 +1,18 @@
-// NACH dem Auslegen der Spielfläche (und even-
-//     tueller Angriffszielmarker), aber VOR der Auf-
-//     stellung der Armeen, geben beide Spieler ihre
-//     Spähfaktoren bekannt. Der Spähfaktor einer
-//     Armee ist gleich der Summe aller ihrer Reiterei-
-//     sowie (im Expertenspiel) Flieger-Elemente, wo-
-//     bei entsprechend ausgerüstete Befehlshaber
-//     mitzählen. Reiterei-Elemente sowie Elemente,
-//     die nur niedrig fliegen können, zählen doppelt,
-//     wenn sie bei einem B-Befehl über mindestens 40
-//     Bewegungspunkte verfügen. Flieger-Elemente
-//     (die auch hoch fliegen können) zählen unabhän-
-//     gig von den ihnen zustehenden Bewegungs-
-//     punkten immer doppelt
+/**
+ * Function calculates the army's scouting factor. The formula is: number of cavalery  + low flyer + high flyer. Low flyers and cavalery with a movement value >= 40 as well as high flyers are multiplied by 2.
+ * @param {unitCard array} selectedUnitList
+ * @returns an integer representing the army's scouting factor
+ */
+const calculateScoutingFactor = (selectedUnitList) => {
+  const MULTIPLICATOR = 2;
 
-// let scoutingFactor = numberOfMountedUnits + numberOflyers + numberOfMountedHeroes + numberOfFlyingHeroes;
+  const cav = selectedUnitList.filter((unit) => unit.isMounted === true && unit.move < 40).length;
+  const fastCav = MULTIPLICATOR * selectedUnitList.filter((unit) => unit.isMounted === true && unit.move >= 40).length;
+
+  const lowFlyer = selectedUnitList.filter((unit) => unit.isLowFlyer === true && unit.move < 40).length;
+  const fastlowFlyer = MULTIPLICATOR * selectedUnitList.filter((unit) => unit.isLowFlyer === true && unit.move >= 40).length;
+
+  const highFlyer = MULTIPLICATOR * selectedUnitList.filter((unit) => unit.isHighFlyer === true).length;
+
+  return cav + fastCav + lowFlyer + fastlowFlyer + highFlyer;
+};
