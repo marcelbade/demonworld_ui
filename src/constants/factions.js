@@ -8,8 +8,9 @@ export const THAIN = "Thain";
 export const ELFEN = "Elfen";
 export const NORWINGER = "Norwinger";
 export const UNTOTE = "Untote";
+export const ECHSENMENSCHEN = "Echsenmenschen";
 
-export const ALL_FACTIONS_ARRAY = [DUNKELFELFEN, ELFEN, GOBLINS, IMPERIUM, ISHTAK, NORWINGER, ORKS, THAIN, UNTOTE, ZWERGE];
+export const ALL_FACTIONS_ARRAY = [DUNKELFELFEN, ELFEN, GOBLINS, IMPERIUM, ISHTAK, NORWINGER, ORKS, THAIN, UNTOTE, ZWERGE, ECHSENMENSCHEN];
 
 export const ARMIES_WITH_ALTERNATIVE_LISTS = ["Imperium", "Zwerge", "Orks"];
 
