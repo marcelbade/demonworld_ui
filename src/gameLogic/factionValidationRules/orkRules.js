@@ -29,7 +29,7 @@ const rules = [
 
   {
     subFaction: "characters",
-    cardNames: ["Helden / Befehlshaber"],
+    cardNames: ["Helden/Befehlshaber"],
     min: 0.0,
     max: 0.3,
     error: "Deine Armeeliste darf zu höchstens 50% aus Helden bestehen.",
