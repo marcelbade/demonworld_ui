@@ -8,6 +8,7 @@ import { rules as OrkRulesList } from "../factionValidationRules/orkRules";
 import { rules as NorwingerRulesList } from "../factionValidationRules/norwingerRules";
 import { rules as UndeadRulesList } from "../factionValidationRules/undeadRules";
 import { rules as ThainRulesList } from "../factionValidationRules/thainRules";
+import { rules as LizardMenRulesList } from "../factionValidationRules/lizardmenRules";
 
 export const ruleObjectProvider = (faction) => {
   switch (faction) {
@@ -31,6 +32,8 @@ export const ruleObjectProvider = (faction) => {
       return UndeadRulesList;
     case "Zwerge":
       return DwarfRulesList;
+    case "Echsenmenschen":
+      return LizardMenRulesList;
     default:
       // there is no default case.
       break;
