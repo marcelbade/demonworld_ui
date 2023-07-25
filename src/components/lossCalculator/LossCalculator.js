@@ -10,8 +10,6 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import LossCalcProvider from "../../contexts/LossCalculatorContext";
 import { unitCardMultiSort, uuidGenerator } from "../shared/sharedFunctions";
 import LossListElement from "./LossListElement";
-// constants
-import { GIANT, HERO, MAGE } from "../../constants/unitTypes";
 
 const useStyles = makeStyles({
   typographyFont: {},

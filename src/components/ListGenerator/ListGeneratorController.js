@@ -24,7 +24,6 @@ import {
   ARMIES_TWO_CHOICES_PER_ALTERNATIVE_LIST,
   ARMIES_WITH_ALTERNATIVE_LISTS,
   ARMY_ALTERNATIVES_LIST_MAPPER,
-  IMPERIUM,
   ZWERGE,
 } from "../../constants/factions";
 import { ALLIES_MAPPING } from "../../constants/allies";

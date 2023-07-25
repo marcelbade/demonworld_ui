@@ -1,14 +1,12 @@
 // React
 import React, { useContext } from "react";
 //Material UI
-import { Typography, Grid, List } from "@material-ui/core";
+import { Typography, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 // components and functions
 import { LossCalcContext } from "../../contexts/LossCalculatorContext";
 import { ListItem } from "@mui/material";
 import ListElementBttns from "./LossInputButtons/ListElementBttnGroup";
-import EquipmentListEntry from "./EquipmentList/EquipmentListEntry";
-import { uuidGenerator } from "../shared/sharedFunctions";
 
 // clsx
 import clsx from "clsx";
@@ -70,10 +68,6 @@ const LossListElement = (props) => {
 
   const TEXT_UNITS = "Verlorene Elemente:";
   const TEXT_SINGLE_ELEMENTS = "Verlorene Lebenspunkte:";
-
-  const doesUnithaveEquipment = () => {
-    return props.unit.equipment !== undefined && props.unit.equipment.length !== 0;
-  };
 
   return (
     <ListItem>

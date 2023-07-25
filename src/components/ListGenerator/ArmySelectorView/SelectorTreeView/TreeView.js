@@ -54,7 +54,7 @@ const FactionTreeView = () => {
     } else if (checkForExistence() && contextArmy.selectedAlternativeList === "NONE") {
       setAlternativeArmyPresentAndSelected(false);
     }
-  }, [contextArmy, contextArmy.selectedFactionName, contextArmy.selectedAlternativeList]);
+  }, [contextArmy, contextArmy.selectedFactionName, contextArmy.selectedAlternativeList]);// eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * Function checks for the existence of the state variables contextArmy, contextArmy.selectedFactionName & contextArmy.armyHasAlternativeLists.

@@ -47,8 +47,8 @@ const Tree = (props) => {
 
   const isSubFactionEmpty = (subFaction) => {
     return (
-      contextArmy.listOfAllFactionUnits.filter((f) => f.subFaction === subFaction).length == 0 &&
-      contextArmy.listOfAllAlliedUnits.filter((f) => f.subFaction === subFaction).length == 0
+      contextArmy.listOfAllFactionUnits.filter((f) => f.subFaction === subFaction).length === 0 &&
+      contextArmy.listOfAllAlliedUnits.filter((f) => f.subFaction === subFaction).length === 0
     );
   };
 

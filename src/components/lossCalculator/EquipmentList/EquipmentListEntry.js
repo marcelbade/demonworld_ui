@@ -1,7 +1,7 @@
 // React
 import React, { useContext } from "react";
 //Material UI
-import { Typography, Grid, ListItem, ListItemIcon, List } from "@material-ui/core";
+import { Typography, Grid, ListItem, ListItemIcon } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 // components and functions
 import { uuidGenerator } from "../../shared/sharedFunctions";
