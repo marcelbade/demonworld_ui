@@ -60,32 +60,12 @@ const addLossCounterToUnit = (unit) => {
  * @returns unit object with equipment + equipmentTypes property.
  */
 const addEquipmentSlotsToUnit = (unit) => {
-  const maxItemNumber = calculateMaxNumberMagicItems(unit);
-
   return {
     ...unit,
     equipment: [],
     equipmentTypes: {
-      poison: false,
-      warpaint: false,
-      maxMagic: maxItemNumber,
+      banner: false,
+      musician:false,
     },
   };
-};
-
-/**
- * Function calculates how many magical items the unit is allowed to have. +1 per special element.
- * @param {unit card} unit
- */
-export const calculateMaxNumberMagicItems = (unit) => {
-  let total = 1;
-
-  if (unit.standardBearer) {
-    ++total;
-  }
-  if (unit.musician) {
-    ++total;
-  }
-
-  return total;
 };

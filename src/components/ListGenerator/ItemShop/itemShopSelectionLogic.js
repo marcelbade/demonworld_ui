@@ -1,5 +1,3 @@
-// constants
-import { NON_MAGIC_ITEMS } from "../../../constants/itemShopConstants";
 
 /**
  * Functions ckecks if item has already been picked by a different unit.
@@ -35,21 +33,6 @@ export const hasItemBeenPicked = (unit, item) => {
  * @returns boolean flag
  */
 export const hasItemTypeBeenPicked = (unit, item) => {
-  if (NON_MAGIC_ITEMS.includes(item.itemType)) {
-    const isGenericType = unit.equipmentTypes[item.itemType];
-    const typeAlreadyPicked = unit.equipment.filter((e) => e.type === item.itemType).length > 0;
-
-    if (!isGenericType && typeAlreadyPicked) {
-      unit.equipmentTypes[item.itemType] = true;
-    }
-    
-    if (isGenericType && typeAlreadyPicked) {
-      unit.equipmentTypes[item.itemType] = false;
-    }
- 
-    return isGenericType;
-  }
-
   return false;
 };
 
@@ -60,17 +43,5 @@ export const hasItemTypeBeenPicked = (unit, item) => {
  * @returns boolean flag
  */
 export const ownsMaxNumberMagicItems = (unit, item) => {
-  let magicItemNumber = 0;
-  let isMagicItem = false;
-
-  if ("equipment" in unit && unit.equipment.length > 0) {
-  }
-  magicItemNumber = unit.equipment.filter((e) => !NON_MAGIC_ITEMS.includes(e.type)).length;
-  isMagicItem = !NON_MAGIC_ITEMS.includes(item.itemType);
-
-  if (isMagicItem && magicItemNumber === unit.equipmentTypes.maxMagic) {
-    return true;
-  }
-
   return false;
 };
