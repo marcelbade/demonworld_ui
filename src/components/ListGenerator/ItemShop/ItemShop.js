@@ -25,6 +25,8 @@ import {
   filterForShields,
   filterForSpears,
   filterForLances,
+  filterForItemsWithMaxArmor,
+  filterForItemsWithMaxSize,
 } from "./itemShopFilterLogic";
 import { hasItemBeenPicked, hasItemBeenPickedByOtherUnit, ownsMaxNumberMagicItems, hasItemTypeBeenPicked } from "./itemShopSelectionLogic";
 
@@ -93,6 +95,8 @@ const ItemShop = () => {
         .filter((item) => filterForStandardBearer(item, unit))
         .filter((item) => filterForMusicians(item, unit))
         .filter((item) => filterForMagicUsers(item, unit))
+        .filter((item) => filterForItemsWithMaxArmor(item, unit))
+        .filter((item) => filterForItemsWithMaxSize(item, unit))
         .filter((item) => filterForShields(item, unit))
         .filter((item) => filterForCavalryItems(item, unit))
         .filter((item) => filterForItemsUsableNotByCavalry(item, unit))
@@ -108,7 +112,7 @@ const ItemShop = () => {
   };
 
   /**
-   * Function finds the distinct item types of the filtered item list and returns it.
+   * Function finds the distinct item types of the filtered item list and returns it. Used as shop categories.
    * @returns [String] an array of item type names.
    */
   const findDistinctItemTypes = () => {
@@ -128,7 +132,7 @@ const ItemShop = () => {
 
   /**
    * Function enforces the item selection rules by toggling the item's corresponding button on/off.
-   * Any unit,hero,... can only gain 1 magical item. In addition it may gain additional "non-magical" generic items like potions. If a standard bearer or musician is present, a standard or intrument can be selected in addition to trhese two.
+   * A hero, magicican or unit leader can only get 1 magical item. In addition, they may gain additional "non-magical" generic items like potions. If a standard bearer or musician is present, a standard or intrument can be selected in addition to these two.
    * @param {itemCard Object} item
    * @returns a boolean that toggles the button on or off.
    */

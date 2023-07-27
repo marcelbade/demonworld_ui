@@ -59,7 +59,23 @@ export const filterForShields = (item, unit) => {
   return true;
 };
 
-// Filter items for those only meant for cavalery
+// Some Items a restricted to units with a max range armor.
+export const filterForItemsWithMaxArmor = (item, unit) => {
+  if (unit.armourRange > item.maxRangeArmor && item.maxRangeArmor > -1) {
+    return false;
+  }
+  return true;
+};
+
+// Some Items a restricted to units with a max range armor.
+export const filterForItemsWithMaxSize = (item, unit) => {
+  if (unit.size > item.maxSize && item.maxSize > -1) {
+    return false;
+  }
+  return true;
+};
+
+// Filter items for those only meant for cavalry
 export const filterForCavalryItems = (item, unit) => {
   if (unit.isMounted === false && item.mustBeMounted === true) {
     return false;
