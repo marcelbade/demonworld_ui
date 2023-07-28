@@ -53,7 +53,7 @@ export const filterForMagicUsers = (item, unit) => {
 
 // only units with shields can use shields
 export const filterForShields = (item, unit) => {
-  if (unit.hasShield === false && item.hasShield === true) {
+  if (unit.hasShield === false && item.requiresShield === true) {
     return false;
   }
   return true;
