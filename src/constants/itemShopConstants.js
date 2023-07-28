@@ -16,16 +16,17 @@ export const NO_RANGE_WEAPON = "x";
 // Mapps item types in the itemCard obj to the displayed German name.
 export const NAME_MAPPING = {
   armor: "Rüstung",
-  banner: "Banner",
-  instrument: "Trommeln & Hörner",
-  weapon: "Waffen",
-  boltsAndCrossbows: "Armbrüste",
   arrowsAndBows: "Bögen",
-  potion: "Tränke",
-  ringsAndAmulets: "Ringe und Amulette",
+  banner: "Banner",
+  boltsAndCrossbows: "Armbrüste",
+  imp: "Dämonlinge",
+  instrument: "Trommeln & Hörner",
   item: "Gegenstände",
   poison: "Gift",
+  potion: "Tränke",
+  ringsAndAmulets: "Ringe und Amulette",
   warpaint: "Kriegsbemalung",
+  weapon: "Waffen",
 };
 
 // List of all range weapons in the game that can use artefacts meant for bows.
