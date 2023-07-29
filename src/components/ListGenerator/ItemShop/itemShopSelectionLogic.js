@@ -26,7 +26,7 @@ export const doesUnitalreadyHaveItem = (unit, item) => {
  * @returns boolean flag
  */
 export const ownsMaxNumberMagicItems = (unit, item) => {
-  return unit.equipmentTypes.magicItem && !item.additionalItem;
+  return unit.equipmentTypes.magicItem && !item.isAdditionalItem;
 };
 
 /**

@@ -275,7 +275,7 @@ const ListGeneratorController = () => {
 
     for (let i = 0; i < selectedUnits.length; i++) {
       for (let j = 0; j < selectedUnits[i].equipment.length; j++) {
-        if (!selectedUnits[i].equipment[j].additionalItem || !selectedUnits[i].equipment[j].generic) {
+        if (!selectedUnits[i].equipment[j].additionalItem || !selectedUnits[i].equipment[j].isGeneric) {
           temp.push(selectedUnits[i].equipment[j].itemName);
         }
       }
@@ -434,7 +434,7 @@ const ListGeneratorController = () => {
 
       tempObj.equipmentTypes.banner = item.itemType === ITEM_TYPE_BANNER ? true : false;
       tempObj.equipmentTypes.musician = item.itemType === ITEM_TYPE_MUSICIAN ? true : false;
-      tempObj.equipmentTypes.magicItem = !item.additionalItem;
+      tempObj.equipmentTypes.magicItem = !item.isAdditionalItem;
 
       setUnitSelectedForShop({
         ...tempObj,
@@ -444,7 +444,7 @@ const ListGeneratorController = () => {
 
       tempObj.equipmentTypes.banner = item.itemType === ITEM_TYPE_BANNER ? false : true;
       tempObj.equipmentTypes.musician = item.itemType === ITEM_TYPE_MUSICIAN ? false : true;
-      tempObj.equipmentTypes.magicItem = item.additionalItem;
+      tempObj.equipmentTypes.magicItem = item.isAdditionalItem;
 
       setUnitSelectedForShop({
         ...tempObj,
