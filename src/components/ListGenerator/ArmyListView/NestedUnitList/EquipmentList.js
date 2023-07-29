@@ -36,15 +36,6 @@ const EquipmentList = (props) => {
   const contextArmy = useContext(ArmyContext);
 
   /**
-   * Removes the item.
-   * @param {unit.name + uuid} identifier
-   * @param {array index } i
-   */
-  const removeItem = (identifier, i) => {
-    contextArmy.removeItem(identifier, i);
-  };
-
-  /**
    * Function makes sure a horizontal divider is displayed when the equipment list is not emtpy.
    * @returns css class
    */
@@ -62,12 +53,13 @@ const EquipmentList = (props) => {
                   key={uuidGenerator()}
                   className={clsx(classes.deleteBttn)}
                   onClick={() => {
-                    removeItem(props.identifier, i);
+                    contextArmy.removeItem(props.identifier, i);
+                      contextArmy.recalculateItemTypeFlags(e, false);
                   }}
                 >
                   <RemoveCircleOutlineIcon key={uuidGenerator()} />
                 </Button>
-                <ListItemText key={uuidGenerator()} primary={<span>{e.name}</span>} secondary={<span>{e.points}</span>} />
+                <ListItemText key={uuidGenerator()} primary={<span>{e.itemName}</span>} secondary={<span>{e.points}</span>} />
               </ListItem>
             );
           })
