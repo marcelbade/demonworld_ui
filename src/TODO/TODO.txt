@@ -1,83 +1,47 @@
-TODO: WAFFENNAMEN NACHTRAGEN 
-    ERLEDIGT: Goblins, Dunkelelfen, Elfen, Imperium, ishtak
-
-
-TODO: Spähfaktor
-- before you can add this feature you need:
-    - isMounted flag for all units
- 
-  
-TODO: PDF VIEWER
-- layout, alternative layout (full cards)
-
-
-TODO: "Gor'Daris Dragon has 3 attacks....
-
+SQL
+--------------------
 
 TODO: src\components\shared\NoSelectionDisplay.js
 You need a pic, if you want to use this :D.
- 
+TODO: PDF VIEWER
+-  alternative layout (full cards)
  
 TODO:  FACTION RULES
 ==================================
-GOBLINS - done!
-Ishtak- done!
-Norwinger - done!
-
+- dwarven special rule not working
+- Thain
+ 
 
 TODO: ItemShop
+- giants need more work
+- item selection logic needs a rework - you already started!
 - remember: there is, according to Patrick, a banner undead can get even though they have no standard bearer
-- its just one banner....
-- I cannot find it :O 
-- You can choose only one poison - it somwhow doesnt work 
+   - its just one banner....
+   - I cannot find it :O 
+
+
+
+- You can choose only one poison - it somehow doesn*t work 
+
 - when selecting an item add the following to the unit card 
         - change the stats
-               
-
-TODO: mark subFaction below minimum and block army list!
-const subFactionBelowMinimum = contextArmy.blockedUnits.subFactionBelowMinimum;
-
-
- TODO: Logic
-- do not exceed total army points -> not working 
-- subfaction below minimum -> how to display / Block
-- dwarven special rule not working
-- model all faction validators after dwarves!
-- tommysAnalysis function
-
-
-TODO: allItems 
+ allItems 
     - is not working! 
     - The use Effect in the GeneratorController must be reowrked, its silly!
 
- 
+                
+ TODO: Logic
+- tommysAnalysis function
 
- 
 
 TODO: missing features // Version 2  - disregard for now 
-- show finished list
-- print finished list
 - save list in MongoDB(!!)
-- Fast Loss Calculator (FLC) 
 - user accounts (!!)
-
 
 
 TODO:
 You accidentally deleted the input element for the army list's name. The element is still there, under shared - just fix it (selectionInput.js).
 
-
- TODO:
-Broch Karutin, der Stinker
-Terios, der Minotaurus
-Thonder, der Riesenwolf
-
-These are the 3 units that make up the "giants" subfaction of the orks - they are all missing! :(
-
-
-
-WORKING ON
 TODO:  RESPONSIVE DESIGN 
-
 SelectionInput. Army -> done, tested for smartphones
-
+ 
