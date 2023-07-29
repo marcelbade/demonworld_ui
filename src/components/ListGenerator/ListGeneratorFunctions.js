@@ -64,6 +64,7 @@ const addEquipmentSlotsToUnit = (unit) => {
     ...unit,
     equipment: [],
     equipmentTypes: {
+      magicItem: false, 
       banner: false,
       musician:false,
     },
