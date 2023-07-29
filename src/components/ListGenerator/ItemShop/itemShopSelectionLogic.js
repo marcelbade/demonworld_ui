@@ -7,9 +7,6 @@ import { ITEM_TYPE_BANNER, ITEM_TYPE_MUSICIAN } from "../../../constants/itemSho
  * @returns boolean flag
  */
 export const hasItemBeenPickedByOtherUnit = (allItems, item) => {
-  console.log("allItems");
-  console.log(allItems);
-
   return allItems.includes(item.itemName);
 };
 
