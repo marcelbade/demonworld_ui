@@ -29,6 +29,7 @@ import {
 import { ALLIES_MAPPING } from "../../constants/allies";
 import { ALL_FACTIONS_ARRAY } from "../../constants/factions";
 import DwarfsSecondSelector from "./ArmySelectorView/AlternativeArmyListSelection/DwarfsSecondSelector";
+import { ITEM_TYPE_BANNER, ITEM_TYPE_MUSICIAN } from "../../constants/itemShopConstants";
 
 const useStyles = makeStyles((theme) => ({
   displayBox: {
@@ -267,24 +268,18 @@ const ListGeneratorController = () => {
   }, [selectedUnits, maxPointsAllowance, selectedAlternativeList, distinctSubFactions]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
-   * Everytime the unit selections changes, recalculate which items are currently selected and store it in the central item list.
+   * Everytime the unit selections changes, recalculate which unique items are already selected and store it in the central item list. Only store those that are magical items that can only be equipped once!
    */
   useEffect(() => {
-    let temp = allItems;
-    let allCurrentItems = [];
+    let temp = [];
 
-    // current items in the army
-    selectedUnits.forEach((unit) => {
-      allCurrentItems = [...allCurrentItems, unit.equipment];
-    });
-
-    // compare
-    temp.forEach((item) => {
-      if (!allCurrentItems.includes(item)) {
-        const position = temp.indexOf(item);
-        temp.splice(position, 1);
+    for (let i = 0; i < selectedUnits.length; i++) {
+      for (let j = 0; j < selectedUnits[i].equipment.length; j++) {
+        if (!selectedUnits[i].equipment[j].additionalItem || !selectedUnits[i].equipment[j].generic) {
+          temp.push(selectedUnits[i].equipment[j].itemName);
+        }
       }
-    });
+    }
 
     setAllItems(temp);
   }, [selectedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -318,15 +313,13 @@ const ListGeneratorController = () => {
       tempArray = tempArray.filter((subFaction) => alternateListSelectionFilter(subFaction));
     }
 
-    // else if (selectedFactionName === ZWERGE) {
-    //   tempArray = tempArray.filter((subFaction) => alternateListSelectionFilter(subFaction));
-    // }
     setDistinctSubFactions([...tempArray]);
   }, [selectedFactionName, selectedAlternativeList, secondDwarvenOption]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
-   * Function filters down the choices for alternative army lists. Alternative army lists work by excluding certain sub factions from the list
-   * of sub factions available to the user. This function takes an array of all possible choices (sub factions), removes the one picked by the user and
+   * Function filters down the choices for alternative army lists.
+   * Alternative army lists work by excluding certain sub factions from the list of sub factions available to the user.
+   * This function takes an array of all possible choices (sub factions), removes the one picked by the user and
    * then uses the resulting array to filter out all units that belong the other sub factions.
    * There is one faction (dwarfs) that requires 2 choices, the second being hard coded.
    * @param {String} subFaction
@@ -345,7 +338,7 @@ const ListGeneratorController = () => {
       }
 
       if (tempArray.includes(ALLIES_MAPPING[selectedFactionName])) {
-        setAllyName(""); 
+        setAllyName("");
         setListOfAllAlliedUnits([]);
       }
 
@@ -406,7 +399,7 @@ const ListGeneratorController = () => {
   };
 
   /**
-   * removes a unit from the current list.
+   * Function removes a unit from the current list.
    * @param {*} identifier unit.name + unique hash value
    */
   const removeUnit = (identifier) => {
@@ -414,6 +407,11 @@ const ListGeneratorController = () => {
     setSelectedUnits(filtered);
   };
 
+  /**
+   * Function removes an item from a unit's equipment array.
+   * @param {name + uniqueID} identifier
+   * @param {int} position
+   */
   const removeItem = (identifier, position) => {
     let temp = [...selectedUnits];
 
@@ -427,16 +425,45 @@ const ListGeneratorController = () => {
   };
 
   /**
+   * Function recalculates itemType flags to correctly toggle the item buttons on and off.
+   * @param {itemCard object} item
+   */
+  const recalculateItemTypeFlags = (item, ITEM_ADDED) => {
+    if (ITEM_ADDED) {
+      let tempObj = { ...unitSelectedForShop };
+
+      tempObj.equipmentTypes.banner = item.itemType === ITEM_TYPE_BANNER ? true : false;
+      tempObj.equipmentTypes.musician = item.itemType === ITEM_TYPE_MUSICIAN ? true : false;
+      tempObj.equipmentTypes.magicItem = !item.additionalItem;
+
+      setUnitSelectedForShop({
+        ...tempObj,
+      });
+    } else {
+      let tempObj = { ...unitSelectedForShop };
+
+      tempObj.equipmentTypes.banner = item.itemType === ITEM_TYPE_BANNER ? false : true;
+      tempObj.equipmentTypes.musician = item.itemType === ITEM_TYPE_MUSICIAN ? false : true;
+      tempObj.equipmentTypes.magicItem = item.additionalItem;
+
+      setUnitSelectedForShop({
+        ...tempObj,
+      });
+    }
+  };
+
+  /**
    * Function deletes the entire army list and closes the stat card display and item shop, if open.
    */
   const clearList = () => {
     setSelectedUnits([]);
+    setAllItems([]);
     closeCardDisplay();
     closeItemShop();
   };
 
   /**
-   * Function toggles the unit card view and Item shop view on and off, as well as switches between views for different units. In order to do this, both views are not toggled by a booelan flag, but an object that stores the previously clicked unit.
+   * Function toggles the unit card view and Item shop view on and off, as well as switches between views for different units. In order to do this, both views are not toggled by a simple booelan flag, but an object that stores the previously clicked unit.
    * @param {unitCard} u
    */
   const toggleMenuState = (u, isCards) => {
@@ -464,7 +491,7 @@ const ListGeneratorController = () => {
   };
 
   /**
-   * in order to work, the state setter needs a unit. Since the card view is toggled off, the first unit in the list is used.
+   * in order to work, the state setter needs a unit at the start. Since the card view is toggled off, the first unit in the list is used.
    */
   const closeCardDisplay = () => {
     setStatCardState({ clickedUnit: selectedUnits[0], lastclickedUnit: selectedUnits[0], show: false });
@@ -500,7 +527,6 @@ const ListGeneratorController = () => {
         setMaxPointsAllowance: setMaxPointsAllowance,
         selectUnit: selectUnit,
         removeUnit: removeUnit,
-        removeItem: removeItem,
         clearList: clearList,
         // ARMY LIST VALIDATION
         listValidationResults: listValidationResults,
@@ -510,6 +536,8 @@ const ListGeneratorController = () => {
         unitSelectedForShop: unitSelectedForShop,
         setUnitSelectedForShop: setUnitSelectedForShop,
         setAllItems: setAllItems,
+        removeItem: removeItem,
+        recalculateItemTypeFlags: recalculateItemTypeFlags,
         // ALTERNATIVE LISTS
         armyHasAlternativeLists: armyHasAlternativeLists,
         selectedAlternativeList: selectedAlternativeList,
