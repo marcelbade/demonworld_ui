@@ -28,7 +28,13 @@ import {
   filterForItemsWithMaxArmor,
   filterForItemsWithMaxSize,
 } from "./itemShopFilterLogic";
-import { hasItemBeenPicked, hasItemBeenPickedByOtherUnit, ownsMaxNumberMagicItems, hasItemTypeBeenPicked } from "./itemShopSelectionLogic";
+import {
+  doesUnitAlreadyHaveInstrument,
+  doesUnitAlreadyHaveBanner,
+  doesUnitalreadyHaveItem,
+  hasItemBeenPickedByOtherUnit,
+  ownsMaxNumberMagicItems,
+} from "./itemShopSelectionLogic";
 
 const useStyles = makeStyles({
   overlay: {
@@ -60,13 +66,14 @@ const ItemShop = () => {
   //state
   const [ItemTypes, setItemTypes] = useState([]);
   const [displayThisItemType, setDisplayThisItemType] = useState(ItemTypes[0]);
+ 
 
   // When the selected unit changes, set the correct items in the shop
   useEffect(() => {
     setItemTypes(findDistinctItemTypes());
   }, [contextArmy.unitSelectedForShop]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // When the selected unit changes, take all items it has been equipped with and add them to the "allItems" state variable. This serves as a central registry of all items allready taken.
+  // When the selected unit changes, take all items it has been equipped with and add them to the "allItems" state variable. This serves as a central register of all items allready taken.
   useEffect(() => {
     let unit = contextArmy.unitSelectedForShop;
 
@@ -112,7 +119,7 @@ const ItemShop = () => {
   };
 
   /**
-   * Function finds the distinct item types of the filtered item list and returns it. Used as shop categories.
+   * Function finds the distinct item types of the filtered item list and returns it. These are used as shop categories.
    * @returns [String] an array of item type names.
    */
   const findDistinctItemTypes = () => {
@@ -132,7 +139,7 @@ const ItemShop = () => {
 
   /**
    * Function enforces the item selection rules by toggling the item's corresponding button on/off.
-   * A hero, magicican or unit leader can only get 1 magical item. In addition, they may gain additional "non-magical" generic items like potions. If a standard bearer or musician is present, a standard or intrument can be selected in addition to these two.
+   * A hero, magicican or unit leader can only get 1 magical item. In addition, they may gain additional "non-magical" generic items like potions. If a standard bearer or musician is present, a standard or intrument can be selected in addition to these two. In addition if it is a unit, items can be choosen that are carried by every element in the unit.
    * @param {itemCard Object} item
    * @returns a boolean that toggles the button on or off.
    */
@@ -141,11 +148,12 @@ const ItemShop = () => {
     let allItems = contextArmy.allItems;
 
     const itemPickedByOtherUnit = hasItemBeenPickedByOtherUnit(allItems, item);
-    const itemPicked = hasItemBeenPicked(unit, item);
+    const itemPicked = doesUnitalreadyHaveItem(unit, item);
     const maxNumber = ownsMaxNumberMagicItems(unit, item);
-    const itemTypePicked = hasItemTypeBeenPicked(unit, item);
+    const banner = doesUnitAlreadyHaveBanner(unit, item);
+    const instrument = doesUnitAlreadyHaveInstrument(unit, item);
 
-    return itemPicked || itemPickedByOtherUnit || maxNumber || itemTypePicked;
+    return itemPicked || itemPickedByOtherUnit || maxNumber || banner || instrument;
   };
 
   /**
@@ -156,10 +164,7 @@ const ItemShop = () => {
     let tempObj = { ...contextArmy.unitSelectedForShop };
 
     tempObj.equipment.push({
-      name: item.itemName,
-      type: item.itemType,
-      rule: item.specialRules,
-      points: item.points,
+      ...item,
       itemLost: false,
     });
 
@@ -169,7 +174,7 @@ const ItemShop = () => {
   };
 
   /**
-   * Function causes the list of all selected units to change (w/o actually changing it). This is necessary to correctly calculate the list's point cost whenever an item is added. Without this, the point cost of the item is only added whenever a unit is added or removed from the list, not when the item is added.
+   * Function causes the list of all selected units to change (w/o actually changing it). This is necessary to correctly calculate the list's point cost whenever an item is added. Without this, the point cost of the item is only added whenever a unit is added or removed from the list, not when the item is added ore removed.
    */
   const triggerArymListReCalculation = () => {
     let tempArray = [...contextArmy.selectedUnits];
@@ -191,9 +196,6 @@ const ItemShop = () => {
           {/* PANEL BUTTONS */}
           <ButtonGroup size="large" orientation="vertical">
             {ItemTypes.map((type) => {
-              console.log("type");
-              console.log(type);
-
               return (
                 <Button
                   className={classes.buttons}
@@ -223,6 +225,7 @@ const ItemShop = () => {
                         disabled={disableButton(item)}
                         onClick={() => {
                           addItemToUnit(item);
+                          contextArmy.recalculateItemTypeFlags(item, true);
                           triggerArymListReCalculation();
                         }}
                         key={uuidGenerator()}
