@@ -85,12 +85,11 @@ export const unitCardMultiSort = (unitList) => {
 };
 
 /**
- * Returns the total point cost for the unit + all equipment selected for it
+ * Function returns the total point cost for the unit + all equipment selected for it
  * @param {unitCard} unit
  * @returns total point cost for the unit + equipment
  */
 export const calculateTotalUnitPointCost = (unit) => {
-
   if ("equipment" in unit && unit.equipment.length !== 0) {
     let pointTotal = 0;
     unit.equipment.forEach((pieceOfGear) => {
@@ -100,4 +99,21 @@ export const calculateTotalUnitPointCost = (unit) => {
   } else {
     return unit.points;
   }
+};
+
+/**
+ * Function searches a JS object used as table in a table-driven function for a match. Used to map in the gameRules to map units/subfactions to heroes.
+ * @param {unitCard Obj} canditateUnit
+ * @param {Object} mapping
+ * @returns
+ */
+export const searchMappingForMatch = (canditateUnit, mapping) => {
+  let match = "";
+
+  for (const unit in mapping) {
+    if (Object.hasOwnProperty.call(mapping, unit)) {
+      match = mapping[canditateUnit];
+    }
+  }
+  return match;
 };

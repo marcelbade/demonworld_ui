@@ -81,7 +81,7 @@ const OptionButtons = () => {
 
   /**
    * Function checks whether the list is valid.
-   * @param {[unitCard Obj]} blockedUnits
+   * @param {[unitCard]} blockedUnits
    * @returns boolean flag; true if list is invalid (no commander OR 1 or more subfaction below min. )
    */
   const violatesRules = (blockedUnits) => {
