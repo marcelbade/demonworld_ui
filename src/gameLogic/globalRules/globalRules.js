@@ -8,8 +8,8 @@ const DONT_EXCEED_THE_POINT_ALLOWANCE_MESSAGE = "Die Liste darf die maximale Pun
 const globalRules = {
   /**
    * Function tests if a unit's point cost exceeds the max point allowance of the list if added.
-   * @param {[unitCard obj]} selectedUnits array of already selected units.
-   * @param {[unitCard obj]} availableUnits array of all units available for the list.
+   * @param {[unitCard]} selectedUnits array of already selected units.
+   * @param {[unitCard]} availableUnits array of all units available for the list.
    * @param {int} armyPointsAllowance Maximum number of points that can be spent.
    * @returns array consisting of objects. Every object contains a unit that must be blocked and an error message to
    * be displayed as a tool tip.
@@ -48,7 +48,7 @@ const globalRules = {
 
   /**
    * Function tests whether a non-unique unit has been selected twice.
-   * @param {[unitCard obj]} selectedUnits
+   * @param {[unitCard]} selectedUnits
    * @returns array consisting of objects. Every object contains a unit that must be blocked and an error message to
    * be displayed as a tool tip.
    */
@@ -69,9 +69,9 @@ const globalRules = {
 
   /**
    * Function tests if a heroe's / magic User's point cost exceeds the max. if added.
-   * @param {[unitCard obj]} selectedUnits array of already selected units.
+   * @param {[unitCard]} selectedUnits array of already selected units.
    * @param {int} armyPointsAllowance Maximum number of points that can be spent.
-   * @param {[unitCard obj]} availableUnits array of all units available for the list.
+   * @param {[unitCard]} availableUnits array of all units available for the list.
    * @param {int} allowedPercentage max percenttage that can be spent on heroes / magic users.
    * @returns array consisting of objects. Every object contains a unit that must be blocked and an error message to
    * be displayed as a tool tip.
@@ -101,7 +101,7 @@ const globalRules = {
   /**
    * Function tests for all sub factions in the list whether they are below the max. point allowance for that sub faction.
    * @param {rule obj} rules rule object for army.
-   * @param {[unitCard obj]} selectedUnits an array of unit card objects.
+   * @param {[unitCard]} selectedUnits an array of unit card objects.
    * @param {int} maxArmyPoints max. army points allowance.
    * @param {*} availableUnits all units available for the army list.
    * @returns array consisting of objects. Every object contains a unit that must be blocked and an error message to
@@ -130,7 +130,7 @@ const globalRules = {
   /**
    *Function tests for all sub factions in the list whether they are above the minimum point allowance for that sub faction.
    * @param {rule obj} rules rule object for army.
-   * @param {[unitCard obj]} selectedUnits an array of unit card objects.
+   * @param {[unitCard]} selectedUnits an array of unit card objects.
    * @param {int} maxArmyPoints max. army points allowance.
    * @returns array consisting of objects. Every object contains a unit that must be blocked and an error message to
    * be displayed as a tool tip.
@@ -163,7 +163,7 @@ const globalRules = {
   },
   /**
    * Function tests whether no more than 50% of the point allowance have been spent on heroes and mages.
-   * @param {[unitCard obj]} selectedUnitsarray of all units already selected by user
+   * @param {[unitCard]} selectedUnitsarray of all units already selected by user
    * @param {unitCard obj} availableUnits list of all unselected units still available
    * @param {int} totalPointsAllowance max. points the user can spent on the list
    * @returns an array. Each entry contains the name of the unit that is blocked by this rule and a message for the user with the block reason.
