@@ -20,12 +20,12 @@ export const ARMY_ALTERNATIVES_LIST_MAPPER = {
   Orks: ["Clanngetts", "Steinclan", "Wyvernclan", "Tierclan", "Eisclan", "Pfeilclan", "Blutclan", "Eisenclan", "Bergclan"],
 };
 
-
 export const ALTERNATIVE_ARMY_SELECTION_TEXT = {
   Imperium: "Wähle eine der Marken",
   Zwerge: ["Wähle eines der Königreiche", "Zweites Königreich oder Alliierte?"],
-  Orks: "Wähle einen der Clans oder Clanngett",  
-}
- 
+  Orks: "Wähle einen der Clans oder Clanngett",
+};
 
-export const ARMIES_TWO_CHOICES_PER_ALTERNATIVE_LIST=[ZWERGE]; 
+export const THAIN_TRIBES = ["Eberstamm", "Bärenstamm", "Wolfsstamm", "Berglöwenstamm", "Adlerstamm"];
+
+export const ARMIES_TWO_CHOICES_PER_ALTERNATIVE_LIST = [ZWERGE];
