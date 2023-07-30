@@ -57,7 +57,7 @@ const SubListStats = (props) => {
     const ruleArray = ruleObjectProvider(contextArmy.selectedFactionName);
     const filteredArray = ruleArray.filter((r) => r.cardNames.includes(props.subFactionName));
 
-    // when changing armies, the rulearray briefly becomes undefined. Hence the test for length.
+    // when changing armies, the rulearray very briefly becomes undefined. Hence the test for length.
     const minPercentage = filteredArray.length !== 0 ? filteredArray[0].min * 100 : 0;
     const maxPercentage = filteredArray.length !== 0 ? filteredArray[0].max * 100 : 0;
 
