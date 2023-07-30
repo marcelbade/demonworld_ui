@@ -70,13 +70,13 @@ const DarkElveRules = {
     const magiciansVsPriests = () => {
       const INCREMENT = 10;
       const NET_TOTAL = 4;
-      const PRIEST = ["Priesterin", "Priesterkaste", "magicianCaste"];
+      const PRIESTS = ["Priesterin", "Priesterkaste", "magicianCaste"];
       const MAGICIANS = ["Magier", "Magierkaste", "priestCaste"];
 
       if (selectedUnits !== undefined && selectedUnits.length > 0) {
         for (let i = selectedUnits.length - 1; i >= 0; i--) {
           if (selectedUnits[i].subFaction === "Priesterin" || selectedUnits[i].subFaction === "Priesterkaste") {
-            decreaseAllowance(INCREMENT, NET_TOTAL, PRIEST);
+            decreaseAllowance(INCREMENT, NET_TOTAL, PRIESTS);
           }
           if (selectedUnits[i].subFaction === "Magier" || selectedUnits[i].subFaction === "Magierkaste") {
             decreaseAllowance(INCREMENT, NET_TOTAL, MAGICIANS);
@@ -86,15 +86,15 @@ const DarkElveRules = {
     };
 
     const decreaseAllowance = (increment, netTotal, subFaction) => {
-      let pointSpent = 0;
+      let pointsSpent = 0;
 
       selectedUnits
         .filter((sU) => sU.subFaction === subFaction[0] || sU.subFaction === subFaction[1])
         .forEach((unit) => {
-          pointSpent += unit.points;
+          pointsSpent += unit.points;
         });
 
-      const percentage = pointSpent * (100 / totalPointsAllowance);
+      const percentage = pointsSpent * (100 / totalPointsAllowance);
       const share = Math.floor(percentage / increment);
 
       const remainder = netTotal - share;
