@@ -100,6 +100,7 @@ const ElfRules = {
     let testForEntsVsCentaurs = entsOrCentaurs(selectedUnits, availableUnits);
     let testForIlahRi = councilArmyRule(selectedUnits, availableUnits);
     let testIlahRiForRemovel = councilArmyRemove(selectedUnits);
+    let testOldHeroForRemovel = oldHeroRemove(selectedUnits);
 
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [
@@ -121,7 +122,10 @@ const ElfRules = {
     validationResults.commanderIsPresent = hasNoCommander;
 
     // Are there units that need to be removed from the list?
-    validationResults.removeUnitsNoLongerValid = [...testIlahRiForRemovel];
+    validationResults.removeUnitsNoLongerValid = [
+      ...testIlahRiForRemovel, //
+      ...testOldHeroForRemovel,
+    ];
 
     return validationResults;
   },
@@ -129,14 +133,11 @@ const ElfRules = {
 
 //SPECIAL FACTION RULES
 
-//Function calculates the max number of "Old Heores". The number of old heroes is calculated differently from anything else in the game - the player can take 1 old hero per 5 Thanaril and Ilah Ri units ("Thanaril-Kriegerbünde" do not count!).
+//Function calculates the max number of "Old Heores". The number of old heroes is calculated differently from anything else in the game - the player can take 1 old hero per 5 Thanaril and/or Ilah Ri units ("Thanaril-Kriegerbünde" do not count!).
 const numberOfOldHeroes = (selectedUnits, availableUnits) => {
   const MESSAGE =
-    "Du darfst höchstens einen alten Helden pro aufgestellten 5 Einheiten der Thanaril (keine Kriegerbünden) und/oder der Ratsarmee aufstellen";
-  const UNITS_PER_HERO = 5;
-  let allowance = 0;
-  let numberOldHeroes = 0;
-  let relevantSubFactions = ["Thanaril", "Ilah Ri"];
+    "Du darfst höchstens einen alten Helden pro aufgestellten 5 Einheiten der Thanaril (keine Kriegerbünde) und/oder der Ilah Ri aufstellen";
+
   let result = [];
 
   // the old heroes must start blocked
@@ -146,12 +147,51 @@ const numberOfOldHeroes = (selectedUnits, availableUnits) => {
       result.push({ unitBlockedbyRules: u.unitName, message: MESSAGE });
     });
 
-  let countRelevantUnits = selectedUnits.filter((selectedUnit) => relevantSubFactions.includes(selectedUnit.subFaction)).length;
-  allowance = parseInt(countRelevantUnits / UNITS_PER_HERO);
+  // unblock if condition is met
+  const numberOldHeroesAlreadySelected = selectedUnits.filter((su) => su.subFaction === "Alter Held").length;
+  const allowance = allowedNumberOldHeroes(selectedUnits);
 
-  while (numberOldHeroes < allowance) {}
+  if (numberOldHeroesAlreadySelected < allowance) {
+    result = [];
+  }
 
   return result;
+};
+
+/**
+ * Function implements the rule Old Heroes:
+ * if the army list contains not enough Ilah Ri and/or Thanaril units,
+ * the function removes a number of Old Heroes, starting with the last one picked,
+ * unitl the rule is no longer broken.
+ * @param {[unitCard]} selectedUnits
+ * @returns array of units that need to be removed from the army list automatically.
+ */
+const oldHeroRemove = (selectedUnits) => {
+  let result = [];
+
+  const numberOldHeroesAlreadySelected = selectedUnits.filter((su) => su.subFaction === "Alter Held").length;
+  const allowance = allowedNumberOldHeroes(selectedUnits);
+
+  if (numberOldHeroesAlreadySelected > allowance) {
+    let difference = numberOldHeroesAlreadySelected - allowance;
+
+    for (let i = selectedUnits.length - 1; i >= 0; i--) {
+      if (selectedUnits[i].subFaction === "Alter Held" && difference > 0) {
+        result.push(selectedUnits[i]);
+        --difference;
+      }
+    }
+  }
+
+  return result;
+};
+
+const allowedNumberOldHeroes = (selectedUnits) => {
+  const UNITS_PER_HERO = 5;
+  const relevantSubFactions = ["Thanaril", "Ilah Ri"];
+
+  const countRelevantUnits = selectedUnits.filter((su) => su.unitType === UNIT && relevantSubFactions.includes(su.subFaction)).length;
+  return parseInt(countRelevantUnits / UNITS_PER_HERO);
 };
 
 /**
@@ -252,7 +292,7 @@ const councilArmyRule = (selectedUnits, availableUnits) => {
 
   if (!isIlaRiHeroPresent) {
     availableUnits
-      .filter((u) => u.subFaction === "Ilah Ri" && u.unitType  === UNIT)
+      .filter((u) => u.subFaction === "Ilah Ri" && u.unitType === UNIT)
       .forEach((u) => {
         result.push({ unitBlockedbyRules: u.unitName, message: MESSAGE });
       });
