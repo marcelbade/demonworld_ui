@@ -13,6 +13,7 @@ Eisriesen aufgestellt werden.
  * */
 
 import globalRules from "../globalValidationRules/globalValidationRules";
+import validationResults from "./validationResultsObjectProvider";
 
 const rules = [
   {
@@ -64,16 +65,8 @@ const rules = [
 
 const MAX_HERO_PERCENTAGE = 40;
 
-
-const validationResults = {
-  unitsBlockedbyRules: [],
-  subFactionBelowMinimum: [],
-  commanderIsPresent: false,
-};
-
 const UndeadRules = {
   testSubFactionRules: (availableUnits, selectedUnits, totalPointsAllowance, subFactions) => {
- 
     //  general rules
     let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(selectedUnits, availableUnits, totalPointsAllowance);
     let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(rules, selectedUnits, totalPointsAllowance, subFactions);

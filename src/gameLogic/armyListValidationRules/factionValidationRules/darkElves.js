@@ -1,4 +1,5 @@
 import globalRules from "../globalValidationRules/globalValidationRules";
+import validationResults from "./validationResultsObjectProvider";
 
 const rules = [
   {
@@ -45,11 +46,7 @@ const rules = [
   },
 ];
 
-const validationResults = {
-  unitsBlockedbyRules: [],
-  subFactionBelowMinimum: [],
-  commanderIsPresent: false,
-};
+ 
 
 const DarkElveRules = {
   testSubFactionRules: (availableUnits, selectedUnits, totalPointsAllowance, subFactions) => {

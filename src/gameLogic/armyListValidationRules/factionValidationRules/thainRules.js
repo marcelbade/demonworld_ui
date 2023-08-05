@@ -16,6 +16,7 @@ import { THAIN_TRIBES } from "../../../constants/factions";
 import { UNIT } from "../../../constants/itemShopConstants";
 import { MAGE } from "../../../constants/unitTypes";
 import globalRules from "../globalValidationRules/globalValidationRules";
+import validationResults from "./validationResultsObjectProvider";
 
 const rules = [
   {
@@ -65,12 +66,6 @@ const rules = [
 ];
 
 const MAX_HERO_PERCENTAGE = 50;
-
-const validationResults = {
-  unitsBlockedbyRules: [],
-  subFactionBelowMinimum: [],
-  commanderIsPresent: false,
-};
 
 const ThainRules = {
   testSubFactionRules: (availableUnits, selectedUnits, totalPointsAllowance, subFactions) => {
@@ -197,7 +192,7 @@ const greatChampionRule = (selectedUnits) => {
     { tribe: "Wolfsstamm", hero: "Dargorkon'yaghar d. Winterwolf" },
     { tribe: "Berglöwenstamm", hero: "Muryan der Berglöwe" },
     { tribe: "Adlerstamm", hero: "Har'anyrrd der Späher" },
-  ]; 
+  ];
 
   let presentTribes = selectedUnits.filter((u) => THAIN_TRIBES.includes(u.secondSubFaction)).map((u) => u.secondSubFaction);
   let missingTribes = THAIN_TRIBES.filter((u) => !presentTribes.includes(u));

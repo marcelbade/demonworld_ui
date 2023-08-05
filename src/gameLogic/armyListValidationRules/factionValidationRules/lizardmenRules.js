@@ -1,4 +1,5 @@
 import globalRules from "../globalValidationRules/globalValidationRules";
+import validationResults from "./validationResultsObjectProvider";
 
 const rules = [
   {
@@ -41,12 +42,6 @@ const rules = [
 
 const MAX_HERO_PERCENTAGE = 40;
 
-const validationResults = {
-  unitsBlockedbyRules: [],
-  subFactionBelowMinimum: [],
-  commanderIsPresent: false,
-};
-
 const LizardMenRules = {
   testSubFactionRules: (availableUnits, selectedUnits, totalPointsAllowance, subFactions) => {
     //  general rules
@@ -65,7 +60,7 @@ const LizardMenRules = {
       MAX_HERO_PERCENTAGE
     );
 
-    // special faction rules - must habe one hero 
+    // special faction rules - must habe one hero
 
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [

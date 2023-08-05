@@ -1,5 +1,7 @@
+
+// TODO: 
 /**
- * TODO: WYVERN -> count as item
+ * WYVERN -> count as item
  * TODO: LIMIT TO ONE CLAN
  * <p>
  * ok, orks is mildly annoying
@@ -82,7 +84,6 @@ const validationResults = {
 
 const OrkRules = {
   testSubFactionRules: (availableUnits, selectedUnits, totalPointsAllowance, subFactions) => {
- 
     //  general rules
     let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(selectedUnits, availableUnits, totalPointsAllowance);
     let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(rules, selectedUnits, totalPointsAllowance, subFactions);
@@ -120,7 +121,5 @@ const OrkRules = {
 };
 
 //SPECIAL FACTION RULES
- 
-
 
 export { OrkRules, rules };

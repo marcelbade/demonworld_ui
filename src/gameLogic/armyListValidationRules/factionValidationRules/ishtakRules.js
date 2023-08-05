@@ -1,4 +1,5 @@
 import globalRules from "../globalValidationRules/globalValidationRules";
+import validationResults from "./validationResultsObjectProvider";
 
 //TODO: change the error messages!!
 const rules = [
@@ -46,13 +47,6 @@ const rules = [
   },
 ];
 
-const validationResults = {
-  unitsBlockedbyRules: [],
-  subFactionBelowMinimum: [],
-  // Ishtak does not have this requirement - hence, this must always be true
-  commanderIsPresent: true,
-};
-
 const IshtakRules = {
   testSubFactionRules: (availableUnits, selectedUnits, totalPointsAllowance, subFactions) => {
     //  general rules
@@ -60,7 +54,6 @@ const IshtakRules = {
     let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(rules, selectedUnits, totalPointsAllowance, subFactions);
     let isAboveSubFactionMax = globalRules.unitsAboveSubFactionMax(rules, selectedUnits, totalPointsAllowance, availableUnits);
     let hasDuplicateUniques = globalRules.noDuplicateUniques(selectedUnits);
-   
 
     // tournament rules
     let testForMax2Result = globalRules.maximumOfTwo(selectedUnits);

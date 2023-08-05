@@ -1,4 +1,5 @@
 import globalRules from "../globalValidationRules/globalValidationRules";
+import validationResults from "./validationResultsObjectProvider";
 
 const rules = [
   {
@@ -46,11 +47,6 @@ const rules = [
     error: "Deine Armeeliste darf zu höchstens 25% aus Verbündeten des Nordens bestehen.",
   },
 ];
-
-const validationResults = {
-  unitsBlockedbyRules: [],
-  subFactionBelowMinimum: [],
-};
 
 const NorwingerRules = {
   testSubFactionRules: (availableUnits, selectedUnits, totalPointsAllowance, subFactions) => {

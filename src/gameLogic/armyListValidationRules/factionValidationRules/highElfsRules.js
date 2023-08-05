@@ -1,5 +1,6 @@
 import { HERO, MAGE, UNIT } from "../../../constants/unitTypes";
 import globalRules from "../globalValidationRules/globalValidationRules";
+import validationResults from "./validationResultsObjectProvider";
 
 const rules = [
   {
@@ -73,13 +74,6 @@ const rules = [
 ];
 
 const MAX_HERO_PERCENTAGE = 40;
-
-const validationResults = {
-  unitsBlockedbyRules: [],
-  subFactionBelowMinimum: [],
-  removeUnitsNoLongerValid: [],
-  commanderIsPresent: false,
-};
 
 const ElfRules = {
   testSubFactionRules: (availableUnits, selectedUnits, totalPointsAllowance, subFactions) => {
@@ -259,7 +253,7 @@ const councilArmyRule = (selectedUnits, availableUnits) => {
         result.push({ unitBlockedbyRules: u.unitName, message: MESSAGE });
       });
 
-    // TODO
+    // TODO remove when list no longer has hero
     const unitsRemoved = selectedUnits.filter((u) => u.subFaction !== "Ilah Ri");
     selectedUnits = [...unitsRemoved];
   }
