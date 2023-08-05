@@ -6,7 +6,7 @@ import { ListItemText, makeStyles, List } from "@material-ui/core";
 import { ArmyContext } from "../../../../contexts/armyContext";
 import { uuidGenerator } from "../../../shared/sharedFunctions";
 import { calculateTotalUnitPointCost } from "../../../shared/sharedFunctions";
-import { ruleObjectProvider } from "../../../../gameLogic/globalRules/ruleObjectProvider";
+import { ruleObjectProvider } from "../../../../gameLogic/armyListValidationRules/ruleObjectProvider";
 // clsx
 
 const useStyles = makeStyles({

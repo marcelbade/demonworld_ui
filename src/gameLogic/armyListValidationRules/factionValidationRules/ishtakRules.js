@@ -1,4 +1,4 @@
-import globalRules from "../globalRules/globalRules";
+import globalRules from "../globalValidationRules/globalValidationRules";
 
 //TODO: change the error messages!!
 const rules = [

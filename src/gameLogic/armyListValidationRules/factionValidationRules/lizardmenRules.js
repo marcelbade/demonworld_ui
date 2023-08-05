@@ -1,58 +1,53 @@
-import globalRules from "../globalRules/globalRules";
+import globalRules from "../globalValidationRules/globalValidationRules";
 
 const rules = [
   {
-    subFaction: "barbarians",
-    cardNames: ["Barbaren"],
+    subFaction: "basicTroops",
     min: 0.2,
-    max: 0.75,
-    error: "Deine Armeeliste muss zu 20% bis 75% aus Barbaren bestehen",
+    max: 0.5,
+    cardNames: ["Grundtruppen"],
+    error: "Deine Armeeliste muss zu mindestens 20% aus Grundtruppen bestehen.",
   },
   {
-    subFaction: "veterans",
-    cardNames: ["Veteranen"],
+    subFaction: "specialists",
     min: 0.0,
     max: 0.4,
-    error: "Deine Armeeliste darf zu höchstens 40% aus Veteranen bestehen.",
+    cardNames: ["Spezialisierte Truppen"],
+    error: "Deine Armeeliste darf maximal zu 40% aus spezialisierten Truppen bestehen.",
   },
-
-  {
-    subFaction: "spellcasters",
-    cardNames: ["Sturmlord", "Hexe"],
-    min: 0.0,
-    max: 0.3,
-    error: "Deine Armeeliste darf zu höchstens 30% aus Sturmlord und Hexen bestehen.",
-  },
-
   {
     subFaction: "heroes",
-    cardNames: ["Helden", " Befehlshaber"],
     min: 0.0,
     max: 0.3,
-    error: "Deine Armeeliste darf zu höchstens 30% aus Helden und Befehlshabern bestehen.",
+    cardNames: ["Helden/Befehlshaber"],
+    error: "Deine Armeeliste darf maximal zu 30% aus Helden und Befehlshabern bestehen.",
   },
   {
-    subFaction: "mightyNorthernBeings",
-    cardNames: ["Mächtige Wesen des Nordens"],
+    subFaction: "mages",
     min: 0.0,
-    max: 0.4,
-    error: "Deine Armeeliste darf zu höchstens 40% aus mächtigen Wesenn des Nordens bestehen.",
+    max: 0.3,
+    cardNames: ["Magier"],
+    error: "Deine Armeeliste darf maximal zu 30% aus Magiern bestehen.",
   },
+
   {
-    subFaction: "northernAllies",
-    cardNames: ["Verbündete des Nordens"],
+    subFaction: "Giants",
     min: 0.0,
-    max: 0.25,
-    error: "Deine Armeeliste darf zu höchstens 25% aus Verbündeten des Nordens bestehen.",
+    max: 0.35,
+    cardNames: ["Großelemente"],
+    error: "Deine Armeeliste darf maximal zu 35% aus Großelementen bestehen.",
   },
 ];
+
+const MAX_HERO_PERCENTAGE = 40;
 
 const validationResults = {
   unitsBlockedbyRules: [],
   subFactionBelowMinimum: [],
+  commanderIsPresent: false,
 };
 
-const NorwingerRules = {
+const LizardMenRules = {
   testSubFactionRules: (availableUnits, selectedUnits, totalPointsAllowance, subFactions) => {
     //  general rules
     let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(selectedUnits, availableUnits, totalPointsAllowance);
@@ -63,17 +58,22 @@ const NorwingerRules = {
 
     // tournament rules
     let testForMax2Result = globalRules.maximumOfTwo(selectedUnits);
+    let testForHeroCapResult = globalRules.belowMaxPercentageHeroes(
+      selectedUnits,
+      totalPointsAllowance,
+      availableUnits,
+      MAX_HERO_PERCENTAGE
+    );
 
-    // special faction rule - no more than 50% may be spent on all heroes, mages, and commanders.
-    let isAboveCharLimit = globalRules.NoMoreThanHalfOnCharacters(selectedUnits, availableUnits, totalPointsAllowance);
+    // special faction rules - must habe one hero 
 
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [
       ...isExceedingPointAllowance,
       ...hasDuplicateUniques,
+      ...testForHeroCapResult,
       ...testForMax2Result,
       ...isAboveSubFactionMax,
-      ...isAboveCharLimit,
     ];
     // result for sub factions below limit.
     validationResults.subFactionBelowMinimum = isBelowSubFactionMin;
@@ -85,4 +85,4 @@ const NorwingerRules = {
   },
 };
 
-export { NorwingerRules, rules };
+export { LizardMenRules, rules };

@@ -14,7 +14,7 @@ import SelectionInput from "../shared/selectionInput";
 import FactionTreeView from "./ArmySelectorView/SelectorTreeView/TreeView";
 import ArmyListDisplay from "./ArmyListView/ArmyListDisplay";
 import ItemShop from "./ItemShop/ItemShop";
-import { ruleValidation } from "../../gameLogic/useRuleValidation";
+import { ruleValidation } from "../../gameLogic/armyListValidationRules/ruleValidatorSelector";
 import { calculateTotalUnitPointCost, isObjectEmtpy, unitOrCmdCard } from "../shared/sharedFunctions";
 import AlternativeArmyListSelector from "./ArmySelectorView/AlternativeArmyListSelection/AlternativeArmyListSelector";
 import OptionButtons from "./OptionButtons/OptionButtons";
@@ -256,7 +256,9 @@ const ListGeneratorController = () => {
   }, [selectedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
-   * Validate the current army list everytime a unit is added or the max point allowance changes. Validation works through a validator object.
+   * Validate the current army list everytime a unit is added, removed or the max point allowance changes.
+   * Validation works through a validator object. The object returns an array containing all units
+   * which need to be blocked, as well as a message stating the reason for blocking it.
    */
   useEffect(() => {
     if (selectedFactionName) {

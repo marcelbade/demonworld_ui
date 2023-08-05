@@ -1,6 +1,6 @@
 import { DarkElveRules } from "./factionValidationRules/darkElves";
 import { DwarfRules } from "./factionValidationRules/dwarfs";
-import { ElveRules } from "./factionValidationRules/highElfsRules";
+import { ElfRules } from "./factionValidationRules/highElfsRules";
 import { EmpireRules } from "./factionValidationRules/empireRules";
 import { GoblinRules } from "./factionValidationRules/goblinRules";
 import { IshtakRules } from "./factionValidationRules/ishtakRules";
@@ -20,7 +20,7 @@ export const ruleValidation = (faction) => {
     case "Dunkelelfen":
       return DarkElveRules;
     case "Elfen":
-      return ElveRules;
+      return ElfRules;
     case "Goblins":
       return GoblinRules;
     case "Imperium":

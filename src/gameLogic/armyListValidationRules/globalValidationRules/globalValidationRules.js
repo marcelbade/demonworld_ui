@@ -1,4 +1,4 @@
-import { HERO, MAGE } from "../../constants/unitTypes";
+import { HERO, MAGE } from "../../../constants/unitTypes";
 
 const NO_DUPLICATE_UNIQUES_MESSAGE = "Die Liste darf einzigartige Einheiten nur einmal enthalten";
 const MAXIMUM_OF_TWO_OF_EACH_MESSAGE = "Die Liste darf eine Einheit maximal 2x enthalten.";

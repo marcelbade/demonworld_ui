@@ -1,41 +1,56 @@
-import globalRules from "../globalRules/globalRules";
+import globalRules from "../globalValidationRules/globalValidationRules";
 
 const rules = [
   {
-    subFaction: "basicTroops",
-    min: 0.2,
-    max: 0.5,
-    cardNames: ["Grundtruppen"],
-    error: "Deine Armeeliste muss zu mindestens 20% aus Grundtruppen bestehen.",
+    subFaction: "infantry",
+    min: 0.3,
+    max: 1.0,
+    cardNames: ["Infanterie"],
+    error: "Deine Armeeliste muss zu mindestens 30% aus Infanterie bestehen.",
   },
   {
-    subFaction: "specialists",
+    subFaction: "engines",
     min: 0.0,
-    max: 0.4,
-    cardNames: ["Spezialisierte Truppen"],
-    error: "Deine Armeeliste darf maximal zu 40% aus spezialisierten Truppen bestehen.",
+    max: 0.2,
+    cardNames: ["Geräte"],
+    error: "Deine Armeeliste darf maximal zu 20% aus Geräten bestehen.",
   },
   {
-    subFaction: "heroes",
+    subFaction: "characters",
     min: 0.0,
     max: 0.3,
     cardNames: ["Helden/Befehlshaber"],
-    error: "Deine Armeeliste darf maximal zu 30% aus Helden und Befehlshabern bestehen.",
+    error: "Deine Armeeliste darf maximal zu 40% aus Helden und Befehlshabern bestehen.",
   },
   {
-    subFaction: "mages",
+    subFaction: "shamans",
     min: 0.0,
     max: 0.3,
-    cardNames: ["Magier"],
-    error: "Deine Armeeliste darf maximal zu 30% aus Magiern bestehen.",
+    cardNames: ["Schamanen"],
+    error: "Deine Armeeliste darf maximal zu 30% aus Schamanen bestehen.",
   },
 
   {
-    subFaction: "Giants",
+    subFaction: "giantInsects",
     min: 0.0,
-    max: 0.35,
-    cardNames: ["Großelemente"],
-    error: "Deine Armeeliste darf maximal zu 35% aus Großelementen bestehen.",
+    max: 0.4,
+    cardNames: ["Rieseninsekten"],
+    error: "Deine Armeeliste darf maximal zu 40% aus Rieseninsekten bestehen.",
+  },
+
+  {
+    subFaction: "insectRiders",
+    min: 0.0,
+    max: 0.4,
+    cardNames: ["Insektenreiter"],
+    error: "Deine Armeeliste darf maximal zu 40% aus Insektenreiter bestehen.",
+  },
+  {
+    subFaction: "orks",
+    min: 0.0,
+    max: 0.2,
+    cardNames: ["Orks"],
+    error: "Deine Armeeliste darf zu maximal zu 20% aus Orks bestehen.",
   },
 ];
 
@@ -47,7 +62,7 @@ const validationResults = {
   commanderIsPresent: false,
 };
 
-const LizardMenRules = {
+const GoblinRules = {
   testSubFactionRules: (availableUnits, selectedUnits, totalPointsAllowance, subFactions) => {
     //  general rules
     let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(selectedUnits, availableUnits, totalPointsAllowance);
@@ -65,7 +80,7 @@ const LizardMenRules = {
       MAX_HERO_PERCENTAGE
     );
 
-    // special faction rules - must habe one hero 
+    // special faction rules - no special rules for Goblins exist.
 
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [
@@ -85,4 +100,4 @@ const LizardMenRules = {
   },
 };
 
-export { LizardMenRules, rules };
+export { GoblinRules, rules };

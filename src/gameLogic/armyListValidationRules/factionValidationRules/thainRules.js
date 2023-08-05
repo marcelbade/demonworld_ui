@@ -12,10 +12,10 @@
 
 // TODO: correct subfations for thain, percentages
 
-import { THAIN_TRIBES } from "../../constants/factions";
-import { UNIT } from "../../constants/itemShopConstants";
-import { MAGE } from "../../constants/unitTypes";
-import globalRules from "../globalRules/globalRules";
+import { THAIN_TRIBES } from "../../../constants/factions";
+import { UNIT } from "../../../constants/itemShopConstants";
+import { MAGE } from "../../../constants/unitTypes";
+import globalRules from "../globalValidationRules/globalValidationRules";
 
 const rules = [
   {

@@ -1,4 +1,4 @@
-import globalRules from "../globalRules/globalRules";
+import globalRules from "../globalValidationRules/globalValidationRules";
 
 const rules = [
   {

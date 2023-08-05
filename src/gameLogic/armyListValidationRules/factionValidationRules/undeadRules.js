@@ -12,7 +12,7 @@ Tiermenschen aufzustellen. Allerdings können keine Schwarzmagier, Dämonen oder
 Eisriesen aufgestellt werden.
  * */
 
-import globalRules from "../globalRules/globalRules";
+import globalRules from "../globalValidationRules/globalValidationRules";
 
 const rules = [
   {
@@ -112,11 +112,11 @@ const UndeadRules = {
 
 //FACTION SPECIAL RULES
 
-// necromancer or commander with commandStars >= 2 must be present
-const necromancerOrCommanderPresent = (selectedUnits, availableUnits) => {
-  const necromancers = ["Xarta die Verderbte", "Sandaur der Perfide", "Jiitis Eishand", "Mad’Agonor"];
-  return selectedUnits.filter((selectedUnit) => selectedUnit.commandStars >= 2 || necromancers.includes(selectedUnit.unitName)) > 0;
-};
+// // necromancer or commander with commandStars >= 2 must be present
+// const necromancerOrCommanderPresent = (selectedUnits, availableUnits) => {
+//   const necromancers = ["Xarta die Verderbte", "Sandaur der Perfide", "Jiitis Eishand", "Mad’Agonor"];
+//   return selectedUnits.filter((selectedUnit) => selectedUnit.commandStars >= 2 || necromancers.includes(selectedUnit.unitName)) > 0;
+// };
 
 /**
  * The army list can have a maximum of 50% characters.
