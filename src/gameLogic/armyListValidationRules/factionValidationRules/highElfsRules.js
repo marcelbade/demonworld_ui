@@ -99,6 +99,7 @@ const ElfRules = {
     let testForThanarilCovenUnits = thanarilCovenRule(selectedUnits);
     let testForEntsVsCentaurs = entsOrCentaurs(selectedUnits, availableUnits);
     let testForIlahRi = councilArmyRule(selectedUnits, availableUnits);
+    let testIlahRiForRemovel = councilArmyRemove(selectedUnits);
 
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [
@@ -113,13 +114,14 @@ const ElfRules = {
       ...testForEntsVsCentaurs,
       ...testForIlahRi,
     ];
-    // result for sub factions below limit.
+    // Result for sub factions below limit.
     validationResults.subFactionBelowMinimum = isBelowSubFactionMin;
 
-    // result - is a commander present?
+    // Result - is a commander present?
     validationResults.commanderIsPresent = hasNoCommander;
 
-    validationResults.removeUnitsNoLongerValid = [...councilArmyRemove];
+    // Are there units that need to be removed from the list?
+    validationResults.removeUnitsNoLongerValid = [...testIlahRiForRemovel];
 
     return validationResults;
   },
@@ -246,11 +248,11 @@ const councilArmyRule = (selectedUnits, availableUnits) => {
   const MESSAGE = "Du musst mindestens einen Ilah Ri Befehlshaber wählen um Einheiten der Ratsarmee aufstellen zu können.";
   const ILAH_RI_HEROES = ["Athulain Gilfar", "Generalin Caliar Ildriel"];
   let result = [];
-  let isIlaRiHeroPresent = selectedUnits.filter((selectedUnit) => ILAH_RI_HEROES.includes(selectedUnit.unitName)).length > 0;
+  let isIlaRiHeroPresent = selectedUnits.filter((selectedUnits) => ILAH_RI_HEROES.includes(selectedUnits.unitName)).length > 0;
 
   if (!isIlaRiHeroPresent) {
     availableUnits
-      .filter((u) => u.subFaction === "Ilah Ri" && u.unitType !== MAGE && !ILAH_RI_HEROES.includes(u))
+      .filter((u) => u.subFaction === "Ilah Ri" && u.unitType  === UNIT)
       .forEach((u) => {
         result.push({ unitBlockedbyRules: u.unitName, message: MESSAGE });
       });
@@ -259,7 +261,7 @@ const councilArmyRule = (selectedUnits, availableUnits) => {
 };
 
 /**
- * Function implements the rule for the Ilah Ri / Council Army: 
+ * Function implements the rule for the Ilah Ri / Council Army:
  * if the army list contains no Ilah Ri heroes but
  * still contains Ilah Ri unit, they are removed.
  * @param {[unitCard]} selectedUnits

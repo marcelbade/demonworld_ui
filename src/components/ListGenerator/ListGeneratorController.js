@@ -30,6 +30,7 @@ import { ALLIES_MAPPING } from "../../constants/allies";
 import { ALL_FACTIONS_ARRAY } from "../../constants/factions";
 import DwarfsSecondSelector from "./ArmySelectorView/AlternativeArmyListSelection/DwarfsSecondSelector";
 import { ITEM_TYPE_BANNER, ITEM_TYPE_MUSICIAN } from "../../constants/itemShopConstants";
+import validationResults from "../../gameLogic/armyListValidationRules/factionValidationRules/validationResultsObjectProvider";
 
 const useStyles = makeStyles((theme) => ({
   displayBox: {
@@ -115,6 +116,7 @@ const ListGeneratorController = () => {
   const [listValidationResults, SetListValidationResults] = useState({
     unitsBlockedbyRules: [],
     subFactionBelowMinimum: [],
+    removeUnitsNoLongerValid: [],
   });
   // alternative lists
   const [armyHasAlternativeLists, setArmyHasAlternativeLists] = useState(false);
@@ -155,11 +157,13 @@ const ListGeneratorController = () => {
     fetchItemData();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  //TODO Change URL in Production!
   const fetchFactionData = async () => {
     const result = await axios(`http://localhost:8080/factions`);
     setfetchedFactions(result.data);
   };
 
+  //TODO Change URL in Production!
   const fetchItemData = async () => {
     const result = await axios(`http://localhost:8080/items`);
     setfetchedItems(result.data);
@@ -203,7 +207,7 @@ const ListGeneratorController = () => {
   }, [listOfAllFactionUnits]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
-   * set the ally name
+   * Set the ally's name.
    */
   useEffect(() => {
     if (allyName) {
@@ -235,13 +239,13 @@ const ListGeneratorController = () => {
     }
   }, [allyName]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // If the army's rules specify different alternative lists, set to true.
+  // If the army's rules have alternative army lists, set to true.
   useEffect(() => {
     setArmyHasAlternativeLists(ARMIES_WITH_ALTERNATIVE_LISTS.includes(selectedFactionName));
   }, [selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
-   * Calculate the total point value for the army.
+   * Function calculate the total point value for the army.
    */
   useEffect(() => {
     let pointTotal = 0;
@@ -263,11 +267,36 @@ const ListGeneratorController = () => {
   useEffect(() => {
     if (selectedFactionName) {
       let validator = ruleValidation(selectedFactionName);
-      let result = validator.testSubFactionRules(listOfAllFactionUnits, selectedUnits, maxPointsAllowance, distinctSubFactions);
+      let validationResult = validator.testSubFactionRules(listOfAllFactionUnits, selectedUnits, maxPointsAllowance, distinctSubFactions);
 
-      collectValidatioResults(result);
+      collectValidatioResults(validationResult);
     }
   }, [selectedUnits, maxPointsAllowance, selectedAlternativeList, distinctSubFactions]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  /**
+   * Function adds all invalid units to the block list.
+   * @param {{}} validationResults
+   */
+  const collectValidatioResults = (validationResults) => {
+    SetListValidationResults({
+      ...listValidationResults,
+      unitsBlockedbyRules: validationResults.unitsBlockedbyRules,
+      subFactionBelowMinimum: validationResults.subFactionBelowMinimum,
+      commanderIspresent: validationResults.commanderIsPresent,
+      removeUnitsNoLongerValid: validationResults.removeUnitsNoLongerValid,
+    });
+  };
+
+  // Autommatically remove units from the army list if the list no longer meets the ciriteria that have to be met to add those units.
+  useEffect(() => {
+    if (listValidationResults.removeUnitsNoLongerValid.length > 0) {
+      let currentState = [...selectedUnits];
+
+      currentState = currentState.filter((u) => !listValidationResults.removeUnitsNoLongerValid.includes(u));
+
+      setSelectedUnits([...currentState]);
+    }
+  }, [listValidationResults]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * Everytime the unit selections changes, recalculate which unique items are already selected and store it in the central item list. Only store those that are magical items that can only be equipped once!
@@ -292,7 +321,7 @@ const ListGeneratorController = () => {
     if (statCardState.show || itemShopState.show) setShowOptionButtons(false);
   }, [statCardState, itemShopState]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Set master list for pdf viewer
+  // Set the PDF master list for pdf viewer.
   useEffect(() => {
     let tempArray = [];
 
@@ -302,7 +331,7 @@ const ListGeneratorController = () => {
     });
   }, [distinctSubFactions, selectedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // reset when another army is selected.
+  // reset the PDF master list when another army is selected.
   useEffect(() => {
     setSelectedAlternativeList("NONE");
   }, [selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -368,27 +397,14 @@ const ListGeneratorController = () => {
   };
 
   /**
-   * Adds the selected units to a central list of units selected by the user and adds 2 things:
-   * - a unique Id so the same unit can be selected more than once and all instances can be differentiated
+   * Function adds a selected units to a the army list and adds 3 things:
+   * - a unique ID, so the same unit can be selected more than once and all instances can be differentiated
    * - equipment slots so items can be added
-   *  -a loss counter for the loss calculator
+   * - a loss counter for the loss calculator
    * @param {unitCard object} unit
    */
   const selectUnit = (unit) => {
     setSelectedUnits([...selectedUnits, enrichUnitCardObject(unit)]);
-  };
-
-  /**
-   * add all invalid units to the block list.
-   * @param {*} validationResult
-   */
-  const collectValidatioResults = (validationResult) => {
-    SetListValidationResults({
-      ...listValidationResults,
-      unitsBlockedbyRules: validationResult.unitsBlockedbyRules,
-      subFactionBelowMinimum: validationResult.subFactionBelowMinimum,
-      commanderIspresent: validationResult.commanderIsPresent,
-    });
   };
 
   /**
@@ -427,7 +443,8 @@ const ListGeneratorController = () => {
   };
 
   /**
-   * Function recalculates itemType flags to correctly toggle the item buttons on and off.
+   * Function recalculates itemType flags of a unitCard to correctly toggle the item buttons
+   * in thej item shop on and off.
    * @param {itemCard object} item
    */
   const recalculateItemTypeFlags = (item, ITEM_ADDED) => {
