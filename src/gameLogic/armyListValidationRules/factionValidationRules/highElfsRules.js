@@ -119,6 +119,8 @@ const ElfRules = {
     // result - is a commander present?
     validationResults.commanderIsPresent = hasNoCommander;
 
+    validationResults.removeUnitsNoLongerValid = [...councilArmyRemove];
+
     return validationResults;
   },
 };
@@ -248,14 +250,33 @@ const councilArmyRule = (selectedUnits, availableUnits) => {
 
   if (!isIlaRiHeroPresent) {
     availableUnits
-      .filter((u) => u.subFaction === "Ilah Ri" && u.unitType !== MAGE && u.unitType !== HERO)
+      .filter((u) => u.subFaction === "Ilah Ri" && u.unitType !== MAGE && !ILAH_RI_HEROES.includes(u))
       .forEach((u) => {
         result.push({ unitBlockedbyRules: u.unitName, message: MESSAGE });
       });
+  }
+  return result;
+};
 
-    // TODO remove when list no longer has hero
-    const unitsRemoved = selectedUnits.filter((u) => u.subFaction !== "Ilah Ri");
-    selectedUnits = [...unitsRemoved];
+/**
+ * Function implements the rule for the Ilah Ri / Council Army: 
+ * if the army list contains no Ilah Ri heroes but
+ * still contains Ilah Ri unit, they are removed.
+ * @param {[unitCard]} selectedUnits
+ * @returns array of units that need to be removed from the army list automatically.
+ */
+const councilArmyRemove = (selectedUnits) => {
+  const ILAH_RI_HEROES = ["Athulain Gilfar", "Generalin Caliar Ildriel"];
+  let result = [];
+
+  let isIlaRiHeroPresent = selectedUnits.filter((selectedUnit) => ILAH_RI_HEROES.includes(selectedUnit.unitName)).length > 0;
+
+  if (!isIlaRiHeroPresent) {
+    selectedUnits
+      .filter((u) => u.subFaction === "Ilah Ri")
+      .forEach((u) => {
+        result.push(u);
+      });
   }
   return result;
 };
