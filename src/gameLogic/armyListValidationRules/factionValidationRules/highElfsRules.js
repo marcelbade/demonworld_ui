@@ -173,7 +173,7 @@ const OreaVanarRules = (selectedUnits) => {
 
   let result = [];
 
-  // the masters must start blocked
+  // the Orea Vanar masters must start blocked!
   OreaVanarMapping.forEach((m) => {
     result.push({ unitBlockedbyRules: m.master, message: MESSAGE_MASTERS });
   });
