@@ -1,4 +1,4 @@
-import { HERO, MAGE, UNIT } from "../../../constants/unitTypes";
+import { GIANT, HERO, MAGE, UNIT } from "../../../constants/unitTypes";
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
 
@@ -99,8 +99,9 @@ const ElfRules = {
     let testForThanarilCovenUnits = thanarilCovenRule(selectedUnits);
     let testForEntsVsCentaurs = entsOrCentaurs(selectedUnits, availableUnits);
     let testForIlahRi = councilArmyRule(selectedUnits, availableUnits);
-    let testIlahRiForRemovel = councilArmyRemove(selectedUnits);
-    let testOldHeroForRemovel = oldHeroRemove(selectedUnits);
+    let testIlahRiForRemoval = councilArmyRemove(selectedUnits);
+    let testOldHeroForRemoval = oldHeroRemove(selectedUnits);
+    let testOreaVanarMasterRemoval = removeOreaVanar(selectedUnits);
 
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [
@@ -123,8 +124,9 @@ const ElfRules = {
 
     // Are there units that need to be removed from the list?
     validationResults.removeUnitsNoLongerValid = [
-      ...testIlahRiForRemovel, //
-      ...testOldHeroForRemovel,
+      ...testIlahRiForRemoval, //
+      ...testOldHeroForRemoval,
+      ...testOreaVanarMasterRemoval,
     ];
 
     return validationResults;
@@ -133,7 +135,7 @@ const ElfRules = {
 
 //SPECIAL FACTION RULES
 
-//Function calculates the max number of "Old Heores". The number of old heroes is calculated differently from anything else in the game - the player can take 1 old hero per 5 Thanaril and/or Ilah Ri units ("Thanaril-Kriegerbünde" do not count!).
+//Function calculates the max number of "Old Heroes". The number of Old Heroes is calculated differently from anything else in the game - the player can take 1 old hero per 5 Thanaril and/or Ilah Ri units ("Thanaril-Kriegerbünde" do not count!).
 const numberOfOldHeroes = (selectedUnits, availableUnits) => {
   const MESSAGE =
     "Du darfst höchstens einen alten Helden pro aufgestellten 5 Einheiten der Thanaril (keine Kriegerbünde) und/oder der Ilah Ri aufstellen";
@@ -186,6 +188,7 @@ const oldHeroRemove = (selectedUnits) => {
   return result;
 };
 
+// Function claculates the maximum number of Old Hero units allowed in the current army list.
 const allowedNumberOldHeroes = (selectedUnits) => {
   const UNITS_PER_HERO = 5;
   const relevantSubFactions = ["Thanaril", "Ilah Ri"];
@@ -193,6 +196,12 @@ const allowedNumberOldHeroes = (selectedUnits) => {
   const countRelevantUnits = selectedUnits.filter((su) => su.unitType === UNIT && relevantSubFactions.includes(su.subFaction)).length;
   return parseInt(countRelevantUnits / UNITS_PER_HERO);
 };
+
+const OreaVanarMapping = [
+  { school: "Avandril Bellir", master: "Der Junge" },
+  { school: "Galorea", master: "Die Wahrheit (Meisterin)" },
+  { school: "Til Dolandor", master: "Der Handwerker" },
+];
 
 /**
  * Function calculates the number of units of the Orea Vanar.
@@ -202,33 +211,48 @@ const allowedNumberOldHeroes = (selectedUnits) => {
  * @returns array of objects containing a blocked unit and an error message.
  */
 const OreaVanarRules = (selectedUnits) => {
-  const OreaVanarMapping = [
-    { school: "Avandril Bellir", master: "Der Junge" },
-    { school: "Galorea", master: "Die Wahrheit (Meisterin)" },
-    { school: "Til Dolandor", master: "Der Handwerker" },
-  ];
-
   const MESSAGE_MASTERS = "Ein Meister kann nur aufgestellt werden, wenn auch ihre Schule auf dem Schlachtfeld anwesend ist";
   const MESSAGE_SCHOOLS = "Jede Schule der Orea Vanar kann nur einmal aufgestellt werden";
 
   let result = [];
 
-  // the Orea Vanar masters must start blocked!
+  const selectedUnitNames = selectedUnits.map((u) => u.unitName);
+
+  OreaVanarMapping.forEach((ovm) => {
+    if (!selectedUnitNames.includes(ovm.school)) {
+      result.push({ unitBlockedbyRules: ovm.master, message: MESSAGE_MASTERS });
+    } else {
+      result.push({ unitBlockedbyRules: ovm.school, message: MESSAGE_SCHOOLS });
+    }
+  });
+
+  return result;
+};
+
+/**
+ * Function removes OreaVanar masters from the army list if the relevant school is no longer selected.
+ * @param {[unitCards]} selectedUnits
+ * @returns  array of unitCard Objects to be removed from the army list.
+ */
+const removeOreaVanar = (selectedUnits) => {
+  let result = [];
+  let found = [];
+ 
+  selectedUnits.forEach((u) => {
+    OreaVanarMapping.forEach((ovm) => {
+      if (ovm.master === u.unitName) {
+        found.push(u.unitName);
+      }
+      if (ovm.school === u.unitName) {
+        found.push(u.unitName);
+      }
+    });
+  });
+
   OreaVanarMapping.forEach((m) => {
-    result.push({ unitBlockedbyRules: m.master, message: MESSAGE_MASTERS });
-  });
-
-  const selectedSchoolUnits = selectedUnits.filter((u) => u.subFaction === "Orea Vanar" && u.unitType === UNIT).map((u) => u.unitName);
-
-  const mastersToUnblock = OreaVanarMapping.filter((m) => selectedSchoolUnits.includes(m.school)).map((m) => m.master);
-
-  mastersToUnblock.forEach((m) => {
-    const choice = result.indexOf(m);
-    result.splice(choice, 1);
-  });
-
-  selectedSchoolUnits.forEach((u) => {
-    result.push({ unitBlockedbyRules: u, message: MESSAGE_SCHOOLS });
+    if (!found.includes(m.school) && found.includes(m.master)) {
+      result.push(selectedUnits.filter((u) => u.unitName === m.master)[0]);
+    }
   });
 
   return result;
@@ -292,7 +316,7 @@ const councilArmyRule = (selectedUnits, availableUnits) => {
 
   if (!isIlaRiHeroPresent) {
     availableUnits
-      .filter((u) => u.subFaction === "Ilah Ri" && u.unitType === UNIT)
+      .filter((u) => u.subFaction === "Ilah Ri" && (u.unitType === UNIT || u.unitType === GIANT))
       .forEach((u) => {
         result.push({ unitBlockedbyRules: u.unitName, message: MESSAGE });
       });
@@ -303,7 +327,7 @@ const councilArmyRule = (selectedUnits, availableUnits) => {
 /**
  * Function implements the rule for the Ilah Ri / Council Army:
  * if the army list contains no Ilah Ri heroes but
- * still contains Ilah Ri unit, they are removed.
+ * still contains Ilah Ri units, they are removed.
  * @param {[unitCard]} selectedUnits
  * @returns array of units that need to be removed from the army list automatically.
  */
