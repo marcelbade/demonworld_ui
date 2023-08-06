@@ -13,15 +13,13 @@ const useStyles = makeStyles({
   },
   blockedLeafNode: {
     paddingRight: "0.5em",
-    
+
     color: "grey",
   },
   unblockedLeafNode: {
     paddingRight: "0.5em",
-    
   },
   points: {
-    
     color: "grey",
   },
 
