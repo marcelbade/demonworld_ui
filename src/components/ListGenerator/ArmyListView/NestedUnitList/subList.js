@@ -15,6 +15,10 @@ const useStyles = makeStyles({
   text: {
     width: "40%",
   },
+  pointsAndSecondSubFaction: {
+    display: "flex",
+    flexDirection: "column",
+  },
   list: {
     padding: "0px",
     margin: "0px",
@@ -69,7 +73,12 @@ const SubList = (props) => {
               <ListItemText
                 key={uuidGenerator()}
                 primary={<span className={classes.text}>{u.unitName}</span>}
-                secondary={<span className={classes.text}>{u.points}</span>}
+                secondary={
+                  <span className={classes.pointsAndSecondSubFaction}>
+                    {u.subFaction !== u.secondSubFaction ? <span className={classes.text}>{u.secondSubFaction}</span> : null}
+                    <span className={classes.text}>{u.points}</span>
+                  </span>
+                }
               />
               {/* BUTTONS */}
               <SublistEntryButtons unit={u} subFaction={props.subFactionName} key={uuidGenerator()} />
