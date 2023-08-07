@@ -48,6 +48,7 @@ const SublistEntryButtons = (props) => {
           className={classes.cardButtons}
           variant="outlined"
           onClick={() => {
+            contextArmy.setUnitSelectedForShop(props.unit);
             contextArmy.toggleMenuState(props.unit, "SECOND_SUB_FACTION");
           }}
         >
