@@ -72,10 +72,10 @@ const SubList = (props) => {
                 secondary={<span className={classes.text}>{u.points}</span>}
               />
               {/* BUTTONS */}
-              <SublistEntryButtons u={u} key={uuidGenerator()} />
+              <SublistEntryButtons unit={u} subFaction={props.subFactionName} key={uuidGenerator()} />
             </ListItem>
             <ListItem key={uuidGenerator()}>
-              <EquipmentList key={uuidGenerator()} u={u} identifier={identifier} />
+              <EquipmentList key={uuidGenerator()} unit={u} identifier={identifier} />
             </ListItem>
           </List>
         );
