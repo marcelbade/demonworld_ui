@@ -32,6 +32,7 @@ import { ALLIES_MAPPING } from "../../constants/allies";
 import { ALL_FACTIONS_ARRAY } from "../../constants/factions";
 import DwarfsSecondSelector from "./ArmySelectorView/AlternativeArmyListSelection/DwarfsSecondSelector";
 import { ITEM_TYPE_BANNER, ITEM_TYPE_MUSICIAN } from "../../constants/itemShopConstants";
+import SecondSubFactionMenu from "./SecondSubfactionMenu/SecondSubfactionMenu";
 
 const useStyles = makeStyles((theme) => ({
   displayBox: {
@@ -126,6 +127,7 @@ const ListGeneratorController = () => {
   const [secondDwarvenOption, setSecondDwarvenOption] = useState("");
   // additional subfactions - currently only important for the Thain army!
   const [hasAdditionalSubFaction, setHasAdditionalSubFaction] = useState(false);
+  const [secondSubFactionList, setSecondSubFactionList] = useState(false);
   const [secondSubfactionCaption, setSecondSubfactionCaption] = useState("");
   const [excemptSubFactions, setExcemptSubFactions] = useState("");
   // second SubFaction Menu view
@@ -198,6 +200,13 @@ const ListGeneratorController = () => {
    */
   useEffect(() => {
     closeItemShop();
+  }, [listOfAllFactionUnits]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  /**
+   * Close the menu for choosing the second sub faction when a new army is selected.
+   */
+  useEffect(() => {
+    closeSecondSubFactionMenu();
   }, [listOfAllFactionUnits]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
@@ -314,21 +323,24 @@ const ListGeneratorController = () => {
   useEffect(() => {
     let temp = [];
 
-    for (let i = 0; i < selectedUnits.length; i++) {
-      for (let j = 0; j < selectedUnits[i].equipment.length; j++) {
-        if (!selectedUnits[i].equipment[j].additionalItem || !selectedUnits[i].equipment[j].isGeneric) {
-          temp.push(selectedUnits[i].equipment[j].itemName);
+    if (selectedUnits) {
+      for (let i = 0; i < selectedUnits.length; i++) {
+        if (selectedUnits[i].equipment) {
+          for (let j = 0; j < selectedUnits[i].equipment.length; j++) {
+            if (!selectedUnits[i].equipment[j].additionalItem || !selectedUnits[i].equipment[j].isGeneric) {
+              temp.push(selectedUnits[i].equipment[j].itemName);
+            }
+          }
         }
       }
     }
-
     setAllItems(temp);
   }, [selectedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Open the option button drawer when everything else is closed, else close it.
   useEffect(() => {
-    if (!statCardState.show && !itemShopState.show) setShowOptionButtons(true);
-    if (statCardState.show || itemShopState.show) setShowOptionButtons(false);
+    if (!statCardState.show && !itemShopState.show && !secondSubFactionMenuState.show) setShowOptionButtons(true);
+    if (statCardState.show || itemShopState.show || secondSubFactionMenuState.show) setShowOptionButtons(false);
   }, [statCardState, itemShopState]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Set the PDF master list for pdf viewer.
@@ -391,8 +403,6 @@ const ListGeneratorController = () => {
     return true;
   };
 
-  //
-
   // set boolean flag if the selected faction has an addditonal sub faction for every unit.
   useEffect(() => {
     if (ARMIES_ADDITIONAL_SUBFACTIONS.includes(selectedFactionName)) {
@@ -401,8 +411,9 @@ const ListGeneratorController = () => {
       setHasAdditionalSubFaction(true);
       setSecondSubfactionCaption(result[0].caption);
       setExcemptSubFactions(result[0].excemptSubFactions);
+      setSecondSubFactionList(result[0].secondSubFactionList);
     }
-  }, [selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [selectedFactionName, secondSubFactionMenuState]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * Function returns all distinct subFactions of a selected faction.
@@ -483,6 +494,7 @@ const ListGeneratorController = () => {
       setUnitSelectedForShop({
         ...tempObj,
       });
+      //item removed
     } else {
       let tempObj = { ...unitSelectedForShop };
 
@@ -508,9 +520,9 @@ const ListGeneratorController = () => {
 
   /**
    * Function toggles the unit card view and Item shop view on and off, as well as switches between views for different units. In order to do this, both views are not toggled by a simple booelan flag, but an object that stores the previously clicked unit.
-   * @param {unitCard} u
+   * @param {unitCard} unit
    */
-  const toggleMenuState = (u, menu) => {
+  const toggleMenuState = (unit, menu) => {
     let stateObjSetter;
     let stateObj;
 
@@ -540,24 +552,24 @@ const ListGeneratorController = () => {
 
     // first click on page (no card displayed)
     if (stateObj.clickedUnit === undefined) {
-      stateObjSetter({ clickedUnit: u, lastclickedUnit: u, show: true });
+      stateObjSetter({ clickedUnit: unit, lastclickedUnit: unit, show: true });
     }
     // click on same unit again to toggle the card view on
-    else if (stateObj.lastclickedUnit.unitName === u.unitName && stateObj.show === true) {
-      stateObjSetter({ clickedUnit: u, lastclickedUnit: u, show: false });
+    else if (stateObj.lastclickedUnit.unitName === unit.unitName && stateObj.show === true) {
+      stateObjSetter({ clickedUnit: unit, lastclickedUnit: unit, show: false });
     }
     // click on same unit again to toggle the card view off
-    else if (stateObj.lastclickedUnit.unitName === u.unitName && stateObj.show === false) {
-      stateObjSetter({ clickedUnit: u, lastclickedUnit: u, show: true });
+    else if (stateObj.lastclickedUnit.unitName === unit.unitName && stateObj.show === false) {
+      stateObjSetter({ clickedUnit: unit, lastclickedUnit: unit, show: true });
     }
     // click on a different unit to show a different card
-    else if (stateObj.lastclickedUnit.unitName !== u.unitName) {
-      stateObjSetter({ clickedUnit: u, lastclickedUnit: u, show: true });
+    else if (stateObj.lastclickedUnit.unitName !== unit.unitName) {
+      stateObjSetter({ clickedUnit: unit, lastclickedUnit: unit, show: true });
     }
   };
 
   /**
-   * in order to work, the state setter needs a unit at the start. Since the card view is toggled off, the first unit in the list is used.
+   * in order to work, the state setter needs a unit at the start. Since the view is not visible, the first unit in the list is used.
    */
   const closeCardDisplay = () => {
     setStatCardState({ clickedUnit: selectedUnits[0], lastclickedUnit: selectedUnits[0], show: false });
@@ -568,7 +580,7 @@ const ListGeneratorController = () => {
   };
 
   const closeSecondSubFactionMenu = () => {
-    setItemShopState({ clickedUnit: selectedUnits[0], lastclickedUnit: selectedUnits[0], show: false });
+    setSecondSubFactionMenuState({ clickedUnit: selectedUnits[0], lastclickedUnit: selectedUnits[0], show: false });
   };
 
   /**
@@ -582,7 +594,6 @@ const ListGeneratorController = () => {
     let currentState = [...selectedUnits];
 
     const unitRemoved = currentState.filter((u) => !(u.unitName === unit.unitName && u.uniqueID === unit.uniqueID));
-
     unit.secondSubFaction = newSecondSubFaction;
 
     setSelectedUnits([...unitRemoved, unit]);
@@ -633,8 +644,9 @@ const ListGeneratorController = () => {
         setSecondDwarvenOption: setSecondDwarvenOption,
         // SECOND SUB FACTION
         hasAdditionalSubFaction: hasAdditionalSubFaction,
-        secondSubfactionCaption: secondSubfactionCaption,
+        secondSubFactionList: secondSubFactionList,
         excemptSubFactions: excemptSubFactions,
+        secondSubfactionCaption: secondSubfactionCaption,
         setSecondSubFactionInArmyList: setSecondSubFactionInArmyList,
         // PDF VIEWER
         pdfMasterList: pdfMasterList,
@@ -687,6 +699,12 @@ const ListGeneratorController = () => {
           <Drawer anchor={"right"} variant="persistent" open={statCardState.show} className={classes.UnitCardDisplay}>
             {!isObjectEmtpy(statCardState.clickedUnit) ? unitOrCmdCard(statCardState.clickedUnit, COLUMN) : <p></p>}
           </Drawer>
+          {/* SECOND SUBFACTION SELECTION MENU */}
+          {secondSubFactionList ? (
+            <Drawer anchor={"right"} variant="persistent" open={secondSubFactionMenuState.show}>
+              <SecondSubFactionMenu />
+            </Drawer>
+          ) : null}
         </Grid>
       </Grid>
     </ArmyProvider>
