@@ -40,13 +40,13 @@ const EquipmentList = (props) => {
    * @returns css class
    */
   const displayListTop = () => {
-    return props.u.equipment.length === 0 ? classes.equipmentList : clsx(classes.line, classes.equipmentList);
+    return props.unit.equipment.length === 0 ? classes.equipmentList : clsx(classes.line, classes.equipmentList);
   };
 
   return (
     <List className={displayListTop()} key={uuidGenerator()}>
-      {props.u.equipment.length !== 0
-        ? props.u.equipment.map((e, i) => {
+      {props.unit.equipment.length !== 0
+        ? props.unit.equipment.map((e, i) => {
             return (
               <ListItem key={uuidGenerator()} className={classes.element}>
                 <Button
