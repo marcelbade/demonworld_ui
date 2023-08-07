@@ -90,6 +90,7 @@ const ThainRules = {
     let testForChampionRule = greatChampionRule(selectedUnits);
     let testForDorgaRule = dorgaPriestRule(selectedUnits, availableUnits);
     let testForVeteranRule = veteranRule(selectedUnits, availableUnits);
+    let testForChurchRemovel = dorgaPriestRemove(selectedUnits, availableUnits);
 
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [
@@ -107,6 +108,11 @@ const ThainRules = {
 
     // result - is a commander present?
     validationResults.commanderIsPresent = hasNoCommander;
+
+    // Are there units that need to be removed from the list?
+    validationResults.removeUnitsNoLongerValid = [
+      ...testForChurchRemovel, //
+    ];
 
     return validationResults;
   },
@@ -206,6 +212,27 @@ const greatChampionRule = (selectedUnits) => {
   return result;
 };
 
+//TODO not finished!
+/**
+ * Function implements the second part of the champion rule:
+ * if there are no longer any tribal units in the list, all champion in the list need to be removed.
+ * @returns an array of units that need to be removed from the army list automatically.
+ */
+const greatChampionRemove = (selectedUnits) => {
+  let result = [];
+
+  let isTribalUnitpresent = selectedUnits.filter((u) => u.subFaction === "Dorga-Kirche" && u.unitType === UNIT).length > 0;
+
+  if (!isTribalUnitpresent) {
+    selectedUnits
+      .filter((u) => u.subFaction === "Veteranen der Stämme")
+      .forEach((u) => {
+        result.push(u);
+      });
+  }
+  return result;
+};
+
 /**
  * Function implements the rule that a Dorga priest can only be picked, if the player has already picked at least one Dorga church unit.
  * @param {[unitCard]} selectedUnits
@@ -230,7 +257,27 @@ const dorgaPriestRule = (selectedUnits, availableUnits) => {
 };
 
 /**
- * Function implements the rule that a veteran unit (including artillery) can only be picked, if the player has already picked at least one   non-veteran unit of the same tribe.
+ * Function implements the second part of the Dorga Church rule:
+ * if there are no longer any church units in the list, all Dorga Priests in the list need to be removed.
+ * @returns an array of units that need to be removed from the army list automatically.
+ */
+const dorgaPriestRemove = (selectedUnits) => {
+  let result = [];
+
+  let isDorgaUnitpresent = selectedUnits.filter((u) => u.subFaction === "Dorga-Kirche" && u.unitType === UNIT).length > 0;
+
+  if (!isDorgaUnitpresent) {
+    selectedUnits
+      .filter((u) => u.subFaction === "Dorga-Kirche")
+      .forEach((u) => {
+        result.push(u);
+      });
+  }
+  return result;
+};
+
+/**
+ * Function implements the rule that a veteran unit (including artillery) can only be picked, if the player has already picked at least one non-veteran unit of the same tribe.
  * @param {[unitCard]} selectedUnits
  * @returns array of objects containing a blocked unit and an error message.
  */
@@ -252,6 +299,27 @@ const veteranRule = (selectedUnits, availableUnits) => {
       result.push({ unitBlockedbyRules: u.unitName, message: MESSAGE });
     });
 
+  return result;
+};
+
+//TODO not finished!
+/**
+ * Function implements the second part of the veteran rule:
+ * if there are no longer any tribal units in the list, all veterans in the list need to be removed.
+ * @returns an array of units that need to be removed from the army list automatically.
+ */
+const tribalVeteranRemove = (selectedUnits) => {
+  let result = [];
+
+  let isTribalUnitpresent = selectedUnits.filter((u) => u.subFaction === "Stammeskrieger" && u.unitType === UNIT).length > 0;
+
+  if (!isTribalUnitpresent) {
+    selectedUnits
+      .filter((u) => u.subFaction === "Veteranen der Stämme")
+      .forEach((u) => {
+        result.push(u);
+      });
+  }
   return result;
 };
 
