@@ -25,8 +25,8 @@ const SublistEntryButtons = (props) => {
         className={classes.buttons}
         variant="outlined"
         onClick={() => {
-          contextArmy.setUnitSelectedForShop(props.u);
-          contextArmy.toggleMenuState(props.u, false);
+          contextArmy.setUnitSelectedForShop(props.unit);
+          contextArmy.toggleMenuState(props.unit, "ITEMS");
         }}
       >
         Gegenstände
@@ -36,11 +36,24 @@ const SublistEntryButtons = (props) => {
         className={classes.cardButtons}
         variant="outlined"
         onClick={() => {
-          contextArmy.toggleMenuState(props.u, true);
+          contextArmy.toggleMenuState(props.unit, "UNIT_CARDS");
         }}
       >
         Kartenvorschau
       </ListItemButton>
+
+      {contextArmy.hasAdditionalSubFaction && !contextArmy.excemptSubFactions.includes(props.subFaction) ? (
+        <ListItemButton
+          key={uuidGenerator()}
+          className={classes.cardButtons}
+          variant="outlined"
+          onClick={() => {
+            contextArmy.toggleMenuState(props.unit, "SECOND_SUB_FACTION");
+          }}
+        >
+          {contextArmy.secondSubfactionCaption}
+        </ListItemButton>
+      ) : null}
     </List>
   );
 };
