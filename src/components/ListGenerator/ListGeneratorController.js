@@ -25,12 +25,13 @@ import {
   ARMIES_WITH_ALTERNATIVE_LISTS,
   ARMY_ALTERNATIVES_LIST_MAPPER,
   ZWERGE,
+  ARMIES_ADDITIONAL_SUBFACTIONS,
+  ARMIES_ADDITIONAL_SUBFACTIONS_BUTTON_CAPTION,
 } from "../../constants/factions";
 import { ALLIES_MAPPING } from "../../constants/allies";
 import { ALL_FACTIONS_ARRAY } from "../../constants/factions";
 import DwarfsSecondSelector from "./ArmySelectorView/AlternativeArmyListSelection/DwarfsSecondSelector";
 import { ITEM_TYPE_BANNER, ITEM_TYPE_MUSICIAN } from "../../constants/itemShopConstants";
-import validationResults from "../../gameLogic/armyListValidationRules/factionValidationRules/validationResultsObjectProvider";
 
 const useStyles = makeStyles((theme) => ({
   displayBox: {
@@ -121,10 +122,19 @@ const ListGeneratorController = () => {
   // alternative lists
   const [armyHasAlternativeLists, setArmyHasAlternativeLists] = useState(false);
   const [selectedAlternativeList, setSelectedAlternativeList] = useState("NONE");
-  // The dwarf faction needs two sselections
+  // The dwarf faction needs two selections
   const [secondDwarvenOption, setSecondDwarvenOption] = useState("");
-
-  // item shop
+  // additional subfactions - currently only important for the Thain army!
+  const [hasAdditionalSubFaction, setHasAdditionalSubFaction] = useState(false);
+  const [secondSubfactionCaption, setSecondSubfactionCaption] = useState("");
+  const [excemptSubFactions, setExcemptSubFactions] = useState("");
+  // second SubFaction Menu view
+  const [secondSubFactionMenuState, setSecondSubFactionMenuState] = useState({
+    clickedUnit: {},
+    lastclickedUnit: {},
+    show: false,
+  });
+  // item shop view
   const [itemShopState, setItemShopState] = useState({
     clickedUnit: {},
     lastclickedUnit: {},
@@ -132,7 +142,7 @@ const ListGeneratorController = () => {
   });
   const [unitSelectedForShop, setUnitSelectedForShop] = useState({});
   const [allItems, setAllItems] = useState([]);
-  // unit card
+  // unit card view
   const [statCardState, setStatCardState] = useState({
     clickedUnit: {},
     lastclickedUnit: {},
@@ -348,23 +358,25 @@ const ListGeneratorController = () => {
   }, [selectedFactionName, selectedAlternativeList, secondDwarvenOption]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
-   * Function filters down the choices for alternative army lists.
+   * Function filters down an army's sub factions to the ones listed in the selected alternative army list.
    * Alternative army lists work by excluding certain sub factions from the list of sub factions available to the user.
-   * This function takes an array of all possible choices (sub factions), removes the one picked by the user and
-   * then uses the resulting array to filter out all units that belong the other sub factions.
+   * This function takes an array of all possible choices (all sub factions affected by the alternative army lists),
+   * removes the choice picked by the user and
+   * then uses the resulting array to filter out all units that belong the sub factions excluded by that alternative list.
    * There is one faction (dwarfs) that requires 2 choices, the second being hard coded.
    * @param {String} subFaction
    * @returns true, if no alternative lists exist or if the subfaction has been selected by the user.
    */
+  //TODO: can be simplified with filter!
   const alternateListSelectionFilter = (subFaction) => {
     if (ARMY_ALTERNATIVES_LIST_MAPPER[selectedFactionName] !== undefined) {
       const tempArray = [...ARMY_ALTERNATIVES_LIST_MAPPER[selectedFactionName]];
+
       const choice = tempArray.indexOf(selectedAlternativeList);
       tempArray.splice(choice, 1);
 
       if (ARMIES_TWO_CHOICES_PER_ALTERNATIVE_LIST.includes(selectedFactionName)) {
         const secondChoice = tempArray.indexOf(secondDwarvenOption);
-
         tempArray.splice(secondChoice, 1);
       }
 
@@ -378,6 +390,19 @@ const ListGeneratorController = () => {
 
     return true;
   };
+
+  //
+
+  // set boolean flag if the selected faction has an addditonal sub faction for every unit.
+  useEffect(() => {
+    if (ARMIES_ADDITIONAL_SUBFACTIONS.includes(selectedFactionName)) {
+      const result = ARMIES_ADDITIONAL_SUBFACTIONS_BUTTON_CAPTION.filter((e) => e.army === selectedFactionName);
+
+      setHasAdditionalSubFaction(true);
+      setSecondSubfactionCaption(result[0].caption);
+      setExcemptSubFactions(result[0].excemptSubFactions);
+    }
+  }, [selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * Function returns all distinct subFactions of a selected faction.
@@ -485,11 +510,33 @@ const ListGeneratorController = () => {
    * Function toggles the unit card view and Item shop view on and off, as well as switches between views for different units. In order to do this, both views are not toggled by a simple booelan flag, but an object that stores the previously clicked unit.
    * @param {unitCard} u
    */
-  const toggleMenuState = (u, isCards) => {
-    isCards ? closeItemShop() : closeCardDisplay();
+  const toggleMenuState = (u, menu) => {
+    let stateObjSetter;
+    let stateObj;
 
-    let stateObj = isCards ? statCardState : itemShopState;
-    let stateObjSetter = isCards ? setStatCardState : setItemShopState;
+    switch (menu) {
+      case "UNIT_CARDS":
+        stateObj = statCardState;
+        stateObjSetter = setStatCardState;
+        closeItemShop();
+        closeSecondSubFactionMenu();
+        break;
+      case "ITEMS":
+        stateObj = itemShopState;
+        stateObjSetter = setItemShopState;
+        closeCardDisplay();
+        closeSecondSubFactionMenu();
+        break;
+      case "SECOND_SUB_FACTION":
+        stateObj = secondSubFactionMenuState;
+        stateObjSetter = setSecondSubFactionMenuState;
+        closeCardDisplay();
+        closeItemShop();
+        break;
+
+      default:
+        break;
+    }
 
     // first click on page (no card displayed)
     if (stateObj.clickedUnit === undefined) {
@@ -518,6 +565,27 @@ const ListGeneratorController = () => {
 
   const closeItemShop = () => {
     setItemShopState({ clickedUnit: selectedUnits[0], lastclickedUnit: selectedUnits[0], show: false });
+  };
+
+  const closeSecondSubFactionMenu = () => {
+    setItemShopState({ clickedUnit: selectedUnits[0], lastclickedUnit: selectedUnits[0], show: false });
+  };
+
+  /**
+   * Function takes the selected unit from the list, sets a new value for
+   * the secondSubfaction property and replaces the old version of the unit in the
+   * selectedUnits state variable with the new one.
+   * @param {unitCard} unit
+   * @param {String} newSecondSubFaction
+   */
+  const setSecondSubFactionInArmyList = (unit, newSecondSubFaction) => {
+    let currentState = [...selectedUnits];
+
+    const unitRemoved = currentState.filter((u) => !(u.unitName === unit.unitName && u.uniqueID === unit.uniqueID));
+
+    unit.secondSubFaction = newSecondSubFaction;
+
+    setSelectedUnits([...unitRemoved, unit]);
   };
 
   /**
@@ -563,6 +631,11 @@ const ListGeneratorController = () => {
         secondDwarvenOption: secondDwarvenOption,
         setSelectedAlternativeList: setSelectedAlternativeList,
         setSecondDwarvenOption: setSecondDwarvenOption,
+        // SECOND SUB FACTION
+        hasAdditionalSubFaction: hasAdditionalSubFaction,
+        secondSubfactionCaption: secondSubfactionCaption,
+        excemptSubFactions: excemptSubFactions,
+        setSecondSubFactionInArmyList: setSecondSubFactionInArmyList,
         // PDF VIEWER
         pdfMasterList: pdfMasterList,
         // MENU STATES
