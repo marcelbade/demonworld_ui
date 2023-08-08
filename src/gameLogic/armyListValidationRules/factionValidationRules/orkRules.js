@@ -1,23 +1,3 @@
-
-// TODO: 
-/**
- * WYVERN -> count as item
- * TODO: LIMIT TO ONE CLAN
- * <p>
- * ok, orks is mildly annoying
- * you choose -> clan OR clangett
- * Clan: special troops of that one clan 50 percent
- * Clangett: lead by one of Clanngetts Lieutenants and troops of all clans can be picked, but at a lower max (20%)
- * ALSO:
- * The lieutenants are Trazzag,  Fherniak,  Ärrig,  Khazzar  and  Nallian
- * <p>
- *
- * ======================
- * - check for clangett lt. method
- * - check if clangett or clan, make max numbers dependent on that choice
- * - limit to one clan , else FALSE
- **/
-
 import globalRules from "../globalValidationRules/globalValidationRules";
 
 const rules = [
@@ -115,6 +95,8 @@ const OrkRules = {
 
     // result - is a commander present?
     validationResults.commanderIsPresent = hasNoCommander;
+
+    validationResults.removeUnitsNoLongerValid = [];
 
     return validationResults;
   },
