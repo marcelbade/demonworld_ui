@@ -197,7 +197,7 @@ const allowedNumberOldHeroes = (selectedUnits) => {
   return parseInt(countRelevantUnits / UNITS_PER_HERO);
 };
 
-const OreaVanarMapping = [
+const oreaVanarMapping = [
   { school: "Avandril Bellir", master: "Der Junge" },
   { school: "Galorea", master: "Die Wahrheit (Meisterin)" },
   { school: "Til Dolandor", master: "Der Handwerker" },
@@ -218,7 +218,7 @@ const OreaVanarRules = (selectedUnits) => {
 
   const selectedUnitNames = selectedUnits.map((u) => u.unitName);
 
-  OreaVanarMapping.forEach((ovm) => {
+  oreaVanarMapping.forEach((ovm) => {
     if (!selectedUnitNames.includes(ovm.school)) {
       result.push({ unitBlockedbyRules: ovm.master, message: MESSAGE_MASTERS });
     } else {
@@ -237,9 +237,9 @@ const OreaVanarRules = (selectedUnits) => {
 const removeOreaVanar = (selectedUnits) => {
   let result = [];
   let found = [];
- 
+
   selectedUnits.forEach((u) => {
-    OreaVanarMapping.forEach((ovm) => {
+    oreaVanarMapping.forEach((ovm) => {
       if (ovm.master === u.unitName) {
         found.push(u.unitName);
       }
@@ -249,9 +249,9 @@ const removeOreaVanar = (selectedUnits) => {
     });
   });
 
-  OreaVanarMapping.forEach((m) => {
-    if (!found.includes(m.school) && found.includes(m.master)) {
-      result.push(selectedUnits.filter((u) => u.unitName === m.master)[0]);
+  oreaVanarMapping.forEach((ovm) => {
+    if (!found.includes(ovm.school) && found.includes(ovm.master)) {
+      result.push(selectedUnits.filter((u) => u.unitName === ovm.master)[0]);
     }
   });
 
