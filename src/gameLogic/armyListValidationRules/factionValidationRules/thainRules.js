@@ -1,17 +1,3 @@
-/*
- * additional rule
- * - EVERY UNIT, ARTILLERY PIECE, CHAMPION,... WITH THE EXCEPTION OF DORGAPRIESTS, CHURCH UNITS AND GARYDWEN MUST BE ASSIGNED TO A TRIBE
- *  - tribal champions can only be selected when at least ONE unit of the tribe has been selected
- *  - for every veteran unit of a tribe you need ONE tribal unit
- *  - Dorga priests can only be selected if at least ONE church unit has been selected
- *  - in addition to the maximum for shamans and heroes/champions the points for champions/heroes AND shamans must be <= 50
- *  - for every FULL 10% of shamans, the maximum for church/droga units is lowered by 10%
- *    * e.g. 25% shamans -> -20% for church units
- *
- * */
-
-// TODO: correct subfations for thain, percentages
-
 import { THAIN_TRIBES } from "../../../constants/factions";
 import { UNIT } from "../../../constants/itemShopConstants";
 import { MAGE } from "../../../constants/unitTypes";
@@ -90,7 +76,9 @@ const ThainRules = {
     let testForChampionRule = greatChampionRule(selectedUnits);
     let testForDorgaRule = dorgaPriestRule(selectedUnits, availableUnits);
     let testForVeteranRule = veteranRule(selectedUnits, availableUnits);
-    let testForChurchRemovel = dorgaPriestRemove(selectedUnits, availableUnits);
+    let testForChurchRemoval = dorgaPriestRemove(selectedUnits, availableUnits);
+    let testForVeteranRemoval = tribalVeteranRemove(selectedUnits, availableUnits);
+    let testForChampionRemoval = greatChampionRemove(selectedUnits, availableUnits);
 
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [
@@ -111,7 +99,9 @@ const ThainRules = {
 
     // Are there units that need to be removed from the list?
     validationResults.removeUnitsNoLongerValid = [
-      ...testForChurchRemovel, //
+      ...testForChurchRemoval, //
+      ...testForVeteranRemoval,
+      ...testForChampionRemoval,
     ];
 
     return validationResults;
@@ -181,6 +171,14 @@ const decreaseAllowance = (increment, netTotal, subFaction, subFactionOpposite, 
   opposingFaction.max = remainder * 0.1;
 };
 
+const championTribeMapping = [
+  { tribe: "Eberstamm", hero: "Arr'ydwen der wilde Eber" },
+  { tribe: "Bärenstamm", hero: "Bold'dyrr der einäugige Bär" },
+  { tribe: "Wolfsstamm", hero: "Dargorkon'yaghar d. Winterwolf" },
+  { tribe: "Berglöwenstamm", hero: "Muryan der Berglöwe" },
+  { tribe: "Adlerstamm", hero: "Har'anyrrd der Späher" },
+];
+
 /**
  * Function implements the rule that the great champion of a tribe can only be picked, if the player has already picked at least one unit of the tribe.
  * @param {[unitCard]} selectedUnits
@@ -191,14 +189,6 @@ const greatChampionRule = (selectedUnits) => {
 
   const MESSAGE =
     "Der Groß-Champion eines Stammes kann nur aufgestellt werden, wenn vorher mindestens 1 Einheit des Stammes ausgewählt wurde.";
-
-  const championTribeMapping = [
-    { tribe: "Eberstamm", hero: "Arr'ydwen der wilde Eber" },
-    { tribe: "Bärenstamm", hero: "Bold'dyrr der einäugige Bär" },
-    { tribe: "Wolfsstamm", hero: "Dargorkon'yaghar d. Winterwolf" },
-    { tribe: "Berglöwenstamm", hero: "Muryan der Berglöwe" },
-    { tribe: "Adlerstamm", hero: "Har'anyrrd der Späher" },
-  ];
 
   let presentTribes = selectedUnits.filter((u) => THAIN_TRIBES.includes(u.secondSubFaction)).map((u) => u.secondSubFaction);
   let missingTribes = THAIN_TRIBES.filter((u) => !presentTribes.includes(u));
@@ -220,16 +210,25 @@ const greatChampionRule = (selectedUnits) => {
  */
 const greatChampionRemove = (selectedUnits) => {
   let result = [];
+  let found = [];
 
-  let isTribalUnitpresent = selectedUnits.filter((u) => u.subFaction === "Dorga-Kirche" && u.unitType === UNIT).length > 0;
+  selectedUnits.forEach((u) => {
+    championTribeMapping.forEach((ctm) => {
+      if (ctm.tribe === u.unitName) {
+        found.push(u.unitName);
+      }
+      if (ctm.hero === u.unitName) {
+        found.push(u.unitName);
+      }
+    });
+  });
 
-  if (!isTribalUnitpresent) {
-    selectedUnits
-      .filter((u) => u.subFaction === "Veteranen der Stämme")
-      .forEach((u) => {
-        result.push(u);
-      });
-  }
+  championTribeMapping.forEach((ctm) => {
+    if (!found.includes(ctm.tribe) && found.includes(ctm.hero)) {
+      result.push(selectedUnits.filter((u) => u.unitName === ctm.hero)[0]);
+    }
+  });
+
   return result;
 };
 
@@ -302,7 +301,6 @@ const veteranRule = (selectedUnits, availableUnits) => {
   return result;
 };
 
-//TODO not finished!
 /**
  * Function implements the second part of the veteran rule:
  * if there are no longer any tribal units in the list, all veterans in the list need to be removed.
@@ -311,15 +309,16 @@ const veteranRule = (selectedUnits, availableUnits) => {
 const tribalVeteranRemove = (selectedUnits) => {
   let result = [];
 
-  let isTribalUnitpresent = selectedUnits.filter((u) => u.subFaction === "Stammeskrieger" && u.unitType === UNIT).length > 0;
+  const presentTribes = selectedUnits
+    .filter((u) => u.subFaction === "Stammeskrieger" && u.secondSubFaction !== "Stammeskrieger")
+    .map((u) => u.secondSubFaction);
 
-  if (!isTribalUnitpresent) {
-    selectedUnits
-      .filter((u) => u.subFaction === "Veteranen der Stämme")
-      .forEach((u) => {
-        result.push(u);
-      });
-  }
+  selectedUnits.forEach((u) => {
+    if (u.subFaction === "Veteranen der Stämme" && !presentTribes.includes(u.secondSubFaction)) {
+      result.push(u);
+    }
+  });
+
   return result;
 };
 
