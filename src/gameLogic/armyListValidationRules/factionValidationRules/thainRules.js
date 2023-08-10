@@ -1,4 +1,4 @@
-import { THAIN_TRIBES } from "../../../constants/factions";
+import { EXCEMPT_FROM_TRIBES_RULE, THAIN_TRIBES } from "../../../constants/factions";
 import { UNIT } from "../../../constants/itemShopConstants";
 import { MAGE } from "../../../constants/unitTypes";
 import globalRules from "../globalValidationRules/globalValidationRules";
@@ -79,6 +79,7 @@ const ThainRules = {
     let testForChurchRemoval = dorgaPriestRemove(selectedUnits, availableUnits);
     let testForVeteranRemoval = tribalVeteranRemove(selectedUnits, availableUnits);
     let testForChampionRemoval = greatChampionRemove(selectedUnits, availableUnits);
+    let testForassignedTribe = allUnitsNeedTribes(selectedUnits);
 
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [
@@ -104,17 +105,34 @@ const ThainRules = {
       ...testForChampionRemoval,
     ];
 
+    validationResults.secondSubFactionMissing = [
+      ...testForassignedTribe, //
+    ];
+
     return validationResults;
   },
 };
 
 //SPECIAL FACTION RULES
 
-// TODO: missing rules
 /**
- *   - every unit in the army except for Gar'ydwen and Dorga-Church MUST(!) be allocated to one of the tribes.
- 
+ * Every Thain unit - with the exception of giant animals, Dorga Church units, Summons and the Banner of the High King must be assigned a tribe, i.e., the secondSubFaction attribute must be chagned to one of the values in the tribes list.
+ * @param {[unitCard]} selectedUnits
+ * @returns an array with all units that still must be assigned a tribe (secondSubFaction).
  */
+const allUnitsNeedTribes = (selectedUnits) => {
+  let result = [];
+  const MESSAGE = "Du mußt der Einheit einen Stamm zuordnen,";
+  selectedUnits
+    .filter((u) => !EXCEMPT_FROM_TRIBES_RULE.includes(u))
+    .forEach((u) => {
+      if (u.secondSubFaction === u.subFaction) {
+        result.push({ unitWithOutSecondSubFaction: u.unitName, message: MESSAGE });
+      }
+    });
+
+  return result;
+};
 
 /**
  * Function implements a special faction rule - per full 10% of the max point allowance spent on the Dorga Church, your point allowance for the shamans decreases by 10% and vice versa. Note that the algorithm is different from all the other validator logic - it does not create a list of unit Card objects that are added to a "block list", it instead directly decreases the limit.
@@ -202,7 +220,6 @@ const greatChampionRule = (selectedUnits) => {
   return result;
 };
 
-//TODO not finished!
 /**
  * Function implements the second part of the champion rule:
  * if there are no longer any tribal units in the list, all champion in the list need to be removed.
