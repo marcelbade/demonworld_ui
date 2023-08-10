@@ -28,6 +28,10 @@ const useStyles = makeStyles({
     margin: "-1em",
     padding: "0em",
   },
+  buttons: {
+    hieght: "80%",
+    
+  },
 });
 
 const SubList = (props) => {
@@ -69,7 +73,7 @@ const SubList = (props) => {
               >
                 <RemoveCircleOutlineIcon key={uuidGenerator()} />
               </Button>
-              {/* NAME + POINTS + BUTTONS*/}
+              {/* NAME + POINTS + SECONDSUBFACTION + BUTTONS*/}
               <ListItemText
                 key={uuidGenerator()}
                 primary={<span className={classes.text}>{u.unitName}</span>}
@@ -81,8 +85,9 @@ const SubList = (props) => {
                 }
               />
               {/* BUTTONS */}
-              <SublistEntryButtons unit={u} subFaction={props.subFactionName} key={uuidGenerator()} />
+              <SublistEntryButtons unit={u} subFaction={props.subFactionName} key={uuidGenerator()}  className={classes.buttons}/>
             </ListItem>
+            {/* EQUIPMENT */}
             <ListItem key={uuidGenerator()}>
               <EquipmentList key={uuidGenerator()} unit={u} identifier={identifier} />
             </ListItem>
