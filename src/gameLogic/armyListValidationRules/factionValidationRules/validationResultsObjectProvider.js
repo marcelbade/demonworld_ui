@@ -14,6 +14,7 @@ const validationResults = {
   unitsBlockedbyRules: [],
   subFactionBelowMinimum: [],
   removeUnitsNoLongerValid: [],
+  secondSubFactionMissing:[],
   commanderIsPresent: false,
 };
 
