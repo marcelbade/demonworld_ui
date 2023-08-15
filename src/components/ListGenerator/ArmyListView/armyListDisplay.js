@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Typography, TextField, InputAdornment, Grid } from "@material-ui/core";
 // components and functions
 import { ArmyContext } from "../../../contexts/armyContext";
-import SubFactionEntry from "./SubFactionList/SubFactionEntry";
+import ArmyListSubFactionEntry from "./ArmyList/ArmyListSubFactionEntry";
 import { uuidGenerator } from "../../shared/sharedFunctions";
 import calculateScoutingFactor from "../../../gameLogic/scoutFactorCalculator/scoutingFactorCalculator";
 
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "20px",
     fontWeight: "bold",
     width: "60%",
-    borderBottom: "solid 4px black",
+    borderBottom: "solid 4px black", 
     marginBottom: "1em",
   },
   total: {
@@ -64,7 +64,7 @@ const ArmyListDisplay = () => {
 
       <List>
         {contextArmy.subfactions.map((sF) => (
-          <SubFactionEntry subFaction={sF} key={uuidGenerator()} />
+          <ArmyListSubFactionEntry subFaction={sF} key={uuidGenerator()} />
         ))}
       </List>
       {/* TOTAL SPENT POINTS +  TOTAL POINT ALLOWANCE*/}
