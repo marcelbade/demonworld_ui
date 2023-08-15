@@ -107,7 +107,7 @@ const ListGeneratorController = () => {
   const [allyName, setAllyName] = useState("");
   const [listOfAllAlliedUnits, setListOfAllAlliedUnits] = useState([]);
   // maximum point allowance
-  const [maxPointsAllowance, setMaxPointsAllowance] = useState(2000); //  eslint-disable-line no-unused-vars
+  const [maxPointsAllowance, setMaxPointsAllowance] = useState(2000);
   // the current total point value of all selected units
   const [totalPointValue, setTotalPointValue] = useState(0);
   // sub factions of currrently selected army
@@ -119,7 +119,17 @@ const ListGeneratorController = () => {
     unitsBlockedbyRules: [],
     subFactionBelowMinimum: [],
     removeUnitsNoLongerValid: [],
+    secondSubFactionMissing: [],
   });
+  // tournament rules override
+
+  const [tournamentOverrideRules, setTournamentOverrideRules] = useState({
+    overrideIsOn: false,
+    tournamentHeroValue: 30,
+    tournamentNonUniqueMax: 2,
+    tournamentUniquesOnylOnce: true,
+  });
+
   // alternative lists
   const [armyHasAlternativeLists, setArmyHasAlternativeLists] = useState(false);
   const [selectedAlternativeList, setSelectedAlternativeList] = useState("NONE");
@@ -303,6 +313,7 @@ const ListGeneratorController = () => {
       subFactionBelowMinimum: validationResults.subFactionBelowMinimum,
       commanderIspresent: validationResults.commanderIsPresent,
       removeUnitsNoLongerValid: validationResults.removeUnitsNoLongerValid,
+      secondSubFactionMissing: validationResults.secondSubFactionMissing,
     });
   };
 
@@ -412,6 +423,8 @@ const ListGeneratorController = () => {
       setSecondSubfactionCaption(result[0].caption);
       setExcemptSubFactions(result[0].excemptSubFactions);
       setSecondSubFactionList(result[0].secondSubFactionList);
+    } else {
+      setHasAdditionalSubFaction(false);
     }
   }, [selectedFactionName, secondSubFactionMenuState]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -628,6 +641,8 @@ const ListGeneratorController = () => {
         clearList: clearList,
         // ARMY LIST VALIDATION
         listValidationResults: listValidationResults,
+        // TOURNAMENT RULES OVERRIDE
+        tournamentOverrideRules: tournamentOverrideRules,
         // ITEMSHOP
         fetchedItems: fetchedItems,
         allItems: allItems,
