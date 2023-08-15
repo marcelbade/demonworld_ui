@@ -1,15 +1,16 @@
 // React
 import React, { Fragment, useContext } from "react";
 // Material UI
-import { List, ListItem, makeStyles, ListItemText, Button } from "@material-ui/core";
+import { List, ListItem, makeStyles, Button } from "@material-ui/core";
 // icons
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 // components and functions
 import { ArmyContext } from "../../../../contexts/armyContext";
 import { unitCardMultiSort, uuidGenerator } from "../../../shared/sharedFunctions";
 import EquipmentList from "./EquipmentList";
-import SubListStats from "./SubListStats";
-import SublistEntryButtons from "./SubListEntryButtons";
+import ArmyListSubFactionFooter from "../ArmyList/ArmyListSubFactionFooter";
+import UnitEntryButtons from "./UnitEntryButtons";
+import ArmyListUnitEntry from "./ArmyListUnitEntry";
 
 const useStyles = makeStyles({
   text: {
@@ -30,22 +31,13 @@ const useStyles = makeStyles({
   },
   buttons: {
     hieght: "80%",
-    
   },
 });
 
-const SubList = (props) => {
+const SubFactionUnitList = (props) => {
   // eslint-disable-next-line no-unused-vars
   const classes = useStyles();
   const contextArmy = useContext(ArmyContext);
-
-  /**
-   * Removes the unit.
-   * @param {unit.name + hash code} identifier
-   */
-  const removeUnit = (identifier) => {
-    contextArmy.removeUnit(identifier);
-  };
 
   /**
    * The component creates the nested unit list for a single sub faction.
@@ -68,24 +60,15 @@ const SubList = (props) => {
               <Button
                 key={uuidGenerator()}
                 onClick={() => {
-                  removeUnit(identifier);
+                  contextArmy.removeUnit(identifier);
                 }}
               >
                 <RemoveCircleOutlineIcon key={uuidGenerator()} />
               </Button>
               {/* NAME + POINTS + SECONDSUBFACTION + BUTTONS*/}
-              <ListItemText
-                key={uuidGenerator()}
-                primary={<span className={classes.text}>{u.unitName}</span>}
-                secondary={
-                  <span className={classes.pointsAndSecondSubFaction}>
-                    {u.subFaction !== u.secondSubFaction ? <span className={classes.text}>{u.secondSubFaction}</span> : null}
-                    <span className={classes.text}>{u.points}</span>
-                  </span>
-                }
-              />
+                <ArmyListUnitEntry  unit= {u} />  
               {/* BUTTONS */}
-              <SublistEntryButtons unit={u} subFaction={props.subFactionName} key={uuidGenerator()}  className={classes.buttons}/>
+              <UnitEntryButtons unit={u} subFaction={props.subFactionName} key={uuidGenerator()} className={classes.buttons} />
             </ListItem>
             {/* EQUIPMENT */}
             <ListItem key={uuidGenerator()}>
@@ -95,9 +78,9 @@ const SubList = (props) => {
         );
       })}
       {/* SUB LIST STATS */}
-      <SubListStats key={uuidGenerator()} subFactionName={props.subFactionName} subFactionUnits={props.subFactionUnits} />
+      <ArmyListSubFactionFooter key={uuidGenerator()} subFactionName={props.subFactionName} subFactionUnits={props.subFactionUnits} />
     </Fragment>
   );
 };
 
-export default SubList;
+export default SubFactionUnitList;

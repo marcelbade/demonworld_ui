@@ -22,7 +22,7 @@ const useStyles = makeStyles({
   font: {},
 });
 
-const SubListStats = (props) => {
+const ArmyListSubFactionFooter = (props) => {
   const classes = useStyles();
   const contextArmy = useContext(ArmyContext);
 
@@ -104,4 +104,4 @@ const SubListStats = (props) => {
   );
 };
 
-export default SubListStats;
+export default ArmyListSubFactionFooter;

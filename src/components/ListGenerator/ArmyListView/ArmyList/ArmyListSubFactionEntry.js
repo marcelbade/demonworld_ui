@@ -6,14 +6,14 @@ import { Grid } from "@material-ui/core";
 // components and functions
 import { ArmyContext } from "../../../../contexts/armyContext";
 import { uuidGenerator } from "../../../shared/sharedFunctions";
-import SubList from "../NestedUnitList/SubList";
+import SubFactionUnitList from "../NestedUnitList/SubFactionUnitList";
 import InvalidHeader from "./InvalidHeader";
 import ValidHeader from "./ValidHeader";
 // constants
 import { ALLIES_MAPPING } from "../../../../constants/allies";
 
 // Creates the suFaction entry of the army list: Head and current and total points.
-const SubFactionEntry = (props) => {
+const ArmyListSubFactionEntry = (props) => {
   const contextArmy = useContext(ArmyContext);
 
   const [validatedSubFaction, setValidatedSubFaction] = useState({
@@ -57,13 +57,17 @@ const SubFactionEntry = (props) => {
   return contextArmy ? (
     <ListItem key={uuidGenerator()}>
       <Grid container direction={"column"} key={uuidGenerator()}>
+
+
+
+
         {validatedSubFaction.valid ? (
           <ValidHeader subFaction={validatedSubFaction.subFactionName} />
         ) : (
           <InvalidHeader subFaction={validatedSubFaction.subFactionName} message={validatedSubFaction.validationMessage} />
         )}
         {/* DISPLAY UNITS, PONT COST, PERCENTAGES FOR ONE SUBFACTION */}
-        <SubList
+        <SubFactionUnitList
           key={uuidGenerator()}
           subFactionUnits={filterUnitsForSubFaction(contextArmy.selectedUnits, props.subFaction)} //
           subFactionName={props.subFaction}
@@ -73,4 +77,4 @@ const SubFactionEntry = (props) => {
   ) : null;
 };
 
-export default SubFactionEntry;
+export default ArmyListSubFactionEntry;
