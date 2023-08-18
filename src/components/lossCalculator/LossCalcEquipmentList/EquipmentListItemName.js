@@ -3,6 +3,7 @@ import React from "react";
 //Material UI
 import { ListItemText } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import { Tooltip } from "@mui/material";
 
 const useStyles = makeStyles((theme) => ({
   typographyFont: {
@@ -21,6 +22,8 @@ const useStyles = makeStyles((theme) => ({
 const EquipmentListItemName = (props) => {
   const classes = useStyles();
 
+  const NOT_SINGLE_ELEMENT_ITEM_MESSAGE = "Punktkosten sind bereits in den Punktkosten der Elemente enthalten.";
+
   /**
    * Function returns the correct css conditionally.x
    * @returns an object containing css.
@@ -29,7 +32,11 @@ const EquipmentListItemName = (props) => {
     return props.isItemLost ? classes.strikeTroughText : classes.typographyFont;
   };
 
-  return (
+  return props.notSingleElementItem ? (
+    <Tooltip title={NOT_SINGLE_ELEMENT_ITEM_MESSAGE}>
+      <ListItemText secondary={<span className={classes.typographyFont}> {props.itemName}</span>} />
+    </Tooltip>
+  ) : (
     <ListItemText
       primary={<span className={switchCssClass()}>{props.itemName}</span>}
       secondary={<span className={classes.typographyFont}> {props.pointCost}</span>}
