@@ -5,7 +5,7 @@ import { ListItem } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 // components and functions
 import { uuidGenerator } from "../../shared/sharedFunctions";
-import LossCalcEquipmentButton from "./EquipmentListElementBttn";
+import EquipmentListElementBttn from "./EquipmentListElementBttn";
 import EquipmentListItemName from "./EquipmentListItemName";
 
 const useStyles = makeStyles((theme) => ({
@@ -27,22 +27,25 @@ const EquipmentListEntry = (props) => {
   const classes = useStyles();
 
   const unit = props.unit;
-  const itemName = props.element.name;
-  const isItemLost = props.element.itemLost;
-  const pointCost = props.element.points;
+  const itemName = props.item.name;
+  const isItemLost = props.item.itemLost;
+  const pointCost = props.item.points;
+  const notSingleElementItem = props.item.everyElement;
 
   return (
     <ListItem className={classes.entry} key={uuidGenerator()}>
-      <LossCalcEquipmentButton
+      <EquipmentListElementBttn
         unit={unit} //
         itemName={itemName}
         isItemLost={isItemLost}
+        disableButton={notSingleElementItem}
       />
 
       <EquipmentListItemName
         pointCost={pointCost} //
         itemName={itemName}
         isItemLost={isItemLost}
+        notSingleElementItem={notSingleElementItem}
       />
     </ListItem>
   );
