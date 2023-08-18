@@ -6,11 +6,11 @@ import { makeStyles } from "@material-ui/core/styles";
 // components and functions
 import { LossCalcContext } from "../../contexts/LossCalculatorContext";
 import { ListItem } from "@mui/material";
-import ListElementBttns from "./LossInputButtons/ListElementBttnGroup";
+import ListElementBttns from "./LossCalcInputButtons/UnitLossCalcBttnGroup";
 
 // clsx
 import clsx from "clsx";
-import EquipmentList from "./EquipmentList/EquipmentList";
+import EquipmentList from "./LossCalcEquipmentList/EquipmentList";
 // icons
 
 const useStyles = makeStyles((theme) => ({
@@ -62,7 +62,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LossListElement = (props) => {
+const LossCalcUnitElement = (props) => {
   const classes = useStyles();
   const calcContext = useContext(LossCalcContext);
 
@@ -116,4 +116,4 @@ const LossListElement = (props) => {
   );
 };
 
-export default LossListElement;
+export default LossCalcUnitElement;

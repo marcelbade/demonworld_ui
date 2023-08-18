@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LossCalculatorButton = (props) => {
+const UnitLossCalculatorButton = (props) => {
   const classes = useStyles();
 
   return props.displayButton ? (
@@ -38,4 +38,4 @@ const LossCalculatorButton = (props) => {
   ) : null;
 };
 
-export default LossCalculatorButton;
+export default UnitLossCalculatorButton;

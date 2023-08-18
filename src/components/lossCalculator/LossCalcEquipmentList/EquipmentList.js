@@ -1,5 +1,5 @@
 // React
-import React, {Fragment} from "react";
+import React, { Fragment } from "react";
 //Material UI
 import { List } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -19,18 +19,31 @@ const useStyles = makeStyles((theme) => ({
 const EquipmentList = (props) => {
   const classes = useStyles();
 
+  /**
+   * Function checks, if the unit's equipment list should be displayed.
+   * @returns true, if equipment array exists and contains elements.
+   */
   const doesUnithaveEquipment = () => {
-    return props.unit.equipment !== undefined && props.unit.equipment.length !== 0;
+    const listExists = props.unit.equipment !== undefined;
+    const listcontainsEntries = props.unit.equipment.length !== 0;
+
+    return listExists && listcontainsEntries;
   };
 
   return (
     <List>
-      {/* ITTEM LIST */}
       {doesUnithaveEquipment() ? (
         <Fragment>
-          <span className={classes.line}></span>  
+          <span className={classes.line}></span>
           {props.unit.equipment.map((e, i) => {
-            return <EquipmentListEntry unit={props.unit} element={e} index={i} key={uuidGenerator()} />;
+            return (
+              <EquipmentListEntry
+                unit={props.unit} //
+                element={e}
+                index={i}
+                key={uuidGenerator()}
+              />
+            );
           })}
         </Fragment>
       ) : null}

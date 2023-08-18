@@ -49,13 +49,17 @@ const EquipmentListEntry = (props) => {
   const classes = useStyles();
   const calcContext = useContext(LossCalcContext);
 
+  const unit = props.unit;
+  const itemName = props.element.name;
+  const isItemLost = props.element.itemLost;
+
   return (
     <ListItem className={classes.entry} key={uuidGenerator()}>
-      {props.element.itemLost ? (
+      {isItemLost ? (
         <ListItemButton
           className={clsx(classes.deleteBttn, classes.textMargin)}
           onClick={() => {
-            calcContext.setItemIsLostFlag(props.unit, props.element.name, false);
+            calcContext.setItemIsLostFlag(unit, itemName, false);
           }}
         >
           <ListItemIcon>
@@ -66,7 +70,7 @@ const EquipmentListEntry = (props) => {
         <ListItemButton
           className={clsx(classes.deleteBttn, classes.textMargin)}
           onClick={() => {
-            calcContext.setItemIsLostFlag(props.unit, props.element.name, true);
+            calcContext.setItemIsLostFlag(unit, itemName, true);
           }}
         >
           <ListItemIcon>
@@ -77,12 +81,12 @@ const EquipmentListEntry = (props) => {
 
       <Grid container justify="space-between">
         <Grid item>
-          <Typography variant="button" className={props.element.itemLost ? classes.strikeTroughText : classes.typographyFont}>
-            {props.element.name}
+          <Typography variant="button" className={isItemLost ? classes.strikeTroughText : classes.typographyFont}>
+            {itemName}
           </Typography>
         </Grid>
         <Grid item>
-          <Typography variant="button" className={props.element.itemLost ? classes.strikeTroughText : classes.typographyFont}>
+          <Typography variant="button" className={isItemLost ? classes.strikeTroughText : classes.typographyFont}>
             {props.element.points}
           </Typography>
         </Grid>
