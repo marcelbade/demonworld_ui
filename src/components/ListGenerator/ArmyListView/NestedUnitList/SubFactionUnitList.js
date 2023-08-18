@@ -56,7 +56,6 @@ const SubFactionUnitList = (props) => {
         return (
           <List className={classes.list} key={uuidGenerator()}>
             <ListItem key={uuidGenerator()} className={classes.element}>
-              {/* REMOVE BUTTON */}
               <Button
                 key={uuidGenerator()}
                 onClick={() => {
@@ -65,20 +64,25 @@ const SubFactionUnitList = (props) => {
               >
                 <RemoveCircleOutlineIcon key={uuidGenerator()} />
               </Button>
-              {/* NAME + POINTS + SECONDSUBFACTION + BUTTONS*/}
-                <ArmyListUnitEntry  unit= {u} />  
+              <ArmyListUnitEntry unit={u} />
               {/* BUTTONS */}
-              <UnitEntryButtons unit={u} subFaction={props.subFactionName} key={uuidGenerator()} className={classes.buttons} />
+              <UnitEntryButtons
+                unit={u} //
+                subFaction={props.subFactionName}
+                key={uuidGenerator()}
+                className={classes.buttons}
+              />
             </ListItem>
-            {/* EQUIPMENT */}
             <ListItem key={uuidGenerator()}>
-              <EquipmentList key={uuidGenerator()} unit={u} identifier={identifier} />
+              <EquipmentList
+                key={uuidGenerator()} //
+                unit={u}
+                identifier={identifier}
+              />
             </ListItem>
           </List>
         );
       })}
-      {/* SUB LIST STATS */}
-      <ArmyListSubFactionFooter key={uuidGenerator()} subFactionName={props.subFactionName} subFactionUnits={props.subFactionUnits} />
     </Fragment>
   );
 };

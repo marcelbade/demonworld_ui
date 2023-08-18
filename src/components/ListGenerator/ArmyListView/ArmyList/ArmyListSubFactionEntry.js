@@ -7,10 +7,10 @@ import { Grid } from "@material-ui/core";
 import { ArmyContext } from "../../../../contexts/armyContext";
 import { uuidGenerator } from "../../../shared/sharedFunctions";
 import SubFactionUnitList from "../NestedUnitList/SubFactionUnitList";
-import InvalidHeader from "./InvalidHeader";
-import ValidHeader from "./ValidHeader";
+import ArmyListSubFactionHeader from "./ArmyListSubFactionHeader";
 // constants
 import { ALLIES_MAPPING } from "../../../../constants/allies";
+import ArmyListSubFactionFooter from "./ArmyListSubFactionFooter";
 
 // Creates the suFaction entry of the army list: Head and current and total points.
 const ArmyListSubFactionEntry = (props) => {
@@ -46,7 +46,7 @@ const ArmyListSubFactionEntry = (props) => {
     let tempObj = { ...validatedSubFaction };
 
     contextArmy.listValidationResults.subFactionBelowMinimum.forEach((sF) => {
-      if (sF.underMinimum.includes(props.subFaction)) {
+      if (sF.subFactionUnderMinimum.includes(props.subFaction)) {
         tempObj = { ...tempObj, valid: false, validationMessage: sF.message };
       }
     });
@@ -57,21 +57,26 @@ const ArmyListSubFactionEntry = (props) => {
   return contextArmy ? (
     <ListItem key={uuidGenerator()}>
       <Grid container direction={"column"} key={uuidGenerator()}>
-
-
-
-
-        {validatedSubFaction.valid ? (
-          <ValidHeader subFaction={validatedSubFaction.subFactionName} />
-        ) : (
-          <InvalidHeader subFaction={validatedSubFaction.subFactionName} message={validatedSubFaction.validationMessage} />
-        )}
-        {/* DISPLAY UNITS, PONT COST, PERCENTAGES FOR ONE SUBFACTION */}
-        <SubFactionUnitList
-          key={uuidGenerator()}
-          subFactionUnits={filterUnitsForSubFaction(contextArmy.selectedUnits, props.subFaction)} //
-          subFactionName={props.subFaction}
-        />
+        <Grid item>
+          <ArmyListSubFactionHeader
+            subFaction={validatedSubFaction.subFactionName} //
+            valid={validatedSubFaction.valid}
+            message={validatedSubFaction.validationMessage}
+          />
+          {/* DISPLAY UNITS, PONT COST, PERCENTAGES FOR ONE SUBFACTION */}
+          <SubFactionUnitList
+            key={uuidGenerator()}
+            subFactionUnits={filterUnitsForSubFaction(contextArmy.selectedUnits, props.subFaction)} //
+            subFactionName={props.subFaction}
+          />
+        </Grid>
+        <Grid item>
+          <ArmyListSubFactionFooter
+            key={uuidGenerator()}
+            subFactionName={props.subFaction}
+            subFactionUnits={filterUnitsForSubFaction(contextArmy.selectedUnits, props.subFaction)}
+          />
+        </Grid>
       </Grid>
     </ListItem>
   ) : null;
