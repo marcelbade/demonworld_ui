@@ -45,7 +45,7 @@ const LossCalculator = () => {
 
   // Calculate current total point loss.
   useEffect(() => {
-    const sum = calculatLostUnitPoints();
+    const sum = calculatePointLoss();
 
     setTotalPointsLost(sum);
   }, [list]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -58,23 +58,40 @@ const LossCalculator = () => {
   }, [list]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
-   * Function calculates the total point loss.
+   * Function calculates the net point loss. Loss is calculated as total point cost per lost element plus the cost of every lost item carried by a single lost element.
+   * @returns the sum of the army points lost.
    */
-  const calculatLostUnitPoints = () => {
+  const calculatePointLoss = () => {
     let sum = 0;
 
     list.forEach((u) => {
-      let pointCostLostElements = u.lossCounter * (u.points / u.maxCounter);
-      sum += pointCostLostElements;
+      const totalUnitCost = calculateTotalUnitCost(u);
 
-      u.equipment.forEach((e) => {
-        if (e.itemLost) {
-          sum += e.points;
-        }
-      });
+      sum += u.lossCounter * (totalUnitCost / u.maxCounter);
+      sum += calculatePointsOfLostEquipment(u.equipment);
     });
 
     return sum;
+  };
+
+  /**
+   * Function calculates the total point cost of all the unit's items that have been lost. Note that this is only factors in items that are carried by single element. Items held by all elements of a unit are added to the unit's point cost.
+   * @param {[itemCard]} equipmentList
+   * @returns the net point los of all single element items.
+   */
+  const calculatePointsOfLostEquipment = (equipmentList) => {
+    return equipmentList.filter((e) => e.itemLost).reduce((sum, { points }) => sum + points, 0);
+  };
+
+  /**
+   * Function calculates the total point cost of a unit. Here the total point cost is the unit's point cost plus the cost for every item that is carried by the whole unit, i.e. every element. This is important as the point loss for these items must be per element.
+   * @param {unitCard} unit
+   * @returns total ppoint cost
+   */
+  const calculateTotalUnitCost = (unit) => {
+    const itemsOnEveryELement = unit.equipment.filter((e) => e.everyElement).reduce((sum, { points }) => sum + points, 0);
+
+    return unit.points + itemsOnEveryELement;
   };
 
   /**
