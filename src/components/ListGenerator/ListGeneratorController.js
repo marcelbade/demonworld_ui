@@ -317,7 +317,7 @@ const ListGeneratorController = () => {
     });
   };
 
-  // Autommatically remove units from the army list if the list no longer meets the ciriteria that have to be met to add those units.
+  // Automatically remove units from the army list if the list no longer meets the ciriteria that have to be met to add those units.
   useEffect(() => {
     if (listValidationResults.removeUnitsNoLongerValid.length > 0) {
       let currentState = [...selectedUnits];
