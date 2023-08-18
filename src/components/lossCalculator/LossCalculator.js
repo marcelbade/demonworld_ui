@@ -9,7 +9,7 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 // components and functions
 import LossCalcProvider from "../../contexts/LossCalculatorContext";
 import { unitCardMultiSort, uuidGenerator } from "../shared/sharedFunctions";
-import LossListElement from "./LossListElement";
+import LossCalcUnitElement from "./LossCalcUnitElement";
 
 const useStyles = makeStyles({
   typographyFont: {},
@@ -152,7 +152,7 @@ const LossCalculator = () => {
               <List>
                 {unitCardMultiSort(list).map((u, i) => {
                   return (
-                    <LossListElement
+                    <LossCalcUnitElement
                       unit={u} //
                       index={i}
                       key={uuidGenerator()}
