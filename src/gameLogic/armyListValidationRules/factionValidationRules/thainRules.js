@@ -122,9 +122,10 @@ const ThainRules = {
  */
 const allUnitsNeedTribes = (selectedUnits) => {
   let result = [];
-  const MESSAGE = "Du mußt der Einheit einen Stamm zuordnen,";
+  const MESSAGE = "Du mußt der Einheit einen Stamm zuordnen.";
+
   selectedUnits
-    .filter((u) => !EXCEMPT_FROM_TRIBES_RULE.includes(u))
+    .filter((u) => !EXCEMPT_FROM_TRIBES_RULE.includes(u.unitName))
     .forEach((u) => {
       if (u.secondSubFaction === u.subFaction) {
         result.push({ unitWithOutSecondSubFaction: u.unitName, message: MESSAGE });
