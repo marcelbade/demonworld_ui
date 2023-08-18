@@ -39,7 +39,7 @@ const EquipmentList = (props) => {
             return (
               <EquipmentListEntry
                 unit={props.unit} //
-                element={e}
+                item={e}
                 index={i}
                 key={uuidGenerator()}
               />

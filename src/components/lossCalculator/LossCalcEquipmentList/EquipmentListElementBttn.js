@@ -9,7 +9,7 @@ import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 import { ListItemButton } from "@mui/material";
 
-const LossCalcEquipmentButton = (props) => {
+const EquipmentListElementBttn = (props) => {
   const calcContext = useContext(LossCalcContext);
 
   /**
@@ -22,6 +22,7 @@ const LossCalcEquipmentButton = (props) => {
 
   return (
     <ListItemButton
+    disabled={props.disableButton}
       onClick={() => {
         calcContext.setItemIsLostFlag(props.unit, props.itemName, !props.isItemLost);
       }}
@@ -31,4 +32,4 @@ const LossCalcEquipmentButton = (props) => {
   );
 };
 
-export default LossCalcEquipmentButton;
+export default EquipmentListElementBttn;
