@@ -1,17 +1,12 @@
 // React
-import React, { useContext } from "react";
+import React from "react";
 //Material UI
-import { Typography, Grid, ListItem, ListItemIcon } from "@material-ui/core";
+import { ListItem } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 // components and functions
 import { uuidGenerator } from "../../shared/sharedFunctions";
-import { LossCalcContext } from "../../../contexts/LossCalculatorContext";
-// clsx
-import clsx from "clsx";
-// icons
-import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
-import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
-import { ListItemButton } from "@mui/material";
+import LossCalcEquipmentButton from "./EquipmentListElementBttn";
+import EquipmentListItemName from "./EquipmentListItemName";
 
 const useStyles = makeStyles((theme) => ({
   entry: {
@@ -26,71 +21,29 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
-  typographyFont: {
-    textAlign: "left",
-    marginTop: "0.5em",
-  },
-  strikeTroughText: {
-    textAlign: "left",
-    marginTop: "0.5em",
-    color: "red",
-    textDecorationLine: "line-through",
-    textDecorationThickness: "0.2em",
-  },
-  line: {
-    marginTop: "0.5em",
-    marginBottom: "0.5em",
-    borderBottom: "solid black 0.1em",
-    display: "block",
-  },
 }));
 
 const EquipmentListEntry = (props) => {
   const classes = useStyles();
-  const calcContext = useContext(LossCalcContext);
 
   const unit = props.unit;
   const itemName = props.element.name;
   const isItemLost = props.element.itemLost;
+  const pointCost = props.element.points;
 
   return (
     <ListItem className={classes.entry} key={uuidGenerator()}>
-      {isItemLost ? (
-        <ListItemButton
-          className={clsx(classes.deleteBttn, classes.textMargin)}
-          onClick={() => {
-            calcContext.setItemIsLostFlag(unit, itemName, false);
-          }}
-        >
-          <ListItemIcon>
-            <RemoveCircleOutlineIcon />
-          </ListItemIcon>
-        </ListItemButton>
-      ) : (
-        <ListItemButton
-          className={clsx(classes.deleteBttn, classes.textMargin)}
-          onClick={() => {
-            calcContext.setItemIsLostFlag(unit, itemName, true);
-          }}
-        >
-          <ListItemIcon>
-            <AddCircleOutlineIcon />
-          </ListItemIcon>
-        </ListItemButton>
-      )}
+      <LossCalcEquipmentButton
+        unit={unit} //
+        itemName={itemName}
+        isItemLost={isItemLost}
+      />
 
-      <Grid container justify="space-between">
-        <Grid item>
-          <Typography variant="button" className={isItemLost ? classes.strikeTroughText : classes.typographyFont}>
-            {itemName}
-          </Typography>
-        </Grid>
-        <Grid item>
-          <Typography variant="button" className={isItemLost ? classes.strikeTroughText : classes.typographyFont}>
-            {props.element.points}
-          </Typography>
-        </Grid>
-      </Grid>
+      <EquipmentListItemName
+        pointCost={pointCost} //
+        itemName={itemName}
+        isItemLost={isItemLost}
+      />
     </ListItem>
   );
 };
