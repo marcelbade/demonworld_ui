@@ -9,7 +9,7 @@ import {
   renderMagicPoints,
   renderCommandPoints,
   RenderSkillValues,
-  displayFormationsn,
+  displayFormations,
 } from "../../compendiums/factionTable/depencies/factionTableFunctions";
 // icons
 import rangeArmorIcon from "../../../icons/range-armor.png";
@@ -85,7 +85,7 @@ const StatCardUnitFront = (props) => {
           {props.unit.hold_maneuvers} Manöver
         </Typography>
         <Typography variant="h6" align="center" className={classes.font}>
-          {displayFormationsn(props.unit)}
+          {displayFormations(props.unit)}
         </Typography>
       </Grid>
       {/* 3rd Row - RANGED WEAPONS  */}
