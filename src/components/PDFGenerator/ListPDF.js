@@ -14,7 +14,7 @@ import styles from "./pdfStyles";
 Font.register({ family: "notMaryKate", src: notMaryKate });
 Font.register({ family: "Beryliumbold", src: Beryliumbold });
 
-// Create the dynamic PDF content. Due to the limitations of react-pdf, this has to be done via a jerryrigged CSS table.  
+// Create the dynamic PDF content. Due to the limitations of react-pdf, this has to be done via a jerryrigged CSS table.
 const ListPDF = (props) => {
   return (
     <Document>
@@ -41,6 +41,15 @@ const ListPDF = (props) => {
                           {u.unitName}
                         </Text>
                       </View>
+                      { u.secondSubFaction !== u.subFaction?
+                        <View key={uuidGenerator()} style={styles.tableColUnit}>
+                          <Text key={uuidGenerator()} style={styles.tableCellUnit}>
+                            {u.secondSubFaction}
+                          </Text>
+                        </View>
+                        : null
+                      }
+
                       <View key={uuidGenerator()} style={styles.tableColUnit}>
                         <Text key={uuidGenerator()} style={styles.tableCellUnit}>
                           {u.points}
