@@ -5,7 +5,8 @@ import { PDFViewer } from "@react-pdf/renderer";
 //Material UI
 import { makeStyles } from "@material-ui/core/styles";
 // components and functions
-import ListPDF from "./ListPDF";
+import ListPDF from "./defaultListPDF/ListPDF";
+import DetailedCardPDF from "./detailedCardPDF/DetailedCardPDF";
 
 // Create styles
 const useStyles = makeStyles((theme) => ({
@@ -29,7 +30,8 @@ const PdfBox = () => {
 
   return pdfData.length > 0 ? (
     <PDFViewer className={classes.pdfTab}>
-      <ListPDF pdfMasterList={pdfData} />
+      {/* TODO: add the logic to pick one! */}
+      {false ? <ListPDF pdfMasterList={pdfData} /> : <DetailedCardPDF pdfMasterList={pdfData} />}
     </PDFViewer>
   ) : null;
 };
