@@ -49,7 +49,6 @@ const ListPDF = (props) => {
                         </View>
                         : null
                       }
-
                       <View key={uuidGenerator()} style={styles.tableColUnit}>
                         <Text key={uuidGenerator()} style={styles.tableCellUnit}>
                           {u.points}
