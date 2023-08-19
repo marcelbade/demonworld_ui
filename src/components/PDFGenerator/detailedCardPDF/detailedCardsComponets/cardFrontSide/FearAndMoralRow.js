@@ -10,7 +10,7 @@ import styles from "../../../pdfStyles/detailedCardPdfStyles";
 const FearAndMoralRow = (props) => {
   return (
     <Document style={styles.rowBorders}>
-      <View key={uuidGenerator()} style={styles.cardBlackRows}>
+      <View key={uuidGenerator()} style={styles.cardBlackRow}>
         <Text key={uuidGenerator()}>Furchtfaktor: {props.unit.fear}</Text>
         <Text key={uuidGenerator()}>
           Moral: {props.unit.moral1 ? props.unit.moral1 : "-"} / {props.unit.moral2 ? props.unit.moral2 : "-"}

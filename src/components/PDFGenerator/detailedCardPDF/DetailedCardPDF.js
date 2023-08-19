@@ -30,7 +30,7 @@ const ListPDF = (props) => {
                 {/* SUBFACTION NAME */}
                 <SubfactionSubtitle subFaction={obj.subFaction} />
                 {obj.units.map((u) => (
-                  <View>
+                  <View style ={styles.arrangeCardSides}>
                     <DetailedCardFront u={u} />
                     <DetailedCardBack u={u} />
                   </View>

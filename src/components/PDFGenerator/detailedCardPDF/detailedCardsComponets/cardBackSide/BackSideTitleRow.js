@@ -12,9 +12,9 @@ const BackSideTitleRow = (props) => {
     <Document style={styles.rowBorders}>
       <View key={uuidGenerator()} style={styles.cardRow}>
         <Text key={uuidGenerator()} style={styles.cardunitName}>
-        {props.unit.faction}
-        {props.unit.unitName}
-        {props.unit.subFaction}
+          {props.unit.faction}
+          {props.unit.unitName}
+          {props.unit.subFaction}
         </Text>
       </View>
     </Document>

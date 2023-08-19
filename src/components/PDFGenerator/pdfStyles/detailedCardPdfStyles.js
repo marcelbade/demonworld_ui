@@ -22,13 +22,14 @@ const styles = {
     fontSize: 10,
   },
 
-  //-----------------------------
-
-
+  arrangeCardSides: {
+    flexDirection: "column",
+  },
   entireCard: {
     marginTop: 15,
-    width: "50%",
-    paddingLeft: 25,
+    height: 90,
+    width: "45%",
+    left: "25%",
   },
 
   cardunitName: {
@@ -46,7 +47,7 @@ const styles = {
     backgroundColor: "lightgrey",
   },
 
-  cardBlackRows:{
+  cardBlackRow: {
     width: "100%",
     fontFamily: "Beryliumbold",
     fontSize: 10,

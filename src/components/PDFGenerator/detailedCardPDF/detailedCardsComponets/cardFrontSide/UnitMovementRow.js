@@ -19,7 +19,7 @@ const UnitMovementRow = (props) => {
 
   return (
     <Document key={uuidGenerator()}  style ={styles.rowBorders}>
-      <View key={uuidGenerator()} style={styles.cardBlackRows}>
+      <View key={uuidGenerator()} style={styles.cardBlackRow}>
         <Text key={uuidGenerator()}>
           B: {props.unit.move} / A: {props.unit.charge} / P:{props.unit.skirmish}
         </Text>

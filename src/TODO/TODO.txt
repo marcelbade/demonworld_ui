@@ -9,17 +9,16 @@ You need a pic, if you want to use this :D.
 
 TODO: Loss calculator
 ===================================
-- rework items that become part of the unit! -> flag
-
+ 
 
 TODO: PDF VIEWER
 ===================================
--  thain tribes must be shown!
 -  alternative layout (full cards)
  
 TODO: FACTION RULES
 ==================================
 - dwarven special rule not working
+- list needs to be blocked if no tribe has been selected
 - TEST! You need to test the validation rules for all factions
 - Tournament Rules Override
    - flags to toggle 

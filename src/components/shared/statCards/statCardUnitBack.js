@@ -4,7 +4,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Typography } from "@material-ui/core";
 // functions and modules
-import { DisplayAllSpecialRules, DisplayUnitElements } from "../../compendiums/factionTable/depencies/factionTableFunctions";
+import { DisplayAllSpecialRules, displayUnitElements } from "../../compendiums/factionTable/depencies/factionTableFunctions";
 import {calculateTotalUnitPointCost}from "../../../components/shared/sharedFunctions"; 
 
 
@@ -69,7 +69,7 @@ const StatCardUnitBack = (props) => {
       </Grid>
       {/* 2nd Row - black Stripe - ELEMENTS */}
       <Grid item container direction="row" className={classes.blackStripe}>
-        {DisplayUnitElements(props.unit)}
+        {displayUnitElements(props.unit)}
       </Grid>
       <Grid item container justify="center" direction="row">
         {/* 3rd Row  SPECIAL RULES*/}
