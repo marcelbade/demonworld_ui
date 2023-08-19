@@ -230,7 +230,7 @@ export const DisplayUnitElements = (unit) => {
 
 
 
-export const displayFormationsn = (unit) => {
+export const displayFormations = (unit) => {
   let formationString = "";
 
   if (unit.wedgeFormation) {
