@@ -1,16 +1,33 @@
-SQL
---------------------
+TODO:SQL
+===================================
+-  Weapon names...
+
 
 TODO: src\components\shared\NoSelectionDisplay.js
 You need a pic, if you want to use this :D.
+
+
+TODO: Loss calculator
+===================================
+- rework items that become part of the unit! -> flag
+
+
 TODO: PDF VIEWER
+===================================
+-  thain tribes must be shown!
 -  alternative layout (full cards)
  
-TODO:  FACTION RULES
+TODO: FACTION RULES
 ==================================
 - dwarven special rule not working
-- Thain
- 
+- TEST! You need to test the validation rules for all factions
+- Tournament Rules Override
+   - flags to toggle 
+      - units can be selected 2x
+      - hero/ mage max percentage ovveride 
+
+  
+
 
 TODO: ItemShop
 - giants need more work
@@ -18,11 +35,7 @@ TODO: ItemShop
 - remember: there is, according to Patrick, a banner undead can get even though they have no standard bearer
    - its just one banner....
    - I cannot find it :O 
-
-
-
 - You can choose only one poison - it somehow doesn*t work 
-
 - when selecting an item add the following to the unit card 
         - change the stats
  allItems 
@@ -35,7 +48,7 @@ TODO: ItemShop
 
 
 TODO: missing features // Version 2  - disregard for now 
-- save list in MongoDB(!!)
+- save lists 
 - user accounts (!!)
 
 
