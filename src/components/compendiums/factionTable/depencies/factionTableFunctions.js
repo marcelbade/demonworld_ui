@@ -194,7 +194,7 @@ export const RenderSkillValues = (rangeSkill, meleeSkill) => {
   );
 };
 
-export const DisplayUnitElements = (unit) => {
+export const displayUnitElements = (unit) => {
   const classes = useStyles();
 
   let specialElements = 0;
