@@ -3,12 +3,12 @@ import React from "react";
 // react-pdf
 import { Page, Text, View, Document, Font } from "@react-pdf/renderer";
 // fonts
-import notMaryKate from "../../fonts/notMaryKate.ttf";
-import Beryliumbold from "../../fonts/Beryliumbold.ttf";
+import notMaryKate from "../../../fonts/notMaryKate.ttf";
+import Beryliumbold from "../../../fonts/Beryliumbold.ttf";
 // functions and components
-import { uuidGenerator } from "../shared/sharedFunctions";
+import { uuidGenerator } from "../../shared/sharedFunctions";
 // styles
-import styles from "./pdfStyles";
+import styles from "../pdfStyles/listPdfStyles";
 
 // Register font
 Font.register({ family: "notMaryKate", src: notMaryKate });
