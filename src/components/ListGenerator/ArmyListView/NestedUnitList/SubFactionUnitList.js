@@ -8,7 +8,6 @@ import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 import { ArmyContext } from "../../../../contexts/armyContext";
 import { unitCardMultiSort, uuidGenerator } from "../../../shared/sharedFunctions";
 import EquipmentList from "./EquipmentList";
-import ArmyListSubFactionFooter from "../ArmyList/ArmyListSubFactionFooter";
 import UnitEntryButtons from "./UnitEntryButtons";
 import ArmyListUnitEntry from "./ArmyListUnitEntry";
 
