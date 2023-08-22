@@ -10,10 +10,10 @@ import styles from "../../../pdfStyles/detailedCardPdfStyles";
 const NameRow = (props) => {
   return (
     <Document style={styles.rowBorders}>
-      <View key={uuidGenerator()} style={styles.cardRow}>
-        <Text key={uuidGenerator()} style={styles.cardunitName}>
-          {props.unitName}
-        </Text>
+      <View key={uuidGenerator()} style={styles.titleRow}>
+        <Text key={uuidGenerator()}> </Text>
+        <Text key={uuidGenerator()}>{props.unitName}</Text>
+        <Text key={uuidGenerator()}> </Text>
       </View>
     </Document>
   );

@@ -10,11 +10,13 @@ import styles from "../../../pdfStyles/detailedCardPdfStyles";
 const BackSideTitleRow = (props) => {
   return (
     <Document style={styles.rowBorders}>
-      <View key={uuidGenerator()} style={styles.cardRow}>
-        <Text key={uuidGenerator()} style={styles.cardunitName}>
-          {props.unit.faction}
-          {props.unit.unitName}
-          {props.unit.subFaction}
+      <View key={uuidGenerator()} style={styles.titleRow}>
+        <Text key={uuidGenerator()}>{props.unit.faction}</Text>
+        <Text key={uuidGenerator()}>{props.unit.unitName}</Text>
+        <Text key={uuidGenerator()}>
+          {props.unit.subFaction === props.unit.secondSubFaction //
+            ? props.unit.subFaction
+            : props.unit.secondSubFaction}
         </Text>
       </View>
     </Document>

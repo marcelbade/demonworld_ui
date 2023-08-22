@@ -17,29 +17,31 @@ const SizeArmorSkillRow = (props) => {
       <View key={uuidGenerator()} style={styles.cardRow}>
         <Text key={uuidGenerator()}>Größe: {props.unit.unitSize}</Text>
 
-        <Text key={uuidGenerator()}>
-          <Image src={rangeArmorIcon} />
-          {props.unit.armourRange}
-        </Text>
-
-        <Text key={uuidGenerator()}>
-          <Image src={meleeArmorIcon} />
-          {props.unit.armourMelee}
-        </Text>
-
-        {props.unit.meleeSkill !== 0 ? (
-          <Text key={uuidGenerator()}>
-            <Image src={blackSwordIcon} />
-            {props.unit.skillMelee}
+        <View key={uuidGenerator()} style={styles.icons}>
+          <Text key={uuidGenerator()} style={styles.rightPadding}>
+            <Image src={rangeArmorIcon} />
+            {props.unit.armourRange}
           </Text>
-        ) : null}
-
-        {props.unit.meleeSkill !== 0 ? (
           <Text key={uuidGenerator()}>
-            <Image src={blackBowIcon} />
-            {props.unit.skillRange}
+            <Image src={meleeArmorIcon} />
+            {props.unit.armourMelee}
           </Text>
-        ) : null}
+        </View>
+        <View key={uuidGenerator()} style={styles.icons}>
+          {props.unit.meleeSkill !== 0 ? (
+            <Text key={uuidGenerator()} style={styles.rightPadding}>
+              <Image src={blackSwordIcon} />
+              {props.unit.skillMelee}
+            </Text>
+          ) : null}
+
+          {props.unit.meleeSkill !== 0 ? (
+            <Text key={uuidGenerator()}>
+              <Image src={blackBowIcon} />
+              {props.unit.skillRange}
+            </Text>
+          ) : null}
+        </View>
       </View>
     </Document>
   );

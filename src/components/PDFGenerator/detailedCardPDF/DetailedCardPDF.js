@@ -11,6 +11,7 @@ import styles from "../pdfStyles/detailedCardPdfStyles";
 import SubfactionSubtitle from "./detailedCardsComponets/SubfactionSubtitle";
 import DetailedCardFront from "./DetailedCardFront";
 import DetailedCardBack from "./DetailedCardBack";
+
 // Register font
 Font.register({ family: "notMaryKate", src: notMaryKate });
 Font.register({ family: "Beryliumbold", src: Beryliumbold });
@@ -27,10 +28,9 @@ const ListPDF = (props) => {
             .filter((subFaction) => subFaction.units.length > 0)
             .map((obj) => (
               <View>
-                {/* SUBFACTION NAME */}
                 <SubfactionSubtitle subFaction={obj.subFaction} />
                 {obj.units.map((u) => (
-                  <View style ={styles.arrangeCardSides}>
+                  <View style={styles.cardBox}>
                     <DetailedCardFront u={u} />
                     <DetailedCardBack u={u} />
                   </View>

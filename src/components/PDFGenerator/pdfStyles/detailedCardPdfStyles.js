@@ -22,29 +22,38 @@ const styles = {
     fontSize: 10,
   },
 
-  arrangeCardSides: {
-    flexDirection: "column",
-  },
-  entireCard: {
-    marginTop: 15,
-    height: 90,
-    width: "45%",
-    left: "25%",
+  cardBox: {
+    flexDirection: "row",
+    marginLeft: 20,
+    marginRight: 20,
   },
 
-  cardunitName: {
+  entireCard: {
+    marginTop: 15,
+    width: " 80%",
+    backgroundColor: "lightgrey",
+    fontFamily: "Beryliumbold",
+    fontSize: 10,
+  },
+
+  titleRow: {
     fontFamily: "notMaryKate",
     color: "red",
     fontSize: 10,
+    alignItems: "center",
   },
 
   cardRow: {
-    width: "100%",
-    fontFamily: "Beryliumbold",
-    fontSize: 10,
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    paddingBottom: 5,
+  },
+
+  icons: {
     flexDirection: "row",
     justifyContent: "space-evenly",
     backgroundColor: "lightgrey",
+    width: "20%",
   },
 
   cardBlackRow: {
@@ -55,10 +64,6 @@ const styles = {
     justifyContent: "space-evenly",
     color: "white",
     backgroundColor: "black",
-  },
-
-  rowBorders: {
-    border: "1px black solid",
   },
 };
 
