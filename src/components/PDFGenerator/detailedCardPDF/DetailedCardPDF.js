@@ -1,5 +1,5 @@
 // react
-import React from "react";
+import React, { useState } from "react";
 // react-pdf
 import { Page, View, Document, Font } from "@react-pdf/renderer";
 // fonts
@@ -22,8 +22,6 @@ const ListPDF = (props) => {
     <Document>
       <Page style={styles.body}>
         <View style={styles.table}>
-          {/* row */}
-
           {props.pdfMasterList
             .filter((subFaction) => subFaction.units.length > 0)
             .map((obj) => (
