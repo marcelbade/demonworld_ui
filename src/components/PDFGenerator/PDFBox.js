@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// Create the PDF Document. The browser's pdf view opens in a new tab.
+// Create the PDF Document. The browser's pdf view will open in a new tab.
 const PdfBox = () => {
   const classes = useStyles();
 
