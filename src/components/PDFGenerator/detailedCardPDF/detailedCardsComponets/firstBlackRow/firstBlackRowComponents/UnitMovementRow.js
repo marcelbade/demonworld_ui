@@ -3,10 +3,10 @@ import React from "react";
 // react-pdf
 import { Text, View, Document } from "@react-pdf/renderer";
 // functions and components
-import { uuidGenerator } from "../../../../shared/sharedFunctions";
-import { displayFormations } from "../../../../compendiums/factionTable/depencies/factionTableFunctions";
+import { uuidGenerator } from "../../../../../shared/sharedFunctions";
+import { displayFormations } from "../../../../../compendiums/factionTable/depencies/factionTableFunctions";
 // styles
-import styles from "../../../pdfStyles/detailedCardPdfStyles";
+import styles from "../../../../pdfStyles/detailedCardPdfStyles";
 
 const UnitMovementRow = (props) => {
   /**

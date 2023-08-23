@@ -23,20 +23,34 @@ const styles = {
   },
 
   cardBox: {
-    flexDirection: "row",
+    flexDirection: "column",
     marginLeft: 20,
     marginRight: 20,
-  },
-
-  entireCard: {
-    marginTop: 15,
-    width: " 80%",
-    backgroundColor: "lightgrey",
     fontFamily: "Beryliumbold",
     fontSize: 10,
+    marginBottom: 10,
+    border: "0.5px solid black",
+    width: 400,
+    backgroundColor: "lightgrey",
+  },
+
+  cardPart: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+
+  cardCenter: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+
+  leftSide: {
+    flexDirection: "column",
+    alignItems: "center",
   },
 
   titleRow: {
+    width: 200,
     fontFamily: "notMaryKate",
     color: "red",
     fontSize: 10,
@@ -44,6 +58,7 @@ const styles = {
   },
 
   cardRow: {
+    width: 200,
     flexDirection: "row",
     justifyContent: "space-evenly",
     paddingBottom: 5,
@@ -57,13 +72,18 @@ const styles = {
   },
 
   cardBlackRow: {
-    width: "100%",
-    fontFamily: "Beryliumbold",
-    fontSize: 10,
+    width: 200,
     flexDirection: "row",
     justifyContent: "space-evenly",
     color: "white",
     backgroundColor: "black",
+  },
+
+  separator: {
+    backgroundColor: "white",
+    width: 2,
+    border: "0.5px solid white",
+    height: "100%",
   },
 };
 

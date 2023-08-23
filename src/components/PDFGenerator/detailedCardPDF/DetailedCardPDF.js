@@ -1,5 +1,5 @@
 // react
-import React, { useState } from "react";
+import React from "react";
 // react-pdf
 import { Page, View, Document, Font } from "@react-pdf/renderer";
 // fonts
@@ -8,20 +8,22 @@ import Beryliumbold from "../../../fonts/Beryliumbold.ttf";
 // styles
 import styles from "../pdfStyles/detailedCardPdfStyles";
 // pdf components
+import CardCenter from "./detailedCardsComponets/center/CardCenter";
+import FirstBlackRow from "./detailedCardsComponets/firstBlackRow/FirstBlackRow";
+import CardHeader from "./detailedCardsComponets/header/Header";
+import SecondBlackRow from "./detailedCardsComponets/secondBlackRow/SecondBlackRow";
+import CardFooter from "./detailedCardsComponets/footer/CardFooter";
 import SubfactionSubtitle from "./detailedCardsComponets/SubfactionSubtitle";
-import DetailedCardFront from "./DetailedCardFront";
-import DetailedCardBack from "./DetailedCardBack";
 
 // Register font
 Font.register({ family: "notMaryKate", src: notMaryKate });
 Font.register({ family: "Beryliumbold", src: Beryliumbold });
 
-// Create the dynamic PDF content. Due to the limitations of react-pdf, this has to be done via a jerryrigged CSS table.
 const ListPDF = (props) => {
   return (
     <Document>
-      <Page style={styles.body}>
-        <View style={styles.table}>
+      <Page>
+        <View>
           {props.pdfMasterList
             .filter((subFaction) => subFaction.units.length > 0)
             .map((obj) => (
@@ -29,8 +31,11 @@ const ListPDF = (props) => {
                 <SubfactionSubtitle subFaction={obj.subFaction} />
                 {obj.units.map((u) => (
                   <View style={styles.cardBox}>
-                    <DetailedCardFront u={u} />
-                    <DetailedCardBack u={u} />
+                    <CardHeader unit={u} />
+                     <FirstBlackRow unit={u} />  
+                    <CardCenter unit={u} />
+                    <SecondBlackRow unit={u} />
+                    <CardFooter unit={u} />
                   </View>
                 ))}
               </View>
