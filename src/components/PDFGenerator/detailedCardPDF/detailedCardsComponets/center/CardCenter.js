@@ -26,7 +26,8 @@ const CardCenter = (props) => {
             weaponName={"Waffe2"} //
             weapon={props.unit.weapon2}
           />
-        )}
+        )} 
+        
         {props.unit.weapon3 === 0 ? null : (
           <MeleeWeaponRow
             weaponName={"Waffe3"} //
