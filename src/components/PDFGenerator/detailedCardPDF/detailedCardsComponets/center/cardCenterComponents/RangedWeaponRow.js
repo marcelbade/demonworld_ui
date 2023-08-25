@@ -1,7 +1,7 @@
 // react
 import React from "react";
 // react-pdf
-import { Text, View, Document } from "@react-pdf/renderer";
+import { Text, View } from "@react-pdf/renderer";
 // functions and components
 import { uuidGenerator } from "../../../../../shared/sharedFunctions";
 // styles

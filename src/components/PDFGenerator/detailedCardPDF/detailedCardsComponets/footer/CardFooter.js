@@ -5,14 +5,17 @@ import { View, Text } from "@react-pdf/renderer";
 // styles
 import styles from "../../../pdfStyles/detailedCardPdfStyles";
 // pdf components
-import HitPointsRow from "./HitPointsRow";
- 
+import HitPointsRow from "./cardFooterComponents/HitPointsRow";
+import ItemRow from "./cardFooterComponents/ItemRow";
+
+
+
 const CardFooter = (props) => {
   return (
     <View style={styles.cardPart}>
       <HitPointsRow hitPoints={props.unit.hitpoints} />
       <Text style={styles.separator}></Text>
-      <HitPointsRow hitPoints={props.unit.hitpoints} />
+      <ItemRow items={props.unit.equipment} />
     </View>
   );
 };

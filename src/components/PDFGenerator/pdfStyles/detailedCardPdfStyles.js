@@ -1,4 +1,8 @@
 const styles = {
+  pageTopMargin: {
+    marginTop: 20,
+  },
+
   table: {
     display: "table",
     width: "auto",
@@ -29,19 +33,17 @@ const styles = {
     fontFamily: "Beryliumbold",
     fontSize: 10,
     marginBottom: 10,
-    border: "0.5px solid black",
     width: 400,
     backgroundColor: "lightgrey",
+    border: "1px solid black",
   },
 
   cardPart: {
     flexDirection: "row",
     alignItems: "center",
-  },
 
-  cardCenter: {
-    flexDirection: "row",
-    alignItems: "center",
+    // borderLeft: "1px solid black",
+    // borderRight: "1px solid black",
   },
 
   leftSide: {
@@ -50,6 +52,7 @@ const styles = {
   },
 
   titleRow: {
+    // borderTop: "1px solid black",
     width: 200,
     fontFamily: "notMaryKate",
     color: "red",
@@ -64,10 +67,18 @@ const styles = {
     paddingBottom: 5,
   },
 
+  footerRow: {
+    width: 200,
+    height: 20,
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    marginBottom: 5,
+    // borderBottom: "1px solid black",
+  },
+
   icons: {
     flexDirection: "row",
     justifyContent: "space-evenly",
-    backgroundColor: "lightgrey",
     width: "20%",
   },
 
@@ -81,9 +92,8 @@ const styles = {
 
   separator: {
     backgroundColor: "white",
-    width: 2,
-    border: "0.5px solid white",
-    height: "100%",
+    width: 10,
+    height: "110%",
   },
 };
 

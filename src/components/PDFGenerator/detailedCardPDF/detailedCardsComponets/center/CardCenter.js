@@ -12,7 +12,7 @@ import BackSideRulesRow from "./cardCenterComponents/BackSideRulesRow";
 
 const CardCenter = (props) => {
   return (
-    <View style={styles.cardCenter}>
+    <View style={styles.cardPart}>
       <View style={styles.leftSide}>
         {props.unit.weapon2 === 0 ? null : (
           <RangeWeaponRow

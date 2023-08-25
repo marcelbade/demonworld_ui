@@ -1,7 +1,7 @@
 // react
 import React from "react";
 // react-pdf
-import { Text, View, Document } from "@react-pdf/renderer";
+import { Text, View } from "@react-pdf/renderer";
 // functions and components
 import { uuidGenerator } from "../../../../../shared/sharedFunctions";
 import { displayFormations } from "../../../../../compendiums/factionTable/depencies/factionTableFunctions";
@@ -18,15 +18,13 @@ const UnitMovementRow = (props) => {
   };
 
   return (
-    <Document key={uuidGenerator()}  style ={styles.rowBorders}>
-      <View key={uuidGenerator()} style={styles.cardBlackRow}>
-        <Text key={uuidGenerator()}>
-          B: {props.unit.move} / A: {props.unit.charge} / P:{props.unit.skirmish}
-        </Text>
-        <Text key={uuidGenerator()}>{props.unit.hold_maneuvers} Manöver</Text>
-        {areFormationsNull() ? <Text>{displayFormations(props.unit)}</Text> : null}
-      </View>
-    </Document>
+    <View key={uuidGenerator()} style={styles.cardBlackRow}>
+      <Text key={uuidGenerator()}>
+        B: {props.unit.move} / A: {props.unit.charge} / P:{props.unit.skirmish}
+      </Text>
+      <Text key={uuidGenerator()}>{props.unit.hold_maneuvers} Manöver</Text>
+      {areFormationsNull() ? <Text>{displayFormations(props.unit)}</Text> : null}
+    </View>
   );
 };
 export default UnitMovementRow;
