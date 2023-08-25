@@ -115,7 +115,7 @@ const ListGeneratorController = () => {
   // sub factions of ally
   const [distinctAllySubFactions, setDistinctAllySubFactions] = useState([]);
   // validation
-  const [listValidationResults, SetListValidationResults] = useState({
+  const [listValidationResults, setListValidationResults] = useState({
     unitsBlockedbyRules: [],
     subFactionBelowMinimum: [],
     removeUnitsNoLongerValid: [],
@@ -224,7 +224,7 @@ const ListGeneratorController = () => {
    */
   useEffect(() => {
     clearList();
-  }, [listOfAllFactionUnits]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [listOfAllFactionUnits, selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ALLY LOGIC
   /**
@@ -307,7 +307,7 @@ const ListGeneratorController = () => {
    * @param {{}} validationResults
    */
   const collectValidatioResults = (validationResults) => {
-    SetListValidationResults({
+    setListValidationResults({
       ...listValidationResults,
       unitsBlockedbyRules: validationResults.unitsBlockedbyRules,
       subFactionBelowMinimum: validationResults.subFactionBelowMinimum,
@@ -522,11 +522,19 @@ const ListGeneratorController = () => {
   };
 
   /**
-   * Function deletes the entire army list and closes the stat card display and item shop, if open.
+   * Function deletes the entire army list, resets the state and closes the stat card display and item shop, if open.
    */
   const clearList = () => {
     setSelectedUnits([]);
     setAllItems([]);
+    setListValidationResults({
+      ...listValidationResults,
+      unitsBlockedbyRules: [],
+      subFactionBelowMinimum: [],
+      removeUnitsNoLongerValid: [],
+      secondSubFactionMissing: [],
+    });
+
     closeCardDisplay();
     closeItemShop();
   };
