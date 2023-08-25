@@ -22,7 +22,7 @@ Font.register({ family: "Beryliumbold", src: Beryliumbold });
 const ListPDF = (props) => {
   return (
     <Document>
-      <Page>
+      <Page style={styles.pageTopMargin}>
         <View>
           {props.pdfMasterList
             .filter((subFaction) => subFaction.units.length > 0)
@@ -30,9 +30,9 @@ const ListPDF = (props) => {
               <View>
                 <SubfactionSubtitle subFaction={obj.subFaction} />
                 {obj.units.map((u) => (
-                  <View style={styles.cardBox}>
+                  <View style={styles.cardBox} wrap={false}>
                     <CardHeader unit={u} />
-                     <FirstBlackRow unit={u} />  
+                    <FirstBlackRow unit={u} />
                     <CardCenter unit={u} />
                     <SecondBlackRow unit={u} />
                     <CardFooter unit={u} />
