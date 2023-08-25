@@ -46,8 +46,6 @@ const rules = [
   },
 ];
 
- 
-
 const DarkElveRules = {
   testSubFactionRules: (availableUnits, selectedUnits, totalPointsAllowance, subFactions) => {
     //  general rules
@@ -63,7 +61,13 @@ const DarkElveRules = {
     // special faction rule - no more than 50% may be spent on all heroes, mages, and commanders.
     let isAboveCharLimit = globalRules.NoMoreThanHalfOnCharacters(selectedUnits, availableUnits, totalPointsAllowance);
 
-    // special faction rule - per full 10% of the max point allowance spent on the priest caste, your point allowance for the magicians caste decreases by 10% and vice versa. Note that the algorithm is different from all the other validator logic- it does not create a list of unit Card objects that are added to a "block list", it instead directly decreases the limit.
+    /**
+     * Function implements a special faction rule - per full 10% of the max point allowance spent on the priest caste, 
+     * your point allowance for the magicians caste decreases by 10% and vice versa. 
+     * Note that the algorithm is different from all the other validator logic- 
+     * it does not create a list of unit Card objects that are added to a "block list", 
+     * it instead directly decreases the limit.
+     */
     const magiciansVsPriests = () => {
       const INCREMENT = 10;
       const NET_TOTAL = 4;
@@ -80,8 +84,14 @@ const DarkElveRules = {
           }
         }
       }
-    };
+    };  
 
+    /**
+     * Function decreases the max point allowance for a subfaction.
+     * @param {int} increment
+     * @param {int} netTotal
+     * @param {String} subFaction
+     */
     const decreaseAllowance = (increment, netTotal, subFaction) => {
       let pointsSpent = 0;
 
