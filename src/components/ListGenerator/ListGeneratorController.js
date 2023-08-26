@@ -13,7 +13,6 @@ import ArmyProvider from "../../contexts/armyContext";
 import SelectionInput from "../shared/selectionInput";
 import FactionTreeView from "./ArmySelectorView/SelectorTreeView/TreeView";
 import ArmyListDisplay from "./ArmyListView/ArmyListDisplay";
-import { enrichUnitCardObject } from "./ListGeneratorFunctions";
 import Allies from "./GeneratorComponents/Allies";
 import ArmyValidation from "./GeneratorComponents/ArmyValidation";
 import Pdf from "./GeneratorComponents/Pdf";

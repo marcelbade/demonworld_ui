@@ -4,7 +4,6 @@ import { useEffect, useContext } from "react";
 import { ArmyContext } from "../../../contexts/armyContext";
 import { findDistinctSubfactions } from "../ListGeneratorFunctions";
 import { calculateTotalUnitPointCost } from "../../shared/sharedFunctions";
-// constants
 
 const ArmyList = () => {
   const AC = useContext(ArmyContext);
