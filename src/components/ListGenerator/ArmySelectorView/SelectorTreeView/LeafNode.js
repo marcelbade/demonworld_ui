@@ -34,7 +34,7 @@ const useStyles = makeStyles({
 
 const LeafNode = (props) => {
   const classes = useStyles();
-  const contextArmy = useContext(ArmyContext);
+  const AC = useContext(ArmyContext);
 
   const displayLeaf = (isBlocked) => {
     return isBlocked ? classes.blockedLeafNode : classes.unblockedLeafNode;
@@ -57,7 +57,7 @@ const LeafNode = (props) => {
       <Grid item xs={5}>
         <IconButton
           onClick={() => {
-            contextArmy.selectUnit(props.unit);
+            AC.selectUnit(props.unit);
           }}
           disabled={props.isBlocked}
           className={displayBttn(props.isBlocked)}
