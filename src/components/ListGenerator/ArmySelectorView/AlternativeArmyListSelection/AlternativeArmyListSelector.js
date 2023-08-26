@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const AlternativeArmyListSelector = () => {
   const classes = useStyles();
-  const contextArmy = useContext(ArmyContext);
+  const AC = useContext(ArmyContext);
 
   //state
   const [options, setOptions] = useState([]);
@@ -28,25 +28,25 @@ const AlternativeArmyListSelector = () => {
 
   useEffect(() => {
     setOptions(optionSelector());
-  }, [contextArmy.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     setLabelText(labelTextSelector());
-  }, [contextArmy.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * Function maps the name of an army to the names of its alternative list and returns them, if it has any.
    * @returns returns the names of the alternative army lists as Strings.
    */
   const optionSelector = () => {
-    if (contextArmy.armyHasAlternativeLists) {
-      if (contextArmy.selectedFactionName === ZWERGE) {
-        const result = [...ARMY_ALTERNATIVES_LIST_MAPPER[contextArmy.selectedFactionName]];
+    if (AC.armyHasAlternativeLists) {
+      if (AC.selectedFactionName === ZWERGE) {
+        const result = [...ARMY_ALTERNATIVES_LIST_MAPPER[AC.selectedFactionName]];
 
         result.pop(); 
         return result;
       }
-      return ARMY_ALTERNATIVES_LIST_MAPPER[contextArmy.selectedFactionName];
+      return ARMY_ALTERNATIVES_LIST_MAPPER[AC.selectedFactionName];
     }
   };
 
@@ -55,11 +55,11 @@ const AlternativeArmyListSelector = () => {
    * @returns String with the label text.
    */
   const labelTextSelector = () => {
-    if (contextArmy.armyHasAlternativeLists) {
+    if (AC.armyHasAlternativeLists) {
       const result =
-        contextArmy.selectedFactionName === ZWERGE
-          ? ALTERNATIVE_ARMY_SELECTION_TEXT[contextArmy.selectedFactionName][0]
-          : ALTERNATIVE_ARMY_SELECTION_TEXT[contextArmy.selectedFactionName];
+        AC.selectedFactionName === ZWERGE
+          ? ALTERNATIVE_ARMY_SELECTION_TEXT[AC.selectedFactionName][0]
+          : ALTERNATIVE_ARMY_SELECTION_TEXT[AC.selectedFactionName];
 
       return result;
     }
@@ -68,7 +68,7 @@ const AlternativeArmyListSelector = () => {
   return (
     <SelectionInput
       className={classes.alternativeListSelector}
-      filterFunction={contextArmy.setSelectedAlternativeList}
+      filterFunction={AC.setSelectedAlternativeList}
       isArmySelector={true}
       options={options}
       label={<Typography>{labelText}</Typography>}
