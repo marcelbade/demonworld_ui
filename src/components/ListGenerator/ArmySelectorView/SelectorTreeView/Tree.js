@@ -48,7 +48,7 @@ const Tree = (props) => {
   const isSubFactionEmpty = (subFaction) => {
     return (
       contextArmy.listOfAllFactionUnits.filter((f) => f.subFaction === subFaction).length === 0 &&
-      contextArmy.listOfAllAlliedUnits.filter((f) => f.subFaction === subFaction).length === 0
+      contextArmy.listOfAlliedUnits.filter((f) => f.subFaction === subFaction).length === 0
     );
   };
 
@@ -72,11 +72,19 @@ const Tree = (props) => {
           key={uuidGenerator()} //
           nodeId={createNodeID(createSubFactionList().indexOf(subFaction))}
           label={subFaction}
-          className={isSubFactionEmpty(subFaction) ? classes.disabledBranch : classes.branch}
+          className={
+            isSubFactionEmpty(subFaction) //
+              ? classes.disabledBranch
+              : classes.branch
+          }
         >
           <LeafNodeSelector
             // tree for army or ally?
-            units={props.showsFaction ? contextArmy.listOfAllFactionUnits : contextArmy.listOfAllAlliedUnits}
+            units={
+              props.showsFaction //
+                ? contextArmy.listOfAllFactionUnits
+                : contextArmy.listOfAlliedUnits
+            }
             subFaction={subFaction}
             nodeID={createNodeID(createSubFactionList().indexOf(subFaction))}
           />
