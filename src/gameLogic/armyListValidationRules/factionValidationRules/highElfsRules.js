@@ -85,7 +85,7 @@ const ElfRules = {
     let hasNoCommander = globalRules.isArmyCommanderPresent(selectedUnits);
 
     // tournament rules
-    let testForMax2Result = globalRules.maximumOfTwo(selectedUnits);
+    let testForMax2Result = []; // globalRules.maximumOfTwo(selectedUnits);
     let testForHeroCapResult = globalRules.belowMaxPercentageHeroes(
       selectedUnits,
       totalPointsAllowance,
@@ -102,6 +102,7 @@ const ElfRules = {
     let testIlahRiForRemoval = councilArmyRemove(selectedUnits);
     let testOldHeroForRemoval = oldHeroRemove(selectedUnits);
     let testOreaVanarMasterRemoval = removeOreaVanar(selectedUnits);
+    let testThanarilCovenRemoval = removeThanarilCoven(selectedUnits);
 
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [
@@ -127,6 +128,7 @@ const ElfRules = {
       ...testIlahRiForRemoval, //
       ...testOldHeroForRemoval,
       ...testOreaVanarMasterRemoval,
+      ...testThanarilCovenRemoval,
     ];
 
     return validationResults;
@@ -161,12 +163,12 @@ const numberOfOldHeroes = (selectedUnits, availableUnits) => {
 };
 
 /**
- * Function implements the rule Old Heroes:
- * if the army list contains not enough Ilah Ri and/or Thanaril units,
+ * Function implements the second part of the Old Heroes rule:
+ * if the army list no longer contains enough Ilah Ri and/or Thanaril units,
  * the function removes a number of Old Heroes, starting with the last one picked,
  * unitl the rule is no longer broken.
  * @param {[unitCard]} selectedUnits
- * @returns array of units that need to be removed from the army list automatically.
+ * @returns an array of units that need to be removed from the army list automatically.
  */
 const oldHeroRemove = (selectedUnits) => {
   let result = [];
@@ -188,7 +190,7 @@ const oldHeroRemove = (selectedUnits) => {
   return result;
 };
 
-// Function claculates the maximum number of Old Hero units allowed in the current army list.
+// Function calculates the maximum number of Old Hero units allowed in the current army list.
 const allowedNumberOldHeroes = (selectedUnits) => {
   const UNITS_PER_HERO = 5;
   const relevantSubFactions = ["Thanaril", "Ilah Ri"];
@@ -230,7 +232,7 @@ const OreaVanarRules = (selectedUnits) => {
 };
 
 /**
- * Function removes OreaVanar masters from the army list if the relevant school is no longer selected.
+ * Function implements the second part of the Orea Vanar rule:removes masters from the army list if the relevant school is no longer selected.
  * @param {[unitCards]} selectedUnits
  * @returns  array of unitCard Objects to be removed from the army list.
  */
@@ -258,6 +260,15 @@ const removeOreaVanar = (selectedUnits) => {
   return result;
 };
 
+const heroesCovenantsMapping = [
+  { lord: "Athulae der Pfeil", units: ["Pfeillords"] },
+  { lord: "Laurelion das Schwert", units: ["Schwertmeister"] },
+  { lord: "Thinuviel die Geschwinde", units: ["Waldreiter"] },
+  { lord: "Terlor der Pegasus", units: ["Pegasusreiter"] },
+  { lord: "Farendil der Dachs", units: ["Dachsleute"] },
+  { lord: "Kelah das Einhorn", units: ["Einhorn-Elfenreiterinnen"] },
+];
+
 /**
  * Function calculates the number of units that are Thanariel Covens (Thanaril-Kriegerbünde). A player can freely pick the first unit of a coven. However, in order to pick additional units of a coven, the player must pick the corresponding hero first.
  * @param {[unitCard]} selectedUnits
@@ -265,15 +276,6 @@ const removeOreaVanar = (selectedUnits) => {
  * @returns array of objects containing a blocked unit and an error message.
  */
 const thanarilCovenRule = (selectedUnits) => {
-  const heroesCovenantsMapping = [
-    { lord: "Athulae der Pfeil", units: ["Pfeillords"] },
-    { lord: "Laurelion das Schwert", units: ["Schwertmeister"] },
-    { lord: "Thinuviel die Geschwinde", units: ["Waldreiter"] },
-    { lord: "Terlor der Pegasus", units: ["Pegasusreiter"] },
-    { lord: "Farendil der Dachs", units: ["Dachsleute"] },
-    { lord: "Kelah das Einhorn", units: ["Einhorn-Elfenreiterinnen"] },
-  ];
-
   const MESSAGE =
     "Eine zweite und weitere Einheiten desselben Kriegerbundes können nur aufgestellt werden, wenn auch der Anführer des betreffenden Kriegerbundes anwesend ist";
 
@@ -298,6 +300,32 @@ const thanarilCovenRule = (selectedUnits) => {
       }
     }
   }
+
+  return result;
+};
+
+ 
+/**
+ * Function implements the second part of the Coven rule: if a Thanaril hero is removed anbd there is more than one unit of the same coven present in the list, it must be removbed automatically.
+ * @param {[unitCard]} selectedUnits 
+ * @returns an array of units that need to be removed from the army list automatically.
+ */
+const removeThanarilCoven = (selectedUnits) => {
+  let result = [];
+  let foundLords = [];
+  let foundCovens = [];
+
+  heroesCovenantsMapping.forEach((m) => {
+    foundLords.push(...selectedUnits.map((u) => u.unitName).filter((u) => u === m.lord));
+    foundCovens.push(...selectedUnits.map((u) => u.unitName).filter((u) => m.units.includes(u)));
+  });
+
+  heroesCovenantsMapping.forEach((m) => {
+    if (!foundLords.includes(m.lord) && foundCovens.filter((c) => m.units.includes(c)).length > 1) {
+      const supernumeralCovens = selectedUnits.filter((u) => m.units.includes(u.unitName));
+      result.push(supernumeralCovens[0]);
+    }
+  });
 
   return result;
 };
