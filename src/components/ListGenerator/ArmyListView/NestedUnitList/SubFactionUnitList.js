@@ -33,21 +33,30 @@ const useStyles = makeStyles({
   },
 });
 
+/**
+ * The component creates the nested unit list for a single sub faction.
+ * Every entry contains:
+ *  - the unit name
+ *  - points
+ *  - buttons to display item shop and card view for that unit
+ *  - the list of items selected for this unit
+ *  - a button to delete the entire entry.
+ * The buttons only appear when the user hovers the mouse over the entry.
+ */
 const SubFactionUnitList = (props) => {
   // eslint-disable-next-line no-unused-vars
   const classes = useStyles();
-  const contextArmy = useContext(ArmyContext);
+  const AC = useContext(ArmyContext);
 
   /**
-   * The component creates the nested unit list for a single sub faction.
-   * Every entry contains:
-   *  - the unit name
-   *  - points
-   *  - buttons to display item shop and card view for that unit
-   *  - the list of items selected for this unit
-   *  - a button to delete the entire entry.
-   * The buttons only appear when the user hovers the mouse over the entry.
+   * Function removes a unit from the current list.
+   * @param {*} identifier unit.name + unique hash value
    */
+  const removeUnit = (identifier) => {
+    let filtered = AC.selectedUnits.filter((u) => u.name + u.uniqueID !== identifier);
+    AC.setSelectedUnits(filtered);
+  };
+
   return (
     <Fragment>
       {unitCardMultiSort(props.subFactionUnits).map((u, i) => {
@@ -58,7 +67,7 @@ const SubFactionUnitList = (props) => {
               <Button
                 key={uuidGenerator()}
                 onClick={() => {
-                  contextArmy.removeUnit(identifier);
+                  removeUnit(identifier);
                 }}
               >
                 <RemoveCircleOutlineIcon key={uuidGenerator()} />
