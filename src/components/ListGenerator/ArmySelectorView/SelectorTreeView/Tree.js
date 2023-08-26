@@ -28,7 +28,7 @@ const useStyles = makeStyles({
 
 const Tree = (props) => {
   const classes = useStyles();
-  const contextArmy = useContext(ArmyContext);
+  const AC = useContext(ArmyContext);
 
   /**
    * Function creates a list of all sub factions of the army. The ally name has to be removed from the array so it is not displayed as an army sub faction in the tree.
@@ -37,9 +37,9 @@ const Tree = (props) => {
   const createSubFactionList = () => {
     let subfactions;
     if (props.showsFaction) {
-      subfactions = contextArmy.subfactions.filter((f) => f !== contextArmy.allyName);
+      subfactions = AC.subfactions.filter((f) => f !== AC.allyName);
     } else {
-      subfactions = contextArmy.allySubFactions;
+      subfactions = AC.allySubFactions;
     }
 
     return subfactions;
@@ -47,8 +47,8 @@ const Tree = (props) => {
 
   const isSubFactionEmpty = (subFaction) => {
     return (
-      contextArmy.listOfAllFactionUnits.filter((f) => f.subFaction === subFaction).length === 0 &&
-      contextArmy.listOfAlliedUnits.filter((f) => f.subFaction === subFaction).length === 0
+      AC.listOfAllFactionUnits.filter((f) => f.subFaction === subFaction).length === 0 &&
+      AC.listOfAlliedUnits.filter((f) => f.subFaction === subFaction).length === 0
     );
   };
 
@@ -82,8 +82,8 @@ const Tree = (props) => {
             // tree for army or ally?
             units={
               props.showsFaction //
-                ? contextArmy.listOfAllFactionUnits
-                : contextArmy.listOfAlliedUnits
+                ? AC.listOfAllFactionUnits
+                : AC.listOfAlliedUnits
             }
             subFaction={subFaction}
             nodeID={createNodeID(createSubFactionList().indexOf(subFaction))}
