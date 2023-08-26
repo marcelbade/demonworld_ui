@@ -6,6 +6,7 @@ import { Typography, Grid, IconButton } from "@material-ui/core";
 import { ArmyContext } from "../../../../contexts/armyContext";
 // Icons
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+import { enrichUnitCardObject } from "../../ListGeneratorFunctions";
 
 const useStyles = makeStyles({
   textBlock: {
@@ -36,6 +37,17 @@ const LeafNode = (props) => {
   const classes = useStyles();
   const AC = useContext(ArmyContext);
 
+  /**
+   * Function adds a selected units to a the army list and adds 3 things:
+   * - a unique ID, so the same unit can be selected more than once and all instances can be differentiated
+   * - equipment slots so items can be added
+   * - a loss counter for the loss calculator
+   * @param {unitCard object} unit
+   */
+  const addUnit = (unit) => {
+    AC.setSelectedUnits([...AC.selectedUnits, enrichUnitCardObject(unit)]);
+  };
+
   const displayLeaf = (isBlocked) => {
     return isBlocked ? classes.blockedLeafNode : classes.unblockedLeafNode;
   };
@@ -57,7 +69,7 @@ const LeafNode = (props) => {
       <Grid item xs={5}>
         <IconButton
           onClick={() => {
-            AC.selectUnit(props.unit);
+            addUnit(props.unit);
           }}
           disabled={props.isBlocked}
           className={displayBttn(props.isBlocked)}

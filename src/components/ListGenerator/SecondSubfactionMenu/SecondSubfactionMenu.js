@@ -1,11 +1,14 @@
 // React
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 //Material UI
 import { Button, Grid, ButtonGroup, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 // components and functions
 import { ArmyContext } from "../../../contexts/armyContext";
 import { uuidGenerator } from "../../shared/sharedFunctions";
+// constants
+import { ARMIES_ADDITIONAL_SUBFACTIONS, ARMIES_ADDITIONAL_SUBFACTIONS_BUTTON_CAPTION } from "../../../constants/factions";
+
 const useStyles = makeStyles({
   overlay: {
     height: "100vh",
@@ -29,7 +32,37 @@ const useStyles = makeStyles({
 
 const SecondSubFactionMenu = () => {
   const classes = useStyles();
-  const contextArmy = useContext(ArmyContext);
+  const AC = useContext(ArmyContext);
+
+  // set boolean flag if the selected faction has an addditonal sub faction for every unit.
+  useEffect(() => {
+    if (ARMIES_ADDITIONAL_SUBFACTIONS.includes(AC.selectedFactionName)) {
+      const result = ARMIES_ADDITIONAL_SUBFACTIONS_BUTTON_CAPTION.filter((e) => e.army === AC.selectedFactionName);
+
+      AC.setHasAdditionalSubFaction(true);
+      AC.setSecondSubfactionCaption(result[0].caption);
+      AC.setExcemptSubFactions(result[0].excemptSubFactions);
+      AC.setSecondSubFactionList(result[0].secondSubFactionList);
+    } else {
+      AC.setHasAdditionalSubFaction(false);
+    }
+  }, [AC.selectedFactionName, AC.secondSubFactionMenuState]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  /**
+   * Function takes the selected unit from the list, sets a new value for
+   * the secondSubfaction property and replaces the old version of the unit in the
+   * selectedUnits state variable with the new one.
+   * @param {unitCard} unit
+   * @param {String} newSecondSubFaction
+   */
+  const setSecondSubFactionInArmyList = (unit, newSecondSubFaction) => {
+    let currentState = [...AC.selectedUnits];
+
+    const unitRemoved = currentState.filter((u) => !(u.unitName === unit.unitName && u.uniqueID === unit.uniqueID));
+    unit.secondSubFaction = newSecondSubFaction;
+
+    AC.setSelectedUnits([...unitRemoved, unit]);
+  };
 
   return (
     <Grid container direction="column" className={classes.overlay}>
@@ -37,7 +70,7 @@ const SecondSubFactionMenu = () => {
         {/*UNIT NAME */}
         <Grid item xs={9}>
           <Typography variant="h5" align="center" className={classes.unitName}>
-            {contextArmy.unitSelectedForShop.unitName}
+            {AC.unitSelectedForShop.unitName}
           </Typography>
         </Grid>
       </Grid>
@@ -45,15 +78,15 @@ const SecondSubFactionMenu = () => {
         <Grid item xs={3} className={classes.panelButtonsBackground}>
           {/* PANEL BUTTONS */}
           <ButtonGroup size="large" orientation="vertical">
-            {contextArmy.secondSubFactionList.map((ssf) => {
-              return ssf === contextArmy.unitSelectedForShop.secondSubFaction ? (
+            {AC.secondSubFactionList.map((ssf) => {
+              return ssf === AC.unitSelectedForShop.secondSubFaction ? (
                 <Button
                   disabled={true}
                   className={classes.currentlySelected}
                   variant="text"
                   key={uuidGenerator()}
                   onClick={() => {
-                    contextArmy.setSecondSubFactionInArmyList(contextArmy.unitSelectedForShop, ssf);
+                    setSecondSubFactionInArmyList(AC.unitSelectedForShop, ssf);
                   }}
                 >
                   {ssf}
@@ -64,7 +97,7 @@ const SecondSubFactionMenu = () => {
                   variant="text"
                   key={uuidGenerator()}
                   onClick={() => {
-                    contextArmy.setSecondSubFactionInArmyList(contextArmy.unitSelectedForShop, ssf);
+                    setSecondSubFactionInArmyList(AC.unitSelectedForShop, ssf);
                   }}
                 >
                   {ssf}
