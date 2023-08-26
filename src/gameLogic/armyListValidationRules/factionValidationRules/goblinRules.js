@@ -75,7 +75,7 @@ const GoblinRules = {
       MAX_HERO_PERCENTAGE
     );
 
-    // special faction rules - no special rules for Goblins exist.
+    // special faction rules - there are no special rules for the Goblins.
 
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [
