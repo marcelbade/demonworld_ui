@@ -19,7 +19,6 @@ import Pdf from "./GeneratorComponents/Pdf";
 import AlternativeArmyLists from "./GeneratorComponents/AlternativeArmyLists";
 // constants
 import { ALL_FACTIONS_ARRAY } from "../../constants/factions";
-import { ITEM_TYPE_BANNER, ITEM_TYPE_MUSICIAN } from "../../constants/itemShopConstants";
 import Menus from "./GeneratorComponents/Menus";
 import ArmyList from "./GeneratorComponents/ArmyList";
 
@@ -197,53 +196,6 @@ const ListGeneratorController = () => {
   }, [selectedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
-   * Function removes an item from a unit's equipment array.
-   * @param {name + uniqueID} identifier
-   * @param {int} position
-   */
-  const removeItem = (identifier, position) => {
-    let temp = [...selectedUnits];
-
-    for (let i = 0; i < temp.length; i++) {
-      if (temp[i].name + temp[i].uniqueID === identifier) {
-        temp[i].equipment.splice(position, 1);
-      }
-    }
-
-    setSelectedUnits(temp);
-  };
-
-  /**
-   * Function recalculates itemType flags of a unitCard to correctly toggle the item buttons
-   * in thej item shop on and off.
-   * @param {itemCard object} item
-   */
-  const recalculateItemTypeFlags = (item, ITEM_ADDED) => {
-    if (ITEM_ADDED) {
-      let tempObj = { ...unitSelectedForShop };
-
-      tempObj.equipmentTypes.banner = item.itemType === ITEM_TYPE_BANNER ? true : false;
-      tempObj.equipmentTypes.musician = item.itemType === ITEM_TYPE_MUSICIAN ? true : false;
-      tempObj.equipmentTypes.magicItem = !item.isAdditionalItem;
-
-      setUnitSelectedForShop({
-        ...tempObj,
-      });
-      //item removed
-    } else {
-      let tempObj = { ...unitSelectedForShop };
-
-      tempObj.equipmentTypes.banner = item.itemType === ITEM_TYPE_BANNER ? false : true;
-      tempObj.equipmentTypes.musician = item.itemType === ITEM_TYPE_MUSICIAN ? false : true;
-      tempObj.equipmentTypes.magicItem = item.isAdditionalItem;
-
-      setUnitSelectedForShop({
-        ...tempObj,
-      });
-    }
-  };
-
-  /**
    * Function deletes the entire army list, resets the state and closes the stat card display and item shop, if open.
    */
   const clearList = () => {
@@ -262,70 +214,6 @@ const ListGeneratorController = () => {
   };
 
   /**
-   * Close the item shop when a new army is selected.
-   */
-  useEffect(() => {
-    closeItemShop();
-  }, [listOfAllFactionUnits]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  /**
-   * Close the menu for choosing the second sub faction when a new army is selected.
-   */
-  useEffect(() => {
-    closeSecondSubFactionMenu();
-  }, [listOfAllFactionUnits]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  /**
-   * Function toggles the unit card view and Item shop view on and off, as well as switches between views for different units. In order to do this, both views are not toggled by a simple booelan flag, but an object that stores the previously clicked unit.
-   * @param {unitCard} unit
-   */
-  const toggleMenuState = (unit, menu) => {
-    let stateObjSetter;
-    let stateObj;
-
-    switch (menu) {
-      case "UNIT_CARDS":
-        stateObj = statCardState;
-        stateObjSetter = setStatCardState;
-        closeItemShop();
-        closeSecondSubFactionMenu();
-        break;
-      case "ITEMS":
-        stateObj = itemShopState;
-        stateObjSetter = setItemShopState;
-        closeCardDisplay();
-        closeSecondSubFactionMenu();
-        break;
-      case "SECOND_SUB_FACTION":
-        stateObj = secondSubFactionMenuState;
-        stateObjSetter = setSecondSubFactionMenuState;
-        closeCardDisplay();
-        closeItemShop();
-        break;
-
-      default:
-        break;
-    }
-
-    // first click on page (no card displayed)
-    if (stateObj.clickedUnit === undefined) {
-      stateObjSetter({ clickedUnit: unit, lastclickedUnit: unit, show: true });
-    }
-    // click on same unit again to toggle the card view on
-    else if (stateObj.lastclickedUnit.unitName === unit.unitName && stateObj.show === true) {
-      stateObjSetter({ clickedUnit: unit, lastclickedUnit: unit, show: false });
-    }
-    // click on same unit again to toggle the card view off
-    else if (stateObj.lastclickedUnit.unitName === unit.unitName && stateObj.show === false) {
-      stateObjSetter({ clickedUnit: unit, lastclickedUnit: unit, show: true });
-    }
-    // click on a different unit to show a different card
-    else if (stateObj.lastclickedUnit.unitName !== unit.unitName) {
-      stateObjSetter({ clickedUnit: unit, lastclickedUnit: unit, show: true });
-    }
-  };
-
-  /**
    * in order to work, the state setter needs a unit at the start. Since the view is not visible, the first unit in the list is used.
    */
   const closeCardDisplay = () => {
@@ -339,6 +227,20 @@ const ListGeneratorController = () => {
   const closeSecondSubFactionMenu = () => {
     setSecondSubFactionMenuState({ clickedUnit: selectedUnits[0], lastclickedUnit: selectedUnits[0], show: false });
   };
+
+  /**
+   * Close the item shop when a new army is selected.
+   */
+  useEffect(() => {
+    closeItemShop();
+  }, [listOfAllFactionUnits]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  /**
+   * Close the menu for choosing the second sub faction when a new army is selected.
+   */
+  useEffect(() => {
+    closeSecondSubFactionMenu();
+  }, [listOfAllFactionUnits]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * Function calls history objects to take user back to main menu.
@@ -387,12 +289,8 @@ const ListGeneratorController = () => {
         unitSelectedForShop: unitSelectedForShop,
         showOptionButtons: showOptionButtons,
         setShowOptionButtons: setShowOptionButtons,
-        setItemShopState: setItemShopState,
-        setSecondSubFactionMenuState: setSecondSubFactionMenuState,
         setUnitSelectedForShop: setUnitSelectedForShop,
         setAllItems: setAllItems,
-        removeItem: removeItem,
-        recalculateItemTypeFlags: recalculateItemTypeFlags,
         // ALTERNATIVE LISTS
         armyHasAlternativeLists: armyHasAlternativeLists,
         selectedAlternativeList: selectedAlternativeList,
@@ -416,7 +314,12 @@ const ListGeneratorController = () => {
         pdfMasterList: pdfMasterList,
         setPdfMasterList: setPdfMasterList,
         // MENU STATES
-        toggleMenuState: toggleMenuState,
+        setStatCardState: setStatCardState,
+        setItemShopState: setItemShopState,
+        setSecondSubFactionMenuState: setSecondSubFactionMenuState,
+        closeCardDisplay: closeCardDisplay,
+        closeItemShop: closeItemShop,
+        closeSecondSubFactionMenu: closeSecondSubFactionMenu,
       }}
     >
       <Grid container className={classes.displayBox} direction="column">
