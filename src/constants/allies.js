@@ -5,3 +5,6 @@ export const ALLIES_MAPPING = {
   Zwerge: "Imperium",
   Untote: "Ishtak",
 };
+
+
+export const NO_ALLY = "NO_ALLY"
