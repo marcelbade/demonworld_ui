@@ -60,7 +60,7 @@ const DwarfsSecondSelector = () => {
   return (
     <SelectionInput
       className={classes.alternativeListSelector}
-      filterFunction={contextArmy.setSecondDwarvenOption}
+      filterFunction={contextArmy. setSecondAlternativeArmyOption}
       isArmySelector={true}
       options={options}
       label={<Typography>{labelText}</Typography>}
