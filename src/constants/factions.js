@@ -1,30 +1,44 @@
-export const ISHTAK = "Ishtak";
-export const ZWERGE = "Zwerge";
-export const ORKS = "Orks";
+export const DUNKELFELFEN = "Dunkelelfen";
+export const ECHSENMENSCHEN = "Echsenmenschen";
+export const ELFEN = "Elfen";
 export const GOBLINS = "Goblins";
 export const IMPERIUM = "Imperium";
-export const DUNKELFELFEN = "Dunkelelfen";
-export const THAIN = "Thain";
-export const ELFEN = "Elfen";
+export const ISHTAK = "Ishtak";
+export const ORKS = "Orks";
 export const NORWINGER = "Norwinger";
+export const THAIN = "Thain";
 export const UNTOTE = "Untote";
-export const ECHSENMENSCHEN = "Echsenmenschen";
+export const ZWERGE = "Zwerge";
+
+export const NONE = "NONE";
 
 // ALL FACTIONS
 export const ALL_FACTIONS_ARRAY = [DUNKELFELFEN, ELFEN, GOBLINS, IMPERIUM, ISHTAK, NORWINGER, ORKS, THAIN, UNTOTE, ZWERGE, ECHSENMENSCHEN];
 
 // ARMIES WITH ALTERNATIVE LISTS
 export const ARMIES_WITH_ALTERNATIVE_LISTS = ["Imperium", "Zwerge", "Orks"];
+
 export const ARMY_ALTERNATIVES_LIST_MAPPER = {
+  Dunkelelfen: [],
+  Echsenmenschen: [],
+  Elfen: [],
+  Goblins: [],
   Imperium: ["Nordmark", "Südmark", "Westmark", "Ostmark"],
-  Zwerge: ["Gaeta", "Zah'ra", "Imperium"],
+  Ishtak: [],
   Orks: ["Clanngetts", "Steinclan", "Wyvernclan", "Tierclan", "Eisclan", "Pfeilclan", "Blutclan", "Eisenclan", "Bergclan"],
+  Norwinger: [],
+  Thain: [],
+  Untote: [],
+  Zwerge: ["Gaeta", "Zah'ra", "Imperium"],
 };
+
 export const ALTERNATIVE_ARMY_SELECTION_TEXT = {
   Imperium: "Wähle eine der Marken",
-  Zwerge: ["Wähle eines der Königreiche", "Wähle das zweites Königreich oder Alliierte"],
   Orks: "Wähle einen der Clans oder Clanngett",
+  Zwerge: ["Wähle eines der Königreiche", "Wähle das zweites Königreich oder Alliierte"],
 };
+
+export const UNIT_OR_SUBFACTION = { units: ["Orks"], subFactions: ["Zwerge", "Imperium"] };
 
 // SECOND SUB_FACTION
 export const ARMIES_ADDITIONAL_SUBFACTIONS = [THAIN];
@@ -66,3 +80,184 @@ export const EXCEMPT_FROM_TRIBES_RULE = [
   "Wolfsgeister",
   "Wolfstotem",
 ];
+
+export const ORK_CLANS_UNIT_MAPPING = {
+  Steinclan: [
+    "Speerträger",
+    "Leichte Speerträger",
+    "Schwertträger",
+    "Leichte Schwertträger",
+    "Bogenschützen",
+    "Leichte Bogenschützen",
+    "Plänkler",
+    "Oger",
+    "gepanzerte Oger",
+    "Erzähler",
+    " Varrigs Starker Arm",
+    "Katapult",
+    "Throigar",
+    "Streitwagen",
+    "Minotauren",
+  ],
+
+  Blutclan: [
+    "Speerträger",
+    "Leichte Speerträger",
+    "Schwertträger",
+    "Leichte Schwertträger",
+    "Bogenschützen",
+    "Leichte Bogenschützen",
+    "Plänkler",
+    "Oger",
+    "gepanzerte Oger",
+    "Erzähler",
+    "Varrigs Starker Arm",
+    "Katapult",
+    "Troll-Garde",
+    "Wolfsreiter",
+    "Wolfsschützen",
+  ],
+
+  Wyvernclan: [
+    "Speerträger",
+    "Leichte Speerträger",
+    "Schwertträger",
+    "Leichte Schwertträger",
+    "Bogenschützen",
+    "Leichte Bogenschützen",
+    "Plänkler",
+    "Oger",
+    "gepanzerte Oger",
+    "Erzähler",
+    "Varrigs Starker Arm",
+    "Katapult",
+    "Wyvernreiter",
+    "Minotauren",
+  ],
+
+  Bergclan: [
+    "Speerträger",
+    "Leichte Speerträger",
+    "Schwertträger",
+    "Leichte Schwertträger",
+    "Bogenschützen",
+    "Leichte Bogenschützen",
+    "Plänkler",
+    "Oger",
+    "gepanzerte Oger",
+    "Erzähler",
+    "Varrigs Starker Arm",
+    "Katapult",
+    "Harpyien",
+    "Bärenreiter",
+    "Bärenmeute",
+  ],
+
+  Tierclan: [
+    "Speerträger",
+    "Leichte Speerträger",
+    "Schwertträger",
+    "Leichte Schwertträger",
+    "Bogenschützen",
+    "Leichte Bogenschützen",
+    "Plänkler",
+    "Oger",
+    "gepanzerte Oger",
+    "Erzähler",
+    "Varrigs Starker Arm",
+    "Katapult",
+    "Wolfsreiter ",
+    "Wolfsschützen",
+    "Wolfsmeute",
+    "Schnee-Oger",
+  ],
+
+  Eisenclan: [
+    "Speerträger",
+    "Leichte Speerträger",
+    "Schwertträger",
+    "Leichte Schwertträger",
+    "Bogenschützen",
+    "Leichte Bogenschützen",
+    "Plänkler",
+    "Oger",
+    "gepanzerte Oger",
+    "Erzähler",
+    "Varrigs Starker Arm",
+    "Katapult",
+    "Zwergenfresser",
+    "Bärenreiter",
+    "Bärenmeute",
+  ],
+
+  Pfeilclan: [
+    "Speerträger",
+    "Leichte Speerträger",
+    "Schwertträger",
+    "Leichte Schwertträger",
+    "Bogenschützen",
+    "Leichte Bogenschützen",
+    "Plänkler",
+    "Oger",
+    "gepanzerte Oger",
+    "Erzähler",
+    "Varrigs Starker Arm",
+    "Katapult",
+    "Bärenreiter",
+    "Bärenmeute",
+    "Armbrustschützen",
+  ],
+
+  Eisclan: [
+    "Speerträger",
+    "Leichte Speerträger",
+    "Schwertträger",
+    "Leichte Schwertträger",
+    "Bogenschützen",
+    "Leichte Bogenschützen",
+    "Plänkler",
+    "Oger",
+    "gepanzerte Oger",
+    "Erzähler",
+    "Varrigs Starker Arm",
+    "Katapult",
+    "Wolfsreiter",
+    "Wolfsschützen",
+    "Streitwagen",
+    "Schnee-Oger",
+  ],
+
+  Clanngetts: [
+    "Speerträger",
+    "Leichte Speerträger",
+    "Schwertträger",
+    "Leichte Schwertträger",
+    "Bogenschützen",
+    "Leichte Bogenschützen",
+    "Plänkler",
+    "Oger",
+    "gepanzerte Oger",
+    "Erzähler",
+    "Varrigs Starker Arm",
+    "Katapult",
+    "Throigar",
+    "Troll-Garde",
+    "Wolfsreiter",
+    "Wolfsschützen",
+    "Wolfsmeute",
+    "Streitwagen",
+    "Wyvernreiter",
+    "Harpyien",
+    "Schnee-Oger",
+    "Minotauren",
+    "Zwergenfresser",
+    "Bärenreiter",
+    "Bärenmeute",
+    "Armbrustschützen",
+    "Goblin-Spinnenschützen",
+    "Goblin-Spinnenreiter",
+    "Trolle",
+    "Furien Clanngetts",
+    "Ork-Garde",
+  ],
+};
