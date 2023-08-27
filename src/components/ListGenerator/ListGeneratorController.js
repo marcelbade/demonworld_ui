@@ -18,9 +18,10 @@ import ArmyValidation from "./GeneratorComponents/ArmyValidation";
 import Pdf from "./GeneratorComponents/Pdf";
 import AlternativeArmyLists from "./GeneratorComponents/AlternativeArmyLists";
 // constants
-import { ALL_FACTIONS_ARRAY } from "../../constants/factions";
+import { ALL_FACTIONS_ARRAY, NONE } from "../../constants/factions";
 import Menus from "./GeneratorComponents/Menus";
 import ArmyList from "./GeneratorComponents/ArmyList";
+import { NO_ALLY } from "../../constants/allies";
 
 const useStyles = makeStyles((theme) => ({
   displayBox: {
@@ -88,8 +89,10 @@ const ListGeneratorController = () => {
   const [listOfAllFactionUnits, setListOfAllFactionUnits] = useState([]);
   const [selectedUnits, setSelectedUnits] = useState([]);
   // allied faction
-  const [allyName, setAllyName] = useState("");
+  const [allyName, setAllyName] = useState(NO_ALLY);
   const [listOfAlliedUnits, setListOfAlliedUnits] = useState([]);
+  const [showAlly, setShowAlly] = useState(true);
+
   // maximum point allowance
   const [maxPointsAllowance, setMaxPointsAllowance] = useState(2000);
   // the current total point value of all selected units
@@ -106,19 +109,17 @@ const ListGeneratorController = () => {
     secondSubFactionMissing: [],
   });
   // tournament rules override
-
   const [tournamentOverrideRules, setTournamentOverrideRules] = useState({
     overrideIsOn: false,
     tournamentHeroValue: 30,
     tournamentNonUniqueMax: 2,
     tournamentUniquesOnylOnce: true,
   });
-
   // alternative lists
   const [armyHasAlternativeLists, setArmyHasAlternativeLists] = useState(false);
-  const [selectedAlternativeList, setSelectedAlternativeList] = useState("NONE");
+  const [selectedAlternativeList, setSelectedAlternativeList] = useState(NONE);
   // The dwarf faction needs two selections
-  const [secondDwarvenOption, setSecondDwarvenOption] = useState("");
+  const [secondAlternativeArmyOption, setSecondAlternativeArmyOption] = useState("");
   // additional subfactions - currently only important for the Thain army!
   const [hasAdditionalSubFaction, setHasAdditionalSubFaction] = useState(false);
   const [secondSubFactionList, setSecondSubFactionList] = useState(false);
@@ -233,14 +234,14 @@ const ListGeneratorController = () => {
    */
   useEffect(() => {
     closeItemShop();
-  }, [listOfAllFactionUnits]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * Close the menu for choosing the second sub faction when a new army is selected.
    */
   useEffect(() => {
     closeSecondSubFactionMenu();
-  }, [listOfAllFactionUnits]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * Function calls history objects to take user back to main menu.
@@ -265,6 +266,8 @@ const ListGeneratorController = () => {
         allySubFactions: distinctAllySubFactions,
         listOfAlliedUnits: listOfAlliedUnits,
         distinctSubFactions: distinctSubFactions,
+        showAlly: showAlly,
+        setShowAlly: setShowAlly,
         setAllyName: setAllyName,
         setListOfAlliedUnits: setListOfAlliedUnits,
         setDistinctAllySubFactions: setDistinctAllySubFactions,
@@ -294,9 +297,9 @@ const ListGeneratorController = () => {
         // ALTERNATIVE LISTS
         armyHasAlternativeLists: armyHasAlternativeLists,
         selectedAlternativeList: selectedAlternativeList,
-        secondDwarvenOption: secondDwarvenOption,
+        secondAlternativeArmyOption: secondAlternativeArmyOption,
         setSelectedAlternativeList: setSelectedAlternativeList,
-        setSecondDwarvenOption: setSecondDwarvenOption,
+        setSecondAlternativeArmyOption: setSecondAlternativeArmyOption,
         setArmyHasAlternativeLists: setArmyHasAlternativeLists,
         // SECOND SUB FACTION
         hasAdditionalSubFaction: hasAdditionalSubFaction,
