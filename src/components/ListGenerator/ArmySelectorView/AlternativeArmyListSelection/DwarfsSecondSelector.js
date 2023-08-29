@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const DwarfsSecondSelector = () => {
   const classes = useStyles();
-  const contextArmy = useContext(ArmyContext);
+  const AC = useContext(ArmyContext);
 
   //state
   const [options, setOptions] = useState([]);
@@ -28,20 +28,20 @@ const DwarfsSecondSelector = () => {
 
   useEffect(() => {
     setOptions(findMenuOptions());
-  }, [contextArmy.selectedAlternativeList]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [AC.selectedAlternativeList]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     setLabelText(findLabelText());
-  }, [contextArmy.selectedAlternativeList]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [AC.selectedAlternativeList]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * functions generates the options for the autocomplete dynmaically by checking which option was selected in the first dropdown.
    * @returns
    */
   const findMenuOptions = () => {
-    const result = [...ARMY_ALTERNATIVES_LIST_MAPPER[contextArmy.selectedFactionName]];
+    const result = [...ARMY_ALTERNATIVES_LIST_MAPPER[AC.selectedFactionName]];
     // remove selected option
-    const position = result.indexOf(contextArmy.selectedAlternativeList);
+    const position = result.indexOf(AC.selectedAlternativeList);
     result.splice(position, 1);
 
     return result;
@@ -52,15 +52,15 @@ const DwarfsSecondSelector = () => {
    * @returns String with the label text.
    */
   const findLabelText = () => {
-    if (contextArmy.armyHasAlternativeLists) {
-      return ALTERNATIVE_ARMY_SELECTION_TEXT[contextArmy.selectedFactionName][1];
+    if (AC.armyHasAlternativeLists) {
+      return ALTERNATIVE_ARMY_SELECTION_TEXT[AC.selectedFactionName][1];
     }
   };
 
   return (
     <SelectionInput
       className={classes.alternativeListSelector}
-      filterFunction={contextArmy.setSecondAlternativeArmyOption}
+      filterFunction={AC.setSecondAlternativeArmyOption}
       isArmySelector={true}
       options={options}
       label={<Typography>{labelText}</Typography>}

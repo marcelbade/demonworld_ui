@@ -61,7 +61,7 @@ const useStyles = makeStyles({
 
 const ItemShop = () => {
   const classes = useStyles();
-  const contextArmy = useContext(ArmyContext);
+  const AC = useContext(ArmyContext);
 
   //state
   const [ItemTypes, setItemTypes] = useState([]);
@@ -71,17 +71,17 @@ const ItemShop = () => {
   // When the selected unit changes, set the correct items in the shop
   useEffect(() => {
     setItemTypes(findDistinctItemTypes());
-  }, [contextArmy.unitSelectedForShop]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [AC.unitSelectedForShop]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // When the selected unit changes, take all items it has been equipped with and add them to the "allItems" state variable. This serves as a central register of all items allready taken.
   useEffect(() => {
-    let unit = contextArmy.unitSelectedForShop;
+    let unit = AC.unitSelectedForShop;
 
     if ("equipment" in unit && unit.equipment.length > 0) {
-      const selectedItemNames = unit.equipment.filter((e) => !contextArmy.allItems.includes(e.name)).map((e) => e.name);
-      contextArmy.setAllItems([...contextArmy.allItems, ...selectedItemNames]);
+      const selectedItemNames = unit.equipment.filter((e) => !AC.allItems.includes(e.name)).map((e) => e.name);
+      AC.setAllItems([...AC.allItems, ...selectedItemNames]);
     }
-  }, [contextArmy.unitSelectedForShop]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [AC.unitSelectedForShop]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * function filters all items in the game down to the ones the selected unit can be equipped with. if no unit has been selected,
@@ -89,11 +89,11 @@ const ItemShop = () => {
    * @returns an array of item objects. array can be emtpy.
    */
   const filterFetchedItemsForUnit = () => {
-    const unit = contextArmy.unitSelectedForShop;
-    const isUnitSelected = !isObjectEmtpy(contextArmy.unitSelectedForShop);
+    const unit = AC.unitSelectedForShop;
+    const isUnitSelected = !isObjectEmtpy(AC.unitSelectedForShop);
 
     if (isUnitSelected) {
-      let items = contextArmy.fetchedItems;
+      let items = AC.fetchedItems;
 
       return items
         .filter((item) => filterForFactionAndGenericItems(item, unit))
@@ -144,8 +144,8 @@ const ItemShop = () => {
    * @returns a boolean that toggles the button on or off.
    */
   const disableButton = (item) => {
-    let unit = contextArmy.unitSelectedForShop;
-    let allItems = contextArmy.allItems;
+    let unit = AC.unitSelectedForShop;
+    let allItems = AC.allItems;
 
     const itemPickedByOtherUnit = hasItemBeenPickedByOtherUnit(allItems, item);
     const itemPicked = doesUnitalreadyHaveItem(unit, item);
@@ -161,14 +161,14 @@ const ItemShop = () => {
    * @param {itemCard object} item
    */
   const addItemToUnit = (item) => {
-    let tempObj = { ...contextArmy.unitSelectedForShop };
+    let tempObj = { ...AC.unitSelectedForShop };
 
     tempObj.equipment.push({
       ...item,
       itemLost: false,
     });
 
-    contextArmy.setUnitSelectedForShop({
+    AC.setUnitSelectedForShop({
       ...tempObj,
     });
   };
@@ -177,8 +177,8 @@ const ItemShop = () => {
    * Function causes the list of all selected units to change (w/o actually changing it). This is necessary to correctly calculate the list's point cost whenever an item is added. Without this, the point cost of the item is only added whenever a unit is added or removed from the list, not when the item is added ore removed.
    */
   const triggerArymListReCalculation = () => {
-    let tempArray = [...contextArmy.selectedUnits];
-    contextArmy.setSelectedUnits([...tempArray]);
+    let tempArray = [...AC.selectedUnits];
+    AC.setSelectedUnits([...tempArray]);
   };
 
   return (
@@ -187,7 +187,7 @@ const ItemShop = () => {
         {/*UNIT NAME */}
         <Grid item xs={9}>
           <Typography variant="h5" align="center" className={classes.unitName}>
-            {contextArmy.unitSelectedForShop.unitName}
+            {AC.unitSelectedForShop.unitName}
           </Typography>
         </Grid>
       </Grid>
@@ -225,7 +225,7 @@ const ItemShop = () => {
                         disabled={disableButton(item)}
                         onClick={() => {
                           addItemToUnit(item);
-                          contextArmy.recalculateItemTypeFlags(item, true);
+                          AC.recalculateItemTypeFlags(item, true);
                           triggerArymListReCalculation();
                         }}
                         key={uuidGenerator()}

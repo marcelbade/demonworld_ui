@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ArmyListDisplay = () => {
   const classes = useStyles();
-  const contextArmy = useContext(ArmyContext);
+  const AC = useContext(ArmyContext);
 
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -49,7 +49,7 @@ const ArmyListDisplay = () => {
    * @param {event object} event
    */
   const changeMaximumPointValue = (event) => {
-    contextArmy.setMaxPointsAllowance(event.target.value);
+    AC.setMaxPointsAllowance(event.target.value);
 
     let isValid = new RegExp(/^[0-9]*$/).test(event.target.value);
     isValid ? setErrorMessage("") : setErrorMessage("Bitte nur Zahlen eingeben.");
@@ -58,23 +58,23 @@ const ArmyListDisplay = () => {
   /**
    * This creates the centre of the UI: the actual army list consisting of the selected units and the display of the maximum * army points.
    */
-  return contextArmy ? (
+  return AC ? (
     <Fragment>
       {/* <Grid item container justify="flex-end"> */}
 
       <List>
-        {contextArmy.subFactions.map((sF) => (
+        {AC.subFactions.map((sF) => (
           <ArmyListSubFactionEntry subFaction={sF} key={uuidGenerator()} />
         ))}
       </List>
       {/* TOTAL SPENT POINTS +  TOTAL POINT ALLOWANCE*/}
       <Grid container direction="column">
         <Grid container direction="row">
-          <Typography className={classes.total}>Gesamtpunktzahl: {contextArmy.totalPointValue} / </Typography>
+          <Typography className={classes.total}>Gesamtpunktzahl: {AC.totalPointValue} / </Typography>
           <TextField
             id="outlined-basic"
             autoComplete="off"
-            value={contextArmy.maxPointsAllowance}
+            value={AC.maxPointsAllowance}
             InputProps={{
               style: {
                 fontSize: "20px",
@@ -91,7 +91,7 @@ const ArmyListDisplay = () => {
             variant="standard"
           />
         </Grid>
-        <Typography className={classes.total}>Spähfaktor: {calculateScoutingFactor(contextArmy.selectedUnits)}</Typography>
+        <Typography className={classes.total}>Spähfaktor: {calculateScoutingFactor(AC.selectedUnits)}</Typography>
       </Grid>
     </Fragment>
   ) : null;

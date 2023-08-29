@@ -51,7 +51,7 @@ const useStyles = makeStyles({
 
 const OptionButtons = () => {
   const classes = useStyles();
-  const contextArmy = useContext(ArmyContext);
+  const AC = useContext(ArmyContext);
   const history = useHistory();
 
   const NO_COMMANDER_WARNING = `Die Armeeliste muss mindestens 1 Helden, Befehlshaber oder Magier mit 2 oder mehr ★ enthalten.`;
@@ -62,22 +62,22 @@ const OptionButtons = () => {
 
   // enable buttons if lit is valid
   useEffect(() => {
-    contextArmy.selectedUnits.length === 0 || violatesRules(contextArmy.listValidationResults) ? setDisableButtons(true) : setDisableButtons(false);
-  }, [contextArmy.selectedUnits, contextArmy.listValidationResults]); // eslint-disable-line react-hooks/exhaustive-deps
+    AC.selectedUnits.length === 0 || violatesRules(AC.listValidationResults) ? setDisableButtons(true) : setDisableButtons(false);
+  }, [AC.selectedUnits, AC.listValidationResults]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // set the display messages
   useEffect(() => {
     let tempArray = [];
 
-    if (contextArmy.listValidationResults.subFactionBelowMinimum.length > 0) {
-      contextArmy.listValidationResults.subFactionBelowMinimum.forEach((u) => tempArray.push(u.message));
+    if (AC.listValidationResults.subFactionBelowMinimum.length > 0) {
+      AC.listValidationResults.subFactionBelowMinimum.forEach((u) => tempArray.push(u.message));
     }
-    if (!contextArmy.listValidationResults.commanderIspresent) {
+    if (!AC.listValidationResults.commanderIspresent) {
       tempArray.push(NO_COMMANDER_WARNING);
     }
 
     setDisplayMessages([...tempArray]);
-  }, [contextArmy.listValidationResults]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [AC.listValidationResults]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * Function checks whether the list is valid.
@@ -100,7 +100,7 @@ const OptionButtons = () => {
       pathname: "/lossCalculator",
       state: {
         lastPage: "listGenerator",
-        selectedArmy: contextArmy.selectedUnits,
+        selectedArmy: AC.selectedUnits,
       },
     });
   };
@@ -112,7 +112,7 @@ const OptionButtons = () => {
     //TODO: replace in production!!
     const URL = "http://localhost:3000/PdfBox";
 
-    let transportObj = { pdfData: contextArmy.pdfMasterList };
+    let transportObj = { pdfData: AC.pdfMasterList };
 
     window.localStorage.setItem("transportObj", JSON.stringify(transportObj));
     window.open(URL, "_blank", "noopener,noreferrer");
@@ -131,7 +131,7 @@ const OptionButtons = () => {
           variant="outlined"
           disabled={disableButtons}
           onClick={() => {
-            contextArmy.clearList();
+            AC.clearList();
           }}
         >
           Liste löschen

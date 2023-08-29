@@ -24,7 +24,7 @@ const useStyles = makeStyles({
 
 const ArmyListSubFactionFooter = (props) => {
   const classes = useStyles();
-  const contextArmy = useContext(ArmyContext);
+  const AC = useContext(ArmyContext);
 
   const [subFactionTotal, setSubFactionTotal] = useState(0);
 
@@ -47,14 +47,14 @@ const ArmyListSubFactionFooter = (props) => {
   useEffect(() => {
     const result = calculateMinAndMaxPercentages();
     setPercentages({ min: result.min, max: result.max });
-  }, [contextArmy.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * Function calculates the minimum and maximum percentage allowance for the subfaction.
    * @returns Object with min and
    */
   const calculateMinAndMaxPercentages = () => {
-    const ruleArray = ruleObjectProvider(contextArmy.selectedFactionName);
+    const ruleArray = ruleObjectProvider(AC.selectedFactionName);
     const filteredArray = ruleArray.filter((r) => r.cardNames.includes(props.subFactionName));
 
     // when changing armies, the rulearray very briefly becomes undefined. Hence the test for length.
@@ -68,7 +68,7 @@ const ArmyListSubFactionFooter = (props) => {
   };
 
   const calculateCurrentPercentage = () => {
-    return (subFactionTotal / contextArmy.maxPointsAllowance) * 100;
+    return (subFactionTotal / AC.maxPointsAllowance) * 100;
   };
 
   const displayPoints = () => {
