@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
