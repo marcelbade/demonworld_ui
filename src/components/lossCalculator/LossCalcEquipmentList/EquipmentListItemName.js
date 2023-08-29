@@ -4,7 +4,7 @@ import React from "react";
 import { ListItemText } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Tooltip } from "@mui/material";
-import { NOT_SINGLE_ELEMENT_ITEM_MESSAGE } from "../../../constants/textsAndMessages";
+import { LOSS_CALCULATOR } from "../../../constants/textsAndMessages";
 
 const useStyles = makeStyles((theme) => ({
   typographyFont: {
@@ -34,7 +34,7 @@ const EquipmentListItemName = (props) => {
   };
 
   return props.notSingleElementItem ? (
-    <Tooltip title={NOT_SINGLE_ELEMENT_ITEM_MESSAGE}>
+    <Tooltip title={LOSS_CALCULATOR.NOT_SINGLE_ELEMENT_ITEM_MESSAGE}>
       <ListItemText secondary={<span className={classes.typographyFont}> {props.itemName}</span>} />
     </Tooltip>
   ) : (

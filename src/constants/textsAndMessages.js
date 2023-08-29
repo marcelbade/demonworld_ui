@@ -159,16 +159,16 @@ export const UNDEAD = {
 
 export const NO_RANGE_WEAPON = "x";
 
-// loss calculator
-export const LOST_HERO = "Held verloren";
-export const LOST_MAGE = "Magier verloren";
-export const LOST_GIANT = "Großelement verloren";
-export const UNIT_ROUTED = "Einheit aufgerieben";
-export const TEXT_UNITS = "Verlorene Elemente:";
-export const TEXT_SINGLE_ELEMENTS = "Verlorene Lebenspunkte:";
-export const MINUS_1_HP = "- 1 Lebenspunkt";
-export const MINUS_1_ELEMENT = "- 1 Element";
-export const PLUS_1_HP = "+ 1 Lebenspunkt";
-export const PLUS_1_ELEMENT = "+ 1 Element";
-
-export const NOT_SINGLE_ELEMENT_ITEM_MESSAGE = "Punktkosten sind bereits in den Punktkosten der Elemente enthalten.";
+export const LOSS_CALCULATOR = {
+  LOST_HERO: "Held verloren",
+  LOST_GIANT: "Großelement verloren",
+  UNIT_ROUTED: "Einheit aufgerieben",
+  TEXT_UNITS: "Verlorene Elemente:",
+  TEXT_SINGLE_ELEMENTS: "Verlorene Lebenspunkte:",
+  MINUS_1_HP: "- 1 Lebenspunkt",
+  MINUS_1_ELEMENT: "- 1 Element",
+  PLUS_1_HP: "+ 1 Lebenspunkt",
+  PLUS_1_ELEMENT: "+ 1 Element",
+  LOST_MAGE: "Magier verloren",
+  NOT_SINGLE_ELEMENT_ITEM_MESSAGE: "Punktkosten sind bereits in den Punktkosten der Elemente enthalten.",
+};

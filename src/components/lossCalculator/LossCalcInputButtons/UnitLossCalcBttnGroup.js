@@ -15,16 +15,7 @@ import { GIANT, HERO, MAGE } from "../../../constants/unitTypes";
 // components and functions
 import { LossCalcContext } from "../../../contexts/LossCalculatorContext";
 import UnitLossCalculatorButton from "./UnitLossCalculatorButton";
-import {
-  LOST_HERO,
-  LOST_GIANT,
-  LOST_MAGE,
-  UNIT_ROUTED,
-  MINUS_1_HP,
-  MINUS_1_ELEMENT,
-  PLUS_1_HP,
-  PLUS_1_ELEMENT,
-} from "../../../constants/textsAndMessages";
+import { LOSS_CALCULATOR } from "../../../constants/textsAndMessages";
 
 const useStyles = makeStyles((theme) => ({
   typographyFont: {
@@ -132,13 +123,13 @@ const UnitLossCalcBttnGroup = (props) => {
     let message;
 
     if (props.unit.unitType === HERO) {
-      message = LOST_HERO;
+      message = LOSS_CALCULATOR.LOST_HERO;
     } else if (props.unit.unitType === MAGE) {
-      message = LOST_MAGE;
+      message = LOSS_CALCULATOR.LOST_MAGE;
     } else if (props.unit.unitType === GIANT) {
-      message = LOST_GIANT;
+      message = LOSS_CALCULATOR.LOST_GIANT;
     } else {
-      message = UNIT_ROUTED;
+      message = LOSS_CALCULATOR.UNIT_ROUTED;
     }
 
     return message;
@@ -156,14 +147,14 @@ const UnitLossCalcBttnGroup = (props) => {
     <Stack direction="row" justifyContent="center" className={classes.test1} spacing={2}>
       <ButtonGroup variant="contained">
         <UnitLossCalculatorButton
-          tooltipText={MINUS_1_ELEMENT}
+          tooltipText={LOSS_CALCULATOR.MINUS_1_ELEMENT}
           displayButton={morethanOneElementAndMultipleHP()}
           action={subtractFullUnit}
           disablerExpression={notLessThanZero() || notLessThanOneUnit()}
           icon={<KeyboardDoubleArrowLeftIcon />}
         />
         <UnitLossCalculatorButton
-          tooltipText={props.unit.hitpoints > 1 ? MINUS_1_HP : MINUS_1_ELEMENT}
+          tooltipText={props.unit.hitpoints > 1 ? LOSS_CALCULATOR.MINUS_1_HP : LOSS_CALCULATOR.MINUS_1_ELEMENT}
           displayButton={true}
           action={subtractLoss}
           disablerExpression={notLessThanZero()}
@@ -173,14 +164,14 @@ const UnitLossCalcBttnGroup = (props) => {
           {props.unit.lossCounter}
         </Typography>
         <UnitLossCalculatorButton
-          tooltipText={props.unit.hitpoints > 1 ? PLUS_1_HP : PLUS_1_ELEMENT}
+          tooltipText={props.unit.hitpoints > 1 ? LOSS_CALCULATOR.PLUS_1_HP : LOSS_CALCULATOR.PLUS_1_ELEMENT}
           displayButton={true}
           action={addLoss}
           disablerExpression={notGreaterThanNumberOfIncrements()}
           icon={<ChevronRightIcon />}
         />
         <UnitLossCalculatorButton
-          tooltipText={PLUS_1_ELEMENT}
+          tooltipText={LOSS_CALCULATOR.PLUS_1_ELEMENT}
           displayButton={morethanOneElementAndMultipleHP()}
           action={addFullUnit}
           disablerExpression={notGreaterThanNumberOfIncrements() || noGreaterThanNumberOfHitpoints()}
@@ -198,7 +189,7 @@ const UnitLossCalcBttnGroup = (props) => {
           }}
           className={classes.bttn}
         >
-          <img src={skullsIcon} alt={UNIT_ROUTED} height={40} width={40} />
+          <img src={skullsIcon} alt={LOSS_CALCULATOR.UNIT_ROUTED} height={40} width={40} />
         </IconButton>
       </Tooltip>
     </Stack>
