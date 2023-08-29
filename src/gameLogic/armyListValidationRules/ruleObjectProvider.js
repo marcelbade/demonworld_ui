@@ -11,7 +11,7 @@ import { rules as ThainRulesList } from "./factionValidationRules/thainRules";
 import { rules as LizardMenRulesList } from "./factionValidationRules/lizardmenRules";
 
 /**
- * In order to calculate the point allowance for a faction's subfactions dynamically, the rules object containing the percentages  for the faction has to be made available.  
+ * In order to calculate the point allowance for a faction's subFactions dynamically, the rules object containing the percentages for the faction has to be made available.  
  * @param {String} faction 
  * @returns 
  */
