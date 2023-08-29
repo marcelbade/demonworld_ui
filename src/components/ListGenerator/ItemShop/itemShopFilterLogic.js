@@ -3,7 +3,7 @@ import {
   USABLE_BY_ALL,
   ITEM_TYPE_BOWS,
   ITEM_TYPE_CROSSBOWS,
-  NO_RANGE_WEAPON,
+  
   BOW_TYPES,
   CROSSBOW_TYPES,
   GIANT,
@@ -11,6 +11,7 @@ import {
   SPEAR_TYPES,
   LANCE_TYPES,
 } from "../../../constants/itemShopConstants";
+import { NO_RANGE_WEAPON } from "../../../constants/textsAndMessages";
 
 // Only show items of the faction or generic ones.
 export const filterForFactionAndGenericItems = (item, unit) => {
@@ -109,7 +110,7 @@ export const filterForLances = (item, unit) => {
 
 // Crossbows can only be used by units with bows
 export const filterForCrossBows = (item, unit) => {
-  if ((unit.rangedWeapon === NO_RANGE_WEAPON || !CROSSBOW_TYPES.includes(unit.rangedWeapon)) && item.itemType === ITEM_TYPE_CROSSBOWS) {
+  if ((unit.rangedWeapon === NO_RANGE_WEAPON|| !CROSSBOW_TYPES.includes(unit.rangedWeapon)) && item.itemType === ITEM_TYPE_CROSSBOWS) {
     return false;
   }
   return true;
