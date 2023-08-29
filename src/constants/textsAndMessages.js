@@ -118,7 +118,7 @@ export const ORKS = {
     UNIT: "Deine Armeeliste muss zu mindestens 25% aus Einheiten bestehen.",
     CHARACTERS: "Deine Armeeliste darf zu höchstens 30% aus Helden bestehen.",
     GIANTS: "Deine Armeeliste darf zu höchstens 30% aus Geräten bestehen.",
-    MACHINES: "Deine Armeeliste darf zu höchstens 30% aus Sturmlords und Hexen bestehen.",
+    ENGINES: "Deine Armeeliste darf zu höchstens 30% aus Sturmlords und Hexen bestehen.",
     CLANTROOPS: "Deine Armeeliste darf zu höchstens 40% aus Sondertruppen der Clans bestehen.",
     CLANNGETT: "Deine Armeeliste darf zu höchstens 50% aus Einheiten Clanngetts bestehen.",
     WIZARDS: "Deine Armeeliste darf zu höchstens 40% aus Zauberern bestehen.",
