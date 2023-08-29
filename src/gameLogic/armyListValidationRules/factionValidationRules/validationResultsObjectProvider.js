@@ -10,15 +10,16 @@
  *   If the condition is no longer met, they are added to the array to be removed.
  *
  * - secondSubFactionMissing: if the faction has a rule that some/all units must be assigned
- *   a secod subFaction, units w/o it are added to thsi array 
+ *   a secod subFaction, units w/o it are added to thsi array
  * - commanderIsPresent: Most army construction rules demand the present of a commander.
  */
 const validationResults = {
   unitsBlockedbyRules: [],
   subFactionBelowMinimum: [],
   removeUnitsNoLongerValid: [],
-  secondSubFactionMissing:[],
+  secondSubFactionMissing: [],
   commanderIsPresent: false,
+  otherBlockingRules: [],  
 };
 
 export default validationResults;
