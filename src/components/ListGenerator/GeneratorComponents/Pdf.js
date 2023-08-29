@@ -13,11 +13,11 @@ const Pdf = () => {
   useEffect(() => {
     let tempArray = [];
 
-    AC.distinctSubFactions.forEach((sF) => {
+    AC.subFactions.forEach((sF) => {
       tempArray.push({ subFaction: sF, units: filterForSubFaction(AC.selectedUnits, sF) });
       AC.setPdfMasterList([...tempArray]);
     });
-  }, [AC.distinctSubFactions, AC.selectedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [AC.subFactions, AC.selectedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // reset the PDF master list when another army is selected.
   useEffect(() => {
