@@ -22,23 +22,22 @@ const AlternativeArmyListSelector = () => {
   const classes = useStyles();
   const AC = useContext(ArmyContext);
 
-  //state
   const [options, setOptions] = useState([]);
   const [labelText, setLabelText] = useState("");
 
   useEffect(() => {
-    setOptions(optionSelector());
+    setOptions(findMenuOptions());
   }, [AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    setLabelText(labelTextSelector());
+    setLabelText(findLabelTexts());
   }, [AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
-   * Function maps the name of an army to the names of its alternative list and returns them, if it has any.
-   * @returns returns the names of the alternative army lists as Strings.
+   *Function returns the names of the alternative army lists as options for the drop downm menu.
+   * @returns anr array of string values.
    */
-  const optionSelector = () => {
+  const findMenuOptions = () => {
     if (AC.armyHasAlternativeLists) {
       if (AC.selectedFactionName === ZWERGE) {
         const result = [...ARMY_ALTERNATIVES_LIST_MAPPER[AC.selectedFactionName]];
@@ -54,7 +53,7 @@ const AlternativeArmyListSelector = () => {
    * Function retrieves the correct label text for the input element.
    * @returns String with the label text.
    */
-  const labelTextSelector = () => {
+  const findLabelTexts = () => {
     if (AC.armyHasAlternativeLists) {
       const result =
         AC.selectedFactionName === ZWERGE
