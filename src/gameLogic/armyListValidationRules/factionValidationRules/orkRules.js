@@ -1,4 +1,7 @@
+import { ORKS } from "../../../constants/textsAndMessages";
 import globalRules from "../globalValidationRules/globalValidationRules";
+
+// clan armies need a two star general
 
 const rules = [
   {
@@ -6,51 +9,56 @@ const rules = [
     cardNames: ["Einheit"],
     min: 0.25,
     max: 1.0,
-    error: "Deine Armeeliste muss zu mindestens 30% aus Einheiten bestehen.",
+    error: ORKS.SUB_FACTION_RULES.UNIT,
   },
-
   {
     subFaction: "characters",
     cardNames: ["Helden/Befehlshaber"],
     min: 0.0,
     max: 0.3,
-    error: "Deine Armeeliste darf zu höchstens 50% aus Helden bestehen.",
-  },
-
-  {
-    subFaction: "Clanngett",
-    cardNames: ["Clanngett"],
-    min: 0.0,
-    max: 0.5,
-    error: "Deine Armeeliste darf zu höchstens 40% aus Einheiten aus Gaeta bestehen.",
+    error: ORKS.SUB_FACTION_RULES.CHARACTERS,
   },
   {
-    subFaction: "machines",
+    subFaction: "engines",
     cardNames: ["Geräte"],
     min: 0.0,
     max: 0.3,
-    error: "Deine Armeeliste darf zu höchstens 40% aus Einheiten aus Zah'ra bestehen.",
+    error: ORKS.SUB_FACTION_RULES.ENGINES,
   },
   {
     subFaction: "giants",
     cardNames: ["Giganten"],
     min: 0.0,
     max: 0.3,
-    error: "Deine Armeeliste darf zu höchstens 20% aus Einheiten aus Alliierten bestehen.",
+    error: ORKS.SUB_FACTION_RULES.GIANTS,
   },
   {
     subFaction: "clantroops",
     cardNames: ["Sondertruppen des Clans"],
     min: 0.0,
     max: 0.4,
-    error: "Deine Armeeliste darf zu höchstens 20% aus Einheiten aus Alliierten bestehen.",
+    error: ORKS.SUB_FACTION_RULES.CLANTROOPS,
+  },
+  {
+    subFaction: "clanngett",
+    cardNames: ["Clanngett"],
+    min: 0.0,
+    max: 0.5,
+    error: ORKS.SUB_FACTION_RULES.CLANNGETT,
   },
   {
     subFaction: "wizards",
     cardNames: ["Zauberer"],
     min: 0.0,
     max: 0.3,
-    error: "Deine Armeeliste darf zu höchstens 20% aus Einheiten aus Alliierten bestehen.",
+    error: ORKS.SUB_FACTION_RULES.WIZARDS,
+  },
+  {
+    subFaction: "goblins",
+    min: 0.0,
+    max: 0.2,
+    cardNames: ["Goblins"],
+    error: ORKS.SUB_FACTION_RULES.GOBLINS,
   },
 ];
 
@@ -63,7 +71,7 @@ const validationResults = {
 };
 
 const OrkRules = {
-  testSubFactionRules: (availableUnits, selectedUnits, totalPointsAllowance, subFactions) => {
+  testSubFactionRules: (availableUnits, selectedUnits, totalPointsAllowance, subFactions, selectedAlternativeList) => {
     //  general rules
     let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(selectedUnits, availableUnits, totalPointsAllowance);
     let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(rules, selectedUnits, totalPointsAllowance, subFactions);
@@ -98,10 +106,104 @@ const OrkRules = {
 
     validationResults.removeUnitsNoLongerValid = [];
 
+    //SPECIAL FACTION RULES
+
+    // If an alternative army has been selected, change the subFaction limits accordingly.
+    const ORK_SUBFACTION_LIMITS = [
+      { subFaction: "engines", clans: 0.2, clanngett: 0.3 },
+      { subFaction: "clantroops", clans: 0.5, clanngett: 0.4 },
+      { subFaction: "clanngett", clans: 0, clanngett: 0.5 },
+    ];
+
+    /**
+     * Function changes the max. limits for the subfactions depending on which alternative army list has been selected.
+     */
+    const switchBetweenAlternativeRules = () => {
+      if (selectedAlternativeList === "Clanngett") {
+        changeLimit("clanngett");
+      } else {
+        changeLimit("clans");
+      }
+    };
+
+    const changeLimit = (armyList) => {
+      for (let i = 0; i < ORK_SUBFACTION_LIMITS.length; i++) {
+        const limit = ORK_SUBFACTION_LIMITS[i];
+        for (let j = 0; j < rules.length; j++) {
+          const rule = rules[j];
+          if (rule.subFaction === limit.subFaction) {
+            rule.max = limit[armyList];
+          }
+        }
+      }
+    };
+
+    if (selectedAlternativeList) {
+      switchBetweenAlternativeRules();
+    }
+
+    /**
+     * Function implements the rule that a Clanngett army must contain at least one of the Clanngett  heroes.
+     * @param {*} selectedUnits array of all selected unit objects
+     * @returns true, if the army contains at least one of the unitCards.
+     */
+    const isClannGettCommanderPresent = (selectedUnits) => {
+      const clangettHeroes = ["Trazzag", "Fherniak", "Ärrig", "Khazzar", "Nallian"];
+      for (let i = 0; i < clangettHeroes.length; i++) {
+        const hero = clangettHeroes[i];
+        if (selectedUnits.includes(hero)) return true;
+      }
+
+      return false;
+    };
+
+    const alliesVsClanngett = (selectedUnits) => {
+      const NET_TOTAL_ORKS = 5;
+      const NET_TOTAL_GOBLINS = 2;
+      const GOBLINS = "Goblins";
+      const CLANNGETT = ["Clanngett"];
+
+      if (selectedUnits !== undefined && selectedUnits.length > 0) {
+        for (let i = selectedUnits.length - 1; i >= 0; i--) {
+          if (selectedUnits[i].subFaction === GOBLINS) {
+            decreaseAllowance(NET_TOTAL_ORKS, GOBLINS);
+          }
+          if (selectedUnits[i].subFaction === CLANNGETT) {
+            decreaseAllowance(NET_TOTAL_GOBLINS, CLANNGETT);
+          }
+        }
+      }
+    };
+
+    /**
+     * Function decreases the max point allowance for a subfaction.
+     * @param {int} increment
+     * @param {int} netTotal
+     * @param {String} subFaction
+     */
+    const decreaseAllowance = (netTotal, subFaction) => {
+      let pointsSpent = 0;
+
+      selectedUnits
+        .filter((sU) => sU.subFaction === subFaction)
+        .forEach((unit) => {
+          pointsSpent += unit.points;
+        });
+
+      const percentage = pointsSpent * (100 / totalPointsAllowance);
+      const share = Math.floor(percentage);
+
+      const remainder = netTotal - share;
+      let foundRules = rules.filter((r) => r.subFaction === subFaction);
+
+      foundRules[0].max = remainder * 0.1;
+    };
+
+    // execute
+    alliesVsClanngett(selectedUnits);
+
     return validationResults;
   },
 };
-
-//SPECIAL FACTION RULES
 
 export { OrkRules, rules };
