@@ -1,3 +1,4 @@
+import { ISHTAK } from "../../../constants/textsAndMessages";
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
 
@@ -8,42 +9,42 @@ const rules = [
     cardNames: ["Menschen"],
     min: 0.1,
     max: 0.6,
-    error: "Deine Armeeliste muss zu 10% bis 60% aus Menschen bestehen.",
+    error: ISHTAK.SUB_FACTION_RULES.HUMANS,
   },
   {
     subFaction: "beastmen",
     cardNames: ["Tiermenschen"],
     min: 0.1,
     max: 0.6,
-    error: "Deine Armeeliste muss zu 10% bis 60% aus Tiermenschen bestehen.",
+    error: ISHTAK.SUB_FACTION_RULES.BEASTMEN,
   },
   {
     subFaction: "icewitches",
     cardNames: ["Eishexen"],
     min: 0.1,
     max: 0.6,
-    error: "Deine Armeeliste muss zu 10% bis 60% aus Eishexen bestehen.",
+    error: ISHTAK.SUB_FACTION_RULES.ICEWITCHES,
   },
   {
     subFaction: "demons",
     cardNames: ["Dämonen"],
     min: 0.0,
     max: 0.5,
-    error: "Deine Armeeliste darf zu höchstens 50% aus Dämonen bestehen.",
+    error: ISHTAK.SUB_FACTION_RULES.DEMONS,
   },
   {
     subFaction: "undead",
     cardNames: ["Untote"],
     min: 0.0,
     max: 0.5,
-    error: "Deine Armeeliste darf zu höchstens 50% aus Untoten bestehen.",
+    error: ISHTAK.SUB_FACTION_RULES.UNDEAD,
   },
   {
     subFaction: "icegiants",
     cardNames: ["Eisriesen"],
     min: 0.0,
     max: 0.3,
-    error: "Deine Armeeliste darf zu höchstens 30% aus Eisriesen bestehen.",
+    error: ISHTAK.SUB_FACTION_RULES.ICEGIANTS,
   },
 ];
 

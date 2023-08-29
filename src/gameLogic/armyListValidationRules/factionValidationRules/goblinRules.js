@@ -1,3 +1,4 @@
+import { GOBLINS } from "../../../constants/textsAndMessages";
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
 
@@ -7,28 +8,28 @@ const rules = [
     min: 0.3,
     max: 1.0,
     cardNames: ["Infanterie"],
-    error: "Deine Armeeliste muss zu mindestens 30% aus Infanterie bestehen.",
+    error: GOBLINS.SUB_FACTION_RULES.INFANTRY,
   },
   {
     subFaction: "engines",
     min: 0.0,
     max: 0.2,
     cardNames: ["Geräte"],
-    error: "Deine Armeeliste darf maximal zu 20% aus Geräten bestehen.",
+    error: GOBLINS.SUB_FACTION_RULES.ENGINES ,
   },
   {
     subFaction: "characters",
     min: 0.0,
     max: 0.3,
     cardNames: ["Helden/Befehlshaber"],
-    error: "Deine Armeeliste darf maximal zu 40% aus Helden und Befehlshabern bestehen.",
+    error: GOBLINS.SUB_FACTION_RULES.CHARACTERS,
   },
   {
     subFaction: "shamans",
     min: 0.0,
     max: 0.3,
     cardNames: ["Schamanen"],
-    error: "Deine Armeeliste darf maximal zu 30% aus Schamanen bestehen.",
+    error: GOBLINS.SUB_FACTION_RULES.SHAMANS,
   },
 
   {
@@ -36,7 +37,7 @@ const rules = [
     min: 0.0,
     max: 0.4,
     cardNames: ["Rieseninsekten"],
-    error: "Deine Armeeliste darf maximal zu 40% aus Rieseninsekten bestehen.",
+    error: GOBLINS.SUB_FACTION_RULES.GIANTINSECTS,
   },
 
   {
@@ -44,14 +45,14 @@ const rules = [
     min: 0.0,
     max: 0.4,
     cardNames: ["Insektenreiter"],
-    error: "Deine Armeeliste darf maximal zu 40% aus Insektenreiter bestehen.",
+    error: GOBLINS.SUB_FACTION_RULES.INSECTRIDERS,
   },
   {
     subFaction: "orks",
     min: 0.0,
     max: 0.2,
     cardNames: ["Orks"],
-    error: "Deine Armeeliste darf zu maximal zu 20% aus Orks bestehen.",
+    error: GOBLINS.SUB_FACTION_RULES.ORKS,
   },
 ];
 

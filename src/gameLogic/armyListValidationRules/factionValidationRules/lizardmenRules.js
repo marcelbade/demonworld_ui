@@ -1,3 +1,4 @@
+import { LIZARDMEN } from "../../../constants/textsAndMessages";
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
 
@@ -7,36 +8,36 @@ const rules = [
     min: 0.2,
     max: 0.5,
     cardNames: ["Grundtruppen"],
-    error: "Deine Armeeliste muss zu mindestens 20% aus Grundtruppen bestehen.",
+    error: LIZARDMEN.SUB_FACTION_RULES.BASICTROOPS,
   },
   {
     subFaction: "specialists",
     min: 0.0,
     max: 0.4,
     cardNames: ["Spezialisierte Truppen"],
-    error: "Deine Armeeliste darf maximal zu 40% aus spezialisierten Truppen bestehen.",
+    error: LIZARDMEN.SUB_FACTION_RULES.SPECIALISTS
   },
   {
     subFaction: "heroes",
     min: 0.0,
     max: 0.3,
     cardNames: ["Helden/Befehlshaber"],
-    error: "Deine Armeeliste darf maximal zu 30% aus Helden und Befehlshabern bestehen.",
+    error:  LIZARDMEN.SUB_FACTION_RULES.HEROES,
   },
   {
     subFaction: "mages",
     min: 0.0,
     max: 0.3,
     cardNames: ["Magier"],
-    error: "Deine Armeeliste darf maximal zu 30% aus Magiern bestehen.",
+    error: LIZARDMEN.SUB_FACTION_RULES.MAGES,
   },
 
   {
-    subFaction: "Giants",
+    subFaction: "giantElements",
     min: 0.0,
     max: 0.35,
     cardNames: ["Großelemente"],
-    error: "Deine Armeeliste darf maximal zu 35% aus Großelementen bestehen.",
+    error: LIZARDMEN.SUB_FACTION_RULES.GIANTELEMENTS,
   },
 ];
 

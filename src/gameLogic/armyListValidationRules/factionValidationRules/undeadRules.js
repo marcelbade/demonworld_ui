@@ -12,6 +12,7 @@ Tiermenschen aufzustellen. Allerdings können keine Schwarzmagier, Dämonen oder
 Eisriesen aufgestellt werden.
  * */
 
+import { UNDEAD } from "../../../constants/textsAndMessages";
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
 
@@ -21,7 +22,7 @@ const rules = [
     cardNames: ["Kleiner Bund "],
     min: 0.2,
     max: 0.7,
-    error: "Deine Armeeliste muss zu mindestens 30% aus Einheiten bestehen.",
+    error: UNDEAD.SUB_FACTION_RULES.LESSER_COVENANT,
   },
 
   {
@@ -29,7 +30,7 @@ const rules = [
     cardNames: ["Großer Bund"],
     min: 0.15,
     max: 0.5,
-    error: "Deine Armeeliste darf zu höchstens 50% aus Helden bestehen.",
+    error: UNDEAD.SUB_FACTION_RULES.GREATER_COVENANT,
   },
 
   {
@@ -37,21 +38,21 @@ const rules = [
     cardNames: ["Schattenbund"],
     min: 0.0,
     max: 0.3,
-    error: "Deine Armeeliste darf zu höchstens 40% aus Einheiten aus Gaeta bestehen.",
+    error: UNDEAD.SUB_FACTION_RULES.SHADOW_COVENANT,
   },
   {
     subFaction: "heroes",
     cardNames: ["Helden/Befehlshaber"],
     min: 0.0,
     max: 0.4,
-    error: "Deine Armeeliste darf zu höchstens 40% aus Einheiten aus Zah'ra bestehen.",
+    error: UNDEAD.SUB_FACTION_RULES.HEROES,
   },
   {
     subFaction: "magician",
     cardNames: ["Magier"],
     min: 0.0,
     max: 0.4,
-    error: "Deine Armeeliste darf zu höchstens 20% aus Einheiten aus Alliierten bestehen.",
+    error: UNDEAD.SUB_FACTION_RULES.MAGICIAN,
   },
 
   {
@@ -59,7 +60,7 @@ const rules = [
     cardNames: ["Isthak"],
     min: 0.0,
     max: 0.2,
-    error: "Deine Armeeliste darf zu höchstens 20% aus Einheiten aus Alliierten bestehen.",
+    error: UNDEAD.SUB_FACTION_RULES.ALLY,
   },
 ];
 

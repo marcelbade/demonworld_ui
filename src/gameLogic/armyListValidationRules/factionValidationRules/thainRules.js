@@ -1,5 +1,6 @@
 import { EXCEMPT_FROM_TRIBES_RULE, THAIN_TRIBES } from "../../../constants/factions";
 import { UNIT } from "../../../constants/itemShopConstants";
+import { THAIN } from "../../../constants/textsAndMessages";
 import { MAGE } from "../../../constants/unitTypes";
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
@@ -10,7 +11,7 @@ const rules = [
     cardNames: ["Stammeskrieger"],
     min: 0.2,
     max: 0.8,
-    error: "Deine Armeeliste muss zu 10% bis 60% aus Stammeskriegern bestehen.",
+    error: THAIN.SUB_FACTION_RULES.TRIBAL_WARRIORS,
   },
 
   {
@@ -18,7 +19,7 @@ const rules = [
     cardNames: ["Veteranen der Stämme"],
     min: 0.0,
     max: 0.5,
-    error: "Deine Armeeliste darf zu höchstens 50% aus Veteranen bestehen.",
+    error: THAIN.SUB_FACTION_RULES.VETERANS,
   },
 
   {
@@ -26,28 +27,28 @@ const rules = [
     cardNames: ["Schamane"],
     min: 0.0,
     max: 0.5,
-    error: "Deine Armeeliste darf zu höchstens 50% aus Schamamen bestehen.",
+    error: THAIN.SUB_FACTION_RULES.SHAMANS,
   },
   {
     subFaction: "GreatChampionsHeroesCommanders",
     cardNames: ["Groß-Champions / Helden / Befehlshaber"],
     min: 0.0,
     max: 0.3,
-    error: "Deine Armeeliste darf zu höchstens 30% aus Groß-Champions, Helden und Befehlshabern bestehen.",
+    error: THAIN.SUB_FACTION_RULES.GREATCHAMPIONS_HEROES_COMMANDERS,
   },
   {
     subFaction: "Gar'Ydwen",
     cardNames: ["Gar'Ydwen"],
     min: 0.0,
     max: 0.4,
-    error: "Deine Armeeliste darf zu höchstens 40% aus Gar'ydwen bestehen.",
+    error: THAIN.SUB_FACTION_RULES.GAR_Y_DWEN,
   },
   {
     subFaction: "dorgaChurch",
     cardNames: ["Dorga-Kirche"],
     min: 0.0,
     max: 0.4,
-    error: "Deine Armeeliste darf zu höchstens 40% aus Einheiten der Dorga-Kirche bestehen.",
+    error: THAIN.SUB_FACTION_RULES.DORGA_CHURCH,
   },
 ];
 
@@ -122,7 +123,7 @@ const ThainRules = {
  */
 const allUnitsNeedTribes = (selectedUnits) => {
   let result = [];
-  const MESSAGE = "Du mußt der Einheit einen Stamm zuordnen.";
+  const MESSAGE = THAIN.ERRORS.TRIBE_MESSAGE;
 
   selectedUnits
     .filter((u) => !EXCEMPT_FROM_TRIBES_RULE.includes(u.unitName))
@@ -206,8 +207,7 @@ const championTribeMapping = [
 const greatChampionRule = (selectedUnits) => {
   let result = [];
 
-  const MESSAGE =
-    "Der Groß-Champion eines Stammes kann nur aufgestellt werden, wenn vorher mindestens 1 Einheit des Stammes ausgewählt wurde.";
+  const MESSAGE = THAIN.ERRORS.CHAMPION_MESSAGE;
 
   let presentTribes = selectedUnits.filter((u) => THAIN_TRIBES.includes(u.secondSubFaction)).map((u) => u.secondSubFaction);
   let missingTribes = THAIN_TRIBES.filter((u) => !presentTribes.includes(u));
@@ -258,7 +258,7 @@ const greatChampionRemove = (selectedUnits) => {
 const dorgaPriestRule = (selectedUnits, availableUnits) => {
   let result = [];
 
-  const MESSAGE = "Dorga-Priester können nur aufgestellt werden, wenn vorher mindestens 1 Einheit der Dorga-Kirche ausgewählt wurde.";
+  const MESSAGE = THAIN.ERRORS.DORGA_MESSAGE;
 
   let listHasDorgaUnit = selectedUnits.filter((u) => u.subFaction === "Dorga-Kirche" && u.unitType === UNIT).length > 0;
 
@@ -301,8 +301,7 @@ const dorgaPriestRemove = (selectedUnits) => {
 const veteranRule = (selectedUnits, availableUnits) => {
   let result = [];
 
-  const MESSAGE =
-    "Einheiten und jedes Geräte der Veteranen der Stämme  können nur aufgestellt werden, wenn vorher mindestens 1 Einheit von Stammeskriegern desselben Stammes aufgestellt ausgewählt wurde.";
+  const MESSAGE = THAIN.ERRORS.VETERAN_MESSAGE;
 
   let presentTribes = selectedUnits
     .filter((u) => u.subFaction === "Stammeskrieger" && THAIN_TRIBES.includes(u.secondSubFaction))

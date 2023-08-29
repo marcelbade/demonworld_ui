@@ -1,3 +1,4 @@
+import { DARKELVES } from "../../../constants/textsAndMessages";
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
 
@@ -7,35 +8,35 @@ const rules = [
     cardNames: ["Kriegerkaste"],
     min: 0.3,
     max: 1.0,
-    error: "Deine Armeeliste muss zu mindestens 30% aus Einheiten der Kriegerkaste bestehen.",
+    error: DARKELVES.SUB_FACTION_RULES.WARRIOR_CASTE,
   },
   {
     subFaction: "nobleCaste",
     cardNames: ["Adelskaste"],
     min: 0.0,
     max: 0.5,
-    error: "Deine Armee darf höchstens zu 50% aus Einheiten der Adelskaste bestehen.",
+    error: DARKELVES.SUB_FACTION_RULES.NOBLE_CASTE,
   },
   {
     subFaction: "magicianCaste",
     cardNames: ["Magierkaste", "Magier"],
     min: 0.0,
     max: 0.4,
-    error: "Deine Armee darf höchstens zu 40% aus Einheiten der Magierkaste bestehen.",
+    error: DARKELVES.SUB_FACTION_RULES.MAGICIAN_CASTE,
   },
   {
     subFaction: "priestCaste",
     cardNames: ["Priesterkaste", "Priesterin"],
     min: 0.0,
     max: 0.4,
-    error: "Deine Armee darf höchstens zu 40% aus Einheiten der Priesterkaste bestehen.",
+    error: DARKELVES.SUB_FACTION_RULES.PRIEST_CASTE,
   },
   {
     subFaction: "heroes",
     cardNames: ["Befehlshaber", "Held", "Helden/Befehlshaber"],
     min: 0.0,
     max: 0.4,
-    error: "Deine Armee darf höchstens zu 40% aus Helden oder Befehlshabern bestehen.",
+    error: DARKELVES.SUB_FACTION_RULES.HEROES,
   },
   {
     subFaction: "summons",
@@ -70,7 +71,7 @@ const DarkElveRules = {
      */
     const magiciansVsPriests = () => {
       const INCREMENT = 10;
-      const NET_TOTAL = 4;
+      const NET_TOTAL = 4; // 40% allowance
       const PRIESTS = ["Priesterin", "Priesterkaste", "magicianCaste"];
       const MAGICIANS = ["Magier", "Magierkaste", "priestCaste"];
 

@@ -1,3 +1,4 @@
+import { DWARVES } from "../../../constants/textsAndMessages";
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
 
@@ -7,7 +8,7 @@ const rules = [
     cardNames: ["Einheit"],
     min: 0.3,
     max: 1.0,
-    error: "Deine Armeeliste muss zu mindestens 30% aus Einheiten bestehen.",
+    error: DWARVES.SUB_FACTION_RULES.UNITS,
   },
 
   {
@@ -15,7 +16,7 @@ const rules = [
     cardNames: ["Held", "Befehlshaber", "Helden/Befehlshaber", "Erdpriester", "Erzpriester", "Feuerpriester"],
     min: 0.0,
     max: 0.5,
-    error: "Deine Armeeliste darf zu höchstens 50% aus Helden bestehen.",
+    error: DWARVES.SUB_FACTION_RULES.CHARACTERS,
   },
 
   {
@@ -23,25 +24,24 @@ const rules = [
     cardNames: ["Gaeta"],
     min: 0.0,
     max: 0.4,
-    error: "Deine Armeeliste darf zu höchstens 40% aus Einheiten aus Gaeta bestehen.",
+    error: DWARVES.SUB_FACTION_RULES.GAETA,
   },
   {
     subFaction: "zahra",
     cardNames: ["Zah'ra"],
     min: 0.0,
     max: 0.4,
-    error: "Deine Armeeliste darf zu höchstens 40% aus Einheiten aus Zah'ra bestehen.",
+    error: DWARVES.SUB_FACTION_RULES.ZAHRA,
   },
   {
     subFaction: "ally",
     cardNames: ["Imperium"],
     min: 0.0,
     max: 0.2,
-    error: "Deine Armeeliste darf zu höchstens 20% aus Einheiten aus Alliierten bestehen.",
+    error: DWARVES.SUB_FACTION_RULES.ALLY,
   },
 ];
 
- 
 const DwarfRules = {
   testSubFactionRules: (availableUnits, selectedUnits, totalPointsAllowance, subFactions) => {
     //  general rules
@@ -56,13 +56,12 @@ const DwarfRules = {
     let testForHeroCapResult = globalRules.belowMaxPercentageHeroes(
       selectedUnits,
       totalPointsAllowance,
-      availableUnits,
+      availableUnits
       // MAX_HERO_PERCENTAGE
     );
 
     // special faction rule: dwarf kingdoms and allies - the player has to choose one. That Kondom can make up up to 40% of the list, the other one up to 20%. Instead of the second kingdom, the player can take up to 20% of imperial allies
     percentageKingdomsAndAlly(selectedUnits);
-
 
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [

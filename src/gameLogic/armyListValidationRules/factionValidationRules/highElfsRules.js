@@ -1,3 +1,4 @@
+import { ELVES } from "../../../constants/textsAndMessages";
 import { GIANT, HERO, MAGE, UNIT } from "../../../constants/unitTypes";
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
@@ -8,7 +9,7 @@ const rules = [
     cardNames: ["Thanaril"],
     min: 0.3,
     max: 0.7,
-    error: "Deine Armeeliste muss zu 30% bis 70% aus Thanaril-Clantruppen bestehen.",
+    error: ELVES.SUB_FACTION_RULES.THANARIL_CLAN_TROOPS,
   },
 
   {
@@ -16,7 +17,7 @@ const rules = [
     cardNames: ["Thanaril-Kriegerbünde"],
     min: 0.0,
     max: 0.3,
-    error: "Deine Armeeliste darf zu höchstens 30% aus Thanaril-Kriegerbünden und Ihren Anführern bestehen.",
+    error: ELVES.SUB_FACTION_RULES.THANARIL_COVENS,
   },
 
   {
@@ -24,7 +25,7 @@ const rules = [
     cardNames: ["Thanaril-Clanlords / Befehlshaber"],
     min: 0.0,
     max: 0.3,
-    error: "Deine Armeeliste darf zu höchstens 30% aus Thanaril-Kriegerbünden und Ihren Anführern bestehen.",
+    error: ELVES.SUB_FACTION_RULES.THANARIL_CLAN_LORDS,
   },
 
   {
@@ -32,7 +33,7 @@ const rules = [
     cardNames: ["Barde / Dyrea / Loreaths"],
     min: 0.0,
     max: 0.4,
-    error: "Deine Armeeliste darf zu höchstens 40% aus Einheiten der Dyrea und Loreath bestehen.",
+    error: ELVES.SUB_FACTION_RULES.LOREATH_DYREA,
   },
 
   {
@@ -40,7 +41,7 @@ const rules = [
     cardNames: ["Ilah Ri"],
     min: 0.0,
     max: 0.5,
-    error: "Deine Armeeliste darf zu höchstens 20% aus Einheiten und Anführern der Ratsarmee bestehen.",
+    error: ELVES.SUB_FACTION_RULES.ILAH_RI,
   },
 
   {
@@ -48,28 +49,28 @@ const rules = [
     cardNames: ["Orea Vanar"],
     min: 0.0,
     max: 0.3,
-    error: "Deine Armeeliste darf zu höchstens 30% aus Einheiten der Orea Vanar bestehen.",
+    error: ELVES.SUB_FACTION_RULES.OREA_VANAR,
   },
   {
     subFaction: "Treelords",
     cardNames: ["Baumherren"],
     min: 0.0,
     max: 0.25,
-    error: "Deine Armeeliste darf zu höchstens 25% aus Einheiten der Baumherren bestehen.",
+    error: ELVES.SUB_FACTION_RULES.TREANTS,
   },
   {
     subFaction: "Centaurs",
     cardNames: ["Zentauren"],
     min: 0.0,
     max: 0.25,
-    error: "Deine Armeeliste darf zu höchstens 25% aus Einheiten der Zentauren bestehen.",
+    error: ELVES.SUB_FACTION_RULES.CENTAURS,
   },
   {
     subFaction: "Old Hero",
     cardNames: ["Alter Held"],
     min: 0.0,
     max: 0.25,
-    error: "SPECIAL",
+    error: ELVES.SUB_FACTION_RULES.OLD_HERO,
   },
 ];
 
@@ -85,7 +86,7 @@ const ElfRules = {
     let hasNoCommander = globalRules.isArmyCommanderPresent(selectedUnits);
 
     // tournament rules
-    let testForMax2Result = []; // globalRules.maximumOfTwo(selectedUnits);
+    let testForMax2Result = globalRules.maximumOfTwo(selectedUnits);
     let testForHeroCapResult = globalRules.belowMaxPercentageHeroes(
       selectedUnits,
       totalPointsAllowance,
@@ -139,8 +140,7 @@ const ElfRules = {
 
 //Function calculates the max number of "Old Heroes". The number of Old Heroes is calculated differently from anything else in the game - the player can take 1 old hero per 5 Thanaril and/or Ilah Ri units ("Thanaril-Kriegerbünde" do not count!).
 const numberOfOldHeroes = (selectedUnits, availableUnits) => {
-  const MESSAGE =
-    "Du darfst höchstens einen alten Helden pro aufgestellten 5 Einheiten der Thanaril (keine Kriegerbünde) und/oder der Ilah Ri aufstellen";
+  const MESSAGE = ELVES.ERRORS.OLD_HERO_MESSAGE;
 
   let result = [];
 
@@ -213,18 +213,15 @@ const oreaVanarMapping = [
  * @returns array of objects containing a blocked unit and an error message.
  */
 const OreaVanarRules = (selectedUnits) => {
-  const MESSAGE_MASTERS = "Ein Meister kann nur aufgestellt werden, wenn auch ihre Schule auf dem Schlachtfeld anwesend ist";
-  const MESSAGE_SCHOOLS = "Jede Schule der Orea Vanar kann nur einmal aufgestellt werden";
-
   let result = [];
 
   const selectedUnitNames = selectedUnits.map((u) => u.unitName);
 
   oreaVanarMapping.forEach((ovm) => {
     if (!selectedUnitNames.includes(ovm.school)) {
-      result.push({ unitBlockedbyRules: ovm.master, message: MESSAGE_MASTERS });
+      result.push({ unitBlockedbyRules: ovm.master, message: ELVES.ERRORS.MASTERS_MESSAGE });
     } else {
-      result.push({ unitBlockedbyRules: ovm.school, message: MESSAGE_SCHOOLS });
+      result.push({ unitBlockedbyRules: ovm.school, message: ELVES.ERRORS.SCHOOLS_MESSAGE });
     }
   });
 
@@ -276,8 +273,7 @@ const heroesCovenantsMapping = [
  * @returns array of objects containing a blocked unit and an error message.
  */
 const thanarilCovenRule = (selectedUnits) => {
-  const MESSAGE =
-    "Eine zweite und weitere Einheiten desselben Kriegerbundes können nur aufgestellt werden, wenn auch der Anführer des betreffenden Kriegerbundes anwesend ist";
+  const MESSAGE = ELVES.ERRORS.THANARIEL_COVEN_MESSAGE;
 
   let result = [];
 
@@ -304,10 +300,9 @@ const thanarilCovenRule = (selectedUnits) => {
   return result;
 };
 
- 
 /**
  * Function implements the second part of the Coven rule: if a Thanaril hero is removed anbd there is more than one unit of the same coven present in the list, it must be removbed automatically.
- * @param {[unitCard]} selectedUnits 
+ * @param {[unitCard]} selectedUnits
  * @returns an array of units that need to be removed from the army list automatically.
  */
 const removeThanarilCoven = (selectedUnits) => {
@@ -337,7 +332,7 @@ const removeThanarilCoven = (selectedUnits) => {
  * @returns array of objects containing a blocked unit and an error message.
  */
 const councilArmyRule = (selectedUnits, availableUnits) => {
-  const MESSAGE = "Du musst mindestens einen Ilah Ri Befehlshaber wählen um Einheiten der Ratsarmee aufstellen zu können.";
+  const MESSAGE = ELVES.ERRORS.ILAH_RI_COMMANDER_MESSAGE;
   const ILAH_RI_HEROES = ["Athulain Gilfar", "Generalin Caliar Ildriel"];
   let result = [];
   let isIlaRiHeroPresent = selectedUnits.filter((selectedUnits) => ILAH_RI_HEROES.includes(selectedUnits.unitName)).length > 0;
@@ -382,7 +377,7 @@ const councilArmyRemove = (selectedUnits) => {
  * @returns array of objects containing a blocked unit and an error message.
  */
 const entsOrCentaurs = (selectedUnits, availableUnits) => {
-  const MESSAGE = "Die Armee kann nur Baumherren oder Zentauren Einheiten enthalten.";
+  const MESSAGE = ELVES.ERRORS.TREANTS_CENTAUR;
   let FACTIONS = ["Baumherren", "Zentauren"];
 
   let result = [];

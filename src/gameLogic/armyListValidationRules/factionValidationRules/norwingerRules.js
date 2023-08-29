@@ -1,3 +1,4 @@
+import { NORWINGER } from "../../../constants/textsAndMessages";
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
 
@@ -7,14 +8,14 @@ const rules = [
     cardNames: ["Barbaren"],
     min: 0.2,
     max: 0.75,
-    error: "Deine Armeeliste muss zu 20% bis 75% aus Barbaren bestehen",
+    error: NORWINGER.SUB_FACTION_RULES.BARBARIANS,
   },
   {
     subFaction: "veterans",
     cardNames: ["Veteranen"],
     min: 0.0,
     max: 0.4,
-    error: "Deine Armeeliste darf zu höchstens 40% aus Veteranen bestehen.",
+    error: NORWINGER.SUB_FACTION_RULES.VETERANS,
   },
 
   {
@@ -22,7 +23,7 @@ const rules = [
     cardNames: ["Sturmlord", "Hexe"],
     min: 0.0,
     max: 0.3,
-    error: "Deine Armeeliste darf zu höchstens 30% aus Sturmlord und Hexen bestehen.",
+    error: NORWINGER.SUB_FACTION_RULES.SPELLCASTERS,
   },
 
   {
@@ -30,21 +31,21 @@ const rules = [
     cardNames: ["Helden", " Befehlshaber"],
     min: 0.0,
     max: 0.3,
-    error: "Deine Armeeliste darf zu höchstens 30% aus Helden und Befehlshabern bestehen.",
+    error: NORWINGER.SUB_FACTION_RULES.HEROES,
   },
   {
     subFaction: "mightyNorthernBeings",
     cardNames: ["Mächtige Wesen des Nordens"],
     min: 0.0,
     max: 0.4,
-    error: "Deine Armeeliste darf zu höchstens 40% aus mächtigen Wesenn des Nordens bestehen.",
+    error: NORWINGER.SUB_FACTION_RULES.MIGHTY_NORTHERN_BEINGS,
   },
   {
     subFaction: "northernAllies",
     cardNames: ["Verbündete des Nordens"],
     min: 0.0,
     max: 0.25,
-    error: "Deine Armeeliste darf zu höchstens 25% aus Verbündeten des Nordens bestehen.",
+    error: NORWINGER.SUB_FACTION_RULES.NORTHERN_ALLIES,
   },
 ];
 
