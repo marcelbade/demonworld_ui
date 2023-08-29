@@ -63,7 +63,7 @@ const ArmyListDisplay = () => {
       {/* <Grid item container justify="flex-end"> */}
 
       <List>
-        {contextArmy.subfactions.map((sF) => (
+        {contextArmy.subFactions.map((sF) => (
           <ArmyListSubFactionEntry subFaction={sF} key={uuidGenerator()} />
         ))}
       </List>

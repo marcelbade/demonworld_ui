@@ -86,21 +86,18 @@ const ListGeneratorController = () => {
   const [fetchedItems, setfetchedItems] = useState([]);
   // selected faction
   const [selectedFactionName, setSelectedFactionName] = useState("");
+  const [distinctSubFactions, setDistinctSubFactions] = useState([]);
   const [listOfAllFactionUnits, setListOfAllFactionUnits] = useState([]);
   const [selectedUnits, setSelectedUnits] = useState([]);
-  // allied faction
-  const [allyName, setAllyName] = useState(NO_ALLY);
-  const [listOfAlliedUnits, setListOfAlliedUnits] = useState([]);
-  const [showAlly, setShowAlly] = useState(true);
-
-  // maximum point allowance
-  const [maxPointsAllowance, setMaxPointsAllowance] = useState(2000);
   // the current total point value of all selected units
   const [totalPointValue, setTotalPointValue] = useState(0);
-  // sub factions of currrently selected army
-  const [distinctSubFactions, setDistinctSubFactions] = useState([]);
-  // sub factions of ally
+  // maximum point allowance
+  const [maxPointsAllowance, setMaxPointsAllowance] = useState(2000);
+  // allied faction
+  const [allyName, setAllyName] = useState(NO_ALLY);
   const [distinctAllySubFactions, setDistinctAllySubFactions] = useState([]);
+  const [listOfAlliedUnits, setListOfAlliedUnits] = useState([]);
+  const [showAlly, setShowAlly] = useState(true);
   // validation
   const [listValidationResults, setListValidationResults] = useState({
     unitsBlockedbyRules: [],
@@ -118,9 +115,13 @@ const ListGeneratorController = () => {
   // alternative lists
   const [armyHasAlternativeLists, setArmyHasAlternativeLists] = useState(false);
   const [selectedAlternativeList, setSelectedAlternativeList] = useState(NONE);
+  const [alternativeSubFactionList, setAlternativeSubFactionList] = useState([]);
+  const [alternativeUnitList, setAlternativeUnitList] = useState([]);
+  const [alternativeArmyPresentAndSelected, setAlternativeArmyPresentAndSelected] = useState(false);
+
   // The dwarf faction needs two selections
   const [secondAlternativeArmyOption, setSecondAlternativeArmyOption] = useState("");
-  // additional subfactions - currently only important for the Thain army!
+  // additional subFactions - currently only important for the Thain army!
   const [hasAdditionalSubFaction, setHasAdditionalSubFaction] = useState(false);
   const [secondSubFactionList, setSecondSubFactionList] = useState(false);
   const [secondSubfactionCaption, setSecondSubfactionCaption] = useState("");
@@ -256,8 +257,9 @@ const ListGeneratorController = () => {
         // ARMY
         selectedFactionName: selectedFactionName,
         fetchedFactions: fetchedFactions,
-        subfactions: distinctSubFactions,
+        subFactions: distinctSubFactions,
         listOfAllFactionUnits: listOfAllFactionUnits,
+        totalPointValue: totalPointValue,
         setDistinctSubFactions: setDistinctSubFactions,
         setListOfAllFactionUnits: setListOfAllFactionUnits,
         setTotalPointValue: setTotalPointValue,
@@ -265,7 +267,7 @@ const ListGeneratorController = () => {
         allyName: allyName,
         allySubFactions: distinctAllySubFactions,
         listOfAlliedUnits: listOfAlliedUnits,
-        distinctSubFactions: distinctSubFactions,
+        distinctAllySubFactions: distinctAllySubFactions,
         showAlly: showAlly,
         setShowAlly: setShowAlly,
         setAllyName: setAllyName,
@@ -274,7 +276,6 @@ const ListGeneratorController = () => {
         // SELECTED UNIT LIST
         selectedUnits: selectedUnits,
         maxPointsAllowance: maxPointsAllowance,
-        totalPointValue: totalPointValue,
         setSelectedUnits: setSelectedUnits,
         setMaxPointsAllowance: setMaxPointsAllowance,
         clearList: clearList,
@@ -298,7 +299,13 @@ const ListGeneratorController = () => {
         armyHasAlternativeLists: armyHasAlternativeLists,
         selectedAlternativeList: selectedAlternativeList,
         secondAlternativeArmyOption: secondAlternativeArmyOption,
+        alternativeSubFactionList: alternativeSubFactionList,
+        alternativeUnitList: alternativeUnitList,
+        alternativeArmyPresentAndSelected: alternativeArmyPresentAndSelected,
+        setAlternativeArmyPresentAndSelected: setAlternativeArmyPresentAndSelected,
         setSelectedAlternativeList: setSelectedAlternativeList,
+        setAlternativeSubFactionList: setAlternativeSubFactionList,
+        setAlternativeUnitList: setAlternativeUnitList,
         setSecondAlternativeArmyOption: setSecondAlternativeArmyOption,
         setArmyHasAlternativeLists: setArmyHasAlternativeLists,
         // SECOND SUB FACTION
@@ -306,13 +313,11 @@ const ListGeneratorController = () => {
         secondSubFactionList: secondSubFactionList,
         excemptSubFactions: excemptSubFactions,
         secondSubfactionCaption: secondSubfactionCaption,
-
         //AdditionalSubfactions
         setHasAdditionalSubFaction: setHasAdditionalSubFaction,
         setSecondSubFactionList: setSecondSubFactionList,
         setExcemptSubFactions: setExcemptSubFactions,
         setSecondSubfactionCaption: setSecondSubfactionCaption,
-
         // PDF VIEWER
         pdfMasterList: pdfMasterList,
         setPdfMasterList: setPdfMasterList,
@@ -352,7 +357,6 @@ const ListGeneratorController = () => {
               label="Wähle Eine Fraktion"
             />
             <AlternativeArmyLists />
-
             <FactionTreeView className={classes.selector} />
           </Grid>
           {/* ARMYLIST */}
