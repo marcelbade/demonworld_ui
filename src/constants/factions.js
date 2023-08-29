@@ -25,7 +25,7 @@ export const ARMY_ALTERNATIVES_LIST_MAPPER = {
   // Goblins: [],
   Imperium: ["Nordmark", "Südmark", "Westmark", "Ostmark"],
   // Ishtak: [],
-  Orks: ["Clanngetts", "Steinclan", "Wyvernclan", "Tierclan", "Eisclan", "Pfeilclan", "Blutclan", "Eisenclan", "Bergclan"],
+  Orks: ["Clanngett", "Steinclan", "Wyvernclan", "Tierclan", "Eisclan", "Pfeilclan", "Blutclan", "Eisenclan", "Bergclan"],
   // Norwinger: [],
   // Thain: [],
   // Untote: [],
@@ -98,7 +98,12 @@ export const ORK_CLANS_UNIT_MAPPING = {
 
   Eisclan: ["Wolfsreiter", "Wolfsschützen", "Streitwagen", "Schnee-Oger"],
 
-  Clanngetts: [
+  Clanngett: [
+    "Trazzag",
+    "Fherniak",
+    "Ärrig",
+    "Khazzar",
+    "Nallian",
     "Throigar",
     "Troll-Garde",
     "Wolfsreiter",
