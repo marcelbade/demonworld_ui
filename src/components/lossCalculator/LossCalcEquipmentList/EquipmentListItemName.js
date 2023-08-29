@@ -4,6 +4,7 @@ import React from "react";
 import { ListItemText } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Tooltip } from "@mui/material";
+import { NOT_SINGLE_ELEMENT_ITEM_MESSAGE } from "../../../constants/textsAndMessages";
 
 const useStyles = makeStyles((theme) => ({
   typographyFont: {
@@ -22,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 const EquipmentListItemName = (props) => {
   const classes = useStyles();
 
-  const NOT_SINGLE_ELEMENT_ITEM_MESSAGE = "Punktkosten sind bereits in den Punktkosten der Elemente enthalten.";
+ 
 
   /**
    * Function returns the correct css conditionally.x
