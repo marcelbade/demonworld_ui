@@ -9,11 +9,12 @@ import { MinusSquare, PlusSquare, CloseSquare, TransitionComponent } from "./tre
 import { Fragment } from "react";
 import Tree from "./Tree";
 import { StyledTreeItem } from "./StyledTreeItem";
+// constants
+import { NO_ALLY } from "../../../../constants/allies";
+import { NONE } from "../../../../constants/factions";
 
 TransitionComponent.propTypes = {
-  /**
-   * Show the component; triggers the enter or exit states
-   */
+  // Show the component; triggers the enter or exit states
   in: PropTypes.bool,
 };
 
@@ -39,35 +40,25 @@ const useStyles = makeStyles((theme) => ({
 
 const FactionTreeView = () => {
   const classes = useStyles();
-  const contextArmy = useContext(ArmyContext);
+  const AC = useContext(ArmyContext);
   const SHOW_SUBFACTIONS = ["1"];
-  // no ally found
-  const NONE = "none";
-
-  const [alternativeArmyPresentAndSelected, setAlternativeArmyPresentAndSelected] = useState(false);
 
   useEffect(() => {
-    if (contextArmy && contextArmy.selectedFactionName && !contextArmy.armyHasAlternativeLists) {
-      setAlternativeArmyPresentAndSelected(true);
-    } else if (checkForExistence() && contextArmy.selectedAlternativeList !== "NONE") {
-      setAlternativeArmyPresentAndSelected(true);
-    } else if (checkForExistence() && contextArmy.selectedAlternativeList === "NONE") {
-      setAlternativeArmyPresentAndSelected(false);
-    }
-  }, [contextArmy, contextArmy.selectedFactionName, contextArmy.selectedAlternativeList]);// eslint-disable-line react-hooks/exhaustive-deps
+    const hasNoAlternatives = !AC.armyHasAlternativeLists;
+    const alternativeListSelected = AC.armyHasAlternativeLists && AC.selectedAlternativeList !== NONE;
 
-  /**
-   * Function checks for the existence of the state variables contextArmy, contextArmy.selectedFactionName & contextArmy.armyHasAlternativeLists.
-   * @returns boolean flag (true if all three exist).
-   */
-  const checkForExistence = () => {
-    return contextArmy && contextArmy.selectedFactionName && contextArmy.armyHasAlternativeLists;
-  };
+    let result = false;
+    if (hasNoAlternatives || alternativeListSelected) {
+      result = true;
+    }
+
+    AC.setAlternativeArmyPresentAndSelected(result);
+  }, [AC, AC.selectedFactionName, AC.selectedAlternativeList]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * The entire treeView for the army.
    */
-  return contextArmy && alternativeArmyPresentAndSelected ? (
+  return AC && AC.alternativeArmyPresentAndSelected ? (
     <>
       <TreeView
         className={classes.treeViewBox}
@@ -75,15 +66,14 @@ const FactionTreeView = () => {
         defaultCollapseIcon={<MinusSquare />}
         defaultExpandIcon={<PlusSquare />}
       >
-        <StyledTreeItem nodeId="1" label={contextArmy.unitName}>
+        <StyledTreeItem nodeId="1" label={AC.selectedFactionName}>
           <Tree showsFaction={true} />
         </StyledTreeItem>
       </TreeView>
       {/* ALLIED FACTION */}
-      {/* test if there is an ally */}
-      {contextArmy.allyName !== NONE ? (
+      {AC.allyName !== NO_ALLY && AC.showAlly ? (
         <Fragment>
-          <div className={classes.allyTitle}>Alliierte: {contextArmy.allyName}</div>
+          <div className={classes.allyTitle}>Alliierte: {AC.allyName}</div>
           <TreeView
             className={classes.treeViewBox}
             defaultExpanded={SHOW_SUBFACTIONS}
@@ -91,7 +81,7 @@ const FactionTreeView = () => {
             defaultExpandIcon={<PlusSquare />}
             defaultEndIcon={<CloseSquare />}
           >
-            <StyledTreeItem nodeId="1" label={contextArmy.allyName}>
+            <StyledTreeItem nodeId="1" label={AC.allyName}>
               <Tree showsFaction={false} />
             </StyledTreeItem>
           </TreeView>
