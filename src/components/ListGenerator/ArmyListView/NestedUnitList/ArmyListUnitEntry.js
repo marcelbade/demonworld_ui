@@ -6,6 +6,8 @@ import { makeStyles, ListItemText, Tooltip } from "@material-ui/core";
 import { ArmyContext } from "../../../../contexts/armyContext";
 import { uuidGenerator } from "../../../shared/sharedFunctions";
 import { useState } from "react";
+// constants
+import { ARMIES_ADDITIONAL_SUBFACTIONS } from "../../../../constants/factions";
 
 const useStyles = makeStyles({
   text: {
@@ -27,16 +29,21 @@ const useStyles = makeStyles({
 const ArmyListUnitEntry = (props) => {
   // eslint-disable-next-line no-unused-vars
   const classes = useStyles();
-  const contextArmy = useContext(ArmyContext);
+  const AC = useContext(ArmyContext);
 
   const [secondSubFactionCheck, setSecondSubFactionCheck] = useState({ isValid: true, message: "" });
 
   useEffect(() => {
-    isSecondSubFactionsValid();
-  }, [contextArmy.listValidationResults.secondSubFactionMissing]); // eslint-disable-line react-hooks/exhaustive-deps
+    if (ARMIES_ADDITIONAL_SUBFACTIONS.includes(AC.selectedFactionName)) {
+      isSecondSubFactionsValid();
+    }
+  }, [AC.listValidationResults.secondSubFactionMissing]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  /**
+   * Function validates that the second subFaction has been selected. Is only called for those armies that require it.
+   */
   const isSecondSubFactionsValid = () => {
-    contextArmy.listValidationResults.secondSubFactionMissing.forEach((u) => {
+    AC.listValidationResults.secondSubFactionMissing.forEach((u) => {
       if (u.unitWithOutSecondSubFaction === props.unit.unitName) {
         setSecondSubFactionCheck({
           ...secondSubFactionCheck,
