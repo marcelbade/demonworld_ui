@@ -16,7 +16,7 @@ const ArmyList = () => {
   }, [AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
-   * Find all distinct subfactions in the selected faction and create a set of them.
+   * Find all distinct subFactions in the selected faction and create a set of them.
    */
   useEffect(() => {
     AC.setDistinctSubFactions(findDistinctSubfactions(AC.listOfAllFactionUnits));
