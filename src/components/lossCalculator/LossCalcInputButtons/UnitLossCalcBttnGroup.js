@@ -15,6 +15,16 @@ import { GIANT, HERO, MAGE } from "../../../constants/unitTypes";
 // components and functions
 import { LossCalcContext } from "../../../contexts/LossCalculatorContext";
 import UnitLossCalculatorButton from "./UnitLossCalculatorButton";
+import {
+  LOST_HERO,
+  LOST_GIANT,
+  LOST_MAGE,
+  UNIT_ROUTED,
+  MINUS_1_HP,
+  MINUS_1_ELEMENT,
+  PLUS_1_HP,
+  PLUS_1_ELEMENT,
+} from "../../../constants/textsAndMessages";
 
 const useStyles = makeStyles((theme) => ({
   typographyFont: {
@@ -39,11 +49,6 @@ const useStyles = makeStyles((theme) => ({
 const UnitLossCalcBttnGroup = (props) => {
   const classes = useStyles();
   const calcContext = useContext(LossCalcContext);
-
-  const MINUS_1_HP = "- 1 Lebenspunkt";
-  const MINUS_1_ELEMENT = "- 1 Element";
-  const PLUS_1_HP = "+ 1 Lebenspunkt";
-  const PLUS_1_ELEMENT = "+ 1 Element";
 
   /**
    * Function lets the user add lost elements.
@@ -127,13 +132,13 @@ const UnitLossCalcBttnGroup = (props) => {
     let message;
 
     if (props.unit.unitType === HERO) {
-      message = "Held verloren";
+      message = LOST_HERO;
     } else if (props.unit.unitType === MAGE) {
-      message = "Magier verloren";
+      message = LOST_MAGE;
     } else if (props.unit.unitType === GIANT) {
-      message = "Großelement verloren";
+      message = LOST_GIANT;
     } else {
-      message = "Einheit aufgerieben";
+      message = UNIT_ROUTED;
     }
 
     return message;
@@ -193,7 +198,7 @@ const UnitLossCalcBttnGroup = (props) => {
           }}
           className={classes.bttn}
         >
-          <img src={skullsIcon} alt="Einheit aufgerieben" height={40} width={40} />
+          <img src={skullsIcon} alt={UNIT_ROUTED} height={40} width={40} />
         </IconButton>
       </Tooltip>
     </Stack>
