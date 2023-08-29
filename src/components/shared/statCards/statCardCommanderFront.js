@@ -14,6 +14,7 @@ import {
 } from "../../compendiums/factionTable/depencies/factionTableFunctions";
 
 import { Grid, Typography } from "@material-ui/core";
+import { NO_RANGE_WEAPON } from "../../../constants/textsAndMessages";
 
 const useStyles = makeStyles({
   cardBox: {
@@ -104,7 +105,7 @@ const StatCardCommanderFront = (props) => {
       </Grid>
       <Grid item container justify="center" className={classes.rangedWeapon}>
         {/* 3rd Row - RANGED WEAPONS  */}
-        {props.unit.rangedWeapon !== "x" ? (
+        {props.unit.rangedWeapon !== NO_RANGE_WEAPON? (
           <Typography variant="h6" align="right" className={classes.font}>
             {props.unit.rangedWeapon} {props.unit.rangedAttackStats}
           </Typography>

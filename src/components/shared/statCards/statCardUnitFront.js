@@ -14,6 +14,7 @@ import {
 // icons
 import rangeArmorIcon from "../../../icons/range-armor.png";
 import meleeArmorIcon from "../../../icons/melee-armor.png";
+import { NO_RANGE_WEAPON } from "../../../constants/textsAndMessages";
 
 const useStyles = makeStyles({
   cardBox: {
@@ -90,7 +91,7 @@ const StatCardUnitFront = (props) => {
       </Grid>
       {/* 3rd Row - RANGED WEAPONS  */}
       <Grid item container direction="row" justify="center">
-        {props.unit.rangedWeapon !== "x" ? (
+        {props.unit.rangedWeapon !== NO_RANGE_WEAPON ? (
           <Typography variant="h6" className={classes.font}>
             {props.unit.rangedWeapon} {props.unit.rangedAttackStats}
           </Typography>
