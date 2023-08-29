@@ -6,15 +6,9 @@ import { makeStyles } from "@material-ui/core/styles";
 import AlternativeArmyListSelector from "../ArmySelectorView/AlternativeArmyListSelection/AlternativeArmyListSelector";
 import DwarfsSecondSelector from "../ArmySelectorView/AlternativeArmyListSelection/DwarfsSecondSelector";
 import { ArmyContext } from "../../../contexts/armyContext";
-import { findDistinctSubfactions } from "../ListGeneratorFunctions";
 // constants
-import {
-  ARMY_ALTERNATIVES_LIST_MAPPER,
-  ARMIES_TWO_CHOICES_PER_ALTERNATIVE_LIST,
-  ARMIES_WITH_ALTERNATIVE_LISTS,
-} from "../../../constants/factions";
+import { ARMY_ALTERNATIVES_LIST_MAPPER, ARMIES_WITH_ALTERNATIVE_LISTS, NONE } from "../../../constants/factions";
 import { ZWERGE } from "../../../constants/factions";
-import { ALLIES_MAPPING } from "../../../constants/allies";
 import { Fragment } from "react";
 
 const useStyles = makeStyles((theme) => ({}));
@@ -30,47 +24,47 @@ const AlternativeArmyLists = () => {
 
   // reset army's subFaction if alternate lists exist and one has been selected.
   useEffect(() => {
-    let tempArray = [...findDistinctSubfactions(AC.listOfAllFactionUnits)];
-
-    if (AC.listOfAllFactionUnits) {
-      tempArray = tempArray.filter((subFaction) => alternateListSelectionFilter(subFaction));
+    if (AC.armyHasAlternativeLists && AC.selectedAlternativeList !== NONE) {
+      alternateUnitListFilter();
+      alternateSubFactionFilter();
     }
-
-    AC.setDistinctSubFactions([...tempArray]);
-  }, [AC.selectedFactionName, AC.selectedAlternativeList, AC.secondDwarvenOption]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [AC.armyHasAlternativeLists, AC.selectedAlternativeList]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * Function filters down an army's sub factions to the ones listed in the selected alternative army list.
-   * Alternative army lists work by excluding certain sub factions from the list of sub factions available to the user.
+   * Alternative army lists work in one of two ways:
+   * either by excluding certain sub factions from the list of sub factions available to the user
+   * or by removing units from the list of all units available.
    * This function takes an array of all possible choices (all sub factions affected by the alternative army lists),
-   * removes the choice picked by the user and
+   * removes the one option selected by the user and
    * then uses the resulting array to filter out all units that belong the sub factions excluded by that alternative list.
    * There is one faction (dwarfs) that requires 2 choices, the second being hard coded.
    * @param {String} subFaction
+   *
    * @returns true, if no alternative lists exist or if the subfaction has been selected by the user.
    */
-  //TODO: can be simplified with filter!
-  const alternateListSelectionFilter = (subFaction) => {
-    if (ARMY_ALTERNATIVES_LIST_MAPPER[AC.selectedFactionName] !== undefined) {
-      const tempArray = [...ARMY_ALTERNATIVES_LIST_MAPPER[AC.selectedFactionName]];
+  const alternateUnitListFilter = () => {
+    const alternatives = ARMY_ALTERNATIVES_LIST_MAPPER[AC.selectedFactionName];
+    const notSelected = alternatives.filter((a) => a !== AC.selectedAlternativeList);
 
-      const choice = tempArray.indexOf(AC.selectedAlternativeList);
-      tempArray.splice(choice, 1);
+    let tempArray = [...AC.listOfAllFactionUnits];
 
-      if (ARMIES_TWO_CHOICES_PER_ALTERNATIVE_LIST.includes(AC.selectedFactionName)) {
-        const secondChoice = tempArray.indexOf(AC.secondDwarvenOption);
-        tempArray.splice(secondChoice, 1);
+    tempArray = tempArray.filter((u) => {
+      if (notSelected.includes(u.subFaction)) {
+        return false;
       }
+      return true;
+    });
 
-      if (tempArray.includes(ALLIES_MAPPING[AC.selectedFactionName])) {
-        AC.setAllyName("");
-        AC.setListOfAlliedUnits([]);
-      }
+    AC.setAlternativeUnitList([...tempArray]);
+  };
 
-      return !tempArray.includes(subFaction);
-    }
+  const alternateSubFactionFilter = () => {
+    const alternatives = ARMY_ALTERNATIVES_LIST_MAPPER[AC.selectedFactionName];
+    const notSelected = alternatives.filter((a) => a !== AC.selectedAlternativeList);
+    const tempArray = [...AC.subFactions];
 
-    return true;
+    AC.setAlternativeSubFactionList(tempArray.filter((sF) => !notSelected.includes(sF)));
   };
 
   return (
