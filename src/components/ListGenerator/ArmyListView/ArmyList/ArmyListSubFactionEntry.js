@@ -14,7 +14,7 @@ import ArmyListSubFactionFooter from "./ArmyListSubFactionFooter";
 
 // Creates the suFaction entry of the army list: Head and current and total points.
 const ArmyListSubFactionEntry = (props) => {
-  const contextArmy = useContext(ArmyContext);
+  const AC = useContext(ArmyContext);
 
   const [validatedSubFaction, setValidatedSubFaction] = useState({
     subFactionName: props.subFaction,
@@ -24,7 +24,7 @@ const ArmyListSubFactionEntry = (props) => {
 
   useEffect(() => {
     isSubFactionValid();
-  }, [contextArmy.selectedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [AC.selectedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * Filters the selected units by subFaction. If allied units have been selected, then their subFaction name is replaced with their faction name.
@@ -34,7 +34,7 @@ const ArmyListSubFactionEntry = (props) => {
    */
   //TODO: The part where you replace the subfaction w. the faction name should be a separate function - and it should happen in a different file!
   const filterUnitsForSubFaction = (allSelectedUnits, subFaction) => {
-    allSelectedUnits.forEach((u) => (u.faction === ALLIES_MAPPING[contextArmy.selectedFactionName] ? (u.subFaction = u.faction) : null));
+    allSelectedUnits.forEach((u) => (u.faction === ALLIES_MAPPING[AC.selectedFactionName] ? (u.subFaction = u.faction) : null));
 
     return allSelectedUnits.filter((u) => u.subFaction === subFaction);
   };
@@ -45,7 +45,7 @@ const ArmyListSubFactionEntry = (props) => {
   const isSubFactionValid = () => {
     let tempObj = { ...validatedSubFaction };
 
-    contextArmy.listValidationResults.subFactionBelowMinimum.forEach((sF) => {
+    AC.listValidationResults.subFactionBelowMinimum.forEach((sF) => {
       if (sF.subFactionUnderMinimum.includes(props.subFaction)) {
         tempObj = { ...tempObj, valid: false, validationMessage: sF.message };
       }
@@ -54,7 +54,7 @@ const ArmyListSubFactionEntry = (props) => {
     setValidatedSubFaction({ ...tempObj });
   };
 
-  return contextArmy ? (
+  return AC ? (
     <ListItem key={uuidGenerator()}>
       <Grid container direction={"column"} key={uuidGenerator()}>
         <Grid item>
@@ -66,7 +66,7 @@ const ArmyListSubFactionEntry = (props) => {
           {/* DISPLAY UNITS, PONT COST, PERCENTAGES FOR ONE SUBFACTION */}
           <SubFactionUnitList
             key={uuidGenerator()}
-            subFactionUnits={filterUnitsForSubFaction(contextArmy.selectedUnits, props.subFaction)} //
+            subFactionUnits={filterUnitsForSubFaction(AC.selectedUnits, props.subFaction)} //
             subFactionName={props.subFaction}
           />
         </Grid>
@@ -74,7 +74,7 @@ const ArmyListSubFactionEntry = (props) => {
           <ArmyListSubFactionFooter
             key={uuidGenerator()}
             subFactionName={props.subFaction}
-            subFactionUnits={filterUnitsForSubFaction(contextArmy.selectedUnits, props.subFaction)}
+            subFactionUnits={filterUnitsForSubFaction(AC.selectedUnits, props.subFaction)}
           />
         </Grid>
       </Grid>
