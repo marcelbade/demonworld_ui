@@ -27,18 +27,18 @@ const DwarfsSecondSelector = () => {
   const [labelText, setLabelText] = useState("");
 
   useEffect(() => {
-    setOptions(SelectOptionsDynamically());
+    setOptions(findMenuOptions());
   }, [contextArmy.selectedAlternativeList]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    setLabelText(labelTextSelector());
+    setLabelText(findLabelText());
   }, [contextArmy.selectedAlternativeList]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * functions generates the options for the autocomplete dynmaically by checking which option was selected in the first dropdown.
    * @returns
    */
-  const SelectOptionsDynamically = () => {
+  const findMenuOptions = () => {
     const result = [...ARMY_ALTERNATIVES_LIST_MAPPER[contextArmy.selectedFactionName]];
     // remove selected option
     const position = result.indexOf(contextArmy.selectedAlternativeList);
@@ -51,7 +51,7 @@ const DwarfsSecondSelector = () => {
    * Function retrieves the correct label text for the input element.
    * @returns String with the label text.
    */
-  const labelTextSelector = () => {
+  const findLabelText = () => {
     if (contextArmy.armyHasAlternativeLists) {
       return ALTERNATIVE_ARMY_SELECTION_TEXT[contextArmy.selectedFactionName][1];
     }
@@ -60,7 +60,7 @@ const DwarfsSecondSelector = () => {
   return (
     <SelectionInput
       className={classes.alternativeListSelector}
-      filterFunction={contextArmy. setSecondAlternativeArmyOption}
+      filterFunction={contextArmy.setSecondAlternativeArmyOption}
       isArmySelector={true}
       options={options}
       label={<Typography>{labelText}</Typography>}
