@@ -23,8 +23,8 @@ const useStyles = makeStyles({
  */
 const LeafNodeSelector = (props) => {
   const classes = useStyles();
-  const contextArmy = useContext(ArmyContext);
-  const blockResults = contextArmy.listValidationResults.unitsBlockedbyRules;
+  const AC = useContext(ArmyContext);
+  const blockResults = AC.listValidationResults.unitsBlockedbyRules;
 
   // no need for a useState hook - must be recalculated for every rerender!
   let blockedUnitNames = [];
@@ -70,7 +70,7 @@ const LeafNodeSelector = (props) => {
    * @returns an int number representing a node ID.
    */
   const createLeafNodeId = (unit) => {
-    return `${props.parentNodeId}${contextArmy.subfactions.indexOf(unit)}`;
+    return `${props.parentNodeId}${AC.subFactions.indexOf(unit)}`;
   };
 
   return filterAndSortSubFaction().map((unit) => {
