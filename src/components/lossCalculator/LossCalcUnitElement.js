@@ -11,7 +11,7 @@ import ListElementBttns from "./LossCalcInputButtons/UnitLossCalcBttnGroup";
 // clsx
 import clsx from "clsx";
 import EquipmentList from "./LossCalcEquipmentList/EquipmentList";
-import { TEXT_SINGLE_ELEMENTS, TEXT_UNITS } from "../../constants/textsAndMessages";
+import { LOSS_CALCULATOR } from "../../constants/textsAndMessages";
 // icons
 
 const useStyles = makeStyles((theme) => ({
@@ -67,8 +67,6 @@ const LossCalcUnitElement = (props) => {
   const classes = useStyles();
   const calcContext = useContext(LossCalcContext);
 
-
-
   return (
     <ListItem>
       <Grid
@@ -99,7 +97,7 @@ const LossCalcUnitElement = (props) => {
         </Grid>
         <Grid item>
           <Typography variant="button" className={clsx(classes.typographyFont, classes.text)}>
-            {calcContext.isHeroMageOrGiantElement(props.unit) ?  TEXT_SINGLE_ELEMENTS : TEXT_UNITS}
+            {calcContext.isHeroMageOrGiantElement(props.unit) ? LOSS_CALCULATOR.TEXT_SINGLE_ELEMENTS : LOSS_CALCULATOR.TEXT_UNITS}
           </Typography>
         </Grid>
         <Grid item>
