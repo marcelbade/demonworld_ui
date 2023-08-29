@@ -4,43 +4,40 @@ import { useEffect, useContext } from "react";
 import { ArmyContext } from "../../../contexts/armyContext";
 import { findDistinctSubfactions } from "../ListGeneratorFunctions";
 // constants
-import { ALLIES_MAPPING } from "../../../constants/allies";
+import { ALLIES_MAPPING, NO_ALLY } from "../../../constants/allies";
 
 const Allies = () => {
   const AC = useContext(ArmyContext);
 
-  const NONE = "none";
-
-  //Find The allied faction, if it exists. If no ally exists, return "none" instead of null.
+  //Find The allied faction, if it exists. If no ally exists, return "no ally" instead of null.
   useEffect(() => {
     const name = ALLIES_MAPPING[AC.selectedFactionName] //
       ? ALLIES_MAPPING[AC.selectedFactionName]
-      : NONE;
+      : NO_ALLY;
+
     AC.setAllyName(name);
   }, [AC.listOfAllFactionUnits]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Add the ally as a subfaction.
   useEffect(() => {
-    if (AC.allyName) {
-      let temp = AC.distinctSubFactions;
+    let temp = [...AC.subFactions];
 
-      if (AC.allyName !== NONE) {
-        temp.push(AC.allyName);
-      }
-      AC.setDistinctSubFactions(temp);
+    if (AC.allyName !== NO_ALLY) {
+      temp.push(AC.allyName);
     }
+    AC.setDistinctSubFactions([...temp]);
   }, [AC.allyName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Create a list of all allied units.
   useEffect(() => {
-    if (AC.allyName) {
+    if (AC.allyName !== NO_ALLY) {
       AC.setListOfAlliedUnits(AC.fetchedFactions.filter((f) => f.faction === AC.allyName));
     }
   }, [AC.allyName]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Find the ally's distinct subfactions in the selected faction and create a set of them.
+  // Find the ally's distinct subFactions in the selected faction and create a set of them.
   useEffect(() => {
-    if (AC.allyName) {
+    if (AC.allyName !== NO_ALLY) {
       const ally = AC.fetchedFactions.filter((f) => f.faction === AC.allyName);
       AC.setDistinctAllySubFactions(findDistinctSubfactions(ally));
     }
