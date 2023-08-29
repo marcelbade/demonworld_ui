@@ -102,7 +102,7 @@ export const calculateTotalUnitPointCost = (unit) => {
 };
 
 /**
- * Function searches a JS object used as table in a table-driven function for a match. Used to map in the gameRules to map units/subfactions to heroes.
+ * Function searches a JS object used as table in a table-driven function for a match. Used to map in the gameRules to map units/subFactions to heroes.
  * @param {unitCard Obj} canditateUnit
  * @param {Object} mapping
  * @returns
