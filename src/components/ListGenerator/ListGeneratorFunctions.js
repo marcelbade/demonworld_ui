@@ -14,7 +14,7 @@ export const filterForSubFaction = (units, subFaction) => {
 /**
  * Function returns all distinct subFactions of a selected faction.
  * @param {[unitCard object]} units
- * @returns [String] name of all distinct subfactions
+ * @returns [String] name of all distinct subFactions
  */
 export const findDistinctSubfactions = (units) => {
   let distinctSubFactions = [];
