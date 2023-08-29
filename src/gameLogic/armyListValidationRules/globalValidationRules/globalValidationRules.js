@@ -1,9 +1,7 @@
 import { HERO, MAGE } from "../../../constants/unitTypes";
-
-const NO_DUPLICATE_UNIQUES_MESSAGE = "Die Liste darf einzigartige Einheiten nur einmal enthalten";
-const MAXIMUM_OF_TWO_OF_EACH_MESSAGE = "Die Liste darf eine Einheit maximal 2x enthalten.";
-const MAXIMUM_OF_35_PERCENT_HEROES_MESSAGE = "Die Liste darf maximal 35% Characktere und Helden enthalten.";
-const DONT_EXCEED_THE_POINT_ALLOWANCE_MESSAGE = "Die Liste darf die maximale Punktzahl nicht überschreiten.";
+import {
+  VALIDATION
+} from "../../../constants/textsAndMessages";
 
 const globalRules = {
   /**
@@ -21,7 +19,7 @@ const globalRules = {
 
     availableUnits.forEach((aU) => {
       if (aU.points + spentPoints > armyPointsAllowance) {
-        result.push({ unitBlockedbyRules: aU.unitName, message: DONT_EXCEED_THE_POINT_ALLOWANCE_MESSAGE });
+        result.push({ unitBlockedbyRules: aU.unitName, message: VALIDATION.DONT_EXCEED_THE_POINT_ALLOWANCE_MESSAGE });
       }
     });
 
@@ -40,7 +38,7 @@ const globalRules = {
     selectedUnits
       .filter((unit) => unit.uniqueUnit === true)
       .forEach((uniqueUnit) => {
-        result.push({ unitBlockedbyRules: uniqueUnit.unitName, message: NO_DUPLICATE_UNIQUES_MESSAGE });
+        result.push({ unitBlockedbyRules: uniqueUnit.unitName, message: VALIDATION.NO_DUPLICATE_UNIQUES_MESSAGE });
       });
 
     return result;
@@ -60,7 +58,7 @@ const globalRules = {
 
       for (let j = i + 1; j < selectedUnits.length; j++) {
         if (testedUnit.unitName === selectedUnits[j].unitName) {
-          result.push({ unitBlockedbyRules: testedUnit.unitName, message: MAXIMUM_OF_TWO_OF_EACH_MESSAGE });
+          result.push({ unitBlockedbyRules: testedUnit.unitName, message: VALIDATION.MAXIMUM_OF_TWO_OF_EACH_MESSAGE });
         }
       }
     }
@@ -91,7 +89,7 @@ const globalRules = {
       .filter((unit) => unit.unitType === HERO || unit.unitType === MAGE)
       .forEach((hero) => {
         if (hero.points + heroTotal > max) {
-          result.push({ unitBlockedbyRules: hero.unitName, message: MAXIMUM_OF_35_PERCENT_HEROES_MESSAGE });
+          result.push({ unitBlockedbyRules: hero.unitName, message: VALIDATION.MAXIMUM_OF_35_PERCENT_HEROES_MESSAGE });
         }
       });
 
@@ -181,7 +179,7 @@ const globalRules = {
       .filter((aU) => aU.unitType === HERO || aU.unitType === MAGE)
       .forEach((char) => {
         if (char.points + pointsSpentOnChars > totalPointsAllowance * HERO_CAP) {
-          result.push({ unitBlockedbyRules: char.unitName, message: NO_MORE_THAN_HALF_ON_CHARS_MESSAGE });
+          result.push({ unitBlockedbyRules: char.unitName, message: VALIDATION.NO_MORE_THAN_HALF_ON_CHARS_MESSAGE });
         }
       });
 

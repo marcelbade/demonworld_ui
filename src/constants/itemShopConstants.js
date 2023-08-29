@@ -11,7 +11,7 @@ export const USABLE_BY_ALL = "*";
 export const UNIT = "U";
 export const GIANT = "G";
 // unit has no range weapons
-export const NO_RANGE_WEAPON = "x";
+ 
 
 // Mapps item types in the itemCard obj to the displayed German name.
 export const NAME_MAPPING = {
