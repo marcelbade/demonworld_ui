@@ -82,8 +82,8 @@ const ListGeneratorController = () => {
   const history = useHistory();
 
   // intialize local states
-  const [fetchedFactions, setfetchedFactions] = useState([]);
-  const [fetchedItems, setfetchedItems] = useState([]);
+  const [fetchedFactions, setFetchedFactions] = useState([]);
+  const [fetchedItems, setFetchedItems] = useState([]);
   // selected faction
   const [selectedFactionName, setSelectedFactionName] = useState("");
   const [distinctSubFactions, setDistinctSubFactions] = useState([]);
@@ -168,13 +168,13 @@ const ListGeneratorController = () => {
   //TODO Change URL in Production!
   const fetchFactionData = async () => {
     const result = await axios(`http://localhost:8080/factions`);
-    setfetchedFactions(result.data);
+    setFetchedFactions(result.data);
   };
 
   //TODO Change URL in Production!
   const fetchItemData = async () => {
     const result = await axios(`http://localhost:8080/items`);
-    setfetchedItems(result.data);
+    setFetchedItems(result.data);
   };
 
   /**
