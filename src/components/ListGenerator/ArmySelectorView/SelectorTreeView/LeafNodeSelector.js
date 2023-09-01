@@ -73,24 +73,24 @@ const LeafNodeSelector = (props) => {
     return `${props.parentNodeId}${AC.subFactions.indexOf(unit)}`;
   };
 
-  return filterAndSortSubFaction().map((unit) => {
+  return filterAndSortSubFaction().map((u) => {
     // unit blocked
-    return blockedUnitNames.includes(unit.unitName) ? (
+    return blockedUnitNames.includes(u.unitName) ? (
       <Tooltip
         className={classes.node}
-        title={<Typography variant="caption">{findBlockMessage(blockResults, unit.unitName)}</Typography>} //
+        title={<Typography variant="caption">{findBlockMessage(blockResults, u.unitName)}</Typography>} //
         key={uuidGenerator()}
       >
         <div>
-          <LeafNode unit={unit} isBlocked={true} />
+          <LeafNode unit={u} isBlocked={true} />
         </div>
       </Tooltip>
     ) : (
       // unit not blocked
       <StyledTreeItem
         className={classes.node}
-        nodeId={createLeafNodeId(unit)} //
-        label={<LeafNode unit={unit} isBlocked={false} />}
+        nodeId={createLeafNodeId(u)} //
+        label={<LeafNode unit={u} isBlocked={false} />}
         key={uuidGenerator()}
       ></StyledTreeItem>
     );
