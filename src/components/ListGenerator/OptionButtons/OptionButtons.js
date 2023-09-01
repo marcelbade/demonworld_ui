@@ -23,6 +23,7 @@ import ErrorIcon from "@mui/icons-material/Error";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 // context
 import { ArmyContext } from "../../../contexts/armyContext";
+import { VALIDATION } from "../../../constants/textsAndMessages";
 
 const useStyles = makeStyles({
   overlay: {
@@ -54,13 +55,11 @@ const OptionButtons = () => {
   const AC = useContext(ArmyContext);
   const history = useHistory();
 
-  const NO_COMMANDER_WARNING = `Die Armeeliste muss mindestens 1 Helden, Befehlshaber oder Magier mit 2 oder mehr ★ enthalten.`;
-
   const [disableButtons, setDisableButtons] = useState(true);
   const [displayMessages, setDisplayMessages] = useState([]);
   const [displayCount, setDisplayCount] = useState(true);
 
-  // enable buttons if lit is valid
+  // enable buttons if list is valid
   useEffect(() => {
     AC.selectedUnits.length === 0 || violatesRules(AC.listValidationResults) ? setDisableButtons(true) : setDisableButtons(false);
   }, [AC.selectedUnits, AC.listValidationResults]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -73,7 +72,7 @@ const OptionButtons = () => {
       AC.listValidationResults.subFactionBelowMinimum.forEach((u) => tempArray.push(u.message));
     }
     if (!AC.listValidationResults.commanderIspresent) {
-      tempArray.push(NO_COMMANDER_WARNING);
+      tempArray.push(VALIDATION.NO_COMMANDER_WARNING);
     }
 
     setDisplayMessages([...tempArray]);
