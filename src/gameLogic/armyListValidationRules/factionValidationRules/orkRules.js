@@ -11,7 +11,7 @@ const rules = [
     max: 1.0,
     error: ORKS.SUB_FACTION_RULES.UNIT,
   },
-  {  
+  {
     subFaction: "characters",
     cardNames: ["Helden / Befehlshaber"],
     min: 0.0,
@@ -34,7 +34,7 @@ const rules = [
   },
   {
     subFaction: "clantroops",
-    cardNames: ["Sondertruppen des Clans"],
+    cardNames: ["Blutclan", "Wyvernclan", "Tierclan", "Pfeilclan", "Eisenclan", "Eisclan", "Bergclan", "Steinclan"],
     min: 0.0,
     max: 0.4,
     error: ORKS.SUB_FACTION_RULES.CLANTROOPS,
