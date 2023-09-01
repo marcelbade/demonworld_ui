@@ -77,7 +77,7 @@ const OrkRules = {
     let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(rules, selectedUnits, totalPointsAllowance, subFactions);
     let isAboveSubFactionMax = globalRules.unitsAboveSubFactionMax(rules, selectedUnits, totalPointsAllowance, availableUnits);
     let hasDuplicateUniques = globalRules.noDuplicateUniques(selectedUnits);
-    let hasNoCommander = globalRules.isArmyCommanderPresent(selectedUnits);
+    let hasNoCommander = isOrkArmyCommanderPresent(selectedUnits);
 
     // tournament rules
     let testForMax2Result = globalRules.maximumOfTwo(selectedUnits);
@@ -137,26 +137,24 @@ const OrkRules = {
       }
     };
 
-    switchBetweenAlternativeRules();
+    switchBetweenAlternativeRules(); 
 
     /**
-     * Function implements the rule that a Clanngett army must contain at least one of the Clanngett  heroes.
-     * @param {*} selectedUnits array of all selected unit objects
-     * @returns true, if the army contains at least one of the unitCards.
+     * Function implements the rule that every Ork army needs a 2* commander. If it is a Clanngett list, it must also include at least one Clanngett hero.
+     * @param {unitCard} selectedUnits
+     * @returns true, if either a 2 * commander (clans) or a 2* commander and a Clanngett hero is present.
      */
-    const isClannGettCommanderPresent = () => {
-      const clangettHeroes = ["Trazzag", "Fherniak", "Ärrig", "Khazzar", "Nallian"];
-      for (let i = 0; i < clangettHeroes.length; i++) {
-        const hero = clangettHeroes[i];
-        if (selectedUnits.includes(hero)) return true;
+    const isOrkArmyCommanderPresent = (selectedUnits) => {
+      if (selectedAlternativeList !== "Clanngett") {
+        return globalRules.isArmyCommanderPresent(selectedUnits);
       }
 
-      return false;
-    };
+      const clangettHeroes = ["Trazzag", "Fherniak", "Ärrig", "Khazzar", "Nallian"];
 
-    if (selectedAlternativeList === "Clanngett") {
-      isClannGettCommanderPresent(selectedUnits);
-    }
+      const clanngettHeroPresent = selectedUnits.filter((u) => clangettHeroes.includes(u));
+      const potentialCommanders = selectedUnits.filter((u) => u.commandStars >= 2);
+      return clanngettHeroPresent.length > 0 && potentialCommanders.length > 0;
+    };
 
     const alliesVsClanngett = (selectedUnits) => {
       const NET_TOTAL_ORKS = 5;
