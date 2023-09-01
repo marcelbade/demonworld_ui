@@ -35,20 +35,14 @@ const Tree = (props) => {
    * @returns
    */
   const createSubFactionList = () => {
-    const isAnAlternativeList = props.showsFaction && AC.armyHasAlternativeLists && AC.alternativeArmyPresentAndSelected;
-    const isAstandardList = props.showsFaction && !AC.armyHasAlternativeLists;
-
-    let subFactions;
-
-    if (isAstandardList) {
-      subFactions = AC.subFactions.filter((f) => f !== AC.allyName);
-    } else if (isAnAlternativeList) {
-      subFactions = AC.alternativeSubFactionList.filter((f) => f !== AC.allyName);
+    let subfactions;
+    if (props.showsFaction) {
+      subfactions = AC.subFactions.filter((f) => f !== AC.allyName);
     } else {
-      subFactions = AC.allySubFactions;
+      subfactions = AC.allySubFactions;
     }
 
-    return subFactions;
+    return subfactions;
   };
 
   const isSubFactionEmpty = (subFaction) => {
@@ -68,26 +62,6 @@ const Tree = (props) => {
     return `${ID_OFFSET}${index}`;
   };
 
-  /**
-   * Function determines which list of units to use: factio, an alternative list, or the ally's units.
-   * @returns array of unitCard objects.
-   */
-  const selectList = () => {
-    let list = [];
-
-    if (props.showsFaction && !AC.armyHasAlternativeLists) {
-      list = [...AC.listOfAllFactionUnits];
-    }
-    if (props.showsFaction && AC.armyHasAlternativeLists) {
-      list = [...AC.alternativeUnitList];
-    }
-    if (!props.showsFaction) {
-      list = [...AC.listOfAlliedUnits];
-    }
-
-    return list;
-  };
-
   return createSubFactionList()
     .sort((a, b) => {
       return a > b;
@@ -105,8 +79,12 @@ const Tree = (props) => {
           }
         >
           <LeafNodeSelector
-            // tree for army, alternative army or ally?
-            units={selectList()}
+            // tree for army or ally?
+            units={
+              props.showsFaction //
+                ? AC.listOfAllFactionUnits
+                : AC.listOfAlliedUnits
+            }
             subFaction={subFaction}
             nodeID={createNodeID(createSubFactionList().indexOf(subFaction))}
           />
