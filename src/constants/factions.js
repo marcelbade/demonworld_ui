@@ -81,47 +81,4 @@ export const EXCEMPT_FROM_TRIBES_RULE = [
   "Wolfstotem",
 ];
 
-export const ORK_CLANS_UNIT_MAPPING = {
-  Steinclan: ["Throigar", "Streitwagen", "Minotauren"],
-
-  Blutclan: ["Troll-Garde", "Wolfsreiter", "Wolfsschützen"],
-
-  Wyvernclan: ["Wyvernreiter", "Minotauren"],
-
-  Bergclan: ["Harpyien", "Bärenreiter", "Bärenmeute"],
-
-  Tierclan: ["Wolfsreiter ", "Wolfsschützen", "Wolfsmeute", "Schnee-Oger"],
-
-  Eisenclan: ["Zwergenfresser", "Bärenreiter", "Bärenmeute"],
-
-  Pfeilclan: ["Bärenreiter", "Bärenmeute", "Armbrustschützen"],
-
-  Eisclan: ["Wolfsreiter", "Wolfsschützen", "Streitwagen", "Schnee-Oger"],
-
-  Clanngett: [
-    "Trazzag",
-    "Fherniak",
-    "Ärrig",
-    "Khazzar",
-    "Nallian",
-    "Throigar",
-    "Troll-Garde",
-    "Wolfsreiter",
-    "Wolfsschützen",
-    "Wolfsmeute",
-    "Streitwagen",
-    "Wyvernreiter",
-    "Harpyien",
-    "Schnee-Oger",
-    "Minotauren",
-    "Zwergenfresser",
-    "Bärenreiter",
-    "Bärenmeute",
-    "Armbrustschützen",
-    "Goblin-Spinnenschützen",
-    "Goblin-Spinnenreiter",
-    "Trolle",
-    "Furien Clanngetts",
-    "Ork-Garde",
-  ],
-};
+ 
