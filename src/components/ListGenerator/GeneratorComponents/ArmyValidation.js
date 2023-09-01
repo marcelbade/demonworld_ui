@@ -34,7 +34,7 @@ const ArmyValidation = () => {
   ]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
-   * Function adds all invalid units to the block list.
+   * Function adds all invalid units and subfactions to the block list.
    * @param {{}} validationResults
    */
   const collectValidatioResults = (validationResults) => {
