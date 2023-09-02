@@ -117,8 +117,6 @@ const ListGeneratorController = () => {
   const [alternateArmyListOptions, setAlternateArmyListOptions] = useState([]);
   const [alternateArmyListLabelText, setAlternateArmyListLabelText] = useState(NONE);
   const [selectedAlternativeList, setSelectedAlternativeList] = useState(NONE);
-  const [alternativeSubFactionList, setAlternativeSubFactionList] = useState([]);
-  const [alternativeUnitList, setAlternativeUnitList] = useState([]);
   const [alternativeArmyPresentAndSelected, setAlternativeArmyPresentAndSelected] = useState(false);
 
   // The dwarf faction needs two selections
@@ -273,7 +271,7 @@ const ListGeneratorController = () => {
         distinctAllySubFactions: distinctAllySubFactions,
         showAlly: showAlly,
         setShowAlly: setShowAlly,
-        setAllyName: setAllyName, 
+        setAllyName: setAllyName,
         setListOfAlliedUnits: setListOfAlliedUnits,
         setDistinctAllySubFactions: setDistinctAllySubFactions,
         // ALTERNATIVE LISTS
@@ -281,15 +279,11 @@ const ListGeneratorController = () => {
         alternateArmyListOptions: alternateArmyListOptions,
         selectedAlternativeList: selectedAlternativeList,
         secondAlternativeArmyOptions: secondAlternativeArmyOptions,
-        alternativeSubFactionList: alternativeSubFactionList,
-        alternativeUnitList: alternativeUnitList,
         alternativeArmyPresentAndSelected: alternativeArmyPresentAndSelected,
         alternateArmyListLabelText: alternateArmyListLabelText,
         setAlternativeArmyPresentAndSelected: setAlternativeArmyPresentAndSelected,
         setAlternateArmyListOptions: setAlternateArmyListOptions,
         setSelectedAlternativeList: setSelectedAlternativeList,
-        setAlternativeSubFactionList: setAlternativeSubFactionList,
-        setAlternativeUnitList: setAlternativeUnitList,
         setSecondAlternativeArmyOptions: setSecondAlternativeArmyOptions,
         setArmyHasAlternativeLists: setArmyHasAlternativeLists,
         setAlternateArmyListLabelText: setAlternateArmyListLabelText,
