@@ -85,7 +85,7 @@ const ListGeneratorController = () => {
   const [fetchedFactions, setFetchedFactions] = useState([]);
   const [fetchedItems, setFetchedItems] = useState([]);
   // selected faction
-  const [selectedFactionName, setSelectedFactionName] = useState("");
+  const [selectedFactionName, setSelectedFactionName] = useState(NONE);
   const [distinctSubFactions, setDistinctSubFactions] = useState([]);
   const [listOfAllFactionUnits, setListOfAllFactionUnits] = useState([]);
   const [selectedUnits, setSelectedUnits] = useState([]);
@@ -117,10 +117,10 @@ const ListGeneratorController = () => {
   const [alternateArmyListOptions, setAlternateArmyListOptions] = useState([]);
   const [alternateArmyListLabelText, setAlternateArmyListLabelText] = useState(NONE);
   const [selectedAlternativeList, setSelectedAlternativeList] = useState(NONE);
+  const [secondSelectedAlternativeList, setSecondSelectedAlternativeList] = useState(NONE);
   const [alternativeArmyPresentAndSelected, setAlternativeArmyPresentAndSelected] = useState(false);
-
-  // The dwarf faction needs two selections
   const [secondAlternativeArmyOptions, setSecondAlternativeArmyOptions] = useState("");
+  const [alternateListSubFactions, setAlternateListSubFactions] = useState([]);
   // additional subFactions - currently only important for the Thain army!
   const [hasAdditionalSubFaction, setHasAdditionalSubFaction] = useState(false);
   const [secondSubFactionList, setSecondSubFactionList] = useState(false);
@@ -277,13 +277,17 @@ const ListGeneratorController = () => {
         // ALTERNATIVE LISTS
         armyHasAlternativeLists: armyHasAlternativeLists,
         alternateArmyListOptions: alternateArmyListOptions,
-        selectedAlternativeList: selectedAlternativeList,
         secondAlternativeArmyOptions: secondAlternativeArmyOptions,
+        selectedAlternativeList: selectedAlternativeList,
+        secondSelectedAlternativeList: secondSelectedAlternativeList,
         alternativeArmyPresentAndSelected: alternativeArmyPresentAndSelected,
         alternateArmyListLabelText: alternateArmyListLabelText,
+        alternateListSubFactions: alternateListSubFactions,
+        setAlternateListSubFactions: setAlternateListSubFactions,
         setAlternativeArmyPresentAndSelected: setAlternativeArmyPresentAndSelected,
         setAlternateArmyListOptions: setAlternateArmyListOptions,
         setSelectedAlternativeList: setSelectedAlternativeList,
+        setSecondSelectedAlternativeList: setSecondSelectedAlternativeList,
         setSecondAlternativeArmyOptions: setSecondAlternativeArmyOptions,
         setArmyHasAlternativeLists: setArmyHasAlternativeLists,
         setAlternateArmyListLabelText: setAlternateArmyListLabelText,
