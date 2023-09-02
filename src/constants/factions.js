@@ -16,26 +16,55 @@ export const NONE = "NONE";
 export const ALL_FACTIONS_ARRAY = [DUNKELFELFEN, ELFEN, GOBLINS, IMPERIUM, ISHTAK, NORWINGER, ORKS, THAIN, UNTOTE, ZWERGE, ECHSENMENSCHEN];
 
 // ARMIES WITH ALTERNATIVE LISTS
-export const ARMIES_WITH_ALTERNATIVE_LISTS = [IMPERIUM, ZWERGE, ORKS];
+export const ARMIES_WITH_ALTERNATIVE_LISTS = {
+  NONE: false,
+  Dunkelelfen: false,
+  Echsenmenschen: false,
+  Elfen: false,
+  Goblins: false,
+  Imperium: true,
+  Ishtak: false,
+  Orks: true,
+  Norwinger: false,
+  Thain: false,
+  Untote: false,
+  Zwerge: true,
+};
+
+export const ARMIES_WITH_TWO_ALTERNATE_ARMY_PICKS =  {
+  NONE: false,
+  Dunkelelfen: false,
+  Echsenmenschen: false,
+  Elfen: false,
+  Goblins: false,
+  Imperium: false,
+  Ishtak: false,
+  Orks: false,
+  Norwinger: false,
+  Thain: false,
+  Untote: false,
+  Zwerge: true,
+};;
 
 export const ARMY_ALTERNATIVES_LIST_MAPPER = {
-  // Dunkelelfen: [],
-  // Echsenmenschen: [],
-  // Elfen: [],
-  // Goblins: [],
+  NONE: [],
+  Dunkelelfen: [],
+  Echsenmenschen: [],
+  Elfen: [],
+  Goblins: [],
   Imperium: ["Nordmark", "Südmark", "Westmark", "Ostmark"],
-  // Ishtak: [],
+  Ishtak: [],
   Orks: ["Clanngett", "Steinclan", "Wyvernclan", "Tierclan", "Eisclan", "Pfeilclan", "Blutclan", "Eisenclan", "Bergclan"],
-  // Norwinger: [],
-  // Thain: [],
-  // Untote: [],
+  Norwinger: [],
+  Thain: [],
+  Untote: [],
   Zwerge: ["Gaeta", "Zah'ra", "Imperium"],
 };
 
 export const ALTERNATIVE_ARMY_SELECTION_TEXT = {
   Imperium: "Wähle eine der Marken",
   Orks: "Wähle einen der Clans oder Clanngett",
-  Zwerge: ["Wähle eines der Königreiche", "Wähle das zweites Königreich oder Alliierte"],
+  Zwerge: ["Wähle eines der Königreiche oder Alliierte"],
 };
 
 export const UNIT_OR_SUBFACTION = { units: ["Orks"], subFactions: ["Zwerge", "Imperium"] };
@@ -80,5 +109,3 @@ export const EXCEMPT_FROM_TRIBES_RULE = [
   "Wolfsgeister",
   "Wolfstotem",
 ];
-
- 
