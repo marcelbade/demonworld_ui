@@ -130,7 +130,7 @@ const OptionButtons = () => {
           variant="outlined"
           disabled={disableButtons}
           onClick={() => {
-            AC.clearList();
+            AC.resetTheState();
           }}
         >
           Liste löschen

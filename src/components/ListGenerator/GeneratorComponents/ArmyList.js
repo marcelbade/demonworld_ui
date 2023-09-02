@@ -26,7 +26,7 @@ const ArmyList = () => {
    *  Clear all selected units from the army list  when a new army is selected.
    */
   useEffect(() => {
-    AC.clearList();
+    AC.resetTheState();
   }, [AC.listOfAllFactionUnits, AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
