@@ -114,13 +114,15 @@ const ListGeneratorController = () => {
   });
   // alternative lists
   const [armyHasAlternativeLists, setArmyHasAlternativeLists] = useState(false);
+  const [alternateArmyListOptions, setAlternateArmyListOptions] = useState([]);
+  const [alternateArmyListLabelText, setAlternateArmyListLabelText] = useState(NONE);
   const [selectedAlternativeList, setSelectedAlternativeList] = useState(NONE);
   const [alternativeSubFactionList, setAlternativeSubFactionList] = useState([]);
   const [alternativeUnitList, setAlternativeUnitList] = useState([]);
   const [alternativeArmyPresentAndSelected, setAlternativeArmyPresentAndSelected] = useState(false);
 
   // The dwarf faction needs two selections
-  const [secondAlternativeArmyOption, setSecondAlternativeArmyOption] = useState("");
+  const [secondAlternativeArmyOptions, setSecondAlternativeArmyOptions] = useState("");
   // additional subFactions - currently only important for the Thain army!
   const [hasAdditionalSubFaction, setHasAdditionalSubFaction] = useState(false);
   const [secondSubFactionList, setSecondSubFactionList] = useState(false);
@@ -198,9 +200,9 @@ const ListGeneratorController = () => {
   }, [selectedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
-   * Function deletes the entire army list, resets the state and closes the stat card display and item shop, if open.
+   * Function resets the entire state back to default.
    */
-  const clearList = () => {
+  const resetTheState = () => {
     setSelectedUnits([]);
     setAllItems([]);
     setListValidationResults({
@@ -210,6 +212,7 @@ const ListGeneratorController = () => {
       removeUnitsNoLongerValid: [],
       secondSubFactionMissing: [],
     });
+    setSelectedAlternativeList(NONE);
 
     closeCardDisplay();
     closeItemShop();
@@ -270,28 +273,32 @@ const ListGeneratorController = () => {
         distinctAllySubFactions: distinctAllySubFactions,
         showAlly: showAlly,
         setShowAlly: setShowAlly,
-        setAllyName: setAllyName,
+        setAllyName: setAllyName, 
         setListOfAlliedUnits: setListOfAlliedUnits,
         setDistinctAllySubFactions: setDistinctAllySubFactions,
         // ALTERNATIVE LISTS
         armyHasAlternativeLists: armyHasAlternativeLists,
+        alternateArmyListOptions: alternateArmyListOptions,
         selectedAlternativeList: selectedAlternativeList,
-        secondAlternativeArmyOption: secondAlternativeArmyOption,
+        secondAlternativeArmyOptions: secondAlternativeArmyOptions,
         alternativeSubFactionList: alternativeSubFactionList,
         alternativeUnitList: alternativeUnitList,
         alternativeArmyPresentAndSelected: alternativeArmyPresentAndSelected,
+        alternateArmyListLabelText: alternateArmyListLabelText,
         setAlternativeArmyPresentAndSelected: setAlternativeArmyPresentAndSelected,
+        setAlternateArmyListOptions: setAlternateArmyListOptions,
         setSelectedAlternativeList: setSelectedAlternativeList,
         setAlternativeSubFactionList: setAlternativeSubFactionList,
         setAlternativeUnitList: setAlternativeUnitList,
-        setSecondAlternativeArmyOption: setSecondAlternativeArmyOption,
+        setSecondAlternativeArmyOptions: setSecondAlternativeArmyOptions,
         setArmyHasAlternativeLists: setArmyHasAlternativeLists,
+        setAlternateArmyListLabelText: setAlternateArmyListLabelText,
         // SELECTED UNIT LIST
         selectedUnits: selectedUnits,
         maxPointsAllowance: maxPointsAllowance,
         setSelectedUnits: setSelectedUnits,
         setMaxPointsAllowance: setMaxPointsAllowance,
-        clearList: clearList,
+        resetTheState: resetTheState,
         // ARMY LIST VALIDATION
         listValidationResults: listValidationResults,
         setListValidationResults: setListValidationResults,
@@ -308,7 +315,6 @@ const ListGeneratorController = () => {
         setShowOptionButtons: setShowOptionButtons,
         setUnitSelectedForShop: setUnitSelectedForShop,
         setAllItems: setAllItems,
-
         // SECOND SUB FACTION
         hasAdditionalSubFaction: hasAdditionalSubFaction,
         secondSubFactionList: secondSubFactionList,
