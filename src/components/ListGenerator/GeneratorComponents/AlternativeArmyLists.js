@@ -1,5 +1,5 @@
 // React
-import { useEffect, useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
 // components and functions
@@ -7,7 +7,12 @@ import AlternativeArmyListSelector from "../ArmySelectorView/AlternativeArmyList
 import DwarfsSecondSelector from "../ArmySelectorView/AlternativeArmyListSelection/DwarfsSecondSelector";
 import { ArmyContext } from "../../../contexts/armyContext";
 // constants
-import { ARMY_ALTERNATIVES_LIST_MAPPER, ARMIES_WITH_ALTERNATIVE_LISTS, NONE } from "../../../constants/factions";
+import {
+  ARMY_ALTERNATIVES_LIST_MAPPER,
+  ARMIES_WITH_ALTERNATIVE_LISTS,
+  NONE,
+  ALTERNATIVE_ARMY_SELECTION_TEXT,
+} from "../../../constants/factions";
 import { ZWERGE } from "../../../constants/factions";
 import { Fragment } from "react";
 
@@ -30,6 +35,14 @@ const AlternativeArmyLists = () => {
     }
   }, [AC.armyHasAlternativeLists, AC.selectedAlternativeList]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  useEffect(() => {
+    AC.setAlternateArmyListOptions(findDropdownOptions());
+  }, [AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    AC.setAlternateArmyListLabelText(findLabelTexts());
+  }, [AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
+
   /**
    * Function filters units, removes all units that do not belong to the selected army list.
    */
@@ -44,13 +57,33 @@ const AlternativeArmyLists = () => {
     AC.setDistinctSubFactions([...tempArray]);
   };
 
-  // const alternateSubFactionFilter = () => {
-  //   const alternatives = ARMY_ALTERNATIVES_LIST_MAPPER[AC.selectedFactionName];
-  //   const notSelected = alternatives.filter((a) => a !== AC.selectedAlternativeList);
-  //   const tempArray = [...AC.subFactions];
+  /**
+   * Function retrieves the correct label text for the input element.
+   * @returns String with the label text.
+   */
+  const findLabelTexts = () => {
+    const result =
+      AC.selectedFactionName === ZWERGE
+        ? ALTERNATIVE_ARMY_SELECTION_TEXT[AC.selectedFactionName][0]
+        : ALTERNATIVE_ARMY_SELECTION_TEXT[AC.selectedFactionName];
 
-  //   AC.setAlternativeSubFactionList(tempArray.filter((sF) => !notSelected.includes(sF)));
-  // };
+    return result;
+  };
+
+  /**
+   *Function returns the names of the alternative army lists as options for the drop down menu.
+   * @returns an array of string values.
+   */
+  const findDropdownOptions = () => {
+    if (AC.selectedFactionName === ZWERGE) {
+      const result = [...ARMY_ALTERNATIVES_LIST_MAPPER[AC.selectedFactionName]];
+
+      result.pop();
+      return result;
+    }
+
+    return ARMY_ALTERNATIVES_LIST_MAPPER[AC.selectedFactionName];
+  };
 
   return (
     <Fragment>
