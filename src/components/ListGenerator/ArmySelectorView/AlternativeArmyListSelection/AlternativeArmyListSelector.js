@@ -16,16 +16,24 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 }));
-const AlternativeArmyListSelector = () => {
+const AlternativeArmyListSelector = (props) => {
   const classes = useStyles();
   const AC = useContext(ArmyContext);
 
   return (
     <SelectionInput
       className={classes.alternativeListSelector}
-      filterFunction={AC.setSelectedAlternativeList}
+      filterFunction={
+        props.alternateArmyFirstSelector //
+          ? AC.setSelectedAlternativeList
+          : AC.setSecondSelectedAlternativeList
+      }
       isArmySelector={true}
-      options={AC.alternateArmyListOptions}
+      options={
+        props.alternateArmyFirstSelector //
+          ? AC.alternateArmyListOptions
+          : AC.secondAlternativeArmyOptions
+      }
       label={<Typography>{AC.alternateArmyListLabelText}</Typography>}
     />
   );
