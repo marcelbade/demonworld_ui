@@ -4,7 +4,7 @@ import { useEffect, useState, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 // components and functions
 import AlternativeArmyListSelector from "../ArmySelectorView/AlternativeArmyListSelection/AlternativeArmyListSelector";
-import DwarfsSecondSelector from "../ArmySelectorView/AlternativeArmyListSelection/DwarfsSecondSelector";
+import SecondAlternativeArmySelector from "../ArmySelectorView/AlternativeArmyListSelection/SecondAlternativeArmySelector";
 import { ArmyContext } from "../../../contexts/armyContext";
 // constants
 import {
@@ -12,8 +12,8 @@ import {
   ARMIES_WITH_ALTERNATIVE_LISTS,
   NONE,
   ALTERNATIVE_ARMY_SELECTION_TEXT,
+  ARMIES_WITH_TWO_ALTERNATE_ARMY_PICKS,
 } from "../../../constants/factions";
-import { ZWERGE } from "../../../constants/factions";
 import { Fragment } from "react";
 
 const useStyles = makeStyles((theme) => ({}));
@@ -21,23 +21,30 @@ const useStyles = makeStyles((theme) => ({}));
 const AlternativeArmyLists = () => {
   const AC = useContext(ArmyContext);
   const classes = useStyles();
+  const FIRST = "FIRST";
+  const SECOND = "SECOND";
 
   // If the army's rules have alternative army lists, set to true.
   useEffect(() => {
-    AC.setArmyHasAlternativeLists(ARMIES_WITH_ALTERNATIVE_LISTS.includes(AC.selectedFactionName));
+    AC.setArmyHasAlternativeLists(ARMIES_WITH_ALTERNATIVE_LISTS[AC.selectedFactionName]);
   }, [AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // reset army's subFaction if alternate lists exist and one has been selected.
   useEffect(() => {
     if (AC.armyHasAlternativeLists && AC.selectedAlternativeList !== NONE) {
       alternateUnitListFilter();
-      // alternateSubFactionFilter();
     }
   }, [AC.armyHasAlternativeLists, AC.selectedAlternativeList]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    AC.setAlternateArmyListOptions(findDropdownOptions());
+    AC.setAlternateArmyListOptions(findDropdownOptions(FIRST));
   }, [AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (ARMIES_WITH_TWO_ALTERNATE_ARMY_PICKS[AC.selectedFactionName] && AC.selectedAlternativeList !== NONE) {
+      AC.setSecondAlternativeArmyOptions(findDropdownOptions(SECOND));
+    }
+  }, [AC.selectedFactionName, AC.selectedAlternativeList]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     AC.setAlternateArmyListLabelText(findLabelTexts());
@@ -51,10 +58,9 @@ const AlternativeArmyLists = () => {
     const notSelected = alternatives.filter((a) => a !== AC.selectedAlternativeList);
 
     let tempArray = [...AC.subFactions];
-
     tempArray = tempArray.filter((f) => !notSelected.includes(f));
 
-    AC.setDistinctSubFactions([...tempArray]);
+    AC.setAlternateListSubFactions([...tempArray]);
   };
 
   /**
@@ -62,35 +68,45 @@ const AlternativeArmyLists = () => {
    * @returns String with the label text.
    */
   const findLabelTexts = () => {
-    const result =
-      AC.selectedFactionName === ZWERGE
-        ? ALTERNATIVE_ARMY_SELECTION_TEXT[AC.selectedFactionName][0]
-        : ALTERNATIVE_ARMY_SELECTION_TEXT[AC.selectedFactionName];
-
-    return result;
+    return ALTERNATIVE_ARMY_SELECTION_TEXT[AC.selectedFactionName];
   };
 
   /**
    *Function returns the names of the alternative army lists as options for the drop down menu.
    * @returns an array of string values.
    */
-  const findDropdownOptions = () => {
-    if (AC.selectedFactionName === ZWERGE) {
-      const result = [...ARMY_ALTERNATIVES_LIST_MAPPER[AC.selectedFactionName]];
+  const findDropdownOptions = (menu) => {
+    let result = [];
 
-      result.pop();
-      return result;
+    const listMapping = ARMY_ALTERNATIVES_LIST_MAPPER[AC.selectedFactionName];
+
+    if (menu === FIRST) {
+      result = [...listMapping];
+    }
+    if (menu === SECOND) {
+      let temp = listMapping.filter((m) => m !== AC.selectedAlternativeList);
+      result = [...temp];
     }
 
-    return ARMY_ALTERNATIVES_LIST_MAPPER[AC.selectedFactionName];
+    return result;
   };
 
   return (
     <Fragment>
-      {AC.armyHasAlternativeLists ? <AlternativeArmyListSelector isArmySelector={false} className={classes.selector} /> : null}
-      {/* DWARFS ONLY */}
-      {AC.selectedFactionName === ZWERGE && AC.selectedAlternativeList !== "" ? (
-        <DwarfsSecondSelector isArmySelector={false} className={classes.selector} />
+      {AC.armyHasAlternativeLists ? (
+        <AlternativeArmyListSelector //
+          alternateArmyFirstSelector={true}
+          isArmySelector={false}
+          className={classes.selector}
+        />
+      ) : null}
+      {ARMIES_WITH_TWO_ALTERNATE_ARMY_PICKS[AC.selectedFactionName] && //
+      AC.selectedAlternativeList !== NONE ? (
+        <AlternativeArmyListSelector //
+          alternateArmyFirstSelector={false}
+          isArmySelector={false}
+          className={classes.selector}
+        />
       ) : null}
     </Fragment>
   );
