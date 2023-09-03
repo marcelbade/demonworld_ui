@@ -132,9 +132,6 @@ const switchBetweenAlternativeRules = (selectedAlternativeList) => {
   const MAPPER_A = "clanngett";
   const MAPPER_B = "clantroops";
 
-  console.log("selectedAlternativeList");
-  console.log(selectedAlternativeList);
-
   if (selectedAlternativeList === CLANNGETT) {
     mapperArray = ORK_SUBFACTION_LIMITS[MAPPER_A];
   } else {
@@ -172,9 +169,6 @@ const isOrkArmyCommanderPresent = (selectedUnits, selectedAlternativeList) => {
 
 const setUnitsForClans = (availableUnits, selectedAlternativeList) => {
   let result = [];
-
-  console.log("ORK_CLANS_UNIT_MAPPING[selectedAlternativeList]");
-  console.log(ORK_CLANS_UNIT_MAPPING[selectedAlternativeList]);
 
   availableUnits.forEach((u) => {
     if (u.subFaction === "Clanntruppen" && !ORK_CLANS_UNIT_MAPPING[selectedAlternativeList].includes(u.unitName)) {
