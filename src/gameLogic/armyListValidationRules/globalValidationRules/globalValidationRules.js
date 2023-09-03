@@ -1,7 +1,5 @@
 import { HERO, MAGE } from "../../../constants/unitTypes";
-import {
-  VALIDATION
-} from "../../../constants/textsAndMessages";
+import { VALIDATION } from "../../../constants/textsAndMessages";
 
 const globalRules = {
   /**
@@ -108,16 +106,16 @@ const globalRules = {
   unitsAboveSubFactionMax: (rules, selectedUnits, maxArmyPoints, availableUnits) => {
     let result = [];
 
-    rules.forEach((factionRule) => {
-      const subFactionMax = maxArmyPoints * factionRule.max;
+    rules.forEach((r) => {
+      const subFactionMax = maxArmyPoints * r.max;
 
-      const spentPoints = calculateCurrentlySpentPoints(selectedUnits, factionRule.cardNames);
+      const spentPoints = calculateCurrentlySpentPoints(selectedUnits, r.cardNames);
 
       availableUnits
-        .filter((availableUnit) => factionRule.cardNames.includes(availableUnit.subFaction))
+        .filter((availableUnit) => r.cardNames.includes(availableUnit.subFaction))
         .forEach((subFactionUnit) => {
           if (subFactionUnit.points + spentPoints > subFactionMax) {
-            result.push({ unitBlockedbyRules: subFactionUnit.unitName, message: factionRule.error });
+            result.push({ unitBlockedbyRules: subFactionUnit.unitName, message: r.error });
           }
         });
     });
@@ -168,7 +166,6 @@ const globalRules = {
    */
   NoMoreThanHalfOnCharacters: (selectedUnits, availableUnits, totalPointsAllowance) => {
     const HERO_CAP = 0.5;
-    const NO_MORE_THAN_HALF_ON_CHARS_MESSAGE = "Du darfst höchstens 50% der Punkte für Helden, Befehlshaber und Magier ausgeben.";
 
     let result = [];
     let pointsSpentOnChars = 0;
@@ -192,14 +189,14 @@ const globalRules = {
 /**
  * Function returns how many points have already been spent for a subfaction.
  */
-const calculateCurrentlySpentPoints = (selectedUnits, subFaction) => {
+const calculateCurrentlySpentPoints = (selectedUnits, cardNames) => {
   let actualValue = 0;
 
   selectedUnits.forEach((selectedUnit) => {
-    if (subFaction.includes(selectedUnit.subFaction)) {
+    if (cardNames.includes(selectedUnit.subFaction)) {
       actualValue += selectedUnit.points;
     }
-    if (subFaction.includes(selectedUnit.subFaction) && selectedUnit.equipment.length > 0) {
+    if (cardNames.includes(selectedUnit.subFaction) && selectedUnit.equipment.length > 0) {
       const equipmentTotal = calculateEquipmentCost(selectedUnit);
       actualValue += equipmentTotal;
     }
@@ -213,7 +210,7 @@ const calculateCurrentlySpentPoints = (selectedUnits, subFaction) => {
  * @param {unitCard Obj} selectedUnit
  * @returns  total point cost for a unit's equipment.
  */
-const calculateEquipmentCost = (selectedUnit) => {
+ const calculateEquipmentCost = (selectedUnit) => {
   let sum = 0;
 
   selectedUnit.equipment.forEach((item) => {
