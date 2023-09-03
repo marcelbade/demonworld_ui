@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: "20px",
     fontWeight: "bold",
     width: "60%",
-    borderBottom: "solid 4px black", 
+    borderBottom: "solid 4px black",
     marginBottom: "1em",
   },
   total: {
@@ -55,6 +55,16 @@ const ArmyListDisplay = () => {
     isValid ? setErrorMessage("") : setErrorMessage("Bitte nur Zahlen eingeben.");
   };
 
+  const selectsSubFactionList = () => {
+    let subfactions;
+    if (!AC.armyHasAlternativeLists) {
+      subfactions = AC.subFactions;
+    } else if (AC.armyHasAlternativeLists) {
+      subfactions = AC.alternateListSubFactions;
+    }
+    return subfactions;
+  };
+
   /**
    * This creates the centre of the UI: the actual army list consisting of the selected units and the display of the maximum * army points.
    */
@@ -63,7 +73,7 @@ const ArmyListDisplay = () => {
       {/* <Grid item container justify="flex-end"> */}
 
       <List>
-        {AC.subFactions.map((sF) => (
+        {selectsSubFactionList().map((sF) => (
           <ArmyListSubFactionEntry subFaction={sF} key={uuidGenerator()} />
         ))}
       </List>
