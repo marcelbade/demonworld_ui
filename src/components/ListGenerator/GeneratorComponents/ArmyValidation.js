@@ -4,6 +4,7 @@ import { useEffect, useContext } from "react";
 import { ArmyContext } from "../../../contexts/armyContext";
 import { ruleValidation } from "../../../gameLogic/armyListValidationRules/ruleValidatorSelector";
 // constants
+import { ARMIES_WITH_ALTERNATIVE_LISTS, NONE } from "../../../constants/factions";
 
 const ArmyValidation = () => {
   const AC = useContext(ArmyContext);
@@ -14,17 +15,14 @@ const ArmyValidation = () => {
    * which need to be blocked, as well as a message stating the reason for blocking it.
    */
   useEffect(() => {
-    if (AC.selectedFactionName) {
-      let validator = ruleValidation(AC.selectedFactionName);
-      let validationResult = validator.testSubFactionRules(
-        AC.listOfAllFactionUnits,
-        AC.selectedUnits,
-        AC.maxPointsAllowance,
-        AC.subFactions,
-        AC.selectedAlternativeList
-      );
+    const hasAlternativeLists = ARMIES_WITH_ALTERNATIVE_LISTS[AC.selectedFactionName];
+    const IsFactionSelected = AC.selectedFactionName !== NONE;
+    const isAlternativeListSelected = AC.selectedAlternativeList !== NONE;
 
-      collectValidatioResults(validationResult);
+    if (IsFactionSelected && hasAlternativeLists && isAlternativeListSelected) {
+      runValidation();
+    } else if (IsFactionSelected && !hasAlternativeLists) {
+      runValidation();
     }
   }, [
     AC.selectedUnits, //
@@ -32,6 +30,19 @@ const ArmyValidation = () => {
     AC.selectedAlternativeList,
     AC.subFactions,
   ]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const runValidation = () => {
+    let validator = ruleValidation(AC.selectedFactionName);
+    let validationResult = validator.testSubFactionRules(
+      AC.listOfAllFactionUnits,
+      AC.selectedUnits,
+      AC.maxPointsAllowance,
+      AC.subFactions,
+      AC.selectedAlternativeList
+    );
+
+    collectValidatioResults(validationResult);
+  };
 
   /**
    * Function adds all invalid units and subfactions to the block list.
