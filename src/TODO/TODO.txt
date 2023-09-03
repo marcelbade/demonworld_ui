@@ -1,19 +1,66 @@
+TODO:  BUGS AND IMPROVEMENTS
+===================================
+- sort the units in the tree alphabetically
+- improve the sub factions sorting
+- move the button that deletes the army list
+- add buttons to delete a sub faction list
+- add close button to itemShop, Card display
+- army list -> CSS bug, long unit names!
+
+TODO:  ARMY LIST 
+===================================
+ - allies dont show up... WTF
+
+TODO: ORKS
+===================================
+ -  alternative army lists dont wokr correctly  <- CONTINUE
+
+
+
+TODO: FINAL TEST - validation
+===================================
+dark elves - FINISHED
+     elves - FINISHED
+   goblins - FINISHED
+    empire - FINISHED
+
+
+
+
+TODO: Unit Cards 
+===================================
+-   Borders are missing
+
+
+
 TODO:SQL
 ===================================
 -  Weapon names...
+
+
+TODO: Code Quality
+===================================
+- use more array.reduce()!
 
 
 TODO: src\components\shared\NoSelectionDisplay.js
 You need a pic, if you want to use this :D.
 
 
-TODO: Loss calculator
+TODO: Loss calculator DONE
 ===================================
  
 
 TODO: PDF VIEWER
 ===================================
--  alternative layout (full cards)
+alternative layout (full cards)
+ - fix bottom borders
+ 
+ 
+ 
+
+
+
  
 TODO: FACTION RULES
 ==================================
@@ -24,9 +71,6 @@ TODO: FACTION RULES
    - flags to toggle 
       - units can be selected 2x
       - hero/ mage max percentage ovveride 
-
-  
-
 
 TODO: ItemShop
 - giants need more work
