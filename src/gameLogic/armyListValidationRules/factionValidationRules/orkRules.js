@@ -1,7 +1,6 @@
+import { ORK_CLANS_UNIT_MAPPING } from "../../../constants/factions";
 import { ORKS } from "../../../constants/textsAndMessages";
 import globalRules from "../globalValidationRules/globalValidationRules";
-
-// clan armies need a two star general
 
 const rules = [
   {
@@ -34,7 +33,7 @@ const rules = [
   },
   {
     subFaction: "clantroops",
-    cardNames: ["Blutclan", "Wyvernclan", "Tierclan", "Pfeilclan", "Eisenclan", "Eisclan", "Bergclan", "Steinclan"],
+    cardNames: ["Clanntruppen"],
     min: 0.0,
     max: 0.4,
     error: ORKS.SUB_FACTION_RULES.CLANTROOPS,
@@ -53,13 +52,6 @@ const rules = [
     max: 0.3,
     error: ORKS.SUB_FACTION_RULES.WIZARDS,
   },
-  {
-    subFaction: "goblins",
-    min: 0.0,
-    max: 0.2,
-    cardNames: ["Goblins"],
-    error: ORKS.SUB_FACTION_RULES.GOBLINS,
-  },
 ];
 
 const MAX_HERO_PERCENTAGE = 40;
@@ -77,7 +69,6 @@ const OrkRules = {
     let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(rules, selectedUnits, totalPointsAllowance, subFactions);
     let isAboveSubFactionMax = globalRules.unitsAboveSubFactionMax(rules, selectedUnits, totalPointsAllowance, availableUnits);
     let hasDuplicateUniques = globalRules.noDuplicateUniques(selectedUnits);
-    let hasNoCommander = isOrkArmyCommanderPresent(selectedUnits, selectedAlternativeList);
 
     // tournament rules
     let testForMax2Result = globalRules.maximumOfTwo(selectedUnits);
@@ -88,6 +79,13 @@ const OrkRules = {
       MAX_HERO_PERCENTAGE
     );
 
+    // special faction rules
+
+    switchBetweenAlternativeRules(selectedAlternativeList);
+    let goblinsAboveMax = checkForGoblinMax(selectedUnits, totalPointsAllowance, availableUnits);
+    let hasNoCommander = isOrkArmyCommanderPresent(selectedUnits, selectedAlternativeList);
+    let availlableClanUnits = setUnitsForClans(availableUnits, selectedAlternativeList);
+
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [
       ...isExceedingPointAllowance,
@@ -95,7 +93,10 @@ const OrkRules = {
       ...testForHeroCapResult,
       ...testForMax2Result,
       ...isAboveSubFactionMax,
+      ...availlableClanUnits,
+      ...goblinsAboveMax,
     ];
+
     // result for sub factions below limit.
     validationResults.subFactionBelowMinimum = isBelowSubFactionMin;
 
@@ -104,41 +105,49 @@ const OrkRules = {
 
     validationResults.removeUnitsNoLongerValid = [];
 
-    // special faction rules
-
-    switchBetweenAlternativeRules(selectedAlternativeList);
-    alliesVsClanngett(selectedUnits);
-
     return validationResults;
   },
 };
 
-// If an alternative army has been selected, change the subFaction limits accordingly.
-const ORK_SUBFACTION_LIMITS = [
-  { subFaction: "Gerät", clans: 0.2, clanngett: 0.3 },
-  { subFaction: "Sondertruppen des Clans", clans: 0.5, clanngett: 0.4 },
-  { subFaction: "Clanngett", clans: 0, clanngett: 0.5 },
-];
+const ORK_SUBFACTION_LIMITS = {
+  clanngett: [
+    { subFaction: "clanngett", limit: 0.5 },
+    { subFaction: "clantroops", limit: 0.4 },
+    { subFaction: "engines", limit: 0.3 },
+  ],
+  clantroops: [
+    { subFaction: "clanngett", limit: 0 },
+    { subFaction: "clantroops", limit: 0.5 },
+    { subFaction: "engines", limit: 0.2 },
+  ],
+};
 
 /**
  * Function changes the max. limits for the subfactions depending on which alternative army list has been selected.
  */
 const switchBetweenAlternativeRules = (selectedAlternativeList) => {
-  if (selectedAlternativeList === "Clanngett") {
-    changeLimit("clanngett");
+  //  selectedAlternativeList  --> Clanngett, Steinclan,...
+  let mapperArray;
+  const CLANNGETT = "Clanngett";
+  const MAPPER_A = "clanngett";
+  const MAPPER_B = "clantroops";
+
+  console.log("selectedAlternativeList");
+  console.log(selectedAlternativeList);
+
+  if (selectedAlternativeList === CLANNGETT) {
+    mapperArray = ORK_SUBFACTION_LIMITS[MAPPER_A];
   } else {
-    changeLimit("clans");
+    mapperArray = ORK_SUBFACTION_LIMITS[MAPPER_B];
   }
-};
 
-const changeLimit = (armyList) => {
-  for (let i = 0; i < ORK_SUBFACTION_LIMITS.length; i++) {
-    const limit = ORK_SUBFACTION_LIMITS[i];
-    for (let j = 0; j < rules.length; j++) {
-      const rule = rules[j];
+  for (let i = 0; i < rules.length; i++) {
+    const rule = rules[i];
+    for (let j = 0; j < mapperArray.length; j++) {
+      const mapping = mapperArray[j];
 
-      if (rule.cardNames.includes(limit.subFaction)) {
-        rule.max = limit[armyList];
+      if (rule.subFaction === mapping.subFaction) {
+        rule.max = mapping.limit;
       }
     }
   }
@@ -161,46 +170,48 @@ const isOrkArmyCommanderPresent = (selectedUnits, selectedAlternativeList) => {
   return clanngettHeroPresent.length > 0 && potentialCommanders.length > 0;
 };
 
-const alliesVsClanngett = (selectedUnits, totalPointsAllowance) => {
-  const NET_TOTAL_ORKS = 5;
-  const NET_TOTAL_GOBLINS = 2;
-  const GOBLINS = "Goblins";
-  const CLANNGETT = ["Clanngett"];
+const setUnitsForClans = (availableUnits, selectedAlternativeList) => {
+  let result = [];
 
-  if (selectedUnits !== undefined && selectedUnits.length > 0) {
-    for (let i = selectedUnits.length - 1; i >= 0; i--) {
-      if (selectedUnits[i].subFaction === GOBLINS) {
-        decreaseAllowance(NET_TOTAL_ORKS, GOBLINS, selectedUnits, totalPointsAllowance);
-      }
-      if (selectedUnits[i].subFaction === CLANNGETT) {
-        decreaseAllowance(NET_TOTAL_GOBLINS, CLANNGETT, selectedUnits, totalPointsAllowance);
-      }
+  console.log("ORK_CLANS_UNIT_MAPPING[selectedAlternativeList]");
+  console.log(ORK_CLANS_UNIT_MAPPING[selectedAlternativeList]);
+
+  availableUnits.forEach((u) => {
+    if (u.subFaction === "Clanntruppen" && !ORK_CLANS_UNIT_MAPPING[selectedAlternativeList].includes(u.unitName)) {
+      result.push({ unitBlockedbyRules: u.unitName, message: ORKS.SUB_FACTION_RULES.AVAILABLE_CLANUNITS });
     }
-  }
+  });
+
+  return result;
 };
 
-/**
- * Function decreases the max point allowance for a subfaction.
- * @param {int} increment
- * @param {int} netTotal
- * @param {String} subFaction
- */
-const decreaseAllowance = (netTotal, subFaction, selectedUnits, totalPointsAllowance) => {
-  let pointsSpent = 0;
+const checkForGoblinMax = (selectedUnits, totalPointsAllowance, availableUnits) => {
+  const goblinUnits = ["Goblin-Spinnenschützen", "Goblin-Spinnenreiter"];
+  const GOBLIN_MAX_PERCENTAGE = 0.2;
+  const goblinPointAllowance = totalPointsAllowance * GOBLIN_MAX_PERCENTAGE;
+
+  let currentGoblinTotal = 0;
+  let result = [];
 
   selectedUnits
-    .filter((sU) => sU.subFaction === subFaction)
-    .forEach((unit) => {
-      pointsSpent += unit.points;
+    .filter((u) => goblinUnits.includes(u.unitName))
+    .forEach((u) => {
+      currentGoblinTotal += u.points;
+      if (u.equipment.length > 0) {
+        const itemCost = u.equipment.reduce((sum, { points }) => sum + points, 0);
+        currentGoblinTotal += itemCost;
+      }
     });
 
-  const percentage = pointsSpent * (100 / totalPointsAllowance);
-  const share = Math.floor(percentage);
+  availableUnits
+    .filter((u) => goblinUnits.includes(u.unitName))
+    .forEach((u) => {
+      if (currentGoblinTotal + u.points > goblinPointAllowance) {
+        result.push({ unitBlockedbyRules: u.unitName, message: ORKS.SUB_FACTION_RULES.GOBLINS });
+      }
+    });
 
-  const remainder = netTotal - share;
-  let foundRules = rules.filter((r) => r.subFaction === subFaction);
-
-  foundRules[0].max = remainder * 0.1;
+  return result;
 };
 
 export { OrkRules, rules };

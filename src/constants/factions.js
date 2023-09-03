@@ -31,7 +31,7 @@ export const ARMIES_WITH_ALTERNATIVE_LISTS = {
   Zwerge: true,
 };
 
-export const ARMIES_WITH_TWO_ALTERNATE_ARMY_PICKS =  {
+export const ARMIES_WITH_TWO_ALTERNATE_ARMY_PICKS = {
   NONE: false,
   Dunkelelfen: false,
   Echsenmenschen: false,
@@ -44,7 +44,7 @@ export const ARMIES_WITH_TWO_ALTERNATE_ARMY_PICKS =  {
   Thain: false,
   Untote: false,
   Zwerge: true,
-};;
+};
 
 export const ARMY_ALTERNATIVES_LIST_MAPPER = {
   NONE: [],
@@ -109,3 +109,38 @@ export const EXCEMPT_FROM_TRIBES_RULE = [
   "Wolfsgeister",
   "Wolfstotem",
 ];
+
+export const ORK_CLANS_UNIT_MAPPING = {
+  Steinclan: ["Throigar", "Streitwagen", "Minotauren"],
+
+  Blutclan: ["Troll-Garde", "Wolfsreiter", "Wolfsschützen"],
+
+  Wyvernclan: ["Wyvernreiter", "Minotauren"],
+
+  Bergclan: ["Harpyien", "Bärenreiter", "Bärenmeute"],
+
+  Tierclan: ["Wolfsreiter ", "Wolfsschützen", "Wolfsmeute", "Schnee-Oger"],
+
+  Eisenclan: ["Zwergenfresser", "Bärenreiter", "Bärenmeute"],
+
+  Pfeilclan: ["Bärenreiter", "Bärenmeute", "Armbrustschützen"],
+
+  Eisclan: ["Wolfsreiter", "Wolfsschützen", "Streitwagen", "Schnee-Oger"],
+
+  Clanngett: [
+    "Throigar",
+    "Troll-Garde",
+    "Wolfsreiter",
+    "Wolfsschützen",
+    "Wolfsmeute",
+    "Streitwagen",
+    "Wyvernreiter",
+    "Harpyien",
+    "Schnee-Oger",
+    "Minotauren",
+    "Zwergenfresser",
+    "Bärenreiter",
+    "Bärenmeute",
+    "Armbrustschützen",
+  ],
+};
