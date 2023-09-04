@@ -1,4 +1,4 @@
-/* TODO SQL: the giant mummy and the "Werkstatt", "altar der Totenbeschwörer" are unique!
+/* TODO SQL: the giant mummy and the "Werkstatt", "Altar der Totenbeschwörer" are unique!
  *
  *Eine Armee der Untoten darf nicht mehr als 50% der Gesamtpunktzahl für
 Helden, Befehlshaber und Magier ausgeben. Sie muss mindestens einen
@@ -73,7 +73,7 @@ const UndeadRules = {
     let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(rules, selectedUnits, totalPointsAllowance, subFactions);
     let isAboveSubFactionMax = globalRules.unitsAboveSubFactionMax(rules, selectedUnits, totalPointsAllowance, availableUnits);
     let hasDuplicateUniques = globalRules.noDuplicateUniques(selectedUnits);
-    let hasNoCommander = globalRules.isArmyCommanderPresent(selectedUnits);
+    let hasNoCommander = isUndeadArmyCommanderPresent(selectedUnits);
 
     // tournament rules
     let testForMax2Result = globalRules.maximumOfTwo(selectedUnits);
@@ -106,21 +106,13 @@ const UndeadRules = {
 
 //FACTION SPECIAL RULES
 
-// // necromancer or commander with commandStars >= 2 must be present
-// const necromancerOrCommanderPresent = (selectedUnits, availableUnits) => {
-//   const necromancers = ["Xarta die Verderbte", "Sandaur der Perfide", "Jiitis Eishand", "Mad’Agonor"];
-//   return selectedUnits.filter((selectedUnit) => selectedUnit.commandStars >= 2 || necromancers.includes(selectedUnit.unitName)) > 0;
-// };
-
 /**
  * The army list can have a maximum of 50% characters.
  */
-// eslint-disable-next-line
 const maxLimitForAllChars = (availableUnits, selectedUnits, maxArmyPoints) => {
-  let characterSubFactions = ["Sturmlord", "Hexe", "Helden", " Befehlshaber"];
+  let characterSubFactions = ["Helden/Befehlshaber", "Magier"];
   let sum = 0;
   let result = [];
-  const MESSAGE = "Die Armeekann zu max. 50% aus Hexen, Sturmlords, Befehlshabern und Helden bestehen!";
 
   selectedUnits
     .filter((unit) => characterSubFactions.includes(unit.subFaction))
@@ -130,15 +122,34 @@ const maxLimitForAllChars = (availableUnits, selectedUnits, maxArmyPoints) => {
 
   availableUnits.forEach((availableUnit) => {
     if (availableUnit.points + sum > 0.5 * maxArmyPoints) {
-      result.push({ unitBlockedbyRules: availableUnit.unitName, message: MESSAGE });
+      result.push({ unitBlockedbyRules: availableUnit.unitName, message: UNDEAD.ERRORS.MAX_LIMIT_CHARACTERS });
     }
   });
 
-  // TODO: mach das fertig :D
+  return result;
 };
 
-// legal allies
-// eslint-disable-next-line
-const limitAllies = (availlableAlliedUnits) => {};
+const isUndeadArmyCommanderPresent = (selectedUnits) => {
+  const necromancers = [
+    "Xarta die Verderbte", //
+    "Sandaur der Perfide",
+    "Jiitis Eishand",
+    "Mad'Agonor",
+  ];
+
+  const necromancerPresent = selectedUnits.filter((u) => necromancers.includes(u.unitName));
+  const potentialCommanders = selectedUnits.filter((u) => u.commandStars >= 2);
+  return necromancerPresent.length > 0 && potentialCommanders.length > 0;
+};
+
+const validIshtakAllies = () => {
+  const permitted = ["icewitches", "beastmen", "humans"];
+  // not permitted
+  const blackWizards = ["Drogador", "Xarator", "Masdra Draizar"];
+
+    
+
+
+};
 
 export { UndeadRules, rules };
