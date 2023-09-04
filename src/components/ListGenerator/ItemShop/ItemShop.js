@@ -66,7 +66,6 @@ const ItemShop = () => {
   //state
   const [ItemTypes, setItemTypes] = useState([]);
   const [displayThisItemType, setDisplayThisItemType] = useState(ItemTypes[0]);
- 
 
   // When the selected unit changes, set the correct items in the shop
   useEffect(() => {
