@@ -1,14 +1,23 @@
 // React
-import React, { useContext, Fragment } from "react";
+import React, { useContext,   } from "react";
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
-import { TextField } from "@material-ui/core";
+import { TextField, IconButton, Tooltip, Typography, Grid } from "@material-ui/core";
+// icons
+import CancelIcon from "@material-ui/icons/Cancel";
 // components and functions
 import { ArmyContext } from "../../../../../contexts/armyContext";
 import { useEffect } from "react";
 import { NONE } from "../../../../../constants/factions";
+import { TOOLTIPS } from "../../../../../constants/textsAndMessages";
+
+const useStyles = makeStyles({
+  button: {},
+});
 
 const ArmyListBoxHeader = () => {
+  const classes = useStyles();
+
   const AC = useContext(ArmyContext);
 
   /**
@@ -32,7 +41,7 @@ const ArmyListBoxHeader = () => {
   }, [AC.selectedFactionName]);
 
   return (
-    <Fragment>
+    <Grid container  flexdirection = "row" >
       <TextField
         id="outlined-basic"
         autoComplete="off"
@@ -49,7 +58,18 @@ const ArmyListBoxHeader = () => {
         required
         variant="standard"
       />
-    </Fragment>
+      <Tooltip title={<Typography className={classes.tooltipText}>{TOOLTIPS.DELETE_ARMY_LIST}</Typography>}>
+        <IconButton
+          className={classes.button}
+          variant="outlined"
+          onClick={() => {
+            AC.resetTheState();
+          }}
+        >
+          <CancelIcon />
+        </IconButton>
+      </Tooltip>
+    </Grid>
   );
 };
 

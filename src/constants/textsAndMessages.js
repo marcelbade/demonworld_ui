@@ -1,5 +1,9 @@
 // validation
 
+export const TOOLTIPS = {
+  DELETE_ARMY_LIST: "Komplette Liste löschen",
+};
+
 export const VALIDATION = {
   NO_COMMANDER_WARNING: `Die Armeeliste muss mindestens 1 Helden, Befehlshaber oder Magier mit 2 oder mehr ★ enthalten.`,
 

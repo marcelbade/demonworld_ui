@@ -124,18 +124,7 @@ const OptionButtons = () => {
 
   return (
     <Grid container direction="column" alignItems="flex-start" spacing={4} className={classes.overlay}>
-      <Grid item>
-        <Button
-          className={classes.button}
-          variant="outlined"
-          disabled={disableButtons}
-          onClick={() => {
-            AC.resetTheState();
-          }}
-        >
-          Liste löschen
-        </Button>
-      </Grid>
+      
       <Grid item>
         <Button
           className={classes.button}
