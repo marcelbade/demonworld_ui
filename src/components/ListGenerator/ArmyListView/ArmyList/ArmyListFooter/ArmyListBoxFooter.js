@@ -4,8 +4,8 @@ import React, { useState, useContext, Fragment } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, TextField, InputAdornment, Grid } from "@material-ui/core";
 // components and functions
-import { ArmyContext } from "../../../../contexts/armyContext";
-import calculateScoutingFactor from "../../../../gameLogic/scoutFactorCalculator/scoutingFactorCalculator";
+import { ArmyContext } from "../../../../../contexts/armyContext";
+import calculateScoutingFactor from "../../../../../gameLogic/scoutFactorCalculator/scoutingFactorCalculator";
 
 // TODO: remove unneeded styles
 const useStyles = makeStyles((theme) => ({

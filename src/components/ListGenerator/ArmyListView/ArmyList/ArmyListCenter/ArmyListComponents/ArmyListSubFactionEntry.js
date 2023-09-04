@@ -4,12 +4,12 @@ import React, { useContext, useEffect, useState } from "react";
 import ListItem from "@material-ui/core/ListItem";
 import { Grid } from "@material-ui/core";
 // components and functions
-import { ArmyContext } from "../../../../contexts/armyContext";
-import { uuidGenerator } from "../../../shared/sharedFunctions";
-import SubFactionUnitList from "../NestedUnitList/SubFactionUnitList";
+import { ArmyContext } from "../../../../../../contexts/armyContext";
+import { uuidGenerator } from "../../../../../shared/sharedFunctions";
+import SubFactionUnitList from "../../../NestedUnitList/SubFactionUnitList";
 import ArmyListSubFactionHeader from "./ArmyListSubFactionHeader";
 // constants
-import { ALLIES_MAPPING } from "../../../../constants/allies";
+import { ALLIES_MAPPING } from "../../../../../../constants/allies";
 import ArmyListSubFactionFooter from "./ArmyListSubFactionFooter";
 
 // Creates the suFaction entry of the army list: Head and current and total points.

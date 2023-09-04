@@ -2,10 +2,10 @@
 import React, { useContext, Fragment } from "react";
 // Material UI
 // components and functions
-import ArmyListBoxHeader from "./ArmyList/ArmyListBoxHeader";
+import ArmyListBoxHeader from "./ArmyList/ArmyListHeader/ArmyListBoxHeader";
 import { ArmyContext } from "../../../contexts/armyContext";
-import ArmyListBoxCenter from "./ArmyList/ArmyListBoxCenter";
-import ArmyListBoxFooter from "./ArmyList/ArmyListBoxFooter";
+import ArmyListBoxCenter from "./ArmyList/ArmyListCenter/ArmyListBoxCenter";
+import ArmyListBoxFooter from "./ArmyList/ArmyListFooter/ArmyListBoxFooter";
 
 const ArmyListBox = () => {
   const AC = useContext(ArmyContext);

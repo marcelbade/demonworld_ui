@@ -4,9 +4,9 @@ import React, { useContext, Fragment } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField } from "@material-ui/core";
 // components and functions
-import { ArmyContext } from "../../../../contexts/armyContext";
+import { ArmyContext } from "../../../../../contexts/armyContext";
 import { useEffect } from "react";
-import { NONE } from "../../../../constants/factions";
+import { NONE } from "../../../../../constants/factions";
 
 const ArmyListBoxHeader = () => {
   const AC = useContext(ArmyContext);

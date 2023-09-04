@@ -3,9 +3,9 @@ import React, { useContext, Fragment } from "react";
 // Material UI
 import List from "@material-ui/core/List";
 // components and functions
-import ArmyListSubFactionEntry from "../ArmyList/ArmyListSubFactionEntry";
-import { ArmyContext } from "../../../../contexts/armyContext";
-import { uuidGenerator } from "../../../shared/sharedFunctions";
+import ArmyListSubFactionEntry from "./ArmyListComponents/ArmyListSubFactionEntry";
+import { ArmyContext } from "../../../../../contexts/armyContext";
+import { uuidGenerator } from "../../../../shared/sharedFunctions";
 
 const ArmyListBoxCenter = () => {
   const AC = useContext(ArmyContext);
