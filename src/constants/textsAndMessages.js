@@ -157,7 +157,10 @@ export const UNDEAD = {
     MAGICIAN: "Deine Armeeliste darf zu höchstens 40% aus Magiern bestehen.",
     ALLY: "Deine Armeeliste darf zu höchstens 20% aus Einheiten aus Alliierten bestehen.",
   },
-  ERRORS: {},
+  ERRORS: {
+      UNDEAD_COMMANDER: "Deine Liste muss einen Nekromanten oder einen Helden oder Befehlshaber mit 2 oder mehr ★ enthalten.",
+      MAX_LIMIT_CHARACTERS: "Die Armee darf zu max. 50% aus Helden, Befehlshaber und Magiern bestehen!",
+  },
 };
 
 export const NO_RANGE_WEAPON = "x";
