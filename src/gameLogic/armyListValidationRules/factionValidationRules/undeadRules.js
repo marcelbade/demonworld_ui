@@ -64,7 +64,7 @@ const rules = [
   },
 ];
 
-const MAX_HERO_PERCENTAGE = 40;
+const MAX_HERO_PERCENTAGE = 50;
 
 const UndeadRules = {
   testSubFactionRules: (availableUnits, selectedUnits, totalPointsAllowance, subFactions) => {
@@ -106,29 +106,6 @@ const UndeadRules = {
 
 //FACTION SPECIAL RULES
 
-/**
- * The army list can have a maximum of 50% characters.
- */
-const maxLimitForAllChars = (availableUnits, selectedUnits, maxArmyPoints) => {
-  let characterSubFactions = ["Helden/Befehlshaber", "Magier"];
-  let sum = 0;
-  let result = [];
-
-  selectedUnits
-    .filter((unit) => characterSubFactions.includes(unit.subFaction))
-    .forEach((characterUnit) => {
-      sum += characterUnit.points;
-    });
-
-  availableUnits.forEach((availableUnit) => {
-    if (availableUnit.points + sum > 0.5 * maxArmyPoints) {
-      result.push({ unitBlockedbyRules: availableUnit.unitName, message: UNDEAD.ERRORS.MAX_LIMIT_CHARACTERS });
-    }
-  });
-
-  return result;
-};
-
 const isUndeadArmyCommanderPresent = (selectedUnits) => {
   const necromancers = [
     "Xarta die Verderbte", //
@@ -146,10 +123,6 @@ const validIshtakAllies = () => {
   const permitted = ["icewitches", "beastmen", "humans"];
   // not permitted
   const blackWizards = ["Drogador", "Xarator", "Masdra Draizar"];
-
-    
-
-
 };
 
 export { UndeadRules, rules };
