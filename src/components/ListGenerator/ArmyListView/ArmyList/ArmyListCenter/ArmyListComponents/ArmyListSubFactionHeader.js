@@ -4,7 +4,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Tooltip, Typography } from "@material-ui/core";
 // components and functions
-import { uuidGenerator } from "../../../shared/sharedFunctions";
+import { uuidGenerator } from "../../../../../shared/sharedFunctions";
 // constants
 
 // TODO: remove unneeded styles

@@ -3,10 +3,10 @@ import React, { useContext, useEffect, useState } from "react";
 // Material UI
 import { ListItemText, makeStyles, List } from "@material-ui/core";
 // components and functions
-import { ArmyContext } from "../../../../contexts/armyContext";
-import { uuidGenerator } from "../../../shared/sharedFunctions";
-import { calculateTotalUnitPointCost } from "../../../shared/sharedFunctions";
-import { ruleObjectProvider } from "../../../../gameLogic/armyListValidationRules/ruleObjectProvider";
+import { ArmyContext } from "../../../../../../contexts/armyContext";
+import { uuidGenerator } from "../../../../../shared/sharedFunctions";
+import { calculateTotalUnitPointCost } from "../../../../../shared/sharedFunctions";
+import { ruleObjectProvider } from "../../../../../../gameLogic/armyListValidationRules/ruleObjectProvider";
 // clsx
 
 const useStyles = makeStyles({

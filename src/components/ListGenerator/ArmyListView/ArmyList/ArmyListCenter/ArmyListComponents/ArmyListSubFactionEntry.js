@@ -6,7 +6,7 @@ import { Grid } from "@material-ui/core";
 // components and functions
 import { ArmyContext } from "../../../../../../contexts/armyContext";
 import { uuidGenerator } from "../../../../../shared/sharedFunctions";
-import SubFactionUnitList from "../../../NestedUnitList/SubFactionUnitList";
+import SubFactionUnitList from "./NestedUnitList/SubFactionUnitList";
 import ArmyListSubFactionHeader from "./ArmyListSubFactionHeader";
 // constants
 import { ALLIES_MAPPING } from "../../../../../../constants/allies";

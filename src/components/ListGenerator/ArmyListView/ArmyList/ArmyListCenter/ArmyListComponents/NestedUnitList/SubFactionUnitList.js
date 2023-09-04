@@ -5,8 +5,8 @@ import { List, ListItem, makeStyles, Button } from "@material-ui/core";
 // icons
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 // components and functions
-import { ArmyContext } from "../../../../contexts/armyContext";
-import { unitCardMultiSort, uuidGenerator } from "../../../shared/sharedFunctions";
+import { ArmyContext } from "../../../../../../../contexts/armyContext";
+import { unitCardMultiSort, uuidGenerator } from "../../../../../../shared/sharedFunctions";
 import EquipmentList from "./EquipmentList";
 import UnitEntryButtons from "./UnitEntryButtons";
 import ArmyListUnitEntry from "./ArmyListUnitEntry";

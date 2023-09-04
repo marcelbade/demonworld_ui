@@ -5,10 +5,10 @@ import { makeStyles, List, ListItemText, ListItem, Button } from "@material-ui/c
 // icons
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 // components and functions
-import { ArmyContext } from "../../../../contexts/armyContext";
-import { uuidGenerator } from "../../../shared/sharedFunctions";
+import { ArmyContext } from "../../../../../../../contexts/armyContext";
+import { uuidGenerator } from "../../../../../../shared/sharedFunctions";
 // constants
-import { ITEM_TYPE_BANNER, ITEM_TYPE_MUSICIAN } from "../../../../constants/itemShopConstants";
+import { ITEM_TYPE_BANNER, ITEM_TYPE_MUSICIAN } from "../../../../../../../constants/itemShopConstants";
 // clsx
 import clsx from "clsx";
 

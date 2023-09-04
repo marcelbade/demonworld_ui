@@ -3,11 +3,11 @@ import React, { Fragment, useContext, useEffect } from "react";
 // Material UI
 import { makeStyles, ListItemText, Tooltip } from "@material-ui/core";
 // components and functions
-import { ArmyContext } from "../../../../contexts/armyContext";
-import { uuidGenerator } from "../../../shared/sharedFunctions";
+import { ArmyContext } from "../../../../../../../contexts/armyContext";
+import { uuidGenerator } from "../../../../../../shared/sharedFunctions";
 import { useState } from "react";
 // constants
-import { ARMIES_ADDITIONAL_SUBFACTIONS } from "../../../../constants/factions";
+import { ARMIES_ADDITIONAL_SUBFACTIONS } from "../../../../../../../constants/factions";
 
 const useStyles = makeStyles({
   text: {
