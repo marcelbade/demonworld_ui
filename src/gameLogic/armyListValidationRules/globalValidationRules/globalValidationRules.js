@@ -87,7 +87,7 @@ const globalRules = {
       .filter((unit) => unit.unitType === HERO || unit.unitType === MAGE)
       .forEach((hero) => {
         if (hero.points + heroTotal > max) {
-          result.push({ unitBlockedbyRules: hero.unitName, message: VALIDATION.MAXIMUM_OF_35_PERCENT_HEROES_MESSAGE });
+          result.push({ unitBlockedbyRules: hero.unitName, message: VALIDATION.MAXIMUM_OF_X_PERCENT_HEROES_MESSAGE(allowedPercentage) });
         }
       });
 
@@ -210,7 +210,7 @@ const calculateCurrentlySpentPoints = (selectedUnits, cardNames) => {
  * @param {unitCard Obj} selectedUnit
  * @returns  total point cost for a unit's equipment.
  */
- const calculateEquipmentCost = (selectedUnit) => {
+const calculateEquipmentCost = (selectedUnit) => {
   let sum = 0;
 
   selectedUnit.equipment.forEach((item) => {
