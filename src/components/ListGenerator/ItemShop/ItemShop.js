@@ -8,7 +8,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { ArmyContext } from "../../../contexts/armyContext";
 import { isObjectEmtpy } from "../../shared/sharedFunctions";
 import { uuidGenerator } from "../../shared/sharedFunctions";
-import { NAME_MAPPING as ITEM_CATEGORY_NAME_MAPPING } from "../../../constants/itemShopConstants";
+import { NAME_MAPPING as ITEM_CATEGORY_NAME_MAPPING, ITEM_TYPE_BANNER, ITEM_TYPE_MUSICIAN } from "../../../constants/itemShopConstants";
 import {
   filterForStandardBearer,
   filterForFactionAndGenericItems,
@@ -173,6 +173,36 @@ const ItemShop = () => {
   };
 
   /**
+   * Function recalculates itemType flags of a unitCard to correctly toggle the item buttons
+   * in thej item shop on and off.
+   * @param {itemCard object} item
+   */
+  const recalculateItemTypeFlags = (item, ITEM_ADDED) => {
+    if (ITEM_ADDED) {
+      let tempObj = { ...AC.unitSelectedForShop };
+
+      tempObj.equipmentTypes.banner = item.itemType ===   ITEM_TYPE_BANNER ? true : false;
+      tempObj.equipmentTypes.musician = item.itemType === ITEM_TYPE_MUSICIAN ? true : false;
+      tempObj.equipmentTypes.magicItem = !item.isAdditionalItem;
+
+      AC.setUnitSelectedForShop({
+        ...tempObj,
+      });
+      //item removed
+    } else {
+      let tempObj = { ...AC.unitSelectedForShop };
+
+      tempObj.equipmentTypes.banner = item.itemType === ITEM_TYPE_BANNER ? false : true;
+      tempObj.equipmentTypes.musician = item.itemType === ITEM_TYPE_MUSICIAN ? false : true;
+      tempObj.equipmentTypes.magicItem = item.isAdditionalItem;
+
+      AC.setUnitSelectedForShop({
+        ...tempObj,
+      });
+    }
+  };
+
+  /**
    * Function causes the list of all selected units to change (w/o actually changing it). This is necessary to correctly calculate the list's point cost whenever an item is added. Without this, the point cost of the item is only added whenever a unit is added or removed from the list, not when the item is added ore removed.
    */
   const triggerArymListReCalculation = () => {
@@ -224,7 +254,7 @@ const ItemShop = () => {
                         disabled={disableButton(item)}
                         onClick={() => {
                           addItemToUnit(item);
-                          AC.recalculateItemTypeFlags(item, true);
+                          recalculateItemTypeFlags(item, true);
                           triggerArymListReCalculation();
                         }}
                         key={uuidGenerator()}
