@@ -1,24 +1,14 @@
 // React
 import React, { useState, useContext, Fragment } from "react";
 // Material UI
-import List from "@material-ui/core/List";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, TextField, InputAdornment, Grid } from "@material-ui/core";
 // components and functions
-import { ArmyContext } from "../../../contexts/armyContext";
-import ArmyListSubFactionEntry from "./ArmyList/ArmyListSubFactionEntry";
-import { uuidGenerator } from "../../shared/sharedFunctions";
-import calculateScoutingFactor from "../../../gameLogic/scoutFactorCalculator/scoutingFactorCalculator";
+import { ArmyContext } from "../../../../contexts/armyContext";
+import calculateScoutingFactor from "../../../../gameLogic/scoutFactorCalculator/scoutingFactorCalculator";
 
 // TODO: remove unneeded styles
 const useStyles = makeStyles((theme) => ({
-  HeaderBox: {
-    fontSize: "20px",
-    fontWeight: "bold",
-    width: "60%",
-    borderBottom: "solid 4px black",
-    marginBottom: "1em",
-  },
   total: {
     fontSize: "20px",
     fontWeight: "bold",
@@ -26,19 +16,12 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     top: 3,
   },
-  clearIcon: {
-    width: "40px",
-    height: "40px",
-  },
-  armyName: {
-    fontSize: "30px",
-  },
   bottom: { bottom: "100px" },
   withinLimit: { color: "black" },
   exceeded: { color: "red" },
 }));
 
-const ArmyListDisplay = () => {
+const ArmyListBoxFooter = () => {
   const classes = useStyles();
   const AC = useContext(ArmyContext);
 
@@ -55,29 +38,8 @@ const ArmyListDisplay = () => {
     isValid ? setErrorMessage("") : setErrorMessage("Bitte nur Zahlen eingeben.");
   };
 
-  const selectsSubFactionList = () => {
-    let subfactions;
-    if (!AC.armyHasAlternativeLists) {
-      subfactions = AC.subFactions;
-    } else if (AC.armyHasAlternativeLists) {
-      subfactions = AC.alternateListSubFactions;
-    }
-    return subfactions;
-  };
-
-  /**
-   * This creates the centre of the UI: the actual army list consisting of the selected units and the display of the maximum * army points.
-   */
-  return AC ? (
+  return (
     <Fragment>
-      {/* <Grid item container justify="flex-end"> */}
-
-      <List>
-        {selectsSubFactionList().map((sF) => (
-          <ArmyListSubFactionEntry subFaction={sF} key={uuidGenerator()} />
-        ))}
-      </List>
-      {/* TOTAL SPENT POINTS +  TOTAL POINT ALLOWANCE*/}
       <Grid container direction="column">
         <Grid container direction="row">
           <Typography className={classes.total}>Gesamtpunktzahl: {AC.totalPointValue} / </Typography>
@@ -104,7 +66,7 @@ const ArmyListDisplay = () => {
         <Typography className={classes.total}>Spähfaktor: {calculateScoutingFactor(AC.selectedUnits)}</Typography>
       </Grid>
     </Fragment>
-  ) : null;
+  );
 };
 
-export default ArmyListDisplay;
+export default ArmyListBoxFooter;
