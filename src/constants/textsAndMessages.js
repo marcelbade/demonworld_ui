@@ -5,7 +5,9 @@ export const VALIDATION = {
 
   NO_DUPLICATE_UNIQUES_MESSAGE: "Die Liste darf einzigartige Einheiten nur einmal enthalten",
   MAXIMUM_OF_TWO_OF_EACH_MESSAGE: "Die Liste darf eine Einheit maximal 2x enthalten.",
-  MAXIMUM_OF_35_PERCENT_HEROES_MESSAGE: "Die Liste darf maximal 35% Characktere und Helden enthalten.",
+  MAXIMUM_OF_X_PERCENT_HEROES_MESSAGE: (percentage) => {
+    return `Die Liste darf maximal ${percentage}% Characktere und Helden enthalten.`;
+  },
   DONT_EXCEED_THE_POINT_ALLOWANCE_MESSAGE: "Die Liste darf die maximale Punktzahl nicht überschreiten.",
 };
 
@@ -125,7 +127,7 @@ export const ORKS = {
     CLANNGETT: "Deine Armeeliste darf zu höchstens 50% aus Einheiten Clanngetts bestehen.",
     WIZARDS: "Deine Armeeliste darf zu höchstens 40% aus Zauberern bestehen.",
     GOBLINS: "Deine Armeeliste darf zu maximal zu 20% aus Goblins bestehen.",
-    AVAILABLE_CLANUNITS:"Dieser Clan kann diese Einehit nicht auswählen.",
+    AVAILABLE_CLANUNITS: "Dieser Clan kann diese Einehit nicht auswählen.",
   },
 };
 
@@ -158,8 +160,8 @@ export const UNDEAD = {
     ALLY: "Deine Armeeliste darf zu höchstens 20% aus Einheiten aus Alliierten bestehen.",
   },
   ERRORS: {
-      UNDEAD_COMMANDER: "Deine Liste muss einen Nekromanten oder einen Helden oder Befehlshaber mit 2 oder mehr ★ enthalten.",
-      MAX_LIMIT_CHARACTERS: "Die Armee darf zu max. 50% aus Helden, Befehlshaber und Magiern bestehen!",
+    UNDEAD_COMMANDER: "Deine Liste muss einen Nekromanten oder einen Helden oder Befehlshaber mit 2 oder mehr ★ enthalten.",
+    MAX_LIMIT_CHARACTERS: "Die Armee darf zu max. 50% aus Helden, Befehlshaber und Magiern bestehen!",
   },
 };
 
