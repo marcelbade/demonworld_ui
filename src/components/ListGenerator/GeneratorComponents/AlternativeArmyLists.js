@@ -1,10 +1,9 @@
 // React
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useContext } from "react";
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
 // components and functions
 import AlternativeArmyListSelector from "../ArmySelectorView/AlternativeArmyListSelection/AlternativeArmyListSelector";
-import SecondAlternativeArmySelector from "../ArmySelectorView/AlternativeArmyListSelection/SecondAlternativeArmySelector";
 import { ArmyContext } from "../../../contexts/armyContext";
 // constants
 import {
@@ -37,6 +36,12 @@ const AlternativeArmyLists = () => {
   }, [AC.armyHasAlternativeLists, AC.selectedAlternativeList]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
+    if (AC.selectedAlternativeList !== NONE) {
+      secondUnitListFilter();
+    }
+  }, [AC.selectedAlternativeList]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
     AC.setAlternateArmyListOptions(findDropdownOptions(FIRST));
   }, [AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -62,6 +67,7 @@ const AlternativeArmyLists = () => {
 
     AC.setAlternateListSubFactions([...tempArray]);
   };
+  const secondUnitListFilter = () => {};
 
   /**
    * Function retrieves the correct label text for the input element.
