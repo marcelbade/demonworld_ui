@@ -12,7 +12,7 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ArmyProvider from "../../contexts/armyContext";
 import SelectionInput from "../shared/selectionInput";
 import FactionTreeView from "./ArmySelectorView/SelectorTreeView/TreeView";
-import ArmyListDisplay from "./ArmyListView/ArmyListDisplay";
+import ArmyListBox from "./ArmyListView/ArmyListBox";
 import Allies from "./GeneratorComponents/Allies";
 import ArmyValidation from "./GeneratorComponents/ArmyValidation";
 import Pdf from "./GeneratorComponents/Pdf";
@@ -84,6 +84,8 @@ const ListGeneratorController = () => {
   // intialize local states
   const [fetchedFactions, setFetchedFactions] = useState([]);
   const [fetchedItems, setFetchedItems] = useState([]);
+  // army name
+  const [armyName, setArmyName] = useState("");
   // selected faction
   const [selectedFactionName, setSelectedFactionName] = useState(NONE);
   const [distinctSubFactions, setDistinctSubFactions] = useState([]);
@@ -255,6 +257,9 @@ const ListGeneratorController = () => {
   return fetchedFactions && fetchedItems ? (
     <ArmyProvider
       value={{
+        // ARMY NAME
+        armyName: armyName,
+        setArmyName: setArmyName,
         // ARMY
         selectedFactionName: selectedFactionName,
         fetchedFactions: fetchedFactions,
@@ -366,7 +371,7 @@ const ListGeneratorController = () => {
           </Grid>
           {/* ARMYLIST */}
           <Grid item container direction="column" justify="flex-end" xs={3} className={classes.armyListBox}>
-            <ArmyListDisplay setTotalPointValue={setTotalPointValue} />
+            <ArmyListBox setTotalPointValue={setTotalPointValue} />
           </Grid>
           <Menus />
         </Grid>
