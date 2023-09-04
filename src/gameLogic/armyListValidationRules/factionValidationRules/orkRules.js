@@ -162,7 +162,7 @@ const isOrkArmyCommanderPresent = (selectedUnits, selectedAlternativeList) => {
 
   const clangettHeroes = ["Trazzag", "Fherniak", "Ärrig", "Khazzar", "Nallian"];
 
-  const clanngettHeroPresent = selectedUnits.filter((u) => clangettHeroes.includes(u));
+  const clanngettHeroPresent = selectedUnits.filter((u) => clangettHeroes.includes(u.unitName));
   const potentialCommanders = selectedUnits.filter((u) => u.commandStars >= 2);
   return clanngettHeroPresent.length > 0 && potentialCommanders.length > 0;
 };
