@@ -9,13 +9,8 @@ TODO:  BUGS AND IMPROVEMENTS
 
 TODO:  ARMY LIST 
 ===================================
- - allies dont show up... WTF
-
-TODO: ORKS
-===================================
- -  alternative army lists dont wokr correctly  <- CONTINUE
-
-
+ 
+ 
 
 TODO: FINAL TEST - validation
 ===================================
@@ -23,6 +18,7 @@ dark elves - FINISHED
      elves - FINISHED
    goblins - FINISHED
     empire - FINISHED
+      ORKS - FINISHED
 
 
 
