@@ -9,6 +9,10 @@ export const OPTIONS = {
   CREATE_PDF: "PDF Erzeugen",
 };
 
+export const GENERAL_ERRRORS = {
+  ONLY_NUMBERS: "Bitte nur Zahlen eingeben.",
+};
+
 export const VALIDATION = {
   NO_COMMANDER_WARNING: `Die Armeeliste muss mindestens 1 Helden, Befehlshaber oder Magier mit 2 oder mehr ★ enthalten.`,
 
