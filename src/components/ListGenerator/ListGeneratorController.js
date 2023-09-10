@@ -303,8 +303,7 @@ const ListGeneratorController = () => {
         setSelectedUnits: setSelectedUnits,
         setMaxPointsAllowance: setMaxPointsAllowance,
         resetTheState: resetTheState,
-        resetSubFaction: resetSubFaction,
-        // ARMY LIST VALIDATION
+         // ARMY LIST VALIDATION
         listValidationResults: listValidationResults,
         setListValidationResults: setListValidationResults,
         // TOURNAMENT RULES OVERRIDE
