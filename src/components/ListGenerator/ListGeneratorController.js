@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
     },
 
     [theme.breakpoints.down("md")]: {},
-    position: "fixed", 
+    position: "fixed",
   },
   armyListBox: {
     paddingTop: "2em",
@@ -213,8 +213,6 @@ const ListGeneratorController = () => {
       removeUnitsNoLongerValid: [],
       secondSubFactionMissing: [],
     });
-    setSelectedAlternativeList(NONE);
-
     closeCardDisplay();
     closeItemShop();
   };
