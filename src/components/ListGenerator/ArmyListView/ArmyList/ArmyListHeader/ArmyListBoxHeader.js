@@ -1,5 +1,5 @@
 // React
-import React, { useContext,   } from "react";
+import React, { useContext } from "react";
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, IconButton, Tooltip, Typography, Grid } from "@material-ui/core";
@@ -41,7 +41,7 @@ const ArmyListBoxHeader = () => {
   }, [AC.selectedFactionName]);
 
   return (
-    <Grid container  flexdirection = "row" >
+    <Grid container flexdirection="row" alignItems="center">
       <TextField
         id="outlined-basic"
         autoComplete="off"
