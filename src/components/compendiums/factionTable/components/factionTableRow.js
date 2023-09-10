@@ -2,16 +2,13 @@
 import React from "react";
 // Material UI
 // import { makeStyles } from "@material-ui/core/styles";
-// eslint-disable-next-line
 import { IconButton } from "@material-ui/core";
 // components & functions
-// eslint-disable-next-line
+
 import { renderBooleanAsIcon, renderMagicPoints, renderSpecialRules, renderCommandPoints } from "../depencies/factionTableFunctions";
 import { uuidGenerator } from "../../../shared/sharedFunctions";
 // icons
-// eslint-disable-next-line
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
-// eslint-disable-next-line
 import CloseIcon from "@material-ui/icons/Close";
 
 /**
