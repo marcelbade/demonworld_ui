@@ -41,6 +41,7 @@ const useStyles = makeStyles((theme) => ({
     },
 
     [theme.breakpoints.down("md")]: {},
+    position: "fixed", 
   },
   armyListBox: {
     paddingTop: "2em",
