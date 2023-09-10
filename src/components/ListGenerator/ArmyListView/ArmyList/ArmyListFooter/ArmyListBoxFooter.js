@@ -6,6 +6,8 @@ import { Typography, TextField, InputAdornment, Grid } from "@material-ui/core";
 // components and functions
 import { ArmyContext } from "../../../../../contexts/armyContext";
 import calculateScoutingFactor from "../../../../../gameLogic/scoutFactorCalculator/scoutingFactorCalculator";
+// constants
+import { GENERAL_ERRRORS } from "../../../../../constants/textsAndMessages";
 
 // TODO: remove unneeded styles
 const useStyles = makeStyles((theme) => ({
@@ -35,7 +37,7 @@ const ArmyListBoxFooter = () => {
     AC.setMaxPointsAllowance(event.target.value);
 
     let isValid = new RegExp(/^[0-9]*$/).test(event.target.value);
-    isValid ? setErrorMessage("") : setErrorMessage("Bitte nur Zahlen eingeben.");
+    isValid ? setErrorMessage("") : setErrorMessage(GENERAL_ERRRORS.ONLY_NUMBERS);
   };
 
   return (
