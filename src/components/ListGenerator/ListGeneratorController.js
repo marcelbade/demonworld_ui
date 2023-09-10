@@ -17,9 +17,9 @@ import Allies from "./GeneratorComponents/Allies";
 import ArmyValidation from "./GeneratorComponents/ArmyValidation";
 import Pdf from "./GeneratorComponents/Pdf";
 import AlternativeArmyLists from "./GeneratorComponents/AlternativeArmyLists";
+import MenuBox from "./RightSideMenus/MenuBox";
 // constants
 import { ALL_FACTIONS_ARRAY, NONE } from "../../constants/factions";
-import Menus from "./GeneratorComponents/Menus";
 import ArmyList from "./GeneratorComponents/ArmyList";
 import { NO_ALLY } from "../../constants/allies";
 
@@ -218,6 +218,11 @@ const ListGeneratorController = () => {
     closeItemShop();
   };
 
+  const resetSubFaction = (subFaction) => {
+    const temp = selectedUnits.filter((u) => !u.subFaction === subFaction);
+    setSelectedUnits(temp);
+  };
+
   /**
    * in order to work, the state setter needs a unit at the start. Since the view is not visible, the first unit in the list is used.
    */
@@ -302,6 +307,7 @@ const ListGeneratorController = () => {
         setSelectedUnits: setSelectedUnits,
         setMaxPointsAllowance: setMaxPointsAllowance,
         resetTheState: resetTheState,
+        resetSubFaction: resetSubFaction,
         // ARMY LIST VALIDATION
         listValidationResults: listValidationResults,
         setListValidationResults: setListValidationResults,
@@ -373,7 +379,7 @@ const ListGeneratorController = () => {
           <Grid item container direction="column" justify="flex-end" xs={3} className={classes.armyListBox}>
             <ArmyListBox setTotalPointValue={setTotalPointValue} />
           </Grid>
-          <Menus />
+          <MenuBox />
         </Grid>
       </Grid>
     </ArmyProvider>
