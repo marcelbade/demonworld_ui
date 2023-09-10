@@ -24,12 +24,7 @@ const ArmyValidation = () => {
     } else if (IsFactionSelected && !hasAlternativeLists) {
       runValidation();
     }
-  }, [
-    AC.selectedUnits, //
-    AC.maxPointsAllowance,
-    AC.selectedAlternativeList,
-    AC.subFactions,
-  ]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [AC.selectedUnits, AC.maxPointsAllowance, AC.selectedAlternativeList, AC.subFactions]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const runValidation = () => {
     let validator = ruleValidation(AC.selectedFactionName);
