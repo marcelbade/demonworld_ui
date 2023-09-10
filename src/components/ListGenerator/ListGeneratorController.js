@@ -305,19 +305,20 @@ const ListGeneratorController = () => {
         // ARMY LIST VALIDATION
         listValidationResults: listValidationResults,
         setListValidationResults: setListValidationResults,
+        // RIGHT SIDE MENU
+        showOptionButtons: showOptionButtons,
+        statCardState: statCardState,
+        secondSubFactionMenuState: secondSubFactionMenuState,
+        itemShopState: itemShopState,
+        setShowOptionButtons: setShowOptionButtons,
         // TOURNAMENT RULES OVERRIDE
         tournamentOverrideRules: tournamentOverrideRules,
         showTournamentRulesMenu: showTournamentRulesMenu,
         setShowTournamentRulesMenu: setShowTournamentRulesMenu,
         // ITEMSHOP
-        statCardState: statCardState,
-        secondSubFactionMenuState: secondSubFactionMenuState,
-        itemShopState: itemShopState,
         fetchedItems: fetchedItems,
         allItems: allItems,
         unitSelectedForShop: unitSelectedForShop,
-        showOptionButtons: showOptionButtons,
-        setShowOptionButtons: setShowOptionButtons,
         setUnitSelectedForShop: setUnitSelectedForShop,
         setAllItems: setAllItems,
         // SECOND SUB FACTION
@@ -325,7 +326,7 @@ const ListGeneratorController = () => {
         secondSubFactionList: secondSubFactionList,
         excemptSubFactions: excemptSubFactions,
         secondSubfactionCaption: secondSubfactionCaption,
-        //AdditionalSubfactions
+        //ADDITIONAL SUBFACTION (TRIBE)
         setHasAdditionalSubFaction: setHasAdditionalSubFaction,
         setSecondSubFactionList: setSecondSubFactionList,
         setExcemptSubFactions: setExcemptSubFactions,
