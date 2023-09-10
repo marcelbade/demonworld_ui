@@ -16,7 +16,7 @@ export const GENERAL_ERRRORS = {
 export const VALIDATION = {
   NO_COMMANDER_WARNING: `Die Armeeliste muss mindestens 1 Helden, Befehlshaber oder Magier mit 2 oder mehr ★ enthalten.`,
 
-  NO_DUPLICATE_UNIQUES_MESSAGE: "Die Liste darf einzigartige Einheiten nur einmal enthalten",
+  NO_DUPLICATE_UNIQUES_MESSAGE: "Die Liste darf einzigartige Einheiten nur einmal enthalten.",
   MAXIMUM_OF_TWO_OF_EACH_MESSAGE: "Die Liste darf eine Einheit maximal 2x enthalten.",
   MAXIMUM_OF_X_PERCENT_HEROES_MESSAGE: (percentage) => {
     return `Die Liste darf maximal ${percentage}% Characktere und Helden enthalten.`;
