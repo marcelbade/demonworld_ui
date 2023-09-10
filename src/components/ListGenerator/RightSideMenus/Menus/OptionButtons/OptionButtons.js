@@ -165,7 +165,7 @@ const OptionButtons = () => {
         <Button
           className={classes.button}
           variant="outlined"
-          disabled={disableButtons}
+          disabled={false}
           onClick={() => {
             AC.setShowTournamentRulesMenu(true);
           }}
