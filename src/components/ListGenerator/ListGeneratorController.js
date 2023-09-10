@@ -217,10 +217,7 @@ const ListGeneratorController = () => {
     closeItemShop();
   };
 
-  const resetSubFaction = (subFaction) => {
-    const temp = selectedUnits.filter((u) => !u.subFaction === subFaction);
-    setSelectedUnits(temp);
-  };
+ 
 
   /**
    * in order to work, the state setter needs a unit at the start. Since the view is not visible, the first unit in the list is used.
