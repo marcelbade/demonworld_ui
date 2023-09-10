@@ -109,11 +109,12 @@ const ListGeneratorController = () => {
     secondSubFactionMissing: [],
   });
   // tournament rules override
+  const [showTournamentRulesMenu, setShowTournamentRulesMenu] = useState(false);
   const [tournamentOverrideRules, setTournamentOverrideRules] = useState({
     overrideIsOn: false,
     tournamentHeroValue: 30,
     tournamentNonUniqueMax: 2,
-    tournamentUniquesOnylOnce: true,
+    tournamentUniquesOnlyOnce: true,
   });
   // alternative lists
   const [armyHasAlternativeLists, setArmyHasAlternativeLists] = useState(false);
@@ -217,8 +218,6 @@ const ListGeneratorController = () => {
     closeItemShop();
   };
 
- 
-
   /**
    * in order to work, the state setter needs a unit at the start. Since the view is not visible, the first unit in the list is used.
    */
@@ -303,11 +302,13 @@ const ListGeneratorController = () => {
         setSelectedUnits: setSelectedUnits,
         setMaxPointsAllowance: setMaxPointsAllowance,
         resetTheState: resetTheState,
-         // ARMY LIST VALIDATION
+        // ARMY LIST VALIDATION
         listValidationResults: listValidationResults,
         setListValidationResults: setListValidationResults,
         // TOURNAMENT RULES OVERRIDE
         tournamentOverrideRules: tournamentOverrideRules,
+        showTournamentRulesMenu: showTournamentRulesMenu,
+        setShowTournamentRulesMenu: setShowTournamentRulesMenu,
         // ITEMSHOP
         statCardState: statCardState,
         secondSubFactionMenuState: secondSubFactionMenuState,
