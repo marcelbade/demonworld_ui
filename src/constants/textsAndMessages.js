@@ -1,7 +1,12 @@
-// validation
-
 export const TOOLTIPS = {
   DELETE_ARMY_LIST: "Komplette Liste löschen",
+};
+
+export const OPTIONS = {
+  CHANGE_TOURNAMENT_RULES: "Turnierregeln Ändern",
+  TO_LOSS_CALCULATOR: "Zum Verlustrechner",
+  SAVE_LIST: "Liste Speichern",
+  CREATE_PDF: "PDF Erzeugen",
 };
 
 export const VALIDATION = {
