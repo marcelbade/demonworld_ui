@@ -10,8 +10,8 @@ import {
   UNIT,
   SPEAR_TYPES,
   LANCE_TYPES,
-} from "../../../constants/itemShopConstants";
-import { NO_RANGE_WEAPON } from "../../../constants/textsAndMessages";
+} from "../../../../../constants/itemShopConstants";
+import { NO_RANGE_WEAPON } from "../../../../../constants/textsAndMessages";
 
 // Only show items of the faction or generic ones.
 export const filterForFactionAndGenericItems = (item, unit) => {

@@ -5,10 +5,13 @@ import { Button, Grid, ButtonGroup, Typography, Accordion, AccordionSummary, Acc
 import { makeStyles } from "@material-ui/core/styles";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 // components and functions
-import { ArmyContext } from "../../../contexts/armyContext";
-import { isObjectEmtpy } from "../../shared/sharedFunctions";
-import { uuidGenerator } from "../../shared/sharedFunctions";
-import { NAME_MAPPING as ITEM_CATEGORY_NAME_MAPPING, ITEM_TYPE_BANNER, ITEM_TYPE_MUSICIAN } from "../../../constants/itemShopConstants";
+import { ArmyContext } from "../../../../../contexts/armyContext";
+import { uuidGenerator, isObjectEmtpy } from "../../../../shared/sharedFunctions";
+import {
+  NAME_MAPPING as ITEM_CATEGORY_NAME_MAPPING,
+  ITEM_TYPE_BANNER,
+  ITEM_TYPE_MUSICIAN,
+} from "../../../../../constants/itemShopConstants";
 import {
   filterForStandardBearer,
   filterForFactionAndGenericItems,
@@ -181,7 +184,7 @@ const ItemShop = () => {
     if (ITEM_ADDED) {
       let tempObj = { ...AC.unitSelectedForShop };
 
-      tempObj.equipmentTypes.banner = item.itemType ===   ITEM_TYPE_BANNER ? true : false;
+      tempObj.equipmentTypes.banner = item.itemType === ITEM_TYPE_BANNER ? true : false;
       tempObj.equipmentTypes.musician = item.itemType === ITEM_TYPE_MUSICIAN ? true : false;
       tempObj.equipmentTypes.magicItem = !item.isAdditionalItem;
 

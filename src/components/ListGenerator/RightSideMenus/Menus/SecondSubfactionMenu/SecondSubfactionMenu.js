@@ -4,10 +4,10 @@ import React, { useContext, useEffect } from "react";
 import { Button, Grid, ButtonGroup, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 // components and functions
-import { ArmyContext } from "../../../contexts/armyContext";
-import { uuidGenerator } from "../../shared/sharedFunctions";
+import { ArmyContext } from "../../../../../contexts/armyContext";
+import { uuidGenerator } from "../../../../shared/sharedFunctions";
 // constants
-import { ARMIES_ADDITIONAL_SUBFACTIONS, ARMIES_ADDITIONAL_SUBFACTIONS_BUTTON_CAPTION } from "../../../constants/factions";
+import { ARMIES_ADDITIONAL_SUBFACTIONS, ARMIES_ADDITIONAL_SUBFACTIONS_BUTTON_CAPTION } from "../../../../../constants/factions";
 
 const useStyles = makeStyles({
   overlay: {

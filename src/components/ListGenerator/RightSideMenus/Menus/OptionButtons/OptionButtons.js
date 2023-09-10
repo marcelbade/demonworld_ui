@@ -17,13 +17,13 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 // components and functions
-import { uuidGenerator } from "../../shared/sharedFunctions";
+import { uuidGenerator } from "../../../../shared/sharedFunctions";
 // Icons
 import ErrorIcon from "@mui/icons-material/Error";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 // context
-import { ArmyContext } from "../../../contexts/armyContext";
-import { VALIDATION } from "../../../constants/textsAndMessages";
+import { ArmyContext } from "../../../../../contexts/armyContext";
+import { VALIDATION } from "../../../../../constants/textsAndMessages";
 
 const useStyles = makeStyles({
   overlay: {

@@ -4,9 +4,9 @@ import { useEffect, useContext } from "react";
 import { Drawer } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 // components and functions
-import OptionButtons from "../OptionButtons/OptionButtons";
-import ItemShop from "../ItemShop/ItemShop";
-import SecondSubFactionMenu from "../SecondSubfactionMenu/SecondSubfactionMenu";
+import OptionButtons from "./Menus/OptionButtons/OptionButtons"
+import ItemShop from "./Menus/ItemShop/ItemShop";
+import SecondSubFactionMenu from "./Menus/SecondSubfactionMenu/SecondSubfactionMenu";
 import { ArmyContext } from "../../../contexts/armyContext";
 import { Fragment } from "react";
 import { isObjectEmtpy, unitOrCmdCard } from "../../shared/sharedFunctions";
@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Menus = () => {
+const MenuBox = () => {
   const AC = useContext(ArmyContext);
   const classes = useStyles();
 
@@ -36,7 +36,7 @@ const Menus = () => {
 
   return (
     <Fragment>
-      <Drawer anchor={"right"} variant="persistent" open={AC.showOptionButtons} className={classes.optionButtons}>
+      <Drawer anchor={"right"} variant="persistent" open={AC.showOptionButtons}  >
         <OptionButtons />
       </Drawer>
       <Drawer anchor={"right"} variant="persistent" open={AC.itemShopState.show}>
@@ -54,4 +54,4 @@ const Menus = () => {
   );
 };
 
-export default Menus;
+export default MenuBox;
