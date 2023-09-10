@@ -63,7 +63,6 @@ const ArmyListSubFactionEntry = (props) => {
             valid={validatedSubFaction.valid}
             message={validatedSubFaction.validationMessage}
           />
-          {/* DISPLAY UNITS, PONT COST, PERCENTAGES FOR ONE SUBFACTION */}
           <SubFactionUnitList
             key={uuidGenerator()}
             subFactionUnits={filterUnitsForSubFaction(AC.selectedUnits, props.subFaction)} //
