@@ -38,7 +38,8 @@ const ArmyListBoxHeader = () => {
       const defaultArmyName = `${AC.selectedFactionName}liste - ${dayOfMonth}.${month}.${year}`;
       AC.setArmyName(defaultArmyName);
     }
-  }, [AC.selectedFactionName]);
+  }, [AC.selectedFactionName]);// eslint-disable-line react-hooks/exhaustive-deps
+
 
   return (
     <Grid container flexdirection="row" alignItems="center">
