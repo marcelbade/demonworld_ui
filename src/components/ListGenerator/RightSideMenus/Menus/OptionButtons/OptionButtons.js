@@ -23,7 +23,8 @@ import ErrorIcon from "@mui/icons-material/Error";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 // context
 import { ArmyContext } from "../../../../../contexts/armyContext";
-import { VALIDATION } from "../../../../../constants/textsAndMessages";
+// constants
+import { OPTIONS, VALIDATION } from "../../../../../constants/textsAndMessages";
 
 const useStyles = makeStyles({
   overlay: {
@@ -124,7 +125,6 @@ const OptionButtons = () => {
 
   return (
     <Grid container direction="column" alignItems="flex-start" spacing={4} className={classes.overlay}>
-      
       <Grid item>
         <Button
           className={classes.button}
@@ -134,7 +134,7 @@ const OptionButtons = () => {
             openPDfInNewTab();
           }}
         >
-          PDF Erzeugen
+          {OPTIONS.CREATE_PDF}
         </Button>
       </Grid>
       <Grid item>
@@ -146,7 +146,7 @@ const OptionButtons = () => {
             storeList();
           }}
         >
-          Liste Speichern
+          {OPTIONS.SAVE_LIST}
         </Button>
       </Grid>
       <Grid item>
@@ -158,7 +158,19 @@ const OptionButtons = () => {
             navigateToLossCalculator();
           }}
         >
-          Zum Verlustrechner
+          {OPTIONS.TO_LOSS_CALCULATOR}
+        </Button>
+      </Grid>
+      <Grid item>
+        <Button
+          className={classes.button}
+          variant="outlined"
+          disabled={disableButtons}
+          onClick={() => {
+            AC.setShowTournamentRulesMenu(true);
+          }}
+        >
+          {OPTIONS.CHANGE_TOURNAMENT_RULES}
         </Button>
       </Grid>
       <Grid item className={classes.cardTest}>
