@@ -4,6 +4,7 @@ import { useEffect, useContext } from "react";
 import { Drawer } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 // components and functions
+import TournamentRulesMenu from "./Menus/TournamentRulesMenu/TournamentRulesMenu";
 import OptionButtons from "./Menus/OptionButtons/OptionButtons"
 import ItemShop from "./Menus/ItemShop/ItemShop";
 import SecondSubFactionMenu from "./Menus/SecondSubfactionMenu/SecondSubfactionMenu";
@@ -36,6 +37,9 @@ const MenuBox = () => {
 
   return (
     <Fragment>
+      <Drawer anchor={"right"} variant="persistent" open={AC.showOptionButtons}  >
+        <TournamentRulesMenu />
+      </Drawer>
       <Drawer anchor={"right"} variant="persistent" open={AC.showOptionButtons}  >
         <OptionButtons />
       </Drawer>
