@@ -5,7 +5,7 @@ import { Drawer } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 // components and functions
 import TournamentRulesMenu from "./Menus/TournamentRulesMenu/TournamentRulesMenu";
-import OptionButtons from "./Menus/OptionButtons/OptionButtons"
+import OptionButtons from "./Menus/OptionButtons/OptionButtons";
 import ItemShop from "./Menus/ItemShop/ItemShop";
 import SecondSubFactionMenu from "./Menus/SecondSubfactionMenu/SecondSubfactionMenu";
 import { ArmyContext } from "../../../contexts/armyContext";
@@ -27,20 +27,30 @@ const MenuBox = () => {
 
   // Open the option button drawer when everything else is closed, else close it.
   useEffect(() => {
-    if (!AC.statCardState.show && !AC.itemShopState.show && !AC.secondSubFactionMenuState.show) {
+    if (
+      !AC.showTournamentRulesMenu && //
+      !AC.statCardState.show &&
+      !AC.itemShopState.show &&
+      !AC.secondSubFactionMenuState.show
+    ) {
       AC.setShowOptionButtons(true);
     }
-    if (AC.statCardState.show || AC.itemShopState.show || AC.secondSubFactionMenuState.show) {
+    if (
+      AC.showTournamentRulesMenu || //
+      AC.statCardState.show ||
+      AC.itemShopState.show ||
+      AC.secondSubFactionMenuState.show
+    ) {
       AC.setShowOptionButtons(false);
     }
-  }, [AC.statCardState, AC.itemShopState, AC.secondSubFactionMenuState]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [AC.statCardState, AC.itemShopState, AC.secondSubFactionMenuState, AC.showTournamentRulesMenu]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Fragment>
-      <Drawer anchor={"right"} variant="persistent" open={AC.showOptionButtons}  >
+      <Drawer anchor={"right"} variant="persistent" open={AC.showTournamentRulesMenu}>
         <TournamentRulesMenu />
       </Drawer>
-      <Drawer anchor={"right"} variant="persistent" open={AC.showOptionButtons}  >
+      <Drawer anchor={"right"} variant="persistent" open={AC.showOptionButtons}>
         <OptionButtons />
       </Drawer>
       <Drawer anchor={"right"} variant="persistent" open={AC.itemShopState.show}>
