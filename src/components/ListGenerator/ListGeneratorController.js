@@ -315,6 +315,7 @@ const ListGeneratorController = () => {
         tournamentOverrideRules: tournamentOverrideRules,
         showTournamentRulesMenu: showTournamentRulesMenu,
         setShowTournamentRulesMenu: setShowTournamentRulesMenu,
+        setTournamentOverrideRules: setTournamentOverrideRules,
         // ITEMSHOP
         fetchedItems: fetchedItems,
         allItems: allItems,
