@@ -1,15 +1,15 @@
 // React
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 // Material UI
-import { Grid, FormControl, FormControlLabel, FormLabel, RadioGroup, Radio, TextField, InputAdornment } from "@material-ui/core";
+import { Grid, FormControl, FormControlLabel, FormLabel, FormGroup, TextField, Switch, Typography, IconButton } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 // components and functions
 // Icons
-import CloseIcon from "@material-ui/icons/Close";
+import CancelIcon from "@material-ui/icons/Cancel";
 // context
 import { ArmyContext } from "../../../../../contexts/armyContext";
 // constants
-import { GENERAL_ERRRORS, VALIDATION } from "../../../../../constants/textsAndMessages";
+import { GENERAL_ERRRORS, TOURNAMENT_RULES } from "../../../../../constants/textsAndMessages";
 
 const useStyles = makeStyles({
   overlay: {
@@ -17,22 +17,14 @@ const useStyles = makeStyles({
     width: "30vw",
     padding: "2em",
   },
-
-  button: {
-    width: "15em",
-    padding: "2em",
-    height: "5em",
-  },
-  cardTest: {
-    width: "100%",
-  },
   errorIcon: {
     color: "red",
   },
-  warningBox: {
-    border: "red 0.2em solid ",
-    borderRadius: "1em",
-    marginBottom: "0.2em",
+  enabledBttnText: {
+    color: "black",
+  },
+  disbledBttnText: {
+    color: "grey",
   },
 });
 
@@ -40,124 +32,126 @@ const TournamentRulesMenu = () => {
   const classes = useStyles();
   const AC = useContext(ArmyContext);
 
-  const [errorMessage, setErrorMessage] = useState("");
-  const [buttonsOn, setButtonsOn] = useState("off");
-  const [uniqueRuleOn, setUniqueRuleOn] = useState("off");
-  const [disableInput, setDisableInput] = useState(false);
+  const [errorMessage, setErrorMessage] = useState({
+    maxHeroValue: "",
+    maxNumber: "",
+  });
+  const [validInput, setValidInput] = useState({
+    maxHeroValue: false,
+    maxNumber: false,
+  });
 
-  const toggleTournamentRules = (event) => {
-    setButtonsOn(event.target.value);
+  const toggleAllButtons = (event) => {
+    AC.setTournamentOverrideRules({ ...AC.tournamentOverrideRules, enableOverride: event.target.checked });
   };
-  const toggleUniquesRule = (event) => {
-    setUniqueRuleOn(event.target.value);
-  };
 
-  useEffect(() => {
-    if (buttonsOn === "on") {
-      setDisableInput(false);
-    } else {
-      setDisableInput(true);
-    }
-  }, [buttonsOn]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  useEffect(() => {
-    if (uniqueRuleOn === "on") {
-      AC.setTournamentOverrideRules({ ...AC.tournamentOverrideRules, uniquesOnlyOnce: true });
-    } else {
-      AC.setTournamentOverrideRules({ ...AC.tournamentOverrideRules, uniquesOnlyOnce: false });
-    }
-  }, [buttonsOn]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  /**
-   * Function takes the user input for maximum point allowance, validates it, and sets the state.
-   * @param {event object} event
-   */
   const changeHeroPercentage = (event) => {
     AC.setTournamentOverrideRules({ ...AC.tournamentOverrideRules, maxHeroValue: event.target.value });
-    validate();
+    validate(event);
   };
-  const changeNonUniqueMax = (event) => {
-    AC.setTournamentOverrideRules({ ...AC.tournamentOverrideRules, nonUniqueMax: event.target.value });
-    validate();
+  const changeMaxNumber = (event) => {
+    AC.setTournamentOverrideRules({ ...AC.tournamentOverrideRules, maxNumber: event.target.value });
+    validate(event);
+  };
+
+  const enforceUniqueRule = (event) => {
+    AC.setTournamentOverrideRules({ ...AC.tournamentOverrideRules, uniquesOnlyOnce: event.target.checked });
+    validate(event);
   };
 
   const validate = (event) => {
-    let isValid = new RegExp(/^[0-9]*$/).test(event.target.value);
-    isValid ? setErrorMessage("") : setErrorMessage(GENERAL_ERRRORS.ONLY_NUMBERS);
+    const regExResult = new RegExp(/^[0-9]*$/).test(event.target.value);
+
+    setValidInput({ ...validInput, [event.target.name]: regExResult });
+    validInput[event.target.name]
+      ? setErrorMessage({ ...errorMessage, [event.target.name]: "" })
+      : setErrorMessage({ ...errorMessage, [event.target.name]: GENERAL_ERRRORS.ONLY_NUMBERS });
   };
 
   return (
     <Grid container direction="column" alignItems="flex-start" spacing={4} className={classes.overlay}>
+      <Grid>
+        <IconButton onClick={() => {}}>
+          <CancelIcon />
+        </IconButton>
+      </Grid>
       <Grid item>
-        <FormControl>
-          <FormLabel id="demo-radio-buttons-group-label">Turnierregeln</FormLabel>
-          <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            name="radio-buttons-group"
-            value={buttonsOn}
-            onChange={toggleTournamentRules}
-          >
-            <FormControlLabel value="on" control={<Radio />} label="An" />
-            <FormControlLabel value="off" control={<Radio />} label="Aus" />
-          </RadioGroup>
+        <FormControl component="fieldset" variant="standard">
+          <FormLabel component="legend">Turnierregeln</FormLabel>
+          <FormGroup>
+            <FormControlLabel control={<Switch checked={AC.tournamentOverrideRules.enableOverride} onChange={toggleAllButtons} />} />
+          </FormGroup>
         </FormControl>
       </Grid>
       <Grid item>
+        <Typography className={AC.tournamentOverrideRules.enableOverride ? classes.enabledBttnText : classes.disbledBttnText}>
+          {TOURNAMENT_RULES.MAX_POINTS_FOR_HERO}
+        </Typography>
         <TextField
           id="outlined-basic"
+          name="maxHeroValue"
           autoComplete="off"
           value={AC.tournamentOverrideRules.maxHeroValue}
-          disabled={disableInput}
+          disabled={!AC.tournamentOverrideRules.enableOverride}
           InputProps={{
             style: {
               fontSize: "20px",
               fontWeight: "bold",
               pading: "50px",
-              width: "110px",
+              width: "50px",
             },
-            endAdornment: <InputAdornment position="end">Prozent</InputAdornment>,
           }}
           onChange={changeHeroPercentage}
           required
-          error={Boolean(errorMessage)}
-          helperText={errorMessage}
+          error={Boolean(errorMessage.maxHeroValue)}
+          helperText={errorMessage.maxHeroValue}
           variant="standard"
         />
       </Grid>
       <Grid item>
+        <Typography className={AC.tournamentOverrideRules.enableOverride ? classes.enabledBttnText : classes.disbledBttnText}>
+          {TOURNAMENT_RULES.HOW_MANY_TIMES}
+        </Typography>
         <TextField
           id="outlined-basic"
+          name="maxNumber"
           autoComplete="off"
-          value={AC.tournamentOverrideRules.nonUniqueMax}
-          disabled={disableInput}
+          value={AC.tournamentOverrideRules.maxNumber}
+          disabled={!AC.tournamentOverrideRules.enableOverride}
           InputProps={{
             style: {
               fontSize: "20px",
               fontWeight: "bold",
               pading: "50px",
-              width: "110px",
+              width: "50px",
             },
-            endAdornment: <InputAdornment position="end">Prozent</InputAdornment>,
           }}
-          onChange={changeNonUniqueMax}
+          onChange={changeMaxNumber}
           required
-          error={Boolean(errorMessage)}
-          helperText={errorMessage}
+          error={Boolean(errorMessage.maxNumber)}
+          helperText={errorMessage.maxNumber}
           variant="standard"
         />
       </Grid>
       <Grid item>
-        <FormControl>
-          <FormLabel id="demo-radio-buttons-group-label"> {VALIDATION.NO_DUPLICATE_UNIQUES_MESSAGE}</FormLabel>
-          <RadioGroup
-            aria-labelledby="demo-radio-buttons-group-label"
-            name="radio-buttons-group"
-            value={uniqueRuleOn}
-            onChange={toggleUniquesRule}
+        <FormControl component="fieldset" variant="standard">
+          <FormLabel
+            className={AC.tournamentOverrideRules.enableOverride ? classes.enabledBttnText : classes.disbledBttnText}
+            component="legend"
           >
-            <FormControlLabel value="on" control={<Radio />} label="An" />
-            <FormControlLabel value="off" control={<Radio />} label="Aus" />
-          </RadioGroup>
+            {TOURNAMENT_RULES.ENFORCE_UNIQUE_RULE}
+          </FormLabel>
+          <FormGroup>
+            <FormControlLabel
+              control={
+                <Switch
+                  disabled={!AC.tournamentOverrideRules.enableOverride} //
+                  checked={AC.tournamentOverrideRules.uniquesOnlyOnce}
+                  onChange={enforceUniqueRule}
+                />
+              }
+            />
+          </FormGroup>
         </FormControl>
       </Grid>
     </Grid>
