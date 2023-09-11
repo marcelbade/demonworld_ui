@@ -2,6 +2,12 @@ export const TOOLTIPS = {
   DELETE_ARMY_LIST: "Komplette Liste löschen",
 };
 
+export const TOURNAMENT_RULES = {
+  MAX_POINTS_FOR_HERO: "Wieviele Punkt dürfen max. für Helden ausgegeben werden",
+  HOW_MANY_TIMES: "Wie oft darf jede Einheit ausgewählt werden",
+  ENFORCE_UNIQUE_RULE: "Einzigartige Einheiten dürfen nur einmal gewählt werden",
+};
+
 export const OPTIONS = {
   CHANGE_TOURNAMENT_RULES: "Turnierregeln Ändern",
   TO_LOSS_CALCULATOR: "Zum Verlustrechner",
