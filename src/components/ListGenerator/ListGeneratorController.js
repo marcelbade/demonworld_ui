@@ -111,9 +111,9 @@ const ListGeneratorController = () => {
   // tournament rules override
   const [showTournamentRulesMenu, setShowTournamentRulesMenu] = useState(false);
   const [tournamentOverrideRules, setTournamentOverrideRules] = useState({
-    overrideIsOn: false,
+    enableOverride: false,
     maxHeroValue: 30,
-    nonUniqueMax: 2,
+    maxNumber: 2,
     uniquesOnlyOnce: true,
   });
   // alternative lists
