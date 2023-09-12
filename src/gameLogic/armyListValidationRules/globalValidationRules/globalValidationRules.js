@@ -48,16 +48,15 @@ const globalRules = {
    * @returns array consisting of objects. Every object contains a unit that must be blocked and an error message to
    * be displayed as a tool tip.
    */
-  maximumOfTwo: (selectedUnits) => {
+  maximumCopiesOfUnit: (selectedUnits, max) => {
     const result = [];
 
     for (let i = 0; i < selectedUnits.length - 1; i++) {
       const testedUnit = selectedUnits[i];
+      const identicalUnits = selectedUnits.filter((u) => u.unitName === testedUnit.unitName);
 
-      for (let j = i + 1; j < selectedUnits.length; j++) {
-        if (testedUnit.unitName === selectedUnits[j].unitName) {
-          result.push({ unitBlockedbyRules: testedUnit.unitName, message: VALIDATION.MAXIMUM_OF_TWO_OF_EACH_MESSAGE });
-        }
+      if (identicalUnits.length > max) {
+        result.push({ unitBlockedbyRules: testedUnit.unitName, message: VALIDATION.MAXIMUM_OF_TWO_OF_EACH_MESSAGE });
       }
     }
     return result;
@@ -156,31 +155,6 @@ const globalRules = {
   isArmyCommanderPresent: (selectedUnits) => {
     const potentialCommanders = selectedUnits.filter((selectedUnit) => selectedUnit.commandStars >= 2);
     return potentialCommanders.length > 0;
-  },
-  /**
-   * Function tests whether no more than 50% of the point allowance have been spent on heroes and mages.
-   * @param {[unitCard]} selectedUnitsarray of all units already selected by user
-   * @param {unitCard obj} availableUnits list of all unselected units still available
-   * @param {int} totalPointsAllowance max. points the user can spent on the list
-   * @returns an array. Each entry contains the name of the unit that is blocked by this rule and a message for the user with the block reason.
-   */
-  NoMoreThanHalfOnCharacters: (selectedUnits, availableUnits, totalPointsAllowance) => {
-    const HERO_CAP = 0.5;
-
-    let result = [];
-    let pointsSpentOnChars = 0;
-
-    selectedUnits.filter((su) => su.unitType === HERO || su.unitType === MAGE).forEach((char) => (pointsSpentOnChars += char.points));
-
-    availableUnits
-      .filter((aU) => aU.unitType === HERO || aU.unitType === MAGE)
-      .forEach((char) => {
-        if (char.points + pointsSpentOnChars > totalPointsAllowance * HERO_CAP) {
-          result.push({ unitBlockedbyRules: char.unitName, message: VALIDATION.NO_MORE_THAN_HALF_ON_CHARS_MESSAGE });
-        }
-      });
-
-    return result;
   },
 };
 

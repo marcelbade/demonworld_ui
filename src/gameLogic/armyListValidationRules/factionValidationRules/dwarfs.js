@@ -43,22 +43,39 @@ const rules = [
 ];
 
 const DwarfRules = {
-  testSubFactionRules: (availableUnits, selectedUnits, totalPointsAllowance, subFactions) => {
+  testSubFactionRules: (
+    availableUnits,
+    selectedUnits,
+    totalPointsAllowance,
+    subFactions,
+    selectedAlternativeList,
+    tournamentOverrideRules
+  ) => {
     //  general rules
     let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(selectedUnits, availableUnits, totalPointsAllowance);
     let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(rules, selectedUnits, totalPointsAllowance, subFactions);
     let isAboveSubFactionMax = globalRules.unitsAboveSubFactionMax(rules, selectedUnits, totalPointsAllowance, availableUnits);
-    let hasDuplicateUniques = globalRules.noDuplicateUniques(selectedUnits);
-    // let hasNoCommander = globalRules.isArmyCommanderPresent(selectedUnits);
+    let hasNoCommander = globalRules.isArmyCommanderPresent(selectedUnits);
 
     // tournament rules
-    let testForMax2Result = globalRules.maximumOfTwo(selectedUnits);
-    let testForHeroCapResult = globalRules.belowMaxPercentageHeroes(
-      selectedUnits,
-      totalPointsAllowance,
-      availableUnits
-      // MAX_HERO_PERCENTAGE
-    );
+    let maxCopies;
+    let heroPointCap;
+
+    if (tournamentOverrideRules.enableOverride) {
+      maxCopies = tournamentOverrideRules.maxNumber;
+      heroPointCap = tournamentOverrideRules.maxHeroValue;
+    } else {
+      maxCopies = 2;
+      // faction rule =>  no cap for heroes!
+      heroPointCap = 100;
+    }
+
+    let testForMax2Result = globalRules.maximumCopiesOfUnit(selectedUnits, maxCopies);
+    let testForHeroCapResult = globalRules.belowMaxPercentageHeroes(selectedUnits, totalPointsAllowance, availableUnits, heroPointCap);
+
+    let hasDuplicateUniques = tournamentOverrideRules.uniquesOnlyOnce //
+    ? globalRules.noDuplicateUniques(selectedUnits)
+    : [];
 
     // special faction rule: dwarf kingdoms and allies - the player has to choose one. That Kondom can make up up to 40% of the list, the other one up to 20%. Instead of the second kingdom, the player can take up to 20% of imperial allies
     percentageKingdomsAndAlly(selectedUnits);
@@ -66,7 +83,7 @@ const DwarfRules = {
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [
       ...isExceedingPointAllowance,
-      ...hasDuplicateUniques,
+       ...hasDuplicateUniques,
       ...testForHeroCapResult,
       ...testForMax2Result,
       ...isAboveSubFactionMax,
@@ -75,7 +92,7 @@ const DwarfRules = {
     validationResults.subFactionBelowMinimum = isBelowSubFactionMin;
 
     // result - is a commander present?
-    // validationResults.commanderIsPresent = hasNoCommander;
+    validationResults.commanderIsPresent = hasNoCommander;
 
     return validationResults;
   },

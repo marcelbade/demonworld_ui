@@ -33,7 +33,8 @@ const ArmyValidation = () => {
       AC.selectedUnits,
       AC.maxPointsAllowance,
       AC.subFactions,
-      AC.selectedAlternativeList
+      AC.selectedAlternativeList,
+      AC.tournamentOverrideRules
     );
 
     collectValidatioResults(validationResult);

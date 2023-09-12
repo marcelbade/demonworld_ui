@@ -52,26 +52,40 @@ const rules = [
   },
 ];
 
-const MAX_HERO_PERCENTAGE = 50;
-
 const ThainRules = {
-  testSubFactionRules: (availableUnits, selectedUnits, totalPointsAllowance, subFactions) => {
+  testSubFactionRules: (
+    availableUnits,
+    selectedUnits,
+    totalPointsAllowance,
+    subFactions,
+    selectedAlternativeList,
+    tournamentOverrideRules
+  ) => {
     //  general rules
     let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(selectedUnits, availableUnits, totalPointsAllowance);
     let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(rules, selectedUnits, totalPointsAllowance, subFactions);
     let isAboveSubFactionMax = globalRules.unitsAboveSubFactionMax(rules, selectedUnits, totalPointsAllowance, availableUnits);
-    let hasDuplicateUniques = globalRules.noDuplicateUniques(selectedUnits);
     let hasNoCommander = globalRules.isArmyCommanderPresent(selectedUnits);
 
     // tournament rules
-    let testForMax2Result = globalRules.maximumOfTwo(selectedUnits);
-    let testForHeroCapResult = globalRules.belowMaxPercentageHeroes(
-      selectedUnits,
-      totalPointsAllowance,
-      availableUnits,
-      MAX_HERO_PERCENTAGE
-    );
+    let maxCopies;
+    let heroPointCap;
 
+    if (tournamentOverrideRules.enableOverride) {
+      maxCopies = tournamentOverrideRules.maxNumber;
+      heroPointCap = tournamentOverrideRules.maxHeroValue;
+    } else {
+      maxCopies = 2;
+      // faction rule => 50% cap
+      heroPointCap = 50;
+    }
+
+    let testForMax2Result = globalRules.maximumCopiesOfUnit(selectedUnits, maxCopies);
+    let testForHeroCapResult = globalRules.belowMaxPercentageHeroes(selectedUnits, totalPointsAllowance, availableUnits, heroPointCap);
+
+    let hasDuplicateUniques = tournamentOverrideRules.uniquesOnlyOnce //
+      ? globalRules.noDuplicateUniques(selectedUnits)
+      : [];
     // special faction rules
     dorgaVsShamans(selectedUnits, totalPointsAllowance);
     let testForChampionRule = greatChampionRule(selectedUnits);
