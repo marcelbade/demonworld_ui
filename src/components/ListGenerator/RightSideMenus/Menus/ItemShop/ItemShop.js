@@ -1,9 +1,11 @@
 // React
 import React, { useState, useContext, useEffect } from "react";
 //Material UI
-import { Button, Grid, ButtonGroup, Typography, Accordion, AccordionSummary, AccordionDetails } from "@material-ui/core";
+import { Button, Grid, ButtonGroup, Typography, Accordion, AccordionSummary, AccordionDetails, IconButton } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+// icons
+import CancelIcon from "@material-ui/icons/Cancel";
 // components and functions
 import { ArmyContext } from "../../../../../contexts/armyContext";
 import { uuidGenerator, isObjectEmtpy } from "../../../../shared/sharedFunctions";
@@ -215,6 +217,15 @@ const ItemShop = () => {
 
   return (
     <Grid container direction="column" className={classes.overlay}>
+      <Grid>
+        <IconButton
+          onClick={() => {
+            AC.setItemShopState({ ...AC.itemShopState, show: false });
+          }}
+        >
+          <CancelIcon />
+        </IconButton>
+      </Grid>
       <Grid item container direction="row">
         {/*UNIT NAME */}
         <Grid item xs={9}>

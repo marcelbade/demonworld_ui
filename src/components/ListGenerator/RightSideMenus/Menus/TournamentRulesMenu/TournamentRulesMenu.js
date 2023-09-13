@@ -71,7 +71,11 @@ const TournamentRulesMenu = () => {
   return (
     <Grid container direction="column" alignItems="flex-start" spacing={4} className={classes.overlay}>
       <Grid>
-        <IconButton onClick={() => {}}>
+        <IconButton
+          onClick={() => {
+            AC.setShowTournamentRulesMenu(false);
+          }}
+        >
           <CancelIcon />
         </IconButton>
       </Grid>
