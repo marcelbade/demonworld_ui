@@ -9,8 +9,7 @@ import OptionButtons from "./Menus/OptionButtons/OptionButtons";
 import ItemShop from "./Menus/ItemShop/ItemShop";
 import SecondSubFactionMenu from "./Menus/SecondSubfactionMenu/SecondSubfactionMenu";
 import { ArmyContext } from "../../../contexts/armyContext";
-import { Fragment } from "react";
-import { isObjectEmtpy, unitOrCmdCard } from "../../shared/sharedFunctions";
+import CardView from "./Menus/CardView/CardView";
 
 const useStyles = makeStyles((theme) => ({
   UnitCardDisplay: {
@@ -22,10 +21,7 @@ const MenuBox = () => {
   const AC = useContext(ArmyContext);
   const classes = useStyles();
 
-  // front and back side of the displayed unit cards are alligned vertically.
-  const COLUMN = "column";
-
-  // Open the option button drawer when everything else is closed, else close it.
+  // show the option button drawer when everything else is closed, else close it.
   useEffect(() => {
     if (
       !AC.showTournamentRulesMenu && //
@@ -45,26 +41,24 @@ const MenuBox = () => {
     }
   }, [AC.statCardState, AC.itemShopState, AC.secondSubFactionMenuState, AC.showTournamentRulesMenu]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  return (
-    <Fragment>
-      <Drawer anchor={"right"} variant="persistent" open={AC.showTournamentRulesMenu}>
-        <TournamentRulesMenu />
+  const components = [
+    { exists: true, show: AC.showOptionButtons, element: <OptionButtons /> },
+    { exists: true, show: AC.showTournamentRulesMenu, element: <TournamentRulesMenu /> },
+    { exists: true, show: AC.itemShopState.show, element: <ItemShop /> },
+    { exists: true, show: AC.statCardState.show, element: <CardView /> },
+    { exists: AC.secondSubFactionList, show: AC.secondSubFactionMenuState.show, element: <SecondSubFactionMenu /> },
+  ];
+
+  return components.map((c) =>
+    c.exists ? (
+      <Drawer
+        anchor={"right"} //
+        variant="persistent"
+        open={c.show}
+      >
+        {c.element}
       </Drawer>
-      <Drawer anchor={"right"} variant="persistent" open={AC.showOptionButtons}>
-        <OptionButtons />
-      </Drawer>
-      <Drawer anchor={"right"} variant="persistent" open={AC.itemShopState.show}>
-        <ItemShop />
-      </Drawer>
-      <Drawer anchor={"right"} variant="persistent" open={AC.statCardState.show} className={classes.UnitCardDisplay}>
-        {!isObjectEmtpy(AC.statCardState.clickedUnit) ? unitOrCmdCard(AC.statCardState.clickedUnit, COLUMN) : <p></p>}
-      </Drawer>
-      {AC.secondSubFactionList ? (
-        <Drawer anchor={"right"} variant="persistent" open={AC.secondSubFactionMenuState.show}>
-          <SecondSubFactionMenu />
-        </Drawer>
-      ) : null}
-    </Fragment>
+    ) : null
   );
 };
 
