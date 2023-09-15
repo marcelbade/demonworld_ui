@@ -1,4 +1,4 @@
-import { ITEM_TYPE_BANNER, ITEM_TYPE_MUSICIAN } from "../../../../../constants/itemShopConstants";
+import { ITEM_TYPE_BANNER, ITEM_TYPE_MUSICIAN } from "../../../../../../constants/itemShopConstants";
 
 /**
  * Functions ckecks if item has already been picked by a different unit. If this is the case AND the item is not generic (i.e., it's unique) it returns true-
