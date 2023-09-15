@@ -23,6 +23,11 @@ const useStyles = makeStyles({
     fontWeight: "bold",
     border: "none",
   },
+  itemName: {
+    width: "20em",
+    display: "flex",
+    alignItems: "center",
+  },
 });
 
 const ShopItemList = (props) => {
@@ -113,8 +118,7 @@ const ShopItemList = (props) => {
           return (
             <Accordion key={uuidGenerator()}>
               <AccordionSummary
-                className={classes.buttons} //
-                expandIcon={<ExpandMoreIcon />}
+                expandIcon={<ExpandMoreIcon />} //
                 aria-controls="panel1a-content"
                 id="panel1a-header"
               >
@@ -130,7 +134,9 @@ const ShopItemList = (props) => {
                 >
                   <AddCircleOutlineIcon />
                 </IconButton>
-                <Typography variant="body1">{i.itemName}</Typography>
+                <Typography variant="body1" className={classes.itemName}>
+                  {i.itemName}
+                </Typography>
               </AccordionSummary>
               <AccordionDetails>
                 <Typography variant="body1">{i.specialRules}</Typography>
