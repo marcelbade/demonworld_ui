@@ -1,50 +1,21 @@
 // React
 import React, { useState, useContext, useEffect } from "react";
 //Material UI
-import { Button, Grid, ButtonGroup, Typography, Accordion, AccordionSummary, AccordionDetails, IconButton } from "@material-ui/core";
+import { Grid, Typography, IconButton } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 // icons
 import CancelIcon from "@material-ui/icons/Cancel";
 // components and functions
 import { ArmyContext } from "../../../../../contexts/armyContext";
-import { uuidGenerator, isObjectEmtpy } from "../../../../shared/sharedFunctions";
-import {
-  NAME_MAPPING as ITEM_CATEGORY_NAME_MAPPING,
-  ITEM_TYPE_BANNER,
-  ITEM_TYPE_MUSICIAN,
-} from "../../../../../constants/itemShopConstants";
-import {
-  filterForStandardBearer,
-  filterForFactionAndGenericItems,
-  filterForBows,
-  whenUnitHasNoLeader,
-  filterForUnitType,
-  filterForMusicians,
-  filterForCavalryItems,
-  filterForMagicUsers,
-  filterForCrossBows,
-  whenUnitIsGiant,
-  filterForUnit,
-  filterForItemsUsableNotByCavalry,
-  filterForShields,
-  filterForSpears,
-  filterForLances,
-  filterForItemsWithMaxArmor,
-  filterForItemsWithMaxSize,
-} from "./itemShopFilterLogic";
-import {
-  doesUnitAlreadyHaveInstrument,
-  doesUnitAlreadyHaveBanner,
-  doesUnitalreadyHaveItem,
-  hasItemBeenPickedByOtherUnit,
-  ownsMaxNumberMagicItems,
-} from "./itemShopSelectionLogic";
+import { isObjectEmtpy } from "../../../../shared/sharedFunctions";
+import { itemFilter } from "./ItemLogic/itemShopFilterLogic";
+import ShopItemList from "./ShopItemList";
+import ShopPanelButtons from "./ShopPanelButtons";
 
 const useStyles = makeStyles({
   overlay: {
     height: "100vh",
-    width: "20vw",
+    width: "30vw",
   },
   buttons: {
     fontWeight: "bold",
@@ -69,8 +40,8 @@ const ItemShop = () => {
   const AC = useContext(ArmyContext);
 
   //state
-  const [ItemTypes, setItemTypes] = useState([]);
-  const [displayThisItemType, setDisplayThisItemType] = useState(ItemTypes[0]);
+  const [itemTypes, setItemTypes] = useState([]);
+  const [displayThisItemType, setDisplayThisItemType] = useState(itemTypes[0]);
 
   // When the selected unit changes, set the correct items in the shop
   useEffect(() => {
@@ -100,23 +71,23 @@ const ItemShop = () => {
       let items = AC.fetchedItems;
 
       return items
-        .filter((item) => filterForFactionAndGenericItems(item, unit))
-        .filter((item) => filterForUnitType(item, unit))
-        .filter((item) => filterForUnit(item, unit))
-        .filter((item) => filterForStandardBearer(item, unit))
-        .filter((item) => filterForMusicians(item, unit))
-        .filter((item) => filterForMagicUsers(item, unit))
-        .filter((item) => filterForItemsWithMaxArmor(item, unit))
-        .filter((item) => filterForItemsWithMaxSize(item, unit))
-        .filter((item) => filterForShields(item, unit))
-        .filter((item) => filterForCavalryItems(item, unit))
-        .filter((item) => filterForItemsUsableNotByCavalry(item, unit))
-        .filter((item) => filterForSpears(item, unit))
-        .filter((item) => filterForLances(item, unit))
-        .filter((item) => filterForBows(item, unit))
-        .filter((item) => filterForCrossBows(item, unit))
-        .filter((item) => whenUnitHasNoLeader(item, unit))
-        .filter((item) => whenUnitIsGiant(item, unit));
+        .filter((item) => itemFilter.filterForFactionAndGenericItems(item, unit))
+        .filter((item) => itemFilter.filterForUnitType(item, unit))
+        .filter((item) => itemFilter.filterForUnit(item, unit))
+        .filter((item) => itemFilter.filterForStandardBearer(item, unit))
+        .filter((item) => itemFilter.filterForMusicians(item, unit))
+        .filter((item) => itemFilter.filterForMagicUsers(item, unit))
+        .filter((item) => itemFilter.filterForItemsWithMaxArmor(item, unit))
+        .filter((item) => itemFilter.filterForItemsWithMaxSize(item, unit))
+        .filter((item) => itemFilter.filterForShields(item, unit))
+        .filter((item) => itemFilter.filterForCavalryItems(item, unit))
+        .filter((item) => itemFilter.filterForItemsUsableNotByCavalry(item, unit))
+        .filter((item) => itemFilter.filterForSpears(item, unit))
+        .filter((item) => itemFilter.filterForLances(item, unit))
+        .filter((item) => itemFilter.filterForBows(item, unit))
+        .filter((item) => itemFilter.filterForCrossBows(item, unit))
+        .filter((item) => itemFilter.whenUnitHasNoLeader(item, unit))
+        .filter((item) => itemFilter.whenUnitIsGiant(item, unit));
     } else {
       return [];
     }
@@ -141,80 +112,6 @@ const ItemShop = () => {
     setDisplayThisItemType(type);
   };
 
-  /**
-   * Function enforces the item selection rules by toggling the item's corresponding button on/off.
-   * A hero, magicican or unit leader can only get 1 magical item. In addition, they may gain additional "non-magical" generic items like potions. If a standard bearer or musician is present, a standard or intrument can be selected in addition to these two. In addition if it is a unit, items can be choosen that are carried by every element in the unit.
-   * @param {itemCard Object} item
-   * @returns a boolean that toggles the button on or off.
-   */
-  const disableButton = (item) => {
-    let unit = AC.unitSelectedForShop;
-    let allItems = AC.allItems;
-
-    const itemPickedByOtherUnit = hasItemBeenPickedByOtherUnit(allItems, item);
-    const itemPicked = doesUnitalreadyHaveItem(unit, item);
-    const maxNumber = ownsMaxNumberMagicItems(unit, item);
-    const banner = doesUnitAlreadyHaveBanner(unit, item);
-    const instrument = doesUnitAlreadyHaveInstrument(unit, item);
-
-    return itemPicked || itemPickedByOtherUnit || maxNumber || banner || instrument;
-  };
-
-  /**
-   * Add the item card object to the selected unit. Only a subSet is added as well as a flag to track whether the item was lost for the lossCalculator component.
-   * @param {itemCard object} item
-   */
-  const addItemToUnit = (item) => {
-    let tempObj = { ...AC.unitSelectedForShop };
-
-    tempObj.equipment.push({
-      ...item,
-      itemLost: false,
-    });
-
-    AC.setUnitSelectedForShop({
-      ...tempObj,
-    });
-  };
-
-  /**
-   * Function recalculates itemType flags of a unitCard to correctly toggle the item buttons
-   * in thej item shop on and off.
-   * @param {itemCard object} item
-   */
-  const recalculateItemTypeFlags = (item, ITEM_ADDED) => {
-    if (ITEM_ADDED) {
-      let tempObj = { ...AC.unitSelectedForShop };
-
-      tempObj.equipmentTypes.banner = item.itemType === ITEM_TYPE_BANNER ? true : false;
-      tempObj.equipmentTypes.musician = item.itemType === ITEM_TYPE_MUSICIAN ? true : false;
-      tempObj.equipmentTypes.magicItem = !item.isAdditionalItem;
-
-      AC.setUnitSelectedForShop({
-        ...tempObj,
-      });
-      //item removed
-    } else {
-      let tempObj = { ...AC.unitSelectedForShop };
-
-      tempObj.equipmentTypes.banner = item.itemType === ITEM_TYPE_BANNER ? false : true;
-      tempObj.equipmentTypes.musician = item.itemType === ITEM_TYPE_MUSICIAN ? false : true;
-      tempObj.equipmentTypes.magicItem = item.isAdditionalItem;
-
-      AC.setUnitSelectedForShop({
-        ...tempObj,
-      });
-    }
-  };
-
-  /**
-   * Function causes the list of all selected units to change (w/o actually changing it). This is necessary to correctly calculate the list's point cost whenever an item is added. Without this, the point cost of the item is only added whenever a unit is added or removed from the list, not when the item is added ore removed.
-   */
-  const triggerArymListReCalculation = () => {
-    let tempArray = [...AC.selectedUnits];
-    AC.setSelectedUnits([...tempArray]);
-  };
-
   return (
     <Grid container direction="column" className={classes.overlay}>
       <Grid>
@@ -227,7 +124,6 @@ const ItemShop = () => {
         </IconButton>
       </Grid>
       <Grid item container direction="row">
-        {/*UNIT NAME */}
         <Grid item xs={9}>
           <Typography variant="h5" align="center" className={classes.unitName}>
             {AC.unitSelectedForShop.unitName}
@@ -235,54 +131,15 @@ const ItemShop = () => {
         </Grid>
       </Grid>
       <Grid item container direction="row" className={classes.dynamicPart}>
-        <Grid item xs={3} className={classes.panelButtonsBackground}>
-          {/* PANEL BUTTONS */}
-          <ButtonGroup size="large" orientation="vertical">
-            {ItemTypes.map((type) => {
-              return (
-                <Button
-                  className={classes.buttons}
-                  variant="text"
-                  key={uuidGenerator()}
-                  onClick={() => {
-                    showTab(type);
-                  }}
-                >
-                  {ITEM_CATEGORY_NAME_MAPPING[type]}
-                </Button>
-              );
-            })}
-          </ButtonGroup>
-        </Grid>
+        <ShopPanelButtons
+          itemTypes={itemTypes} //
+          showTab={showTab}
+        />
         <Grid item xs={8}>
-          {/* ITEMLIST */}
-          <ButtonGroup orientation="vertical">
-            {filterFetchedItemsForUnit()
-              .filter((item) => item.itemType === displayThisItemType)
-              .map((item) => {
-                return (
-                  <Accordion key={uuidGenerator()}>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon />} aria-controls="panel1a-content" id="panel1a-header">
-                      <Button
-                        className={classes.buttons}
-                        disabled={disableButton(item)}
-                        onClick={() => {
-                          addItemToUnit(item);
-                          recalculateItemTypeFlags(item, true);
-                          triggerArymListReCalculation();
-                        }}
-                        key={uuidGenerator()}
-                      >
-                        <Typography variant="body1">{item.itemName}</Typography>
-                      </Button>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                      <Typography variant="body1">{item.specialRules}</Typography>
-                    </AccordionDetails>
-                  </Accordion>
-                );
-              })}
-          </ButtonGroup>
+          <ShopItemList
+            items={filterFetchedItemsForUnit()} //
+            displayThisItemType={displayThisItemType}
+          />
         </Grid>
       </Grid>
     </Grid>
