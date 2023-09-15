@@ -14,7 +14,7 @@ export const GIANT = "G";
  
 
 // Mapps item types in the itemCard obj to the displayed German name.
-export const NAME_MAPPING = {
+export const ITEM_CATEGORY_NAME_MAPPING = {
   armor: "Rüstung",
   arrowsAndBows: "Bögen",
   banner: "Banner",
