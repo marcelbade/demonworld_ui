@@ -38,7 +38,7 @@ const CardFrontCenter = () => {
       <Grid item container justify="center">
         {/* 3rd Row - RANGED WEAPONS  */}
         {SC.unit.rangedWeapon !== NO_RANGE_WEAPON ? (
-          <Typography variant="h6" align="right" className={classes.font}>
+          <Typography variant="h6" align="right">
             {SC.unit.rangedWeapon} {SC.unit.rangedAttackStats}
           </Typography>
         ) : null}
@@ -46,36 +46,26 @@ const CardFrontCenter = () => {
       {/* 4th & 5th Row - WEAPONS  */}
       <Grid item container direction="column">
         <Grid item container justify="center">
-          <Typography variant="h6" className={classes.font}>
-            Waffe 1: {SC.unit.weapon1}
-          </Typography>
+          <Typography variant="h6">Waffe 1: {SC.unit.weapon1}</Typography>
         </Grid>
         <Grid item container justify="center">
-          <Typography variant="h6" className={classes.font}>
-            {SC.unit.weapon2 === 0 ? null : "Waffe 2: " + SC.unit.weapon2}
-          </Typography>
+          <Typography variant="h6">{SC.unit.weapon2 === 0 ? null : "Waffe 2: " + SC.unit.weapon2}</Typography>
         </Grid>
       </Grid>
       {/* 6th Row - SIZE, ARMOR, SKILLS*/}
       <Grid item container alignItems="center" direction="row" className={classes.noWrap}>
         <Grid item container justify="center">
-          <Typography variant="h6" className={classes.font}>
-            Größe: {SC.unit.unitSize}
-          </Typography>
+          <Typography variant="h6">Größe: {SC.unit.unitSize}</Typography>
         </Grid>
         <Grid item container alignItems="center" justify="center">
           <div className={classes.alignIcons}>
             <img alt="FK-Panzerung" src={rangeArmorIcon} className={classes.Icon} />
           </div>
-          <Typography variant="h6" className={classes.font}>
-            {SC.unit.armourRange}
-          </Typography>
+          <Typography variant="h6">{SC.unit.armourRange}</Typography>
           <div className={classes.alignIcons}>
             <img alt="NK-Panzerung" src={meleeArmorIcon} className={classes.Icon} />
           </div>
-          <Typography variant="h6" className={classes.font}>
-            {SC.unit.armourMelee}
-          </Typography>
+          <Typography variant="h6">{SC.unit.armourMelee}</Typography>
         </Grid>
         <Grid item container direction="row" justify="center" className={classes.noWrap}>
           {RenderSkillValues(SC.unit.skillRange, SC.unit.skillMelee)}

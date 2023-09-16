@@ -27,10 +27,8 @@ const CardFrontLowerBlackStripe = () => {
     </Grid>
   ) : (
     <Grid container direction="row" justify="space-around" className={classes.unitCardStripe}>
-      <Typography variant="h6" className={classes.font}>
-        Furchtfaktor: {SC.unit.fear}
-      </Typography>
-      <Typography variant="h6" className={classes.font}>
+      <Typography variant="h6">Furchtfaktor: {SC.unit.fear}</Typography>
+      <Typography variant="h6">
         Moral: {SC.unit.moral1 ? SC.unit.moral1 : "-"} / {SC.unit.moral2 ? SC.unit.moral2 : "-"}
       </Typography>
     </Grid>
