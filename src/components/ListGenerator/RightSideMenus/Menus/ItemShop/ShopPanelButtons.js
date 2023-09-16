@@ -1,12 +1,11 @@
 // React
-import React, { useState, useContext, useEffect } from "react";
+import React from "react";
 //Material UI
 import { Button, Grid, ButtonGroup } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 // icons
 // components and functions
-import { ArmyContext } from "../../../../../contexts/armyContext";
-import { uuidGenerator, isObjectEmtpy } from "../../../../shared/sharedFunctions";
+import { uuidGenerator } from "../../../../shared/sharedFunctions";
 
 import { ITEM_CATEGORY_NAME_MAPPING } from "../../../../../constants/itemShopConstants";
 
