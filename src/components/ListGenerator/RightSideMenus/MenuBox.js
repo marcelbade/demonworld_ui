@@ -2,7 +2,6 @@
 import { useEffect, useContext } from "react";
 // Material UI
 import { Drawer } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 // components and functions
 import TournamentRulesMenu from "./Menus/TournamentRulesMenu/TournamentRulesMenu";
 import OptionButtons from "./Menus/OptionButtons/OptionButtons";
@@ -11,15 +10,8 @@ import SecondSubFactionMenu from "./Menus/SecondSubfactionMenu/SecondSubfactionM
 import { ArmyContext } from "../../../contexts/armyContext";
 import CardView from "./Menus/CardView/CardView";
 
-const useStyles = makeStyles((theme) => ({
-  UnitCardDisplay: {
-    position: "fixed",
-  },
-}));
-
 const MenuBox = () => {
   const AC = useContext(ArmyContext);
-  const classes = useStyles();
 
   // show the option button drawer when everything else is closed, else close it.
   useEffect(() => {
