@@ -8,11 +8,6 @@ import { calculateTotalUnitPointCost } from "../../../sharedFunctions";
 import { StateCardContext } from "../../../../../contexts/statCardContext";
 
 const useStyles = makeStyles({
-  font: {
-    fontFamily: "Beryliumbold",
-    fontWeight: "bold",
-  },
-
   blackStripe: {
     fontFamily: "Beryliumbold",
     fontWeight: "bold",

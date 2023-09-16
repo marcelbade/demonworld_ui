@@ -6,7 +6,7 @@ import { Grid } from "@material-ui/core";
 import { DisplayAllSpecialRules } from "../../../../compendiums/factionTable/depencies/factionTableFunctions";
 import { StateCardContext } from "../../../../../contexts/statCardContext";
 
-const CardBackCenter = (props) => {
+const CardBackCenter = () => {
   const SC = useContext(StateCardContext);
 
   return <Grid item>{DisplayAllSpecialRules(SC.unit)}</Grid>;

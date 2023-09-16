@@ -17,7 +17,7 @@ const useStyles = makeStyles({
   },
 });
 
-const CardFrontTitle = (props) => {
+const CardFrontTitle = () => {
   const classes = useStyles();
 
   const SC = useContext(StateCardContext);
