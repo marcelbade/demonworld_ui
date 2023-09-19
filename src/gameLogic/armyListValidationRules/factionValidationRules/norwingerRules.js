@@ -85,7 +85,7 @@ const NorwingerRules = {
       : [];
 
     // special faction rule - no more than 50% may be spent on all heroes, mages, and commanders.
-    let isAboveCharLimit = globalRules.NoMoreThanHalfOnCharacters(selectedUnits, availableUnits, totalPointsAllowance);
+    let isAboveCharLimit =  globalRules.belowMaxPercentageHeroes(selectedUnits, totalPointsAllowance, availableUnits, heroPointCap);
 
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [
