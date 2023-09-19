@@ -35,7 +35,7 @@ const ArmyListBoxHeader = () => {
     const dayOfMonth = currentDate.getDate();
 
     if (AC.selectedFactionName !== NONE) {
-      const defaultArmyName = `${AC.selectedFactionName}liste - ${dayOfMonth}.${month}.${year}`;
+      const defaultArmyName = `${AC.selectedFactionName} - ${dayOfMonth}.${month}.${year}`;
       AC.setArmyName(defaultArmyName);
     }
   }, [AC.selectedFactionName]);// eslint-disable-line react-hooks/exhaustive-deps
