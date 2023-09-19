@@ -12,6 +12,7 @@ import { StyledTreeItem } from "./StyledTreeItem";
 // constants
 import { NO_ALLY } from "../../../../constants/allies";
 import { NONE } from "../../../../constants/factions";
+import { Typography } from "@material-ui/core";
 
 TransitionComponent.propTypes = {
   // Show the component; triggers the enter or exit states
@@ -30,11 +31,10 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   allyTitle: {
-    paddingLeft: "5em",
-    fontFamily: "BreatheOfFire",
-    fontSize: "3em",
-    color: "black",
+    marginLeft: "1em",
     paddingTop: "1em",
+    marginBottom:"1em",
+    borderBottom: "black 1px solid"
   },
 }));
 
@@ -73,7 +73,7 @@ const FactionTreeView = () => {
       {/* ALLIED FACTION */}
       {AC.allyName !== NO_ALLY && AC.showAlly ? (
         <Fragment>
-          <div className={classes.allyTitle}>Alliierte: {AC.allyName}</div>
+          <Typography className={classes.allyTitle}  variant="h6">Alliierte: {AC.allyName}</Typography>
           <TreeView
             className={classes.treeViewBox}
             defaultExpanded={SHOW_SUBFACTIONS}
