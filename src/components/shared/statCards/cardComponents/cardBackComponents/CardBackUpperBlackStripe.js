@@ -36,18 +36,18 @@ const CardBackUpperBlackStripe = () => {
 
   return (
     <Grid container direction="row" className={classes.blackStripe} justify="space-around">
-      <Grid item>
+      {SC.unit.numberOfElements !== 1 ? (
         <Typography variant="h6">
           {SC.unit.leader ? "Anführer" : null}
           {SC.unit.standardBearer ? " / Standarte" : null}
           {SC.unit.musician ? " / Musiker" : null}
         </Typography>
-      </Grid> 
-      <Grid item>
-        <Typography variant="h6">
-          {displayUnitElements()} {SC.unit.numberOfElements === 1 ? " Element" : " Elemente"}
-        </Typography>
-      </Grid>
+      ) : null}
+      {SC.unit.numberOfElements !== 1 ? (
+        <Typography variant="h6">{displayUnitElements()} " Elemente"</Typography>
+      ) : (
+        <Typography variant="h6">1 Element</Typography>
+      )}
     </Grid>
   );
 };

@@ -22,8 +22,7 @@ const CardFrontUpperBlackStripe = () => {
   return SC.isSingleElement ? (
     <Grid item container justify="space-around" className={classes.unitCardStripe}>
       <Typography variant="h6">{SC.unit.move} Bewegungspunkte</Typography>
-      <Grid item></Grid>
-      <Typography variant="h6">Kontrollbereich: {SC.unit.controlZone_OverRun}</Typography>
+      {SC.unit.controlZone > 1 ? <Typography variant="h6">Kontrollbereich: {SC.unit.controlZone}</Typography> : null}
     </Grid>
   ) : (
     <Grid item container direction="row" justify="space-around" className={classes.unitCardStripe}>
@@ -33,8 +32,6 @@ const CardFrontUpperBlackStripe = () => {
       <Typography variant="h6" align="center">
         {SC.unit.hold_maneuvers} Manöver
       </Typography>
-  
-    
     </Grid>
   );
 };
