@@ -9,9 +9,7 @@ import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
 import CancelIcon from "@material-ui/icons/Cancel";
 // components & functions
 import { unitOrCmdCard } from "../../../shared/sharedFunctions";
-// icons
-import blackBowIcon from "../../../../icons/bow2.png";
-import blackSwordIcon from "../../../../icons/sword2.png";
+
  
 
 const RulesToolTip = withStyles({
@@ -168,34 +166,9 @@ export const DisplayAllSpecialRules = (unit) => {
   );
 };
 
-/**
- * Function renders the Skill part of the stat card display.
- * @param {unitCard rangeSkill property} rangeSkill
- * @param {unitCard meleeSkill property} meleeSkill
- * @returns a JSX element with the unitCard melee and range skills displayed.
- */
-export const RenderSkillValues = (rangeSkill, meleeSkill) => {
-  const classes = useStyles();
-  return (
-    <Grid container direction="row" justify="center" alignItems="center" className={classes.skillBox}>
-      {meleeSkill !== 0 ? (
-        <Fragment>
-          <img alt="NK-Fertigkeit" src={blackSwordIcon} className={classes.Icon} />
-          <Typography variant="h6"> {meleeSkill} </Typography>
-        </Fragment>
-      ) : null}
-      {rangeSkill !== 0 ? (
-        <Fragment>
-          <img alt="Fernkampffertigkeit" src={blackBowIcon} className={classes.secondSkillIcon} />
-          <Typography variant="h6"> {rangeSkill} </Typography>
-        </Fragment>
-      ) : null}
-    </Grid>
-  );
-};
 
 export const displayUnitElements = (unit) => {
-  const classes = useStyles();
+ 
 
   let specialElements = 0;
   if (unit.leader) {
@@ -212,16 +185,16 @@ export const displayUnitElements = (unit) => {
   let ending = unit.numberOfElements === 1 ? "Element" : "Elemente";
 
   return (
-    <Grid container direction="row" justify="center" alignItems="center" className={classes.skillBox}>
-      <Typography variant="h6" className={classes.specialRules}>
-        {unit.leader ? "Anführer / " : null}
-        {unit.standardBearer ? "Standarte / " : null}
-        {unit.musician ? "Musiker / " : null}
+    <Grid container direction="row" justify="center" alignItems="center" >
+      <Typography variant="h6"  >
+        {unit.leader ? "Anführer  " : null}
+        {unit.standardBearer ? "/ Standarte" : null}
+        {unit.musician ? "/ Musiker" : null}
       </Typography>
-      <Typography variant="h6" className={classes.specialRules}>
+      <Typography variant="h6" >
         {number}
       </Typography>
-      <Typography variant="h6" className={classes.specialRules}>
+      <Typography variant="h6"  >
         {ending}
       </Typography>
     </Grid>
