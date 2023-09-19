@@ -8,7 +8,7 @@ import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 import { ArmyContext } from "../../../../../../../contexts/armyContext";
 import { unitCardMultiSort, uuidGenerator } from "../../../../../../shared/sharedFunctions";
 import EquipmentList from "./EquipmentList";
-import UnitEntryButtons from "./UnitEntryButtons";
+import UnitElementButtons from "./UnitElementButtons";
 import ArmyListUnitEntry from "./ArmyListUnitEntry";
 
 const useStyles = makeStyles({
@@ -74,7 +74,7 @@ const SubFactionUnitList = (props) => {
               </Button>
               <ArmyListUnitEntry unit={u} />
               {/* BUTTONS */}
-              <UnitEntryButtons
+              <UnitElementButtons
                 unit={u} //
                 subFaction={props.subFactionName}
                 key={uuidGenerator()}
