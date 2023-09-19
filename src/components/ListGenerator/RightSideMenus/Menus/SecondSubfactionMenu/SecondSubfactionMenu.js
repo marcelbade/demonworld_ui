@@ -1,5 +1,5 @@
 // React
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 //Material UI
 import { Button, Grid, ButtonGroup, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -7,7 +7,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import { ArmyContext } from "../../../../../contexts/armyContext";
 import { uuidGenerator } from "../../../../shared/sharedFunctions";
 // constants
-import { ARMIES_ADDITIONAL_SUBFACTIONS, ARMIES_ADDITIONAL_SUBFACTIONS_BUTTON_CAPTION } from "../../../../../constants/factions";
 
 const useStyles = makeStyles({
   overlay: {
@@ -33,20 +32,6 @@ const useStyles = makeStyles({
 const SecondSubFactionMenu = () => {
   const classes = useStyles();
   const AC = useContext(ArmyContext);
-
-  // set boolean flag if the selected faction has an addditonal sub faction for every unit.
-  useEffect(() => {
-    if (ARMIES_ADDITIONAL_SUBFACTIONS.includes(AC.selectedFactionName)) {
-      const result = ARMIES_ADDITIONAL_SUBFACTIONS_BUTTON_CAPTION.filter((e) => e.army === AC.selectedFactionName);
-
-      AC.setHasAdditionalSubFaction(true);
-      AC.setSecondSubfactionCaption(result[0].caption);
-      AC.setExcemptSubFactions(result[0].excemptSubFactions);
-      AC.setSecondSubFactionList(result[0].secondSubFactionList);
-    } else {
-      AC.setHasAdditionalSubFaction(false);
-    }
-  }, [AC.selectedFactionName, AC.secondSubFactionMenuState]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * Function takes the selected unit from the list, sets a new value for

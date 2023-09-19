@@ -9,6 +9,7 @@ import ItemShop from "./Menus/ItemShop/ItemShop";
 import SecondSubFactionMenu from "./Menus/SecondSubfactionMenu/SecondSubfactionMenu";
 import { ArmyContext } from "../../../contexts/armyContext";
 import CardView from "./Menus/CardView/CardView";
+import { ARMIES_ADDITIONAL_SUBFACTIONS, ARMIES_ADDITIONAL_SUBFACTIONS_BUTTON_CAPTION } from "../../../constants/factions";
 
 const MenuBox = () => {
   const AC = useContext(ArmyContext);
@@ -32,6 +33,20 @@ const MenuBox = () => {
       AC.setShowOptionButtons(false);
     }
   }, [AC.statCardState, AC.itemShopState, AC.secondSubFactionMenuState, AC.showTournamentRulesMenu]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // set boolean flag if the selected faction has an addditonal sub faction for every unit.
+  useEffect(() => {
+    if (ARMIES_ADDITIONAL_SUBFACTIONS.includes(AC.selectedFactionName)) {
+      const result = ARMIES_ADDITIONAL_SUBFACTIONS_BUTTON_CAPTION.filter((e) => e.army === AC.selectedFactionName);
+
+      AC.setHasAdditionalSubFaction(true);
+      AC.setSecondSubfactionCaption(result[0].caption);
+      AC.setExcemptSubFactions(result[0].excemptSubFactions);
+      AC.setSecondSubFactionList(result[0].secondSubFactionList);
+    } else {
+      AC.setHasAdditionalSubFaction(false);
+    }
+  }, [AC.selectedFactionName, AC.secondSubFactionMenuState]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const components = [
     { exists: true, show: AC.showOptionButtons, element: <OptionButtons /> },
