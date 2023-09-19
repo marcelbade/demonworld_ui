@@ -26,6 +26,17 @@
   font-weight: normal;
 }
  
+@font-face {
+  font-family: "jaapokki-regular";
+  src: local("jaapokki-regular"), url("./fonts/jaapokki-regular.ttf") format("truetype");
+  font-weight: normal;
+}
+@font-face {
+  font-family: "jaapokkienchance-regular";
+  src: local("jaapokkienchance-regular"), url("./fonts/jaapokkienchance-regular.ttf") format("truetype");
+  font-weight: normal;
+}
+ 
 
 body {
   margin: 0;

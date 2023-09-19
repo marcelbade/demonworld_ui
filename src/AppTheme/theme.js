@@ -7,7 +7,7 @@ const theme = createMuiTheme({
 
   typography: {
     allVariants: {
-      fontFamily: "notMaryKate",
+      fontFamily: "jaapokki-regular",
       textTransform: "none",
     },
   },
