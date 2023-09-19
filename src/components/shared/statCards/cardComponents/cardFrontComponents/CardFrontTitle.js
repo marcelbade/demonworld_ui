@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { renderMagicPoints, renderCommandPoints } from "../../../../compendiums/factionTable/depencies/factionTableFunctions";
 import { Grid, Typography } from "@material-ui/core";
 import { StateCardContext } from "../../../../../contexts/statCardContext";
-
+ 
 const useStyles = makeStyles({
   cardTitle: {
     wordSpacing: "100vw",

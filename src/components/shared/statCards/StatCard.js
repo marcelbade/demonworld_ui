@@ -10,7 +10,7 @@ import StatCardProvider from "../../../contexts/statCardContext";
 
 const useStyles = makeStyles({
   cardBox: {
-    width: "120%",
+    width: "150%",
     marginRight: "2em",
     marginTop: "2em",
     backgroundColor: "lightgrey",
@@ -23,8 +23,6 @@ const useStyles = makeStyles({
  */
 const StatCard = (props) => {
   const classes = useStyles();
-
-  
 
   return (
     <StatCardProvider

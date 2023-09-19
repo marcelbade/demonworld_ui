@@ -19,11 +19,35 @@ const CardBackUpperBlackStripe = () => {
   const classes = useStyles();
   const SC = useContext(StateCardContext);
 
+  const displayUnitElements = () => {
+    let specialElements = 0;
+    if (SC.unit.leader) {
+      ++specialElements;
+    }
+    if (SC.unit.standardBearer) {
+      ++specialElements;
+    }
+    if (SC.unit.musician) {
+      ++specialElements;
+    }
+
+    return SC.unit.numberOfElements - specialElements;
+  };
+
   return (
-    <Grid item>
-      <Typography variant="h6" align="center" className={classes.blackStripe}>
-        {SC.unit.numberOfElements} {SC.unit.numberOfElements === 1 ? "Element" : "Elemente"}
-      </Typography>
+    <Grid container direction="row" className={classes.blackStripe} justify="space-around">
+      <Grid item>
+        <Typography variant="h6">
+          {SC.unit.leader ? "Anführer" : null}
+          {SC.unit.standardBearer ? " / Standarte" : null}
+          {SC.unit.musician ? " / Musiker" : null}
+        </Typography>
+      </Grid> 
+      <Grid item>
+        <Typography variant="h6">
+          {displayUnitElements()} {SC.unit.numberOfElements === 1 ? " Element" : " Elemente"}
+        </Typography>
+      </Grid>
     </Grid>
   );
 };
