@@ -25,9 +25,9 @@ const CardFrontTitle = () => {
   return (
     <Grid item container justify="space-around" direction="row">
       <Grid item xs={3}>
-        <Typography variant="h6" align="center">
-          {renderCommandPoints(SC.unit.commandStars)}
-        </Typography>
+      <Typography variant="h6" align="center">
+        {renderCommandPoints(SC.unit.commandStars)}
+      </Typography>
       </Grid>
       <Grid item xs={6}>
         <Typography variant="h6" align="center" className={classes.cardTitle}>

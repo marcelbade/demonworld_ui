@@ -10,10 +10,14 @@ import StatCardProvider from "../../../contexts/statCardContext";
 
 const useStyles = makeStyles({
   cardBox: {
-    width: "150%",
+    width: "30em",
+    // maxWidth: "5em",
+    // minWidth: "5em",
+    
     marginRight: "2em",
     marginTop: "2em",
     backgroundColor: "lightgrey",
+    border: "1px black solid",
   },
 });
 /**
