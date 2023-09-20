@@ -1,5 +1,5 @@
 // React
-import React, { Fragment, useContext } from "react";
+import React, { useContext } from "react";
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Typography } from "@material-ui/core";

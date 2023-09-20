@@ -2,7 +2,7 @@
 import React, { Fragment, useContext } from "react";
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
-import { Grid, Typography, Icon } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 // icons
 import rangeArmorIcon from "../../../../../../icons/range-armor.png";
 import meleeArmorIcon from "../../../../../../icons/melee-armor.png";
