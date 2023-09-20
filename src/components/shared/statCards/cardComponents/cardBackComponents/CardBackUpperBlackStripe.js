@@ -44,7 +44,7 @@ const CardBackUpperBlackStripe = () => {
         </Typography>
       ) : null}
       {SC.unit.numberOfElements !== 1 ? (
-        <Typography variant="h6">{displayUnitElements()} " Elemente"</Typography>
+        <Typography variant="h6">{displayUnitElements()} Elemente</Typography>
       ) : (
         <Typography variant="h6">1 Element</Typography>
       )}
