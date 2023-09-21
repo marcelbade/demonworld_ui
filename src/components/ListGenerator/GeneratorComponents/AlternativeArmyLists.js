@@ -36,12 +36,6 @@ const AlternativeArmyLists = () => {
   }, [AC.armyHasAlternativeLists, AC.selectedAlternativeList]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    if (AC.selectedAlternativeList !== NONE) {
-      secondUnitListFilter();
-    }
-  }, [AC.selectedAlternativeList]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  useEffect(() => {
     AC.setAlternateArmyListOptions(findDropdownOptions(FIRST));
   }, [AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -50,6 +44,9 @@ const AlternativeArmyLists = () => {
       AC.setSecondAlternativeArmyOptions(findDropdownOptions(SECOND));
     }
   }, [AC.selectedFactionName, AC.selectedAlternativeList]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  console.log("secondAlternativeArmyOptions");
+  console.log(AC.secondAlternativeArmyOptions);
 
   useEffect(() => {
     AC.setAlternateArmyListLabelText(findLabelTexts());
@@ -67,7 +64,6 @@ const AlternativeArmyLists = () => {
 
     AC.setAlternateListSubFactions([...tempArray]);
   };
-  const secondUnitListFilter = () => {};
 
   /**
    * Function retrieves the correct label text for the input element.
@@ -78,19 +74,20 @@ const AlternativeArmyLists = () => {
   };
 
   /**
-   *Function returns the names of the alternative army lists as options for the drop down menu.
+   *Function returns the names of the alternative army lists as options for the drop down menu. if the menu is the second option (in addition to the first), then the array of options is simply the array for the first menu minus the selected value.
    * @returns an array of string values.
    */
   const findDropdownOptions = (menu) => {
     let result = [];
 
-    const listMapping = ARMY_ALTERNATIVES_LIST_MAPPER[AC.selectedFactionName];
+    const options = ARMY_ALTERNATIVES_LIST_MAPPER[AC.selectedFactionName];
 
     if (menu === FIRST) {
-      result = [...listMapping];
+      result = [...options];
     }
+
     if (menu === SECOND) {
-      let temp = listMapping.filter((m) => m !== AC.selectedAlternativeList);
+      let temp = options.filter((m) => m !== AC.selectedAlternativeList);
       result = [...temp];
     }
 
@@ -106,8 +103,7 @@ const AlternativeArmyLists = () => {
           className={classes.selector}
         />
       ) : null}
-      {ARMIES_WITH_TWO_ALTERNATE_ARMY_PICKS[AC.selectedFactionName] && //
-      AC.selectedAlternativeList !== NONE ? (
+      {ARMIES_WITH_TWO_ALTERNATE_ARMY_PICKS[AC.selectedFactionName] && AC.selectedAlternativeList !== NONE ? (
         <AlternativeArmyListSelector //
           alternateArmyFirstSelector={false}
           isArmySelector={false}
