@@ -6,7 +6,6 @@ import { Grid, IconButton } from "@material-ui/core";
 // icons
 import CancelIcon from "@material-ui/icons/Cancel";
 // components and functions
-import { isObjectEmtpy, unitOrCmdCard } from "../../../../shared/sharedFunctions";
 import { ArmyContext } from "../../../../../contexts/armyContext";
 import { useState } from "react";
 import { useEffect } from "react";

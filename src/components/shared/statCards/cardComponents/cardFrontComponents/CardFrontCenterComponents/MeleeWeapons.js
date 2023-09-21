@@ -1,31 +1,12 @@
 // React
 import React, { useContext } from "react";
 // Material UI
-import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Typography } from "@material-ui/core";
 // components & functions
 import { StateCardContext } from "../../../../../../contexts/statCardContext";
 // constants
 
-const useStyles = makeStyles({
-  Icon: {
-    height: "1.2em",
-    width: "1.2em",
-  },
-  alignIcons: {
-    display: "flex",
-    alignItems: "center",
-    marginLeft: "1em",
-  },
-
-  noWrap: {
-    flexWrap: "nowrap",
-  },
-});
-
 const MeleeWeapons = () => {
-  const classes = useStyles();
-
   const SC = useContext(StateCardContext);
 
   return (
