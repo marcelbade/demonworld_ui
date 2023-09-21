@@ -31,9 +31,7 @@ const MeleeWeapons = () => {
   return (
     <Grid item container direction="column">
       <Grid item container justify="center">
-        <Typography variant="h6">
-          {SC.unit.weapon1Name} : {SC.unit.weapon1}
-        </Typography>
+        <Typography variant="h6">{SC.unit.weapon1 === 0 ? null : SC.unit.weapon1Name + ": " + SC.unit.weapon1}</Typography>
       </Grid>
       <Grid item container justify="center">
         <Typography variant="h6">{SC.unit.weapon2 === 0 ? null : SC.unit.weapon2Name + SC.unit.weapon2}</Typography>
