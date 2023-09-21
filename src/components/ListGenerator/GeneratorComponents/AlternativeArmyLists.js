@@ -14,6 +14,7 @@ import {
   ARMIES_WITH_TWO_ALTERNATE_ARMY_PICKS,
 } from "../../../constants/factions";
 import { Fragment } from "react";
+import { ALLIES_MAPPING, NO_ALLY } from "../../../constants/allies";
 
 const useStyles = makeStyles((theme) => ({}));
 
@@ -28,12 +29,28 @@ const AlternativeArmyLists = () => {
     AC.setArmyHasAlternativeLists(ARMIES_WITH_ALTERNATIVE_LISTS[AC.selectedFactionName]);
   }, [AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // If there two alternative lists, set to true.
+  useEffect(() => {
+    AC.setArmyHasSecondChoice(ARMIES_WITH_TWO_ALTERNATE_ARMY_PICKS[AC.selectedFactionName]);
+  }, [AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
+
   // reset army's subFaction if alternate lists exist and one has been selected.
   useEffect(() => {
-    if (AC.armyHasAlternativeLists && AC.selectedAlternativeList !== NONE) {
-      alternateUnitListFilter();
+    if (
+      AC.armyHasAlternativeLists && //
+      !AC.armyHasSecondChoice &&
+      AC.selectedAlternativeList !== NONE
+    ) {
+      alternativeArmyListFilter(1);
+    } else if (
+      AC.armyHasAlternativeLists && //
+      AC.armyHasSecondChoice &&
+      AC.selectedAlternativeList !== NONE &&
+      AC.secondSelectedAlternativeList !== NONE
+    ) {
+      alternativeArmyListFilter(2);
     }
-  }, [AC.armyHasAlternativeLists, AC.selectedAlternativeList]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [AC.armyHasAlternativeLists, AC.armyHasSecondChoice, AC.selectedAlternativeList, AC.secondSelectedAlternativeList]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     AC.setAlternateArmyListOptions(findDropdownOptions(FIRST));
@@ -45,9 +62,6 @@ const AlternativeArmyLists = () => {
     }
   }, [AC.selectedFactionName, AC.selectedAlternativeList]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  console.log("secondAlternativeArmyOptions");
-  console.log(AC.secondAlternativeArmyOptions);
-
   useEffect(() => {
     AC.setAlternateArmyListLabelText(findLabelTexts());
   }, [AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -55,14 +69,41 @@ const AlternativeArmyLists = () => {
   /**
    * Function filters units, removes all units that do not belong to the selected army list.
    */
-  const alternateUnitListFilter = () => {
+  const alternativeArmyListFilter = (numberOfselections) => {
     const alternatives = ARMY_ALTERNATIVES_LIST_MAPPER[AC.selectedFactionName];
-    const notSelected = alternatives.filter((a) => a !== AC.selectedAlternativeList);
-
     let tempArray = [...AC.subFactions];
+    let notSelected = [];
+    let filterSubFactions;
+
+    // are there one or two selectors for alternative lists?
+    numberOfselections === 1
+      ? (filterSubFactions = filterForOneAlternative) //
+      : (filterSubFactions = filterForTwoAlternatives);
+
+    notSelected = alternatives.filter((a) => filterSubFactions(a));
     tempArray = tempArray.filter((f) => !notSelected.includes(f));
 
+    //allies
+    if (tempArray.includes(ALLIES_MAPPING[AC.selectedFactionName])) {
+      AC.setShowAlly(false);
+    } else {
+      AC.setShowAlly(true);
+    }
+
     AC.setAlternateListSubFactions([...tempArray]);
+  };
+
+  /**
+   * Both functions - filterForOneAlternative and filterForTwoAlternatives - are filter functions
+   * for the alternativeArmyListFilter and filter for the alternative lists that haven't been selected.
+   * @param {String} a
+   * @returns a filtered array
+   */
+  const filterForOneAlternative = (a) => {
+    return a !== AC.selectedAlternativeList;
+  };
+  const filterForTwoAlternatives = (a) => {
+    return a !== AC.selectedAlternativeList && a !== AC.secondSelectedAlternativeList;
   };
 
   /**
@@ -74,7 +115,9 @@ const AlternativeArmyLists = () => {
   };
 
   /**
-   *Function returns the names of the alternative army lists as options for the drop down menu. if the menu is the second option (in addition to the first), then the array of options is simply the array for the first menu minus the selected value.
+   * Function returns the names of the alternative army lists as options for the drop down menu.
+   * If the menu is the second option (in addition to the first),
+   * then the array of options is simply the array for the first menu minus the selected value.
    * @returns an array of string values.
    */
   const findDropdownOptions = (menu) => {

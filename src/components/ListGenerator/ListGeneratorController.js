@@ -41,7 +41,6 @@ const useStyles = makeStyles((theme) => ({
     },
 
     [theme.breakpoints.down("md")]: {},
-    position: "fixed",
   },
   armyListBox: {
     paddingTop: "2em",
@@ -118,13 +117,14 @@ const ListGeneratorController = () => {
   });
   // alternative lists
   const [armyHasAlternativeLists, setArmyHasAlternativeLists] = useState(false);
-  const [alternateArmyListOptions, setAlternateArmyListOptions] = useState([]);
-  const [alternateArmyListLabelText, setAlternateArmyListLabelText] = useState(NONE);
+  const [armyHasSecondChoice, setArmyHasSecondChoice] = useState(false);
   const [selectedAlternativeList, setSelectedAlternativeList] = useState(NONE);
   const [secondSelectedAlternativeList, setSecondSelectedAlternativeList] = useState(NONE);
-  const [alternativeArmyPresentAndSelected, setAlternativeArmyPresentAndSelected] = useState(false);
-  const [secondAlternativeArmyOptions, setSecondAlternativeArmyOptions] = useState("");
+  const [alternateArmyListOptions, setAlternateArmyListOptions] = useState([]);
+  const [secondAlternativeArmyOptions, setSecondAlternativeArmyOptions] = useState([]);
   const [alternateListSubFactions, setAlternateListSubFactions] = useState([]);
+  const [altArmyListSelectionComplete, setAltArmyListSelectionComplete] = useState(false);
+  const [alternateArmyListLabelText, setAlternateArmyListLabelText] = useState(NONE);
   // additional subFactions - currently only important for the Thain army!
   const [hasAdditionalSubFaction, setHasAdditionalSubFaction] = useState(false);
   const [secondSubFactionList, setSecondSubFactionList] = useState(false);
@@ -214,6 +214,8 @@ const ListGeneratorController = () => {
       removeUnitsNoLongerValid: [],
       secondSubFactionMissing: [],
     });
+ 
+    setAlternateListSubFactions([]);
     closeCardDisplay();
     closeItemShop();
   };
@@ -279,23 +281,28 @@ const ListGeneratorController = () => {
         setAllyName: setAllyName,
         setListOfAlliedUnits: setListOfAlliedUnits,
         setDistinctAllySubFactions: setDistinctAllySubFactions,
+
         // ALTERNATIVE LISTS
+
         armyHasAlternativeLists: armyHasAlternativeLists,
+        armyHasSecondChoice: armyHasSecondChoice,
         alternateArmyListOptions: alternateArmyListOptions,
         secondAlternativeArmyOptions: secondAlternativeArmyOptions,
         selectedAlternativeList: selectedAlternativeList,
         secondSelectedAlternativeList: secondSelectedAlternativeList,
-        alternativeArmyPresentAndSelected: alternativeArmyPresentAndSelected,
+        altArmyListSelectionComplete: altArmyListSelectionComplete,
         alternateArmyListLabelText: alternateArmyListLabelText,
         alternateListSubFactions: alternateListSubFactions,
+        setArmyHasSecondChoice: setArmyHasSecondChoice,
         setAlternateListSubFactions: setAlternateListSubFactions,
-        setAlternativeArmyPresentAndSelected: setAlternativeArmyPresentAndSelected,
+        setAltArmyListSelectionComplete: setAltArmyListSelectionComplete,
         setAlternateArmyListOptions: setAlternateArmyListOptions,
         setSelectedAlternativeList: setSelectedAlternativeList,
         setSecondSelectedAlternativeList: setSecondSelectedAlternativeList,
         setSecondAlternativeArmyOptions: setSecondAlternativeArmyOptions,
         setArmyHasAlternativeLists: setArmyHasAlternativeLists,
         setAlternateArmyListLabelText: setAlternateArmyListLabelText,
+
         // SELECTED UNIT LIST
         selectedUnits: selectedUnits,
         maxPointsAllowance: maxPointsAllowance,

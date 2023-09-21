@@ -11,8 +11,8 @@ import Tree from "./Tree";
 import { StyledTreeItem } from "./StyledTreeItem";
 // constants
 import { NO_ALLY } from "../../../../constants/allies";
-import { NONE } from "../../../../constants/factions";
 import { Typography } from "@material-ui/core";
+import { NONE } from "../../../../constants/factions";
 
 TransitionComponent.propTypes = {
   // Show the component; triggers the enter or exit states
@@ -33,8 +33,8 @@ const useStyles = makeStyles((theme) => ({
   allyTitle: {
     marginLeft: "1em",
     paddingTop: "1em",
-    marginBottom:"1em",
-    borderBottom: "black 1px solid"
+    marginBottom: "1em",
+    borderBottom: "black 1px solid",
   },
 }));
 
@@ -44,21 +44,36 @@ const FactionTreeView = () => {
   const SHOW_SUBFACTIONS = ["1"];
 
   useEffect(() => {
-    const hasNoAlternatives = !AC.armyHasAlternativeLists;
-    const alternativeListSelected = AC.armyHasAlternativeLists && AC.selectedAlternativeList !== NONE;
-
     let result = false;
-    if (hasNoAlternatives || alternativeListSelected) {
+
+    if (
+      !AC.armyHasAlternativeLists && //
+      !AC.armyHasSecondChoice
+    ) {
+      result = true;
+    } else if (
+      !AC.armyHasSecondChoice && //
+      AC.armyHasAlternativeLists &&
+      AC.selectedAlternativeList !== NONE
+    ) {
+      result = true;
+    } else if (
+      AC.armyHasAlternativeLists && //
+      AC.armyHasSecondChoice &&
+      AC.secondSelectedAlternativeList !== NONE
+    ) {
       result = true;
     }
 
-    AC.setAlternativeArmyPresentAndSelected(result);
+    
+
+    AC.setAltArmyListSelectionComplete(result);
   }, [AC, AC.selectedFactionName, AC.selectedAlternativeList]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * The entire treeView for the army.
    */
-  return AC && AC.alternativeArmyPresentAndSelected ? (
+  return AC && AC.altArmyListSelectionComplete ? (
     <>
       <TreeView
         className={classes.treeViewBox}
@@ -73,7 +88,9 @@ const FactionTreeView = () => {
       {/* ALLIED FACTION */}
       {AC.allyName !== NO_ALLY && AC.showAlly ? (
         <Fragment>
-          <Typography className={classes.allyTitle}  variant="h6">Alliierte: {AC.allyName}</Typography>
+          <Typography className={classes.allyTitle} variant="h6">
+            Alliierte: {AC.allyName}
+          </Typography>
           <TreeView
             className={classes.treeViewBox}
             defaultExpanded={SHOW_SUBFACTIONS}

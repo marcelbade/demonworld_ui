@@ -68,9 +68,6 @@ const UnitEntryButtons = (props) => {
     }
   };
 
-  console.log("AC.hasAdditionalSubFaction")
-  console.log(AC.hasAdditionalSubFaction)
-
   return (
     <List key={uuidGenerator()}>
       <ListItemButton
@@ -105,7 +102,7 @@ const UnitEntryButtons = (props) => {
             toggleMenuState(props.unit, "SECOND_SUB_FACTION");
           }}
         >
-          {AC.secondSubfactionCaption} 
+          {AC.secondSubfactionCaption}
         </ListItemButton>
       ) : null}
     </List>
