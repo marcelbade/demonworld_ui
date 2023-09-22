@@ -65,8 +65,6 @@ const FactionTreeView = () => {
       result = true;
     }
 
-    
-
     AC.setAltArmyListSelectionComplete(result);
   }, [AC, AC.selectedFactionName, AC.selectedAlternativeList]); // eslint-disable-line react-hooks/exhaustive-deps
 
