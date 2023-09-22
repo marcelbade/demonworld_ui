@@ -55,7 +55,7 @@ const globalRules = {
       const testedUnit = selectedUnits[i];
       const identicalUnits = selectedUnits.filter((u) => u.unitName === testedUnit.unitName);
 
-      if (identicalUnits.length > max) {
+      if (identicalUnits.length >= max) {
         result.push({ unitBlockedbyRules: testedUnit.unitName, message: VALIDATION.MAXIMUM_OF_TWO_OF_EACH_MESSAGE });
       }
     }
