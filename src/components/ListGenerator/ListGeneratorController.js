@@ -1,16 +1,13 @@
 // React
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 // Axios
 import axios from "axios";
-// notistack
-import { SnackbarProvider } from "notistack";
 // Material UI
-import { Fade, Grid, IconButton } from "@material-ui/core";
+import { Grid, IconButton } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 // icons
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import CancelIcon from "@material-ui/icons/Cancel";
 // components and functions
 import ArmyProvider from "../../contexts/armyContext";
 import SelectionInput from "../shared/selectionInput";
@@ -84,7 +81,6 @@ const useStyles = makeStyles((theme) => ({
 const ListGeneratorController = () => {
   const classes = useStyles();
   const history = useHistory();
-  const notistackRef = useRef();
 
   // intialize local states
   const [fetchedFactions, setFetchedFactions] = useState([]);
@@ -394,21 +390,6 @@ const ListGeneratorController = () => {
           <MenuBox />
         </Grid>
       </Grid>
-      <SnackbarProvider
-        hideIconVariant
-        TransitionComponent={Fade}
-        ref={notistackRef}
-        action={(key) => (
-          <IconButton
-            onClick={() => notistackRef.current.closeSnackbar(key)} //
-            style={{ color: "#fff", fontSize: "20px" }}
-          >
-            <CancelIcon />
-          </IconButton>
-        )}
-      >
-        <ValidationNotification />
-      </SnackbarProvider>
     </ArmyProvider>
   ) : null;
 };
