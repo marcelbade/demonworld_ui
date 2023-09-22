@@ -1,30 +1,13 @@
 // React
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 // Material UI
-import {
-  Grid,
-  Button,
-  Fade,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemAvatar,
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Avatar,
-} from "@material-ui/core";
+import { Grid, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-// components and functions
-import { uuidGenerator } from "../../../../shared/sharedFunctions";
-// Icons
-import ErrorIcon from "@mui/icons-material/Error";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 // context
 import { ArmyContext } from "../../../../../contexts/armyContext";
 // constants
-import { OPTIONS, VALIDATION } from "../../../../../constants/textsAndMessages";
+import { OPTIONS } from "../../../../../constants/textsAndMessages";
 
 const useStyles = makeStyles({
   overlay: {
@@ -55,42 +38,6 @@ const OptionButtons = () => {
   const classes = useStyles();
   const AC = useContext(ArmyContext);
   const history = useHistory();
-
-  const [disableButtons, setDisableButtons] = useState(true);
-  const [displayMessages, setDisplayMessages] = useState([]);
-  const [displayCount, setDisplayCount] = useState(true);
-
-  // enable buttons if list is valid
-  useEffect(() => {
-    AC.selectedUnits.length === 0 || violatesRules(AC.listValidationResults) ? setDisableButtons(true) : setDisableButtons(false);
-  }, [AC.selectedUnits, AC.listValidationResults]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  // set the display messages
-  useEffect(() => {
-    let tempArray = [];
-
-    if (AC.listValidationResults.subFactionBelowMinimum.length > 0) {
-      AC.listValidationResults.subFactionBelowMinimum.forEach((u) => tempArray.push(u.message));
-    }
-    if (!AC.listValidationResults.commanderIspresent) {
-      tempArray.push(VALIDATION.NO_COMMANDER_WARNING);
-    }
-
-    setDisplayMessages([...tempArray]);
-  }, [AC.listValidationResults]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  /**
-   * Function checks whether the list is valid.
-   * @param {[unitCard]} blockedUnits
-   * @returns boolean flag; true if list is invalid (no commander OR 1 or more subfaction below min. )
-   */
-  const violatesRules = (blockedUnits) => {
-    return blockedUnits.subFactionBelowMinimum.length > 0 || blockedUnits.commanderIspresent === false;
-  };
-
-  const showCount = () => {
-    setDisplayCount(!displayCount);
-  };
 
   /**
    * Function graps the current army list as an object, stores it in the history object and naviagat3s to the LossCalculator component.
@@ -129,7 +76,7 @@ const OptionButtons = () => {
         <Button
           className={classes.button}
           variant="outlined"
-          disabled={disableButtons}
+          disabled={AC.disableOptionButtons}
           onClick={() => {
             openPDfInNewTab();
           }}
@@ -141,7 +88,7 @@ const OptionButtons = () => {
         <Button
           className={classes.button}
           variant="outlined"
-          disabled={disableButtons}
+          disabled={AC.disableOptionButtons}
           onClick={() => {
             storeList();
           }}
@@ -153,7 +100,7 @@ const OptionButtons = () => {
         <Button
           className={classes.button}
           variant="outlined"
-          disabled={disableButtons}
+          disabled={AC.disableOptionButtons}
           onClick={() => {
             navigateToLossCalculator();
           }}
@@ -172,37 +119,6 @@ const OptionButtons = () => {
         >
           {OPTIONS.CHANGE_TOURNAMENT_RULES}
         </Button>
-      </Grid>
-      <Grid item className={classes.cardTest}>
-        <Accordion
-          onChange={() => {
-            showCount();
-          }}
-        >
-          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            {displayCount ? (
-              <Fade in timeout={500}>
-                <Avatar>{displayMessages.length}</Avatar>
-              </Fade>
-            ) : null}
-          </AccordionSummary>
-          <AccordionDetails>
-            <List>
-              {displayMessages.map((m) => {
-                return (
-                  <Fade in key={uuidGenerator()} timeout={2500}>
-                    <ListItem key={uuidGenerator()} className={classes.warningBox}>
-                      <ListItemAvatar key={uuidGenerator()}>
-                        <ErrorIcon key={uuidGenerator()} className={classes.errorIcon} />
-                      </ListItemAvatar>
-                      <ListItemText key={uuidGenerator()} primary={m} />
-                    </ListItem>
-                  </Fade>
-                );
-              })}
-            </List>
-          </AccordionDetails>
-        </Accordion>
       </Grid>
     </Grid>
   );
