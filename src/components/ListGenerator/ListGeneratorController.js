@@ -1,20 +1,24 @@
 // React
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
 // Axios
 import axios from "axios";
+// notistack
+import { SnackbarProvider } from "notistack";
 // Material UI
-import { Grid, IconButton } from "@material-ui/core";
+import { Fade, Grid, IconButton } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 // icons
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import CancelIcon from "@material-ui/icons/Cancel";
 // components and functions
 import ArmyProvider from "../../contexts/armyContext";
 import SelectionInput from "../shared/selectionInput";
 import FactionTreeView from "./ArmySelectorView/SelectorTreeView/TreeView";
 import ArmyListBox from "./ArmyListView/ArmyListBox";
 import Allies from "./GeneratorComponents/Allies";
-import ArmyValidation from "./GeneratorComponents/ArmyValidation";
+import ArmyValidation from "./GeneratorComponents/validation/ArmyValidation";
+import ValidationNotification from "./GeneratorComponents/validation/ValidationNotification";
 import Pdf from "./GeneratorComponents/Pdf";
 import AlternativeArmyLists from "./GeneratorComponents/AlternativeArmyLists";
 import MenuBox from "./RightSideMenus/MenuBox";
@@ -80,6 +84,7 @@ const useStyles = makeStyles((theme) => ({
 const ListGeneratorController = () => {
   const classes = useStyles();
   const history = useHistory();
+  const notistackRef = useRef();
 
   // intialize local states
   const [fetchedFactions, setFetchedFactions] = useState([]);
@@ -106,7 +111,9 @@ const ListGeneratorController = () => {
     subFactionBelowMinimum: [],
     removeUnitsNoLongerValid: [],
     secondSubFactionMissing: [],
+    commanderIsPresent: true,
   });
+  const [disableOptionsButtons, setDisableOptionsButtons] = useState(true);
   // tournament rules override
   const [showTournamentRulesMenu, setShowTournamentRulesMenu] = useState(false);
   const [tournamentOverrideRules, setTournamentOverrideRules] = useState({
@@ -213,8 +220,9 @@ const ListGeneratorController = () => {
       subFactionBelowMinimum: [],
       removeUnitsNoLongerValid: [],
       secondSubFactionMissing: [],
+      commanderIsPresent: true,
     });
- 
+
     setAlternateListSubFactions([]);
     closeCardDisplay();
     closeItemShop();
@@ -281,9 +289,7 @@ const ListGeneratorController = () => {
         setAllyName: setAllyName,
         setListOfAlliedUnits: setListOfAlliedUnits,
         setDistinctAllySubFactions: setDistinctAllySubFactions,
-
         // ALTERNATIVE LISTS
-
         armyHasAlternativeLists: armyHasAlternativeLists,
         armyHasSecondChoice: armyHasSecondChoice,
         alternateArmyListOptions: alternateArmyListOptions,
@@ -302,7 +308,6 @@ const ListGeneratorController = () => {
         setSecondAlternativeArmyOptions: setSecondAlternativeArmyOptions,
         setArmyHasAlternativeLists: setArmyHasAlternativeLists,
         setAlternateArmyListLabelText: setAlternateArmyListLabelText,
-
         // SELECTED UNIT LIST
         selectedUnits: selectedUnits,
         maxPointsAllowance: maxPointsAllowance,
@@ -311,7 +316,9 @@ const ListGeneratorController = () => {
         resetTheState: resetTheState,
         // ARMY LIST VALIDATION
         listValidationResults: listValidationResults,
+        disableOptionsButtons: disableOptionsButtons,
         setListValidationResults: setListValidationResults,
+        setDisableOptionsButtons: setDisableOptionsButtons,
         // RIGHT SIDE MENU
         showOptionButtons: showOptionButtons,
         statCardState: statCardState,
@@ -387,6 +394,21 @@ const ListGeneratorController = () => {
           <MenuBox />
         </Grid>
       </Grid>
+      <SnackbarProvider
+        hideIconVariant
+        TransitionComponent={Fade}
+        ref={notistackRef}
+        action={(key) => (
+          <IconButton
+            onClick={() => notistackRef.current.closeSnackbar(key)} //
+            style={{ color: "#fff", fontSize: "20px" }}
+          >
+            <CancelIcon />
+          </IconButton>
+        )}
+      >
+        <ValidationNotification />
+      </SnackbarProvider>
     </ArmyProvider>
   ) : null;
 };
