@@ -6,6 +6,7 @@ import { ListItemButton } from "@mui/material";
 // components and functions
 import { ArmyContext } from "../../../../../../../contexts/armyContext";
 import { uuidGenerator } from "../../../../../../shared/sharedFunctions";
+import { BUTTON_TEXTS } from "../../../../../../../constants/textsAndMessages";
 
 const useStyles = makeStyles({
   buttons: {
@@ -79,7 +80,7 @@ const UnitEntryButtons = (props) => {
           toggleMenuState(props.unit, "ITEMS");
         }}
       >
-        Gegenstände
+        {BUTTON_TEXTS.PREVIEW_CARD}
       </ListItemButton>
       <ListItemButton
         key={uuidGenerator()}
@@ -89,7 +90,7 @@ const UnitEntryButtons = (props) => {
           toggleMenuState(props.unit, "UNIT_CARDS");
         }}
       >
-        Kartenvorschau
+        {BUTTON_TEXTS.SHOW_ITEM_SHOP}
       </ListItemButton>
 
       {AC.hasAdditionalSubFaction && !AC.excemptSubFactions.includes(props.subFaction) ? (

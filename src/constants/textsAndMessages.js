@@ -19,6 +19,13 @@ export const GENERAL_ERRRORS = {
   ONLY_NUMBERS: "Bitte nur Zahlen eingeben.",
 };
 
+
+export const BUTTON_TEXTS={
+  PREVIEW_CARD: "Gegenstände",
+  SHOW_ITEM_SHOP: "Kartenvorschau",
+}
+
+
 export const VALIDATION = {
   NO_COMMANDER_WARNING: `Die Armeeliste muss mindestens 1 Helden, Befehlshaber oder Magier mit 2 oder mehr ★ enthalten.`,
 
