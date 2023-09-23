@@ -19,12 +19,10 @@ export const GENERAL_ERRRORS = {
   ONLY_NUMBERS: "Bitte nur Zahlen eingeben.",
 };
 
-
-export const BUTTON_TEXTS={
+export const BUTTON_TEXTS = {
   PREVIEW_CARD: "Gegenstände",
   SHOW_ITEM_SHOP: "Kartenvorschau",
-}
-
+};
 
 export const VALIDATION = {
   NO_COMMANDER_WARNING: `Die Armeeliste muss mindestens 1 Helden, Befehlshaber oder Magier mit 2 oder mehr ★ enthalten.`,
@@ -188,6 +186,7 @@ export const UNDEAD = {
   ERRORS: {
     UNDEAD_COMMANDER: "Deine Liste muss einen Nekromanten oder einen Helden oder Befehlshaber mit 2 oder mehr ★ enthalten.",
     MAX_LIMIT_CHARACTERS: "Die Armee darf zu max. 50% aus Helden, Befehlshaber und Magiern bestehen!",
+    ALLIES: "Diese Einheit steht nicht als Alliierter zur Verfügung.",
   },
 };
 
