@@ -20,15 +20,8 @@ const ArmyValidation = () => {
     const isAlternativeListSelected = AC.selectedAlternativeList !== NONE;
 
     if (IsFactionSelected && hasAlternativeLists && isAlternativeListSelected) {
-
-      console.log("A");
-    
-
       runValidation();
     } else if (IsFactionSelected && !hasAlternativeLists) {
-
-      console.log("B");
-
       runValidation();
     }
   }, [AC.selectedUnits, AC.maxPointsAllowance, AC.selectedAlternativeList, AC.subFactions]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -61,10 +54,6 @@ const ArmyValidation = () => {
       secondSubFactionMissing: validationResults.secondSubFactionMissing,
     });
   };
-
-  
-
-
 
   // Automatically remove units from the army list if the list no longer meets the ciriteria that have to be met to permit those units to be picked.
   useEffect(() => {
