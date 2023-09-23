@@ -1,5 +1,5 @@
 // React
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 // notistack
 import { useSnackbar } from "notistack";
 // components and functions
