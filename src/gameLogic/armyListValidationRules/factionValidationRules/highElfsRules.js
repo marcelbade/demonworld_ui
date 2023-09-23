@@ -81,7 +81,8 @@ const ElfRules = {
     totalPointsAllowance,
     subFactions,
     selectedAlternativeList,
-    tournamentOverrideRules
+    tournamentOverrideRules,
+    listOfAlliedUnits
   ) => {
     //  general rules
     let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(selectedUnits, availableUnits, totalPointsAllowance);

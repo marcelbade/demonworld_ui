@@ -56,7 +56,8 @@ const NorwingerRules = {
     totalPointsAllowance,
     subFactions,
     selectedAlternativeList,
-    tournamentOverrideRules
+    tournamentOverrideRules,
+    listOfAlliedUnits
   ) => {
     //  general rules
     let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(selectedUnits, availableUnits, totalPointsAllowance);
@@ -85,7 +86,7 @@ const NorwingerRules = {
       : [];
 
     // special faction rule - no more than 50% may be spent on all heroes, mages, and commanders.
-    let isAboveCharLimit =  globalRules.belowMaxPercentageHeroes(selectedUnits, totalPointsAllowance, availableUnits, heroPointCap);
+    let isAboveCharLimit = globalRules.belowMaxPercentageHeroes(selectedUnits, totalPointsAllowance, availableUnits, heroPointCap);
 
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [

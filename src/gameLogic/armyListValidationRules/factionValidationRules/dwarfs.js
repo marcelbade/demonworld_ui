@@ -49,7 +49,8 @@ const DwarfRules = {
     totalPointsAllowance,
     subFactions,
     selectedAlternativeList,
-    tournamentOverrideRules
+    tournamentOverrideRules,
+    listOfAlliedUnits
   ) => {
     //  general rules
     let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(selectedUnits, availableUnits, totalPointsAllowance);
@@ -74,8 +75,8 @@ const DwarfRules = {
     let testForHeroCapResult = globalRules.belowMaxPercentageHeroes(selectedUnits, totalPointsAllowance, availableUnits, heroPointCap);
 
     let hasDuplicateUniques = tournamentOverrideRules.uniquesOnlyOnce //
-    ? globalRules.noDuplicateUniques(selectedUnits)
-    : [];
+      ? globalRules.noDuplicateUniques(selectedUnits)
+      : [];
 
     // special faction rule: dwarf kingdoms and allies - the player has to choose one. That Kondom can make up up to 40% of the list, the other one up to 20%. Instead of the second kingdom, the player can take up to 20% of imperial allies
     percentageKingdomsAndAlly(selectedUnits);
@@ -83,7 +84,7 @@ const DwarfRules = {
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [
       ...isExceedingPointAllowance,
-       ...hasDuplicateUniques,
+      ...hasDuplicateUniques,
       ...testForHeroCapResult,
       ...testForMax2Result,
       ...isAboveSubFactionMax,

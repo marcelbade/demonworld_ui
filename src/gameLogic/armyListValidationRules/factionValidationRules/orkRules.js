@@ -67,7 +67,8 @@ const OrkRules = {
     totalPointsAllowance,
     subFactions,
     selectedAlternativeList,
-    tournamentOverrideRules
+    tournamentOverrideRules,
+    listOfAlliedUnits
   ) => {
     //  general rules
     let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(selectedUnits, availableUnits, totalPointsAllowance);
@@ -182,6 +183,13 @@ const isOrkArmyCommanderPresent = (selectedUnits, selectedAlternativeList) => {
   return clanngettHeroPresent.length > 0 && potentialCommanders.length > 0;
 };
 
+/**
+ *  Functions implement the rule that each clan has only access to a small sub set of clan units.
+ * All other units are blocked.
+ * @param {[unitCard]} availableUnits
+ * @param {String} selectedAlternativeList
+ * @returns an array of objects, each containins a blocked unbit and an error message.
+ */
 const setUnitsForClans = (availableUnits, selectedAlternativeList) => {
   let result = [];
 
@@ -194,6 +202,13 @@ const setUnitsForClans = (availableUnits, selectedAlternativeList) => {
   return result;
 };
 
+/**
+ * Function implements the rule that Orks don't get allies, insted a fixed percentage of points casn be spent on Goblin units as part of the Clanngett troops.
+ * @param {[unitCard]} selectedUnits
+ * @param {Int} totalPointsAllowance
+ * @param {[unitCard]} availableUnits
+ * @returns
+ */
 const checkForGoblinMax = (selectedUnits, totalPointsAllowance, availableUnits) => {
   const goblinUnits = ["Goblin-Spinnenschützen", "Goblin-Spinnenreiter"];
   const GOBLIN_MAX_PERCENTAGE = 0.2;
