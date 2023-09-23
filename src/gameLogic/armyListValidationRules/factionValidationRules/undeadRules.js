@@ -3,6 +3,7 @@
  *Eine Armee der Untoten darf nicht mehr als 50% der Gesamtpunktzahl für
 Helden, Befehlshaber und Magier ausgeben. Sie muss mindestens einen
 Totenbeschwörer oder einen ** Befehlshaber enthalten.
+
 Für die Rekrutierung isthakischer Alliierter können nur Rekrutierungskarten
 aus dem Armeebuch Isthak aus den Kategorien Menschen (aber keine
 Schwarzmagier), Tiermenschen und Eishexen aufgestellt werden. Die
@@ -64,8 +65,6 @@ const rules = [
   },
 ];
 
-const MAX_HERO_PERCENTAGE = 50;
-
 const UndeadRules = {
   testSubFactionRules: (
     availableUnits,
@@ -73,13 +72,18 @@ const UndeadRules = {
     totalPointsAllowance,
     subFactions,
     selectedAlternativeList,
-    tournamentOverrideRules
+    tournamentOverrideRules,
+    listOfAlliedUnits
   ) => {
+    console.log("availableUnits");
+    console.log(availableUnits);
+
     //  general rules
     let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(selectedUnits, availableUnits, totalPointsAllowance);
     let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(rules, selectedUnits, totalPointsAllowance, subFactions);
     let isAboveSubFactionMax = globalRules.unitsAboveSubFactionMax(rules, selectedUnits, totalPointsAllowance, availableUnits);
     let hasNoCommander = isUndeadArmyCommanderPresent(selectedUnits);
+    let hasBlockedAllies = validIshtakAllies(listOfAlliedUnits);
 
     // tournament rules
     let maxCopies;
@@ -90,8 +94,8 @@ const UndeadRules = {
       heroPointCap = tournamentOverrideRules.maxHeroValue;
     } else {
       maxCopies = 2;
-      // faction rule => 40% cap
-      heroPointCap = 40;
+      // faction rule => 50% cap
+      heroPointCap = 50;
     }
 
     let testForMax2Result = globalRules.maximumCopiesOfUnit(selectedUnits, maxCopies);
@@ -116,6 +120,8 @@ const UndeadRules = {
     // result - is a commander present?
     validationResults.commanderIsPresent = hasNoCommander;
 
+    validationResults.alliedUnitsBlockedbyRules = hasBlockedAllies;
+
     return validationResults;
   },
 };
@@ -132,13 +138,23 @@ const isUndeadArmyCommanderPresent = (selectedUnits) => {
 
   const necromancerPresent = selectedUnits.filter((u) => necromancers.includes(u.unitName));
   const potentialCommanders = selectedUnits.filter((u) => u.commandStars >= 2);
-  return necromancerPresent.length > 0 && potentialCommanders.length > 0;
+  return necromancerPresent.length > 0 || potentialCommanders.length > 0;
 };
 
-const validIshtakAllies = () => {
-  const permitted = ["icewitches", "beastmen", "humans"];
-  // not permitted
-  const blackWizards = ["Drogador", "Xarator", "Masdra Draizar"];
+const validIshtakAllies = (listOfAlliedUnits) => {
+  const permittedSubFactions = ["Eishexen", "Tiermenschen", "Menschen"];
+  const blockedUnits = ["Drogador", "Xarator", "Masdra Draizar"];
+  const result = [];
+
+  const blockedAlliedUnits = listOfAlliedUnits.filter(
+    (a) => !permittedSubFactions.includes(a.subFaction) || blockedUnits.includes(a.unitName)
+  );
+
+  blockedAlliedUnits.forEach((aU) => {
+    result.push({ unitBlockedbyRules: aU.unitName, message: UNDEAD.ERRORS.ALLIES });
+  });
+
+  return result;
 };
 
 export { UndeadRules, rules };
