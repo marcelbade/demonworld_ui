@@ -157,7 +157,7 @@ export const ORKS = {
 
 export const THAIN = {
   SUB_FACTION_RULES: {
-    TRIBAL_WARRIORS: "Deine Armeeliste muss zu 10% bis 60% aus Stammeskriegern bestehen.",
+    TRIBAL_WARRIORS: "Deine Armeeliste muss zu 10% bis 80% aus Stammeskriegern bestehen.",
     VETERANS: "Deine Armeeliste darf zu höchstens 50% aus Veteranen bestehen.",
     SHAMANS: "Deine Armeeliste darf zu höchstens 50% aus Schamamen bestehen.",
     GREATCHAMPIONS_HEROES_COMMANDERS: "Deine Armeeliste darf zu höchstens 30% aus Groß-Champions, Helden und Befehlshabern bestehen.",
