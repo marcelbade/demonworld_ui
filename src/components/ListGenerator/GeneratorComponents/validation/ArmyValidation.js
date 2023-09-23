@@ -34,7 +34,8 @@ const ArmyValidation = () => {
       AC.maxPointsAllowance,
       AC.subFactions,
       AC.selectedAlternativeList,
-      AC.tournamentOverrideRules
+      AC.tournamentOverrideRules,
+      AC.listOfAlliedUnits
     );
 
     collectValidatioResults(validationResult);
@@ -52,6 +53,7 @@ const ArmyValidation = () => {
       commanderIsPresent: validationResults.commanderIsPresent,
       removeUnitsNoLongerValid: validationResults.removeUnitsNoLongerValid,
       secondSubFactionMissing: validationResults.secondSubFactionMissing,
+      alliedUnitsBlockedbyRules: validationResults.alliedUnitsBlockedbyRules,
     });
   };
 

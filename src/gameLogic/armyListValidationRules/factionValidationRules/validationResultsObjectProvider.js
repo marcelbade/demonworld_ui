@@ -19,7 +19,7 @@ const validationResults = {
   removeUnitsNoLongerValid: [],
   secondSubFactionMissing: [],
   commanderIsPresent: false,
-  otherBlockingRules: [],  
+  alliedUnitsBlockedbyRules: [],
 };
 
 export default validationResults;
