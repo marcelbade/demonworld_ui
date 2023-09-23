@@ -35,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: "1em",
     marginBottom: "1em",
     borderBottom: "black 1px solid",
+    width: "70%"
   },
 }));
 
