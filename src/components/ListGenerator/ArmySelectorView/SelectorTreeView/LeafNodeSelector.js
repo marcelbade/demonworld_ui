@@ -23,14 +23,17 @@ const useStyles = makeStyles({
 const LeafNodeSelector = (props) => {
   const classes = useStyles();
   const AC = useContext(ArmyContext);
-  const blockResults = AC.listValidationResults.unitsBlockedbyRules;
+
+  const blockResults = props.showsFaction
+    ? AC.listValidationResults.unitsBlockedbyRules
+    : AC.listValidationResults.alliedUnitsBlockedbyRules;
 
   // no need for a useState hook - must be recalculated for every rerender!
   let blockedUnitNames = [];
 
   // collect all blocked units in one array
-  blockResults.forEach((blockedUnitObj) => {
-    blockedUnitNames.push(blockedUnitObj.unitBlockedbyRules);
+  blockResults.forEach((bR) => {
+    blockedUnitNames.push(bR.unitBlockedbyRules);
   });
 
   /**
@@ -76,6 +79,7 @@ const LeafNodeSelector = (props) => {
     // unit blocked
     return blockedUnitNames.includes(u.unitName) ? (
       <LeafNode
+        key={uuidGenerator()}
         unit={u}
         isBlocked={true} //
         blockMessage={findBlockMessage(blockResults, u.unitName)}
@@ -83,10 +87,10 @@ const LeafNodeSelector = (props) => {
     ) : (
       // unit not blocked
       <StyledTreeItem
+        key={uuidGenerator()}
         className={classes.node}
         nodeId={createLeafNodeId(u)} //
         label={<LeafNode unit={u} isBlocked={false} />}
-        key={uuidGenerator()}
       ></StyledTreeItem>
     );
   });

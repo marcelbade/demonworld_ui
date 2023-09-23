@@ -115,6 +115,7 @@ const ListGeneratorController = () => {
     subFactionBelowMinimum: [],
     removeUnitsNoLongerValid: [],
     secondSubFactionMissing: [],
+    alliedUnitsBlockedbyRules: [],
     commanderIsPresent: true,
   });
   const [disableOptionsButtons, setDisableOptionsButtons] = useState(true);

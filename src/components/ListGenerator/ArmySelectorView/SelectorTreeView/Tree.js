@@ -31,7 +31,7 @@ const Tree = (props) => {
   const AC = useContext(ArmyContext);
 
   /**
-   * Function selects a list of all sub factions of the army - either the faction's list or that of it's ally. If the army has alternative lists, the alternative lit is selected instead of thej faction's list. The ally name has to be removed from the array so it is not displayed as an army sub faction in the tree. 
+   * Function selects a list of all sub factions of the army - either the faction's list or that of it's ally. If the army has alternative lists, the alternative lit is selected instead of thej faction's list. The ally name has to be removed from the array so it is not displayed as an army sub faction in the tree.
    * @returns
    */
   const selectsSubFactionList = () => {
@@ -68,14 +68,14 @@ const Tree = (props) => {
     .sort((a, b) => {
       return a > b;
     })
-    .map((subFaction) => {
+    .map((sF) => {
       return (
         <StyledTreeItem
           key={uuidGenerator()} //
-          nodeId={createNodeID(selectsSubFactionList().indexOf(subFaction))}
-          label={subFaction}
+          nodeId={createNodeID(selectsSubFactionList().indexOf(sF))}
+          label={sF}
           className={
-            isSubFactionEmpty(subFaction) //
+            isSubFactionEmpty(sF) //
               ? classes.disabledBranch
               : classes.branch
           }
@@ -87,8 +87,9 @@ const Tree = (props) => {
                 ? AC.listOfAllFactionUnits
                 : AC.listOfAlliedUnits
             }
-            subFaction={subFaction}
-            nodeID={createNodeID(selectsSubFactionList().indexOf(subFaction))}
+            showsFaction={props.showsFaction}
+            subFaction={sF}
+            nodeID={createNodeID(selectsSubFactionList().indexOf(sF))}
           />
         </StyledTreeItem>
       );
