@@ -2,15 +2,10 @@ TODO:  BUGS AND IMPROVEMENTS
 ===================================
 - sort the units in the tree alphabetically
 - improve the sub factions sorting
-- move the button that deletes the army list
-- add buttons to delete a sub faction list
-- add close button to itemShop, Card display
-- army list -> CSS bug, long unit names!
-
+ 
 TODO:  ARMY LIST 
 ===================================
- 
- 
+FINISHED
 
 TODO: FINAL TEST - validation
 ===================================
@@ -25,14 +20,12 @@ dark elves - FINISHED
 
 TODO: Unit Cards 
 ===================================
--   Borders are missing
-
+ DONE
 
 
 TODO:SQL
 ===================================
--  Weapon names...
-
+ DONE
 
 TODO: Code Quality
 ===================================
@@ -91,8 +84,6 @@ TODO: missing features // Version 2  - disregard for now
 - user accounts (!!)
 
 
-TODO:
-You accidentally deleted the input element for the army list's name. The element is still there, under shared - just fix it (selectionInput.js).
 
 TODO:  RESPONSIVE DESIGN 
 SelectionInput. Army -> done, tested for smartphones
