@@ -14,7 +14,7 @@ import {
   ARMIES_WITH_TWO_ALTERNATE_ARMY_PICKS,
 } from "../../../constants/factions";
 import { Fragment } from "react";
-import { ALLIES_MAPPING, NO_ALLY } from "../../../constants/allies";
+import { ALLIES_MAPPING } from "../../../constants/allies";
 
 const useStyles = makeStyles((theme) => ({}));
 
