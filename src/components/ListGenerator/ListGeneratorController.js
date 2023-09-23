@@ -1,13 +1,17 @@
 // React
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useHistory } from "react-router-dom";
 // Axios
 import axios from "axios";
 // Material UI
-import { Grid, IconButton } from "@material-ui/core";
+import { Grid, IconButton, Fade } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+// notistack
+import { SnackbarProvider } from "notistack";
 // icons
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import CancelIcon from "@material-ui/icons/Cancel";
+import SpellBookIcon from "../../icons/spellbook-white.png";
 // components and functions
 import ArmyProvider from "../../contexts/armyContext";
 import SelectionInput from "../shared/selectionInput";
@@ -15,10 +19,10 @@ import FactionTreeView from "./ArmySelectorView/SelectorTreeView/TreeView";
 import ArmyListBox from "./ArmyListView/ArmyListBox";
 import Allies from "./GeneratorComponents/Allies";
 import ArmyValidation from "./GeneratorComponents/validation/ArmyValidation";
-import ValidationNotification from "./GeneratorComponents/validation/ValidationNotification";
 import Pdf from "./GeneratorComponents/Pdf";
 import AlternativeArmyLists from "./GeneratorComponents/AlternativeArmyLists";
 import MenuBox from "./RightSideMenus/MenuBox";
+import ValidationNotification from "../shared/ValidationNotification";
 // constants
 import { ALL_FACTIONS_ARRAY, NONE } from "../../constants/factions";
 import ArmyList from "./GeneratorComponents/ArmyList";
@@ -61,7 +65,6 @@ const useStyles = makeStyles((theme) => ({
   BackBttnBox: {
     height: " 3em",
   },
-
   BackBttn: {
     [theme.breakpoints.up("md")]: {
       position: "fixed",
@@ -76,11 +79,16 @@ const useStyles = makeStyles((theme) => ({
   alternativeListSelector: {
     marginTop: "13em",
   },
+  pushMessages: {
+    marginRight: "2em",
+    marginBottom: "2em",
+  },
 }));
 
 const ListGeneratorController = () => {
   const classes = useStyles();
   const history = useHistory();
+  const notistackRef = useRef();
 
   // intialize local states
   const [fetchedFactions, setFetchedFactions] = useState([]);
@@ -110,7 +118,6 @@ const ListGeneratorController = () => {
     commanderIsPresent: true,
   });
   const [disableOptionsButtons, setDisableOptionsButtons] = useState(true);
-  // tournament rules override
   const [showTournamentRulesMenu, setShowTournamentRulesMenu] = useState(false);
   const [tournamentOverrideRules, setTournamentOverrideRules] = useState({
     enableOverride: false,
@@ -118,6 +125,9 @@ const ListGeneratorController = () => {
     maxNumber: 2,
     uniquesOnlyOnce: true,
   });
+  // validation toast message
+  const [validationMessage, setValidationMessage] = useState(NONE);
+  const [showToastMessage, setShowToastMessage] = useState(false);
   // alternative lists
   const [armyHasAlternativeLists, setArmyHasAlternativeLists] = useState(false);
   const [armyHasSecondChoice, setArmyHasSecondChoice] = useState(false);
@@ -315,6 +325,11 @@ const ListGeneratorController = () => {
         disableOptionsButtons: disableOptionsButtons,
         setListValidationResults: setListValidationResults,
         setDisableOptionsButtons: setDisableOptionsButtons,
+        // VALIDATION TOAST MESSAGE
+        validationMessage: validationMessage,
+        showToastMessage: showToastMessage,
+        setValidationMessage: setValidationMessage,
+        setShowToastMessage: setShowToastMessage,
         // RIGHT SIDE MENU
         showOptionButtons: showOptionButtons,
         statCardState: statCardState,
@@ -354,42 +369,68 @@ const ListGeneratorController = () => {
         closeSecondSubFactionMenu: closeSecondSubFactionMenu,
       }}
     >
-      <Grid container className={classes.displayBox} direction="column">
-        <Allies />
-        <ArmyValidation />
-        <Pdf />
-        <ArmyList />
-
-        <Grid item xs={12} className={classes.BackBttnBox}>
+      <SnackbarProvider
+        ref={notistackRef}
+        TransitionComponent={Fade}
+        // maxSnack={3}
+        preventDuplicate
+        iconVariant={{
+          error: <img className={classes.pushMessageIcon} src={SpellBookIcon} alt={"Regelbuchtext"} height={35} width={35} />,
+        }}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right",
+        }}
+        action={(key) => (
           <IconButton
-            className={classes.BackBttn}
             onClick={() => {
-              backToMainmenu();
+              notistackRef.current.closeSnackbar(key);
+              setShowToastMessage(false);
             }}
+            style={{ color: "#fff", fontSize: "20px" }}
           >
-            <ChevronLeftIcon className={classes.BackBttnIcon} />
+            <CancelIcon />
           </IconButton>
-        </Grid>
-        {/* ARMY SELECTION */}
-        <Grid container item direction="row">
-          <Grid direction={"column"} xs={3} className={classes.armySelectionBox}>
-            <SelectionInput
-              className={classes.selector}
-              filterFunction={setSelectedFactionName}
-              isArmySelector={true}
-              options={ALL_FACTIONS_ARRAY}
-              label="Wähle Eine Fraktion"
-            />
-            <AlternativeArmyLists />
-            <FactionTreeView className={classes.selector} />
+        )}
+      >
+        <Grid container className={classes.displayBox} direction="column">
+          <Allies />
+          <ArmyValidation />
+          <Pdf />
+          <ArmyList />
+
+          <Grid item xs={12} className={classes.BackBttnBox}>
+            <IconButton
+              className={classes.BackBttn}
+              onClick={() => {
+                backToMainmenu();
+              }}
+            >
+              <ChevronLeftIcon className={classes.BackBttnIcon} />
+            </IconButton>
           </Grid>
-          {/* ARMYLIST */}
-          <Grid item container direction="column" justify="flex-end" xs={3} className={classes.armyListBox}>
-            <ArmyListBox setTotalPointValue={setTotalPointValue} />
+          {/* ARMY SELECTION */}
+          <Grid container item direction="row">
+            <Grid container item direction={"column"} xs={3} className={classes.armySelectionBox}>
+              <SelectionInput
+                className={classes.selector}
+                filterFunction={setSelectedFactionName}
+                isArmySelector={true}
+                options={ALL_FACTIONS_ARRAY}
+                label="Wähle Eine Fraktion"
+              />
+              <AlternativeArmyLists />
+              <FactionTreeView className={classes.selector} />
+            </Grid>
+            {/* ARMYLIST */}
+            <Grid container item direction="column" justify="flex-end" xs={3} className={classes.armyListBox}>
+              <ArmyListBox setTotalPointValue={setTotalPointValue} />
+            </Grid>
           </Grid>
           <MenuBox />
+          <ValidationNotification text={validationMessage} show={showToastMessage} />
         </Grid>
-      </Grid>
+      </SnackbarProvider>
     </ArmyProvider>
   ) : null;
 };

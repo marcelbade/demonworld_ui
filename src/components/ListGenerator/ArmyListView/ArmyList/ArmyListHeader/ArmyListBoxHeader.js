@@ -4,20 +4,19 @@ import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, IconButton, Tooltip, Typography, Grid } from "@material-ui/core";
 // icons
+import HelpIcon from "@material-ui/icons/Help";
 import CancelIcon from "@material-ui/icons/Cancel";
 // components and functions
 import { ArmyContext } from "../../../../../contexts/armyContext";
 import { useEffect } from "react";
+// constants
+import { TOOLTIPS, VALIDATION } from "../../../../../constants/textsAndMessages";
 import { NONE } from "../../../../../constants/factions";
-import { TOOLTIPS } from "../../../../../constants/textsAndMessages";
 
-const useStyles = makeStyles({
-  button: {},
-});
+const useStyles = makeStyles({});
 
 const ArmyListBoxHeader = () => {
   const classes = useStyles();
-
   const AC = useContext(ArmyContext);
 
   /**
@@ -28,6 +27,7 @@ const ArmyListBoxHeader = () => {
     AC.setArmyName(event.target.value);
   };
 
+  // Calculate date and create a default name for the army list.
   useEffect(() => {
     const currentDate = new Date();
     const year = currentDate.getFullYear();
@@ -38,27 +38,46 @@ const ArmyListBoxHeader = () => {
       const defaultArmyName = `${AC.selectedFactionName} - ${dayOfMonth}.${month}.${year}`;
       AC.setArmyName(defaultArmyName);
     }
-  }, [AC.selectedFactionName]);// eslint-disable-line react-hooks/exhaustive-deps
-
+  }, [AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <Grid container flexdirection="row" alignItems="center">
-      <TextField
-        id="outlined-basic"
-        autoComplete="off"
-        value={AC.armyName}
-        InputProps={{
-          style: {
-            fontSize: "20px",
-            fontWeight: "bold",
-            pading: "50px",
-            width: "330px",
-          },
-        }}
-        onChange={changeArmyName}
-        required
-        variant="standard"
-      />
+      {!AC.listValidationResults.commanderIsPresent ? (
+        <TextField
+          id="outlined-basic"
+          autoComplete="off"
+          value={AC.armyName}
+          InputProps={{
+            style: {
+              fontSize: "20px",
+              fontWeight: "bold",
+              pading: "50px",
+              width: "330px",
+              color: "red",
+            },
+          }}
+          onChange={changeArmyName}
+          required
+          variant="standard"
+        />
+      ) : (
+        <TextField
+          id="outlined-basic"
+          autoComplete="off"
+          value={AC.armyName}
+          InputProps={{
+            style: {
+              fontSize: "20px",
+              fontWeight: "bold",
+              pading: "50px",
+              width: "330px",
+            },
+          }}
+          onChange={changeArmyName}
+          required
+          variant="standard"
+        />
+      )}
       <Tooltip title={<Typography className={classes.tooltipText}>{TOOLTIPS.DELETE_ARMY_LIST}</Typography>}>
         <IconButton
           className={classes.button}
@@ -70,6 +89,16 @@ const ArmyListBoxHeader = () => {
           <CancelIcon />
         </IconButton>
       </Tooltip>
+      {!AC.listValidationResults.commanderIsPresent ? (
+        <IconButton
+          onClick={() => {
+            AC.setValidationMessage(VALIDATION.NO_COMMANDER_WARNING);
+            AC.setShowToastMessage(true);
+          }}
+        >
+          <HelpIcon />
+        </IconButton>
+      ) : null}
     </Grid>
   );
 };

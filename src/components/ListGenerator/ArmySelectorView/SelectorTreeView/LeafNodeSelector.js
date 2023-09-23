@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 // Material UI
-import { Tooltip, Typography } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 // components and functions
 import { ArmyContext } from "../../../../contexts/armyContext";
@@ -76,15 +75,11 @@ const LeafNodeSelector = (props) => {
   return filterAndSortSubFaction().map((u) => {
     // unit blocked
     return blockedUnitNames.includes(u.unitName) ? (
-      <Tooltip
-        className={classes.node}
-        title={<Typography variant="caption">{findBlockMessage(blockResults, u.unitName)}</Typography>} //
-        key={uuidGenerator()}
-      >
-        <div>
-          <LeafNode unit={u} isBlocked={true} />
-        </div>
-      </Tooltip>
+      <LeafNode
+        unit={u}
+        isBlocked={true} //
+        blockMessage={findBlockMessage(blockResults, u.unitName)}
+      />
     ) : (
       // unit not blocked
       <StyledTreeItem

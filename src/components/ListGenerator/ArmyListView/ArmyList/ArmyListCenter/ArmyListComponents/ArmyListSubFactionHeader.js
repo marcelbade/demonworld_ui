@@ -1,14 +1,16 @@
 // React
-import React from "react";
+import React, { useContext } from "react";
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
-import { Tooltip, Typography } from "@material-ui/core";
+import { Grid, IconButton, Typography } from "@material-ui/core";
+
+// icons
+import HelpIcon from "@material-ui/icons/Help";
 // components and functions
 import { uuidGenerator } from "../../../../../shared/sharedFunctions";
-// constants
+import { ArmyContext } from "../../../../../../contexts/armyContext";
 
-// TODO: remove unneeded styles
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   HeaderValidStyle: {
     fontSize: "20px",
     fontWeight: "bold",
@@ -17,30 +19,45 @@ const useStyles = makeStyles((theme) => ({
     marginBottom: "1em",
   },
   HeaderInvalidStyle: {
-    fontSize: "20px",
-    fontWeight: "bold",
     width: "60%",
     borderBottom: "solid 4px black",
     marginBottom: "1em",
     color: "red",
   },
+  invalidText: { fontSize: "20px", fontWeight: "bold" },
 }));
 
 const ArmyListSubFactionHeader = (props) => {
   const classes = useStyles();
+  const AC = useContext(ArmyContext);
 
-  return props.valid ? (
-    <Typography key={uuidGenerator()} className={classes.HeaderValidStyle}>
-      {props.subFaction}
-    </Typography>
-  ) : (
-    <Tooltip title={props.message}>
-      <div>
-        <Typography key={uuidGenerator()} className={classes.HeaderInvalidStyle}>
+  return (
+    <Grid container>
+      {props.valid ? (
+        <Typography key={uuidGenerator()} className={classes.HeaderValidStyle}>
           {props.subFaction}
         </Typography>
-      </div>
-    </Tooltip>
+      ) : (
+        <Grid
+          container //
+          direction="row"
+          className={classes.HeaderInvalidStyle}
+          alignItems="center"
+        >
+          <Typography key={uuidGenerator()} className={classes.invalidText}>
+            {props.subFaction}
+          </Typography>
+          <IconButton
+            onClick={() => {
+              AC.setValidationMessage(props.message);
+              AC.setShowToastMessage(true);
+            }}
+          >
+            <HelpIcon />
+          </IconButton>
+        </Grid>
+      )}
+    </Grid>
   );
 };
 

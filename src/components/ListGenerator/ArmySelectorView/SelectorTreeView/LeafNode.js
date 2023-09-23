@@ -2,10 +2,11 @@ import React, { useContext } from "react";
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, Grid, IconButton } from "@material-ui/core";
+// icons
+import HelpIcon from "@material-ui/icons/Help";
+import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 // components and functions
 import { ArmyContext } from "../../../../contexts/armyContext";
-// Icons
-import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 import { enrichUnitCardObject } from "../../ListGeneratorFunctions";
 
 const useStyles = makeStyles({
@@ -76,6 +77,16 @@ const LeafNode = (props) => {
         >
           <AddCircleOutlineIcon />
         </IconButton>
+        {props.isBlocked ? (
+          <IconButton
+            onClick={() => {
+              AC.setValidationMessage(props.blockMessage);
+              AC.setShowToastMessage(true);
+            }}
+          >
+            <HelpIcon />
+          </IconButton>
+        ) : null}
       </Grid>
     </Grid>
   );
