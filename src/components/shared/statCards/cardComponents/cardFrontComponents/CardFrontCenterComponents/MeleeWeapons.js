@@ -15,10 +15,10 @@ const MeleeWeapons = () => {
         <Typography variant="h6">{SC.unit.weapon1 === 0 ? null : SC.unit.weapon1Name + ": " + SC.unit.weapon1}</Typography>
       </Grid>
       <Grid item container justify="center">
-        <Typography variant="h6">{SC.unit.weapon2 === 0 ? null : SC.unit.weapon2Name + SC.unit.weapon2}</Typography>
+        <Typography variant="h6">{SC.unit.weapon2 === 0 ? null : SC.unit.weapon2Name + ": " + SC.unit.weapon2}</Typography>
       </Grid>
       <Grid item container justify="center">
-        <Typography variant="h6">{SC.unit.weapon3 === 0 ? null : SC.unit.weapon3Name + SC.unit.weapon3}</Typography>
+        <Typography variant="h6">{SC.unit.weapon3 === 0 ? null : SC.unit.weapon3Name + ": " + SC.unit.weapon3}</Typography>
       </Grid>
     </Grid>
   );
