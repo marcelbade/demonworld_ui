@@ -10,6 +10,7 @@ import SecondSubFactionMenu from "./Menus/SecondSubfactionMenu/SecondSubfactionM
 import { ArmyContext } from "../../../contexts/armyContext";
 import CardView from "./Menus/CardView/CardView";
 import { ARMIES_ADDITIONAL_SUBFACTIONS, ARMIES_ADDITIONAL_SUBFACTIONS_BUTTON_CAPTION } from "../../../constants/factions";
+import { uuidGenerator } from "../../shared/sharedFunctions";
 
 const MenuBox = () => {
   const AC = useContext(ArmyContext);
@@ -59,6 +60,7 @@ const MenuBox = () => {
   return components.map((c) =>
     c.exists ? (
       <Drawer
+        key={uuidGenerator()}
         anchor={"right"} //
         variant="persistent"
         open={c.show}
