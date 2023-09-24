@@ -8,7 +8,6 @@ import { TransitionComponent } from "./treeViewFunctions";
 import { uuidGenerator } from "../../../shared/sharedFunctions";
 import LeafNodeSelector from "./LeafNodeSelector";
 import { StyledTreeItem } from "./StyledTreeItem";
-import { ALLIES_MAPPING } from "../../../../constants/allies";
 
 TransitionComponent.propTypes = {
   /**
