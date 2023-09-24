@@ -8,6 +8,7 @@ import { TransitionComponent } from "./treeViewFunctions";
 import { uuidGenerator } from "../../../shared/sharedFunctions";
 import LeafNodeSelector from "./LeafNodeSelector";
 import { StyledTreeItem } from "./StyledTreeItem";
+import { ALLIES_MAPPING } from "../../../../constants/allies";
 
 TransitionComponent.propTypes = {
   /**
@@ -51,24 +52,24 @@ const Tree = (props) => {
   };
 
   /**
-   * Function marks a sub faction in the army selector tree view as empty (greyed out) 
+   * Function marks a sub faction in the army selector tree view as empty (greyed out)
    * if all units in that subFaction are blocked by the validator. The funciton checks both faction and ally.
    * @param {[String]} subFaction
    * @returns true, if all units for a sub faction are blocked.
    */
   const isSubFactionEmpty = (subFaction) => {
-    const blockedUnitNames = AC.listValidationResults.unitsBlockedbyRules.map((b) => b.unitBlockedbyRules);
-    const blockedAlliedUnitNames = AC.listValidationResults.alliedUnitsBlockedbyRules.map((b) => b.unitBlockedbyRules);
+    let blockedUnitNames = [];
+    let notBlockedUnits = [];
 
-    const notBlockedFactionUnits = AC.listOfAllFactionUnits
-      .filter((u) => u.subFaction === subFaction)
-      .filter((u) => !blockedUnitNames.includes(u.unitName));
+    if (props.showsFaction) {
+      blockedUnitNames = AC.listValidationResults.unitsBlockedbyRules.map((b) => b.unitBlockedbyRules);
+      notBlockedUnits = AC.listOfAllFactionUnits.filter((u) => u.subFaction === subFaction && !blockedUnitNames.includes(u.unitName));
+    } else {
+      blockedUnitNames = AC.listValidationResults.alliedUnitsBlockedbyRules.map((b) => b.unitBlockedbyRules);
+      notBlockedUnits = AC.listOfAlliedUnits.filter((u) => u.subFaction === subFaction && !blockedUnitNames.includes(u.unitName));
+    }
 
-    const notBlockedAlliedUnits = AC.listOfAlliedUnits
-      .filter((u) => u.subFaction === subFaction)
-      .filter((u) => !blockedAlliedUnitNames.includes(u.unitName));
-
-    return props.showsFaction ? notBlockedFactionUnits.length === 0 : notBlockedAlliedUnits.length === 0;
+    return notBlockedUnits.length === 0;
   };
 
   /**
