@@ -59,14 +59,14 @@ export const unitCardMultiSort = (unitList) => {
   let multipleElements = [];
   let result = [];
 
-  // Step 1: separate array into n arrays by unit type.
+  // Step 1:create an array of the distinct unitTypes present in the unit list
   unitList.forEach((u) => {
     if (!types.includes(u.unitType)) {
       types.push(u.unitType);
     }
   });
 
-  // Step 2: sort  and merge into resulting array
+  // Step 2: sort and merge into the resulting array
   for (let i = 0; i < types.length; i++) {
     let detailSortResult = unitList
       .filter((u) => u.unitType === types[i])
