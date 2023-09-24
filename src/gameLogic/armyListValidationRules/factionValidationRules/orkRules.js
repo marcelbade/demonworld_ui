@@ -96,8 +96,6 @@ const OrkRules = {
       : [];
 
     // special faction rules
-
-    switchBetweenAlternativeRules(selectedAlternativeList);
     let goblinsAboveMax = checkForGoblinMax(selectedUnits, totalPointsAllowance, availableUnits);
     let hasNoCommander = isOrkArmyCommanderPresent(selectedUnits, selectedAlternativeList);
     let availlableClanUnits = setUnitsForClans(availableUnits, selectedAlternativeList);
@@ -123,47 +121,6 @@ const OrkRules = {
 
     return validationResults;
   },
-};
-
-const ORK_SUBFACTION_LIMITS = {
-  clanngett: [
-    { subFaction: "clanngett", limit: 0.5 },
-    { subFaction: "clantroops", limit: 0.4 },
-    { subFaction: "engines", limit: 0.3 },
-  ],
-  clantroops: [
-    { subFaction: "clanngett", limit: 0 },
-    { subFaction: "clantroops", limit: 0.5 },
-    { subFaction: "engines", limit: 0.2 },
-  ],
-};
-
-/**
- * Function changes the max. limits for the subfactions depending on which alternative army list has been selected.
- */
-const switchBetweenAlternativeRules = (selectedAlternativeList) => {
-  //  selectedAlternativeList  --> Clanngett, Steinclan,...
-  let mapperArray;
-  const CLANNGETT = "Clanngett";
-  const MAPPER_A = "clanngett";
-  const MAPPER_B = "clantroops";
-
-  if (selectedAlternativeList === CLANNGETT) {
-    mapperArray = ORK_SUBFACTION_LIMITS[MAPPER_A];
-  } else {
-    mapperArray = ORK_SUBFACTION_LIMITS[MAPPER_B];
-  }
-
-  for (let i = 0; i < rules.length; i++) {
-    const rule = rules[i];
-    for (let j = 0; j < mapperArray.length; j++) {
-      const mapping = mapperArray[j];
-
-      if (rule.subFaction === mapping.subFaction) {
-        rule.max = mapping.limit;
-      }
-    }
-  }
 };
 
 /**
