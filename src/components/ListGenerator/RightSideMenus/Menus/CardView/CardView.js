@@ -13,6 +13,10 @@ const useStyles = makeStyles({
   singleCard: {
     paddingLeft: "2em",
   },
+  icons: {
+    width: "3em",
+    height: "3em",
+  },
 });
 
 const CardView = (props) => {
@@ -29,7 +33,7 @@ const CardView = (props) => {
                 props.carouselBackwards();
               }}
             >
-              <ChevronLeft />
+              <ChevronLeft className={classes.icons} />
             </IconButton>
           ) : null}
         </Grid>
@@ -47,7 +51,7 @@ const CardView = (props) => {
                 props.carouselForwards();
               }}
             >
-              <ChevronRight />
+              <ChevronRight className={classes.icons} />
             </IconButton>
           ) : null}
         </Grid>
