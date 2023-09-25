@@ -75,9 +75,6 @@ const UndeadRules = {
     tournamentOverrideRules,
     listOfAlliedUnits
   ) => {
-    console.log("availableUnits");
-    console.log(availableUnits);
-
     //  general rules
     let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(selectedUnits, availableUnits, totalPointsAllowance);
     let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(rules, selectedUnits, totalPointsAllowance, subFactions);
