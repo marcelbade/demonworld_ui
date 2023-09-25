@@ -196,26 +196,6 @@ const ListGeneratorController = () => {
   };
 
   /**
-   * Everytime the unit selections changes, recalculate which unique items are already selected and store it in the central item list. Only store those that are magical items that can only be equipped once!
-   */
-  useEffect(() => {
-    let temp = [];
-
-    if (selectedUnits) {
-      for (let i = 0; i < selectedUnits.length; i++) {
-        if (selectedUnits[i].equipment) {
-          for (let j = 0; j < selectedUnits[i].equipment.length; j++) {
-            if (!selectedUnits[i].equipment[j].additionalItem || !selectedUnits[i].equipment[j].isGeneric) {
-              temp.push(selectedUnits[i].equipment[j].itemName);
-            }
-          }
-        }
-      }
-    }
-    setAllItems(temp);
-  }, [selectedUnits]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  /**
    * Function resets the entire state back to default.
    */
   const resetTheState = () => {
