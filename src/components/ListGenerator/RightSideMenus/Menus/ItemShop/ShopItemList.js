@@ -60,7 +60,7 @@ const ShopItemList = (props) => {
    * in the item shop on and off.
    * @param {itemCard object} item
    */
-  const recalculateItemTypeFlags = (item, ITEM_ADDED) => {
+  const recalculateUnitsItemTypeFlags = (item, ITEM_ADDED) => {
     if (ITEM_ADDED) {
       let tempObj = { ...AC.unitSelectedForShop };
 
@@ -127,7 +127,7 @@ const ShopItemList = (props) => {
                   disabled={disableButton(i)}
                   onClick={() => {
                     addItemToUnit(i);
-                    recalculateItemTypeFlags(i, true);
+                    recalculateUnitsItemTypeFlags(i, true);
                     triggerArymListReCalculation();
                   }}
                   key={uuidGenerator()}
