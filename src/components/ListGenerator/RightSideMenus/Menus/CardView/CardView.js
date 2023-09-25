@@ -1,70 +1,58 @@
 // React
-import { useContext } from "react";
+import { Fragment } from "react";
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
+
 import { Grid, IconButton } from "@material-ui/core";
 // icons
-import CancelIcon from "@material-ui/icons/Cancel";
+import { ChevronLeft, ChevronRight } from "@material-ui/icons";
 // components and functions
-import { ArmyContext } from "../../../../../contexts/armyContext";
-import { useState } from "react";
-import { useEffect } from "react";
-import { AUTOMATON, GIANT, HERO, MAGE } from "../../../../../constants/unitTypes";
 import StatCard from "../../../../shared/statCards/StatCard";
 
 const useStyles = makeStyles({
-  overlay: {
-    height: "100vh",
-    width: "30vw",
+  singleCard: {
+    paddingLeft: "2em",
   },
 });
 
-const CardView = () => {
-  const AC = useContext(ArmyContext);
+const CardView = (props) => {
   const classes = useStyles();
-  const COLUMN = "column";
-
-  const [isSingleElement, setIsSingleElement] = useState(false);
-
-  useEffect(() => {
-    if (AC.statCardState.clickedUnit !== undefined) {
-      const isSingleElement = unitOrCmdCard(AC.statCardState.clickedUnit);
-      setIsSingleElement(isSingleElement);
-    }
-  }, [AC.statCardState.clickedUnit]);
-
-  /**
-   *  Function controls which kind of stat card (unit or character) is displayed.
-   *
-   * @param {[{*}]} unit
-   * @returns  JSX element
-   */
-  const unitOrCmdCard = (unit) => {
-    const SINGLE_ELEMENTS_LIST = [HERO, MAGE, AUTOMATON, GIANT];
-    return SINGLE_ELEMENTS_LIST.includes(unit.unitType);
-  };
+  //
 
   return (
-    <Grid container className={classes.overlay}>
-      <Grid item>
-        <IconButton
-          onClick={() => {
-            AC.closeCardDisplay();
-          }}
-        >
-          <CancelIcon />
-        </IconButton>
-      </Grid>
-      <Grid item>
-        {AC.statCardState.clickedUnit !== undefined ? (
+    <Fragment>
+      <Grid item container direction="row" alignItems="center" justify="center" alignContent="center">
+        <Grid item>
+          {props.isMultiStateCard ? (
+            <IconButton
+              onClick={() => {
+                props.carouselBackwards();
+              }}
+            >
+              <ChevronLeft />
+            </IconButton>
+          ) : null}
+        </Grid>
+        <Grid>
           <StatCard
-            isSingleElement={isSingleElement} //
-            alignment={COLUMN}
-            unit={AC.statCardState.clickedUnit}
+            isSingleElement={props.isSingleElement} //
+            alignment={props.alignment}
+            unit={props.cardData}
           />
-        ) : null}
+        </Grid>
+        <Grid item>
+          {props.isMultiStateCard ? (
+            <IconButton
+              onClick={() => {
+                props.carouselForwards();
+              }}
+            >
+              <ChevronRight />
+            </IconButton>
+          ) : null}
+        </Grid>
       </Grid>
-    </Grid>
+    </Fragment>
   );
 };
 

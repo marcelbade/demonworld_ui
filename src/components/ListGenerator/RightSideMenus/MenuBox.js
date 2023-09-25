@@ -8,7 +8,7 @@ import OptionButtons from "./Menus/OptionButtons/OptionButtons";
 import ItemShop from "./Menus/ItemShop/ItemShop";
 import SecondSubFactionMenu from "./Menus/SecondSubfactionMenu/SecondSubfactionMenu";
 import { ArmyContext } from "../../../contexts/armyContext";
-import CardView from "./Menus/CardView/CardView";
+import CardViewBox from "./Menus/CardView/CardViewBox";
 import { ARMIES_ADDITIONAL_SUBFACTIONS, ARMIES_ADDITIONAL_SUBFACTIONS_BUTTON_CAPTION } from "../../../constants/factions";
 import { uuidGenerator } from "../../shared/sharedFunctions";
 
@@ -53,7 +53,7 @@ const MenuBox = () => {
     { exists: true, show: AC.showOptionButtons, element: <OptionButtons /> },
     { exists: true, show: AC.showTournamentRulesMenu, element: <TournamentRulesMenu /> },
     { exists: true, show: AC.itemShopState.show, element: <ItemShop /> },
-    { exists: true, show: AC.statCardState.show, element: <CardView /> },
+    { exists: true, show: AC.statCardState.show, element: <CardViewBox /> },
     { exists: AC.secondSubFactionList, show: AC.secondSubFactionMenuState.show, element: <SecondSubFactionMenu /> },
   ];
 

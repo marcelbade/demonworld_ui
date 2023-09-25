@@ -54,13 +54,18 @@ const LeafNodeSelector = (props) => {
   };
 
   /**
-   * Functions filters the units down to the sub faction and sorts the result.
+   * Functions filters the units down to the sub faction and removes all additional stat cards for multi state units. Then, it sorts the result.
    * @returns sorted and filtered array of unitCard objects.
    */
   const filterAndSortSubFaction = () => {
     let allUnitsOfSubFaction = [];
 
-    allUnitsOfSubFaction = props.units.filter((f) => f.subFaction === props.subFaction);
+    for (let i = 0; i < props.units.length; i++) {
+      const unit = props.units[i];
+      if (unit.subFaction === props.subFaction && (unit.multiStateOrderNumber === 1 || unit.multiStateOrderNumber === 0))
+        allUnitsOfSubFaction.push(unit);
+    }
+
     allUnitsOfSubFaction = unitCardMultiSort(allUnitsOfSubFaction);
 
     return allUnitsOfSubFaction;
