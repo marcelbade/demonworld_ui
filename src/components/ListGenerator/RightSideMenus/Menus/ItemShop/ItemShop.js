@@ -41,26 +41,34 @@ const ItemShop = () => {
 
   //state
   const [itemTypes, setItemTypes] = useState([]);
-  const [displayThisItemType, setDisplayThisItemType] = useState(itemTypes[0]);
+  const [displayThisItemType, setDisplayThisItemType] = useState("");
 
   // When the selected unit changes, set the correct items in the shop
   useEffect(() => {
     setItemTypes(findDistinctItemTypes());
   }, [AC.unitSelectedForShop]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // When the selected unit changes, take all items it has been equipped with and add them to the "allItems" state variable. This serves as a central register of all items allready taken.
   useEffect(() => {
-    let unit = AC.unitSelectedForShop;
-
-    if ("equipment" in unit && unit.equipment.length > 0) {
-      const selectedItemNames = unit.equipment.filter((e) => !AC.allItems.includes(e.name)).map((e) => e.name);
-      AC.setAllItems([...AC.allItems, ...selectedItemNames]);
-    }
-  }, [AC.unitSelectedForShop]); // eslint-disable-line react-hooks/exhaustive-deps
+    showTab(itemTypes[0]);
+  }, [itemTypes]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
-   * function filters all items in the game down to the ones the selected unit can be equipped with. if no unit has been selected,
-   * it returns an empty array by default.
+   * Function finds the distinct item types of the filtered item list and returns it. These are used as shop categories.
+   * @returns [String] an array of item type names.
+   */
+  const findDistinctItemTypes = () => {
+    let distinctTypes = [];
+
+    filterFetchedItemsForUnit().forEach((item) => {
+      if (!distinctTypes.includes(item.itemType)) return distinctTypes.push(item.itemType);
+    });
+
+    return distinctTypes;
+  };
+
+  /**
+   * Function filters all items in the game down to the ones the selected unit can be equipped with.
+   * If no unit has been selected, it returns an empty array by default.
    * @returns an array of item objects. array can be emtpy.
    */
   const filterFetchedItemsForUnit = () => {
@@ -75,13 +83,13 @@ const ItemShop = () => {
         .filter((item) => itemFilter.filterForUnitType(item, unit))
         .filter((item) => itemFilter.filterForUnit(item, unit))
         .filter((item) => itemFilter.filterForStandardBearer(item, unit))
-        .filter((item) => itemFilter.filterForMusicians(item, unit))
+        .filter((item) => itemFilter.filterForMusician(item, unit))
         .filter((item) => itemFilter.filterForMagicUsers(item, unit))
         .filter((item) => itemFilter.filterForItemsWithMaxArmor(item, unit))
         .filter((item) => itemFilter.filterForItemsWithMaxSize(item, unit))
         .filter((item) => itemFilter.filterForShields(item, unit))
         .filter((item) => itemFilter.filterForCavalryItems(item, unit))
-        .filter((item) => itemFilter.filterForItemsUsableNotByCavalry(item, unit))
+        .filter((item) => itemFilter.filterForItemsNotUsableByCavalry(item, unit))
         .filter((item) => itemFilter.filterForSpears(item, unit))
         .filter((item) => itemFilter.filterForLances(item, unit))
         .filter((item) => itemFilter.filterForBows(item, unit))
@@ -91,20 +99,6 @@ const ItemShop = () => {
     } else {
       return [];
     }
-  };
-
-  /**
-   * Function finds the distinct item types of the filtered item list and returns it. These are used as shop categories.
-   * @returns [String] an array of item type names.
-   */
-  const findDistinctItemTypes = () => {
-    let distinctTypes = [];
-
-    filterFetchedItemsForUnit().forEach((item) => {
-      if (!distinctTypes.includes(item.itemType)) return distinctTypes.push(item.itemType);
-    });
-
-    return distinctTypes;
   };
 
   // shows all items of the type whose button was pressed.
