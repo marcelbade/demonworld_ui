@@ -36,7 +36,7 @@ const rules = [
     cardNames: ["Clanntruppen"],
     min: 0.0,
     max: 0.4,
-    error: ORKS.SUB_FACTION_RULES.CLANTROOPS,
+    error: "", // see below, set by switchBetweenAlternativeRules
   },
   {
     subFaction: "clanngett",
@@ -70,10 +70,8 @@ const OrkRules = {
     tournamentOverrideRules,
     listOfAlliedUnits
   ) => {
-
+    // Switch between alternative ruule objects!
     switchBetweenAlternativeRules(selectedAlternativeList);
-
-
 
     //  general rules
     let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(selectedUnits, availableUnits, totalPointsAllowance);
@@ -128,8 +126,6 @@ const OrkRules = {
   },
 };
 
-
-
 const ORK_SUBFACTION_LIMITS = {
   clanngett: [
     { subFaction: "clanngett", limit: 0.5 },
@@ -167,6 +163,8 @@ const switchBetweenAlternativeRules = (selectedAlternativeList) => {
       if (rule.subFaction === mapping.subFaction) {
         rule.max = mapping.limit;
       }
+      if (rule.subFaction === "clantroops" && rule.subFaction === mapping.subFaction)
+        rule.error = ORKS.SUB_FACTION_RULES.CLANTROOPS(mapping.limit * 100);
     }
   }
 };

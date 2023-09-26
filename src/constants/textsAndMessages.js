@@ -156,7 +156,7 @@ export const ORKS = {
     GIANTS: "Deine Armeeliste darf zu höchstens 30% aus Geräten bestehen.",
     ENGINES: "Deine Armeeliste darf zu höchstens 30% aus Sturmlords und Hexen bestehen.",
     CLANTROOPS: (percentage) => {
-      return `Deine Armeeliste darf zu höchstens ${percentage} aus Sondertruppen der Clans bestehen.`;
+      return `Deine Armeeliste darf zu höchstens ${percentage} Prozent aus Sondertruppen der Clans bestehen.`;
     },
     CLANNGETT: "Deine Armeeliste darf zu höchstens 50% aus Einheiten Clanngetts bestehen.",
     WIZARDS: "Deine Armeeliste darf zu höchstens 40% aus Zauberern bestehen.",
@@ -164,7 +164,7 @@ export const ORKS = {
     AVAILABLE_CLANUNITS: "Dieser Clan kann diese Einehit nicht auswählen.",
   },
 };
-
+  
 export const THAIN = {
   SUB_FACTION_RULES: {
     TRIBAL_WARRIORS: "Deine Armeeliste muss zu 10% bis 80% aus Stammeskriegern bestehen.",
