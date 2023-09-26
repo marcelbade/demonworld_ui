@@ -37,7 +37,7 @@ export const itemFilter = {
   },
 
   // Only show instruments if the unit has a musician special element.
-  filterForMusicians: (item, unit) => {
+  filterForMusician: (item, unit) => {
     if (!unit.musician && item.requiresMusician) {
       return false;
     }
@@ -85,7 +85,7 @@ export const itemFilter = {
   },
 
   // Filter items for those only meant for units that are not mounted
-  filterForItemsUsableNotByCavalry: (item, unit) => {
+  filterForItemsNotUsableByCavalry: (item, unit) => {
     if (unit.isMounted === true && item.usableByCav === false) {
       return false;
     }

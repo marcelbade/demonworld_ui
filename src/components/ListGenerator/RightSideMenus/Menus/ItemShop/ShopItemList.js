@@ -36,7 +36,10 @@ const ShopItemList = (props) => {
 
   /**
    * Function enforces the item selection rules by toggling the item's corresponding button on/off.
-   * A hero, magicican or unit leader can only get 1 magical item. In addition, they may gain additional "non-magical" generic items like potions. If a standard bearer or musician is present, a standard or intrument can be selected in addition to these two. In addition if it is a unit, items can be choosen that are carried by every element in the unit.
+   * A hero, magicican or unit leader can only get 1 magical item. 
+   * In addition, they may gain additional "non-magical" generic items like potions. 
+   * If a standard bearer or musician is present, a standard or intrument can be selected in addition to these two. 
+   * In addition if it is a unit, items can be choosen that are carried by every element in the unit.
    * @param {itemCard Object} item
    * @returns a boolean that toggles the button on or off.
    */
@@ -45,14 +48,14 @@ const ShopItemList = (props) => {
     let allItems = AC.allItems;
 
     const itemPickedByOtherUnit = hasItemBeenPickedByOtherUnit(allItems, item);
-    const itemPicked = doesUnitalreadyHaveItem(unit, item);
-    const maxNumber = ownsMaxNumberMagicItems(unit, item);
-    const banner = doesUnitAlreadyHaveBanner(unit, item);
-    const instrument = doesUnitAlreadyHaveInstrument(unit, item);
+    const itemAlreadyPicked = doesUnitalreadyHaveItem(unit, item);
+    const hasMaxNumber = ownsMaxNumberMagicItems(unit, item);
+    const hasBanner = doesUnitAlreadyHaveBanner(unit, item);
+    const hasInstrument = doesUnitAlreadyHaveInstrument(unit, item);
 
-    const blockItem = itemPicked || itemPickedByOtherUnit || maxNumber || banner || instrument;
+    const blockItemWhen = itemAlreadyPicked || itemPickedByOtherUnit || hasMaxNumber || hasBanner || hasInstrument;
 
-    return blockItem;
+    return blockItemWhen;
   };
 
   /**

@@ -15,7 +15,7 @@ import { uuidGenerator } from "../../shared/sharedFunctions";
 const MenuBox = () => {
   const AC = useContext(ArmyContext);
 
-  // show the option button drawer when everything else is closed, else close it.
+  // Show the option button drawer when everything else is closed, else close it.
   useEffect(() => {
     if (
       !AC.showTournamentRulesMenu && //
@@ -35,7 +35,7 @@ const MenuBox = () => {
     }
   }, [AC.statCardState, AC.itemShopState, AC.secondSubFactionMenuState, AC.showTournamentRulesMenu]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // set boolean flag if the selected faction has an addditonal sub faction for every unit.
+  // Set boolean flag if the selected faction has an addditonal sub faction for every unit.
   useEffect(() => {
     if (ARMIES_ADDITIONAL_SUBFACTIONS.includes(AC.selectedFactionName)) {
       const result = ARMIES_ADDITIONAL_SUBFACTIONS_BUTTON_CAPTION.filter((e) => e.army === AC.selectedFactionName);

@@ -1,7 +1,5 @@
 import { uuidGenerator } from "../shared/sharedFunctions";
 
-
-
 /**
  * Function filters unit card arrays for a sub faction.
  * @param {String} subFaction

@@ -24,8 +24,8 @@ export const INPUT_TEXTS = {
 };
 
 export const BUTTON_TEXTS = {
-  PREVIEW_CARD: "Gegenstände.",
-  SHOW_ITEM_SHOP: "Kartenvorschau.",
+  PREVIEW_CARD: "Gegenstände",
+  SHOW_ITEM_SHOP: "Kartenvorschau",
 };
 
 export const TEXTS = {
