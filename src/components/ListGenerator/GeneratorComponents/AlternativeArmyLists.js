@@ -34,7 +34,7 @@ const AlternativeArmyLists = () => {
     AC.setArmyHasSecondChoice(ARMIES_WITH_TWO_ALTERNATE_ARMY_PICKS[AC.selectedFactionName]);
   }, [AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // reset army's subFaction if alternate lists exist and one has been selected.
+  // Reset army's subFaction if alternate lists exist and one has been selected.
   useEffect(() => {
     if (
       AC.armyHasAlternativeLists && //
@@ -52,16 +52,19 @@ const AlternativeArmyLists = () => {
     }
   }, [AC.armyHasAlternativeLists, AC.armyHasSecondChoice, AC.selectedAlternativeList, AC.secondSelectedAlternativeList]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // Set the available options for the dropdown. 
   useEffect(() => {
     AC.setAlternateArmyListOptions(findDropdownOptions(FIRST));
   }, [AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
+    // Set the available options for the second dropdown if two the army has two choices.
   useEffect(() => {
     if (ARMIES_WITH_TWO_ALTERNATE_ARMY_PICKS[AC.selectedFactionName] && AC.selectedAlternativeList !== NONE) {
       AC.setSecondAlternativeArmyOptions(findDropdownOptions(SECOND));
     }
   }, [AC.selectedFactionName, AC.selectedAlternativeList]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // set the label text for the dropdown menu.
   useEffect(() => {
     AC.setAlternateArmyListLabelText(findLabelTexts());
   }, [AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -72,22 +75,22 @@ const AlternativeArmyLists = () => {
   const alternativeArmyListFilter = (numberOfselections) => {
     const alternatives = ARMY_ALTERNATIVES_LIST_MAPPER[AC.selectedFactionName];
     let tempArray = [...AC.subFactions];
-    let notSelected = [];
+    let notSelectedSubfactions = [];
     let filterSubFactions;
 
-    // are there one or two selectors for alternative lists?
+    // are there one or two selections needed to chose an alternative list?
     numberOfselections === 1
       ? (filterSubFactions = filterForOneAlternative) //
       : (filterSubFactions = filterForTwoAlternatives);
 
-    notSelected = alternatives.filter((a) => filterSubFactions(a));
-    tempArray = tempArray.filter((f) => !notSelected.includes(f));
+    notSelectedSubfactions = alternatives.filter((a) => filterSubFactions(a));
+    tempArray = tempArray.filter((f) => !notSelectedSubfactions.includes(f));
 
     //allies
     if (tempArray.includes(ALLIES_MAPPING[AC.selectedFactionName])) {
-      AC.setShowAlly(false);
-    } else {
       AC.setShowAlly(true);
+    } else {
+      AC.setShowAlly(false);
     }
 
     AC.setAlternateListSubFactions([...tempArray]);
