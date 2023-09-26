@@ -28,6 +28,10 @@ export const BUTTON_TEXTS = {
   SHOW_ITEM_SHOP: "Kartenvorschau.",
 };
 
+export const TEXTS = {
+  SCOUTING_FACTOR: "Spähfaktor:",
+};
+
 export const VALIDATION = {
   NO_COMMANDER_WARNING: `Die Armeeliste muss mindestens 1 Helden, Befehlshaber oder Magier mit 2 oder mehr ★ enthalten.`,
 
@@ -151,7 +155,9 @@ export const ORKS = {
     CHARACTERS: "Deine Armeeliste darf zu höchstens 30% aus Helden bestehen.",
     GIANTS: "Deine Armeeliste darf zu höchstens 30% aus Geräten bestehen.",
     ENGINES: "Deine Armeeliste darf zu höchstens 30% aus Sturmlords und Hexen bestehen.",
-    CLANTROOPS: "Deine Armeeliste darf zu höchstens 40% aus Sondertruppen der Clans bestehen.",
+    CLANTROOPS: (percentage) => {
+      return `Deine Armeeliste darf zu höchstens ${percentage} aus Sondertruppen der Clans bestehen.`;
+    },
     CLANNGETT: "Deine Armeeliste darf zu höchstens 50% aus Einheiten Clanngetts bestehen.",
     WIZARDS: "Deine Armeeliste darf zu höchstens 40% aus Zauberern bestehen.",
     GOBLINS: "Deine Armeeliste darf zu maximal zu 20% aus Goblins bestehen.",
