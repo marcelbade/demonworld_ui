@@ -27,12 +27,7 @@ const ArmyList = () => {
    */
   useEffect(() => {
     AC.resetTheState();
-  }, [
-    AC.listOfAllFactionUnits, //
-    AC.selectedFactionName,
-    AC.selectedAlternativeList,
-    AC.secondSelectedAlternativeList,
-  ]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [AC.listOfAllFactionUnits, AC.selectedFactionName, AC.selectedAlternativeList, AC.secondSelectedAlternativeList]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * Function calculate the total point value for the army.
