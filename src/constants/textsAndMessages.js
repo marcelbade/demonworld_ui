@@ -1,27 +1,31 @@
 export const TOOLTIPS = {
-  DELETE_ARMY_LIST: "Komplette Liste löschen",
+  DELETE_ARMY_LIST: "Komplette Liste löschen.",
 };
 
 export const TOURNAMENT_RULES = {
-  MAX_POINTS_FOR_HERO: "Wieviele Prozent dürfen max. für Helden ausgegeben werden",
-  HOW_MANY_TIMES: "Wie oft darf jede Einheit ausgewählt werden",
-  ENFORCE_UNIQUE_RULE: "Einzigartige Einheiten dürfen nur einmal gewählt werden",
+  MAX_POINTS_FOR_HERO: "Wieviele Prozent dürfen max. für Helden ausgegeben werden.",
+  HOW_MANY_TIMES: "Wie oft darf jede Einheit ausgewählt werden.",
+  ENFORCE_UNIQUE_RULE: "Einzigartige Einheiten dürfen nur einmal gewählt werden.",
 };
 
 export const OPTIONS = {
-  CHANGE_TOURNAMENT_RULES: "Turnierregeln Ändern",
-  TO_LOSS_CALCULATOR: "Zum Verlustrechner",
-  SAVE_LIST: "Liste Speichern",
-  CREATE_PDF: "PDF Erzeugen",
+  CHANGE_TOURNAMENT_RULES: "Turnierregeln Ändern.",
+  TO_LOSS_CALCULATOR: "Zum Verlustrechner.",
+  SAVE_LIST: "Liste Speichern.",
+  CREATE_PDF: "PDF Erzeugen.",
 };
 
 export const GENERAL_ERRRORS = {
   ONLY_NUMBERS: "Bitte nur Zahlen eingeben.",
 };
 
+export const INPUT_TEXTS = {
+  SELECT_FACTION: "Wähle Eine Fraktion.",
+};
+
 export const BUTTON_TEXTS = {
-  PREVIEW_CARD: "Gegenstände",
-  SHOW_ITEM_SHOP: "Kartenvorschau",
+  PREVIEW_CARD: "Gegenstände.",
+  SHOW_ITEM_SHOP: "Kartenvorschau.",
 };
 
 export const VALIDATION = {
@@ -65,18 +69,18 @@ export const ELVES = {
     ILAH_RI: "Deine Armeeliste darf zu höchstens 20% aus Einheiten und Anführern der Ratsarmee bestehen.",
     OREA_VANAR: "Deine Armeeliste darf zu höchstens 30% aus Einheiten der Orea Vanar bestehen.",
     TREANTS: "Deine Armeeliste darf zu höchstens 25% aus Einheiten der Baumherren bestehen.",
-    OLD_HERO: "Du kannst max. 1 alten Helden pro 5 EInheiten der Ilah Ri oder Thanaril wählen",
+    OLD_HERO: "Du kannst max. 1 alten Helden pro 5 EInheiten der Ilah Ri oder Thanaril wählen.",
     CENTAURS: "Deine Armeeliste darf zu höchstens 25% aus Einheiten der Zentauren bestehen.",
   },
   ERRORS: {
     ILAH_RI_COMMANDER_MESSAGE: "Du musst mindestens einen Ilah Ri Befehlshaber wählen um Einheiten der Ratsarmee aufstellen zu können.",
     TREANTS_CENTAUR: "Die Armee kann nur Baumherren oder Zentauren Einheiten enthalten.",
     THANARIEL_COVEN_MESSAGE:
-      "Eine zweite und weitere Einheiten desselben Kriegerbundes können nur aufgestellt werden, wenn auch der Anführer des betreffenden Kriegerbundes anwesend ist",
-    MASTERS_MESSAGE: "Ein Meister kann nur aufgestellt werden, wenn auch ihre Schule auf dem Schlachtfeld anwesend ist",
-    SCHOOLS_MESSAGE: "Jede Schule der Orea Vanar kann nur einmal aufgestellt werden",
+      "Eine zweite und weitere Einheiten desselben Kriegerbundes können nur aufgestellt werden, wenn auch der Anführer des betreffenden Kriegerbundes anwesend ist.",
+    MASTERS_MESSAGE: "Ein Meister kann nur aufgestellt werden, wenn auch ihre Schule auf dem Schlachtfeld anwesend ist.",
+    SCHOOLS_MESSAGE: "Jede Schule der Orea Vanar kann nur einmal aufgestellt werden.",
     OLD_HERO_MESSAGE:
-      "Du darfst höchstens einen alten Helden pro aufgestellten 5 Einheiten der Thanaril (keine Kriegerbünde) und/oder der Ilah Ri aufstellen",
+      "Du darfst höchstens einen alten Helden pro aufgestellten 5 Einheiten der Thanaril (keine Kriegerbünde) und/oder der Ilah Ri aufstellen.",
   },
 };
 
@@ -131,7 +135,7 @@ export const LIZARDMEN = {
 
 export const NORWINGER = {
   SUB_FACTION_RULES: {
-    BARBARIANS: "Deine Armeeliste muss zu 20% bis 75% aus Barbaren bestehen",
+    BARBARIANS: "Deine Armeeliste muss zu 20% bis 75% aus Barbaren bestehen.",
     VETERANS: "Deine Armeeliste darf zu höchstens 40% aus Veteranen bestehen.",
     HEROES: "Deine Armeeliste darf maximal zu 30% aus Helden und Befehlshabern bestehen.",
     SPELLCASTERS: "Deine Armeeliste darf zu höchstens 30% aus Sturmlords und Hexen bestehen.",
@@ -185,7 +189,7 @@ export const UNDEAD = {
   },
   ERRORS: {
     UNDEAD_COMMANDER: "Deine Liste muss einen Nekromanten oder einen Helden oder Befehlshaber mit 2 oder mehr ★ enthalten.",
-    MAX_LIMIT_CHARACTERS: "Die Armee darf zu max. 50% aus Helden, Befehlshaber und Magiern bestehen!",
+    MAX_LIMIT_CHARACTERS: "Die Armee darf zu max. 50% aus Helden, Befehlshaber und Magiern bestehen!.",
     ALLIES: "Diese Einheit steht nicht als Alliierter zur Verfügung.",
   },
 };
@@ -193,15 +197,15 @@ export const UNDEAD = {
 export const NO_RANGE_WEAPON = "x";
 
 export const LOSS_CALCULATOR = {
-  LOST_HERO: "Held verloren",
-  LOST_GIANT: "Großelement verloren",
-  UNIT_ROUTED: "Einheit aufgerieben",
-  TEXT_UNITS: "Verlorene Elemente:",
-  TEXT_SINGLE_ELEMENTS: "Verlorene Lebenspunkte:",
-  MINUS_1_HP: "- 1 Lebenspunkt",
-  MINUS_1_ELEMENT: "- 1 Element",
-  PLUS_1_HP: "+ 1 Lebenspunkt",
-  PLUS_1_ELEMENT: "+ 1 Element",
-  LOST_MAGE: "Magier verloren",
+  LOST_HERO: "Held verloren.",
+  LOST_GIANT: "Großelement verloren.",
+  UNIT_ROUTED: "Einheit aufgerieben.",
+  TEXT_UNITS: "Verlorene Elemente:.",
+  TEXT_SINGLE_ELEMENTS: "Verlorene Lebenspunkte:.",
+  MINUS_1_HP: "- 1 Lebenspunkt.",
+  MINUS_1_ELEMENT: "- 1 Element.",
+  PLUS_1_HP: "+ 1 Lebenspunkt.",
+  PLUS_1_ELEMENT: "+ 1 Element.",
+  LOST_MAGE: "Magier verloren.",
   NOT_SINGLE_ELEMENT_ITEM_MESSAGE: "Punktkosten sind bereits in den Punktkosten der Elemente enthalten.",
 };
