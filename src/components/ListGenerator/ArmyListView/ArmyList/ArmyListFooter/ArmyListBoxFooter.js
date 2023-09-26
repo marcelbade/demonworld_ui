@@ -7,7 +7,7 @@ import { Typography, TextField, InputAdornment, Grid } from "@material-ui/core";
 import { ArmyContext } from "../../../../../contexts/armyContext";
 import calculateScoutingFactor from "../../../../../gameLogic/scoutFactorCalculator/scoutingFactorCalculator";
 // constants
-import { GENERAL_ERRRORS } from "../../../../../constants/textsAndMessages";
+import { GENERAL_ERRRORS, TEXTS } from "../../../../../constants/textsAndMessages";
 
 // TODO: remove unneeded styles
 const useStyles = makeStyles((theme) => ({
@@ -65,7 +65,9 @@ const ArmyListBoxFooter = () => {
             variant="standard"
           />
         </Grid>
-        <Typography className={classes.total}>Spähfaktor: {calculateScoutingFactor(AC.selectedUnits)}</Typography>
+        <Typography className={classes.total}>
+          {TEXTS.SCOUTING_FACTOR} {calculateScoutingFactor(AC.selectedUnits)}
+        </Typography>
       </Grid>
     </Fragment>
   );
