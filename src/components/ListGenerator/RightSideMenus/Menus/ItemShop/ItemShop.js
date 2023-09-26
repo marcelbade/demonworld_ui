@@ -42,6 +42,7 @@ const ItemShop = () => {
   //state
   const [itemTypes, setItemTypes] = useState([]);
   const [displayThisItemType, setDisplayThisItemType] = useState("");
+  const [active, setActive] = useState(0);
 
   // When the selected unit changes, set the correct items in the shop
   useEffect(() => {
@@ -101,6 +102,10 @@ const ItemShop = () => {
     }
   };
 
+  const markButton = (key) => {
+    setActive(key);
+  };
+
   // shows all items of the type whose button was pressed.
   const showTab = (type) => {
     setDisplayThisItemType(type);
@@ -127,7 +132,9 @@ const ItemShop = () => {
       <Grid item container direction="row" className={classes.dynamicPart}>
         <ShopPanelButtons
           itemTypes={itemTypes} //
+          active={active} //
           showTab={showTab}
+          markButton={markButton}
         />
         <Grid item xs={8}>
           <ShopItemList

@@ -21,24 +21,18 @@ const useStyles = makeStyles({
 const ShopPanelButtons = (props) => {
   const classes = useStyles();
 
-  const [active, setActive] = useState(0);
-
-  const markButton = (key) => {
-    setActive(key);
-  };
-
   return (
     <Grid item xs={3} className={classes.panelButtonsBackground}>
       <ButtonGroup size="large" orientation="vertical">
         {props.itemTypes.map((type, i) => {
           return (
             <Button
-              className={active === i ? classes.activeButton : classes.buttons}
+              className={props.active === i ? classes.activeButton : classes.buttons}
               variant="text"
               key={i}
               onClick={() => {
                 props.showTab(type);
-                markButton(i);
+                props.markButton(i);
               }}
             >
               {ITEM_CATEGORY_NAME_MAPPING[type]}
