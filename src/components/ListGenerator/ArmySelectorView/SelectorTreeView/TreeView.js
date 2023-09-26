@@ -39,6 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+// only show the army selection tree if the army and, if it exists, alternative list has been selected.
 const FactionTreeView = () => {
   const classes = useStyles();
   const AC = useContext(ArmyContext);
