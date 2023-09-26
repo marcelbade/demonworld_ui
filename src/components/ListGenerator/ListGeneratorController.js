@@ -27,6 +27,7 @@ import ValidationNotification from "../shared/ValidationNotification";
 import { ALL_FACTIONS_ARRAY, NONE } from "../../constants/factions";
 import ArmyList from "./GeneratorComponents/ArmyList";
 import { NO_ALLY } from "../../constants/allies";
+import { INPUT_TEXTS } from "../../constants/textsAndMessages";
 
 const useStyles = makeStyles((theme) => ({
   displayBox: {
@@ -398,7 +399,7 @@ const ListGeneratorController = () => {
                 filterFunction={setSelectedFactionName}
                 isArmySelector={true}
                 options={ALL_FACTIONS_ARRAY}
-                label="Wähle Eine Fraktion"
+                label={INPUT_TEXTS.SELECT_FACTION}
               />
               <AlternativeArmyLists />
               <FactionTreeView className={classes.selector} />
