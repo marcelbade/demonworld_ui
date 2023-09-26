@@ -16,14 +16,14 @@ export const GIANT = "G";
 // Mapps item types in the itemCard obj to the displayed German name.
 export const ITEM_CATEGORY_NAME_MAPPING = {
   fortifications: "Befestigungen", 
-  armor: "Rüstung",
+  armor: "Rüstungen",
   arrowsAndBows: "Bögen",
   banner: "Banner",
   boltsAndCrossbows: "Armbrüste",
   imp: "Dämonlinge",
   instrument: "Trommeln & Hörner",
   item: "Gegenstände",
-  poison: "Gift",
+  poison: "Gifte",
   potion: "Tränke",
   ringsAndAmulets: "Ringe und Amulette",
   warpaint: "Kriegsbemalung",
