@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: "1em",
     marginBottom: "1em",
     borderBottom: "black 1px solid",
-    width: "70%"
+    width: "70%",
   },
 }));
 
@@ -80,7 +80,14 @@ const FactionTreeView = () => {
         defaultCollapseIcon={<MinusSquare />}
         defaultExpandIcon={<PlusSquare />}
       >
-        <StyledTreeItem nodeId="1" label={AC.selectedFactionName}>
+        <StyledTreeItem
+          nodeId="1"
+          label={
+            AC.selectedFactionName === NONE //
+              ? ""
+              : AC.selectedFactionNam
+          }
+        >
           <Tree showsFaction={true} />
         </StyledTreeItem>
       </TreeView>
