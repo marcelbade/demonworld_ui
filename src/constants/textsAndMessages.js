@@ -9,10 +9,10 @@ export const TOURNAMENT_RULES = {
 };
 
 export const OPTIONS = {
-  CHANGE_TOURNAMENT_RULES: "Turnierregeln Ändern.",
-  TO_LOSS_CALCULATOR: "Zum Verlustrechner.",
-  SAVE_LIST: "Liste Speichern.",
-  CREATE_PDF: "PDF Erzeugen.",
+  CHANGE_TOURNAMENT_RULES: "Turnierregeln Ändern",
+  TO_LOSS_CALCULATOR: "Zum Verlustrechner",
+  SAVE_LIST: "Liste Speichern",
+  CREATE_PDF: "PDF Erzeugen",
 };
 
 export const GENERAL_ERRRORS = {
