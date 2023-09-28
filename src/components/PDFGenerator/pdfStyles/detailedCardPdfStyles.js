@@ -38,6 +38,29 @@ const styles = {
     backgroundColor: "lightgrey",
   },
 
+  commandAndMagicRow: {
+    color: "black",
+    display: "flex",
+    flexDirection: "row",
+    width: "100%",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+
+  commandPoints:{
+    
+  },
+
+  headerBacksideSecondSubFaction: {
+    display: "flex",
+    width: "100%",
+    fontSize: 10,
+    color: "black",
+    fontFamily: "jaapokkiRegular",
+    alignItems: "flex-start",
+    flexDirection: "row",
+  },
+
   blackRowBox: {
     width: "100%",
     justifyContent: "space-between",
@@ -45,17 +68,48 @@ const styles = {
     alignItems: "center",
   },
 
-  cardBlackRow: {
+  cardUpperBlackRow: {
+    height: "20em",
     width: "45%",
     flexDirection: "row",
-    justifyContent: "space-evenly",
+    justifyContent: "space-around",
+    alignItems: "center",
     color: "white",
     backgroundColor: "black",
   },
-  firstBlackRowBack: {
+
+  cardBlackRow: {
+    width: "45%",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    color: "white",
+    backgroundColor: "black",
+  },
+
+  cardBlackRowFearMoral: {
+    width: "45%",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    color: "white",
+    backgroundColor: "black",
+  },
+
+  firstBlackRowBackTwoElements: {
+    height: "20em",
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-around",
+    alignItems: "center",
+    width: "100%",
+  },
+
+  firstBlackRowBackOneElement: {
+    height: "20em",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
     alignItems: "center",
     width: "100%",
   },
@@ -107,14 +161,39 @@ const styles = {
     alignItems: "center",
   },
 
+  armorIconValueGroup: {
+    width: "18%",
+    justifyContent: "space-between",
+    display: "flex",
+    flexDirection: "row",
+  },
+
   iconValueGroup: {
     display: "flex",
     flexDirection: "row",
   },
 
+  skillGroup: {
+    width: "18%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+
   icon: {
     height: "10em",
-    width: "10em",
+  },
+
+  squareFormationIcon: {
+    height: "20em",
+  },
+
+  formations: {
+    width: "15%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
 
   cardFooterBox: {
