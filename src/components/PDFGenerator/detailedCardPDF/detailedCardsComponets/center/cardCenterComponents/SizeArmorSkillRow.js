@@ -16,28 +16,30 @@ const SizeArmorSkillRow = (props) => {
     <View key={uuidGenerator()} style={styles.sizeArmorSkillBox}>
       <Text key={uuidGenerator()}>Größe: {props.unit.unitSize}</Text>
 
-      <View  style={styles.iconValueGroup}>
-        <Image src={rangeArmorIcon} style={styles.icon} />
-        <Text key={uuidGenerator()}>
-          {props.unit.armourRange}
-        </Text>
-        <Image src={meleeArmorIcon} style={styles.icon} />
-        <Text key={uuidGenerator()}>{props.unit.armourMelee}</Text>
+      <View style={styles.armorIconValueGroup}>
+        <View style={styles.iconValueGroup}>
+          <Image src={rangeArmorIcon} style={styles.icon} />
+          <Text key={uuidGenerator()}>{props.unit.armourRange}</Text>
+        </View>
+        <View style={styles.iconValueGroup}>
+          <Image src={meleeArmorIcon} style={styles.icon} />
+          <Text key={uuidGenerator()}>{props.unit.armourMelee}</Text>
+        </View>
       </View>
-
-      {props.unit.meleeSkill !== 0 ? (
-        <View style={styles.iconValueGroup}>
-          <Image src={blackSwordIcon} style={styles.icon} />
-          <Text key={uuidGenerator()}>{props.unit.skillMelee}</Text>
-        </View>
-      ) : null}
-
-      {props.unit.meleeSkill !== 0 ? (
-        <View style={styles.iconValueGroup}>
-          <Image src={blackBowIcon} style={styles.icon} />
-          <Text key={uuidGenerator()}>{props.unit.skillRange}</Text>
-        </View>
-      ) : null}
+      <View style={styles.skillGroup}>
+        {props.unit.skillMelee !== 0 ? (
+          <View style={styles.iconValueGroup}>
+            <Image src={blackSwordIcon} style={styles.icon} />
+            <Text key={uuidGenerator()}>{props.unit.skillMelee}</Text>
+          </View>
+        ) : null}
+        {props.unit.skillRange !== 0 ? (
+          <View style={styles.iconValueGroup}>
+            <Image src={blackBowIcon} style={styles.icon} />
+            <Text key={uuidGenerator()}>{props.unit.skillRange}</Text>
+          </View>
+        ) : null}
+      </View>
     </View>
   );
 };
