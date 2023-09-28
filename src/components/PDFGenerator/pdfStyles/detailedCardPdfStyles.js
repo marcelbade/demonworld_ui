@@ -43,13 +43,10 @@ const styles = {
     display: "flex",
     flexDirection: "row",
     width: "100%",
-    justifyContent: "space-between",
+    justifyContent: "space-around",
     alignItems: "center",
   },
-
-  commandPoints:{
-    
-  },
+ 
 
   headerBacksideSecondSubFaction: {
     display: "flex",

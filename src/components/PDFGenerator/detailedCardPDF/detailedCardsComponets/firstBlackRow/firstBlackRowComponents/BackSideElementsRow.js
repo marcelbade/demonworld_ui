@@ -30,16 +30,20 @@ const BackSideElementsRow = (props) => {
 
   return (
     <View key={uuidGenerator()} style={styles.cardBlackRow}>
-      <View style={styles.firstBlackRowBack}>
-        {!props.unit.leader && !props.unit.standardBearer && !props.unit.musician ? null : (
+      {!props.unit.leader && !props.unit.standardBearer && !props.unit.musician ? (
+        <View style={styles.firstBlackRowBackOneElement}>
+          <Text> {numberOfElements(props.unit)} </Text>
+        </View>
+      ) : (
+        <View style={styles.firstBlackRowBackTwoElements}>
           <Text>
-            {props.unit.leader ? "Anführer  " : null}
+            {props.unit.leader ? "Anführer " : null}
             {props.unit.standardBearer ? "/ Standarte" : null}
             {props.unit.musician ? "/ Musiker" : null}{" "}
           </Text>
-        )}
-        <Text> {numberOfElements(props.unit)} </Text>
-      </View>
+          <Text> {numberOfElements(props.unit)} </Text>
+        </View>
+      )}
     </View>
   );
 };
