@@ -49,6 +49,17 @@ export const unitOrCmdCard = (unit, alignment) => {
 };
 
 /**
+ *  Function controls which kind of stat card (unit or character) is displayed.
+ *
+ * @param {[{*}]} unit
+ * @returns  JSX element
+ */
+export const isSingleElementCard = (unit) => {
+  const SINGLE_ELEMENTS_LIST = [HERO, MAGE, AUTOMATON, GIANT];
+  return SINGLE_ELEMENTS_LIST.includes(unit.unitType);
+};
+
+/**
  * This being JS, there is no way to elegantly sort an object collection by more than 2 properites without negating previous sorting. This function divides a list of unitCards by unit type, sorts each new partial array by point cost and alphabetically, then adds the resulting sorted arrays to either one of two arrays, depending on whether they have more than 1 element. Finally, these two arrays are merged into a single array and returned.
  * @param {[unitCard]} unitList
  * @returns [unitCard], sorted in this order, by number of elements (1 or more), unit type, point cost and alphabetically.
