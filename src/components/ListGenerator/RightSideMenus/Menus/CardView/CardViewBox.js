@@ -7,8 +7,8 @@ import { Grid, IconButton } from "@material-ui/core";
 import CancelIcon from "@material-ui/icons/Cancel";
 // components and functions
 import { ArmyContext } from "../../../../../contexts/armyContext";
-import { AUTOMATON, GIANT, HERO, MAGE } from "../../../../../constants/unitTypes";
 import CardView from "./CardView";
+import { isSingleElementCard } from "../../../../shared/sharedFunctions";
 
 const useStyles = makeStyles({
   overlay: {
@@ -35,7 +35,7 @@ const CardViewBox = () => {
   // Does the stat card belong to a unit with more than 1 element?
   useEffect(() => {
     if (AC.statCardState.clickedUnit !== undefined) {
-      const isSingleElement = unitOrCmdCard(AC.statCardState.clickedUnit);
+      const isSingleElement = isSingleElementCard(AC.statCardState.clickedUnit);
       setIsSingleElement(isSingleElement);
     }
   }, [AC.statCardState.clickedUnit]);
@@ -47,17 +47,6 @@ const CardViewBox = () => {
       setCarouselCards(allStateCards);
     }
   }, [AC.statCardState.clickedUnit]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  /**
-   *  Function controls which kind of stat card (unit or character) is displayed.
-   *
-   * @param {[{*}]} unit
-   * @returns  JSX element
-   */
-  const unitOrCmdCard = (unit) => {
-    const SINGLE_ELEMENTS_LIST = [HERO, MAGE, AUTOMATON, GIANT];
-    return SINGLE_ELEMENTS_LIST.includes(unit.unitType);
-  };
 
   /**
    * Function allwos user to cycle through the multiple stat cards counter-clockwise.

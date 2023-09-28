@@ -10,7 +10,7 @@ import BackSideTitleRow from "./cardHeaderComponents/BackSideTitleRow";
 
 const CardHeader = (props) => {
   return (
-    <View style={styles.cardPart}>
+    <View style={styles.cardHeaderBox}>
       <NameRow unitName={props.unit.unitName} />
       <Text style={styles.separator}></Text>
       <BackSideTitleRow unit={props.unit} />

@@ -11,7 +11,7 @@ import BackSideElementsRow from "./firstBlackRowComponents/BackSideElementsRow";
 
 const FirstBlackRow = (props) => {
   return (
-    <View style={styles.cardPart}>
+    <View style={styles.blackRowBox}>
     <UnitMovementRow unit={props.unit} />
     <Text style={styles.separator}></Text>
     <BackSideElementsRow unit={props.unit} />

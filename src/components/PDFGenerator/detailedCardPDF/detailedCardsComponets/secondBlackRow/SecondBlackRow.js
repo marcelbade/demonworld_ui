@@ -10,7 +10,7 @@ import BackSidePointCostRow from "./secondBlackRowComponents/BackSidePointCostRo
 
 const SecondBlackRow = (props) => {
   return (
-    <View style={styles.cardPart}>
+    <View style={styles.blackRowBox}>
       <FearAndMoralRow unit={props.unit} />
       <Text style={styles.separator}></Text>
       <BackSidePointCostRow unit={props.unit} />

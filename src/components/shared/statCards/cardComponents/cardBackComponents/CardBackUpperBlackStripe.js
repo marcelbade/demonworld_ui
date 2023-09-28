@@ -7,7 +7,7 @@ import { StateCardContext } from "../../../../../contexts/statCardContext";
 
 const useStyles = makeStyles({
   blackStripe: {
-    fontFamily: "Beryliumbold",
+    fontFamily: "jaapokkiRegular",
     fontWeight: "bold",
     padding: "10px",
     color: "white",

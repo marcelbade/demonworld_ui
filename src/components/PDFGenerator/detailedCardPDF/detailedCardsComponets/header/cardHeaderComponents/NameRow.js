@@ -9,7 +9,7 @@ import styles from "../../../../pdfStyles/detailedCardPdfStyles";
 
 const NameRow = (props) => {
   return (
-    <View key={uuidGenerator()} style={styles.titleRow}>
+    <View key={uuidGenerator()} style={styles.headerRow}>
       <Text key={uuidGenerator()}> </Text>
       <Text key={uuidGenerator()}>{props.unitName}</Text>
       <Text key={uuidGenerator()}> </Text>

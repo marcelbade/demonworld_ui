@@ -1,6 +1,6 @@
 import React from "react";
 // react-pdf
-import { Text, View,   Image } from "@react-pdf/renderer";
+import { Text, View, Image } from "@react-pdf/renderer";
 // functions and components
 import { uuidGenerator } from "../../../../../shared/sharedFunctions";
 // styles
@@ -13,34 +13,31 @@ import blackBowIcon from "../../../../../../icons/bow2.png";
 
 const SizeArmorSkillRow = (props) => {
   return (
-    <View key={uuidGenerator()} style={styles.cardRow}>
+    <View key={uuidGenerator()} style={styles.sizeArmorSkillBox}>
       <Text key={uuidGenerator()}>Größe: {props.unit.unitSize}</Text>
 
-      <View key={uuidGenerator()} style={styles.icons}>
-        <Text key={uuidGenerator()} style={styles.rightPadding}>
-          <Image src={rangeArmorIcon} />
+      <View  style={styles.iconValueGroup}>
+        <Image src={rangeArmorIcon} style={styles.icon} />
+        <Text key={uuidGenerator()}>
           {props.unit.armourRange}
         </Text>
-        <Text key={uuidGenerator()}>
-          <Image src={meleeArmorIcon} />
-          {props.unit.armourMelee}
-        </Text>
+        <Image src={meleeArmorIcon} style={styles.icon} />
+        <Text key={uuidGenerator()}>{props.unit.armourMelee}</Text>
       </View>
-      <View key={uuidGenerator()} style={styles.icons}>
-        {props.unit.meleeSkill !== 0 ? (
-          <Text key={uuidGenerator()} style={styles.rightPadding}>
-            <Image src={blackSwordIcon} />
-            {props.unit.skillMelee}
-          </Text>
-        ) : null}
 
-        {props.unit.meleeSkill !== 0 ? (
-          <Text key={uuidGenerator()}>
-            <Image src={blackBowIcon} />
-            {props.unit.skillRange}
-          </Text>
-        ) : null}
-      </View>
+      {props.unit.meleeSkill !== 0 ? (
+        <View style={styles.iconValueGroup}>
+          <Image src={blackSwordIcon} style={styles.icon} />
+          <Text key={uuidGenerator()}>{props.unit.skillMelee}</Text>
+        </View>
+      ) : null}
+
+      {props.unit.meleeSkill !== 0 ? (
+        <View style={styles.iconValueGroup}>
+          <Image src={blackBowIcon} style={styles.icon} />
+          <Text key={uuidGenerator()}>{props.unit.skillRange}</Text>
+        </View>
+      ) : null}
     </View>
   );
 };

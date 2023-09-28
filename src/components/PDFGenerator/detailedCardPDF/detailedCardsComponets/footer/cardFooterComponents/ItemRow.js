@@ -22,7 +22,11 @@ const ItemRow = (props) => {
 
   return (
     <View key={uuidGenerator()} style={styles.footerRow}>
-      <Text>{generateItemNameList()}</Text>
+      {props.items.length === 0 ? ( //
+        <Text>Keine Gegenstände</Text>
+      ) : (
+        <Text>{generateItemNameList()}</Text>
+      )}
     </View>
   );
 };

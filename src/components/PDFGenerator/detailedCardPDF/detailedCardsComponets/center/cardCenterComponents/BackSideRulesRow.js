@@ -9,8 +9,8 @@ import styles from "../../../../pdfStyles/detailedCardPdfStyles";
 
 const BackSideRulesRow = (props) => {
   return (
-    <View key={uuidGenerator()} style={styles.cardRow}>
-      <Text key={uuidGenerator()}>{props.unit.specialRules}</Text>
+    <View key={uuidGenerator()} style={styles.cardRules}>
+      <Text    key={uuidGenerator()}>{props.unit.specialRules}</Text>
     </View>
   );
 };

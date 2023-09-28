@@ -3,7 +3,7 @@ import React from "react";
 // react-pdf
 import { Text, View } from "@react-pdf/renderer";
 // functions and components
-import { uuidGenerator } from "../../../../../shared/sharedFunctions";
+import { isSingleElementCard, uuidGenerator } from "../../../../../shared/sharedFunctions";
 import { displayFormations } from "../../../../../compendiums/factionTable/depencies/factionTableFunctions";
 // styles
 import styles from "../../../../pdfStyles/detailedCardPdfStyles";
@@ -17,7 +17,12 @@ const UnitMovementRow = (props) => {
     return props.unit.wedgeFormation || props.unit.horde || props.unit.squareFormation || props.unit.skirmishFormation;
   };
 
-  return (
+  //unitOrCmdCard
+  return isSingleElementCard(props.unit) ? (
+    <View key={uuidGenerator()} style={styles.cardBlackRow}>
+      <Text key={uuidGenerator()}>{props.unit.move} Bewegungspunkte</Text>
+    </View>
+  ) : (
     <View key={uuidGenerator()} style={styles.cardBlackRow}>
       <Text key={uuidGenerator()}>
         B: {props.unit.move} / A: {props.unit.charge} / P:{props.unit.skirmish}

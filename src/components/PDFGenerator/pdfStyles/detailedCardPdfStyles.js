@@ -1,99 +1,139 @@
 const styles = {
-  pageTopMargin: {
-    marginTop: 20,
-  },
-
-  table: {
-    display: "table",
-    width: "auto",
-  },
-
-  tableRowSubFactionName: {
-    margin: "auto",
-    flexDirection: "row",
-    marginTop: 10,
-  },
-  tableColSubFactionName: {
-    width: "100%",
-    fontFamily: "Beryliumbold",
-  },
-  tableCellSubFactioName: {
+  subFactioName: {
+    margin: 20,
     fontFamily: "notMaryKate",
-    margin: "auto",
-    textAlign: "left",
-    marginTop: 5,
-    marginLeft: 20,
-    fontSize: 10,
   },
 
   cardBox: {
     flexDirection: "column",
     marginLeft: 20,
     marginRight: 20,
-    fontFamily: "Beryliumbold",
+    fontFamily: "jaapokkiRegular",
     fontSize: 10,
     marginBottom: 10,
-    width: 400,
-    backgroundColor: "lightgrey",
-    border: "1px solid black",
+    width: "500px",
   },
 
-  cardPart: {
+  separator: {
+    backgroundColor: "white",
+    width: "10em",
+  },
+
+  cardHeaderBox: {
     flexDirection: "row",
+    justifyContent: "space-between",
     alignItems: "center",
-
-    // borderLeft: "1px solid black",
-    // borderRight: "1px solid black",
+    width: "100%",
   },
 
-  leftSide: {
-    flexDirection: "column",
-    alignItems: "center",
-  },
-
-  titleRow: {
-    // borderTop: "1px solid black",
-    width: 200,
+  headerRow: {
+    width: "45%",
     fontFamily: "notMaryKate",
     color: "red",
     fontSize: 10,
     alignItems: "center",
+    borderTop: "1px solid black",
+    borderLeft: "1px solid black",
+    borderRight: "1px solid black",
+    backgroundColor: "lightgrey",
   },
 
-  cardRow: {
-    width: 200,
+  blackRowBox: {
+    width: "100%",
+    justifyContent: "space-between",
     flexDirection: "row",
-    justifyContent: "space-evenly",
-    paddingBottom: 5,
-  },
-
-  footerRow: {
-    width: 200,
-    height: 20,
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-    marginBottom: 5,
-    // borderBottom: "1px solid black",
-  },
-
-  icons: {
-    flexDirection: "row",
-    justifyContent: "space-evenly",
-    width: "20%",
+    alignItems: "center",
   },
 
   cardBlackRow: {
-    width: 200,
+    width: "45%",
     flexDirection: "row",
     justifyContent: "space-evenly",
     color: "white",
     backgroundColor: "black",
   },
+  firstBlackRowBack: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around",
+    alignItems: "center",
+    width: "100%",
+  },
 
-  separator: {
-    backgroundColor: "white",
-    width: 10,
-    height: "110%",
+  cardCenterBox: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+
+  cardCenterContent: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+  },
+
+  centerLeftSide: {
+    width: "45%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    borderLeft: "1px solid black",
+    borderRight: "1px solid black",
+    backgroundColor: "lightgrey",
+  },
+
+  cardCenterRightSide: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "45%",
+    height: "100%",
+    borderLeft: "1px solid black",
+    borderRight: "1px solid black",
+    backgroundColor: "lightgrey",
+  },
+
+  sizeArmorSkillBox: {
+    display: "flex",
+    flexDirection: "row",
+    width: "100%",
+    justifyContent: "space-around",
+    alignItems: "center",
+  },
+
+  iconValueGroup: {
+    display: "flex",
+    flexDirection: "row",
+  },
+
+  icon: {
+    height: "10em",
+    width: "10em",
+  },
+
+  cardFooterBox: {
+    width: "100%",
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+
+  footerRow: {
+    width: "45%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    borderLeft: "1px solid black",
+    borderRight: "1px solid black",
+    borderBottom: "1px solid black",
+    backgroundColor: "lightgrey",
   },
 };
 

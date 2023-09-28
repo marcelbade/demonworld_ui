@@ -8,7 +8,7 @@ import { StateCardContext } from "../../../../../contexts/statCardContext";
 
 const useStyles = makeStyles({
   specialRules: {
-    fontFamily: "Beryliumbold",
+    fontFamily: "jaapokkiRegular",
     paddingLeft: "0.5em",
   },
 });

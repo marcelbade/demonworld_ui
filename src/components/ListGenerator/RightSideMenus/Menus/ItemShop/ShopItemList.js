@@ -3,7 +3,6 @@ import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography, IconButton, Accordion, AccordionSummary, AccordionDetails, ButtonGroup } from "@material-ui/core";
 // components and functions
-import { uuidGenerator } from "../../../../shared/sharedFunctions";
 import { ArmyContext } from "../../../../../contexts/armyContext";
 import {
   doesUnitAlreadyHaveInstrument,
@@ -28,6 +27,12 @@ const useStyles = makeStyles({
     display: "flex",
     alignItems: "center",
   },
+  blockedItemName: {
+    width: "20em",
+    display: "flex",
+    alignItems: "center",
+    color: "lightgrey",
+  },
 });
 
 const ShopItemList = (props) => {
@@ -36,10 +41,12 @@ const ShopItemList = (props) => {
 
   /**
    * Function enforces the item selection rules by toggling the item's corresponding button on/off.
-   * A hero, magicican or unit leader can only get 1 magical item. 
-   * In addition, they may gain additional "non-magical" generic items like potions. 
-   * If a standard bearer or musician is present, a standard or intrument can be selected in addition to these two. 
-   * In addition if it is a unit, items can be choosen that are carried by every element in the unit.
+   * Rules are:
+   *  - A hero, magicican or unit leader can only get ONE magical item.
+   *  - In addition, they may gain additional "non-magical" generic items like potions.
+   *  - If a standard bearer or musician is present, a standard or
+   *    Intrument can be selected in addition to these two.
+   *  - In addition if it is a unit, items can be choosen that are carried by every element in the unit.
    * @param {itemCard Object} item
    * @returns a boolean that toggles the button on or off.
    */
@@ -97,7 +104,7 @@ const ShopItemList = (props) => {
   };
 
   /**
-   * Add the item card object to the selected unit. Only a subSet is added as well as a flag to track whether the item was lost for the lossCalculator component.
+   * Add the item card object to the selected unit. In addiition a flag to track whether the item was lost for the lossCalculator component is added.
    * @param {itemCard object} item
    */
   const addItemToUnit = (item) => {
@@ -119,7 +126,7 @@ const ShopItemList = (props) => {
         .filter((item) => item.itemType === props.displayThisItemType)
         .map((i) => {
           return (
-            <Accordion key={uuidGenerator()}>
+            <Accordion key={i}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />} //
                 aria-controls="panel1a-content"
@@ -133,11 +140,11 @@ const ShopItemList = (props) => {
                     recalculateUnitsItemTypeFlags(i, true);
                     triggerArymListReCalculation();
                   }}
-                  key={uuidGenerator()}
+                  key={i}
                 >
                   <AddCircleOutlineIcon />
                 </IconButton>
-                <Typography variant="body1" className={classes.itemName}>
+                <Typography variant="body1" className={disableButton(i) ? classes.blockedItemName : classes.itemName}>
                   {i.itemName}
                 </Typography>
               </AccordionSummary>

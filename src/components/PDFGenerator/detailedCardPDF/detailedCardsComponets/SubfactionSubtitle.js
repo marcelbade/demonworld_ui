@@ -12,7 +12,7 @@ const SubfactionSubtitle = (props) => {
     <Document>
       <View key={uuidGenerator()} style={styles.tableRowSubFactionName}>
         <View key={uuidGenerator()} style={styles.tableColSubFactionName}>
-          <Text style={styles.tableCellSubFactioName}>{props.subFaction}</Text>
+          <Text style={styles.subFactioName}>{props.subFaction}</Text>
         </View>
       </View>
     </Document>

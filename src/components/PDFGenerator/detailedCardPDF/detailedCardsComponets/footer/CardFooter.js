@@ -12,7 +12,7 @@ import ItemRow from "./cardFooterComponents/ItemRow";
 
 const CardFooter = (props) => {
   return (
-    <View style={styles.cardPart}>
+    <View style={styles.cardFooterBox}>
       <HitPointsRow hitPoints={props.unit.hitpoints} />
       <Text style={styles.separator}></Text>
       <ItemRow items={props.unit.equipment} />
