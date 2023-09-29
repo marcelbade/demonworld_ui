@@ -59,7 +59,7 @@ const OptionButtons = () => {
     //TODO: replace in production!!
     const URL = "http://localhost:3000/PdfBox";
 
-    let transportObj = { pdfData: AC.pdfMasterList };
+    let transportObj = { armyName: AC.armyName, pdfData: AC.pdfMasterList };
 
     window.localStorage.setItem("transportObj", JSON.stringify(transportObj));
     window.open(URL, "_blank", "noopener,noreferrer");

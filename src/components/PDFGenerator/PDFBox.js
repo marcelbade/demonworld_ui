@@ -22,16 +22,22 @@ const PdfBox = () => {
   const classes = useStyles();
 
   const [pdfData, setPdfData] = useState([]);
+  const [armyName, setArmyName] = useState([]);
 
   useEffect(() => {
     const transportObj = JSON.parse(localStorage.getItem("transportObj"));
     setPdfData(transportObj.pdfData);
+    setArmyName(transportObj.armyName);
   }, []);
 
   return pdfData.length > 0 ? (
     <PDFViewer className={classes.pdfTab}>
       {/* TODO: add the logic to pick one! */}
-      {false ? <ListPDF pdfMasterList={pdfData} /> : <DetailedCardPDF pdfMasterList={pdfData} />}
+      {false ? ( //
+        <ListPDF armyName={armyName} pdfMasterList={pdfData} />
+      ) : (
+        <DetailedCardPDF armyName={armyName} pdfMasterList={pdfData} />
+      )}
     </PDFViewer>
   ) : null;
 };

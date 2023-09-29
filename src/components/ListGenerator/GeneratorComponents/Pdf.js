@@ -24,7 +24,7 @@ const Pdf = () => {
     AC.setSelectedAlternativeList("NONE");
   }, [AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // this component returns no jsx - it is simply meant to help code readability by factoring out all logic for army validation from the ListGeneratorController component.
+  // this component returns no jsx - it is simply meant to help code readability by factoring out all logic for pdf generation from the ListGeneratorController root component.
   return null;
 };
 
