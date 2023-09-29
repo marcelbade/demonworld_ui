@@ -165,7 +165,7 @@ const LossCalculator = () => {
               </IconButton>
             </Grid>
             {/* LIST */}
-            <Grid item alignItems>
+            <Grid container item alignItems>
               <List>
                 {unitCardMultiSort(list).map((u, i) => {
                   return (
