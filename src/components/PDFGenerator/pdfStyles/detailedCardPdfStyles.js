@@ -254,7 +254,7 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
   },
-  test: {
+  pageNumber: {
     position: "absolute",
     right: 10,
     bottom: 15,

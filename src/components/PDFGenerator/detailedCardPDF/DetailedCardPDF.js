@@ -49,7 +49,7 @@ const ListPDF = (props) => {
               </View>
             ))}
         </View>
-        <Text style={styles.test} render={({ pageNumber, totalPages }) => `${pageNumber}/${totalPages} `} fixed />
+        <Text style={styles.pageNumber} render={({ pageNumber, totalPages }) => `${pageNumber}/${totalPages} `} fixed />
       </Page>
     </Document>
   );
