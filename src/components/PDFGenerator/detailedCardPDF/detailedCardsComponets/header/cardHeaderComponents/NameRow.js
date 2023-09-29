@@ -11,9 +11,17 @@ import { renderCommandPoints, renderMagicPoints } from "../../../../../compendiu
 const NameRow = (props) => {
   return (
     <View key={uuidGenerator()} style={styles.headerRow}>
-      <View style={styles.commandAndMagicRow}>
-        <Text key={uuidGenerator()}>{renderCommandPoints(props.unit.commandStars)}</Text>
-        <Text key={uuidGenerator()}> {renderMagicPoints(props.unit.magic)} </Text>
+      <View key={uuidGenerator()} style={styles.paddingTopHeader}></View>
+      <View key={uuidGenerator()} style={styles.commandAndMagicRow}>
+        <View key={uuidGenerator()} style={styles.commandMagicContent}>
+          <Text key={uuidGenerator()}>{renderCommandPoints(props.unit.commandStars)}</Text>
+        </View>
+        <View key={uuidGenerator()} style={styles.headerPaddingRow}>
+          <Text key={uuidGenerator()}> </Text>
+        </View>
+        <View key={uuidGenerator()} style={styles.commandMagicContent}>
+          <Text key={uuidGenerator()}> {renderMagicPoints(props.unit.magic)} </Text>
+        </View>
       </View>
       <Text key={uuidGenerator()}>{props.unit.unitName}</Text>
       <Text key={uuidGenerator()}> </Text>

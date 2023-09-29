@@ -8,9 +8,11 @@ import { uuidGenerator } from "../../../../../shared/sharedFunctions";
 import styles from "../../../../pdfStyles/detailedCardPdfStyles";
 
 const BackSideRulesRow = (props) => {
+ 
+
   return (
     <View key={uuidGenerator()} style={styles.cardRules}>
-      <Text    key={uuidGenerator()}>{props.unit.specialRules}</Text>
+      <Text key={uuidGenerator()}>{props.unit.specialRules}</Text>
     </View>
   );
 };

@@ -1,7 +1,21 @@
 const styles = {
-  subFactioName: {
-    margin: 20,
+  pageTopMargin: {
+    marginTop: 10,
+  },
+
+  armyName: {
+    display: "flex",
+    justifyContent:"center",
+    alignItems:"center",
+    font: "15",
     fontFamily: "notMaryKate",
+    margin: 5,
+  },
+
+  subFactionName: {
+    font: 5,
+    fontFamily: "notMaryKate",
+    margin: 10,
   },
 
   cardBox: {
@@ -42,11 +56,19 @@ const styles = {
     color: "black",
     display: "flex",
     flexDirection: "row",
-    width: "100%",
-    justifyContent: "space-around",
+    width: "98%",
+    justifyContent: "space-between",
     alignItems: "center",
   },
- 
+
+  commandMagicContent: {
+    flexDirection: "row",
+    width: "10%",
+    justifyContent: "center",
+  },
+  paddingTopHeader: {
+    height: "5em",
+  },
 
   headerBacksideSecondSubFaction: {
     display: "flex",
@@ -63,6 +85,11 @@ const styles = {
     justifyContent: "space-between",
     flexDirection: "row",
     alignItems: "center",
+  },
+
+  headerPaddingRow: {
+    fontSize: 10,
+    fontFamily: "jaapokkiRegular",
   },
 
   cardUpperBlackRow: {
@@ -192,6 +219,10 @@ const styles = {
     justifyContent: "space-between",
     alignItems: "center",
   },
+  cardRules: {
+    width: "98%",
+    textAlign: "center",
+  },
 
   cardFooterBox: {
     width: "100%",
@@ -210,6 +241,23 @@ const styles = {
     borderRight: "1px solid black",
     borderBottom: "1px solid black",
     backgroundColor: "lightgrey",
+  },
+
+  test2: {
+    backgroundColor: "cyan",
+    zIndex: 999,
+    height: "5%",
+    width: "100%",
+    position: "absolute",
+    top: 1,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  test: {
+    position: "absolute",
+    right: 10,
+    bottom: 15,
   },
 };
 

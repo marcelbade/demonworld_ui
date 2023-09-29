@@ -1,7 +1,7 @@
 // react
 import React from "react";
 // react-pdf
-import { Page, View, Document, Font } from "@react-pdf/renderer";
+import { Page, View, Document, Font, Text } from "@react-pdf/renderer";
 // fonts
 import notMaryKate from "../../../fonts/notMaryKate.ttf";
 import Beryliumbold from "../../../fonts/Beryliumbold.ttf";
@@ -15,16 +15,22 @@ import CardHeader from "./detailedCardsComponets/header/Header";
 import SecondBlackRow from "./detailedCardsComponets/secondBlackRow/SecondBlackRow";
 import CardFooter from "./detailedCardsComponets/footer/CardFooter";
 import SubfactionSubtitle from "./detailedCardsComponets/SubfactionSubtitle";
- 
+
 // Register font
 Font.register({ family: "notMaryKate", src: notMaryKate });
 Font.register({ family: "Beryliumbold", src: Beryliumbold });
 Font.register({ family: "jaapokkiRegular", src: jaapokkiRegular });
 
 const ListPDF = (props) => {
+  console.log("props.pdfMasterList");
+  console.log(props.pdfMasterList);
+
   return (
     <Document>
       <Page style={styles.pageTopMargin}>
+        <View style={styles.armyName}>
+          <Text> {props.armyName} </Text>
+        </View>
         <View>
           {props.pdfMasterList
             .filter((subFaction) => subFaction.units.length > 0)
@@ -43,6 +49,7 @@ const ListPDF = (props) => {
               </View>
             ))}
         </View>
+        <Text style={styles.test} render={({ pageNumber, totalPages }) => `${pageNumber}/${totalPages} `} fixed />
       </Page>
     </Document>
   );

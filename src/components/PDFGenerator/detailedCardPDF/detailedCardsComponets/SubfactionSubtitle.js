@@ -10,10 +10,8 @@ import styles from "../../pdfStyles/detailedCardPdfStyles";
 const SubfactionSubtitle = (props) => {
   return (
     <Document>
-      <View key={uuidGenerator()} style={styles.tableRowSubFactionName}>
-        <View key={uuidGenerator()} style={styles.tableColSubFactionName}>
-          <Text style={styles.subFactioName}>{props.subFaction}</Text>
-        </View>
+      <View key={uuidGenerator()} style={styles.subFactionName}>
+        <Text style={styles.subFactioName}>{props.subFaction}</Text>
       </View>
     </Document>
   );
