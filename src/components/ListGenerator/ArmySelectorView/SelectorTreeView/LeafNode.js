@@ -69,7 +69,7 @@ const LeafNode = (props) => {
 
     return {
       ...unit,
-      lossCounter: 0,
+      lossCounter: 0, 
       maxCounter: max,
       unitDestroyed: false,
     };
@@ -86,6 +86,7 @@ const LeafNode = (props) => {
       equipment: [],
       equipmentTypes: {
         magicItem: false,
+        // units only
         banner: false,
         musician: false,
         unit: false,
