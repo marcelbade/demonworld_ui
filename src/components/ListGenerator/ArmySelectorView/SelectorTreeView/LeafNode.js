@@ -7,8 +7,8 @@ import HelpIcon from "@material-ui/icons/Help";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 // components and functions
 import { ArmyContext } from "../../../../contexts/armyContext";
-import { enrichUnitCardObject } from "../../ListGeneratorFunctions";
-
+import { uuidGenerator } from "../../../shared/sharedFunctions";
+ 
 const useStyles = makeStyles({
   textBlock: {
     width: "25em",
@@ -37,6 +37,62 @@ const useStyles = makeStyles({
 const LeafNode = (props) => {
   const classes = useStyles();
   const AC = useContext(ArmyContext);
+
+  const enrichUnitCardObject = (unit) => {
+    unit = addUniqueIdToUnit(unit);
+    unit = addLossCounterToUnit(unit);
+    unit = addEquipmentSlotsToUnit(unit);
+
+    return unit;
+  };
+
+  /**
+   * Functions adds a UUID as unique id so the user can select the
+   * same unit twice in a row. Without it, the useEffect does not fire, since the
+   * unit objects are identical!
+   *
+   * @param {} unit
+   * @returns {} unit object with a random ID
+   */
+  const addUniqueIdToUnit = (unit) => {
+    const randomID = uuidGenerator();
+    return { ...unit, uniqueID: randomID };
+  };
+
+  /**
+   * Function adds a property that counts the number of lost elements the unit has suffered. Needed for the loss calculator module.
+   * @param {*} unit
+   * @returns {} unit object with a lossCounter property
+   */
+  const addLossCounterToUnit = (unit) => {
+    const max = unit.numberOfElements * unit.hitpoints;
+
+    return {
+      ...unit,
+      lossCounter: 0,
+      maxCounter: max,
+      unitDestroyed: false,
+    };
+  };
+
+  /**
+   * Function adds a property which allows equipment to be added as well as check what equipment can be added. There are, at this moment, 5 types of items. Each type can be selected once. 
+   * @param {*} unit
+   * @returns unit object with equipment + equipmentTypes property.
+   */
+  const addEquipmentSlotsToUnit = (unit) => {
+    return {
+      ...unit,
+      equipment: [],
+      equipmentTypes: {
+        magicItem: false,
+        banner: false,
+        musician: false,
+        unit: false,
+        fortifications: false,
+      },
+    };
+  };
 
   /**
    * Function adds a selected units to a the army list and adds 3 things:
