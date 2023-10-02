@@ -11,23 +11,22 @@ export const USABLE_BY_ALL = "*";
 export const UNIT = "U";
 export const GIANT = "G";
 // unit has no range weapons
- 
 
 // Mapps item types in the itemCard obj to the displayed German name.
 export const ITEM_CATEGORY_NAME_MAPPING = {
-  fortifications: "Befestigungen", 
   armor: "Rüstungen",
   arrowsAndBows: "Bögen",
   banner: "Banner",
   boltsAndCrossbows: "Armbrüste",
+  fortifications: "Befestigungen",
   imp: "Dämonlinge",
   instrument: "Trommeln & Hörner",
   item: "Gegenstände",
   poison: "Gifte",
   potion: "Tränke",
   ringsAndAmulets: "Ringe und Amulette",
-  warpaint: "Kriegsbemalung",
   weapon: "Waffen",
+  warpaint: "Kriegsbemalung",
 };
 
 // List of all range weapons in the game that can use artefacts meant for bows.
