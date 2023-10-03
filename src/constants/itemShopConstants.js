@@ -1,8 +1,9 @@
 // Item Types
 export const ITEM_TYPE_BANNER = "banner";
-export const ITEM_TYPE_MUSICIAN = "instrument";
+export const ITEM_TYPE_INSTRUMENT = "instrument";
 export const ITEM_TYPE_CROSSBOWS = "boltsAndCrossbows";
 export const ITEM_TYPE_BOWS = "arrowsAndBows";
+export const ITEM_TYPE_FORTIFICATIONS = "fortifications";
 
 // Item can be used by any faction
 export const USABLE_BY_ALL = "*";
@@ -12,7 +13,25 @@ export const UNIT = "U";
 export const GIANT = "G";
 // unit has no range weapons
 
-// Mapps item types in the itemCard obj to the displayed German name.
+// These item types are magical items for the purpose of setting a unit's item flags.
+export const MAGICAL_ITEMS = [
+  "armor",
+  "arrowsAndBows",
+  "banner",
+  "boltsAndCrossbows",
+  "crystal",
+  "imp",
+  "item",
+  "mask",
+  "poison",
+  "potion",
+  "Relicts",
+  "ringsAndAmulets",
+  "weapon",
+  "YarrinsSons",
+];
+
+// Mapps item types in the itemCard obj to the display the German name.
 export const ITEM_CATEGORY_NAME_MAPPING = {
   armor: "Rüstungen",
   arrowsAndBows: "Bögen",

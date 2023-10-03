@@ -4,18 +4,16 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Typography, IconButton, Accordion, AccordionSummary, AccordionDetails, ButtonGroup } from "@material-ui/core";
 // components and functions
 import { ArmyContext } from "../../../../../contexts/armyContext";
-import {
-  doesUnitAlreadyHaveInstrument,
-  doesUnitAlreadyHaveBanner,
-  doesUnitalreadyHaveItem,
-  hasItemBeenPickedByOtherUnit,
-  ownsMaxNumberMagicItems,
-} from "./ItemLogic/itemShopSelectionLogic";
 // Icons
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 // constants
-import { ITEM_TYPE_BANNER, ITEM_TYPE_MUSICIAN } from "../../../../../constants/itemShopConstants";
+import {
+  MAGICAL_ITEMS,
+  ITEM_TYPE_BANNER,
+  ITEM_TYPE_FORTIFICATIONS,
+  ITEM_TYPE_INSTRUMENT,
+} from "../../../../../constants/itemShopConstants";
 
 const useStyles = makeStyles({
   buttons: {
@@ -42,57 +40,93 @@ const ShopItemList = (props) => {
   /**
    * Function enforces the item selection rules by toggling the item's corresponding button on/off.
    * Rules are:
+   *  - Only generic items can be given to multiple units.
    *  - A hero, magicican or unit leader can only get ONE magical item.
-   *  - In addition, they may gain additional "non-magical" generic items like potions.
-   *  - If a standard bearer or musician is present, a standard or
-   *    Intrument can be selected in addition to these two.
-   *  - In addition if it is a unit, items can be choosen that are carried by every element in the unit.
+   *  - A unit may get one banner (if it has a banner bearer).
+   *  - A unit may get one instrument (if it has a musician).
+   *  - A unit may get one item that every element equips (shields...).
+   *  - A unit may get 1 fortification, as long as no more than 10% of the army's points are spent on them.
    * @param {itemCard Object} item
-   * @returns a boolean that toggles the button on or off.
+   * @returns true, if the flag corresponding to the item's itemType is true.
+   * In that case, the button will be disabled.
    */
-  const disableButton = (item) => {
+  const toggleItemButton = (item) => {
     let unit = AC.unitSelectedForShop;
     let allItems = AC.allItems;
 
     const itemPickedByOtherUnit = hasItemBeenPickedByOtherUnit(allItems, item);
-    const itemAlreadyPicked = doesUnitalreadyHaveItem(unit, item);
-    const hasMaxNumber = ownsMaxNumberMagicItems(unit, item);
-    const hasBanner = doesUnitAlreadyHaveBanner(unit, item);
-    const hasInstrument = doesUnitAlreadyHaveInstrument(unit, item);
+    const hasMagicalItem = unitHasMagicalItem(unit, item);
+    const hasBanner = unitHasBanner(unit, item);
+    const hasInstrument = unitHasInstrument(unit, item);
+    const hasItemForEntireUnit = unitHasItemForEveryElement(unit, item);
+    const hasFortifications = unitHasFortifications(unit, item);
 
-    const blockItemWhen = itemAlreadyPicked || itemPickedByOtherUnit || hasMaxNumber || hasBanner || hasInstrument;
+    const blockItemWhen =
+      itemPickedByOtherUnit || hasMagicalItem || hasBanner || hasBanner || hasInstrument || hasItemForEntireUnit || hasFortifications;
 
     return blockItemWhen;
   };
 
-  /**
-   * Function recalculates itemType flags of a unitCard to correctly toggle the item buttons
-   * in the item shop on and off.
-   * @param {itemCard object} item
+  /*
+   * The following functions check the unit's item flags and return the Boolean value.
    */
-  const recalculateUnitsItemTypeFlags = (item, ITEM_ADDED) => {
-    if (ITEM_ADDED) {
-      let tempObj = { ...AC.unitSelectedForShop };
 
-      tempObj.equipmentTypes.banner = item.itemType === ITEM_TYPE_BANNER ? true : false;
-      tempObj.equipmentTypes.musician = item.itemType === ITEM_TYPE_MUSICIAN ? true : false;
-      tempObj.equipmentTypes.magicItem = !item.isAdditionalItem;
+  const hasItemBeenPickedByOtherUnit = (allItems, item) => {
+    if (!item.isGeneric) {
+      return allItems.includes(item.itemName);
+    } else return false;
+  };
 
-      AC.setUnitSelectedForShop({
-        ...tempObj,
-      });
-      //item removed
+  const unitHasMagicalItem = (unit, item) => {
+    if (MAGICAL_ITEMS.includes(item.itemType) && !item.everyElement) {
+      return unit.equipmentTypes.magicItem;
+    } else return false;
+  };
+
+  const unitHasBanner = (unit, item) => {
+    if (item.itemType === ITEM_TYPE_BANNER) {
+      return unit.equipmentTypes.banner;
+    } else return false;
+  };
+
+  const unitHasInstrument = (unit, item) => {
+    if (item.itemType === ITEM_TYPE_INSTRUMENT) {
+      return unit.equipmentTypes.instrument;
+    } else return false;
+  };
+
+  const unitHasItemForEveryElement = (unit, item) => {
+    if (item.everyElement) {
+      return unit.equipmentTypes.unit;
+    } else return false;
+  };
+
+  const unitHasFortifications = (unit, item) => {
+    if (item.itemType === ITEM_TYPE_FORTIFICATIONS) {
+      return unit.equipmentTypes.fortifications;
+    } else return false;
+  };
+
+  /**
+   * Function sets the itemType flags of a unitCard to correctly toggle the item buttons
+   * in the item shop on and off.
+   * @param {*} item
+   * @param {*} newFlagValue booleam flag. True, if the item is added, false if the item is removed.
+   */
+  const toggleUnitsItemTypeFlags = (item, newFlagValue) => {
+    let tempObj = { ...AC.unitSelectedForShop };
+
+    if (item.everyElement) {
+      tempObj.equipmentTypes.unit = newFlagValue;
+    } else if (MAGICAL_ITEMS.includes(item.itemType)) {
+      tempObj.equipmentTypes.magicItem = newFlagValue;
     } else {
-      let tempObj = { ...AC.unitSelectedForShop };
-
-      tempObj.equipmentTypes.banner = item.itemType === ITEM_TYPE_BANNER ? false : true;
-      tempObj.equipmentTypes.musician = item.itemType === ITEM_TYPE_MUSICIAN ? false : true;
-      tempObj.equipmentTypes.magicItem = item.isAdditionalItem;
-
-      AC.setUnitSelectedForShop({
-        ...tempObj,
-      });
+      tempObj.equipmentTypes[item.itemType] = newFlagValue;
     }
+
+    AC.setUnitSelectedForShop({
+      ...tempObj,
+    });
   };
 
   /**
@@ -104,7 +138,7 @@ const ShopItemList = (props) => {
   };
 
   /**
-   * Add the item card object to the selected unit. In addiition a flag to track whether the item was lost for the lossCalculator component is added.
+   * Add the item card object to the selected unit. In addition a flag to track whether the item was lost for the lossCalculator component is added.
    * @param {itemCard object} item
    */
   const addItemToUnit = (item) => {
@@ -134,17 +168,17 @@ const ShopItemList = (props) => {
               >
                 <IconButton
                   className={classes.buttons}
-                  disabled={disableButton(i)}
+                  disabled={toggleItemButton(i)}
                   onClick={() => {
                     addItemToUnit(i);
-                    recalculateUnitsItemTypeFlags(i, true);
+                    toggleUnitsItemTypeFlags(i, true);
                     triggerArymListReCalculation();
                   }}
                   key={i}
                 >
                   <AddCircleOutlineIcon />
                 </IconButton>
-                <Typography variant="body1" className={disableButton(i) ? classes.blockedItemName : classes.itemName}>
+                <Typography variant="body1" className={toggleItemButton(i) ? classes.blockedItemName : classes.itemName}>
                   {i.itemName}
                 </Typography>
               </AccordionSummary>

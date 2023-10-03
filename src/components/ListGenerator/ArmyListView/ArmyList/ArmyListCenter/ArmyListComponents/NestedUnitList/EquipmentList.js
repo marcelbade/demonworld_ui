@@ -8,7 +8,7 @@ import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 import { ArmyContext } from "../../../../../../../contexts/armyContext";
 import { uuidGenerator } from "../../../../../../shared/sharedFunctions";
 // constants
-import { ITEM_TYPE_BANNER, ITEM_TYPE_MUSICIAN } from "../../../../../../../constants/itemShopConstants";
+import { MAGICAL_ITEMS } from "../../../../../../../constants/itemShopConstants";
 // clsx
 import clsx from "clsx";
 
@@ -55,37 +55,29 @@ const EquipmentList = (props) => {
   };
 
   /**
-   * Function recalculates itemType flags of a unitCard to correctly toggle the item buttons
-   * in thej item shop on and off.
-   * @param {itemCard object} item
+   * Function sets the itemType flags of a unitCard to correctly toggle the item buttons
+   * in the item shop on and off.
+   * @param {*} item
+   * @param {*} newFlagValue booleam flag. True, if the item is added, false if the item is removed.
    */
-  const recalculateItemTypeFlags = (item, ITEM_ADDED) => {
-    if (ITEM_ADDED) {
-      let tempObj = { ...AC.unitSelectedForShop };
+  const toggleUnitsItemTypeFlags = (item, newFlagValue) => {
+    let tempObj = { ...AC.unitSelectedForShop };
 
-      tempObj.equipmentTypes.banner = item.itemType === ITEM_TYPE_BANNER ? true : false;
-      tempObj.equipmentTypes.musician = item.itemType === ITEM_TYPE_MUSICIAN ? true : false;
-      tempObj.equipmentTypes.magicItem = !item.isAdditionalItem;
-
-      AC.setUnitSelectedForShop({
-        ...tempObj,
-      });
-      //item removed
+    if (item.everyElement) {
+      tempObj.equipmentTypes.unit = newFlagValue;
+    } else if (MAGICAL_ITEMS.includes(item.itemType)) {
+      tempObj.equipmentTypes.magicItem = newFlagValue;
     } else {
-      let tempObj = { ...AC.unitSelectedForShop };
-
-      tempObj.equipmentTypes.banner = item.itemType === ITEM_TYPE_BANNER ? false : true;
-      tempObj.equipmentTypes.musician = item.itemType === ITEM_TYPE_MUSICIAN ? false : true;
-      tempObj.equipmentTypes.magicItem = item.isAdditionalItem;
-
-      AC.setUnitSelectedForShop({
-        ...tempObj,
-      });
+      tempObj.equipmentTypes[item.itemType] = newFlagValue;
     }
+
+    AC.setUnitSelectedForShop({
+      ...tempObj,
+    });
   };
 
   /**
-   * Function makes sure a horizontal divider is displayed when the equipment list is not emtpy.
+   * Function draws horizontal divider is displayed when the equipment list is not emtpy.
    * @returns css class
    */
   const displayListTop = () => {
@@ -103,7 +95,7 @@ const EquipmentList = (props) => {
                   className={clsx(classes.deleteBttn)}
                   onClick={() => {
                     removeItem(props.identifier, i);
-                    recalculateItemTypeFlags(e, false);
+                    toggleUnitsItemTypeFlags(e, false);
                   }}
                 >
                   <RemoveCircleOutlineIcon key={uuidGenerator()} />
