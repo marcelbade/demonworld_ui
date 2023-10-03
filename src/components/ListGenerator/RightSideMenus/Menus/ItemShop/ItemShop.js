@@ -22,8 +22,10 @@ const useStyles = makeStyles({
     border: "none",
   },
   unitName: {
+    width: "60%",
     fontWeight: "bold",
     borderBottom: "solid 4px black",
+    marginBottom: "1em",
   },
   itemText: {
     fontFamily: "Beryliumbold",
@@ -122,14 +124,12 @@ const ItemShop = () => {
           <CancelIcon />
         </IconButton>
       </Grid>
-      <Grid item container direction="row">
-        <Grid item xs={9}>
-          <Typography variant="h5" align="center" className={classes.unitName}>
-            {AC.unitSelectedForShop.unitName}
-          </Typography>
-        </Grid>
+      <Grid item container direction="row" justify="center">
+        <Typography variant="h5" align="center" className={classes.unitName}>
+          {AC.unitSelectedForShop.unitName}
+        </Typography>
       </Grid>
-      <Grid item container direction="row" className={classes.dynamicPart}>
+      <Grid item container direction="row" justify="center" className={classes.dynamicPart}>
         <ShopPanelButtons
           itemTypes={itemTypes} //
           active={active} //
