@@ -53,6 +53,11 @@ const EquipmentList = (props) => {
 
     AC.setSelectedUnits(temp);
   };
+  const removeItemFromCentralList = (item) => {
+    let temp = [...AC.allItems];
+    temp = temp.filter((i) => !i === item.itemName);
+    AC.setAllItems(temp);
+  };
 
   /**
    * Function sets the itemType flags of a unitCard to correctly toggle the item buttons
@@ -95,6 +100,7 @@ const EquipmentList = (props) => {
                   className={clsx(classes.deleteBttn)}
                   onClick={() => {
                     removeItem(props.identifier, i);
+                    removeItemFromCentralList(e);
                     toggleUnitsItemTypeFlags(e, false);
                   }}
                 >

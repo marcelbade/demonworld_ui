@@ -52,17 +52,14 @@ const ShopItemList = (props) => {
    */
   const toggleItemButton = (item) => {
     let unit = AC.unitSelectedForShop;
-    let allItems = AC.allItems;
 
-    const itemPickedByOtherUnit = hasItemBeenPickedByOtherUnit(allItems, item);
     const hasMagicalItem = unitHasMagicalItem(unit, item);
     const hasBanner = unitHasBanner(unit, item);
     const hasInstrument = unitHasInstrument(unit, item);
     const hasItemForEntireUnit = unitHasItemForEveryElement(unit, item);
     const hasFortifications = unitHasFortifications(unit, item);
 
-    const blockItemWhen =
-      itemPickedByOtherUnit || hasMagicalItem || hasBanner || hasBanner || hasInstrument || hasItemForEntireUnit || hasFortifications;
+    const blockItemWhen = hasMagicalItem || hasBanner || hasBanner || hasInstrument || hasItemForEntireUnit || hasFortifications;
 
     return blockItemWhen;
   };
@@ -70,12 +67,6 @@ const ShopItemList = (props) => {
   /*
    * The following functions check the unit's item flags and return the Boolean value.
    */
-
-  const hasItemBeenPickedByOtherUnit = (allItems, item) => {
-    if (!item.isGeneric) {
-      return allItems.includes(item.itemName);
-    } else return false;
-  };
 
   const unitHasMagicalItem = (unit, item) => {
     if (MAGICAL_ITEMS.includes(item.itemType) && !item.everyElement) {
@@ -154,6 +145,14 @@ const ShopItemList = (props) => {
     });
   };
 
+  /**
+   * Function sends all items to a central list to help implement the rule that uniqe items can only be selected once.
+   * @param {itemCard} item
+   */
+  const addItemToCentralList = (item) => {
+    AC.setAllItems([...AC.allItems, item.itemName]);
+  };
+
   return (
     <ButtonGroup orientation="vertical">
       {props.items
@@ -171,6 +170,7 @@ const ShopItemList = (props) => {
                   disabled={toggleItemButton(i)}
                   onClick={() => {
                     addItemToUnit(i);
+                    addItemToCentralList(i);
                     toggleUnitsItemTypeFlags(i, true);
                     triggerArymListReCalculation();
                   }}

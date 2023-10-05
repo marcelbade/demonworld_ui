@@ -17,6 +17,7 @@ export const OPTIONS = {
 
 export const GENERAL_ERRRORS = {
   ONLY_NUMBERS: "Bitte nur Zahlen eingeben.",
+  NO_ITEMS_FOR_UNIT: "Diese Einheit kann keine Gegenstände erhalten.",
 };
 
 export const INPUT_TEXTS = {

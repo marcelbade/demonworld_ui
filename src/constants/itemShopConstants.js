@@ -6,7 +6,7 @@ export const ITEM_TYPE_BOWS = "arrowsAndBows";
 export const ITEM_TYPE_FORTIFICATIONS = "fortifications";
 
 // Item can be used by any faction
-export const USABLE_BY_ALL = "*";
+export const ALL = "*";
 
 // unit types
 export const UNIT = "U";

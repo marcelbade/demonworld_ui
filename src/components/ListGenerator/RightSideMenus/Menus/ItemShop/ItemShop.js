@@ -11,6 +11,7 @@ import { isObjectEmtpy } from "../../../../shared/sharedFunctions";
 import { itemFilter } from "./ItemLogic/itemShopFilterLogic";
 import ShopItemList from "./ShopItemList";
 import ShopPanelButtons from "./ShopPanelButtons";
+import { GENERAL_ERRRORS } from "../../../../../constants/textsAndMessages";
 
 const useStyles = makeStyles({
   overlay: {
@@ -81,7 +82,10 @@ const ItemShop = () => {
     if (isUnitSelected) {
       let items = AC.fetchedItems;
 
-      return items
+      const result = items
+        .filter((item) => itemFilter.filterUniqueItemsAlreadyInList(AC.allItems, item))
+        .filter((item) => itemFilter.belowMaxFortificationPercentage(AC.allItems, AC.maxPointsAllowance, item))
+        .filter((item) => itemFilter.filterProhibitedItems(item, unit))
         .filter((item) => itemFilter.filterForFactionAndGenericItems(item, unit))
         .filter((item) => itemFilter.filterForUnitType(item, unit))
         .filter((item) => itemFilter.filterForUnit(item, unit))
@@ -99,10 +103,15 @@ const ItemShop = () => {
         .filter((item) => itemFilter.filterForCrossBows(item, unit))
         .filter((item) => itemFilter.whenUnitHasNoLeader(item, unit))
         .filter((item) => itemFilter.whenUnitIsGiant(item, unit));
+
+      return result;
     } else {
       return [];
     }
   };
+
+  console.log("AC.allItems");
+  console.log(AC.allItems);
 
   const markButton = (key) => {
     setActive(key);
@@ -129,6 +138,7 @@ const ItemShop = () => {
           {AC.unitSelectedForShop.unitName}
         </Typography>
       </Grid>
+
       <Grid item container direction="row" justify="center" className={classes.dynamicPart}>
         <ShopPanelButtons
           itemTypes={itemTypes} //

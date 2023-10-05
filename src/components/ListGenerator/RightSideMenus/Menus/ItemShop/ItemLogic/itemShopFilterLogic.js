@@ -1,6 +1,6 @@
 // constants
 import {
-  USABLE_BY_ALL,
+  ALL,
   ITEM_TYPE_BOWS,
   ITEM_TYPE_CROSSBOWS,
   BOW_TYPES,
@@ -9,23 +9,55 @@ import {
   UNIT,
   SPEAR_TYPES,
   LANCE_TYPES,
+  ITEM_TYPE_FORTIFICATIONS,
 } from "../../../../../../constants/itemShopConstants";
 import { NO_RANGE_WEAPON } from "../../../../../../constants/textsAndMessages";
 
 export const itemFilter = {
+  filterUniqueItemsAlreadyInList: (allItems, item) => {
+    if (!item.isGeneric) {
+      return !allItems.includes(item.itemName);
+    } else {
+      return true;
+    }
+  },
+
+  /**
+   * Function implements the rule that at most only 10% of the armie's points
+   * can be spent on fortificatons.
+   * @returns true, if the amount of points is lower then the max. percentage.
+   */
+  belowMaxFortificationPercentage: (allItems, maxPoints, item) => {
+    if (item.itemType === ITEM_TYPE_FORTIFICATIONS) {
+      const MAX_PERCENTAGE = 0.1;
+
+      const pointSum = allItems
+        .filter((i) => i.itemType === ITEM_TYPE_FORTIFICATIONS) //
+        .reduce((sum, { points }) => sum + points, 0);
+
+      return pointSum < maxPoints * MAX_PERCENTAGE;
+    } else return true;
+  },
+
+  filterProhibitedItems: (item, unit) => {
+    if (unit.prohibitedItemType === ALL || unit.prohibitedItemType === item.itemType) {
+      return false;
+    } else return true;
+  },
+
   // Only show items of the faction or generic ones.
   filterForFactionAndGenericItems: (item, unit) => {
-    return item.faction === unit.faction || item.faction === USABLE_BY_ALL;
+    return item.faction === unit.faction || item.faction === ALL;
   },
 
   // Only show items that can be equipped by the selected type of unit.
   filterForUnitType: (item, unit) => {
-    return item.unitType.includes(unit.unitType) || item.unitType === USABLE_BY_ALL;
+    return item.unitType.includes(unit.unitType) || item.unitType === ALL;
   },
 
   //Only show items that are for this specific unit
   filterForUnit: (item, unit) => {
-    return item.limitedToUnit === unit.unitName || item.limitedToUnit === USABLE_BY_ALL;
+    return item.limitedToUnit === unit.unitName || item.limitedToUnit === ALL;
   },
 
   // Only show banners if the unit has a standard bearer special element.
