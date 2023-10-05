@@ -22,9 +22,6 @@ Font.register({ family: "Beryliumbold", src: Beryliumbold });
 Font.register({ family: "jaapokkiRegular", src: jaapokkiRegular });
 
 const ListPDF = (props) => {
-  console.log("props.pdfMasterList");
-  console.log(props.pdfMasterList);
-
   return (
     <Document>
       <Page style={styles.pageTopMargin}>
