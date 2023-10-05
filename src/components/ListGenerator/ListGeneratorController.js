@@ -151,14 +151,14 @@ const ListGeneratorController = () => {
     lastclickedUnit: {},
     show: false,
   });
-  // item shop view
+  // item shop
+  const [allItems, setAllItems] = useState([]);
   const [itemShopState, setItemShopState] = useState({
     clickedUnit: {},
     lastclickedUnit: {},
     show: false,
   });
   const [unitSelectedForShop, setUnitSelectedForShop] = useState({});
-  const [allItems, setAllItems] = useState([]);
   // unit card view
   const [statCardState, setStatCardState] = useState({
     clickedUnit: {},
