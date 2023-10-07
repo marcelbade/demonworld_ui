@@ -5,7 +5,6 @@ import { makeStyles, List } from "@material-ui/core";
 import { ListItemButton } from "@mui/material";
 // components and functions
 import { ArmyContext } from "../../../../../../../contexts/armyContext";
-import { uuidGenerator } from "../../../../../../shared/sharedFunctions";
 import { BUTTON_TEXTS } from "../../../../../../../constants/textsAndMessages";
 
 const useStyles = makeStyles({
@@ -69,43 +68,46 @@ const UnitEntryButtons = (props) => {
     }
   };
 
-  return (
-    <List key={uuidGenerator()}>
-      <ListItemButton
-        key={uuidGenerator()}
-        className={classes.buttons}
-        variant="outlined"
-        onClick={() => {
-          AC.setUnitSelectedForShop(props.unit);
-          toggleMenuState(props.unit, "ITEMS");
-        }}
-      >
-        {BUTTON_TEXTS.PREVIEW_CARD}
-      </ListItemButton>
-      <ListItemButton
-        key={uuidGenerator()}
-        className={classes.cardButtons}
-        variant="outlined"
-        onClick={() => {
-          toggleMenuState(props.unit, "UNIT_CARDS");
-        }}
-      >
-        {BUTTON_TEXTS.SHOW_ITEM_SHOP}
-      </ListItemButton>
+  const buttons = [
+    {
+      show: true,
+      action: () => {
+        AC.setUnitSelectedForShop(props.unit);
+        toggleMenuState(props.unit, "ITEMS");
+      },
+      text: BUTTON_TEXTS.PREVIEW_CARD,
+    },
+    {
+      show: true,
+      action: () => {
+        toggleMenuState(props.unit, "UNIT_CARDS");
+      },
+      text: BUTTON_TEXTS.SHOW_ITEM_SHOP,
+    },
+    {
+      show: AC.hasAdditionalSubFaction && !AC.excemptSubFactions.includes(props.subFaction),
+      action: () => {
+        AC.setUnitSelectedForShop(props.unit);
+        toggleMenuState(props.unit, "SECOND_SUB_FACTION");
+      },
+      text: AC.secondSubfactionCaption,
+    },
+  ];
 
-      {AC.hasAdditionalSubFaction && !AC.excemptSubFactions.includes(props.subFaction) ? (
-        <ListItemButton
-          key={uuidGenerator()}
-          className={classes.cardButtons}
-          variant="outlined"
-          onClick={() => {
-            AC.setUnitSelectedForShop(props.unit);
-            toggleMenuState(props.unit, "SECOND_SUB_FACTION");
-          }}
-        >
-          {AC.secondSubfactionCaption}
-        </ListItemButton>
-      ) : null}
+  return (
+    <List key={props.unit.uniqueID}>
+      {buttons.map((b, i) => {
+        return b.show ? (
+          <ListItemButton
+            key={i} // static list
+            className={classes.cardButtons}
+            variant="outlined"
+            onClick={b.action}
+          >
+            {b.text}
+          </ListItemButton>
+        ) : null;
+      })}
     </List>
   );
 };
