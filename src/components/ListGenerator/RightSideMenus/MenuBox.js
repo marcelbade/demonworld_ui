@@ -50,17 +50,17 @@ const MenuBox = () => {
   }, [AC.selectedFactionName, AC.secondSubFactionMenuState]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const components = [
-    { exists: true, show: AC.showOptionButtons, element: <OptionButtons /> },
-    { exists: true, show: AC.showTournamentRulesMenu, element: <TournamentRulesMenu /> },
-    { exists: true, show: AC.itemShopState.show, element: <ItemShop /> },
-    { exists: true, show: AC.statCardState.show, element: <CardViewBox /> },
-    { exists: AC.secondSubFactionList, show: AC.secondSubFactionMenuState.show, element: <SecondSubFactionMenu /> },
+    { exists: true, show: AC.showOptionButtons, element: <OptionButtons />, id: 0 },
+    { exists: true, show: AC.showTournamentRulesMenu, element: <TournamentRulesMenu />, id: 1 },
+    { exists: true, show: AC.itemShopState.show, element: <ItemShop />, id: 2 },
+    { exists: true, show: AC.statCardState.show, element: <CardViewBox />, id: 3 },
+    { exists: AC.secondSubFactionList, show: AC.secondSubFactionMenuState.show, element: <SecondSubFactionMenu />, id: 4 },
   ];
 
   return components.map((c) =>
     c.exists ? (
       <Drawer
-        key={uuidGenerator()}
+        key={c.id}
         anchor={"right"} //
         variant="persistent"
         open={c.show}

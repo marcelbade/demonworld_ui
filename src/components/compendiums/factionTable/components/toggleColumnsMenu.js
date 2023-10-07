@@ -3,7 +3,6 @@ import React from "react";
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Checkbox, FormControlLabel, FormGroup } from "@material-ui/core";
-import { uuidGenerator } from "../../../shared/sharedFunctions";
 
 const useStyles = makeStyles({
   toggleGroupBox: {
@@ -25,10 +24,10 @@ const ToggleColumnsMenu = (props) => {
   return (
     <Grid item container xs={12} direction="row">
       {/* outer loop that goes through toogle groups and creates one box each */}
-      {props.toggleGroups.map((toggle) => (
-        <FormGroup className="classes.toggleGroupBox" key={uuidGenerator()}>
+      {props.toggleGroups.map((toggle, i) => (
+        <FormGroup className="classes.toggleGroupBox" key={i}>
           <Checkbox
-            key={uuidGenerator()}
+            key={i}
             checked={toggle.displayed}
             onChange={() => {
               props.toggleGroupsOfColumns(toggle.unitName, toggle.stats, toggle.displayed);
@@ -39,11 +38,11 @@ const ToggleColumnsMenu = (props) => {
             .filter((col) => toggle.stats.includes(col.column))
             .map((col) => (
               <FormControlLabel
-                key={uuidGenerator()}
+                key={i}
                 className={classes.checkBoxLabel}
                 control={
                   <Checkbox
-                    key={uuidGenerator()}
+                    key={i}
                     checked={col.displayed}
                     onChange={() => {
                       props.chooseColumnsToDisplay(col.column, col.displayed);

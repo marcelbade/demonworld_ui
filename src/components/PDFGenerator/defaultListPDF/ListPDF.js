@@ -5,9 +5,7 @@ import { Page, Text, View, Document, Font } from "@react-pdf/renderer";
 // fonts
 import notMaryKate from "../../../fonts/notMaryKate.ttf";
 import Beryliumbold from "../../../fonts/Beryliumbold.ttf";
-// functions and components
-import { uuidGenerator } from "../../shared/sharedFunctions";
-// styles
+ // styles
 import styles from "../pdfStyles/listPdfStyles";
 
 // Register font
@@ -24,52 +22,52 @@ const ListPDF = (props) => {
 
           {props.pdfMasterList
             .filter((subFaction) => subFaction.units.length > 0)
-            .map((obj) => (
+            .map((obj, i) => (
               <View style={styles.table}>
                 {/* SUBFACTION NAME */}
-                <View key={uuidGenerator()} style={styles.tableRowSubFactionName}>
-                  <View key={uuidGenerator()} style={styles.tableColSubFactionName}>
+                <View key={i} style={styles.tableRowSubFactionName}>
+                  <View key={i} style={styles.tableColSubFactionName}>
                     <Text style={styles.tableCellSubFactioName}>{obj.subFaction}</Text>
                   </View>
                 </View>
-                {obj.units.map((u) => (
+                {obj.units.map((u, i) => (
                   //  UNIT
-                  <View key={uuidGenerator()} style={styles.table}>
-                    <View key={uuidGenerator()} style={styles.tableRow}>
-                      <View key={uuidGenerator()} style={styles.tableColUnit}>
-                        <Text key={uuidGenerator()} style={styles.tableCellUnit}>
+                  <View key={i} style={styles.table}>
+                    <View key={i} style={styles.tableRow}>
+                      <View key={i} style={styles.tableColUnit}>
+                        <Text key={i} style={styles.tableCellUnit}>
                           {u.unitName}
                         </Text>
                       </View>
                       { u.secondSubFaction !== u.subFaction?
-                        <View key={uuidGenerator()} style={styles.tableColUnit}>
-                          <Text key={uuidGenerator()} style={styles.tableCellUnit}>
+                        <View key={i} style={styles.tableColUnit}>
+                          <Text key={i} style={styles.tableCellUnit}>
                             {u.secondSubFaction}
                           </Text>
                         </View>
                         : null
                       }
-                      <View key={uuidGenerator()} style={styles.tableColUnit}>
-                        <Text key={uuidGenerator()} style={styles.tableCellUnit}>
+                      <View key={i} style={styles.tableColUnit}>
+                        <Text key={i} style={styles.tableCellUnit}>
                           {u.points}
                         </Text>
                       </View>
-                      <View key={uuidGenerator()} style={styles.tableColUnitFiller}></View>
+                      <View key={i} style={styles.tableColUnitFiller}></View>
                     </View>
                     {/* EQUIPMENT */}
-                    <View key={uuidGenerator()} style={styles.tableRow}>
-                      {u.equipment.length > 0 ? <Text key={uuidGenerator()} style={styles.equipmentLineStyle}></Text> : null}
+                    <View key={i} style={styles.tableRow}>
+                      {u.equipment.length > 0 ? <Text key={i} style={styles.equipmentLineStyle}></Text> : null}
                     </View>
                     {u.equipment.length > 0
                       ? u.equipment.map((e) => (
-                          <View key={uuidGenerator()} style={styles.tableRow}>
-                            <View key={uuidGenerator()} style={styles.tableColEquipment}>
-                              <Text key={uuidGenerator()} style={styles.tableCellEquipment}>
+                          <View key={i} style={styles.tableRow}>
+                            <View key={i} style={styles.tableColEquipment}>
+                              <Text key={i} style={styles.tableCellEquipment}>
                                 {e.name}
                               </Text>
                             </View>
-                            <View key={uuidGenerator()} style={styles.tableColUnit}>
-                              <Text key={uuidGenerator()} style={styles.tableCellEquipment}>
+                            <View key={i} style={styles.tableColUnit}>
+                              <Text key={i} style={styles.tableCellEquipment}>
                                 {e.points}
                               </Text>
                             </View>

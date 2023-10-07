@@ -34,13 +34,13 @@ const ListPDF = (props) => {
             .map((obj) => (
               <View>
                 <SubfactionSubtitle subFaction={obj.subFaction} />
-                {obj.units.map((u) => (
+                {obj.units.map((u, i) => (
                   <View style={styles.cardBox} wrap={false}>
-                    <CardHeader unit={u} />
-                    <FirstBlackRow unit={u} />
-                    <CardCenter unit={u} />
-                    <SecondBlackRow unit={u} />
-                    <CardFooter unit={u} />
+                    <CardHeader unit={u} index={i} />
+                    <FirstBlackRow unit={u} index={i} />
+                    <CardCenter unit={u} index={i} />
+                    <SecondBlackRow unit={u} index={i} />
+                    <CardFooter unit={u} index={i} />
                   </View>
                 ))}
               </View>

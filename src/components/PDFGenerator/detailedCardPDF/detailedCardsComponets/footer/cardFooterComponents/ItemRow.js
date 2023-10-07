@@ -2,8 +2,6 @@
 import React from "react";
 // react-pdf
 import { View, Text } from "@react-pdf/renderer";
-// functions and components
-import { uuidGenerator } from "../../../../../shared/sharedFunctions";
 // styles
 import styles from "../../../../pdfStyles/detailedCardPdfStyles";
 
@@ -21,7 +19,7 @@ const ItemRow = (props) => {
   };
 
   return (
-    <View key={uuidGenerator()} style={styles.footerRow}>
+    <View key={props.index} style={styles.footerRow}>
       {props.items.length === 0 ? ( //
         <Text>Keine Gegenstände</Text>
       ) : (

@@ -3,7 +3,7 @@ import React from "react";
 // react-pdf
 import { Text, View, Image } from "@react-pdf/renderer";
 // functions and components
-import { isSingleElementCard, uuidGenerator } from "../../../../../shared/sharedFunctions";
+import { isSingleElementCard } from "../../../../../shared/sharedFunctions";
 // icons
 import squareFormationWhite from "../../../../../../icons/squareFormationWhite.png";
 import skirmishFormation from "../../../../../../icons/skirmishFormation.png";
@@ -19,20 +19,20 @@ const UnitMovementRow = (props) => {
 
   //unitOrCmdCard
   return isSingleElementCard(props.unit) ? (
-    <View key={uuidGenerator()} style={styles.cardUpperBlackRow}>
-      <Text key={uuidGenerator()}>{props.unit.move} Bewegungspunkte</Text>
+    <View key={props.index} style={styles.cardUpperBlackRow}>
+      <Text key={props.index}>{props.unit.move} Bewegungspunkte</Text>
     </View>
   ) : (
-    <View key={uuidGenerator()} style={styles.cardUpperBlackRow}>
-      <Text key={uuidGenerator()}>
+    <View key={props.index} style={styles.cardUpperBlackRow}>
+      <Text key={props.index}>
         B: {props.unit.move} / A: {props.unit.charge} / P:{props.unit.skirmish}
       </Text>
-      <Text key={uuidGenerator()}>{props.unit.hold_maneuvers} Manöver</Text>
-      <View key={uuidGenerator()} style={styles.formations}>
+      <Text key={props.index}>{props.unit.hold_maneuvers} Manöver</Text>
+      <View key={props.index} style={styles.formations}>
         {props.unit.skirmishFormation ? <Image src={skirmishFormation} style={styles.icon} /> : null}
         {props.unit.squareFormation ? <Image src={squareFormationWhite} style={styles.squareFormationIcon} /> : null}
         {props.unit.wedgeFormation ? <Image src={wedgeFormation} style={styles.icon} /> : null}
-        {<Text key={uuidGenerator()}> {props.unit.horde ? <Text>Horde</Text> : null}</Text>}
+        {<Text key={props.index}> {props.unit.horde ? <Text>Horde</Text> : null}</Text>}
       </View>
     </View>
   );

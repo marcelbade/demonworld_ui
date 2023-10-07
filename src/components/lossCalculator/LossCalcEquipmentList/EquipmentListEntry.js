@@ -4,7 +4,6 @@ import React from "react";
 import { ListItem } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 // components and functions
-import { uuidGenerator } from "../../shared/sharedFunctions";
 import EquipmentListElementBttn from "./EquipmentListElementBttn";
 import EquipmentListItemName from "./EquipmentListItemName";
 
@@ -33,7 +32,7 @@ const EquipmentListEntry = (props) => {
   const notSingleElementItem = props.item.everyElement;
 
   return (
-    <ListItem className={classes.entry} key={uuidGenerator()}>
+    <ListItem className={classes.entry} key={props.unit.uniqueID}>
       <EquipmentListElementBttn
         unit={unit} //
         itemName={itemName}

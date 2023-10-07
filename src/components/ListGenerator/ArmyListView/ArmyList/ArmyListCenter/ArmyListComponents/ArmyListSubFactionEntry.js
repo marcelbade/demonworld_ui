@@ -55,8 +55,8 @@ const ArmyListSubFactionEntry = (props) => {
   };
 
   return AC ? (
-    <ListItem key={uuidGenerator()}>
-      <Grid container direction={"column"} key={uuidGenerator()}>
+    <ListItem>
+      <Grid container direction={"column"}>
         <Grid item>
           <ArmyListSubFactionHeader
             subFaction={validatedSubFaction.subFactionName} //
@@ -64,14 +64,12 @@ const ArmyListSubFactionEntry = (props) => {
             message={validatedSubFaction.validationMessage}
           />
           <SubFactionUnitList
-            key={uuidGenerator()}
             subFactionUnits={filterUnitsForSubFaction(AC.selectedUnits, props.subFaction)} //
             subFactionName={props.subFaction}
           />
         </Grid>
         <Grid item>
           <ArmyListSubFactionFooter
-            key={uuidGenerator()}
             subFactionName={props.subFaction}
             subFactionUnits={filterUnitsForSubFaction(AC.selectedUnits, props.subFaction)}
           />

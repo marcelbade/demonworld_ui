@@ -11,9 +11,15 @@ import BackSidePointCostRow from "./secondBlackRowComponents/BackSidePointCostRo
 const SecondBlackRow = (props) => {
   return (
     <View style={styles.blackRowBox}>
-      <FearAndMoralRow unit={props.unit} />
+      <FearAndMoralRow
+        unit={props.unit} //
+        index={props.index}
+      />
       <Text style={styles.separator}></Text>
-      <BackSidePointCostRow unit={props.unit} />
+      <BackSidePointCostRow
+        unit={props.unit} //
+        index={props.index}
+      />
     </View>
   );
 };

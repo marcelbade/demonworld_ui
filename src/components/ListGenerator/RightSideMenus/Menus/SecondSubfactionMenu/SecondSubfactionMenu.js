@@ -7,8 +7,6 @@ import { makeStyles } from "@material-ui/core/styles";
 import CancelIcon from "@material-ui/icons/Cancel";
 // components and functions
 import { ArmyContext } from "../../../../../contexts/armyContext";
-import { uuidGenerator } from "../../../../shared/sharedFunctions";
-// constants
 
 const useStyles = makeStyles({
   overlay: {
@@ -81,7 +79,7 @@ const SecondSubFactionMenu = () => {
                 disabled={true}
                 className={classes.currentlySelected}
                 variant="text"
-                key={uuidGenerator()}
+                key={ssf}
                 onClick={() => {
                   setSecondSubFactionInArmyList(AC.unitSelectedForShop, ssf);
                 }}
@@ -92,7 +90,7 @@ const SecondSubFactionMenu = () => {
               <Button
                 className={classes.buttons}
                 variant="text"
-                key={uuidGenerator()}
+                key={ssf}
                 onClick={() => {
                   setSecondSubFactionInArmyList(AC.unitSelectedForShop, ssf);
                 }}

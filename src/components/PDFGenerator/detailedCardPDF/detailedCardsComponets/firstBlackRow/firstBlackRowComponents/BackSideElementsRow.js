@@ -2,8 +2,6 @@
 import React from "react";
 // react-pdf
 import { Text, View } from "@react-pdf/renderer";
-// functions and components
-import { uuidGenerator } from "../../../../../shared/sharedFunctions";
 // styles
 import styles from "../../../../pdfStyles/detailedCardPdfStyles";
 
@@ -29,7 +27,7 @@ const BackSideElementsRow = (props) => {
   };
 
   return (
-    <View key={uuidGenerator()} style={styles.cardBlackRow}>
+    <View key={props.index} style={styles.cardBlackRow}>
       {!props.unit.leader && !props.unit.standardBearer && !props.unit.musician ? (
         <View style={styles.firstBlackRowBackOneElement}>
           <Text> {numberOfElements(props.unit)} </Text>

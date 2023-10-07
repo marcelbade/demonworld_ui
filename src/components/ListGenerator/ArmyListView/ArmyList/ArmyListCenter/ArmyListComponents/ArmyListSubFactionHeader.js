@@ -34,7 +34,7 @@ const ArmyListSubFactionHeader = (props) => {
   return (
     <Grid container>
       {props.valid ? (
-        <Typography key={uuidGenerator()} className={classes.HeaderValidStyle}>
+        <Typography key={props.subFaction} className={classes.HeaderValidStyle}>
           {props.subFaction}
         </Typography>
       ) : (
@@ -44,7 +44,7 @@ const ArmyListSubFactionHeader = (props) => {
           className={classes.HeaderInvalidStyle}
           alignItems="center"
         >
-          <Typography key={uuidGenerator()} className={classes.invalidText}>
+          <Typography key={props.subFaction} className={classes.invalidText}>
             {props.subFaction}
           </Typography>
           <IconButton

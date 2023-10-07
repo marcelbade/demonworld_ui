@@ -5,7 +5,6 @@ import { List } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 // components and functions
 import EquipmentListEntry from "./EquipmentListEntry";
-import { uuidGenerator } from "../../shared/sharedFunctions";
 
 const useStyles = makeStyles((theme) => ({
   line: {
@@ -41,7 +40,7 @@ const EquipmentList = (props) => {
                 unit={props.unit} //
                 item={e}
                 index={i}
-                key={uuidGenerator()}
+                key={props.unit.uniqueID}
               />
             );
           })}

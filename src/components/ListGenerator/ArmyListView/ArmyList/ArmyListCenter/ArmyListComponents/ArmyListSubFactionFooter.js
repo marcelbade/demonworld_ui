@@ -4,7 +4,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { ListItemText, makeStyles, List } from "@material-ui/core";
 // components and functions
 import { ArmyContext } from "../../../../../../contexts/armyContext";
-import { uuidGenerator } from "../../../../../shared/sharedFunctions";
 import { calculateTotalUnitPointCost } from "../../../../../shared/sharedFunctions";
 import { ruleObjectProvider } from "../../../../../../gameLogic/armyListValidationRules/ruleObjectProvider";
 // clsx
@@ -76,17 +75,16 @@ const ArmyListSubFactionFooter = (props) => {
   };
 
   const displayPercents = () => {
-    
     const result = calculateCurrentPercentage() === 0 ? null : `Prozent ${Number(calculateCurrentPercentage()).toFixed(2)} %`;
     return result;
   };
 
   return (
     <List>
-      <ListItemText className={classes.listElement} key={uuidGenerator()} primary={<span className={classes.font}>Gesamt</span>} />
+      <ListItemText className={classes.listElement} key={props.subFaction} primary={<span className={classes.font}>Gesamt</span>} />
       <ListItemText
         className={classes.listElement}
-        key={uuidGenerator()}
+        key={props.subFaction}
         primary={
           <span className={classes.textBox}>
             <span className={classes.font}>{displayPoints()}</span>

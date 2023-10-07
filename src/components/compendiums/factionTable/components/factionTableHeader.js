@@ -2,8 +2,6 @@
 import React from "react";
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
-// components & functions
-import { uuidGenerator } from "../../../shared/sharedFunctions";
 
 const useStyles = makeStyles({
   header: {
@@ -21,9 +19,9 @@ const FactionTableHeader = (props) => {
     <thead>
       <tr>
         <th></th>
-        {props.columns.map((col) => {
+        {props.columns.map((col, i) => {
           let element = col.displayed ? (
-            <th className={classes.header} key={uuidGenerator()}>
+            <th className={classes.header} key={i}>
               {col.label}
             </th>
           ) : null;

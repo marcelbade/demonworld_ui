@@ -59,32 +59,29 @@ const SubFactionUnitList = (props) => {
 
   return (
     <Fragment>
-      {unitCardMultiSort(props.subFactionUnits).map((u, i) => {
+      {unitCardMultiSort(props.subFactionUnits).map((u) => {
         const identifier = u.unitName + u.uniqueID;
         return (
-          <List className={classes.list} key={uuidGenerator()}>
-            <ListItem key={uuidGenerator()} className={classes.element}>
+          <List className={classes.list} key={identifier}>
+            <ListItem className={classes.element}>
               <Button
-                key={uuidGenerator()}
                 onClick={() => {
                   removeUnit(identifier);
                 }}
               >
-                <RemoveCircleOutlineIcon key={uuidGenerator()} />
+                <RemoveCircleOutlineIcon />
               </Button>
               <ArmyListUnitEntry unit={u} />
               {/* BUTTONS */}
               <UnitElementButtons
                 unit={u} //
                 subFaction={props.subFactionName}
-                key={uuidGenerator()}
                 className={classes.buttons}
               />
             </ListItem>
-            <ListItem key={uuidGenerator()}>
+            <ListItem>
               <EquipmentList
-                key={uuidGenerator()} //
-                unit={u}
+                unit={u} //
                 identifier={identifier}
               />
             </ListItem>

@@ -20,13 +20,19 @@ const CardCenter = (props) => {
           <RangeWeaponRow
             weaponName={props.unit.rangedWeapon} //
             rangedAttackStats={props.unit.rangedAttackStats}
+            index={props.index}
           />
         )}
-        <MeleeWeaponRow weaponName={props.unit.weapon1Name} weapon={props.unit.weapon1} />
+        <MeleeWeaponRow
+          weaponName={props.unit.weapon1Name} //
+          weapon={props.unit.weapon1}
+          index={props.index}
+        />
         {props.unit.weapon2 === 0 ? null : (
           <MeleeWeaponRow
             weaponName={props.unit.weapon2Name} //
             weapon={props.unit.weapon2}
+            index={props.index}
           />
         )}
 
@@ -34,13 +40,20 @@ const CardCenter = (props) => {
           <MeleeWeaponRow
             weaponName={props.unit.weapon3Name} //
             weapon={props.unit.weapon3}
+            index={props.index}
           />
         )}
-        <SizeArmorSkill unit={props.unit} />
+        <SizeArmorSkill
+          unit={props.unit} //
+          index={props.index}
+        />
       </View>
       <Text style={styles.separator}></Text>
       <View style={styles.cardCenterRightSide}>
-        <BackSideRulesRow unit={props.unit} />
+        <BackSideRulesRow
+          unit={props.unit} //
+          index={props.index}
+        />
       </View>
     </View>
   );

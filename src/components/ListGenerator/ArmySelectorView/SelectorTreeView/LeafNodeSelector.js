@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 // components and functions
 import { ArmyContext } from "../../../../contexts/armyContext";
-import { uuidGenerator, unitCardMultiSort } from "../../../shared/sharedFunctions";
+import { unitCardMultiSort } from "../../../shared/sharedFunctions";
 import { StyledTreeItem } from "./StyledTreeItem";
 import LeafNode from "./LeafNode";
 
@@ -84,7 +84,7 @@ const LeafNodeSelector = (props) => {
     // unit blocked
     return blockedUnitNames.includes(u.unitName) ? (
       <LeafNode
-        key={uuidGenerator()}
+        key={u.unitName}
         unit={u}
         isBlocked={true} //
         blockMessage={findBlockMessage(blockResults, u.unitName)}
@@ -92,7 +92,7 @@ const LeafNodeSelector = (props) => {
     ) : (
       // unit not blocked
       <StyledTreeItem
-        key={uuidGenerator()}
+        key={u.unitName}
         className={classes.node}
         nodeId={createLeafNodeId(u)} //
         label={<LeafNode unit={u} isBlocked={false} />}

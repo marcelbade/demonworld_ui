@@ -2,26 +2,24 @@
 import React from "react";
 // react-pdf
 import { Text, View } from "@react-pdf/renderer";
-// functions and components
-import { uuidGenerator } from "../../../../../shared/sharedFunctions";
 // styles
 import styles from "../../../../pdfStyles/detailedCardPdfStyles";
 
 const BackSideTitleRow = (props) => {
   return (
-    <View key={uuidGenerator()} style={styles.headerRow}>
-      <View key={uuidGenerator()} style={styles.paddingTopHeader}></View>
-      <View key={uuidGenerator()} style={styles.commandAndMagicRow}>
-        <View key={uuidGenerator()} style={styles.headerPaddingRow}>
-          <Text key={uuidGenerator()}>
+    <View key={props.index} style={styles.headerRow}>
+      <View key={props.index} style={styles.paddingTopHeader}></View>
+      <View key={props.index} style={styles.commandAndMagicRow}>
+        <View key={props.index} style={styles.headerPaddingRow}>
+          <Text key={props.index}>
             {props.unit.subFaction !== props.unit.secondSubFaction //
               ? props.unit.secondSubFaction
               : props.unit.subFaction}
           </Text>
         </View>
       </View>
-      <Text key={uuidGenerator()}>{props.unit.faction}</Text>
-      <Text key={uuidGenerator()}> </Text>
+      <Text key={props.index}>{props.unit.faction}</Text>
+      <Text key={props.index}> </Text>
     </View>
   );
 };

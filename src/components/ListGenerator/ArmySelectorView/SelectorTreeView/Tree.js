@@ -5,7 +5,6 @@ import { makeStyles } from "@material-ui/core/styles";
 // components and functions
 import { ArmyContext } from "../../../../contexts/armyContext";
 import { TransitionComponent } from "./treeViewFunctions";
-import { uuidGenerator } from "../../../shared/sharedFunctions";
 import LeafNodeSelector from "./LeafNodeSelector";
 import { StyledTreeItem } from "./StyledTreeItem";
 
@@ -88,7 +87,7 @@ const Tree = (props) => {
     .map((sF) => {
       return (
         <StyledTreeItem
-          key={uuidGenerator()} //
+          key={sF} //
           nodeId={createNodeID(selectsSubFactionList().indexOf(sF))}
           label={sF}
           className={

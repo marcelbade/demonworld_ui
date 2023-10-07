@@ -6,7 +6,6 @@ import { IconButton } from "@material-ui/core";
 // components & functions
 
 import { renderBooleanAsIcon, renderMagicPoints, renderSpecialRules, renderCommandPoints } from "../depencies/factionTableFunctions";
-import { uuidGenerator } from "../../../shared/sharedFunctions";
 // icons
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 import CloseIcon from "@material-ui/icons/Close";
@@ -19,10 +18,10 @@ import CloseIcon from "@material-ui/icons/Close";
 
 const FactionTableRow = (props) => {
   return (
-    <tr key={uuidGenerator()}>
+    <tr key={props.unit.unitName}>
       <td></td>
       {props.columns[0].displayed ? (
-        <td key={uuidGenerator()}>
+        <td key={props.unit.unitName}>
           <IconButton
             onClick={() => {
               props.toggleUnitCard(props.unit);
