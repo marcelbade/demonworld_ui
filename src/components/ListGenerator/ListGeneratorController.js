@@ -102,11 +102,11 @@ const ListGeneratorController = () => {
   const [listOfAllFactionUnits, setListOfAllFactionUnits] = useState([]);
   const [selectedUnits, setSelectedUnits] = useState([]);
   // the current total point value of all selected units
-  const [totalPointValue, setTotalPointValue] = useState(0);
+  const [totalPointValue, setTotalPointValue] = useState(0); // TODO: unnecessary, can be calculated
   // maximum point allowance
   const [maxPointsAllowance, setMaxPointsAllowance] = useState(2000);
   // allied faction
-  const [allyName, setAllyName] = useState(NO_ALLY);
+  const [allyName, setAllyName] = useState(NO_ALLY); // TODO: unnecessary, can be calculated
   const [distinctAllySubFactions, setDistinctAllySubFactions] = useState([]);
   const [listOfAlliedUnits, setListOfAlliedUnits] = useState([]);
   const [showAlly, setShowAlly] = useState(true);
@@ -152,7 +152,7 @@ const ListGeneratorController = () => {
     show: false,
   });
   // item shop
-  const [allItems, setAllItems] = useState([]);
+  const [allEquippedItems, setAllEquippedItems] = useState([]);
   const [itemShopState, setItemShopState] = useState({
     clickedUnit: {},
     lastclickedUnit: {},
@@ -196,12 +196,18 @@ const ListGeneratorController = () => {
     setFetchedItems(result.data);
   };
 
+  const chooseFaction = (factioName) => {
+    setSelectedFactionName(factioName);
+    resetTheState();
+  };
+
   /**
    * Function resets the entire state back to default.
    */
   const resetTheState = () => {
     setSelectedUnits([]);
-    setAllItems([]);
+    setAllEquippedItems([]);
+    setAlternateListSubFactions([]);
     setListValidationResults({
       ...listValidationResults,
       unitsBlockedbyRules: [],
@@ -210,10 +216,9 @@ const ListGeneratorController = () => {
       secondSubFactionMissing: [],
       commanderIsPresent: true,
     });
-
-    setAlternateListSubFactions([]);
     closeCardDisplay();
     closeItemShop();
+    closeSecondSubFactionMenu();
   };
 
   /**
@@ -230,20 +235,6 @@ const ListGeneratorController = () => {
   const closeSecondSubFactionMenu = () => {
     setSecondSubFactionMenuState({ clickedUnit: selectedUnits[0], lastclickedUnit: selectedUnits[0], show: false });
   };
-
-  /**
-   * Close the item shop when a new army is selected.
-   */
-  useEffect(() => {
-    closeItemShop();
-  }, [selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  /**
-   * Close the menu for choosing the second sub faction when a new army is selected.
-   */
-  useEffect(() => {
-    closeSecondSubFactionMenu();
-  }, [selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * Function calls history objects to take user back to main menu.
@@ -325,10 +316,10 @@ const ListGeneratorController = () => {
         setTournamentOverrideRules: setTournamentOverrideRules,
         // ITEMSHOP
         fetchedItems: fetchedItems,
-        allItems: allItems,
+        allEquippedItems: allEquippedItems,
         unitSelectedForShop: unitSelectedForShop,
         setUnitSelectedForShop: setUnitSelectedForShop,
-        setAllItems: setAllItems,
+        setAllEquippedItems: setAllEquippedItems,
         // SECOND SUB FACTION
         hasAdditionalSubFaction: hasAdditionalSubFaction,
         secondSubFactionList: secondSubFactionList,
@@ -369,7 +360,7 @@ const ListGeneratorController = () => {
               notistackRef.current.closeSnackbar(key);
               setShowToastMessage(false);
             }}
-            style={{ color: "#fff", fontSize: "20px" }}
+            style={{ color: "#fff", fontSize: "20px" }} // TODO dont use inline css! :)
           >
             <CancelIcon />
           </IconButton>
@@ -396,7 +387,7 @@ const ListGeneratorController = () => {
             <Grid container item direction={"column"} xs={3} className={classes.armySelectionBox}>
               <SelectionInput
                 className={classes.selector}
-                filterFunction={setSelectedFactionName}
+                filterFunction={chooseFaction}
                 isArmySelector={true}
                 options={ALL_FACTIONS_ARRAY}
                 label={INPUT_TEXTS.SELECT_FACTION}
