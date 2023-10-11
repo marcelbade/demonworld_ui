@@ -150,13 +150,16 @@ const ShopItemList = (props) => {
    * @param {itemCard} item
    */
   const addItemToCentralList = (item) => {
-    AC.setAllItems([...AC.allItems, item.itemName]);
+    AC.setAllEquippedItems([...AC.allEquippedItems, item.itemName]);
   };
+
+
+
 
   return (
     <ButtonGroup orientation="vertical">
       {props.items
-        .filter((item) => item.itemType === props.displayThisItemType)
+     .filter((item) => item.itemType === props.displayThisItemType)
         .map((i) => {
           return (
             <Accordion key={i}>
