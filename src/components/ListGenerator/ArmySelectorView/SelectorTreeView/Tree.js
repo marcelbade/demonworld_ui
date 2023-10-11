@@ -30,9 +30,11 @@ const Tree = (props) => {
   const AC = useContext(ArmyContext);
 
   /**
-   * Function selects a list of all sub factions in the army or in it's ally. If the army has alternative lists, the
-   * alternative list is selected instead of the faction's list.
-   * If a list of the army's sub faction is created, the ally has to be removed from the array so it is not
+   * Function selects a list of all sub factions in the army or in it's ally. 
+   * If the army has alternative lists, the alternative list is 
+   * selected instead of the faction's list.
+   * If a list of the army's sub faction is created, 
+   * the ally has to be removed from the array so it is not
    * displayed as one of the faction's sub faction in the tree.
    * @returns a list of all sub factions that can be found in the faction or in the allied faction
    */
