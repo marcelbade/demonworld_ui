@@ -10,7 +10,6 @@ import SecondSubFactionMenu from "./Menus/SecondSubfactionMenu/SecondSubfactionM
 import { ArmyContext } from "../../../contexts/armyContext";
 import CardViewBox from "./Menus/CardView/CardViewBox";
 import { ARMIES_ADDITIONAL_SUBFACTIONS, ARMIES_ADDITIONAL_SUBFACTIONS_BUTTON_CAPTION } from "../../../constants/factions";
-import { uuidGenerator } from "../../shared/sharedFunctions";
 
 const MenuBox = () => {
   const AC = useContext(ArmyContext);
