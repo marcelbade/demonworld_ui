@@ -16,7 +16,7 @@ const ArmyValidation = () => {
    */
   useEffect(() => {
     const hasAlternativeLists = ARMIES_WITH_ALTERNATIVE_LISTS[AC.selectedFactionName];
-    const IsFactionSelected = AC.selectedFactionName !== NONE;
+    const IsFactionSelected = AC.selectedFactionName !== NONE && AC.selectedFactionName !== undefined;
     const isAlternativeListSelected = AC.selectedAlternativeList !== NONE;
 
     if (IsFactionSelected && hasAlternativeLists && isAlternativeListSelected) {
