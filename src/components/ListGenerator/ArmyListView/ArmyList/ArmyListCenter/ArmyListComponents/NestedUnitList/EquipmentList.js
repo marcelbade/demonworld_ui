@@ -6,7 +6,6 @@ import { makeStyles, List, ListItemText, ListItem, Button } from "@material-ui/c
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 // components and functions
 import { ArmyContext } from "../../../../../../../contexts/armyContext";
-import { uuidGenerator } from "../../../../../../shared/sharedFunctions";
 // constants
 import { MAGICAL_ITEMS } from "../../../../../../../constants/itemShopConstants";
 // clsx
@@ -54,9 +53,9 @@ const EquipmentList = (props) => {
     AC.setSelectedUnits(temp);
   };
   const removeItemFromCentralList = (item) => {
-    let temp = [...AC.allItems];
+    let temp = [...AC.allEquippedItems];
     temp = temp.filter((i) => !i === item.itemName);
-    AC.setAllItems(temp);
+    AC.setAllEquippedItems(temp);
   };
 
   /**
@@ -90,13 +89,13 @@ const EquipmentList = (props) => {
   };
 
   return (
-    <List className={displayListTop()} key={uuidGenerator()}>
+    <List className={displayListTop()} key={props.unit.uniqueID}>
       {props.unit.equipment.length !== 0
         ? props.unit.equipment.map((e, i) => {
             return (
-              <ListItem key={uuidGenerator()} className={classes.element}>
+              <ListItem key={props.unit.uniqueID} className={classes.element}>
                 <Button
-                  key={uuidGenerator()}
+                  key={props.unit.uniqueID}
                   className={clsx(classes.deleteBttn)}
                   onClick={() => {
                     removeItem(props.identifier, i);
@@ -104,9 +103,9 @@ const EquipmentList = (props) => {
                     toggleUnitsItemTypeFlags(e, false);
                   }}
                 >
-                  <RemoveCircleOutlineIcon key={uuidGenerator()} />
+                  <RemoveCircleOutlineIcon key={props.unit.uniqueID} />
                 </Button>
-                <ListItemText key={uuidGenerator()} primary={<span>{e.itemName}</span>} secondary={<span>{e.points}</span>} />
+                <ListItemText key={props.unit.uniqueID} primary={<span>{e.itemName}</span>} secondary={<span>{e.points}</span>} />
               </ListItem>
             );
           })
