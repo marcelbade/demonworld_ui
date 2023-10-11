@@ -5,11 +5,9 @@ import ListItem from "@material-ui/core/ListItem";
 import { Grid } from "@material-ui/core";
 // components and functions
 import { ArmyContext } from "../../../../../../contexts/armyContext";
-import { uuidGenerator } from "../../../../../shared/sharedFunctions";
 import SubFactionUnitList from "./NestedUnitList/SubFactionUnitList";
 import ArmyListSubFactionHeader from "./ArmyListSubFactionHeader";
 // constants
-import { ALLIES_MAPPING } from "../../../../../../constants/allies";
 import ArmyListSubFactionFooter from "./ArmyListSubFactionFooter";
 
 // Creates the suFaction entry of the army list: Head and current and total points.
@@ -34,7 +32,7 @@ const ArmyListSubFactionEntry = (props) => {
    */
   //TODO: The part where you replace the subfaction w. the faction name should be a separate function - and it should happen in a different file!
   const filterUnitsForSubFaction = (allSelectedUnits, subFaction) => {
-    allSelectedUnits.forEach((u) => (u.faction === ALLIES_MAPPING[AC.selectedFactionName] ? (u.subFaction = u.faction) : null));
+    allSelectedUnits.forEach((u) => (u.faction === AC.allyName ? (u.subFaction = u.faction) : null));
 
     return allSelectedUnits.filter((u) => u.subFaction === subFaction);
   };

@@ -34,9 +34,9 @@ const PdfBox = () => {
     <PDFViewer className={classes.pdfTab}>
       {/* TODO: add the logic to pick one! */}
       {false ? ( //
-        <ListPDF armyName={armyName} pdfMasterList={pdfData} />
+        <ListPDF armyName={armyName} pdfData={pdfData} />
       ) : (
-        <DetailedCardPDF armyName={armyName} pdfMasterList={pdfData} />
+        <DetailedCardPDF armyName={armyName} pdfData={pdfData} />
       )}
     </PDFViewer>
   ) : null;

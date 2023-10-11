@@ -34,7 +34,7 @@ const ArmyListBoxHeader = () => {
     const month = currentDate.getMonth();
     const dayOfMonth = currentDate.getDate();
 
-    if (AC.selectedFactionName !== NONE) {
+    if (AC.selectedFactionName !== NONE && AC.selectedFactionName !== undefined ) {
       const defaultArmyName = `${AC.selectedFactionName} - ${dayOfMonth}.${month}.${year}`;
       AC.setArmyName(defaultArmyName);
     }
@@ -83,7 +83,7 @@ const ArmyListBoxHeader = () => {
           className={classes.button}
           variant="outlined"
           onClick={() => {
-            AC.resetTheState();
+            AC.setSelectedUnits([]);
           }}
         >
           <CancelIcon />

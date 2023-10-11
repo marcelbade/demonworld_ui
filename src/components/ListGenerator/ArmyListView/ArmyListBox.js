@@ -10,9 +10,8 @@ import ArmyListBoxFooter from "./ArmyList/ArmyListFooter/ArmyListBoxFooter";
 const ArmyListBox = () => {
   const AC = useContext(ArmyContext);
 
-  /**
-   * This creates the centre of the UI: the actual army list consisting of the selected units and the display of the maximum * army points.
-   */
+
+   // This creates the centre of the UI: the actual army list consisting of the selected units and the display of the maximum army points.
   return AC ? (
     <Fragment>
       <ArmyListBoxHeader />

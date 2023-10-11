@@ -7,7 +7,7 @@ import HelpIcon from "@material-ui/icons/Help";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 // components and functions
 import { ArmyContext } from "../../../../contexts/armyContext";
-import { uuidGenerator } from "../../../shared/sharedFunctions";
+import { calculateTotalPointCost, uuidGenerator } from "../../../shared/sharedFunctions";
 
 const useStyles = makeStyles({
   textBlock: {
@@ -103,7 +103,14 @@ const LeafNode = (props) => {
    * @param {unitCard object} unit
    */
   const addUnit = (unit) => {
-    AC.setSelectedUnits([...AC.selectedUnits, enrichUnitCardObject(unit)]);
+    let tempArray = [...AC.selectedUnits];
+    let points = 0;
+
+    tempArray.push(enrichUnitCardObject(unit));
+    points = calculateTotalPointCost(tempArray);
+
+    AC.setSelectedUnits(tempArray);
+    AC.setTotalPointValue(points);
   };
 
   const displayLeaf = (isBlocked) => {

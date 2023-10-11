@@ -14,7 +14,6 @@ import {
   ARMIES_WITH_TWO_ALTERNATE_ARMY_PICKS,
 } from "../../../constants/factions";
 import { Fragment } from "react";
-import { ALLIES_MAPPING } from "../../../constants/allies";
 
 const useStyles = makeStyles((theme) => ({}));
 
@@ -23,16 +22,6 @@ const AlternativeArmyLists = () => {
   const classes = useStyles();
   const FIRST = "FIRST";
   const SECOND = "SECOND";
-
-  // If the army's rules have alternative army lists, set to true.
-  useEffect(() => {
-    AC.setArmyHasAlternativeLists(ARMIES_WITH_ALTERNATIVE_LISTS[AC.selectedFactionName]);
-  }, [AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  // If there two alternative lists, set to true.
-  useEffect(() => {
-    AC.setArmyHasSecondChoice(ARMIES_WITH_TWO_ALTERNATE_ARMY_PICKS[AC.selectedFactionName]);
-  }, [AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Reset army's subFaction if alternate lists exist and one has been selected.
   useEffect(() => {
@@ -52,22 +41,17 @@ const AlternativeArmyLists = () => {
     }
   }, [AC.armyHasAlternativeLists, AC.armyHasSecondChoice, AC.selectedAlternativeList, AC.secondSelectedAlternativeList]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Set the available options for the dropdown. 
+  // Set the available options for the dropdown.
   useEffect(() => {
     AC.setAlternateArmyListOptions(findDropdownOptions(FIRST));
   }, [AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
-    // Set the available options for the second dropdown if two the army has two choices.
+  // Set the available options for the second dropdown if two the army has two choices.
   useEffect(() => {
     if (ARMIES_WITH_TWO_ALTERNATE_ARMY_PICKS[AC.selectedFactionName] && AC.selectedAlternativeList !== NONE) {
       AC.setSecondAlternativeArmyOptions(findDropdownOptions(SECOND));
     }
   }, [AC.selectedFactionName, AC.selectedAlternativeList]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  // set the label text for the dropdown menu.
-  useEffect(() => {
-    AC.setAlternateArmyListLabelText(findLabelTexts());
-  }, [AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * Function filters units, removes all units that do not belong to the selected army list.
@@ -87,7 +71,7 @@ const AlternativeArmyLists = () => {
     tempArray = tempArray.filter((f) => !notSelectedSubfactions.includes(f));
 
     //allies
-    if (tempArray.includes(ALLIES_MAPPING[AC.selectedFactionName])) {
+    if (tempArray.includes(AC.allyName)) {
       AC.setShowAlly(true);
     } else {
       AC.setShowAlly(false);
@@ -110,31 +94,22 @@ const AlternativeArmyLists = () => {
   };
 
   /**
-   * Function retrieves the correct label text for the input element.
-   * @returns String with the label text.
-   */
-  const findLabelTexts = () => {
-    return ALTERNATIVE_ARMY_SELECTION_TEXT[AC.selectedFactionName];
-  };
-
-  /**
    * Function returns the names of the alternative army lists as options for the drop down menu.
-   * If the menu is the second option (in addition to the first),
-   * then the array of options is simply the array for the first menu minus the selected value.
    * @returns an array of string values.
    */
   const findDropdownOptions = (menu) => {
     let result = [];
+    if (AC.selectedFactionName !== undefined) {
+      const options = ARMY_ALTERNATIVES_LIST_MAPPER[AC.selectedFactionName];
 
-    const options = ARMY_ALTERNATIVES_LIST_MAPPER[AC.selectedFactionName];
+      if (menu === FIRST) {
+        result = [...options];
+      }
 
-    if (menu === FIRST) {
-      result = [...options];
-    }
-
-    if (menu === SECOND) {
-      let temp = options.filter((m) => m !== AC.selectedAlternativeList);
-      result = [...temp];
+      if (menu === SECOND) {
+        let temp = options.filter((m) => m !== AC.selectedAlternativeList);
+        result = [...temp];
+      }
     }
 
     return result;
@@ -144,14 +119,14 @@ const AlternativeArmyLists = () => {
     <Fragment>
       {AC.armyHasAlternativeLists ? (
         <AlternativeArmyListSelector //
-          alternateArmyFirstSelector={true}
+          alternativeArmyFirstSelector={true}
           isArmySelector={false}
           className={classes.selector}
         />
       ) : null}
       {ARMIES_WITH_TWO_ALTERNATE_ARMY_PICKS[AC.selectedFactionName] && AC.selectedAlternativeList !== NONE ? (
         <AlternativeArmyListSelector //
-          alternateArmyFirstSelector={false}
+          alternativeArmyFirstSelector={false}
           isArmySelector={false}
           className={classes.selector}
         />

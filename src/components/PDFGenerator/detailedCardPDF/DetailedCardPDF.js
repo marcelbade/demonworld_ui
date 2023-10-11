@@ -29,7 +29,7 @@ const ListPDF = (props) => {
           <Text> {props.armyName} </Text>
         </View>
         <View>
-          {props.pdfMasterList
+          {props.pdfData
             .filter((subFaction) => subFaction.units.length > 0)
             .map((obj) => (
               <View>

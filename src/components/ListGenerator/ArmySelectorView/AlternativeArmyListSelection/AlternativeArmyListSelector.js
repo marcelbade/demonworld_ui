@@ -24,13 +24,13 @@ const AlternativeArmyListSelector = (props) => {
     <SelectionInput
       className={classes.alternativeListSelector}
       filterFunction={
-        props.alternateArmyFirstSelector //
+        props.alternativeArmyFirstSelector //
           ? AC.setSelectedAlternativeList
           : AC.setSecondSelectedAlternativeList
       }
       isArmySelector={true}
       options={
-        props.alternateArmyFirstSelector //
+        props.alternativeArmyFirstSelector //
           ? AC.alternateArmyListOptions
           : AC.secondAlternativeArmyOptions
       }

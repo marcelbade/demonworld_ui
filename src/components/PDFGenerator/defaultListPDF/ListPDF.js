@@ -12,6 +12,8 @@ import styles from "../pdfStyles/listPdfStyles";
 Font.register({ family: "notMaryKate", src: notMaryKate });
 Font.register({ family: "Beryliumbold", src: Beryliumbold });
 
+
+//TODO: refactor this into smaller parts like you did for the detailed list!
 // Create the dynamic PDF content. Due to the limitations of react-pdf, this has to be done via a jerryrigged CSS table.
 const ListPDF = (props) => {
   return (
@@ -20,7 +22,7 @@ const ListPDF = (props) => {
         <View style={styles.table}>
           {/* row */}
 
-          {props.pdfMasterList
+          {props.pdfData
             .filter((subFaction) => subFaction.units.length > 0)
             .map((obj, i) => (
               <View style={styles.table}>

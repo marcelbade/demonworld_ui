@@ -130,3 +130,14 @@ export const searchMappingForMatch = (canditateUnit, mapping) => {
   }
   return match;
 };
+
+export const calculateTotalPointCost = (selectedUnits) => {
+  let pointTotal = 0;
+
+  selectedUnits.forEach((u) => {
+    const totalUnitCost = calculateTotalUnitPointCost(u);
+    pointTotal += totalUnitCost;
+  });
+
+  return pointTotal;
+};

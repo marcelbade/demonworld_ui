@@ -14,20 +14,16 @@ import CancelIcon from "@material-ui/icons/Cancel";
 import SpellBookIcon from "../../icons/spellbook-white.png";
 // components and functions
 import ArmyProvider from "../../contexts/armyContext";
-import SelectionInput from "../shared/selectionInput";
 import FactionTreeView from "./ArmySelectorView/SelectorTreeView/TreeView";
 import ArmyListBox from "./ArmyListView/ArmyListBox";
-import Allies from "./GeneratorComponents/Allies";
 import ArmyValidation from "./GeneratorComponents/validation/ArmyValidation";
-import Pdf from "./GeneratorComponents/Pdf";
 import AlternativeArmyLists from "./GeneratorComponents/AlternativeArmyLists";
 import MenuBox from "./RightSideMenus/MenuBox";
 import ValidationNotification from "../shared/ValidationNotification";
 // constants
-import { ALL_FACTIONS_ARRAY, NONE } from "../../constants/factions";
-import ArmyList from "./GeneratorComponents/ArmyList";
+import { NONE } from "../../constants/factions";
 import { NO_ALLY } from "../../constants/allies";
-import { INPUT_TEXTS } from "../../constants/textsAndMessages";
+import ArmySelector from "./ArmySelectorView/ArmySelector";
 
 const useStyles = makeStyles((theme) => ({
   displayBox: {
@@ -106,7 +102,7 @@ const ListGeneratorController = () => {
   // maximum point allowance
   const [maxPointsAllowance, setMaxPointsAllowance] = useState(2000);
   // allied faction
-  const [allyName, setAllyName] = useState(NO_ALLY); // TODO: unnecessary, can be calculated
+  const [allyName, setAllyName] = useState(NO_ALLY);
   const [distinctAllySubFactions, setDistinctAllySubFactions] = useState([]);
   const [listOfAlliedUnits, setListOfAlliedUnits] = useState([]);
   const [showAlly, setShowAlly] = useState(true);
@@ -167,8 +163,6 @@ const ListGeneratorController = () => {
   });
   // option buttons
   const [showOptionButtons, setShowOptionButtons] = useState(true);
-  //pdf viewer
-  const [pdfMasterList, setPdfMasterList] = useState([]);
 
   /**
    * fetch units  from the Back End via REST.
@@ -186,7 +180,8 @@ const ListGeneratorController = () => {
 
   //TODO Change URL in Production!
   const fetchFactionData = async () => {
-    const result = await axios(`http://localhost:8080/factions`);
+    // http://localhost:8080/factions
+    const result = await axios(`http://localhost:8080/factionDTOs`);
     setFetchedFactions(result.data);
   };
 
@@ -196,17 +191,15 @@ const ListGeneratorController = () => {
     setFetchedItems(result.data);
   };
 
-  const chooseFaction = (factioName) => {
-    setSelectedFactionName(factioName);
-    resetTheState();
-  };
-
   /**
    * Function resets the entire state back to default.
    */
   const resetTheState = () => {
     setSelectedUnits([]);
     setAllEquippedItems([]);
+    setAllyName(NO_ALLY);
+    setListOfAlliedUnits([]);
+    setDistinctAllySubFactions([]);
     setAlternateListSubFactions([]);
     setListValidationResults({
       ...listValidationResults,
@@ -255,6 +248,7 @@ const ListGeneratorController = () => {
         subFactions: distinctSubFactions,
         listOfAllFactionUnits: listOfAllFactionUnits,
         totalPointValue: totalPointValue,
+        setSelectedFactionName: setSelectedFactionName,
         setDistinctSubFactions: setDistinctSubFactions,
         setListOfAllFactionUnits: setListOfAllFactionUnits,
         setTotalPointValue: setTotalPointValue,
@@ -330,9 +324,6 @@ const ListGeneratorController = () => {
         setSecondSubFactionList: setSecondSubFactionList,
         setExcemptSubFactions: setExcemptSubFactions,
         setSecondSubfactionCaption: setSecondSubfactionCaption,
-        // PDF VIEWER
-        pdfMasterList: pdfMasterList,
-        setPdfMasterList: setPdfMasterList,
         // MENU STATES
         setStatCardState: setStatCardState,
         setItemShopState: setItemShopState,
@@ -367,11 +358,7 @@ const ListGeneratorController = () => {
         )}
       >
         <Grid container className={classes.displayBox} direction="column">
-          <Allies />
           <ArmyValidation />
-          <Pdf />
-          <ArmyList />
-
           <Grid item xs={12} className={classes.BackBttnBox}>
             <IconButton
               className={classes.BackBttn}
@@ -385,13 +372,7 @@ const ListGeneratorController = () => {
           {/* ARMY SELECTION */}
           <Grid container item direction="row">
             <Grid container item direction={"column"} xs={3} className={classes.armySelectionBox}>
-              <SelectionInput
-                className={classes.selector}
-                filterFunction={chooseFaction}
-                isArmySelector={true}
-                options={ALL_FACTIONS_ARRAY}
-                label={INPUT_TEXTS.SELECT_FACTION}
-              />
+              <ArmySelector />
               <AlternativeArmyLists />
               <FactionTreeView className={classes.selector} />
             </Grid>

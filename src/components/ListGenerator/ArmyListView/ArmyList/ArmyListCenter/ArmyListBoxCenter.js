@@ -9,6 +9,10 @@ import { ArmyContext } from "../../../../../contexts/armyContext";
 const ArmyListBoxCenter = () => {
   const AC = useContext(ArmyContext);
 
+  /**
+   * Function decides which list of subfactions to display: standard or, for armies w. alternative lists, the alternative.
+   * @returns a list of subfaction names
+   */
   const selectSubFactionList = () => {
     let subfactions;
     if (!AC.armyHasAlternativeLists) {
