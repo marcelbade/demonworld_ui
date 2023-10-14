@@ -4,9 +4,9 @@ import React from "react";
 import { Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 // icons
-import deathIcon from "../../icons/icons8-death-64.png";
-import calculatorIcon from "../../icons/icons8-calculator-64.png";
-import bookIcon from "../../icons/icons8-book-64.png";
+import deathIcon from "../../assets/icons/icons8-death-64.png";
+import calculatorIcon from "../../assets/icons/icons8-calculator-64.png";
+import bookIcon from "../../assets/icons/icons8-book-64.png";
 // functions and components
 import LandingPageNaviButton from "./LandingPageNaviButton";
 
