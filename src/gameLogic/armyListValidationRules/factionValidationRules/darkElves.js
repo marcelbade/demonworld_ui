@@ -84,8 +84,9 @@ const DarkElveRules = {
       : [];
 
     /**
-     * Function implements a special faction rule - per full 10% of the max point allowance spent on the priest caste,
-     * your point allowance for the magicians caste decreases by 10% and vice versa.
+     * Function implements a special faction rule per full 10% of the max point allowance 
+     * spent on the priest caste, your point allowance 
+     * for the magicians caste decreases by 10% and vice versa.
      * Note that the algorithm is different from all the other validator logic-
      * it does not create a list of unit Card objects that are added to a "block list",
      * it instead directly decreases the limit.
