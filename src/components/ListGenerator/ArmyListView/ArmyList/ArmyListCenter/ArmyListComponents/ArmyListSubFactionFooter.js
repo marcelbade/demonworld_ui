@@ -1,12 +1,10 @@
 // React
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 // Material UI
 import { ListItemText, makeStyles, List } from "@material-ui/core";
 // components and functions
 import { ArmyContext } from "../../../../../../contexts/armyContext";
-import { calculateTotalUnitPointCost } from "../../../../../shared/sharedFunctions";
-import { ruleObjectProvider } from "../../../../../../gameLogic/armyListValidationRules/ruleObjectProvider";
-// clsx
+import useSubFactionStats from "../../../../../../customHooks/UseSubFactionStats";
 
 const useStyles = makeStyles({
   listElement: {
@@ -18,68 +16,19 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "row",
   },
-  font: {},
 });
 
 const ArmyListSubFactionFooter = (props) => {
   const classes = useStyles();
   const AC = useContext(ArmyContext);
+  const calculateStats = useSubFactionStats(
+    props.subFactionUnits, //
+    props.subFactionName,
+    AC.selectedFactionName,
+    AC.maxPointsAllowance
+  );
 
-  const [subFactionTotal, setSubFactionTotal] = useState(0);
-
-  const [percentages, setPercentages] = useState({
-    min: 0,
-    max: 0,
-  });
-
-  /**
-   * Useffect calculates the point total for the sub faction and validates it.
-   */
-  useEffect(() => {
-    let total = 0;
-    if (props.subFactionUnits) {
-      props.subFactionUnits.forEach((u) => (total += calculateTotalUnitPointCost(u)));
-    }
-    setSubFactionTotal(total);
-  }, [props.subFactionUnits]);
-
-  useEffect(() => {
-    const result = calculateMinAndMaxPercentages();
-    setPercentages({ min: result.min, max: result.max });
-  }, [AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  /**
-   * Function calculates the minimum and maximum percentage allowance for the subfaction.
-   * @returns Object with min and
-   */
-  const calculateMinAndMaxPercentages = () => {
-    const ruleArray = ruleObjectProvider(AC.selectedFactionName);
-
-    const filteredArray = ruleArray.filter((r) => r.cardNames.includes(props.subFactionName));
-
-    // when changing armies, the ruleArray briefly becomes undefined. Hence the test for length.
-    const minPercentage = filteredArray.length !== 0 ? filteredArray[0].min * 100 : 0;
-    const maxPercentage = filteredArray.length !== 0 ? filteredArray[0].max * 100 : 0;
-
-    return {
-      min: Math.trunc(minPercentage),
-      max: Math.trunc(maxPercentage),
-    };
-  };
-
-  const displayPoints = () => {
-    return subFactionTotal === 0 ? null : `${subFactionTotal} Punkte`;
-  };
-
-  const displayPercents = () => {
-    let percentage = (subFactionTotal / AC.maxPointsAllowance) * 100;
-
-    const result =
-      percentage * 100 === 0 //
-        ? null
-        : `Prozent ${Number(percentage).toFixed(2)} %`;
-    return result;
-  };
+  const stats = calculateStats();
 
   return (
     <List>
@@ -89,14 +38,14 @@ const ArmyListSubFactionFooter = (props) => {
         key={props.subFaction}
         primary={
           <span className={classes.textBox}>
-            <span className={classes.font}>{displayPoints()}</span>
-            <span className={classes.font}> {displayPercents()}</span>
+            <span>{stats.currentTotal}</span>
+            <span> {stats.currentPercent}</span>
           </span>
         }
         secondary={
           <span className={classes.textBox}>
-            <span className={classes.font}>{`Minimum: ${percentages.min} %`}</span>
-            <span className={classes.font}>{`Maximum ${percentages.max} %`}</span>
+            <span>{`Minimum: ${stats.minPercentage} %`}</span>
+            <span>{`Maximum ${stats.maxPercentage} %`}</span>
           </span>
         }
       />
