@@ -1,10 +1,10 @@
 // React
 import { useContext } from "react";
 // components and functions
-import { ArmyContext } from "../../../../contexts/armyContext";
-import { ruleValidation } from "../../../../gameLogic/armyListValidationRules/ruleValidatorSelector";
+import { ArmyContext } from "../contexts/armyContext";
+import { ruleValidation } from "../gameLogic/armyListValidationRules/ruleValidatorSelector";
 // constants
-import { ARMIES_WITH_ALTERNATIVE_LISTS, NONE } from "../../../../constants/factions";
+import { ARMIES_WITH_ALTERNATIVE_LISTS, NONE } from "../constants/factions";
 
 const useArmyValidation = () => {
   const AC = useContext(ArmyContext);
@@ -83,23 +83,16 @@ const useArmyValidation = () => {
     }
   };
 
-  // // TODO: unnecessary?!
-  // // enable buttons if list is valid
-  // useEffect(() => {
-  //   AC.selectedUnits.length === 0 || violatesRules(AC.listValidationResults)
-  //     ? AC.setDisableOptionsButtons(true)
-  //     : AC.setDisableOptionsButtons(false);
-  // }, [AC.selectedUnits, AC.listValidationResults]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  // // TODO: unnecessary?!
-  // /**
-  //  * Function checks whether the list is valid.
-  //  * @param {[unitCard]} blockedUnits
-  //  * @returns boolean flag; true if list is invalid (no commander OR 1 or more subfaction below min. )
-  //  */
-  // const violatesRules = (blockedUnits) => {
-  //   return blockedUnits.subFactionBelowMinimum.length > 0 || blockedUnits.commanderIsPresent === false;
-  // };
+ 
+  // TODO: finish this. Make it so the list van only be safed OR printed when correct,or at least give a warning :D
+  /**
+   * Function checks whether the list is valid.
+   * @param {[unitCard]} blockedUnits
+   * @returns boolean flag; true if list is invalid (no commander OR 1 or more subfaction below min. )
+   */
+  const violatesRules = (blockedUnits) => {
+    return blockedUnits.subFactionBelowMinimum.length > 0 || blockedUnits.commanderIsPresent === false;
+  };
 
   return {
     validateList: validateList, //
