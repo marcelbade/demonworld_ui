@@ -8,6 +8,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import { ArmyContext } from "../../../../../contexts/armyContext";
 // constants
 import { OPTIONS } from "../../../../../constants/textsAndMessages";
+// components and functions
+import { filterForSubFaction } from "../../../ListGeneratorFunctions";
 
 const useStyles = makeStyles({
   overlay: {
@@ -57,9 +59,15 @@ const OptionButtons = () => {
    */
   const openPDfInNewTab = () => {
     //TODO: replace in production!!
-    const URL = "http://localhost:3000/PdfBox";
 
-    let transportObj = { armyName: AC.armyName, pdfData: AC.pdfMasterList };
+    let list = [];
+
+    AC.subFactions.forEach((sF) => {
+      list.push({ subFaction: sF, units: filterForSubFaction(AC.selectedUnits, sF) });
+    });
+
+    const URL = "http://localhost:3000/PdfBox";
+    const transportObj = { armyName: AC.armyName, pdfData: list };
 
     window.localStorage.setItem("transportObj", JSON.stringify(transportObj));
     window.open(URL, "_blank", "noopener,noreferrer");
