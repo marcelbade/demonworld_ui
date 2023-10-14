@@ -11,12 +11,11 @@ import { SnackbarProvider } from "notistack";
 // icons
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import CancelIcon from "@material-ui/icons/Cancel";
-import SpellBookIcon from "../../icons/spellbook-white.png";
+import SpellBookIcon from "../../assets/icons/spellbook-white.png";
 // components and functions
 import ArmyProvider from "../../contexts/armyContext";
 import FactionTreeView from "./ArmySelectorView/SelectorTreeView/TreeView";
 import ArmyListBox from "./ArmyListView/ArmyListBox";
-import ArmyValidation from "./GeneratorComponents/validation/ArmyValidation";
 import AlternativeArmyLists from "./GeneratorComponents/AlternativeArmyLists";
 import MenuBox from "./RightSideMenus/MenuBox";
 import ValidationNotification from "../shared/ValidationNotification";
@@ -24,7 +23,7 @@ import ValidationNotification from "../shared/ValidationNotification";
 import { NONE } from "../../constants/factions";
 import { NO_ALLY } from "../../constants/allies";
 import ArmySelector from "./ArmySelectorView/ArmySelector";
-
+ 
 const useStyles = makeStyles((theme) => ({
   displayBox: {
     [theme.breakpoints.up("md")]: {
@@ -235,7 +234,7 @@ const ListGeneratorController = () => {
   const backToMainmenu = () => {
     history.push("/");
   };
-
+ 
   return fetchedFactions && fetchedItems ? (
     <ArmyProvider
       value={{
@@ -358,7 +357,7 @@ const ListGeneratorController = () => {
         )}
       >
         <Grid container className={classes.displayBox} direction="column">
-          <ArmyValidation />
+          {/* <ArmyValidation /> */}
           <Grid item xs={12} className={classes.BackBttnBox}>
             <IconButton
               className={classes.BackBttn}
