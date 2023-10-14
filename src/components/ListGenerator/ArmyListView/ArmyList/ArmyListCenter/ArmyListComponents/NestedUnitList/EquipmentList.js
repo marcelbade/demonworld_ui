@@ -6,6 +6,8 @@ import { makeStyles, List, ListItemText, ListItem, Button } from "@material-ui/c
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 // components and functions
 import { ArmyContext } from "../../../../../../../contexts/armyContext";
+// custom hooks
+import useArmyValidation from "../../../../../GeneratorComponents/validation/ArmyValidation";
 // constants
 import { MAGICAL_ITEMS } from "../../../../../../../constants/itemShopConstants";
 // clsx
@@ -35,6 +37,7 @@ const EquipmentList = (props) => {
   // eslint-disable-next-line no-unused-vars
   const classes = useStyles();
   const AC = useContext(ArmyContext);
+  const validation = useArmyValidation();
 
   /**
    * Function removes an item from a unit's equipment array.
@@ -50,8 +53,10 @@ const EquipmentList = (props) => {
       }
     }
 
+    validation.validateList(temp, AC.maxPointsAllowance, AC.subFactions);
     AC.setSelectedUnits(temp);
   };
+
   const removeItemFromCentralList = (item) => {
     let temp = [...AC.allEquippedItems];
     temp = temp.filter((i) => !i === item.itemName);
