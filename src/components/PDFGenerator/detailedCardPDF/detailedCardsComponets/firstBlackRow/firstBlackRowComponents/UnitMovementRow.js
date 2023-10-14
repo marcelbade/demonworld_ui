@@ -5,9 +5,9 @@ import { Text, View, Image } from "@react-pdf/renderer";
 // functions and components
 import { isSingleElementCard } from "../../../../../shared/sharedFunctions";
 // icons
-import squareFormationWhite from "../../../../../../icons/squareFormationWhite.png";
-import skirmishFormation from "../../../../../../icons/skirmishFormation.png";
-import wedgeFormation from "../../../../../../icons/wedgeFormation.png";
+import squareFormationWhite from "../../../../../../assets/icons/squareFormationWhite.png";
+import skirmishFormation from "../../../../../../assets/icons/skirmishFormation.png";
+import wedgeFormation from "../../../../../../assets/icons/wedgeFormation.png";
 // styles
 import styles from "../../../../pdfStyles/detailedCardPdfStyles";
 

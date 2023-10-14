@@ -3,9 +3,9 @@ import React from "react";
 // react-pdf
 import { Page, View, Document, Font, Text } from "@react-pdf/renderer";
 // fonts
-import notMaryKate from "../../../fonts/notMaryKate.ttf";
-import Beryliumbold from "../../../fonts/Beryliumbold.ttf";
-import jaapokkiRegular from "../../../fonts/jaapokkiRegular.ttf";
+import notMaryKate from "../../../assets/fonts/notMaryKate.ttf";
+import Beryliumbold from "../../../assets/fonts/Beryliumbold.ttf";
+import jaapokkiRegular from "../../../assets/fonts/jaapokkiRegular.ttf";
 // styles
 import styles from "../pdfStyles/detailedCardPdfStyles";
 // pdf components

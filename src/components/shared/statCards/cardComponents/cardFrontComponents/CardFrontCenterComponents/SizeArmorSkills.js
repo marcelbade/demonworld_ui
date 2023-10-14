@@ -4,10 +4,10 @@ import React, { Fragment, useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Typography } from "@material-ui/core";
 // icons
-import rangeArmorIcon from "../../../../../../icons/range-armor.png";
-import meleeArmorIcon from "../../../../../../icons/melee-armor.png";
-import blackBowIcon from "../../../../../../icons/bow2.png";
-import blackSwordIcon from "../../../../../../icons/sword2.png";
+import rangeArmorIcon from "../../../../../../assets/icons/range-armor.png";
+import meleeArmorIcon from "../../../../../../assets/icons/melee-armor.png";
+import blackBowIcon from "../../../../../../assets/icons/bow2.png";
+import blackSwordIcon from "../../../../../../assets/icons/sword2.png";
 // components & functions
 import { StateCardContext } from "../../../../../../contexts/statCardContext";
 // constants

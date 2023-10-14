@@ -4,10 +4,10 @@ import { Text, View, Image } from "@react-pdf/renderer";
 // styles
 import styles from "../../../../pdfStyles/detailedCardPdfStyles";
 //  icons
-import rangeArmorIcon from "../../../../../../icons/range-armor.png";
-import meleeArmorIcon from "../../../../../../icons/melee-armor.png";
-import blackSwordIcon from "../../../../../../icons/sword2.png";
-import blackBowIcon from "../../../../../../icons/bow2.png";
+import rangeArmorIcon from "../../../../../../assets/icons/range-armor.png";
+import meleeArmorIcon from "../../../../../../assets/icons/melee-armor.png";
+import blackSwordIcon from "../../../../../../assets/icons/sword2.png";
+import blackBowIcon from "../../../../../../assets/icons/bow2.png";
 
 const SizeArmorSkillRow = (props) => {
   return (

@@ -3,8 +3,8 @@ import React from "react";
 // react-pdf
 import { Page, Text, View, Document, Font } from "@react-pdf/renderer";
 // fonts
-import notMaryKate from "../../../fonts/notMaryKate.ttf";
-import Beryliumbold from "../../../fonts/Beryliumbold.ttf";
+import notMaryKate from "../../../assets/fonts/notMaryKate.ttf";
+import Beryliumbold from "../../../assets/fonts/Beryliumbold.ttf";
  // styles
 import styles from "../pdfStyles/listPdfStyles";
 
