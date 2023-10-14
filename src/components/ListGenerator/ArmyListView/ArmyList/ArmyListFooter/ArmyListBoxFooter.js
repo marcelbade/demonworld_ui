@@ -8,6 +8,7 @@ import { ArmyContext } from "../../../../../contexts/armyContext";
 import calculateScoutingFactor from "../../../../../gameLogic/scoutFactorCalculator/scoutingFactorCalculator";
 // constants
 import { GENERAL_ERRRORS, TEXTS } from "../../../../../constants/textsAndMessages";
+import useArmyValidation from "../../../GeneratorComponents/validation/ArmyValidation";
 
 // TODO: remove unneeded styles
 const useStyles = makeStyles((theme) => ({
@@ -26,6 +27,7 @@ const useStyles = makeStyles((theme) => ({
 const ArmyListBoxFooter = () => {
   const classes = useStyles();
   const AC = useContext(ArmyContext);
+  const validation = useArmyValidation();
 
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -38,6 +40,8 @@ const ArmyListBoxFooter = () => {
 
     let isValid = new RegExp(/^[0-9]*$/).test(event.target.value);
     isValid ? setErrorMessage("") : setErrorMessage(GENERAL_ERRRORS.ONLY_NUMBERS);
+
+    validation.validateList(AC.selectedUnits, event.target.value, AC.subFactions);
   };
 
   return (

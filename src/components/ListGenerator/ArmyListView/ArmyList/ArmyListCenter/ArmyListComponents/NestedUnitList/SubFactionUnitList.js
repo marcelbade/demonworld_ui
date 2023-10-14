@@ -10,6 +10,7 @@ import { unitCardMultiSort } from "../../../../../../shared/sharedFunctions";
 import EquipmentList from "./EquipmentList";
 import UnitElementButtons from "./UnitElementButtons";
 import ArmyListUnitEntry from "./ArmyListUnitEntry";
+import useArmyValidation from "../../../../../GeneratorComponents/validation/ArmyValidation";
 
 const useStyles = makeStyles({
   text: {
@@ -47,6 +48,7 @@ const SubFactionUnitList = (props) => {
   // eslint-disable-next-line no-unused-vars
   const classes = useStyles();
   const AC = useContext(ArmyContext);
+  const validation = useArmyValidation();
 
   /**
    * Function removes a unit from the current list.
@@ -54,6 +56,7 @@ const SubFactionUnitList = (props) => {
    */
   const removeUnit = (identifier) => {
     let filtered = AC.selectedUnits.filter((u) => u.name + u.uniqueID !== identifier);
+    validation.validateList(filtered, AC.maxPointsAllowance, AC.subFactions);
     AC.setSelectedUnits(filtered);
   };
 

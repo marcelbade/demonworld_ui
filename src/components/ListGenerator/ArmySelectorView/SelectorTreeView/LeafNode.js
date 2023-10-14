@@ -8,6 +8,7 @@ import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 // components and functions
 import { ArmyContext } from "../../../../contexts/armyContext";
 import { calculateTotalPointCost, uuidGenerator } from "../../../shared/sharedFunctions";
+import useArmyValidation from "../../GeneratorComponents/validation/ArmyValidation";
 
 const useStyles = makeStyles({
   textBlock: {
@@ -37,6 +38,7 @@ const useStyles = makeStyles({
 const LeafNode = (props) => {
   const classes = useStyles();
   const AC = useContext(ArmyContext);
+  const validation = useArmyValidation();
 
   const enrichUnitCardObject = (unit) => {
     unit = addUniqueIdToUnit(unit);
@@ -109,6 +111,7 @@ const LeafNode = (props) => {
     tempArray.push(enrichUnitCardObject(unit));
     points = calculateTotalPointCost(tempArray);
 
+    validation.validateList(tempArray, AC.maxPointsAllowance, AC.subFactions);
     AC.setSelectedUnits(tempArray);
     AC.setTotalPointValue(points);
   };

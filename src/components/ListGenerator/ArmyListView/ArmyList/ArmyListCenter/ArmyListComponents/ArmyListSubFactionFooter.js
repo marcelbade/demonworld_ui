@@ -54,9 +54,10 @@ const ArmyListSubFactionFooter = (props) => {
    */
   const calculateMinAndMaxPercentages = () => {
     const ruleArray = ruleObjectProvider(AC.selectedFactionName);
+
     const filteredArray = ruleArray.filter((r) => r.cardNames.includes(props.subFactionName));
 
-    // when changing armies, the rulearray very briefly becomes undefined. Hence the test for length.
+    // when changing armies, the ruleArray briefly becomes undefined. Hence the test for length.
     const minPercentage = filteredArray.length !== 0 ? filteredArray[0].min * 100 : 0;
     const maxPercentage = filteredArray.length !== 0 ? filteredArray[0].max * 100 : 0;
 
@@ -66,16 +67,17 @@ const ArmyListSubFactionFooter = (props) => {
     };
   };
 
-  const calculateCurrentPercentage = () => {
-    return (subFactionTotal / AC.maxPointsAllowance) * 100;
-  };
-
   const displayPoints = () => {
     return subFactionTotal === 0 ? null : `${subFactionTotal} Punkte`;
   };
 
   const displayPercents = () => {
-    const result = calculateCurrentPercentage() === 0 ? null : `Prozent ${Number(calculateCurrentPercentage()).toFixed(2)} %`;
+    let percentage = (subFactionTotal / AC.maxPointsAllowance) * 100;
+
+    const result =
+      percentage * 100 === 0 //
+        ? null
+        : `Prozent ${Number(percentage).toFixed(2)} %`;
     return result;
   };
 

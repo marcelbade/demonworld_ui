@@ -1,91 +1,110 @@
 // React
-import { useEffect, useContext } from "react";
+import { useContext } from "react";
 // components and functions
 import { ArmyContext } from "../../../../contexts/armyContext";
 import { ruleValidation } from "../../../../gameLogic/armyListValidationRules/ruleValidatorSelector";
 // constants
 import { ARMIES_WITH_ALTERNATIVE_LISTS, NONE } from "../../../../constants/factions";
 
-const ArmyValidation = () => {
+const useArmyValidation = () => {
   const AC = useContext(ArmyContext);
 
-  /**
-   * Function validates the current army list everytime a unit is added, removed, subFactions, the selected alternative army list or the max point allowance changes.
-   * Validation works through a validator object. The object returns an array containing all units
-   * which need to be blocked, as well as a message stating the reason for blocking it.
-   */
-  useEffect(() => {
+  const validateList = (currentList, currentTotalPointAllowance, currentSubFactions) => {
     const hasAlternativeLists = ARMIES_WITH_ALTERNATIVE_LISTS[AC.selectedFactionName];
     const IsFactionSelected = AC.selectedFactionName !== NONE && AC.selectedFactionName !== undefined;
     const isAlternativeListSelected = AC.selectedAlternativeList !== NONE;
 
     if (IsFactionSelected && hasAlternativeLists && isAlternativeListSelected) {
-      runValidation();
+      runValidation(currentList, currentTotalPointAllowance, currentSubFactions);
     } else if (IsFactionSelected && !hasAlternativeLists) {
-      runValidation();
+      runValidation(currentList, currentTotalPointAllowance, currentSubFactions);
     }
-  }, [AC.selectedUnits, AC.maxPointsAllowance, AC.selectedAlternativeList, AC.subFactions]); // eslint-disable-line react-hooks/exhaustive-deps
+  };
 
-  const runValidation = () => {
+  const runValidation = (currentList, currentTotalPointAllowance, currentSubFactions) => {
     let validator = ruleValidation(AC.selectedFactionName);
     let validationResult = validator.testSubFactionRules(
       AC.listOfAllFactionUnits,
-      AC.selectedUnits,
-      AC.maxPointsAllowance,
-      AC.subFactions,
+      currentList,
+      currentTotalPointAllowance,
+      currentSubFactions,
       AC.selectedAlternativeList,
       AC.tournamentOverrideRules,
       AC.listOfAlliedUnits
     );
 
-    collectValidatioResults(validationResult);
+    collectValidatioResults(currentList, validationResult);
   };
 
   /**
    * Function adds all invalid units and subfactions to the block list.
-   * @param {{}} validationResults
+   * @param {{}} validationResult
    */
-  const collectValidatioResults = (validationResults) => {
-    AC.setListValidationResults({
+  const collectValidatioResults = (currentList, validationResult) => {
+    const currentValidationResult = {
       ...AC.listValidationResults,
-      unitsBlockedbyRules: validationResults.unitsBlockedbyRules,
-      subFactionBelowMinimum: validationResults.subFactionBelowMinimum,
-      commanderIsPresent: validationResults.commanderIsPresent,
-      removeUnitsNoLongerValid: validationResults.removeUnitsNoLongerValid,
-      secondSubFactionMissing: validationResults.secondSubFactionMissing,
-      alliedUnitsBlockedbyRules: validationResults.alliedUnitsBlockedbyRules,
-    });
+      unitsBlockedbyRules: validationResult.unitsBlockedbyRules,
+      subFactionBelowMinimum: validationResult.subFactionBelowMinimum,
+      commanderIsPresent: validationResult.commanderIsPresent,
+      removeUnitsNoLongerValid: validationResult.removeUnitsNoLongerValid,
+      secondSubFactionMissing: validationResult.secondSubFactionMissing,
+      alliedUnitsBlockedbyRules: validationResult.alliedUnitsBlockedbyRules,
+    };
+
+    AC.setListValidationResults(currentValidationResult);
+    removeInvalidUnits(currentList, currentValidationResult);
   };
 
-  // Automatically remove units from the army list if the list no longer meets the ciriteria that have to be met to permit those units to be picked.
-  useEffect(() => {
-    if (AC.listValidationResults.removeUnitsNoLongerValid.length > 0) {
-      let currentState = [...AC.selectedUnits];
+  const removeInvalidUnits = (currentList, currentValidationResult) => {
+    if (currentValidationResult.removeUnitsNoLongerValid.length > 0) {
+      let currentState = [...currentList];
 
-      currentState = currentState.filter((u) => !AC.listValidationResults.removeUnitsNoLongerValid.includes(u));
+      currentState = currentState.filter((u) => !currentValidationResult.removeUnitsNoLongerValid.includes(u));
 
       AC.setSelectedUnits([...currentState]);
     }
-  }, [AC.listValidationResults]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  // enable buttons if list is valid
-  useEffect(() => {
-    AC.selectedUnits.length === 0 || violatesRules(AC.listValidationResults)
-      ? AC.setDisableOptionsButtons(true)
-      : AC.setDisableOptionsButtons(false);
-  }, [AC.selectedUnits, AC.listValidationResults]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  /**
-   * Function checks whether the list is valid.
-   * @param {[unitCard]} blockedUnits
-   * @returns boolean flag; true if list is invalid (no commander OR 1 or more subfaction below min. )
-   */
-  const violatesRules = (blockedUnits) => {
-    return blockedUnits.subFactionBelowMinimum.length > 0 || blockedUnits.commanderIsPresent === false;
   };
 
-  // this component returns no jsx - it is simply meant to help code readability by factoring out all logic for army validation from the ListGeneratorController component.
-  return null;
+  const returnValidationResult = (type, payload) => {
+    switch (type) {
+      case "subFaction":
+        let tempObj = { subFactionName: payload, valid: true, validationMessage: "" };
+
+        AC.listValidationResults.subFactionBelowMinimum.forEach((sF) => {
+          if (sF.subFactionUnderMinimum.includes(payload)) {
+            tempObj = { subFactionName: payload, valid: false, validationMessage: sF.message };
+          }
+        });
+        return tempObj;
+      case "unit":
+        break;
+      default:
+        throw new Error();
+    }
+  };
+
+  // // TODO: unnecessary?!
+  // // enable buttons if list is valid
+  // useEffect(() => {
+  //   AC.selectedUnits.length === 0 || violatesRules(AC.listValidationResults)
+  //     ? AC.setDisableOptionsButtons(true)
+  //     : AC.setDisableOptionsButtons(false);
+  // }, [AC.selectedUnits, AC.listValidationResults]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // // TODO: unnecessary?!
+  // /**
+  //  * Function checks whether the list is valid.
+  //  * @param {[unitCard]} blockedUnits
+  //  * @returns boolean flag; true if list is invalid (no commander OR 1 or more subfaction below min. )
+  //  */
+  // const violatesRules = (blockedUnits) => {
+  //   return blockedUnits.subFactionBelowMinimum.length > 0 || blockedUnits.commanderIsPresent === false;
+  // };
+
+  return {
+    validateList: validateList, //
+    returnValidationResult: returnValidationResult,
+  };
 };
 
-export default ArmyValidation;
+export default useArmyValidation;

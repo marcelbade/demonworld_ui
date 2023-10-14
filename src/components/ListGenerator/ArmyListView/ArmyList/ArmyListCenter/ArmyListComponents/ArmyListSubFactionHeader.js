@@ -7,7 +7,6 @@ import { Grid, IconButton, Typography } from "@material-ui/core";
 // icons
 import HelpIcon from "@material-ui/icons/Help";
 // components and functions
-import { uuidGenerator } from "../../../../../shared/sharedFunctions";
 import { ArmyContext } from "../../../../../../contexts/armyContext";
 
 const useStyles = makeStyles(() => ({

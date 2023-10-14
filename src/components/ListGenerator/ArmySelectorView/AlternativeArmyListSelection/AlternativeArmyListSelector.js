@@ -6,6 +6,7 @@ import { Typography } from "@material-ui/core";
 // components and functions
 import { ArmyContext } from "../../../../contexts/armyContext";
 import SelectionInput from "../../../shared/selectionInput";
+import useArmyValidation from "../../GeneratorComponents/validation/ArmyValidation";
 
 const useStyles = makeStyles((theme) => ({
   alternativeListSelector: {
@@ -19,15 +20,21 @@ const useStyles = makeStyles((theme) => ({
 const AlternativeArmyListSelector = (props) => {
   const classes = useStyles();
   const AC = useContext(ArmyContext);
+  const validation = useArmyValidation();
+
+  const handleInput = (value) => {
+    const setter = props.alternativeArmyFirstSelector //
+      ? AC.setSelectedAlternativeList
+      : AC.setSecondSelectedAlternativeList;
+
+    setter(value);
+    validation.validateList(AC.selectedUnits, AC.maxPointsAllowance, AC.subFactions);
+  };
 
   return (
     <SelectionInput
       className={classes.alternativeListSelector}
-      filterFunction={
-        props.alternativeArmyFirstSelector //
-          ? AC.setSelectedAlternativeList
-          : AC.setSecondSelectedAlternativeList
-      }
+      filterFunction={handleInput}
       isArmySelector={true}
       options={
         props.alternativeArmyFirstSelector //

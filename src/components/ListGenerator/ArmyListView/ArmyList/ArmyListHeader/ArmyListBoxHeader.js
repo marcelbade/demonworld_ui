@@ -1,5 +1,5 @@
 // React
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
 import { TextField, IconButton, Tooltip, Typography, Grid } from "@material-ui/core";
@@ -8,7 +8,6 @@ import HelpIcon from "@material-ui/icons/Help";
 import CancelIcon from "@material-ui/icons/Cancel";
 // components and functions
 import { ArmyContext } from "../../../../../contexts/armyContext";
-import { useEffect } from "react";
 // constants
 import { TOOLTIPS, VALIDATION } from "../../../../../constants/textsAndMessages";
 import { NONE } from "../../../../../constants/factions";
@@ -34,7 +33,7 @@ const ArmyListBoxHeader = () => {
     const month = currentDate.getMonth();
     const dayOfMonth = currentDate.getDate();
 
-    if (AC.selectedFactionName !== NONE && AC.selectedFactionName !== undefined ) {
+    if (AC.selectedFactionName !== NONE && AC.selectedFactionName !== undefined) {
       const defaultArmyName = `${AC.selectedFactionName} - ${dayOfMonth}.${month}.${year}`;
       AC.setArmyName(defaultArmyName);
     }
