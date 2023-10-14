@@ -30,10 +30,10 @@ const Tree = (props) => {
   const AC = useContext(ArmyContext);
 
   /**
-   * Function selects a list of all sub factions in the army or in it's ally. 
-   * If the army has alternative lists, the alternative list is 
+   * Function selects a list of all sub factions in the army or in it's ally.
+   * If the army has alternative lists, the alternative list is
    * selected instead of the faction's list.
-   * If a list of the army's sub faction is created, 
+   * If a list of the army's sub faction is created,
    * the ally has to be removed from the array so it is not
    * displayed as one of the faction's sub faction in the tree.
    * @returns a list of all sub factions that can be found in the faction or in the allied faction
@@ -53,21 +53,17 @@ const Tree = (props) => {
 
   /**
    * Function marks a sub faction in the army selector tree view as empty (greyed out)
-   * if all units in that subFaction are blocked by the validator. The funciton checks both faction and ally.
+   * if all units in that subFaction are blocked by the validator. The function checks both faction and ally.
    * @param {[String]} subFaction
    * @returns true, if all units for a sub faction are blocked.
    */
   const isSubFactionEmpty = (subFaction) => {
-    let blockedUnitNames = [];
-    let notBlockedUnits = [];
+    const validationResults = props.showsFaction //
+      ? AC.listValidationResults.unitsBlockedbyRules
+      : AC.listValidationResults.alliedUnitsBlockedbyRules;
 
-    if (props.showsFaction) {
-      blockedUnitNames = AC.listValidationResults.unitsBlockedbyRules.map((b) => b.unitBlockedbyRules);
-      notBlockedUnits = AC.listOfAllFactionUnits.filter((u) => u.subFaction === subFaction && !blockedUnitNames.includes(u.unitName));
-    } else {
-      blockedUnitNames = AC.listValidationResults.alliedUnitsBlockedbyRules.map((b) => b.unitBlockedbyRules);
-      notBlockedUnits = AC.listOfAlliedUnits.filter((u) => u.subFaction === subFaction && !blockedUnitNames.includes(u.unitName));
-    }
+    const blockedUnitNames = validationResults.map((b) => b.unitBlockedbyRules);
+    const notBlockedUnits = AC.listOfAllFactionUnits.filter((u) => u.subFaction === subFaction && !blockedUnitNames.includes(u.unitName));
 
     return notBlockedUnits.length === 0;
   };
