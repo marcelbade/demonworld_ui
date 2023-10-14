@@ -4,14 +4,15 @@ import React, { useContext } from "react";
 import { Typography, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 // components and functions
-import { LossCalcContext } from "../../contexts/LossCalculatorContext";
+import { LossCalcContext } from "../../../contexts/LossCalculatorContext";
 import { ListItem } from "@mui/material";
-import ListElementBttns from "./LossCalcInputButtons/UnitLossCalcBttnGroup";
+import UnitLossCalcBttnGroup from "../LossCalcInputButtons/UnitLossCalcBttnGroup";
 
 // clsx
 import clsx from "clsx";
-import EquipmentList from "./LossCalcEquipmentList/EquipmentList";
-import { LOSS_CALCULATOR } from "../../constants/textsAndMessages";
+import EquipmentList from "../LossCalcEquipmentList/EquipmentList";
+import { LOSS_CALCULATOR } from "../../../constants/textsAndMessages";
+import ListElementName from "./ListElementName";
 // icons
 
 const useStyles = makeStyles((theme) => ({
@@ -63,7 +64,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LossCalcUnitElement = (props) => {
+const LostUnitListElement = (props) => {
   const classes = useStyles();
   const calcContext = useContext(LossCalcContext);
 
@@ -77,20 +78,11 @@ const LossCalcUnitElement = (props) => {
           props.unit.unitDestroyed ? clsx(classes.listElement, classes.borderLost) : clsx(classes.listElement, classes.borderNormal)
         }
       >
-        {/* NAME*/}
         <Grid container item md={4} direction="column">
-          <Grid item>
-            <Typography
-              variant="button"
-              className={
-                props.unit.unitDestroyed
-                  ? clsx(classes.typographyFont, classes.strikeTroughText)
-                  : clsx(classes.typographyFont, classes.text)
-              }
-            >
-              {props.unit.name}
-            </Typography>
-          </Grid>
+          <ListElementName //
+            unitName={props.unit.unitName}
+            unitDestroyedd={props.unit.unitDestroyed}
+          />
           <Grid item xs={12}>
             <EquipmentList unit={props.unit} />
           </Grid>
@@ -101,8 +93,7 @@ const LossCalcUnitElement = (props) => {
           </Typography>
         </Grid>
         <Grid item>
-          {/*  BUTTONS */}
-          <ListElementBttns unit={props.unit} />
+          <UnitLossCalcBttnGroup unit={props.unit} />
         </Grid>
         <Grid item>
           <Typography variant="h6" align="center" className={classes.typographyFont}>
@@ -114,4 +105,4 @@ const LossCalcUnitElement = (props) => {
   );
 };
 
-export default LossCalcUnitElement;
+export default LostUnitListElement;

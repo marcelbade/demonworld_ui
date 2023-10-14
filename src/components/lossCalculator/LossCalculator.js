@@ -1,34 +1,17 @@
 // React
 import React, { useEffect, useState } from "react";
-import { useHistory, useLocation } from "react-router-dom";
+import { useLocation, useHistory } from "react-router-dom";
 //Material UI
-import { Button, Grid, IconButton, List, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Grid } from "@material-ui/core";
 // icons
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 // components and functions
 import LossCalcProvider from "../../contexts/LossCalculatorContext";
-import { unitCardMultiSort } from "../shared/sharedFunctions";
-import LossCalcUnitElement from "./LossCalcUnitElement";
-
-const useStyles = makeStyles({
-  typographyFont: {},
-  pointsTotal: {
-    marginLeft: "2em",
-  },
-  BackBttn: {
-    width: "2em",
-    height: "2em",
-  },
-  noListButtons: {
-    margin: "2em",
-    width: "30em",
-    height: "3em",
-  },
-});
+import CreateListScreen from "./CreateListScreen";
+import LostPointDisplay from "./LostPointDisplay";
+import ReturnButton from "./ReturnButton";
+import LostUnitList from "./LostUnitList/LostUnitList";
 
 const LossCalculator = () => {
-  const classes = useStyles();
   const history = useHistory();
   const location = useLocation();
 
@@ -46,14 +29,10 @@ const LossCalculator = () => {
   // Calculate current total point loss.
   useEffect(() => {
     const sum = calculatePointLoss();
-
     setTotalPointsLost(sum);
-  }, [list]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Set flag "unitDestroyed" to change CSS.
-  useEffect(() => {
+    // mark destroyed units
     let tempArray = [...list];
-
     tempArray.forEach((u) => setUnitDestroyedFlag(u));
   }, [list]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -75,7 +54,7 @@ const LossCalculator = () => {
   };
 
   /**
-   * Function calculates the total point cost of all the unit's items that have been lost. Note that this is only factors in items that are carried by single element. Items held by all elements of a unit are added to the unit's point cost.
+   * Function calculates the total point cost of all the unit's items that have been lost. Note that this only factors in items that are carried by single element. Items held by all elements of a unit are added to the unit's point cost.
    * @param {[itemCard]} equipmentList
    * @returns the net point los of all single element items.
    */
@@ -154,74 +133,17 @@ const LossCalculator = () => {
       {list.length !== 0 ? (
         <Grid container direction="row">
           <Grid container item xs={6} direction="column">
-            {/* RETURN BUTTON */}
             <Grid item>
-              <IconButton
-                onClick={() => {
-                  navigateToPage(location.state.lastPage);
-                }}
-              >
-                <ChevronLeftIcon className={classes.BackBttn} />
-              </IconButton>
+              <ReturnButton navigateToPage={navigateToPage} />
             </Grid>
-            {/* LIST */}
             <Grid container item alignItems>
-              <List>
-                {unitCardMultiSort(list).map((u, i) => {
-                  return (
-                    <LossCalcUnitElement
-                      unit={u} //
-                      index={i}
-                      key={u.uniqueID}
-                    />
-                  );
-                })}
-              </List>
+              <LostUnitList list={list} />
             </Grid>
           </Grid>
-          {/* TOTAL POINTS LOST */}
-          <Grid container xs={6} item direction="row" alignItems="center" justify="flex-start">
-            <Typography variant="h6" className={classes.pointsTotal}>
-              Verlorene Punkte:
-            </Typography>
-            <Typography variant="h6" className={classes.pointsTotal}>
-              {totalPointsLost.toFixed(2)}
-            </Typography>
-          </Grid>
+          <LostPointDisplay totalPointsLost={totalPointsLost} />
         </Grid>
       ) : (
-        <Grid container direction="column">
-          <Grid>
-            <IconButton
-              onClick={() => {
-                // navigate to landing page
-                navigateToPage("");
-              }}
-            >
-              <ChevronLeftIcon className={classes.BackBttn} />
-            </IconButton>
-          </Grid>
-          <Grid container direction="column" alignContent="center" justify="center">
-            <Button
-              variant="outlined"
-              className={classes.noListButtons}
-              onClick={() => {
-                navigateToPage("ListGenerator");
-              }}
-            >
-              Liste Erstellen
-            </Button>
-            <Button
-              variant="outlined"
-              className={classes.noListButtons}
-              onClick={() => {
-                //TODO open login prompt
-              }}
-            >
-              Ins Konto einloggen und Liste Laden
-            </Button>
-          </Grid>
-        </Grid>
+        <CreateListScreen navigateToPage={navigateToPage} />
       )}
     </LossCalcProvider>
   );

@@ -5,7 +5,7 @@ import { Typography, ButtonGroup, Button, Tooltip, IconButton } from "@material-
 import Stack from "@mui/material/Stack";
 import { makeStyles } from "@material-ui/core/styles";
 // icons
-import skullsIcon from "../../../icons/skulls.png";
+import skullsIcon from "../../../assets/icons/skulls.png";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
