@@ -1,39 +1,39 @@
 @font-face {
   font-family: "BreatheOfFire";
   src: local("BreatheOfFire"),
-    url("./fonts/BreatheOfFire.ttf") format("truetype");
+    url("./assets/fonts/BreatheOfFire.ttf") format("truetype");
   font-weight: normal;
 }
 @font-face {
   font-family: "gonjuring";
-  src: local("gonjuring"), url("./fonts/gonjuring.ttf") format("truetype");
+  src: local("gonjuring"), url("./assets/fonts/gonjuring.ttf") format("truetype");
   font-weight: normal;
 }
 
 @font-face {
   font-family: "notMaryKate";
-  src: local("notMaryKate"), url("./fonts/notMaryKate.ttf") format("truetype");
+  src: local("notMaryKate"), url("./assets/fonts/notMaryKate.ttf") format("truetype");
   font-weight: normal;
 }
 @font-face {
   font-family: "Berylium";
-  src: local("Berylium"), url("./fonts/Berylium.ttf") format("truetype");
+  src: local("Berylium"), url("./assets/fonts/Berylium.ttf") format("truetype");
   font-weight: normal;
 }
 @font-face {
   font-family: "Beryliumbold";
-  src: local("Beryliumbold"), url("./fonts/Beryliumbold.ttf") format("truetype");
+  src: local("Beryliumbold"), url("./assets/fonts/Beryliumbold.ttf") format("truetype");
   font-weight: normal;
 }
  
 @font-face {
   font-family: "jaapokkiRegular";
-  src: local("jaapokkiRegular"), url("./fonts/jaapokkiRegular.ttf") format("truetype");
+  src: local("jaapokkiRegular"), url("./assets/fonts/jaapokkiRegular.ttf") format("truetype");
   font-weight: normal;
 }
 @font-face {
   font-family: "jaapokkienchanceRegular";
-  src: local("jaapokkienchanceRegular"), url("./fonts/jaapokkienchanceRegular.ttf") format("truetype");
+  src: local("jaapokkienchanceRegular"), url("./assets/fonts/jaapokkienchanceRegular.ttf") format("truetype");
   font-weight: normal;
 }
  
