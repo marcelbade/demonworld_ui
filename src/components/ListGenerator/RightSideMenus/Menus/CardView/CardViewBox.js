@@ -27,26 +27,18 @@ const CardViewBox = () => {
   const [carouselCards, setCarouselCards] = useState([]);
   const [displayedCard, setDisplayedCard] = useState({});
 
-  // set the default unit card that is displayeds
-  useEffect(() => {
-    setDisplayedCard({ ...AC.statCardState.clickedUnit });
-  }, [AC.statCardState.clickedUnit]);
-
-  // Does the stat card belong to a unit with more than 1 element?
+  // set the unit card that is displayed
   useEffect(() => {
     if (AC.statCardState.clickedUnit !== undefined) {
-      const isSingleElement = isSingleElementCard(AC.statCardState.clickedUnit);
-      setIsSingleElement(isSingleElement);
+      setDisplayedCard({ ...AC.statCardState.clickedUnit });
+      setIsSingleElement(isSingleElementCard(AC.statCardState.clickedUnit));
     }
-  }, [AC.statCardState.clickedUnit]);
 
-  // if the unit has multiple state cards, store them all has carousel cards.
-  useEffect(() => {
     if (AC.statCardState.clickedUnit !== undefined && AC.statCardState.clickedUnit.isMultiStateUnit) {
       const allStateCards = AC.listOfAllFactionUnits.filter((u) => u.belongsToUnit === AC.statCardState.clickedUnit.unitName);
       setCarouselCards(allStateCards);
     }
-  }, [AC.statCardState.clickedUnit]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [AC.statCardState.clickedUnit]);
 
   /**
    * Function allwos user to cycle through the multiple stat cards counter-clockwise.
