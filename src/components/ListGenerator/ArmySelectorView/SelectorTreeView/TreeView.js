@@ -10,7 +10,7 @@ import { Fragment } from "react";
 import Tree from "./Tree";
 import { StyledTreeItem } from "./StyledTreeItem";
 // constants
-import { NO_ALLY } from "../../../../constants/allies";
+import { NO_ALLY } from "../../../../constants/factions";
 import { Typography } from "@material-ui/core";
 import { NONE } from "../../../../constants/factions";
 

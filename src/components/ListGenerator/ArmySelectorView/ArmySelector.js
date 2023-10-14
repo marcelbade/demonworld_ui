@@ -10,7 +10,7 @@ import {
   ARMIES_WITH_TWO_ALTERNATE_ARMY_PICKS,
 } from "../../../constants/factions";
 import { INPUT_TEXTS } from "../../../constants/textsAndMessages";
-import useArmyValidation from "../GeneratorComponents/validation/ArmyValidation";
+import useArmyValidation from "../../../customHooks/UseArmyValidation";
 
 const ArmySelector = () => {
   const AC = useContext(ArmyContext);

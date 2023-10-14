@@ -21,9 +21,9 @@ import MenuBox from "./RightSideMenus/MenuBox";
 import ValidationNotification from "../shared/ValidationNotification";
 // constants
 import { NONE } from "../../constants/factions";
-import { NO_ALLY } from "../../constants/allies";
+import { NO_ALLY } from "../../constants/factions";
 import ArmySelector from "./ArmySelectorView/ArmySelector";
- 
+
 const useStyles = makeStyles((theme) => ({
   displayBox: {
     [theme.breakpoints.up("md")]: {
@@ -114,7 +114,6 @@ const ListGeneratorController = () => {
     alliedUnitsBlockedbyRules: [],
     commanderIsPresent: true,
   });
-  const [disableOptionsButtons, setDisableOptionsButtons] = useState(true);
   const [showTournamentRulesMenu, setShowTournamentRulesMenu] = useState(false);
   const [tournamentOverrideRules, setTournamentOverrideRules] = useState({
     enableOverride: false,
@@ -234,7 +233,7 @@ const ListGeneratorController = () => {
   const backToMainmenu = () => {
     history.push("/");
   };
- 
+
   return fetchedFactions && fetchedItems ? (
     <ArmyProvider
       value={{
@@ -288,9 +287,7 @@ const ListGeneratorController = () => {
         resetTheState: resetTheState,
         // ARMY LIST VALIDATION
         listValidationResults: listValidationResults,
-        disableOptionsButtons: disableOptionsButtons,
         setListValidationResults: setListValidationResults,
-        setDisableOptionsButtons: setDisableOptionsButtons,
         // VALIDATION TOAST MESSAGE
         validationMessage: validationMessage,
         showToastMessage: showToastMessage,

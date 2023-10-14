@@ -10,7 +10,7 @@ import { unitCardMultiSort } from "../../../../../../shared/sharedFunctions";
 import EquipmentList from "./EquipmentList";
 import UnitElementButtons from "./UnitElementButtons";
 import ArmyListUnitEntry from "./ArmyListUnitEntry";
-import useArmyValidation from "../../../../../GeneratorComponents/validation/ArmyValidation";
+import useArmyValidation from "../../../../../../../customHooks/UseArmyValidation";
 
 const useStyles = makeStyles({
   text: {

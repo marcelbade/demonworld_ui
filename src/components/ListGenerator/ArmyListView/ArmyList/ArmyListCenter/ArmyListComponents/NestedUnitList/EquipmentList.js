@@ -7,7 +7,7 @@ import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 // components and functions
 import { ArmyContext } from "../../../../../../../contexts/armyContext";
 // custom hooks
-import useArmyValidation from "../../../../../GeneratorComponents/validation/ArmyValidation";
+import useArmyValidation from "../../../../../../../customHooks/UseArmyValidation";
 // constants
 import { MAGICAL_ITEMS } from "../../../../../../../constants/itemShopConstants";
 // clsx

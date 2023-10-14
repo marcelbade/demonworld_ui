@@ -6,7 +6,7 @@ import { Typography } from "@material-ui/core";
 // components and functions
 import { ArmyContext } from "../../../../contexts/armyContext";
 import SelectionInput from "../../../shared/selectionInput";
-import useArmyValidation from "../../GeneratorComponents/validation/ArmyValidation";
+import useArmyValidation from "../../../../customHooks/UseArmyValidation";
 
 const useStyles = makeStyles((theme) => ({
   alternativeListSelector: {

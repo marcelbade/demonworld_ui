@@ -5,7 +5,7 @@ import List from "@material-ui/core/List";
 // components and functions
 import ArmyListSubFactionEntry from "./ArmyListComponents/ArmyListSubFactionEntry";
 import { ArmyContext } from "../../../../../contexts/armyContext";
-import useArmyValidation from "../../../GeneratorComponents/validation/ArmyValidation";
+import useArmyValidation from "../../../../../customHooks/UseArmyValidation";
 
 const ArmyListBoxCenter = () => {
   const AC = useContext(ArmyContext);

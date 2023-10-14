@@ -8,7 +8,7 @@ import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 // components and functions
 import { ArmyContext } from "../../../../contexts/armyContext";
 import { calculateTotalPointCost, uuidGenerator } from "../../../shared/sharedFunctions";
-import useArmyValidation from "../../GeneratorComponents/validation/ArmyValidation";
+import useArmyValidation from "../../../../customHooks/UseArmyValidation";
 
 const useStyles = makeStyles({
   textBlock: {

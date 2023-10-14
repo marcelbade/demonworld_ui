@@ -8,7 +8,7 @@ import { ArmyContext } from "../../../../../contexts/armyContext";
 import calculateScoutingFactor from "../../../../../gameLogic/scoutFactorCalculator/scoutingFactorCalculator";
 // constants
 import { GENERAL_ERRRORS, TEXTS } from "../../../../../constants/textsAndMessages";
-import useArmyValidation from "../../../GeneratorComponents/validation/ArmyValidation";
+import useArmyValidation from "../../../../../customHooks/UseArmyValidation";
 
 // TODO: remove unneeded styles
 const useStyles = makeStyles((theme) => ({
