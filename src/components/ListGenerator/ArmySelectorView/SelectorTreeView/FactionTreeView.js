@@ -45,35 +45,10 @@ const FactionTreeView = () => {
   const AC = useContext(ArmyContext);
   const SHOW_SUBFACTIONS = ["1"];
 
-  useEffect(() => {
-    let result = false;
-
-    if (
-      !AC.armyHasAlternativeLists && //
-      !AC.armyHasSecondChoice
-    ) {
-      result = true;
-    } else if (
-      !AC.armyHasSecondChoice && //
-      AC.armyHasAlternativeLists &&
-      AC.selectedAlternativeList !== NONE
-    ) {
-      result = true;
-    } else if (
-      AC.armyHasAlternativeLists && //
-      AC.armyHasSecondChoice &&
-      AC.secondSelectedAlternativeList !== NONE
-    ) {
-      result = true;
-    }
-
-    AC.setAltArmyListSelectionComplete(result);
-  }, [AC, AC.selectedFactionName, AC.selectedAlternativeList]); // eslint-disable-line react-hooks/exhaustive-deps
-
   /**
    * The entire treeView for the army.
    */
-  return AC && AC.altArmyListSelectionComplete ? (
+  return AC && AC.alternativeArmyState.altArmyListSelectionComplete ? (
     <>
       <TreeView
         className={classes.treeViewBox}
@@ -84,19 +59,19 @@ const FactionTreeView = () => {
         <StyledTreeItem
           nodeId="1"
           label={
-            AC.selectedFactionName === NONE //
+            AC.factionState.factionName === NONE //
               ? ""
-              : AC.selectedFactionNam
+              : AC.factionState.factionName
           }
         >
           <Tree showsFaction={true} />
         </StyledTreeItem>
       </TreeView>
       {/* ALLIED FACTION */}
-      {AC.allyName !== NO_ALLY && AC.showAlly ? (
+      {AC.allyState.name !== NO_ALLY && AC.showAlly ? (
         <Fragment>
           <Typography className={classes.allyTitle} variant="h6">
-            Alliierte: {AC.allyName}
+            Alliierte: {AC.allyState.name}
           </Typography>
           <TreeView
             className={classes.treeViewBox}
@@ -105,7 +80,7 @@ const FactionTreeView = () => {
             defaultExpandIcon={<PlusSquare />}
             defaultEndIcon={<CloseSquare />}
           >
-            <StyledTreeItem nodeId="1" label={AC.allyName}>
+            <StyledTreeItem nodeId="1" label={AC.allyState.name}>
               <Tree showsFaction={false} />
             </StyledTreeItem>
           </TreeView>
