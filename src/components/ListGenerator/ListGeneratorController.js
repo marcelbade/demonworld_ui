@@ -14,9 +14,9 @@ import CancelIcon from "@material-ui/icons/Cancel";
 import SpellBookIcon from "../../assets/icons/spellbook-white.png";
 // components and functions
 import ArmyProvider from "../../contexts/armyContext";
-import FactionTreeView from "./ArmySelectorView/SelectorTreeView/TreeView";
+import FactionTreeView from "./ArmySelectorView/SelectorTreeView/FactionTreeView";
 import ArmyListBox from "./ArmyListView/ArmyListBox";
-import AlternativeArmyLists from "./GeneratorComponents/AlternativeArmyLists";
+import AlternativeArmyListBox from "./ArmySelectorView/AlternativeArmyListSelection/AlternativeArmyLists";
 import MenuBox from "./RightSideMenus/MenuBox";
 import ValidationNotification from "../shared/ValidationNotification";
 // constants
@@ -104,7 +104,6 @@ const ListGeneratorController = () => {
   const [allyName, setAllyName] = useState(NO_ALLY);
   const [distinctAllySubFactions, setDistinctAllySubFactions] = useState([]);
   const [listOfAlliedUnits, setListOfAlliedUnits] = useState([]);
-  const [showAlly, setShowAlly] = useState(true);
   // validation
   const [listValidationResults, setListValidationResults] = useState({
     unitsBlockedbyRules: [],
@@ -126,7 +125,7 @@ const ListGeneratorController = () => {
   const [showToastMessage, setShowToastMessage] = useState(false);
   // alternative lists
   const [armyHasAlternativeLists, setArmyHasAlternativeLists] = useState(false);
-  const [armyHasSecondChoice, setArmyHasSecondChoice] = useState(false);
+  const [numberOfAlternativeChoices, setNumberOfAlternativeChoices] = useState(0);
   const [selectedAlternativeList, setSelectedAlternativeList] = useState(NONE);
   const [secondSelectedAlternativeList, setSecondSelectedAlternativeList] = useState(NONE);
   const [alternateArmyListOptions, setAlternateArmyListOptions] = useState([]);
@@ -190,29 +189,6 @@ const ListGeneratorController = () => {
   };
 
   /**
-   * Function resets the entire state back to default.
-   */
-  const resetTheState = () => {
-    setSelectedUnits([]);
-    setAllEquippedItems([]);
-    setAllyName(NO_ALLY);
-    setListOfAlliedUnits([]);
-    setDistinctAllySubFactions([]);
-    setAlternateListSubFactions([]);
-    setListValidationResults({
-      ...listValidationResults,
-      unitsBlockedbyRules: [],
-      subFactionBelowMinimum: [],
-      removeUnitsNoLongerValid: [],
-      secondSubFactionMissing: [],
-      commanderIsPresent: true,
-    });
-    closeCardDisplay();
-    closeItemShop();
-    closeSecondSubFactionMenu();
-  };
-
-  /**
    * in order to work, the state setter needs a unit at the start. Since the view is not visible, the first unit in the list is used.
    */
   const closeCardDisplay = () => {
@@ -255,14 +231,12 @@ const ListGeneratorController = () => {
         allySubFactions: distinctAllySubFactions,
         listOfAlliedUnits: listOfAlliedUnits,
         distinctAllySubFactions: distinctAllySubFactions,
-        showAlly: showAlly,
-        setShowAlly: setShowAlly,
         setAllyName: setAllyName,
         setListOfAlliedUnits: setListOfAlliedUnits,
         setDistinctAllySubFactions: setDistinctAllySubFactions,
         // ALTERNATIVE LISTS
         armyHasAlternativeLists: armyHasAlternativeLists,
-        armyHasSecondChoice: armyHasSecondChoice,
+        numberOfAlternativeChoices: numberOfAlternativeChoices,
         alternateArmyListOptions: alternateArmyListOptions,
         secondAlternativeArmyOptions: secondAlternativeArmyOptions,
         selectedAlternativeList: selectedAlternativeList,
@@ -270,7 +244,7 @@ const ListGeneratorController = () => {
         altArmyListSelectionComplete: altArmyListSelectionComplete,
         alternateArmyListLabelText: alternateArmyListLabelText,
         alternateListSubFactions: alternateListSubFactions,
-        setArmyHasSecondChoice: setArmyHasSecondChoice,
+        setNumberOfAlternativeChoices: setNumberOfAlternativeChoices,
         setAlternateListSubFactions: setAlternateListSubFactions,
         setAltArmyListSelectionComplete: setAltArmyListSelectionComplete,
         setAlternateArmyListOptions: setAlternateArmyListOptions,
@@ -284,7 +258,6 @@ const ListGeneratorController = () => {
         maxPointsAllowance: maxPointsAllowance,
         setSelectedUnits: setSelectedUnits,
         setMaxPointsAllowance: setMaxPointsAllowance,
-        resetTheState: resetTheState,
         // ARMY LIST VALIDATION
         listValidationResults: listValidationResults,
         setListValidationResults: setListValidationResults,
@@ -369,12 +342,12 @@ const ListGeneratorController = () => {
           <Grid container item direction="row">
             <Grid container item direction={"column"} xs={3} className={classes.armySelectionBox}>
               <ArmySelector />
-              <AlternativeArmyLists />
+              <AlternativeArmyListBox />
               <FactionTreeView className={classes.selector} />
             </Grid>
             {/* ARMYLIST */}
             <Grid container item direction="column" justify="flex-end" xs={3} className={classes.armyListBox}>
-              <ArmyListBox setTotalPointValue={setTotalPointValue} />
+              <ArmyListBox />
             </Grid>
           </Grid>
           <MenuBox />
