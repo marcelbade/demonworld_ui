@@ -56,7 +56,7 @@ const SubFactionUnitList = (props) => {
    */
   const removeUnit = (identifier) => {
     let filtered = AC.selectedUnits.filter((u) => u.name + u.uniqueID !== identifier);
-    validation.validateList(filtered, AC.maxPointsAllowance, AC.subFactions);
+    validation.validateList(filtered, AC.maxPointsAllowance, AC.subFactions,AC.armyHasAlternativeLists);
     AC.setSelectedUnits(filtered);
   };
 

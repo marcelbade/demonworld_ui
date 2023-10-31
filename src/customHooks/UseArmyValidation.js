@@ -21,7 +21,6 @@ const useArmyValidation = () => {
     }
   };
 
-
   //TODO: memoize AC.X properties!
   const runValidation = (currentList, currentTotalPointAllowance, currentSubFactions) => {
     let validator = ruleValidation(AC.selectedFactionName);
@@ -84,10 +83,10 @@ const useArmyValidation = () => {
       case "subFaction":
         return scanSubFaction(payload);
       case "unit":
+          
         break;
       default:
-        // TODO: please make this better :D
-        throw new Error();
+        throw new Error("returnValidationResult() received an invalid type parameter");
     }
   };
 
@@ -110,32 +109,29 @@ const useArmyValidation = () => {
     return validationResult;
   };
 
-
-  
-
-  //------------------------------
+  //------------------------------//------------------------------
   const testForSecondSubFaction = () => {
     if (ARMIES_ADDITIONAL_SUBFACTIONS.includes(AC.factionName)) {
       isSecondSubFactionsValid();
     }
   };
 
-
-    /**
+  /**
    * Function validates that the second subFaction has been selected. Is only called for those armies that require it.
    */
-    const isSecondSubFactionsValid = (unit) => {
-      AC.listValidationResults.secondSubFactionMissing.forEach((u) => {
-        if (u.unitWithOutSecondSubFaction ===  unit.unitName) {
-          // setSecondSubFactionCheck({
-          //   ...secondSubFactionCheck,
-          //   isValid: false,
-          //   message: u.message,
-          // });
-        }
-      });
-    };
+  const isSecondSubFactionsValid = (unit) => {
+    AC.listValidationResults.secondSubFactionMissing.forEach((u) => {
+      if (u.unitWithOutSecondSubFaction === unit.unitName) {
+        // setSecondSubFactionCheck({
+        //   ...secondSubFactionCheck,
+        //   isValid: false,
+        //   message: u.message,
+        // });
+      }
+    });
+  };
 
+  //------------------------------//------------------------------
 
   // TODO: finish this. Make it so the list can only be safed OR printed when correct,or at least give a warning :D
   /**

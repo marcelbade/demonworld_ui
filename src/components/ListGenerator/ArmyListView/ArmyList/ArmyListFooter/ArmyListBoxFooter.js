@@ -9,6 +9,7 @@ import calculateScoutingFactor from "../../../../../gameLogic/scoutFactorCalcula
 // constants
 import { GENERAL_ERRRORS, TEXTS } from "../../../../../constants/textsAndMessages";
 import useArmyValidation from "../../../../../customHooks/UseArmyValidation";
+import { calculateTotalPointCost } from "../../../../shared/sharedFunctions";
 
 // TODO: remove unneeded styles
 const useStyles = makeStyles((theme) => ({
@@ -41,7 +42,7 @@ const ArmyListBoxFooter = () => {
     let isValid = new RegExp(/^[0-9]*$/).test(event.target.value);
     isValid ? setErrorMessage("") : setErrorMessage(GENERAL_ERRRORS.ONLY_NUMBERS);
 
-    validation.validateList(AC.selectedUnits, event.target.value, AC.subFactions);
+    validation.validateList(AC.selectedUnits, event.target.value, AC.subFactions, AC.armyHasAlternativeLists);
   };
 
   return (

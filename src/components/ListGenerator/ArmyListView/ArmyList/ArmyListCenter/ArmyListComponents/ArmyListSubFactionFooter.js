@@ -21,14 +21,12 @@ const useStyles = makeStyles({
 const ArmyListSubFactionFooter = (props) => {
   const classes = useStyles();
   const AC = useContext(ArmyContext);
-  const calculateStats = useSubFactionStats(
+  const stats = useSubFactionStats(
     props.subFactionUnits, //
     props.subFactionName,
     AC.selectedFactionName,
     AC.maxPointsAllowance
   );
-
-  const stats = calculateStats();
 
   return (
     <List>
