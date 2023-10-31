@@ -4,25 +4,10 @@ import { ruleObjectProvider } from "../gameLogic/armyListValidationRules/ruleObj
 import { calculateTotalUnitPointCost } from "../components/shared/sharedFunctions";
 
 const useSubFactionStats = (unitList, subFactionName, factionName, maxPointsAllowance) => {
-  const calculateStats = () => {
-    let total = 0;
-    if (unitList) {
-      console.log();
-
-      unitList.forEach((u) => (total += calculateTotalUnitPointCost(u)));
-    }
-
-    const limits = calculateMinAndMaxPercentages();
-    const currentPoints = displayPoints(total);
-    const currentPercent = displayPercents(total);
-
-    return {
-      currentTotal: currentPoints,
-      currentPercent: currentPercent,
-      minPercentage: limits.min, //
-      maxPercentage: limits.max,
-    };
-  };
+  let total = 0;
+  if (unitList) {
+    unitList.forEach((u) => (total += calculateTotalUnitPointCost(u)));
+  }
 
   const calculateMinAndMaxPercentages = () => {
     const ruleArray = ruleObjectProvider(factionName);
@@ -48,7 +33,16 @@ const useSubFactionStats = (unitList, subFactionName, factionName, maxPointsAllo
     return percentage * 100 === 0 ? null : `Prozent ${Number(percentage).toFixed(2)} %`;
   };
 
-  return calculateStats;
+  const limits = calculateMinAndMaxPercentages();
+  const currentPoints = displayPoints(total);
+  const currentPercent = displayPercents(total);
+
+  return {
+    currentTotal: currentPoints,
+    currentPercent: currentPercent,
+    minPercentage: limits.min,
+    maxPercentage: limits.max,
+  };
 };
 
 export default useSubFactionStats;
