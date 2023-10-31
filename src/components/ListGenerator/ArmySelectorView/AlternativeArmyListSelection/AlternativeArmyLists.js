@@ -17,19 +17,18 @@ const AlternativeArmyListBox = () => {
 
   return (
     <Fragment>
-      {AC.alternativeArmyState.armyHasAlternativeLists ? (
+      {AC.armyHasAlternativeLists && AC.numberOfAlternativeChoices > 0 ? (
         <AlternativeArmyListSelector //
           firstSelector={true}
-          options={AC.alternativeArmyState.alternateArmyListOptions}
+          options={AC.alternateArmyListOptions}
           isArmySelector={false}
           className={classes.selector}
         />
       ) : null}
-      {ARMIES_WITH_TWO_ALTERNATE_ARMY_PICKS[AC.factionState.factionName] && //
-      AC.alternativeArmyState.selectedAlternativeList !== NONE ? (
+      {AC.armyHasAlternativeLists && AC.numberOfAlternativeChoices > 1 ? (
         <AlternativeArmyListSelector //
           firstSelector={false}
-          options={AC.alternativeArmyState.secondAlternativeArmyOptions}
+          options={AC.secondAlternativeArmyOptions}
           isArmySelector={false}
           className={classes.selector}
         />

@@ -6,6 +6,7 @@ import List from "@material-ui/core/List";
 import ArmyListSubFactionEntry from "./ArmyListComponents/ArmyListSubFactionEntry";
 import { ArmyContext } from "../../../../../contexts/armyContext";
 import useArmyValidation from "../../../../../customHooks/UseArmyValidation";
+import { NO_ALLY } from "../../../../../constants/factions";
 
 const ArmyListBoxCenter = () => {
   const AC = useContext(ArmyContext);
@@ -17,7 +18,6 @@ const ArmyListBoxCenter = () => {
    * @param {String} subFaction
    * @returns
    */
-  //TODO: The part where you replace the subfaction w. the faction name should be a separate function - and it should happen in a different file!
   const filterUnitsForSubFaction = (subFaction) => {
     AC.selectedUnits.forEach((u) => (u.faction === AC.allyName ? (u.subFaction = u.faction) : null));
     return AC.selectedUnits.filter((u) => u.subFaction === subFaction);
@@ -30,12 +30,25 @@ const ArmyListBoxCenter = () => {
   const selectSubFactionList = () => {
     let subfactions;
     if (!AC.armyHasAlternativeLists) {
-      subfactions = AC.subFactions;
+      subfactions = [...AC.subFactions];
     } else if (AC.armyHasAlternativeLists) {
-      subfactions = AC.alternateListSubFactions;
+      subfactions = [...AC.alternateListSubFactions];
     }
 
-    return subfactions;
+    const result = addAlly(subfactions);
+    return result;
+  };
+
+  /**
+   * Function implements the logic to add the allied Faction as an additional subFaction.
+   * @param {[String]} subFactionList
+   * @returns a list of subfactions that includes the allied faction as element.
+   */
+  const addAlly = (subFactionList) => {
+    if (AC.allyName !== NO_ALLY && !subFactionList.includes(AC.allyName)) {
+      subFactionList.push(AC.allyName);
+    }
+    return subFactionList;
   };
 
   return (

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import PropTypes from "prop-types";
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
@@ -48,7 +48,15 @@ const FactionTreeView = () => {
   /**
    * The entire treeView for the army.
    */
-  return AC && AC.alternativeArmyState.altArmyListSelectionComplete ? (
+
+  const selectionComplete = () => {
+    if (AC.armyHasAlternativeLists) {
+      return AC.altArmyListSelectionComplete;
+    }
+    return true;
+  };
+
+  return selectionComplete() ? (
     <>
       <TreeView
         className={classes.treeViewBox}
@@ -59,19 +67,19 @@ const FactionTreeView = () => {
         <StyledTreeItem
           nodeId="1"
           label={
-            AC.factionState.factionName === NONE //
+            AC.factionName === NONE //
               ? ""
-              : AC.factionState.factionName
+              : AC.factionName
           }
         >
           <Tree showsFaction={true} />
         </StyledTreeItem>
       </TreeView>
       {/* ALLIED FACTION */}
-      {AC.allyState.name !== NO_ALLY && AC.showAlly ? (
+      {AC.allyName !== NO_ALLY ? (
         <Fragment>
           <Typography className={classes.allyTitle} variant="h6">
-            Alliierte: {AC.allyState.name}
+            Alliierte: {AC.allyName}
           </Typography>
           <TreeView
             className={classes.treeViewBox}
@@ -80,7 +88,7 @@ const FactionTreeView = () => {
             defaultExpandIcon={<PlusSquare />}
             defaultEndIcon={<CloseSquare />}
           >
-            <StyledTreeItem nodeId="1" label={AC.allyState.name}>
+            <StyledTreeItem nodeId="1" label={AC.allyName}>
               <Tree showsFaction={false} />
             </StyledTreeItem>
           </TreeView>
