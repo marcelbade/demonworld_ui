@@ -30,7 +30,7 @@ const Tree = (props) => {
   const AC = useContext(ArmyContext);
 
   /**
-   * Function selects a list of all sub factions in the army or in it's ally.
+   * Function selects a list of all sub factions for the army or for its ally.
    * If the army has alternative lists, the alternative list is
    * selected instead of the faction's list.
    * If a list of the army's sub faction is created,
@@ -41,9 +41,9 @@ const Tree = (props) => {
   const selectsSubFactionList = () => {
     let subfactions;
     if (props.showsFaction && !AC.armyHasAlternativeLists) {
-      subfactions = AC.subFactions.filter((f) => f !== AC.allyName);
+      subfactions = AC.subFactions;
     } else if (props.showsFaction && AC.armyHasAlternativeLists) {
-      subfactions = AC.alternateListSubFactions.filter((f) => f !== AC.allyName);
+      subfactions = AC.alternateListSubFactions;
     } else {
       subfactions = AC.allySubFactions;
     }
@@ -58,12 +58,14 @@ const Tree = (props) => {
    * @returns true, if all units for a sub faction are blocked.
    */
   const isSubFactionEmpty = (subFaction) => {
-    const validationResults = props.showsFaction //
+    const validationResults = props.showsFaction
       ? AC.listValidationResults.unitsBlockedbyRules
       : AC.listValidationResults.alliedUnitsBlockedbyRules;
 
+    const unitList = props.showsFaction ? AC.listOfAllFactionUnits : AC.listOfAlliedUnits;
+
     const blockedUnitNames = validationResults.map((b) => b.unitBlockedbyRules);
-    const notBlockedUnits = AC.listOfAllFactionUnits.filter((u) => u.subFaction === subFaction && !blockedUnitNames.includes(u.unitName));
+    const notBlockedUnits = unitList.filter((u) => u.subFaction === subFaction && !blockedUnitNames.includes(u.unitName));
 
     return notBlockedUnits.length === 0;
   };
@@ -75,7 +77,7 @@ const Tree = (props) => {
    */
   const createNodeID = (index) => {
     const ID_OFFSET = 2;
-    return `${ID_OFFSET}${index}`;
+    return `${ID_OFFSET}${index}`;  
   };
 
   return selectsSubFactionList()
@@ -88,19 +90,11 @@ const Tree = (props) => {
           key={sF} //
           nodeId={createNodeID(selectsSubFactionList().indexOf(sF))}
           label={sF}
-          className={
-            isSubFactionEmpty(sF) //
-              ? classes.disabledBranch
-              : classes.branch
-          }
+          className={isSubFactionEmpty(sF) ? classes.disabledBranch : classes.branch}
         >
           <LeafNodeSelector
             // tree for army or ally?
-            units={
-              props.showsFaction //
-                ? AC.listOfAllFactionUnits
-                : AC.listOfAlliedUnits
-            }
+            units={props.showsFaction ? AC.listOfAllFactionUnits : AC.listOfAlliedUnits}
             showsFaction={props.showsFaction}
             subFaction={sF}
             nodeID={createNodeID(selectsSubFactionList().indexOf(sF))}
