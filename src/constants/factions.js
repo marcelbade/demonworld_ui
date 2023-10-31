@@ -17,37 +17,6 @@ export const NO_ALLY = "NO_ALLY";
 // ALL FACTIONS
 export const ALL_FACTIONS_ARRAY = [DUNKELFELFEN, ELFEN, GOBLINS, IMPERIUM, ISHTAK, NORWINGER, ORKS, THAIN, UNTOTE, ZWERGE, ECHSENMENSCHEN];
 
-// ARMIES WITH ALTERNATIVE LISTS
-export const ARMIES_WITH_ALTERNATIVE_LISTS = {
-  NONE: false,
-  Dunkelelfen: false,
-  Echsenmenschen: false,
-  Elfen: false,
-  Goblins: false,
-  Imperium: true,
-  Ishtak: false,
-  Orks: true,
-  Norwinger: false,
-  Thain: false,
-  Untote: false,
-  Zwerge: true,
-};
-
-export const ARMIES_WITH_TWO_ALTERNATE_ARMY_PICKS = {
-  NONE: false,
-  Dunkelelfen: false,
-  Echsenmenschen: false,
-  Elfen: false,
-  Goblins: false,
-  Imperium: false,
-  Ishtak: false,
-  Orks: false,
-  Norwinger: false,
-  Thain: false,
-  Untote: false,
-  Zwerge: true,
-};
-
 export const ARMY_ALTERNATIVES_LIST_MAPPER = {
   NONE: [],
   Dunkelelfen: [],
