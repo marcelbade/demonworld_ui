@@ -4,10 +4,11 @@ import SelectionInput from "../../shared/selectionInput";
 import { ArmyContext } from "../../../contexts/armyContext";
 // constants
 import {
-  ALL_FACTIONS_ARRAY,
+  ALL_FACTIONS_ARRAY, //
   ALTERNATIVE_ARMY_SELECTION_TEXT,
-  ARMIES_WITH_ALTERNATIVE_LISTS,
-  ARMIES_WITH_TWO_ALTERNATE_ARMY_PICKS,
+  ARMY_ALTERNATIVES_LIST_MAPPER,
+  NONE,
+  NO_ALLY,
 } from "../../../constants/factions";
 import { INPUT_TEXTS } from "../../../constants/textsAndMessages";
 import useArmyValidation from "../../../customHooks/UseArmyValidation";
@@ -16,13 +17,18 @@ const ArmySelector = () => {
   const AC = useContext(ArmyContext);
   const validation = useArmyValidation();
 
+  const handleInput = (value) => {
+    setFactionProperties(value);
+  };
+
   /**
    * Function sets all properties of a faction when it is selected.
-   * @param {String} factioName
+   * @param {String} factionName
    */
-  const setFactionProperties = (factioName) => {
-    AC.resetTheState();
-    const factionObj = AC.fetchedFactions.filter((f) => f.factionName === factioName)[0];
+  const setFactionProperties = (factionName) => {
+    const factionObj = AC.fetchedFactions.filter((f) => f.factionName === factionName)[0];
+
+    resetTheState();
 
     AC.setSelectedFactionName(factionObj.factionName);
     AC.setListOfAllFactionUnits(factionObj.units);
@@ -34,21 +40,50 @@ const ArmySelector = () => {
       AC.setDistinctAllySubFactions(factionObj.allySubFactions);
     }
 
-    AC.setArmyHasAlternativeLists(ARMIES_WITH_ALTERNATIVE_LISTS[factioName]);
-    AC.setArmyHasSecondChoice(ARMIES_WITH_TWO_ALTERNATE_ARMY_PICKS[factioName]);
-    AC.setAlternateArmyListLabelText(ALTERNATIVE_ARMY_SELECTION_TEXT[factioName]);
+    if (factionObj.hasAlternativeLists) {
+      AC.setArmyHasAlternativeLists(factionObj.hasAlternativeLists);
+      AC.setNumberOfAlternativeChoices(factionObj.numberOfAlternativeArmySelections);
+      AC.setAlternateArmyListOptions(ARMY_ALTERNATIVES_LIST_MAPPER[factionName]);
+      AC.setAlternateArmyListLabelText(ALTERNATIVE_ARMY_SELECTION_TEXT[factionName]);
+    }
+  };
+
+  /**
+   * Function resets the entire state back to default.
+   */
+  const resetTheState = () => {
+    AC.setSelectedUnits([]);
+    AC.setAllEquippedItems([]);
+    AC.setAllyName(NO_ALLY);
+    AC.setListOfAlliedUnits([]);
+    AC.setDistinctAllySubFactions([]);
+
+    AC.setSelectedAlternativeList(NONE);
+    AC.setSecondSelectedAlternativeList(NONE);
+    AC.setAlternateListSubFactions([]);
+    AC.setArmyHasAlternativeLists(false);
+    AC.setAltArmyListSelectionComplete(false);
+
+    AC.setListValidationResults({
+      ...AC.listValidationResults,
+      unitsBlockedbyRules: [],
+      subFactionBelowMinimum: [],
+      commanderIsPresent: false,
+      removeUnitsNoLongerValid: [],
+      secondSubFactionMissing: [],
+      alliedUnitsBlockedbyRules: [],
+    });
+    AC.closeCardDisplay();
+    AC.closeItemShop();
+    AC.closeSecondSubFactionMenu();
   };
 
   useEffect(() => {
-    validation.validateList([], AC.maxPointsAllowance, AC.subFactions);
+    validation.validateList([], AC.maxPointsAllowance, AC.subFactions, AC.armyHasAlternativeLists);
   }, [AC.selectedFactionName]);
 
-  const handleInput = (value) => {
-    setFactionProperties(value);
-  };
-
   return (
-    <SelectionInput //  
+    <SelectionInput //
       filterFunction={handleInput}
       isArmySelector={true}
       options={ALL_FACTIONS_ARRAY}
