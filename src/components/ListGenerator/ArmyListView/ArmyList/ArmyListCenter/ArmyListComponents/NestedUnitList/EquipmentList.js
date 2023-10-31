@@ -53,7 +53,7 @@ const EquipmentList = (props) => {
       }
     }
 
-    validation.validateList(temp, AC.maxPointsAllowance, AC.subFactions);
+    validation.validateList(temp, AC.maxPointsAllowance, AC.subFactions,AC.armyHasAlternativeLists);
     AC.setSelectedUnits(temp);
   };
 
