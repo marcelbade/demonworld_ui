@@ -83,7 +83,7 @@ const Tree = (props) => {
    */
   const createNodeID = (index) => {
     const ID_OFFSET = 2;
-    return `${ID_OFFSET}${index}`;  
+    return `${ID_OFFSET}${index}`;
   };
 
   return selectsSubFactionList()

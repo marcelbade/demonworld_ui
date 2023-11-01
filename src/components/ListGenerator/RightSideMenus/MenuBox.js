@@ -7,12 +7,15 @@ import TournamentRulesMenu from "./Menus/TournamentRulesMenu/TournamentRulesMenu
 import OptionButtons from "./Menus/OptionButtons/OptionButtons";
 import ItemShop from "./Menus/ItemShop/ItemShop";
 import SecondSubFactionMenu from "./Menus/SecondSubfactionMenu/SecondSubfactionMenu";
+import CardViewBox from "./Menus/CardView/CardViewBox";
+import { ARMIES_ADDITIONAL_SUBFACTIONS, ARMIES_ADDITIONAL_SUBFACTIONS_BUTTON_CAPTION } from "../../../constants/factions";
+// contexts
 import { ArmyContext } from "../../../contexts/armyContext";
 import { TournamentRulesContext } from "../../../contexts/tournamentRulesContext";
 import { SecondSubFactionContext } from "../../../contexts/secondSubFactionContext";
-import CardViewBox from "./Menus/CardView/CardViewBox";
-import { ARMIES_ADDITIONAL_SUBFACTIONS, ARMIES_ADDITIONAL_SUBFACTIONS_BUTTON_CAPTION } from "../../../constants/factions";
 import { RightMenuContext } from "../../../contexts/rightMenuContext";
+
+
 
 const MenuBox = () => {
   const AC = useContext(ArmyContext);

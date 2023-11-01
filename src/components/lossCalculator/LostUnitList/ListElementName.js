@@ -1,11 +1,8 @@
 // React
-import React, { useContext } from "react";
+import React from "react";
 //Material UI
 import { Typography, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-// components and functions
-import { LossCalcContext } from "../../../contexts/LossCalculatorContext";
-
 // clsx
 import clsx from "clsx";
 
@@ -29,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
 
 const ListElementName = (props) => {
   const classes = useStyles();
-  const calcContext = useContext(LossCalcContext);
 
   return (
     <Grid item>
