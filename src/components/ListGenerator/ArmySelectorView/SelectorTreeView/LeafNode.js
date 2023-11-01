@@ -52,9 +52,6 @@ const LeafNode = (props) => {
     tempArray.push(enrichUnit(props.unit));
     AC.setSelectedUnits(tempArray);
 
-    let points = calculateTotalPointCost(tempArray);
-    AC.setTotalPointValue(points);
-
     validation.validateList(tempArray, AC.maxPointsAllowance, AC.subFactions, AC.armyHasAlternativeLists);
   };
 
@@ -64,8 +61,6 @@ const LeafNode = (props) => {
   const displayBttn = (isBlocked) => {
     return isBlocked ? classes.blockedBttn : classes.unblockedBttn;
   };
-
-  console.log(AC.selectedUnits);
 
   return (
     <Grid container direction="row" alignItems="center" justify="space-around">
