@@ -6,7 +6,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import AlternativeArmyListSelector from "./AlternativeArmyListSelector";
 import { AlternativeListContext } from "../../../../contexts/alternativeListContext";
 
-const useStyles = makeStyles((theme) => ({}));
+const useStyles = makeStyles(() => ({}));
 
 const AlternativeArmyListBox = () => {
   const ALC = useContext(AlternativeListContext);
@@ -17,7 +17,6 @@ const AlternativeArmyListBox = () => {
       {ALC.armyHasAlternativeLists && ALC.numberOfAlternativeChoices > 0 ? (
         <AlternativeArmyListSelector //
           firstSelector={true}
-          options={ALC.alternateArmyListOptions}
           isArmySelector={false}
           className={classes.selector}
         />
@@ -25,7 +24,6 @@ const AlternativeArmyListBox = () => {
       {ALC.armyHasAlternativeLists && ALC.numberOfAlternativeChoices > 1 ? (
         <AlternativeArmyListSelector //
           firstSelector={false}
-          options={ALC.secondAlternativeArmyOptions}
           isArmySelector={false}
           className={classes.selector}
         />
