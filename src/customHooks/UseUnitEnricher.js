@@ -58,7 +58,7 @@ const useUnitEnricher = (unit) => {
   const addSecondSubFactionFlagAndMessage = () => {
     return {
       ...unit,
-      secondSubFaction: {
+      secondSubFactionState: {
         hasSecondSubFaction: false,
         errorMessage: "",
       },
