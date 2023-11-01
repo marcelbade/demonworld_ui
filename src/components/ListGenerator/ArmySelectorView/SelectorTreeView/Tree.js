@@ -4,9 +4,12 @@ import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core/styles";
 // components and functions
 import { ArmyContext } from "../../../../contexts/armyContext";
+import { ValidationContext } from "../../../../contexts/validationContext";
 import { TransitionComponent } from "./treeViewFunctions";
 import LeafNodeSelector from "./LeafNodeSelector";
 import { StyledTreeItem } from "./StyledTreeItem";
+import { AlternativeListContext } from "../../../../contexts/alternativeListContext";
+import { AllyContext } from "../../../../contexts/allyContext";
 
 TransitionComponent.propTypes = {
   /**
@@ -28,6 +31,9 @@ const useStyles = makeStyles({
 const Tree = (props) => {
   const classes = useStyles();
   const AC = useContext(ArmyContext);
+  const VC = useContext(ValidationContext);
+  const ALC = useContext(AlternativeListContext);
+  const AYC = useContext(AllyContext);
 
   /**
    * Function selects a list of all sub factions for the army or for its ally.
@@ -40,12 +46,12 @@ const Tree = (props) => {
    */
   const selectsSubFactionList = () => {
     let subfactions;
-    if (props.showsFaction && !AC.armyHasAlternativeLists) {
+    if (props.isFaction && !ALC.armyHasAlternativeLists) {
       subfactions = AC.subFactions;
-    } else if (props.showsFaction && AC.armyHasAlternativeLists) {
-      subfactions = AC.alternateListSubFactions;
+    } else if (props.isFaction && ALC.armyHasAlternativeLists) {
+      subfactions = ALC.alternateListSubFactions;
     } else {
-      subfactions = AC.allySubFactions;
+      subfactions = AYC.allySubFactions;
     }
 
     return subfactions;
@@ -58,11 +64,11 @@ const Tree = (props) => {
    * @returns true, if all units for a sub faction are blocked.
    */
   const isSubFactionEmpty = (subFaction) => {
-    const validationResults = props.showsFaction
-      ? AC.listValidationResults.unitsBlockedbyRules
-      : AC.listValidationResults.alliedUnitsBlockedbyRules;
+    const validationResults = props.isFaction
+      ? VC.listValidationResults.unitsBlockedbyRules
+      : VC.listValidationResults.alliedUnitsBlockedbyRules;
 
-    const unitList = props.showsFaction ? AC.listOfAllFactionUnits : AC.listOfAlliedUnits;
+    const unitList = props.isFaction ? AC.listOfAllFactionUnits : AYC.listOfAlliedUnits;
 
     const blockedUnitNames = validationResults.map((b) => b.unitBlockedbyRules);
     const notBlockedUnits = unitList.filter((u) => u.subFaction === subFaction && !blockedUnitNames.includes(u.unitName));
@@ -94,8 +100,8 @@ const Tree = (props) => {
         >
           <LeafNodeSelector
             // tree for army or ally?
-            units={props.showsFaction ? AC.listOfAllFactionUnits : AC.listOfAlliedUnits}
-            showsFaction={props.showsFaction}
+            units={props.isFaction ? AC.listOfAllFactionUnits : AYC.listOfAlliedUnits}
+            isFaction={props.isFaction}
             subFaction={sF}
             nodeID={createNodeID(selectsSubFactionList().indexOf(sF))}
           />

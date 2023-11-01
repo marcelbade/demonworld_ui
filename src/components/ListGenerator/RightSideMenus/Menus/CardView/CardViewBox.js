@@ -7,6 +7,7 @@ import { Grid, IconButton } from "@material-ui/core";
 import CancelIcon from "@material-ui/icons/Cancel";
 // components and functions
 import { ArmyContext } from "../../../../../contexts/armyContext";
+import { RightMenuContext } from "../../../../../contexts/rightMenuContext";
 import CardView from "./CardView";
 import { isSingleElementCard } from "../../../../shared/sharedFunctions";
 
@@ -20,6 +21,7 @@ const useStyles = makeStyles({
 
 const CardViewBox = () => {
   const AC = useContext(ArmyContext);
+  const RC = useContext(RightMenuContext);
   const classes = useStyles();
   const COLUMN = "column";
 
@@ -29,16 +31,16 @@ const CardViewBox = () => {
 
   // set the unit card that is displayed
   useEffect(() => {
-    if (AC.statCardState.clickedUnit !== undefined) {
-      setDisplayedCard({ ...AC.statCardState.clickedUnit });
-      setIsSingleElement(isSingleElementCard(AC.statCardState.clickedUnit));
+    if (RC.statCardState.clickedUnit !== undefined) {
+      setDisplayedCard({ ...RC.statCardState.clickedUnit });
+      setIsSingleElement(isSingleElementCard(RC.statCardState.clickedUnit));
     }
 
-    if (AC.statCardState.clickedUnit !== undefined && AC.statCardState.clickedUnit.isMultiStateUnit) {
-      const allStateCards = AC.listOfAllFactionUnits.filter((u) => u.belongsToUnit === AC.statCardState.clickedUnit.unitName);
+    if (RC.statCardState.clickedUnit !== undefined && RC.statCardState.clickedUnit.isMultiStateUnit) {
+      const allStateCards = AC.listOfAllFactionUnits.filter((u) => u.belongsToUnit === RC.statCardState.clickedUnit.unitName);
       setCarouselCards(allStateCards);
     }
-  }, [AC.statCardState.clickedUnit]);
+  }, [RC.statCardState.clickedUnit]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * Function allwos user to cycle through the multiple stat cards counter-clockwise.
@@ -71,16 +73,16 @@ const CardViewBox = () => {
       <Grid item>
         <IconButton
           onClick={() => {
-            AC.closeCardDisplay();
+            RC.closeCardDisplay();
           }}
         >
           <CancelIcon />
         </IconButton>
       </Grid>
       <Grid container item>
-        {AC.statCardState.clickedUnit !== undefined ? (
+        {RC.statCardState.clickedUnit !== undefined ? (
           <CardView
-            isMultiStateCard={AC.statCardState.clickedUnit?.isMultiStateUnit}
+            isMultiStateCard={RC.statCardState.clickedUnit?.isMultiStateUnit}
             cardData={displayedCard}
             alignment={COLUMN}
             isSingleElement={isSingleElement}

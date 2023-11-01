@@ -7,7 +7,7 @@ import { Grid, IconButton, Typography } from "@material-ui/core";
 // icons
 import HelpIcon from "@material-ui/icons/Help";
 // components and functions
-import { ArmyContext } from "../../../../../../contexts/armyContext";
+import { ValidationContext } from "../../../../../../contexts/validationContext";
 
 const useStyles = makeStyles(() => ({
   HeaderValidStyle: {
@@ -28,7 +28,7 @@ const useStyles = makeStyles(() => ({
 
 const ArmyListSubFactionHeader = (props) => {
   const classes = useStyles();
-  const AC = useContext(ArmyContext);
+  const VC = useContext(ValidationContext);
 
   return (
     <Grid container>
@@ -48,8 +48,8 @@ const ArmyListSubFactionHeader = (props) => {
           </Typography>
           <IconButton
             onClick={() => {
-              AC.setValidationMessage(props.message);
-              AC.setShowToastMessage(true);
+              VC.setValidationMessage(props.message);
+              VC.setShowToastMessage(true);
             }}
           >
             <HelpIcon />

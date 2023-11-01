@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Typography, TextField, InputAdornment, Grid } from "@material-ui/core";
 // components and functions
 import { ArmyContext } from "../../../../../contexts/armyContext";
+import { SelectionContext } from "../../../../../contexts/selectionContext";
 import calculateScoutingFactor from "../../../../../gameLogic/scoutFactorCalculator/scoutingFactorCalculator";
 // constants
 import { GENERAL_ERRRORS, TEXTS } from "../../../../../constants/textsAndMessages";
@@ -28,23 +29,25 @@ const useStyles = makeStyles((theme) => ({
 const ArmyListBoxFooter = () => {
   const classes = useStyles();
   const AC = useContext(ArmyContext);
+  const SEC = useContext(SelectionContext)
+
   const validation = useArmyValidation();
 
   const [errorMessage, setErrorMessage] = useState("");
 
-  let netPoints = calculateTotalPointCost(AC.selectedUnits);
+  let netPoints = calculateTotalPointCost(SEC.selectedUnits);
 
   /**
    * Function takes the user input for maximum point allowance, validates it, and sets the state.
    * @param {event object} event
    */
   const changeMaximumPointValue = (event) => {
-    AC.setMaxPointsAllowance(event.target.value);
+    SEC.setMaxPointsAllowance(event.target.value);
 
     let isValid = new RegExp(/^[0-9]*$/).test(event.target.value);
     isValid ? setErrorMessage("") : setErrorMessage(GENERAL_ERRRORS.ONLY_NUMBERS);
 
-    validation.validateList(AC.selectedUnits, event.target.value, AC.subFactions, AC.armyHasAlternativeLists);
+    validation.validateList(SEC.selectedUnits, event.target.value, AC.subFactions, ALC.armyHasAlternativeLists);
   };
 
   return (
@@ -55,7 +58,7 @@ const ArmyListBoxFooter = () => {
           <TextField
             id="outlined-basic"
             autoComplete="off"
-            value={AC.maxPointsAllowance}
+            value={SEC.maxPointsAllowance}
             InputProps={{
               style: {
                 fontSize: "20px",
@@ -73,7 +76,7 @@ const ArmyListBoxFooter = () => {
           />
         </Grid>
         <Typography className={classes.total}>
-          {TEXTS.SCOUTING_FACTOR} {calculateScoutingFactor(AC.selectedUnits)}
+          {TEXTS.SCOUTING_FACTOR} {calculateScoutingFactor(SEC.selectedUnits)}
         </Typography>
       </Grid>
     </Fragment>

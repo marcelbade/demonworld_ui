@@ -25,7 +25,7 @@ const ArmyListSubFactionFooter = (props) => {
     props.subFactionUnits, //
     props.subFactionName,
     AC.selectedFactionName,
-    AC.maxPointsAllowance
+    SEC.maxPointsAllowance
   );
 
   return (

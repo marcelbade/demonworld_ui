@@ -6,6 +6,7 @@ import { ArmyContext } from "../../../../contexts/armyContext";
 import { unitCardMultiSort } from "../../../shared/sharedFunctions";
 import { StyledTreeItem } from "./StyledTreeItem";
 import LeafNode from "./LeafNode";
+import useArmyValidation from "../../../../customHooks/UseArmyValidation";
 
 const useStyles = makeStyles({
   node: {
@@ -23,35 +24,7 @@ const useStyles = makeStyles({
 const LeafNodeSelector = (props) => {
   const classes = useStyles();
   const AC = useContext(ArmyContext);
-
-  const blockResults = props.showsFaction
-    ? AC.listValidationResults.unitsBlockedbyRules
-    : AC.listValidationResults.alliedUnitsBlockedbyRules;
-
-  // no need for a useState hook - must be recalculated for every rerender!
-  let blockedUnitNames = [];
-
-  // collect all blocked units in one array
-  blockResults.forEach((bR) => {
-    blockedUnitNames.push(bR.unitBlockedbyRules);
-  });
-
-  /**
-   * Find & return the reason the unit was blocked
-   * @param {[*]} blockResults list
-   * @param {String} name of the unit
-   * @returns the block message as a String.
-   */
-  const findBlockMessage = (blockResults, name) => {
-    let message;
-    blockResults.forEach((singleResult) => {
-      if (name === singleResult.unitBlockedbyRules) {
-        message = singleResult.message;
-      }
-    });
-
-    return message;
-  };
+  const validation = useArmyValidation();
 
   /**
    * Functions filters the units down to the sub faction and removes all additional stat cards for multi state units. Then, it sorts the result.
@@ -80,25 +53,26 @@ const LeafNodeSelector = (props) => {
     return `${props.parentNodeId}${AC.subFactions.indexOf(unit)}`;
   };
 
-  return filterAndSortSubFaction().map((u) => {
-    // unit blocked
-    return blockedUnitNames.includes(u.unitName) ? (
-      <LeafNode
-        key={u.unitName}
-        unit={u}
-        isBlocked={true} //
-        blockMessage={findBlockMessage(blockResults, u.unitName)}
-      />
-    ) : (
-      // unit not blocked
-      <StyledTreeItem
-        key={u.unitName}
-        className={classes.node}
-        nodeId={createLeafNodeId(u)} //
-        label={<LeafNode unit={u} isBlocked={false} />}
-      ></StyledTreeItem>
-    );
-  });
+  return filterAndSortSubFaction()
+    .map((u) => validation.returnValidationResult("unit", u, props.isFaction))
+    .map((validationObj) => {
+      return validationObj.valid ? (
+        // unit not blocked
+        <StyledTreeItem
+          key={validationObj.unit.unitName}
+          className={classes.node}
+          nodeId={createLeafNodeId(validationObj.unit)}
+          label={<LeafNode unit={validationObj.unit} isBlocked={false} />}
+        ></StyledTreeItem>
+      ) : (
+        <LeafNode
+          key={validationObj.unit.unitName}
+          unit={validationObj.unit}
+          isBlocked={true}
+          blockMessage={validationObj.validationMessage}
+        />
+      );
+    });
 };
 
 export default LeafNodeSelector;

@@ -7,7 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 // Icons
 import CancelIcon from "@material-ui/icons/Cancel";
 // context
-import { ArmyContext } from "../../../../../contexts/armyContext";
+import { TournamentRulesContext } from "../../../../../contexts/tournamentRulesContext";
 // constants
 import { GENERAL_ERRRORS, TOURNAMENT_RULES } from "../../../../../constants/textsAndMessages";
 
@@ -30,7 +30,7 @@ const useStyles = makeStyles({
 
 const TournamentRulesMenu = () => {
   const classes = useStyles();
-  const AC = useContext(ArmyContext);
+  const TC = useContext(TournamentRulesContext);
 
   const [errorMessage, setErrorMessage] = useState({
     maxHeroValue: "",
@@ -42,20 +42,20 @@ const TournamentRulesMenu = () => {
   });
 
   const toggleAllButtons = (event) => {
-    AC.setTournamentOverrideRules({ ...AC.tournamentOverrideRules, enableOverride: event.target.checked });
+    TC.setTournamentOverrideRules({ ...TC.tournamentOverrideRules, enableOverride: event.target.checked });
   };
 
   const changeHeroPercentage = (event) => {
-    AC.setTournamentOverrideRules({ ...AC.tournamentOverrideRules, maxHeroValue: event.target.value });
+    TC.setTournamentOverrideRules({ ...TC.tournamentOverrideRules, maxHeroValue: event.target.value });
     validate(event);
   };
   const changeMaxNumber = (event) => {
-    AC.setTournamentOverrideRules({ ...AC.tournamentOverrideRules, maxNumber: event.target.value });
+    TC.setTournamentOverrideRules({ ...TC.tournamentOverrideRules, maxNumber: event.target.value });
     validate(event);
   };
 
   const enforceUniqueRule = (event) => {
-    AC.setTournamentOverrideRules({ ...AC.tournamentOverrideRules, uniquesOnlyOnce: event.target.checked });
+    TC.setTournamentOverrideRules({ ...TC.tournamentOverrideRules, uniquesOnlyOnce: event.target.checked });
     validate(event);
   };
 
@@ -73,7 +73,7 @@ const TournamentRulesMenu = () => {
       <Grid>
         <IconButton
           onClick={() => {
-            AC.setShowTournamentRulesMenu(false);
+            TC.setShowTournamentRulesMenu(false);
           }}
         >
           <CancelIcon />
@@ -83,20 +83,20 @@ const TournamentRulesMenu = () => {
         <FormControl component="fieldset" variant="standard">
           <FormLabel component="legend">Turnierregeln</FormLabel>
           <FormGroup>
-            <FormControlLabel control={<Switch checked={AC.tournamentOverrideRules.enableOverride} onChange={toggleAllButtons} />} />
+            <FormControlLabel control={<Switch checked={TC.tournamentOverrideRules.enableOverride} onChange={toggleAllButtons} />} />
           </FormGroup>
         </FormControl>
       </Grid>
       <Grid item>
-        <Typography className={AC.tournamentOverrideRules.enableOverride ? classes.enabledBttnText : classes.disbledBttnText}>
+        <Typography className={TC.tournamentOverrideRules.enableOverride ? classes.enabledBttnText : classes.disbledBttnText}>
           {TOURNAMENT_RULES.MAX_POINTS_FOR_HERO}
         </Typography>
         <TextField
           id="outlined-basic"
           name="maxHeroValue"
           autoComplete="off"
-          value={AC.tournamentOverrideRules.maxHeroValue}
-          disabled={!AC.tournamentOverrideRules.enableOverride}
+          value={TC.tournamentOverrideRules.maxHeroValue}
+          disabled={!TC.tournamentOverrideRules.enableOverride}
           InputProps={{
             style: {
               fontSize: "20px",
@@ -113,15 +113,15 @@ const TournamentRulesMenu = () => {
         />
       </Grid>
       <Grid item>
-        <Typography className={AC.tournamentOverrideRules.enableOverride ? classes.enabledBttnText : classes.disbledBttnText}>
+        <Typography className={TC.tournamentOverrideRules.enableOverride ? classes.enabledBttnText : classes.disbledBttnText}>
           {TOURNAMENT_RULES.HOW_MANY_TIMES}
         </Typography>
         <TextField
           id="outlined-basic"
           name="maxNumber"
           autoComplete="off"
-          value={AC.tournamentOverrideRules.maxNumber}
-          disabled={!AC.tournamentOverrideRules.enableOverride}
+          value={TC.tournamentOverrideRules.maxNumber}
+          disabled={!TC.tournamentOverrideRules.enableOverride}
           InputProps={{
             style: {
               fontSize: "20px",
@@ -140,7 +140,7 @@ const TournamentRulesMenu = () => {
       <Grid item>
         <FormControl component="fieldset" variant="standard">
           <FormLabel
-            className={AC.tournamentOverrideRules.enableOverride ? classes.enabledBttnText : classes.disbledBttnText}
+            className={TC.tournamentOverrideRules.enableOverride ? classes.enabledBttnText : classes.disbledBttnText}
             component="legend"
           >
             {TOURNAMENT_RULES.ENFORCE_UNIQUE_RULE}
@@ -149,8 +149,8 @@ const TournamentRulesMenu = () => {
             <FormControlLabel
               control={
                 <Switch
-                  disabled={!AC.tournamentOverrideRules.enableOverride} //
-                  checked={AC.tournamentOverrideRules.uniquesOnlyOnce}
+                  disabled={!TC.tournamentOverrideRules.enableOverride} //
+                  checked={TC.tournamentOverrideRules.uniquesOnlyOnce}
                   onChange={enforceUniqueRule}
                 />
               }

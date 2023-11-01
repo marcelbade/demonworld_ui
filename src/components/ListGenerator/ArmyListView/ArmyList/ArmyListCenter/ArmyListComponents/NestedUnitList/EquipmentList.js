@@ -6,6 +6,7 @@ import { makeStyles, List, ListItemText, ListItem, Button } from "@material-ui/c
 import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 // components and functions
 import { ArmyContext } from "../../../../../../../contexts/armyContext";
+import { ItemContext } from "../../../../../../../contexts/itemContext";
 // custom hooks
 import useArmyValidation from "../../../../../../../customHooks/UseArmyValidation";
 // constants
@@ -37,6 +38,7 @@ const EquipmentList = (props) => {
   // eslint-disable-next-line no-unused-vars
   const classes = useStyles();
   const AC = useContext(ArmyContext);
+  const IC = useContext(ItemContext);
   const validation = useArmyValidation();
 
   /**
@@ -45,7 +47,7 @@ const EquipmentList = (props) => {
    * @param {int} position
    */
   const removeItem = (identifier, position) => {
-    let temp = [...AC.selectedUnits];
+    let temp = [...SEC.selectedUnits];
 
     for (let i = 0; i < temp.length; i++) {
       if (temp[i].name + temp[i].uniqueID === identifier) {
@@ -53,14 +55,14 @@ const EquipmentList = (props) => {
       }
     }
 
-    validation.validateList(temp, AC.maxPointsAllowance, AC.subFactions,AC.armyHasAlternativeLists);
-    AC.setSelectedUnits(temp);
+    validation.validateList(temp, SEC.maxPointsAllowance, AC.subFactions,ALC.armyHasAlternativeLists);
+    SEC.setSelectedUnits(temp);
   };
 
   const removeItemFromCentralList = (item) => {
-    let temp = [...AC.allEquippedItems];
+    let temp = [...IC.allEquippedItems];
     temp = temp.filter((i) => !i === item.itemName);
-    AC.setAllEquippedItems(temp);
+    IC.setAllEquippedItems(temp);
   };
 
   /**
@@ -70,7 +72,7 @@ const EquipmentList = (props) => {
    * @param {*} newFlagValue booleam flag. True, if the item is added, false if the item is removed.
    */
   const toggleUnitsItemTypeFlags = (item, newFlagValue) => {
-    let tempObj = { ...AC.unitSelectedForShop };
+    let tempObj = { ...IC.unitSelectedForShop };
 
     if (item.everyElement) {
       tempObj.equipmentTypes.unit = newFlagValue;
@@ -80,7 +82,7 @@ const EquipmentList = (props) => {
       tempObj.equipmentTypes[item.itemType] = newFlagValue;
     }
 
-    AC.setUnitSelectedForShop({
+    IC.setUnitSelectedForShop({
       ...tempObj,
     });
   };

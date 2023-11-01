@@ -8,6 +8,7 @@ import HelpIcon from "@material-ui/icons/Help";
 import CancelIcon from "@material-ui/icons/Cancel";
 // components and functions
 import { ArmyContext } from "../../../../../contexts/armyContext";
+import { ValidationContext } from "../../../../../contexts/validationContext";
 // constants
 import { TOOLTIPS, VALIDATION } from "../../../../../constants/textsAndMessages";
 import { NONE } from "../../../../../constants/factions";
@@ -17,6 +18,7 @@ const useStyles = makeStyles({});
 const ArmyListBoxHeader = () => {
   const classes = useStyles();
   const AC = useContext(ArmyContext);
+  const VC = useContext(ValidationContext);
 
   /**
    * Function takes the user input for maximum point allowance, validates it, and sets the state.
@@ -41,7 +43,7 @@ const ArmyListBoxHeader = () => {
 
   return (
     <Grid container flexdirection="row" alignItems="center">
-      {!AC.listValidationResults.commanderIsPresent ? (
+      {!VC.listValidationResults.commanderIsPresent ? (
         <TextField
           id="outlined-basic"
           autoComplete="off"
@@ -82,17 +84,17 @@ const ArmyListBoxHeader = () => {
           className={classes.button}
           variant="outlined"
           onClick={() => {
-            AC.setSelectedUnits([]);
+            SEC.setSelectedUnits([]);
           }}
         >
           <CancelIcon />
         </IconButton>
       </Tooltip>
-      {!AC.listValidationResults.commanderIsPresent ? (
+      {!VC.listValidationResults.commanderIsPresent ? (
         <IconButton
           onClick={() => {
-            AC.setValidationMessage(VALIDATION.NO_COMMANDER_WARNING);
-            AC.setShowToastMessage(true);
+            VC.setValidationMessage(VALIDATION.NO_COMMANDER_WARNING);
+            VC.setShowToastMessage(true);
           }}
         >
           <HelpIcon />

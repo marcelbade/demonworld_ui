@@ -13,6 +13,8 @@ import { StyledTreeItem } from "./StyledTreeItem";
 import { NO_ALLY } from "../../../../constants/factions";
 import { Typography } from "@material-ui/core";
 import { NONE } from "../../../../constants/factions";
+import { AlternativeListContext } from "../../../../contexts/alternativeListContext";
+import { AllyContext } from "../../../../contexts/allyContext";
 
 TransitionComponent.propTypes = {
   // Show the component; triggers the enter or exit states
@@ -43,6 +45,9 @@ const useStyles = makeStyles((theme) => ({
 const FactionTreeView = () => {
   const classes = useStyles();
   const AC = useContext(ArmyContext);
+  const ALC = useContext(AlternativeListContext);
+  const AYC = useContext(AllyContext);
+
   const SHOW_SUBFACTIONS = ["1"];
 
   /**
@@ -50,8 +55,8 @@ const FactionTreeView = () => {
    */
 
   const selectionComplete = () => {
-    if (AC.armyHasAlternativeLists) {
-      return AC.altArmyListSelectionComplete;
+    if (ALC.armyHasAlternativeLists) {
+      return ALC.altArmyListSelectionComplete;
     }
     return true;
   };
@@ -72,14 +77,14 @@ const FactionTreeView = () => {
               : AC.factionName
           }
         >
-          <Tree showsFaction={true} />
+          <Tree isFaction={true} />
         </StyledTreeItem>
       </TreeView>
       {/* ALLIED FACTION */}
-      {AC.allyName !== NO_ALLY ? (
+      {AYC.allyName !== NO_ALLY ? (
         <Fragment>
           <Typography className={classes.allyTitle} variant="h6">
-            Alliierte: {AC.allyName}
+            Alliierte: {AYC.allyName}
           </Typography>
           <TreeView
             className={classes.treeViewBox}
@@ -88,8 +93,8 @@ const FactionTreeView = () => {
             defaultExpandIcon={<PlusSquare />}
             defaultEndIcon={<CloseSquare />}
           >
-            <StyledTreeItem nodeId="1" label={AC.allyName}>
-              <Tree showsFaction={false} />
+            <StyledTreeItem nodeId="1" label={AYC.allyName}>
+              <Tree isFaction={false} />
             </StyledTreeItem>
           </TreeView>
         </Fragment>

@@ -7,9 +7,9 @@ import HelpIcon from "@material-ui/icons/Help";
 import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
 // components and functions
 import { ArmyContext } from "../../../../contexts/armyContext";
+import { ValidationContext } from "../../../../contexts/validationContext";
 import useArmyValidation from "../../../../customHooks/UseArmyValidation";
 import useUnitEnricher from "../../../../customHooks/UseUnitEnricher";
-import { calculateTotalPointCost } from "../../../shared/sharedFunctions";
 
 const useStyles = makeStyles({
   textBlock: {
@@ -39,6 +39,7 @@ const useStyles = makeStyles({
 const LeafNode = (props) => {
   const classes = useStyles();
   const AC = useContext(ArmyContext);
+  const VC = useContext(ValidationContext);
   const validation = useArmyValidation();
   const enrichUnit = useUnitEnricher(props.unit);
 
@@ -47,12 +48,12 @@ const LeafNode = (props) => {
    * @param {unitCard object} unit
    */
   const addUnit = () => {
-    let tempArray = [...AC.selectedUnits];
+    let tempArray = [...SEC.selectedUnits];
 
     tempArray.push(enrichUnit(props.unit));
-    AC.setSelectedUnits(tempArray);
+    SEC.setSelectedUnits(tempArray);
 
-    validation.validateList(tempArray, AC.maxPointsAllowance, AC.subFactions, AC.armyHasAlternativeLists);
+    validation.validateList(tempArray, SEC.maxPointsAllowance, AC.subFactions, ALC.armyHasAlternativeLists);
   };
 
   const displayLeaf = (isBlocked) => {
@@ -84,8 +85,8 @@ const LeafNode = (props) => {
         {props.isBlocked ? (
           <IconButton
             onClick={() => {
-              AC.setValidationMessage(props.blockMessage);
-              AC.setShowToastMessage(true);
+              VC.setValidationMessage(props.blockMessage);
+              VC.setShowToastMessage(true);
             }}
           >
             <HelpIcon />

@@ -1,14 +1,15 @@
 // React
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
 // components and functions
 import { ArmyContext } from "../../../../contexts/armyContext";
 import SelectionInput from "../../../shared/selectionInput";
-import useArmyValidation from "../../../../customHooks/UseArmyValidation";
+// import useArmyValidation from "../../../../customHooks/UseArmyValidation";
 // constants
-import { ARMY_ALTERNATIVES_LIST_MAPPER, NONE } from "../../../../constants/factions";
+import { ARMY_ALTERNATIVES_LIST_MAPPER } from "../../../../constants/factions";
+import { AlternativeListContext } from "../../../../contexts/alternativeListContext";
 
 const useStyles = makeStyles(() => ({
   alternativeListSelector: {
@@ -22,7 +23,8 @@ const useStyles = makeStyles(() => ({
 const AlternativeArmyListSelector = (props) => {
   const classes = useStyles();
   const AC = useContext(ArmyContext);
-  const validation = useArmyValidation();
+  const ALC = useContext(AlternativeListContext);
+  // const validation = useArmyValidation();
 
   const handleInput = (value) => {
     redoSubFactionSet(value);
@@ -30,38 +32,38 @@ const AlternativeArmyListSelector = (props) => {
 
   const redoSubFactionSet = (value) => {
     const subFactions = AC.subFactions;
-    const allOptions = AC.alternateArmyListOptions;
+    const allOptions = ALC.alternateArmyListOptions;
 
     if (props.firstSelector) {
-      AC.setSelectedAlternativeList(value);
+      ALC.setSelectedAlternativeList(value);
       createAlternativeSubFactionList(value, subFactions, allOptions);
-      AC.setAltArmyListSelectionComplete(true);
+      ALC.setAltArmyListSelectionComplete(true);
     } else {
-      AC.setSecondSelectedAlternativeList(value);
+      ALC.setsecondSelectedAlternativeList(value);
       createListWithSecondChoice(value, subFactions, allOptions);
-      AC.setAltArmyListSelectionComplete(true);
+      ALC.setAltArmyListSelectionComplete(true);
     }
   };
 
   const createAlternativeSubFactionList = (value, subFactions, allOptions) => {
     const notSelectedOptions = allOptions.filter((o) => value !== o);
     const newSubFactionList = subFactions.filter((sF) => !notSelectedOptions.includes(sF));
-    AC.setAlternateListSubFactions(newSubFactionList);
+    ALC.setAlternateListSubFactions(newSubFactionList);
   };
 
   const createListWithSecondChoice = (value, subFactions, allOptions) => {
-    const allChoices = [value, AC.selectedAlternativeList];
+    const allChoices = [value, ALC.selectedAlternativeList];
     const notSelectedOptions = allOptions.filter((o) => !allChoices.includes(o));
     const newSubFactionList = subFactions.filter((sF) => !notSelectedOptions.includes(sF));
-    AC.setAlternateListSubFactions(newSubFactionList);
+    ALC.setAlternateListSubFactions(newSubFactionList);
   };
 
   const setSecondOptionList = () => {
-    return AC.alternateArmyListOptions.filter((o) => o !== AC.selectedAlternativeList);
+    return ALC.alternateArmyListOptions.filter((o) => o !== ALC.selectedAlternativeList);
   };
 
   //TODO
-  const ifOptionsIncludeAlly = (value, subFactions, allOptions) => {};
+  // const ifOptionsIncludeAlly = (value, subFactions, allOptions) => {};
 
   return (
     <SelectionInput
@@ -73,7 +75,7 @@ const AlternativeArmyListSelector = (props) => {
           ? ARMY_ALTERNATIVES_LIST_MAPPER[AC.selectedFactionName]
           : setSecondOptionList()
       }
-      label={<Typography>{AC.alternateArmyListLabelText}</Typography>}
+      label={<Typography>{ALC.alternateArmyListLabelText}</Typography>}
     />
   );
 };

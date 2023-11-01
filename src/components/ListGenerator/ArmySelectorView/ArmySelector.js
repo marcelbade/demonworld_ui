@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 // components and functions
 import SelectionInput from "../../shared/selectionInput";
 import { ArmyContext } from "../../../contexts/armyContext";
+import { ItemContext } from "../../../contexts/itemContext";
 // constants
 import {
   ALL_FACTIONS_ARRAY, //
@@ -12,9 +13,21 @@ import {
 } from "../../../constants/factions";
 import { INPUT_TEXTS } from "../../../constants/textsAndMessages";
 import useArmyValidation from "../../../customHooks/UseArmyValidation";
+import { ValidationContext } from "../../../contexts/validationContext";
+import { RightMenuContext } from "../../../contexts/rightMenuContext";
+import { SelectionContext } from "../../../contexts/selectionContext";
+import { AlternativeListContext } from "../../../contexts/alternativeListContext";
+import { AllyContext } from "../../../contexts/allyContext";
 
 const ArmySelector = () => {
   const AC = useContext(ArmyContext);
+  const IC = useContext(ItemContext);
+  const VC = useContext(ValidationContext);
+  const RC = useContext(RightMenuContext);
+  const SEC = useContext(SelectionContext);
+  const ALC = useContext(AlternativeListContext);
+  const AYC = useContext(AllyContext);
+
   const validation = useArmyValidation();
 
   const handleInput = (value) => {
@@ -35,16 +48,16 @@ const ArmySelector = () => {
     AC.setDistinctSubFactions(factionObj.subFactions);
 
     if (factionObj.ally) {
-      AC.setAllyName(factionObj.ally);
-      AC.setListOfAlliedUnits(factionObj.allyUnits);
-      AC.setDistinctAllySubFactions(factionObj.allySubFactions);
+      AYC.setAllyName(factionObj.ally);
+      AYC.setListOfAlliedUnits(factionObj.allyUnits);
+      AYC.setDistinctAllySubFactions(factionObj.allySubFactions);
     }
 
     if (factionObj.hasAlternativeLists) {
-      AC.setArmyHasAlternativeLists(factionObj.hasAlternativeLists);
-      AC.setNumberOfAlternativeChoices(factionObj.numberOfAlternativeArmySelections);
-      AC.setAlternateArmyListOptions(ARMY_ALTERNATIVES_LIST_MAPPER[factionName]);
-      AC.setAlternateArmyListLabelText(ALTERNATIVE_ARMY_SELECTION_TEXT[factionName]);
+      ALC.setArmyHasAlternativeLists(factionObj.hasAlternativeLists);
+      ALC.setNumberOfAlternativeChoices(factionObj.numberOfAlternativeArmySelections);
+      ALC.setAlternateArmyListOptions(ARMY_ALTERNATIVES_LIST_MAPPER[factionName]);
+      ALC.setAlternateArmyListLabelText(ALTERNATIVE_ARMY_SELECTION_TEXT[factionName]);
     }
   };
 
@@ -52,20 +65,20 @@ const ArmySelector = () => {
    * Function resets the entire state back to default.
    */
   const resetTheState = () => {
-    AC.setSelectedUnits([]);
-    AC.setAllEquippedItems([]);
-    AC.setAllyName(NO_ALLY);
-    AC.setListOfAlliedUnits([]);
-    AC.setDistinctAllySubFactions([]);
+    SEC.setSelectedUnits([]);
+    IC.setAllEquippedItems([]);
+    AYC.setAllyName(NO_ALLY);
+    AYC.setListOfAlliedUnits([]);
+    AYC.setDistinctAllySubFactions([]);
 
-    AC.setSelectedAlternativeList(NONE);
-    AC.setSecondSelectedAlternativeList(NONE);
-    AC.setAlternateListSubFactions([]);
-    AC.setArmyHasAlternativeLists(false);
-    AC.setAltArmyListSelectionComplete(false);
+    ALC.setSelectedAlternativeList(NONE);
+    ALC.setsecondSelectedAlternativeList(NONE);
+    ALC.setAlternateListSubFactions([]);
+    ALC.setArmyHasAlternativeLists(false);
+    ALC.setAltArmyListSelectionComplete(false);
 
-    AC.setListValidationResults({
-      ...AC.listValidationResults,
+    VC.setListValidationResults({
+      ...VC.listValidationResults,
       unitsBlockedbyRules: [],
       subFactionBelowMinimum: [],
       commanderIsPresent: false,
@@ -73,14 +86,14 @@ const ArmySelector = () => {
       secondSubFactionMissing: [],
       alliedUnitsBlockedbyRules: [],
     });
-    AC.closeCardDisplay();
-    AC.closeItemShop();
-    AC.closeSecondSubFactionMenu();
+    RC.closeCardDisplay();
+    RC.closeItemShop();
+    RC.closeSecondSubFactionMenu();
   };
 
   useEffect(() => {
-    validation.validateList([], AC.maxPointsAllowance, AC.subFactions, AC.armyHasAlternativeLists);
-  }, [AC.selectedFactionName]);
+    validation.validateList([], SEC.maxPointsAllowance, AC.subFactions, ALC.armyHasAlternativeLists);
+  }, [AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <SelectionInput //

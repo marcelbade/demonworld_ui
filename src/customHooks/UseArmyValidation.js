@@ -2,16 +2,26 @@
 import { useContext } from "react";
 // components and functions
 import { ArmyContext } from "../contexts/armyContext";
+import { TournamentRulesContext } from "../contexts/tournamentRulesContext";
+import { ValidationContext } from "../contexts/validationContext";
+import { SelectionContext } from "../contexts/selectionContext";
+import { AllyContext } from "../contexts/allyContext";
+import { AlternativeListContext } from "../contexts/alternativeListContext";
 import { ruleValidation } from "../gameLogic/armyListValidationRules/ruleValidatorSelector";
 // constants
-import { ARMIES_ADDITIONAL_SUBFACTIONS, NONE } from "../constants/factions";
+import { NONE } from "../constants/factions";
 
 const useArmyValidation = () => {
   const AC = useContext(ArmyContext);
+  const TC = useContext(TournamentRulesContext);
+  const VC = useContext(ValidationContext);
+  const SEC = useContext(SelectionContext);
+  const AYC = useContext(AllyContext);
+  const ALC = useContext(AlternativeListContext);
 
   const validateList = (currentList, currentTotalPointAllowance, currentSubFactions, hasAlternativeLists) => {
     const IsFactionSelected = AC.selectedFactionName !== NONE && AC.selectedFactionName !== undefined;
-    const isAlternativeListSelected = AC.selectedAlternativeList !== NONE;
+    const isAlternativeListSelected = ALC.selectedAlternativeList !== NONE;
 
     if (
       (IsFactionSelected && hasAlternativeLists && isAlternativeListSelected) || //
@@ -29,9 +39,9 @@ const useArmyValidation = () => {
       currentList,
       currentTotalPointAllowance,
       currentSubFactions,
-      AC.selectedAlternativeList,
-      AC.tournamentOverrideRules,
-      AC.listOfAlliedUnits
+      ALC.selectedAlternativeList,
+      TC.tournamentOverrideRules,
+      AYC.listOfAlliedUnits
     );
 
     collectValidatioResults(currentList, validationResult);
@@ -43,7 +53,7 @@ const useArmyValidation = () => {
    */
   const collectValidatioResults = (currentList, validationResult) => {
     const currentValidationResult = {
-      ...AC.listValidationResults,
+      ...VC.listValidationResults,
       unitsBlockedbyRules: validationResult.unitsBlockedbyRules,
       subFactionBelowMinimum: validationResult.subFactionBelowMinimum,
       commanderIsPresent: validationResult.commanderIsPresent,
@@ -52,7 +62,7 @@ const useArmyValidation = () => {
       alliedUnitsBlockedbyRules: validationResult.alliedUnitsBlockedbyRules,
     };
 
-    AC.setListValidationResults(currentValidationResult);
+    VC.setListValidationResults(currentValidationResult);
     removeInvalidUnits(currentList, currentValidationResult);
   };
 
@@ -67,24 +77,23 @@ const useArmyValidation = () => {
 
       currentState = currentState.filter((u) => !currentValidationResult.removeUnitsNoLongerValid.includes(u));
 
-      AC.setSelectedUnits([...currentState]);
+      SEC.setSelectedUnits([...currentState]);
     }
   };
 
   /**
    * Function returns the result of the validation process for sub factions or units.
    * @param {String} type
-   * @param {obj} payload
+   * @param {obj} payload can be subFaction name or unitCard object.
    * @returns a custom object with the name of the unit or subfaction,
    *          a flag to mark it as unvalid and an error message.
    */
-  const returnValidationResult = (type, payload) => {
+  const returnValidationResult = (type, payload, factionOrAlly) => {
     switch (type) {
       case "subFaction":
         return scanSubFaction(payload);
       case "unit":
-          
-        break;
+        return scanUnit(payload, factionOrAlly);
       default:
         throw new Error("returnValidationResult() received an invalid type parameter");
     }
@@ -93,12 +102,12 @@ const useArmyValidation = () => {
   /**
    * Function tests if a subFaction is valid.
    * @param {obj} payload
-   * @returns
+   * @returns validation result object.
    */
   const scanSubFaction = (payload) => {
     let validationResult = {};
 
-    AC.listValidationResults.subFactionBelowMinimum.forEach((sF) => {
+    VC.listValidationResults.subFactionBelowMinimum.forEach((sF) => {
       if (sF.subFactionUnderMinimum.includes(payload)) {
         validationResult = { subFactionName: payload, valid: false, validationMessage: sF.message };
       } else {
@@ -109,27 +118,49 @@ const useArmyValidation = () => {
     return validationResult;
   };
 
-  //------------------------------//------------------------------
-  const testForSecondSubFaction = () => {
-    if (ARMIES_ADDITIONAL_SUBFACTIONS.includes(AC.factionName)) {
-      isSecondSubFactionsValid();
-    }
-  };
-
   /**
-   * Function validates that the second subFaction has been selected. Is only called for those armies that require it.
+   * Function tests if a unit is valid.
+   * @param {obj} payload
+   * @returns validation result object.
    */
-  const isSecondSubFactionsValid = (unit) => {
-    AC.listValidationResults.secondSubFactionMissing.forEach((u) => {
-      if (u.unitWithOutSecondSubFaction === unit.unitName) {
-        // setSecondSubFactionCheck({
-        //   ...secondSubFactionCheck,
-        //   isValid: false,
-        //   message: u.message,
-        // });
+  const scanUnit = (payload, factionOrAlly) => {
+    let validationResult = { unit: payload, valid: true, validationMessage: "" };
+    const factionBlockList = VC.listValidationResults.unitsBlockedbyRules;
+    const alliedBlockList = VC.listValidationResults.alliedUnitsBlockedbyRules;
+
+    const blockedUnits = factionOrAlly ? factionBlockList : alliedBlockList;
+
+    blockedUnits.forEach((bU) => {
+      if (bU.unitBlockedbyRules === payload.unitName) {
+        validationResult = { unit: payload, valid: false, validationMessage: bU.message };
       }
     });
+
+    return validationResult;
   };
+
+  //TODO
+  //------------------------------//------------------------------
+  // const testForSecondSubFaction = () => {
+  //   if (ARMIES_ADDITIONAL_SUBFACTIONS.includes(AC.factionName)) {
+  //     isSecondSubFactionsValid();
+  //   }
+  // };
+
+  // /**
+  //  * Function validates that the second subFaction has been selected. Is only called for those armies that require it.
+  //  */
+  // const isSecondSubFactionsValid = (unit) => {
+  //   VC.listValidationResults.secondSubFactionMissing.forEach((u) => {
+  //     if (u.unitWithOutSecondSubFaction === unit.unitName) {
+  //       // setSecondSubFactionCheck({
+  //       //   ...secondSubFactionCheck,
+  //       //   isValid: false,
+  //       //   message: u.message,
+  //       // });
+  //     }
+  //   });
+  // };
 
   //------------------------------//------------------------------
 
@@ -139,9 +170,9 @@ const useArmyValidation = () => {
    * @param {[unitCard]} blockedUnits
    * @returns boolean flag; true if list is invalid (no commander OR 1 or more subfaction below min. )
    */
-  const violatesRules = (blockedUnits) => {
-    return blockedUnits.subFactionBelowMinimum.length > 0 || blockedUnits.commanderIsPresent === false;
-  };
+  // const violatesRules = (blockedUnits) => {
+  //   return blockedUnits.subFactionBelowMinimum.length > 0 || blockedUnits.commanderIsPresent === false;
+  // };
 
   return {
     validateList: validateList, //

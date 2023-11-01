@@ -4,7 +4,7 @@ import React, { Fragment, useContext, useEffect } from "react";
 import { makeStyles, ListItemText, Tooltip } from "@material-ui/core";
 // components and functions
 import { ArmyContext } from "../../../../../../../contexts/armyContext";
-import { useState } from "react";
+import { ValidationContext } from "../../../../../../../contexts/validationContext";
 // constants
 import { ARMIES_ADDITIONAL_SUBFACTIONS } from "../../../../../../../constants/factions";
 
@@ -29,26 +29,22 @@ const ArmyListUnitEntry = (props) => {
   // eslint-disable-next-line no-unused-vars
   const classes = useStyles();
   const AC = useContext(ArmyContext);
-
-  const [secondSubFactionCheck, setSecondSubFactionCheck] = useState({ isValid: true, message: "" });
+  const VC = useContext(ValidationContext);
 
   useEffect(() => {
-    if (ARMIES_ADDITIONAL_SUBFACTIONS.includes(AC.selectedFactionName)) {
+    if (ARMIES_ADDITIONAL_SUBFACTIONS.includes(AC.factionName)) {
       isSecondSubFactionsValid();
     }
-  }, [AC.listValidationResults.secondSubFactionMissing]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [VC.listValidationResults.secondSubFactionMissing]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * Function validates that the second subFaction has been selected. Is only called for those armies that require it.
    */
   const isSecondSubFactionsValid = () => {
-    AC.listValidationResults.secondSubFactionMissing.forEach((u) => {
+    VC.listValidationResults.secondSubFactionMissing.forEach((u) => {
       if (u.unitWithOutSecondSubFaction === props.unit.unitName) {
-        setSecondSubFactionCheck({
-          ...secondSubFactionCheck,
-          isValid: false,
-          message: u.message,
-        });
+        props.unit.secondSubFaction.hasSecondSubFaction = false;
+        props.unit.secondSubFaction.errorMessage = u.message;
       }
     });
   };
@@ -66,10 +62,10 @@ const ArmyListUnitEntry = (props) => {
       <ListItemText
         key={props.unit.uniqueID}
         primary={
-          secondSubFactionCheck.isValid ? (
+          props.unit.secondSubFaction.hasSecondSubFaction ? (
             <span className={classes.validUnitEntryStyle}>{props.unit.unitName}</span>
           ) : (
-            <Tooltip title={secondSubFactionCheck.message}>
+            <Tooltip title={props.unit.secondSubFaction.errorMessage}>
               <span className={classes.invalidUnitEntryStyle}>{props.unit.unitName}</span>
             </Tooltip>
           )

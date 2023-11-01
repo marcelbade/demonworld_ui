@@ -4,7 +4,9 @@ import React, { useContext } from "react";
 import { makeStyles, List } from "@material-ui/core";
 import { ListItemButton } from "@mui/material";
 // components and functions
-import { ArmyContext } from "../../../../../../../contexts/armyContext";
+import { SecondSubFactionContext } from "../../../../../../../contexts/secondSubFactionContext";
+import { RightMenuContext } from "../../../../../../../contexts/rightMenuContext";
+import { ItemContext } from "../../../../../../../contexts/itemContext";
 import { BUTTON_TEXTS } from "../../../../../../../constants/textsAndMessages";
 
 const useStyles = makeStyles({
@@ -16,7 +18,9 @@ const useStyles = makeStyles({
 const UnitEntryButtons = (props) => {
   // eslint-disable-next-line no-unused-vars
   const classes = useStyles();
-  const AC = useContext(ArmyContext);
+  const SFC = useContext(SecondSubFactionContext);
+  const IC = useContext(ItemContext);
+  const RC = useContext(RightMenuContext);
 
   /**
    * Function toggles the unit card view and Item shop view on and off, as well as switches between views for different units. In order to do this, both views are not toggled by a simple booelan flag, but an object that stores the previously clicked unit.
@@ -28,22 +32,22 @@ const UnitEntryButtons = (props) => {
 
     switch (menu) {
       case "UNIT_CARDS":
-        stateObj = AC.statCardState;
-        stateObjSetter = AC.setStatCardState;
-        AC.closeItemShop();
-        AC.closeSecondSubFactionMenu();
+        stateObj = RC.statCardState;
+        stateObjSetter = RC.setStatCardState;
+        RC.closeItemShop();
+        RC.closeSecondSubFactionMenu();
         break;
       case "ITEMS":
-        stateObj = AC.itemShopState;
-        stateObjSetter = AC.setItemShopState;
-        AC.closeCardDisplay();
-        AC.closeSecondSubFactionMenu();
+        stateObj = RC.itemShopState;
+        stateObjSetter = RC.setItemShopState;
+        RC.closeCardDisplay();
+        RC.closeSecondSubFactionMenu();
         break;
       case "SECOND_SUB_FACTION":
-        stateObj = AC.secondSubFactionMenuState;
-        stateObjSetter = AC.setSecondSubFactionMenuState;
-        AC.closeCardDisplay();
-        AC.closeItemShop();
+        stateObj = RC.secondSubFactionMenuState;
+        stateObjSetter = RC.setSecondSubFactionMenuState;
+        RC.closeCardDisplay();
+        RC.closeItemShop();
         break;
 
       default:
@@ -72,7 +76,7 @@ const UnitEntryButtons = (props) => {
     {
       show: true,
       action: () => {
-        AC.setUnitSelectedForShop(props.unit);
+        IC.setUnitSelectedForShop(props.unit);
         toggleMenuState(props.unit, "ITEMS");
       },
       text: BUTTON_TEXTS.PREVIEW_CARD,
@@ -85,12 +89,12 @@ const UnitEntryButtons = (props) => {
       text: BUTTON_TEXTS.SHOW_ITEM_SHOP,
     },
     {
-      show: AC.hasAdditionalSubFaction && !AC.excemptSubFactions.includes(props.subFaction),
+      show: SFC.hasAdditionalSubFaction && !SFC.excemptSubFactions.includes(props.subFaction),
       action: () => {
-        AC.setUnitSelectedForShop(props.unit);
+        IC.setUnitSelectedForShop(props.unit);
         toggleMenuState(props.unit, "SECOND_SUB_FACTION");
       },
-      text: AC.secondSubfactionCaption,
+      text: SFC.secondSubfactionCaption,
     },
   ];
 

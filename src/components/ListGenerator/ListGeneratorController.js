@@ -13,12 +13,22 @@ import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import CancelIcon from "@material-ui/icons/Cancel";
 import SpellBookIcon from "../../assets/icons/spellbook-white.png";
 // components and functions
-import ArmyProvider from "../../contexts/armyContext";
 import FactionTreeView from "./ArmySelectorView/SelectorTreeView/FactionTreeView";
 import ArmyListBox from "./ArmyListView/ArmyListBox";
 import AlternativeArmyListBox from "./ArmySelectorView/AlternativeArmyListSelection/AlternativeArmyLists";
 import MenuBox from "./RightSideMenus/MenuBox";
 import ValidationNotification from "../shared/ValidationNotification";
+// context providers
+import ArmyProvider from "../../contexts/armyContext";
+import AllyProvider from "../../contexts/allyContext";
+import AlternativeListProvider from "../../contexts/alternativeListContext";
+import RightMenuContext from "../../contexts/selectionContext";
+import ValidationContext from "../../contexts/validationContext";
+import SelectionContext from "../../contexts/selectionContext";
+import ItemContext from "../../contexts/itemContext";
+import SecondSubFactionProvider from "../../contexts/secondSubFactionContext";
+import TournamentRulesProvider from "../../contexts/tournamentRulesContext";
+
 // constants
 import { NONE } from "../../constants/factions";
 import { NO_ALLY } from "../../constants/factions";
@@ -209,148 +219,186 @@ const ListGeneratorController = () => {
   };
 
   return fetchedFactions && fetchedItems ? (
-    <ArmyProvider
+    <TournamentRulesProvider
       value={{
-        // ARMY NAME
-        armyName: armyName,
-        setArmyName: setArmyName,
-        // ARMY
-        selectedFactionName: selectedFactionName,
-        fetchedFactions: fetchedFactions,
-        subFactions: distinctSubFactions,
-        listOfAllFactionUnits: listOfAllFactionUnits,
-        setSelectedFactionName: setSelectedFactionName,
-        setDistinctSubFactions: setDistinctSubFactions,
-        setListOfAllFactionUnits: setListOfAllFactionUnits,
-        // ALLY
-        allyName: allyName,
-        allySubFactions: distinctAllySubFactions,
-        listOfAlliedUnits: listOfAlliedUnits,
-        distinctAllySubFactions: distinctAllySubFactions,
-        setAllyName: setAllyName,
-        setListOfAlliedUnits: setListOfAlliedUnits,
-        setDistinctAllySubFactions: setDistinctAllySubFactions,
-        // ALTERNATIVE LISTS
-        armyHasAlternativeLists: armyHasAlternativeLists,
-        numberOfAlternativeChoices: numberOfAlternativeChoices,
-        alternateArmyListOptions: alternateArmyListOptions,
-        secondAlternativeArmyOptions: secondAlternativeArmyOptions,
-        selectedAlternativeList: selectedAlternativeList,
-        secondSelectedAlternativeList: secondSelectedAlternativeList,
-        altArmyListSelectionComplete: altArmyListSelectionComplete,
-        alternateArmyListLabelText: alternateArmyListLabelText,
-        alternateListSubFactions: alternateListSubFactions,
-        setNumberOfAlternativeChoices: setNumberOfAlternativeChoices,
-        setAlternateListSubFactions: setAlternateListSubFactions,
-        setAltArmyListSelectionComplete: setAltArmyListSelectionComplete,
-        setAlternateArmyListOptions: setAlternateArmyListOptions,
-        setSelectedAlternativeList: setSelectedAlternativeList,
-        setSecondSelectedAlternativeList: setSecondSelectedAlternativeList,
-        setSecondAlternativeArmyOptions: setSecondAlternativeArmyOptions,
-        setArmyHasAlternativeLists: setArmyHasAlternativeLists,
-        setAlternateArmyListLabelText: setAlternateArmyListLabelText,
-        // SELECTED UNIT LIST
-        selectedUnits: selectedUnits,
-        maxPointsAllowance: maxPointsAllowance,
-        setSelectedUnits: setSelectedUnits,
-        setMaxPointsAllowance: setMaxPointsAllowance,
-        // ARMY LIST VALIDATION
-        listValidationResults: listValidationResults,
-        setListValidationResults: setListValidationResults,
-        // VALIDATION TOAST MESSAGE
-        validationMessage: validationMessage,
-        showToastMessage: showToastMessage,
-        setValidationMessage: setValidationMessage,
-        setShowToastMessage: setShowToastMessage,
-        // RIGHT SIDE MENU
-        showOptionButtons: showOptionButtons,
-        statCardState: statCardState,
-        secondSubFactionMenuState: secondSubFactionMenuState,
-        itemShopState: itemShopState,
-        setShowOptionButtons: setShowOptionButtons,
         // TOURNAMENT RULES OVERRIDE
         tournamentOverrideRules: tournamentOverrideRules,
         showTournamentRulesMenu: showTournamentRulesMenu,
         setShowTournamentRulesMenu: setShowTournamentRulesMenu,
         setTournamentOverrideRules: setTournamentOverrideRules,
-        // ITEMSHOP
-        fetchedItems: fetchedItems,
-        allEquippedItems: allEquippedItems,
-        unitSelectedForShop: unitSelectedForShop,
-        setUnitSelectedForShop: setUnitSelectedForShop,
-        setAllEquippedItems: setAllEquippedItems,
-        // SECOND SUB FACTION
-        hasAdditionalSubFaction: hasAdditionalSubFaction,
-        secondSubFactionList: secondSubFactionList,
-        excemptSubFactions: excemptSubFactions,
-        secondSubfactionCaption: secondSubfactionCaption,
-        //ADDITIONAL SUBFACTION (TRIBE)
-        setHasAdditionalSubFaction: setHasAdditionalSubFaction,
-        setSecondSubFactionList: setSecondSubFactionList,
-        setExcemptSubFactions: setExcemptSubFactions,
-        setSecondSubfactionCaption: setSecondSubfactionCaption,
-        // MENU STATES
-        setStatCardState: setStatCardState,
-        setItemShopState: setItemShopState,
-        setSecondSubFactionMenuState: setSecondSubFactionMenuState,
-        closeCardDisplay: closeCardDisplay,
-        closeItemShop: closeItemShop,
-        closeSecondSubFactionMenu: closeSecondSubFactionMenu,
       }}
     >
-      <SnackbarProvider
-        ref={notistackRef}
-        TransitionComponent={Fade}
-        // maxSnack={3}
-        preventDuplicate
-        iconVariant={{
-          error: <img className={classes.pushMessageIcon} src={SpellBookIcon} alt={"Regelbuchtext"} height={35} width={35} />,
+      <SecondSubFactionProvider
+        value={{
+          // SECOND SUB FACTION
+          hasAdditionalSubFaction: hasAdditionalSubFaction,
+          secondSubFactionList: secondSubFactionList,
+          excemptSubFactions: excemptSubFactions,
+          secondSubfactionCaption: secondSubfactionCaption,
+          setHasAdditionalSubFaction: setHasAdditionalSubFaction,
+          setSecondSubFactionList: setSecondSubFactionList,
+          setExcemptSubFactions: setExcemptSubFactions,
+          setSecondSubfactionCaption: setSecondSubfactionCaption,
         }}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "right",
-        }}
-        action={(key) => (
-          <IconButton
-            onClick={() => {
-              notistackRef.current.closeSnackbar(key);
-              setShowToastMessage(false);
-            }}
-            style={{ color: "#fff", fontSize: "20px" }} // TODO dont use inline css! :)
-          >
-            <CancelIcon />
-          </IconButton>
-        )}
       >
-        <Grid container className={classes.displayBox} direction="column">
-          {/* <ArmyValidation /> */}
-          <Grid item xs={12} className={classes.BackBttnBox}>
-            <IconButton
-              className={classes.BackBttn}
-              onClick={() => {
-                backToMainmenu();
+        <ItemContext
+          value={{
+            // ITEMSHOP
+            fetchedItems: fetchedItems,
+            allEquippedItems: allEquippedItems,
+            unitSelectedForShop: unitSelectedForShop,
+            setUnitSelectedForShop: setUnitSelectedForShop,
+            setAllEquippedItems: setAllEquippedItems,
+          }}
+        >
+          <ValidationContext
+            value={{
+              // ARMY LIST VALIDATION
+              listValidationResults: listValidationResults,
+              validationMessage: validationMessage,
+              showToastMessage: showToastMessage,
+              setListValidationResults: setListValidationResults,
+              setValidationMessage: setValidationMessage,
+              setShowToastMessage: setShowToastMessage,
+            }}
+          >
+            <SelectionContext
+              value={{
+                // SELECTED UNIT LIST
+                selectedUnits: selectedUnits,
+                maxPointsAllowance: maxPointsAllowance,
+                setSelectedUnits: setSelectedUnits,
+                setMaxPointsAllowance: setMaxPointsAllowance,
               }}
             >
-              <ChevronLeftIcon className={classes.BackBttnIcon} />
-            </IconButton>
-          </Grid>
-          {/* ARMY SELECTION */}
-          <Grid container item direction="row">
-            <Grid container item direction={"column"} xs={3} className={classes.armySelectionBox}>
-              <ArmySelector />
-              <AlternativeArmyListBox />
-              <FactionTreeView className={classes.selector} />
-            </Grid>
-            {/* ARMYLIST */}
-            <Grid container item direction="column" justify="flex-end" xs={3} className={classes.armyListBox}>
-              <ArmyListBox />
-            </Grid>
-          </Grid>
-          <MenuBox />
-          <ValidationNotification text={validationMessage} show={showToastMessage} />
-        </Grid>
-      </SnackbarProvider>
-    </ArmyProvider>
+              <RightMenuContext
+                value={{
+                  // RIGHT SIDE MENU
+                  showOptionButtons: showOptionButtons,
+                  statCardState: statCardState,
+                  secondSubFactionMenuState: secondSubFactionMenuState,
+                  itemShopState: itemShopState,
+                  setShowOptionButtons: setShowOptionButtons,
+                  setStatCardState: setStatCardState,
+                  setItemShopState: setItemShopState,
+                  setSecondSubFactionMenuState: setSecondSubFactionMenuState,
+                  closeCardDisplay: closeCardDisplay,
+                  closeItemShop: closeItemShop,
+                  closeSecondSubFactionMenu: closeSecondSubFactionMenu,
+                }}
+              >
+                <AlternativeListProvider
+                  value={{
+                    // ALTERNATIVE LISTS
+                    armyHasAlternativeLists: armyHasAlternativeLists,
+                    numberOfAlternativeChoices: numberOfAlternativeChoices,
+                    alternateArmyListOptions: alternateArmyListOptions,
+                    secondAlternativeArmyOptions: secondAlternativeArmyOptions,
+                    selectedAlternativeList: selectedAlternativeList,
+                    secondSelectedAlternativeList: secondSelectedAlternativeList,
+                    altArmyListSelectionComplete: altArmyListSelectionComplete,
+                    alternateArmyListLabelText: alternateArmyListLabelText,
+                    alternateListSubFactions: alternateListSubFactions,
+                    setNumberOfAlternativeChoices: setNumberOfAlternativeChoices,
+                    setAlternateListSubFactions: setAlternateListSubFactions,
+                    setAltArmyListSelectionComplete: setAltArmyListSelectionComplete,
+                    setAlternateArmyListOptions: setAlternateArmyListOptions,
+                    setSelectedAlternativeList: setSelectedAlternativeList,
+                    setSecondSelectedAlternativeList: setSecondSelectedAlternativeList, // TODO NOT NEEDED
+                    setSecondAlternativeArmyOptions: setSecondAlternativeArmyOptions,// TODO NOT NEEDED
+                    setArmyHasAlternativeLists: setArmyHasAlternativeLists,
+                    setAlternateArmyListLabelText: setAlternateArmyListLabelText,
+                  }}
+                >
+                  <AllyProvider
+                    value={{
+                      // ALLY
+                      allyName: allyName,
+                      allySubFactions: distinctAllySubFactions,
+                      listOfAlliedUnits: listOfAlliedUnits,
+                      distinctAllySubFactions: distinctAllySubFactions, // TODO NOT NEEDED??
+                      setAllyName: setAllyName,
+                      setListOfAlliedUnits: setListOfAlliedUnits,
+                      setDistinctAllySubFactions: setDistinctAllySubFactions,
+                    }}
+                  >
+                    <ArmyProvider
+                      value={{
+                        // ARMY
+                        armyName: armyName,
+                        setArmyName: setArmyName,
+                        selectedFactionName: selectedFactionName,
+                        fetchedFactions: fetchedFactions,
+                        subFactions: distinctSubFactions,
+                        listOfAllFactionUnits: listOfAllFactionUnits,
+                        setSelectedFactionName: setSelectedFactionName,
+                        setDistinctSubFactions: setDistinctSubFactions,
+                        setListOfAllFactionUnits: setListOfAllFactionUnits,
+                      }}
+                    >
+                      <SnackbarProvider
+                        ref={notistackRef}
+                        TransitionComponent={Fade}
+                        // maxSnack={3}
+                        preventDuplicate
+                        iconVariant={{
+                          error: (
+                            <img className={classes.pushMessageIcon} src={SpellBookIcon} alt={"Regelbuchtext"} height={35} width={35} />
+                          ),
+                        }}
+                        anchorOrigin={{
+                          vertical: "bottom",
+                          horizontal: "right",
+                        }}
+                        action={(key) => (
+                          <IconButton
+                            onClick={() => {
+                              notistackRef.current.closeSnackbar(key);
+                              setShowToastMessage(false);
+                            }}
+                            style={{ color: "#fff", fontSize: "20px" }} // TODO dont use inline css! :)
+                          >
+                            <CancelIcon />
+                          </IconButton>
+                        )}
+                      >
+                        <Grid container className={classes.displayBox} direction="column">
+                          {/* <ArmyValidation /> */}
+                          <Grid item xs={12} className={classes.BackBttnBox}>
+                            <IconButton
+                              className={classes.BackBttn}
+                              onClick={() => {
+                                backToMainmenu();
+                              }}
+                            >
+                              <ChevronLeftIcon className={classes.BackBttnIcon} />
+                            </IconButton>
+                          </Grid>
+                          {/* ARMY SELECTION */}
+                          <Grid container item direction="row">
+                            <Grid container item direction={"column"} xs={3} className={classes.armySelectionBox}>
+                              <ArmySelector />
+                              <AlternativeArmyListBox />
+                              <FactionTreeView className={classes.selector} />
+                            </Grid>
+                            {/* ARMYLIST */}
+                            <Grid container item direction="column" justify="flex-end" xs={3} className={classes.armyListBox}>
+                              <ArmyListBox />
+                            </Grid>
+                          </Grid>
+                          <MenuBox />
+                          <ValidationNotification text={validationMessage} show={showToastMessage} />
+                        </Grid>
+                      </SnackbarProvider>
+                    </ArmyProvider>
+                  </AllyProvider>
+                </AlternativeListProvider>
+              </RightMenuContext>
+            </SelectionContext>
+          </ValidationContext>
+        </ItemContext>
+      </SecondSubFactionProvider>
+    </TournamentRulesProvider>
   ) : null;
 };
 

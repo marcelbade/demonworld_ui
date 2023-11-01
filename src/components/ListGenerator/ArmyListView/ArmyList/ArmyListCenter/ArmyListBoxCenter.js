@@ -5,11 +5,15 @@ import List from "@material-ui/core/List";
 // components and functions
 import ArmyListSubFactionEntry from "./ArmyListComponents/ArmyListSubFactionEntry";
 import { ArmyContext } from "../../../../../contexts/armyContext";
+import { SelectionContext } from "../../../../../contexts/selectionContext";
+import { AlternativeListContext } from "../../../../../contexts/alternativeListContext";
 import useArmyValidation from "../../../../../customHooks/UseArmyValidation";
 import { NO_ALLY } from "../../../../../constants/factions";
 
 const ArmyListBoxCenter = () => {
   const AC = useContext(ArmyContext);
+  const SEC = useContext(SelectionContext);
+  const ALC = useContext(AlternativeListContext);
   const validation = useArmyValidation();
 
   /**
@@ -19,8 +23,8 @@ const ArmyListBoxCenter = () => {
    * @returns
    */
   const filterUnitsForSubFaction = (subFaction) => {
-    AC.selectedUnits.forEach((u) => (u.faction === AC.allyName ? (u.subFaction = u.faction) : null));
-    return AC.selectedUnits.filter((u) => u.subFaction === subFaction);
+    SEC.selectedUnits.forEach((u) => (u.faction === AYC.allyName ? (u.subFaction = u.faction) : null));
+    return SEC.selectedUnits.filter((u) => u.subFaction === subFaction);
   };
 
   /**
@@ -29,10 +33,10 @@ const ArmyListBoxCenter = () => {
    */
   const selectSubFactionList = () => {
     let subfactions;
-    if (!AC.armyHasAlternativeLists) {
+    if (!ALC.armyHasAlternativeLists) {
       subfactions = [...AC.subFactions];
-    } else if (AC.armyHasAlternativeLists) {
-      subfactions = [...AC.alternateListSubFactions];
+    } else if (ALC.armyHasAlternativeLists) {
+      subfactions = [...ALC.alternateListSubFactions];
     }
 
     const result = addAlly(subfactions);
@@ -45,8 +49,8 @@ const ArmyListBoxCenter = () => {
    * @returns a list of subfactions that includes the allied faction as element.
    */
   const addAlly = (subFactionList) => {
-    if (AC.allyName !== NO_ALLY && !subFactionList.includes(AC.allyName)) {
-      subFactionList.push(AC.allyName);
+    if (AYC.allyName !== NO_ALLY && !subFactionList.includes(AYC.allyName)) {
+      subFactionList.push(AYC.allyName);
     }
     return subFactionList;
   };
