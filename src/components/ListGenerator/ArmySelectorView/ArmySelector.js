@@ -7,7 +7,6 @@ import { ItemContext } from "../../../contexts/itemContext";
 import {
   ALL_FACTIONS_ARRAY, //
   ALTERNATIVE_ARMY_SELECTION_TEXT,
-  ARMY_ALTERNATIVES_LIST_MAPPER,
   NONE,
   NO_ALLY,
 } from "../../../constants/factions";

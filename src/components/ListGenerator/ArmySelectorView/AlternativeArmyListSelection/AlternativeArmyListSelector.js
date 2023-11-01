@@ -1,15 +1,16 @@
 // React
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 // Material UI
 import { makeStyles } from "@material-ui/core/styles";
 import { Typography } from "@material-ui/core";
 // components and functions
 import { ArmyContext } from "../../../../contexts/armyContext";
 import SelectionInput from "../../../shared/selectionInput";
+import { AlternativeListContext } from "../../../../contexts/alternativeListContext";
+import { AllyContext } from "../../../../contexts/allyContext";
 // import useArmyValidation from "../../../../customHooks/UseArmyValidation";
 // constants
-import { ARMY_ALTERNATIVES_LIST_MAPPER } from "../../../../constants/factions";
-import { AlternativeListContext } from "../../../../contexts/alternativeListContext";
+import { ARMY_ALTERNATIVES_LIST_MAPPER, NO_ALLY } from "../../../../constants/factions";
 
 const useStyles = makeStyles(() => ({
   alternativeListSelector: {
@@ -24,7 +25,11 @@ const AlternativeArmyListSelector = (props) => {
   const classes = useStyles();
   const AC = useContext(ArmyContext);
   const ALC = useContext(AlternativeListContext);
-  // const validation = useArmyValidation();
+  const AYC = useContext(AllyContext);
+
+  const [allyName] = useState(AYC.allyName);
+
+  const allAlternativeOptions = ARMY_ALTERNATIVES_LIST_MAPPER[AC.selectedFactionName];
 
   const handleInput = (value) => {
     redoSubFactionSet(value);
@@ -32,38 +37,66 @@ const AlternativeArmyListSelector = (props) => {
 
   const redoSubFactionSet = (value) => {
     const subFactions = AC.subFactions;
-    const allOptions = ALC.alternateArmyListOptions;
 
     if (props.firstSelector) {
       ALC.setSelectedAlternativeList(value);
-      createAlternativeSubFactionList(value, subFactions, allOptions);
+      createAlternativeSubFactionList(value, subFactions, allAlternativeOptions);
       ALC.setAltArmyListSelectionComplete(true);
     } else {
-      ALC.setsecondSelectedAlternativeList(value);
-      createListWithSecondChoice(value, subFactions, allOptions);
+      createListWithSecondChoice(value, subFactions, allAlternativeOptions);
       ALC.setAltArmyListSelectionComplete(true);
     }
   };
 
+  /**
+   * Function filters the default sub faction list to create the alternative army list.
+   * @param {event.value} value selected alternative list
+   * @param {[String]} subFactions name list
+   * @param {[String]} allOptions  name list
+   */
   const createAlternativeSubFactionList = (value, subFactions, allOptions) => {
     const notSelectedOptions = allOptions.filter((o) => value !== o);
     const newSubFactionList = subFactions.filter((sF) => !notSelectedOptions.includes(sF));
     ALC.setAlternateListSubFactions(newSubFactionList);
   };
 
+  /**
+   * Function filters the default sub faction list to create the alternative army list
+   * for armies that require two choices for the alternative list.
+   * @param {event.value} value selected alternative list
+   * @param {[String]} subFactions name list
+   * @param {[String]} allOptions  name list
+   */
   const createListWithSecondChoice = (value, subFactions, allOptions) => {
     const allChoices = [value, ALC.selectedAlternativeList];
     const notSelectedOptions = allOptions.filter((o) => !allChoices.includes(o));
     const newSubFactionList = subFactions.filter((sF) => !notSelectedOptions.includes(sF));
+
+    isAllyAnOption(newSubFactionList);
     ALC.setAlternateListSubFactions(newSubFactionList);
   };
 
-  const setSecondOptionList = () => {
-    return ALC.alternateArmyListOptions.filter((o) => o !== ALC.selectedAlternativeList);
+  /**
+   * Function checks if the ally is one of the alternatives. If so, and if it is not selected,  the state is changed so it isn't displayed.
+   */
+  const isAllyAnOption = (subFactionList) => {
+    if (
+      allAlternativeOptions.includes(AYC.allyName) && //
+      !subFactionList.includes(AYC.allyName)
+    ) {
+      AYC.setAllyName(NO_ALLY);
+    } else {
+      AYC.setAllyName(allyName);
+    }
   };
 
-  //TODO
-  // const ifOptionsIncludeAlly = (value, subFactions, allOptions) => {};
+  /**
+   * Function computes the options available to the user after he made the first choice.
+   * @returns an array of the available options to be diplayed in the dropdown.
+   */
+  const setSecondOptionList = () => {
+    return allAlternativeOptions.filter((o) => o !== ALC.selectedAlternativeList);
+  };
 
   return (
     <SelectionInput
