@@ -7,6 +7,7 @@ import { ListItemButton } from "@mui/material";
 import { SecondSubFactionContext } from "../../../../../../../contexts/secondSubFactionContext";
 import { RightMenuContext } from "../../../../../../../contexts/rightMenuContext";
 import { ItemContext } from "../../../../../../../contexts/itemContext";
+import { TournamentRulesContext } from "../../../../../../../contexts/tournamentRulesContext";
 import { BUTTON_TEXTS } from "../../../../../../../constants/textsAndMessages";
 
 const useStyles = makeStyles({
@@ -21,12 +22,16 @@ const UnitEntryButtons = (props) => {
   const SFC = useContext(SecondSubFactionContext);
   const IC = useContext(ItemContext);
   const RC = useContext(RightMenuContext);
+  const TC = useContext(TournamentRulesContext);
 
   /**
-   * Function toggles the unit card view and Item shop view on and off, as well as switches between views for different units. In order to do this, both views are not toggled by a simple booelan flag, but an object that stores the previously clicked unit.
+   * Function controls the menus on the right.
+   * It controls what menu and what content for which unit is shown.
+   * In order to do this, the menus are not toggled by a simple booelan flag,
+   * instead an object that stores the previously clicked unit is used.
    * @param {unitCard} unit
    */
-  const toggleMenuState = (unit, menu) => {
+  const rightMenuController = (unit, menu) => {
     let stateObjSetter;
     let stateObj;
 
@@ -49,42 +54,58 @@ const UnitEntryButtons = (props) => {
         RC.closeCardDisplay();
         RC.closeItemShop();
         break;
-
       default:
-        break;
+        throw Error("rightMenuController function received invalid menu parameter");
     }
 
-    // first click on page (no card displayed)
+    // first click on page (no menu is displayed)
     if (stateObj.clickedUnit === undefined) {
       stateObjSetter({ clickedUnit: unit, lastclickedUnit: unit, show: true });
     }
-    // click on same unit again to toggle the card view on
+    // click on a unit to toggle the menu for this unit on
     else if (stateObj.lastclickedUnit.unitName === unit.unitName && stateObj.show === true) {
       stateObjSetter({ clickedUnit: unit, lastclickedUnit: unit, show: false });
     }
-    // click on same unit again to toggle the card view off
+    // click on same unit again to toggle the menu off
     else if (stateObj.lastclickedUnit.unitName === unit.unitName && stateObj.show === false) {
       stateObjSetter({ clickedUnit: unit, lastclickedUnit: unit, show: true });
     }
-    // click on a different unit to show a different card
+    // click on a different unit to show the menu for that unit
     else if (stateObj.lastclickedUnit.unitName !== unit.unitName) {
       stateObjSetter({ clickedUnit: unit, lastclickedUnit: unit, show: true });
     }
   };
+
+  if (
+    !TC.showTournamentRulesMenu && //
+    !RC.statCardState.show &&
+    !RC.itemShopState.show &&
+    !RC.secondSubFactionMenuState.show
+  ) {
+    RC.setShowOptionButtons(true);
+  }
+  if (
+    TC.showTournamentRulesMenu || //
+    RC.statCardState.show ||
+    RC.itemShopState.show ||
+    RC.secondSubFactionMenuState.show
+  ) {
+    RC.setShowOptionButtons(false);
+  }
 
   const buttons = [
     {
       show: true,
       action: () => {
         IC.setUnitSelectedForShop(props.unit);
-        toggleMenuState(props.unit, "ITEMS");
+        rightMenuController(props.unit, "ITEMS");
       },
       text: BUTTON_TEXTS.PREVIEW_CARD,
     },
     {
       show: true,
       action: () => {
-        toggleMenuState(props.unit, "UNIT_CARDS");
+        rightMenuController(props.unit, "UNIT_CARDS");
       },
       text: BUTTON_TEXTS.SHOW_ITEM_SHOP,
     },
@@ -92,7 +113,7 @@ const UnitEntryButtons = (props) => {
       show: SFC.hasAdditionalSubFaction && !SFC.excemptSubFactions.includes(props.subFaction),
       action: () => {
         IC.setUnitSelectedForShop(props.unit);
-        toggleMenuState(props.unit, "SECOND_SUB_FACTION");
+        rightMenuController(props.unit, "SECOND_SUB_FACTION");
       },
       text: SFC.secondSubfactionCaption,
     },
@@ -103,7 +124,7 @@ const UnitEntryButtons = (props) => {
       {buttons.map((b, i) => {
         return b.show ? (
           <ListItemButton
-            key={i} // static list
+            key={i} //
             className={classes.cardButtons}
             variant="outlined"
             onClick={b.action}

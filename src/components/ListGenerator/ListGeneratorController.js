@@ -162,6 +162,8 @@ const ListGeneratorController = () => {
     lastclickedUnit: {},
     show: false,
   });
+  // right side options menu
+  const [showOptionButtons, setShowOptionButtons] = useState(true);
 
   /**
    * fetch units  from the Back End via REST.
@@ -271,12 +273,14 @@ const ListGeneratorController = () => {
                   statCardState: statCardState,
                   secondSubFactionMenuState: secondSubFactionMenuState,
                   itemShopState: itemShopState,
+                  showOptionButtons: showOptionButtons,
                   setStatCardState: setStatCardState,
                   setItemShopState: setItemShopState,
                   setSecondSubFactionMenuState: setSecondSubFactionMenuState,
                   closeCardDisplay: closeCardDisplay,
                   closeItemShop: closeItemShop,
                   closeSecondSubFactionMenu: closeSecondSubFactionMenu,
+                  setShowOptionButtons: setShowOptionButtons,
                 }}
               >
                 <AlternativeListProvider

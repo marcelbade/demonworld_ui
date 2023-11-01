@@ -9,43 +9,19 @@ import ItemShop from "./Menus/ItemShop/ItemShop";
 import SecondSubFactionMenu from "./Menus/SecondSubfactionMenu/SecondSubfactionMenu";
 import CardViewBox from "./Menus/CardView/CardViewBox";
 // contexts
-import { ArmyContext } from "../../../contexts/armyContext";
 import { TournamentRulesContext } from "../../../contexts/tournamentRulesContext";
 import { SecondSubFactionContext } from "../../../contexts/secondSubFactionContext";
 import { RightMenuContext } from "../../../contexts/rightMenuContext";
 
 const MenuBox = () => {
-  const AC = useContext(ArmyContext);
   const TC = useContext(TournamentRulesContext);
   const SFC = useContext(SecondSubFactionContext);
   const RC = useContext(RightMenuContext);
 
-  const [showOptionButtons, setShowOptionButtons] = useState(true);
-
-  // Show the option button drawer when everything else is closed, else close it.
-  useEffect(() => {
-    if (
-      !TC.showTournamentRulesMenu && //
-      !RC.statCardState.show &&
-      !RC.itemShopState.show &&
-      !RC.secondSubFactionMenuState.show
-    ) {
-      setShowOptionButtons(true);
-    }
-    if (
-      TC.showTournamentRulesMenu || //
-      RC.statCardState.show ||
-      RC.itemShopState.show ||
-      RC.secondSubFactionMenuState.show
-    ) {
-      setShowOptionButtons(false);
-    }
-  }, [RC.statCardState, RC.itemShopState, RC.secondSubFactionMenuState, TC.showTournamentRulesMenu]); // eslint-disable-line react-hooks/exhaustive-deps
-
   const components = [
     {
       exists: true, //
-      show: showOptionButtons,
+      show: RC.showOptionButtons,
       element: <OptionButtons />,
     },
     {
