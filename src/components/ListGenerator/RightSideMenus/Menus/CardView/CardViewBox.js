@@ -29,7 +29,7 @@ const CardViewBox = () => {
   const [carouselCards, setCarouselCards] = useState([]);
   const [displayedCard, setDisplayedCard] = useState({});
 
-  // set the unit card that is displayed
+  // set the unit card that is displayed. Check if it's a multi state card 
   useEffect(() => {
     if (RC.statCardState.clickedUnit !== undefined) {
       setDisplayedCard({ ...RC.statCardState.clickedUnit });
@@ -45,7 +45,7 @@ const CardViewBox = () => {
   /**
    * Function allwos user to cycle through the multiple stat cards counter-clockwise.
    */
-  const carouselForwards = () => {
+  const carouselForward = () => {
     const number = displayedCard.multiStateOrderNumber;
 
     if (number < carouselCards.length) {
@@ -58,7 +58,7 @@ const CardViewBox = () => {
   /**
    * Function allows user to cycle through the multiple stat cards clockwise.
    */
-  const carouselBackwards = () => {
+  const carouselBackward = () => {
     const number = displayedCard.multiStateOrderNumber;
 
     if (number > 1) {
@@ -86,8 +86,8 @@ const CardViewBox = () => {
             cardData={displayedCard}
             alignment={COLUMN}
             isSingleElement={isSingleElement}
-            carouselForwards={carouselForwards}
-            carouselBackwards={carouselBackwards}
+            carouselForward={carouselForward}
+            carouselBackward={carouselBackward}
           />
         ) : null}
       </Grid>

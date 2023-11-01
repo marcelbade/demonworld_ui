@@ -30,7 +30,7 @@ const CardView = (props) => {
           {props.isMultiStateCard ? (
             <IconButton
               onClick={() => {
-                props.carouselBackwards();
+                props.carouselBackward();
               }}
             >
               <ChevronLeft className={classes.icons} />
@@ -48,7 +48,7 @@ const CardView = (props) => {
           {props.isMultiStateCard ? (
             <IconButton
               onClick={() => {
-                props.carouselForwards();
+                props.carouselForward();
               }}
             >
               <ChevronRight className={classes.icons} />
