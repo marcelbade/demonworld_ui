@@ -5,8 +5,9 @@ import { ArmyContext } from "../../../contexts/armyContext";
 import { ItemContext } from "../../../contexts/itemContext";
 // constants
 import {
-  ALL_FACTIONS_ARRAY, //
-  ALTERNATIVE_ARMY_SELECTION_TEXT,
+  ALL_FACTIONS_ARRAY,
+  ARMIES_ADDITIONAL_SUBFACTIONS,
+  ARMIES_ADDITIONAL_SUBFACTIONS_BUTTON_CAPTION, //
   NONE,
   NO_ALLY,
 } from "../../../constants/factions";
@@ -17,6 +18,7 @@ import { RightMenuContext } from "../../../contexts/rightMenuContext";
 import { SelectionContext } from "../../../contexts/selectionContext";
 import { AlternativeListContext } from "../../../contexts/alternativeListContext";
 import { AllyContext } from "../../../contexts/allyContext";
+import { SecondSubFactionContext } from "../../../contexts/secondSubFactionContext";
 
 const ArmySelector = () => {
   const AC = useContext(ArmyContext);
@@ -26,6 +28,7 @@ const ArmySelector = () => {
   const SEC = useContext(SelectionContext);
   const ALC = useContext(AlternativeListContext);
   const AYC = useContext(AllyContext);
+  const SFC = useContext(SecondSubFactionContext);
 
   const validation = useArmyValidation();
 
@@ -33,7 +36,7 @@ const ArmySelector = () => {
     setFactionProperties(value);
   };
 
-  /**
+  /** 
    * Function sets all properties of a faction when it is selected.
    * @param {String} factionName
    */
@@ -55,6 +58,17 @@ const ArmySelector = () => {
     if (factionObj.hasAlternativeLists) {
       ALC.setArmyHasAlternativeLists(factionObj.hasAlternativeLists);
       ALC.setNumberOfAlternativeChoices(factionObj.numberOfAlternativeArmySelections);
+    }
+
+    if (ARMIES_ADDITIONAL_SUBFACTIONS.includes(factionObj.factionName)) {
+      const result = ARMIES_ADDITIONAL_SUBFACTIONS_BUTTON_CAPTION.filter((e) => e.army === factionObj.factionName);
+
+      SFC.setHasAdditionalSubFaction(true);
+      SFC.setSecondSubfactionCaption(result[0].caption);
+      SFC.setExcemptSubFactions(result[0].excemptSubFactions);
+      SFC.setSecondSubFactionList(result[0].secondSubFactionList);
+    } else {
+      SFC.setHasAdditionalSubFaction(false);
     }
   };
 
