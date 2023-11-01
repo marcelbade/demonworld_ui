@@ -25,8 +25,8 @@ export const INPUT_TEXTS = {
 };
 
 export const BUTTON_TEXTS = {
-  PREVIEW_CARD: "Gegenstände",
-  SHOW_ITEM_SHOP: "Kartenvorschau",
+  SHOW_ITEM_SHOP: "Gegenstände",
+  PREVIEW_CARD: "Kartenvorschau",
 };
 
 export const TEXTS = {
@@ -165,7 +165,7 @@ export const ORKS = {
     AVAILABLE_CLANUNITS: "Dieser Clan kann diese Einehit nicht auswählen.",
   },
 };
-  
+
 export const THAIN = {
   SUB_FACTION_RULES: {
     TRIBAL_WARRIORS: "Deine Armeeliste muss zu 10% bis 80% aus Stammeskriegern bestehen.",
