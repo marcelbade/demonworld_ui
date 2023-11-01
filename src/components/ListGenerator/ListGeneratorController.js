@@ -22,7 +22,7 @@ import ValidationNotification from "../shared/ValidationNotification";
 import ArmyProvider from "../../contexts/armyContext";
 import AllyProvider from "../../contexts/allyContext";
 import AlternativeListProvider from "../../contexts/alternativeListContext";
-import RightMenuContext from "../../contexts/selectionContext";
+import RightMenuContext from "../../contexts/rightMenuContext";
 import ValidationContext from "../../contexts/validationContext";
 import SelectionContext from "../../contexts/selectionContext";
 import ItemContext from "../../contexts/itemContext";
@@ -135,9 +135,6 @@ const ListGeneratorController = () => {
   const [armyHasAlternativeLists, setArmyHasAlternativeLists] = useState(false);
   const [numberOfAlternativeChoices, setNumberOfAlternativeChoices] = useState(0);
   const [selectedAlternativeList, setSelectedAlternativeList] = useState(NONE);
-  const [secondSelectedAlternativeList, setSecondSelectedAlternativeList] = useState(NONE);
-  const [alternateArmyListOptions, setAlternateArmyListOptions] = useState([]);
-  const [secondAlternativeArmyOptions, setSecondAlternativeArmyOptions] = useState([]);
   const [alternateListSubFactions, setAlternateListSubFactions] = useState([]);
   const [altArmyListSelectionComplete, setAltArmyListSelectionComplete] = useState(false);
   const [alternateArmyListLabelText, setAlternateArmyListLabelText] = useState(NONE);
@@ -292,20 +289,14 @@ const ListGeneratorController = () => {
                     // ALTERNATIVE LISTS
                     armyHasAlternativeLists: armyHasAlternativeLists,
                     numberOfAlternativeChoices: numberOfAlternativeChoices,
-                    alternateArmyListOptions: alternateArmyListOptions,
-                    secondAlternativeArmyOptions: secondAlternativeArmyOptions,
                     selectedAlternativeList: selectedAlternativeList,
-                    secondSelectedAlternativeList: secondSelectedAlternativeList,
                     altArmyListSelectionComplete: altArmyListSelectionComplete,
                     alternateArmyListLabelText: alternateArmyListLabelText,
                     alternateListSubFactions: alternateListSubFactions,
                     setNumberOfAlternativeChoices: setNumberOfAlternativeChoices,
                     setAlternateListSubFactions: setAlternateListSubFactions,
                     setAltArmyListSelectionComplete: setAltArmyListSelectionComplete,
-                    setAlternateArmyListOptions: setAlternateArmyListOptions,
                     setSelectedAlternativeList: setSelectedAlternativeList,
-                    setSecondSelectedAlternativeList: setSecondSelectedAlternativeList, // TODO NOT NEEDED
-                    setSecondAlternativeArmyOptions: setSecondAlternativeArmyOptions,// TODO NOT NEEDED
                     setArmyHasAlternativeLists: setArmyHasAlternativeLists,
                     setAlternateArmyListLabelText: setAlternateArmyListLabelText,
                   }}
