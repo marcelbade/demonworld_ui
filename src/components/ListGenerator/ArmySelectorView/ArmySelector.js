@@ -55,7 +55,6 @@ const ArmySelector = () => {
     if (factionObj.hasAlternativeLists) {
       ALC.setArmyHasAlternativeLists(factionObj.hasAlternativeLists);
       ALC.setNumberOfAlternativeChoices(factionObj.numberOfAlternativeArmySelections);
-      ALC.setAlternateArmyListLabelText(ALTERNATIVE_ARMY_SELECTION_TEXT[factionName]);
     }
   };
 
@@ -88,7 +87,12 @@ const ArmySelector = () => {
   };
 
   useEffect(() => {
-    validation.validateList([], SEC.maxPointsAllowance, AC.subFactions, ALC.armyHasAlternativeLists);
+    validation.validateList(
+      [], //
+      SEC.maxPointsAllowance,
+      AC.subFactions,
+      ALC.armyHasAlternativeLists
+    );
   }, [AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (

@@ -10,7 +10,7 @@ import { AlternativeListContext } from "../../../../contexts/alternativeListCont
 import { AllyContext } from "../../../../contexts/allyContext";
 // import useArmyValidation from "../../../../customHooks/UseArmyValidation";
 // constants
-import { ARMY_ALTERNATIVES_LIST_MAPPER, NO_ALLY } from "../../../../constants/factions";
+import { ALTERNATIVE_ARMY_SELECTION_TEXT, ARMY_ALTERNATIVES_LIST_MAPPER, NO_ALLY } from "../../../../constants/factions";
 
 const useStyles = makeStyles(() => ({
   alternativeListSelector: {
@@ -108,7 +108,7 @@ const AlternativeArmyListSelector = (props) => {
           ? ARMY_ALTERNATIVES_LIST_MAPPER[AC.selectedFactionName]
           : setSecondOptionList()
       }
-      label={<Typography>{ALC.alternateArmyListLabelText}</Typography>}
+      label={<Typography>{ALTERNATIVE_ARMY_SELECTION_TEXT[AC.selectedFactionName]}</Typography>}
     />
   );
 };

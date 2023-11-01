@@ -137,7 +137,6 @@ const ListGeneratorController = () => {
   const [selectedAlternativeList, setSelectedAlternativeList] = useState(NONE);
   const [alternateListSubFactions, setAlternateListSubFactions] = useState([]);
   const [altArmyListSelectionComplete, setAltArmyListSelectionComplete] = useState(false);
-  const [alternateArmyListLabelText, setAlternateArmyListLabelText] = useState(NONE);
   // additional subFactions - currently only important for the Thain army!
   const [hasAdditionalSubFaction, setHasAdditionalSubFaction] = useState(false);
   const [secondSubFactionList, setSecondSubFactionList] = useState(false);
@@ -291,14 +290,12 @@ const ListGeneratorController = () => {
                     numberOfAlternativeChoices: numberOfAlternativeChoices,
                     selectedAlternativeList: selectedAlternativeList,
                     altArmyListSelectionComplete: altArmyListSelectionComplete,
-                    alternateArmyListLabelText: alternateArmyListLabelText,
                     alternateListSubFactions: alternateListSubFactions,
                     setNumberOfAlternativeChoices: setNumberOfAlternativeChoices,
                     setAlternateListSubFactions: setAlternateListSubFactions,
                     setAltArmyListSelectionComplete: setAltArmyListSelectionComplete,
                     setSelectedAlternativeList: setSelectedAlternativeList,
                     setArmyHasAlternativeLists: setArmyHasAlternativeLists,
-                    setAlternateArmyListLabelText: setAlternateArmyListLabelText,
                   }}
                 >
                   <AllyProvider
