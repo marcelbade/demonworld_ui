@@ -96,8 +96,6 @@ const ListGeneratorController = () => {
   const [distinctSubFactions, setDistinctSubFactions] = useState([]);
   const [listOfAllFactionUnits, setListOfAllFactionUnits] = useState([]);
   const [selectedUnits, setSelectedUnits] = useState([]);
-  // the current total point value of all selected units
-  const [totalPointValue, setTotalPointValue] = useState(0); // TODO: unnecessary, can be calculated
   // maximum point allowance
   const [maxPointsAllowance, setMaxPointsAllowance] = useState(2000);
   // allied faction
@@ -221,11 +219,9 @@ const ListGeneratorController = () => {
         fetchedFactions: fetchedFactions,
         subFactions: distinctSubFactions,
         listOfAllFactionUnits: listOfAllFactionUnits,
-        totalPointValue: totalPointValue,
         setSelectedFactionName: setSelectedFactionName,
         setDistinctSubFactions: setDistinctSubFactions,
         setListOfAllFactionUnits: setListOfAllFactionUnits,
-        setTotalPointValue: setTotalPointValue,
         // ALLY
         allyName: allyName,
         allySubFactions: distinctAllySubFactions,

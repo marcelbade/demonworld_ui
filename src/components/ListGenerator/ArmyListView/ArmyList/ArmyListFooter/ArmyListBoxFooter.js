@@ -32,6 +32,8 @@ const ArmyListBoxFooter = () => {
 
   const [errorMessage, setErrorMessage] = useState("");
 
+  let netPoints = calculateTotalPointCost(AC.selectedUnits);
+
   /**
    * Function takes the user input for maximum point allowance, validates it, and sets the state.
    * @param {event object} event
@@ -49,7 +51,7 @@ const ArmyListBoxFooter = () => {
     <Fragment>
       <Grid container direction="column">
         <Grid container direction="row">
-          <Typography className={classes.total}>Gesamtpunktzahl: {AC.totalPointValue} / </Typography>
+          <Typography className={classes.total}>Gesamtpunktzahl: {netPoints} / </Typography>
           <TextField
             id="outlined-basic"
             autoComplete="off"
