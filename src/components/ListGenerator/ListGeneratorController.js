@@ -162,8 +162,6 @@ const ListGeneratorController = () => {
     lastclickedUnit: {},
     show: false,
   });
-  // option buttons
-  const [showOptionButtons, setShowOptionButtons] = useState(true);
 
   /**
    * fetch units  from the Back End via REST.
@@ -270,11 +268,9 @@ const ListGeneratorController = () => {
               <RightMenuContext
                 value={{
                   // RIGHT SIDE MENU
-                  showOptionButtons: showOptionButtons,
                   statCardState: statCardState,
                   secondSubFactionMenuState: secondSubFactionMenuState,
                   itemShopState: itemShopState,
-                  setShowOptionButtons: setShowOptionButtons,
                   setStatCardState: setStatCardState,
                   setItemShopState: setItemShopState,
                   setSecondSubFactionMenuState: setSecondSubFactionMenuState,
@@ -304,7 +300,6 @@ const ListGeneratorController = () => {
                       allyName: allyName,
                       allySubFactions: distinctAllySubFactions,
                       listOfAlliedUnits: listOfAlliedUnits,
-                      distinctAllySubFactions: distinctAllySubFactions, // TODO NOT NEEDED??
                       setAllyName: setAllyName,
                       setListOfAlliedUnits: setListOfAlliedUnits,
                       setDistinctAllySubFactions: setDistinctAllySubFactions,
