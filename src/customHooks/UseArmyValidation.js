@@ -105,13 +105,11 @@ const useArmyValidation = () => {
    * @returns validation result object.
    */
   const scanSubFaction = (payload) => {
-    let validationResult = {};
+    let validationResult = { subFactionName: payload, valid: true, validationMessage: "" };
 
     VC.listValidationResults.subFactionBelowMinimum.forEach((sF) => {
       if (sF.subFactionUnderMinimum.includes(payload)) {
         validationResult = { subFactionName: payload, valid: false, validationMessage: sF.message };
-      } else {
-        validationResult = { subFactionName: payload, valid: true, validationMessage: "" };
       }
     });
 
