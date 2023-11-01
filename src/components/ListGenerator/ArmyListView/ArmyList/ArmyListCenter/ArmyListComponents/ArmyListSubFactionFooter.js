@@ -4,6 +4,7 @@ import React, { useContext } from "react";
 import { ListItemText, makeStyles, List } from "@material-ui/core";
 // components and functions
 import { ArmyContext } from "../../../../../../contexts/armyContext";
+import { SelectionContext } from "../../../../../../contexts/selectionContext";
 import useSubFactionStats from "../../../../../../customHooks/UseSubFactionStats";
 
 const useStyles = makeStyles({
@@ -21,6 +22,8 @@ const useStyles = makeStyles({
 const ArmyListSubFactionFooter = (props) => {
   const classes = useStyles();
   const AC = useContext(ArmyContext);
+  const SEC = useContext(SelectionContext);
+
   const stats = useSubFactionStats(
     props.subFactionUnits, //
     props.subFactionName,

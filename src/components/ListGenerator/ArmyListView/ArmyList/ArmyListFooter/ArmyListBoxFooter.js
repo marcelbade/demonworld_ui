@@ -11,6 +11,7 @@ import calculateScoutingFactor from "../../../../../gameLogic/scoutFactorCalcula
 import { GENERAL_ERRRORS, TEXTS } from "../../../../../constants/textsAndMessages";
 import useArmyValidation from "../../../../../customHooks/UseArmyValidation";
 import { calculateTotalPointCost } from "../../../../shared/sharedFunctions";
+import { AlternativeListContext } from "../../../../../contexts/alternativeListContext";
 
 // TODO: remove unneeded styles
 const useStyles = makeStyles((theme) => ({
@@ -29,13 +30,14 @@ const useStyles = makeStyles((theme) => ({
 const ArmyListBoxFooter = () => {
   const classes = useStyles();
   const AC = useContext(ArmyContext);
-  const SEC = useContext(SelectionContext)
+  const ALC = useContext(AlternativeListContext);
+  const SEC = useContext(SelectionContext);
 
   const validation = useArmyValidation();
 
   const [errorMessage, setErrorMessage] = useState("");
 
-  let netPoints = calculateTotalPointCost(SEC.selectedUnits);
+  let netPoints = SEC.selectedUnits ? calculateTotalPointCost(SEC.selectedUnits) : 0;
 
   /**
    * Function takes the user input for maximum point allowance, validates it, and sets the state.
@@ -76,7 +78,7 @@ const ArmyListBoxFooter = () => {
           />
         </Grid>
         <Typography className={classes.total}>
-          {TEXTS.SCOUTING_FACTOR} {calculateScoutingFactor(SEC.selectedUnits)}
+          {TEXTS.SCOUTING_FACTOR} {calculateScoutingFactor(SEC.selectedUnits ? SEC.selectedUnits : [])}
         </Typography>
       </Grid>
     </Fragment>

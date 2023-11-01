@@ -9,11 +9,13 @@ import { SelectionContext } from "../../../../../contexts/selectionContext";
 import { AlternativeListContext } from "../../../../../contexts/alternativeListContext";
 import useArmyValidation from "../../../../../customHooks/UseArmyValidation";
 import { NO_ALLY } from "../../../../../constants/factions";
+import { AllyContext } from "../../../../../contexts/allyContext";
 
 const ArmyListBoxCenter = () => {
   const AC = useContext(ArmyContext);
   const SEC = useContext(SelectionContext);
   const ALC = useContext(AlternativeListContext);
+  const AYC = useContext(AllyContext);
   const validation = useArmyValidation();
 
   /**
@@ -59,9 +61,9 @@ const ArmyListBoxCenter = () => {
     <List>
       {selectSubFactionList()
         .map((sF) => validation.returnValidationResult("subFaction", sF))
-        .map((obj) => (
+        .map((obj, i) => (
           <ArmyListSubFactionEntry
-            key={obj.subFactionName} //
+            key={i} //
             subFaction={obj.subFactionName}
             valid={obj.valid}
             message={obj.message}

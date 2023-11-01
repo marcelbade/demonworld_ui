@@ -10,6 +10,8 @@ import { ArmyContext } from "../../../../contexts/armyContext";
 import { ValidationContext } from "../../../../contexts/validationContext";
 import useArmyValidation from "../../../../customHooks/UseArmyValidation";
 import useUnitEnricher from "../../../../customHooks/UseUnitEnricher";
+import { SelectionContext } from "../../../../contexts/selectionContext";
+import { AlternativeListContext } from "../../../../contexts/alternativeListContext";
 
 const useStyles = makeStyles({
   textBlock: {
@@ -40,6 +42,8 @@ const LeafNode = (props) => {
   const classes = useStyles();
   const AC = useContext(ArmyContext);
   const VC = useContext(ValidationContext);
+  const SEC = useContext(SelectionContext);
+  const ALC = useContext(AlternativeListContext);
   const validation = useArmyValidation();
   const enrichUnit = useUnitEnricher(props.unit);
 

@@ -6,6 +6,7 @@ import { Grid, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 // context
 import { ArmyContext } from "../../../../../contexts/armyContext";
+import { TournamentRulesContext } from "../../../../../contexts/tournamentRulesContext";
 // constants
 import { OPTIONS } from "../../../../../constants/textsAndMessages";
 // components and functions
@@ -39,6 +40,7 @@ const useStyles = makeStyles({
 const OptionButtons = () => {
   const classes = useStyles();
   const AC = useContext(ArmyContext);
+  const TC = useContext(TournamentRulesContext);
   const history = useHistory();
 
   /**
@@ -49,7 +51,7 @@ const OptionButtons = () => {
       pathname: "/lossCalculator",
       state: {
         lastPage: "listGenerator",
-        selectedArmy: AC.selectedUnits,
+        selectedArmy: SEC.selectedUnits,
       },
     });
   };
@@ -63,7 +65,7 @@ const OptionButtons = () => {
     let list = [];
 
     AC.subFactions.forEach((sF) => {
-      list.push({ subFaction: sF, units: filterForSubFaction(AC.selectedUnits, sF) });
+      list.push({ subFaction: sF, units: filterForSubFaction(SEC.selectedUnits, sF) });
     });
 
     const URL = "http://localhost:3000/PdfBox";
@@ -122,7 +124,7 @@ const OptionButtons = () => {
           variant="outlined"
           disabled={false}
           onClick={() => {
-            AC.setShowTournamentRulesMenu(true);
+            TC.setShowTournamentRulesMenu(true);
           }}
         >
           {OPTIONS.CHANGE_TOURNAMENT_RULES}
