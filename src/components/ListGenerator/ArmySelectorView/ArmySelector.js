@@ -56,7 +56,6 @@ const ArmySelector = () => {
     if (factionObj.hasAlternativeLists) {
       ALC.setArmyHasAlternativeLists(factionObj.hasAlternativeLists);
       ALC.setNumberOfAlternativeChoices(factionObj.numberOfAlternativeArmySelections);
-      ALC.setAlternateArmyListOptions(ARMY_ALTERNATIVES_LIST_MAPPER[factionName]);
       ALC.setAlternateArmyListLabelText(ALTERNATIVE_ARMY_SELECTION_TEXT[factionName]);
     }
   };
@@ -70,9 +69,7 @@ const ArmySelector = () => {
     AYC.setAllyName(NO_ALLY);
     AYC.setListOfAlliedUnits([]);
     AYC.setDistinctAllySubFactions([]);
-
     ALC.setSelectedAlternativeList(NONE);
-    ALC.setsecondSelectedAlternativeList(NONE);
     ALC.setAlternateListSubFactions([]);
     ALC.setArmyHasAlternativeLists(false);
     ALC.setAltArmyListSelectionComplete(false);
