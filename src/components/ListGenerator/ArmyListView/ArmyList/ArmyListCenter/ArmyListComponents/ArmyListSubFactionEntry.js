@@ -12,7 +12,9 @@ import ArmyListSubFactionFooter from "./ArmyListSubFactionFooter";
 // Creates the suFaction entry of the army list: Head and current and total points.
 const ArmyListSubFactionEntry = (props) => {
   return (
-    <ListItem>
+    <ListItem //
+      key="subfactionEntry"
+    >
       <Grid container direction={"column"}>
         <Grid item>
           <ArmyListSubFactionHeader
