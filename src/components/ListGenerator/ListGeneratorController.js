@@ -162,6 +162,10 @@ const ListGeneratorController = () => {
     lastclickedUnit: {},
     show: false,
   });
+  const [isSingleElement, setIsSingleElement] = useState(false);
+  const [carouselCards, setCarouselCards] = useState([]);
+  const [displayedCard, setDisplayedCard] = useState({});
+
   // right side options menu
   const [showOptionButtons, setShowOptionButtons] = useState(true);
 
@@ -274,6 +278,9 @@ const ListGeneratorController = () => {
                   secondSubFactionMenuState: secondSubFactionMenuState,
                   itemShopState: itemShopState,
                   showOptionButtons: showOptionButtons,
+                  isSingleElement: isSingleElement,
+                  carouselCards: carouselCards,
+                  displayedCard: displayedCard,
                   setStatCardState: setStatCardState,
                   setItemShopState: setItemShopState,
                   setSecondSubFactionMenuState: setSecondSubFactionMenuState,
@@ -281,6 +288,9 @@ const ListGeneratorController = () => {
                   closeItemShop: closeItemShop,
                   closeSecondSubFactionMenu: closeSecondSubFactionMenu,
                   setShowOptionButtons: setShowOptionButtons,
+                  setIsSingleElement: setIsSingleElement,
+                  setCarouselCards: setCarouselCards,
+                  setDisplayedCard: setDisplayedCard,
                 }}
               >
                 <AlternativeListProvider

@@ -4,11 +4,14 @@ import React, { useContext } from "react";
 import { makeStyles, List } from "@material-ui/core";
 import { ListItemButton } from "@mui/material";
 // components and functions
+import { BUTTON_TEXTS } from "../../../../../../../constants/textsAndMessages";
+import { isSingleElementCard } from "../../../../../../shared/sharedFunctions";
+// context
 import { SecondSubFactionContext } from "../../../../../../../contexts/secondSubFactionContext";
+import { ArmyContext } from "../../../../../../../contexts/armyContext";
 import { RightMenuContext } from "../../../../../../../contexts/rightMenuContext";
 import { ItemContext } from "../../../../../../../contexts/itemContext";
 import { TournamentRulesContext } from "../../../../../../../contexts/tournamentRulesContext";
-import { BUTTON_TEXTS } from "../../../../../../../constants/textsAndMessages";
 
 const useStyles = makeStyles({
   buttons: {
@@ -23,6 +26,7 @@ const UnitEntryButtons = (props) => {
   const IC = useContext(ItemContext);
   const RC = useContext(RightMenuContext);
   const TC = useContext(TournamentRulesContext);
+  const AC = useContext(ArmyContext);
 
   /**
    * Function controls the menus on the right.
@@ -37,6 +41,8 @@ const UnitEntryButtons = (props) => {
 
     switch (menu) {
       case "UNIT_CARDS":
+        setCard(unit);
+
         stateObj = RC.statCardState;
         stateObjSetter = RC.setStatCardState;
         RC.closeItemShop();
@@ -76,6 +82,22 @@ const UnitEntryButtons = (props) => {
     }
   };
 
+  /**
+   * Function sets the state for the stat card that is displayed when the "PREVIEW_CARD" button is clicked.
+   * @param {unitCard} clickedUnit
+   */
+  const setCard = (clickedUnit) => {
+    if (clickedUnit !== undefined) {
+      RC.setDisplayedCard({ ...clickedUnit });
+      RC.setIsSingleElement(isSingleElementCard(clickedUnit));
+    }
+
+    if (clickedUnit !== undefined && clickedUnit.isMultiStateUnit) {
+      const allStateCards = AC.listOfAllFactionUnits.filter((u) => u.belongsToUnit === clickedUnit.unitName);
+      RC.setCarouselCards(allStateCards);
+    }
+  };
+
   if (
     !TC.showTournamentRulesMenu && //
     !RC.statCardState.show &&
@@ -100,14 +122,14 @@ const UnitEntryButtons = (props) => {
         IC.setUnitSelectedForShop(props.unit);
         rightMenuController(props.unit, "ITEMS");
       },
-      text: BUTTON_TEXTS.PREVIEW_CARD,
+      text: BUTTON_TEXTS.SHOW_ITEM_SHOP,
     },
     {
       show: true,
       action: () => {
         rightMenuController(props.unit, "UNIT_CARDS");
       },
-      text: BUTTON_TEXTS.SHOW_ITEM_SHOP,
+      text: BUTTON_TEXTS.PREVIEW_CARD,
     },
     {
       show: SFC.hasAdditionalSubFaction && !SFC.excemptSubFactions.includes(props.subFaction),

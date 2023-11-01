@@ -1,5 +1,5 @@
 // React
-import { useEffect, useContext, useState } from "react";
+import { useContext } from "react";
 // Material UI
 import { Drawer } from "@material-ui/core";
 // components and functions
