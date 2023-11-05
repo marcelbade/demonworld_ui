@@ -31,6 +31,9 @@ const ArmyListUnitEntry = (props) => {
   const AC = useContext(ArmyContext);
   const VC = useContext(ValidationContext);
 
+
+
+  // TODO reworkthis into the hook!
   useEffect(() => {
     if (ARMIES_ADDITIONAL_SUBFACTIONS.includes(AC.factionName)) {
       isSecondSubFactionsValid();
@@ -65,6 +68,8 @@ const ArmyListUnitEntry = (props) => {
           props.unit.secondSubFaction.hasSecondSubFaction ? (
             <span className={classes.validUnitEntryStyle}>{props.unit.unitName}</span>
           ) : (
+
+            //TODO  title = undefined
             <Tooltip title={props.unit.secondSubFaction.errorMessage}>
               <span className={classes.invalidUnitEntryStyle}>{props.unit.unitName}</span>
             </Tooltip>

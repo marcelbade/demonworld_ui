@@ -111,6 +111,8 @@ const OrkRules = {
       ...testForMax2Result,
       ...isAboveSubFactionMax,
       ...availlableClanUnits,
+
+      //TODO:
       ...goblinsAboveMax,
     ];
 
