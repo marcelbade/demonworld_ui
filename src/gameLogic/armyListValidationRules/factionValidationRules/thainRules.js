@@ -114,15 +114,16 @@ const ThainRules = {
     // result - is a commander present?
     validationResults.commanderIsPresent = hasNoCommander;
 
+    // result - is there a unit that needs a second subFaction?
+    validationResults.secondSubFactionMissing = [
+      ...testForassignedTribe, //
+    ];
+
     // Are there units that need to be removed from the list?
     validationResults.removeUnitsNoLongerValid = [
       ...testForChurchRemoval, //
       ...testForVeteranRemoval,
       ...testForChampionRemoval,
-    ];
-
-    validationResults.secondSubFactionMissing = [
-      ...testForassignedTribe, //
     ];
 
     return validationResults;
