@@ -1,6 +1,6 @@
-import { createTheme } from "@material-ui/core/styles";
+import { createTheme, adaptV4Theme } from "@mui/material/styles";
 
-const theme = createTheme({
+const theme = createTheme(adaptV4Theme({
   palette: {
     primary: { 500: "#467fcf" },
   },
@@ -11,7 +11,7 @@ const theme = createTheme({
       textTransform: "none",
     },
   },
-});
+}));
 
 theme.overrides = {
   MuiTreeItem:{

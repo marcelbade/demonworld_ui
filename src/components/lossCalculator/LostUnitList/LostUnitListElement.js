@@ -1,8 +1,8 @@
 // React
 import React, { useContext } from "react";
 //Material UI
-import { Typography, Grid } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Typography, Grid } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
 // components and functions
 import { LossCalcContext } from "../../../contexts/LossCalculatorContext";
 import { ListItem } from "@mui/material";
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
       width: "190%",
       height: "10%",
     },
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down('lg')]: {
       flexDirection: "column",
 
       width: "100%",

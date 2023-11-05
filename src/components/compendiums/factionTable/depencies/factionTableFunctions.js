@@ -1,16 +1,17 @@
 // React
 import { Fragment } from "react";
 //material
-import { makeStyles, Typography, Grid } from "@material-ui/core";
-import { withStyles } from "@material-ui/core/styles";
-import Tooltip from "@material-ui/core/Tooltip";
+import { Typography, Grid } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
+import withStyles from '@mui/styles/withStyles';
+import Tooltip from "@mui/material/Tooltip";
 //icons
-import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
-import CancelIcon from "@material-ui/icons/Cancel";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import CancelIcon from "@mui/icons-material/Cancel";
 // components & functions
 import { unitOrCmdCard } from "../../../shared/sharedFunctions";
 
- 
+
 
 const RulesToolTip = withStyles({
   tooltip: {

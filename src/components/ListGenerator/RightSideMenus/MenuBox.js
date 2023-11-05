@@ -1,7 +1,7 @@
 // React
 import { useContext } from "react";
 // Material UI
-import { Drawer } from "@material-ui/core";
+import { Drawer } from "@mui/material";
 // components and functions
 import TournamentRulesMenu from "./Menus/TournamentRulesMenu/TournamentRulesMenu";
 import OptionButtons from "./Menus/OptionButtons/OptionButtons";

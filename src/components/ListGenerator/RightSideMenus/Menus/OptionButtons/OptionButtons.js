@@ -2,8 +2,8 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 // Material UI
-import { Grid, Button } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Grid, Button } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
 // context
 import { ArmyContext } from "../../../../../contexts/armyContext";
 import { TournamentRulesContext } from "../../../../../contexts/tournamentRulesContext";

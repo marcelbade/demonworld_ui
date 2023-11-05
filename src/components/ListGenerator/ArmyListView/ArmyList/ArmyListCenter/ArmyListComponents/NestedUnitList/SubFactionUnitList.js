@@ -1,9 +1,10 @@
 // React
 import React, { Fragment, useContext } from "react";
 // Material UI
-import { List, ListItem, makeStyles, Button } from "@material-ui/core";
+import { List, ListItem, Button } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
 // icons
-import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 // components and functions
 import { ArmyContext } from "../../../../../../../contexts/armyContext";
 import { unitCardMultiSort } from "../../../../../../shared/sharedFunctions";

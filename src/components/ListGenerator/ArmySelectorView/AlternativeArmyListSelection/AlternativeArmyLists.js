@@ -1,7 +1,6 @@
 // React
 import { useContext, Fragment } from "react";
-// Material UI
-import { makeStyles } from "@material-ui/core/styles";
+import makeStyles from '@mui/styles/makeStyles';
 // components and functions
 import AlternativeArmyListSelector from "./AlternativeArmyListSelector";
 import { AlternativeListContext } from "../../../../contexts/alternativeListContext";

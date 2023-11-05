@@ -1,8 +1,8 @@
 // React
 import React from "react";
 // Material UI
-import { Grid } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Grid } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
 import CardBack from "./cardComponents/CardBack";
 import CardFront from "./cardComponents/CardFront";
 import StatCardProvider from "../../../contexts/statCardContext";

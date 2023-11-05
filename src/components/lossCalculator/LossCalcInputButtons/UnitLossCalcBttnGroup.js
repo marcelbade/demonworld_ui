@@ -1,13 +1,13 @@
 // React
 import React, { useContext } from "react";
 //Material UI
-import { Typography, ButtonGroup, Button, Tooltip, IconButton } from "@material-ui/core";
+import { Typography, ButtonGroup, Button, Tooltip, IconButton } from "@mui/material";
 import Stack from "@mui/material/Stack";
-import { makeStyles } from "@material-ui/core/styles";
+import makeStyles from '@mui/styles/makeStyles';
 // icons
 import skullsIcon from "../../../assets/icons/skulls.png";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 // constants
@@ -188,7 +188,7 @@ const UnitLossCalcBttnGroup = (props) => {
             allItemsMarkedLost();
           }}
           className={classes.bttn}
-        >
+          size="large">
           <img src={skullsIcon} alt={LOSS_CALCULATOR.UNIT_ROUTED} height={40} width={40} />
         </IconButton>
       </Tooltip>

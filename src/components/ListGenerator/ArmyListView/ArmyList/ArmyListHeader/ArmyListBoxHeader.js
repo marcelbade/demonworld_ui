@@ -1,11 +1,10 @@
 // React
 import React, { useContext, useEffect } from "react";
-// Material UI
-import { makeStyles } from "@material-ui/core/styles";
-import { TextField, IconButton, Tooltip, Typography, Grid } from "@material-ui/core";
+import makeStyles from '@mui/styles/makeStyles';
+import { TextField, IconButton, Tooltip, Typography, Grid } from "@mui/material";
 // icons
-import HelpIcon from "@material-ui/icons/Help";
-import CancelIcon from "@material-ui/icons/Cancel";
+import HelpIcon from "@mui/icons-material/Help";
+import CancelIcon from "@mui/icons-material/Cancel";
 // components and functions
 import { ArmyContext } from "../../../../../contexts/armyContext";
 import { ValidationContext } from "../../../../../contexts/validationContext";
@@ -88,7 +87,7 @@ const ArmyListBoxHeader = () => {
           onClick={() => {
             SEC.setSelectedUnits([]);
           }}
-        >
+          size="large">
           <CancelIcon />
         </IconButton>
       </Tooltip>
@@ -98,7 +97,7 @@ const ArmyListBoxHeader = () => {
             VC.setValidationMessage(VALIDATION.NO_COMMANDER_WARNING);
             VC.setShowToastMessage(true);
           }}
-        >
+          size="large">
           <HelpIcon />
         </IconButton>
       ) : null}

@@ -1,11 +1,10 @@
 // React
 import { Fragment } from "react";
-// Material UI
-import { makeStyles } from "@material-ui/core/styles";
+import makeStyles from '@mui/styles/makeStyles';
 
-import { Grid, IconButton } from "@material-ui/core";
+import { Grid, IconButton } from "@mui/material";
 // icons
-import { ChevronLeft, ChevronRight } from "@material-ui/icons";
+import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 // components and functions
 import StatCard from "../../../../shared/statCards/StatCard";
 
@@ -32,7 +31,7 @@ const CardView = (props) => {
               onClick={() => {
                 props.carouselBackward();
               }}
-            >
+              size="large">
               <ChevronLeft className={classes.icons} />
             </IconButton>
           ) : null}
@@ -50,7 +49,7 @@ const CardView = (props) => {
               onClick={() => {
                 props.carouselForward();
               }}
-            >
+              size="large">
               <ChevronRight className={classes.icons} />
             </IconButton>
           ) : null}

@@ -1,7 +1,7 @@
 // React
 import React, { Fragment, useContext } from "react";
 // Material UI
-import { Grid } from "@material-ui/core";
+import { Grid } from "@mui/material";
 // icons
 
 // components & functions

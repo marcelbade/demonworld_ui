@@ -1,8 +1,8 @@
 // React
 import React from "react";
 // Material UI
-import ListItem from "@material-ui/core/ListItem";
-import { Grid } from "@material-ui/core";
+import ListItem from "@mui/material/ListItem";
+import { Grid } from "@mui/material";
 // components and functions
 import SubFactionUnitList from "./NestedUnitList/SubFactionUnitList";
 import ArmyListSubFactionHeader from "./ArmyListSubFactionHeader";

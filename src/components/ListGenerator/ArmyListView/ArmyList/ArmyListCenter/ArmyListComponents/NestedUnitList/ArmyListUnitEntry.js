@@ -1,7 +1,8 @@
 // React
 import React, { Fragment, useContext, useEffect } from "react";
 // Material UI
-import { makeStyles, ListItemText, Tooltip } from "@material-ui/core";
+import { ListItemText, Tooltip } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
 // components and functions
 import { ArmyContext } from "../../../../../../../contexts/armyContext";
 import { ValidationContext } from "../../../../../../../contexts/validationContext";

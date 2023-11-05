@@ -1,8 +1,8 @@
 // React
 import React, { useContext } from "react";
 // Material UI
-import { Grid, Typography } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Grid, Typography } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
 // functions and modules
 import { calculateTotalUnitPointCost } from "../../../sharedFunctions";
 import { StateCardContext } from "../../../../../contexts/statCardContext";

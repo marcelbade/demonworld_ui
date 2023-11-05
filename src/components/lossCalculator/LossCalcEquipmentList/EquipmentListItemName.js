@@ -1,8 +1,8 @@
 // React
 import React from "react";
 //Material UI
-import { ListItemText } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { ListItemText } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
 import { Tooltip } from "@mui/material";
 import { LOSS_CALCULATOR } from "../../../constants/textsAndMessages";
 

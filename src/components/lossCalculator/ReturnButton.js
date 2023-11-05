@@ -2,10 +2,10 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 //Material UI
-import { Grid, IconButton } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Grid, IconButton } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
 // icons
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 
 const useStyles = makeStyles({
   BackBttn: {
@@ -24,7 +24,7 @@ const ReturnButton = (props) => {
         onClick={() => {
           props.navigateToPage(location.state.lastPage);
         }}
-      >
+        size="large">
         <ChevronLeftIcon className={classes.BackBttn} />
       </IconButton>
     </Grid>

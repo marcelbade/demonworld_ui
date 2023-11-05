@@ -4,13 +4,13 @@ import { useHistory } from "react-router-dom";
 // Axios
 import axios from "axios";
 // Material UI
-import { Grid, IconButton, Fade } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Grid, IconButton, Fade } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
 // notistack
 import { SnackbarProvider } from "notistack";
 // icons
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import CancelIcon from "@material-ui/icons/Cancel";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import CancelIcon from "@mui/icons-material/Cancel";
 import SpellBookIcon from "../../assets/icons/spellbook-white.png";
 // components and functions
 import FactionTreeView from "./ArmySelectorView/SelectorTreeView/FactionTreeView";
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("md")]: {
       flexDirection: "row",
     },
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down('lg')]: {
       display: "block",
       flexDirection: "column",
     },
@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
       paddingLeft: "4em",
     },
 
-    [theme.breakpoints.down("md")]: {},
+    [theme.breakpoints.down('lg')]: {},
   },
   armyListBox: {
     paddingTop: "2em",
@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
       position: "absolute",
       left: "30%",
     },
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down('lg')]: {
       position: "relative",
 
       left: "10%",
@@ -353,8 +353,9 @@ const ListGeneratorController = () => {
                               notistackRef.current.closeSnackbar(key);
                               setShowToastMessage(false);
                             }}
-                            style={{ color: "#fff", fontSize: "20px" }} // TODO dont use inline css! :)
-                          >
+                            // TODO dont use inline css! :)
+                            style={{ color: "#fff", fontSize: "20px" }}
+                            size="large">
                             <CancelIcon />
                           </IconButton>
                         )}
@@ -367,7 +368,7 @@ const ListGeneratorController = () => {
                               onClick={() => {
                                 backToMainmenu();
                               }}
-                            >
+                              size="large">
                               <ChevronLeftIcon className={classes.BackBttnIcon} />
                             </IconButton>
                           </Grid>

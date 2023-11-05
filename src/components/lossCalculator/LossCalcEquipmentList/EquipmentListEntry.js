@@ -1,8 +1,8 @@
 // React
 import React from "react";
 //Material UI
-import { ListItem } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { ListItem } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
 // components and functions
 import EquipmentListElementBttn from "./EquipmentListElementBttn";
 import EquipmentListItemName from "./EquipmentListItemName";
@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("md")]: {
       flexDirection: "row",
     },
-    [theme.breakpoints.down("md")]: {
+    [theme.breakpoints.down('lg')]: {
       flexDirection: "row",
 
       "@media (orientation:landscape)": {

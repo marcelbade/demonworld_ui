@@ -1,7 +1,7 @@
 // React
 import React, { useContext } from "react";
 // Material UI
-import { Grid, Typography } from "@material-ui/core";
+import { Grid, Typography } from "@mui/material";
 // components & functions
 import { StateCardContext } from "../../../../../../contexts/statCardContext";
 // constants

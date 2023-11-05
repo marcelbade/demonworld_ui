@@ -1,7 +1,7 @@
 // React
 import React, { useContext } from "react";
 //Material UI
-import { List } from "@material-ui/core";
+import { List } from "@mui/material";
 // components and functions
  import { unitCardMultiSort } from "../../shared/sharedFunctions";
 import { LossCalcContext } from "../../../contexts/LossCalculatorContext";

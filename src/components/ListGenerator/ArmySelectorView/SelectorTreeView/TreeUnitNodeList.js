@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-// Material UI
-import { makeStyles } from "@material-ui/core/styles";
+import makeStyles from '@mui/styles/makeStyles';
 // components and functions
 import { unitCardMultiSort } from "../../../shared/sharedFunctions";
 import useArmyValidation from "../../../../customHooks/UseArmyValidation";

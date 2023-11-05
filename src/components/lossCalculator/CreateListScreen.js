@@ -1,10 +1,10 @@
 // React
 import React from "react";
 //Material UI
-import { Button, Grid, IconButton } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Button, Grid, IconButton } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
 // icons
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 
 const useStyles = makeStyles({
   typographyFont: {},
@@ -33,7 +33,7 @@ const CreateListScreen = (props) => {
             // navigate to landing page
             props.navigateToPage("");
           }}
-        >
+          size="large">
           <ChevronLeftIcon className={classes.BackBttn} />
         </IconButton>
       </Grid>

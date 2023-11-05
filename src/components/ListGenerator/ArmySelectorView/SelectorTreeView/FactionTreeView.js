@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
-// Material UI
-import { makeStyles } from "@material-ui/core/styles";
+import makeStyles from '@mui/styles/makeStyles';
 import { TreeView } from "@mui/x-tree-view/TreeView";
 import { TreeItem } from "@mui/x-tree-view/TreeItem";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -10,7 +9,7 @@ import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { ArmyContext } from "../../../../contexts/armyContext";
 // constants
 import { NO_ALLY } from "../../../../constants/factions";
-import { Typography } from "@material-ui/core";
+import { Typography } from "@mui/material";
 // import { NONE } from "../../../../constants/factions";
 import { AlternativeListContext } from "../../../../contexts/alternativeListContext";
 import { AllyContext } from "../../../../contexts/allyContext";

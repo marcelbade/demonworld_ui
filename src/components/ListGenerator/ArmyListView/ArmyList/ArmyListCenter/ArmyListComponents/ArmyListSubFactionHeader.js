@@ -1,11 +1,10 @@
 // React
 import React, { useContext } from "react";
-// Material UI
-import { makeStyles } from "@material-ui/core/styles";
-import { Grid, IconButton, Typography } from "@material-ui/core";
+import makeStyles from '@mui/styles/makeStyles';
+import { Grid, IconButton, Typography } from "@mui/material";
 
 // icons
-import HelpIcon from "@material-ui/icons/Help";
+import HelpIcon from "@mui/icons-material/Help";
 // components and functions
 import { ValidationContext } from "../../../../../../contexts/validationContext";
 
@@ -51,7 +50,7 @@ const ArmyListSubFactionHeader = (props) => {
               VC.setValidationMessage(props.message);
               VC.setShowToastMessage(true);
             }}
-          >
+            size="large">
             <HelpIcon />
           </IconButton>
         </Grid>

@@ -1,10 +1,9 @@
 import React, { useContext } from "react";
-// Material UI
-import { makeStyles } from "@material-ui/core/styles";
-import { Typography, Grid, IconButton } from "@material-ui/core";
+import makeStyles from '@mui/styles/makeStyles';
+import { Typography, Grid, IconButton } from "@mui/material";
 // icons
-import HelpIcon from "@material-ui/icons/Help";
-import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+import HelpIcon from "@mui/icons-material/Help";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 // components and functions
 import { ArmyContext } from "../../../../contexts/armyContext";
 import { ValidationContext } from "../../../../contexts/validationContext";
@@ -83,10 +82,11 @@ const TreeUnitNode = (props) => {
       </Grid>
       <Grid item xs={5}>
         <IconButton
-          onClick={addUnit} //
+          //
+          onClick={addUnit}
           disabled={!props.isValidUnit}
           className={displayBttn(props.isBlocked)}
-        >
+          size="large">
           <AddCircleOutlineIcon />
         </IconButton>
         {!props.isValidUnit ? (
@@ -95,7 +95,7 @@ const TreeUnitNode = (props) => {
               VC.setValidationMessage(props.blockMessage);
               VC.setShowToastMessage(true);
             }}
-          >
+            size="large">
             <HelpIcon />
           </IconButton>
         ) : null}

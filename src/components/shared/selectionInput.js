@@ -1,9 +1,8 @@
 // React
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-// Material UI
-import { Autocomplete } from "@material-ui/lab";
-import { TextField } from "@material-ui/core";
+import makeStyles from '@mui/styles/makeStyles';
+import { Autocomplete } from '@mui/material';
+import { TextField } from "@mui/material";
 
 const useStyles = makeStyles((theme) => ({
 
@@ -14,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
       fontFamily: "BreatheOfFire",
       width: "10em",
     },
-    [theme.breakpoints.down("sm")]: {
+    [theme.breakpoints.down('md')]: {
       fontSize: "2em",
       fontFamily: "BreatheOfFire",
       width: "10em",

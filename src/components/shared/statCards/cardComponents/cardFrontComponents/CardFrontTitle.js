@@ -1,10 +1,9 @@
 // React
 import React, { useContext } from "react";
-// Material UI
-import { makeStyles } from "@material-ui/core/styles";
+import makeStyles from '@mui/styles/makeStyles';
 // components & functions
 import { renderMagicPoints, renderCommandPoints } from "../../../../compendiums/factionTable/depencies/factionTableFunctions";
-import { Grid, Typography } from "@material-ui/core";
+import { Grid, Typography } from "@mui/material";
 import { StateCardContext } from "../../../../../contexts/statCardContext";
 
 const useStyles = makeStyles({

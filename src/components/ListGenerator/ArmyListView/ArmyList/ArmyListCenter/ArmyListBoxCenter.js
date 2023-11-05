@@ -1,7 +1,7 @@
 // React
 import React, { useContext } from "react";
 // Material UI
-import List from "@material-ui/core/List";
+import List from "@mui/material/List";
 // components and functions
 import ArmyListSubFactionEntry from "./ArmyListComponents/ArmyListSubFactionEntry";
 import { ArmyContext } from "../../../../../contexts/armyContext";

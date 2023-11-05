@@ -1,9 +1,10 @@
 // React
 import React, { useContext } from "react";
 // Material UI
-import { makeStyles, List, ListItemText, ListItem, Button } from "@material-ui/core";
+import { List, ListItemText, ListItem, Button } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
 // icons
-import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 // components and functions
 import { ArmyContext } from "../../../../../../../contexts/armyContext";
 import { ItemContext } from "../../../../../../../contexts/itemContext";

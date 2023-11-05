@@ -1,7 +1,7 @@
 // React
 import * as React from "react";
 // Material UI
-import { Grid, ThemeProvider } from "@material-ui/core";
+import { Grid, ThemeProvider, StyledEngineProvider } from "@mui/material";
 // router
 import { Route, Switch } from "react-router-dom";
 // components and functions
@@ -15,17 +15,19 @@ import theme from "./AppTheme/theme";
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <Grid container>
-        <Switch>
-          <Route path="/" component={landingPage} exact />
-          <Route path="/compendium" component={factionTable} exact />
-          <Route path="/listGenerator" component={ListGeneratorController} />
-          <Route path="/lossCalculator" component={LossCalculator} />
-          <Route path="/PdfBox" component={PdfBox} />
-        </Switch>
-      </Grid>
-    </ThemeProvider>
+    <StyledEngineProvider injectFirst>
+      <ThemeProvider theme={theme}>
+        <Grid container>
+          <Switch>
+            <Route path="/" component={landingPage} exact />
+            <Route path="/compendium" component={factionTable} exact />
+            <Route path="/listGenerator" component={ListGeneratorController} />
+            <Route path="/lossCalculator" component={LossCalculator} />
+            <Route path="/PdfBox" component={PdfBox} />
+          </Switch>
+        </Grid>
+      </ThemeProvider>
+    </StyledEngineProvider>
   );
 }
 

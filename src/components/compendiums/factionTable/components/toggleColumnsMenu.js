@@ -1,8 +1,7 @@
 // React
 import React from "react";
-// Material UI
-import { makeStyles } from "@material-ui/core/styles";
-import { Grid, Checkbox, FormControlLabel, FormGroup } from "@material-ui/core";
+import makeStyles from '@mui/styles/makeStyles';
+import { Grid, Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 
 const useStyles = makeStyles({
   toggleGroupBox: {

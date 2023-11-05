@@ -1,11 +1,11 @@
 // React
 import React, { useContext, useState } from "react";
 // Material UI
-import { Grid, FormControl, FormControlLabel, FormLabel, FormGroup, TextField, Switch, Typography, IconButton } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Grid, FormControl, FormControlLabel, FormLabel, FormGroup, TextField, Switch, Typography, IconButton } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
 // components and functions
 // Icons
-import CancelIcon from "@material-ui/icons/Cancel";
+import CancelIcon from "@mui/icons-material/Cancel";
 // context
 import { TournamentRulesContext } from "../../../../../contexts/tournamentRulesContext";
 // constants
@@ -75,7 +75,7 @@ const TournamentRulesMenu = () => {
           onClick={() => {
             TC.setShowTournamentRulesMenu(false);
           }}
-        >
+          size="large">
           <CancelIcon />
         </IconButton>
       </Grid>

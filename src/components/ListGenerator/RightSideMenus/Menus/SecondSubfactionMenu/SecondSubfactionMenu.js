@@ -1,10 +1,10 @@
 // React
 import React, { useContext } from "react";
 //Material UI
-import { Button, Grid, ButtonGroup, Typography, IconButton } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Button, Grid, ButtonGroup, Typography, IconButton } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
 // icons
-import CancelIcon from "@material-ui/icons/Cancel";
+import CancelIcon from "@mui/icons-material/Cancel";
 // components and functions
 import { SecondSubFactionContext } from "../../../../../contexts/secondSubFactionContext";
 import { ItemContext } from "../../../../../contexts/itemContext";
@@ -64,7 +64,7 @@ const SecondSubFactionMenu = () => {
           onClick={() => {
             RC.closeSecondSubFactionMenu();
           }}
-        >
+          size="large">
           <CancelIcon />
         </IconButton>
       </Grid>

@@ -1,7 +1,8 @@
 // React
 import React, { useContext } from "react";
 // Material UI
-import { ListItemText, makeStyles, List } from "@material-ui/core";
+import { ListItemText, List } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
 // components and functions
 import { ArmyContext } from "../../../../../../contexts/armyContext";
 import { SelectionContext } from "../../../../../../contexts/selectionContext";

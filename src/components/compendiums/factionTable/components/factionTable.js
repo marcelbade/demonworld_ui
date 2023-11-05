@@ -2,9 +2,8 @@
 import React, { useEffect, useState } from "react";
 // Axios
 import axios from "axios";
-// Material UI
-import { makeStyles } from "@material-ui/core/styles";
-import { Grid, Typography } from "@material-ui/core";
+import makeStyles from '@mui/styles/makeStyles';
+import { Grid, Typography } from "@mui/material";
 // components & functions
 import SelectionInput from "../../../shared/selectionInput";
 import { ALL_FACTIONS_ARRAY } from "../../../../constants/factions";

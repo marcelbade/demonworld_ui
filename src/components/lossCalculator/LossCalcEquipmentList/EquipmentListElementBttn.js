@@ -1,12 +1,12 @@
 // React
 import React, { useContext } from "react";
 //Material UI
-import { ListItemIcon } from "@material-ui/core";
+import { ListItemIcon } from "@mui/material";
 // components and functions
 import { LossCalcContext } from "../../../contexts/LossCalculatorContext";
 // icons
-import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
-import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 import { ListItemButton } from "@mui/material";
 
 const EquipmentListElementBttn = (props) => {

@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 //Material UI
-import { Grid } from "@material-ui/core";
+import { Grid } from "@mui/material";
 // icons
 // components and functions
 import LossCalcProvider from "../../contexts/LossCalculatorContext";

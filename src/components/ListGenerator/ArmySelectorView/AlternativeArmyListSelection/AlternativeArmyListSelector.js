@@ -1,8 +1,7 @@
 // React
 import React, { useContext, useState } from "react";
-// Material UI
-import { makeStyles } from "@material-ui/core/styles";
-import { Typography } from "@material-ui/core";
+import makeStyles from '@mui/styles/makeStyles';
+import { Typography } from "@mui/material";
 // components and functions
 import { ArmyContext } from "../../../../contexts/armyContext";
 import SelectionInput from "../../../shared/selectionInput";

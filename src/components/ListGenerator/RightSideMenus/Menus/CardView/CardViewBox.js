@@ -1,10 +1,9 @@
 // React
 import { useContext } from "react";
-// Material UI
-import { makeStyles } from "@material-ui/core/styles";
-import { Grid, IconButton } from "@material-ui/core";
+import makeStyles from '@mui/styles/makeStyles';
+import { Grid, IconButton } from "@mui/material";
 // icons
-import CancelIcon from "@material-ui/icons/Cancel";
+import CancelIcon from "@mui/icons-material/Cancel";
 // components and functions
 import { RightMenuContext } from "../../../../../contexts/rightMenuContext";
 import CardView from "./CardView";
@@ -58,7 +57,7 @@ const CardViewBox = () => {
           onClick={() => {
             RC.closeCardDisplay();
           }}
-        >
+          size="large">
           <CancelIcon />
         </IconButton>
       </Grid>

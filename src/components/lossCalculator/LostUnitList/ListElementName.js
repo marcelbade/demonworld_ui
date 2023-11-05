@@ -1,8 +1,8 @@
 // React
 import React from "react";
 //Material UI
-import { Typography, Grid } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Typography, Grid } from "@mui/material";
+import makeStyles from '@mui/styles/makeStyles';
 // clsx
 import clsx from "clsx";
 

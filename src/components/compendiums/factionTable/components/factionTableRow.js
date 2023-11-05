@@ -1,14 +1,14 @@
 // React
 import React from "react";
 // Material UI
-// import { makeStyles } from "@material-ui/core/styles";
-import { IconButton } from "@material-ui/core";
+// import { makeStyles } from "@mui/material/styles";
+import { IconButton } from "@mui/material";
 // components & functions
 
 import { renderBooleanAsIcon, renderMagicPoints, renderSpecialRules, renderCommandPoints } from "../depencies/factionTableFunctions";
 // icons
-import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
-import CloseIcon from "@material-ui/icons/Close";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import CloseIcon from "@mui/icons-material/Close";
 
 /**
  *
@@ -26,7 +26,7 @@ const FactionTableRow = (props) => {
             onClick={() => {
               props.toggleUnitCard(props.unit);
             }}
-          >
+            size="large">
             {props.selectedStatCards.includes(props.unit.faction + props.unit.unitName) ? <CloseIcon /> : <ArrowForwardIosIcon />}
           </IconButton>
         </td>
