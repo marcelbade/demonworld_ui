@@ -38,7 +38,7 @@ const useStyles = makeStyles({
   },
 });
 
-const LeafNode = (props) => {
+const TreeUnitNode = (props) => {
   const classes = useStyles();
   const AC = useContext(ArmyContext);
   const VC = useContext(ValidationContext);
@@ -46,6 +46,9 @@ const LeafNode = (props) => {
   const ALC = useContext(AlternativeListContext);
   const validation = useArmyValidation();
   const enrichUnit = useUnitEnricher(props.unit);
+
+  console.log("VC.listValidationResults.unitsBlockedbyRules");
+  console.log(VC.listValidationResults.unitsBlockedbyRules);
 
   /**
    * Function adds a selected unit and uses the custom UseUnitEnricher hook to add necessary information.
@@ -60,7 +63,7 @@ const LeafNode = (props) => {
     validation.validateList(tempArray, SEC.maxPointsAllowance, AC.subFactions, ALC.armyHasAlternativeLists);
   };
 
-  const displayLeaf = (isBlocked) => {
+  const displayValidNode = (isBlocked) => {
     return isBlocked ? classes.blockedLeafNode : classes.unblockedLeafNode;
   };
   const displayBttn = (isBlocked) => {
@@ -68,9 +71,9 @@ const LeafNode = (props) => {
   };
 
   return (
-    <Grid container direction="row" alignItems="center" justify="space-around">
+    <Grid container direction="row" alignItems="center" justifyContent="space-around">
       <Grid xs={6} item container direction="column">
-        <Typography variant="button" className={displayLeaf(props.isBlocked)}>
+        <Typography variant="button" className={displayValidNode(!props.isValidUnit)}>
           {props.unit.unitName}
         </Typography>
 
@@ -81,12 +84,12 @@ const LeafNode = (props) => {
       <Grid item xs={5}>
         <IconButton
           onClick={addUnit} //
-          disabled={props.isBlocked}
+          disabled={!props.isValidUnit}
           className={displayBttn(props.isBlocked)}
         >
           <AddCircleOutlineIcon />
         </IconButton>
-        {props.isBlocked ? (
+        {!props.isValidUnit ? (
           <IconButton
             onClick={() => {
               VC.setValidationMessage(props.blockMessage);
@@ -100,4 +103,4 @@ const LeafNode = (props) => {
     </Grid>
   );
 };
-export default LeafNode;
+export default TreeUnitNode;
