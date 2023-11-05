@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
 import { TreeView } from "@mui/x-tree-view/TreeView";
 import { TreeItem } from "@mui/x-tree-view/TreeItem";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -25,7 +25,6 @@ const useStyles = makeStyles((theme) => ({
   },
   subFactionNames: {
     "& .MuiTreeItem-label": {
-      color: "red",
       FontFamily: "jaapokkiRegular",
     },
   },
