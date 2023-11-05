@@ -37,7 +37,7 @@ const CreateListScreen = (props) => {
           <ChevronLeftIcon className={classes.BackBttn} />
         </IconButton>
       </Grid>
-      <Grid container direction="column" alignContent="center" justify="center">
+      <Grid container direction="column" alignContent="center" justifyContent="center">
         <Button
           variant="outlined"
           className={classes.noListButtons}

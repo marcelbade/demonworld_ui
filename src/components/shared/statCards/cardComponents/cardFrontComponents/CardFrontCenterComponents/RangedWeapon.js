@@ -14,7 +14,7 @@ const RangedWeapon = () => {
   const SC = useContext(StateCardContext);
 
   return (
-    <Grid item container justify="center">
+    <Grid item container justifyContent="center">
       {/* 3rd Row - RANGED WEAPONS  */}
       {SC.unit.rangedWeapon !== NO_RANGE_WEAPON ? (
         <Typography variant="h6" align="right">

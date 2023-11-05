@@ -22,7 +22,7 @@ const CardFrontTitle = () => {
   const SC = useContext(StateCardContext);
 
   return (
-    <Grid item container justify="space-around" direction="row">
+    <Grid item container justifyContent="space-around" direction="row">
       <Typography variant="h6" align="center">
         {renderCommandPoints(SC.unit.commandStars)}
       </Typography>

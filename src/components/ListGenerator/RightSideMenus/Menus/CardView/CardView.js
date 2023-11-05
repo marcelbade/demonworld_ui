@@ -25,7 +25,7 @@ const CardView = (props) => {
 
   return (
     <Fragment>
-      <Grid item container direction="row" alignItems="center" justify="center" alignContent="center">
+      <Grid item container direction="row" alignItems="center" justifyContent="center" alignContent="center">
         <Grid item>
           {props.isMultiStateCard ? (
             <IconButton

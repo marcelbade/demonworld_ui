@@ -14,7 +14,7 @@ const LostPointDisplay = (props) => {
   const classes = useStyles();
 
   return (
-    <Grid container xs={6} item direction="row" alignItems="center" justify="flex-start">
+    <Grid container xs={6} item direction="row" alignItems="center" justifyContent="flex-start">
       <Typography variant="h6" className={classes.pointsTotal}>
         Verlorene Punkte:
       </Typography>

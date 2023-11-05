@@ -35,7 +35,7 @@ const CardBackUpperBlackStripe = () => {
   };
 
   return (
-    <Grid container direction="row" className={classes.blackStripe} justify="space-around">
+    <Grid container direction="row" className={classes.blackStripe} justifyContent="space-around">
       {SC.unit.numberOfElements !== 1 ? (
         <Typography variant="h6">
           {SC.unit.leader ? "Anführer" : null}

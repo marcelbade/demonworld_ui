@@ -17,7 +17,7 @@ const CardFrontCenter = () => {
 
   return (
     <Fragment>
-      <Grid item container justify="center">
+      <Grid item container justifyContent="center">
         {SC.unit.rangedWeapon !== NO_RANGE_WEAPON ? ( //
           <RangedWeapon />
         ) : null}

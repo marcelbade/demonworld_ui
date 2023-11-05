@@ -68,7 +68,7 @@ const SecondSubFactionMenu = () => {
           <CancelIcon />
         </IconButton>
       </Grid>
-      <Grid item container direction="row" justify="center">
+      <Grid item container direction="row" justifyContent="center">
         {/*UNIT NAME */}
         <Grid item xs={9}>
           <Typography variant="h5" align="center" className={classes.unitName}>
@@ -76,7 +76,7 @@ const SecondSubFactionMenu = () => {
           </Typography>
         </Grid>
       </Grid>
-      <Grid item container direction="row" justify="center">
+      <Grid item container direction="row" justifyContent="center">
         {/* PANEL BUTTONS */}
         <ButtonGroup size="large" orientation="vertical">
           {SFC.secondSubFactionList.map((ssf) => {

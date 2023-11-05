@@ -21,7 +21,7 @@ const CardBackTitle = () => {
   const SC = useContext(StateCardContext);
 
   return (
-    <Grid container justify="center">
+    <Grid container justifyContent="center">
       <Typography variant="h6" align="center" className={classes.cardTitle}>
         {SC.unit.faction}
       </Typography>

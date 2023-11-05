@@ -10,7 +10,7 @@ const CardFrontFooter = () => {
   const SC = useContext(StateCardContext);
 
   return (
-    <Grid container justify="center" direction="row">
+    <Grid container justifyContent="center" direction="row">
       <Typography variant="h6">{generateHitPoints(SC.unit.hitpoints)}</Typography>
     </Grid>
   );

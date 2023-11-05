@@ -37,10 +37,10 @@ const SizeArmorSkills = () => {
 
   return (
     <Grid item container alignItems="center" direction="row" className={classes.noWrap}>
-      <Grid item container justify="center">
+      <Grid item container justifyContent="center">
         <Typography variant="h6">Größe: {SC.unit.unitSize}</Typography>
       </Grid>
-      <Grid item container alignItems="center" justify="center">
+      <Grid item container alignItems="center" justifyContent="center">
         <div className={classes.alignIcons}>
           <img alt="FK-Panzerung" src={rangeArmorIcon} className={classes.icon} />
         </div>
@@ -51,7 +51,7 @@ const SizeArmorSkills = () => {
         <Typography variant="h6">{SC.unit.armourMelee}</Typography>
       </Grid>
       {SC.unit.skillRange === 0 && SC.unit.skillMelee === 0 ? null : (
-        <Grid container direction="row" justify="center" alignItems="center" className={classes.skillBox}>
+        <Grid container direction="row" justifyContent="center" alignItems="center" className={classes.skillBox}>
           {SC.unit.skillMelee !== 0 ? (
             <Fragment>
               <div className={classes.alignIcons}>
