@@ -1,6 +1,6 @@
-import { createMuiTheme } from "@material-ui/core/styles";
+import { createTheme } from "@material-ui/core/styles";
 
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
     primary: { 500: "#467fcf" },
   },
@@ -14,6 +14,12 @@ const theme = createMuiTheme({
 });
 
 theme.overrides = {
+  MuiTreeItem:{
+    root:{
+      fontFamily: "NotMaryKate",
+    },
+  },
+
   MuiButton: {
     root: {
       fontFamily: "NotMaryKate",

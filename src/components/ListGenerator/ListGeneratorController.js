@@ -379,7 +379,7 @@ const ListGeneratorController = () => {
                               <FactionTreeView className={classes.selector} />
                             </Grid>
                             {/* ARMYLIST */}
-                            <Grid container item direction="column" justify="flex-end" xs={3} className={classes.armyListBox}>
+                            <Grid container item direction="column" justifyContent="flex-end" xs={3} className={classes.armyListBox}>
                               <ArmyListBox />
                             </Grid>
                           </Grid>

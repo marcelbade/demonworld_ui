@@ -33,7 +33,7 @@ const LandingPage = () => {
   const classes = useStyles();
 
   return (
-    <Grid container justify="center" alignContent="center" className={classes.homePage}>
+    <Grid container justifyContent="center" alignContent="center" className={classes.homePage}>
       <LandingPageNaviButton relativeURL={"/compendium"} icon={bookIcon} altText={"Kompendium"} />
       <LandingPageNaviButton relativeURL={"/listGenerator"} icon={calculatorIcon} altText={"ListenGenerator"} />
       <LandingPageNaviButton relativeURL={"/lossCalculator"} icon={deathIcon} altText={"Verlustrechner"} />

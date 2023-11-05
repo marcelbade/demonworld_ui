@@ -185,7 +185,7 @@ export const displayUnitElements = (unit) => {
   let ending = unit.numberOfElements === 1 ? "Element" : "Elemente";
 
   return (
-    <Grid container direction="row" justify="center" alignItems="center" >
+    <Grid container direction="row" justifyContent="center" alignItems="center" >
       <Typography variant="h6"  >
         {unit.leader ? "Anführer  " : null}
         {unit.standardBearer ? "/ Standarte" : null}
