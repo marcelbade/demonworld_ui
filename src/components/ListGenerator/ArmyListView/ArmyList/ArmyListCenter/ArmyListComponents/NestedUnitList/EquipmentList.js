@@ -7,6 +7,8 @@ import RemoveCircleOutlineIcon from "@material-ui/icons/RemoveCircleOutline";
 // components and functions
 import { ArmyContext } from "../../../../../../../contexts/armyContext";
 import { ItemContext } from "../../../../../../../contexts/itemContext";
+import { SelectionContext } from "../../../../../../../contexts/selectionContext";
+import { AlternativeListContext } from "../../../../../../../contexts/alternativeListContext";
 // custom hooks
 import useArmyValidation from "../../../../../../../customHooks/UseArmyValidation";
 // constants
@@ -39,6 +41,8 @@ const EquipmentList = (props) => {
   const classes = useStyles();
   const AC = useContext(ArmyContext);
   const IC = useContext(ItemContext);
+  const SEC = useContext(SelectionContext);
+  const ALC = useContext(AlternativeListContext);
   const validation = useArmyValidation();
 
   /**

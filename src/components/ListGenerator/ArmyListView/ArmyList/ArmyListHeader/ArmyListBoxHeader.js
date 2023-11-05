@@ -9,6 +9,7 @@ import CancelIcon from "@material-ui/icons/Cancel";
 // components and functions
 import { ArmyContext } from "../../../../../contexts/armyContext";
 import { ValidationContext } from "../../../../../contexts/validationContext";
+import { SelectionContext } from "../../../../../contexts/selectionContext";
 // constants
 import { TOOLTIPS, VALIDATION } from "../../../../../constants/textsAndMessages";
 import { NONE } from "../../../../../constants/factions";
@@ -19,6 +20,7 @@ const ArmyListBoxHeader = () => {
   const classes = useStyles();
   const AC = useContext(ArmyContext);
   const VC = useContext(ValidationContext);
+  const SEC = useContext(SelectionContext);
 
   /**
    * Function takes the user input for maximum point allowance, validates it, and sets the state.

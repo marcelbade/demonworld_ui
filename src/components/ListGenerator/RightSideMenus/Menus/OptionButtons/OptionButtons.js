@@ -7,6 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 // context
 import { ArmyContext } from "../../../../../contexts/armyContext";
 import { TournamentRulesContext } from "../../../../../contexts/tournamentRulesContext";
+import { SelectionContext } from "../../../../../contexts/selectionContext";
 // constants
 import { OPTIONS } from "../../../../../constants/textsAndMessages";
 // components and functions
@@ -41,6 +42,8 @@ const OptionButtons = () => {
   const classes = useStyles();
   const AC = useContext(ArmyContext);
   const TC = useContext(TournamentRulesContext);
+  const SEC = useContext(SelectionContext);
+
   const history = useHistory();
 
   /**

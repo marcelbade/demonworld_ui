@@ -11,6 +11,8 @@ import EquipmentList from "./EquipmentList";
 import UnitElementButtons from "./UnitElementButtons";
 import ArmyListUnitEntry from "./ArmyListUnitEntry";
 import useArmyValidation from "../../../../../../../customHooks/UseArmyValidation";
+import { AlternativeListContext } from "../../../../../../../contexts/alternativeListContext";
+import { SelectionContext } from "../../../../../../../contexts/selectionContext";
 
 const useStyles = makeStyles({
   text: {
@@ -48,6 +50,8 @@ const SubFactionUnitList = (props) => {
   // eslint-disable-next-line no-unused-vars
   const classes = useStyles();
   const AC = useContext(ArmyContext);
+  const SEC = useContext(SelectionContext);
+  const ALC = useContext(AlternativeListContext);
   const validation = useArmyValidation();
 
   /**
