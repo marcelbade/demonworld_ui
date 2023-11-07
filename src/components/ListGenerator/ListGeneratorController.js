@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 // Material UI
 import { Grid, IconButton, Fade } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
 // notistack
 import { SnackbarProvider } from "notistack";
 // icons
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("md")]: {
       flexDirection: "row",
     },
-    [theme.breakpoints.down('lg')]: {
+    [theme.breakpoints.down("lg")]: {
       display: "block",
       flexDirection: "column",
     },
@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
       paddingLeft: "4em",
     },
 
-    [theme.breakpoints.down('lg')]: {},
+    [theme.breakpoints.down("lg")]: {},
   },
   armyListBox: {
     paddingTop: "2em",
@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
       position: "absolute",
       left: "30%",
     },
-    [theme.breakpoints.down('lg')]: {
+    [theme.breakpoints.down("lg")]: {
       position: "relative",
 
       left: "10%",
@@ -103,7 +103,7 @@ const ListGeneratorController = () => {
   const [armyName, setArmyName] = useState("");
   // selected faction
   const [selectedFactionName, setSelectedFactionName] = useState(NONE);
-  const [distinctSubFactions, setDistinctSubFactions] = useState([]);
+  const [subFactionObjects, setSubFactionObjects] = useState([]);
   const [listOfAllFactionUnits, setListOfAllFactionUnits] = useState([]);
   const [selectedUnits, setSelectedUnits] = useState([]);
   // maximum point allowance
@@ -326,10 +326,12 @@ const ListGeneratorController = () => {
                         setArmyName: setArmyName,
                         selectedFactionName: selectedFactionName,
                         fetchedFactions: fetchedFactions,
-                        subFactions: distinctSubFactions,
+                        //TODO Changed!!
+                        subFactionObjects: subFactionObjects,
+                        // TODO DTO change -> now subFactionObjects.units!
                         listOfAllFactionUnits: listOfAllFactionUnits,
                         setSelectedFactionName: setSelectedFactionName,
-                        setDistinctSubFactions: setDistinctSubFactions,
+                        setDistinctSubFactions: setSubFactionObjects,
                         setListOfAllFactionUnits: setListOfAllFactionUnits,
                       }}
                     >
@@ -355,7 +357,8 @@ const ListGeneratorController = () => {
                             }}
                             // TODO dont use inline css! :)
                             style={{ color: "#fff", fontSize: "20px" }}
-                            size="large">
+                            size="large"
+                          >
                             <CancelIcon />
                           </IconButton>
                         )}
@@ -368,7 +371,8 @@ const ListGeneratorController = () => {
                               onClick={() => {
                                 backToMainmenu();
                               }}
-                              size="large">
+                              size="large"
+                            >
                               <ChevronLeftIcon className={classes.BackBttnIcon} />
                             </IconButton>
                           </Grid>
