@@ -114,6 +114,7 @@ const ListGeneratorController = () => {
   const [allyName, setAllyName] = useState(NO_ALLY);
   const [distinctAllySubFactions, setDistinctAllySubFactions] = useState([]);
   const [listOfAlliedUnits, setListOfAlliedUnits] = useState([]);
+  const [allySubFactionDTOs, setAllySubFactionDTOs] = useState([]);
   // validation
   const [listValidationResults, setListValidationResults] = useState({
     unitsBlockedbyRules: [],
@@ -316,9 +317,11 @@ const ListGeneratorController = () => {
                       allyName: allyName,
                       allySubFactions: distinctAllySubFactions,
                       listOfAlliedUnits: listOfAlliedUnits,
+                      allySubFactionDTOs: allySubFactionDTOs,
                       setAllyName: setAllyName,
                       setListOfAlliedUnits: setListOfAlliedUnits,
                       setDistinctAllySubFactions: setDistinctAllySubFactions,
+                      setAllySubFactionDTOs: setAllySubFactionDTOs,
                     }}
                   >
                     <ArmyProvider

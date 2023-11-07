@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
 import { Typography, Grid, IconButton } from "@mui/material";
 // icons
 import HelpIcon from "@mui/icons-material/Help";
@@ -46,9 +46,6 @@ const TreeUnitNode = (props) => {
   const validation = useArmyValidation();
   const enrichUnit = useUnitEnricher(props.unit);
 
-  console.log("VC.listValidationResults.unitsBlockedbyRules");
-  console.log(VC.listValidationResults.unitsBlockedbyRules);
-
   /**
    * Function adds a selected unit and uses the custom UseUnitEnricher hook to add necessary information.
    * @param {unitCard object} unit
@@ -86,7 +83,8 @@ const TreeUnitNode = (props) => {
           onClick={addUnit}
           disabled={!props.isValidUnit}
           className={displayBttn(props.isBlocked)}
-          size="large">
+          size="large"
+        >
           <AddCircleOutlineIcon />
         </IconButton>
         {!props.isValidUnit ? (
@@ -95,7 +93,8 @@ const TreeUnitNode = (props) => {
               VC.setValidationMessage(props.blockMessage);
               VC.setShowToastMessage(true);
             }}
-            size="large">
+            size="large"
+          >
             <HelpIcon />
           </IconButton>
         ) : null}
