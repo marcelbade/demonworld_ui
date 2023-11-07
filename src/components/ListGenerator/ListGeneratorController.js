@@ -103,8 +103,10 @@ const ListGeneratorController = () => {
   const [armyName, setArmyName] = useState("");
   // selected faction
   const [selectedFactionName, setSelectedFactionName] = useState(NONE);
-  const [subFactionObjects, setSubFactionObjects] = useState([]);
+  const [distinctSubFactions, setDistinctSubFactions] = useState([]);
   const [listOfAllFactionUnits, setListOfAllFactionUnits] = useState([]);
+  const [subFactionDTOs, setSubFactionDTOs] = useState([]);
+
   const [selectedUnits, setSelectedUnits] = useState([]);
   // maximum point allowance
   const [maxPointsAllowance, setMaxPointsAllowance] = useState(2000);
@@ -326,13 +328,13 @@ const ListGeneratorController = () => {
                         setArmyName: setArmyName,
                         selectedFactionName: selectedFactionName,
                         fetchedFactions: fetchedFactions,
-                        //TODO Changed!!
-                        subFactionObjects: subFactionObjects,
-                        // TODO DTO change -> now subFactionObjects.units!
+                        subFactions: distinctSubFactions,
                         listOfAllFactionUnits: listOfAllFactionUnits,
+                        subFactionDTOs: subFactionDTOs,
                         setSelectedFactionName: setSelectedFactionName,
-                        setDistinctSubFactions: setSubFactionObjects,
+                        setDistinctSubFactions: setDistinctSubFactions,
                         setListOfAllFactionUnits: setListOfAllFactionUnits,
+                        setSubFactionDTOs: setSubFactionDTOs,
                       }}
                     >
                       <SnackbarProvider
