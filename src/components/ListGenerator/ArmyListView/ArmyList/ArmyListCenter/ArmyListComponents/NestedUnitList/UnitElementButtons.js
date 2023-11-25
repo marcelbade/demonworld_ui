@@ -20,7 +20,7 @@ const useStyles = makeStyles({
   },
 });
 
-const UnitEntryButtons = (props) => {
+const UnitElementButtons = (props) => {
   // eslint-disable-next-line no-unused-vars
   const classes = useStyles();
   const SFC = useContext(SecondSubFactionContext);
@@ -105,6 +105,7 @@ const UnitEntryButtons = (props) => {
     !RC.itemShopState.show &&
     !RC.secondSubFactionMenuState.show
   ) {
+    //TODO Warning: Cannot update a component (`ListGeneratorController`) while rendering a different component (`UnitElementButtons`). To locate the bad setState() call inside `UnitElementButtons`, 
     RC.setShowOptionButtons(true);
   }
   if (
@@ -160,4 +161,4 @@ const UnitEntryButtons = (props) => {
   );
 };
 
-export default UnitEntryButtons;
+export default UnitElementButtons;
