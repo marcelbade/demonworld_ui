@@ -140,6 +140,7 @@ const ListGeneratorController = () => {
   const [selectedAlternativeList, setSelectedAlternativeList] = useState(NONE);
   const [alternateListSubFactions, setAlternateListSubFactions] = useState([]);
   const [altArmyListSelectionComplete, setAltArmyListSelectionComplete] = useState(false);
+  const [allyIsAlternativeOption, setAllyIsAlternativeOption] = useState(false);
   // additional subFactions - currently only important for the Thain army!
   const [hasAdditionalSubFaction, setHasAdditionalSubFaction] = useState(false);
   const [secondSubFactionList, setSecondSubFactionList] = useState(false);
@@ -304,11 +305,13 @@ const ListGeneratorController = () => {
                     selectedAlternativeList: selectedAlternativeList,
                     altArmyListSelectionComplete: altArmyListSelectionComplete,
                     alternateListSubFactions: alternateListSubFactions,
+                    allyIsAlternativeOption: allyIsAlternativeOption,
                     setNumberOfAlternativeChoices: setNumberOfAlternativeChoices,
                     setAlternateListSubFactions: setAlternateListSubFactions,
                     setAltArmyListSelectionComplete: setAltArmyListSelectionComplete,
                     setSelectedAlternativeList: setSelectedAlternativeList,
                     setArmyHasAlternativeLists: setArmyHasAlternativeLists,
+                    setAllyIsAlternativeOption: setAllyIsAlternativeOption,
                   }}
                 >
                   <AllyProvider
@@ -334,10 +337,12 @@ const ListGeneratorController = () => {
                         subFactions: distinctSubFactions,
                         listOfAllFactionUnits: listOfAllFactionUnits,
                         subFactionDTOs: subFactionDTOs,
+                        // listofAlternativeSubFactions: listofAlternativeSubFactions,
                         setSelectedFactionName: setSelectedFactionName,
                         setDistinctSubFactions: setDistinctSubFactions,
                         setListOfAllFactionUnits: setListOfAllFactionUnits,
                         setSubFactionDTOs: setSubFactionDTOs,
+                        // setListofAlternativeSubFactions: setListofAlternativeSubFactions
                       }}
                     >
                       <SnackbarProvider
