@@ -137,7 +137,7 @@ const ListGeneratorController = () => {
   // alternative lists
   const [armyHasAlternativeLists, setArmyHasAlternativeLists] = useState(false);
   const [numberOfAlternativeChoices, setNumberOfAlternativeChoices] = useState(0);
-  const [selectedAlternativeList, setSelectedAlternativeList] = useState(NONE);
+  const [selectedAlternativeList, setSelectedAlternativeList] = useState([]);
   const [alternateListSubFactions, setAlternateListSubFactions] = useState([]);
   const [altArmyListSelectionComplete, setAltArmyListSelectionComplete] = useState(false);
   const [allyIsAlternativeOption, setAllyIsAlternativeOption] = useState(false);
