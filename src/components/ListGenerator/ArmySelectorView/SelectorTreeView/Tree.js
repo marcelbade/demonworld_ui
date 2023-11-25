@@ -11,6 +11,7 @@ import { unitCardMultiSort } from "../../../shared/sharedFunctions.js";
 // icons
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import { isSubFactionAlternativeAndSelective } from "../../../../util/utilityFunctions.js";
 
 const useStyles = makeStyles({
   node: {
@@ -52,7 +53,7 @@ const Tree = (props) => {
       defaultExpandIcon={<ChevronRightIcon />}
     >
       {props.subFactionDtoList.map((dto, i) => {
-        return (
+        return isSubFactionAlternativeAndSelective(dto) ? (
           <TreeItem
             nodeId={`${i}`} //
             label={dto.name}
@@ -73,7 +74,7 @@ const Tree = (props) => {
                 );
               })}
           </TreeItem>
-        );
+        ) : null;
       })}
     </TreeView>
   );

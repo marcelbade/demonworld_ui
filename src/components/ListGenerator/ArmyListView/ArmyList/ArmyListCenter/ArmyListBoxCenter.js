@@ -6,15 +6,14 @@ import List from "@mui/material/List";
 import ArmyListSubFactionEntry from "./ArmyListComponents/ArmyListSubFactionEntry";
 import { ArmyContext } from "../../../../../contexts/armyContext";
 import { SelectionContext } from "../../../../../contexts/selectionContext";
-import { AlternativeListContext } from "../../../../../contexts/alternativeListContext";
 import useArmyValidation from "../../../../../customHooks/UseArmyValidation";
 import { NO_ALLY } from "../../../../../constants/factions";
 import { AllyContext } from "../../../../../contexts/allyContext";
+import { isSubFactionAlternativeAndSelective } from "../../../../../util/utilityFunctions";
 
 const ArmyListBoxCenter = () => {
   const AC = useContext(ArmyContext);
   const SEC = useContext(SelectionContext);
-  const ALC = useContext(AlternativeListContext);
   const AYC = useContext(AllyContext);
   const validation = useArmyValidation();
 
@@ -29,38 +28,11 @@ const ArmyListBoxCenter = () => {
     return SEC.selectedUnits.filter((u) => u.subFaction === subFaction);
   };
 
-  /**
-   * Function decides which list of subfactions to display: standard or, for armies w. alternative lists, the alternative.
-   * @returns a list of subfaction names
-   */
-  const selectSubFactionList = () => {
-    let subfactions;
-    if (!ALC.armyHasAlternativeLists) {
-      subfactions = [...AC.subFactions];
-    } else if (ALC.armyHasAlternativeLists) {
-      subfactions = [...ALC.alternateListSubFactions];
-    }
-
-    const result = addAlly(subfactions);
-    return result;
-  };
-
-  /**
-   * Function implements the logic to add the allied Faction as an additional subFaction.
-   * @param {[String]} subFactionList
-   * @returns a list of subfactions that includes the allied faction as element.
-   */
-  const addAlly = (subFactionList) => {
-    if (AYC.allyName !== NO_ALLY && !subFactionList.includes(AYC.allyName)) {
-      subFactionList.push(AYC.allyName);
-    }
-    return subFactionList;
-  };
-
   return (
     <List>
-      {selectSubFactionList()
-        .map((sF) => validation.returnValidationResult("subFaction", sF))
+      {AC.subFactionDTOs
+        .filter((dto) => isSubFactionAlternativeAndSelective(dto))
+        .map((dto) => validation.returnValidationResult("subFaction", dto.name))
         .map((obj, i) => (
           <ArmyListSubFactionEntry
             key={i} //
@@ -70,6 +42,13 @@ const ArmyListBoxCenter = () => {
             units={filterUnitsForSubFaction(obj.subFactionName)}
           />
         ))}
+      {AYC.allyName !== NO_ALLY ? (
+        <ArmyListSubFactionEntry
+          key={AYC.allyName} //
+          subFaction={AYC.allyName}
+          units={filterUnitsForSubFaction(AYC.allyName)}
+        />
+      ) : null}
     </List>
   );
 };
