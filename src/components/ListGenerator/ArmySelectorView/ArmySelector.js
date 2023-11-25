@@ -8,7 +8,6 @@ import {
   ALL_FACTIONS_ARRAY,
   ARMIES_ADDITIONAL_SUBFACTIONS,
   ARMIES_ADDITIONAL_SUBFACTIONS_BUTTON_CAPTION, //
-  NONE,
   NO_ALLY,
 } from "../../../constants/factions";
 import { INPUT_TEXTS } from "../../../constants/textsAndMessages";
@@ -104,7 +103,7 @@ const ArmySelector = () => {
   const resetTheState = () => {
     SEC.setSelectedUnits([]);
     IC.setAllEquippedItems([]);
-    ALC.setSelectedAlternativeList(NONE);
+    ALC.setSelectedAlternativeList([]);
     ALC.setAlternateListSubFactions([]);
     ALC.setArmyHasAlternativeLists(false);
     ALC.setAltArmyListSelectionComplete(false);
