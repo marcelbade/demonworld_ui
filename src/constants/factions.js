@@ -17,28 +17,13 @@ export const NO_ALLY = "NO_ALLY";
 // ALL FACTIONS
 export const ALL_FACTIONS_ARRAY = [DUNKELFELFEN, ELFEN, GOBLINS, IMPERIUM, ISHTAK, NORWINGER, ORKS, THAIN, UNTOTE, ZWERGE, ECHSENMENSCHEN];
 
-export const ARMY_ALTERNATIVES_LIST_MAPPER = {
-  NONE: [],
-  Dunkelelfen: [],
-  Echsenmenschen: [],
-  Elfen: [],
-  Goblins: [],
-  Imperium: ["Nordmark", "Südmark", "Westmark", "Ostmark"],
-  Ishtak: [],
-  Orks: ["Clanngett", "Steinclan", "Wyvernclan", "Tierclan", "Eisclan", "Pfeilclan", "Blutclan", "Eisenclan", "Bergclan"],
-  Norwinger: [],
-  Thain: [],
-  Untote: [],
-  Zwerge: ["Gaeta", "Zah'ra", "Imperium"],
-};
-
 export const ALTERNATIVE_ARMY_SELECTION_TEXT = {
   Imperium: "Wähle eine der Marken",
   Orks: "Wähle einen der Clans oder Clanngett",
   Zwerge: ["Wähle eines der Königreiche oder Alliierte"],
 };
 
-export const UNIT_OR_SUBFACTION = { units: ["Orks"], subFactions: ["Zwerge", "Imperium"] };
+// export const UNIT_OR_SUBFACTION = { units: ["Orks"], subFactions: ["Zwerge", "Imperium"] };
 
 // SECOND SUB_FACTION
 export const ARMIES_ADDITIONAL_SUBFACTIONS = [THAIN];
