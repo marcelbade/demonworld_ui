@@ -151,7 +151,7 @@ const switchBetweenAlternativeRules = (selectedAlternativeList) => {
   const MAPPER_A = "clanngett";
   const MAPPER_B = "clantroops";
 
-  if (selectedAlternativeList === CLANNGETT) {
+  if (selectedAlternativeList.includes(CLANNGETT)) {
     mapperArray = ORK_SUBFACTION_LIMITS[MAPPER_A];
   } else {
     mapperArray = ORK_SUBFACTION_LIMITS[MAPPER_B];
@@ -177,7 +177,7 @@ const switchBetweenAlternativeRules = (selectedAlternativeList) => {
  * @returns true, if either a 2 * commander (clans) or a 2* commander and a Clanngett hero is present.
  */
 const isOrkArmyCommanderPresent = (selectedUnits, selectedAlternativeList) => {
-  if (selectedAlternativeList !== "Clanngett") {
+  if (!selectedAlternativeList.includes("Clanngett")) {
     return globalRules.isArmyCommanderPresent(selectedUnits);
   }
 
@@ -189,17 +189,18 @@ const isOrkArmyCommanderPresent = (selectedUnits, selectedAlternativeList) => {
 };
 
 /**
- *  Functions implement the rule that each clan has only access to a small sub set of clan units.
+ * Functions implement the rule that each clan has only access to a small sub set of clan units.
  * All other units are blocked.
  * @param {[unitCard]} availableUnits
  * @param {String} selectedAlternativeList
- * @returns an array of objects, each containins a blocked unbit and an error message.
+ * @returns an array of objects, each containing a blocked unit and an error message.
  */
 const setUnitsForClans = (availableUnits, selectedAlternativeList) => {
   let result = [];
+  const selectedAlternative = selectedAlternativeList[0];
 
   availableUnits.forEach((u) => {
-    if (u.subFaction === "Clanntruppen" && !ORK_CLANS_UNIT_MAPPING[selectedAlternativeList].includes(u.unitName)) {
+    if (u.subFaction === "Clanntruppen" && !ORK_CLANS_UNIT_MAPPING[selectedAlternative].includes(u.unitName)) {
       result.push({ unitBlockedbyRules: u.unitName, message: ORKS.SUB_FACTION_RULES.AVAILABLE_CLANUNITS });
     }
   });
