@@ -36,28 +36,37 @@ const ArmySelector = () => {
     setFactionProperties(value);
   };
 
-  /** 
-   * Function sets all properties of a faction when it is selected.
+  /**
+   * Function sets the enitre state for a faction when it is selected.
    * @param {String} factionName
    */
   const setFactionProperties = (factionName) => {
     const factionObj = AC.fetchedFactions.filter((f) => f.factionName === factionName)[0];
+    const allSubFactions = [...factionObj.subFactions.map((sF) => sF.name)];
+    const allFactionUnits = captureAllFactionUnits(factionObj.subFactions);
 
     resetTheState();
 
+    AC.setSubFactionDTOs(factionObj.subFactions);
     AC.setSelectedFactionName(factionObj.factionName);
-    AC.setListOfAllFactionUnits(factionObj.units);
-    AC.setDistinctSubFactions(factionObj.subFactions);
+    AC.setDistinctSubFactions(allSubFactions);
+    AC.setListOfAllFactionUnits(allFactionUnits);
 
-    if (factionObj.ally) {
+    if (factionObj.ally !== NO_ALLY) {
+      const allAllySubFactions = [...factionObj.allySubFactions.map((sF) => sF.name)];
+      const allAllyUnits = [...factionObj.allySubFactions.map((sF) => sF.name)];
+
       AYC.setAllyName(factionObj.ally);
-      AYC.setListOfAlliedUnits(factionObj.allyUnits);
-      AYC.setDistinctAllySubFactions(factionObj.allySubFactions);
+      AYC.setAllySubFactionDTOs(factionObj.allySubFactions);
+      AYC.setDistinctAllySubFactions(allAllySubFactions);
+      AYC.setListOfAlliedUnits(allAllyUnits);
     }
 
     if (factionObj.hasAlternativeLists) {
       ALC.setArmyHasAlternativeLists(factionObj.hasAlternativeLists);
       ALC.setNumberOfAlternativeChoices(factionObj.numberOfAlternativeArmySelections);
+      ALC.setAlternateListSubFactions(factionObj.alternativeOptions.subFactions);
+      ALC.setAllyIsAlternativeOption(factionObj.allyIsAlternativeOption);
     }
 
     if (ARMIES_ADDITIONAL_SUBFACTIONS.includes(factionObj.factionName)) {
@@ -73,14 +82,28 @@ const ArmySelector = () => {
   };
 
   /**
+   * Function creates array containing every unit of a faction
+   * @param {[subFactionDTO]} subFactionObjects
+   * @returns array of unitCard objects.
+   */
+  const captureAllFactionUnits = (subFactionObjects) => {
+    let result = [];
+
+    subFactionObjects.forEach((sF) => {
+      sF.units.forEach((u) => {
+        result.push(u);
+      });
+    });
+
+    return result;
+  };
+
+  /**
    * Function resets the entire state back to default.
    */
   const resetTheState = () => {
     SEC.setSelectedUnits([]);
     IC.setAllEquippedItems([]);
-    AYC.setAllyName(NO_ALLY);
-    AYC.setListOfAlliedUnits([]);
-    AYC.setDistinctAllySubFactions([]);
     ALC.setSelectedAlternativeList(NONE);
     ALC.setAlternateListSubFactions([]);
     ALC.setArmyHasAlternativeLists(false);
@@ -95,6 +118,7 @@ const ArmySelector = () => {
       secondSubFactionMissing: [],
       alliedUnitsBlockedbyRules: [],
     });
+
     RC.closeCardDisplay();
     RC.closeItemShop();
     RC.closeSecondSubFactionMenu();
