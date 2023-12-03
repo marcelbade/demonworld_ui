@@ -15,7 +15,7 @@ import SpellBookIcon from "../../assets/icons/spellbook-white.png";
 // components and functions
 import FactionTreeView from "./ArmySelectorView/SelectorTreeView/FactionTreeView";
 import ArmyListBox from "./ArmyListView/ArmyListBox";
-import AlternativeArmyListBox from "./ArmySelectorView/AlternativeArmyListSelection/AlternativeArmyLists";
+import AlternativeArmyLists from "./ArmySelectorView/AlternativeArmyListSelection/AlternativeArmyLists";
 import MenuBox from "./RightSideMenus/MenuBox";
 import ValidationNotification from "../shared/ValidationNotification";
 // context providers
@@ -196,9 +196,11 @@ const ListGeneratorController = () => {
 
   //TODO Change URL in Production!
   const fetchItemData = async () => {
-    const result = await axios(`http://localhost:8080/items`);
+    const result = await axios(`http://localhost:8080/itemDTOs`);
     setFetchedItems(result.data);
   };
+
+
 
   /**
    * in order to work, the state setter needs a unit at the start. Since the view is not visible, the first unit in the list is used.
@@ -390,7 +392,7 @@ const ListGeneratorController = () => {
                           <Grid container item direction="row">
                             <Grid container item direction={"column"} xs={3} className={classes.armySelectionBox}>
                               <ArmySelector />
-                              <AlternativeArmyListBox />
+                              <AlternativeArmyLists />
                               <FactionTreeView className={classes.selector} />
                             </Grid>
                             {/* ARMYLIST */}
