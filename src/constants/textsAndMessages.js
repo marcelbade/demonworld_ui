@@ -3,6 +3,7 @@ export const TOOLTIPS = {
 };
 
 export const TOURNAMENT_RULES = {
+  TOURNAMENT_RULES: "Turnierregeln",
   MAX_POINTS_FOR_HERO: "Wieviele Prozent dürfen max. für Helden ausgegeben werden.",
   HOW_MANY_TIMES: "Wie oft darf jede Einheit ausgewählt werden.",
   ENFORCE_UNIQUE_RULE: "Einzigartige Einheiten dürfen nur einmal gewählt werden.",
@@ -149,7 +150,6 @@ export const NORWINGER = {
   },
 };
 
-//TODO: messages must change with chosen alternative lists / point costs
 export const ORKS = {
   SUB_FACTION_RULES: {
     UNIT: "Deine Armeeliste muss zu mindestens 25% aus Einheiten bestehen.",
