@@ -46,7 +46,7 @@ const ArmyListBoxHeader = () => {
     <Grid container flexdirection="row" alignItems="center">
       {!VC.listValidationResults.commanderIsPresent ? (
         <TextField
-          id="outlined-basic"
+          id="armyNameValid"
           autoComplete="off"
           value={AC.armyName}
           InputProps={{
@@ -64,7 +64,7 @@ const ArmyListBoxHeader = () => {
         />
       ) : (
         <TextField
-          id="outlined-basic"
+          id="armyNameInvalid"
           autoComplete="off"
           value={AC.armyName}
           InputProps={{

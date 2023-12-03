@@ -81,9 +81,11 @@ const TournamentRulesMenu = () => {
       </Grid>
       <Grid item>
         <FormControl component="fieldset" variant="standard">
-          <FormLabel component="legend">Turnierregeln</FormLabel>
+          <FormLabel component="legend">{TOURNAMENT_RULES.TOURNAMENT_RULES}</FormLabel>
           <FormGroup>
-            <FormControlLabel control={<Switch checked={TC.tournamentOverrideRules.enableOverride} onChange={toggleAllButtons} />} />
+            <FormControlLabel control={<Switch 
+             id= "toggleAllButtons" 
+            checked={TC.tournamentOverrideRules.enableOverride} onChange={toggleAllButtons} />} />
           </FormGroup>
         </FormControl>
       </Grid>
@@ -92,7 +94,7 @@ const TournamentRulesMenu = () => {
           {TOURNAMENT_RULES.MAX_POINTS_FOR_HERO}
         </Typography>
         <TextField
-          id="outlined-basic"
+          id="maxHeroValue"
           name="maxHeroValue"
           autoComplete="off"
           value={TC.tournamentOverrideRules.maxHeroValue}
@@ -117,7 +119,7 @@ const TournamentRulesMenu = () => {
           {TOURNAMENT_RULES.HOW_MANY_TIMES}
         </Typography>
         <TextField
-          id="outlined-basic"
+          id="maxNumber"
           name="maxNumber"
           autoComplete="off"
           value={TC.tournamentOverrideRules.maxNumber}
@@ -149,6 +151,7 @@ const TournamentRulesMenu = () => {
             <FormControlLabel
               control={
                 <Switch
+                  id="toggleUniqueRule"
                   disabled={!TC.tournamentOverrideRules.enableOverride} //
                   checked={TC.tournamentOverrideRules.uniquesOnlyOnce}
                   onChange={enforceUniqueRule}
