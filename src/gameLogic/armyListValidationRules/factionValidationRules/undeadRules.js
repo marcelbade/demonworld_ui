@@ -1,4 +1,4 @@
-/* TODO SQL: the giant mummy and the "Werkstatt", "Altar der Totenbeschwörer" are unique!
+/*  
  *
  *Eine Armee der Untoten darf nicht mehr als 50% der Gesamtpunktzahl für
 Helden, Befehlshaber und Magier ausgeben. Sie muss mindestens einen
