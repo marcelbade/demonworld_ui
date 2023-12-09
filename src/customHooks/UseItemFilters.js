@@ -3,7 +3,25 @@ import { useContext } from "react";
 import { ItemContext } from "../contexts/itemContext";
 import { SelectionContext } from "../contexts/selectionContext";
 //constants
-import { ALL, ITEM_TYPE_BANNER, ITEM_TYPE_FORTIFICATIONS, ITEM_TYPE_INSTRUMENT, LANCE_TYPES, UNIT } from "../constants/itemShopConstants";
+import {
+  ALL,
+  ITEM_TYPE_ARMOR,
+  ITEM_TYPE_BANNER,
+  ITEM_TYPE_BOWS,
+  ITEM_TYPE_CROSSBOWS,
+  ITEM_TYPE_FORTIFICATIONS,
+  ITEM_TYPE_INSTRUMENT,
+  ITEM_TYPE_IMP,
+  ITEM_TYPE_POTION,
+  ITEM_TYPE_WEAPON,
+  ITEM_TYPE_ITEM,
+  ITEM_TYPE_RINGSANDAMULETS,
+  SPEAR_TYPES,
+  LANCE_TYPES,
+  BOW_TYPES,
+  CROSSBOW_TYPES,
+  UNIT,
+} from "../constants/itemShopConstants";
 import { do2ArraysHaveCommonElements } from "../util/utilityFunctions";
 
 const useItemFilters = () => {
