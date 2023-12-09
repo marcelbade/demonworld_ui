@@ -6,7 +6,7 @@ import makeStyles from '@mui/styles/makeStyles';
 import { ListItemButton } from "@mui/material";
 // components and functions
 import { BUTTON_TEXTS } from "../../../../../../../constants/textsAndMessages";
-import { isSingleElementCard } from "../../../../../../shared/sharedFunctions";
+import { isSingleElementCard } from "../../../../../../../util/utilityFunctions";
 // context
 import { SecondSubFactionContext } from "../../../../../../../contexts/secondSubFactionContext";
 import { ArmyContext } from "../../../../../../../contexts/armyContext";
@@ -30,10 +30,10 @@ const UnitElementButtons = (props) => {
   const AC = useContext(ArmyContext);
 
   /**
-   * Function controls the menus on the right.
+   * Function toggles the menus on the right side.
    * It controls what menu and what content for which unit is shown.
-   * In order to do this, the menus are not toggled by a simple booelan flag,
-   * instead an object that stores the previously clicked unit is used.
+   * In order to do this, the menus are not toggled by a simple boolean flag,
+   * instead an object stores the previously clicked unit, a boolean flag and the clicked unit.
    * @param {unitCard} unit
    */
   const rightMenuController = (unit, menu) => {
@@ -55,7 +55,7 @@ const UnitElementButtons = (props) => {
         RC.closeCardDisplay();
         RC.closeSecondSubFactionMenu();
         break;
-      case "SECOND_SUB_FACTION":
+      case "SECOND_SUB_FACTION":  // Thain faction only
         stateObj = RC.secondSubFactionMenuState;
         stateObjSetter = RC.setSecondSubFactionMenuState;
         RC.closeCardDisplay();
