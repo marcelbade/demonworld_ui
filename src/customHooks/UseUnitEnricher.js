@@ -1,4 +1,6 @@
-import { uuidGenerator } from "../components/shared/sharedFunctions";
+import { uuidGenerator } from "../util/utilityFunctions";
+
+ 
 
 const useUnitEnricher = (unit) => {
   /**
@@ -32,7 +34,7 @@ const useUnitEnricher = (unit) => {
 
   /**
    * Function adds a property which allows equipment to be added as well as check what equipment can be added. There are, at this moment, 5 types of items. Each type can be selected once.
-   * @param {*} unit
+   * @param {unitCard object} unit
    * @returns unit object with equipment + equipmentTypes property.
    */
   const addEquipmentSlotsToUnit = (unit) => {

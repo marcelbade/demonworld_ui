@@ -1,7 +1,7 @@
 // components and functions
 import { ruleObjectProvider } from "../gameLogic/armyListValidationRules/ruleObjectProvider";
 // constants
-import { calculateTotalUnitPointCost } from "../components/shared/sharedFunctions";
+import { calculateTotalUnitPointCost } from "../util/utilityFunctions";
 
 const useSubFactionStats = (unitList, subFactionName, factionName, maxPointsAllowance) => {
   let total = 0;
