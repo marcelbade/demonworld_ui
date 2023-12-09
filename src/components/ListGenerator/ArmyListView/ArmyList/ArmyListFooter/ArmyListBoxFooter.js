@@ -1,18 +1,17 @@
 // React
 import React, { useState, useContext, Fragment } from "react";
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
 import { Typography, TextField, InputAdornment, Grid } from "@mui/material";
 // components and functions
 import { ArmyContext } from "../../../../../contexts/armyContext";
 import { SelectionContext } from "../../../../../contexts/selectionContext";
 import calculateScoutingFactor from "../../../../../gameLogic/scoutFactorCalculator/scoutingFactorCalculator";
+import useArmyValidation from "../../../../../customHooks/UseArmyValidation";
+import { calculateTotalPointCost } from "../../../../../util/utilityFunctions";
+import { AlternativeListContext } from "../../../../../contexts/alternativeListContext";
 // constants
 import { GENERAL_ERRRORS, TEXTS } from "../../../../../constants/textsAndMessages";
-import useArmyValidation from "../../../../../customHooks/UseArmyValidation";
-import { calculateTotalPointCost } from "../../../../shared/sharedFunctions";
-import { AlternativeListContext } from "../../../../../contexts/alternativeListContext";
 
-// TODO: remove unneeded styles
 const useStyles = makeStyles((theme) => ({
   total: {
     fontSize: "20px",
@@ -21,9 +20,6 @@ const useStyles = makeStyles((theme) => ({
     position: "relative",
     top: 3,
   },
-  bottom: { bottom: "100px" },
-  withinLimit: { color: "black" },
-  exceeded: { color: "red" },
 }));
 
 const ArmyListBoxFooter = () => {
@@ -39,7 +35,7 @@ const ArmyListBoxFooter = () => {
   let netPoints = SEC.selectedUnits ? calculateTotalPointCost(SEC.selectedUnits) : 0;
 
   /**
-   * Function takes the user input for maximum point allowance, validates it, and sets the state.
+   * Function alloes the user to change the maximum point total for the army.
    * @param {event object} event
    */
   const changeMaximumPointValue = (event) => {
@@ -57,7 +53,7 @@ const ArmyListBoxFooter = () => {
         <Grid container direction="row">
           <Typography className={classes.total}>Gesamtpunktzahl: {netPoints} / </Typography>
           <TextField
-            id="outlined-basic"
+            id="totalPointValue"
             autoComplete="off"
             value={SEC.maxPointsAllowance}
             InputProps={{
