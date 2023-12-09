@@ -3,7 +3,7 @@ import React from "react";
 // react-pdf
 import { Text, View } from "@react-pdf/renderer";
 // functions and components
-import { isSingleElementCard } from "../../../../../shared/sharedFunctions";
+import { isSingleElementCard } from "../../../../../../util/utilityFunctions";
 // styles
 import styles from "../../../../pdfStyles/detailedCardPdfStyles";
 

@@ -9,7 +9,7 @@ import Tooltip from "@mui/material/Tooltip";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import CancelIcon from "@mui/icons-material/Cancel";
 // components & functions
-import { unitOrCmdCard } from "../../../shared/sharedFunctions";
+import { unitOrCmdCard } from "../../../../util/utilityFunctions";
 
 
 

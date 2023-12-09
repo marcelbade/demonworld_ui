@@ -3,7 +3,7 @@ import React from "react";
 // react-pdf
 import { Text, View, Image } from "@react-pdf/renderer";
 // functions and components
-import { isSingleElementCard } from "../../../../../shared/sharedFunctions";
+import { isSingleElementCard } from "../../../../../../util/utilityFunctions";
 // icons
 import squareFormationWhite from "../../../../../../assets/icons/squareFormationWhite.png";
 import skirmishFormation from "../../../../../../assets/icons/skirmishFormation.png";

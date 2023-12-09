@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 //Material UI
 import { List } from "@mui/material";
 // components and functions
- import { unitCardMultiSort } from "../../shared/sharedFunctions";
+ import { unitCardMultiSort } from "../../../util/utilityFunctions";
 import { LossCalcContext } from "../../../contexts/LossCalculatorContext";
 import LostUnitListElement from "./LostUnitListElement";
 

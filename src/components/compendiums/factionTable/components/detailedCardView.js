@@ -2,7 +2,8 @@
 import React from "react";
 import makeStyles from '@mui/styles/makeStyles';
 // components & functions
-import { unitOrCmdCard } from "../../../shared/sharedFunctions";
+import { unitOrCmdCard } from "../../../../util/utilityFunctions";
+ 
 
 const useStyles = makeStyles({
   backGround: {

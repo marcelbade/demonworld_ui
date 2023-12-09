@@ -4,7 +4,7 @@ import React, { useContext } from "react";
 import { Grid, Typography } from "@mui/material";
 import makeStyles from '@mui/styles/makeStyles';
 // functions and modules
-import { calculateTotalUnitPointCost } from "../../../sharedFunctions";
+import { calculateTotalUnitPointCost } from "../../../../../util/utilityFunctions";
 import { StateCardContext } from "../../../../../contexts/statCardContext";
 
 const useStyles = makeStyles({
