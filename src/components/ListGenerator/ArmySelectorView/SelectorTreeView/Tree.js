@@ -6,7 +6,7 @@ import { TreeItem } from "@mui/x-tree-view/TreeItem";
 // components and functions
 import TreeUnitNode from "./TreeUnitNode";
 import useArmyValidation from "../../../../customHooks/UseArmyValidation.js";
-import { unitCardMultiSort } from "../../../shared/sharedFunctions.js";
+import { unitCardMultiSort } from "../../../../util/utilityFunctions.js";
 
 // icons
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
