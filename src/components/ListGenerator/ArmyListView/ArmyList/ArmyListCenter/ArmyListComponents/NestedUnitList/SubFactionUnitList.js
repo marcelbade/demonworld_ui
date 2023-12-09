@@ -7,7 +7,7 @@ import makeStyles from '@mui/styles/makeStyles';
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 // components and functions
 import { ArmyContext } from "../../../../../../../contexts/armyContext";
-import { unitCardMultiSort } from "../../../../../../shared/sharedFunctions";
+import { unitCardMultiSort } from "../../../../../../../util/utilityFunctions"
 import EquipmentList from "./EquipmentList";
 import UnitElementButtons from "./UnitElementButtons";
 import ArmyListUnitEntry from "./ArmyListUnitEntry";
