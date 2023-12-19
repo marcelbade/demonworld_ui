@@ -1,12 +1,14 @@
 import React, { useContext } from "react";
-// Material UI
-import { makeStyles } from "@material-ui/core/styles";
-import { Typography, IconButton, Accordion, AccordionSummary, AccordionDetails, ButtonGroup } from "@material-ui/core";
+import makeStyles from "@mui/styles/makeStyles";
+import { Typography, IconButton, Accordion, AccordionSummary, AccordionDetails, ButtonGroup } from "@mui/material";
 // components and functions
-import { ArmyContext } from "../../../../../contexts/armyContext";
-// Icons
+import { isObjectEmtpy } from "../../../../../util/utilityFunctions";
+import { ItemContext } from "../../../../../contexts/itemContext";
+import { SelectionContext } from "../../../../../contexts/selectionContext";
+import useItemFilters from "../../../../../customHooks/UseItemFilters";
+// icons
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import AddCircleOutlineIcon from "@material-ui/icons/AddCircleOutline";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 // constants
 import {
   MAGICAL_ITEMS,
@@ -35,7 +37,11 @@ const useStyles = makeStyles({
 
 const ShopItemList = (props) => {
   const classes = useStyles();
-  const AC = useContext(ArmyContext);
+  // const AC = useContext(ArmyContext);
+  const IC = useContext(ItemContext);
+  const SEC = useContext(SelectionContext);
+
+  const filter = useItemFilters();
 
   /**
    * Function enforces the item selection rules by toggling the item's corresponding button on/off.
@@ -51,17 +57,20 @@ const ShopItemList = (props) => {
    * In that case, the button will be disabled.
    */
   const toggleItemButton = (item) => {
-    let unit = AC.unitSelectedForShop;
+    if (!isObjectEmtpy(IC.unitSelectedForShop)) {
+      let unit = IC.unitSelectedForShop;
 
-    const hasMagicalItem = unitHasMagicalItem(unit, item);
-    const hasBanner = unitHasBanner(unit, item);
-    const hasInstrument = unitHasInstrument(unit, item);
-    const hasItemForEntireUnit = unitHasItemForEveryElement(unit, item);
-    const hasFortifications = unitHasFortifications(unit, item);
+      const hasMagicalItem = unitHasMagicalItem(unit, item);
+      const hasBanner = unitHasBanner(unit, item);
+      const hasInstrument = unitHasInstrument(unit, item);
+      const hasItemForEntireUnit = unitHasItemForEveryElement(unit, item);
+      const hasFortifications = unitHasFortifications(unit, item);
 
-    const blockItemWhen = hasMagicalItem || hasBanner || hasBanner || hasInstrument || hasItemForEntireUnit || hasFortifications;
+      const blockItemWhen = hasMagicalItem || hasBanner || hasBanner || hasInstrument || hasItemForEntireUnit || hasFortifications;
 
-    return blockItemWhen;
+      return blockItemWhen;
+    }
+    return false;
   };
 
   /*
@@ -105,7 +114,7 @@ const ShopItemList = (props) => {
    * @param {*} newFlagValue booleam flag. True, if the item is added, false if the item is removed.
    */
   const toggleUnitsItemTypeFlags = (item, newFlagValue) => {
-    let tempObj = { ...AC.unitSelectedForShop };
+    let tempObj = { ...IC.unitSelectedForShop };
 
     if (item.everyElement) {
       tempObj.equipmentTypes.unit = newFlagValue;
@@ -115,7 +124,7 @@ const ShopItemList = (props) => {
       tempObj.equipmentTypes[item.itemType] = newFlagValue;
     }
 
-    AC.setUnitSelectedForShop({
+    IC.setUnitSelectedForShop({
       ...tempObj,
     });
   };
@@ -123,9 +132,9 @@ const ShopItemList = (props) => {
   /**
    * Function causes the list of all selected units to change (w/o actually changing it). This is necessary to correctly calculate the list's point cost whenever an item is added. Without this, the point cost of the item is only added whenever a unit is added or removed from the list, not when the item is added ore removed.
    */
-  const triggerArymListReCalculation = () => {
-    let tempArray = [...AC.selectedUnits];
-    AC.setSelectedUnits([...tempArray]);
+  const triggerArymListRecalculation = () => {
+    let tempArray = [...SEC.selectedUnits];
+    SEC.setSelectedUnits([...tempArray]);
   };
 
   /**
@@ -133,14 +142,14 @@ const ShopItemList = (props) => {
    * @param {itemCard object} item
    */
   const addItemToUnit = (item) => {
-    let tempObj = { ...AC.unitSelectedForShop };
+    let tempObj = { ...IC.unitSelectedForShop };
 
     tempObj.equipment.push({
       ...item,
       itemLost: false,
     });
 
-    AC.setUnitSelectedForShop({
+    IC.setUnitSelectedForShop({
       ...tempObj,
     });
   };
@@ -150,48 +159,48 @@ const ShopItemList = (props) => {
    * @param {itemCard} item
    */
   const addItemToCentralList = (item) => {
-    AC.setAllEquippedItems([...AC.allEquippedItems, item.itemName]);
+    //TODO caused an undefined   IC.setAllEquippedItems error
+    // IC.setAllEquippedItems([...AC.allEquippedItems, item.itemName]);
   };
 
-
-
-
-  return (
+  return props.items.length !== 0 ? (
     <ButtonGroup orientation="vertical">
       {props.items
-     .filter((item) => item.itemType === props.displayThisItemType)
-        .map((i) => {
+        .filter((itemGroup) => itemGroup.typeName === props.displayThisItemType)
+        .map((itemGroup) => itemGroup.items)[0]
+        .filter((items) => filter.filterIndividualItems(props.unit, items))
+        .map((item) => {
           return (
-            <Accordion key={i}>
+            <Accordion key={item}>
               <AccordionSummary
                 expandIcon={<ExpandMoreIcon />} //
                 aria-controls="panel1a-content"
-                id="panel1a-header"
+                id="shopItem"
               >
                 <IconButton
                   className={classes.buttons}
-                  disabled={toggleItemButton(i)}
+                  disabled={toggleItemButton(item)}
                   onClick={() => {
-                    addItemToUnit(i);
-                    addItemToCentralList(i);
-                    toggleUnitsItemTypeFlags(i, true);
-                    triggerArymListReCalculation();
+                    addItemToUnit(item);
+                    addItemToCentralList(item);
+                    toggleUnitsItemTypeFlags(item, true);
+                    triggerArymListRecalculation();
                   }}
-                  key={i}
+                  size="large"
                 >
                   <AddCircleOutlineIcon />
                 </IconButton>
-                <Typography variant="body1" className={toggleItemButton(i) ? classes.blockedItemName : classes.itemName}>
-                  {i.itemName}
+                <Typography variant="body1" className={toggleItemButton(item) ? classes.blockedItemName : classes.itemName}>
+                  {item.itemName}
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <Typography variant="body1">{i.specialRules}</Typography>
+                <Typography variant="body1">{item.specialRules}</Typography>
               </AccordionDetails>
             </Accordion>
           );
         })}
     </ButtonGroup>
-  );
+  ) : null;
 };
 export default ShopItemList;

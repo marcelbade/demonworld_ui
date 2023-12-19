@@ -29,31 +29,65 @@ const useItemFilters = () => {
   const SC = useContext(SelectionContext);
 
   /**
-   * Function filters out entire groups of items that the selected unit cannot equipped.
+   * Function is a wrapper for the filter logic and calls the filtering functions.
+   * First, entire groups of items are filtered, then individual items arte filtered.
+   * @returns an array of items grouped by type, with all item types
+   * and items filtered out that the selected unit cannot equip.
+   */
+  const filterItemsForUnit = (selectedUnit, listOfItemGroups) => {
+    const itemGroupsForUnit = getItemGroupsForSelectedUnit(selectedUnit, listOfItemGroups);
+
+    const validItemTypeGroups = filterItemTypes(selectedUnit, itemGroupsForUnit);
+
+    // validItemTypeGroups.forEach((group) => {
+    //   group.items = filterIndividualItems(selectedUnit, group.items);
+    // });
+
+    return validItemTypeGroups;
+  };
+
+  /**
+   * Function takes the DTO fromthe BE and filters by faction.
+   * @returns an array of dto filtered by faction.
+   */
+  const getItemGroupsForSelectedUnit = (selectedUnit, ListOfItemGroups) => {
+    return ListOfItemGroups.filter((obj) => obj.factionName === selectedUnit.faction)[0].groupsOfFactionItemsByType;
+  };
+
+  /**
+   * Function filters out entire items groups that the selected unit cannot equipped.
    * I.e., a hero cannot carry fortifications or banners.
-   * @param {unitCard} unit
-   * @param {[obj]} itemGroupList an array of objects, each containing an itemType (String)
+   * @param {unitCard} selectedUnit
+   * @param {[obj]} itemTypeGroup an array of objects, each containing an itemType (String)
    * and an array of itemCards containing items of that type.
    * @returns a filtered down itemGroupList array.
    */
-  const filterItemGroups = (unit, itemGroupList) => {
-    if (unit.prohibitedItemType === ALL) {
-      itemGroupList = [];
+  const filterItemTypes = (selectedUnit, itemTypeGroup) => {
+    // if a hero cannot have any items, return an empty array
+    if (selectedUnit.prohibitedItemType === ALL) {
+      itemTypeGroup = [];
     }
 
-    itemGroupList = itemGroupList.filter((group) => group.typeName !== unit.prohibitedItemType);
+    itemTypeGroup = itemTypeGroup.filter((group) => group.typeName !== selectedUnit.prohibitedItemType);
 
-    if (unit.unitType !== UNIT) {
-      itemGroupList = itemGroupList.filter(
-        (group) =>
-          group.typeName !== ITEM_TYPE_FORTIFICATIONS || //
-          group.typeName !== ITEM_TYPE_BANNER ||
-          group.typeName !== ITEM_TYPE_INSTRUMENT
-      );
+    if (
+      selectedUnit.unitType !== UNIT || //
+      selectedUnit.isMounted ||
+      !isTheListBelowFortificationsLimit()
+    ) {
+      itemTypeGroup = itemTypeGroup.filter((group) => group.typeName !== ITEM_TYPE_FORTIFICATIONS);
     }
 
-    if (unit.leader === false && unit.unitType === UNIT) {
-      itemGroupList = itemGroupList.filter(
+    if (!selectedUnit.standardBearer) {
+      itemTypeGroup = itemTypeGroup.filter((group) => group.typeName !== ITEM_TYPE_BANNER);
+    }
+
+    if (!selectedUnit.musician) {
+      itemTypeGroup = itemTypeGroup.filter((group) => group.typeName !== ITEM_TYPE_INSTRUMENT);
+    }
+
+    if (!selectedUnit.leader && selectedUnit.unitType === UNIT) {
+      itemTypeGroup = itemTypeGroup.filter(
         (group) =>
           group.typeName !== ITEM_TYPE_ARMOR ||
           group.typeName !== ITEM_TYPE_CROSSBOWS ||
@@ -66,28 +100,11 @@ const useItemFilters = () => {
     }
 
     // non-casters and mounted magic users cannot equip an imp
-    if (unit.magic === 0 || unit.isMounted) {
-      itemGroupList = itemGroupList.filter((group) => group.typeName !== ITEM_TYPE_IMP);
+    if (selectedUnit.magic === 0 || selectedUnit.isMounted) {
+      itemTypeGroup = itemTypeGroup.filter((group) => group.typeName !== ITEM_TYPE_IMP);
     }
 
-    // there is a hard limit for fortifications
-    if (!isTheListBelowFortificationsLimit()) {
-      itemGroupList = itemGroupList.filter((group) => group.typeName !== ITEM_TYPE_FORTIFICATIONS);
-    }
-
-    return itemGroupList;
-  };
-
-  /**
-   * Function checks if a uniqe item has already been equipped.
-   * @param {itemCard Object} item
-   * @returns true, if item has already been equipped.
-   */
-  const uniqueItemIsAlreadyEquipped = (item) => {
-    if (!item.isGeneric) {
-      return IC.allEquippedItems.includes(item.itemName);
-    }
-    return false;
+    return itemTypeGroup;
   };
 
   /**
@@ -97,53 +114,89 @@ const useItemFilters = () => {
    * @param {[unitCartd]} itemList
    * @returns a filtered item list.
    */
-  const filterIndividualItems = (unit, itemList) => {
-    if (!unit.hasShield) {
-      itemList = itemList.filter((item) => item.requiresShield === false);
+  const filterIndividualItems = (unit, item) => {
+    // unique items can only be selected once.
+
+    let isValidItem = true;
+
+    if (!item.isGeneric && IC.allEquippedItems.includes(item.itemName)) {
+      isValidItem = false;
     }
-    if (!unit.isMounted) {
-      itemList = itemList.filter((item) => item.mustBeMounted === false);
+
+    // no shield items for heroes & leaders w/o shields.
+    if (!unit.hasShield && item.requiresShield) {
+      isValidItem = false;
+    }
+
+    // no cavalery items for heroes & leaders w/o mounts.
+    if (!unit.isMounted && item.mustBeMounted) {
+      isValidItem = false;
+    }
+
+    // no spellcaster items for heroes & leaders w/o magic.
+    if (unit.magic === 0 && item.magicUsersOnly) {
+      isValidItem = false;
     }
 
     const unitWeapons = [unit.weapon1Name, unit.weapon2Name, unit.weapon3Name];
+    const SPEARS = "spears";
+    const LANCES = "lances";
 
-    if (!do2ArraysHaveCommonElements(LANCE_TYPES, unitWeapons)) {
-      itemList = itemList.filter((item) => item.requiresWeaponType !== "lances");
+    // no lance items for heroes & leaders w/o a lance.
+    if (
+      !do2ArraysHaveCommonElements(LANCE_TYPES, unitWeapons) && //
+      item.requiresWeaponType === LANCES
+    ) {
+      isValidItem = false;
+    }
+    console.log(5);
+    console.log(isValidItem);
+
+    // no spear items for heroes & leaders w/o a spear.
+    if (
+      !do2ArraysHaveCommonElements(SPEAR_TYPES, unitWeapons) && //
+      item.requiresWeaponType === SPEARS
+    ) {
+      isValidItem = false;
     }
 
-    if (!do2ArraysHaveCommonElements(SPEAR_TYPES, unitWeapons)) {
-      itemList = itemList.filter((item) => item.requiresWeaponType !== "spears");
+    // no crossbow items for heroes & leaders w/o a crossbow.
+    if (
+      !CROSSBOW_TYPES.includes(unit.rangedWeapon) && //
+      item.itemType === ITEM_TYPE_CROSSBOWS
+    ) {
+      isValidItem = false;
     }
 
-    if (!CROSSBOW_TYPES.includes(unit.rangedWeapon)) {
-      itemList = itemList.filter((item) => item.itemType !== ITEM_TYPE_CROSSBOWS);
+    // no bow items for heroes & leaders w/o a bow.
+    if (
+      !BOW_TYPES.includes(unit.rangedWeapon) && //
+      item.itemType === ITEM_TYPE_BOWS
+    ) {
+      isValidItem = false;
     }
 
-    if (!BOW_TYPES.includes(unit.rangedWeapon)) {
-      itemList = itemList.filter((item) => item.itemType !== ITEM_TYPE_BOWS);
+    // check if the item requires a specific type of unit
+    if (!item.unitType.includes(unit.unitType) && !item.unitType === ALL) {
+      isValidItem = false;
     }
 
-    // filter for unit type - only same type or generic
-    itemList = itemList.filter((item) => item.unitType.includes(unit.unitType) || item.unitType === ALL);
+    // check if the item is limited ot a specific unit
+    if (item.limitedToUnit !== unit.unitName && !item.limitedToUnit === ALL) {
+      isValidItem = false;
+    }
 
-    // filter for unit name
-    itemList = itemList.filter((item) => item.limitedToUnit === unit.unitName || item.limitedToUnit === ALL);
+    // filter for unit size
+    if (unit.size > item.maxSize && item.maxSize > -1) {
+      isValidItem = false;
+    }
 
-    itemList = itemList.filter((item) => {
-      if (unit.size > item.maxSize && item.maxSize > -1) {
-        return false;
-      }
-      return true;
-    });
+    // filter for range armor
+    if (unit.armourRange > item.maxRangeArmor && item.maxRangeArmor > -1) {
+      isValidItem = false;
+    }
 
-    itemList = itemList.filter((item) => {
-      if (unit.armourRange > item.maxRangeArmor && item.maxRangeArmor > -1) {
-        return false;
-      }
-      return true;
-    });
-
-    return itemList;
+    return isValidItem;
   };
 
   /**
@@ -162,9 +215,8 @@ const useItemFilters = () => {
   };
 
   return {
-    filterItemGroups: filterItemGroups, //
+    filterItemsForUnit: filterItemsForUnit,
     filterIndividualItems: filterIndividualItems,
-    uniqueItemAlreadyEquipped: uniqueItemIsAlreadyEquipped,
   };
 };
 export default useItemFilters;
