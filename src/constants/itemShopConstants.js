@@ -1,9 +1,18 @@
 // Item Types
-export const ITEM_TYPE_BANNER = "banner";
-export const ITEM_TYPE_INSTRUMENT = "instrument";
-export const ITEM_TYPE_CROSSBOWS = "boltsAndCrossbows";
+
+export const ITEM_TYPE_ARMOR = "armor";
 export const ITEM_TYPE_BOWS = "arrowsAndBows";
+export const ITEM_TYPE_BANNER = "banner";
+export const ITEM_TYPE_CROSSBOWS = "boltsAndCrossbows";
 export const ITEM_TYPE_FORTIFICATIONS = "fortifications";
+export const ITEM_TYPE_INSTRUMENT = "instrument";
+export const ITEM_TYPE_IMP = "imp";
+export const ITEM_TYPE_ITEM = "item";
+export const ITEM_TYPE_POISON = "poison";
+export const ITEM_TYPE_POTION = "potion";
+export const ITEM_TYPE_RINGSANDAMULETS = "ringsAndAmulets";
+export const ITEM_TYPE_WARPAINT = "warpaint";
+export const ITEM_TYPE_WEAPON = "weapon";
 
 // Item can be used by any faction
 export const ALL = "*";
