@@ -39,10 +39,6 @@ const useItemFilters = () => {
 
     const validItemTypeGroups = filterItemTypes(selectedUnit, itemGroupsForUnit);
 
-    // validItemTypeGroups.forEach((group) => {
-    //   group.items = filterIndividualItems(selectedUnit, group.items);
-    // });
-
     return validItemTypeGroups;
   };
 
@@ -122,40 +118,64 @@ const useItemFilters = () => {
 
     const itemFilters = {
       // unique items can only be selected once.
-      uniqueItems: (unit, item) => !item.isGeneric && IC.allEquippedItems.includes(item.itemName),
+      uniqueItems: (unit, item) =>
+        !item.isGeneric && //
+        IC.allEquippedItems.includes(item.itemName),
 
       // no shield items for heroes & leaders w/o shields.
-      shieldItems: (unit, item) => !unit.hasShield && item.requiresShield,
+      shieldItems: (unit, item) =>
+        !unit.hasShield && //
+        item.requiresShield,
 
       // no cavalery items for heroes & leaders w/o mounts.
-      cavItems: (unit, item) => !unit.isMounted && item.mustBeMounted,
+      cavItems: (unit, item) =>
+        !unit.isMounted && //
+        item.mustBeMounted,
 
       // no spellcaster items for heroes & leaders w/o magic.
-      spellCasterItems: (unit, item) => unit.magic === 0 && item.magicUsersOnly,
+      spellCasterItems: (unit, item) =>
+        unit.magic === 0 && //
+        item.magicUsersOnly,
 
       // no lance items for heroes & leaders w/o a lance.
-      lanceItem: (unit, item) => !do2ArraysHaveCommonElements(LANCE_TYPES, unitWeapons) && item.requiresWeaponType === LANCES,
+      lanceItem: (unit, item) =>
+        !do2ArraysHaveCommonElements(LANCE_TYPES, unitWeapons) && //
+        item.requiresWeaponType === LANCES,
 
       // no spear items for heroes & leaders w/o a spear.
-      spearItems: (unit, item) => !do2ArraysHaveCommonElements(SPEAR_TYPES, unitWeapons) && item.requiresWeaponType === SPEARS,
+      spearItems: (unit, item) =>
+        !do2ArraysHaveCommonElements(SPEAR_TYPES, unitWeapons) && //
+        item.requiresWeaponType === SPEARS,
 
       // no crossbow items for heroes & leaders w/o a crossbow.
-      crossBowItems: (unit, item) => !CROSSBOW_TYPES.includes(unit.rangedWeapon) && item.itemType === ITEM_TYPE_CROSSBOWS,
+      crossBowItems: (unit, item) =>
+        !CROSSBOW_TYPES.includes(unit.rangedWeapon) && //
+        item.itemType === ITEM_TYPE_CROSSBOWS,
 
       // no bow items for heroes & leaders w/o a bow.
-      bowItems: (unit, item) => !BOW_TYPES.includes(unit.rangedWeapon) && item.itemType === ITEM_TYPE_BOWS,
+      bowItems: (unit, item) =>
+        !BOW_TYPES.includes(unit.rangedWeapon) && //
+        item.itemType === ITEM_TYPE_BOWS,
 
       // check if the item requires a specific type of unit
-      unitTypeItems: (unit, item) => !item.unitType.includes(unit.unitType) && !item.unitType === ALL,
+      unitTypeItems: (unit, item) =>
+        !item.unitType.includes(unit.unitType) && //
+        !item.unitType === ALL,
 
       // check if the item is limited ot a specific unit
-      unitItems: (unit, item) => item.limitedToUnit !== unit.unitName && !item.limitedToUnit === ALL,
+      unitItems: (unit, item) =>
+        item.limitedToUnit !== unit.unitName && //
+        !item.limitedToUnit === ALL,
 
       // filter for unit size
-      sizeItem: (unit, item) => unit.size > item.maxSize && item.maxSize > -1,
+      sizeItem: (unit, item) =>
+        unit.size > item.maxSize && //
+        item.maxSize > -1,
 
       // filter for range armor
-      rangeArmorItem: (unit, item) => unit.armourRange > item.maxRangeArmor && item.maxRangeArmor > -1,
+      rangeArmorItem: (unit, item) =>
+        unit.armourRange > item.maxRangeArmor && //
+        item.maxRangeArmor > -1,
     };
 
     for (const value of Object.values(itemFilters)) {
