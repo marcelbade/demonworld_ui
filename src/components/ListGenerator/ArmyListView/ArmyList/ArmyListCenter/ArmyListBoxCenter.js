@@ -33,9 +33,9 @@ const ArmyListBoxCenter = () => {
       {AC.subFactionDTOs
         .filter((dto) => isSubFactionAlternativeAndSelective(dto))
         .map((dto) => validation.returnValidationResult("subFaction", dto.name))
-        .map((obj, i) => (
+        .map((obj) => (
           <ArmyListSubFactionEntry
-            key={i} //
+            key={obj.subFactionName} //
             subFaction={obj.subFactionName}
             valid={obj.valid}
             message={obj.message}

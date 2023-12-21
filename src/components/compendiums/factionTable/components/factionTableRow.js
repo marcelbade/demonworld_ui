@@ -21,12 +21,13 @@ const FactionTableRow = (props) => {
     <tr key={props.unit.unitName}>
       <td></td>
       {props.columns[0].displayed ? (
-        <td key={props.unit.unitName}>
+        <td>
           <IconButton
             onClick={() => {
               props.toggleUnitCard(props.unit);
             }}
-            size="large">
+            size="large"
+          >
             {props.selectedStatCards.includes(props.unit.faction + props.unit.unitName) ? <CloseIcon /> : <ArrowForwardIosIcon />}
           </IconButton>
         </td>

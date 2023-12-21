@@ -1,6 +1,6 @@
 // React
 import React from "react";
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
 import { Grid, Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 
 const useStyles = makeStyles({
@@ -26,7 +26,6 @@ const ToggleColumnsMenu = (props) => {
       {props.toggleGroups.map((toggle, i) => (
         <FormGroup className="classes.toggleGroupBox" key={i}>
           <Checkbox
-            key={i}
             checked={toggle.displayed}
             onChange={() => {
               props.toggleGroupsOfColumns(toggle.unitName, toggle.stats, toggle.displayed);
@@ -37,11 +36,9 @@ const ToggleColumnsMenu = (props) => {
             .filter((col) => toggle.stats.includes(col.column))
             .map((col) => (
               <FormControlLabel
-                key={i}
                 className={classes.checkBoxLabel}
                 control={
                   <Checkbox
-                    key={i}
                     checked={col.displayed}
                     onChange={() => {
                       props.chooseColumnsToDisplay(col.column, col.displayed);
