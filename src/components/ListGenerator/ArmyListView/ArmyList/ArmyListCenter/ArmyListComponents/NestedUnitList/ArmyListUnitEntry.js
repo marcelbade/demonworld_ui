@@ -34,7 +34,7 @@ const ArmyListUnitEntry = (props) => {
 
 
 
-  // TODO reworkthis into the hook!
+  // TODO reworkt his into the hook!
   useEffect(() => {
     if (ARMIES_ADDITIONAL_SUBFACTIONS.includes(AC.factionName)) {
       isSecondSubFactionsValid();
@@ -64,7 +64,7 @@ const ArmyListUnitEntry = (props) => {
   return (
     <Fragment>
       <ListItemText
-        key={props.unit.uniqueID}
+        key={props.unit.secondSubFaction}
         primary={
           props.unit.secondSubFaction.hasSecondSubFaction ? (
             <span className={classes.validUnitEntryStyle}>{props.unit.unitName}</span>
