@@ -6,6 +6,7 @@ import { TreeItem } from "@mui/x-tree-view/TreeItem";
 // components and functions
 import TreeUnitNode from "./TreeUnitNode";
 import useArmyValidation from "../../../../customHooks/UseArmyValidation.js";
+import useTreeViewController from "../../../../customHooks/UseTreeViewController.js";
 import { unitCardMultiSort } from "../../../../util/utilityFunctions.js";
 // icons
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -33,6 +34,8 @@ const useStyles = makeStyles({
 const Tree = (props) => {
   const classes = useStyles();
   const validation = useArmyValidation();
+  const controller = useTreeViewController();
+
   const UNIT = "unit";
 
   const testForEmptySubFaction = (subfactionDTO) => {
@@ -50,6 +53,7 @@ const Tree = (props) => {
       aria-label="file system navigator" //
       defaultCollapseIcon={<ExpandMoreIcon />}
       defaultExpandIcon={<ChevronRightIcon />}
+      expanded={controller.expansionValue}
     >
       {props.subFactionDtoList.map((dto, i) => {
         return isSubFactionAlternativeAndSelective(dto) ? (
@@ -57,6 +61,8 @@ const Tree = (props) => {
             nodeId={`${i}`} //
             label={dto.name}
             key={i}
+            disabled={testForEmptySubFaction(dto)}
+            onClick={() => controller.getNodeId([`${i}`])}
             className={testForEmptySubFaction(dto) ? classes.emptySubFactionName : classes.subFactionName}
           >
             {unitCardMultiSort(dto.units)
