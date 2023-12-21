@@ -34,7 +34,7 @@ const useItemFilters = () => {
    * @returns an array of items grouped by type, with all item types
    * and items filtered out that the selected unit cannot equip.
    */
-  const filterItemsForUnit = (selectedUnit, listOfItemGroups) => {
+  const filterItemTypesForUnit = (selectedUnit, listOfItemGroups) => {
     const itemGroupsForUnit = getItemGroupsForSelectedUnit(selectedUnit, listOfItemGroups);
 
     const validItemTypeGroups = filterItemTypes(selectedUnit, itemGroupsForUnit);
@@ -203,7 +203,7 @@ const useItemFilters = () => {
   };
 
   return {
-    filterItemsForUnit: filterItemsForUnit,
+    filterItemTypesForUnit : filterItemTypesForUnit,
     filterIndividualItems: filterIndividualItems,
   };
 };
