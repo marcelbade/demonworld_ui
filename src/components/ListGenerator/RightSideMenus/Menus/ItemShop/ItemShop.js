@@ -14,8 +14,11 @@ import { RightMenuContext } from "../../../../../contexts/rightMenuContext";
 import useItemFilters from "../../../../../customHooks/UseItemFilters";
 import { isObjectEmtpy } from "../../../../../util/utilityFunctions";
 import TreeItemNode from "./TreeItemNode";
+import useTreeViewController from "../../../../../customHooks/UseTreeViewController";
+// constants
 import { ITEM_CATEGORY_NAME_MAPPING } from "../../../../../constants/itemShopConstants";
-import ItemRuleNode from "./ItemRuleNode";
+
+
 
 const useStyles = makeStyles({
   overlay: {
@@ -25,6 +28,7 @@ const useStyles = makeStyles({
   treePadding: {
     paddingLeft: "2em",
   },
+
   unitName: {
     width: "60%",
     fontWeight: "bold",
@@ -46,11 +50,11 @@ const ItemShop = () => {
 
   const IC = useContext(ItemContext);
   const RC = useContext(RightMenuContext);
+  const filter = useItemFilters();
+  const controller = useTreeViewController();
 
   const [filteredItemGroups, setFilteredItemGroups] = useState([]);
-
-  const filter = useItemFilters();
-
+ 
   useEffect(() => {
     if (!isObjectEmtpy(IC.unitSelectedForShop)) {
       setFilteredItemGroups(filter.filterItemTypesForUnit(IC.unitSelectedForShop, IC.fetchedItems.factionItems));
@@ -84,24 +88,21 @@ const ItemShop = () => {
           aria-label="file system navigator" //
           defaultCollapseIcon={<ExpandMoreIcon />}
           defaultExpandIcon={<ChevronRightIcon />}
+          expanded={controller.expansionValue}
         >
           {filteredItemGroups.map((dto, i) => {
             return (
               <TreeItem
                 className={classes.itemTypeName}
                 nodeId={`${i}`} //
+                onClick={() => controller.getNodeId([`${i}`])}
                 label={ITEM_CATEGORY_NAME_MAPPING[dto.typeName]}
                 key={dto.typeName}
-                
               >
                 {dto.items.map((item) => {
                   return filter.filterIndividualItems(IC.unitSelectedForShop, item) ? (
                     <Grid container>
                       <TreeItemNode item={item} />
-                      <ItemRuleNode
-                        itemText={item.specialRules} //
-                  
-                      />
                     </Grid>
                   ) : null;
                 })}
