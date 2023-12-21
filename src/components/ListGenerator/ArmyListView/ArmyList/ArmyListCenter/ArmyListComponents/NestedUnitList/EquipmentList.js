@@ -2,7 +2,7 @@
 import React, { useContext } from "react";
 // Material UI
 import { List, ListItemText, ListItem, Button } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
 // icons
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 // components and functions
@@ -38,7 +38,6 @@ const useStyles = makeStyles({
 });
 
 const EquipmentList = (props) => {
-  // eslint-disable-next-line no-unused-vars
   const classes = useStyles();
   const AC = useContext(ArmyContext);
   const IC = useContext(ItemContext);
@@ -60,7 +59,7 @@ const EquipmentList = (props) => {
       }
     }
 
-    validation.validateList(temp, SEC.maxPointsAllowance, AC.subFactions,ALC.armyHasAlternativeLists);
+    validation.validateList(temp, SEC.maxPointsAllowance, AC.subFactions, ALC.armyHasAlternativeLists);
     SEC.setSelectedUnits(temp);
   };
 
@@ -107,7 +106,6 @@ const EquipmentList = (props) => {
             return (
               <ListItem key={props.unit.uniqueID} className={classes.element}>
                 <Button
-                  key={props.unit.uniqueID}
                   className={clsx(classes.deleteBttn)}
                   onClick={() => {
                     removeItem(props.identifier, i);
@@ -115,9 +113,9 @@ const EquipmentList = (props) => {
                     toggleUnitsItemTypeFlags(e, false);
                   }}
                 >
-                  <RemoveCircleOutlineIcon key={props.unit.uniqueID} />
+                  <RemoveCircleOutlineIcon />
                 </Button>
-                <ListItemText key={props.unit.uniqueID} primary={<span>{e.itemName}</span>} secondary={<span>{e.points}</span>} />
+                <ListItemText primary={<span>{e.itemName}</span>} secondary={<span>{e.points}</span>} />
               </ListItem>
             );
           })
