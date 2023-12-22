@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 // Material UI
 import { Grid, Button } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
 // context
 import { ArmyContext } from "../../../../../contexts/armyContext";
 import { TournamentRulesContext } from "../../../../../contexts/tournamentRulesContext";
@@ -12,6 +12,7 @@ import { SelectionContext } from "../../../../../contexts/selectionContext";
 import { OPTIONS } from "../../../../../constants/textsAndMessages";
 // components and functions
 import { filterForSubFaction } from "../../../ListGeneratorFunctions";
+import { useTheme } from "@mui/styles";
 
 const useStyles = makeStyles({
   overlay: {
@@ -19,22 +20,10 @@ const useStyles = makeStyles({
     width: "30vw",
     padding: "2em",
   },
-
   button: {
     width: "15em",
     padding: "2em",
     height: "5em",
-  },
-  cardTest: {
-    width: "100%",
-  },
-  errorIcon: {
-    color: "red",
-  },
-  warningBox: {
-    border: "red 0.2em solid ",
-    borderRadius: "1em",
-    marginBottom: "0.2em",
   },
 });
 
@@ -45,6 +34,8 @@ const OptionButtons = () => {
   const SEC = useContext(SelectionContext);
 
   const history = useHistory();
+
+  const theme = useTheme();
 
   /**
    * Function graps the current army list as an object, stores it in the history object and naviagat3s to the LossCalculator component.
@@ -67,7 +58,7 @@ const OptionButtons = () => {
 
     let list = [];
 
-    AC.subFactions.forEach((sF) => {
+    AC.subFactionObjects.forEach((sF) => {
       list.push({ subFaction: sF, units: filterForSubFaction(SEC.selectedUnits, sF) });
     });
 
@@ -83,56 +74,52 @@ const OptionButtons = () => {
     // Call REST
   };
 
+  const buttons = [
+    {
+      disabled: AC.disableOptionButtons,
+      action: () => {
+        openPDfInNewTab();
+      },
+      text: OPTIONS.CREATE_PDF,
+    },
+    {
+      // TODO VERSION 2.0 -> addd this
+      disabled: true,
+      action: () => {
+        storeList();
+      },
+      text: OPTIONS.SAVE_LIST,
+    },
+    {
+      disabled: AC.disableOptionButtons,
+      action: () => {
+        navigateToLossCalculator();
+      },
+      text: OPTIONS.TO_LOSS_CALCULATOR,
+    },
+    {
+      disabled: false,
+      action: () => {
+        TC.setShowTournamentRulesMenu(true);
+      },
+      text: OPTIONS.CHANGE_TOURNAMENT_RULES,
+    },
+  ];
+
   return (
     <Grid container direction="column" alignItems="flex-start" spacing={4} className={classes.overlay}>
-      <Grid item>
-        <Button
-          className={classes.button}
-          variant="outlined"
-          disabled={AC.disableOptionButtons}
-          onClick={() => {
-            openPDfInNewTab();
-          }}
-        >
-          {OPTIONS.CREATE_PDF}
-        </Button>
-      </Grid>
-      <Grid item>
-        <Button
-          className={classes.button}
-          variant="outlined"
-          disabled={AC.disableOptionButtons}
-          onClick={() => {
-            storeList();
-          }}
-        >
-          {OPTIONS.SAVE_LIST}
-        </Button>
-      </Grid>
-      <Grid item>
-        <Button
-          className={classes.button}
-          variant="outlined"
-          disabled={AC.disableOptionButtons}
-          onClick={() => {
-            navigateToLossCalculator();
-          }}
-        >
-          {OPTIONS.TO_LOSS_CALCULATOR}
-        </Button>
-      </Grid>
-      <Grid item>
-        <Button
-          className={classes.button}
-          variant="outlined"
-          disabled={false}
-          onClick={() => {
-            TC.setShowTournamentRulesMenu(true);
-          }}
-        >
-          {OPTIONS.CHANGE_TOURNAMENT_RULES}
-        </Button>
-      </Grid>
+      {buttons.map((bttn, i) => (
+        <Grid item key={i}>
+          <Button
+            // className={classes.button}
+            variant="outlined" //
+            disabled={bttn.disabled}
+            onClick={bttn.action}
+          >
+            {bttn.text}
+          </Button>
+        </Grid>
+      ))}
     </Grid>
   );
 };
