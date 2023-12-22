@@ -1,5 +1,5 @@
 // React
-import * as React from "react";
+import React, { useState } from "react";
 // Material UI
 import { Grid, ThemeProvider, StyledEngineProvider, CssBaseline } from "@mui/material";
 // router
@@ -10,23 +10,37 @@ import factionTable from "./components/compendiums/factionTable/components/facti
 import ListGeneratorController from "./components/ListGenerator/ListGeneratorController";
 import LossCalculator from "./components/LossCalculator/LossCalculator";
 import PdfBox from "./components/PDFGenerator/PDFBox";
+// context providers
+import LightSwitchProvider from "./contexts/lightSwitchContext";
 // theme
-import theme from "./AppTheme/theme";
+import { lightTheme, darkTheme } from "./AppTheme/theme";
 
 function App() {
+  const [darkModeOff, setDarkModeOff] = useState(false);
+
+  console.log("darkModeOff");
+  console.log(darkModeOff);
+
   return (
     <StyledEngineProvider injectFirst>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider theme={darkModeOff ? lightTheme : darkTheme}>
         <CssBaseline />
-        <Grid container>
-          <Switch>
-            <Route path="/" component={landingPage} exact />
-            <Route path="/compendium" component={factionTable} exact />
-            <Route path="/listGenerator" component={ListGeneratorController} />
-            <Route path="/lossCalculator" component={LossCalculator} />
-            <Route path="/PdfBox" component={PdfBox} />
-          </Switch>
-        </Grid>
+        <LightSwitchProvider
+          value={{
+            darkModeOff: darkModeOff,
+            setDarkModeOff: setDarkModeOff,
+          }}
+        >
+          <Grid container>
+            <Switch>
+              <Route path="/" component={landingPage} exact />
+              <Route path="/compendium" component={factionTable} exact />
+              <Route path="/listGenerator" component={ListGeneratorController} />
+              <Route path="/lossCalculator" component={LossCalculator} />
+              <Route path="/PdfBox" component={PdfBox} />
+            </Switch>
+          </Grid>
+        </LightSwitchProvider>
       </ThemeProvider>
     </StyledEngineProvider>
   );
