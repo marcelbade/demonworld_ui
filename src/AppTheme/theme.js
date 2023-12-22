@@ -1,51 +1,66 @@
-import { createTheme, adaptV4Theme } from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles";
 
-const theme = createTheme(adaptV4Theme({
+const theme = createTheme({
   palette: {
+    //  mode: "dark",
     primary: { 500: "#467fcf" },
   },
-
   typography: {
     allVariants: {
-      fontFamily: "jaapokkiRegular",
+      fontFamily: "NotMaryKate",
       textTransform: "none",
     },
+    button: {
+      fontFamily: "jaapokkiRegular",
+    },
+    body1: {
+      fontFamily: "jaapokkiRegular",
+    },
+    subtitle1: {
+      fontFamily: "NotMaryKate",
+      color: "green",
+    },
   },
-}));
+  components: {
+    MuiTypography: {
+      styleOverrides: {
+        button: {
+          fontFamily: "jaapokkiRegular",
+        },
+        body1: {
+          fontFamily: "jaapokkiRegular",
+        },
+        subtitle1: {
+          fontFamily: "NotMaryKate",
+          color: "green",
+        },
+      },
+    },
 
-theme.overrides = {
-  MuiTreeItem:{
-    root:{
-      fontFamily: "NotMaryKate",
-    },
-  },
-
-  MuiButton: {
-    root: {
-      fontFamily: "NotMaryKate",
-    },
-    outlined: {
-      "&:hover": {
-        backgroundColor: "grey",
-        color: "red",
+    MuiButton: {
+      styleOverrides: {
+        outlined: {
+          color: "black",
+          width: "15em",
+          padding: "2em",
+          height: "5em",
+        },
+      },
+      ":hover": {
+        backgroundColor: "lightGrey",
       },
     },
-    text: {
-      "&:hover": {
-        backgroundColor: "grey",
-        color: "red",
-      },
-    },
-  },
-  MuiButtonBase: {
-    root: {
-      fontFamily: "NotMaryKate",
-      "&:hover": {
-        backgroundColor: "grey",
-        color: "red",
+    MuiListItemButton: {
+      styleOverrides: {
+        root: {
+          fontFamily: "NotMaryKate",
+          ":hover": {
+            backgroundColor: "lightGrey",
+          },
+        },
       },
     },
   },
-};
+});
 
 export default theme;

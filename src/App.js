@@ -1,7 +1,7 @@
 // React
 import * as React from "react";
 // Material UI
-import { Grid, ThemeProvider, StyledEngineProvider } from "@mui/material";
+import { Grid, ThemeProvider, StyledEngineProvider, CssBaseline } from "@mui/material";
 // router
 import { Route, Switch } from "react-router-dom";
 // components and functions
@@ -17,6 +17,7 @@ function App() {
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={theme}>
+        <CssBaseline />
         <Grid container>
           <Switch>
             <Route path="/" component={landingPage} exact />
