@@ -14,6 +14,7 @@ export const OPTIONS = {
   TO_LOSS_CALCULATOR: "Zum Verlustrechner",
   SAVE_LIST: "Liste Speichern",
   CREATE_PDF: "PDF Erzeugen",
+  LIGHT_SWITCH: "Wechsel zw. Dark und Light Mode",
 };
 
 export const GENERAL_ERRRORS = {

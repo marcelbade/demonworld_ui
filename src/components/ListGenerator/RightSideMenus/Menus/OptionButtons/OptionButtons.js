@@ -2,7 +2,7 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 // Material UI
-import { Grid, Button, IconButton } from "@mui/material";
+import { Grid, Button, IconButton, Tooltip, Typography } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
 // context
 import { ArmyContext } from "../../../../../contexts/armyContext";
@@ -115,13 +115,15 @@ const OptionButtons = () => {
   return (
     <Grid container direction="column" alignItems="flex-start" spacing={4} className={classes.overlay}>
       <Grid item>
-        <IconButton
-          onClick={() => {
-            toggleDarkMode();
-          }}
-        >
-          {LC.darkModeOff ? <BrightnessHighIcon /> : <Brightness4Icon />}
-        </IconButton>
+        <Tooltip title={<Typography>{OPTIONS.LIGHT_SWITCH}</Typography>}>
+          <IconButton
+            onClick={() => {
+              toggleDarkMode();
+            }}
+          >
+            {LC.darkModeOff ? <Brightness4Icon /> : <BrightnessHighIcon />}
+          </IconButton>
+        </Tooltip>
       </Grid>
 
       {buttons.map((bttn, i) => (
