@@ -60,9 +60,11 @@ const OptionButtons = () => {
 
     let list = [];
 
-    AC.subFactionObjects.forEach((sF) => {
-      list.push({ subFaction: sF, units: filterForSubFaction(SEC.selectedUnits, sF) });
-    });
+    AC.subFactionDTOs
+      .map((sF) => sF.name)
+      .forEach((name) => {
+        list.push({ subFaction: name, units: filterForSubFaction(SEC.selectedUnits, name) });
+      });
 
     const URL = "http://localhost:3000/PdfBox";
     const transportObj = { armyName: AC.armyName, pdfData: list };
