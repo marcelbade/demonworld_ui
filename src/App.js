@@ -18,9 +18,6 @@ import { lightTheme, darkTheme } from "./AppTheme/theme";
 function App() {
   const [darkModeOff, setDarkModeOff] = useState(false);
 
-  console.log("darkModeOff");
-  console.log(darkModeOff);
-
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={darkModeOff ? lightTheme : darkTheme}>
