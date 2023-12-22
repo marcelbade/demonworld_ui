@@ -92,7 +92,7 @@ const EquipmentList = (props) => {
   };
 
   /**
-   * Function draws horizontal divider is displayed when the equipment list is not emtpy.
+   * Function draws horizontal divider is displayed when the equipment list is not empty.
    * @returns css class
    */
   const displayListTop = () => {

@@ -28,7 +28,6 @@ import SelectionContext from "../../contexts/selectionContext";
 import ItemContext from "../../contexts/itemContext";
 import SecondSubFactionProvider from "../../contexts/secondSubFactionContext";
 import TournamentRulesProvider from "../../contexts/tournamentRulesContext";
-
 // constants
 import { NONE } from "../../constants/factions";
 import { NO_ALLY } from "../../constants/factions";
@@ -199,8 +198,6 @@ const ListGeneratorController = () => {
     const result = await axios(`http://localhost:8080/itemDTOs`);
     setFetchedItems(result.data);
   };
-
-
 
   /**
    * in order to work, the state setter needs a unit at the start. Since the view is not visible, the first unit in the list is used.

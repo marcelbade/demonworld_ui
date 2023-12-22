@@ -18,17 +18,6 @@ const useStyles = makeStyles({
     width: "110%",
     paddingBottom: "1em",
   },
-  subFactionName: {
-    "& .MuiTreeItem-label": {
-      FontFamily: "jaapokkiRegular",
-    },
-  },
-  emptySubFactionName: {
-    "& .MuiTreeItem-label": {
-      FontFamily: "jaapokkiRegular",
-      color: "grey",
-    },
-  },
 });
 
 const Tree = (props) => {
