@@ -13,10 +13,11 @@ import PdfBox from "./components/PDFGenerator/PDFBox";
 // context providers
 import LightSwitchProvider from "./contexts/lightSwitchContext";
 // theme
-import { lightTheme, darkTheme } from "./AppTheme/theme";
+import lightTheme from "./AppTheme/lightTheme";
+import darkTheme from "./AppTheme/darkTheme";
 
 function App() {
-  const [darkModeOff, setDarkModeOff] = useState(false);
+  const [darkModeOff, setDarkModeOff] = useState(true);
 
   return (
     <StyledEngineProvider injectFirst>

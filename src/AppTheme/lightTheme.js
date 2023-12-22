@@ -2,14 +2,25 @@ import { createTheme } from "@mui/material/styles";
 
 const lightTheme = createTheme({
   palette: {
-    //  mode: "dark",
     primary: { 500: "#467fcf" },
   },
   components: {
+    MuiTreeItem: {
+      styleOverrides: {
+        root: {
+          "& > .MuiTreeItem-content .MuiTreeItem-label": {
+            fontFamily: "NotMaryKate",
+          },
+          "& > .MuiTreeItem-label .MuiTypography-body1": {
+            fontFamily: "NotMaryKate",
+          },
+        },
+      },
+    },
     MuiTypography: {
       styleOverrides: {
         button: {
-          fontFamily: "jaapokkiRegular",
+          fontFamily: "jaapokkiRegular"
         },
         body1: {
           fontFamily: "jaapokkiRegular",
@@ -19,7 +30,6 @@ const lightTheme = createTheme({
         },
       },
     },
-
     MuiButton: {
       styleOverrides: {
         outlined: {
@@ -27,11 +37,20 @@ const lightTheme = createTheme({
           width: "15em",
           padding: "2em",
           height: "5em",
+          fontFamily: "NotMaryKate",
         },
       },
       ":hover": {
         backgroundColor: "lightGrey",
       },
+    },
+    MuiListItemText:{
+      primary: {
+        fontFamily: "jaapokkiRegular",
+      },
+      secondary:{
+        fontFamily: "jaapokkiRegular",
+      }
     },
     MuiListItemButton: {
       styleOverrides: {
@@ -46,52 +65,5 @@ const lightTheme = createTheme({
   },
 });
 
-const darkTheme = createTheme({
-  palette: {
-    mode: "dark",
-    primary: { 500: "#fafcfc" },
-    color: "#daa520",
-  },
-  components: {
-    MuiTypography: {
-      styleOverrides: {
-        button: {
-          fontFamily: "jaapokkiRegular",
-        },
-        body1: {
-          fontFamily: "jaapokkiRegular",
-        },
-        subtitle1: {
-          fontFamily: "NotMaryKate",
-        },
-      },
-    },
+export default lightTheme ;
 
-    MuiButton: {
-      styleOverrides: {
-        outlined: {
-          color: "black",
-          width: "15em",
-          padding: "2em",
-          height: "5em",
-        },
-      },
-      ":hover": {
-        backgroundColor: "lightGrey",
-      },
-    },
-    MuiListItemButton: {
-      styleOverrides: {
-        root: {
-          fontFamily: "NotMaryKate",
-          ":hover": {
-            backgroundColor: "lightGrey",
-          },
-        },
-      },
-    },
-  },
-});
-
-
-export  {lightTheme, darkTheme};
