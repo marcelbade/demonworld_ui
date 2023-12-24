@@ -8,10 +8,9 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
 const useStyles = makeStyles({
   itemName: {
-   
     color: "grey",
   },
- 
+
   ruleText: {
     width: "40em",
   },
@@ -29,7 +28,7 @@ const InvalidTreeItemNode = (props) => {
         </Typography>
       </Grid>
       <Grid item xs={6}>
-        <IconButton disabled={true} size="large" onClick={() => {}}>
+        <IconButton disabled={true} size="large">
           <AddCircleOutlineIcon />
         </IconButton>
       </Grid>
