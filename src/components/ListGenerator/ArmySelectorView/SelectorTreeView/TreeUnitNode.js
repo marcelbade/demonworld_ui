@@ -90,7 +90,7 @@ const TreeUnitNode = (props) => {
         {!props.isValidUnit ? (
           <IconButton
             onClick={() => {
-              VC.setValidationMessage(props.blockMessage);
+              VC.setValidationMessage(props.validationMessage);
               VC.setShowToastMessage(true);
             }}
             size="large"

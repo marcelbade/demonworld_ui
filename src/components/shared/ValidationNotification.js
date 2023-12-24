@@ -8,6 +8,7 @@ const ValidationNotification = (props) => {
   const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
+    
     if (props.show) {
       enqueueSnackbar(props.text, {
         persist: true,
