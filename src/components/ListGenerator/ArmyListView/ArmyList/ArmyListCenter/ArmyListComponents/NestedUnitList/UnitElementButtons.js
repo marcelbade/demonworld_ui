@@ -2,7 +2,6 @@
 import React, { useContext } from "react";
 // Material UI
 import { List } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
 import { ListItemButton } from "@mui/material";
 // components and functions
 import { BUTTON_TEXTS } from "../../../../../../../constants/textsAndMessages";
@@ -14,15 +13,8 @@ import { RightMenuContext } from "../../../../../../../contexts/rightMenuContext
 import { ItemContext } from "../../../../../../../contexts/itemContext";
 import { TournamentRulesContext } from "../../../../../../../contexts/tournamentRulesContext";
 
-const useStyles = makeStyles({
-  buttons: {
-    marginRight: "1em",
-  },
-});
-
 const UnitElementButtons = (props) => {
   // eslint-disable-next-line no-unused-vars
-  const classes = useStyles();
   const SFC = useContext(SecondSubFactionContext);
   const IC = useContext(ItemContext);
   const RC = useContext(RightMenuContext);
@@ -55,7 +47,7 @@ const UnitElementButtons = (props) => {
         RC.closeCardDisplay();
         RC.closeSecondSubFactionMenu();
         break;
-      case "SECOND_SUB_FACTION":  // Thain faction only
+      case "SECOND_SUB_FACTION": // Thain faction only
         stateObj = RC.secondSubFactionMenuState;
         stateObjSetter = RC.setSecondSubFactionMenuState;
         RC.closeCardDisplay();
@@ -105,7 +97,7 @@ const UnitElementButtons = (props) => {
     !RC.itemShopState.show &&
     !RC.secondSubFactionMenuState.show
   ) {
-    //TODO Warning: Cannot update a component (`ListGeneratorController`) while rendering a different component (`UnitElementButtons`). To locate the bad setState() call inside `UnitElementButtons`, 
+    //TODO Warning: Cannot update a component (`ListGeneratorController`) while rendering a different component (`UnitElementButtons`). To locate the bad setState() call inside `UnitElementButtons`,
     RC.setShowOptionButtons(true);
   }
   if (
@@ -149,7 +141,6 @@ const UnitElementButtons = (props) => {
         return b.show ? (
           <ListItemButton
             key={i} //
-            className={classes.cardButtons}
             variant="outlined"
             onClick={b.action}
           >

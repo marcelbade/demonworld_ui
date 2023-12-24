@@ -1,6 +1,6 @@
 // React
 import React, { useContext } from "react";
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
 import { Grid, IconButton, Typography } from "@mui/material";
 
 // icons
@@ -10,8 +10,6 @@ import { ValidationContext } from "../../../../../../contexts/validationContext"
 
 const useStyles = makeStyles(() => ({
   HeaderValidStyle: {
-    fontSize: "20px",
-    fontWeight: "bold",
     width: "60%",
     borderBottom: "solid 4px black",
     marginBottom: "1em",
@@ -32,7 +30,11 @@ const ArmyListSubFactionHeader = (props) => {
   return (
     <Grid container>
       {props.valid ? (
-        <Typography key={props.subFaction} className={classes.HeaderValidStyle}>
+        <Typography
+          key={props.subFaction} //
+          variant="subtitle1"
+          className={classes.HeaderValidStyle}
+        >
           {props.subFaction}
         </Typography>
       ) : (
@@ -42,7 +44,11 @@ const ArmyListSubFactionHeader = (props) => {
           className={classes.HeaderInvalidStyle}
           alignItems="center"
         >
-          <Typography key={props.subFaction} className={classes.invalidText}>
+          <Typography
+            key={props.subFaction} //
+            className={classes.invalidText}
+            variant="subtitle1"
+          >
             {props.subFaction}
           </Typography>
           <IconButton
@@ -50,7 +56,8 @@ const ArmyListSubFactionHeader = (props) => {
               VC.setValidationMessage(props.message);
               VC.setShowToastMessage(true);
             }}
-            size="large">
+            size="large"
+          >
             <HelpIcon />
           </IconButton>
         </Grid>

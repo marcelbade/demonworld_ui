@@ -1,6 +1,5 @@
 // React
 import React, { useContext, useEffect } from "react";
-import makeStyles from '@mui/styles/makeStyles';
 import { TextField, IconButton, Tooltip, Typography, Grid } from "@mui/material";
 // icons
 import HelpIcon from "@mui/icons-material/Help";
@@ -13,10 +12,7 @@ import { SelectionContext } from "../../../../../contexts/selectionContext";
 import { TOOLTIPS, VALIDATION } from "../../../../../constants/textsAndMessages";
 import { NONE } from "../../../../../constants/factions";
 
-const useStyles = makeStyles({});
-
 const ArmyListBoxHeader = () => {
-  const classes = useStyles();
   const AC = useContext(ArmyContext);
   const VC = useContext(ValidationContext);
   const SEC = useContext(SelectionContext);
@@ -80,14 +76,14 @@ const ArmyListBoxHeader = () => {
           variant="standard"
         />
       )}
-      <Tooltip title={<Typography className={classes.tooltipText}>{TOOLTIPS.DELETE_ARMY_LIST}</Typography>}>
+      <Tooltip title={<Typography>{TOOLTIPS.DELETE_ARMY_LIST}</Typography>}>
         <IconButton
-          className={classes.button}
           variant="outlined"
           onClick={() => {
             SEC.setSelectedUnits([]);
           }}
-          size="large">
+          size="large"
+        >
           <CancelIcon />
         </IconButton>
       </Tooltip>
@@ -97,7 +93,8 @@ const ArmyListBoxHeader = () => {
             VC.setValidationMessage(VALIDATION.NO_COMMANDER_WARNING);
             VC.setShowToastMessage(true);
           }}
-          size="large">
+          size="large"
+        >
           <HelpIcon />
         </IconButton>
       ) : null}
