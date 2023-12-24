@@ -12,6 +12,7 @@ import useItemFilters from "../../../../../customHooks/UseItemFilters";
 import { isObjectEmtpy } from "../../../../../util/utilityFunctions";
 import TreeItemNode from "./TreeItemNode";
 import useTreeViewController from "../../../../../customHooks/UseTreeViewController";
+import InvalidTreeItemNode from "./InvalidTreeItemNode";
 // constants
 import { ITEM_CATEGORY_NAME_MAPPING } from "../../../../../constants/itemShopConstants";
 
@@ -62,7 +63,9 @@ const ItemShopTree = () => {
                 <Grid container>
                   <TreeItemNode item={item} />
                 </Grid>
-              ) : null;
+              ) : (
+                <InvalidTreeItemNode  item={item} />
+              );
             })}
           </TreeItem>
         );

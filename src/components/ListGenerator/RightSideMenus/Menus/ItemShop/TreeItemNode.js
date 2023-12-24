@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+// material ui
 import makeStyles from "@mui/styles/makeStyles";
 import { Typography, IconButton, Accordion, AccordionSummary, AccordionDetails, Grid } from "@mui/material";
 // components and functions
@@ -11,12 +12,7 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { MAGICAL_ITEMS } from "../../../../../constants/itemShopConstants";
 
 const useStyles = makeStyles({
-  itemName: {
-    fontFamily: "jaapokkiRegular",
-  },
-
   points: {
-    fontFamily: "jaapokkiRegular",
     color: "grey",
   },
   ruleText: {
@@ -95,7 +91,7 @@ const TreeItemNode = (props) => {
         id="shopItem"
       >
         <Grid container alignItems="center" direction="row">
-          <Grid item container direction="column"  xs ={6}>
+          <Grid item container direction="column" xs={3}>
             <Typography variant="body1" className={toggleItemButton(props.item) ? classes.blockedItemName : classes.itemName}>
               {props.item.itemName}
             </Typography>
@@ -103,7 +99,7 @@ const TreeItemNode = (props) => {
               {props.item.points}
             </Typography>
           </Grid>
-          <Grid item xs ={6}>
+          <Grid item xs={6}>
             <IconButton
               disabled={toggleItemButton(props.item)}
               size="large"
