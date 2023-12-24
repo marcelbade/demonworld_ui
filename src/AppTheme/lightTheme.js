@@ -11,21 +11,28 @@ const lightTheme = createTheme({
           "& > .MuiTreeItem-content .MuiTreeItem-label": {
             fontFamily: "NotMaryKate",
           },
-          "& > .MuiTreeItem-label .MuiTypography-body1": {
-            fontFamily: "NotMaryKate",
-          },
+          // "& > .MuiTreeItem-content .MuiTreeItem-label .MuiTypography-body1": {
+          //   fontFamily: "NotMaryKate",
+          // },
         },
       },
     },
     MuiTypography: {
       styleOverrides: {
         button: {
-          fontFamily: "jaapokkiRegular"
+          root: {
+            fontFamily: "jaapokkiRegular",
+          },
         },
         body1: {
-          fontFamily: "jaapokkiRegular",
+          root: {
+            fontFamily: "jaapokkiRegular",
+          },
         },
         subtitle1: {
+          fontFamily: "NotMaryKate",
+        },
+        h5: {
           fontFamily: "NotMaryKate",
         },
       },
@@ -44,13 +51,13 @@ const lightTheme = createTheme({
         backgroundColor: "lightGrey",
       },
     },
-    MuiListItemText:{
+    MuiListItemText: {
       primary: {
         fontFamily: "jaapokkiRegular",
       },
-      secondary:{
+      secondary: {
         fontFamily: "jaapokkiRegular",
-      }
+      },
     },
     MuiListItemButton: {
       styleOverrides: {
@@ -62,8 +69,22 @@ const lightTheme = createTheme({
         },
       },
     },
+    MuiAccordionDetails: {
+      root: {
+        fontFamily: "jaapokkiRegular",
+      },
+    },
+    MuiAutocomplete: {
+      styleOverrides: {
+        groupLabel: {
+          fontFamily: "jaapokkiRegular",
+        },
+        root: {
+          fontFamily: "jaapokkiRegular",
+        },
+      },
+    },
   },
 });
 
-export default lightTheme ;
-
+export default lightTheme;
