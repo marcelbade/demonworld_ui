@@ -11,6 +11,9 @@ import ArmyListSubFactionFooter from "./ArmyListSubFactionFooter";
 
 // Creates the suFaction entry of the army list: Head and current and total points.
 const ArmyListSubFactionEntry = (props) => {
+  console.log("props>>>");
+  console.log(props);
+
   return (
     <ListItem //
       key="subfactionEntry"
@@ -20,7 +23,7 @@ const ArmyListSubFactionEntry = (props) => {
           <ArmyListSubFactionHeader
             subFaction={props.subFaction} //
             valid={props.valid}
-            message={props.mesage}
+            message={props.message}
           />
           <SubFactionUnitList
             subFactionUnits={props.units} //

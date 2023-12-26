@@ -38,7 +38,7 @@ const ArmyListBoxCenter = () => {
             key={obj.subFactionName} //
             subFaction={obj.subFactionName}
             valid={obj.valid}
-            message={obj.message}
+            message={obj.validationMessage}
             units={filterUnitsForSubFaction(obj.subFactionName)}
           />
         ))}

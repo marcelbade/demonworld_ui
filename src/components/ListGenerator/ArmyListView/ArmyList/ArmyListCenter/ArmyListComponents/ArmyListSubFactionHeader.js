@@ -52,10 +52,7 @@ const ArmyListSubFactionHeader = (props) => {
           </Typography>
           <IconButton
             onClick={() => {
-              console.log("props.message");
-              console.log(props.message);
-
-              pushMessages.showSnackBar("props.message");
+              pushMessages.showSnackBar(props.message);
             }}
             size="large"
           >
