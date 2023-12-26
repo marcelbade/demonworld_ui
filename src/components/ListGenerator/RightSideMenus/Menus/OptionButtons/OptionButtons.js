@@ -1,8 +1,8 @@
 // React
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 // Material UI
-import { Grid, Button, IconButton, Tooltip, Typography } from "@mui/material";
+import { Grid, Button, IconButton, Tooltip, Typography, Fade } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
 // context
 import { ArmyContext } from "../../../../../contexts/armyContext";
@@ -38,6 +38,7 @@ const OptionButtons = () => {
   const LC = useContext(LightSwitchContext);
 
   const history = useHistory();
+  const [showPdfVariantButtons, setShowPdfVariantButtons] = useState();
 
   /**
    * Function graps the current army list as an object, stores it in the history object and naviagat3s to the LossCalculator component.
@@ -55,7 +56,7 @@ const OptionButtons = () => {
   /**
    * Function opens the pdf generator in a new tab and sends all data needed via the window object.
    */
-  const openPDfInNewTab = () => {
+  const openPDfInNewTab = (options) => {
     //TODO: replace in production!!
 
     let list = [];
@@ -67,7 +68,11 @@ const OptionButtons = () => {
       });
 
     const URL = "http://localhost:3000/PdfBox";
-    const transportObj = { armyName: AC.armyName, pdfData: list };
+    const transportObj = {
+      armyName: AC.armyName,
+      pdfData: list,
+      options: options,
+    };
 
     window.localStorage.setItem("transportObj", JSON.stringify(transportObj));
     window.open(URL, "_blank", "noopener,noreferrer");
@@ -82,14 +87,42 @@ const OptionButtons = () => {
     LC.setDarkModeOff((prevState) => !prevState);
   };
 
+  const dispablePdfButton = () => {
+    return AC.disableOptionButtons || !showPdfVariantButtons;
+  };
+
   const buttons = [
     {
-      disabled: AC.disableOptionButtons,
+      disabled: false, //dispablePdfButton(),
       action: () => {
-        openPDfInNewTab();
+        setShowPdfVariantButtons(true);
       },
       text: OPTIONS.CREATE_PDF,
+      display: true,
     },
+
+    //TODO what pdf type to display?
+
+    {
+      disabled: false,
+      action: () => {
+        openPDfInNewTab({ printDefaultList: true });
+        setShowPdfVariantButtons(false);
+      },
+      text: OPTIONS.CREATE_DEFAULT_LIST,
+      display: showPdfVariantButtons,
+    },
+
+    {
+      disabled: false,
+      action: () => {
+        openPDfInNewTab({ printDefaultList: false });
+        setShowPdfVariantButtons(false);
+      },
+      text: OPTIONS.CREATE_DETAILED_LIST,
+      display: showPdfVariantButtons,
+    },
+
     {
       // TODO VERSION 2.0 -> addd this
       disabled: true,
@@ -97,6 +130,7 @@ const OptionButtons = () => {
         storeList();
       },
       text: OPTIONS.SAVE_LIST,
+      display: true,
     },
     {
       disabled: AC.disableOptionButtons,
@@ -104,6 +138,7 @@ const OptionButtons = () => {
         navigateToLossCalculator();
       },
       text: OPTIONS.TO_LOSS_CALCULATOR,
+      display: true,
     },
     {
       disabled: false,
@@ -111,6 +146,7 @@ const OptionButtons = () => {
         TC.setShowTournamentRulesMenu(true);
       },
       text: OPTIONS.CHANGE_TOURNAMENT_RULES,
+      display: true,
     },
   ];
 
@@ -130,14 +166,18 @@ const OptionButtons = () => {
 
       {buttons.map((bttn, i) => (
         <Grid item key={i}>
-          <Button
-            // className={classes.button}
-            variant="outlined" //
-            disabled={bttn.disabled}
-            onClick={bttn.action}
-          >
-            {bttn.text}
-          </Button>
+          {bttn.display ? (
+            <Fade in={true}>
+              <Button
+                // className={classes.button}
+                variant="outlined" //
+                disabled={bttn.disabled}
+                onClick={bttn.action}
+              >
+                {bttn.text}
+              </Button>
+            </Fade>
+          ) : null}
         </Grid>
       ))}
     </Grid>

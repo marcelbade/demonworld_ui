@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 // react-pdf
 import { PDFViewer } from "@react-pdf/renderer";
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
 // components and functions
 import ListPDF from "./defaultListPDF/ListPDF";
 import DetailedCardPDF from "./detailedCardPDF/DetailedCardPDF";
@@ -20,22 +20,28 @@ const useStyles = makeStyles((theme) => ({
 const PdfBox = () => {
   const classes = useStyles();
 
-  const [pdfData, setPdfData] = useState([]);
-  const [armyName, setArmyName] = useState([]);
+  const [data, setData] = useState({
+    list: [],
+    armyName: [],
+    options: {},
+  });
 
   useEffect(() => {
     const transportObj = JSON.parse(localStorage.getItem("transportObj"));
-    setPdfData(transportObj.pdfData);
-    setArmyName(transportObj.armyName);
+    setData({
+      ...data, //
+      list: transportObj.pdfData,
+      armyName: transportObj.armyName,
+      options: transportObj.options,
+    });
   }, []);
 
-  return pdfData.length > 0 ? (
+  return data.list.length > 0 ? (
     <PDFViewer className={classes.pdfTab}>
-      {/* TODO: add the logic to pick one! */}
-      {false ? ( //
-        <ListPDF armyName={armyName} pdfData={pdfData} />
+      {data.options.printDefaultList ? (
+        <ListPDF armyName={data.armyName} pdfData={data.list} />
       ) : (
-        <DetailedCardPDF armyName={armyName} pdfData={pdfData} />
+        <DetailedCardPDF armyName={data.armyName} pdfData={data.list} />
       )}
     </PDFViewer>
   ) : null;
