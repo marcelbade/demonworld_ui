@@ -8,6 +8,7 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import { ArmyContext } from "../../../../../contexts/armyContext";
 import { ValidationContext } from "../../../../../contexts/validationContext";
 import { SelectionContext } from "../../../../../contexts/selectionContext";
+import usePushMessages from "../../../../../customHooks/UsePushMessages";
 // constants
 import { TOOLTIPS, VALIDATION } from "../../../../../constants/textsAndMessages";
 import { NONE } from "../../../../../constants/factions";
@@ -16,6 +17,8 @@ const ArmyListBoxHeader = () => {
   const AC = useContext(ArmyContext);
   const VC = useContext(ValidationContext);
   const SEC = useContext(SelectionContext);
+
+  const pushMessages = usePushMessages();
 
   /**
    * Function takes the user input for maximum point allowance, validates it, and sets the state.
@@ -90,8 +93,7 @@ const ArmyListBoxHeader = () => {
       {!VC.listValidationResults.commanderIsPresent ? (
         <IconButton
           onClick={() => {
-            VC.setValidationMessage(VALIDATION.NO_COMMANDER_WARNING);
-            VC.setShowToastMessage(true);
+            pushMessages.showSnackBar(VALIDATION.NO_COMMANDER_WARNING);
           }}
           size="large"
         >

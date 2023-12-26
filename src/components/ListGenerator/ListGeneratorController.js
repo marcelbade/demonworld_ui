@@ -1,5 +1,5 @@
 // React
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 // Axios
 import axios from "axios";
@@ -10,14 +10,12 @@ import makeStyles from "@mui/styles/makeStyles";
 import { SnackbarProvider } from "notistack";
 // icons
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import CancelIcon from "@mui/icons-material/Cancel";
 import SpellBookIcon from "../../assets/icons/spellbook-white.png";
 // components and functions
 import FactionTreeView from "./ArmySelectorView/SelectorTreeView/FactionTreeView";
 import ArmyListBox from "./ArmyListView/ArmyListBox";
 import AlternativeArmyLists from "./ArmySelectorView/AlternativeArmyListSelection/AlternativeArmyLists";
 import MenuBox from "./RightSideMenus/MenuBox";
-import ValidationNotification from "../shared/ValidationNotification";
 // context providers
 import ArmyProvider from "../../contexts/armyContext";
 import AllyProvider from "../../contexts/allyContext";
@@ -32,6 +30,7 @@ import TournamentRulesProvider from "../../contexts/tournamentRulesContext";
 import { NONE } from "../../constants/factions";
 import { NO_ALLY } from "../../constants/factions";
 import ArmySelector from "./ArmySelectorView/ArmySelector";
+import CustomIcon from "../shared/statCards/CustomIcon";
 
 const useStyles = makeStyles((theme) => ({
   displayBox: {
@@ -93,7 +92,6 @@ const useStyles = makeStyles((theme) => ({
 const ListGeneratorController = () => {
   const classes = useStyles();
   const history = useHistory();
-  const notistackRef = useRef();
 
   // intialize local states
   const [fetchedFactions, setFetchedFactions] = useState([]);
@@ -130,9 +128,6 @@ const ListGeneratorController = () => {
     maxNumber: 2,
     uniquesOnlyOnce: true,
   });
-  // validation toast message
-  const [validationMessage, setValidationMessage] = useState(NONE);
-  const [showToastMessage, setShowToastMessage] = useState(false);
   // alternative lists
   const [armyHasAlternativeLists, setArmyHasAlternativeLists] = useState(false);
   const [numberOfAlternativeChoices, setNumberOfAlternativeChoices] = useState(0);
@@ -258,11 +253,7 @@ const ListGeneratorController = () => {
             value={{
               // ARMY LIST VALIDATION
               listValidationResults: listValidationResults,
-              validationMessage: validationMessage,
-              showToastMessage: showToastMessage,
               setListValidationResults: setListValidationResults,
-              setValidationMessage: setValidationMessage,
-              setShowToastMessage: setShowToastMessage,
             }}
           >
             <SelectionContext
@@ -345,32 +336,20 @@ const ListGeneratorController = () => {
                       }}
                     >
                       <SnackbarProvider
-                        ref={notistackRef}
-                        TransitionComponent={Fade}
-                        // maxSnack={3}
                         preventDuplicate
+                        maxSnack={3}
+                        TransitionComponent={Fade}
                         iconVariant={{
                           error: (
-                            <img className={classes.pushMessageIcon} src={SpellBookIcon} alt={"Regelbuchtext"} height={35} width={35} />
+                            <CustomIcon
+                              className={classes.pushMessageIcon} //
+                              icon={SpellBookIcon}
+                              altText={"Regelbuchtext"}
+                              height={35}
+                              width={35}
+                            />
                           ),
                         }}
-                        anchorOrigin={{
-                          vertical: "bottom",
-                          horizontal: "right",
-                        }}
-                        action={(key) => (
-                          <IconButton
-                            onClick={() => {
-                              notistackRef.current.closeSnackbar(key);
-                              setShowToastMessage(false);
-                            }}
-                            // TODO dont use inline css! :)
-                            style={{ color: "#fff", fontSize: "20px" }}
-                            size="large"
-                          >
-                            <CancelIcon />
-                          </IconButton>
-                        )}
                       >
                         <Grid container className={classes.displayBox} direction="column">
                           {/* <ArmyValidation /> */}
@@ -393,12 +372,18 @@ const ListGeneratorController = () => {
                               <FactionTreeView className={classes.selector} />
                             </Grid>
                             {/* ARMYLIST */}
-                            <Grid container item direction="column" justifyContent="flex-end" xs={3} className={classes.armyListBox}>
+                            <Grid
+                              container //
+                              item
+                              direction="column"
+                              justifyContent="flex-end"
+                              xs={3}
+                              className={classes.armyListBox}
+                            >
                               <ArmyListBox />
                             </Grid>
                           </Grid>
                           <MenuBox />
-                          <ValidationNotification text={validationMessage} show={showToastMessage} />
                         </Grid>
                       </SnackbarProvider>
                     </ArmyProvider>

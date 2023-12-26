@@ -6,11 +6,11 @@ import HelpIcon from "@mui/icons-material/Help";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 // components and functions
 import { ArmyContext } from "../../../../contexts/armyContext";
-import { ValidationContext } from "../../../../contexts/validationContext";
 import useArmyValidation from "../../../../customHooks/UseArmyValidation";
 import useUnitEnricher from "../../../../customHooks/UseUnitEnricher";
 import { SelectionContext } from "../../../../contexts/selectionContext";
 import { AlternativeListContext } from "../../../../contexts/alternativeListContext";
+import usePushMessages from "../../../../customHooks/UsePushMessages";
 
 const useStyles = makeStyles({
   textBlock: {
@@ -40,11 +40,12 @@ const useStyles = makeStyles({
 const TreeUnitNode = (props) => {
   const classes = useStyles();
   const AC = useContext(ArmyContext);
-  const VC = useContext(ValidationContext);
   const SEC = useContext(SelectionContext);
   const ALC = useContext(AlternativeListContext);
   const validation = useArmyValidation();
   const enrichUnit = useUnitEnricher(props.unit);
+
+  const pushMessages = usePushMessages();
 
   /**
    * Function adds a selected unit and uses the custom UseUnitEnricher hook to add necessary information.
@@ -90,8 +91,7 @@ const TreeUnitNode = (props) => {
         {!props.isValidUnit ? (
           <IconButton
             onClick={() => {
-              VC.setValidationMessage(props.validationMessage);
-              VC.setShowToastMessage(true);
+              pushMessages.showSnackBar(props.validationMessage);
             }}
             size="large"
           >

@@ -1,12 +1,11 @@
 // React
-import React, { useContext } from "react";
+import React from "react";
 import makeStyles from "@mui/styles/makeStyles";
 import { Grid, IconButton, Typography } from "@mui/material";
-
 // icons
 import HelpIcon from "@mui/icons-material/Help";
 // components and functions
-import { ValidationContext } from "../../../../../../contexts/validationContext";
+import usePushMessages from "../../../../../../customHooks/UsePushMessages";
 
 const useStyles = makeStyles(() => ({
   HeaderValidStyle: {
@@ -25,7 +24,7 @@ const useStyles = makeStyles(() => ({
 
 const ArmyListSubFactionHeader = (props) => {
   const classes = useStyles();
-  const VC = useContext(ValidationContext);
+  const pushMessages = usePushMessages();
 
   return (
     <Grid container>
@@ -53,8 +52,10 @@ const ArmyListSubFactionHeader = (props) => {
           </Typography>
           <IconButton
             onClick={() => {
-              VC.setValidationMessage(props.message);
-              VC.setShowToastMessage(true);
+              console.log("props.message");
+              console.log(props.message);
+
+              pushMessages.showSnackBar("props.message");
             }}
             size="large"
           >
