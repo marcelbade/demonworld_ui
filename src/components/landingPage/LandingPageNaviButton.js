@@ -3,7 +3,9 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 // Material UI
 import { IconButton, Grid, Tooltip, Typography } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
+// Functions And Components
+import CustomIcon from "../shared/statCards/CustomIcon";
 
 const useStyles = makeStyles((theme) => ({
   iconContainer: {
@@ -15,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
       width: "20em",
       height: "20em",
     },
-    [theme.breakpoints.down('lg')]: {
+    [theme.breakpoints.down("lg")]: {
       width: "10em",
       height: "10em",
     },
@@ -25,7 +27,7 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up("md")]: {
       display: "none",
     },
-    [theme.breakpoints.down('lg')]: {},
+    [theme.breakpoints.down("lg")]: {},
   },
 
   tooltipText: {
@@ -54,8 +56,14 @@ const LandingPageNaviButton = (props) => {
           onClick={() => {
             toPage(props.relativeURL);
           }}
-          size="large">
-          <img src={props.icon} alt={props.altText} height={100} width={100} />
+          size="large"
+        >
+          <CustomIcon
+            icon={props.icon} //
+            altText={props.altText}
+            height={100}
+            width={100}
+          />
         </IconButton>
       </Tooltip>
       <Typography className={classes.mobileToolTip}>{props.altText}</Typography>

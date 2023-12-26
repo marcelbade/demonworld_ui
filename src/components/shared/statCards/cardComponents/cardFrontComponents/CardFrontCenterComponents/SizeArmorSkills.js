@@ -1,6 +1,6 @@
 // React
 import React, { Fragment, useContext } from "react";
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
 import { Grid, Typography } from "@mui/material";
 // icons
 import rangeArmorIcon from "../../../../../../assets/icons/range-armor.png";
@@ -9,7 +9,7 @@ import blackBowIcon from "../../../../../../assets/icons/bow2.png";
 import blackSwordIcon from "../../../../../../assets/icons/sword2.png";
 // components & functions
 import { StateCardContext } from "../../../../../../contexts/statCardContext";
-// constants
+import CustomIcon from "../../../CustomIcon";
 
 const useStyles = makeStyles({
   icon: {
@@ -45,7 +45,12 @@ const SizeArmorSkills = () => {
         </div>
         <Typography variant="h6">{SC.unit.armourRange}</Typography>
         <div className={classes.alignIcons}>
-          <img alt="NK-Panzerung" src={meleeArmorIcon} className={classes.icon} />
+          <CustomIcon
+            icon={meleeArmorIcon} //
+            altText={""}
+            height={"1.2em"}
+            width={"1.2em"}
+          />
         </div>
         <Typography variant="h6">{SC.unit.armourMelee}</Typography>
       </Grid>
@@ -54,7 +59,12 @@ const SizeArmorSkills = () => {
           {SC.unit.skillMelee !== 0 ? (
             <Fragment>
               <div className={classes.alignIcons}>
-                <img alt="NK-Fertigkeit" src={blackSwordIcon} className={classes.icon} />
+                <CustomIcon
+                  icon={blackSwordIcon} //
+                  altText={"NK-Fertigkeit"}
+                  height={"1.2em"}
+                  width={"1.2em"}
+                />
               </div>
               <Typography variant="h6"> {SC.unit.skillMelee} </Typography>
             </Fragment>

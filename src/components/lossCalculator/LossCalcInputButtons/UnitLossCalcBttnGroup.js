@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 //Material UI
 import { Typography, ButtonGroup, Button, Tooltip, IconButton } from "@mui/material";
 import Stack from "@mui/material/Stack";
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
 // icons
 import skullsIcon from "../../../assets/icons/skulls.png";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -12,10 +12,11 @@ import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrow
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 // constants
 import { GIANT, HERO, MAGE } from "../../../constants/unitTypes";
+import { LOSS_CALCULATOR } from "../../../constants/textsAndMessages";
 // components and functions
 import { LossCalcContext } from "../../../contexts/LossCalculatorContext";
 import UnitLossCalculatorButton from "./UnitLossCalculatorButton";
-import { LOSS_CALCULATOR } from "../../../constants/textsAndMessages";
+import CustomIcon from "../../shared/statCards/CustomIcon";
 
 const useStyles = makeStyles((theme) => ({
   typographyFont: {
@@ -188,8 +189,14 @@ const UnitLossCalcBttnGroup = (props) => {
             allItemsMarkedLost();
           }}
           className={classes.bttn}
-          size="large">
-          <img src={skullsIcon} alt={LOSS_CALCULATOR.UNIT_ROUTED} height={40} width={40} />
+          size="large"
+        >
+          <CustomIcon
+            icon={skullsIcon} //
+            altText={LOSS_CALCULATOR.UNIT_ROUTED}
+            height={40}
+            width={40}
+          />
         </IconButton>
       </Tooltip>
     </Stack>
