@@ -3,11 +3,15 @@ import React from "react";
 import makeStyles from "@mui/styles/makeStyles";
 import { Typography, IconButton, Grid } from "@mui/material";
 // icons
+import HelpIcon from "@mui/icons-material/Help";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+// components and functions
+import usePushMessages from "../../../../../customHooks/UsePushMessages";
 // constants
+import { VALIDATION } from "../../../../../constants/textsAndMessages";
 
 const useStyles = makeStyles({
-  itemName: {
+  invalidItem: {
     color: "grey",
   },
 
@@ -18,18 +22,35 @@ const useStyles = makeStyles({
 
 const InvalidTreeItemNode = (props) => {
   const classes = useStyles();
+  const pushMessages = usePushMessages();
 
   return (
     <Grid container alignItems="center" direction="row">
       <Grid item container direction="column" xs={2}>
-        <Typography variant="body1">{props.item.itemName}</Typography>
-        <Typography variant="body1" className={classes.points}>
+        <Typography
+          variant="body1" //
+          className={classes.invalidItem}
+        >
+          {props.item.itemName}
+        </Typography>
+        <Typography
+          variant="body1" //
+          className={classes.invalidItem}
+        >
           {props.item.points}
         </Typography>
       </Grid>
       <Grid item xs={6}>
-        <IconButton disabled={true} size="large">
+        <IconButton
+          onClick={() => {
+            pushMessages.showSnackBar(VALIDATION.NOT_A_VALID_ITEM);
+          }}
+          size="large"
+        >
           <AddCircleOutlineIcon />
+        </IconButton>
+        <IconButton size="large">
+          <HelpIcon />
         </IconButton>
       </Grid>
     </Grid>
