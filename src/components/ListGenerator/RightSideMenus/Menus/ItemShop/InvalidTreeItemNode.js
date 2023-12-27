@@ -3,10 +3,7 @@ import React from "react";
 import makeStyles from "@mui/styles/makeStyles";
 import { Typography, IconButton, Grid } from "@mui/material";
 // icons
-import HelpIcon from "@mui/icons-material/Help";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-// components and functions
-import usePushMessages from "../../../../../customHooks/UsePushMessages";
 // constants
 import { VALIDATION } from "../../../../../constants/textsAndMessages";
 import ContextHelpButton from "../../../../shared/ContextHelpButton";
@@ -23,7 +20,6 @@ const useStyles = makeStyles({
 
 const InvalidTreeItemNode = (props) => {
   const classes = useStyles();
-  const pushMessages = usePushMessages();
 
   return (
     <Grid container alignItems="center" direction="row">

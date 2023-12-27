@@ -9,7 +9,6 @@ import useArmyValidation from "../../../../customHooks/UseArmyValidation";
 import useUnitEnricher from "../../../../customHooks/UseUnitEnricher";
 import { SelectionContext } from "../../../../contexts/selectionContext";
 import { AlternativeListContext } from "../../../../contexts/alternativeListContext";
-import usePushMessages from "../../../../customHooks/UsePushMessages";
 import ContextHelpButton from "../../../shared/ContextHelpButton";
 
 const useStyles = makeStyles({
@@ -44,8 +43,6 @@ const TreeUnitNode = (props) => {
   const ALC = useContext(AlternativeListContext);
   const validation = useArmyValidation();
   const enrichUnit = useUnitEnricher(props.unit);
-
-  const pushMessages = usePushMessages();
 
   /**
    * Function adds a selected unit and uses the custom UseUnitEnricher hook to add necessary information.

@@ -7,7 +7,6 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import { ArmyContext } from "../../../../../contexts/armyContext";
 import { ValidationContext } from "../../../../../contexts/validationContext";
 import { SelectionContext } from "../../../../../contexts/selectionContext";
-import usePushMessages from "../../../../../customHooks/UsePushMessages";
 import ContextHelpButton from "../../../../shared/ContextHelpButton";
 // constants
 import { TOOLTIPS, VALIDATION } from "../../../../../constants/textsAndMessages";
@@ -17,8 +16,6 @@ const ArmyListBoxHeader = () => {
   const AC = useContext(ArmyContext);
   const VC = useContext(ValidationContext);
   const SEC = useContext(SelectionContext);
-
-  const pushMessages = usePushMessages();
 
   /**
    * Function takes the user input for maximum point allowance, validates it, and sets the state.

@@ -3,7 +3,6 @@ import React from "react";
 import makeStyles from "@mui/styles/makeStyles";
 import { Grid, Typography } from "@mui/material";
  // components and functions
-import usePushMessages from "../../../../../../customHooks/UsePushMessages";
 import ContextHelpButton from "../../../../../shared/ContextHelpButton";
 
 const useStyles = makeStyles(() => ({
@@ -23,8 +22,7 @@ const useStyles = makeStyles(() => ({
 
 const ArmyListSubFactionHeader = (props) => {
   const classes = useStyles();
-  const pushMessages = usePushMessages();
-
+ 
   return (
     <Grid container>
       {props.valid ? (
