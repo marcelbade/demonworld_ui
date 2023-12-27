@@ -41,15 +41,15 @@ const InvalidTreeItemNode = (props) => {
         </Typography>
       </Grid>
       <Grid item xs={6}>
+        <IconButton size="large" disabled={true}>
+          <AddCircleOutlineIcon />
+        </IconButton>
         <IconButton
           onClick={() => {
             pushMessages.showSnackBar(VALIDATION.NOT_A_VALID_ITEM);
           }}
           size="large"
         >
-          <AddCircleOutlineIcon />
-        </IconButton>
-        <IconButton size="large">
           <HelpIcon />
         </IconButton>
       </Grid>
