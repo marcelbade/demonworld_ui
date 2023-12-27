@@ -1,11 +1,10 @@
 // React
 import React from "react";
 import makeStyles from "@mui/styles/makeStyles";
-import { Grid, IconButton, Typography } from "@mui/material";
-// icons
-import HelpIcon from "@mui/icons-material/Help";
-// components and functions
+import { Grid, Typography } from "@mui/material";
+ // components and functions
 import usePushMessages from "../../../../../../customHooks/UsePushMessages";
+import ContextHelpButton from "../../../../../shared/ContextHelpButton";
 
 const useStyles = makeStyles(() => ({
   HeaderValidStyle: {
@@ -50,14 +49,7 @@ const ArmyListSubFactionHeader = (props) => {
           >
             {props.subFaction}
           </Typography>
-          <IconButton
-            onClick={() => {
-              pushMessages.showSnackBar(props.message);
-            }}
-            size="large"
-          >
-            <HelpIcon />
-          </IconButton>
+          <ContextHelpButton message={props.message} />
         </Grid>
       )}
     </Grid>

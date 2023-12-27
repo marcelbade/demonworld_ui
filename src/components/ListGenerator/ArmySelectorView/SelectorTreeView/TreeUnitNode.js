@@ -2,7 +2,6 @@ import React, { useContext } from "react";
 import makeStyles from "@mui/styles/makeStyles";
 import { Typography, Grid, IconButton } from "@mui/material";
 // icons
-import HelpIcon from "@mui/icons-material/Help";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 // components and functions
 import { ArmyContext } from "../../../../contexts/armyContext";
@@ -11,6 +10,7 @@ import useUnitEnricher from "../../../../customHooks/UseUnitEnricher";
 import { SelectionContext } from "../../../../contexts/selectionContext";
 import { AlternativeListContext } from "../../../../contexts/alternativeListContext";
 import usePushMessages from "../../../../customHooks/UsePushMessages";
+import ContextHelpButton from "../../../shared/ContextHelpButton";
 
 const useStyles = makeStyles({
   textBlock: {
@@ -88,16 +88,7 @@ const TreeUnitNode = (props) => {
         >
           <AddCircleOutlineIcon />
         </IconButton>
-        {!props.isValidUnit ? (
-          <IconButton
-            onClick={() => {
-              pushMessages.showSnackBar(props.validationMessage);
-            }}
-            size="large"
-          >
-            <HelpIcon />
-          </IconButton>
-        ) : null}
+        {!props.isValidUnit ? <ContextHelpButton message={props.validationMessage} /> : null}
       </Grid>
     </Grid>
   );

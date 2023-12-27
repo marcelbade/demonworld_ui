@@ -9,6 +9,7 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import usePushMessages from "../../../../../customHooks/UsePushMessages";
 // constants
 import { VALIDATION } from "../../../../../constants/textsAndMessages";
+import ContextHelpButton from "../../../../shared/ContextHelpButton";
 
 const useStyles = makeStyles({
   invalidItem: {
@@ -44,14 +45,7 @@ const InvalidTreeItemNode = (props) => {
         <IconButton size="large" disabled={true}>
           <AddCircleOutlineIcon />
         </IconButton>
-        <IconButton
-          onClick={() => {
-            pushMessages.showSnackBar(VALIDATION.NOT_A_VALID_ITEM);
-          }}
-          size="large"
-        >
-          <HelpIcon />
-        </IconButton>
+        <ContextHelpButton message={VALIDATION.NOT_A_VALID_ITEM} />
       </Grid>
     </Grid>
   );

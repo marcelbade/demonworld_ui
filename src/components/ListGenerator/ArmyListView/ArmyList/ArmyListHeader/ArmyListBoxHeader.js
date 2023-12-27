@@ -2,13 +2,13 @@
 import React, { useContext, useEffect } from "react";
 import { TextField, IconButton, Tooltip, Typography, Grid } from "@mui/material";
 // icons
-import HelpIcon from "@mui/icons-material/Help";
 import CancelIcon from "@mui/icons-material/Cancel";
 // components and functions
 import { ArmyContext } from "../../../../../contexts/armyContext";
 import { ValidationContext } from "../../../../../contexts/validationContext";
 import { SelectionContext } from "../../../../../contexts/selectionContext";
 import usePushMessages from "../../../../../customHooks/UsePushMessages";
+import ContextHelpButton from "../../../../shared/ContextHelpButton";
 // constants
 import { TOOLTIPS, VALIDATION } from "../../../../../constants/textsAndMessages";
 import { NONE } from "../../../../../constants/factions";
@@ -90,16 +90,7 @@ const ArmyListBoxHeader = () => {
           <CancelIcon />
         </IconButton>
       </Tooltip>
-      {!VC.listValidationResults.commanderIsPresent ? (
-        <IconButton
-          onClick={() => {
-            pushMessages.showSnackBar(VALIDATION.NO_COMMANDER_WARNING);
-          }}
-          size="large"
-        >
-          <HelpIcon />
-        </IconButton>
-      ) : null}
+      {!VC.listValidationResults.commanderIsPresent ? <ContextHelpButton message={VALIDATION.NO_COMMANDER_WARNING} /> : null}
     </Grid>
   );
 };
