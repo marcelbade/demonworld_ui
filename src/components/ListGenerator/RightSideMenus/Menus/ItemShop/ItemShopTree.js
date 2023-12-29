@@ -21,8 +21,8 @@ import { VALIDATION } from "../../../../../constants/textsAndMessages";
 
 const ItemShopTree = () => {
   const IC = useContext(ItemContext);
-  const filter = useItemFilters();
   const controller = useTreeViewController();
+  const filter = useItemFilters();
   const limiter = useUnitEqipmentLimits();
 
   const [filteredItemGroups, setFilteredItemGroups] = useState([]);
@@ -67,7 +67,7 @@ const ItemShopTree = () => {
     // test if the item needs to be disabled due to an equipment flag.
     if (filter.filterIndividualItems(unit, item)) {
       return {
-        isBlocked: !limiter.disableItem(unit, item), //
+        isBlocked: !limiter.disableItem(unit, item),
         message: VALIDATION.ALREADY_HAS_ITEM_OF_TYPE(ITEM_CATEGORY_NAME_MAPPING[item.itemType]),
       };
     }

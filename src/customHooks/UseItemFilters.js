@@ -36,7 +36,6 @@ const useItemFilters = () => {
    */
   const filterItemTypesForUnit = (selectedUnit, listOfItemGroups) => {
     const itemGroupsForUnit = getItemGroupsForSelectedUnit(selectedUnit, listOfItemGroups);
-
     const validItemTypeGroups = filterItemTypes(selectedUnit, itemGroupsForUnit);
 
     return validItemTypeGroups;
@@ -176,6 +175,11 @@ const useItemFilters = () => {
       rangeArmorItem: (unit, item) =>
         unit.armourRange > item.maxRangeArmor && //
         item.maxRangeArmor > -1,
+
+      // filter items not meant for single element units
+      rankAndFileItem: (unit, item) =>
+        unit.numberOfElements < 2 && //
+        item.everyElement,
     };
 
     for (const value of Object.values(itemFilters)) {
@@ -203,7 +207,7 @@ const useItemFilters = () => {
   };
 
   return {
-    filterItemTypesForUnit : filterItemTypesForUnit,
+    filterItemTypesForUnit: filterItemTypesForUnit,
     filterIndividualItems: filterIndividualItems,
   };
 };
