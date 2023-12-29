@@ -1,13 +1,13 @@
 // React
 import React, { Fragment, useContext } from "react";
 // Material UI
-import { List, ListItem, Button } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
+import { List, ListItem, Button, IconButton } from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
 // icons
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 // components and functions
 import { ArmyContext } from "../../../../../../../contexts/armyContext";
-import { unitCardMultiSort } from "../../../../../../../util/utilityFunctions"
+import { unitCardMultiSort } from "../../../../../../../util/utilityFunctions";
 import EquipmentList from "./EquipmentList";
 import UnitElementButtons from "./UnitElementButtons";
 import ArmyListUnitEntry from "./ArmyListUnitEntry";
@@ -31,9 +31,6 @@ const useStyles = makeStyles({
     width: "80%",
     margin: "-1em",
     padding: "0em",
-  },
-  buttons: {
-    hieght: "80%",
   },
 });
 
@@ -72,19 +69,18 @@ const SubFactionUnitList = (props) => {
         return (
           <List className={classes.list} key={identifier}>
             <ListItem className={classes.element}>
-              <Button
+              <IconButton 
                 onClick={() => {
                   removeUnit(identifier);
                 }}
               >
                 <RemoveCircleOutlineIcon />
-              </Button>
+              </IconButton>
               <ArmyListUnitEntry unit={u} />
               {/* BUTTONS */}
               <UnitElementButtons
                 unit={u} //
                 subFaction={props.subFactionName}
-                className={classes.buttons}
               />
             </ListItem>
             <ListItem>
