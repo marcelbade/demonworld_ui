@@ -1,6 +1,15 @@
+// react
+import { useContext } from "react";
+// components and functions
+import { ItemContext } from "../contexts/itemContext";
+// constants
+import { ITEM_TYPE_FORTIFICATIONS } from "../constants/itemShopConstants";
+
 const useUnitEqipmentLimits = () => {
+  const IC = useContext(ItemContext);
+
   /**
-   * Function enforces the item selection rules by toggling the item's corresponding button on/off.
+   * Function enforces the item selection rules by toggling the item's corresponding add button on/off.
    * Rules are:
    *  - Only generic items can be given to multiple units.
    *  - A hero, magicican or unit leader can only get ONE magical item.
@@ -12,59 +21,44 @@ const useUnitEqipmentLimits = () => {
    * @returns true, if the flag corresponding to the item's itemType is true.
    * In that case, the button will be disabled.
    */
-  const toggleItemButton = (item) => {
-    if (!isObjectEmtpy(IC.unitSelectedForShop)) {
-      let unit = IC.unitSelectedForShop;
+  const disableItem = (unit, item) => {
+    let disableBttn = false;
 
-      const hasMagicalItem = unitHasMagicalItem(unit, item);
-      const hasBanner = unitHasBanner(unit, item);
-      const hasInstrument = unitHasInstrument(unit, item);
-      const hasItemForEntireUnit = unitHasItemForEveryElement(unit, item);
-      const hasFortifications = unitHasFortifications(unit, item);
-
-      const blockItemWhen = hasMagicalItem || hasBanner || hasBanner || hasInstrument || hasItemForEntireUnit || hasFortifications;
-
-      return blockItemWhen;
+    if (item.everyElement && unit.equipmentTypes.unit) {
+      disableBttn = true;
     }
-    return false;
+    if (item.requiresBanner && unit.equipmentTypes.banner) {
+      disableBttn = true;
+    }
+    if (item.requiresMusician && unit.equipmentTypes.instrument) {
+      disableBttn = true;
+    }
+    if (item.itemType === ITEM_TYPE_FORTIFICATIONS && unit.equipmentTypes.fortifications) {
+      disableBttn = true;
+    }
+    if (isMagicItem(item) && unit.equipmentTypes.magicItem) {
+      disableBttn = true;
+    }
+
+    return disableBttn;
   };
-  /*
-   * The following functions check the unit's item flags and return the Boolean value.
+
+  /**
+   * Function tests if the item is a magical item, i.e.,
+   * that it does not belong to one of the special categories
+   * (banner, fortificatio, instrument, items that are given to every element of a unit)
+   * @param {itemCard Object} item
+   * @returns
    */
-
-  const unitHasMagicalItem = (unit, item) => {
-    if (MAGICAL_ITEMS.includes(item.itemType) && !item.everyElement) {
-      return unit.equipmentTypes.magicItem;
-    } else return false;
+  const isMagicItem = (item) => {
+    return (
+      !item.everyElement && //
+      !item.requiresBanner &&
+      !item.requiresMusician &&
+      item.itemType !== ITEM_TYPE_FORTIFICATIONS
+    );
   };
 
-  const unitHasBanner = (unit, item) => {
-    if (item.itemType === ITEM_TYPE_BANNER) {
-      return unit.equipmentTypes.banner;
-    } else return false;
-  };
-
-  const unitHasInstrument = (unit, item) => {
-    if (item.itemType === ITEM_TYPE_INSTRUMENT) {
-      return unit.equipmentTypes.instrument;
-    } else return false;
-  };
-
-  const unitHasItemForEveryElement = (unit, item) => {
-    if (item.everyElement) {
-      return unit.equipmentTypes.unit;
-    } else return false;
-  };
-
-  const unitHasFortifications = (unit, item) => {
-    if (item.itemType === ITEM_TYPE_FORTIFICATIONS) {
-      return unit.equipmentTypes.fortifications;
-    } else return false;
-  };
-};
-
-
-// TODO
   /**
    * Function sets the itemType flags of a unitCard to correctly toggle the item buttons
    * in the item shop on and off.
@@ -76,10 +70,18 @@ const useUnitEqipmentLimits = () => {
 
     if (item.everyElement) {
       tempObj.equipmentTypes.unit = newFlagValue;
-    } else if (MAGICAL_ITEMS.includes(item.itemType)) {
+    }
+    if (item.requiresBanner) {
+      tempObj.equipmentTypes.banner = newFlagValue;
+    }
+    if (item.requiresMusician) {
+      tempObj.equipmentTypes.instrument = newFlagValue;
+    }
+    if (item.itemType === ITEM_TYPE_FORTIFICATIONS) {
+      tempObj.equipmentTypes.fortifications = newFlagValue;
+    }
+    if (isMagicItem(item)) {
       tempObj.equipmentTypes.magicItem = newFlagValue;
-    } else {
-      tempObj.equipmentTypes[item.itemType] = newFlagValue;
     }
 
     IC.setUnitSelectedForShop({
@@ -87,5 +89,10 @@ const useUnitEqipmentLimits = () => {
     });
   };
 
+  return {
+    disableItem: disableItem,
+    toggleUnitsItemTypeFlags: toggleUnitsItemTypeFlags,
+  };
+};
 
 export default useUnitEqipmentLimits;

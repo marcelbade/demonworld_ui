@@ -16,11 +16,13 @@ import useTreeViewController from "../../../../../customHooks/UseTreeViewControl
 import InvalidTreeItemNode from "./InvalidTreeItemNode";
 // constants
 import { ITEM_CATEGORY_NAME_MAPPING } from "../../../../../constants/itemShopConstants";
+import useUnitEqipmentLimits from "../../../../../customHooks/useUnitEqipmentLimits";
 
 const ItemShopTree = () => {
   const IC = useContext(ItemContext);
   const filter = useItemFilters();
   const controller = useTreeViewController();
+  const limiter = useUnitEqipmentLimits();
 
   const [filteredItemGroups, setFilteredItemGroups] = useState([]);
 
@@ -30,17 +32,41 @@ const ItemShopTree = () => {
     }
   }, [IC.unitSelectedForShop]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  /**
+   * Function tests wether all items of one type are blocked.
+   * If so, the treeItem node is shown as disabled.
+   * @param {item DTO} dto
+   * @returns true, if the node must be disabled.
+   */
   const testForEmptyItemType = (dto) => {
     const numberOfItems = dto.items.length;
     let numberOfBlockedItems = 0;
 
     dto.items.forEach((item) => {
-      if (!filter.filterIndividualItems(IC.unitSelectedForShop, item)) {
+      if (
+        !filter.filterIndividualItems(IC.unitSelectedForShop, item) || //
+        limiter.disableItem(IC.unitSelectedForShop, item)
+      ) {
         numberOfBlockedItems++;
       }
     });
 
-    return numberOfItems === numberOfBlockedItems;
+    return numberOfBlockedItems >= numberOfItems;
+  };
+
+  /**
+   * Wrapper Function. Tests whether an item can be equipped or not. Calls filterIndividualItems and disableItem
+   * @param {unitCard} unit
+   * @param {itemCard} item
+   * @returns false, if the item must be blocked. In taht case, the button will be disabled.
+   */
+  const isItemBlocked = (unit, item) => {
+    // if the item can be equipped, test if the item needs to be disabled.
+    if (filter.filterIndividualItems(unit, item)) {
+      return !limiter.disableItem(unit, item);
+    }
+
+    return false;
   };
 
   return (
@@ -60,7 +86,7 @@ const ItemShopTree = () => {
             disabled={testForEmptyItemType(dto)}
           >
             {dto.items.map((item) => {
-              return filter.filterIndividualItems(IC.unitSelectedForShop, item) ? (
+              return isItemBlocked(IC.unitSelectedForShop, item) ? (
                 <Grid container>
                   <TreeItemNode item={item} />
                 </Grid>

@@ -70,7 +70,6 @@ const TreeItemNode = (props) => {
           <Grid item container direction="column" xs={3}>
             <Typography
               variant="body1"
-              className={limiter.disableItemBttn(props.item, IC.unitSelectedForShop) ? classes.blockedItemName : classes.itemName}
             >
               {props.item.itemName}
             </Typography>
@@ -80,7 +79,6 @@ const TreeItemNode = (props) => {
           </Grid>
           <Grid item xs={6}>
             <IconButton
-              disabled={limiter.disableItemBttn(props.item, IC.unitSelectedForShop)}
               size="large"
               onClick={(e) => {
                 addItemToUnit(props.item);
