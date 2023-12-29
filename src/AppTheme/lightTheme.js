@@ -3,17 +3,21 @@ import { createTheme } from "@mui/material/styles";
 const lightTheme = createTheme({
   palette: {
     primary: { 500: "#467fcf" },
+    disabled: "grey",
   },
   components: {
     MuiTreeItem: {
       styleOverrides: {
         root: {
-          "& > .MuiTreeItem-content .MuiTreeItem-label": {
-            fontFamily: "NotMaryKate",
+          "& span": {
+            fontFamily: "jaapokkiRegular",
           },
-          // "& > .MuiTreeItem-content .MuiTreeItem-label .MuiTypography-body1": {
-          //   fontFamily: "NotMaryKate",
-          // },
+          "& p": {
+            fontFamily: "jaapokkiRegular",
+          },
+        },
+        label: {
+          fontFamily: "NotMaryKate",
         },
       },
     },

@@ -8,15 +8,14 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { VALIDATION } from "../../../../../constants/textsAndMessages";
 import ContextHelpButton from "../../../../shared/ContextHelpButton";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   invalidItem: {
-    color: "grey",
+    color: theme.palette.disabled,
   },
-
   ruleText: {
     width: "40em",
   },
-});
+}));
 
 const InvalidTreeItemNode = (props) => {
   const classes = useStyles();

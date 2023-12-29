@@ -11,30 +11,11 @@ import { SelectionContext } from "../../../../contexts/selectionContext";
 import { AlternativeListContext } from "../../../../contexts/alternativeListContext";
 import ContextHelpButton from "../../../shared/ContextHelpButton";
 
-const useStyles = makeStyles({
-  textBlock: {
-    width: "25em",
-  },
+const useStyles = makeStyles((theme) => ({
   blockedLeafNode: {
-    paddingRight: "0.5em",
-
-    color: "grey",
+    color: theme.palette.disabled,
   },
-  unblockedLeafNode: {
-    paddingRight: "0.5em",
-  },
-  points: {
-    color: "grey",
-  },
-
-  unblockedBttn: {
-    alignContent: "center",
-    color: "black",
-  },
-  blockedBttn: {
-    paddingLeft: "1em",
-  },
-});
+}));
 
 const TreeUnitNode = (props) => {
   const classes = useStyles();
@@ -58,7 +39,7 @@ const TreeUnitNode = (props) => {
   };
 
   const displayValidNode = (isBlocked) => {
-    return isBlocked ? classes.blockedLeafNode : classes.unblockedLeafNode;
+    return isBlocked ? classes.blockedLeafNode : null;
   };
   const displayBttn = (isBlocked) => {
     return isBlocked ? classes.blockedBttn : classes.unblockedBttn;
