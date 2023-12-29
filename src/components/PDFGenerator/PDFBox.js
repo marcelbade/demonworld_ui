@@ -34,7 +34,7 @@ const PdfBox = () => {
       armyName: transportObj.armyName,
       options: transportObj.options,
     });
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return data.list.length > 0 ? (
     <PDFViewer className={classes.pdfTab}>
