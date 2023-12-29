@@ -5,7 +5,6 @@ import { Typography, IconButton, Grid } from "@mui/material";
 // icons
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 // constants
-import { VALIDATION } from "../../../../../constants/textsAndMessages";
 import ContextHelpButton from "../../../../shared/ContextHelpButton";
 
 const useStyles = makeStyles((theme) => ({
@@ -40,7 +39,7 @@ const InvalidTreeItemNode = (props) => {
         <IconButton size="large" disabled={true}>
           <AddCircleOutlineIcon />
         </IconButton>
-        <ContextHelpButton message={VALIDATION.NOT_A_VALID_ITEM} />
+        <ContextHelpButton message={props.message} />
       </Grid>
     </Grid>
   );

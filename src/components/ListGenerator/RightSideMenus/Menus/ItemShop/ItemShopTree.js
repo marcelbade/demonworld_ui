@@ -17,6 +17,7 @@ import InvalidTreeItemNode from "./InvalidTreeItemNode";
 // constants
 import { ITEM_CATEGORY_NAME_MAPPING } from "../../../../../constants/itemShopConstants";
 import useUnitEqipmentLimits from "../../../../../customHooks/useUnitEqipmentLimits";
+import { VALIDATION } from "../../../../../constants/textsAndMessages";
 
 const ItemShopTree = () => {
   const IC = useContext(ItemContext);
@@ -55,18 +56,26 @@ const ItemShopTree = () => {
   };
 
   /**
-   * Wrapper Function. Tests whether an item can be equipped or not. Calls filterIndividualItems and disableItem
+   * Wrapper Function. Tests whether an item can be equipped or not. Calls filterIndividualItems and disableItem. Reu
    * @param {unitCard} unit
    * @param {itemCard} item
-   * @returns false, if the item must be blocked. In taht case, the button will be disabled.
+   * @returns An object with the test result an error message.
+   * Result is false, if the item must be blocked. In that case, the button will be disabled.
    */
   const isItemBlocked = (unit, item) => {
-    // if the item can be equipped, test if the item needs to be disabled.
+    // if the item can be equipped,
+    // test if the item needs to be disabled due to an equipment flag.
     if (filter.filterIndividualItems(unit, item)) {
-      return !limiter.disableItem(unit, item);
+      return {
+        isBlocked: !limiter.disableItem(unit, item), //
+        message: VALIDATION.ALREADY_HAS_ITEM_OF_TYPE(ITEM_CATEGORY_NAME_MAPPING[item.itemType]),
+      };
     }
 
-    return false;
+    return {
+      isBlocked: false, //
+      message: VALIDATION.NOT_A_VALID_ITEM,
+    };
   };
 
   return (
@@ -86,12 +95,14 @@ const ItemShopTree = () => {
             disabled={testForEmptyItemType(dto)}
           >
             {dto.items.map((item) => {
-              return isItemBlocked(IC.unitSelectedForShop, item) ? (
+              const result = isItemBlocked(IC.unitSelectedForShop, item);
+
+              return result.isBlocked ? (
                 <Grid container>
                   <TreeItemNode item={item} />
                 </Grid>
               ) : (
-                <InvalidTreeItemNode item={item} />
+                <InvalidTreeItemNode item={item} message={result.message} />
               );
             })}
           </TreeItem>

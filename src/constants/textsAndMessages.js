@@ -46,7 +46,10 @@ export const VALIDATION = {
     return `Die Liste darf maximal ${percentage}% Characktere und Helden enthalten.`;
   },
   DONT_EXCEED_THE_POINT_ALLOWANCE_MESSAGE: "Die Liste darf die maximale Punktzahl nicht überschreiten.",
-  NOT_A_VALID_ITEM : "Diese Einheit kann diesen Gegenstand nicht einsetzen."
+  NOT_A_VALID_ITEM: "Diese Einheit kann diesen Gegenstand nicht erhalten.",
+  ALREADY_HAS_ITEM_OF_TYPE: (itemType) => {
+    return `Diese Einheit hat bereits einen Gegenstand vom Typ ${itemType} erhalten.`;
+  },
 };
 
 export const DARKELVES = {
