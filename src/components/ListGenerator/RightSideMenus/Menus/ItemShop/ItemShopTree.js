@@ -2,7 +2,8 @@
 import React, { useState, useContext, useEffect } from "react";
 //Material UI
 import { Grid } from "@mui/material";
-import { TreeItem, TreeView } from "@material-ui/lab";
+import { TreeView } from "@mui/x-tree-view/TreeView";
+import { TreeItem } from "@mui/x-tree-view/TreeItem";
 // icons
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
@@ -53,9 +54,9 @@ const ItemShopTree = () => {
         return (
           <TreeItem
             nodeId={`${i}`} //
-            onClick={() => controller.getNodeId([`${i}`])}
             label={ITEM_CATEGORY_NAME_MAPPING[dto.typeName]}
-            key={dto.typeName}
+            key={i}
+            onClick={() => controller.getNodeId([`${i}`])}
             disabled={testForEmptyItemType(dto)}
           >
             {dto.items.map((item) => {
@@ -64,7 +65,7 @@ const ItemShopTree = () => {
                   <TreeItemNode item={item} />
                 </Grid>
               ) : (
-                <InvalidTreeItemNode  item={item} />
+                <InvalidTreeItemNode item={item} />
               );
             })}
           </TreeItem>
