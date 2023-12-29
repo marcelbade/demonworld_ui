@@ -52,7 +52,6 @@ const Tree = (props) => {
             key={i}
             disabled={testForEmptySubFaction(dto)}
             onClick={() => controller.getNodeId([`${i}`])}
-            className={testForEmptySubFaction(dto) ? classes.emptySubFactionName : classes.subFactionName}
           >
             {unitCardMultiSort(dto.units)
               .map((u) => validation.returnValidationResult(UNIT, u, true))
