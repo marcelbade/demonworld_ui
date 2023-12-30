@@ -1,7 +1,5 @@
 import { uuidGenerator } from "../util/utilityFunctions";
 
- 
-
 const useUnitEnricher = (unit) => {
   /**
    * Functions adds a UUID as unique id so the user can select the
@@ -53,26 +51,10 @@ const useUnitEnricher = (unit) => {
     };
   };
 
-  /**
-   * Function adds a state which allows to check whether the unit has a
-   * second sub faction and an error message to be displayed if necessary.
-   * @returns unit object with the a state holding infos about the second subfaction.
-   */
-  const addSecondSubFactionFlagAndMessage = () => {
-    return {
-      ...unit,
-      secondSubFactionState: {
-        hasSecondSubFaction: false,
-        errorMessage: "",
-      },
-    };
-  };
-
   const enrichUnit = () => {
     unit = addUniqueIdToUnit(unit);
     unit = addLossCounterToUnit(unit);
     unit = addEquipmentSlotsToUnit(unit);
-    unit = addSecondSubFactionFlagAndMessage(unit);
 
     return unit;
   };
