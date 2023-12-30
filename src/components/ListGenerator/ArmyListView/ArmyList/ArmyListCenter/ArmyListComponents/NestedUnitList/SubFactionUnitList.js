@@ -1,7 +1,7 @@
 // React
 import React, { Fragment, useContext } from "react";
 // Material UI
-import { List, ListItem, Button, IconButton } from "@mui/material";
+import { List, ListItem, IconButton } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
 // icons
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
@@ -69,7 +69,7 @@ const SubFactionUnitList = (props) => {
         return (
           <List className={classes.list} key={identifier}>
             <ListItem className={classes.element}>
-              <IconButton 
+              <IconButton
                 onClick={() => {
                   removeUnit(identifier);
                 }}
