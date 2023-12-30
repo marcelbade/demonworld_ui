@@ -1,41 +1,17 @@
 // React
 import React from "react";
-import makeStyles from '@mui/styles/makeStyles';
-import { Autocomplete } from '@mui/material';
+import { Autocomplete } from "@mui/material";
 import { TextField } from "@mui/material";
 
-const useStyles = makeStyles((theme) => ({
-
-  root: {
-    marginLeft: "1em",
-    [theme.breakpoints.up("md")]: {
-      fontSize: "3em",
-      fontFamily: "BreatheOfFire",
-      width: "10em",
-    },
-    [theme.breakpoints.down('md')]: {
-      fontSize: "2em",
-      fontFamily: "BreatheOfFire",
-      width: "10em",
-    },
-    "& .MuiFormLabel-root": {
-      fontSize: "20px",
-    },
-  },
-}));
-
 /**
- *Function creates the army selection Autocomplete element used by all pages.
+ *Component for the army selection Autocomplete input element used by all pages.
  * @param {*} props
  * @returns
  */
 const SelectionInput = (props) => {
-  const classes = useStyles();
-
   return (
     <Autocomplete
       id="arymSelection"
-      className={classes.root}
       options={props.options}
       onChange={(event, value, reason) => {
         if (reason === "clear") {
@@ -45,14 +21,7 @@ const SelectionInput = (props) => {
           props.filterFunction(value);
         }
       }}
-      renderInput={(params) => (
-        <TextField
-          className={props.isArmySelector ? classes.armySelector : classes.AlternativeList}
-          {...params}
-          label={props.label}
-          variant="standard"
-        />
-      )}
+      renderInput={(params) => <TextField {...params} label={props.label} variant="standard" />}
     />
   );
 };
