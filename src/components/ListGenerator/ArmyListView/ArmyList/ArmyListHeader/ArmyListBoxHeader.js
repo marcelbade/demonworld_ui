@@ -25,17 +25,25 @@ const ArmyListBoxHeader = () => {
     AC.setArmyName(event.target.value);
   };
 
-  // Calculate date and create a default name for the army list.
-  useEffect(() => {
-    const currentDate = new Date();
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth();
-    const dayOfMonth = currentDate.getDate();
-
+  /**
+   * Function creates a default name for the army list
+   * by combining the faction name and the current date.
+   */
+  const createDefaultArmyName = () => {
     if (AC.selectedFactionName !== NONE && AC.selectedFactionName !== undefined) {
-      const defaultArmyName = `${AC.selectedFactionName} - ${dayOfMonth}.${month}.${year}`;
-      AC.setArmyName(defaultArmyName);
+      const currentDate = new Date();
+
+      // add 1 to the month since it starts with 0
+      const year = currentDate.getFullYear();
+      const month = 1 + currentDate.getMonth();
+      const dayOfMonth = currentDate.getDate();
+
+      AC.setArmyName(`${AC.selectedFactionName} - ${dayOfMonth}.${month}.${year}`);
     }
+  };
+
+  useEffect(() => {
+    createDefaultArmyName();
   }, [AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
@@ -47,6 +55,7 @@ const ArmyListBoxHeader = () => {
           value={AC.armyName}
           InputProps={{
             style: {
+              fontFamily: "NotMaryKate",
               fontSize: "20px",
               fontWeight: "bold",
               pading: "50px",
@@ -65,6 +74,7 @@ const ArmyListBoxHeader = () => {
           value={AC.armyName}
           InputProps={{
             style: {
+              fontFamily: "NotMaryKate",
               fontSize: "20px",
               fontWeight: "bold",
               pading: "50px",
