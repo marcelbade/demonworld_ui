@@ -14,7 +14,6 @@ import { ItemContext } from "../../../../../../../contexts/itemContext";
 import { TournamentRulesContext } from "../../../../../../../contexts/tournamentRulesContext";
 
 const UnitElementButtons = (props) => {
-  // eslint-disable-next-line no-unused-vars
   const SFC = useContext(SecondSubFactionContext);
   const IC = useContext(ItemContext);
   const RC = useContext(RightMenuContext);
@@ -54,7 +53,7 @@ const UnitElementButtons = (props) => {
         RC.closeItemShop();
         break;
       default:
-        throw Error("rightMenuController function received invalid menu parameter");
+        throw Error("rightMenuController function received invalid menu parameter: unknown menu name");
     }
 
     // first click on page (no menu is displayed)
@@ -109,6 +108,7 @@ const UnitElementButtons = (props) => {
     RC.setShowOptionButtons(false);
   }
 
+  // values for buttons
   const buttons = [
     {
       show: true,
