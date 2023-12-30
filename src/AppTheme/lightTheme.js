@@ -50,9 +50,16 @@ const lightTheme = createTheme({
           height: "5em",
           fontFamily: "NotMaryKate",
         },
-      },
-      ":hover": {
-        backgroundColor: "lightGrey",
+        text: {
+          color: "black",
+          width: "15em",
+          padding: "2em",
+          height: "5em",
+          fontFamily: "NotMaryKate",
+          ":hover": {
+            backgroundColor: "lightGrey",
+          },
+        },
       },
     },
     MuiListItemText: {
@@ -73,6 +80,18 @@ const lightTheme = createTheme({
         },
       },
     },
+    MuiListItemText: {
+      styleOverrides: {
+        primary: {
+          fontFamily: "jaapokkiRegular",
+          fontSize: "1.2em",
+        },
+        secondary: {
+          fontFamily: "jaapokkiRegular",
+        },
+      },
+    },
+
     MuiAccordionDetails: {
       root: {
         fontFamily: "jaapokkiRegular",
@@ -80,12 +99,20 @@ const lightTheme = createTheme({
     },
     MuiAutocomplete: {
       styleOverrides: {
-        groupLabel: {
-          fontFamily: "jaapokkiRegular",
-        },
+        input: {
+          fontFamily: "NotMaryKate",
+          fontSize: "1.5em",
+         },
+         listbox: {
+          fontFamily: "NotMaryKate",
+         },
         root: {
-          fontFamily: "jaapokkiRegular",
+            paddingBottom: "1.2em",
         },
+        label: {
+          fontFamily: "NotMaryKate",
+          fontSize: "1.5em",
+        }
       },
     },
   },
