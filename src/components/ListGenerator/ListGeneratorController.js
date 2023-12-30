@@ -31,6 +31,7 @@ import { NONE } from "../../constants/factions";
 import { NO_ALLY } from "../../constants/factions";
 import ArmySelector from "./ArmySelectorView/ArmySelector";
 import CustomIcon from "../shared/statCards/CustomIcon";
+import customStyledErrorMessage from "../../AppTheme/notiStackTheme";
 
 const useStyles = makeStyles((theme) => ({
   displayBox: {
@@ -342,9 +343,12 @@ const ListGeneratorController = () => {
                         setListOfAllFactionUnits: setListOfAllFactionUnits,
                         setSubFactionDTOs: setSubFactionDTOs,
                         // setListofAlternativeSubFactions: setListofAlternativeSubFactions
-                      }}
+                      }}  
                     >
                       <SnackbarProvider
+                        Components={{
+                          error: customStyledErrorMessage,
+                        }}
                         preventDuplicate
                         maxSnack={3}
                         TransitionComponent={Fade}
