@@ -11,6 +11,7 @@ const useStyles = makeStyles({
   invalidUnitEntryStyle: {
     color: "red",
     width: "40%",
+    fontFamily: "jaapokkiRegular",
   },
   pointsAndSecondSubFaction: {
     display: "flex",
@@ -57,7 +58,7 @@ const ArmyListUnitEntry = (props) => {
             <span>{props.unit.unitName}</span>
           ) : (
             <Grid container direction="row" alignItems="center">
-              <Typography className={classes.invalidUnitEntryStyle}> {props.unit.unitName} </Typography>
+              <Typography variant="button" className={classes.invalidUnitEntryStyle}> {props.unit.unitName} </Typography>
               <ContextHelpButton message={testForSecondSubFaction.message} />
             </Grid>
           )
