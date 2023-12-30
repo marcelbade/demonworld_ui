@@ -27,7 +27,7 @@ export const ALTERNATIVE_ARMY_SELECTION_TEXT = {
 
 // SECOND SUB_FACTION
 export const ARMIES_ADDITIONAL_SUBFACTIONS = [THAIN];
-export const ARMIES_ADDITIONAL_SUBFACTIONS_BUTTON_CAPTION = [
+export const ARMIES_ADDITIONAL_SUBFACTIONS_MAPPING = [
   {
     army: THAIN,
     secondSubFactionList: ["Eberstamm", "Bärenstamm", "Wolfsstamm", "Berglöwenstamm", "Adlerstamm"],
