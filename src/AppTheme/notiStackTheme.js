@@ -4,6 +4,7 @@ import { MaterialDesignContent } from "notistack";
 const customStyledErrorMessage = styled(MaterialDesignContent)(() => ({
   "&.notistack-MuiContent-error": {
     fontFamily: "jaapokkiRegular",
+    fontSize: "1.2em",
   },
 }));
 
