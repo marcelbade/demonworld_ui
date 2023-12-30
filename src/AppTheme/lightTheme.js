@@ -62,14 +62,6 @@ const lightTheme = createTheme({
         },
       },
     },
-    MuiListItemText: {
-      primary: {
-        fontFamily: "jaapokkiRegular",
-      },
-      secondary: {
-        fontFamily: "jaapokkiRegular",
-      },
-    },
     MuiListItemButton: {
       styleOverrides: {
         root: {
@@ -102,17 +94,17 @@ const lightTheme = createTheme({
         input: {
           fontFamily: "NotMaryKate",
           fontSize: "1.5em",
-         },
-         listbox: {
+        },
+        listbox: {
           fontFamily: "NotMaryKate",
-         },
+        },
         root: {
-            paddingBottom: "1.2em",
+          paddingBottom: "1.2em",
         },
         label: {
           fontFamily: "NotMaryKate",
           fontSize: "1.5em",
-        }
+        },
       },
     },
   },
