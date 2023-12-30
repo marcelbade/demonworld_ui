@@ -2,7 +2,7 @@
 import React, { useContext } from "react";
 //Material UI
 import { Button, Grid, ButtonGroup, Typography, IconButton } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
 // icons
 import CancelIcon from "@mui/icons-material/Cancel";
 // components and functions
@@ -10,36 +10,31 @@ import { SecondSubFactionContext } from "../../../../../contexts/secondSubFactio
 import { ItemContext } from "../../../../../contexts/itemContext";
 import { SelectionContext } from "../../../../../contexts/selectionContext";
 import { RightMenuContext } from "../../../../../contexts/rightMenuContext";
+import useArmyValidation from "../../../../../customHooks/UseArmyValidation";
+import { ArmyContext } from "../../../../../contexts/armyContext";
+import { AlternativeListContext } from "../../../../../contexts/alternativeListContext";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   overlay: {
     height: "100vh",
     width: "30vw",
   },
-  panelButtonBox: {},
-  buttons: {
-    fontWeight: "bold",
-    border: "none",
-  },
-  currentlySelected: {
-    fontWeight: "bold",
-    border: "none",
-    backgroundColor: "lightgrey",
-    color: "red",
-  },
   unitName: {
-    fontWeight: "bold",
     borderBottom: "solid 4px black",
     marginBottom: "1em",
   },
-});
+}));
 
 const SecondSubFactionMenu = () => {
   const classes = useStyles();
-  const SFC = useContext(SecondSubFactionContext);
+  const AC = useContext(ArmyContext);
+  const ALC = useContext(AlternativeListContext);
   const IC = useContext(ItemContext);
   const SEC = useContext(SelectionContext);
+  const SFC = useContext(SecondSubFactionContext);
   const RC = useContext(RightMenuContext);
+
+  const validation = useArmyValidation();
 
   /**
    * Function takes the selected unit from the list, sets a new value for
@@ -64,12 +59,12 @@ const SecondSubFactionMenu = () => {
           onClick={() => {
             RC.closeSecondSubFactionMenu();
           }}
-          size="large">
+          size="large"
+        >
           <CancelIcon />
         </IconButton>
       </Grid>
       <Grid item container direction="row" justifyContent="center">
-        {/*UNIT NAME */}
         <Grid item xs={9}>
           <Typography variant="h5" align="center" className={classes.unitName}>
             {IC.unitSelectedForShop.unitName}
@@ -77,28 +72,29 @@ const SecondSubFactionMenu = () => {
         </Grid>
       </Grid>
       <Grid item container direction="row" justifyContent="center">
-        {/* PANEL BUTTONS */}
         <ButtonGroup size="large" orientation="vertical">
           {SFC.secondSubFactionList.map((ssf) => {
             return ssf === IC.unitSelectedForShop.secondSubFaction ? (
               <Button
-                disabled={true}
-                className={classes.currentlySelected}
+                disabled={true} //
                 variant="text"
                 key={ssf}
-                onClick={() => {
-                  setSecondSubFactionInArmyList(IC.unitSelectedForShop, ssf);
-                }}
               >
                 {ssf}
               </Button>
             ) : (
               <Button
-                className={classes.buttons}
                 variant="text"
                 key={ssf}
                 onClick={() => {
                   setSecondSubFactionInArmyList(IC.unitSelectedForShop, ssf);
+                  // immediately re-evaluate list so the unit is shown correctly
+                  validation.validateList(
+                    SEC.selectedUnits, //
+                    SEC.maxPointsAllowance,
+                    AC.subFactions,
+                    ALC.armyHasAlternativeLists
+                  );
                 }}
               >
                 {ssf}

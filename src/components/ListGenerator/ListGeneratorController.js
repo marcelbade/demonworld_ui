@@ -96,22 +96,26 @@ const ListGeneratorController = () => {
   // intialize local states
   const [fetchedFactions, setFetchedFactions] = useState([]);
   const [fetchedItems, setFetchedItems] = useState([]);
+
   // army name
   const [armyName, setArmyName] = useState("");
+
   // selected faction
   const [selectedFactionName, setSelectedFactionName] = useState(NONE);
   const [distinctSubFactions, setDistinctSubFactions] = useState([]);
   const [listOfAllFactionUnits, setListOfAllFactionUnits] = useState([]);
   const [subFactionDTOs, setSubFactionDTOs] = useState([]);
-
   const [selectedUnits, setSelectedUnits] = useState([]);
+
   // maximum point allowance
   const [maxPointsAllowance, setMaxPointsAllowance] = useState(2000);
+
   // allied faction
   const [allyName, setAllyName] = useState(NO_ALLY);
   const [distinctAllySubFactions, setDistinctAllySubFactions] = useState([]);
   const [listOfAlliedUnits, setListOfAlliedUnits] = useState([]);
   const [allySubFactionDTOs, setAllySubFactionDTOs] = useState([]);
+
   // validation
   const [listValidationResults, setListValidationResults] = useState({
     unitsBlockedbyRules: [],
@@ -128,6 +132,7 @@ const ListGeneratorController = () => {
     maxNumber: 2,
     uniquesOnlyOnce: true,
   });
+
   // alternative lists
   const [armyHasAlternativeLists, setArmyHasAlternativeLists] = useState(false);
   const [numberOfAlternativeChoices, setNumberOfAlternativeChoices] = useState(0);
@@ -135,17 +140,20 @@ const ListGeneratorController = () => {
   const [alternateListSubFactions, setAlternateListSubFactions] = useState([]);
   const [altArmyListSelectionComplete, setAltArmyListSelectionComplete] = useState(false);
   const [allyIsAlternativeOption, setAllyIsAlternativeOption] = useState(false);
-  // additional subFactions - currently only important for the Thain army!
+
+  // additional subFactions - currently only important for the Thain faction!
   const [hasAdditionalSubFaction, setHasAdditionalSubFaction] = useState(false);
-  const [secondSubFactionList, setSecondSubFactionList] = useState(false);
+  const [secondSubFactionList, setSecondSubFactionList] = useState([]);
   const [secondSubfactionCaption, setSecondSubfactionCaption] = useState("");
-  const [excemptSubFactions, setExcemptSubFactions] = useState("");
+  const [excemptSubFactions, setExcemptSubFactions] = useState([]);
+
   // second SubFaction Menu view
   const [secondSubFactionMenuState, setSecondSubFactionMenuState] = useState({
     clickedUnit: {},
     lastclickedUnit: {},
     show: false,
   });
+
   // item shop
   const [allEquippedItems, setAllEquippedItems] = useState([]);
   const [itemShopState, setItemShopState] = useState({
@@ -154,6 +162,7 @@ const ListGeneratorController = () => {
     show: false,
   });
   const [unitSelectedForShop, setUnitSelectedForShop] = useState({});
+
   // unit card view
   const [statCardState, setStatCardState] = useState({
     clickedUnit: {},

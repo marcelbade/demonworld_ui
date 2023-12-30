@@ -1,21 +1,13 @@
 // React
-import React, { Fragment, useContext, useEffect } from "react";
+import React, { Fragment, useContext } from "react";
 // Material UI
-import { ListItemText, Tooltip } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
+import { Grid, ListItemText, Typography } from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
 // components and functions
-import { ArmyContext } from "../../../../../../../contexts/armyContext";
 import { ValidationContext } from "../../../../../../../contexts/validationContext";
-// constants
-import { ARMIES_ADDITIONAL_SUBFACTIONS } from "../../../../../../../constants/factions";
+import ContextHelpButton from "../../../../../../shared/ContextHelpButton";
 
 const useStyles = makeStyles({
-  text: {
-    width: "40%",
-  },
-  validUnitEntryStyle: {
-    width: "40%",
-  },
   invalidUnitEntryStyle: {
     color: "red",
     width: "40%",
@@ -23,34 +15,27 @@ const useStyles = makeStyles({
   pointsAndSecondSubFaction: {
     display: "flex",
     flexDirection: "column",
+    fontSize: "1.2em",
   },
 });
 
 const ArmyListUnitEntry = (props) => {
-  // eslint-disable-next-line no-unused-vars
   const classes = useStyles();
-  const AC = useContext(ArmyContext);
   const VC = useContext(ValidationContext);
-
-
-
-  // TODO reworkt his into the hook!
-  useEffect(() => {
-    if (ARMIES_ADDITIONAL_SUBFACTIONS.includes(AC.factionName)) {
-      isSecondSubFactionsValid();
-    }
-  }, [VC.listValidationResults.secondSubFactionMissing]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * Function validates that the second subFaction has been selected. Is only called for those armies that require it.
    */
   const isSecondSubFactionsValid = () => {
+    let result = { isValid: true, message: "" };
+
     VC.listValidationResults.secondSubFactionMissing.forEach((u) => {
       if (u.unitWithOutSecondSubFaction === props.unit.unitName) {
-        props.unit.secondSubFaction.hasSecondSubFaction = false;
-        props.unit.secondSubFaction.errorMessage = u.message;
+        result = { isValid: false, message: u.message };
       }
     });
+
+    return result;
   };
 
   /**
@@ -58,27 +43,28 @@ const ArmyListUnitEntry = (props) => {
    * @returns an html element with the secondSubFaction property or null.
    */
   const showSecondSubFaction = () => {
-    return props.unit.subFaction !== props.unit.secondSubFaction ? <span>{props.unit.secondSubFaction} </span> : null;
+    return props.unit.subFaction !== props.unit.secondSubFaction;
   };
+
+  const testForSecondSubFaction = isSecondSubFactionsValid();
 
   return (
     <Fragment>
       <ListItemText
         key={props.unit.secondSubFaction}
         primary={
-          props.unit.secondSubFaction.hasSecondSubFaction ? (
-            <span className={classes.validUnitEntryStyle}>{props.unit.unitName}</span>
+          testForSecondSubFaction.isValid ? (
+            <span>{props.unit.unitName}</span>
           ) : (
-
-            //TODO  title = undefined
-            <Tooltip title={props.unit.secondSubFaction.errorMessage}>
-              <span className={classes.invalidUnitEntryStyle}>{props.unit.unitName}</span>
-            </Tooltip>
+            <Grid container direction="row" alignItems="center">
+              <Typography className={classes.invalidUnitEntryStyle}> {props.unit.unitName} </Typography>
+              <ContextHelpButton message={testForSecondSubFaction.message} />
+            </Grid>
           )
         }
         secondary={
           <span className={classes.pointsAndSecondSubFaction}>
-            {showSecondSubFaction()}
+            {showSecondSubFaction() ? <span>{props.unit.secondSubFaction} </span> : null}
             <span className={classes.text}>{props.unit.points}</span>
           </span>
         }

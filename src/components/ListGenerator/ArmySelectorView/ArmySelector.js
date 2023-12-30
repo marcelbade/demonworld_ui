@@ -7,7 +7,7 @@ import { ItemContext } from "../../../contexts/itemContext";
 import {
   ALL_FACTIONS_ARRAY,
   ARMIES_ADDITIONAL_SUBFACTIONS,
-  ARMIES_ADDITIONAL_SUBFACTIONS_BUTTON_CAPTION, //
+  ARMIES_ADDITIONAL_SUBFACTIONS_MAPPING, //
   NO_ALLY,
 } from "../../../constants/factions";
 import { INPUT_TEXTS } from "../../../constants/textsAndMessages";
@@ -69,14 +69,13 @@ const ArmySelector = () => {
     }
 
     if (ARMIES_ADDITIONAL_SUBFACTIONS.includes(factionObj.factionName)) {
-      const result = ARMIES_ADDITIONAL_SUBFACTIONS_BUTTON_CAPTION.filter((e) => e.army === factionObj.factionName);
+      const result = ARMIES_ADDITIONAL_SUBFACTIONS_MAPPING.filter((e) => e.army === factionObj.factionName);
 
       SFC.setHasAdditionalSubFaction(true);
+
       SFC.setSecondSubfactionCaption(result[0].caption);
       SFC.setExcemptSubFactions(result[0].excemptSubFactions);
       SFC.setSecondSubFactionList(result[0].secondSubFactionList);
-    } else {
-      SFC.setHasAdditionalSubFaction(false);
     }
   };
 
@@ -107,6 +106,7 @@ const ArmySelector = () => {
     ALC.setAlternateListSubFactions([]);
     ALC.setArmyHasAlternativeLists(false);
     ALC.setAltArmyListSelectionComplete(false);
+    SFC.setHasAdditionalSubFaction(false);
 
     VC.setListValidationResults({
       ...VC.listValidationResults,
