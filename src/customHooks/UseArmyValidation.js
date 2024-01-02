@@ -21,7 +21,7 @@ const useArmyValidation = () => {
 
   const validateList = (currentList, currentTotalPointAllowance, currentSubFactions, hasAlternativeLists) => {
     const IsFactionSelected = AC.selectedFactionName !== NONE && AC.selectedFactionName !== undefined;
-    const isAlternativeListSelected = ALC.selectedAlternativeList !== NONE;
+    const isAlternativeListSelected = ALC.selectedAlternativeList.length !== 0;
 
     if (
       (IsFactionSelected && hasAlternativeLists && isAlternativeListSelected) || //
@@ -91,9 +91,9 @@ const useArmyValidation = () => {
   const returnValidationResult = (type, payload, factionOrAlly) => {
     switch (type) {
       case "subFaction":
-        return scanSubFaction(payload);
+        return testSubFaction(payload);
       case "unit":
-        return scanUnit(payload, factionOrAlly);
+        return testUnit(payload, factionOrAlly);
       default:
         throw new Error("returnValidationResult() received an invalid type parameter");
     }
@@ -101,15 +101,15 @@ const useArmyValidation = () => {
 
   /**
    * Function tests if a subFaction is valid.
-   * @param {obj} payload
+   * @param {obj} subFactionName
    * @returns validation result object.
    */
-  const scanSubFaction = (payload) => {
-    let validationResult = { subFactionName: payload, valid: true, validationMessage: "" };
+  const testSubFaction = (subFactionName) => {
+    let validationResult = { subFactionName: subFactionName, valid: true, validationMessage: "" };
 
     VC.listValidationResults.subFactionBelowMinimum.forEach((sF) => {
-      if (sF.subFactionUnderMinimum.includes(payload)) {
-        validationResult = { subFactionName: payload, valid: false, validationMessage: sF.message };
+      if (sF.subFactionUnderMinimum.includes(subFactionName)) {
+        validationResult = { subFactionName: subFactionName, valid: false, validationMessage: sF.message };
       }
     });
 
@@ -121,8 +121,9 @@ const useArmyValidation = () => {
    * @param {obj} payload
    * @returns validation result object.
    */
-  const scanUnit = (payload, factionOrAlly) => {
+  const testUnit = (payload, factionOrAlly) => {
     let validationResult = { unit: payload, valid: true, validationMessage: "" };
+
     const factionBlockList = VC.listValidationResults.unitsBlockedbyRules;
     const alliedBlockList = VC.listValidationResults.alliedUnitsBlockedbyRules;
 
