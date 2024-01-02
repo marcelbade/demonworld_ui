@@ -2,7 +2,7 @@
 import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 // Material UI
-import { Grid, Button, IconButton, Tooltip, Typography, Fade } from "@mui/material";
+import { Grid, Button, Fade } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
 // context
 import { ArmyContext } from "../../../../../contexts/armyContext";
@@ -12,10 +12,7 @@ import { SelectionContext } from "../../../../../contexts/selectionContext";
 import { OPTIONS } from "../../../../../constants/textsAndMessages";
 // components and functions
 import { filterForSubFaction } from "../../../ListGeneratorFunctions";
-import { LightSwitchContext } from "../../../../../contexts/lightSwitchContext";
-// icons
-import BrightnessHighIcon from "@mui/icons-material/BrightnessHigh";
-import Brightness4Icon from "@mui/icons-material/Brightness4";
+import LightSwitch from "../../../../shared/LightSwitch";
 
 const useStyles = makeStyles({
   overlay: {
@@ -35,7 +32,6 @@ const OptionButtons = () => {
   const AC = useContext(ArmyContext);
   const TC = useContext(TournamentRulesContext);
   const SEC = useContext(SelectionContext);
-  const LC = useContext(LightSwitchContext);
 
   const history = useHistory();
   const [showPdfVariantButtons, setShowPdfVariantButtons] = useState();
@@ -83,13 +79,10 @@ const OptionButtons = () => {
     // Call REST
   };
 
-  const toggleDarkMode = () => {
-    LC.setDarkModeOff((prevState) => !prevState);
-  };
-
-  const dispablePdfButton = () => {
-    return AC.disableOptionButtons || !showPdfVariantButtons;
-  };
+  // TODO finish this!
+  // const disablePdfButton = () => {
+  //   return AC.disableOptionButtons || !showPdfVariantButtons;
+  // };
 
   const buttons = [
     {
@@ -152,24 +145,13 @@ const OptionButtons = () => {
 
   return (
     <Grid container direction="column" alignItems="flex-start" spacing={4} className={classes.overlay}>
-      <Grid item>
-        <Tooltip title={<Typography>{OPTIONS.LIGHT_SWITCH}</Typography>}>
-          <IconButton
-            onClick={() => {
-              toggleDarkMode();
-            }}
-          >
-            {LC.darkModeOff ? <Brightness4Icon /> : <BrightnessHighIcon />}
-          </IconButton>
-        </Tooltip>
-      </Grid>
+      <LightSwitch />
 
       {buttons.map((bttn, i) => (
         <Grid item key={i}>
           {bttn.display ? (
             <Fade in={true}>
               <Button
-                // className={classes.button}
                 variant="outlined" //
                 disabled={bttn.disabled}
                 onClick={bttn.action}
