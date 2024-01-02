@@ -13,13 +13,13 @@ import { AlternativeListContext } from "../../../../../contexts/alternativeListC
 import { GENERAL_ERRRORS, INPUT_TEXTS, TEXTS } from "../../../../../constants/textsAndMessages";
 
 const useStyles = makeStyles((theme) => ({
-  total: {
-    fontSize: "20px",
-    fontWeight: "bold",
-    paddingRight: "5px",
-    position: "relative",
-    top: 3,
-  },
+  // total: {
+  //   fontSize: "20px",
+  //   fontWeight: "bold",
+  //   paddingRight: "5px",
+  //   position: "relative",
+  //   top: 3,
+  // },
 }));
 
 const ArmyListBoxFooter = () => {
@@ -51,7 +51,7 @@ const ArmyListBoxFooter = () => {
     <Fragment>
       <Grid container direction="column">
         <Grid container direction="row">
-          <Typography className={classes.total}>
+          <Typography variant="subtitle1">
             {INPUT_TEXTS.TOTAL_POINTS} {netPoints} /
           </Typography>
           <TextField
@@ -74,7 +74,7 @@ const ArmyListBoxFooter = () => {
             variant="standard"
           />
         </Grid>
-        <Typography className={classes.total}>
+        <Typography variant="subtitle1">
           {TEXTS.SCOUTING_FACTOR} {calculateScoutingFactor(SEC.selectedUnits ? SEC.selectedUnits : [])}
         </Typography>
       </Grid>
