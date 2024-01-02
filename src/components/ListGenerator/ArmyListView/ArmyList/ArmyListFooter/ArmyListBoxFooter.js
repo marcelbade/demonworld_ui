@@ -10,7 +10,7 @@ import useArmyValidation from "../../../../../customHooks/UseArmyValidation";
 import { calculateTotalPointCost } from "../../../../../util/utilityFunctions";
 import { AlternativeListContext } from "../../../../../contexts/alternativeListContext";
 // constants
-import { GENERAL_ERRRORS, TEXTS } from "../../../../../constants/textsAndMessages";
+import { GENERAL_ERRRORS, INPUT_TEXTS, TEXTS } from "../../../../../constants/textsAndMessages";
 
 const useStyles = makeStyles((theme) => ({
   total: {
@@ -51,7 +51,9 @@ const ArmyListBoxFooter = () => {
     <Fragment>
       <Grid container direction="column">
         <Grid container direction="row">
-          <Typography className={classes.total}>Gesamtpunktzahl: {netPoints} / </Typography>
+          <Typography className={classes.total}>
+            {INPUT_TEXTS.TOTAL_POINTS} {netPoints} /
+          </Typography>
           <TextField
             id="totalPointValue"
             autoComplete="off"
@@ -63,7 +65,7 @@ const ArmyListBoxFooter = () => {
                 pading: "50px",
                 width: "130px",
               },
-              endAdornment: <InputAdornment position="end">Punkte</InputAdornment>,
+              endAdornment: <InputAdornment position="end">{INPUT_TEXTS.POINTS}</InputAdornment>,
             }}
             onChange={changeMaximumPointValue}
             required
