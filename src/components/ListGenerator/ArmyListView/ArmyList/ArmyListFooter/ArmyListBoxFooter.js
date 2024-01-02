@@ -1,6 +1,5 @@
 // React
 import React, { useState, useContext, Fragment } from "react";
-import makeStyles from "@mui/styles/makeStyles";
 import { Typography, TextField, InputAdornment, Grid } from "@mui/material";
 // components and functions
 import { ArmyContext } from "../../../../../contexts/armyContext";
@@ -12,18 +11,7 @@ import { AlternativeListContext } from "../../../../../contexts/alternativeListC
 // constants
 import { GENERAL_ERRRORS, INPUT_TEXTS, TEXTS } from "../../../../../constants/textsAndMessages";
 
-const useStyles = makeStyles((theme) => ({
-  // total: {
-  //   fontSize: "20px",
-  //   fontWeight: "bold",
-  //   paddingRight: "5px",
-  //   position: "relative",
-  //   top: 3,
-  // },
-}));
-
 const ArmyListBoxFooter = () => {
-  const classes = useStyles();
   const AC = useContext(ArmyContext);
   const ALC = useContext(AlternativeListContext);
   const SEC = useContext(SelectionContext);
