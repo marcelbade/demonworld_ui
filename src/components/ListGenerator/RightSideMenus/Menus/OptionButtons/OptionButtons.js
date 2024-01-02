@@ -13,6 +13,7 @@ import { OPTIONS } from "../../../../../constants/textsAndMessages";
 // components and functions
 import { filterForSubFaction } from "../../../ListGeneratorFunctions";
 import LightSwitch from "../../../../shared/LightSwitch";
+import ChoosePdfType from "./ChoosePdfType";
 
 const useStyles = makeStyles({
   overlay: {
@@ -34,7 +35,7 @@ const OptionButtons = () => {
   const SEC = useContext(SelectionContext);
 
   const history = useHistory();
-  const [showPdfVariantButtons, setShowPdfVariantButtons] = useState();
+  const [showPdfVariantButtons, setShowPdfVariantButtons] = useState(false);
 
   /**
    * Function graps the current army list as an object, stores it in the history object and naviagat3s to the LossCalculator component.
@@ -79,40 +80,23 @@ const OptionButtons = () => {
     // Call REST
   };
 
-  // TODO finish this!
-  // const disablePdfButton = () => {
-  //   return AC.disableOptionButtons || !showPdfVariantButtons;
-  // };
+  const disablePdfButton = () => {
+    return AC.disableOptionButtons || !showPdfVariantButtons;
+  };
+
+  console.log("showPdfVariantButtons");
+  console.log(showPdfVariantButtons);
 
   const buttons = [
     {
-      disabled: false, //dispablePdfButton(),
+      display: disablePdfButton(),
       action: () => {
         setShowPdfVariantButtons(true);
       },
       text: OPTIONS.CREATE_PDF,
-      display: true,
     },
-
-    //TODO what pdf type to display?
-
     {
-      disabled: false,
-      action: () => {
-        openPDfInNewTab({ printDefaultList: true });
-        setShowPdfVariantButtons(false);
-      },
-      text: OPTIONS.CREATE_DEFAULT_LIST,
-      display: showPdfVariantButtons,
-    },
-
-    {
-      disabled: false,
-      action: () => {
-        openPDfInNewTab({ printDefaultList: false });
-        setShowPdfVariantButtons(false);
-      },
-      text: OPTIONS.CREATE_DETAILED_LIST,
+      isComplexElement: true,
       display: showPdfVariantButtons,
     },
 
@@ -150,7 +134,7 @@ const OptionButtons = () => {
       {buttons.map((bttn, i) => (
         <Grid item key={i}>
           {bttn.display ? (
-            <Fade in={true}>
+            // <Fade in={true}>
               <Button
                 variant="outlined" //
                 disabled={bttn.disabled}
@@ -158,7 +142,14 @@ const OptionButtons = () => {
               >
                 {bttn.text}
               </Button>
-            </Fade>
+            // </Fade>
+          ) : null}
+          {bttn.isComplexElement ? (
+            <ChoosePdfType
+              openPDfInNewTab={openPDfInNewTab} //
+              setShowPdfVariantButtons={setShowPdfVariantButtons}
+              display={bttn.display}
+            />
           ) : null}
         </Grid>
       ))}
