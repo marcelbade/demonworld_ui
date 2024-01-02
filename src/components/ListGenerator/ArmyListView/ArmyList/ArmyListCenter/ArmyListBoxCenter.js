@@ -46,6 +46,7 @@ const ArmyListBoxCenter = () => {
         <ArmyListSubFactionEntry
           key={AYC.allyName} //
           subFaction={AYC.allyName}
+          valid={true}
           units={filterUnitsForSubFaction(AYC.allyName)}
         />
       ) : null}
