@@ -84,9 +84,6 @@ const OptionButtons = () => {
     return AC.disableOptionButtons || !showPdfVariantButtons;
   };
 
-  console.log("showPdfVariantButtons");
-  console.log(showPdfVariantButtons);
-
   const buttons = [
     {
       display: disablePdfButton(),
@@ -97,7 +94,6 @@ const OptionButtons = () => {
     },
     {
       isComplexElement: true,
-      display: showPdfVariantButtons,
     },
 
     {
@@ -128,13 +124,13 @@ const OptionButtons = () => {
   ];
 
   return (
-    <Grid container direction="column" alignItems="flex-start" spacing={4} className={classes.overlay}>
+    <Grid container direction="column" alignItems="center" spacing={4} className={classes.overlay}>
       <LightSwitch />
 
       {buttons.map((bttn, i) => (
         <Grid item key={i}>
           {bttn.display ? (
-            // <Fade in={true}>
+            <Fade in={true}>
               <Button
                 variant="outlined" //
                 disabled={bttn.disabled}
@@ -142,13 +138,13 @@ const OptionButtons = () => {
               >
                 {bttn.text}
               </Button>
-            // </Fade>
+            </Fade>
           ) : null}
           {bttn.isComplexElement ? (
             <ChoosePdfType
               openPDfInNewTab={openPDfInNewTab} //
               setShowPdfVariantButtons={setShowPdfVariantButtons}
-              display={bttn.display}
+              display={showPdfVariantButtons}
             />
           ) : null}
         </Grid>
