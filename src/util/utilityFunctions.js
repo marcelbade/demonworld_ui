@@ -1,8 +1,6 @@
 //constants
 import { HERO, MAGE, AUTOMATON, GIANT } from "../constants/unitTypes";
- import StatCard from "../components/shared/statCards/StatCard";
-
-
+import StatCard from "../components/shared/statCards/StatCard";
 
 /**
  * Function checks if a subFaction is an alternative sub faction.
@@ -54,10 +52,6 @@ export const isObjectEmtpy = (obj) => {
     return true;
   }
 };
-
-
-
-
 
 /**
  *  Function controls which kind of stat card (unit or character) is displayed.
@@ -126,8 +120,6 @@ export const unitCardMultiSort = (unitList) => {
 
   return result;
 };
-
- 
 
 export const calculateTotalPointCost = (selectedUnits) => {
   let pointTotal = 0;
