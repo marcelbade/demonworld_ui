@@ -26,6 +26,8 @@ export const GENERAL_ERRRORS = {
 
 export const INPUT_TEXTS = {
   SELECT_FACTION: "Wähle Eine Fraktion.",
+  TOTAL_POINTS: "Gesamtpunktzahl :",
+  POINTS: "Punkte",
 };
 
 export const BUTTON_TEXTS = {
@@ -85,6 +87,7 @@ export const ELVES = {
     OLD_HERO: "Du kannst max. 1 alten Helden pro 5 EInheiten der Ilah Ri oder Thanaril wählen.",
     CENTAURS: "Deine Armeeliste darf zu höchstens 25% aus Einheiten der Zentauren bestehen.",
   },
+
   ERRORS: {
     ILAH_RI_COMMANDER_MESSAGE: "Du musst mindestens einen Ilah Ri Befehlshaber wählen um Einheiten der Ratsarmee aufstellen zu können.",
     TREANTS_CENTAUR: "Die Armee kann nur Baumherren oder Zentauren Einheiten enthalten.",
