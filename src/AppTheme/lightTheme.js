@@ -39,6 +39,9 @@ const lightTheme = createTheme({
         h5: {
           fontFamily: "NotMaryKate",
         },
+        h6: {
+          fontFamily: "jaapokkiRegular",
+        },
       },
     },
     MuiButton: {

@@ -2,13 +2,11 @@
 import React, { useContext } from "react";
 // Material UI
 import { Grid, Typography } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
 import { StateCardContext } from "../../../../../contexts/statCardContext";
 
 const useStyles = makeStyles({
   blackStripe: {
-    fontFamily: "jaapokkiRegular",
-    fontWeight: "bold",
     padding: "10px",
     color: "white",
     backgroundColor: "black",
