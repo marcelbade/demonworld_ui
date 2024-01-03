@@ -2,19 +2,10 @@
 import React, { Fragment } from "react";
 //Material UI
 import { Divider, List } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
 // components and functions
 import EquipmentListEntry from "./EquipmentListEntry";
 
-const useStyles = makeStyles((theme) => ({
-  line: {
-    color: "black",
-  },
-}));
-
 const EquipmentList = (props) => {
-  const classes = useStyles();
-
   /**
    * Function checks, if the unit's equipment list should be displayed.
    * @returns true, if equipment array exists and contains elements.
@@ -30,7 +21,7 @@ const EquipmentList = (props) => {
     <List>
       {doesUnithaveEquipment() ? (
         <Fragment>
-          <Divider variant="middle"   />
+          <Divider variant="middle" />
           {props.unit.equipment.map((e, i) => {
             return (
               <EquipmentListEntry
