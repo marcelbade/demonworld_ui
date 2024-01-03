@@ -1,17 +1,14 @@
 // React
 import React, { Fragment } from "react";
 //Material UI
-import { List } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
+import { Divider, List } from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
 // components and functions
 import EquipmentListEntry from "./EquipmentListEntry";
 
 const useStyles = makeStyles((theme) => ({
   line: {
-    marginTop: "0.5em",
-    marginBottom: "0.5em",
-    borderBottom: "solid black 0.1em",
-    display: "block",
+    color: "black",
   },
 }));
 
@@ -33,7 +30,7 @@ const EquipmentList = (props) => {
     <List>
       {doesUnithaveEquipment() ? (
         <Fragment>
-          <span className={classes.line}></span>
+          <Divider variant="middle"   />
           {props.unit.equipment.map((e, i) => {
             return (
               <EquipmentListEntry
