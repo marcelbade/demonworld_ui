@@ -24,7 +24,7 @@ const RulesToolTip = withStyles({
 
 const useStyles = makeStyles({
   specialRules: {
-    fontFamily: "Beryliumbold",
+    fontFamily: "jaapokkiRegular",
     paddingLeft: "0.5em",
   },
   Icon: {
