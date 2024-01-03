@@ -1,8 +1,7 @@
 // React
 import React, { useContext } from "react";
 //Material UI
-import { Typography, Button, Tooltip, IconButton, Grid } from "@mui/material";
-import Stack from "@mui/material/Stack";
+import { Typography, Tooltip, IconButton, Grid } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
 // icons
 import skullsIcon from "../../../assets/icons/skulls.png";
@@ -18,7 +17,7 @@ import { LossCalcContext } from "../../../contexts/LossCalculatorContext";
 import UnitLossCalculatorButton from "./UnitLossCalculatorButton";
 import CustomIcon from "../../shared/statCards/CustomIcon";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   typographyFont: {
     textAlign: "center",
     marginTop: "0.5em",
@@ -98,7 +97,7 @@ const UnitLossCalcBttnGroup = (props) => {
   const notGreaterThanNumberOfIncrements = () => {
     return props.unit.lossCounter === props.unit.maxCounter;
   };
-  const noGreaterThanNumberOfHitpoints = () => {
+  const notGreaterThanNumberOfHitpoints = () => {
     return props.unit.lossCounter + props.unit.hitpoints > props.unit.maxCounter;
   };
 
@@ -173,7 +172,7 @@ const UnitLossCalcBttnGroup = (props) => {
         tooltipText={LOSS_CALCULATOR.PLUS_1_ELEMENT}
         display={morethanOneElementAndMultipleHP()}
         action={addFullUnit}
-        disableBttn={notGreaterThanNumberOfIncrements() || noGreaterThanNumberOfHitpoints()}
+        disableBttn={notGreaterThanNumberOfIncrements() || notGreaterThanNumberOfHitpoints()}
         icon={<KeyboardDoubleArrowRightIcon />}
       />
 
