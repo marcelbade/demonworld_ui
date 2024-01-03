@@ -1,7 +1,7 @@
 // React
 import React, { useContext } from "react";
 //Material UI
-import { Typography, ButtonGroup, Button, Tooltip, IconButton } from "@mui/material";
+import { Typography, Button, Tooltip, IconButton, Grid } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import makeStyles from "@mui/styles/makeStyles";
 // icons
@@ -25,13 +25,6 @@ const useStyles = makeStyles((theme) => ({
   },
   text: {
     paddingLeft: "1em",
-  },
-  bttn: {
-    width: "1em",
-    height: "4em",
-  },
-  tooltipText: {
-    fontSize: "20px",
   },
   test1: {
     padding: "2em",
@@ -138,6 +131,8 @@ const UnitLossCalcBttnGroup = (props) => {
 
   /**
    * Function checks, if a unit has more than 1 element and more than 1 HP per element.
+   * If so, 2 additional buttons are displayed that allow the user to add or substract
+   * all 1 entire element (with multiple HP) with one click.
    * @returns true, if the unit has multiple elements and HP.
    */
   const morethanOneElementAndMultipleHP = () => {
@@ -145,51 +140,49 @@ const UnitLossCalcBttnGroup = (props) => {
   };
 
   return (
-    <Stack direction="row" justifyContent="center" className={classes.test1} spacing={2}>
-      <ButtonGroup variant="contained">
-        <UnitLossCalculatorButton
-          tooltipText={LOSS_CALCULATOR.MINUS_1_ELEMENT}
-          displayButton={morethanOneElementAndMultipleHP()}
-          action={subtractFullUnit}
-          disablerExpression={notLessThanZero() || notLessThanOneUnit()}
-          icon={<KeyboardDoubleArrowLeftIcon />}
-        />
-        <UnitLossCalculatorButton
-          tooltipText={props.unit.hitpoints > 1 ? LOSS_CALCULATOR.MINUS_1_HP : LOSS_CALCULATOR.MINUS_1_ELEMENT}
-          displayButton={true}
-          action={subtractLoss}
-          disablerExpression={notLessThanZero()}
-          icon={<ChevronLeftIcon />}
-        />
-        <Typography variant="h6" className={classes.typographyFont}>
-          {props.unit.lossCounter}
-        </Typography>
-        <UnitLossCalculatorButton
-          tooltipText={props.unit.hitpoints > 1 ? LOSS_CALCULATOR.PLUS_1_HP : LOSS_CALCULATOR.PLUS_1_ELEMENT}
-          displayButton={true}
-          action={addLoss}
-          disablerExpression={notGreaterThanNumberOfIncrements()}
-          icon={<ChevronRightIcon />}
-        />
-        <UnitLossCalculatorButton
-          tooltipText={LOSS_CALCULATOR.PLUS_1_ELEMENT}
-          displayButton={morethanOneElementAndMultipleHP()}
-          action={addFullUnit}
-          disablerExpression={notGreaterThanNumberOfIncrements() || noGreaterThanNumberOfHitpoints()}
-          icon={<KeyboardDoubleArrowRightIcon />}
-        />
-      </ButtonGroup>
+    <Grid container direction="row" alignItems="center" justifyContent="center" className={classes.test1} spacing={2}>
+      <UnitLossCalculatorButton
+        tooltipText={LOSS_CALCULATOR.MINUS_1_ELEMENT}
+        display={morethanOneElementAndMultipleHP()}
+        action={subtractFullUnit}
+        disableBttn={notLessThanZero() || notLessThanOneUnit()}
+        icon={<KeyboardDoubleArrowLeftIcon />}
+      />
 
-      <Tooltip title={<Typography className={classes.tooltipText}>{displayToolTipUnitLost()}</Typography>}>
+      <UnitLossCalculatorButton
+        tooltipText={props.unit.hitpoints > 1 ? LOSS_CALCULATOR.MINUS_1_HP : LOSS_CALCULATOR.MINUS_1_ELEMENT}
+        display={true}
+        action={subtractLoss}
+        disableBttn={notLessThanZero()}
+        icon={<ChevronLeftIcon />}
+      />
+
+      <Typography variant="h6" className={classes.typographyFont}>
+        {props.unit.lossCounter}
+      </Typography>
+
+      <UnitLossCalculatorButton
+        tooltipText={props.unit.hitpoints > 1 ? LOSS_CALCULATOR.PLUS_1_HP : LOSS_CALCULATOR.PLUS_1_ELEMENT}
+        display={true}
+        action={addLoss}
+        disableBttn={notGreaterThanNumberOfIncrements()}
+        icon={<ChevronRightIcon />}
+      />
+
+      <UnitLossCalculatorButton
+        tooltipText={LOSS_CALCULATOR.PLUS_1_ELEMENT}
+        display={morethanOneElementAndMultipleHP()}
+        action={addFullUnit}
+        disableBttn={notGreaterThanNumberOfIncrements() || noGreaterThanNumberOfHitpoints()}
+        icon={<KeyboardDoubleArrowRightIcon />}
+      />
+
+      <Tooltip title={<Typography variant="h6">{displayToolTipUnitLost()}</Typography>}>
         <IconButton
-          variant="contained"
-          component={Button}
           onClick={() => {
             unitDestroyed();
             allItemsMarkedLost();
           }}
-          className={classes.bttn}
-          size="large"
         >
           <CustomIcon
             icon={skullsIcon} //
@@ -199,7 +192,7 @@ const UnitLossCalcBttnGroup = (props) => {
           />
         </IconButton>
       </Tooltip>
-    </Stack>
+    </Grid>
   );
 };
 
