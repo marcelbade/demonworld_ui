@@ -1,7 +1,6 @@
 @font-face {
   font-family: "BreatheOfFire";
-  src: local("BreatheOfFire"),
-    url("./assets/fonts/BreatheOfFire.ttf") format("truetype");
+  src: local("BreatheOfFire"), url("./assets/fonts/BreatheOfFire.ttf") format("truetype");
   font-weight: normal;
 }
 @font-face {
@@ -15,17 +14,7 @@
   src: local("notMaryKate"), url("./assets/fonts/notMaryKate.ttf") format("truetype");
   font-weight: normal;
 }
-@font-face {
-  font-family: "Berylium";
-  src: local("Berylium"), url("./assets/fonts/Berylium.ttf") format("truetype");
-  font-weight: normal;
-}
-@font-face {
-  font-family: "Beryliumbold";
-  src: local("Beryliumbold"), url("./assets/fonts/Beryliumbold.ttf") format("truetype");
-  font-weight: normal;
-}
- 
+
 @font-face {
   font-family: "jaapokkiRegular";
   src: local("jaapokkiRegular"), url("./assets/fonts/jaapokkiRegular.ttf") format("truetype");
@@ -36,18 +25,15 @@
   src: local("jaapokkienchanceRegular"), url("./assets/fonts/jaapokkienchanceRegular.ttf") format("truetype");
   font-weight: normal;
 }
- 
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }

@@ -4,14 +4,12 @@ import React from "react";
 import { Page, Text, View, Document, Font } from "@react-pdf/renderer";
 // fonts
 import notMaryKate from "../../../assets/fonts/notMaryKate.ttf";
-import Beryliumbold from "../../../assets/fonts/Beryliumbold.ttf";
- // styles
+  // styles
 import styles from "../pdfStyles/listPdfStyles";
 
 // Register font
 Font.register({ family: "notMaryKate", src: notMaryKate });
-Font.register({ family: "Beryliumbold", src: Beryliumbold });
-
+ 
 
 //TODO: refactor this into smaller parts like you did for the detailed list!
 // Create the dynamic PDF content. Due to the limitations of react-pdf, this has to be done via a jerryrigged CSS table.

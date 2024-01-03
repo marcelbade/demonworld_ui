@@ -4,8 +4,7 @@ import React from "react";
 import { Page, View, Document, Font, Text } from "@react-pdf/renderer";
 // fonts
 import notMaryKate from "../../../assets/fonts/notMaryKate.ttf";
-import Beryliumbold from "../../../assets/fonts/Beryliumbold.ttf";
-import jaapokkiRegular from "../../../assets/fonts/jaapokkiRegular.ttf";
+ import jaapokkiRegular from "../../../assets/fonts/jaapokkiRegular.ttf";
 // styles
 import styles from "../pdfStyles/detailedCardPdfStyles";
 // pdf components
@@ -18,8 +17,7 @@ import SubfactionSubtitle from "./detailedCardsComponets/SubfactionSubtitle";
 
 // Register font
 Font.register({ family: "notMaryKate", src: notMaryKate });
-Font.register({ family: "Beryliumbold", src: Beryliumbold });
-Font.register({ family: "jaapokkiRegular", src: jaapokkiRegular });
+ Font.register({ family: "jaapokkiRegular", src: jaapokkiRegular });
 
 const ListPDF = (props) => {
   return (

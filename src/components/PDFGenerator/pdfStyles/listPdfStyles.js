@@ -14,20 +14,20 @@ const styles = {
   },
   tableCol: {
     width: "25%",
-    fontFamily: "Beryliumbold",
+    fontFamily: "jaapokkiRegular",
   },
   tableColSubFactionName: {
     width: "100%",
-    fontFamily: "Beryliumbold",
+    fontFamily: "jaapokkiRegular",
   },
   tableColUnit: {
     width: "15%",
-    fontFamily: "Beryliumbold",
+    fontFamily: "jaapokkiRegular",
   },
 
   tableColEquipment: {
     width: "25%",
-    fontFamily: "Beryliumbold",
+    fontFamily: "jaapokkiRegular",
     borderLeftWidth: 0,
     borderWidth: 1,
     borderBottomWidth: 0,
@@ -50,7 +50,7 @@ const styles = {
     fontSize: 15,
   },
   tableCellUnit: {
-    fontFamily: "Beryliumbold",
+    fontFamily: "jaapokkiRegular",
     margin: "auto",
     textAlign: "left",
     marginTop: 5,
@@ -58,7 +58,7 @@ const styles = {
     fontSize: 10,
   },
   tableCellEquipment: {
-    fontFamily: "Beryliumbold",
+    fontFamily: "jaapokkiRegular",
     margin: "auto",
     textAlign: "left",
     marginTop: 5,
