@@ -2,7 +2,7 @@ import { createTheme } from "@mui/material/styles";
 
 const lightTheme = createTheme({
   palette: {
-    primary: { 500: "#467fcf" },
+    primary: { 500: "#000000" },
     disabled: "grey",
   },
   components: {
@@ -20,18 +20,14 @@ const lightTheme = createTheme({
           fontFamily: "NotMaryKate",
         },
       },
-    },
+    },  
     MuiTypography: {
       styleOverrides: {
         button: {
-          root: {
-            fontFamily: "jaapokkiRegular",
-          },
+          fontFamily: "jaapokkiRegular",
         },
         body1: {
-          root: {
-            fontFamily: "jaapokkiRegular",
-          },
+          fontFamily: "jaapokkiRegular",
         },
         subtitle1: {
           fontFamily: "NotMaryKate",
@@ -46,6 +42,11 @@ const lightTheme = createTheme({
     },
     MuiButton: {
       styleOverrides: {
+        contained: {
+          fontFamily: "NotMaryKate",
+          color: "black",
+        },
+
         outlined: {
           color: "black",
           width: "15em",
