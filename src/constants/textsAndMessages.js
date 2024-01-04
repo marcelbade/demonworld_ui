@@ -218,7 +218,7 @@ export const LOSS_CALCULATOR = {
   LOST_GIANT: "Großelement verloren.",
   UNIT_ROUTED: "Einheit aufgerieben.",
   TEXT_UNITS: "Verlorene Elemente:.",
-  TEXT_SINGLE_ELEMENTS: "Verlorene Lebenspunkte:.",
+  TEXT_SINGLE_ELEMENTS: "Verlorene Lebenspunkte:",
   MINUS_1_HP: "- 1 Lebenspunkt.",
   MINUS_1_ELEMENT: "- 1 Element.",
   PLUS_1_HP: "+ 1 Lebenspunkt.",
