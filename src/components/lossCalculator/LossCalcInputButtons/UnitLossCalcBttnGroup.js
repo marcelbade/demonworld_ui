@@ -1,34 +1,21 @@
 // React
-import React, { useContext } from "react";
+import React, { Fragment, useContext } from "react";
 //Material UI
-import { Typography, Tooltip, IconButton, Grid } from "@mui/material";
+import { Typography } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
 // icons
-import skullsIcon from "../../../assets/icons/skulls.png";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 // constants
-import { GIANT, HERO, MAGE } from "../../../constants/unitTypes";
 import { LOSS_CALCULATOR } from "../../../constants/textsAndMessages";
 // components and functions
 import { LossCalcContext } from "../../../contexts/LossCalculatorContext";
 import UnitLossCalculatorButton from "./UnitLossCalculatorButton";
-import CustomIcon from "../../shared/statCards/CustomIcon";
+import TotalLossButton from "./TotalLossButton";
 
-const useStyles = makeStyles(() => ({
-  typographyFont: {
-    textAlign: "center",
-    marginTop: "0.5em",
-  },
-  text: {
-    paddingLeft: "1em",
-  },
-  test1: {
-    padding: "2em",
-  },
-}));
+const useStyles = makeStyles(() => ({}));
 
 const UnitLossCalcBttnGroup = (props) => {
   const classes = useStyles();
@@ -71,26 +58,6 @@ const UnitLossCalcBttnGroup = (props) => {
   };
 
   /**
-   * Function immediately sets the number of lost elements or hitpoints to the maximum number possible.
-   */
-  const unitDestroyed = () => {
-    let tempArray = [...calcContext.list];
-
-    let unitIndex = tempArray.findIndex((u) => u.uniqueID === props.unit.uniqueID);
-    tempArray[unitIndex].lossCounter = props.unit.maxCounter;
-    tempArray[unitIndex].unitDestroyed = true;
-
-    calcContext.setList([...tempArray]);
-  };
-
-  /**
-   * Function marks all items as lost by setting all flags to true.
-   */
-  const allItemsMarkedLost = () => {
-    props.unit.equipment.forEach((e) => (e.itemLost = true));
-  };
-
-  /**
    * Function prevents the user from choosing a number of lost elements larger than the number of elements or hitpoints the unit has.
    * @returns boolean flag
    */
@@ -112,22 +79,6 @@ const UnitLossCalcBttnGroup = (props) => {
     return props.unit.lossCounter < props.unit.hitpoints;
   };
 
-  const displayToolTipUnitLost = () => {
-    let message;
-
-    if (props.unit.unitType === HERO) {
-      message = LOSS_CALCULATOR.LOST_HERO;
-    } else if (props.unit.unitType === MAGE) {
-      message = LOSS_CALCULATOR.LOST_MAGE;
-    } else if (props.unit.unitType === GIANT) {
-      message = LOSS_CALCULATOR.LOST_GIANT;
-    } else {
-      message = LOSS_CALCULATOR.UNIT_ROUTED;
-    }
-
-    return message;
-  };
-
   /**
    * Function checks, if a unit has more than 1 element and more than 1 HP per element.
    * If so, 2 additional buttons are displayed that allow the user to add or substract
@@ -139,7 +90,7 @@ const UnitLossCalcBttnGroup = (props) => {
   };
 
   return (
-    <Grid container direction="row" alignItems="center" justifyContent="center" className={classes.test1} spacing={2}>
+    <Fragment>
       <UnitLossCalculatorButton
         tooltipText={LOSS_CALCULATOR.MINUS_1_ELEMENT}
         display={morethanOneElementAndMultipleHP()}
@@ -156,9 +107,7 @@ const UnitLossCalcBttnGroup = (props) => {
         icon={<ChevronLeftIcon />}
       />
 
-      <Typography variant="h6" className={classes.typographyFont}>
-        {props.unit.lossCounter}
-      </Typography>
+      <Typography variant="h6">{props.unit.lossCounter}</Typography>
 
       <UnitLossCalculatorButton
         tooltipText={props.unit.hitpoints > 1 ? LOSS_CALCULATOR.PLUS_1_HP : LOSS_CALCULATOR.PLUS_1_ELEMENT}
@@ -175,23 +124,7 @@ const UnitLossCalcBttnGroup = (props) => {
         disableBttn={notGreaterThanNumberOfIncrements() || notGreaterThanNumberOfHitpoints()}
         icon={<KeyboardDoubleArrowRightIcon />}
       />
-
-      <Tooltip title={<Typography variant="h6">{displayToolTipUnitLost()}</Typography>}>
-        <IconButton
-          onClick={() => {
-            unitDestroyed();
-            allItemsMarkedLost();
-          }}
-        >
-          <CustomIcon
-            icon={skullsIcon} //
-            altText={LOSS_CALCULATOR.UNIT_ROUTED}
-            height={40}
-            width={40}
-          />
-        </IconButton>
-      </Tooltip>
-    </Grid>
+    </Fragment>
   );
 };
 
