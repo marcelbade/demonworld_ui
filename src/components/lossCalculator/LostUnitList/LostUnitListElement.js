@@ -51,7 +51,7 @@ const LostUnitListElement = (props) => {
             <EquipmentList unit={props.unit} />
           </Grid>
         </Grid>
-        <Grid item xs={1} sx={{ backgroundColor: "green" }}>
+        <Grid item xs={1}>
           <Typography variant="button">
             {calcContext.isHeroMageOrGiantElement(props.unit) ? LOSS_CALCULATOR.TEXT_SINGLE_ELEMENTS : LOSS_CALCULATOR.TEXT_UNITS}
           </Typography>
@@ -63,7 +63,6 @@ const LostUnitListElement = (props) => {
           alignItems="center"
           justifyContent="center"
           xs={2}
-          sx={{ backgroundColor: "yellow" }}
         >
           <UnitLossCalcBttnGroup unit={props.unit} />
         </Grid>
