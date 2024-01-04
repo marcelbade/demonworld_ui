@@ -20,7 +20,15 @@ const lightTheme = createTheme({
           fontFamily: "NotMaryKate",
         },
       },
-    },  
+    },
+    MuiDivider: {
+      styleOverrides: {
+        root: {
+          background: "black",
+        },
+      },
+    },
+
     MuiTypography: {
       styleOverrides: {
         button: {
@@ -36,7 +44,7 @@ const lightTheme = createTheme({
           fontFamily: "NotMaryKate",
         },
         h6: {
-          fontFamily: "jaapokkiRegular",
+          fontFamily: "NotMaryKate",
         },
       },
     },
