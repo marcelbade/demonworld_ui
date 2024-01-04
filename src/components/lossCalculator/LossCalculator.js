@@ -2,18 +2,33 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 //Material UI
-import { Grid } from "@mui/material";
-// icons
+import { Fade, Grid } from "@mui/material";
+import {makeStyles} from "@mui/styles"
+// notistack
+import { SnackbarProvider } from "notistack";
 // components and functions
 import LossCalcProvider from "../../contexts/LossCalculatorContext";
 import CreateListScreen from "./CreateListScreen";
 import LostPointDisplay from "./LostPointDisplay";
 import ReturnButton from "./ReturnButton";
 import LostUnitList from "./LostUnitList/LostUnitList";
+import customStyledErrorMessage from "../../AppTheme/notiStackTheme";
+import CustomIcon from "../shared/statCards/CustomIcon";
+// icons
+import SpellBookIcon from "../../assets/icons/spellbook-white.png";
+
+const useStyles = makeStyles({
+  pushMessages: {
+    marginRight: "2em",
+    marginBottom: "2em",
+  },
+});
 
 const LossCalculator = () => {
   const history = useHistory();
   const location = useLocation();
+
+  const classes = useStyles();
 
   //state
   const [list, setList] = useState([]);
@@ -26,15 +41,21 @@ const LossCalculator = () => {
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Calculate current total point loss.
   useEffect(() => {
+    calculateCurrentTotalPointLoss();
+  }, [list]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  /**
+   * Function calculates current total point loss.
+   */
+  const calculateCurrentTotalPointLoss = () => {
     const sum = calculatePointLoss();
     setTotalPointsLost(sum);
 
     // mark destroyed units
     let tempArray = [...list];
     tempArray.forEach((u) => setUnitDestroyedFlag(u));
-  }, [list]); // eslint-disable-line react-hooks/exhaustive-deps
+  };
 
   /**
    * Function calculates the net point loss. Loss is calculated as total point cost per lost element plus the cost of every lost item carried by a single lost element.
@@ -122,30 +143,50 @@ const LossCalculator = () => {
   };
 
   return (
-    <LossCalcProvider
-      value={{
-        list: list,
-        setList: setList,
-        setItemIsLostFlag: setItemIsLostFlag,
-        isHeroMageOrGiantElement: isHeroMageOrGiantElement,
+    <SnackbarProvider
+      Components={{
+        error: customStyledErrorMessage,
+      }}
+      preventDuplicate
+      maxSnack={3}
+      TransitionComponent={Fade}
+      iconVariant={{
+        error: (
+          <CustomIcon
+            className={classes.pushMessageIcon} //
+            icon={SpellBookIcon}
+            altText={"Regelbuchtext"}
+            height={35}
+            width={35}
+          />
+        ),
       }}
     >
-      {list.length !== 0 ? (
-        <Grid container direction="row">
-          <Grid container item xs={6} direction="column">
-            <Grid item>
+      <LossCalcProvider
+        value={{
+          list: list,
+          setList: setList,
+          setItemIsLostFlag: setItemIsLostFlag,
+          isHeroMageOrGiantElement: isHeroMageOrGiantElement,
+        }}
+      >
+        {list.length !== 0 ? (
+          <Grid container direction="row">
+            <Grid item xs={1}>
               <ReturnButton navigateToPage={navigateToPage} />
             </Grid>
-            <Grid container item alignItems>
+            <Grid container xs={4} item direction="column">
               <LostUnitList list={list} />
             </Grid>
+            <Grid item xs={6} alignItems="center" justifyContent="flex-start" alignSelf="center">
+              <LostPointDisplay totalPointsLost={totalPointsLost} />
+            </Grid>
           </Grid>
-          <LostPointDisplay totalPointsLost={totalPointsLost} />
-        </Grid>
-      ) : (
-        <CreateListScreen navigateToPage={navigateToPage} />
-      )}
-    </LossCalcProvider>
+        ) : (
+          <CreateListScreen navigateToPage={navigateToPage} />
+        )}
+      </LossCalcProvider>
+    </SnackbarProvider>
   );
 };
 
