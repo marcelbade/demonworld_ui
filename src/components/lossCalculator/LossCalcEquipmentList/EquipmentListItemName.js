@@ -28,14 +28,19 @@ const EquipmentListItemName = (props) => {
   };
 
   return props.notSingleElementItem ? (
-    <Grid container direction="row">
-      <ListItemText secondary={<span> {props.itemName}</span>} />
+    <Grid container direction="row" justifyContent="flex-start">
+      <Grid item xs={4}>
+        <ListItemText
+          primary={<span> {props.itemName}</span>} //
+          secondary={<span> {props.pointCost}</span>}
+        />
+      </Grid>
       <ContextHelpButton message={LOSS_CALCULATOR.NOT_SINGLE_ELEMENT_ITEM_MESSAGE} />
     </Grid>
   ) : (
     <ListItemText
-      primary={<span className={switchCssClass()}>{props.itemName}</span>}
-      secondary={<span className={classes.typographyFont}> {props.pointCost}</span>}
+      primary={<span>{props.itemName}</span>} //
+      secondary={<span> {props.pointCost}</span>}
     />
   );
 };
