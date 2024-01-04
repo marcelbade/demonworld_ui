@@ -2,17 +2,9 @@
 import React from "react";
 //Material UI
 import { Typography, Grid } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
-// clsx
-import clsx from "clsx";
-
-// icons
+import makeStyles from "@mui/styles/makeStyles";
 
 const useStyles = makeStyles((theme) => ({
-  typographyFont: {
-    textAlign: "center",
-    marginTop: "0.5em",
-  },
   text: {
     paddingLeft: "1em",
   },
@@ -30,11 +22,11 @@ const ListElementName = (props) => {
   return (
     <Grid item>
       <Typography
-        variant="button"
+        variant="h6"
         className={
-          props.unitDestroyedd //
-            ? clsx(classes.typographyFont, classes.strikeTroughText)
-            : clsx(classes.typographyFont, classes.text)
+          props.unitDestroyed //
+            ? classes.strikeTroughText
+            : classes.text
         }
       >
         {props.unitName}
