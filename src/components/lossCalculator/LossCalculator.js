@@ -175,10 +175,10 @@ const LossCalculator = () => {
             <Grid item xs={1}>
               <ReturnButton navigateToPage={navigateToPage} />
             </Grid>
-            <Grid container xs={4} item direction="column">
+            <Grid container xs={7} item direction="column">
               <LostUnitList list={list} />
             </Grid>
-            <Grid item xs={6} alignItems="center" justifyContent="flex-start" alignSelf="center">
+            <Grid item xs={4} alignItems="center" justifyContent="flex-start" alignSelf="center">
               <LostPointDisplay totalPointsLost={totalPointsLost} />
             </Grid>
           </Grid>
