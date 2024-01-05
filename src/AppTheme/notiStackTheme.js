@@ -6,6 +6,12 @@ const customStyledMessage = styled(MaterialDesignContent)(() => ({
     fontFamily: "jaapokkiRegular",
     fontSize: "1.2em",
   },
+  "&.notistack-MuiContent-info": {
+    fontFamily: "jaapokkiRegular",
+    fontSize: "1.2em",
+    color: "black",
+    whiteSpace: 'pre-line' 
+  },
 }));
 
 export default customStyledMessage;
