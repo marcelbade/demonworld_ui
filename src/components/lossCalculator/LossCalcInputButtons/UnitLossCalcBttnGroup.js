@@ -2,7 +2,6 @@
 import React, { Fragment, useContext } from "react";
 //Material UI
 import { Typography } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
 // icons
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
@@ -13,12 +12,8 @@ import { LOSS_CALCULATOR } from "../../../constants/textsAndMessages";
 // components and functions
 import { LossCalcContext } from "../../../contexts/LossCalculatorContext";
 import UnitLossCalculatorButton from "./UnitLossCalculatorButton";
-import TotalLossButton from "./TotalLossButton";
-
-const useStyles = makeStyles(() => ({}));
 
 const UnitLossCalcBttnGroup = (props) => {
-  const classes = useStyles();
   const calcContext = useContext(LossCalcContext);
 
   /**
