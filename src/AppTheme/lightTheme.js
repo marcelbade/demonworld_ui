@@ -119,6 +119,14 @@ const lightTheme = createTheme({
         },
       },
     },
+    MuiTooltip: {
+      styleOverrides: {
+        root: {
+          color: "red",
+          fontFamily: "jaapokkiRegular",
+        },
+      },
+    },
   },
 });
 
