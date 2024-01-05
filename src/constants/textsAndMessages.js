@@ -14,7 +14,7 @@ export const OPTIONS = {
   CREATE_DEFAULT_LIST: "Standard Liste Erzeugen",
   CREATE_DETAILED_LIST: "Detailierte Liste Erzeugen",
   CREATE_PDF: "PDF Erzeugen ",
-  LIGHT_SWITCH: "Wechsel zw. Dark und Light Mode",
+  LIGHT_SWITCH: "Wechsel zw. dunklen und hellen Theme",
   SAVE_LIST: "Liste Speichern",
   TO_LOSS_CALCULATOR: "Zum Verlustrechner",
 };
@@ -214,16 +214,7 @@ export const UNDEAD = {
 export const NO_RANGE_WEAPON = "x";
 
 export const LOSS_CALCULATOR = {
-  LOST_HERO: "Held verloren.",
-  LOST_GIANT: "Großelement verloren.",
-  UNIT_ROUTED: "Einheit aufgerieben.",
-  TEXT_UNITS: "Verlorene Elemente:",
-  TEXT_SINGLE_ELEMENTS: "Verlorene Lebenspunkte:",
-  MINUS_1_HP: "- 1 Lebenspunkt.",
-  MINUS_1_ELEMENT: "- 1 Element.",
-  PLUS_1_HP: "+ 1 Lebenspunkt.",
-  PLUS_1_ELEMENT: "+ 1 Element.",
-  LOST_MAGE: "Magier verloren.",
+  LOSS_BUTTON_HELP :"Die Pfeil-Buttons addieren einen Lebenspunkt oder ein Element zu den Verlusten.\n Einheiten mit mehr als einen Element und mehreren Lebenspunkten haben 2 Pfeil-Buttons:\n einen für Lebenspunkte und einen für Elemente.\n Beim Klick auf das Schädel Icon wird die komplette Einheit zu den Verlusten hinzugefügt.",
   NOT_SINGLE_ELEMENT_ITEM_MESSAGE: "Punktkosten sind bereits in den Punktkosten der Elemente enthalten.",
 };
 
@@ -232,7 +223,4 @@ export const PUSH_MESSAGE_TYPES = {
   INFO: "info",
 };
 
-
-export const HELP ={
-  LOSS_BUTTON_HELP :"Die Pfeil-Buttons addieren einen Lebenspunkt oder ein Element zu den Verlusten.\n Einheiten mit mehr als einen Element und mehreren Lebenspunkten haben 2 Pfeil-Buttons:\n einen für Lebenspunkte und einen für Elemente.\n Beim Klick auf das Schädel Icon wird die komplette Einheit zu den Verlusten hinzugefügt."
-}
+ 
