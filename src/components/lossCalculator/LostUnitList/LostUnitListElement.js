@@ -10,8 +10,9 @@ import UnitLossCalcBttnGroup from "../LossCalcInputButtons/UnitLossCalcBttnGroup
 import EquipmentList from "../LossCalcEquipmentList/EquipmentList";
 import ListElementName from "./ListElementName";
 import TotalLossButton from "../LossCalcInputButtons/TotalLossButton";
+import ContextHelpButton from "../../shared/ContextHelpButton";
 // constants
-import { LOSS_CALCULATOR } from "../../../constants/textsAndMessages";
+import { LOSS_CALCULATOR, PUSH_MESSAGE_TYPES } from "../../../constants/textsAndMessages";
 
 const useStyles = makeStyles(() => ({
   borderNormal: {
@@ -59,10 +60,10 @@ const LostUnitListElement = (props) => {
         <Grid
           item
           container
+          xs={2}
           direction="row" //
           alignItems="center"
           justifyContent="center"
-          xs={2}
         >
           <UnitLossCalcBttnGroup unit={props.unit} />
         </Grid>
@@ -75,6 +76,19 @@ const LostUnitListElement = (props) => {
             {/* //TODO   */}
             {calcContext.unitPointsLost}
           </Typography>
+        </Grid>
+        <Grid
+          xs={1}
+          item //
+          direction="column"
+          container
+          justifyContent="flex-end"
+          alignItems="flex-end"
+        >
+          <ContextHelpButton
+            message={LOSS_CALCULATOR.LOSS_BUTTON_HELP} //
+            type={PUSH_MESSAGE_TYPES.INFO}
+          />
         </Grid>
       </Grid>
     </ListItem>
