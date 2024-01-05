@@ -6,6 +6,8 @@ import makeStyles from "@mui/styles/makeStyles";
 // components and functions
 import { ValidationContext } from "../../../../../../../contexts/validationContext";
 import ContextHelpButton from "../../../../../../shared/ContextHelpButton";
+// constants
+import { PUSH_MESSAGE_TYPES } from "../../../../../../../constants/textsAndMessages";
 
 const useStyles = makeStyles({
   invalidUnitEntryStyle: {
@@ -58,8 +60,14 @@ const ArmyListUnitEntry = (props) => {
             <span>{props.unit.unitName}</span>
           ) : (
             <Grid container direction="row" alignItems="center">
-              <Typography variant="button" className={classes.invalidUnitEntryStyle}> {props.unit.unitName} </Typography>
-              <ContextHelpButton message={testForSecondSubFaction.message} />
+              <Typography variant="button" className={classes.invalidUnitEntryStyle}>
+                {" "}
+                {props.unit.unitName}{" "}
+              </Typography>
+              <ContextHelpButton
+                message={testForSecondSubFaction.message} //
+                type={PUSH_MESSAGE_TYPES.ERROR}
+              />
             </Grid>
           )
         }

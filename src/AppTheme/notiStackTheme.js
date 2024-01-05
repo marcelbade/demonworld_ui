@@ -1,11 +1,11 @@
 import { styled } from "@mui/material/styles";
 import { MaterialDesignContent } from "notistack";
 
-const customStyledErrorMessage = styled(MaterialDesignContent)(() => ({
+const customStyledMessage = styled(MaterialDesignContent)(() => ({
   "&.notistack-MuiContent-error": {
     fontFamily: "jaapokkiRegular",
     fontSize: "1.2em",
   },
 }));
 
-export default customStyledErrorMessage;
+export default customStyledMessage;

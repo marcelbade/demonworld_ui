@@ -9,7 +9,7 @@ import { ValidationContext } from "../../../../../contexts/validationContext";
 import { SelectionContext } from "../../../../../contexts/selectionContext";
 import ContextHelpButton from "../../../../shared/ContextHelpButton";
 // constants
-import { TOOLTIPS, VALIDATION } from "../../../../../constants/textsAndMessages";
+import { PUSH_MESSAGE_TYPES, TOOLTIPS, VALIDATION } from "../../../../../constants/textsAndMessages";
 import { NONE } from "../../../../../constants/factions";
 
 const ArmyListBoxHeader = () => {
@@ -97,7 +97,12 @@ const ArmyListBoxHeader = () => {
           <CancelIcon />
         </IconButton>
       </Tooltip>
-      {!VC.listValidationResults.commanderIsPresent ? <ContextHelpButton message={VALIDATION.NO_COMMANDER_WARNING} /> : null}
+      {!VC.listValidationResults.commanderIsPresent ? ( //
+        <ContextHelpButton
+          message={VALIDATION.NO_COMMANDER_WARNING} //
+          type={PUSH_MESSAGE_TYPES.ERROR}
+        />
+      ) : null}
     </Grid>
   );
 };

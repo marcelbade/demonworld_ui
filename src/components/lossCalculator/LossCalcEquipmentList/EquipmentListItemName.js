@@ -6,7 +6,7 @@ import makeStyles from "@mui/styles/makeStyles";
 // component and functions
 import ContextHelpButton from "../../shared/ContextHelpButton";
 // constants
-import { LOSS_CALCULATOR } from "../../../constants/textsAndMessages";
+import { LOSS_CALCULATOR, PUSH_MESSAGE_TYPES } from "../../../constants/textsAndMessages";
 
 const useStyles = makeStyles((theme) => ({
   strikeTroughText: {
@@ -35,7 +35,10 @@ const EquipmentListItemName = (props) => {
           secondary={<span> {props.pointCost}</span>}
         />
       </Grid>
-      <ContextHelpButton message={LOSS_CALCULATOR.NOT_SINGLE_ELEMENT_ITEM_MESSAGE} />
+      <ContextHelpButton
+        message={LOSS_CALCULATOR.NOT_SINGLE_ELEMENT_ITEM_MESSAGE} //
+        type={PUSH_MESSAGE_TYPES.ERROR}
+      />
     </Grid>
   ) : (
     <ListItemText

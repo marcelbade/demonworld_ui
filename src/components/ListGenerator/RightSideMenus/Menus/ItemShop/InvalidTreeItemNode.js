@@ -6,6 +6,7 @@ import { Typography, IconButton, Grid } from "@mui/material";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 // constants
 import ContextHelpButton from "../../../../shared/ContextHelpButton";
+import { PUSH_MESSAGE_TYPES } from "../../../../../constants/textsAndMessages";
 
 const useStyles = makeStyles((theme) => ({
   invalidItem: {
@@ -39,7 +40,10 @@ const InvalidTreeItemNode = (props) => {
         <IconButton size="large" disabled={true}>
           <AddCircleOutlineIcon />
         </IconButton>
-        <ContextHelpButton message={props.message} />
+        <ContextHelpButton
+          message={props.message} //
+          type={PUSH_MESSAGE_TYPES.ERROR}
+        />
       </Grid>
     </Grid>
   );

@@ -2,8 +2,10 @@
 import React from "react";
 import makeStyles from "@mui/styles/makeStyles";
 import { Grid, Typography } from "@mui/material";
- // components and functions
+// components and functions
 import ContextHelpButton from "../../../../../shared/ContextHelpButton";
+// constants
+import { PUSH_MESSAGE_TYPES } from "../../../../../../constants/textsAndMessages";
 
 const useStyles = makeStyles(() => ({
   HeaderValidStyle: {
@@ -22,7 +24,7 @@ const useStyles = makeStyles(() => ({
 
 const ArmyListSubFactionHeader = (props) => {
   const classes = useStyles();
- 
+
   return (
     <Grid container>
       {props.valid ? (
@@ -47,7 +49,10 @@ const ArmyListSubFactionHeader = (props) => {
           >
             {props.subFaction}
           </Typography>
-          <ContextHelpButton message={props.message} />
+          <ContextHelpButton
+            message={props.message} //
+            type={PUSH_MESSAGE_TYPES.ERROR}
+          />
         </Grid>
       )}
     </Grid>

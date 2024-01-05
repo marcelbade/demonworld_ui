@@ -13,7 +13,7 @@ const ContextHelpButton = (props) => {
   return (
     <IconButton
       onClick={() => {
-        pushMessages.showSnackBar(props.message);
+        pushMessages.showSnackBar(props.message, props.type);
       }}
       size="large"
     >

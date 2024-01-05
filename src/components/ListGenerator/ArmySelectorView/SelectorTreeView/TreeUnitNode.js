@@ -10,6 +10,7 @@ import useUnitEnricher from "../../../../customHooks/UseUnitEnricher";
 import { SelectionContext } from "../../../../contexts/selectionContext";
 import { AlternativeListContext } from "../../../../contexts/alternativeListContext";
 import ContextHelpButton from "../../../shared/ContextHelpButton";
+import { PUSH_MESSAGE_TYPES } from "../../../../constants/textsAndMessages";
 
 const useStyles = makeStyles((theme) => ({
   blockedLeafNode: {
@@ -66,7 +67,12 @@ const TreeUnitNode = (props) => {
         >
           <AddCircleOutlineIcon />
         </IconButton>
-        {!props.isValidUnit ? <ContextHelpButton message={props.validationMessage} /> : null}
+        {!props.isValidUnit ? (
+          <ContextHelpButton
+            message={props.validationMessage} //
+            type={PUSH_MESSAGE_TYPES.ERROR}
+          />
+        ) : null}
       </Grid>
     </Grid>
   );

@@ -226,3 +226,8 @@ export const LOSS_CALCULATOR = {
   LOST_MAGE: "Magier verloren.",
   NOT_SINGLE_ELEMENT_ITEM_MESSAGE: "Punktkosten sind bereits in den Punktkosten der Elemente enthalten.",
 };
+
+export const PUSH_MESSAGE_TYPES = {
+  ERROR: "error",
+  INFO: "info",
+};
