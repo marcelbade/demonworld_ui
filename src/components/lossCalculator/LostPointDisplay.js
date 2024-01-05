@@ -1,8 +1,8 @@
 // React
-import React from "react";
+import React, { Fragment } from "react";
 //Material UI
-import { Grid, Typography } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
+import { Typography } from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
 
 const useStyles = makeStyles({
   pointsTotal: {
@@ -14,14 +14,14 @@ const LostPointDisplay = (props) => {
   const classes = useStyles();
 
   return (
-    <Grid container xs={6} item direction="row" alignItems="center" justifyContent="flex-start">
+    <Fragment>
       <Typography variant="h6" className={classes.pointsTotal}>
         Verlorene Punkte:
       </Typography>
       <Typography variant="h6" className={classes.pointsTotal}>
         {props.totalPointsLost.toFixed(2)}
       </Typography>
-    </Grid>
+    </Fragment>
   );
 };
 
