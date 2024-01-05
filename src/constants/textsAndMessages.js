@@ -231,3 +231,8 @@ export const PUSH_MESSAGE_TYPES = {
   ERROR: "error",
   INFO: "info",
 };
+
+
+export const HELP ={
+  LOSS_BUTTON_HELP :"Die Pfeil-Buttons addieren einen Lebenspunkt oder ein Element zu den Verlusten.\n Einheiten mit mehr als einen Element und mehreren Lebenspunkten haben 2 Pfeil-Buttons:\n einen für Lebenspunkte und einen für Elemente.\n Beim Klick auf das Schädel Icon wird die komplette Einheit zu den Verlusten hinzugefügt."
+}
