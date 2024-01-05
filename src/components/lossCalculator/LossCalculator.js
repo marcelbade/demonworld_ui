@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 //Material UI
 import { Fade, Grid } from "@mui/material";
-import {makeStyles} from "@mui/styles"
+import { makeStyles } from "@mui/styles";
 // notistack
 import { SnackbarProvider } from "notistack";
 // components and functions
@@ -12,7 +12,7 @@ import CreateListScreen from "./CreateListScreen";
 import LostPointDisplay from "./LostPointDisplay";
 import ReturnButton from "./ReturnButton";
 import LostUnitList from "./LostUnitList/LostUnitList";
-import customStyledErrorMessage from "../../AppTheme/notiStackTheme";
+import customStyledMessage from "../../AppTheme/notiStackTheme";
 import CustomIcon from "../shared/statCards/CustomIcon";
 // icons
 import SpellBookIcon from "../../assets/icons/spellbook-white.png";
@@ -145,7 +145,8 @@ const LossCalculator = () => {
   return (
     <SnackbarProvider
       Components={{
-        error: customStyledErrorMessage,
+        error: customStyledMessage,
+        info: customStyledMessage,
       }}
       preventDuplicate
       maxSnack={3}
