@@ -37,7 +37,7 @@ const EquipmentListItemName = (props) => {
       </Grid>
       <ContextHelpButton
         message={LOSS_CALCULATOR.NOT_SINGLE_ELEMENT_ITEM_MESSAGE} //
-        type={PUSH_MESSAGE_TYPES.ERROR}
+        type={PUSH_MESSAGE_TYPES.INFO}
       />
     </Grid>
   ) : (
