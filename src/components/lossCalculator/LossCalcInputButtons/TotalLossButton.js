@@ -9,7 +9,7 @@ import { LossCalcContext } from "../../../contexts/LossCalculatorContext";
 import skullsIcon from "../../../assets/icons/skulls.png";
 // constants
 import { LOSS_CALCULATOR } from "../../../constants/textsAndMessages";
-import {  GIANT, HERO, MAGE } from "../../../constants/unitTypes";
+import { GIANT, HERO, MAGE } from "../../../constants/unitTypes";
 
 const TotalLossButton = (props) => {
   const calcContext = useContext(LossCalcContext);
@@ -56,21 +56,19 @@ const TotalLossButton = (props) => {
   };
 
   return (
-    <Tooltip title={<Typography variant="h6">{displayToolTipUnitLost()}</Typography>}>
-      <IconButton
-        onClick={() => {
-          unitDestroyed();
-          allItemsMarkedLost();
-        }}
-      >
-        <CustomIcon
-          icon={skullsIcon} //
-          altText={LOSS_CALCULATOR.UNIT_ROUTED}
-          height={40}
-          width={40}
-        />
-      </IconButton>
-    </Tooltip>
+    <IconButton
+      onClick={() => {
+        unitDestroyed();
+        allItemsMarkedLost();
+      }}
+    >
+      <CustomIcon
+        icon={skullsIcon} //
+        altText={LOSS_CALCULATOR.UNIT_ROUTED}
+        height={40}
+        width={40}
+      />
+    </IconButton>
   );
 };
 
