@@ -18,6 +18,7 @@ import LightSwitch from "../shared/LightSwitch";
 // icons
 import SpellBookIcon from "../../assets/icons/spellbook-white.png";
 import { Box } from "@material-ui/core";
+import usePointCostCalculator from "../../customHooks/UsePointCostCalculator";
 
 const useStyles = makeStyles({
   pushMessages: {
@@ -35,6 +36,7 @@ const LossCalculator = () => {
   //state
   const [list, setList] = useState([]);
   const [totalPointsLost, setTotalPointsLost] = useState(0);
+  const calculator = usePointCostCalculator();
 
   // Initializes the state by pulling the list from the history object. If none is present, an alternative UI is displayed
   useEffect(() => {
@@ -51,49 +53,12 @@ const LossCalculator = () => {
    * Function calculates current total point loss.
    */
   const calculateCurrentTotalPointLoss = () => {
-    const sum = calculatePointLoss();
+    const sum = calculator.calculateTotalArmyPointLoss(list);
     setTotalPointsLost(sum);
 
     // mark destroyed units
     let tempArray = [...list];
     tempArray.forEach((u) => setUnitDestroyedFlag(u));
-  };
-
-  /**
-   * Function calculates the net point loss. Loss is calculated as total point cost per lost element plus the cost of every lost item carried by a single lost element.
-   * @returns the sum of the army points lost.
-   */
-  const calculatePointLoss = () => {
-    let sum = 0;
-
-    list.forEach((u) => {
-      const totalUnitCost = calculateTotalUnitCost(u);
-
-      sum += u.lossCounter * (totalUnitCost / u.maxCounter);
-      sum += calculatePointsOfLostEquipment(u.equipment);
-    });
-
-    return sum;
-  };
-
-  /**
-   * Function calculates the total point cost of all the unit's items that have been lost. Note that this only factors in items that are carried by single element. Items held by all elements of a unit are added to the unit's point cost.
-   * @param {[itemCard]} equipmentList
-   * @returns the net point los of all single element items.
-   */
-  const calculatePointsOfLostEquipment = (equipmentList) => {
-    return equipmentList.filter((e) => e.itemLost).reduce((sum, { points }) => sum + points, 0);
-  };
-
-  /**
-   * Function calculates the total point cost of a unit. Here the total point cost is the unit's point cost plus the cost for every item that is carried by the whole unit, i.e. every element. This is important as the point loss for these items must be per element.
-   * @param {unitCard} unit
-   * @returns total ppoint cost
-   */
-  const calculateTotalUnitCost = (unit) => {
-    const itemsOnEveryELement = unit.equipment.filter((e) => e.everyElement).reduce((sum, { points }) => sum + points, 0);
-
-    return unit.points + itemsOnEveryELement;
   };
 
   /**
@@ -121,6 +86,7 @@ const LossCalculator = () => {
 
   /**
    * Function sets the value of the itemLost flag for one element (item) in the equipment array.
+   * @param {unitCard} selectedUnit
    * @param {String} itemName Name of the item the unit was equipped with.
    * @param {boolean} isLost  flag shows whether the element is lost or not.
    */
