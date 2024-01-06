@@ -3,6 +3,7 @@ import React, { Fragment } from "react";
 //Material UI
 import { Typography } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
+import { LOSS_CALCULATOR } from "../../constants/textsAndMessages";
 
 const useStyles = makeStyles({
   pointsTotal: {
@@ -16,7 +17,7 @@ const LostPointDisplay = (props) => {
   return (
     <Fragment>
       <Typography variant="h6" className={classes.pointsTotal}>
-        Verlorene Punkte:
+        {LOSS_CALCULATOR.LOST_POINTS}
       </Typography>
       <Typography variant="h6" className={classes.pointsTotal}>
         {props.totalPointsLost.toFixed(2)}
