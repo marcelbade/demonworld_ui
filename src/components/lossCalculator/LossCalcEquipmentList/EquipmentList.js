@@ -28,7 +28,7 @@ const EquipmentList = (props) => {
                 unit={props.unit} //
                 item={e}
                 index={i}
-                key={props.unit.uniqueID}
+                key={i}
               />
             );
           })}
