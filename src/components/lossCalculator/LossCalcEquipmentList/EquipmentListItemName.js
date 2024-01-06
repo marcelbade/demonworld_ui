@@ -42,15 +42,10 @@ const EquipmentListItemName = (props) => {
   };
 
   return props.notSingleElementItem ? (
-    <ListItemText
-      primary={<span>{props.itemName}</span>} //
-      secondary={<span> {props.pointCost}</span>}
-    />
-  ) : (
     <Grid container direction="row" justifyContent="flex-start">
       <Grid item xs={4}>
         <ListItemText
-          primary={<span className={switchCssClass()}>{props.itemName}</span>} //
+          primary={<span>{props.itemName}</span>} //
           secondary={<span> {props.pointCost}</span>}
         />
       </Grid>
@@ -59,6 +54,11 @@ const EquipmentListItemName = (props) => {
         type={PUSH_MESSAGE_TYPES.INFO}
       />
     </Grid>
+  ) : (
+    <ListItemText
+      primary={<span className={switchCssClass()}>{props.itemName}</span>} //
+      secondary={<span> {props.pointCost}</span>}
+    />
   );
 };
 
