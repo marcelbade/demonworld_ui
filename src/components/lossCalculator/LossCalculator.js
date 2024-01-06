@@ -28,15 +28,14 @@ const useStyles = makeStyles({
 });
 
 const LossCalculator = () => {
+  const classes = useStyles();
   const history = useHistory();
   const location = useLocation();
-
-  const classes = useStyles();
+  const calculator = usePointCostCalculator();
 
   //state
   const [list, setList] = useState([]);
   const [totalPointsLost, setTotalPointsLost] = useState(0);
-  const calculator = usePointCostCalculator();
 
   // Initializes the state by pulling the list from the history object. If none is present, an alternative UI is displayed
   useEffect(() => {
