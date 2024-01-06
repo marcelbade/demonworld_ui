@@ -214,6 +214,8 @@ export const UNDEAD = {
 export const NO_RANGE_WEAPON = "x";
 
 export const LOSS_CALCULATOR = {
+  CREATE_LIST: "Liste Erstellen.",
+  LOG_INTO_ACCOUNT: " Ins Konto einloggen und Liste Laden.",
   LOSS_BUTTON_HELP :"Die Pfeil-Buttons addieren einen Lebenspunkt oder ein Element zu den Verlusten.\n Einheiten mit mehr als einen Element und mehreren Lebenspunkten haben 2 Pfeil-Buttons:\n einen für Lebenspunkte und einen für Elemente.\n Beim Klick auf das Schädel Icon wird die komplette Einheit zu den Verlusten hinzugefügt.",
   NOT_SINGLE_ELEMENT_ITEM_MESSAGE: "Punktkosten sind bereits in den Punktkosten der Elemente enthalten.",
 };

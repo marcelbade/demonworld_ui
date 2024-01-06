@@ -2,9 +2,11 @@
 import React from "react";
 //Material UI
 import { Button, Grid, IconButton } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
 // icons
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+// constants
+import { LOSS_CALCULATOR } from "../../constants/textsAndMessages";
 
 const useStyles = makeStyles({
   typographyFont: {},
@@ -33,7 +35,8 @@ const CreateListScreen = (props) => {
             // navigate to landing page
             props.navigateToPage("");
           }}
-          size="large">
+          size="large"
+        >
           <ChevronLeftIcon className={classes.BackBttn} />
         </IconButton>
       </Grid>
@@ -45,7 +48,7 @@ const CreateListScreen = (props) => {
             props.navigateToPage("ListGenerator");
           }}
         >
-          Liste Erstellen
+          {LOSS_CALCULATOR.CREATE_LIST}
         </Button>
         <Button
           variant="outlined"
@@ -54,7 +57,7 @@ const CreateListScreen = (props) => {
             //TODO open login prompt
           }}
         >
-          Ins Konto einloggen und Liste Laden.
+          {LOSS_CALCULATOR.LOG_INTO_ACCOUNT}
         </Button>
       </Grid>
     </Grid>
