@@ -1,11 +1,30 @@
 const usePointCostCalculator = () => {
   /**
-   * Function calculates the total point cost of all the unit's items that have been lost. Note that this only factors in items that are carried by a single element. Items held by all elements of a unit are already included to the unit's point cost.
+   *
    * @param {[itemCard]} equipmentList
    * @returns the net point los of all single element items.
    */
-  const calculatePointsOfLostEquipment = (equipmentList) => {
-    return equipmentList.filter((e) => e.itemLost && !e.everyElement).reduce((sum, { points }) => sum + points, 0);
+
+  /**
+   * Function calculates the total point cost of all the unit's items.
+   * If the the `onlyLostItems` flag is true, only lostitems are counted.
+   * Note that this only factors in items that are carried by a single element.
+   * Items held by all elements of a unit are already included to the unit's point cost.
+   * @param {[itemCard]} equipmentList an array with all the units items
+   * @param {*} onlyLostItems if true, the value of lost items is calculated.
+   * @returns the total point cost of all (lost) items
+   */
+  const calculateEquipmentPointCost = (equipmentList, onlyLostItems) => {
+    let result = 0;
+
+    if (equipmentList !== undefined) {
+      const filterFunction = onlyLostItems.filter //
+        ? (e) => e.itemLost && !e.everyElement
+        : (e) => !e.everyElement;
+
+      result = equipmentList.filter(filterFunction).reduce((sum, { points }) => sum + points, 0);
+    }
+    return result;
   };
 
   /**
@@ -13,10 +32,21 @@ const usePointCostCalculator = () => {
    * @param {unitCard} unit
    * @returns total ppoint cost
    */
-  const calculateTotalUnitAndEquipmentCost = (unit) => {
-    const itemsOnEveryELement = unit.equipment.filter((e) => e.everyElement).reduce((sum, { points }) => sum + points, 0);
+  const calculateUnitAndEveryElementItemCost = (unit) => {
+    let itemsOnEveryELement = 0;
+
+    if (unit.equipment !== undefined) {
+      itemsOnEveryELement = unit.equipment.filter((e) => e.everyElement).reduce((sum, { points }) => sum + points, 0);
+    }
 
     return unit.points + itemsOnEveryELement;
+  };
+
+  const calculateTotalUnitCost = (unit) => {
+    const unitAndItemsOnEveryElement = calculateUnitAndEveryElementItemCost(unit);
+    const singelElementEquipmentCost = calculateEquipmentPointCost(unit.equipment, { filter: false });
+
+    return unitAndItemsOnEveryElement + singelElementEquipmentCost;
   };
 
   /**
@@ -27,17 +57,34 @@ const usePointCostCalculator = () => {
     let sum = 0;
 
     unitList.forEach((u) => {
-      const totalUnitCost = calculateTotalUnitAndEquipmentCost(u);
+      const totalUnitCost = calculateUnitAndEveryElementItemCost(u);
 
       sum += u.lossCounter * (totalUnitCost / u.maxCounter);
-      sum += calculatePointsOfLostEquipment(u.equipment);
+      sum += calculateEquipmentPointCost(u.equipment, { filter: true });
     });
 
     return sum;
   };
 
+  /**
+   * Function calculates the total point cost of the entire army list.
+   * @param {[unitCard]} unitList
+   * @returns the net point value of the army list.
+   */
+  const calculateTotalArmyCost = (unitList) => {
+    let totalListPointCost = 0;
+
+    unitList.forEach((u) => {
+      const unitTotal = calculateTotalUnitCost(u);
+      totalListPointCost += unitTotal;
+    });
+
+    return totalListPointCost;
+  };
+
   return {
-    
+    calculateTotalUnitCost: calculateTotalUnitCost,
+    calculateTotalArmyCost: calculateTotalArmyCost,
     calculateTotalArmyPointLoss: calculateTotalArmyPointLoss,
   };
 };

@@ -6,7 +6,8 @@ import { ArmyContext } from "../../../../../contexts/armyContext";
 import { SelectionContext } from "../../../../../contexts/selectionContext";
 import calculateScoutingFactor from "../../../../../gameLogic/scoutFactorCalculator/scoutingFactorCalculator";
 import useArmyValidation from "../../../../../customHooks/UseArmyValidation";
-import { calculateTotalPointCost } from "../../../../../util/utilityFunctions";
+// import { calculateTotalPointCost } from "../../../../../util/utilityFunctions";
+import usePointCostCalculator from "../../../../../customHooks/UsePointCostCalculator";
 import { AlternativeListContext } from "../../../../../contexts/alternativeListContext";
 // constants
 import { GENERAL_ERRRORS, INPUT_TEXTS, TEXTS } from "../../../../../constants/textsAndMessages";
@@ -17,10 +18,13 @@ const ArmyListBoxFooter = () => {
   const SEC = useContext(SelectionContext);
 
   const validation = useArmyValidation();
+  const calculator = usePointCostCalculator();
 
   const [errorMessage, setErrorMessage] = useState("");
 
-  let netPoints = SEC.selectedUnits ? calculateTotalPointCost(SEC.selectedUnits) : 0;
+  
+
+  let netPoints = SEC.selectedUnits !== undefined ? calculator.calculateTotalArmyCost(SEC.selectedUnits) : 0;
 
   /**
    * Function alloes the user to change the maximum point total for the army.

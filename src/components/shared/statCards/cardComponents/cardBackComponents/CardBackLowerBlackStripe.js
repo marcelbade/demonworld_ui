@@ -4,8 +4,8 @@ import React, { useContext } from "react";
 import { Grid, Typography } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
 // functions and modules
-import { calculateTotalUnitPointCost } from "../../../../../util/utilityFunctions";
 import { StateCardContext } from "../../../../../contexts/statCardContext";
+import usePointCostCalculator from "../../../../../customHooks/UsePointCostCalculator";
 
 const useStyles = makeStyles({
   blackStripe: {
@@ -17,13 +17,14 @@ const useStyles = makeStyles({
 
 const CardBackLowerBlackStripe = () => {
   const classes = useStyles();
+  const calculator = usePointCostCalculator();
 
   const SC = useContext(StateCardContext);
 
   return (
     <Grid>
       <Typography variant="h6" align="center" className={classes.blackStripe}>
-        {calculateTotalUnitPointCost(SC.unit)} Punkte
+        {calculator.calculateTotalUnitCost(SC.unit)} Punkte
       </Typography>
     </Grid>
   );

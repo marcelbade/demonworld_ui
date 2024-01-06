@@ -120,31 +120,3 @@ export const unitCardMultiSort = (unitList) => {
 
   return result;
 };
-
-export const calculateTotalPointCost = (selectedUnits) => {
-  let pointTotal = 0;
-
-  selectedUnits.forEach((u) => {
-    const totalUnitCost = calculateTotalUnitPointCost(u);
-    pointTotal += totalUnitCost;
-  });
-
-  return pointTotal;
-};
-
-/**
- * Function returns the total point cost for the unit + all equipment selected for it
- * @param {unitCard} unit
- * @returns total point cost for the unit + equipment
- */
-export const calculateTotalUnitPointCost = (unit) => {
-  if ("equipment" in unit && unit.equipment.length !== 0) {
-    let pointTotal = 0;
-    unit.equipment.forEach((pieceOfGear) => {
-      pointTotal += pieceOfGear.points;
-    });
-    return unit.points + pointTotal;
-  } else {
-    return unit.points;
-  }
-};
