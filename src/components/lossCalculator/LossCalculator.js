@@ -14,8 +14,10 @@ import ReturnButton from "./ReturnButton";
 import LostUnitList from "./LostUnitList/LostUnitList";
 import customStyledMessage from "../../AppTheme/notiStackTheme";
 import CustomIcon from "../shared/statCards/CustomIcon";
+import LightSwitch from "../shared/LightSwitch";
 // icons
 import SpellBookIcon from "../../assets/icons/spellbook-white.png";
+import { Box } from "@material-ui/core";
 
 const useStyles = makeStyles({
   pushMessages: {
@@ -176,11 +178,22 @@ const LossCalculator = () => {
             <Grid item xs={1}>
               <ReturnButton navigateToPage={navigateToPage} />
             </Grid>
-            <Grid container xs={7} item direction="column">
+            <Grid container xs={6} item direction="column">
               <LostUnitList list={list} />
             </Grid>
-            <Grid item xs={4} alignItems="center" justifyContent="flex-start" alignSelf="center">
+            <Grid
+              item
+              xs={4} //
+              alignItems="center"
+              justifyContent="flex-start"
+              alignSelf="center"
+            >
               <LostPointDisplay totalPointsLost={totalPointsLost} />
+            </Grid>
+            <Grid item xs={1}>
+              <Box display="flex" justifyContent="center">
+                <LightSwitch />
+              </Box>
             </Grid>
           </Grid>
         ) : (
