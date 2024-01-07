@@ -41,15 +41,20 @@ const SizeArmorSkills = () => {
       </Grid>
       <Grid item container alignItems="center" justifyContent="center">
         <div className={classes.alignIcons}>
-          <img alt="FK-Panzerung" src={rangeArmorIcon} className={classes.icon} />
+          <CustomIcon
+            icon={rangeArmorIcon} //
+            altText={"Fernkampfpanzerung"}
+            height={"25"}
+            width={"25"}
+          />
         </div>
         <Typography variant="h6">{SC.unit.armourRange}</Typography>
         <div className={classes.alignIcons}>
           <CustomIcon
             icon={meleeArmorIcon} //
-            altText={""}
-            height={"1.2em"}
-            width={"1.2em"}
+            altText={"Nahkampfpanzerung"}
+            height={"25"}
+            width={"25"}
           />
         </div>
         <Typography variant="h6">{SC.unit.armourMelee}</Typography>
@@ -61,9 +66,9 @@ const SizeArmorSkills = () => {
               <div className={classes.alignIcons}>
                 <CustomIcon
                   icon={blackSwordIcon} //
-                  altText={"NK-Fertigkeit"}
-                  height={"1.2em"}
-                  width={"1.2em"}
+                  altText={"Nahkampffertigkeit"}
+                  height={"25"}
+                  width={"25"}
                 />
               </div>
               <Typography variant="h6"> {SC.unit.skillMelee} </Typography>
@@ -72,7 +77,12 @@ const SizeArmorSkills = () => {
           {SC.unit.skillRange !== 0 ? (
             <Fragment>
               <div className={classes.alignIcons}>
-                <img alt="Fernkampffertigkeit" src={blackBowIcon} className={classes.icon} />
+                <CustomIcon
+                  icon={blackBowIcon} //
+                  altText={"Fernkampffertigkeit"}
+                  height={"25"}
+                  width={"25"}
+                />
               </div>
               <Typography variant="h6"> {SC.unit.skillRange} </Typography>
             </Fragment>
