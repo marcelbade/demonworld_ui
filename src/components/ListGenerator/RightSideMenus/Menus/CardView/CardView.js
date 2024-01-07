@@ -1,6 +1,6 @@
 // React
 import { Fragment } from "react";
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
 
 import { Grid, IconButton } from "@mui/material";
 // icons
@@ -20,7 +20,6 @@ const useStyles = makeStyles({
 
 const CardView = (props) => {
   const classes = useStyles();
-  //
 
   return (
     <Fragment>
@@ -31,7 +30,8 @@ const CardView = (props) => {
               onClick={() => {
                 props.carouselBackward();
               }}
-              size="large">
+              size="large"
+            >
               <ChevronLeft className={classes.icons} />
             </IconButton>
           ) : null}
@@ -49,7 +49,8 @@ const CardView = (props) => {
               onClick={() => {
                 props.carouselForward();
               }}
-              size="large">
+              size="large"
+            >
               <ChevronRight className={classes.icons} />
             </IconButton>
           ) : null}
