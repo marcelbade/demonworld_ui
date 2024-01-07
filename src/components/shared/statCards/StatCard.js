@@ -2,11 +2,10 @@
 import React from "react";
 // Material UI
 import { Grid } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
 import CardBack from "./cardComponents/CardBack";
 import CardFront from "./cardComponents/CardFront";
 import StatCardProvider from "../../../contexts/statCardContext";
-// components
 
 const useStyles = makeStyles({
   cardBox: {
