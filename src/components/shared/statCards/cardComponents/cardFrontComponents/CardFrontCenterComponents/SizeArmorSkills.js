@@ -10,6 +10,14 @@ import blackSwordIcon from "../../../../../../assets/icons/sword2.png";
 // components & functions
 import { StateCardContext } from "../../../../../../contexts/statCardContext";
 import CustomIcon from "../../../CustomIcon";
+import {
+  meleeArmorStat,
+  meleeSkillStat,
+  rangeArmorStat,
+  rangeSkillStat,
+} from "../../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/StatChangesLogic";
+// constants
+import { CARD_PREVIEW } from "../../../../../../constants/textsAndMessages";
 
 const useStyles = makeStyles({
   icon: {
@@ -35,9 +43,17 @@ const SizeArmorSkills = () => {
   const SC = useContext(StateCardContext);
 
   return (
-    <Grid item container alignItems="center" direction="row" className={classes.noWrap}>
+    <Grid
+      item //
+      container
+      alignItems="center"
+      direction="row"
+      className={classes.noWrap}
+    >
       <Grid item container justifyContent="center">
-        <Typography variant="h6">Größe: {SC.unit.unitSize}</Typography>
+        <Typography variant="h6">
+          {CARD_PREVIEW.SIZE} {SC.unit.unitSize}
+        </Typography>
       </Grid>
       <Grid item container alignItems="center" justifyContent="center">
         <div className={classes.alignIcons}>
@@ -48,7 +64,7 @@ const SizeArmorSkills = () => {
             width={"25"}
           />
         </div>
-        <Typography variant="h6">{SC.unit.armourRange}</Typography>
+        <Typography variant="h6">{rangeArmorStat(SC.unit)}</Typography>
         <div className={classes.alignIcons}>
           <CustomIcon
             icon={meleeArmorIcon} //
@@ -57,10 +73,16 @@ const SizeArmorSkills = () => {
             width={"25"}
           />
         </div>
-        <Typography variant="h6">{SC.unit.armourMelee}</Typography>
+        <Typography variant="h6">{meleeArmorStat(SC.unit)}</Typography>
       </Grid>
       {SC.unit.skillRange === 0 && SC.unit.skillMelee === 0 ? null : (
-        <Grid container direction="row" justifyContent="center" alignItems="center" className={classes.skillBox}>
+        <Grid
+          container
+          direction="row" //
+          justifyContent="center"
+          alignItems="center"
+          className={classes.skillBox}
+        >
           {SC.unit.skillMelee !== 0 ? (
             <Fragment>
               <div className={classes.alignIcons}>
@@ -71,7 +93,7 @@ const SizeArmorSkills = () => {
                   width={"25"}
                 />
               </div>
-              <Typography variant="h6"> {SC.unit.skillMelee} </Typography>
+              <Typography variant="h6"> {meleeSkillStat(SC.unit)} </Typography>
             </Fragment>
           ) : null}
           {SC.unit.skillRange !== 0 ? (
@@ -84,7 +106,7 @@ const SizeArmorSkills = () => {
                   width={"25"}
                 />
               </div>
-              <Typography variant="h6"> {SC.unit.skillRange} </Typography>
+              <Typography variant="h6"> {rangeSkillStat(SC.unit)} </Typography>
             </Fragment>
           ) : null}
         </Grid>

@@ -54,6 +54,38 @@ export const VALIDATION = {
   },
 };
 
+export const NO_RANGE_WEAPON = "x";
+
+export const LOSS_CALCULATOR = {
+  CREATE_LIST: "Liste Erstellen.",
+  LOG_INTO_ACCOUNT: " Ins Konto einloggen und Liste Laden.",
+  LOST_POINTS: "Verlorene Punkte:",
+  LOSS_BUTTON_HELP:
+    "Die Pfeil-Buttons addieren einen Lebenspunkt oder ein Element zu den Verlusten.\n Einheiten mit mehr als einen Element und mehreren Lebenspunkten haben 2 Pfeil-Buttons:\n einen für Lebenspunkte und einen für Elemente.\n Beim Klick auf das Schädel Icon wird die komplette Einheit zu den Verlusten hinzugefügt.",
+  NOT_SINGLE_ELEMENT_ITEM_MESSAGE: "Punktkosten sind bereits in den Punktkosten der Elemente enthalten.",
+};
+
+export const PUSH_MESSAGE_TYPES = {
+  ERROR: "error",
+  INFO: "info",
+};
+
+export const CARD_PREVIEW = {
+  SIZE: "Größe: ",
+  MOVEMENT_POINTS: " Bewegungspunkte",
+  MANEUVER: " Manöver",
+  HORDE: "Horde",
+  MOVE: "M",
+  SKIRMISH: "P",
+  CHARGE: "A",
+  INITIATIVE:"Initiative",
+  FEAR: "Furchtfaktor",
+  MORAL: "Moral",
+  CONTROL_AREA:"Kontrollbereich",
+};
+
+// FACTIONS
+
 export const DARKELVES = {
   SUB_FACTION_RULES: {
     WARRIOR_CASTE: "Deine Armeeliste muss zu mindestens 30% aus Einheiten der Kriegerkaste bestehen.",
@@ -210,20 +242,3 @@ export const UNDEAD = {
     ALLIES: "Diese Einheit steht nicht als Alliierter zur Verfügung.",
   },
 };
-
-export const NO_RANGE_WEAPON = "x";
-
-export const LOSS_CALCULATOR = {
-  CREATE_LIST: "Liste Erstellen.",
-  LOG_INTO_ACCOUNT: " Ins Konto einloggen und Liste Laden.",
-  LOST_POINTS :"Verlorene Punkte:",
-  LOSS_BUTTON_HELP :"Die Pfeil-Buttons addieren einen Lebenspunkt oder ein Element zu den Verlusten.\n Einheiten mit mehr als einen Element und mehreren Lebenspunkten haben 2 Pfeil-Buttons:\n einen für Lebenspunkte und einen für Elemente.\n Beim Klick auf das Schädel Icon wird die komplette Einheit zu den Verlusten hinzugefügt.",
-  NOT_SINGLE_ELEMENT_ITEM_MESSAGE: "Punktkosten sind bereits in den Punktkosten der Elemente enthalten.",
-};
-
-export const PUSH_MESSAGE_TYPES = {
-  ERROR: "error",
-  INFO: "info",
-};
-
- 

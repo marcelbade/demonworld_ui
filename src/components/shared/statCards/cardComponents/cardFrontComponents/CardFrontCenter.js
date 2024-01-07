@@ -8,6 +8,7 @@ import { Grid } from "@mui/material";
 import { StateCardContext } from "../../../../../contexts/statCardContext";
 import RangedWeapon from "./CardFrontCenterComponents/RangedWeapon";
 import MeleeWeapons from "./CardFrontCenterComponents/MeleeWeapons";
+import Initiative from "./CardFrontCenterComponents/Initiative";
 import SizeArmorSkills from "./CardFrontCenterComponents/SizeArmorSkills";
 // constants
 import { NO_RANGE_WEAPON } from "../../../../../constants/textsAndMessages";
@@ -25,6 +26,7 @@ const CardFrontCenter = () => {
       <Grid item container direction="column">
         <MeleeWeapons />
       </Grid>
+      <Initiative/>
       <SizeArmorSkills />
     </Fragment>
   );

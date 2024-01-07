@@ -4,6 +4,7 @@ import React from "react";
 import { Text, View, Image } from "@react-pdf/renderer";
 // functions and components
 import { isSingleElementCard } from "../../../../../../util/utilityFunctions";
+import { CARD_PREVIEW } from "../../../../../../constants/textsAndMessages";
 // icons
 import squareFormationWhite from "../../../../../../assets/icons/squareFormationWhite.png";
 import skirmishFormation from "../../../../../../assets/icons/skirmishFormation.png";
@@ -20,19 +21,23 @@ const UnitMovementRow = (props) => {
   //unitOrCmdCard
   return isSingleElementCard(props.unit) ? (
     <View key={props.index} style={styles.cardUpperBlackRow}>
-      <Text key={props.index}>{props.unit.move} Bewegungspunkte</Text>
+      <Text key={props.index}>
+        {props.unit.move} {CARD_PREVIEW.MOVEMENT_POINTS}
+      </Text>
     </View>
   ) : (
     <View key={props.index} style={styles.cardUpperBlackRow}>
       <Text key={props.index}>
-        B: {props.unit.move} / A: {props.unit.charge} / P:{props.unit.skirmish}
+        {`${CARD_PREVIEW.MOVE}: ${props.unit.move} / ${CARD_PREVIEW.SKIRMISH}: ${props.unit.charge} / ${CARD_PREVIEW.CHARGE}: ${props.unit.skirmish}`}
       </Text>
-      <Text key={props.index}>{props.unit.hold_maneuvers} Manöver</Text>
+      <Text key={props.index}>
+        {props.unit.hold_maneuvers} {CARD_PREVIEW.MANEUVER}
+      </Text>
       <View key={props.index} style={styles.formations}>
         {props.unit.skirmishFormation ? <Image src={skirmishFormation} style={styles.icon} /> : null}
         {props.unit.squareFormation ? <Image src={squareFormationWhite} style={styles.squareFormationIcon} /> : null}
         {props.unit.wedgeFormation ? <Image src={wedgeFormation} style={styles.icon} /> : null}
-        {<Text key={props.index}> {props.unit.horde ? <Text>Horde</Text> : null}</Text>}
+        {<Text key={props.index}> {props.unit.horde ? <Text>{CARD_PREVIEW.HORDE}</Text> : null}</Text>}
       </View>
     </View>
   );
