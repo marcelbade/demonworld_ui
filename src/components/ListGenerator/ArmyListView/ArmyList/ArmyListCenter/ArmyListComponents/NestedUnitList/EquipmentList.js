@@ -1,7 +1,7 @@
 // React
 import React, { useContext } from "react";
 // Material UI
-import { List, ListItemText, ListItem, Button } from "@mui/material";
+import { List, ListItemText, ListItem, IconButton } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
 // icons
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
@@ -105,7 +105,7 @@ const EquipmentList = (props) => {
         ? props.unit.equipment.map((e, i) => {
             return (
               <ListItem key={props.unit.uniqueID} className={classes.element}>
-                <Button
+                <IconButton
                   className={clsx(classes.deleteBttn)}
                   onClick={() => {
                     removeItem(props.identifier, i);
@@ -114,7 +114,7 @@ const EquipmentList = (props) => {
                   }}
                 >
                   <RemoveCircleOutlineIcon />
-                </Button>
+                </IconButton>
                 <ListItemText primary={<span>{e.itemName}</span>} secondary={<span>{e.points}</span>} />
               </ListItem>
             );
