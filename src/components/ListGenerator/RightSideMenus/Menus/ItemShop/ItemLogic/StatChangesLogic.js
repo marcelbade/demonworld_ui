@@ -1,3 +1,29 @@
+export const ARMOUR_MELEE = "armourMelee";
+export const ARMOUR_RANGE = "armourRange";
+export const FEAR = "fear";
+export const MOVE = "move";
+export const SKIRMISH = "skirmish";
+export const CHARGE = "skillMelee";
+export const SKILL_MELEE = "skillMelee";
+export const SKILL_RANGE = "skillRange";
+export const INITIATIVE = "initiative";
+export const MORAL1 = "moral1";
+export const MORAL2 = "moral2";
+
+const statMapping = {
+  armourMelee: "altersArmourMelee",
+  armourRange: "altersArmourRange",
+  fear: "altersFear",
+  move: "altersMove",
+  skirmish: "altersSkirmish",
+  charge: "altersCharge",
+  skillMelee: "altersSkillMelee",
+  skillRange: "altersSkillRange",
+  initiative: "altersInitiative",
+  moral1: "altersMoral1",
+  moral2: "altersMoral2",
+};
+
 /**
  * Function calculates the stats for a unit's first weapon.
  * (weapon 1)
@@ -19,140 +45,30 @@ export const weapon1stats = (unit) => {
   return weapon1Properties;
 };
 
-export const meleeArmorStat = (unit) => {
-  let meleeArmor = unit.armourMelee;
+/**
+ * Function calculates the new value for a unit's stat
+ * after choosing an item that permanently changes a stat.
+ * @param {unitCard} unit
+ * @param {String} statName
+ * @returns
+ */
+export const setStat = (unit, statName) => {
+  let stat = unit[statName];
 
-  const result = searchForRelevantModifier(unit, "altersArmourMelee");
-
-  if (result.modifierFound) {
-    meleeArmor += result.modifier;
-  }
-
-  return meleeArmor;
-};
-
-export const rangeArmorStat = (unit) => {
-  let rangeArmor = unit.armourRange;
-
-  const result = searchForRelevantModifier(unit, "altersArmourRange");
+  const result = searchForRelevantModifier(unit, statMapping[statName]);
 
   if (result.modifierFound) {
-    rangeArmor += result.modifier;
+    stat += result.modifier;
   }
 
-  return rangeArmor;
-};
-
-export const fearStat = (unit) => {
-  let fearFactor = unit.fear;
-
-  const result = searchForRelevantModifier(unit, "altersFear");
-
-  if (result.modifierFound) {
-    fearFactor += result.modifier;
-  }
-
-  return fearFactor;
-};
-
-export const movementStat = (unit) => {
-  let movementFactor = unit.fear;
-
-  const result = searchForRelevantModifier(unit, "altersMove");
-
-  if (result.modifierFound) {
-    movementFactor += result.modifier;
-  }
-
-  return movementFactor;
-};
-
-export const skirmishStat = (unit) => {
-  let skirmishFactor = unit.fear;
-
-  const result = searchForRelevantModifier(unit, "altersSkirmish");
-
-  if (result.modifierFound) {
-    skirmishFactor += result.modifier;
-  }
-
-  return skirmishFactor;
-};
-
-export const chargeStat = (unit) => {
-  let chargeFactor = unit.fear;
-
-  const result = searchForRelevantModifier(unit, "altersCharge");
-
-  if (result.modifierFound) {
-    chargeFactor += result.modifier;
-  }
-
-  return chargeFactor;
-};
-
-export const meleeSkillStat = (unit) => {
-  let skillMelee = unit.skillMelee;
-
-  const result = searchForRelevantModifier(unit, "altersSkillMelee");
-
-  if (result.modifierFound) {
-    skillMelee += result.modifier;
-  }
-
-  return skillMelee;
-};
-
-export const rangeSkillStat = (unit) => {
-  let skillRange = unit.skillRange;
-
-  const result = searchForRelevantModifier(unit, "altersSkillRange");
-
-  if (result.modifierFound) {
-    skillRange += result.modifier;
-  }
-
-  return skillRange;
-};
-
-export const initiativeStat = (unit) => {
-  let initiative = unit.initiative;
-
-  const result = searchForRelevantModifier(unit, "altersInitiative");
-
-  if (result.modifierFound) {
-    initiative += result.modifier;
-  }
-
-  return initiative;
-};
-
-export const moral1Stat = (unit) => {
-  let moral1 = unit.moral1;
-
-  const result = searchForRelevantModifier(unit, "altersMoral1");
-
-  if (result.modifierFound) {
-    moral1 += result.modifier;
-  }
-
-  return moral1;
-};
-
-export const moral2Stat = (unit) => {
-  let moral2 = unit.moral2;
-
-  const result = searchForRelevantModifier(unit, "altersMoral2");
-
-  if (result.modifierFound) {
-    moral2 += result.modifier;
-  }
-
-  return moral2;
+  return stat;
 };
 
 // TODO command stars ->  Uhrgs Stirnreif, range weopon stat -> Der Bogen von Iconessa
-// bonusb -> Greifenfedern
+// bonus -> Greifenfedern
+//TODO übetrqagungsfehler in der DB
+// TODO: you somehow destroyed the pdf card view...
+// TODO schwerer Fehler! bei den Goblins: Schamamen UND Helden =< 30%!
 
 /**
  * Function iterates through a unit's items, if they exist.
@@ -190,6 +106,13 @@ const searchForRelevantModifier = (unit, property) => {
   return replacementStats;
 };
 
+/**
+ * Function calculates the new value of the unit's melee attack
+ * when chosing a magical weapon.
+ * @param {unitCard} unit
+ * @param {int} modifier of chosen weapon
+ * @returns the new value of the melee attack
+ */
 const calculateNewMeleeWeaponValue = (unit, modifier) => {
   const MAX_SIZE = 4;
   const LEADER_BONUS = 1;

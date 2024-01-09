@@ -4,7 +4,9 @@ import React, { useContext } from "react";
 import { Grid, Typography } from "@mui/material";
 // components & functions
 import { StateCardContext } from "../../../../../../contexts/statCardContext";
-import { initiativeStat } from "../../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/StatChangesLogic";
+import { setStat } from "../../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/StatChangesLogic";
+//constants
+import { INITIATIVE } from "../../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/StatChangesLogic";
 import { CARD_PREVIEW } from "../../../../../../constants/textsAndMessages";
 
 const Initiative = () => {
@@ -16,7 +18,7 @@ const Initiative = () => {
       direction="column"
       alignItems="center"
     >
-      <Typography variant="h6">{`${CARD_PREVIEW.INITIATIVE}: ${initiativeStat(SC.unit)}`}</Typography>
+      <Typography variant="h6">{`${CARD_PREVIEW.INITIATIVE}: ${setStat(SC.unit, INITIATIVE)}`}</Typography>
     </Grid>
   );
 };

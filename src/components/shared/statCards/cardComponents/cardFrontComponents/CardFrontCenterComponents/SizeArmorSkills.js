@@ -11,10 +11,11 @@ import blackSwordIcon from "../../../../../../assets/icons/sword2.png";
 import { StateCardContext } from "../../../../../../contexts/statCardContext";
 import CustomIcon from "../../../CustomIcon";
 import {
-  meleeArmorStat,
-  meleeSkillStat,
-  rangeArmorStat,
-  rangeSkillStat,
+  ARMOUR_MELEE,
+  ARMOUR_RANGE,
+  SKILL_MELEE,
+  SKILL_RANGE,
+  setStat,
 } from "../../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/StatChangesLogic";
 // constants
 import { CARD_PREVIEW } from "../../../../../../constants/textsAndMessages";
@@ -64,7 +65,7 @@ const SizeArmorSkills = () => {
             width={"25"}
           />
         </div>
-        <Typography variant="h6">{rangeArmorStat(SC.unit)}</Typography>
+        <Typography variant="h6">{setStat(SC.unit, ARMOUR_RANGE)}</Typography>
         <div className={classes.alignIcons}>
           <CustomIcon
             icon={meleeArmorIcon} //
@@ -73,7 +74,7 @@ const SizeArmorSkills = () => {
             width={"25"}
           />
         </div>
-        <Typography variant="h6">{meleeArmorStat(SC.unit)}</Typography>
+        <Typography variant="h6">{setStat(SC.unit, ARMOUR_MELEE)}</Typography>
       </Grid>
       {SC.unit.skillRange === 0 && SC.unit.skillMelee === 0 ? null : (
         <Grid
@@ -93,7 +94,7 @@ const SizeArmorSkills = () => {
                   width={"25"}
                 />
               </div>
-              <Typography variant="h6"> {meleeSkillStat(SC.unit)} </Typography>
+              <Typography variant="h6"> {setStat(SC.unit, SKILL_MELEE)} </Typography>
             </Fragment>
           ) : null}
           {SC.unit.skillRange !== 0 ? (
@@ -106,7 +107,7 @@ const SizeArmorSkills = () => {
                   width={"25"}
                 />
               </div>
-              <Typography variant="h6"> {rangeSkillStat(SC.unit)} </Typography>
+              <Typography variant="h6"> {setStat(SC.unit, SKILL_RANGE)} </Typography>
             </Fragment>
           ) : null}
         </Grid>
