@@ -5,7 +5,7 @@ import { ItemContext } from "../contexts/itemContext";
 // constants
 import { ITEM_TYPE_FORTIFICATIONS } from "../constants/itemShopConstants";
 
-const useUnitEqipmentLimits = () => {
+const useUnitEquipmentLimits = () => {
   const IC = useContext(ItemContext);
 
   /**
@@ -95,4 +95,4 @@ const useUnitEqipmentLimits = () => {
   };
 };
 
-export default useUnitEqipmentLimits;
+export default useUnitEquipmentLimits;
