@@ -78,12 +78,6 @@ export const setStat = (unit, statName) => {
   return stat;
 };
 
- 
-// bonus -> Greifenfedern
-//TODO Übertragungsfehler in der DB
-// TODO: you somehow destroyed the pdf card view...
-// TODO schwerer Fehler! bei den Goblins: Schamanen UND Helden =< 30%!
-
 /**
  * Function iterates through a unit's items, if they exist.
  * If one of the items has the correct property with a value !== 0
