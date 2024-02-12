@@ -20,7 +20,7 @@ const ChoosePdfType = (props) => {
         <Button
           variant="outlined"
           onClick={() => {
-            props.openPDfInNewTab({ printDefaultList: true });
+            props.openPDfInNewTab({ printDefaultList: false });
             props.setShowPdfVariantButtons(false);
           }}
         >
