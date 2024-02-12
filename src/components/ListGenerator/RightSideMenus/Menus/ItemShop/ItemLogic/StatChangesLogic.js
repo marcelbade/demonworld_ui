@@ -10,18 +10,17 @@ export const INITIATIVE = "initiative";
 export const MORAL1 = "moral1";
 export const MORAL2 = "moral2";
 
-const statMapping = {
-  armourMelee: "altersArmourMelee",
-  armourRange: "altersArmourRange",
-  fear: "altersFear",
-  move: "altersMove",
-  skirmish: "altersSkirmish",
-  charge: "altersCharge",
-  skillMelee: "altersSkillMelee",
-  skillRange: "altersSkillRange",
-  initiative: "altersInitiative",
-  moral1: "altersMoral1",
-  moral2: "altersMoral2",
+/**
+ * Since all item properties that alter unit stats follow the same naming convention,
+ * the mapping is done via a simple String concotenation
+ * + making the first character of the stat's name upper case.
+ * E.g.: moral2 => altersMoral2.
+ * @param {String} unitStat
+ * @returns a String that is the name of the corresponding item property.
+ */
+const mapUnitStatToItemProperty = (unitStat) => {
+  unitStat = unitStat.charAt(0).toUpperCase() + unitStat.slice(1);
+  return `alters${unitStat}`;
 };
 
 /**
@@ -30,7 +29,7 @@ const statMapping = {
  * @param {unitCard} unit
  * @returns the value for the property weapon1
  */
-export const weapon1stats = (unit) => {
+export const weapon1Stats = (unit) => {
   let weapon1Properties = { name: unit.weapon1Name, value: unit.weapon1 };
   const result = searchForRelevantModifier(unit, "altersWeapon1");
 
@@ -45,6 +44,21 @@ export const weapon1stats = (unit) => {
   return weapon1Properties;
 };
 
+export const rangedWeaponStats = (unit) => {
+  let rangedWeaponProperties = { name: unit.rangedWeapon, value: unit.rangedAttackStats };
+  const result = searchForRelevantModifier(unit, "altersRangedWeapon");
+
+  if (result.modifierFound) {
+    rangedWeaponProperties = {
+      ...rangedWeaponProperties, //
+      name: result.newName,
+      value: result.modifier,
+    };
+  }
+
+  return rangedWeaponProperties;
+};
+
 /**
  * Function calculates the new value for a unit's stat
  * after choosing an item that permanently changes a stat.
@@ -55,7 +69,7 @@ export const weapon1stats = (unit) => {
 export const setStat = (unit, statName) => {
   let stat = unit[statName];
 
-  const result = searchForRelevantModifier(unit, statMapping[statName]);
+  const result = searchForRelevantModifier(unit, mapUnitStatToItemProperty(statName));
 
   if (result.modifierFound) {
     stat += result.modifier;
@@ -64,11 +78,11 @@ export const setStat = (unit, statName) => {
   return stat;
 };
 
-// TODO command stars ->  Uhrgs Stirnreif, range weopon stat -> Der Bogen von Iconessa
+ 
 // bonus -> Greifenfedern
-//TODO übetrqagungsfehler in der DB
+//TODO Übertragungsfehler in der DB
 // TODO: you somehow destroyed the pdf card view...
-// TODO schwerer Fehler! bei den Goblins: Schamamen UND Helden =< 30%!
+// TODO schwerer Fehler! bei den Goblins: Schamanen UND Helden =< 30%!
 
 /**
  * Function iterates through a unit's items, if they exist.
@@ -82,20 +96,19 @@ export const setStat = (unit, statName) => {
 const searchForRelevantModifier = (unit, property) => {
   let replacementStats = {
     modifierFound: false,
-    name: null,
     modifier: 0,
   };
 
-  if (unit.equipment !== undefined && unit.equipment.length !== 0) {
-    unit.equipment.forEach((e) => {
-      const itemFields = Object.entries(e);
+  if (unitHasItems(unit)) {
+    unit.equipment.forEach((item) => {
+      const itemFields = Object.entries(item);
       itemFields.forEach((i) => {
         //i = [property, value]
         if (i[0] === property && i[1] !== 0 && i[1] > replacementStats.modifier) {
           replacementStats = {
             ...replacementStats, //
             modifierFound: true,
-            newName: e.itemName,
+            newName: item.itemName,
             modifier: i[1],
           };
         }
@@ -104,6 +117,10 @@ const searchForRelevantModifier = (unit, property) => {
   }
 
   return replacementStats;
+};
+
+const unitHasItems = (unit) => {
+  return unit.equipment !== undefined && unit.equipment.length !== 0;
 };
 
 /**
