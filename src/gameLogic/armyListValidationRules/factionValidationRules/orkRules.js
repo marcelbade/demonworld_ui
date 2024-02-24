@@ -62,46 +62,40 @@ const validationResults = {
 
 const OrkRules = {
   testSubFactionRules: (
-    availableUnits,
-    selectedUnits,
-    totalPointsAllowance,
-    subFactions,
-    selectedAlternativeList,
-    tournamentOverrideRules,
-    listOfAlliedUnits
-  ) => {
+    validationData 
+   ) => {
     // Switch between alternative ruule objects!
-    switchBetweenAlternativeRules(selectedAlternativeList);
+    switchBetweenAlternativeRules(validationData.selectedAlternativeList);
 
     //  general rules
-    let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(selectedUnits, availableUnits, totalPointsAllowance);
-    let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(rules, selectedUnits, totalPointsAllowance, subFactions);
-    let isAboveSubFactionMax = globalRules.unitsAboveSubFactionMax(rules, selectedUnits, totalPointsAllowance, availableUnits);
+    let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(validationData.selectedUnits, validationData.availableUnits, validationData.totalPointsAllowance);
+    let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(rules, validationData.selectedUnits, validationData.totalPointsAllowance, validationData.subFactions);
+    let isAboveSubFactionMax = globalRules.unitsAboveSubFactionMax(rules, validationData.selectedUnits, validationData.totalPointsAllowance, validationData.availableUnits);
 
     // tournament rules
     let maxCopies;
     let heroPointCap;
 
-    if (tournamentOverrideRules.enableOverride) {
-      maxCopies = tournamentOverrideRules.maxNumber;
-      heroPointCap = tournamentOverrideRules.maxHeroValue;
+    if (validationData.tournamentOverrideRules.enableOverride) {
+      maxCopies = validationData.tournamentOverrideRules.maxNumber;
+      heroPointCap = validationData.tournamentOverrideRules.maxHeroValue;
     } else {
       maxCopies = 2;
       // faction rule => 40% cap
       heroPointCap = 40;
     }
 
-    let testForMax2Result = globalRules.maximumCopiesOfUnit(selectedUnits, maxCopies);
-    let testForHeroCapResult = globalRules.belowMaxPercentageHeroes(selectedUnits, totalPointsAllowance, availableUnits, heroPointCap);
+    let testForMax2Result = globalRules.maximumCopiesOfUnit(validationData.selectedUnits, maxCopies);
+    let testForHeroCapResult = globalRules.belowMaxPercentageHeroes(validationData.selectedUnits, validationData.totalPointsAllowance, validationData.availableUnits, heroPointCap);
 
-    let hasDuplicateUniques = tournamentOverrideRules.uniquesOnlyOnce //
-      ? globalRules.noDuplicateUniques(selectedUnits)
+    let hasDuplicateUniques = validationData.tournamentOverrideRules.uniquesOnlyOnce //
+      ? globalRules.noDuplicateUniques(validationData.selectedUnits)
       : [];
 
     // special faction rules
-    let goblinsAboveMax = checkForGoblinMax(selectedUnits, totalPointsAllowance, availableUnits);
-    let hasNoCommander = isOrkArmyCommanderPresent(selectedUnits, selectedAlternativeList);
-    let availlableClanUnits = setUnitsForClans(availableUnits, selectedAlternativeList);
+    let goblinsAboveMax = checkForGoblinMax(validationData.selectedUnits, validationData.totalPointsAllowance, validationData.availableUnits);
+    let hasNoCommander = isOrkArmyCommanderPresent(validationData.selectedUnits, validationData.selectedAlternativeList);
+    let availlableClanUnits = setUnitsForClans(validationData.availableUnits, validationData.selectedAlternativeList);
 
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [
@@ -142,10 +136,10 @@ const ORK_SUBFACTION_LIMITS = {
 };
 
 /**
- * Function changes the max. limits for the subfactions depending on which alternative army list has been selected.
+ * Function changes the max. limits for the validationData.subFactions depending on which alternative army list has been selected.
  */
-const switchBetweenAlternativeRules = (selectedAlternativeList) => {
-  //  selectedAlternativeList  --> Clanngett, Steinclan,...
+const switchBetweenAlternativeRules = ( selectedAlternativeList) => {
+  //  validationData.selectedAlternativeList  --> Clanngett, Steinclan,...
   let mapperArray;
   const CLANNGETT = "Clanngett";
   const MAPPER_A = "clanngett";

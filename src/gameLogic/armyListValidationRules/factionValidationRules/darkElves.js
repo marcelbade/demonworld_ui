@@ -48,44 +48,55 @@ const rules = [
 ];
 
 const DarkElveRules = {
-  testSubFactionRules: (
-    availableUnits,
-    selectedUnits,
-    totalPointsAllowance,
-    subFactions,
-    selectedAlternativeList,
-    tournamentOverrideRules,
-    listOfAlliedUnits
-  ) => {
+  testSubFactionRules: (validationData) => {
     //  general rules
-    let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(selectedUnits, availableUnits, totalPointsAllowance);
-    let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(rules, selectedUnits, totalPointsAllowance, subFactions);
-    let isAboveSubFactionMax = globalRules.unitsAboveSubFactionMax(rules, selectedUnits, totalPointsAllowance, availableUnits);
-    let hasNoCommander = globalRules.isArmyCommanderPresent(selectedUnits);
+    let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(
+      validationData.selectedUnits,
+      validationData.availableUnits,
+      validationData.totalPointsAllowance
+    );
+    let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(
+      rules,
+      validationData.selectedUnits,
+      validationData.totalPointsAllowance,
+      validationData.subFactions
+    );
+    let isAboveSubFactionMax = globalRules.unitsAboveSubFactionMax(
+      rules,
+      validationData.selectedUnits,
+      validationData.totalPointsAllowance,
+      validationData.availableUnits
+    );
+    let hasNoCommander = globalRules.isArmyCommanderPresent(validationData.selectedUnits);
 
     // tournament rules
     let maxCopies;
     let heroPointCap;
 
-    if (tournamentOverrideRules.enableOverride) {
-      maxCopies = tournamentOverrideRules.maxNumber;
-      heroPointCap = tournamentOverrideRules.maxHeroValue;
+    if (validationData.tournamentOverrideRules.enableOverride) {
+      maxCopies = validationData.tournamentOverrideRules.maxNumber;
+      heroPointCap = validationData.tournamentOverrideRules.maxHeroValue;
     } else {
       maxCopies = 2;
       // faction rule => 50% cap
       heroPointCap = 50;
     }
 
-    let testForMax2Result = globalRules.maximumCopiesOfUnit(selectedUnits, maxCopies);
-    let isAboveCharLimit = globalRules.belowMaxPercentageHeroes(selectedUnits, totalPointsAllowance, availableUnits, heroPointCap);
+    let testForMax2Result = globalRules.maximumCopiesOfUnit(validationData.selectedUnits, maxCopies);
+    let isAboveCharLimit = globalRules.belowMaxPercentageHeroes(
+      validationData.selectedUnits,
+      validationData.totalPointsAllowance,
+      validationData.availableUnits,
+      heroPointCap
+    );
 
-    let hasDuplicateUniques = tournamentOverrideRules.uniquesOnlyOnce //
-      ? globalRules.noDuplicateUniques(selectedUnits)
+    let hasDuplicateUniques = validationData.tournamentOverrideRules.uniquesOnlyOnce //
+      ? globalRules.noDuplicateUniques(validationData.selectedUnits)
       : [];
 
     /**
-     * Function implements a special faction rule: per full 10% of the max point allowance 
-     * spent on the priest caste, your point allowance 
+     * Function implements a special faction rule: per full 10% of the max point allowance
+     * spent on the priest caste, your point allowance
      * for the magicians' caste decreases by 10% and vice versa.
      * Note that the algorithm is different from all the other validator logic-
      * it does not create a list of unit Card objects that are added to a "block list",
@@ -97,12 +108,15 @@ const DarkElveRules = {
       const PRIESTS = ["Priesterin", "Priesterkaste", "magicianCaste"];
       const MAGICIANS = ["Magier", "Magierkaste", "priestCaste"];
 
-      if (selectedUnits !== undefined && selectedUnits.length > 0) {
-        for (let i = selectedUnits.length - 1; i >= 0; i--) {
-          if (selectedUnits[i].subFaction === "Priesterin" || selectedUnits[i].subFaction === "Priesterkaste") {
+      if (validationData.selectedUnits !== undefined && validationData.selectedUnits.length > 0) {
+        for (let i = validationData.selectedUnits.length - 1; i >= 0; i--) {
+          if (
+            validationData.selectedUnits[i].subFaction === "Priesterin" ||
+            validationData.selectedUnits[i].subFaction === "Priesterkaste"
+          ) {
             decreaseAllowance(INCREMENT, NET_TOTAL, PRIESTS);
           }
-          if (selectedUnits[i].subFaction === "Magier" || selectedUnits[i].subFaction === "Magierkaste") {
+          if (validationData.selectedUnits[i].subFaction === "Magier" || validationData.selectedUnits[i].subFaction === "Magierkaste") {
             decreaseAllowance(INCREMENT, NET_TOTAL, MAGICIANS);
           }
         }
@@ -118,13 +132,13 @@ const DarkElveRules = {
     const decreaseAllowance = (increment, netTotal, subFaction) => {
       let pointsSpent = 0;
 
-      selectedUnits
+      validationData.selectedUnits
         .filter((sU) => sU.subFaction === subFaction[0] || sU.subFaction === subFaction[1])
         .forEach((unit) => {
           pointsSpent += unit.points;
         });
 
-      const percentage = pointsSpent * (100 / totalPointsAllowance);
+      const percentage = pointsSpent * (100 / validationData.totalPointsAllowance);
       const share = Math.floor(percentage / increment);
 
       const remainder = netTotal - share;

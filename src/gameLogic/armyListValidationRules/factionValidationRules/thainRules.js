@@ -53,49 +53,60 @@ const rules = [
 ];
 
 const ThainRules = {
-  testSubFactionRules: (
-    availableUnits,
-    selectedUnits,
-    totalPointsAllowance,
-    subFactions,
-    selectedAlternativeList,
-    tournamentOverrideRules,
-    listOfAlliedUnits
-  ) => {
+  testSubFactionRules: (validationData) => {
     //  general rules
-    let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(selectedUnits, availableUnits, totalPointsAllowance);
-    let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(rules, selectedUnits, totalPointsAllowance, subFactions);
-    let isAboveSubFactionMax = globalRules.unitsAboveSubFactionMax(rules, selectedUnits, totalPointsAllowance, availableUnits);
-    let hasNoCommander = globalRules.isArmyCommanderPresent(selectedUnits);
+    let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(
+      validationData.selectedUnits,
+      validationData.availableUnits,
+      validationData.totalPointsAllowance
+    );
+    let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(
+      rules,
+      validationData.selectedUnits,
+      validationData.totalPointsAllowance,
+      validationData.subFactions
+    );
+    let isAboveSubFactionMax = globalRules.unitsAboveSubFactionMax(
+      rules,
+      validationData.selectedUnits,
+      validationData.totalPointsAllowance,
+      validationData.availableUnits
+    );
+    let hasNoCommander = globalRules.isArmyCommanderPresent(validationData.selectedUnits);
 
     // tournament rules
     let maxCopies;
     let heroPointCap;
 
-    if (tournamentOverrideRules.enableOverride) {
-      maxCopies = tournamentOverrideRules.maxNumber;
-      heroPointCap = tournamentOverrideRules.maxHeroValue;
+    if (validationData.tournamentOverrideRules.enableOverride) {
+      maxCopies = validationData.tournamentOverrideRules.maxNumber;
+      heroPointCap = validationData.tournamentOverrideRules.maxHeroValue;
     } else {
       maxCopies = 2;
       // faction rule => 50% cap
       heroPointCap = 50;
     }
 
-    let testForMax2Result = globalRules.maximumCopiesOfUnit(selectedUnits, maxCopies);
-    let testForHeroCapResult = globalRules.belowMaxPercentageHeroes(selectedUnits, totalPointsAllowance, availableUnits, heroPointCap);
+    let testForMax2Result = globalRules.maximumCopiesOfUnit(validationData.selectedUnits, maxCopies);
+    let testForHeroCapResult = globalRules.belowMaxPercentageHeroes(
+      validationData.selectedUnits,
+      validationData.totalPointsAllowance,
+      validationData.availableUnits,
+      heroPointCap
+    );
 
-    let hasDuplicateUniques = tournamentOverrideRules.uniquesOnlyOnce //
-      ? globalRules.noDuplicateUniques(selectedUnits)
+    let hasDuplicateUniques = validationData.tournamentOverrideRules.uniquesOnlyOnce //
+      ? globalRules.noDuplicateUniques(validationData.selectedUnits)
       : [];
     // special faction rules
-    dorgaVsShamans(selectedUnits, totalPointsAllowance);
-    let testForChampionRule = greatChampionRule(selectedUnits);
-    let testForDorgaRule = dorgaPriestRule(selectedUnits, availableUnits);
-    let testForVeteranRule = veteranRule(selectedUnits, availableUnits);
-    let testForChurchRemoval = dorgaPriestRemove(selectedUnits, availableUnits);
-    let testForVeteranRemoval = tribalVeteranRemove(selectedUnits, availableUnits);
-    let testForChampionRemoval = greatChampionRemove(selectedUnits, availableUnits);
-    let testForassignedTribe = allUnitsNeedTribes(selectedUnits);
+    dorgaVsShamans(validationData.selectedUnits, validationData.totalPointsAllowance);
+    let testForChampionRule = greatChampionRule(validationData.selectedUnits);
+    let testForDorgaRule = dorgaPriestRule(validationData.selectedUnits, validationData.availableUnits);
+    let testForVeteranRule = veteranRule(validationData.selectedUnits, validationData.availableUnits);
+    let testForChurchRemoval = dorgaPriestRemove(validationData.selectedUnits, validationData.availableUnits);
+    let testForVeteranRemoval = tribalVeteranRemove(validationData.selectedUnits, validationData.availableUnits);
+    let testForChampionRemoval = greatChampionRemove(validationData.selectedUnits, validationData.availableUnits);
+    let testForassignedTribe = allUnitsNeedTribes(validationData.selectedUnits);
 
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [
@@ -134,7 +145,7 @@ const ThainRules = {
 
 /**
  * Every Thain unit - with the exception of giant animals, Dorga Church units, Summons and the Banner of the High King must be assigned a tribe, i.e., the secondSubFaction attribute must be chagned to one of the values in the tribes list.
- * @param {[unitCard]} selectedUnits
+ * @param {[unitCard]}  electedUnits
  * @returns an array with all units that still must be assigned a tribe (secondSubFaction).
  */
 const allUnitsNeedTribes = (selectedUnits) => {

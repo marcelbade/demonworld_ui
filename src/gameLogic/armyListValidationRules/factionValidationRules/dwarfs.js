@@ -43,43 +43,54 @@ const rules = [
 ];
 
 const DwarfRules = {
-  testSubFactionRules: (
-    availableUnits,
-    selectedUnits,
-    totalPointsAllowance,
-    subFactions,
-    selectedAlternativeList,
-    tournamentOverrideRules,
-    listOfAlliedUnits
-  ) => {
+  testSubFactionRules: (validationData) => {
     //  general rules
-    let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(selectedUnits, availableUnits, totalPointsAllowance);
-    let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(rules, selectedUnits, totalPointsAllowance, subFactions);
-    let isAboveSubFactionMax = globalRules.unitsAboveSubFactionMax(rules, selectedUnits, totalPointsAllowance, availableUnits);
-    let hasNoCommander = globalRules.isArmyCommanderPresent(selectedUnits);
+    let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(
+      validationData.selectedUnits,
+      validationData.availableUnits,
+      validationData.totalPointsAllowance
+    );
+    let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(
+      rules,
+      validationData.selectedUnits,
+      validationData.totalPointsAllowance,
+      validationData.subFactions
+    );
+    let isAboveSubFactionMax = globalRules.unitsAboveSubFactionMax(
+      rules,
+      validationData.selectedUnits,
+      validationData.totalPointsAllowance,
+      validationData.availableUnits
+    );
+    let hasNoCommander = globalRules.isArmyCommanderPresent(validationData.selectedUnits);
 
     // tournament rules
     let maxCopies;
     let heroPointCap;
 
-    if (tournamentOverrideRules.enableOverride) {
-      maxCopies = tournamentOverrideRules.maxNumber;
-      heroPointCap = tournamentOverrideRules.maxHeroValue;
+    if (validationData.tournamentOverrideRules.enableOverride) {
+      maxCopies = validationData.tournamentOverrideRules.maxNumber;
+      heroPointCap = validationData.tournamentOverrideRules.maxHeroValue;
     } else {
       maxCopies = 2;
       // faction rule =>  no cap for heroes!
       heroPointCap = 100;
     }
 
-    let testForMax2Result = globalRules.maximumCopiesOfUnit(selectedUnits, maxCopies);
-    let testForHeroCapResult = globalRules.belowMaxPercentageHeroes(selectedUnits, totalPointsAllowance, availableUnits, heroPointCap);
+    let testForMax2Result = globalRules.maximumCopiesOfUnit(validationData.selectedUnits, maxCopies);
+    let testForHeroCapResult = globalRules.belowMaxPercentageHeroes(
+      validationData.selectedUnits,
+      validationData.totalPointsAllowance,
+      validationData.availableUnits,
+      heroPointCap
+    );
 
-    let hasDuplicateUniques = tournamentOverrideRules.uniquesOnlyOnce //
-      ? globalRules.noDuplicateUniques(selectedUnits)
+    let hasDuplicateUniques = validationData.tournamentOverrideRules.uniquesOnlyOnce //
+      ? globalRules.noDuplicateUniques(validationData.selectedUnits)
       : [];
 
     // special faction rule: dwarf kingdoms and allies - the player has to choose one. That Kondom can make up up to 40% of the list, the other one up to 20%. Instead of the second kingdom, the player can take up to 20% of imperial allies
-    percentageKingdomsAndAlly(selectedUnits);
+    percentageKingdomsAndAlly(validationData.selectedUnits);
 
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [

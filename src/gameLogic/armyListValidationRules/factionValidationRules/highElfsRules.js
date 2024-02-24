@@ -75,51 +75,62 @@ const rules = [
 ];
 
 const ElfRules = {
-  testSubFactionRules: (
-    availableUnits,
-    selectedUnits,
-    totalPointsAllowance,
-    subFactions,
-    selectedAlternativeList,
-    tournamentOverrideRules,
-    listOfAlliedUnits
-  ) => {
+  testSubFactionRules: (validationData) => {
     //  general rules
-    let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(selectedUnits, availableUnits, totalPointsAllowance);
-    let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(rules, selectedUnits, totalPointsAllowance, subFactions);
-    let isAboveSubFactionMax = globalRules.unitsAboveSubFactionMax(rules, selectedUnits, totalPointsAllowance, availableUnits);
-    let hasNoCommander = globalRules.isArmyCommanderPresent(selectedUnits);
+    let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(
+      validationData.selectedUnits,
+      validationData.availableUnits,
+      validationData.totalPointsAllowance
+    );
+    let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(
+      rules,
+      validationData.selectedUnits,
+      validationData.totalPointsAllowance,
+      validationData.subFactions
+    );
+    let isAboveSubFactionMax = globalRules.unitsAboveSubFactionMax(
+      rules,
+      validationData.selectedUnits,
+      validationData.totalPointsAllowance,
+      validationData.availableUnits
+    );
+    let hasNoCommander = globalRules.isArmyCommanderPresent(validationData.selectedUnits);
 
     // tournament rules
     let maxCopies;
     let heroPointCap;
 
-    if (tournamentOverrideRules.enableOverride) {
-      maxCopies = tournamentOverrideRules.maxNumber;
-      heroPointCap = tournamentOverrideRules.maxHeroValue;
+    if (validationData.tournamentOverrideRules.enableOverride) {
+      maxCopies = validationData.tournamentOverrideRules.maxNumber;
+      heroPointCap = validationData.tournamentOverrideRules.maxHeroValue;
     } else {
       maxCopies = 2;
       // faction rule => 40% cap
       heroPointCap = 40;
     }
 
-    let testForMax2Result = globalRules.maximumCopiesOfUnit(selectedUnits, maxCopies);
-    let testForHeroCapResult = globalRules.belowMaxPercentageHeroes(selectedUnits, totalPointsAllowance, availableUnits, heroPointCap);
+    let testForMax2Result = globalRules.maximumCopiesOfUnit(validationData.selectedUnits, maxCopies);
+    let testForHeroCapResult = globalRules.belowMaxPercentageHeroes(
+      validationData.selectedUnits,
+      validationData.totalPointsAllowance,
+      validationData.availableUnits,
+      heroPointCap
+    );
 
-    let hasDuplicateUniques = tournamentOverrideRules.uniquesOnlyOnce //
-      ? globalRules.noDuplicateUniques(selectedUnits)
+    let hasDuplicateUniques = validationData.tournamentOverrideRules.uniquesOnlyOnce //
+      ? globalRules.noDuplicateUniques(validationData.selectedUnits)
       : [];
 
     // special faction rules
-    let testForMaxNumberOldHeroes = numberOfOldHeroes(selectedUnits, availableUnits);
-    let testForOreaVanarUnits = OreaVanarRules(selectedUnits);
-    let testForThanarilCovenUnits = thanarilCovenRule(selectedUnits);
-    let testForEntsVsCentaurs = entsOrCentaurs(selectedUnits, availableUnits);
-    let testForIlahRi = councilArmyRule(selectedUnits, availableUnits);
-    let testIlahRiForRemoval = councilArmyRemove(selectedUnits);
-    let testOldHeroForRemoval = oldHeroRemove(selectedUnits);
-    let testOreaVanarMasterRemoval = removeOreaVanar(selectedUnits);
-    let testThanarilCovenRemoval = removeThanarilCoven(selectedUnits);
+    let testForMaxNumberOldHeroes = numberOfOldHeroes(validationData.selectedUnits, validationData.availableUnits);
+    let testForOreaVanarUnits = OreaVanarRules(validationData.selectedUnits);
+    let testForThanarilCovenUnits = thanarilCovenRule(validationData.selectedUnits);
+    let testForEntsVsCentaurs = entsOrCentaurs(validationData.selectedUnits, validationData.availableUnits);
+    let testForIlahRi = councilArmyRule(validationData.selectedUnits, validationData.availableUnits);
+    let testIlahRiForRemoval = councilArmyRemove(validationData.selectedUnits);
+    let testOldHeroForRemoval = oldHeroRemove(validationData.selectedUnits);
+    let testOreaVanarMasterRemoval = removeOreaVanar(validationData.selectedUnits);
+    let testThanarilCovenRemoval = removeThanarilCoven(validationData.selectedUnits);
 
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [
@@ -183,7 +194,7 @@ const numberOfOldHeroes = (selectedUnits, availableUnits) => {
  * if the army list no longer contains enough Ilah Ri and/or Thanaril units,
  * the function removes a number of Old Heroes, starting with the last one picked,
  * unitl the rule is no longer broken.
- * @param {[unitCard]} selectedUnits
+ * @param {[unitCard]} validationData.selectedUnits
  * @returns an array of units that need to be removed from the army list automatically.
  */
 const oldHeroRemove = (selectedUnits) => {
