@@ -78,10 +78,10 @@ export const CARD_PREVIEW = {
   MOVE: "M",
   SKIRMISH: "P",
   CHARGE: "A",
-  INITIATIVE:"Initiative",
+  INITIATIVE: "Initiative",
   FEAR: "Furchtfaktor",
   MORAL: "Moral",
-  CONTROL_AREA:"Kontrollbereich",
+  CONTROL_AREA: "Kontrollbereich",
 };
 
 // FACTIONS
@@ -152,11 +152,14 @@ export const GOBLINS = {
   SUB_FACTION_RULES: {
     INFANTRY: "Deine Armeeliste muss zu mindestens 30% aus Infanterie bestehen.",
     ENGINES: "Deine Armeeliste darf maximal zu 20% aus Geräten bestehen.",
-    CHARACTERS: "Deine Armeeliste darf maximal zu 40% aus Helden und Befehlshabern bestehen.",
+    CHARACTERS: "Deine Armeeliste darf maximal zu 30% aus Helden und Befehlshabern bestehen.",
     SHAMANS: "Deine Armeeliste darf maximal zu 30% aus Schamanen bestehen.",
     GIANTINSECTS: "Deine Armeeliste darf maximal zu 40% aus Rieseninsekten bestehen.",
     INSECTRIDERS: "Deine Armeeliste darf maximal zu 40% aus Insektenreiter bestehen.",
     ORKS: "Deine Armeeliste darf zu maximal zu 20% aus Orks bestehen.",
+  },
+  ERRORS: {
+    SHAMAN_AND_HEROES: "Deine Armeeliste darf maximal zu 40% aus Schamanen und Helden bestehen.",
   },
 };
 
