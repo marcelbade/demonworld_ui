@@ -6,13 +6,11 @@ import makeStyles from "@mui/styles/makeStyles";
 // icons
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 // components and functions
-import { ArmyContext } from "../../../../../../../contexts/armyContext";
 import { unitCardMultiSort } from "../../../../../../../util/utilityFunctions";
 import EquipmentList from "./EquipmentList";
 import UnitElementButtons from "./UnitElementButtons";
 import ArmyListUnitEntry from "./ArmyListUnitEntry";
 import useArmyValidation from "../../../../../../../customHooks/UseArmyValidation";
-import { AlternativeListContext } from "../../../../../../../contexts/alternativeListContext";
 import { SelectionContext } from "../../../../../../../contexts/selectionContext";
 
 const useStyles = makeStyles({
@@ -47,18 +45,16 @@ const useStyles = makeStyles({
 const SubFactionUnitList = (props) => {
   // eslint-disable-next-line no-unused-vars
   const classes = useStyles();
-  const AC = useContext(ArmyContext);
   const SEC = useContext(SelectionContext);
-  const ALC = useContext(AlternativeListContext);
   const validation = useArmyValidation();
 
   /**
-   * Function removes a unit from the current list.
+   * Function removes a unit from the current list, and revalidates the list.
    * @param {*} identifier unit.name + unique hash value
    */
   const removeUnit = (identifier) => {
     let filtered = SEC.selectedUnits.filter((u) => u.name + u.uniqueID !== identifier);
-    validation.validateList(filtered, SEC.maxPointsAllowance, AC.subFactions, ALC.armyHasAlternativeLists);
+    validation.validateList(filtered, SEC.maxPointsAllowance);
     SEC.setSelectedUnits(filtered);
   };
 

@@ -19,30 +19,36 @@ const useArmyValidation = () => {
   const AYC = useContext(AllyContext);
   const ALC = useContext(AlternativeListContext);
 
-  const validateList = (currentList, currentTotalPointAllowance, currentSubFactions, hasAlternativeLists) => {
+  const validateList = (currentList, currentTotalPointAllowance) => {
     const IsFactionSelected = AC.selectedFactionName !== NONE && AC.selectedFactionName !== undefined;
     const isAlternativeListSelected = ALC.selectedAlternativeList.length !== 0;
 
     if (
-      (IsFactionSelected && hasAlternativeLists && isAlternativeListSelected) || //
-      (IsFactionSelected && !hasAlternativeLists)
+      (IsFactionSelected && ALC.armyHasAlternativeLists && isAlternativeListSelected) || //
+      (IsFactionSelected && !ALC.armyHasAlternativeLists)
     ) {
-      runValidation(currentList, currentTotalPointAllowance, currentSubFactions);
+      runValidation(currentList, currentTotalPointAllowance, AC.subFactions);
     }
   };
 
   //TODO: memoize AC.X properties!
+  /**
+   *
+   * @param {*} currentList
+   * @param {*} currentTotalPointAllowance
+   * @param {*} currentSubFactions
+   */
   const runValidation = (currentList, currentTotalPointAllowance, currentSubFactions) => {
     let validator = ruleValidation(AC.selectedFactionName);
-    let validationResult = validator.testSubFactionRules(
-      AC.listOfAllFactionUnits,
-      currentList,
-      currentTotalPointAllowance,
-      currentSubFactions,
-      ALC.selectedAlternativeList,
-      TC.tournamentOverrideRules,
-      AYC.listOfAlliedUnits
-    );
+    let validationResult = validator.testSubFactionRules({
+      availableUnits: AC.listOfAllFactionUnits,
+      selectedUnits: currentList,
+      totalPointsAllowance: currentTotalPointAllowance,
+      subFactions: currentSubFactions,
+      selectedAlternativeList: ALC.selectedAlternativeList,
+      tournamentOverrideRules: TC.tournamentOverrideRules,
+      listOfAlliedUnits: AYC.listOfAlliedUnits,
+    });
 
     collectValidatioResults(currentList, validationResult);
   };

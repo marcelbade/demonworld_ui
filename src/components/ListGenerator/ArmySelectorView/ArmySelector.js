@@ -124,12 +124,7 @@ const ArmySelector = () => {
   };
 
   useEffect(() => {
-    validation.validateList(
-      [], //
-      SEC.maxPointsAllowance,
-      AC.subFactions,
-      ALC.armyHasAlternativeLists
-    );
+    validation.validateList([], SEC.maxPointsAllowance);
   }, [AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (

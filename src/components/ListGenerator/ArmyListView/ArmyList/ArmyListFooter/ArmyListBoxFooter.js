@@ -2,27 +2,21 @@
 import React, { useState, useContext, Fragment } from "react";
 import { Typography, TextField, InputAdornment, Grid } from "@mui/material";
 // components and functions
-import { ArmyContext } from "../../../../../contexts/armyContext";
 import { SelectionContext } from "../../../../../contexts/selectionContext";
 import calculateScoutingFactor from "../../../../../gameLogic/scoutFactorCalculator/scoutingFactorCalculator";
 import useArmyValidation from "../../../../../customHooks/UseArmyValidation";
 // import { calculateTotalPointCost } from "../../../../../util/utilityFunctions";
 import usePointCostCalculator from "../../../../../customHooks/UsePointCostCalculator";
-import { AlternativeListContext } from "../../../../../contexts/alternativeListContext";
 // constants
 import { GENERAL_ERRRORS, INPUT_TEXTS, TEXTS } from "../../../../../constants/textsAndMessages";
 
 const ArmyListBoxFooter = () => {
-  const AC = useContext(ArmyContext);
-  const ALC = useContext(AlternativeListContext);
   const SEC = useContext(SelectionContext);
 
   const validation = useArmyValidation();
   const calculator = usePointCostCalculator();
 
   const [errorMessage, setErrorMessage] = useState("");
-
-  
 
   let netPoints = SEC.selectedUnits !== undefined ? calculator.calculateTotalArmyCost(SEC.selectedUnits) : 0;
 
@@ -36,7 +30,7 @@ const ArmyListBoxFooter = () => {
     let isValid = new RegExp(/^[0-9]*$/).test(event.target.value);
     isValid ? setErrorMessage("") : setErrorMessage(GENERAL_ERRRORS.ONLY_NUMBERS);
 
-    validation.validateList(SEC.selectedUnits, event.target.value, AC.subFactions, ALC.armyHasAlternativeLists);
+    validation.validateList(SEC.selectedUnits, event.target.value);
   };
 
   return (

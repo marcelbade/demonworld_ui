@@ -4,11 +4,9 @@ import { Typography, Grid, IconButton } from "@mui/material";
 // icons
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 // components and functions
-import { ArmyContext } from "../../../../contexts/armyContext";
 import useArmyValidation from "../../../../customHooks/UseArmyValidation";
 import useUnitEnricher from "../../../../customHooks/UseUnitEnricher";
 import { SelectionContext } from "../../../../contexts/selectionContext";
-import { AlternativeListContext } from "../../../../contexts/alternativeListContext";
 import ContextHelpButton from "../../../shared/ContextHelpButton";
 import { PUSH_MESSAGE_TYPES } from "../../../../constants/textsAndMessages";
 
@@ -20,9 +18,7 @@ const useStyles = makeStyles((theme) => ({
 
 const TreeUnitNode = (props) => {
   const classes = useStyles();
-  const AC = useContext(ArmyContext);
   const SEC = useContext(SelectionContext);
-  const ALC = useContext(AlternativeListContext);
   const validation = useArmyValidation();
   const enrichUnit = useUnitEnricher(props.unit);
 
@@ -36,7 +32,7 @@ const TreeUnitNode = (props) => {
     tempArray.push(enrichUnit(props.unit));
     SEC.setSelectedUnits(tempArray);
 
-    validation.validateList(tempArray, SEC.maxPointsAllowance, AC.subFactions, ALC.armyHasAlternativeLists);
+    validation.validateList(tempArray, SEC.maxPointsAllowance);
   };
 
   const displayValidNode = (isBlocked) => {

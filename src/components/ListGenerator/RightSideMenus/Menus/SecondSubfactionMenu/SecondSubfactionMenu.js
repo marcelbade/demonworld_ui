@@ -11,8 +11,6 @@ import { ItemContext } from "../../../../../contexts/itemContext";
 import { SelectionContext } from "../../../../../contexts/selectionContext";
 import { RightMenuContext } from "../../../../../contexts/rightMenuContext";
 import useArmyValidation from "../../../../../customHooks/UseArmyValidation";
-import { ArmyContext } from "../../../../../contexts/armyContext";
-import { AlternativeListContext } from "../../../../../contexts/alternativeListContext";
 
 const useStyles = makeStyles((theme) => ({
   overlay: {
@@ -27,8 +25,6 @@ const useStyles = makeStyles((theme) => ({
 
 const SecondSubFactionMenu = () => {
   const classes = useStyles();
-  const AC = useContext(ArmyContext);
-  const ALC = useContext(AlternativeListContext);
   const IC = useContext(ItemContext);
   const SEC = useContext(SelectionContext);
   const SFC = useContext(SecondSubFactionContext);
@@ -91,9 +87,7 @@ const SecondSubFactionMenu = () => {
                   // immediately re-evaluate list so the unit is shown correctly
                   validation.validateList(
                     SEC.selectedUnits, //
-                    SEC.maxPointsAllowance,
-                    AC.subFactions,
-                    ALC.armyHasAlternativeLists
+                    SEC.maxPointsAllowance
                   );
                 }}
               >
