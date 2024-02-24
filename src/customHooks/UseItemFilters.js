@@ -42,7 +42,7 @@ const useItemFilters = () => {
   };
 
   /**
-   * Function takes the DTO fromthe BE and filters by faction.
+   * Function takes the DTO from the BE and filters by faction.
    * @returns an array of dto filtered by faction.
    */
   const getItemGroupsForSelectedUnit = (selectedUnit, ListOfItemGroups) => {
@@ -51,7 +51,7 @@ const useItemFilters = () => {
 
   /**
    * Function filters out entire items groups that the selected unit cannot equipped.
-   * I.e., a hero cannot carry fortifications or banners.
+   * E.g., a hero cannot carry fortifications or banners.
    * @param {unitCard} selectedUnit
    * @param {[obj]} itemTypeGroup an array of objects, each containing an itemType (String)
    * and an array of itemCards containing items of that type.
@@ -193,7 +193,7 @@ const useItemFilters = () => {
 
   /**
    * Function checks the maximum points allowance for fortifications.
-   * No more than 10% can be spent.
+   * No more than 10% can be spent on fortifications.
    * @returns true, if the points spent on Fortifications is lower than or equal to 10%.
    */
   const isTheListBelowFortificationsLimit = () => {
