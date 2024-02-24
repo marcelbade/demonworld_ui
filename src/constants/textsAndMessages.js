@@ -45,7 +45,7 @@ export const VALIDATION = {
   NO_DUPLICATE_UNIQUES_MESSAGE: "Die Liste darf einzigartige Einheiten nur einmal enthalten.",
   MAXIMUM_OF_TWO_OF_EACH_MESSAGE: "Die Liste darf eine Einheit maximal 2x enthalten.",
   MAXIMUM_OF_X_PERCENT_HEROES_MESSAGE: (percentage) => {
-    return `Die Liste darf maximal ${percentage}% Characktere und Helden enthalten.`;
+    return `Die Liste darf maximal ${percentage}% Charaktere und Helden enthalten.`;
   },
   DONT_EXCEED_THE_POINT_ALLOWANCE_MESSAGE: "Die Liste darf die maximale Punktzahl nicht überschreiten.",
   NOT_A_VALID_ITEM: "Diese Einheit kann diesen Gegenstand nicht erhalten.",
