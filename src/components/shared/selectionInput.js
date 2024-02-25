@@ -12,7 +12,7 @@ const SelectionInput = (props) => {
   return (
     <Autocomplete
       id="arymSelection"
-      options={props.options}
+      options={props.alternatives}
       onChange={(event, value, reason) => {
         if (reason === "clear") {
           props.clearFunction();

@@ -131,7 +131,7 @@ const ArmySelector = () => {
     <SelectionInput //
       filterFunction={handleInput}
       isArmySelector={true}
-      options={ALL_FACTIONS_ARRAY}
+      alternatives={ALL_FACTIONS_ARRAY}
       label={INPUT_TEXTS.SELECT_FACTION}
     />
   );
