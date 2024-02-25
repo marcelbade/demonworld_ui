@@ -60,10 +60,10 @@ const SubFactionUnitList = (props) => {
 
   return (
     <Fragment>
-      {unitCardMultiSort(props.subFactionUnits).map((u) => {
+      {unitCardMultiSort(props.subFactionUnits).map((u,i) => {
         const identifier = u.unitName + u.uniqueID;
         return (
-          <List className={classes.list} key={identifier}>
+          <List className={classes.list} key={i}>
             <ListItem className={classes.element}>
               <IconButton
                 onClick={() => {
