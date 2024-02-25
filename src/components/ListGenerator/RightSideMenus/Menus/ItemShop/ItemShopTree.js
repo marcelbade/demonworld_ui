@@ -94,15 +94,22 @@ const ItemShopTree = () => {
             onClick={() => controller.getNodeId([`${i}`])}
             disabled={testForEmptyItemType(dto)}
           >
-            {dto.items.map((item) => {
+            {dto.items.map((item, i) => {
               const result = isItemBlocked(IC.unitSelectedForShop, item);
 
               return result.isBlocked ? (
-                <Grid container>
+                <Grid
+                  key={i} //
+                  container
+                >
                   <TreeItemNode item={item} />
                 </Grid>
               ) : (
-                <InvalidTreeItemNode item={item} message={result.message} />
+                <InvalidTreeItemNode
+                  key={i} //
+                  item={item}
+                  message={result.message}
+                />
               );
             })}
           </TreeItem>
