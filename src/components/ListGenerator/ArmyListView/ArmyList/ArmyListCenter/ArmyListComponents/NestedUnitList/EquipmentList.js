@@ -55,10 +55,7 @@ const EquipmentList = (props) => {
       }
     }
 
-    validation.validateList({
-      currentList: temp,
-      currentTotalPointAllowance: SEC.maxPointsAllowance,
-    });
+    validation.validateList(temp, SEC.maxPointsAllowance);
 
     SEC.setSelectedUnits(temp);
   };
@@ -104,7 +101,7 @@ const EquipmentList = (props) => {
       {props.unit.equipment.length !== 0
         ? props.unit.equipment.map((e, i) => {
             return (
-              <ListItem key={props.unit.uniqueID} className={classes.element}>
+              <ListItem key={i} className={classes.element}>
                 <IconButton
                   className={clsx(classes.deleteBttn)}
                   onClick={() => {
