@@ -2,7 +2,7 @@
 import React, { useContext, Fragment } from "react";
 // Material UI
 import { Grid, Typography } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
 // functions and modules
 import { StateCardContext } from "../../../../../contexts/statCardContext";
 
@@ -22,10 +22,10 @@ const CardBackCenter = () => {
       <Typography variant="body1" align="center" className={classes.specialRules}>
         {SC.unit.specialRules === "" ? "Keine Besonderen Spielregeln" : SC.unit.specialRules}
         {"equipment" in SC.unit && SC.unit.equipment.length !== 0
-          ? SC.unit.equipment.map((e) => {
+          ? SC.unit.equipment.map((e, i) => {
               return (
-                <Fragment>
-                  <hr></hr>
+                <Fragment key={i}>
+                  {/* <hr></hr> */}
                   <Typography variant="body1" className={classes.specialRules}>
                     {e.name}
                   </Typography>
