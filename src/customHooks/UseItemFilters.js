@@ -30,7 +30,9 @@ const useItemFilters = () => {
 
   /**
    * Function is a wrapper for the filter logic and calls the filtering functions.
-   * First, entire groups of items are filtered, then individual items arte filtered.
+   * First, the correct item list for the selected faction is returned, then item groups are removed.
+   * @param {unitCard} selectedUnit
+   * @param {[itemGroup]} listOfItemGroups
    * @returns an array of items grouped by type, with all item types
    * and items filtered out that the selected unit cannot equip.
    */
@@ -65,6 +67,7 @@ const useItemFilters = () => {
 
     itemTypeGroup = itemTypeGroup.filter((group) => group.typeName !== selectedUnit.prohibitedItemType);
 
+    // filter out fortifications if -> (A) it's not a unit (B) mounted (C) the limit for fortification has been reache.
     if (
       selectedUnit.unitType !== UNIT || //
       selectedUnit.isMounted ||
@@ -72,15 +75,15 @@ const useItemFilters = () => {
     ) {
       itemTypeGroup = itemTypeGroup.filter((group) => group.typeName !== ITEM_TYPE_FORTIFICATIONS);
     }
-
+    // filter out banners if there is no standard bearer
     if (!selectedUnit.standardBearer) {
       itemTypeGroup = itemTypeGroup.filter((group) => group.typeName !== ITEM_TYPE_BANNER);
     }
-
+    // filter out instruments if there is no musician
     if (!selectedUnit.musician) {
       itemTypeGroup = itemTypeGroup.filter((group) => group.typeName !== ITEM_TYPE_INSTRUMENT);
     }
-
+    // filter out almost everything if the unit has no leader
     if (!selectedUnit.leader && selectedUnit.unitType === UNIT) {
       itemTypeGroup = itemTypeGroup.filter(
         (group) =>
@@ -93,8 +96,7 @@ const useItemFilters = () => {
           group.typeName !== ITEM_TYPE_WEAPON
       );
     }
-
-    // non-casters and mounted magic users cannot equip an imp
+    //filter out imps if the unit is a non-casters or a mounted magic users
     if (selectedUnit.magic === 0 || selectedUnit.isMounted) {
       itemTypeGroup = itemTypeGroup.filter((group) => group.typeName !== ITEM_TYPE_IMP);
     }
@@ -117,73 +119,73 @@ const useItemFilters = () => {
 
     const itemFilters = {
       // unique items can only be selected once.
-      uniqueItems: (unit, item) =>
-        !item.isGeneric && //
+      uniqueItems: (data) =>
+        !data.item.isGeneric && //
         IC.allEquippedItems.includes(item.itemName),
 
       // no shield items for heroes & leaders w/o shields.
-      shieldItems: (unit, item) =>
-        !unit.hasShield && //
-        item.requiresShield,
+      shieldItems: (data) =>
+        !data.unit.hasShield && //
+        data.item.requiresShield,
 
       // no cavalery items for heroes & leaders w/o mounts.
-      cavItems: (unit, item) =>
-        !unit.isMounted && //
-        item.mustBeMounted,
+      cavItems: (data) =>
+        !data.unit.isMounted && //
+        data.item.mustBeMounted,
 
       // no spellcaster items for heroes & leaders w/o magic.
-      spellCasterItems: (unit, item) =>
-        unit.magic === 0 && //
-        item.magicUsersOnly,
+      spellCasterItems: (data) =>
+        data.unit.magic === 0 && //
+        data.item.magicUsersOnly,
 
       // no lance items for heroes & leaders w/o a lance.
-      lanceItem: (unit, item) =>
+      lanceItem: (data) =>
         !do2ArraysHaveCommonElements(LANCE_TYPES, unitWeapons) && //
-        item.requiresWeaponType === LANCES,
+        data.item.requiresWeaponType === LANCES,
 
       // no spear items for heroes & leaders w/o a spear.
-      spearItems: (unit, item) =>
+      spearItems: (data) =>
         !do2ArraysHaveCommonElements(SPEAR_TYPES, unitWeapons) && //
-        item.requiresWeaponType === SPEARS,
+        data.item.requiresWeaponType === SPEARS,
 
       // no crossbow items for heroes & leaders w/o a crossbow.
-      crossBowItems: (unit, item) =>
-        !CROSSBOW_TYPES.includes(unit.rangedWeapon) && //
-        item.itemType === ITEM_TYPE_CROSSBOWS,
+      crossBowItems: (data) =>
+        !CROSSBOW_TYPES.includes(data.unit.rangedWeapon) && //
+        data.item.itemType === ITEM_TYPE_CROSSBOWS,
 
       // no bow items for heroes & leaders w/o a bow.
-      bowItems: (unit, item) =>
-        !BOW_TYPES.includes(unit.rangedWeapon) && //
-        item.itemType === ITEM_TYPE_BOWS,
+      bowItems: (data) =>
+        !BOW_TYPES.includes(data.unit.rangedWeapon) && //
+        data.item.itemType === ITEM_TYPE_BOWS,
 
       // check if the item requires a specific type of unit
-      unitTypeItems: (unit, item) =>
-        !item.unitType.includes(unit.unitType) && //
-        !item.unitType === ALL,
+      unitTypeItems: (data) =>
+        !data.item.unitType.includes(data.unit.unitType) && //
+        !data.item.unitType === ALL,
 
       // check if the item is limited ot a specific unit
-      unitItems: (unit, item) =>
-        item.limitedToUnit !== unit.unitName && //
-        !item.limitedToUnit === ALL,
+      unitItems: (data) =>
+        data.item.limitedToUnit !== data.unit.unitName && //
+        !data.item.limitedToUnit === ALL,
 
       // filter for unit size
-      sizeItem: (unit, item) =>
-        unit.size > item.maxSize && //
-        item.maxSize > -1,
+      sizeItem: (data) =>
+        data.unit.size > data.item.maxSize && //
+        data.item.maxSize > -1,
 
       // filter for range armor
-      rangeArmorItem: (unit, item) =>
-        unit.armourRange > item.maxRangeArmor && //
-        item.maxRangeArmor > -1,
+      rangeArmorItem: (data) =>
+        data.unit.armourRange > data.item.maxRangeArmor && //
+        data.item.maxRangeArmor > -1,
 
       // filter items not meant for single element units
-      rankAndFileItem: (unit, item) =>
-        unit.numberOfElements < 2 && //
-        item.everyElement,
+      rankAndFileItem: (data) =>
+        data.unit.numberOfElements < 2 && //
+        data.item.everyElement,
     };
 
     for (const value of Object.values(itemFilters)) {
-      if (value(unit, item)) {
+      if (value({ unit: unit, item: item })) {
         isValidItem = false;
       }
     }
@@ -202,6 +204,11 @@ const useItemFilters = () => {
     const pointSum = IC.allEquippedItems
       .filter((i) => i.itemType === ITEM_TYPE_FORTIFICATIONS) //
       .reduce((sum, { points }) => sum + points, 0);
+
+    console.log("pointSum");
+    console.log(pointSum);
+    console.log("pointSum <= SC.maxPointsAllowance * MAX_PERCENTAGE");
+    console.log(pointSum <= SC.maxPointsAllowance * MAX_PERCENTAGE);
 
     return pointSum <= SC.maxPointsAllowance * MAX_PERCENTAGE;
   };
