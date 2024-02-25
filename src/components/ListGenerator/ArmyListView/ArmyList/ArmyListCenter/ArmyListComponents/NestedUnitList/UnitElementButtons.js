@@ -20,19 +20,25 @@ const UnitElementButtons = (props) => {
   const TC = useContext(TournamentRulesContext);
   const AC = useContext(ArmyContext);
 
+  // menu names
+  const UNIT_CARDS = "UNIT_CARDS";
+  const ITEMS = "ITEMS";
+  const SECOND_SUB_FACTION = "SECOND_SUB_FACTION";
+
   /**
    * Function toggles the menus on the right side.
    * It controls what menu and what content for which unit is shown.
    * In order to do this, the menus are not toggled by a simple boolean flag,
    * instead an object stores the previously clicked unit, a boolean flag and the clicked unit.
    * @param {unitCard} unit
+   * @param {String} menu
    */
   const rightMenuController = (unit, menu) => {
     let stateObjSetter;
     let stateObj;
 
     switch (menu) {
-      case "UNIT_CARDS":
+      case UNIT_CARDS:
         setCard(unit);
 
         stateObj = RC.statCardState;
@@ -40,13 +46,13 @@ const UnitElementButtons = (props) => {
         RC.closeItemShop();
         RC.closeSecondSubFactionMenu();
         break;
-      case "ITEMS":
+      case ITEMS:
         stateObj = RC.itemShopState;
         stateObjSetter = RC.setItemShopState;
         RC.closeCardDisplay();
         RC.closeSecondSubFactionMenu();
         break;
-      case "SECOND_SUB_FACTION": // Thain faction only
+      case SECOND_SUB_FACTION: // Thain faction only
         stateObj = RC.secondSubFactionMenuState;
         stateObjSetter = RC.setSecondSubFactionMenuState;
         RC.closeCardDisplay();
@@ -56,7 +62,7 @@ const UnitElementButtons = (props) => {
         throw Error("rightMenuController function received invalid menu parameter: unknown menu name");
     }
 
-    // first click on page (no menu is displayed)
+    // first click on a menu button (after loading the page)
     if (stateObj.clickedUnit === undefined) {
       stateObjSetter({ clickedUnit: unit, lastclickedUnit: unit, show: true });
     }
@@ -114,14 +120,14 @@ const UnitElementButtons = (props) => {
       show: true,
       action: () => {
         IC.setUnitSelectedForShop(props.unit);
-        rightMenuController(props.unit, "ITEMS");
+        rightMenuController(props.unit, ITEMS);
       },
       text: BUTTON_TEXTS.SHOW_ITEM_SHOP,
     },
     {
       show: true,
       action: () => {
-        rightMenuController(props.unit, "UNIT_CARDS");
+        rightMenuController(props.unit, UNIT_CARDS);
       },
       text: BUTTON_TEXTS.PREVIEW_CARD,
     },
@@ -129,7 +135,7 @@ const UnitElementButtons = (props) => {
       show: SFC.hasAdditionalSubFaction && !SFC.excemptSubFactions.includes(props.subFaction),
       action: () => {
         IC.setUnitSelectedForShop(props.unit);
-        rightMenuController(props.unit, "SECOND_SUB_FACTION");
+        rightMenuController(props.unit, SECOND_SUB_FACTION);
       },
       text: SFC.secondSubfactionCaption,
     },
