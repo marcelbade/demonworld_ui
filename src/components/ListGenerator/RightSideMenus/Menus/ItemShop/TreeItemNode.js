@@ -47,8 +47,9 @@ const TreeItemNode = (props) => {
     });
   };
 
-  //TODO implement
-  const addItemToCentralList = () => {};
+  const addItemToCentralList = (item) => {
+    IC.setAllEquippedItems([...IC.allEquippedItems, item]);
+  };
 
   /**
    * Function causes the list of all selected units to change (w/o actually changing it). This is necessary to correctly calculate the list's point cost whenever an item is added. Without this, the point cost of the item is only added whenever a unit is added or removed from the list, not when the item is added ore removed.
