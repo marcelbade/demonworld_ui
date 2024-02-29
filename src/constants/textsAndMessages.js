@@ -41,17 +41,43 @@ export const TEXTS = {
 
 export const VALIDATION = {
   NO_COMMANDER_WARNING: `Die Armeeliste muss mindestens 1 Helden, Befehlshaber oder Magier mit 2 oder mehr ★ enthalten.`,
-
   NO_DUPLICATE_UNIQUES_MESSAGE: "Die Liste darf einzigartige Einheiten nur einmal enthalten.",
   MAXIMUM_OF_TWO_OF_EACH_MESSAGE: "Die Liste darf eine Einheit maximal 2x enthalten.",
   MAXIMUM_OF_X_PERCENT_HEROES_MESSAGE: (percentage) => {
     return `Die Liste darf maximal ${percentage}% Charaktere und Helden enthalten.`;
   },
   DONT_EXCEED_THE_POINT_ALLOWANCE_MESSAGE: "Die Liste darf die maximale Punktzahl nicht überschreiten.",
-  NOT_A_VALID_ITEM: "Diese Einheit kann diesen Gegenstand nicht erhalten.",
-  ALREADY_HAS_ITEM_OF_TYPE: (itemType) => {
-    return `Diese Einheit hat bereits einen Gegenstand vom Typ ${itemType} erhalten.`;
+};
+
+export const ITEM_LIMIT_MESSAGE = {
+  UNIQUE_ITEMS: `Einzigartige Gegenstände können nur einmal vergeben werden.`,
+  SHIELD_ITEMS: `Nur eine Einheit mit Schild kann diesen Gegenstand erhalten.`,
+  MOUNTED_ITEMS: `Nur eine berittene Einheit kann diesen Gegenstand erhalten.`,
+  MAGIC_ITEMS: `Nur ein Magier kann diesen Gegenstand erhalten.`,
+  LANCE_ITEMS: `Nur eine Einheitmit Lanzen kann diesen Gegenstand erhalten.`,
+  SPEAR_ITEMS: `Nur eine Einheit mit Speeren kann diesen Gegenstand erhalten.`,
+  BOWS_ITEMS: `Nur eine Einheit mit Bögen kann diesen Gegenstand erhalten.`,
+  CROSSBOWS_ITEMS: `Nur eine Einheit mit Armbrüsten kann diesen Gegenstand erhalten.`,
+  UNIT_TYPE_ITEMS: (unitType) => {
+    return `Nur eine Einheit vom Typ ${unitType} kann diesen Gegenstand erhalten.`;
   },
+  UNIT_NAME_ITEMS: (unitName) => {
+    return `Nur eine Einheit ${unitName} kann diesen Gegenstand erhalten.`;
+  },
+  UNIT_SIZE_ITEMS: (maxSize) => {
+    return `Nur an eine Einheit mit einer Größe von max. ${maxSize} kann diesen Gegenstand erhalten.`;
+  },
+  RANGE_ARMOR_ITEMS: (maxRangeArmor) => {
+    return `Nur an eine Einheit mit einer Fernkampfpanzerung von max. ${maxRangeArmor} kann diesen Gegenstand erhalten.`;
+  },
+  MULTIPLE_ELEMENTS_ITEMS: `Nur an eine Einheit mit mehreren Elementen kann diesen Gegenstand erhalten.`,
+  FORTIFICATIONS_ITEMS: `Die Liste darf max. 10% Befestigungen enthalten.`,
+  //
+  ONLY_ONE_ITEM_FOR_ALL_ELEMENTS: `Diese Einheit hat bereits einen Gegestand für alle Elemente erhalten.`,
+  ONLY_ONE_BANNER: `Diese Einheit hat bereits ein Banner erhalten.`,
+  ONLY_ONE_INSTRUMENT: `Diese Einheit hat bereits ein Instrument erhalten.`,
+  ONLY_ONE_FORTIFICATION: `Diese Einheit hat bereits eine Feldbefestigung erhalten.`,
+  ONLY_ONE_MAGICAL_ITEM: `Diese Einheit hat bereits einen magischen Gegenstand erhalten.`,
 };
 
 export const NO_RANGE_WEAPON = "x";
