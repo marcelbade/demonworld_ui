@@ -23,6 +23,7 @@ import {
   UNIT,
 } from "../constants/itemShopConstants";
 import { do2ArraysHaveCommonElements } from "../util/utilityFunctions";
+import { ITEM_LIMIT_MESSAGE } from "../constants/textsAndMessages";
 
 const useItemFilters = () => {
   const IC = useContext(ItemContext);
@@ -68,11 +69,7 @@ const useItemFilters = () => {
     itemTypeGroup = itemTypeGroup.filter((group) => group.typeName !== selectedUnit.prohibitedItemType);
 
     // filter out fortifications if -> (A) it's not a unit (B) mounted (C) the limit for fortification has been reache.
-    if (
-      selectedUnit.unitType !== UNIT || //
-      selectedUnit.isMounted ||
-      !isTheListBelowFortificationsLimit()
-    ) {
+    if (selectedUnit.unitType !== UNIT || selectedUnit.isMounted) {
       itemTypeGroup = itemTypeGroup.filter((group) => group.typeName !== ITEM_TYPE_FORTIFICATIONS);
     }
     // filter out banners if there is no standard bearer
@@ -111,86 +108,162 @@ const useItemFilters = () => {
    * @returns true, if the item is a valid option for the selected unit.
    */
   const filterIndividualItems = (unit, item) => {
-    let isValidItem = true;
-
     const unitWeapons = [unit.weapon1Name, unit.weapon2Name, unit.weapon3Name];
     const SPEARS = "spears";
     const LANCES = "lances";
 
     const itemFilters = {
       // unique items can only be selected once.
-      uniqueItems: (data) =>
-        !data.item.isGeneric && //
-        IC.allEquippedItems.includes(item.itemName),
+      uniqueItems: (data) => {
+        return {
+          isInvalidItem:
+            !data.item.isGeneric && //
+            IC.allEquippedItems.includes(item.itemName),
+          errorMessage: ITEM_LIMIT_MESSAGE.UNIQUE_ITEMS ,
+        };
+      },
 
       // no shield items for heroes & leaders w/o shields.
-      shieldItems: (data) =>
-        !data.unit.hasShield && //
-        data.item.requiresShield,
+      shieldItems: (data) => {
+        return {
+          isInvalidItem:
+            !data.unit.hasShield && //
+            data.item.requiresShield,
+          errorMessage: ITEM_LIMIT_MESSAGE.SHIELD_ITEMS ,
+        };
+      },
 
       // no cavalery items for heroes & leaders w/o mounts.
-      cavItems: (data) =>
-        !data.unit.isMounted && //
-        data.item.mustBeMounted,
+      cavItems: (data) => {
+        return {
+          isInvalidItem:
+            !data.unit.isMounted && //
+            data.item.mustBeMounted,
+          errorMessage: ITEM_LIMIT_MESSAGE.MOUNTED_ITEMS ,
+        };
+      },
 
       // no spellcaster items for heroes & leaders w/o magic.
-      spellCasterItems: (data) =>
-        data.unit.magic === 0 && //
-        data.item.magicUsersOnly,
+      spellCasterItems: (data) => {
+        return {
+          isInvalidItem:
+            data.unit.magic === 0 && //
+            data.item.magicUsersOnly,
+          errorMessage: ITEM_LIMIT_MESSAGE.MAGIC_ITEMS ,
+        };
+      },
 
       // no lance items for heroes & leaders w/o a lance.
-      lanceItem: (data) =>
-        !do2ArraysHaveCommonElements(LANCE_TYPES, unitWeapons) && //
-        data.item.requiresWeaponType === LANCES,
-
+      lanceItem: (data) => {
+        return {
+          isInvalidItem:
+            !do2ArraysHaveCommonElements(LANCE_TYPES, unitWeapons) && //
+            data.item.requiresWeaponType === LANCES,
+          errorMessage: ITEM_LIMIT_MESSAGE.LANCE_ITEMS ,
+        };
+      },
       // no spear items for heroes & leaders w/o a spear.
-      spearItems: (data) =>
-        !do2ArraysHaveCommonElements(SPEAR_TYPES, unitWeapons) && //
-        data.item.requiresWeaponType === SPEARS,
+      spearItems: (data) => {
+        return {
+          isInvalidItem:
+            !do2ArraysHaveCommonElements(SPEAR_TYPES, unitWeapons) && //
+            data.item.requiresWeaponType === SPEARS,
+          errorMessage: ITEM_LIMIT_MESSAGE.SPEAR_ITEMS ,
+        };
+      },
 
       // no crossbow items for heroes & leaders w/o a crossbow.
-      crossBowItems: (data) =>
-        !CROSSBOW_TYPES.includes(data.unit.rangedWeapon) && //
-        data.item.itemType === ITEM_TYPE_CROSSBOWS,
+      crossBowItems: (data) => {
+        return {
+          isInvalidItem:
+            !CROSSBOW_TYPES.includes(data.unit.rangedWeapon) && //
+            data.item.itemType === ITEM_TYPE_CROSSBOWS,
+          errorMessage: ITEM_LIMIT_MESSAGE.CROSSBOWS_ITEMS ,
+        };
+      },
 
       // no bow items for heroes & leaders w/o a bow.
-      bowItems: (data) =>
-        !BOW_TYPES.includes(data.unit.rangedWeapon) && //
-        data.item.itemType === ITEM_TYPE_BOWS,
+      bowItems: (data) => {
+        return {
+          isInvalidItem:
+            !BOW_TYPES.includes(data.unit.rangedWeapon) && //
+            data.item.itemType === ITEM_TYPE_BOWS,
+          errorMessage: ITEM_LIMIT_MESSAGE.BOWS_ITEMS ,
+        };
+      },
 
       // check if the item requires a specific type of unit
-      unitTypeItems: (data) =>
-        !data.item.unitType.includes(data.unit.unitType) && //
-        !data.item.unitType === ALL,
+      unitTypeItems: (data) => {
+        return {
+          isInvalidItem:
+            !data.item.unitType.includes(data.unit.unitType) && //
+            !data.item.unitType === ALL,
+          errorMessage: ITEM_LIMIT_MESSAGE.UNIT_TYPE_ITEMS (data.item.unitType),
+        };
+      },
 
       // check if the item is limited ot a specific unit
-      unitItems: (data) =>
-        data.item.limitedToUnit !== data.unit.unitName && //
-        !data.item.limitedToUnit === ALL,
+      unitItems: (data) => {
+        return {
+          isInvalidItem:
+            data.item.limitedToUnit !== data.unit.unitName && //
+            !data.item.limitedToUnit === ALL,
+          errorMessage: ITEM_LIMIT_MESSAGE.UNIT_NAME_ITEMS (data.item.unitName),
+        };
+      },
 
       // filter for unit size
-      sizeItem: (data) =>
-        data.unit.size > data.item.maxSize && //
-        data.item.maxSize > -1,
+      sizeItem: (data) => {
+        return {
+          isInvalidItem:
+            data.unit.size > data.item.maxSize && //
+            data.item.maxSize > -1,
+          errorMessage: ITEM_LIMIT_MESSAGE.UNIT_SIZE_ITEMS (data.item.maxSize),
+        };
+      },
 
       // filter for range armor
-      rangeArmorItem: (data) =>
-        data.unit.armourRange > data.item.maxRangeArmor && //
-        data.item.maxRangeArmor > -1,
-
+      rangeArmorItem: (data) => {
+        return {
+          isInvalidItem:
+            data.unit.armourRange > data.item.maxRangeArmor && //
+            data.item.maxRangeArmor > -1,
+          errorMessage: ITEM_LIMIT_MESSAGE.RANGE_ARMOR_ITEMS(data.item.maxRangeArmor),
+        };
+      },
       // filter items not meant for single element units
-      rankAndFileItem: (data) =>
-        data.unit.numberOfElements < 2 && //
-        data.item.everyElement,
+      rankAndFileItem: (data) => {
+        return {
+          isInvalidItem:
+            data.unit.numberOfElements < 2 && //
+            data.item.everyElement,
+          errorMessage: ITEM_LIMIT_MESSAGE.MULTIPLE_ELEMENTS_ITEMS ,
+        };
+      },
+      fortifications: () => {
+        return {
+          isInvalidItem: !isTheListBelowFortificationsLimit(),
+          errorMessage: ITEM_LIMIT_MESSAGE.FORTIFICATIONS_ITEMS,
+        };
+      },
+    };
+
+    let result = {
+      isInvalidItem: false,
+      errorMessage: "",
     };
 
     for (const value of Object.values(itemFilters)) {
-      if (value({ unit: unit, item: item })) {
-        isValidItem = false;
+      if (value({ unit: unit, item: item }).isInvalidItem) {
+        result = {
+          isInvalidItem: value({ unit: unit, item: item }).isInvalidItem,
+          errorMessage: value({ unit: unit, item: item }).errorMessage,
+        };
+        break;
       }
     }
 
-    return isValidItem;
+    return result;
   };
 
   /**
@@ -200,15 +273,11 @@ const useItemFilters = () => {
    */
   const isTheListBelowFortificationsLimit = () => {
     const MAX_PERCENTAGE = 0.1;
+    // let sum = 0;
 
     const pointSum = IC.allEquippedItems
       .filter((i) => i.itemType === ITEM_TYPE_FORTIFICATIONS) //
       .reduce((sum, { points }) => sum + points, 0);
-
-    console.log("pointSum");
-    console.log(pointSum);
-    console.log("pointSum <= SC.maxPointsAllowance * MAX_PERCENTAGE");
-    console.log(pointSum <= SC.maxPointsAllowance * MAX_PERCENTAGE);
 
     return pointSum <= SC.maxPointsAllowance * MAX_PERCENTAGE;
   };

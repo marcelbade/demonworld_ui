@@ -17,16 +17,16 @@ import InvalidTreeItemNode from "./InvalidTreeItemNode";
 // constants
 import { ITEM_CATEGORY_NAME_MAPPING } from "../../../../../constants/itemShopConstants";
 import useUnitEqipmentLimits from "../../../../../customHooks/useUnitEqipmentLimits";
-import { VALIDATION } from "../../../../../constants/textsAndMessages";
 
 const ItemShopTree = () => {
   const IC = useContext(ItemContext);
   const controller = useTreeViewController();
   const filter = useItemFilters();
-  const limiter = useUnitEqipmentLimits();
+  const equipmentLimits = useUnitEqipmentLimits();
 
   const [filteredItemGroups, setFilteredItemGroups] = useState([]);
 
+  // When the selected unit changes, recalculate which item(groups) are filtered out.
   useEffect(() => {
     if (!isObjectEmtpy(IC.unitSelectedForShop)) {
       setFilteredItemGroups(filter.filterItemTypesForUnit(IC.unitSelectedForShop, IC.fetchedItems.factionItems));
@@ -45,8 +45,8 @@ const ItemShopTree = () => {
 
     dto.items.forEach((item) => {
       if (
-        !filter.filterIndividualItems(IC.unitSelectedForShop, item) || //
-        limiter.disableItem(IC.unitSelectedForShop, item)
+        filter.filterIndividualItems(IC.unitSelectedForShop, item).isInvalidItem || //
+        equipmentLimits.disableItem(IC.unitSelectedForShop, item).disableButton
       ) {
         numberOfBlockedItems++;
       }
@@ -56,7 +56,7 @@ const ItemShopTree = () => {
   };
 
   /**
-   * Wrapper Function. Tests whether an item can be equipped or not. Calls filterIndividualItems and disableItem. Reu
+   * Wrapper Function. Tests whether an item can be equipped or not. Calls filterIndividualItems and disableItem.
    * @param {unitCard} unit
    * @param {itemCard} item
    * @returns An object with the test result an error message.
@@ -65,16 +65,21 @@ const ItemShopTree = () => {
   const isItemBlocked = (unit, item) => {
     // if the item can be equipped,
     // test if the item needs to be disabled due to an equipment flag.
-    if (filter.filterIndividualItems(unit, item)) {
-      return {
-        isBlocked: !limiter.disableItem(unit, item),
-        message: VALIDATION.ALREADY_HAS_ITEM_OF_TYPE(ITEM_CATEGORY_NAME_MAPPING[item.itemType]),
-      };
+
+    const filterResult = filter.filterIndividualItems(unit, item);
+    const limitResult = equipmentLimits.disableItem(unit, item);
+
+    let displayedMessage = "";
+
+    if (filterResult.errorMessage !== "") {
+      displayedMessage = filterResult.errorMessage;
+    } else if (limitResult.errorMessage !== "") {
+      displayedMessage = limitResult.errorMessage;
     }
 
     return {
-      isBlocked: false, //
-      message: VALIDATION.NOT_A_VALID_ITEM,
+      isBlocked: filterResult.isInvalidItem || limitResult.disableButton,
+      message: displayedMessage,
     };
   };
 
@@ -98,18 +103,18 @@ const ItemShopTree = () => {
               const result = isItemBlocked(IC.unitSelectedForShop, item);
 
               return result.isBlocked ? (
+                <InvalidTreeItemNode
+                  key={i} //
+                  item={item}
+                  message={result.message}
+                />
+              ) : (
                 <Grid
                   key={i} //
                   container
                 >
                   <TreeItemNode item={item} />
                 </Grid>
-              ) : (
-                <InvalidTreeItemNode
-                  key={i} //
-                  item={item}
-                  message={result.message}
-                />
               );
             })}
           </TreeItem>

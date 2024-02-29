@@ -4,17 +4,20 @@ import { useContext } from "react";
 import { ItemContext } from "../contexts/itemContext";
 // constants
 import { ITEM_TYPE_FORTIFICATIONS } from "../constants/itemShopConstants";
+import { ITEM_LIMIT_MESSAGE } from "../constants/textsAndMessages";
 
 const useUnitEquipmentLimits = () => {
   const IC = useContext(ItemContext);
 
   /**
-   * Function enforces the item selection rules by toggling the item's corresponding add button on/off.
-   * Rules are:
+   * While useItemFilters makes sure that items that a unit can not equip are not shown or disabled,
+   * this logic implements item selection selection rules by toggling the item's
+   * corresponding add button on/off.
+   * The Rules are as follows:
    *  - Only generic items can be given to multiple units.
    *  - A hero, magicican or unit leader can only get ONE magical item.
-   *  - A unit may get one banner (if it has a banner bearer).
-   *  - A unit may get one instrument (if it has a musician).
+   *  - A unit may get one banner, if it has a banner bearer.
+   *  - A unit may get one instrument, if it has a musician.
    *  - A unit may get one item that every element equips (shields...).
    *  - A unit may get 1 fortification, as long as no more than 10% of the army's points are spent on them.
    * @param {itemCard Object} item
@@ -22,25 +25,46 @@ const useUnitEquipmentLimits = () => {
    * In that case, the button will be disabled.
    */
   const disableItem = (unit, item) => {
-    let disableBttn = false;
+    // TODO: do this like the filterIndividualItems
+    // TODO: you need to return a Boolean and a message
+
+    let disable = {
+      disableButton: false,
+      errorMessage: "",
+    };
 
     if (item.everyElement && unit.equipmentTypes.unit) {
-      disableBttn = true;
+      disable = {
+        disableButton: true,
+        errorMessage: ITEM_LIMIT_MESSAGE.ONLY_ONE_ITEM_FOR_ALL_ELEMENTS,
+      };
     }
     if (item.requiresBanner && unit.equipmentTypes.banner) {
-      disableBttn = true;
+      disable = {
+        disableButton: true,
+        errorMessage: ITEM_LIMIT_MESSAGE.ONLY_ONE_BANNER,
+      };
     }
     if (item.requiresMusician && unit.equipmentTypes.instrument) {
-      disableBttn = true;
+      disable = {
+        disableButton: true,
+        errorMessage: ITEM_LIMIT_MESSAGE.ONLY_ONE_INSTRUMENT,
+      };
     }
     if (item.itemType === ITEM_TYPE_FORTIFICATIONS && unit.equipmentTypes.fortifications) {
-      disableBttn = true;
+      disable = {
+        disableButton: true,
+        errorMessage: ITEM_LIMIT_MESSAGE.ONLY_ONE_FORTIFICATION,
+      };
     }
     if (isMagicItem(item) && unit.equipmentTypes.magicItem) {
-      disableBttn = true;
+      disable = {
+        disableButton: true,
+        errorMessage: ITEM_LIMIT_MESSAGE.ONLY_ONE_MAGICAL_ITEM,
+      };
     }
 
-    return disableBttn;
+    return disable;
   };
 
   /**
