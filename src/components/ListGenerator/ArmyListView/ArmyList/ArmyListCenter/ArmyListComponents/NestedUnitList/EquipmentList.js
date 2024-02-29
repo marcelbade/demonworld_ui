@@ -10,8 +10,7 @@ import { ItemContext } from "../../../../../../../contexts/itemContext";
 import { SelectionContext } from "../../../../../../../contexts/selectionContext";
 // custom hooks
 import useArmyValidation from "../../../../../../../customHooks/UseArmyValidation";
-// constants
-import { MAGICAL_ITEMS } from "../../../../../../../constants/itemShopConstants";
+import useUnitEquipmentLimits from "../../../../../../../customHooks/useUnitEqipmentLimits";
 // clsx
 import clsx from "clsx";
 
@@ -40,6 +39,7 @@ const EquipmentList = (props) => {
   const IC = useContext(ItemContext);
   const SEC = useContext(SelectionContext);
   const validation = useArmyValidation();
+  const limiter = useUnitEquipmentLimits();
 
   /**
    * Function removes an item from a unit's equipment array, and revalidates the list.
@@ -67,28 +67,6 @@ const EquipmentList = (props) => {
   };
 
   /**
-   * Function sets the itemType flags of a unitCard to correctly toggle the item buttons
-   * in the item shop on and off.
-   * @param {*} item
-   * @param {*} newFlagValue booleam flag. True, if the item is added, false if the item is removed.
-   */
-  const toggleUnitsItemTypeFlags = (item, newFlagValue) => {
-    let tempObj = { ...IC.unitSelectedForShop };
-
-    if (item.everyElement) {
-      tempObj.equipmentTypes.unit = newFlagValue;
-    } else if (MAGICAL_ITEMS.includes(item.itemType)) {
-      tempObj.equipmentTypes.magicItem = newFlagValue;
-    } else {
-      tempObj.equipmentTypes[item.itemType] = newFlagValue;
-    }
-
-    IC.setUnitSelectedForShop({
-      ...tempObj,
-    });
-  };
-
-  /**
    * Function draws horizontal divider is displayed when the equipment list is not empty.
    * @returns css class
    */
@@ -107,7 +85,7 @@ const EquipmentList = (props) => {
                   onClick={() => {
                     removeItem(props.identifier, i);
                     removeItemFromCentralList(e);
-                    toggleUnitsItemTypeFlags(e, false);
+                    limiter.toggleUnitsItemTypeFlags(e, false);
                   }}
                 >
                   <RemoveCircleOutlineIcon />
