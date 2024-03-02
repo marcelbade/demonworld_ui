@@ -276,9 +276,6 @@ const useItemFilters = () => {
 
     let pointSum = 0;
 
-    console.log("IC.allEquippedItems");
-    console.log(IC.allEquippedItems);
-
     IC.allEquippedItems
       .filter((i) => i.itemType === ITEM_TYPE_FORTIFICATIONS) //
       .forEach((i) => {
