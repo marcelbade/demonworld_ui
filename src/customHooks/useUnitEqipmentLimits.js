@@ -7,12 +7,10 @@ import { ITEM_TYPE_FORTIFICATIONS } from "../constants/itemShopConstants";
 import { ITEM_LIMIT_MESSAGE } from "../constants/textsAndMessages";
 
 const useUnitEquipmentLimits = () => {
-  const IC = useContext(ItemContext);
-
   /**
-   * While useItemFilters makes sure that items that a unit can not equip are not shown or disabled,
-   * this logic implements item selection selection rules by toggling the item's
-   * corresponding add button on/off.
+   * While useItemFilters makes sure that items that a unit can not equip 
+   * are not shown or disabled, this logic implements item selection
+   * selection rules by toggling the item's corresponding add button on/off.
    * The Rules are as follows:
    *  - Only generic items can be given to multiple units.
    *  - A hero, magicican or unit leader can only get ONE magical item.
@@ -25,8 +23,7 @@ const useUnitEquipmentLimits = () => {
    * In that case, the button will be disabled.
    */
   const disableItem = (unit, item) => {
-    // TODO: do this like the filterIndividualItems
-    // TODO: you need to return a Boolean and a message
+ 
 
     let disable = {
       disableButton: false,
@@ -89,28 +86,22 @@ const useUnitEquipmentLimits = () => {
    * @param {*} item
    * @param {*} newFlagValue booleam flag. True, if the item is added, false if the item is removed.
    */
-  const toggleUnitsItemTypeFlags = (item, newFlagValue) => {
-    let tempObj = { ...IC.unitSelectedForShop };
-
+  const toggleUnitsItemTypeFlags = (unit, item, newFlagValue) => {
     if (item.everyElement) {
-      tempObj.equipmentTypes.unit = newFlagValue;
+      unit.equipmentTypes.unit = newFlagValue;
     }
     if (item.requiresBanner) {
-      tempObj.equipmentTypes.banner = newFlagValue;
+      unit.equipmentTypes.banner = newFlagValue;
     }
     if (item.requiresMusician) {
-      tempObj.equipmentTypes.instrument = newFlagValue;
+      unit.equipmentTypes.instrument = newFlagValue;
     }
     if (item.itemType === ITEM_TYPE_FORTIFICATIONS) {
-      tempObj.equipmentTypes.fortifications = newFlagValue;
+      unit.equipmentTypes.fortifications = newFlagValue;
     }
     if (isMagicItem(item)) {
-      tempObj.equipmentTypes.magicItem = newFlagValue;
+      unit.equipmentTypes.magicItem = newFlagValue;
     }
-
-    IC.setUnitSelectedForShop({
-      ...tempObj,
-    });
   };
 
   return {

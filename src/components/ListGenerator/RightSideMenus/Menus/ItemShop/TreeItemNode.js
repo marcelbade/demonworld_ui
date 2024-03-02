@@ -84,7 +84,7 @@ const TreeItemNode = (props) => {
               onClick={(e) => {
                 addItemToUnit(props.item);
                 addItemToCentralList(props.item);
-                limiter.toggleUnitsItemTypeFlags(props.item, true);
+                limiter.toggleUnitsItemTypeFlags(IC.unitSelectedForShop, props.item, true);
                 triggerArymListRecalculation();
                 e.stopPropagation();
               }}

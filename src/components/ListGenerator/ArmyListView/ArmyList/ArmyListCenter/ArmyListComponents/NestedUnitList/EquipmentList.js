@@ -85,7 +85,7 @@ const EquipmentList = (props) => {
                   onClick={() => {
                     removeItem(props.identifier, i);
                     removeItemFromCentralList(e);
-                    limiter.toggleUnitsItemTypeFlags(e, false);
+                    limiter.toggleUnitsItemTypeFlags(props.unit, e, false);
                   }}
                 >
                   <RemoveCircleOutlineIcon />
