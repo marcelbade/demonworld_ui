@@ -119,7 +119,7 @@ const useItemFilters = () => {
           isInvalidItem:
             !data.item.isGeneric && //
             IC.allEquippedItems.includes(item.itemName),
-          errorMessage: ITEM_LIMIT_MESSAGE.UNIQUE_ITEMS ,
+          errorMessage: ITEM_LIMIT_MESSAGE.UNIQUE_ITEMS,
         };
       },
 
@@ -129,7 +129,7 @@ const useItemFilters = () => {
           isInvalidItem:
             !data.unit.hasShield && //
             data.item.requiresShield,
-          errorMessage: ITEM_LIMIT_MESSAGE.SHIELD_ITEMS ,
+          errorMessage: ITEM_LIMIT_MESSAGE.SHIELD_ITEMS,
         };
       },
 
@@ -139,7 +139,7 @@ const useItemFilters = () => {
           isInvalidItem:
             !data.unit.isMounted && //
             data.item.mustBeMounted,
-          errorMessage: ITEM_LIMIT_MESSAGE.MOUNTED_ITEMS ,
+          errorMessage: ITEM_LIMIT_MESSAGE.MOUNTED_ITEMS,
         };
       },
 
@@ -149,7 +149,7 @@ const useItemFilters = () => {
           isInvalidItem:
             data.unit.magic === 0 && //
             data.item.magicUsersOnly,
-          errorMessage: ITEM_LIMIT_MESSAGE.MAGIC_ITEMS ,
+          errorMessage: ITEM_LIMIT_MESSAGE.MAGIC_ITEMS,
         };
       },
 
@@ -159,7 +159,7 @@ const useItemFilters = () => {
           isInvalidItem:
             !do2ArraysHaveCommonElements(LANCE_TYPES, unitWeapons) && //
             data.item.requiresWeaponType === LANCES,
-          errorMessage: ITEM_LIMIT_MESSAGE.LANCE_ITEMS ,
+          errorMessage: ITEM_LIMIT_MESSAGE.LANCE_ITEMS,
         };
       },
       // no spear items for heroes & leaders w/o a spear.
@@ -168,7 +168,7 @@ const useItemFilters = () => {
           isInvalidItem:
             !do2ArraysHaveCommonElements(SPEAR_TYPES, unitWeapons) && //
             data.item.requiresWeaponType === SPEARS,
-          errorMessage: ITEM_LIMIT_MESSAGE.SPEAR_ITEMS ,
+          errorMessage: ITEM_LIMIT_MESSAGE.SPEAR_ITEMS,
         };
       },
 
@@ -178,7 +178,7 @@ const useItemFilters = () => {
           isInvalidItem:
             !CROSSBOW_TYPES.includes(data.unit.rangedWeapon) && //
             data.item.itemType === ITEM_TYPE_CROSSBOWS,
-          errorMessage: ITEM_LIMIT_MESSAGE.CROSSBOWS_ITEMS ,
+          errorMessage: ITEM_LIMIT_MESSAGE.CROSSBOWS_ITEMS,
         };
       },
 
@@ -188,7 +188,7 @@ const useItemFilters = () => {
           isInvalidItem:
             !BOW_TYPES.includes(data.unit.rangedWeapon) && //
             data.item.itemType === ITEM_TYPE_BOWS,
-          errorMessage: ITEM_LIMIT_MESSAGE.BOWS_ITEMS ,
+          errorMessage: ITEM_LIMIT_MESSAGE.BOWS_ITEMS,
         };
       },
 
@@ -198,7 +198,7 @@ const useItemFilters = () => {
           isInvalidItem:
             !data.item.unitType.includes(data.unit.unitType) && //
             !data.item.unitType === ALL,
-          errorMessage: ITEM_LIMIT_MESSAGE.UNIT_TYPE_ITEMS (data.item.unitType),
+          errorMessage: ITEM_LIMIT_MESSAGE.UNIT_TYPE_ITEMS(data.item.unitType),
         };
       },
 
@@ -208,7 +208,7 @@ const useItemFilters = () => {
           isInvalidItem:
             data.item.limitedToUnit !== data.unit.unitName && //
             !data.item.limitedToUnit === ALL,
-          errorMessage: ITEM_LIMIT_MESSAGE.UNIT_NAME_ITEMS (data.item.unitName),
+          errorMessage: ITEM_LIMIT_MESSAGE.UNIT_NAME_ITEMS(data.item.unitName),
         };
       },
 
@@ -218,7 +218,7 @@ const useItemFilters = () => {
           isInvalidItem:
             data.unit.size > data.item.maxSize && //
             data.item.maxSize > -1,
-          errorMessage: ITEM_LIMIT_MESSAGE.UNIT_SIZE_ITEMS (data.item.maxSize),
+          errorMessage: ITEM_LIMIT_MESSAGE.UNIT_SIZE_ITEMS(data.item.maxSize),
         };
       },
 
@@ -237,12 +237,12 @@ const useItemFilters = () => {
           isInvalidItem:
             data.unit.numberOfElements < 2 && //
             data.item.everyElement,
-          errorMessage: ITEM_LIMIT_MESSAGE.MULTIPLE_ELEMENTS_ITEMS ,
+          errorMessage: ITEM_LIMIT_MESSAGE.MULTIPLE_ELEMENTS_ITEMS,
         };
       },
-      fortifications: () => {
+      fortifications: (data) => {
         return {
-          isInvalidItem: !isTheListBelowFortificationsLimit(),
+          isInvalidItem: !isTheListBelowFortificationsLimit(data.item),
           errorMessage: ITEM_LIMIT_MESSAGE.FORTIFICATIONS_ITEMS,
         };
       },
@@ -271,15 +271,24 @@ const useItemFilters = () => {
    * No more than 10% can be spent on fortifications.
    * @returns true, if the points spent on Fortifications is lower than or equal to 10%.
    */
-  const isTheListBelowFortificationsLimit = () => {
+  const isTheListBelowFortificationsLimit = (item) => {
     const MAX_PERCENTAGE = 0.1;
-    // let sum = 0;
 
-    const pointSum = IC.allEquippedItems
-      .filter((i) => i.itemType === ITEM_TYPE_FORTIFICATIONS) //
-      .reduce((sum, { points }) => sum + points, 0);
+    let result = true;
 
-    return pointSum <= SC.maxPointsAllowance * MAX_PERCENTAGE;
+    if (item.itemType == ITEM_TYPE_FORTIFICATIONS) {
+      const pointSum = IC.allEquippedItems
+        .filter((i) => i.itemType === ITEM_TYPE_FORTIFICATIONS) //
+        .reduce((sum, { points }) => sum + points, 0);
+
+      // console.log("pointSum");
+      // console.log(pointSum);
+
+      result = pointSum + item.points <= SC.maxPointsAllowance * MAX_PERCENTAGE;
+    }
+
+    // true if valid
+    return true;
   };
 
   return {
