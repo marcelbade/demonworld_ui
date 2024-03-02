@@ -274,21 +274,18 @@ const useItemFilters = () => {
   const isTheListBelowFortificationsLimit = (item) => {
     const MAX_PERCENTAGE = 0.1;
 
-    let result = true;
+    let pointSum = 0;
 
-    if (item.itemType == ITEM_TYPE_FORTIFICATIONS) {
-      const pointSum = IC.allEquippedItems
-        .filter((i) => i.itemType === ITEM_TYPE_FORTIFICATIONS) //
-        .reduce((sum, { points }) => sum + points, 0);
+    console.log("IC.allEquippedItems");
+    console.log(IC.allEquippedItems);
 
-      // console.log("pointSum");
-      // console.log(pointSum);
+    IC.allEquippedItems
+      .filter((i) => i.itemType === ITEM_TYPE_FORTIFICATIONS) //
+      .forEach((i) => {
+        pointSum += i.points;
+      });
 
-      result = pointSum + item.points <= SC.maxPointsAllowance * MAX_PERCENTAGE;
-    }
-
-    // true if valid
-    return true;
+    return pointSum + item.points <= SC.maxPointsAllowance * MAX_PERCENTAGE;
   };
 
   return {
