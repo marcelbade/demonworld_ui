@@ -1,7 +1,4 @@
-// react
-import { useContext } from "react";
-// components and functions
-import { ItemContext } from "../contexts/itemContext";
+
 // constants
 import { ITEM_TYPE_FORTIFICATIONS } from "../constants/itemShopConstants";
 import { ITEM_LIMIT_MESSAGE } from "../constants/textsAndMessages";
