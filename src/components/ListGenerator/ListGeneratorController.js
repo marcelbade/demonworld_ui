@@ -329,7 +329,7 @@ const ListGeneratorController = () => {
                           </Grid>
                           {/* </Grid>
                           </Grid> */}
-                          <Grid item>
+                          <Grid item xs={3}>
                             <MenuBox />
                           </Grid>
                         </Grid>
