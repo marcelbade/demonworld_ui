@@ -39,7 +39,7 @@ const TreeUnitNode = (props) => {
     return isBlocked ? classes.blockedLeafNode : null;
   };
   const displayBttn = (isBlocked) => {
-    return isBlocked ? classes.blockedBttn : classes.unblockedBttn;
+    return isBlocked ? classes.blockedBttn : null;
   };
 
   return (
