@@ -1,7 +1,15 @@
 // React
 import React from "react";
+// material ui
 import { Autocomplete } from "@mui/material";
 import { TextField } from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
+
+const useStyles = makeStyles((theme) => ({
+  inputDimensions: {
+    width: "25em",
+  },
+}));
 
 /**
  *Component for the army selection Autocomplete input element used by all pages.
@@ -9,8 +17,11 @@ import { TextField } from "@mui/material";
  * @returns
  */
 const SelectionInput = (props) => {
+  const classes = useStyles();
+
   return (
     <Autocomplete
+      className={classes.inputDimensions}
       id="arymSelection"
       options={props.alternatives}
       onChange={(event, value, reason) => {
