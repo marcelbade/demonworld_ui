@@ -1,21 +1,20 @@
-// React
+// react
 import React, { useEffect, useState } from "react";
-import { useHistory } from "react-router-dom";
-// Axios
+// axios
 import axios from "axios";
-// Material UI
-import { Grid, IconButton, Fade } from "@mui/material";
+// material ui
+import { Grid, Fade } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
 // notistack
 import { SnackbarProvider } from "notistack";
 // icons
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import SpellBookIcon from "../../assets/icons/spellbook-white.png";
 // components and functions
 import FactionTreeView from "./ArmySelectorView/SelectorTreeView/FactionTreeView";
 import ArmyListBox from "./ArmyListView/ArmyListBox";
 import AlternativeArmyLists from "./ArmySelectorView/AlternativeArmyListSelection/AlternativeArmyLists";
 import MenuBox from "./RightSideMenus/MenuBox";
+import MainMenuReturnButton from "../shared/MainMenuReturnButton";
 // context providers
 import ArmyProvider from "../../contexts/armyContext";
 import AllyProvider from "../../contexts/allyContext";
@@ -34,55 +33,8 @@ import CustomIcon from "../shared/statCards/CustomIcon";
 import customStyledErrorMessage from "../../AppTheme/notiStackTheme";
 
 const useStyles = makeStyles((theme) => ({
-  displayBox: {
-    [theme.breakpoints.up("md")]: {
-      flexDirection: "row",
-    },
-    [theme.breakpoints.down("lg")]: {
-      display: "block",
-      flexDirection: "column",
-    },
-  },
-  armySelectionBox: {
-    width: "10em",
-    [theme.breakpoints.up("md")]: {
-      paddingTop: "2em",
-      paddingLeft: "4em",
-    },
-
-    [theme.breakpoints.down("lg")]: {},
-  },
-  armyListBox: {
-    paddingTop: "2em",
-    [theme.breakpoints.up("md")]: {
-      position: "absolute",
-      left: "30%",
-    },
-    [theme.breakpoints.down("lg")]: {
-      position: "relative",
-
-      left: "10%",
-    },
-  },
-  UnitCardDisplay: {
-    position: "fixed",
-  },
-  BackBttnBox: {
-    height: " 3em",
-  },
-  BackBttn: {
-    [theme.breakpoints.up("md")]: {
-      position: "fixed",
-      top: "0%",
-      left: "1%",
-    },
-  },
-  BackBttnIcon: {
-    width: "1em",
-    height: "1em",
-  },
-  alternativeListSelector: {
-    marginTop: "13em",
+  leftSide: {
+    paddingLeft: "2em",
   },
   pushMessages: {
     marginRight: "2em",
@@ -92,7 +44,6 @@ const useStyles = makeStyles((theme) => ({
 
 const ListGeneratorController = () => {
   const classes = useStyles();
-  const history = useHistory();
 
   // intialize local states
   const [fetchedFactions, setFetchedFactions] = useState([]);
@@ -204,6 +155,7 @@ const ListGeneratorController = () => {
     setFetchedItems(result.data);
   };
 
+  //TODO: working, fine, but doesn't belong here!
   /**
    * in order to work, the state setter needs a unit at the start. Since the view is not visible, the first unit in the list is used.
    */
@@ -217,13 +169,6 @@ const ListGeneratorController = () => {
 
   const closeSecondSubFactionMenu = () => {
     setSecondSubFactionMenuState({ clickedUnit: selectedUnits[0], lastclickedUnit: selectedUnits[0], show: false });
-  };
-
-  /**
-   * Function calls history objects to take user back to main menu.
-   */
-  const backToMainmenu = () => {
-    history.push("/");
   };
 
   return fetchedFactions && fetchedItems ? (
@@ -343,7 +288,7 @@ const ListGeneratorController = () => {
                         setListOfAllFactionUnits: setListOfAllFactionUnits,
                         setSubFactionDTOs: setSubFactionDTOs,
                         // setListofAlternativeSubFactions: setListofAlternativeSubFactions
-                      }}  
+                      }}
                     >
                       <SnackbarProvider
                         Components={{
@@ -364,39 +309,29 @@ const ListGeneratorController = () => {
                           ),
                         }}
                       >
-                        <Grid container className={classes.displayBox} direction="column">
-                          {/* <ArmyValidation /> */}
-                          <Grid item xs={12} className={classes.BackBttnBox}>
-                            <IconButton
-                              className={classes.BackBttn}
-                              onClick={() => {
-                                backToMainmenu();
-                              }}
-                              size="large"
-                            >
-                              <ChevronLeftIcon className={classes.BackBttnIcon} />
-                            </IconButton>
-                          </Grid>
-                          {/* ARMY SELECTION */}
-                          <Grid container item direction="row">
-                            <Grid container item direction={"column"} xs={3} className={classes.armySelectionBox}>
-                              <ArmySelector />
+                        <Grid container direction="row">
+                          <Grid container item direction="column" xs={4} className={classes.leftSide}>
+                            <Grid item>
+                              <MainMenuReturnButton />
+                            </Grid>
+                            <Grid item>
+                              <ArmySelector xs={1} />
+                            </Grid>
+                            <Grid item>
                               <AlternativeArmyLists />
+                            </Grid>
+                            <Grid item>
                               <FactionTreeView className={classes.selector} />
                             </Grid>
-                            {/* ARMYLIST */}
-                            <Grid
-                              container //
-                              item
-                              direction="column"
-                              justifyContent="flex-end"
-                              xs={3}
-                              className={classes.armyListBox}
-                            >
-                              <ArmyListBox />
-                            </Grid>
                           </Grid>
-                          <MenuBox />
+                          <Grid item xs={3}>
+                            <ArmyListBox />
+                          </Grid>
+                          {/* </Grid>
+                          </Grid> */}
+                          <Grid item>
+                            <MenuBox />
+                          </Grid>
                         </Grid>
                       </SnackbarProvider>
                     </ArmyProvider>
