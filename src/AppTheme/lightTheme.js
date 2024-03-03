@@ -4,6 +4,7 @@ const lightTheme = createTheme({
   palette: {
     primary: { 500: "#000000" },
     disabled: "grey",
+    statCardBackGround: "lightgrey",
   },
   components: {
     MuiTreeItem: {
