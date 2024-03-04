@@ -7,14 +7,15 @@ import CardBack from "./cardComponents/CardBack";
 import CardFront from "./cardComponents/CardFront";
 import StatCardProvider from "../../../contexts/statCardContext";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   cardBox: {
     width: "30em",
     marginTop: "2em",
-    backgroundColor: "lightgrey",
+    backgroundColor: theme.palette.statCardBackGround,
     border: "1px black solid",
   },
-});
+}));
+
 /**
  * Wrapper Element. Allows for vertical or horizontal layout of the cards.
  * @param {String} props A value for the alignment property of the MUI grid element.

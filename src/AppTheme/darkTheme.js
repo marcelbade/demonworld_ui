@@ -9,7 +9,8 @@ const darkTheme = createTheme({
     primary: { 500: "#060d13" },
     color: "#0ceda6",
     disabled: "darkgrey",
-    statCardBackGround: "darkgrey",
+    statCardBackGround: "#5f6a6a",
+    rightMenuBackground: "pink",
   },
   components: {
     MuiTreeItem: {

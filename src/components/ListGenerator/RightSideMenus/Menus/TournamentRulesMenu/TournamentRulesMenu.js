@@ -2,7 +2,7 @@
 import React, { useContext, useState } from "react";
 // Material UI
 import { Grid, FormControl, FormControlLabel, FormLabel, FormGroup, TextField, Switch, Typography, IconButton } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
 // components and functions
 // Icons
 import CancelIcon from "@mui/icons-material/Cancel";
@@ -11,8 +11,9 @@ import { TournamentRulesContext } from "../../../../../contexts/tournamentRulesC
 // constants
 import { GENERAL_ERRRORS, TOURNAMENT_RULES } from "../../../../../constants/textsAndMessages";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   overlay: {
+    backGroundColor: theme.palette.rightMenuBackground,
     height: "100vh",
     width: "30vw",
     padding: "2em",
@@ -26,7 +27,7 @@ const useStyles = makeStyles({
   disbledBttnText: {
     color: "grey",
   },
-});
+}));
 
 const TournamentRulesMenu = () => {
   const classes = useStyles();
@@ -75,7 +76,8 @@ const TournamentRulesMenu = () => {
           onClick={() => {
             TC.setShowTournamentRulesMenu(false);
           }}
-          size="large">
+          size="large"
+        >
           <CancelIcon />
         </IconButton>
       </Grid>
@@ -83,14 +85,22 @@ const TournamentRulesMenu = () => {
         <FormControl component="fieldset" variant="standard">
           <FormLabel component="legend">{TOURNAMENT_RULES.TOURNAMENT_RULES}</FormLabel>
           <FormGroup>
-            <FormControlLabel control={<Switch 
-             id= "toggleAllButtons" 
-            checked={TC.tournamentOverrideRules.enableOverride} onChange={toggleAllButtons} />} />
+            <FormControlLabel
+              control={
+                <Switch //
+                  id="toggleAllButtons"
+                  checked={TC.tournamentOverrideRules.enableOverride}
+                  onChange={toggleAllButtons}
+                />
+              }
+            />
           </FormGroup>
         </FormControl>
       </Grid>
       <Grid item>
-        <Typography className={TC.tournamentOverrideRules.enableOverride ? classes.enabledBttnText : classes.disbledBttnText}>
+        <Typography //
+          className={TC.tournamentOverrideRules.enableOverride ? classes.enabledBttnText : classes.disbledBttnText}
+        >
           {TOURNAMENT_RULES.MAX_POINTS_FOR_HERO}
         </Typography>
         <TextField

@@ -1,7 +1,7 @@
 // React
 import React, { useContext } from "react";
 //Material UI
-import { Button, Grid, ButtonGroup, Typography, IconButton } from "@mui/material";
+import { Button, Grid, ButtonGroup, Typography, IconButton, ThemeProvider, CssBaseline } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
 // icons
 import CancelIcon from "@mui/icons-material/Cancel";
@@ -11,6 +11,10 @@ import { ItemContext } from "../../../../../contexts/itemContext";
 import { SelectionContext } from "../../../../../contexts/selectionContext";
 import { RightMenuContext } from "../../../../../contexts/rightMenuContext";
 import useArmyValidation from "../../../../../customHooks/UseArmyValidation";
+import { LightSwitchContext } from "../../../../../contexts/lightSwitchContext";
+// theme
+import lightTheme from "../../../../../AppTheme/lightTheme";
+import darkTheme from "../../../../../AppTheme/darkTheme";
 
 const useStyles = makeStyles((theme) => ({
   overlay: {
@@ -29,6 +33,7 @@ const SecondSubFactionMenu = () => {
   const SEC = useContext(SelectionContext);
   const SFC = useContext(SecondSubFactionContext);
   const RC = useContext(RightMenuContext);
+  const LC = useContext(LightSwitchContext);
 
   const validation = useArmyValidation();
 
@@ -49,55 +54,58 @@ const SecondSubFactionMenu = () => {
   };
 
   return (
-    <Grid container direction="column" className={classes.overlay}>
-      <Grid item>
-        <IconButton
-          onClick={() => {
-            RC.closeSecondSubFactionMenu();
-          }}
-          size="large"
-        >
-          <CancelIcon />
-        </IconButton>
-      </Grid>
-      <Grid item container direction="row" justifyContent="center">
-        <Grid item xs={9}>
-          <Typography variant="h5" align="center" className={classes.unitName}>
-            {IC.unitSelectedForShop.unitName}
-          </Typography>
+    <ThemeProvider theme={LC.darkModeOff ? lightTheme : darkTheme}>
+      <CssBaseline />
+      <Grid container direction="column" className={classes.overlay}>
+        <Grid item>
+          <IconButton
+            onClick={() => {
+              RC.closeSecondSubFactionMenu();
+            }}
+            size="large"
+          >
+            <CancelIcon />
+          </IconButton>
+        </Grid>
+        <Grid item container direction="row" justifyContent="center">
+          <Grid item xs={9}>
+            <Typography variant="h5" align="center" className={classes.unitName}>
+              {IC.unitSelectedForShop.unitName}
+            </Typography>
+          </Grid>
+        </Grid>
+        <Grid item container direction="row" justifyContent="center">
+          <ButtonGroup size="large" orientation="vertical">
+            {SFC.secondSubFactionList.map((ssf) => {
+              return ssf === IC.unitSelectedForShop.secondSubFaction ? (
+                <Button
+                  disabled={true} //
+                  variant="text"
+                  key={ssf}
+                >
+                  {ssf}
+                </Button>
+              ) : (
+                <Button
+                  variant="text"
+                  key={ssf}
+                  onClick={() => {
+                    setSecondSubFactionInArmyList(IC.unitSelectedForShop, ssf);
+                    // immediately re-evaluate list so the unit is shown correctly
+                    validation.validateList(
+                      SEC.selectedUnits, //
+                      SEC.maxPointsAllowance
+                    );
+                  }}
+                >
+                  {ssf}
+                </Button>
+              );
+            })}
+          </ButtonGroup>
         </Grid>
       </Grid>
-      <Grid item container direction="row" justifyContent="center">
-        <ButtonGroup size="large" orientation="vertical">
-          {SFC.secondSubFactionList.map((ssf) => {
-            return ssf === IC.unitSelectedForShop.secondSubFaction ? (
-              <Button
-                disabled={true} //
-                variant="text"
-                key={ssf}
-              >
-                {ssf}
-              </Button>
-            ) : (
-              <Button
-                variant="text"
-                key={ssf}
-                onClick={() => {
-                  setSecondSubFactionInArmyList(IC.unitSelectedForShop, ssf);
-                  // immediately re-evaluate list so the unit is shown correctly
-                  validation.validateList(
-                    SEC.selectedUnits, //
-                    SEC.maxPointsAllowance
-                  );
-                }}
-              >
-                {ssf}
-              </Button>
-            );
-          })}
-        </ButtonGroup>
-      </Grid>
-    </Grid>
+    </ThemeProvider>
   );
 };
 

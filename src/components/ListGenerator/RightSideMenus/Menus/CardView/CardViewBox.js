@@ -1,24 +1,31 @@
 // React
 import { useContext } from "react";
-import makeStyles from '@mui/styles/makeStyles';
-import { Grid, IconButton } from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
+import { Grid, IconButton, ThemeProvider, CssBaseline } from "@mui/material";
 // icons
 import CancelIcon from "@mui/icons-material/Cancel";
 // components and functions
 import { RightMenuContext } from "../../../../../contexts/rightMenuContext";
 import CardView from "./CardView";
+// theme
+import lightTheme from "../../../../../AppTheme/lightTheme";
+import darkTheme from "../../../../../AppTheme/darkTheme";
+import { LightSwitchContext } from "../../../../../contexts/lightSwitchContext";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   overlay: {
+    backGroundColor: theme.palette.rightMenuBackground,
     height: "100vh",
     width: "30vw",
-    paddingRight: "2em",
+    padding: "2em",
   },
-});
+}));
 
 const CardViewBox = () => {
   const classes = useStyles();
   const RC = useContext(RightMenuContext);
+  const LC = useContext(LightSwitchContext);
+
   const COLUMN = "column";
 
   // // set the unit card that is displayed. Check if it's a multi state card
@@ -51,29 +58,33 @@ const CardViewBox = () => {
   };
 
   return (
-    <Grid container direction="column" className={classes.overlay}>
-      <Grid item>
-        <IconButton
-          onClick={() => {
-            RC.closeCardDisplay();
-          }}
-          size="large">
-          <CancelIcon />
-        </IconButton>
+    <ThemeProvider theme={LC.darkModeOff ? lightTheme : darkTheme}>
+      <CssBaseline />
+      <Grid container direction="column" className={classes.overlay}>
+        <Grid item>
+          <IconButton
+            onClick={() => {
+              RC.closeCardDisplay();
+            }}
+            size="large"
+          >
+            <CancelIcon />
+          </IconButton>
+        </Grid>
+        <Grid container item>
+          {RC.statCardState.clickedUnit !== undefined ? (
+            <CardView
+              isMultiStateCard={RC.statCardState.clickedUnit?.isMultiStateUnit}
+              cardData={RC.displayedCard}
+              alignment={COLUMN}
+              isSingleElement={RC.isSingleElement}
+              carouselForward={carouselForward}
+              carouselBackward={carouselBackward}
+            />
+          ) : null}
+        </Grid>
       </Grid>
-      <Grid container item>
-        {RC.statCardState.clickedUnit !== undefined ? (
-          <CardView
-            isMultiStateCard={RC.statCardState.clickedUnit?.isMultiStateUnit}
-            cardData={RC.displayedCard}
-            alignment={COLUMN}
-            isSingleElement={RC.isSingleElement}
-            carouselForward={carouselForward}
-            carouselBackward={carouselBackward}
-          />
-        ) : null}
-      </Grid>
-    </Grid>
+    </ThemeProvider>
   );
 };
 

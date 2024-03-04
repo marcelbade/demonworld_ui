@@ -15,8 +15,9 @@ import { filterForSubFaction } from "../../../ListGeneratorFunctions";
 import LightSwitch from "../../../../shared/LightSwitch";
 import ChoosePdfType from "./ChoosePdfType";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   overlay: {
+    backGroundColor: theme.palette.rightMenuBackground,
     height: "100vh",
     width: "30vw",
     padding: "2em",
@@ -26,7 +27,7 @@ const useStyles = makeStyles({
     padding: "2em",
     height: "5em",
   },
-});
+}));
 
 const OptionButtons = () => {
   const classes = useStyles();
