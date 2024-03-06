@@ -13,8 +13,8 @@ const useStyles = makeStyles({
     paddingLeft: "2em",
   },
   icons: {
-    width: "3em",
-    height: "3em",
+    width: "2em",
+    height: "2em",
   },
 });
 
