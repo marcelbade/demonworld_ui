@@ -18,17 +18,15 @@ const LightSwitch = () => {
   };
 
   return (
-    <Grid item>
-      <Tooltip title={<Typography>{OPTIONS.LIGHT_SWITCH}</Typography>}>
-        <IconButton
-          onClick={() => {
-            toggleDarkMode();
-          }}
-        >
-          {LC.darkModeOff ? <Brightness4Icon /> : <BrightnessHighIcon />}
-        </IconButton>
-      </Tooltip>
-    </Grid>
+    <Tooltip title={<Typography>{OPTIONS.LIGHT_SWITCH}</Typography>}>
+      <IconButton
+        onClick={() => {
+          toggleDarkMode();
+        }}
+      >
+        {LC.darkModeOff ? <Brightness4Icon /> : <BrightnessHighIcon />}
+      </IconButton>
+    </Tooltip>
   );
 };
 
