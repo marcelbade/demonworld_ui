@@ -13,6 +13,8 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "2em",
     backgroundColor: theme.palette.statCardBackGround,
     border: "1px black solid",
+    marginLeft: "0.75em",
+    marginRight: "0.75em",
   },
 }));
 
