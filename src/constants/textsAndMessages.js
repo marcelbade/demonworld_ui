@@ -1,3 +1,10 @@
+export const LANDINGPAGE ={
+    COMPENDIUM: "",
+    LIST_GENERATOR: "",
+    LOSS_CALCULATOR: "",
+}
+
+
 export const COMPENDIUM = {
   TITLE: "Kompendium",
   FACTION: "Fraktion",
