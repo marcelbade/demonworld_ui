@@ -33,12 +33,6 @@ const useStyles = makeStyles((theme) => ({
 const LandingPage = () => {
   const classes = useStyles();
 
-  const buttons = [
-    { relativURL: "/compendium", icon: bookIcon, altText: LANDINGPAGE.COMPENDIUM },
-    { relativURL: "/listGenerator", icon: calculatorIcon, altText: LANDINGPAGE.LIST_GENERATOR },
-    { relativURL: "/lossCalculator", icon: deathIcon, altText: LANDINGPAGE.LOSS_CALCULATOR },
-  ];
-
   return (
     <Grid
       container //
@@ -46,13 +40,21 @@ const LandingPage = () => {
       alignContent="center"
       className={classes.homePage}
     >
-      {buttons.map((b) => (
-        <LandingPageNaviButton
-          relativURL={b.relativURL} //
-          icon={b.icon}
-          altText={b.altText}
-        />
-      ))}
+      <LandingPageNaviButton
+        relativeURL={"/compendium"} //
+        icon={bookIcon}
+        altText={LANDINGPAGE.COMPENDIUM}
+      />
+      <LandingPageNaviButton
+        relativeURL={"/listGenerator"} //
+        icon={calculatorIcon}
+        altText={LANDINGPAGE.LIST_GENERATOR}
+      />
+      <LandingPageNaviButton
+        relativeURL={"/lossCalculator"} //
+        icon={deathIcon}
+        altText={LANDINGPAGE.LOSS_CALCULATOR}
+      />
     </Grid>
   );
 };
