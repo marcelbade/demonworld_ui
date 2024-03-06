@@ -1,3 +1,40 @@
+export const COMPENDIUM = {
+  TITLE: "Kompendium",
+  FACTION: "Fraktion",
+  SUBFACTION: "Unterfraktion",
+  NAME: "Name",
+  UNITTYPE: "Typ",
+  NUMBEROFELEMENTS: "Elemente",
+  STANDARDBEARER: "Banner",
+  MUSICIAN: "Musiker",
+  WEDGEFORMATION: "Keil",
+  SKIRMISHFORMATION: "Plänkler",
+  SQUAREFORMATION: "Kare",
+  HORDE: "Horde",
+  MOVE: "Bewegen",
+  CHARGE: "Angriff",
+  SKIRMISH: "Plänkeln",
+  HOLD_MANEUVERS: "Halten",
+  UNIT_SIZE: "Größe",
+  ARMOURRANGE: "FK-Rüstung",
+  ARMOURMELEE: "NK-Rüstung",
+  WEAPON1: "1. Waffe",
+  WEAPON2: "2. Waffe",
+  RANGEDWEAPON: "Fernkampf",
+  SKILLMELEE: "NK-Fertigkeit",
+  SKILLRANGE: "FK-Fertigkeit",
+  INITIATIVE: "Initiative",
+  COMMANDSTARS: "Befehle",
+  MAGIC: "Magie",
+  CONTROLZONE_OVERRUN: "Kontrolbereich/Überrennen",
+  HITPOINTS: "Trefferpunkte",
+  FEAR: "Trefferpunkte",
+  MORAL1: "Moral",
+  MORAL2: "Moral",
+  SPECIALRULES: "Sonderregeln",
+  POINTS: "Punkte",
+};
+
 export const TOOLTIPS = {
   DELETE_ARMY_LIST: "Komplette Liste löschen.",
 };
@@ -25,7 +62,8 @@ export const GENERAL_ERRRORS = {
 };
 
 export const INPUT_TEXTS = {
-  SELECT_FACTION: "Wähle Eine Fraktion.",
+  SELECT_FACTION: "Wähle Eine Fraktion:",
+  SELECT_UNIT: "Suche nach Einheit:",
   TOTAL_POINTS: "Gesamtpunktzahl :",
   POINTS: "Punkte",
 };
