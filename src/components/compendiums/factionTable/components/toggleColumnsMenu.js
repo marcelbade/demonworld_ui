@@ -12,7 +12,7 @@ const useStyles = makeStyles({
     margin: "10px",
     width: "250px",
     "& .MuiFormControlLabel-label": {
-      fontFamily: "BreatheOfFire",
+      fontFamily: "NotMaryKate",
     },
   },
 });

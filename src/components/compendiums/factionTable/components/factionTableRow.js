@@ -1,24 +1,25 @@
 // React
 import React from "react";
 // Material UI
-// import { makeStyles } from "@mui/material/styles";
+import { makeStyles } from "@mui/styles";
 import { IconButton } from "@mui/material";
 // components & functions
-
 import { renderBooleanAsIcon, renderMagicPoints, renderSpecialRules, renderCommandPoints } from "../depencies/factionTableFunctions";
 // icons
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import CloseIcon from "@mui/icons-material/Close";
 
-/**
- *
- * @param {*} props
- *
- */
+const useStyles = makeStyles({
+  tableRow: {
+    fontFamily: "jaapokkiRegular",
+  },
+});
 
 const FactionTableRow = (props) => {
+  const classes = useStyles();
+
   return (
-    <tr key={props.unit.unitName}>
+    <tr key={props.unit.unitName} className={classes.tableRow}>
       <td></td>
       {props.columns[0].displayed ? (
         <td>

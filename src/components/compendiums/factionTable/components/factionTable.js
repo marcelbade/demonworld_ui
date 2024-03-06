@@ -12,15 +12,26 @@ import DetailedCardView from "./detailedCardView";
 import ToggleColumnsMenu from "./toggleColumnsMenu";
 import FactionTableHeader from "./factionTableHeader";
 import { COMPENDIUM, INPUT_TEXTS } from "../../../../constants/textsAndMessages";
+import LightSwitch from "../../../shared/LightSwitch";
+import MainMenuReturnButton from "../../../shared/MainMenuReturnButton";
 
 const useStyles = makeStyles({
+  test: {
+    backgroundColor: "pink",
+  },
+  test2: {
+    backgroundColor: "blue",
+  },
+  selectorInputs: {
+    marginLeft: "2em",
+  },
   table: {
     width: "100%",
     textAlign: "center",
   },
   pageTitle: {
-    marginLeft: "40px",
-    fontFamily: "BreatheOfFire",
+    marginLeft: "0.5em",
+    fontFamily: "NotMaryKate",
   },
   toggleGroupBox: {
     border: 1,
@@ -30,7 +41,7 @@ const useStyles = makeStyles({
     margin: "10px",
     width: "250px",
     "& .MuiFormControlLabel-label": {
-      fontFamily: "BreatheOfFire",
+      fontFamily: "NotMaryKate",
     },
   },
   tableRow: {
@@ -225,27 +236,45 @@ const OverviewTable = () => {
   return receivedData ? (
     <>
       <Grid container spacing={6}>
-        <Grid item xs={12}>
-          <Typography variant="h3" className={classes.pageTitle}>
-            {COMPENDIUM.TITLE}
-          </Typography>
+        <Grid
+          item //
+          container
+          xs={12}
+          alignContent="flex-start"
+          direction="row"
+        >
+          <Grid item xs={6}>
+            <MainMenuReturnButton />
+          </Grid>
+          <Grid
+            item //
+            xs={6}
+            className={classes.test}
+          >
+            <LightSwitch />
+          </Grid>
         </Grid>
-        <Grid item container xs={12} direction="column" alignItems="flex-start">
-          <SelectionInput
-            className={classes.selectorInputs}
-            alternatives={setSelectorFactionNames()}
-            filterFunction={selectFaction}
-            clearFunction={clearFaction}
-            label={INPUT_TEXTS.SELECT_FACTION}
-          />
-          <SelectionInput
-            className={classes.selectorInputs}
-            alternatives={setSelectorUnitNames()}
-            filterFunction={selectUnit}
-            clearFunction={clearUnit}
-            label={INPUT_TEXTS.SELECT_UNIT}
-          />
+        <Grid item container direction="row">
+          <Grid item xs={8}>
+            <Typography variant="h3" className={classes.pageTitle}>
+              {COMPENDIUM.TITLE}
+            </Typography>
+
+            <SelectionInput
+              alternatives={setSelectorFactionNames()}
+              filterFunction={selectFaction}
+              clearFunction={clearFaction}
+              label={INPUT_TEXTS.SELECT_FACTION}
+            />
+            <SelectionInput
+              alternatives={setSelectorUnitNames()}
+              filterFunction={selectUnit}
+              clearFunction={clearUnit}
+              label={INPUT_TEXTS.SELECT_UNIT}
+            />
+          </Grid>
         </Grid>
+
         <ToggleColumnsMenu
           allBoxes={allBoxes}
           columns={columns}
@@ -254,6 +283,7 @@ const OverviewTable = () => {
           toggleAllColumns={toggleAllColumns}
           toggleGroupsOfColumns={toggleGroupsOfColumns}
         />
+
         <Grid item xs={12}>
           {receivedData ? (
             <table className={classes.table}>
