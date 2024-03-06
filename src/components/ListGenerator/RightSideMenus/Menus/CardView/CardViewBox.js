@@ -28,9 +28,6 @@ const CardViewBox = () => {
 
   const COLUMN = "column";
 
-  // // set the unit card that is displayed. Check if it's a multi state card
-  // useEffect(() => {}, [RC.statCardState.clickedUnit]); // eslint-disable-line react-hooks/exhaustive-deps
-
   /**
    * Function allwos user to cycle through the multiple stat cards counter-clockwise.
    */
