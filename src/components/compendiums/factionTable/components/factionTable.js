@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 // Axios
 import axios from "axios";
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
 import { Grid, Typography } from "@mui/material";
 // components & functions
 import SelectionInput from "../../../shared/selectionInput";
@@ -11,6 +11,7 @@ import FactionTableRow from "./factionTableRow";
 import DetailedCardView from "./detailedCardView";
 import ToggleColumnsMenu from "./toggleColumnsMenu";
 import FactionTableHeader from "./factionTableHeader";
+import { COMPENDIUM, INPUT_TEXTS } from "../../../../constants/textsAndMessages";
 
 const useStyles = makeStyles({
   table: {
@@ -52,39 +53,39 @@ const OverviewTable = () => {
 
   const [columns, setColumns] = useState([
     { column: "button", label: "", displayed: true, type: "button" },
-    { column: "faction", label: "Fraktion", displayed: true },
-    { column: "subFaction", label: "Unterfraktion", displayed: true },
-    { column: "name", label: "Name", displayed: true },
-    { column: "unitType", label: "Typ", displayed: true },
-    { column: "numberOfElements", label: "Elemente", displayed: true },
-    { column: "standardBearer", label: "Banner", displayed: true, type: "boolean" },
-    { column: "musician", label: "Musiker", displayed: true, type: "boolean" },
-    { column: "wedgeFormation", label: "Keil", displayed: true, type: "boolean" },
-    { column: "skirmishFormation", label: "Plänkler", displayed: true, type: "boolean" },
-    { column: "squareFormation", label: "Kare", displayed: true, type: "boolean" },
-    { column: "horde", label: "Horde", displayed: true, type: "boolean" },
-    { column: "move", label: "Bewegen", displayed: true },
-    { column: "charge", label: "Angriff", displayed: true },
-    { column: "skirmish", label: "Plänkeln", displayed: true },
-    { column: "hold_maneuvers", label: "Halten", displayed: true },
-    { column: "unitSize", label: "Größe", displayed: true },
-    { column: "armourRange", label: "FK-Rüstung", displayed: true },
-    { column: "armourMelee", label: "NK-Rüstung", displayed: true },
-    { column: "weapon1", label: "1. Waffe", displayed: true },
-    { column: "weapon2", label: "2. Waffe", displayed: true },
-    { column: "rangedWeapon", label: "Fernkampf", displayed: true },
-    { column: "skillMelee", label: "NK-Fertigkeit", displayed: true },
-    { column: "skillRange", label: "FK-Fertigkeit", displayed: true },
-    { column: "initiative", label: "Initiative", displayed: true },
-    { column: "commandStars", label: "Befehle", displayed: true, type: "command" },
-    { column: "magic", label: "Magie", displayed: true, type: "magic" },
-    { column: "controlZone_OverRun", label: "Kontrolbereich/Überrennen", displayed: true },
-    { column: "hitpoints", label: "Trefferpunkte", displayed: true },
-    { column: "fear", label: "Furcht", displayed: true },
-    { column: "moral1", label: "Moral", displayed: true },
-    { column: "moral2", label: "Moral", displayed: true },
-    { column: "specialRules", label: "Sonderregeln", displayed: true, type: "specialRules" },
-    { column: "points", label: "Punkte", displayed: true },
+    { column: "faction", label: COMPENDIUM.FACTION, displayed: true },
+    { column: "subFaction", label: COMPENDIUM.SUBFACTION, displayed: true },
+    { column: "name", label: COMPENDIUM.NAME, displayed: true },
+    { column: "unitType", label: COMPENDIUM.UNITTYPE, displayed: true },
+    { column: "numberOfElements", label: COMPENDIUM.NUMBEROFELEMENTS, displayed: true },
+    { column: "standardBearer", label: COMPENDIUM.STANDARDBEARER, displayed: true, type: "boolean" },
+    { column: "musician", label: COMPENDIUM.MUSICIAN, displayed: true, type: "boolean" },
+    { column: "wedgeFormation", label: COMPENDIUM.WEDGEFORMATION, displayed: true, type: "boolean" },
+    { column: "skirmishFormation", label: COMPENDIUM.SKIRMISHFORMATION, displayed: true, type: "boolean" },
+    { column: "squareFormation", label: COMPENDIUM.NAME, displayed: true, type: "boolean" },
+    { column: "horde", label: COMPENDIUM.HORDE, displayed: true, type: "boolean" },
+    { column: "move", label: COMPENDIUM.MOVE, displayed: true },
+    { column: "charge", label: COMPENDIUM.CHARGE, displayed: true },
+    { column: "skirmish", label: COMPENDIUM.SKIRMISH, displayed: true },
+    { column: "hold_maneuvers", label: COMPENDIUM.HOLD_MANEUVERS, displayed: true },
+    { column: "unitSize", label: COMPENDIUM.UNIT_SIZE, displayed: true },
+    { column: "armourRange", label: COMPENDIUM.ARMOURRANGE, displayed: true },
+    { column: "armourMelee", label: COMPENDIUM.ARMOURMELEE, displayed: true },
+    { column: "weapon1", label: COMPENDIUM.WEAPON1, displayed: true },
+    { column: "weapon2", label: COMPENDIUM.WEAPON2, displayed: true },
+    { column: "rangedWeapon", label: COMPENDIUM.RANGEDWEAPON, displayed: true },
+    { column: "skillMelee", label: COMPENDIUM.SKILLMELEE, displayed: true },
+    { column: "skillRange", label: COMPENDIUM.SKILLRANGE, displayed: true },
+    { column: "initiative", label: COMPENDIUM.INITIATIVE, displayed: true },
+    { column: "commandStars", label: COMPENDIUM.COMMANDSTARS, displayed: true, type: "command" },
+    { column: "magic", label: COMPENDIUM.MAGIC, displayed: true, type: "magic" },
+    { column: "controlZone_OverRun", label: COMPENDIUM.CONTROLZONE_OVERRUN, displayed: true },
+    { column: "hitpoints", label: COMPENDIUM.HITPOINTS, displayed: true },
+    { column: "fear", label: COMPENDIUM.FEAR, displayed: true },
+    { column: "moral1", label: COMPENDIUM.MORAL1, displayed: true },
+    { column: "moral2", label: COMPENDIUM.MORAL2, displayed: true },
+    { column: "specialRules", label: COMPENDIUM.SPECIALRULES, displayed: true, type: "specialRules" },
+    { column: "points", label: COMPENDIUM.POINTS, displayed: true },
   ]);
 
   const [toggleGroups, setToggleGroups] = useState([
@@ -226,23 +227,23 @@ const OverviewTable = () => {
       <Grid container spacing={6}>
         <Grid item xs={12}>
           <Typography variant="h3" className={classes.pageTitle}>
-            Kompendium
+            {COMPENDIUM.TITLE}
           </Typography>
         </Grid>
         <Grid item container xs={12} direction="column" alignItems="flex-start">
           <SelectionInput
             className={classes.selectorInputs}
-            options={setSelectorFactionNames()}
+            alternatives={setSelectorFactionNames()}
             filterFunction={selectFaction}
             clearFunction={clearFaction}
-            label="Suche nach Fraktion"
+            label={INPUT_TEXTS.SELECT_FACTION}
           />
           <SelectionInput
             className={classes.selectorInputs}
-            options={setSelectorUnitNames()}
+            alternatives={setSelectorUnitNames()}
             filterFunction={selectUnit}
             clearFunction={clearUnit}
-            label="Suche nach Einheit"
+            label={INPUT_TEXTS.SELECT_UNIT}
           />
         </Grid>
         <ToggleColumnsMenu
