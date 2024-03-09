@@ -1,7 +1,7 @@
 // React
 import React, { useContext } from "react";
 // Material UI
-import { Grid, IconButton, Tooltip, Typography } from "@mui/material";
+import { IconButton, Tooltip, Typography } from "@mui/material";
 // components and functions
 import { LightSwitchContext } from "../../contexts/lightSwitchContext";
 // icons
