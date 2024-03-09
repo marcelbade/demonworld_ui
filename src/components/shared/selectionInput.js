@@ -8,6 +8,7 @@ import makeStyles from "@mui/styles/makeStyles";
 const useStyles = makeStyles((theme) => ({
   inputDimensions: {
     width: "25em",
+    marginLeft: "2em",
   },
 }));
 
