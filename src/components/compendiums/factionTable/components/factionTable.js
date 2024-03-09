@@ -45,9 +45,7 @@ const useStyles = makeStyles({
     },
   },
   tableRow: {
-    "& :hover": {
-      backgroundColor: "lightgrey",
-    },
+   
   },
 });
 
@@ -286,13 +284,14 @@ const OverviewTable = () => {
 
         <Grid item xs={12}>
           {receivedData ? (
-            <table className={classes.table}>
+            <table className={classes.table} rules="none">
               <FactionTableHeader columns={columns} />
-              <tbody className={classes.tableRow}>
+              <tbody>
                 {tableData.map((unit) => {
                   return (
                     <>
                       <FactionTableRow
+                      
                         columns={columns}
                         unit={unit}
                         selectedStatCards={selectedStatCards}

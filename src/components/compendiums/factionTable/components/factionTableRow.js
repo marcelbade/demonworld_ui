@@ -2,15 +2,15 @@
 import React from "react";
 // Material UI
 import { makeStyles } from "@mui/styles";
-import { IconButton } from "@mui/material";
 // components & functions
 import { renderBooleanAsIcon, renderMagicPoints, renderSpecialRules, renderCommandPoints } from "../depencies/factionTableFunctions";
-// icons
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import CloseIcon from "@mui/icons-material/Close";
+import CardButton from "./CardButton";
 
 const useStyles = makeStyles({
   tableRow: {
+    "& :hover": {
+      backgroundColor: "green",
+    },
     fontFamily: "jaapokkiRegular",
   },
 });
@@ -23,14 +23,11 @@ const FactionTableRow = (props) => {
       <td></td>
       {props.columns[0].displayed ? (
         <td>
-          <IconButton
-            onClick={() => {
-              props.toggleUnitCard(props.unit);
-            }}
-            size="large"
-          >
-            {props.selectedStatCards.includes(props.unit.faction + props.unit.unitName) ? <CloseIcon /> : <ArrowForwardIosIcon />}
-          </IconButton>
+          <CardButton
+            toggleUnitCard={props.toggleUnitCard} //
+            unit={props.unit}
+            selectedStatCards={props.selectedStatCards}
+          />
         </td>
       ) : null}
 
