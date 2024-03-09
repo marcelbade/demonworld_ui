@@ -1,7 +1,7 @@
 export const LANDINGPAGE ={
-    COMPENDIUM: "",
-    LIST_GENERATOR: "",
-    LOSS_CALCULATOR: "",
+    COMPENDIUM: "Kompendium",
+    LIST_GENERATOR: "Listengenerator",
+    LOSS_CALCULATOR: "Verlustrechner",
 }
 
 
