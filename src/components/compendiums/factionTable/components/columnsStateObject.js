@@ -19,7 +19,7 @@ export const columnGroupObjects = [
 export const columnsStateObjects = [
   {
     column: "button", //
-    label: "",
+    label: COMPENDIUM.CARD_BUTTON,
     displayed: true,
     type: "button",
     toggleGroup: "button",

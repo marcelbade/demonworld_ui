@@ -1,14 +1,14 @@
-export const LANDINGPAGE ={
-    COMPENDIUM: "Kompendium",
-    LIST_GENERATOR: "Listengenerator",
-    LOSS_CALCULATOR: "Verlustrechner",
-}
-
+export const LANDINGPAGE = {
+  COMPENDIUM: "Kompendium",
+  LIST_GENERATOR: "Listengenerator",
+  LOSS_CALCULATOR: "Verlustrechner",
+};
 
 export const COMPENDIUM = {
   TITLE: "Kompendium",
-  COLUMNS:"Tabellenspalten",
-  TOGGLE_OFF_ALL_COLUMNS:"Blende alle Spalten aus.",
+  COLUMNS: "Tabellenspalten",
+  TOGGLE_OFF_ALL_COLUMNS: "Blende alle Spalten aus.",
+  CARD_BUTTON: "Kartenansicht",
   FACTION: "Fraktion",
   SUBFACTION: "Unterfraktion",
   NAME: "Name",
@@ -38,8 +38,8 @@ export const COMPENDIUM = {
   CONTROLZONE_OVERRUN: "Kontrolbereich/Überrennen",
   HITPOINTS: "Trefferpunkte",
   FEAR: "Trefferpunkte",
-  MORAL1: "Moral",
-  MORAL2: "Moral",
+  MORAL1: "1. Moralwert",
+  MORAL2: "2. Moralwert",
   SPECIALRULES: "Sonderregeln",
   POINTS: "Punkte",
 };

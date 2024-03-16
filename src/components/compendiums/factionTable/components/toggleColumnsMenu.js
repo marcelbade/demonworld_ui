@@ -7,11 +7,11 @@ import { Grid, Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 import { COMPENDIUM } from "../../../../constants/textsAndMessages";
 
 const useStyles = makeStyles({
-  checkBoxLabel: {
-    width: "250px",
-    "& .MuiFormControlLabel-label": {
-      fontFamily: "NotMaryKate",
-    },
+  formGroup: {
+    display: "flex",
+    justifyContent: "flex-start",
+    flexDirection: "column",
+    margin: "1em",
   },
 });
 
@@ -19,18 +19,20 @@ const ToggleColumnsMenu = (props) => {
   const classes = useStyles();
 
   return (
-    <Grid item container xs={12} direction="row">
-      {/* outer loop that goes through toogle groups and creates one box each */}
-      {props.toggleGroups
-        .filter((g) => g.toggleGroup !== "button")
-        .map((g, i) => {
+    <Grid container direction="column">
+      <Grid item container xs={12} direction="row">
+        {/* outer loop that goes through toogle groups and creates one box each */}
+        {props.toggleGroups.map((g, i) => {
           return (
-            <FormGroup key={i}>
+            <FormGroup
+              key={i} //
+              className={classes.formGroup}
+            >
               <Checkbox
                 key={i}
                 checked={g.displayEntireGroup}
                 onChange={() => {
-                  props.toggleGroupsOfColumns(g.toggleGroup); //TODO
+                  props.toggleGroupsOfColumns(g.toggleGroup);
                 }}
               />
               {props.columns
@@ -38,12 +40,6 @@ const ToggleColumnsMenu = (props) => {
                 .map((c, i) => (
                   <FormControlLabel
                     key={i} //
-                    sx={{
-                      backgroundColor: "green", //
-                      display: "flex",
-                      justifyContent: "flex-start",
-                      flexDirection: "row",
-                    }}
                     control={
                       <Checkbox
                         key={i}
@@ -59,21 +55,22 @@ const ToggleColumnsMenu = (props) => {
             </FormGroup>
           );
         })}
-
-      <FormGroup>
-        <FormControlLabel
-          className={classes.checkBoxLabel}
-          control={
-            <Checkbox
-              checked={props.allBoxes}
-              onChange={() => {
-                props.toggleAllColumns();
-              }}
-            />
-          }
-          label={COMPENDIUM.TOGGLE_OFF_ALL_COLUMNS}
-        />
-      </FormGroup>
+      </Grid>
+      <Grid item>
+        <FormGroup className={classes.formGroup}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={props.allBoxes}
+                onChange={() => {
+                  props.toggleAllColumns();
+                }}
+              />
+            }
+            label={COMPENDIUM.TOGGLE_OFF_ALL_COLUMNS}
+          />
+        </FormGroup>
+      </Grid>
     </Grid>
   );
 };
