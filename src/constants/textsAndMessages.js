@@ -7,6 +7,7 @@ export const LANDINGPAGE ={
 
 export const COMPENDIUM = {
   TITLE: "Kompendium",
+  COLUMNS:"Tabellenspalten",
   FACTION: "Fraktion",
   SUBFACTION: "Unterfraktion",
   NAME: "Name",
