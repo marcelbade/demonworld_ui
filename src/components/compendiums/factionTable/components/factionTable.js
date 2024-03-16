@@ -186,21 +186,23 @@ const FactionTable = () => {
    * Function toggles all table columns.
    */
   const toggleAllColumns = () => {
-    setAllBoxes((prevState) => !prevState);
+    const temp =  allBoxes;
 
     setColumns(
       columns.map((c) => {
-        c.displayed = !allBoxes;
+        c.displayed = temp;
         return c;
       })
     );
 
     setToggleGroups(
       toggleGroups.map((t) => {
-        t.displayEntireGroup = !allBoxes;
+        t.displayEntireGroup = temp;
         return t;
       })
     );
+
+    setAllBoxes((prevState) => !prevState);
   };
 
   const handleOptionsOpen = () => {
