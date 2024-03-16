@@ -14,6 +14,7 @@ import FactionTableHeader from "./factionTableHeader";
 import { COMPENDIUM, INPUT_TEXTS } from "../../../../constants/textsAndMessages";
 import LightSwitch from "../../../shared/LightSwitch";
 import MainMenuReturnButton from "../../../shared/MainMenuReturnButton";
+import { columnGroupObjects, columnsStateObjects } from "./columnsStateObject";
 //icons
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
@@ -62,60 +63,10 @@ const FactionTable = () => {
   const [singleFilteredFaction, setSingleFilteredFaction] = useState([]);
   const [tableData, setTableData] = useState([]);
   const [selectedStatCards, setSelectedStatCards] = useState([]);
-  const [allBoxes, setAllBoxes] = useState(true);
+  const [allBoxes, setAllBoxes] = useState(false);
   const [openOptions, setOpenOptions] = useState(false);
-
-  const [columns, setColumns] = useState([
-    { column: "button", label: "", displayed: true, type: "button" },
-    { column: "faction", label: COMPENDIUM.FACTION, displayed: true },
-    { column: "subFaction", label: COMPENDIUM.SUBFACTION, displayed: true },
-    { column: "name", label: COMPENDIUM.NAME, displayed: true },
-    { column: "unitType", label: COMPENDIUM.UNITTYPE, displayed: true },
-    { column: "numberOfElements", label: COMPENDIUM.NUMBEROFELEMENTS, displayed: true },
-    { column: "standardBearer", label: COMPENDIUM.STANDARDBEARER, displayed: true, type: "boolean" },
-    { column: "musician", label: COMPENDIUM.MUSICIAN, displayed: true, type: "boolean" },
-    { column: "wedgeFormation", label: COMPENDIUM.WEDGEFORMATION, displayed: true, type: "boolean" },
-    { column: "skirmishFormation", label: COMPENDIUM.SKIRMISHFORMATION, displayed: true, type: "boolean" },
-    { column: "squareFormation", label: COMPENDIUM.NAME, displayed: true, type: "boolean" },
-    { column: "horde", label: COMPENDIUM.HORDE, displayed: true, type: "boolean" },
-    { column: "move", label: COMPENDIUM.MOVE, displayed: true },
-    { column: "charge", label: COMPENDIUM.CHARGE, displayed: true },
-    { column: "skirmish", label: COMPENDIUM.SKIRMISH, displayed: true },
-    { column: "hold_maneuvers", label: COMPENDIUM.HOLD_MANEUVERS, displayed: true },
-    { column: "unitSize", label: COMPENDIUM.UNIT_SIZE, displayed: true },
-    { column: "armourRange", label: COMPENDIUM.ARMOURRANGE, displayed: true },
-    { column: "armourMelee", label: COMPENDIUM.ARMOURMELEE, displayed: true },
-    { column: "weapon1", label: COMPENDIUM.WEAPON1, displayed: true },
-    { column: "weapon2", label: COMPENDIUM.WEAPON2, displayed: true },
-    { column: "rangedWeapon", label: COMPENDIUM.RANGEDWEAPON, displayed: true },
-    { column: "skillMelee", label: COMPENDIUM.SKILLMELEE, displayed: true },
-    { column: "skillRange", label: COMPENDIUM.SKILLRANGE, displayed: true },
-    { column: "initiative", label: COMPENDIUM.INITIATIVE, displayed: true },
-    { column: "commandStars", label: COMPENDIUM.COMMANDSTARS, displayed: true, type: "command" },
-    { column: "magic", label: COMPENDIUM.MAGIC, displayed: true, type: "magic" },
-    { column: "controlZone_OverRun", label: COMPENDIUM.CONTROLZONE_OVERRUN, displayed: true },
-    { column: "hitpoints", label: COMPENDIUM.HITPOINTS, displayed: true },
-    { column: "fear", label: COMPENDIUM.FEAR, displayed: true },
-    { column: "moral1", label: COMPENDIUM.MORAL1, displayed: true },
-    { column: "moral2", label: COMPENDIUM.MORAL2, displayed: true },
-    { column: "specialRules", label: COMPENDIUM.SPECIALRULES, displayed: true, type: "specialRules" },
-    { column: "points", label: COMPENDIUM.POINTS, displayed: true },
-  ]);
-
-  const [toggleGroups, setToggleGroups] = useState([
-    { name: "naming", stats: ["faction", "subFaction", "name"], displayed: true },
-    {
-      name: "unitCharacteristics",
-      stats: ["banner", "musician", "wedgeFormation", "skirmishFormation", "squareFormation", "horde"],
-      displayed: true,
-    },
-    { name: "movement", stats: ["move", "charge", "skirmish", "hold_maneuvers"], displayed: true },
-    { name: "defense", stats: ["unitSize", "armourRange", "armourMelee"], displayed: true },
-    { name: "offense", stats: ["weapon1", "weapon2", "rangedWeapon", "skillMelee", "skillRange", "initiative"], displayed: true },
-    { name: "heroCharacteristics", stats: ["commandStars", "magic", "controlZone_OverRun"], displayed: true },
-    { name: "vigor", stats: ["hitpoints", "fear", "moral1", "moral2"], displayed: true },
-    { name: "napoints_rules", stats: ["specialRules", "points"], displayed: true },
-  ]);
+  const [columns, setColumns] = useState(columnsStateObjects);
+  const [toggleGroups, setToggleGroups] = useState(columnGroupObjects);
 
   useEffect(() => {
     fetchData();
@@ -190,11 +141,41 @@ const FactionTable = () => {
    * @param {String} column
    * @param {boolean} isChecked
    */
-  const chooseColumnsToDisplay = (column, isChecked) => {
+  const toggleColumn = (column, isChecked) => {
     setColumns(
-      columns.map((c) => {
+      columns.filter((c) => {
         if (c.column === column) {
           c.displayed = !isChecked;
+        }
+        return c;
+      })
+    );
+  };
+
+  /**
+   * Function toggles all table columns of one Group.
+   *
+   * @param {String} name
+   * @param {[String]} columnGroup
+   * @param {boolean} isChecked
+   */
+  const toggleGroupsOfColumns = (groupName) => {
+    let oldGroupToggleValue;
+
+    setToggleGroups(
+      toggleGroups.map((t) => {
+        if (t.toggleGroup === groupName) {
+          oldGroupToggleValue = t.displayEntireGroup;
+          t.displayEntireGroup = !t.displayEntireGroup;
+        }
+        return t;
+      })
+    );
+
+    setColumns(
+      columns.map((c) => {
+        if (c.toggleGroup === groupName) {
+          c.displayed = !oldGroupToggleValue;
         }
         return c;
       })
@@ -205,33 +186,19 @@ const FactionTable = () => {
    * Function toggles all table columns.
    */
   const toggleAllColumns = () => {
-    setAllBoxes(!allBoxes);
-    columns.forEach((u) => (u.displayed = !allBoxes));
-  };
-
-  /**
-   * Function toggles all table columns of one Group.
-   *
-   * @param {String} name
-   * @param {[String]} columnGroup
-   * @param {boolean} isChecked
-   */
-  const toggleGroupsOfColumns = (name, columnGroup, isChecked) => {
-    setToggleGroups(
-      toggleGroups.map((t) => {
-        if (t.unitName === name) {
-          t.displayed = !isChecked;
-        }
-        return t;
-      })
-    );
+    setAllBoxes((prevState) => !prevState);
 
     setColumns(
       columns.map((c) => {
-        if (columnGroup.includes(c.column)) {
-          c.displayed = !isChecked;
-        }
+        c.displayed = !allBoxes;
         return c;
+      })
+    );
+
+    setToggleGroups(
+      toggleGroups.map((t) => {
+        t.displayEntireGroup = !allBoxes;
+        return t;
       })
     );
   };
@@ -239,9 +206,6 @@ const FactionTable = () => {
   const handleOptionsOpen = () => {
     setOpenOptions(true);
   };
-
-  console.log("openOptions");
-  console.log(openOptions);
 
   const handleOptionsClose = () => {
     setOpenOptions(false);
@@ -316,11 +280,12 @@ const FactionTable = () => {
               </Typography>
             </Toolbar>
           </AppBar>
+          {/* TODO */}
           <ToggleColumnsMenu
             allBoxes={allBoxes}
             columns={columns}
             toggleGroups={toggleGroups}
-            chooseColumnsToDisplay={chooseColumnsToDisplay}
+            toggleColumn={toggleColumn}
             toggleAllColumns={toggleAllColumns}
             toggleGroupsOfColumns={toggleGroupsOfColumns}
           />
