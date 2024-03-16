@@ -2,16 +2,14 @@
 import { Fragment } from "react";
 //material
 import { Typography, Grid } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
-import withStyles from '@mui/styles/withStyles';
+import makeStyles from "@mui/styles/makeStyles";
+import withStyles from "@mui/styles/withStyles";
 import Tooltip from "@mui/material/Tooltip";
 //icons
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import CancelIcon from "@mui/icons-material/Cancel";
 // components & functions
 import { unitOrCmdCard } from "../../../../util/utilityFunctions";
-
-
 
 const RulesToolTip = withStyles({
   tooltip: {
@@ -71,7 +69,6 @@ const renderDetailsPanel = (cardData, showTommysStuff) => {
 
 //TODO: finish this function
 export const tommysAnalysis = (cardData) => {
-  //#############
   return <Grid container direction="column"></Grid>;
 };
 
@@ -86,7 +83,7 @@ export const renderBooleanAsIcon = (numberOfElements, flag) => {
   const SINGLE_ELEMENT = 1;
 
   if (numberOfElements !== SINGLE_ELEMENT) {
-    return flag ? <CheckCircleOutlineIcon style={{ color: "black" }} /> : <CancelIcon style={{ color: "black" }} />;
+    return flag ? <CheckCircleOutlineIcon /> : <CancelIcon />;
   } else {
     return "-";
   }
@@ -167,10 +164,7 @@ export const DisplayAllSpecialRules = (unit) => {
   );
 };
 
-
 export const displayUnitElements = (unit) => {
- 
-
   let specialElements = 0;
   if (unit.leader) {
     ++specialElements;
@@ -186,23 +180,17 @@ export const displayUnitElements = (unit) => {
   let ending = unit.numberOfElements === 1 ? "Element" : "Elemente";
 
   return (
-    <Grid container direction="row" justifyContent="center" alignItems="center" >
-      <Typography variant="h6"  >
+    <Grid container direction="row" justifyContent="center" alignItems="center">
+      <Typography variant="h6">
         {unit.leader ? "Anführer  " : null}
         {unit.standardBearer ? "/ Standarte" : null}
         {unit.musician ? "/ Musiker" : null}
       </Typography>
-      <Typography variant="h6" >
-        {number}
-      </Typography>
-      <Typography variant="h6"  >
-        {ending}
-      </Typography>
+      <Typography variant="h6">{number}</Typography>
+      <Typography variant="h6">{ending}</Typography>
     </Grid>
   );
 };
-
-
 
 export const displayFormations = (unit) => {
   let formationString = "";
