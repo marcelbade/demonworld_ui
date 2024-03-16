@@ -5,6 +5,7 @@ const lightTheme = createTheme({
     primary: { 500: "#000000" },
     disabled: "grey",
     statCardBackGround: "lightgrey",
+    compendiumHeaderBackground: "black",
   },
   components: {
     MuiTreeItem: {
@@ -45,6 +46,9 @@ const lightTheme = createTheme({
           fontFamily: "NotMaryKate",
         },
         h6: {
+          fontFamily: "NotMaryKate",
+        },
+        h3: {
           fontFamily: "NotMaryKate",
         },
       },
