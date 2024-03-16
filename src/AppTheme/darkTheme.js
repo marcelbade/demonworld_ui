@@ -10,7 +10,7 @@ const darkTheme = createTheme({
     color: "#0ceda6",
     disabled: "darkgrey",
     statCardBackGround: "#5f6a6a",
-    rightMenuBackground: "pink",
+    compendiumHeaderBackground: "#565757",
   },
   components: {
     MuiTreeItem: {
@@ -51,6 +51,9 @@ const darkTheme = createTheme({
           fontFamily: "NotMaryKate",
         },
         h6: {
+          fontFamily: "NotMaryKate",
+        },
+        h3: {
           fontFamily: "NotMaryKate",
         },
       },
