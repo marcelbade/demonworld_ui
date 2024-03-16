@@ -17,7 +17,6 @@ import ChoosePdfType from "./ChoosePdfType";
 
 const useStyles = makeStyles((theme) => ({
   overlay: {
-    backGroundColor: theme.palette.rightMenuBackground,
     height: "100vh",
     width: "30vw",
     padding: "2em",

@@ -13,7 +13,6 @@ import { GENERAL_ERRRORS, TOURNAMENT_RULES } from "../../../../../constants/text
 
 const useStyles = makeStyles((theme) => ({
   overlay: {
-    backGroundColor: theme.palette.rightMenuBackground,
     height: "100vh",
     width: "30vw",
     padding: "2em",
