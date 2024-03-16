@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 // Axios
 import axios from "axios";
 import makeStyles from "@mui/styles/makeStyles";
-import { Grid, Typography } from "@mui/material";
+import { AppBar, Dialog, Grid, IconButton, Toolbar, Typography, Slide } from "@mui/material";
 // components & functions
 import SelectionInput from "../../../shared/selectionInput";
 import { ALL_FACTIONS_ARRAY } from "../../../../constants/factions";
@@ -14,6 +14,9 @@ import FactionTableHeader from "./factionTableHeader";
 import { COMPENDIUM, INPUT_TEXTS } from "../../../../constants/textsAndMessages";
 import LightSwitch from "../../../shared/LightSwitch";
 import MainMenuReturnButton from "../../../shared/MainMenuReturnButton";
+//icons
+import MenuIcon from "@mui/icons-material/Menu";
+import CloseIcon from "@mui/icons-material/Close";
 
 const useStyles = makeStyles({
   test: {
@@ -22,8 +25,8 @@ const useStyles = makeStyles({
   test2: {
     backgroundColor: "blue",
   },
-  selectorInputs: {
-    marginLeft: "2em",
+  topButtons: {
+    paddingRight: "3em",
   },
   table: {
     width: "100%",
@@ -44,12 +47,13 @@ const useStyles = makeStyles({
       fontFamily: "NotMaryKate",
     },
   },
-  tableRow: {
-   
-  },
 });
 
-const OverviewTable = () => {
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
+const FactionTable = () => {
   const classes = useStyles();
 
   // intialize local state
@@ -59,6 +63,7 @@ const OverviewTable = () => {
   const [tableData, setTableData] = useState([]);
   const [selectedStatCards, setSelectedStatCards] = useState([]);
   const [allBoxes, setAllBoxes] = useState(true);
+  const [openOptions, setOpenOptions] = useState(false);
 
   const [columns, setColumns] = useState([
     { column: "button", label: "", displayed: true, type: "button" },
@@ -231,25 +236,41 @@ const OverviewTable = () => {
     );
   };
 
+  const handleOptionsOpen = () => {
+    setOpenOptions(true);
+  };
+
+  console.log("openOptions");
+  console.log(openOptions);
+
+  const handleOptionsClose = () => {
+    setOpenOptions(false);
+  };
+
   return receivedData ? (
     <>
-      <Grid container spacing={6}>
+      <Grid container>
         <Grid
           item //
           container
           xs={12}
           alignContent="flex-start"
           direction="row"
+          justifyContent="space-between"
+          className={classes.topButtons}
         >
-          <Grid item xs={6}>
-            <MainMenuReturnButton />
-          </Grid>
+          <MainMenuReturnButton />
           <Grid
             item //
-            xs={6}
-            className={classes.test}
+            container
+            xs={1}
+            alignContent="flex-start"
+            justifyContent="end"
           >
             <LightSwitch />
+            <IconButton onClick={handleOptionsOpen}>
+              <MenuIcon />
+            </IconButton>
           </Grid>
         </Grid>
         <Grid item container direction="row">
@@ -273,14 +294,37 @@ const OverviewTable = () => {
           </Grid>
         </Grid>
 
-        <ToggleColumnsMenu
-          allBoxes={allBoxes}
-          columns={columns}
-          toggleGroups={toggleGroups}
-          chooseColumnsToDisplay={chooseColumnsToDisplay}
-          toggleAllColumns={toggleAllColumns}
-          toggleGroupsOfColumns={toggleGroupsOfColumns}
-        />
+        <Dialog
+          open={openOptions} //
+          onClose={handleOptionsClose}
+          TransitionComponent={Transition}
+          // override CSS for paper component child
+          PaperProps={{
+            sx: {
+              minWidth: "80vw",
+              minHeight: "80vh",
+            },
+          }}
+        >
+          <AppBar sx={{ position: "relative" }}>
+            <Toolbar>
+              <IconButton edge="start" color="inherit" onClick={handleOptionsClose} aria-label="close">
+                <CloseIcon />
+              </IconButton>
+              <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+                {COMPENDIUM.COLUMNS}
+              </Typography>
+            </Toolbar>
+          </AppBar>
+          <ToggleColumnsMenu
+            allBoxes={allBoxes}
+            columns={columns}
+            toggleGroups={toggleGroups}
+            chooseColumnsToDisplay={chooseColumnsToDisplay}
+            toggleAllColumns={toggleAllColumns}
+            toggleGroupsOfColumns={toggleGroupsOfColumns}
+          />
+        </Dialog>
 
         <Grid item xs={12}>
           {receivedData ? (
@@ -291,7 +335,6 @@ const OverviewTable = () => {
                   return (
                     <>
                       <FactionTableRow
-                      
                         columns={columns}
                         unit={unit}
                         selectedStatCards={selectedStatCards}
@@ -310,4 +353,4 @@ const OverviewTable = () => {
   ) : null;
 };
 
-export default OverviewTable;
+export default FactionTable;
