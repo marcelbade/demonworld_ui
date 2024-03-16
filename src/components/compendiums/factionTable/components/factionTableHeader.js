@@ -1,15 +1,15 @@
 // React
 import React from "react";
-import makeStyles from '@mui/styles/makeStyles';
+import makeStyles from "@mui/styles/makeStyles";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   header: {
-    backgroundColor: "black",
+    backgroundColor:  theme.palette.compendiumHeaderBackground,
     color: "white",
     borderColor: "black",
     padding: "5px",
   },
-});
+}));
 
 const FactionTableHeader = (props) => {
   const classes = useStyles();
