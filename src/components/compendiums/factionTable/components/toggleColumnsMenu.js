@@ -34,9 +34,10 @@ const ToggleColumnsMenu = (props) => {
           {props.columns
             .filter((col) => col.column !== "button")
             .filter((col) => toggle.stats.includes(col.column))
-            .map((col) => (
+            .map((col, i) => (
               <FormControlLabel
                 className={classes.checkBoxLabel}
+                key ={i}
                 control={
                   <Checkbox
                     checked={col.displayed}
