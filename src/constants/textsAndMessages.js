@@ -8,6 +8,7 @@ export const LANDINGPAGE ={
 export const COMPENDIUM = {
   TITLE: "Kompendium",
   COLUMNS:"Tabellenspalten",
+  TOGGLE_OFF_ALL_COLUMNS:"Blende alle Spalten aus.",
   FACTION: "Fraktion",
   SUBFACTION: "Unterfraktion",
   NAME: "Name",
