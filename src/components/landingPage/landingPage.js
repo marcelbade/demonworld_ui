@@ -10,6 +10,7 @@ import bookIcon from "../../assets/icons/icons8-book-64.png";
 // functions and components
 import LandingPageNaviButton from "./LandingPageNaviButton";
 import { LANDINGPAGE } from "../../constants/textsAndMessages";
+import LightSwitch from "../shared/LightSwitch";
 
 const useStyles = makeStyles((theme) => ({
   homePage: {
@@ -28,33 +29,51 @@ const useStyles = makeStyles((theme) => ({
       },
     },
   },
+  lightSwitch: {
+    marginRight: "2em",
+    marginTop: "1em",
+  },
 }));
 
 const LandingPage = () => {
   const classes = useStyles();
 
   return (
-    <Grid
-      container //
-      justifyContent="center"
-      alignContent="center"
-      className={classes.homePage}
-    >
-      <LandingPageNaviButton
-        relativeURL={"/compendium"} //
-        icon={bookIcon}
-        altText={LANDINGPAGE.COMPENDIUM}
-      />
-      <LandingPageNaviButton
-        relativeURL={"/listGenerator"} //
-        icon={calculatorIcon}
-        altText={LANDINGPAGE.LIST_GENERATOR}
-      />
-      <LandingPageNaviButton
-        relativeURL={"/lossCalculator"} //
-        icon={deathIcon}
-        altText={LANDINGPAGE.LOSS_CALCULATOR}
-      />
+    <Grid container>
+      <Grid
+        container
+        xs={12}
+        item //
+        justifyContent="flex-end"
+        alignContent="center"
+      >
+        <Grid item className={classes.lightSwitch}>
+          <LightSwitch />
+        </Grid>
+      </Grid>
+      <Grid
+        container //
+        item
+        justifyContent="center"
+        alignContent="center"
+        className={classes.homePage}
+      >
+        <LandingPageNaviButton
+          relativeURL={"/compendium"} //
+          icon={bookIcon}
+          altText={LANDINGPAGE.COMPENDIUM}
+        />
+        <LandingPageNaviButton
+          relativeURL={"/listGenerator"} //
+          icon={calculatorIcon}
+          altText={LANDINGPAGE.LIST_GENERATOR}
+        />
+        <LandingPageNaviButton
+          relativeURL={"/lossCalculator"} //
+          icon={deathIcon}
+          altText={LANDINGPAGE.LOSS_CALCULATOR}
+        />
+      </Grid>
     </Grid>
   );
 };
