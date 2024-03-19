@@ -1,3 +1,4 @@
+// SINGLE FACTIONS
 export const DUNKELFELFEN = "Dunkelelfen";
 export const ECHSENMENSCHEN = "Echsenmenschen";
 export const ELFEN = "Elfen";
@@ -9,9 +10,7 @@ export const NORWINGER = "Norwinger";
 export const THAIN = "Thain";
 export const UNTOTE = "Untote";
 export const ZWERGE = "Zwerge";
-
 export const NONE = "NONE";
-
 export const NO_ALLY = "NO_ALLY";
 
 // ALL FACTIONS
