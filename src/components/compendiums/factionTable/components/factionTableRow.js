@@ -9,6 +9,9 @@ import CardButton from "./CardButton";
 const useStyles = makeStyles({
   tableRow: {
     fontFamily: "jaapokkiRegular",
+    "&:hover": {
+      backgroundColor: "#ac6725",
+    },
   },
 });
 
