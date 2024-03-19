@@ -87,7 +87,7 @@ const FactionTable = () => {
    * @returns [String]
    */
   const setSelectorFactionNames = () => {
-    return ALL_FACTIONS_ARRAY;
+    return ALL_FACTIONS_ARRAY.sort();
   };
 
   /**
@@ -96,7 +96,8 @@ const FactionTable = () => {
    * @returns [String]
    */
   const setSelectorUnitNames = () => {
-    return singleFilteredFaction.length === 0 ? allFactions.map((u) => u.unitName) : singleFilteredFaction.map((u) => u.unitName);
+    const options = singleFilteredFaction.length === 0 ? allFactions : singleFilteredFaction;
+    return options.map((u) => u.unitName).sort();
   };
 
   /**
@@ -186,7 +187,7 @@ const FactionTable = () => {
    * Function toggles all table columns.
    */
   const toggleAllColumns = () => {
-    const temp =  allBoxes;
+    const temp = allBoxes;
 
     setColumns(
       columns.map((c) => {
@@ -282,7 +283,6 @@ const FactionTable = () => {
               </Typography>
             </Toolbar>
           </AppBar>
-          {/* TODO */}
           <ToggleColumnsMenu
             allBoxes={allBoxes}
             columns={columns}
@@ -292,7 +292,6 @@ const FactionTable = () => {
             toggleGroupsOfColumns={toggleGroupsOfColumns}
           />
         </Dialog>
-
         <Grid item xs={12}>
           {receivedData ? (
             <table className={classes.table} rules="none">
