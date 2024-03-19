@@ -263,4 +263,18 @@ export const columnsStateObjects = [
     type: "text",
     toggleGroup: "rulesPointsGroup",
   },
+  {
+    column: "effectiveness_1", //
+    label: COMPENDIUM.EFFECTIVENESS_1,
+    displayed: true,
+    type: "text",
+    toggleGroup: "rulesPointsGroup",
+  },
+  {
+    column: "effectiveness_2", //
+    label: COMPENDIUM.EFFECTIVENESS_2,
+    displayed: true,
+    type: "text",
+    toggleGroup: "rulesPointsGroup",
+  },
 ];

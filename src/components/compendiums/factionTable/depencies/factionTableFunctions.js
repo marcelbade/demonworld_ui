@@ -8,8 +8,7 @@ import Tooltip from "@mui/material/Tooltip";
 //icons
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import CancelIcon from "@mui/icons-material/Cancel";
-// components & functions
-import { unitOrCmdCard } from "../../../../util/utilityFunctions";
+// constants
 import { UNIT_TYPES } from "../../../../constants/textsAndMessages";
 
 const RulesToolTip = withStyles({
@@ -54,23 +53,34 @@ export const renderSpecialRules = (rule) => {
   );
 };
 
-// eslint-disable-next-line no-unused-vars
-const renderDetailsPanel = (cardData, showTommysStuff) => {
-  return (
-    <Grid container>
-      <Grid item xs={6}>
-        {unitOrCmdCard(cardData)}
-      </Grid>
-      <Grid item xs={6}>
-        {showTommysStuff ? tommysAnalysis(cardData) : null}
-      </Grid>
-    </Grid>
-  );
+/**
+ * Function calculates Tommy's first effectivenness (melee only) rating from
+ * his spreadsheet for a single unit.
+ * @param {unitCard} unit
+ * @returns a decimal number expressing the effectiveness of the unit.
+ */
+export const renderEffectiveness_1 = (unit) => {
+  const result = (unit.weapon1 + unit.armourMelee) / (unit.points / unit.hitpoints);
+  return result.toFixed(2);
 };
 
-//TODO: finish this function
-export const tommysAnalysis = (cardData) => {
-  return <Grid container direction="column"></Grid>;
+/**
+ * Function calculates Tommy's second effectivenness rating from
+ * his spreadsheet for a single unit.
+ * @param {unitCard} unit
+ * @returns a decimal number expressing the effectiveness of the unit.
+ */
+export const renderEffectiveness_2 = (unit) => {
+  const result =
+    (unit.weapon1 +
+      unit.armourMelee + //
+      (unit.armourRange - 0.5 * unit.unitSize) + //
+      3 * unit.initiative +
+      0.2 * unit.move + //
+      0.5 * unit.numberOfElements) / //
+    (unit.points / unit.hitpoints);
+
+  return result.toFixed(2);
 };
 
 /**

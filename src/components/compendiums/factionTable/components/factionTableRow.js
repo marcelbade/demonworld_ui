@@ -9,6 +9,8 @@ import {
   renderSpecialRules,
   renderCommandPoints,
   renderUnitTypeName,
+  renderEffectiveness_1,
+  renderEffectiveness_2,
 } from "../depencies/factionTableFunctions";
 import CardButton from "./CardButton";
 
@@ -70,6 +72,8 @@ const FactionTableRow = (props) => {
       {props.columns[31].displayed ? <td>{props.unit.moral2}</td> : null}
       {props.columns[32].displayed ? <td>{renderSpecialRules(props.unit.specialRules)}</td> : null}
       {props.columns[33].displayed ? <td>{props.unit.points}</td> : null}
+      {props.columns[33].displayed ? <td>{renderEffectiveness_1(props.unit)}</td> : null}
+      {props.columns[33].displayed ? <td>{renderEffectiveness_2(props.unit)}</td> : null}
     </tr>
   );
 };

@@ -42,6 +42,8 @@ export const COMPENDIUM = {
   MORAL2: "2. Moralwert",
   SPECIALRULES: "Sonderregeln",
   POINTS: "Punkte",
+  EFFECTIVENESS_1: "Effektivität 1",
+  EFFECTIVENESS_2: "Effektivität 2",
 };
 
 export const TOOLTIPS = {
