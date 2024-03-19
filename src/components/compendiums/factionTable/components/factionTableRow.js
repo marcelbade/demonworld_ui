@@ -3,7 +3,13 @@ import React from "react";
 // Material UI
 import { makeStyles } from "@mui/styles";
 // components & functions
-import { renderBooleanAsIcon, renderMagicPoints, renderSpecialRules, renderCommandPoints } from "../depencies/factionTableFunctions";
+import {
+  renderBooleanAsIcon,
+  renderMagicPoints,
+  renderSpecialRules,
+  renderCommandPoints,
+  renderUnitTypeName,
+} from "../depencies/factionTableFunctions";
 import CardButton from "./CardButton";
 
 const useStyles = makeStyles({
@@ -34,7 +40,7 @@ const FactionTableRow = (props) => {
       {props.columns[1].displayed ? <td>{props.unit.faction}</td> : null}
       {props.columns[2].displayed ? <td>{props.unit.subFaction}</td> : null}
       {props.columns[3].displayed ? <td>{props.unit.unitName}</td> : null}
-      {props.columns[4].displayed ? <td>{props.unit.unitType}</td> : null}
+      {props.columns[4].displayed ? <td>{renderUnitTypeName(props.unit.unitType)}</td> : null}
       {props.columns[5].displayed ? <td>{props.unit.numberOfElements}</td> : null}
       {props.columns[6].displayed ? <td>{renderBooleanAsIcon(props.unit.numberOfElements, props.unit.standardBearer)}</td> : null}
       {props.columns[7].displayed ? <td>{renderBooleanAsIcon(props.unit.numberOfElements, props.unit.musician)}</td> : null}

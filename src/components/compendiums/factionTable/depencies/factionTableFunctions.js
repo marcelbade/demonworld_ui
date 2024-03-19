@@ -78,7 +78,7 @@ export const tommysAnalysis = (cardData) => {
  * @param {String} unitType
  * @returns the name of the unit Type from the textsAndMessages file.
  */
-const renderUnitTypeName = (unitType) => {
+export const renderUnitTypeName = (unitType) => {
   return UNIT_TYPES[unitType];
 };
 
