@@ -20,26 +20,16 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 
 const useStyles = makeStyles({
-  test: {
-    backgroundColor: "pink",
-  },
-  test2: {
-    backgroundColor: "blue",
-  },
   topButtons: {
+    position: "fixed",
     paddingRight: "3em",
   },
   table: {
-    width: "100%",
-    textAlign: "center",
+     textAlign: "center",
   },
   pageTitle: {
     marginLeft: "0.5em",
     fontFamily: "NotMaryKate",
-  },
-  toggleGroupBox: {
-    border: 1,
-    borderColor: "pink",
   },
   checkBoxLabel: {
     margin: "10px",
@@ -106,7 +96,7 @@ const FactionTable = () => {
    * @param {[{}]} selectedFaction
    */
   const selectFaction = (selectedFaction) => {
-    setSingleFilteredFaction(allFactions.filter((u) => u.faction=== selectedFaction));
+    setSingleFilteredFaction(allFactions.filter((u) => u.faction === selectedFaction));
     setTableData(allFactions.filter((u) => u.faction === selectedFaction));
   };
 
@@ -226,7 +216,14 @@ const FactionTable = () => {
           justifyContent="space-between"
           className={classes.topButtons}
         >
-          <MainMenuReturnButton />
+          <Grid
+            item //
+            container
+            xs={11}
+          >
+            <MainMenuReturnButton />
+          </Grid>
+
           <Grid
             item //
             container
