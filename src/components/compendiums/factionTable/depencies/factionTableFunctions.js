@@ -10,6 +10,7 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import CancelIcon from "@mui/icons-material/Cancel";
 // components & functions
 import { unitOrCmdCard } from "../../../../util/utilityFunctions";
+import { UNIT_TYPES } from "../../../../constants/textsAndMessages";
 
 const RulesToolTip = withStyles({
   tooltip: {
@@ -70,6 +71,15 @@ const renderDetailsPanel = (cardData, showTommysStuff) => {
 //TODO: finish this function
 export const tommysAnalysis = (cardData) => {
   return <Grid container direction="column"></Grid>;
+};
+
+/**
+ * Function takes the unit type abbrevation (G,U,M...) and replaces it with the type name.
+ * @param {String} unitType
+ * @returns the name of the unit Type from the textsAndMessages file.
+ */
+const renderUnitTypeName = (unitType) => {
+  return UNIT_TYPES[unitType];
 };
 
 /**
