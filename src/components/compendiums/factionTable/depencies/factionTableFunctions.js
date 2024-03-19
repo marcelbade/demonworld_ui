@@ -1,5 +1,5 @@
 // React
-import { Fragment } from "react";
+import React, { Fragment } from "react";
 //material
 import { Typography, Grid } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";

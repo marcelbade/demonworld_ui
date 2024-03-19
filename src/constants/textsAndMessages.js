@@ -29,6 +29,7 @@ export const COMPENDIUM = {
   ARMOURMELEE: "NK-Rüstung",
   WEAPON1: "1. Waffe",
   WEAPON2: "2. Waffe",
+  WEAPON3: "3. Waffe",
   RANGEDWEAPON: "Fernkampf",
   SKILLMELEE: "NK-Fertigkeit",
   SKILLRANGE: "FK-Fertigkeit",

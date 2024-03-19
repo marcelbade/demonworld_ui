@@ -57,8 +57,9 @@ const FactionTableRow = (props) => {
       {props.columns[16].displayed ? <td>{props.unit.unitSize}</td> : null}
       {props.columns[17].displayed ? <td>{props.unit.armourRange}</td> : null}
       {props.columns[18].displayed ? <td>{props.unit.armourMelee}</td> : null}
-      {props.columns[19].displayed ? <td>{props.unit.weapon1}</td> : null}
-      {props.columns[20].displayed ? <td>{props.unit.weapon2}</td> : null}
+      {props.columns[19].displayed ? <td>{props.unit.weapon1Name + " " + props.unit.weapon1}</td> : null}
+      {props.columns[20].displayed ? <td>{props.unit.weapon2Name + " " + props.unit.weapon2}</td> : null}
+      {props.columns[20].displayed ? <td>{props.unit.weapon3Name + " " + props.unit.weapon3}</td> : null}
       {props.columns[21].displayed ? <td>{props.unit.rangedWeapon}</td> : null}
       {props.columns[22].displayed ? <td>{props.unit.skillMelee}</td> : null}
       {props.columns[23].displayed ? <td>{props.unit.skillRange}</td> : null}

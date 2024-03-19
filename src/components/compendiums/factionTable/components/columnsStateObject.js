@@ -170,6 +170,13 @@ export const columnsStateObjects = [
     toggleGroup: "offenseGroup",
   },
   {
+    column: "weapon3", //
+    label: COMPENDIUM.WEAPON3,
+    displayed: true,
+    type: "text",
+    toggleGroup: "offenseGroup",
+  },
+  {
     column: "rangedWeapon", //
     label: COMPENDIUM.RANGEDWEAPON,
     displayed: true,
