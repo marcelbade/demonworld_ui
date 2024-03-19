@@ -106,8 +106,8 @@ const FactionTable = () => {
    * @param {[{}]} selectedFaction
    */
   const selectFaction = (selectedFaction) => {
-    setSingleFilteredFaction(allFactions.filter((u) => u.faction.toLowerCase() === selectedFaction.toLowerCase()));
-    setTableData(allFactions.filter((u) => u.faction.toLowerCase() === selectedFaction.toLowerCase()));
+    setSingleFilteredFaction(allFactions.filter((u) => u.faction=== selectedFaction));
+    setTableData(allFactions.filter((u) => u.faction === selectedFaction));
   };
 
   /**
@@ -117,7 +117,7 @@ const FactionTable = () => {
    */
   const selectUnit = (nameSearchString) => {
     setSelectorUnitNames();
-    setTableData(allFactions.filter((lf) => lf.unitName.toLowerCase().includes(nameSearchString.toLowerCase())));
+    setTableData(allFactions.filter((lf) => lf.unitName.includes(nameSearchString)));
   };
 
   const clearFaction = () => {
