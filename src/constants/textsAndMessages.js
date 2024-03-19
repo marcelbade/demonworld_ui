@@ -157,7 +157,16 @@ export const CARD_PREVIEW = {
   CONTROL_AREA: "Kontrollbereich",
 };
 
-// FACTIONS
+// FACTIONS & Game Rules
+
+export const UNIT_TYPES = {
+  H: "Held/Charakter",
+  M: "Magier",
+  A: "Gerät",
+  G: "Großelement",
+  U: "Einheit",
+  S: "Beschworenes Element",
+};
 
 export const DARKELVES = {
   SUB_FACTION_RULES: {
