@@ -11,6 +11,9 @@ import LockOpenIcon from "@mui/icons-material/LockOpen";
 const RowLock = (props) => {
   const TC = useContext(TableContext);
 
+  /**
+   * Function sets the unitLocked property for a unit.
+   */
   const toggleRowLock = () => {
     TC.setTableData(
       TC.tableData.map((t) => {

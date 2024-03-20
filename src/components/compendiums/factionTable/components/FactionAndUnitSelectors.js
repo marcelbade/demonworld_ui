@@ -7,7 +7,7 @@ import { ALL_FACTIONS_ARRAY } from "../../../../constants/factions";
 import { INPUT_TEXTS } from "../../../../constants/textsAndMessages";
 import SelectionInput from "../../../shared/selectionInput";
 
-const SelectionAndComparisons = (props) => {
+const FactionAndUnitSelectors = (props) => {
   const TC = useContext(TableContext);
 
   /**
@@ -72,4 +72,4 @@ const SelectionAndComparisons = (props) => {
   );
 };
 
-export default SelectionAndComparisons;
+export default FactionAndUnitSelectors;

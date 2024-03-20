@@ -14,7 +14,7 @@ import MainMenuReturnButton from "../../../shared/MainMenuReturnButton";
 import { columnGroupObjects, columnsStateObjects } from "./columnsStateObject";
 //icons
 import MenuIcon from "@mui/icons-material/Menu";
-import SelectionAndComparisons from "./SelectionAndComparisons";
+import FactionAndUnitSelectors from "./FactionAndUnitSelectors";
 import OptionsDialog from "./OptionsDialog";
 import TableProvider from "../../../../contexts/tableContext";
 
@@ -222,7 +222,7 @@ const FactionTable = () => {
               <Typography variant="h3" className={classes.pageTitle}>
                 {COMPENDIUM.TITLE}
               </Typography>
-              <SelectionAndComparisons />
+              <FactionAndUnitSelectors />
             </Grid>
           </Grid>
           <OptionsDialog />
