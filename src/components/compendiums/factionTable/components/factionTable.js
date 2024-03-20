@@ -69,6 +69,10 @@ const FactionTable = () => {
     setTableData(receivedData);
   }, [receivedData]);
 
+  /**
+   * Function toggles the unitCard view onand off for a single table Column.
+   * @param {UnitCard} unit
+   */
   const toggleUnitCard = (unit) => {
     const id = unit.faction + unit.unitName;
 
