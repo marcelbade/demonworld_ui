@@ -1,55 +1,32 @@
 // React
-import React, { Fragment } from "react";
-//material
-import { Typography, Grid } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
-import withStyles from "@mui/styles/withStyles";
-import Tooltip from "@mui/material/Tooltip";
+import React from "react";
+//Material UI
+import { Grid, Tooltip, Typography } from "@mui/material";
 //icons
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import CancelIcon from "@mui/icons-material/Cancel";
 // constants
-import { UNIT_TYPES } from "../../../../constants/textsAndMessages";
-
-const RulesToolTip = withStyles({
-  tooltip: {
-    fontFamily: "gonjuring",
-    fontSize: "20px",
-    color: "white",
-    backgroundColor: "black",
-  },
-})(Tooltip);
-
-const useStyles = makeStyles({
-  specialRules: {
-    fontFamily: "jaapokkiRegular",
-    paddingLeft: "0.5em",
-  },
-  Icon: {
-    width: "1em",
-    height: "1em",
-  },
-  skillBox: {
-    marginLeft: "1em",
-    flexWrap: "nowrap",
-  },
-  secondSkillIcon: {
-    width: "1em",
-    height: "1em",
-    marginLeft: "1em",
-  },
-});
+import { COMPENDIUM, UNIT_TYPES } from "../../../../constants/textsAndMessages";
 
 /**
- * Cut special rule to a max of 30 characters. If there is no rule, show "-".
+ * Function searches the String value of the special rule property for a space (" "). If a space is found,
+ * the special rule is deemed to long and only the String up to the first space is displayed
+ * and the rest repalced with an ellipsis. If no space is found, then the special rule consist of a single
+ * word (i.e., "two-handed Sword") and is displayed as is.
  * @param {String} rule
  * @returns resized string or "-"
  */
 export const renderSpecialRules = (rule) => {
+  const firstSpace = rule.indexOf(" ");
+  const length = firstSpace === -1 ? rule.length : firstSpace;
+  const ellipsis = length !== rule.length ? "..." : "";
+
+  const rulePreview = `${rule.slice(0, length)}${ellipsis} `;
+
   return (
-    <RulesToolTip title={rule}>
-      <p className="font-face-gonjuring">{rule.length === 0 ? "-" : "..."}</p>
-    </RulesToolTip>
+    <Tooltip title={<Typography>{rule === "-" ? COMPENDIUM.NO_SPECIAL_RULES : rule}</Typography>}>
+      <Typography>{rule === "-" ? "-" : rulePreview}</Typography>
+    </Tooltip>
   );
 };
 
@@ -152,38 +129,6 @@ export const renderCommandPoints = (stars) => {
   return starIcons;
 };
 
-/**
- * Function creates the html for the displayed unit card's special rule section.
- *
- * @param {unitCard} unit
- * @returns html containing the unit's special rule (if it has any), and optionally, the rules for any
- * pieces of equipment added to the unit.
- */
-export const DisplayAllSpecialRules = (unit) => {
-  const classes = useStyles();
-  return (
-    <Typography variant="body1" align="center" className={classes.specialRules}>
-      {unit.specialRules === "" ? "Keine Besonderen Spielregeln" : unit.specialRules}
-      {"equipment" in unit && unit.equipment.length !== 0
-        ? unit.equipment.map((e) => {
-            return (
-              <Fragment>
-                <hr></hr>
-                <Typography variant="body1" className={classes.specialRules}>
-                  {e.name}
-                </Typography>
-                <Typography>_______</Typography>
-                <Typography variant="body1" className={classes.specialRules}>
-                  {e.rule}
-                </Typography>
-              </Fragment>
-            );
-          })
-        : null}
-    </Typography>
-  );
-};
-
 export const displayUnitElements = (unit) => {
   let specialElements = 0;
   if (unit.leader) {
@@ -210,25 +155,4 @@ export const displayUnitElements = (unit) => {
       <Typography variant="h6">{ending}</Typography>
     </Grid>
   );
-};
-
-export const displayFormations = (unit) => {
-  let formationString = "";
-
-  if (unit.wedgeFormation) {
-    formationString += "Ke";
-  }
-  if (unit.skirmishFormation) {
-    formationString += "Pl";
-  }
-  if (unit.squareFormation) {
-    formationString += "Ka";
-  }
-  if (unit.squareFormation) {
-    formationString += "Horde";
-  }
-
-  formationString = formationString.replace(/([A-Z])/g, " $1").trim();
-
-  return formationString;
 };
