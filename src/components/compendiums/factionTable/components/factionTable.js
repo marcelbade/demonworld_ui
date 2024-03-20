@@ -166,6 +166,7 @@ const FactionTable = () => {
           columns: columns,
           toggleGroups: toggleGroups,
           singleFilteredFaction: singleFilteredFaction,
+          selectedStatCards: selectedStatCards,
           setAllFactions: setAllFactions,
           setTableData: setTableData,
           setOpenOptions: setOpenOptions,
@@ -174,6 +175,7 @@ const FactionTable = () => {
           toggleAllColumns: toggleAllColumns,
           toggleGroupsOfColumns: toggleGroupsOfColumns,
           setSingleFilteredFaction: setSingleFilteredFaction,
+          toggleUnitCard: toggleUnitCard,
         }}
       >
         <Grid container>
@@ -224,12 +226,7 @@ const FactionTable = () => {
                   {tableData.map((unit) => {
                     return (
                       <>
-                        <FactionTableRow
-                          columns={columns}
-                          unit={unit}
-                          selectedStatCards={selectedStatCards}
-                          toggleUnitCard={toggleUnitCard}
-                        />
+                        <FactionTableRow unit={unit} />
                         <DetailedCardView selectedCards={selectedStatCards} unit={unit} />
                       </>
                     );
