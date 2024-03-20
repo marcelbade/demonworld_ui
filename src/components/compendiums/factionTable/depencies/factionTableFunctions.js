@@ -12,7 +12,7 @@ import { COMPENDIUM, UNIT_TYPES } from "../../../../constants/textsAndMessages";
  * Function searches the String value of the special rule property for a space (" ").
  * If a space is found, the special rule is deemed to long and
  * only the String up to the first space is displayed and
- * the rest repalced with an ellipsis. If no space is found,
+ * the rest replaced with an ellipsis. If no space is found,
  * then the special rule consist of a single
  * word (i.e., "two-handed Sword") and is displayed as is.
  * @param {String} rule
@@ -72,9 +72,10 @@ export const renderUnitTypeName = (unitType) => {
 };
 
 /**
- * Function that renders the correct icon for those unit stats
- * that are booleans. For a Unit the function displays either a check mark or X icon,
- * for heroes  and commanders it shows  a "-".
+ * Function renders an icon for unit stats that are Booleans
+ * and only occur in Units that do not consist of a single element
+ * (giants, heroes, magic users). For a Unit the function displays either a check mark or X icon,
+ * for heroes  and commanders it shows a "-".
  *
  * @param {boolean} flag
  * @returns Material UI icon or "-"
