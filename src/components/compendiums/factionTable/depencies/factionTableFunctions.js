@@ -92,7 +92,7 @@ export const renderBooleanAsIcon = (numberOfElements, flag) => {
  * Function renders the hitpoint markers for the stat cards.
  *
  * @param {integer} hitpoints
- * @returns  String
+ * @returns a String containing the correct number of icons.
  */
 export const generateHitPoints = (hitpoints) => {
   let hitpointMarker = "";
@@ -104,10 +104,10 @@ export const generateHitPoints = (hitpoints) => {
 };
 
 /**
- * Function renders rank of a magic user for stat cards.
+ * Function renders the rank of a magic user for stat cards.
  *
  * @param {integer} arcana
- * @returns String
+ * @returns a String containing the correct number of icons.
  */
 export const renderMagicPoints = (arcana) => {
   let arcanaMarker = "";
@@ -121,7 +121,7 @@ export const renderMagicPoints = (arcana) => {
  * Function renders command stars for stat cards.
  *
  * @param {integer} stars
- * @returns String
+ * @returns a String containing the correct number of icons.
  */
 export const renderCommandPoints = (stars) => {
   let starIcons = "";
