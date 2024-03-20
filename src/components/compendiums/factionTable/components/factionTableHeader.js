@@ -1,6 +1,7 @@
 // React
-import React from "react";
+import React, { useContext } from "react";
 import makeStyles from "@mui/styles/makeStyles";
+import { TableContext } from "../../../../contexts/tableContext";
 
 const useStyles = makeStyles((theme) => ({
   header: {
@@ -11,14 +12,15 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const FactionTableHeader = (props) => {
+const FactionTableHeader = () => {
   const classes = useStyles();
+  const TC = useContext(TableContext);
 
   return (
     <thead>
       <tr>
         <th></th>
-        {props.columns.map((col, i) => {
+        {TC.columns.map((col, i) => {
           let element = col.displayed ? (
             <th className={classes.header} key={i}>
               {col.label}
