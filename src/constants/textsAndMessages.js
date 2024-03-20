@@ -46,6 +46,7 @@ export const COMPENDIUM = {
   POINTS: "Punkte",
   EFFECTIVENESS_1: "Effektivität 1",
   EFFECTIVENESS_2: "Effektivität 2",
+  NO_SPECIAL_RULES: "Keine Sonderregeln",
 };
 
 export const TOOLTIPS = {
