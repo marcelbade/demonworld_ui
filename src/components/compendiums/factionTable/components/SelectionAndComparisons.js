@@ -6,8 +6,6 @@ import { TableContext } from "../../../../contexts/tableContext";
 import { ALL_FACTIONS_ARRAY } from "../../../../constants/factions";
 import { INPUT_TEXTS } from "../../../../constants/textsAndMessages";
 import SelectionInput from "../../../shared/selectionInput";
-import { FormControlLabel, Grid } from "@mui/material";
-import { CheckBox } from "@material-ui/icons";
 
 const SelectionAndComparisons = (props) => {
   const TC = useContext(TableContext);
@@ -59,31 +57,20 @@ const SelectionAndComparisons = (props) => {
   };
 
   return (
-    <Grid
-      item
-      container //
-      direction="row"
-      alignContent="flex-start"
-      alignItems="flex-start"
-    >
-      <Grid container item direction="column" xs={4}>
-        <SelectionInput
-          alternatives={setSelectorFactionNames()}
-          filterFunction={selectFaction}
-          clearFunction={clearFaction}
-          label={INPUT_TEXTS.SELECT_FACTION}
-        />
-        <SelectionInput
-          alternatives={setSelectorUnitNames()}
-          filterFunction={selectUnit}
-          clearFunction={clearUnit}
-          label={INPUT_TEXTS.SELECT_UNIT}
-        />
-      </Grid>
-      <Grid item>
-        <FormControlLabel control={<CheckBox checked={false} onChange={() => {}} />} label={"Vergleichen"} />
-      </Grid>
-    </Grid>
+    <>
+      <SelectionInput
+        alternatives={setSelectorFactionNames()}
+        filterFunction={selectFaction}
+        clearFunction={clearFaction}
+        label={INPUT_TEXTS.SELECT_FACTION}
+      />
+      <SelectionInput
+        alternatives={setSelectorUnitNames()}
+        filterFunction={selectUnit}
+        clearFunction={clearUnit}
+        label={INPUT_TEXTS.SELECT_UNIT}
+      />
+    </>
   );
 };
 
