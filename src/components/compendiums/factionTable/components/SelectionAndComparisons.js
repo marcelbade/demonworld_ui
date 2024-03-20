@@ -1,11 +1,17 @@
 //  React
-import React, { Fragment } from "react";
+import React, { useContext } from "react";
+// components & functions
+import { TableContext } from "../../../../contexts/tableContext";
 //  Constants
 import { ALL_FACTIONS_ARRAY } from "../../../../constants/factions";
 import { INPUT_TEXTS } from "../../../../constants/textsAndMessages";
 import SelectionInput from "../../../shared/selectionInput";
+import { FormControlLabel, Grid } from "@mui/material";
+import { CheckBox } from "@material-ui/icons";
 
-const SelectionAndComaparisons = (props) => {
+const SelectionAndComparisons = (props) => {
+  const TC = useContext(TableContext);
+
   /**
    * Generates the options for the faction name selector.
    * @returns [String]
@@ -20,7 +26,7 @@ const SelectionAndComaparisons = (props) => {
    * @returns [String]
    */
   const setSelectorUnitNames = () => {
-    const options = props.singleFilteredFaction.length === 0 ? props.allFactions : props.singleFilteredFaction;
+    const options = TC.singleFilteredFaction.length === 0 ? TC.allFactions : TC.singleFilteredFaction;
     return options.map((u) => u.unitName).sort();
   };
 
@@ -30,8 +36,8 @@ const SelectionAndComaparisons = (props) => {
    * @param {[{}]} selectedFaction
    */
   const selectFaction = (selectedFaction) => {
-    props.setSingleFilteredFaction(props.allFactions.filter((u) => u.faction === selectedFaction));
-    props.setTableData(props.allFactions.filter((u) => u.faction === selectedFaction));
+    TC.setSingleFilteredFaction(TC.allFactions.filter((u) => u.faction === selectedFaction));
+    TC.setTableData(TC.allFactions.filter((u) => u.faction === selectedFaction));
   };
 
   /**
@@ -41,34 +47,44 @@ const SelectionAndComaparisons = (props) => {
    */
   const selectUnit = (nameSearchString) => {
     setSelectorUnitNames();
-    props.setTableData(props.allFactions.filter((lf) => lf.unitName.includes(nameSearchString)));
+    TC.setTableData(TC.allFactions.filter((lf) => lf.unitName.includes(nameSearchString)));
   };
 
   const clearFaction = () => {
-    props.setTableData(props.allFactions);
+    TC.setTableData(TC.allFactions);
   };
 
   const clearUnit = () => {
-    props.setTableData(props.singleFilteredFaction);
+    TC.setTableData(TC.singleFilteredFaction);
   };
 
   return (
-    <Fragment>
-      <SelectionInput
-        alternatives={setSelectorFactionNames()}
-        filterFunction={selectFaction}
-        clearFunction={clearFaction}
-        label={INPUT_TEXTS.SELECT_FACTION}
-      />
-      <SelectionInput
-        alternatives={setSelectorUnitNames()}
-        filterFunction={selectUnit}
-        clearFunction={clearUnit}
-        label={INPUT_TEXTS.SELECT_UNIT}
-      />
-      
-    </Fragment>
+    <Grid
+      item
+      container //
+      direction="row"
+      alignContent="flex-start"
+      alignItems="flex-start"
+    >
+      <Grid container item direction="column" xs={4}>
+        <SelectionInput
+          alternatives={setSelectorFactionNames()}
+          filterFunction={selectFaction}
+          clearFunction={clearFaction}
+          label={INPUT_TEXTS.SELECT_FACTION}
+        />
+        <SelectionInput
+          alternatives={setSelectorUnitNames()}
+          filterFunction={selectUnit}
+          clearFunction={clearUnit}
+          label={INPUT_TEXTS.SELECT_UNIT}
+        />
+      </Grid>
+      <Grid item>
+        <FormControlLabel control={<CheckBox checked={false} onChange={() => {}} />} label={"Vergleichen"} />
+      </Grid>
+    </Grid>
   );
 };
 
-export default SelectionAndComaparisons;
+export default SelectionAndComparisons;

@@ -1,5 +1,5 @@
 // React
-import React from "react";
+import React, { useContext } from "react";
 // material ui
 import { AppBar, Dialog, IconButton, Toolbar, Typography, Slide } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
@@ -7,19 +7,22 @@ import CloseIcon from "@mui/icons-material/Close";
 import ToggleColumnsMenu from "./ToggleColumnsMenu";
 // constants
 import { COMPENDIUM } from "../../../../constants/textsAndMessages";
+import { TableContext } from "../../../../contexts/tableContext";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
 const OptionsDialog = (props) => {
+  const TC = useContext(TableContext);
+
   const handleOptionsClose = () => {
-    props.setOpenOptions(false);
+    TC.setOpenOptions(false);
   };
 
   return (
     <Dialog
-      open={props.openOptions} //
+      open={TC.openOptions} //
       onClose={handleOptionsClose}
       TransitionComponent={Transition}
       // override CSS for paper component child
@@ -40,14 +43,7 @@ const OptionsDialog = (props) => {
           </Typography>
         </Toolbar>
       </AppBar>
-      <ToggleColumnsMenu
-        allBoxes={props.allBoxes}
-        columns={props.columns}
-        toggleGroups={props.toggleGroups}
-        toggleColumn={props.toggleColumn}
-        toggleAllColumns={props.toggleAllColumns}
-        toggleGroupsOfColumns={props.toggleGroupsOfColumns}
-      />
+      <ToggleColumnsMenu />
     </Dialog>
   );
 };

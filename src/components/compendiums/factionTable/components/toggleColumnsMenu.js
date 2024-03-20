@@ -1,8 +1,11 @@
 // React
-import React from "react";
+import React, { useContext } from "react";
 // material ui
 import makeStyles from "@mui/styles/makeStyles";
 import { Grid, Checkbox, FormControlLabel, FormGroup } from "@mui/material";
+// components & functions
+import { TableContext } from "../../../../contexts/tableContext";
+
 // constants
 import { COMPENDIUM } from "../../../../constants/textsAndMessages";
 
@@ -17,12 +20,13 @@ const useStyles = makeStyles({
 
 const ToggleColumnsMenu = (props) => {
   const classes = useStyles();
+  const TC = useContext(TableContext);
 
   return (
     <Grid container direction="column">
       <Grid item container xs={12} direction="row">
         {/* outer loop that goes through toogle groups and creates one box each */}
-        {props.toggleGroups.map((g, i) => {
+        {TC.toggleGroups.map((g, i) => {
           return (
             <FormGroup
               key={i} //
@@ -32,10 +36,10 @@ const ToggleColumnsMenu = (props) => {
                 key={i}
                 checked={g.displayEntireGroup}
                 onChange={() => {
-                  props.toggleGroupsOfColumns(g.toggleGroup);
+                  TC.toggleGroupsOfColumns(g.toggleGroup);
                 }}
               />
-              {props.columns
+              {TC.columns
                 .filter((column) => column.toggleGroup === g.toggleGroup)
                 .map((c, i) => (
                   <FormControlLabel
@@ -45,7 +49,7 @@ const ToggleColumnsMenu = (props) => {
                         key={i}
                         checked={c.displayed}
                         onChange={() => {
-                          props.toggleColumn(c.column, c.displayed);
+                          TC.toggleColumn(c.column, c.displayed);
                         }}
                       />
                     }
@@ -61,9 +65,9 @@ const ToggleColumnsMenu = (props) => {
           <FormControlLabel
             control={
               <Checkbox
-                checked={props.allBoxes}
+                checked={TC.allBoxes}
                 onChange={() => {
-                  props.toggleAllColumns();
+                  TC.toggleAllColumns();
                 }}
               />
             }

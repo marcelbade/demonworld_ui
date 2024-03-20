@@ -14,8 +14,9 @@ import MainMenuReturnButton from "../../../shared/MainMenuReturnButton";
 import { columnGroupObjects, columnsStateObjects } from "./columnsStateObject";
 //icons
 import MenuIcon from "@mui/icons-material/Menu";
-import SelectionAndComaparisons from "./SelectionAndComparisons";
+import SelectionAndComparisons from "./SelectionAndComparisons";
 import OptionsDialog from "./OptionsDialog";
+import TableProvider from "../../../../contexts/tableContext";
 
 const useStyles = makeStyles({
   topButtons: {
@@ -152,86 +153,89 @@ const FactionTable = () => {
 
   return receivedData ? (
     <>
-      <Grid container>
-        <Grid
-          item //
-          container
-          xs={12}
-          alignContent="flex-start"
-          direction="row"
-          justifyContent="space-between"
-          className={classes.topButtons}
-        >
+      <TableProvider
+        value={{
+          tableData: tableData,
+          allFactions: allFactions,
+          openOptions: openOptions,
+          allBoxes: allBoxes,
+          columns: columns,
+          toggleGroups: toggleGroups,
+          singleFilteredFaction: singleFilteredFaction,
+          setAllFactions: setAllFactions,
+          setTableData: setTableData,
+          setOpenOptions: setOpenOptions,
+          setColumns: setColumns,
+          toggleColumn: toggleColumn,
+          toggleAllColumns: toggleAllColumns,
+          toggleGroupsOfColumns: toggleGroupsOfColumns,
+          setSingleFilteredFaction: setSingleFilteredFaction,
+        }}
+      >
+        <Grid container>
           <Grid
             item //
             container
-            xs={11}
-          >
-            <MainMenuReturnButton />
-          </Grid>
-
-          <Grid
-            item //
-            container
-            xs={1}
+            xs={12}
             alignContent="flex-start"
-            justifyContent="end"
+            direction="row"
+            justifyContent="space-between"
+            className={classes.topButtons}
           >
-            <LightSwitch />
-            <IconButton onClick={handleOptionsOpen}>
-              <MenuIcon />
-            </IconButton>
+            <Grid
+              item //
+              container
+              xs={11}
+            >
+              <MainMenuReturnButton />
+            </Grid>
+
+            <Grid
+              item //
+              container
+              xs={1}
+              alignContent="flex-start"
+              justifyContent="end"
+            >
+              <LightSwitch />
+              <IconButton onClick={handleOptionsOpen}>
+                <MenuIcon />
+              </IconButton>
+            </Grid>
+          </Grid>
+          <Grid item container direction="row">
+            <Grid item xs={8}>
+              <Typography variant="h3" className={classes.pageTitle}>
+                {COMPENDIUM.TITLE}
+              </Typography>
+              <SelectionAndComparisons />
+            </Grid>
+          </Grid>
+          <OptionsDialog />
+          <Grid item xs={12}>
+            {receivedData ? (
+              <table className={classes.table} rules="none">
+                <FactionTableHeader columns={columns} />
+                <tbody>
+                  {tableData.map((unit) => {
+                    return (
+                      <>
+                        <FactionTableRow
+                          columns={columns}
+                          unit={unit}
+                          selectedStatCards={selectedStatCards}
+                          toggleUnitCard={toggleUnitCard}
+                        />
+                        <DetailedCardView selectedCards={selectedStatCards} unit={unit} />
+                      </>
+                    );
+                  })}
+                </tbody>
+              </table>
+            ) : null}
           </Grid>
         </Grid>
-        <Grid item container direction="row">
-          <Grid item xs={8}>
-            <Typography variant="h3" className={classes.pageTitle}>
-              {COMPENDIUM.TITLE}
-            </Typography>
-            <SelectionAndComaparisons
-              singleFilteredFaction={singleFilteredFaction} //
-              allFactions={allFactions}
-              tableData={tableData}
-              setSingleFilteredFaction={setSingleFilteredFaction}
-              setAllFactions={setAllFactions}
-              setTableData={setTableData}
-            />
-          </Grid>
-        </Grid>
-        <OptionsDialog
-          openOptions={openOptions}
-          allBoxes={allBoxes}
-          columns={columns}
-          toggleGroups={toggleGroups}
-          setOpenOptions={setOpenOptions}
-          setColumns={setColumns}
-          toggleColumn={toggleColumn}
-          toggleAllColumns={toggleAllColumns}
-          toggleGroupsOfColumns={toggleGroupsOfColumns}
-        />
-        <Grid item xs={12}>
-          {receivedData ? (
-            <table className={classes.table} rules="none">
-              <FactionTableHeader columns={columns} />
-              <tbody>
-                {tableData.map((unit) => {
-                  return (
-                    <>
-                      <FactionTableRow
-                        columns={columns}
-                        unit={unit}
-                        selectedStatCards={selectedStatCards}
-                        toggleUnitCard={toggleUnitCard}
-                      />
-                      <DetailedCardView selectedCards={selectedStatCards} unit={unit} />
-                    </>
-                  );
-                })}
-              </tbody>
-            </table>
-          ) : null}
-        </Grid>
-      </Grid>
+      </TableProvider>
     </>
   ) : null;
 };
