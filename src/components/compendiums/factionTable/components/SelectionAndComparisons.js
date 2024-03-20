@@ -29,23 +29,21 @@ const SelectionAndComparisons = (props) => {
   };
 
   /**
-   * OnChange function for faction name selector. Allows user to type and see the matching factions in real time.
-   * setTableData changes table content after selection.
-   * @param {[{}]} selectedFaction
+   * Function for OnChangeEvent. Select all units of one faction to be displayed in the table.
+   * @param {[FactionObject]} selectedFaction
    */
   const selectFaction = (selectedFaction) => {
     TC.setSingleFilteredFaction(TC.allFactions.filter((u) => u.faction === selectedFaction));
-    TC.setTableData(TC.allFactions.filter((u) => u.faction === selectedFaction));
+    TC.setTableData(TC.allFactions.filter((u) => u.faction === selectedFaction || u.unitLocked));
   };
 
   /**
-   *  "onChange" function for the unit name selector. getUnitNames() resets it
-   *  after the selection to show all units of the faction.
+   * Function for OnChangeEvent. Select all a single unit fpr the selected faction.
    * @param {[{}]} nameSearchString
    */
   const selectUnit = (nameSearchString) => {
     setSelectorUnitNames();
-    TC.setTableData(TC.allFactions.filter((lf) => lf.unitName.includes(nameSearchString)));
+    TC.setTableData(TC.allFactions.filter((aF) => aF.unitName.includes(nameSearchString) || aF.unitLocked));
   };
 
   const clearFaction = () => {

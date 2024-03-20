@@ -17,6 +17,14 @@ export const columnGroupObjects = [
 ];
 
 export const columnsStateObjects = [
+  // Buttons  
+  {
+    column: "lock", //
+    label: COMPENDIUM.LOCK,
+    displayed: true,
+    type: "button",
+    toggleGroup: "button",
+  },
   {
     column: "button", //
     label: COMPENDIUM.CARD_BUTTON,

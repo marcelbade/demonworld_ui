@@ -33,7 +33,7 @@ const FactionTableRow = (props) => {
     <tr key={props.rowNumber} className={classes.tableRow}>
       <td></td>
       <td>
-        <RowLock rowNumber={props.rowNumber} />
+        <RowLock unit={props.unit} />
       </td>
       {TC.columns[0].displayed ? (
         <td>

@@ -57,17 +57,25 @@ const FactionTable = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const fetchData = async () => {
     const result = await axios(`http://localhost:8080/factions`);
-    setReceivedData(result.data);
+    setReceivedData(addLock(result.data));
   };
 
   useEffect(() => {
     setAllFactions(receivedData);
     setTableData(receivedData);
-  }, [receivedData]);
+  }, [receivedData]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const addLock = (rawUnits) => {
+    for (let i = 0; i < rawUnits.length; i++) {
+      rawUnits[i] = { ...rawUnits[i], unitLocked: false };
+    }
+
+    return rawUnits;
+  };
 
   /**
    * Function toggles the unitCard view onand off for a single table Column.
@@ -223,10 +231,13 @@ const FactionTable = () => {
               <table className={classes.table} rules="none">
                 <FactionTableHeader columns={columns} />
                 <tbody>
-                  {tableData.map((unit) => {
+                  {tableData.map((unit, i) => {
                     return (
                       <>
-                        <FactionTableRow unit={unit} />
+                        <FactionTableRow
+                          unit={unit} //
+                          rowNumber={i}
+                        />
                         <DetailedCardView selectedCards={selectedStatCards} unit={unit} />
                       </>
                     );
