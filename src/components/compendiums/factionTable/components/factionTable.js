@@ -21,14 +21,16 @@ import CloseIcon from "@mui/icons-material/Close";
 
 const useStyles = makeStyles({
   topButtons: {
-    position: "fixed",
+    position: "relative",
     paddingRight: "3em",
   },
   table: {
-     textAlign: "center",
+    textAlign: "center",
   },
   pageTitle: {
     marginLeft: "0.5em",
+    marginTop: "0.5em",
+    marginBottom: "0.5em",
     fontFamily: "NotMaryKate",
   },
   checkBoxLabel: {
