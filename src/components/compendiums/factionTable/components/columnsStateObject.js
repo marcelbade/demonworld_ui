@@ -228,8 +228,15 @@ export const columnsStateObjects = [
     type: "magic",
   },
   {
-    column: "controlZone_OverRun",
-    label: COMPENDIUM.CONTROLZONE_OVERRUN,
+    column: "controlZone",
+    label: COMPENDIUM.CONTROLZONE,
+    displayed: true,
+    type: "text",
+    toggleGroup: "heroCharacteristicsGroup",
+  },
+  {
+    column: "OverRun",
+    label: COMPENDIUM.OVERRUN,
     displayed: true,
     type: "text",
     toggleGroup: "heroCharacteristicsGroup",

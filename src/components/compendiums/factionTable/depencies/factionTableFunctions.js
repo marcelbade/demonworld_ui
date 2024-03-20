@@ -116,7 +116,7 @@ export const renderMagicPoints = (arcana) => {
   for (let i = 0; i < arcana; i++) {
     arcanaMarker = arcanaMarker + "/";
   }
-  return arcanaMarker;
+  return arcanaMarker.length === 0 ? "-" : arcanaMarker;
 };
 /**
  * Function renders command stars for stat cards.
@@ -130,7 +130,8 @@ export const renderCommandPoints = (stars) => {
   for (let i = 0; i < stars; i++) {
     starIcons = starIcons + "*";
   }
-  return starIcons;
+
+  return starIcons.length === 0 ? "-" : starIcons;
 };
 
 /**

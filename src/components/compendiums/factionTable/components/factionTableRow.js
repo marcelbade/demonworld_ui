@@ -68,7 +68,8 @@ const FactionTableRow = (props) => {
       {TC.columns[24].displayed ? <td>{props.unit.initiative}</td> : null}
       {TC.columns[25].displayed ? <td>{renderCommandPoints(props.unit.commandStars)}</td> : null}
       {TC.columns[26].displayed ? <td>{renderMagicPoints(props.unit.magic)}</td> : null}
-      {TC.columns[27].displayed ? <td>{props.unit.controlZone_OverRun}</td> : null}
+      {TC.columns[27].displayed ? <td>{props.unit.controlZone}</td> : null}
+      {TC.columns[27].displayed ? <td>{props.unit.overRun}</td> : null}
       {TC.columns[28].displayed ? <td>{props.unit.hitpoints}</td> : null}
       {TC.columns[29].displayed ? <td>{props.unit.fear}</td> : null}
       {TC.columns[30].displayed ? <td>{props.unit.moral1}</td> : null}
