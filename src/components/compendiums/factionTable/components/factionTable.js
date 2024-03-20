@@ -3,21 +3,19 @@ import React, { useEffect, useState } from "react";
 // Axios
 import axios from "axios";
 import makeStyles from "@mui/styles/makeStyles";
-import { AppBar, Dialog, Grid, IconButton, Toolbar, Typography, Slide } from "@mui/material";
+import { Grid, IconButton, Typography } from "@mui/material";
 // components & functions
-import SelectionInput from "../../../shared/selectionInput";
-import { ALL_FACTIONS_ARRAY } from "../../../../constants/factions";
 import FactionTableRow from "./factionTableRow";
 import DetailedCardView from "./detailedCardView";
-import ToggleColumnsMenu from "./toggleColumnsMenu";
 import FactionTableHeader from "./factionTableHeader";
-import { COMPENDIUM, INPUT_TEXTS } from "../../../../constants/textsAndMessages";
+import { COMPENDIUM } from "../../../../constants/textsAndMessages";
 import LightSwitch from "../../../shared/LightSwitch";
 import MainMenuReturnButton from "../../../shared/MainMenuReturnButton";
 import { columnGroupObjects, columnsStateObjects } from "./columnsStateObject";
 //icons
 import MenuIcon from "@mui/icons-material/Menu";
-import CloseIcon from "@mui/icons-material/Close";
+import SelectionAndComaparisons from "./SelectionAndComparisons";
+import OptionsDialog from "./OptionsDialog";
 
 const useStyles = makeStyles({
   topButtons: {
@@ -40,10 +38,6 @@ const useStyles = makeStyles({
       fontFamily: "NotMaryKate",
     },
   },
-});
-
-const Transition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
 });
 
 const FactionTable = () => {
@@ -73,52 +67,6 @@ const FactionTable = () => {
     setAllFactions(receivedData);
     setTableData(receivedData);
   }, [receivedData]);
-
-  /**
-   * Generates the options for the faction name selector.
-   * @returns [String]
-   */
-  const setSelectorFactionNames = () => {
-    return ALL_FACTIONS_ARRAY.sort();
-  };
-
-  /**
-   * Generates the options for the unit name selector. If a faction has been selected, only the names of that faction
-   * are shown as options (singleFilteredFaction), otherwise ALL unit names in the games are displayed (localFactions).
-   * @returns [String]
-   */
-  const setSelectorUnitNames = () => {
-    const options = singleFilteredFaction.length === 0 ? allFactions : singleFilteredFaction;
-    return options.map((u) => u.unitName).sort();
-  };
-
-  /**
-   * OnChange function for faction name selector. Allows user to type and see the matching factions in real time.
-   * setTableData changes table content after selection.
-   * @param {[{}]} selectedFaction
-   */
-  const selectFaction = (selectedFaction) => {
-    setSingleFilteredFaction(allFactions.filter((u) => u.faction === selectedFaction));
-    setTableData(allFactions.filter((u) => u.faction === selectedFaction));
-  };
-
-  /**
-   *  "onChange" function for the unit name selector. getUnitNames() resets it
-   *  after the selection to show all units of the faction.
-   * @param {[{}]} nameSearchString
-   */
-  const selectUnit = (nameSearchString) => {
-    setSelectorUnitNames();
-    setTableData(allFactions.filter((lf) => lf.unitName.includes(nameSearchString)));
-  };
-
-  const clearFaction = () => {
-    setTableData(allFactions);
-  };
-
-  const clearUnit = () => {
-    setTableData(singleFilteredFaction);
-  };
 
   const toggleUnitCard = (unit) => {
     const id = unit.faction + unit.unitName;
@@ -202,10 +150,6 @@ const FactionTable = () => {
     setOpenOptions(true);
   };
 
-  const handleOptionsClose = () => {
-    setOpenOptions(false);
-  };
-
   return receivedData ? (
     <>
       <Grid container>
@@ -244,53 +188,27 @@ const FactionTable = () => {
             <Typography variant="h3" className={classes.pageTitle}>
               {COMPENDIUM.TITLE}
             </Typography>
-
-            <SelectionInput
-              alternatives={setSelectorFactionNames()}
-              filterFunction={selectFaction}
-              clearFunction={clearFaction}
-              label={INPUT_TEXTS.SELECT_FACTION}
-            />
-            <SelectionInput
-              alternatives={setSelectorUnitNames()}
-              filterFunction={selectUnit}
-              clearFunction={clearUnit}
-              label={INPUT_TEXTS.SELECT_UNIT}
+            <SelectionAndComaparisons
+              singleFilteredFaction={singleFilteredFaction} //
+              allFactions={allFactions}
+              tableData={tableData}
+              setSingleFilteredFaction={setSingleFilteredFaction}
+              setAllFactions={setAllFactions}
+              setTableData={setTableData}
             />
           </Grid>
         </Grid>
-
-        <Dialog
-          open={openOptions} //
-          onClose={handleOptionsClose}
-          TransitionComponent={Transition}
-          // override CSS for paper component child
-          PaperProps={{
-            sx: {
-              minWidth: "80vw",
-              minHeight: "80vh",
-            },
-          }}
-        >
-          <AppBar sx={{ position: "relative" }}>
-            <Toolbar>
-              <IconButton edge="start" color="inherit" onClick={handleOptionsClose} aria-label="close">
-                <CloseIcon />
-              </IconButton>
-              <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-                {COMPENDIUM.COLUMNS}
-              </Typography>
-            </Toolbar>
-          </AppBar>
-          <ToggleColumnsMenu
-            allBoxes={allBoxes}
-            columns={columns}
-            toggleGroups={toggleGroups}
-            toggleColumn={toggleColumn}
-            toggleAllColumns={toggleAllColumns}
-            toggleGroupsOfColumns={toggleGroupsOfColumns}
-          />
-        </Dialog>
+        <OptionsDialog
+          openOptions={openOptions}
+          allBoxes={allBoxes}
+          columns={columns}
+          toggleGroups={toggleGroups}
+          setOpenOptions={setOpenOptions}
+          setColumns={setColumns}
+          toggleColumn={toggleColumn}
+          toggleAllColumns={toggleAllColumns}
+          toggleGroupsOfColumns={toggleGroupsOfColumns}
+        />
         <Grid item xs={12}>
           {receivedData ? (
             <table className={classes.table} rules="none">
