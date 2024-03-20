@@ -13,7 +13,7 @@ import { COMPENDIUM, UNIT_TYPES } from "../../../../constants/textsAndMessages";
  * If a space is found, the special rule is deemed to long and
  * only the String up to the first space is displayed and
  * the rest replaced with an ellipsis. If no space is found,
- * then the special rule consist of a single
+ * then the special rule consists of a single
  * word (i.e., "two-handed Sword") and is displayed as is.
  * @param {String} rule
  * @returns resized string or "-"
