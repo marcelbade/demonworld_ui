@@ -134,13 +134,13 @@ export const renderCommandPoints = (stars) => {
 };
 
 /**
- * Function creates an html element for stat cards and calculates the
- * correctnumber of elements. The finished html shows the
+ * Function creates an HTML element for stat cards and calculates the
+ * correctnumber of elements. The finished HTML shows the
  * number of elements, as well as unit leader, standard bearer,
  * and musician, if they exist.
  *
  * @param {unitCard} unit
- * @returns an html element cotaining the formatted information
+ * @returns an HTML element cotaining the formatted information
  */
 export const displayUnitElements = (unit) => {
   let specialElements = 0;
