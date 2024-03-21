@@ -3,7 +3,7 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 // Material UI
 import { IconButton, Grid, Tooltip, Typography } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
+import { makeStyles } from "@material-ui/core";
 // Functions And Components
 import CustomIcon from "../shared/statCards/CustomIcon";
 

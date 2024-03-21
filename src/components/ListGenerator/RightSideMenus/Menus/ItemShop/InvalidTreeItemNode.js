@@ -1,6 +1,6 @@
 import React from "react";
 // material ui
-import makeStyles from "@mui/styles/makeStyles";
+import {makeStyles} from "@material-ui/core";
 import { Typography, IconButton, Grid } from "@mui/material";
 // icons
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";

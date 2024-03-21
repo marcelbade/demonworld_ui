@@ -2,7 +2,7 @@
 import React, { useContext } from "react";
 //Material UI
 import { Button, Grid, ButtonGroup, Typography, IconButton, ThemeProvider, CssBaseline } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
+import {makeStyles} from "@material-ui/core";
 // icons
 import CancelIcon from "@mui/icons-material/Cancel";
 // components and functions

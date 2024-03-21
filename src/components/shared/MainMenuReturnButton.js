@@ -1,12 +1,11 @@
 // react
 import React from "react";
 import { useHistory } from "react-router-dom";
-
-// icons
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 // material ui
 import { IconButton } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
+import { makeStyles } from "@material-ui/core";
+// icons
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 
 const useStyles = makeStyles((theme) => ({
   BackBttn: {

@@ -1,6 +1,7 @@
-// React
+// react
 import React from "react";
-import makeStyles from "@mui/styles/makeStyles";
+// material ui
+import { makeStyles } from "@material-ui/core";
 // components & functions
 import { unitOrCmdCard } from "../../../../util/utilityFunctions";
 

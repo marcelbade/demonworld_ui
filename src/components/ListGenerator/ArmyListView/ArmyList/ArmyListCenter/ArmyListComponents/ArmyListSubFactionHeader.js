@@ -1,6 +1,6 @@
 // React
 import React from "react";
-import makeStyles from "@mui/styles/makeStyles";
+import {makeStyles} from "@material-ui/core";
 import { Grid, Typography } from "@mui/material";
 // components and functions
 import ContextHelpButton from "../../../../../shared/ContextHelpButton";

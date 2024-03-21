@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 // material ui
-import makeStyles from "@mui/styles/makeStyles";
+import {makeStyles} from "@material-ui/core";
 import { Typography, IconButton, Accordion, AccordionSummary, AccordionDetails, Grid } from "@mui/material";
 // components and functions
 import { ItemContext } from "../../../../../contexts/itemContext";

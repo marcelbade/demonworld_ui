@@ -1,6 +1,6 @@
 // React
 import { Fragment } from "react";
-import makeStyles from "@mui/styles/makeStyles";
+import {makeStyles} from "@material-ui/core";
 
 import { Grid, IconButton } from "@mui/material";
 // icons

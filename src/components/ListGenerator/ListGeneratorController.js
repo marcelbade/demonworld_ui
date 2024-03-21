@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 // material ui
 import { Grid, Fade } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
+import {makeStyles} from "@material-ui/core";
 // notistack
 import { SnackbarProvider } from "notistack";
 // icons

@@ -1,6 +1,6 @@
 // React
 import React, { Fragment, useContext } from "react";
-import makeStyles from "@mui/styles/makeStyles";
+import {makeStyles} from "@material-ui/core";
 import { Grid, Typography } from "@mui/material";
 // icons
 import rangeArmorIcon from "../../../../../../assets/icons/range-armor.png";

@@ -2,7 +2,7 @@
 import React from "react";
 //Material UI
 import { Typography, Grid } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
+import {makeStyles} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   text: {

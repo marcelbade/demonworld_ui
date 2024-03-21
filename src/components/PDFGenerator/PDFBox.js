@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 // react-pdf
 import { PDFViewer } from "@react-pdf/renderer";
-import makeStyles from "@mui/styles/makeStyles";
+import {makeStyles} from "@material-ui/core";
 // components and functions
 import ListPDF from "./defaultListPDF/ListPDF";
 import DetailedCardPDF from "./detailedCardPDF/DetailedCardPDF";

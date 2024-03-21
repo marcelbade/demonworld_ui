@@ -2,7 +2,7 @@
 import React, { useContext, useState } from "react";
 // Material UI
 import { Grid, FormControl, FormControlLabel, FormLabel, FormGroup, TextField, Switch, Typography, IconButton } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
+import {makeStyles} from "@material-ui/core";
 // components and functions
 // Icons
 import CancelIcon from "@mui/icons-material/Cancel";

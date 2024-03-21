@@ -2,7 +2,7 @@
 import React from "react";
 //Material UI
 import { Grid } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
+import {makeStyles} from "@material-ui/core";
 // components and functions
 import ItemShopHeader from "./ItemShopHeader";
 import ItemShopTree from "./ItemShopTree";

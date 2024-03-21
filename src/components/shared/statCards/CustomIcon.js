@@ -1,7 +1,7 @@
 // React
 import React, { useContext } from "react";
 // Material UI
-import makeStyles from "@mui/styles/makeStyles";
+import {makeStyles} from "@material-ui/core";
 // components and functions
 import { LightSwitchContext } from "../../../contexts/lightSwitchContext";
 

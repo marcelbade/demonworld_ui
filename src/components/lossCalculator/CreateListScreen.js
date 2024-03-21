@@ -2,7 +2,7 @@
 import React from "react";
 //Material UI
 import { Button, Grid, IconButton } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
+import {makeStyles} from "@material-ui/core";
 // icons
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 // constants

@@ -2,7 +2,7 @@
 import React, { useContext } from "react";
 // Material UI
 import { Grid, Typography } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
+import {makeStyles} from "@material-ui/core";
 // functions and modules
 import { StateCardContext } from "../../../../../contexts/statCardContext";
 import usePointCostCalculator from "../../../../../customHooks/UsePointCostCalculator";

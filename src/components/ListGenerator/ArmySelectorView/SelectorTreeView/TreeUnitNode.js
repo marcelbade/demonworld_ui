@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import makeStyles from "@mui/styles/makeStyles";
+import {makeStyles} from "@material-ui/core";
 import { Typography, Grid, IconButton } from "@mui/material";
 // icons
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";

@@ -1,11 +1,13 @@
 // React
 import React, { useContext } from "react";
-import makeStyles from "@mui/styles/makeStyles";
+// material ui
+import { makeStyles } from "@material-ui/core";
+// components & functions
 import { TableContext } from "../../../../contexts/tableContext";
 
 const useStyles = makeStyles((theme) => ({
   header: {
-    backgroundColor:  theme.palette.compendiumHeaderBackground,
+    backgroundColor: theme.palette.compendiumHeaderBackground,
     color: "white",
     borderColor: "black",
     padding: "5px",

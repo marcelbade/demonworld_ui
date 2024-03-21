@@ -2,7 +2,7 @@
 import React, { Fragment, useContext } from "react";
 // Material UI
 import { Grid, ListItemText, Typography } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
+import {makeStyles} from "@material-ui/core";
 // components and functions
 import { ValidationContext } from "../../../../../../../contexts/validationContext";
 import ContextHelpButton from "../../../../../../shared/ContextHelpButton";

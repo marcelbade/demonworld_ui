@@ -3,7 +3,7 @@ import React from "react";
 // material ui
 import { Autocomplete } from "@mui/material";
 import { TextField } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
+import {makeStyles} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   inputDimensions: {

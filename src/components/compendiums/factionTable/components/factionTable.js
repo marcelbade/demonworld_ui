@@ -2,13 +2,13 @@
 import React, { useEffect, useState } from "react";
 // Axios
 import axios from "axios";
-import makeStyles from "@mui/styles/makeStyles";
+// import {makeStyles} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core";
 import { Grid, IconButton, Typography } from "@mui/material";
 // components & functions
 import FactionTableRow from "./factionTableRow";
 import DetailedCardView from "./detailedCardView";
 import FactionTableHeader from "./factionTableHeader";
-import { COMPENDIUM } from "../../../../constants/textsAndMessages";
 import LightSwitch from "../../../shared/LightSwitch";
 import MainMenuReturnButton from "../../../shared/MainMenuReturnButton";
 import { columnGroupObjects, columnsStateObjects } from "./columnsStateObject";
@@ -17,6 +17,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 import FactionAndUnitSelectors from "./FactionAndUnitSelectors";
 import OptionsDialog from "./OptionsDialog";
 import TableProvider from "../../../../contexts/tableContext";
+// constants
+import { COMPENDIUM } from "../../../../constants/textsAndMessages";
+
 
 const useStyles = makeStyles({
   topButtons: {

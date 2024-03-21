@@ -2,7 +2,7 @@
 import React, { Fragment } from "react";
 //Material UI
 import { Typography } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
+import {makeStyles} from "@material-ui/core";
 import { LOSS_CALCULATOR } from "../../constants/textsAndMessages";
 
 const useStyles = makeStyles({

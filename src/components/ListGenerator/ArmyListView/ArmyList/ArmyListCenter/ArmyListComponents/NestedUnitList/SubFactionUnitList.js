@@ -2,7 +2,7 @@
 import React, { Fragment, useContext } from "react";
 // Material UI
 import { List, ListItem, IconButton } from "@mui/material";
-import makeStyles from "@mui/styles/makeStyles";
+import {makeStyles} from "@material-ui/core";
 // icons
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 // components and functions

@@ -1,7 +1,7 @@
 // React
 import React, { useContext } from "react";
 // material ui
-import makeStyles from "@mui/styles/makeStyles";
+import {makeStyles} from "@material-ui/core";
 import { Grid, Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 // components & functions
 import { TableContext } from "../../../../contexts/tableContext";
