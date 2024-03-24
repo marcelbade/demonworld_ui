@@ -2,18 +2,38 @@
 import React, { useContext } from "react";
 // components and functions
 import { LightSwitchContext } from "../../../contexts/lightSwitchContext";
+import { Icon } from "@mui/material";
 
 const CustomIcon = (props) => {
   const LC = useContext(LightSwitchContext);
 
+  const STYLES = {
+    width: props.width, //
+    height: props.height,
+    alt: props.altText,
+  };
+
+  /**
+   * Function checks whether the app is using the dark theme and flipps the icon color if necessary.
+   * @returns a plain js objkect containing css attributes.
+   */
+  const toggleIconColor = () => {
+    return !LC.darkModeOff
+      ? {
+          ...STYLES, //
+          webkitFilter: `invert(100%)`,
+          filter: `invert(100%)`,
+        }
+      : STYLES;
+  };
+
   return (
-    <img
-      src={props.icon} //
-      alt={props.altText}
-      height={props.height}
-      width={props.width}
-      sx={!LC.darkModeOff ? { webkitFilter: `invert(100%)`, filter: `invert(100%)` } : null}
-    />
+    <Icon sx={toggleIconColor()}>
+      <img
+        src={props.icon} //
+        height={props.height}
+      />
+    </Icon>
   );
 };
 
