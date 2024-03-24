@@ -11,7 +11,7 @@ import CustomIcon from "../shared/statCards/CustomIcon";
 
 const LandingPageNaviButton = (props) => {
   const history = useHistory();
-  const theme =useTheme
+  const theme =useTheme()
 
   const toPage = (relativeURL) => {
     history.push({
