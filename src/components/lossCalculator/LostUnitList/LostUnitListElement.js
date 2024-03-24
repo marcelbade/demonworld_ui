@@ -2,7 +2,6 @@
 import React, { useContext } from "react";
 //Material UI
 import { Typography, Grid } from "@mui/material";
-import {makeStyles} from "@material-ui/core";
 // components and functions
 import { LossCalcContext } from "../../../contexts/LossCalculatorContext";
 import { ListItem } from "@mui/material";
@@ -14,21 +13,18 @@ import ContextHelpButton from "../../shared/ContextHelpButton";
 // constants
 import { LOSS_CALCULATOR, PUSH_MESSAGE_TYPES } from "../../../constants/textsAndMessages";
 
-const useStyles = makeStyles(() => ({
-  borderNormal: {
+const LostUnitListElement = (props) => {
+  const BORDER_NORMAL = {
     borderColor: "black",
     border: "solid 0.1em",
     borderRadius: "4px",
-  },
-  borderLost: {
+  };
+  const BORDER_LOST = {
     borderColor: "red",
     border: "solid 0.1em",
     borderRadius: "4px",
-  },
-}));
+  };
 
-const LostUnitListElement = (props) => {
-  const classes = useStyles();
   const calcContext = useContext(LossCalcContext);
 
   return (
@@ -39,7 +35,7 @@ const LostUnitListElement = (props) => {
         alignItems="center"
         alignContent="center"
         justifyContent="center"
-        className={props.unit.unitDestroyed ? classes.borderLost : classes.borderNormal}
+        sx={props.unit.unitDestroyed ? BORDER_LOST : BORDER_NORMAL}
       >
         <Grid container item xs={5} direction="column">
           <Grid item>

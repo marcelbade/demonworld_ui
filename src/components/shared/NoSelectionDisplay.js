@@ -16,9 +16,9 @@ const useStyles = makeStyles({
 });
 
 const NoSelectionDisplay = (props) => {
-  const classes = useStyles();
+  const theme= useTheme();
 
-  return <span className={classes.message}>show this when nothing was selected :D</span>;
+  return <span sx={classes.message}>show this when nothing was selected :D</span>;
 };
 
 export default NoSelectionDisplay;

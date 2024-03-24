@@ -2,31 +2,12 @@
 import React from "react";
 //Material UI
 import { Button, Grid, IconButton } from "@mui/material";
-import {makeStyles} from "@material-ui/core";
 // icons
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 // constants
 import { LOSS_CALCULATOR } from "../../constants/textsAndMessages";
 
-const useStyles = makeStyles({
-  typographyFont: {},
-  pointsTotal: {
-    marginLeft: "2em",
-  },
-  BackBttn: {
-    width: "2em",
-    height: "2em",
-  },
-  noListButtons: {
-    margin: "2em",
-    width: "30em",
-    height: "3em",
-  },
-});
-
 const CreateListScreen = (props) => {
-  const classes = useStyles();
-
   return (
     <Grid container direction="column">
       <Grid>
@@ -37,13 +18,17 @@ const CreateListScreen = (props) => {
           }}
           size="large"
         >
-          <ChevronLeftIcon className={classes.BackBttn} />
+          <ChevronLeftIcon sx={{ width: "2em", height: "2em" }} />
         </IconButton>
       </Grid>
       <Grid container direction="column" alignContent="center" justifyContent="center">
         <Button
           variant="outlined"
-          className={classes.noListButtons}
+          sx={{
+            margin: "2em",
+            width: "30em",
+            height: "3em",
+          }}
           onClick={() => {
             props.navigateToPage("ListGenerator");
           }}
@@ -52,7 +37,11 @@ const CreateListScreen = (props) => {
         </Button>
         <Button
           variant="outlined"
-          className={classes.noListButtons}
+          sx={{
+            margin: "2em",
+            width: "30em",
+            height: "3em",
+          }}
           onClick={() => {
             //TODO open login prompt
           }}

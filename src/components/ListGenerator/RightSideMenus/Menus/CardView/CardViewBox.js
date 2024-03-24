@@ -1,6 +1,5 @@
 // React
 import { useContext } from "react";
-import {makeStyles} from "@material-ui/core";
 import { Grid, IconButton, ThemeProvider, CssBaseline } from "@mui/material";
 // icons
 import CancelIcon from "@mui/icons-material/Cancel";
@@ -12,16 +11,7 @@ import lightTheme from "../../../../../AppTheme/lightTheme";
 import darkTheme from "../../../../../AppTheme/darkTheme";
 import { LightSwitchContext } from "../../../../../contexts/lightSwitchContext";
 
-const useStyles = makeStyles((theme) => ({
-  overlay: {
-    height: "100vh",
-    width: "30vw",
-    padding: "2em",
-  },
-}));
-
 const CardViewBox = () => {
-  const classes = useStyles();
   const RC = useContext(RightMenuContext);
   const LC = useContext(LightSwitchContext);
 
@@ -56,7 +46,7 @@ const CardViewBox = () => {
   return (
     <ThemeProvider theme={LC.darkModeOff ? lightTheme : darkTheme}>
       <CssBaseline />
-      <Grid container direction="column" className={classes.overlay}>
+      <Grid container direction="column" sx={{ height: "100vh", width: "30vw", padding: "2em" }}>
         <Grid item>
           <IconButton
             onClick={() => {

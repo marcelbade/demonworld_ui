@@ -2,7 +2,6 @@
 import React, { useContext } from "react";
 // Material UI
 import { List, ListItemText, ListItem, IconButton } from "@mui/material";
-import {makeStyles} from "@material-ui/core";
 // icons
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 // components and functions
@@ -11,31 +10,11 @@ import { SelectionContext } from "../../../../../../../contexts/selectionContext
 // custom hooks
 import useArmyValidation from "../../../../../../../customHooks/UseArmyValidation";
 import useUnitEquipmentLimits from "../../../../../../../customHooks/useUnitEqipmentLimits";
-// clsx
-import clsx from "clsx";
+ 
 
-const useStyles = makeStyles({
-  deleteBttn: {
-    padding: "0",
-    marginRight: "1.5em",
-  },
-  equipmentList: {
-    display: "flex",
-    flexDirection: "column",
-  },
-  line: {
-    marginTop: "0.5em",
-    borderTop: "solid black 0.1em",
-    width: "55%",
-  },
-  element: {
-    padding: "0px",
-    margin: "0px",
-  },
-});
+ 
 
 const EquipmentList = (props) => {
-  const classes = useStyles();
   const IC = useContext(ItemContext);
   const SEC = useContext(SelectionContext);
   const validation = useArmyValidation();
@@ -71,17 +50,28 @@ const EquipmentList = (props) => {
    * @returns css class
    */
   const displayListTop = () => {
-    return props.unit.equipment.length === 0 ? classes.equipmentList : clsx(classes.line, classes.equipmentList);
+    return props.unit.equipment.length === 0
+      ? {
+          display: "flex",
+          flexDirection: "column",
+        }
+      : {
+          marginTop: "0.5em",
+          borderTop: "solid black 0.1em",
+          width: "55%",
+          display: "flex",
+          flexDirection: "column",
+        };
   };
 
   return (
-    <List className={displayListTop()} key={props.unit.uniqueID}>
+    <List sx={displayListTop()} key={props.unit.uniqueID}>
       {props.unit.equipment.length !== 0
         ? props.unit.equipment.map((e, i) => {
             return (
-              <ListItem key={i} className={classes.element}>
+              <ListItem key={i} sx={{ padding: "0px", margin: "0px" }}>
                 <IconButton
-                  className={clsx(classes.deleteBttn)}
+                  sx={{ padding: "0", marginRight: "1.5em" }}
                   onClick={() => {
                     removeItem(props.identifier, i);
                     removeItemFromCentralList(e);

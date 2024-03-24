@@ -4,7 +4,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 // material ui
 import { Grid, Fade } from "@mui/material";
-import {makeStyles} from "@material-ui/core";
 // notistack
 import { SnackbarProvider } from "notistack";
 // icons
@@ -32,19 +31,7 @@ import ArmySelector from "./ArmySelectorView/ArmySelector";
 import CustomIcon from "../shared/statCards/CustomIcon";
 import customStyledErrorMessage from "../../AppTheme/notiStackTheme";
 
-const useStyles = makeStyles((theme) => ({
-  leftSide: {
-    paddingLeft: "2em",
-  },
-  pushMessages: {
-    marginRight: "2em",
-    marginBottom: "2em",
-  },
-}));
-
 const ListGeneratorController = () => {
-  const classes = useStyles();
-
   // intialize local states
   const [fetchedFactions, setFetchedFactions] = useState([]);
   const [fetchedItems, setFetchedItems] = useState([]);
@@ -299,8 +286,7 @@ const ListGeneratorController = () => {
                         TransitionComponent={Fade}
                         iconVariant={{
                           error: (
-                            <CustomIcon
-                              className={classes.pushMessageIcon} //
+                            <CustomIcon //
                               icon={SpellBookIcon}
                               altText={"Regelbuchtext"}
                               height={35}
@@ -310,7 +296,7 @@ const ListGeneratorController = () => {
                         }}
                       >
                         <Grid container direction="row">
-                          <Grid container item direction="column" xs={4} className={classes.leftSide}>
+                          <Grid container item direction="column" xs={4} sx={{ paddingLeft: "2em" }}>
                             <Grid item>
                               <MainMenuReturnButton />
                             </Grid>
@@ -321,7 +307,7 @@ const ListGeneratorController = () => {
                               <AlternativeArmyLists />
                             </Grid>
                             <Grid item>
-                              <FactionTreeView className={classes.selector} />
+                              <FactionTreeView />
                             </Grid>
                           </Grid>
                           <Grid item xs={3}>

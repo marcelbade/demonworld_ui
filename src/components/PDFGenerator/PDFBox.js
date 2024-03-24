@@ -2,24 +2,12 @@
 import React, { useEffect, useState } from "react";
 // react-pdf
 import { PDFViewer } from "@react-pdf/renderer";
-import {makeStyles} from "@material-ui/core";
 // components and functions
 import ListPDF from "./defaultListPDF/ListPDF";
 import DetailedCardPDF from "./detailedCardPDF/DetailedCardPDF";
 
-// Create styles
-const useStyles = makeStyles((theme) => ({
-  pdfTab: {
-    position: "fixed",
-    width: "100%",
-    height: " 100%",
-  },
-}));
-
 // Create the PDF Document. The browser's pdf view will open in a new tab.
 const PdfBox = () => {
-  const classes = useStyles();
-
   const [data, setData] = useState({
     list: [],
     armyName: [],
@@ -37,7 +25,13 @@ const PdfBox = () => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return data.list.length > 0 ? (
-    <PDFViewer className={classes.pdfTab}>
+    <PDFViewer
+      sx={{
+        position: "fixed",
+        width: "100%",
+        height: " 100%",
+      }}
+    >
       {data.options.printDefaultList ? (
         <ListPDF armyName={data.armyName} pdfData={data.list} />
       ) : (

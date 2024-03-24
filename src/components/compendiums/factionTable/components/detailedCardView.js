@@ -1,21 +1,7 @@
 // react
 import React from "react";
-// material ui
-import { makeStyles } from "@material-ui/core";
 // components & functions
-import { unitOrCmdCard } from "../../../../util/utilityFunctions";
-
-const useStyles = makeStyles((theme) => ({
-  backGround: {
-    backgroundColor: theme.palette.backGround,
-    "& :hover": {
-      backgroundColor: theme.palette.backGround,
-    },
-  },
-  card: {
-    paddingBottom: "1em",
-  },
-}));
+import StatCard from "../../../shared/statCards/StatCard";
 
 // front and back side of the displayed unit cards are alligned horizontally.
 const ROW = "row";
@@ -26,15 +12,16 @@ const ROW = "row";
  * @returns
  */
 const DetailedCardView = (props) => {
-  const classes = useStyles();
-
   return (
-    <tr key={props.unit.uniqueID} className={classes.backGround}>
+    <tr key={props.unit.uniqueID}>
       <td colSpan={"10%"}></td>
-      <td key={props.unit.uniqueID} colSpan={"30%"} className={classes.card}>
-        {props.selectedCards.includes(props.unit.faction + props.unit.unitName) //
-          ? unitOrCmdCard(props.unit, ROW)
-          : null}
+      <td key={props.unit.uniqueID} colSpan={"30%"}>
+        {props.selectedCards.includes(props.unit.faction + props.unit.unitName) ? ( //
+          <StatCard
+            unit={props.unit} //
+            alignment={ROW}
+          />
+        ) : null}
       </td>
     </tr>
   );

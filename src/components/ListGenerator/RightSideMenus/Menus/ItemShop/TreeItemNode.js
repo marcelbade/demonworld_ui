@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 // material ui
-import {makeStyles} from "@material-ui/core";
 import { Typography, IconButton, Accordion, AccordionSummary, AccordionDetails, Grid } from "@mui/material";
 // components and functions
 import { ItemContext } from "../../../../../contexts/itemContext";
@@ -10,17 +9,7 @@ import useUnitEqipmentLimits from "../../../../../customHooks/useUnitEqipmentLim
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 
-const useStyles = makeStyles({
-  points: {
-    color: "grey",
-  },
-  ruleText: {
-    width: "40em",
-  },
-});
-
 const TreeItemNode = (props) => {
-  const classes = useStyles();
   const IC = useContext(ItemContext);
   const SEC = useContext(SelectionContext);
 
@@ -74,7 +63,7 @@ const TreeItemNode = (props) => {
         <Grid container alignItems="center" direction="row">
           <Grid item container direction="column" xs={3}>
             <Typography variant="body1">{props.item.itemName}</Typography>
-            <Typography variant="body1" className={classes.points}>
+            <Typography variant="body1" sx={{ color: "grey" }}>
               {props.item.points}
             </Typography>
           </Grid>
@@ -97,7 +86,7 @@ const TreeItemNode = (props) => {
       <AccordionDetails>
         <Typography
           variant="body1" //
-          className={classes.ruleText}
+          sx={{ width: "40em" }}
         >
           {props.item.specialRules}
         </Typography>

@@ -2,8 +2,6 @@
 import React, { useContext, useState } from "react";
 // Material UI
 import { Grid, FormControl, FormControlLabel, FormLabel, FormGroup, TextField, Switch, Typography, IconButton } from "@mui/material";
-import {makeStyles} from "@material-ui/core";
-// components and functions
 // Icons
 import CancelIcon from "@mui/icons-material/Cancel";
 // context
@@ -11,26 +9,15 @@ import { TournamentRulesContext } from "../../../../../contexts/tournamentRulesC
 // constants
 import { GENERAL_ERRRORS, TOURNAMENT_RULES } from "../../../../../constants/textsAndMessages";
 
-const useStyles = makeStyles((theme) => ({
-  overlay: {
-    height: "100vh",
-    width: "30vw",
-    padding: "2em",
-  },
-  errorIcon: {
-    color: "red",
-  },
-  enabledBttnText: {
-    color: "black",
-  },
-  disbledBttnText: {
-    color: "grey",
-  },
-}));
-
 const TournamentRulesMenu = () => {
-  const classes = useStyles();
   const TC = useContext(TournamentRulesContext);
+
+  const ENABLED_BTTN_TEXT = {
+    color: "black",
+  };
+  const DISBLED_BTTN_TEXT = {
+    color: "grey",
+  };
 
   const [errorMessage, setErrorMessage] = useState({
     maxHeroValue: "",
@@ -69,7 +56,17 @@ const TournamentRulesMenu = () => {
   };
 
   return (
-    <Grid container direction="column" alignItems="flex-start" spacing={4} className={classes.overlay}>
+    <Grid
+      container
+      direction="column"
+      alignItems="flex-start"
+      spacing={4}
+      sx={{
+        height: "100vh",
+        width: "30vw",
+        padding: "2em",
+      }}
+    >
       <Grid>
         <IconButton
           onClick={() => {
@@ -98,7 +95,7 @@ const TournamentRulesMenu = () => {
       </Grid>
       <Grid item>
         <Typography //
-          className={TC.tournamentOverrideRules.enableOverride ? classes.enabledBttnText : classes.disbledBttnText}
+          sx={TC.tournamentOverrideRules.enableOverride ? ENABLED_BTTN_TEXT : DISBLED_BTTN_TEXT}
         >
           {TOURNAMENT_RULES.MAX_POINTS_FOR_HERO}
         </Typography>
@@ -124,7 +121,7 @@ const TournamentRulesMenu = () => {
         />
       </Grid>
       <Grid item>
-        <Typography className={TC.tournamentOverrideRules.enableOverride ? classes.enabledBttnText : classes.disbledBttnText}>
+        <Typography sx={TC.tournamentOverrideRules.enableOverride ? ENABLED_BTTN_TEXT : DISBLED_BTTN_TEXT}>
           {TOURNAMENT_RULES.HOW_MANY_TIMES}
         </Typography>
         <TextField
@@ -150,10 +147,7 @@ const TournamentRulesMenu = () => {
       </Grid>
       <Grid item>
         <FormControl component="fieldset" variant="standard">
-          <FormLabel
-            className={TC.tournamentOverrideRules.enableOverride ? classes.enabledBttnText : classes.disbledBttnText}
-            component="legend"
-          >
+          <FormLabel sx={TC.tournamentOverrideRules.enableOverride ? ENABLED_BTTN_TEXT : DISBLED_BTTN_TEXT} component="legend">
             {TOURNAMENT_RULES.ENFORCE_UNIQUE_RULE}
           </FormLabel>
           <FormGroup>

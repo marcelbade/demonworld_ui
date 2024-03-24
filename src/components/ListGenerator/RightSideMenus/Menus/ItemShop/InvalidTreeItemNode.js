@@ -1,37 +1,32 @@
 import React from "react";
 // material ui
-import {makeStyles} from "@material-ui/core";
 import { Typography, IconButton, Grid } from "@mui/material";
+import { useTheme } from "@emotion/react";
 // icons
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 // constants
 import ContextHelpButton from "../../../../shared/ContextHelpButton";
 import { PUSH_MESSAGE_TYPES } from "../../../../../constants/textsAndMessages";
 
-const useStyles = makeStyles((theme) => ({
-  invalidItem: {
-    color: theme.palette.disabled,
-  },
-  ruleText: {
-    width: "40em",
-  },
-}));
-
 const InvalidTreeItemNode = (props) => {
-  const classes = useStyles();
+  const theme = useTheme();
 
   return (
     <Grid container alignItems="center" direction="row">
       <Grid item container direction="column" xs={2}>
         <Typography
           variant="body1" //
-          className={classes.invalidItem}
+          sx={{
+            color: theme.palette.disabled,
+          }}
         >
           {props.item.itemName}
         </Typography>
         <Typography
           variant="body1" //
-          className={classes.invalidItem}
+          sx={{
+            color: theme.palette.disabled,
+          }}
         >
           {props.item.points}
         </Typography>

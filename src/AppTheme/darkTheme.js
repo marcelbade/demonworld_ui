@@ -1,4 +1,5 @@
-import { createTheme } from "@mui/material/styles";
+
+import { createTheme } from '@mui/material';
 
 const darkTheme = createTheme({
   palette: {
@@ -11,7 +12,16 @@ const darkTheme = createTheme({
     disabled: "darkgrey",
     statCardBackGround: "#5f6a6a",
     compendiumHeaderBackground: "#565757",
+    cardTitle:{
+      flexWrap: "nowrap",
+      fontWeight: "normal",
+      fontSize: "30px",
+      color: "red",
+    }
+
+
   },
+
   components: {
     MuiTreeItem: {
       styleOverrides: {

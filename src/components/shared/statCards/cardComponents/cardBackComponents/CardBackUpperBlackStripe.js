@@ -2,19 +2,9 @@
 import React, { useContext } from "react";
 // Material UI
 import { Grid, Typography } from "@mui/material";
-import {makeStyles} from "@material-ui/core";
 import { StateCardContext } from "../../../../../contexts/statCardContext";
 
-const useStyles = makeStyles({
-  blackStripe: {
-    padding: "10px",
-    color: "white",
-    backgroundColor: "black",
-  },
-});
-
 const CardBackUpperBlackStripe = () => {
-  const classes = useStyles();
   const SC = useContext(StateCardContext);
 
   const displayUnitElements = () => {
@@ -33,7 +23,7 @@ const CardBackUpperBlackStripe = () => {
   };
 
   return (
-    <Grid container direction="row" className={classes.blackStripe} justifyContent="space-around">
+    <Grid container direction="row" sx={{ padding: "10px", color: "white", backgroundColor: "black" }} justifyContent="space-around">
       {SC.unit.numberOfElements !== 1 ? (
         <Typography variant="h6">
           {SC.unit.leader ? "Anführer" : null}

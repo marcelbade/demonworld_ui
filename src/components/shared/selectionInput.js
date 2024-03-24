@@ -3,14 +3,6 @@ import React from "react";
 // material ui
 import { Autocomplete } from "@mui/material";
 import { TextField } from "@mui/material";
-import {makeStyles} from "@material-ui/core";
-
-const useStyles = makeStyles((theme) => ({
-  inputDimensions: {
-    width: "25em",
-    marginLeft: "2em",
-  },
-}));
 
 /**
  *Component for the army selection Autocomplete input element used by all pages.
@@ -18,11 +10,9 @@ const useStyles = makeStyles((theme) => ({
  * @returns
  */
 const SelectionInput = (props) => {
-  const classes = useStyles();
-
   return (
     <Autocomplete
-      className={classes.inputDimensions}
+      sx={{ width: "25em", marginLeft: "2em" }}
       id="arymSelection"
       options={props.alternatives}
       onChange={(event, value, reason) => {

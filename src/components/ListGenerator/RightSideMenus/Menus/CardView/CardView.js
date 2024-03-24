@@ -1,26 +1,13 @@
 // React
 import { Fragment } from "react";
-import {makeStyles} from "@material-ui/core";
-
+// material ui
 import { Grid, IconButton } from "@mui/material";
 // icons
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 // components and functions
 import StatCard from "../../../../shared/statCards/StatCard";
 
-const useStyles = makeStyles({
-  singleCard: {
-    paddingLeft: "2em",
-  },
-  icons: {
-    width: "2em",
-    height: "2em",
-  },
-});
-
 const CardView = (props) => {
-  const classes = useStyles();
-
   return (
     <Fragment>
       <Grid item container direction="row" alignItems="center" justifyContent="center" alignContent="center">
@@ -32,7 +19,12 @@ const CardView = (props) => {
               }}
               size="large"
             >
-              <ChevronLeft className={classes.icons} />
+              <ChevronLeft
+                sx={{
+                  width: "2em",
+                  height: "2em",
+                }}
+              />
             </IconButton>
           ) : null}
         </Grid>
@@ -51,7 +43,12 @@ const CardView = (props) => {
               }}
               size="large"
             >
-              <ChevronRight className={classes.icons} />
+              <ChevronRight
+                sx={{
+                  width: "2em",
+                  height: "2em",
+                }}
+              />
             </IconButton>
           ) : null}
         </Grid>

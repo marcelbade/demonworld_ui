@@ -2,24 +2,19 @@
 import React, { Fragment } from "react";
 //Material UI
 import { Typography } from "@mui/material";
-import {makeStyles} from "@material-ui/core";
 import { LOSS_CALCULATOR } from "../../constants/textsAndMessages";
 
-const useStyles = makeStyles({
-  pointsTotal: {
-    marginLeft: "2em",
-  },
-});
-
 const LostPointDisplay = (props) => {
-  const classes = useStyles();
+  const POINTS_TOTAL = {
+    marginLeft: "2em",
+  };
 
   return (
     <Fragment>
-      <Typography variant="h6" className={classes.pointsTotal}>
+      <Typography variant="h6" sx={POINTS_TOTAL}>
         {LOSS_CALCULATOR.LOST_POINTS}
       </Typography>
-      <Typography variant="h6" className={classes.pointsTotal}>
+      <Typography variant="h6" sx={POINTS_TOTAL}>
         {props.totalPointsLost.toFixed(2)}
       </Typography>
     </Fragment>

@@ -1,7 +1,6 @@
 // React
 import React, { useContext } from "react";
 // material ui
-import {makeStyles} from "@material-ui/core";
 import { Grid, Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 // components & functions
 import { TableContext } from "../../../../contexts/tableContext";
@@ -9,17 +8,8 @@ import { TableContext } from "../../../../contexts/tableContext";
 // constants
 import { COMPENDIUM } from "../../../../constants/textsAndMessages";
 
-const useStyles = makeStyles({
-  formGroup: {
-    display: "flex",
-    justifyContent: "flex-start",
-    flexDirection: "column",
-    margin: "1em",
-  },
-});
-
-const ToggleColumnsMenu = (props) => {
-  const classes = useStyles();
+const ToggleColumnsMenu = () => {
+  const FORMGROUP = { display: "flex", justifyContent: "flex-start", flexDirection: "column", margin: "1em" };
   const TC = useContext(TableContext);
 
   return (
@@ -30,7 +20,7 @@ const ToggleColumnsMenu = (props) => {
           return (
             <FormGroup
               key={i} //
-              className={classes.formGroup}
+              sx={FORMGROUP}
             >
               <Checkbox
                 key={i}
@@ -61,7 +51,7 @@ const ToggleColumnsMenu = (props) => {
         })}
       </Grid>
       <Grid item>
-        <FormGroup className={classes.formGroup}>
+        <FormGroup sx={FORMGROUP}>
           <FormControlLabel
             control={
               <Checkbox

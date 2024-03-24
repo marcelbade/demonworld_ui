@@ -1,21 +1,12 @@
 // React
 import React, { useContext } from "react";
 // material ui
-import { makeStyles } from "@material-ui/core";
+import { useTheme } from "@emotion/react";
 // components & functions
 import { TableContext } from "../../../../contexts/tableContext";
 
-const useStyles = makeStyles((theme) => ({
-  header: {
-    backgroundColor: theme.palette.compendiumHeaderBackground,
-    color: "white",
-    borderColor: "black",
-    padding: "5px",
-  },
-}));
-
 const FactionTableHeader = () => {
-  const classes = useStyles();
+  const theme = useTheme();
   const TC = useContext(TableContext);
 
   return (
@@ -24,7 +15,15 @@ const FactionTableHeader = () => {
         <th></th>
         {TC.columns.map((col, i) => {
           let element = col.displayed ? (
-            <th className={classes.header} key={i}>
+            <th
+              sx={{
+                backgroundColor: theme.palette.compendiumHeaderBackground,
+                color: "white",
+                borderColor: "black",
+                padding: "5px",
+              }}
+              key={i}
+            >
               {col.label}
             </th>
           ) : null;

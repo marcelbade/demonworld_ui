@@ -1,7 +1,7 @@
 // React
 import React, { useState } from "react";
 // Material UI
-import { Grid, ThemeProvider, StyledEngineProvider, CssBaseline } from "@mui/material";
+import { Grid,  StyledEngineProvider, CssBaseline } from "@mui/material";
 // router
 import { Route, Switch } from "react-router-dom";
 // components and functions
@@ -15,6 +15,7 @@ import LightSwitchProvider from "./contexts/lightSwitchContext";
 // theme
 import lightTheme from "./AppTheme/lightTheme";
 import darkTheme from "./AppTheme/darkTheme";
+import { ThemeProvider } from '@mui/material';
 
 function App() {
   const [darkModeOff, setDarkModeOff] = useState(true);

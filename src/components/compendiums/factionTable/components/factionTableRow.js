@@ -1,7 +1,5 @@
 // React
 import React, { useContext } from "react";
-// Material UI
-import { makeStyles } from "@mui/styles";
 // components & functions
 import { TableContext } from "../../../../contexts/tableContext";
 import {
@@ -16,21 +14,19 @@ import {
 import CardButton from "./CardButton";
 import RowLock from "./RowLock";
 
-const useStyles = makeStyles({
-  tableRow: {
-    fontFamily: "jaapokkiRegular",
-    "&:hover": {
-      backgroundColor: "#ac6725",
-    },
-  },
-});
-
 const FactionTableRow = (props) => {
-  const classes = useStyles();
   const TC = useContext(TableContext);
 
   return (
-    <tr key={props.rowNumber} className={classes.tableRow}>
+    <tr
+      key={props.rowNumber}
+      sx={{
+        fontFamily: "jaapokkiRegular",
+        "&:hover": {
+          backgroundColor: "#ac6725",
+        },
+      }}
+    >
       <td></td>
       <td>
         <RowLock unit={props.unit} />

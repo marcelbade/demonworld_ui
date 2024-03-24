@@ -2,26 +2,13 @@
 import React, { useContext } from "react";
 // Material UI
 import { ListItemText, List } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
 // components and functions
 import { ArmyContext } from "../../../../../../contexts/armyContext";
 import { SelectionContext } from "../../../../../../contexts/selectionContext";
 import useSubFactionStats from "../../../../../../customHooks/UseSubFactionStats";
-
-const useStyles = makeStyles({
-  listElement: {
-    display: "flex",
-    flexDirection: "column",
-  },
-  textBox: {
-    gap: "1em",
-    display: "flex",
-    flexDirection: "row",
-  },
-});
+import { TEXTS } from "../../../../../../constants/textsAndMessages";
 
 const ArmyListSubFactionFooter = (props) => {
-  const classes = useStyles();
   const AC = useContext(ArmyContext);
   const SEC = useContext(SelectionContext);
 
@@ -34,18 +21,22 @@ const ArmyListSubFactionFooter = (props) => {
 
   return (
     <List>
-      <ListItemText className={classes.listElement} key={props.subFaction} primary={<span className={classes.font}>Gesamt</span>} />
+      <ListItemText //
+        sx={{ display: "flex", flexDirection: "column" }}
+        key={props.subFaction}
+        primary={<span>{TEXTS.TOTAL}</span>}
+      />
       <ListItemText
-        className={classes.listElement}
+        sx={{ display: "flex", flexDirection: "column" }}
         key={props.subFaction}
         primary={
-          <span className={classes.textBox}>
+          <span sx={{ gap: "1em", display: "flex", flexDirection: "row" }}>
             <span>{stats.currentTotal}</span>
             <span> {stats.currentPercent}</span>
           </span>
         }
         secondary={
-          <span className={classes.textBox}>
+          <span sx={{ gap: "1em", display: "flex", flexDirection: "row" }}>
             <span>{`Minimum: ${stats.minPercentage} %`}</span>
             <span>{`Maximum ${stats.maxPercentage} %`}</span>
           </span>

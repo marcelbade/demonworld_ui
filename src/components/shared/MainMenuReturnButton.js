@@ -3,26 +3,13 @@ import React from "react";
 import { useHistory } from "react-router-dom";
 // material ui
 import { IconButton } from "@mui/material";
-import { makeStyles } from "@material-ui/core";
+import { useTheme } from "@emotion/react";
 // icons
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 
-const useStyles = makeStyles((theme) => ({
-  BackBttn: {
-    [theme.breakpoints.up("md")]: {
-      top: "0%",
-      left: "1%",
-    },
-  },
-  BackBttnIcon: {
-    width: "2em",
-    height: "2em",
-  },
-}));
-
 const MainMenuReturnButton = () => {
   const history = useHistory();
-  const classes = useStyles();
+  const theme = useTheme();
 
   /**
    * Function calls history objects to take user back to main menu.
@@ -33,13 +20,18 @@ const MainMenuReturnButton = () => {
 
   return (
     <IconButton
-      className={classes.BackBttn}
+      sx={{
+        [theme.breakpoints.up("md")]: {
+          top: "0%",
+          left: "1%",
+        },
+      }}
       onClick={() => {
         backToMainmenu();
       }}
       size="large"
     >
-      <ChevronLeftIcon className={classes.BackBttnIcon} />
+      <ChevronLeftIcon sx={{ width: "2em", height: "2em" }} />
     </IconButton>
   );
 };

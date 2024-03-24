@@ -1,6 +1,6 @@
 // React
 import React, { useContext } from "react";
-import {makeStyles} from "@material-ui/core";
+// material ui
 import { Grid, Typography } from "@mui/material";
 // components & functions
 import { StateCardContext } from "../../../../../contexts/statCardContext";
@@ -9,17 +9,9 @@ import { setStat } from "../../../../ListGenerator/RightSideMenus/Menus/ItemShop
 // constants
 import { FEAR, MORAL1, MORAL2 } from "../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/StatChangesLogic";
 
-const useStyles = makeStyles({
-  unitCardStripe: {
-    padding: "10px",
-    color: "white",
-    backgroundColor: "black",
-  },
-});
+const CSS = { padding: "10px", color: "white", backgroundColor: "black" };
 
 const CardFrontLowerBlackStripe = () => {
-  const classes = useStyles();
-
   const SC = useContext(StateCardContext);
 
   return SC.isSingleElement ? (
@@ -27,7 +19,7 @@ const CardFrontLowerBlackStripe = () => {
       <Typography
         variant="h6" //
         align="center"
-        className={classes.unitCardStripe}
+        sx={CSS}
       >
         {`${CARD_PREVIEW.FEAR}: ${setStat(SC.unit, FEAR)}`}
       </Typography>
@@ -37,13 +29,11 @@ const CardFrontLowerBlackStripe = () => {
       container //
       direction="row"
       justifyContent="space-around"
-      className={classes.unitCardStripe}
+      sx={CSS}
     >
       <Typography variant="h6"> {`${CARD_PREVIEW.FEAR}: ${setStat(SC.unit, FEAR)}`}</Typography>
       <Typography variant="h6">
-        {`${CARD_PREVIEW.MORAL}: ${SC.unit.moral1 ? setStat(SC.unit, MORAL1) : "-"} / ${
-          SC.unit.moral2 ? setStat(SC.unit, MORAL2) : "-"
-        }`}
+        {`${CARD_PREVIEW.MORAL}: ${SC.unit.moral1 ? setStat(SC.unit, MORAL1) : "-"} / ${SC.unit.moral2 ? setStat(SC.unit, MORAL2) : "-"}`}
       </Typography>
     </Grid>
   );

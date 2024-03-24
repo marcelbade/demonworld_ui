@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 // Axios
 import axios from "axios";
 // import {makeStyles} from "@material-ui/core";
-import { makeStyles } from "@material-ui/core";
 import { Grid, IconButton, Typography } from "@mui/material";
 // components & functions
 import FactionTableRow from "./factionTableRow";
@@ -20,33 +19,7 @@ import TableProvider from "../../../../contexts/tableContext";
 // constants
 import { COMPENDIUM } from "../../../../constants/textsAndMessages";
 
-
-const useStyles = makeStyles({
-  topButtons: {
-    position: "relative",
-    paddingRight: "3em",
-  },
-  table: {
-    textAlign: "center",
-  },
-  pageTitle: {
-    marginLeft: "0.5em",
-    marginTop: "0.5em",
-    marginBottom: "0.5em",
-    fontFamily: "NotMaryKate",
-  },
-  checkBoxLabel: {
-    margin: "10px",
-    width: "250px",
-    "& .MuiFormControlLabel-label": {
-      fontFamily: "NotMaryKate",
-    },
-  },
-});
-
 const FactionTable = () => {
-  const classes = useStyles();
-
   // intialize local state
   const [receivedData, setReceivedData] = useState([]);
   const [allFactions, setAllFactions] = useState([]);
@@ -197,7 +170,10 @@ const FactionTable = () => {
             alignContent="flex-start"
             direction="row"
             justifyContent="space-between"
-            className={classes.topButtons}
+            sx={{
+              position: "relative", //
+              paddingRight: "3em",
+            }}
           >
             <Grid
               item //
@@ -222,7 +198,15 @@ const FactionTable = () => {
           </Grid>
           <Grid item container direction="row">
             <Grid item xs={8}>
-              <Typography variant="h3" className={classes.pageTitle}>
+              <Typography
+                variant="h3"
+                sx={{
+                  marginLeft: "0.5em", //
+                  marginTop: "0.5em",
+                  marginBottom: "0.5em",
+                  fontFamily: "NotMaryKate",
+                }}
+              >
                 {COMPENDIUM.TITLE}
               </Typography>
               <FactionAndUnitSelectors />
@@ -231,7 +215,7 @@ const FactionTable = () => {
           <OptionsDialog />
           <Grid item xs={12}>
             {receivedData ? (
-              <table className={classes.table} rules="none">
+              <table sx={{ textAlign: "center" }} rules="none">
                 <FactionTableHeader columns={columns} />
                 <tbody>
                   {tableData.map((unit, i) => {

@@ -2,7 +2,6 @@
 import React, { useContext } from "react";
 //Material UI
 import { Button, Grid, ButtonGroup, Typography, IconButton, ThemeProvider, CssBaseline } from "@mui/material";
-import {makeStyles} from "@material-ui/core";
 // icons
 import CancelIcon from "@mui/icons-material/Cancel";
 // components and functions
@@ -16,19 +15,7 @@ import { LightSwitchContext } from "../../../../../contexts/lightSwitchContext";
 import lightTheme from "../../../../../AppTheme/lightTheme";
 import darkTheme from "../../../../../AppTheme/darkTheme";
 
-const useStyles = makeStyles((theme) => ({
-  overlay: {
-    height: "100vh",
-    width: "30vw",
-  },
-  unitName: {
-    borderBottom: "solid 4px black",
-    marginBottom: "1em",
-  },
-}));
-
 const SecondSubFactionMenu = () => {
-  const classes = useStyles();
   const IC = useContext(ItemContext);
   const SEC = useContext(SelectionContext);
   const SFC = useContext(SecondSubFactionContext);
@@ -56,7 +43,14 @@ const SecondSubFactionMenu = () => {
   return (
     <ThemeProvider theme={LC.darkModeOff ? lightTheme : darkTheme}>
       <CssBaseline />
-      <Grid container direction="column" className={classes.overlay}>
+      <Grid
+        container
+        direction="column"
+        sx={{
+          height: "100vh",
+          width: "30vw",
+        }}
+      >
         <Grid item>
           <IconButton
             onClick={() => {
@@ -69,7 +63,11 @@ const SecondSubFactionMenu = () => {
         </Grid>
         <Grid item container direction="row" justifyContent="center">
           <Grid item xs={9}>
-            <Typography variant="h5" align="center" className={classes.unitName}>
+            <Typography
+              variant="h5" //
+              align="center"
+              sx={{ borderBottom: "solid 4px black", marginBottom: "1em" }}
+            >
               {IC.unitSelectedForShop.unitName}
             </Typography>
           </Grid>

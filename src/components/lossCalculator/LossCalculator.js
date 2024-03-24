@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 //Material UI
 import { Fade, Grid } from "@mui/material";
-import { makeStyles } from "@mui/styles";
 // notistack
 import { SnackbarProvider } from "notistack";
 // components and functions
@@ -20,15 +19,7 @@ import SpellBookIcon from "../../assets/icons/spellbook-white.png";
 import { Box } from "@material-ui/core";
 import usePointCostCalculator from "../../customHooks/UsePointCostCalculator";
 
-const useStyles = makeStyles({
-  pushMessages: {
-    marginRight: "2em",
-    marginBottom: "2em",
-  },
-});
-
 const LossCalculator = () => {
-  const classes = useStyles();
   const history = useHistory();
   const location = useLocation();
   const calculator = usePointCostCalculator();
@@ -121,8 +112,7 @@ const LossCalculator = () => {
       iconVariant={{
         error: (
           <CustomIcon
-            className={classes.pushMessageIcon} //
-            icon={SpellBookIcon}
+            icon={SpellBookIcon} //
             altText={"Regelbuchtext"}
             height={35}
             width={35}

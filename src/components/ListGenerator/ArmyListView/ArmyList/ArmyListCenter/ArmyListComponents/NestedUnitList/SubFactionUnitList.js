@@ -2,7 +2,6 @@
 import React, { Fragment, useContext } from "react";
 // Material UI
 import { List, ListItem, IconButton } from "@mui/material";
-import {makeStyles} from "@material-ui/core";
 // icons
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 // components and functions
@@ -12,25 +11,6 @@ import UnitElementButtons from "./UnitElementButtons";
 import ArmyListUnitEntry from "./ArmyListUnitEntry";
 import useArmyValidation from "../../../../../../../customHooks/UseArmyValidation";
 import { SelectionContext } from "../../../../../../../contexts/selectionContext";
-
-const useStyles = makeStyles({
-  text: {
-    width: "40%",
-  },
-  pointsAndSecondSubFaction: {
-    display: "flex",
-    flexDirection: "column",
-  },
-  list: {
-    padding: "0px",
-    margin: "0px",
-  },
-  element: {
-    width: "80%",
-    margin: "-1em",
-    padding: "0em",
-  },
-});
 
 /**
  * The component creates the nested unit list for a single sub faction.
@@ -44,7 +24,6 @@ const useStyles = makeStyles({
  */
 const SubFactionUnitList = (props) => {
   // eslint-disable-next-line no-unused-vars
-  const classes = useStyles();
   const SEC = useContext(SelectionContext);
   const validation = useArmyValidation();
 
@@ -60,11 +39,11 @@ const SubFactionUnitList = (props) => {
 
   return (
     <Fragment>
-      {unitCardMultiSort(props.subFactionUnits).map((u,i) => {
+      {unitCardMultiSort(props.subFactionUnits).map((u, i) => {
         const identifier = u.unitName + u.uniqueID;
         return (
-          <List className={classes.list} key={i}>
-            <ListItem className={classes.element}>
+          <List sx={{ padding: "0px", margin: "0px" }} key={i}>
+            <ListItem sx={{ width: "80%", margin: "-1em", padding: "0em" }}>
               <IconButton
                 onClick={() => {
                   removeUnit(identifier);

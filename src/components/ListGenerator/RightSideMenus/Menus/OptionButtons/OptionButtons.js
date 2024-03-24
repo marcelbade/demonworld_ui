@@ -3,7 +3,6 @@ import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 // Material UI
 import { Grid, Button, Fade } from "@mui/material";
-import {makeStyles} from "@material-ui/core";
 // context
 import { ArmyContext } from "../../../../../contexts/armyContext";
 import { TournamentRulesContext } from "../../../../../contexts/tournamentRulesContext";
@@ -15,21 +14,7 @@ import { filterForSubFaction } from "../../../ListGeneratorFunctions";
 import LightSwitch from "../../../../shared/LightSwitch";
 import ChoosePdfType from "./ChoosePdfType";
 
-const useStyles = makeStyles((theme) => ({
-  overlay: {
-    height: "100vh",
-    width: "30vw",
-    padding: "2em",
-  },
-  button: {
-    width: "15em",
-    padding: "2em",
-    height: "5em",
-  },
-}));
-
 const OptionButtons = () => {
-  const classes = useStyles();
   const AC = useContext(ArmyContext);
   const TC = useContext(TournamentRulesContext);
   const SEC = useContext(SelectionContext);
@@ -124,7 +109,17 @@ const OptionButtons = () => {
   ];
 
   return (
-    <Grid container direction="column" alignItems="center" spacing={4} className={classes.overlay}>
+    <Grid
+      container
+      direction="column"
+      alignItems="center"
+      spacing={4}
+      sx={{
+        height: "100vh",
+        width: "30vw",
+        padding: "2em",
+      }}
+    >
       <LightSwitch />
 
       {buttons.map((bttn, i) => (

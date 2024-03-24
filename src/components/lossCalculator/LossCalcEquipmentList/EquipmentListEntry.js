@@ -2,28 +2,26 @@
 import React from "react";
 //Material UI
 import { ListItem } from "@mui/material";
-import makeStyles from '@mui/styles/makeStyles';
+import { useTheme } from "@emotion/react";
 // components and functions
 import EquipmentListElementBttn from "./EquipmentListElementBttn";
 import EquipmentListItemName from "./EquipmentListItemName";
 
-const useStyles = makeStyles((theme) => ({
-  entry: {
+const EquipmentListEntry = (props) => {
+  const theme = useTheme();
+
+  const ENTRY = {
     [theme.breakpoints.up("md")]: {
       flexDirection: "row",
     },
-    [theme.breakpoints.down('lg')]: {
+    [theme.breakpoints.down("lg")]: {
       flexDirection: "row",
 
       "@media (orientation:landscape)": {
         flexDirection: "row",
       },
     },
-  },
-}));
-
-const EquipmentListEntry = (props) => {
-  const classes = useStyles();
+  };
 
   const unit = props.unit;
   const itemName = props.item.name;
@@ -32,7 +30,7 @@ const EquipmentListEntry = (props) => {
   const notSingleElementItem = props.item.everyElement;
 
   return (
-    <ListItem className={classes.entry} key={props.unit.uniqueID}>
+    <ListItem sx={ENTRY} key={props.unit.uniqueID}>
       <EquipmentListElementBttn
         unit={unit} //
         itemName={itemName}

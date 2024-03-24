@@ -2,28 +2,13 @@
 import React, { Fragment, useContext } from "react";
 // Material UI
 import { Grid, ListItemText, Typography } from "@mui/material";
-import {makeStyles} from "@material-ui/core";
 // components and functions
 import { ValidationContext } from "../../../../../../../contexts/validationContext";
 import ContextHelpButton from "../../../../../../shared/ContextHelpButton";
 // constants
 import { PUSH_MESSAGE_TYPES } from "../../../../../../../constants/textsAndMessages";
 
-const useStyles = makeStyles({
-  invalidUnitEntryStyle: {
-    color: "red",
-    width: "40%",
-    fontFamily: "jaapokkiRegular",
-  },
-  pointsAndSecondSubFaction: {
-    display: "flex",
-    flexDirection: "column",
-    fontSize: "1.2em",
-  },
-});
-
 const ArmyListUnitEntry = (props) => {
-  const classes = useStyles();
   const VC = useContext(ValidationContext);
 
   /**
@@ -60,7 +45,14 @@ const ArmyListUnitEntry = (props) => {
             <span>{props.unit.unitName}</span>
           ) : (
             <Grid container direction="row" alignItems="center">
-              <Typography variant="button" className={classes.invalidUnitEntryStyle}>
+              <Typography
+                variant="button"
+                sx={{
+                  color: "red",
+                  width: "40%",
+                  fontFamily: "jaapokkiRegular",
+                }}
+              >
                 {" "}
                 {props.unit.unitName}{" "}
               </Typography>
@@ -72,9 +64,15 @@ const ArmyListUnitEntry = (props) => {
           )
         }
         secondary={
-          <span className={classes.pointsAndSecondSubFaction}>
+          <span
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              fontSize: "1.2em",
+            }}
+          >
             {showSecondSubFaction() ? <span>{props.unit.secondSubFaction} </span> : null}
-            <span className={classes.text}>{props.unit.points}</span>
+            <span>{props.unit.points}</span>
           </span>
         }
       />

@@ -8,7 +8,7 @@ export const COMPENDIUM = {
   TITLE: "Kompendium",
   COLUMNS: "Tabellenspalten",
   TOGGLE_OFF_ALL_COLUMNS: "Blende alle Spalten aus.",
-  LOCK:"Anheften",
+  LOCK: "Anheften",
   CARD_BUTTON: "Kartenansicht",
   FACTION: "Fraktion",
   SUBFACTION: "Unterfraktion",
@@ -90,6 +90,7 @@ export const BUTTON_TEXTS = {
 
 export const TEXTS = {
   SCOUTING_FACTOR: "Spähfaktor:",
+  TOTAL: "Gesamt",
 };
 
 export const VALIDATION = {

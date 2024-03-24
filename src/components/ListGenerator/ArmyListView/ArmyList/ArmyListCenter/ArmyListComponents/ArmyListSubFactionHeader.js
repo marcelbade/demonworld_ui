@@ -1,37 +1,20 @@
 // React
 import React from "react";
-import {makeStyles} from "@material-ui/core";
 import { Grid, Typography } from "@mui/material";
 // components and functions
 import ContextHelpButton from "../../../../../shared/ContextHelpButton";
 // constants
 import { PUSH_MESSAGE_TYPES } from "../../../../../../constants/textsAndMessages";
 
-const useStyles = makeStyles(() => ({
-  HeaderValidStyle: {
-    width: "60%",
-    borderBottom: "solid 4px black",
-    marginBottom: "1em",
-  },
-  HeaderInvalidStyle: {
-    width: "60%",
-    borderBottom: "solid 4px black",
-    marginBottom: "1em",
-    color: "red",
-  },
-  invalidText: { fontSize: "20px", fontWeight: "bold" },
-}));
-
 const ArmyListSubFactionHeader = (props) => {
-  const classes = useStyles();
-
+ 
   return (
     <Grid container>
       {props.valid ? (
         <Typography
           key={props.subFaction} //
           variant="subtitle1"
-          className={classes.HeaderValidStyle}
+          sx={{ width: "60%", borderBottom: "solid 4px black", marginBottom: "1em" }}
         >
           {props.subFaction}
         </Typography>
@@ -39,12 +22,12 @@ const ArmyListSubFactionHeader = (props) => {
         <Grid
           container //
           direction="row"
-          className={classes.HeaderInvalidStyle}
+          sx={{ width: "60%", borderBottom: "solid 4px black", marginBottom: "1em", color: "red" }}
           alignItems="center"
         >
           <Typography
             key={props.subFaction} //
-            className={classes.invalidText}
+            sx={{ fontSize: "20px", fontWeight: "bold" }}
             variant="subtitle1"
           >
             {props.subFaction}

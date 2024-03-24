@@ -1,6 +1,5 @@
 // React
 import React, { Fragment, useContext } from "react";
-import {makeStyles} from "@material-ui/core";
 import { Grid, Typography } from "@mui/material";
 // icons
 import rangeArmorIcon from "../../../../../../assets/icons/range-armor.png";
@@ -20,27 +19,14 @@ import {
 // constants
 import { CARD_PREVIEW } from "../../../../../../constants/textsAndMessages";
 
-const useStyles = makeStyles({
-  icon: {
-    height: "1.2em",
-    width: "1.2em",
-  },
-
-  alignIcons: {
-    display: "flex",
-    alignItems: "center",
-    marginLeft: "1em",
-    marginBottom: "0.4em",
-  },
-
-  noWrap: {
-    flexWrap: "nowrap",
-  },
-});
+const ALIGN_ICONS = {
+  display: "flex",
+  alignItems: "center",
+  marginLeft: "1em",
+  marginBottom: "0.4em",
+};
 
 const SizeArmorSkills = () => {
-  const classes = useStyles();
-
   const SC = useContext(StateCardContext);
 
   return (
@@ -49,7 +35,7 @@ const SizeArmorSkills = () => {
       container
       alignItems="center"
       direction="row"
-      className={classes.noWrap}
+      sx={{ flexWrap: "nowrap" }}
     >
       <Grid item container justifyContent="center">
         <Typography variant="h6">
@@ -57,7 +43,7 @@ const SizeArmorSkills = () => {
         </Typography>
       </Grid>
       <Grid item container alignItems="center" justifyContent="center">
-        <div className={classes.alignIcons}>
+        <div sx={ALIGN_ICONS}>
           <CustomIcon
             icon={rangeArmorIcon} //
             altText={"Fernkampfpanzerung"}
@@ -66,7 +52,7 @@ const SizeArmorSkills = () => {
           />
         </div>
         <Typography variant="h6">{setStat(SC.unit, ARMOUR_RANGE)}</Typography>
-        <div className={classes.alignIcons}>
+        <div sx={ALIGN_ICONS}>
           <CustomIcon
             icon={meleeArmorIcon} //
             altText={"Nahkampfpanzerung"}
@@ -82,11 +68,10 @@ const SizeArmorSkills = () => {
           direction="row" //
           justifyContent="center"
           alignItems="center"
-          className={classes.skillBox}
         >
           {SC.unit.skillMelee !== 0 ? (
             <Fragment>
-              <div className={classes.alignIcons}>
+              <div sx={ALIGN_ICONS}>
                 <CustomIcon
                   icon={blackSwordIcon} //
                   altText={"Nahkampffertigkeit"}
@@ -99,7 +84,7 @@ const SizeArmorSkills = () => {
           ) : null}
           {SC.unit.skillRange !== 0 ? (
             <Fragment>
-              <div className={classes.alignIcons}>
+              <div sx={ALIGN_ICONS}>
                 <CustomIcon
                   icon={blackBowIcon} //
                   altText={"Fernkampffertigkeit"}

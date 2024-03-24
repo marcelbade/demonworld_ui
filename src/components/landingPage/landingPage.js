@@ -2,7 +2,6 @@
 import React from "react";
 // Material UI
 import { Grid } from "@mui/material";
-import { makeStyles } from "@material-ui/core";
 // icons
 import deathIcon from "../../assets/icons/icons8-death-64.png";
 import calculatorIcon from "../../assets/icons/icons8-calculator-64.png";
@@ -11,32 +10,10 @@ import bookIcon from "../../assets/icons/icons8-book-64.png";
 import LandingPageNaviButton from "./LandingPageNaviButton";
 import { LANDINGPAGE } from "../../constants/textsAndMessages";
 import LightSwitch from "../shared/LightSwitch";
-
-const useStyles = makeStyles((theme) => ({
-  homePage: {
-    width: "100vw",
-    height: "100vh",
-
-    [theme.breakpoints.up("md")]: {
-      flexDirection: "row",
-    },
-    [theme.breakpoints.down("lg")]: {
-      flexDirection: "column",
-      "@media (orientation:landscape)": {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        padding: "1em",
-      },
-    },
-  },
-  lightSwitch: {
-    marginRight: "2em",
-    marginTop: "1em",
-  },
-}));
+import { useTheme } from "@emotion/react";
 
 const LandingPage = () => {
-  const classes = useStyles();
+  const theme = useTheme();
 
   return (
     <Grid container>
@@ -47,7 +24,7 @@ const LandingPage = () => {
         justifyContent="flex-end"
         alignContent="center"
       >
-        <Grid item className={classes.lightSwitch}>
+        <Grid item sx={{ marginRight: "2em", marginTop: "1em" }}>
           <LightSwitch />
         </Grid>
       </Grid>
@@ -56,7 +33,22 @@ const LandingPage = () => {
         item
         justifyContent="center"
         alignContent="center"
-        className={classes.homePage}
+        sx={{
+          width: "100vw",
+          height: "100vh",
+
+          [theme.breakpoints.up("md")]: {
+            flexDirection: "row",
+          },
+          [theme.breakpoints.down("lg")]: {
+            flexDirection: "column",
+            "@media (orientation:landscape)": {
+              flexDirection: "row",
+              justifyContent: "space-between",
+              padding: "1em",
+            },
+          },
+        }}
       >
         <LandingPageNaviButton
           relativeURL={"/compendium"} //
