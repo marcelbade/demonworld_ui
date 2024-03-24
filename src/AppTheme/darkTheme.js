@@ -1,25 +1,22 @@
-
-import { createTheme } from '@mui/material';
+import { createTheme } from "@mui/material";
 
 const darkTheme = createTheme({
   palette: {
+    mode: "dark",
     background: {
       default: "#130606",
     },
-    mode: "dark",
     primary: { 500: "#060d13" },
     color: "#0ceda6",
     disabled: "darkgrey",
     statCardBackGround: "#5f6a6a",
     compendiumHeaderBackground: "#565757",
-    cardTitle:{
+    cardTitle: {
       flexWrap: "nowrap",
       fontWeight: "normal",
       fontSize: "30px",
       color: "red",
-    }
-
-
+    },
   },
 
   components: {
