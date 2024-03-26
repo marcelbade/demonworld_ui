@@ -1,6 +1,8 @@
 // React
 import React, { Fragment, useContext } from "react";
 import { Grid, Typography } from "@mui/material";
+// Material UI
+import { useTheme } from "@emotion/react";
 // icons
 import rangeArmorIcon from "../../../../../../assets/icons/range-armor.png";
 import meleeArmorIcon from "../../../../../../assets/icons/melee-armor.png";
@@ -8,26 +10,19 @@ import blackBowIcon from "../../../../../../assets/icons/bow2.png";
 import blackSwordIcon from "../../../../../../assets/icons/sword2.png";
 // components & functions
 import { StateCardContext } from "../../../../../../contexts/statCardContext";
-import CustomIcon from "../../../CustomIcon";
 import {
   ARMOUR_MELEE,
   ARMOUR_RANGE,
   SKILL_MELEE,
   SKILL_RANGE,
-  setStat,
 } from "../../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/StatChangesLogic";
 // constants
-import { CARD_PREVIEW } from "../../../../../../constants/textsAndMessages";
-
-const ALIGN_ICONS = {
-  display: "flex",
-  alignItems: "center",
-  marginLeft: "1em",
-  marginBottom: "0.4em",
-};
+import { ALTTEXT, CARD_PREVIEW } from "../../../../../../constants/textsAndMessages";
+import StatCardIcon from "./StatCardIcon";
 
 const SizeArmorSkills = () => {
   const SC = useContext(StateCardContext);
+  const theme = useTheme();
 
   return (
     <Grid
@@ -35,7 +30,7 @@ const SizeArmorSkills = () => {
       container
       alignItems="center"
       direction="row"
-      sx={{ flexWrap: "nowrap" }}
+      sx={{ ...theme.palette.statCards.cardBackGround, flexWrap: "nowrap" }}
     >
       <Grid item container justifyContent="center">
         <Typography variant="h6">
@@ -43,56 +38,40 @@ const SizeArmorSkills = () => {
         </Typography>
       </Grid>
       <Grid item container alignItems="center" justifyContent="center">
-        <div sx={ALIGN_ICONS}>
-          <CustomIcon
-            icon={rangeArmorIcon} //
-            altText={"Fernkampfpanzerung"}
-            height={"25"}
-            width={"25"}
-          />
-        </div>
-        <Typography variant="h6">{setStat(SC.unit, ARMOUR_RANGE)}</Typography>
-        <div sx={ALIGN_ICONS}>
-          <CustomIcon
-            icon={meleeArmorIcon} //
-            altText={"Nahkampfpanzerung"}
-            height={"25"}
-            width={"25"}
-          />
-        </div>
-        <Typography variant="h6">{setStat(SC.unit, ARMOUR_MELEE)}</Typography>
+        <StatCardIcon
+          icon={rangeArmorIcon} //
+          altText={ALTTEXT.RANGE_ARMOR}
+          stat={ARMOUR_RANGE}
+        />
+        <StatCardIcon
+          icon={meleeArmorIcon} //
+          altText={ALTTEXT.MELEE_ARMOR}
+          stat={ARMOUR_MELEE}
+        />
       </Grid>
       {SC.unit.skillRange === 0 && SC.unit.skillMelee === 0 ? null : (
         <Grid
           container
-          direction="row" //
           justifyContent="center"
+          direction="row" //
           alignItems="center"
         >
           {SC.unit.skillMelee !== 0 ? (
             <Fragment>
-              <div sx={ALIGN_ICONS}>
-                <CustomIcon
-                  icon={blackSwordIcon} //
-                  altText={"Nahkampffertigkeit"}
-                  height={"25"}
-                  width={"25"}
-                />
-              </div>
-              <Typography variant="h6"> {setStat(SC.unit, SKILL_MELEE)} </Typography>
+              <StatCardIcon
+                icon={blackSwordIcon} //
+                altText={ALTTEXT.MELEE_SKILL}
+                stat={SKILL_MELEE}
+              />
             </Fragment>
           ) : null}
           {SC.unit.skillRange !== 0 ? (
             <Fragment>
-              <div sx={ALIGN_ICONS}>
-                <CustomIcon
-                  icon={blackBowIcon} //
-                  altText={"Fernkampffertigkeit"}
-                  height={"25"}
-                  width={"25"}
-                />
-              </div>
-              <Typography variant="h6"> {setStat(SC.unit, SKILL_RANGE)} </Typography>
+              <StatCardIcon
+                icon={blackBowIcon} //
+                altText={ALTTEXT.RANGE_SKILL}
+                stat={SKILL_RANGE}
+              />
             </Fragment>
           ) : null}
         </Grid>
