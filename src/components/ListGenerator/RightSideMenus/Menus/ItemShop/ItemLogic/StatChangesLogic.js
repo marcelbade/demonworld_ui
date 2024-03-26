@@ -1,4 +1,3 @@
- 
 /**
  * Since all item properties that alter unit stats follow the same naming convention,
  * the mapping is done via a simple String concotenation
@@ -52,19 +51,19 @@ export const rangedWeaponStats = (unit) => {
  * Function calculates the new value for a unit's stat
  * after choosing an item that permanently changes a stat.
  * @param {unitCard} unit
- * @param {String} statName
+ * @param {String} stateName
  * @returns
  */
-export const setStat = (unit, statName) => {
-  let stat = unit[statName];
+export const setState = (unit, stateName) => {
+  let state = unit[stateName];
 
-  const result = searchForRelevantModifier(unit, mapUnitStatToItemProperty(statName));
+  const result = searchForRelevantModifier(unit, mapUnitStatToItemProperty(stateName));
 
   if (result.modifierFound) {
-    stat += result.modifier;
+    state += result.modifier;
   }
 
-  return stat;
+  return state;
 };
 
 /**
