@@ -10,12 +10,8 @@ import blackBowIcon from "../../../../../../assets/icons/bow2.png";
 import blackSwordIcon from "../../../../../../assets/icons/sword2.png";
 // components & functions
 import { StateCardContext } from "../../../../../../contexts/statCardContext";
-import {
-  ARMOUR_MELEE,
-  ARMOUR_RANGE,
-  SKILL_MELEE,
-  SKILL_RANGE,
-} from "../../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/StatChangesLogic";
+import { ARMOUR_RANGE, ARMOUR_MELEE, SKILL_MELEE, SKILL_RANGE,   } from "../../../../../../constants/stats";
+
 // constants
 import { ALTTEXT, CARD_PREVIEW } from "../../../../../../constants/textsAndMessages";
 import StatCardIcon from "./StatCardIcon";

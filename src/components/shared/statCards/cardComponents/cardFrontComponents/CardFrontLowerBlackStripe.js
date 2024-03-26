@@ -7,7 +7,7 @@ import { StateCardContext } from "../../../../../contexts/statCardContext";
 import { CARD_PREVIEW } from "../../../../../constants/textsAndMessages";
 import { setStat } from "../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/StatChangesLogic";
 // constants
-import { FEAR, MORAL1, MORAL2 } from "../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/StatChangesLogic";
+import { FEAR, MORAL1, MORAL2 } from "../../../../../constants/stats";
 
 const CSS = { padding: "10px", color: "white", backgroundColor: "black" };
 

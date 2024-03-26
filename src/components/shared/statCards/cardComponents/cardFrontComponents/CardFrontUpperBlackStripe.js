@@ -7,7 +7,7 @@ import { StateCardContext } from "../../../../../contexts/statCardContext";
 import { CARD_PREVIEW } from "../../../../../constants/textsAndMessages";
 import { setStat } from "../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/StatChangesLogic";
 // constants
-import { CHARGE, MOVE, SKIRMISH } from "../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/StatChangesLogic";
+import { CHARGE, MOVE, SKIRMISH } from "../../../../../constants/stats";
 
 const CardFrontUpperBlackStripe = () => {
   const SC = useContext(StateCardContext);
