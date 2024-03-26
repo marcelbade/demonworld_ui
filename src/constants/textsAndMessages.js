@@ -1,3 +1,10 @@
+export const ALTTEXT = {
+  RANGE_ARMOR: "Fernkampfpanzerung",
+  MELEE_ARMOR: "Nahkampfpanzerung",
+  RANGE_SKILL: "Fernkampffertigkeit",
+  MELEE_SKILL: "Nahkampffertigkeit",
+};
+
 export const LANDINGPAGE = {
   COMPENDIUM: "Kompendium",
   LIST_GENERATOR: "Listengenerator",
