@@ -10,7 +10,6 @@ const CustomIcon = (props) => {
   const STYLES = {
     width: props.width, //
     height: props.height,
-    alt: props.altText,
   };
 
   /**
@@ -32,6 +31,7 @@ const CustomIcon = (props) => {
       <img
         src={props.icon} //
         height={props.height}
+        alt={props.altText}
       />
     </Icon>
   );
