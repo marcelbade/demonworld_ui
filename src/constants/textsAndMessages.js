@@ -169,6 +169,12 @@ export const CARD_PREVIEW = {
   FEAR: "Furchtfaktor",
   MORAL: "Moral",
   CONTROL_AREA: "Kontrollbereich",
+  POINTS: "Punkte",
+  ELEMENTS: "Elemente",
+  SINGLE_ELEMENT: "Element",
+  LEADER: "Anführer",
+  MUSICIAN: "Musiker",
+  STANDARD_BEARER: "Banner",
 };
 
 // FACTIONS & Game Rules
