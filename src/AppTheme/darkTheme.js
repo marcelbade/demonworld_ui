@@ -3,22 +3,32 @@ import { createTheme } from "@mui/material";
 const darkTheme = createTheme({
   palette: {
     mode: "dark",
+    primary: { 500: "#060d13" },
     background: {
       default: "#130606",
     },
     primary: { 500: "#060d13" },
     color: "#0ceda6",
     disabled: "darkgrey",
-    statCardBackGround: "#5f6a6a",
     compendiumHeaderBackground: "#565757",
-    cardTitle: {
-      flexWrap: "nowrap",
-      fontWeight: "normal",
-      fontSize: "30px",
-      color: "red",
+    statCards: {
+      backGround: {
+        backgroundColor: "#5f6a6a", //
+      },
+      cardTitle: {
+        flexWrap: "nowrap",
+        fontWeight: "normal",
+        fontSize: "30px",
+        color: "red",
+        fontFamily: "NotMaryKate",
+      },
+      blackStripe: {
+        padding: "10px",
+        color: "white",
+        backgroundColor: "black",
+      },
     },
   },
-
   components: {
     MuiTreeItem: {
       styleOverrides: {

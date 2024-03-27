@@ -4,8 +4,24 @@ const lightTheme = createTheme({
   palette: {
     primary: { 500: "#000000" },
     disabled: "grey",
-    statCardBackGround: "lightgrey",
     compendiumHeaderBackground: "black",
+    statCards: {
+      backGround: {
+        backgroundColor: "lightgrey", //
+      },
+      cardTitle: {
+        flexWrap: "nowrap",
+        fontWeight: "normal",
+        fontSize: "30px",
+        color: "red",
+        fontFamily: "NotMaryKate",
+      },
+      blackStripe: {
+        padding: "10px",
+        color: "white",
+        backgroundColor: "black",
+      },
+    },
   },
   components: {
     MuiTreeItem: {
