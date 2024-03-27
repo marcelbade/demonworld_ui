@@ -13,15 +13,17 @@ const RangedWeapon = () => {
 
   const rangedWeaponProperties = rangedWeaponStats(SC.unit);
 
+  const rangeWeapon = `${rangedWeaponProperties.name} ${rangedWeaponProperties.value}`;
 
   return (
-    <Grid item container justifyContent="center">
-      {/* 3rd Row - RANGED WEAPONS  */}
-      {SC.unit.rangedWeapon !== NO_RANGE_WEAPON ? (
-        <Typography variant="h6" align="right">
-          {rangedWeaponProperties.name} {rangedWeaponProperties.value}
-        </Typography>
-      ) : null}
+    <Grid
+      item //
+      container
+      justifyContent="center"
+    >
+      <Typography variant="h6" align="right">
+        {SC.unit.rangedWeapon !== NO_RANGE_WEAPON ? rangeWeapon : null}
+      </Typography>
     </Grid>
   );
 };

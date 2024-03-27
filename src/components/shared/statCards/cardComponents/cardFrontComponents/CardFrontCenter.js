@@ -2,8 +2,7 @@
 import React, { Fragment, useContext } from "react";
 // Material UI
 import { Grid } from "@mui/material";
-// icons
-
+import { useTheme } from "@emotion/react";
 // components & functions
 import { StateCardContext } from "../../../../../contexts/statCardContext";
 import RangedWeapon from "./CardFrontCenterComponents/RangedWeapon";
@@ -14,19 +13,25 @@ import SizeArmorSkills from "./CardFrontCenterComponents/SizeArmorSkills";
 import { NO_RANGE_WEAPON } from "../../../../../constants/textsAndMessages";
 
 const CardFrontCenter = () => {
+  const theme = useTheme();
   const SC = useContext(StateCardContext);
 
   return (
     <Fragment>
-      <Grid item container justifyContent="center">
+      <Grid
+        item //
+        container
+        justifyContent="center"
+        sx={theme.palette.statCards.backGround}
+      >
         {SC.unit.rangedWeapon !== NO_RANGE_WEAPON ? ( //
           <RangedWeapon />
         ) : null}
       </Grid>
-      <Grid item container direction="column">
+      <Grid item container direction="column" sx={theme.palette.statCards.backGround}>
         <MeleeWeapons />
       </Grid>
-      <Initiative/>
+      <Initiative />
       <SizeArmorSkills />
     </Fragment>
   );

@@ -5,7 +5,7 @@ import { Grid, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components & functions
 import { StateCardContext } from "../../../../../../contexts/statCardContext";
-import { setStat } from "../../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/StatChangesLogic";
+import { setUnitStat } from "../../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/StatChangesLogic";
 //constants
 import { INITIATIVE } from "../../../../../../constants/stats";  
 import { CARD_PREVIEW } from "../../../../../../constants/textsAndMessages";
@@ -19,9 +19,9 @@ const Initiative = () => {
       container //
       direction="column"
       alignItems="center"
-      sx={theme.palette.statCards.cardBackGround}
+      sx={theme.palette.statCards.backGround}
     >
-      <Typography variant="h6">{`${CARD_PREVIEW.INITIATIVE}: ${setStat(SC.unit, INITIATIVE)}`}</Typography>
+      <Typography variant="h6">{`${CARD_PREVIEW.INITIATIVE}: ${setUnitStat(SC.unit, INITIATIVE)}`}</Typography>
     </Grid>
   );
 };

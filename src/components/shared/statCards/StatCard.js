@@ -17,6 +17,14 @@ import { isSingleElementCard } from "../../../util/utilityFunctions";
 const StatCard = (props) => {
   const theme = useTheme();
 
+  const CSS = {
+    width: "30em",
+    marginTop: "2em",
+    border: "1px black solid",
+    marginLeft: "0.75em",
+    marginRight: "0.75em",
+  };
+
   return (
     <StatCardProvider
       value={{
@@ -24,22 +32,16 @@ const StatCard = (props) => {
         unit: props.unit,
       }}
     >
-      <Grid sx={{ backgroundColor: theme.palette.statCardBackGround }} container direction={props.alignment}>
+      <Grid container direction={props.alignment}>
         <Grid
           item //
-          sx={{
-            width: "30em",
-            marginTop: "2em",
-            backgroundColor: (theme) => theme.palette.statCardBackGround,
-            border: "1px black solid",
-            marginLeft: "0.75em",
-            marginRight: "0.75em",
-          }}
+          sx={CSS}
         >
           <CardFront />
         </Grid>
         <Grid
           item //
+          sx={CSS}
         >
           <CardBack />
         </Grid>

@@ -11,29 +11,21 @@ const CardFrontTitle = () => {
   const theme = useTheme();
   const SC = useContext(StateCardContext);
 
-  const CARD_TITLE = {
-    backgroundColor: theme.palette.statCardBackGround, //
-    flexWrap: "nowrap",
-    fontWeight: "normal",
-    fontSize: "30px",
-    color: "red",
-  };
-
   return (
     <Grid
-      sx={CARD_TITLE} //
+      sx={theme.palette.statCards.backGround} //
       item
       container
       justifyContent="space-around"
       direction="row"
     >
-      <Typography variant="h6" align="center">
+      <Typography sx={theme.palette.statCards.cardTitle} variant="h4" align="center">
         {renderCommandPoints(SC.unit.commandStars)}
       </Typography>
-      <Typography variant="h6" align="center" sx={CARD_TITLE}>
+      <Typography sx={theme.palette.statCards.cardTitle} variant="h4" align="center">
         {SC.unit.unitName}
       </Typography>
-      <Typography variant="h6" align="center">
+      <Typography sx={theme.palette.cardTitle} variant="h6" align="center">
         {renderMagicPoints(SC.unit.magic)}
       </Typography>
     </Grid>

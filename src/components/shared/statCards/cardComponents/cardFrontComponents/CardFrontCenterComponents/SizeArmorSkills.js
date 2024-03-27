@@ -10,7 +10,7 @@ import blackBowIcon from "../../../../../../assets/icons/bow2.png";
 import blackSwordIcon from "../../../../../../assets/icons/sword2.png";
 // components & functions
 import { StateCardContext } from "../../../../../../contexts/statCardContext";
-import { ARMOUR_RANGE, ARMOUR_MELEE, SKILL_MELEE, SKILL_RANGE,   } from "../../../../../../constants/stats";
+import { ARMOUR_RANGE, ARMOUR_MELEE, SKILL_MELEE, SKILL_RANGE } from "../../../../../../constants/stats";
 
 // constants
 import { ALTTEXT, CARD_PREVIEW } from "../../../../../../constants/textsAndMessages";
@@ -26,7 +26,7 @@ const SizeArmorSkills = () => {
       container
       alignItems="center"
       direction="row"
-      sx={{ ...theme.palette.statCards.cardBackGround, flexWrap: "nowrap" }}
+      sx={{ ...theme.palette.statCards.backGround, flexWrap: "nowrap" }}
     >
       <Grid item container justifyContent="center">
         <Typography variant="h6">
@@ -38,11 +38,13 @@ const SizeArmorSkills = () => {
           icon={rangeArmorIcon} //
           altText={ALTTEXT.RANGE_ARMOR}
           stat={ARMOUR_RANGE}
+          unit={SC.unit}
         />
         <StatCardIcon
           icon={meleeArmorIcon} //
           altText={ALTTEXT.MELEE_ARMOR}
           stat={ARMOUR_MELEE}
+          unit={SC.unit}
         />
       </Grid>
       {SC.unit.skillRange === 0 && SC.unit.skillMelee === 0 ? null : (
@@ -58,6 +60,7 @@ const SizeArmorSkills = () => {
                 icon={blackSwordIcon} //
                 altText={ALTTEXT.MELEE_SKILL}
                 stat={SKILL_MELEE}
+                unit={SC.unit}
               />
             </Fragment>
           ) : null}
@@ -67,6 +70,7 @@ const SizeArmorSkills = () => {
                 icon={blackBowIcon} //
                 altText={ALTTEXT.RANGE_SKILL}
                 stat={SKILL_RANGE}
+                unit={SC.unit}
               />
             </Fragment>
           ) : null}

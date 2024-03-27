@@ -54,16 +54,16 @@ export const rangedWeaponStats = (unit) => {
  * @param {String} stateName
  * @returns
  */
-export const setState = (unit, stateName) => {
-  let state = unit[stateName];
+export const setUnitStat = (unit, unitStatName) => {
+  let stat = unit[unitStatName];
 
-  const result = searchForRelevantModifier(unit, mapUnitStatToItemProperty(stateName));
+  const result = searchForRelevantModifier(unit, mapUnitStatToItemProperty(unitStatName));
 
   if (result.modifierFound) {
-    state += result.modifier;
+    stat += result.modifier;
   }
 
-  return state;
+  return stat;
 };
 
 /**

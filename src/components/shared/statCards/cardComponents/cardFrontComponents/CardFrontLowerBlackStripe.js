@@ -2,26 +2,33 @@
 import React, { useContext } from "react";
 // material ui
 import { Grid, Typography } from "@mui/material";
+import { useTheme } from "@emotion/react";
 // components & functions
 import { StateCardContext } from "../../../../../contexts/statCardContext";
 import { CARD_PREVIEW } from "../../../../../constants/textsAndMessages";
-import { setStat } from "../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/StatChangesLogic";
+import { setUnitStat } from "../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/StatChangesLogic";
 // constants
 import { FEAR, MORAL1, MORAL2 } from "../../../../../constants/stats";
 
-const CSS = { padding: "10px", color: "white", backgroundColor: "black" };
-
 const CardFrontLowerBlackStripe = () => {
   const SC = useContext(StateCardContext);
+  const theme = useTheme();
+
+  const fear = `${CARD_PREVIEW.FEAR}: ${setUnitStat(SC.unit, FEAR)}`;
+  const moral = `${CARD_PREVIEW.MORAL}: ${
+    SC.unit.moral1 //
+      ? setUnitStat(SC.unit, MORAL1)
+      : "-"
+  } / ${SC.unit.moral2 ? setUnitStat(SC.unit, MORAL2) : "-"}`;
 
   return SC.isSingleElement ? (
     <Grid item>
       <Typography
         variant="h6" //
         align="center"
-        sx={CSS}
+        sx={theme.palette.statCards.blackStripe}
       >
-        {`${CARD_PREVIEW.FEAR}: ${setStat(SC.unit, FEAR)}`}
+        {fear}
       </Typography>
     </Grid>
   ) : (
@@ -29,12 +36,10 @@ const CardFrontLowerBlackStripe = () => {
       container //
       direction="row"
       justifyContent="space-around"
-      sx={CSS}
+      sx={theme.palette.statCards.blackStripe}
     >
-      <Typography variant="h6"> {`${CARD_PREVIEW.FEAR}: ${setStat(SC.unit, FEAR)}`}</Typography>
-      <Typography variant="h6">
-        {`${CARD_PREVIEW.MORAL}: ${SC.unit.moral1 ? setStat(SC.unit, MORAL1) : "-"} / ${SC.unit.moral2 ? setStat(SC.unit, MORAL2) : "-"}`}
-      </Typography>
+      <Typography variant="h6"> {fear}</Typography>
+      <Typography variant="h6">{moral}</Typography>
     </Grid>
   );
 };
