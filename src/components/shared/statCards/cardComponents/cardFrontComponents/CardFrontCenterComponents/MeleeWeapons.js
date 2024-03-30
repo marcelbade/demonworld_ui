@@ -30,12 +30,13 @@ const MeleeWeapons = () => {
       container
       direction="column"
     >
-      {weapons.map((w) => {
+      {weapons.map((w, i) => {
         return (
           <Grid
             item //
             container
             justifyContent="center"
+            key={i}
           >
             <Typography variant="h6">{w.weaponString}</Typography>
           </Grid>
