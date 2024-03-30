@@ -47,7 +47,7 @@ export const COMPENDIUM = {
   CONTROLZONE: "Kontrolbereich",
   OVERRUN: "Überrennen",
   HITPOINTS: "Trefferpunkte",
-  FEAR: "Trefferpunkte",
+  FEAR: "Furcht",
   MORAL1: "1. Moralwert",
   MORAL2: "2. Moralwert",
   SPECIALRULES: "Sonderregeln",
