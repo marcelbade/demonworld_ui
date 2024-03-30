@@ -2,7 +2,6 @@
 import React from "react";
 // Material UI
 import { Grid } from "@mui/material";
-import { useTheme } from "@material-ui/core";
 // components & functions
 import CardBack from "./cardComponents/CardBack";
 import CardFront from "./cardComponents/CardFront";
@@ -15,8 +14,6 @@ import { isSingleElementCard } from "../../../util/utilityFunctions";
  * @returns jsx
  */
 const StatCard = (props) => {
-  const theme = useTheme();
-
   const CSS = {
     width: "30em",
     marginTop: "2em",
