@@ -4,20 +4,22 @@ import React, { useContext } from "react";
 import { useTheme } from "@emotion/react";
 // components & functions
 import { TableContext } from "../../../../contexts/tableContext";
+import { TableCell, TableHead, TableRow } from "@mui/material";
 
 const FactionTableHeader = () => {
   const theme = useTheme();
   const TC = useContext(TableContext);
 
   return (
-    <thead>
-      <tr>
-        <th></th>
+    <TableHead>
+      <TableRow>
         {TC.columns.map((col, i) => {
           let element = col.displayed ? (
-            <th
+            <TableCell
               sx={{
                 backgroundColor: theme.palette.compendiumHeaderBackground,
+                fontFamily: "jaapokkiRegular",
+                textAlign: "center",
                 color: "white",
                 borderColor: "black",
                 padding: "5px",
@@ -25,12 +27,12 @@ const FactionTableHeader = () => {
               key={i}
             >
               {col.label}
-            </th>
+            </TableCell>
           ) : null;
           return element;
         })}
-      </tr>
-    </thead>
+      </TableRow>
+    </TableHead>
   );
 };
 
