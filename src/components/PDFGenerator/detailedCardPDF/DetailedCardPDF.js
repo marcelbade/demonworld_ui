@@ -4,9 +4,10 @@ import React from "react";
 import { Page, View, Document, Font, Text } from "@react-pdf/renderer";
 // fonts
 import notMaryKate from "../../../assets/fonts/notMaryKate.ttf";
- import jaapokkiRegular from "../../../assets/fonts/jaapokkiRegular.ttf";
+import jaapokkiRegular from "../../../assets/fonts/jaapokkiRegular.ttf";
 // styles
-import styles from "../pdfStyles/detailedCardPdfStyles";
+import { detailedStyles } from "../pdfStyles/detailedCardPdfStyles";
+import { commonStyles } from "../pdfStyles/commonStyles"; 
 // pdf components
 import CardCenter from "./detailedCardsComponets/center/CardCenter";
 import FirstBlackRow from "./detailedCardsComponets/firstBlackRow/FirstBlackRow";
@@ -17,13 +18,13 @@ import SubfactionSubtitle from "./detailedCardsComponets/SubfactionSubtitle";
 
 // Register font
 Font.register({ family: "notMaryKate", src: notMaryKate });
- Font.register({ family: "jaapokkiRegular", src: jaapokkiRegular });
+Font.register({ family: "jaapokkiRegular", src: jaapokkiRegular });
 
 const ListPDF = (props) => {
   return (
     <Document>
-      <Page style={styles.pageTopMargin}>
-        <View style={styles.armyName}>
+      <Page style={detailedStyles.pageTopMargin}>
+        <View style={commonStyles.armyName}>
           <Text> {props.armyName} </Text>
         </View>
         <View>
@@ -33,7 +34,7 @@ const ListPDF = (props) => {
               <View>
                 <SubfactionSubtitle subFaction={obj.subFaction} />
                 {obj.units.map((u, i) => (
-                  <View style={styles.cardBox} wrap={false}>
+                  <View style={detailedStyles.cardBox} wrap={false}>
                     <CardHeader unit={u} index={i} />
                     <FirstBlackRow unit={u} index={i} />
                     <CardCenter unit={u} index={i} />
@@ -44,7 +45,7 @@ const ListPDF = (props) => {
               </View>
             ))}
         </View>
-        <Text style={styles.pageNumber} render={({ pageNumber, totalPages }) => `${pageNumber}/${totalPages} `} fixed />
+        <Text style={detailedStyles.pageNumber} render={({ pageNumber, totalPages }) => `${pageNumber}/${totalPages} `} fixed />
       </Page>
     </Document>
   );

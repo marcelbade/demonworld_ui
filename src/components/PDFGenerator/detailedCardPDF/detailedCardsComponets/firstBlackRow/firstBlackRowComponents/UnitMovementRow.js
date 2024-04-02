@@ -10,7 +10,7 @@ import squareFormationWhite from "../../../../../../assets/icons/squareFormation
 import skirmishFormation from "../../../../../../assets/icons/skirmishFormation.png";
 import wedgeFormation from "../../../../../../assets/icons/wedgeFormation.png";
 // styles
-import styles from "../../../../pdfStyles/detailedCardPdfStyles";
+import { detailedStyles } from "../../../../pdfStyles/detailedCardPdfStyles";
 
 const UnitMovementRow = (props) => {
   /**
@@ -20,23 +20,23 @@ const UnitMovementRow = (props) => {
 
   //unitOrCmdCard
   return isSingleElementCard(props.unit) ? (
-    <View key={props.index} style={styles.cardUpperBlackRow}>
+    <View key={props.index} style={detailedStyles.cardUpperBlackRow}>
       <Text key={props.index}>
         {props.unit.move} {CARD_PREVIEW.MOVEMENT_POINTS}
       </Text>
     </View>
   ) : (
-    <View key={props.index} style={styles.cardUpperBlackRow}>
+    <View key={props.index} style={detailedStyles.cardUpperBlackRow}>
       <Text key={props.index}>
         {`${CARD_PREVIEW.MOVE}: ${props.unit.move} / ${CARD_PREVIEW.SKIRMISH}: ${props.unit.charge} / ${CARD_PREVIEW.CHARGE}: ${props.unit.skirmish}`}
       </Text>
       <Text key={props.index}>
         {props.unit.hold_maneuvers} {CARD_PREVIEW.MANEUVER}
       </Text>
-      <View key={props.index} style={styles.formations}>
-        {props.unit.skirmishFormation ? <Image src={skirmishFormation} style={styles.icon} /> : null}
-        {props.unit.squareFormation ? <Image src={squareFormationWhite} style={styles.squareFormationIcon} /> : null}
-        {props.unit.wedgeFormation ? <Image src={wedgeFormation} style={styles.icon} /> : null}
+      <View key={props.index} style={detailedStyles.formations}>
+        {props.unit.skirmishFormation ? <Image src={skirmishFormation} style={detailedStyles.icon} /> : null}
+        {props.unit.squareFormation ? <Image src={squareFormationWhite} style={detailedStyles.squareFormationIcon} /> : null}
+        {props.unit.wedgeFormation ? <Image src={wedgeFormation} style={detailedStyles.icon} /> : null}
         {<Text key={props.index}> {props.unit.horde ? <Text>{CARD_PREVIEW.HORDE}</Text> : null}</Text>}
       </View>
     </View>

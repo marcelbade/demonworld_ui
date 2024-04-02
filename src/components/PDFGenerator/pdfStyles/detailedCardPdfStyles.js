@@ -1,15 +1,6 @@
-const styles = {
+export const detailedStyles = {
   pageTopMargin: {
     marginTop: 10,
-  },
-
-  armyName: {
-    display: "flex",
-    justifyContent:"center",
-    alignItems:"center",
-    font: "15",
-    fontFamily: "notMaryKate",
-    margin: 5,
   },
 
   subFactionName: {
@@ -260,5 +251,3 @@ const styles = {
     bottom: 15,
   },
 };
-
-export default styles;

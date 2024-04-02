@@ -3,11 +3,11 @@ import React from "react";
 // react-pdf
 import { Text, View } from "@react-pdf/renderer";
 // styles
-import styles from "../../../../pdfStyles/detailedCardPdfStyles";
+import { detailedStyles } from "../../../../pdfStyles/detailedCardPdfStyles";
 
 const BackSideRulesRow = (props) => {
   return (
-    <View key={props.index} style={styles.cardRules}>
+    <View key={props.index} style={detailedStyles.cardRules}>
       <Text key={props.index}>{props.unit.specialRules}</Text>
     </View>
   );

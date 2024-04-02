@@ -25,13 +25,7 @@ const PdfBox = () => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return data.list.length > 0 ? (
-    <PDFViewer
-      sx={{
-        position: "fixed",
-        width: "100%",
-        height: " 100%",
-      }}
-    >
+    <PDFViewer style={{ width: "100%", height: "100vh" }}>
       {data.options.printDefaultList ? (
         <ListPDF armyName={data.armyName} pdfData={data.list} />
       ) : (

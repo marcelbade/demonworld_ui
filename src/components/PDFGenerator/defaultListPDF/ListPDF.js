@@ -4,74 +4,75 @@ import React from "react";
 import { Page, Text, View, Document, Font } from "@react-pdf/renderer";
 // fonts
 import notMaryKate from "../../../assets/fonts/notMaryKate.ttf";
-  // styles
-import styles from "../pdfStyles/listPdfStyles";
+// styles
+import { listStyles } from "../pdfStyles/listPdfStyles";
+import { commonStyles } from "../pdfStyles/commonStyles";
 
 // Register font
 Font.register({ family: "notMaryKate", src: notMaryKate });
- 
 
 //TODO: refactor this into smaller parts like you did for the detailed list!
 // Create the dynamic PDF content. Due to the limitations of react-pdf, this has to be done via a jerryrigged CSS table.
 const ListPDF = (props) => {
   return (
     <Document>
-      <Page style={styles.body}>
-        <View style={styles.table}>
-          {/* row */}
+      <Page style={listStyles.body}>
+        <View style={listStyles.table}>
+          <View style={commonStyles.armyName}>
+            <Text> {props.armyName} </Text>
+          </View>
 
           {props.pdfData
             .filter((subFaction) => subFaction.units.length > 0)
             .map((obj, i) => (
-              <View style={styles.table}>
+              <View style={listStyles.table}>
                 {/* SUBFACTION NAME */}
-                <View key={i} style={styles.tableRowSubFactionName}>
-                  <View key={i} style={styles.tableColSubFactionName}>
-                    <Text style={styles.tableCellSubFactioName}>{obj.subFaction}</Text>
+                <View key={i} style={listStyles.tableRowSubFactionName}>
+                  <View key={i} style={listStyles.tableColSubFactionName}>
+                    <Text style={listStyles.tableCellSubFactioName}>{obj.subFaction}</Text>
                   </View>
                 </View>
                 {obj.units.map((u, i) => (
                   //  UNIT
-                  <View key={i} style={styles.table}>
-                    <View key={i} style={styles.tableRow}>
-                      <View key={i} style={styles.tableColUnit}>
-                        <Text key={i} style={styles.tableCellUnit}>
+                  <View key={i} style={listStyles.table}>
+                    <View key={i} style={listStyles.tableRow}>
+                      <View key={i} style={listStyles.tableColUnit}>
+                        <Text key={i} style={listStyles.tableCellUnit}>
                           {u.unitName}
                         </Text>
                       </View>
-                      { u.secondSubFaction !== u.subFaction?
-                        <View key={i} style={styles.tableColUnit}>
-                          <Text key={i} style={styles.tableCellUnit}>
+                      {u.secondSubFaction !== u.subFaction ? (
+                        <View key={i} style={listStyles.tableColUnit}>
+                          <Text key={i} style={listStyles.tableCellUnit}>
                             {u.secondSubFaction}
                           </Text>
                         </View>
-                        : null
-                      }
-                      <View key={i} style={styles.tableColUnit}>
-                        <Text key={i} style={styles.tableCellUnit}>
+                      ) : null}
+                      <View key={i} style={listStyles.tableColUnit}>
+                        <Text key={i} style={listStyles.tableCellUnit}>
                           {u.points}
                         </Text>
                       </View>
-                      <View key={i} style={styles.tableColUnitFiller}></View>
+                      <View key={i} style={listStyles.tableColUnitFiller}></View>
                     </View>
                     {/* EQUIPMENT */}
-                    <View key={i} style={styles.tableRow}>
-                      {u.equipment.length > 0 ? <Text key={i} style={styles.equipmentLineStyle}></Text> : null}
+                    <View key={i} style={listStyles.tableRow}>
+                      {u.equipment.length > 0 ? <Text key={i} style={listStyles.equipmentLineStyle}></Text> : null}
                     </View>
                     {u.equipment.length > 0
                       ? u.equipment.map((e) => (
-                          <View key={i} style={styles.tableRow}>
-                            <View key={i} style={styles.tableColEquipment}>
-                              <Text key={i} style={styles.tableCellEquipment}>
+                          <View key={i} style={listStyles.tableRow}>
+                            <View key={i} style={listStyles.tableColEquipment}>
+                              <Text key={i} style={listStyles.tableCellEquipment}>
                                 {e.name}
                               </Text>
                             </View>
-                            <View key={i} style={styles.tableColUnit}>
-                              <Text key={i} style={styles.tableCellEquipment}>
+                            <View key={i} style={listStyles.tableColUnit}>
+                              <Text key={i} style={listStyles.tableCellEquipment}>
                                 {e.points}
                               </Text>
                             </View>
-                            <View style={styles.tableColEquipmentFiller}></View>
+                            <View style={listStyles.tableColEquipmentFiller}></View>
                           </View>
                         ))
                       : null}

@@ -3,7 +3,7 @@ import React from "react";
 // react-pdf
 import { View, Text } from "@react-pdf/renderer";
 // styles
-import styles from "../../../pdfStyles/detailedCardPdfStyles";
+import { detailedStyles } from "../../../pdfStyles/detailedCardPdfStyles";
 // pdf components
 import RangeWeaponRow from "./cardCenterComponents/RangedWeaponRow";
 import MeleeWeaponRow from "./cardCenterComponents/MeleeWeaponRow";
@@ -14,8 +14,8 @@ import { NO_RANGE_WEAPON } from "../../../../../constants/textsAndMessages";
 
 const CardCenter = (props) => {
   return (
-    <View style={styles.cardCenterBox}>
-      <View style={styles.centerLeftSide}>
+    <View style={detailedStyles.cardCenterBox}>
+      <View style={detailedStyles.centerLeftSide}>
         {props.unit.rangedWeapon === NO_RANGE_WEAPON ? null : (
           <RangeWeaponRow
             weaponName={props.unit.rangedWeapon} //
@@ -48,8 +48,8 @@ const CardCenter = (props) => {
           index={props.index}
         />
       </View>
-      <Text style={styles.separator}></Text>
-      <View style={styles.cardCenterRightSide}>
+      <Text style={detailedStyles.separator}></Text>
+      <View style={detailedStyles.cardCenterRightSide}>
         <BackSideRulesRow
           unit={props.unit} //
           index={props.index}

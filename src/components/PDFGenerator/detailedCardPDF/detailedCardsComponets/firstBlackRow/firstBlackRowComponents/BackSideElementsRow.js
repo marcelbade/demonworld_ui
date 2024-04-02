@@ -3,7 +3,7 @@ import React from "react";
 // react-pdf
 import { Text, View } from "@react-pdf/renderer";
 // styles
-import styles from "../../../../pdfStyles/detailedCardPdfStyles";
+import { detailedStyles } from "../../../../pdfStyles/detailedCardPdfStyles";
 
 const BackSideElementsRow = (props) => {
   //
@@ -27,13 +27,13 @@ const BackSideElementsRow = (props) => {
   };
 
   return (
-    <View key={props.index} style={styles.cardBlackRow}>
+    <View key={props.index} style={detailedStyles.cardBlackRow}>
       {!props.unit.leader && !props.unit.standardBearer && !props.unit.musician ? (
-        <View style={styles.firstBlackRowBackOneElement}>
+        <View style={detailedStyles.firstBlackRowBackOneElement}>
           <Text> {numberOfElements(props.unit)} </Text>
         </View>
       ) : (
-        <View style={styles.firstBlackRowBackTwoElements}>
+        <View style={detailedStyles.firstBlackRowBackTwoElements}>
           <Text>
             {props.unit.leader ? "Anführer " : null}
             {props.unit.standardBearer ? "/ Standarte" : null}

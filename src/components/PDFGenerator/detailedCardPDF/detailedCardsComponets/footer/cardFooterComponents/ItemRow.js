@@ -3,7 +3,7 @@ import React from "react";
 // react-pdf
 import { View, Text } from "@react-pdf/renderer";
 // styles
-import styles from "../../../../pdfStyles/detailedCardPdfStyles";
+import { detailedStyles } from "../../../../pdfStyles/detailedCardPdfStyles";
 
 const ItemRow = (props) => {
   const generateItemNameList = () => {
@@ -19,7 +19,7 @@ const ItemRow = (props) => {
   };
 
   return (
-    <View key={props.index} style={styles.footerRow}>
+    <View key={props.index} style={detailedStyles.footerRow}>
       {props.items.length === 0 ? ( //
         <Text>Keine Gegenstände</Text>
       ) : (

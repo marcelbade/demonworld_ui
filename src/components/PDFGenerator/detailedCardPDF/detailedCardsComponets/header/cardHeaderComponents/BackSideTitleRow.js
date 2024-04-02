@@ -3,14 +3,15 @@ import React from "react";
 // react-pdf
 import { Text, View } from "@react-pdf/renderer";
 // styles
-import styles from "../../../../pdfStyles/detailedCardPdfStyles";
+import { detailedStyles } from "../../../../pdfStyles/detailedCardPdfStyles";
+
 
 const BackSideTitleRow = (props) => {
   return (
-    <View key={props.index} style={styles.headerRow}>
-      <View key={props.index} style={styles.paddingTopHeader}></View>
-      <View key={props.index} style={styles.commandAndMagicRow}>
-        <View key={props.index} style={styles.headerPaddingRow}>
+    <View key={props.index} style={detailedStyles.headerRow}>
+      <View key={props.index} style={detailedStyles.paddingTopHeader}></View>
+      <View key={props.index} style={detailedStyles.commandAndMagicRow}>
+        <View key={props.index} style={detailedStyles.headerPaddingRow}>
           <Text key={props.index}>
             {props.unit.subFaction !== props.unit.secondSubFaction //
               ? props.unit.secondSubFaction

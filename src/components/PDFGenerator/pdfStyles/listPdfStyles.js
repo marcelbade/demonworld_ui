@@ -1,4 +1,4 @@
-const styles = {
+export const listStyles = {
   table: {
     display: "table",
     width: "auto",
@@ -67,4 +67,4 @@ const styles = {
   },
 };
 
-export default styles;
+ 
