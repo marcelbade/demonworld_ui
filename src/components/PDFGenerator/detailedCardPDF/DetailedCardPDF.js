@@ -7,7 +7,7 @@ import notMaryKate from "../../../assets/fonts/notMaryKate.ttf";
 import jaapokkiRegular from "../../../assets/fonts/jaapokkiRegular.ttf";
 // styles
 import { detailedStyles } from "../pdfStyles/detailedCardPdfStyles";
-import { commonStyles } from "../pdfStyles/commonStyles"; 
+import { commonStyles } from "../pdfStyles/commonStyles";
 // pdf components
 import CardCenter from "./detailedCardsComponets/center/CardCenter";
 import FirstBlackRow from "./detailedCardsComponets/firstBlackRow/FirstBlackRow";
