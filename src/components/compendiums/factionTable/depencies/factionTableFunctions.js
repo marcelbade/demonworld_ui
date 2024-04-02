@@ -89,49 +89,27 @@ export const renderBooleanAsIcon = (numberOfElements, flag) => {
     return "-";
   }
 };
-/**
- * Function renders the hitpoint markers for the stat cards.
- *
- * @param {integer} hitpoints
- * @returns a String containing the correct number of icons.
- */
-export const generateHitPoints = (hitpoints) => {
-  let hitpointMarker = "";
-
-  for (let i = 0; i < hitpoints; i++) {
-    hitpointMarker = hitpointMarker + "[ ]";
-  }
-  return hitpointMarker;
-};
 
 /**
- * Function renders the rank of a magic user for stat cards.
- *
- * @param {integer} arcana
- * @returns a String containing the correct number of icons.
+ * Functions renders the dynamic icons, i.e., Those who depend on the
+ * units stats: hitpoint markers, command stars, magic markers.
+ * The icons are simply special characters.
+ * @param {{iconString, numberOfIcons, showZeroMarker}} data
+ * @returns a string with a number of symbols equal to the unit's stat.
  */
-export const renderMagicPoints = (arcana) => {
-  let arcanaMarker = "";
+export const renderDynamicIcons = (data) => {
+  let icons = "";
+  let zeroMarker = "";
 
-  for (let i = 0; i < arcana; i++) {
-    arcanaMarker = arcanaMarker + "/";
-  }
-  return arcanaMarker.length === 0 ? "-" : arcanaMarker;
-};
-/**
- * Function renders command stars for stat cards.
- *
- * @param {integer} stars
- * @returns a String containing the correct number of icons.
- */
-export const renderCommandPoints = (stars) => {
-  let starIcons = "";
-
-  for (let i = 0; i < stars; i++) {
-    starIcons = starIcons + "*";
+  for (let i = 0; i < data.iconNumber; i++) {
+    icons = icons + data.iconString;
   }
 
-  return starIcons.length === 0 ? "-" : starIcons;
+  if (data.showIfNone) {
+    zeroMarker = "-";
+  }
+
+  return icons.length === 0 ? zeroMarker : icons;
 };
 
 /**

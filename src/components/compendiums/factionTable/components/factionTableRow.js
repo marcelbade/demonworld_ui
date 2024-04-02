@@ -4,30 +4,30 @@ import React, { useContext } from "react";
 import { TableContext } from "../../../../contexts/tableContext";
 import {
   renderBooleanAsIcon,
-  renderMagicPoints,
   renderSpecialRules,
-  renderCommandPoints,
+  renderDynamicIcons,
   renderUnitTypeName,
   renderEffectiveness_1,
   renderEffectiveness_2,
 } from "../depencies/factionTableFunctions";
 import CardButton from "./CardButton";
 import RowLock from "./RowLock";
+import { TableRow } from "@mui/material";
 
 const FactionTableRow = (props) => {
   const TC = useContext(TableContext);
 
   return (
-    <tr
+    <TableRow
       key={props.rowNumber}
       sx={{
         fontFamily: "jaapokkiRegular",
+        textAlign: "center",
         "&:hover": {
           backgroundColor: "#ac6725",
         },
       }}
     >
-      <td></td>
       <td>
         <RowLock unit={props.unit} />
       </td>
@@ -37,7 +37,15 @@ const FactionTableRow = (props) => {
         </td>
       ) : null}
 
-      {TC.columns[1].displayed ? <td>{props.unit.faction}</td> : null}
+      {TC.columns[1].displayed ? (
+        <td
+          sx={{
+            fontFamily: "inhherit",
+          }}
+        >
+          {props.unit.faction}
+        </td>
+      ) : null}
       {TC.columns[2].displayed ? <td>{props.unit.subFaction}</td> : null}
       {TC.columns[3].displayed ? <td>{props.unit.unitName}</td> : null}
       {TC.columns[4].displayed ? <td>{renderUnitTypeName(props.unit.unitType)}</td> : null}
@@ -62,8 +70,24 @@ const FactionTableRow = (props) => {
       {TC.columns[22].displayed ? <td>{props.unit.skillMelee}</td> : null}
       {TC.columns[23].displayed ? <td>{props.unit.skillRange}</td> : null}
       {TC.columns[24].displayed ? <td>{props.unit.initiative}</td> : null}
-      {TC.columns[25].displayed ? <td>{renderCommandPoints(props.unit.commandStars)}</td> : null}
-      {TC.columns[26].displayed ? <td>{renderMagicPoints(props.unit.magic)}</td> : null}
+      {TC.columns[25].displayed ? (
+        <td>
+          {renderDynamicIcons({
+            iconString: "*", //
+            iconNumber: props.unit.commandStars,
+            showIfNone: true,
+          })}
+        </td>
+      ) : null}
+      {TC.columns[26].displayed ? (
+        <td>
+          {renderDynamicIcons({
+            iconString: "/", //
+            iconNumber: props.unit.magic,
+            showIfNone: true,
+          })}
+        </td>
+      ) : null}
       {TC.columns[27].displayed ? <td>{props.unit.controlZone}</td> : null}
       {TC.columns[27].displayed ? <td>{props.unit.overRun}</td> : null}
       {TC.columns[28].displayed ? <td>{props.unit.hitpoints}</td> : null}
@@ -74,7 +98,7 @@ const FactionTableRow = (props) => {
       {TC.columns[33].displayed ? <td>{props.unit.points}</td> : null}
       {TC.columns[33].displayed ? <td>{renderEffectiveness_1(props.unit)}</td> : null}
       {TC.columns[33].displayed ? <td>{renderEffectiveness_2(props.unit)}</td> : null}
-    </tr>
+    </TableRow>
   );
 };
 

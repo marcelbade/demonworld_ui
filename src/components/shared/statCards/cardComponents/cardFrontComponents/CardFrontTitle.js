@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 // material ui
 import { useTheme } from "@emotion/react";
 // components & functions
-import { renderMagicPoints, renderCommandPoints } from "../../../../compendiums/factionTable/depencies/factionTableFunctions";
+import { renderDynamicIcons } from "../../../../compendiums/factionTable/depencies/factionTableFunctions";
 import { Grid, Typography } from "@mui/material";
 import { StateCardContext } from "../../../../../contexts/statCardContext";
 
@@ -20,13 +20,21 @@ const CardFrontTitle = () => {
       direction="row"
     >
       <Typography sx={theme.palette.statCards.cardTitle} variant="h4" align="center">
-        {renderCommandPoints(SC.unit.commandStars)}
+        {renderDynamicIcons({
+          iconString: "*",
+          iconNumber: SC.unit.commandStars,
+          showIfNone: false,
+        })}
       </Typography>
       <Typography sx={theme.palette.statCards.cardTitle} variant="h4" align="center">
         {SC.unit.unitName}
       </Typography>
       <Typography sx={theme.palette.cardTitle} variant="h6" align="center">
-        {renderMagicPoints(SC.unit.magic)}
+        {renderDynamicIcons({
+          iconString: "/",
+          iconNumber: SC.unit.magic,
+          showIfNone: false,
+        })}
       </Typography>
     </Grid>
   );

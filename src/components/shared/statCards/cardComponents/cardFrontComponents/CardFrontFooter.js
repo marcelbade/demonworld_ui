@@ -4,14 +4,18 @@ import React, { useContext } from "react";
 import { Grid, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components & functions
-import { generateHitPoints } from "../../../../../components/compendiums/factionTable/depencies/factionTableFunctions";
+import { renderDynamicIcons } from "../../../../compendiums/factionTable/depencies/factionTableFunctions";
 import { StateCardContext } from "../../../../../contexts/statCardContext";
 
 const CardFrontFooter = () => {
   const SC = useContext(StateCardContext);
   const theme = useTheme();
 
-  const hitpoints = generateHitPoints(SC.unit.hitpoints);
+  const hitpoints = renderDynamicIcons({
+    iconString: "[ ]",
+    iconNumber: SC.unit.hitpoints,
+    showIfNone: false,
+  });
 
   return (
     <Grid
