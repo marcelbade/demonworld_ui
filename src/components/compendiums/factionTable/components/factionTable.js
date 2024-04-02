@@ -215,7 +215,7 @@ const FactionTable = () => {
           <OptionsDialog />
           <Grid item xs={12}>
             {receivedData ? (
-              <table sx={{ textAlign: "center" }} rules="none">
+              <table rules="none">
                 <FactionTableHeader columns={columns} />
                 <tbody>
                   {tableData.map((unit, i) => {
@@ -224,8 +224,13 @@ const FactionTable = () => {
                         <FactionTableRow
                           unit={unit} //
                           rowNumber={i}
+                          key={i}
                         />
-                        <DetailedCardView selectedCards={selectedStatCards} unit={unit} />
+                        <DetailedCardView
+                          selectedCards={selectedStatCards} //
+                          unit={unit}
+                          key={unit.unitName}
+                        />
                       </>
                     );
                   })}
