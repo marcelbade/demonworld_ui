@@ -113,8 +113,7 @@ export const renderDynamicIcons = (data) => {
 };
 
 /**
- * Function creates an HTML element for stat cards and calculates the
- * correctnumber of elements. The finished HTML shows the
+ * Function calculates the correct number of elements. The finished HTML shows the
  * number of elements, as well as unit leader, standard bearer,
  * and musician, if they exist.
  *
