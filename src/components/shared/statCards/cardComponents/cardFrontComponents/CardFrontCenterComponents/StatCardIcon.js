@@ -7,25 +7,19 @@ import { setUnitStat } from "../../../../../ListGenerator/RightSideMenus/Menus/I
 import CustomIcon from "../../../CustomIcon";
 
 const StatCardIcon = (props) => {
-  const HEIGHT_WIDTH = "25";
+  const HEIGHT_WIDTH = "25px";
+  const HEIGHT_WIDTH_BOX = "35px";
 
   return (
     <Fragment>
-      <div
-        sx={{
-          display: "flex", //
-          alignItems: "center",
-          marginLeft: "1em",
-          marginBottom: "0.4em",
-        }}
-      >
-        <CustomIcon
-          icon={props.icon} //
-          altText={props.altText}
-          height={HEIGHT_WIDTH}
-          width={HEIGHT_WIDTH}
-        />
-      </div>
+      <CustomIcon
+        icon={props.icon} //
+        altText={props.altText}
+        height={HEIGHT_WIDTH}
+        width={HEIGHT_WIDTH}
+        boxHeight={HEIGHT_WIDTH_BOX}
+        boxWidth={HEIGHT_WIDTH_BOX}
+      />
       <Typography variant="h6">{setUnitStat(props.unit, props.stat)}</Typography>
     </Fragment>
   );

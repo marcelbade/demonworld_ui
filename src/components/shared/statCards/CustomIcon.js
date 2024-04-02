@@ -7,10 +7,8 @@ import { Icon } from "@mui/material";
 const CustomIcon = (props) => {
   const LC = useContext(LightSwitchContext);
 
-  const STYLES = {
-    width: props.width, //
-    height: props.height,
-  };
+  // const STYLES = { height: `${props.height + 5}px`, width: `${props.height + 5}px` };
+  const STYLES = { height: props.boxHeight, width: props.boxWidth };
 
   /**
    * Function checks whether the app is using the dark theme and flipps the icon color if necessary.
@@ -19,7 +17,7 @@ const CustomIcon = (props) => {
   const toggleIconColor = () => {
     return !LC.darkModeOff
       ? {
-          ...STYLES, //
+          ...STYLES,
           webkitFilter: `invert(100%)`,
           filter: `invert(100%)`,
         }
@@ -30,6 +28,7 @@ const CustomIcon = (props) => {
     <Icon sx={toggleIconColor()}>
       <img
         src={props.icon} //
+        width={props.width}
         height={props.height}
         alt={props.altText}
       />

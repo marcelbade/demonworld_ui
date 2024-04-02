@@ -7,11 +7,12 @@ import { useTheme } from "@emotion/react";
 // Functions And Components
 import CustomIcon from "../shared/statCards/CustomIcon";
 
- 
-
 const LandingPageNaviButton = (props) => {
   const history = useHistory();
-  const theme =useTheme()
+  const theme = useTheme();
+
+  const HEIGHT_WIDTH = "100px";
+  const HEIGHT_WIDTH_BOX = "135px";
 
   const toPage = (relativeURL) => {
     history.push({
@@ -51,8 +52,10 @@ const LandingPageNaviButton = (props) => {
           <CustomIcon
             icon={props.icon} //
             altText={props.altText}
-            height={100}
-            width={100}
+            height={HEIGHT_WIDTH}
+            width={HEIGHT_WIDTH}
+            boxHeight={HEIGHT_WIDTH_BOX}
+            boxWidth={HEIGHT_WIDTH_BOX}
           />
         </IconButton>
       </Tooltip>

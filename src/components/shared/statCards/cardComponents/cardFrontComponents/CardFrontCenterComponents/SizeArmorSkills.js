@@ -33,7 +33,15 @@ const SizeArmorSkills = () => {
           {CARD_PREVIEW.SIZE} {SC.unit.unitSize}
         </Typography>
       </Grid>
-      <Grid item container alignItems="center" justifyContent="center">
+      <Grid
+        item
+        container
+        direction="row"
+        alignItems="center"
+        justifyContent="center"
+ 
+
+      >
         <StatCardIcon
           icon={rangeArmorIcon} //
           altText={ALTTEXT.RANGE_ARMOR}
