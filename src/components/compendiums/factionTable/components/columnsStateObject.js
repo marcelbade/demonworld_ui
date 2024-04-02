@@ -25,7 +25,9 @@ export const columnsStateObjects = [
     type: "button",
     toggleGroup: "button",
   },
-  {
+
+
+  { 
     column: "button", //
     label: COMPENDIUM.CARD_BUTTON,
     displayed: true,
@@ -48,7 +50,7 @@ export const columnsStateObjects = [
     toggleGroup: "naming",
   },
   {
-    column: "name", //
+    column: "unitName", //
     label: COMPENDIUM.NAME,
     displayed: true,
     type: "text",
