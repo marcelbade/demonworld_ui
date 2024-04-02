@@ -28,7 +28,7 @@ export const columnsStateObjects = [
 
 
   { 
-    column: "button", //
+    column: "cardViewButton", //
     label: COMPENDIUM.CARD_BUTTON,
     displayed: true,
     type: "button",
