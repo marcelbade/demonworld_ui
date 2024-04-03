@@ -3,14 +3,14 @@ export const listStyles = {
     display: "table",
     width: "auto",
   },
-  tableRow: {
-    margin: "auto",
-    flexDirection: "row",
-  },
   tableRowSubFactionName: {
     margin: "auto",
     flexDirection: "row",
     marginTop: 10,
+  },
+  tableRow: {
+    margin: "auto",
+    flexDirection: "row",
   },
   tableCol: {
     width: "25%",
@@ -21,10 +21,10 @@ export const listStyles = {
     fontFamily: "jaapokkiRegular",
   },
   tableColUnit: {
-    width: "15%",
+    width: "75%",
     fontFamily: "jaapokkiRegular",
+    paddingBottom: 5,
   },
-
   tableColEquipment: {
     width: "25%",
     fontFamily: "jaapokkiRegular",
@@ -33,6 +33,7 @@ export const listStyles = {
     borderBottomWidth: 0,
     borderTopWidth: 0,
     borderRightWidth: 0,
+    marginLeft: 15,
   },
 
   tableColUnitFiller: {
@@ -66,5 +67,3 @@ export const listStyles = {
     fontSize: 10,
   },
 };
-
- 
