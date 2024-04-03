@@ -116,6 +116,8 @@ const LossCalculator = () => {
             altText={"Regelbuchtext"}
             height={35}
             width={35}
+            boxHeight={45}
+            boxWidth={45}
           />
         ),
       }}
