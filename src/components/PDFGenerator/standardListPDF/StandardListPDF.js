@@ -13,7 +13,7 @@ Font.register({ family: "notMaryKate", src: notMaryKate });
 
 //TODO: refactor this into smaller parts like you did for the detailed list!
 // Create the dynamic PDF content. Due to the limitations of react-pdf, this has to be done via a jerryrigged CSS table.
-const ListPDF = (props) => {
+const StandardListPDF = (props) => {
   return (
     <Document>
       <Page style={listStyles.body}>
@@ -85,4 +85,4 @@ const ListPDF = (props) => {
     </Document>
   );
 };
-export default ListPDF;
+export default StandardListPDF;

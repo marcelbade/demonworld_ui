@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 // react-pdf
 import { PDFViewer } from "@react-pdf/renderer";
 // components and functions
-import ListPDF from "./defaultListPDF/ListPDF";
+import StandardListPDF from "./standardListPDF/StandardListPDF";
 import DetailedCardPDF from "./detailedCardPDF/DetailedCardPDF";
 
 // Create the PDF Document. The browser's pdf view will open in a new tab.
@@ -27,7 +27,7 @@ const PdfBox = () => {
   return data.list.length > 0 ? (
     <PDFViewer style={{ width: "100%", height: "100vh" }}>
       {data.options.printDefaultList ? (
-        <ListPDF armyName={data.armyName} pdfData={data.list} />
+        <StandardListPDF armyName={data.armyName} pdfData={data.list} />
       ) : (
         <DetailedCardPDF armyName={data.armyName} pdfData={data.list} />
       )}
