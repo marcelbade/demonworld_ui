@@ -12,7 +12,6 @@ const FirstBlackRow = (props) => {
   return (
     <View style={detailedStyles.blackRowBox}>
       <UnitMovementRow unit={props.unit} index={props.index} />
-      <Text style={detailedStyles.separator}></Text>
       <BackSideElementsRow unit={props.unit} index={props.index} />
     </View>
   );

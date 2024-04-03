@@ -148,6 +148,7 @@ export const detailedStyles = {
   centerLeftSide: {
     width: "45%",
     display: "flex",
+
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
@@ -174,6 +175,7 @@ export const detailedStyles = {
     width: "100%",
     justifyContent: "space-around",
     alignItems: "center",
+    paddingTop: 2,
   },
 
   armorIconValueGroup: {
@@ -211,8 +213,10 @@ export const detailedStyles = {
     alignItems: "center",
   },
   cardRules: {
-    width: "98%",
+    width: "100%",
     textAlign: "center",
+    fontSize: 9,
+    padding: 3,
   },
 
   cardFooterBox: {
@@ -234,20 +238,28 @@ export const detailedStyles = {
     backgroundColor: "lightgrey",
   },
 
-  test2: {
-    backgroundColor: "cyan",
-    zIndex: 999,
-    height: "5%",
-    width: "100%",
-    position: "absolute",
-    top: 1,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
   pageNumber: {
     position: "absolute",
     right: 10,
     bottom: 15,
+  },
+
+  cell: {
+    backgroundColor: "lightgrey",
+    width: "45%",
+    fontFamily: "jaapokkiRegular",
+    textAlign: "center",
+    borderRight: "1px solid black",
+    borderLeft: "1px solid black",
+  },
+  whiteCell: {
+    backgroundColor: "white",
+    width: "10%",
+  },
+  emptyGreyCell: {
+    backgroundColor: "lightgrey",
+    width: "45%",
+    borderRight: "1px solid black",
+    borderLeft: "1px solid black",
   },
 };

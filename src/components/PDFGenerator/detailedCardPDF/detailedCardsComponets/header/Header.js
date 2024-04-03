@@ -11,9 +11,9 @@ import BackSideTitleRow from "./cardHeaderComponents/BackSideTitleRow";
 const CardHeader = (props) => {
   return (
     <View style={detailedStyles.cardHeaderBox}>
-      <NameRow unit={props.unit} index ={props.index}  />
-      <Text style={detailedStyles.separator}></Text>
-      <BackSideTitleRow unit={props.unit} index ={props.index} />
+      <NameRow unit={props.unit} index={props.index} />
+     
+      <BackSideTitleRow unit={props.unit} index={props.index} />
     </View>
   );
 };

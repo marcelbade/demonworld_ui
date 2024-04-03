@@ -15,7 +15,6 @@ const SecondBlackRow = (props) => {
         unit={props.unit} //
         index={props.index}
       />
-      <Text style={detailedStyles.separator}></Text>
       <BackSidePointCostRow
         unit={props.unit} //
         index={props.index}

@@ -35,7 +35,7 @@ const StandardListPDF = (props) => {
                 {obj.units.map((u, i) => (
                   //  UNIT
                   <View key={i} style={listStyles.table}>
-                    <View key={i} style={listStyles.tableRow}>
+                    <View key={i} style={commonStyles.tableRow}>
                       <View key={i} style={listStyles.tableColUnit}>
                         <Text key={i} style={listStyles.tableCellUnit}>
                           {u.unitName}
@@ -56,12 +56,12 @@ const StandardListPDF = (props) => {
                       <View key={i} style={listStyles.tableColUnitFiller}></View>
                     </View>
                     {/* EQUIPMENT */}
-                    <View key={i} style={listStyles.tableRow}>
+                    <View key={i} style={commonStyles.tableRow}>
                       {u.equipment.length > 0 ? <Text key={i} style={listStyles.equipmentLineStyle}></Text> : null}
                     </View>
                     {u.equipment.length > 0
                       ? u.equipment.map((e) => (
-                          <View key={i} style={listStyles.tableRow}>
+                          <View key={i} style={commonStyles.tableRow}>
                             <View key={i} style={listStyles.tableColEquipment}>
                               <Text key={i} style={listStyles.tableCellEquipment}>
                                 {e.name}

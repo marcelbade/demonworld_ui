@@ -1,17 +1,10 @@
 export const listStyles = {
-  table: {
-    display: "table",
-    width: "auto",
-  },
   tableRowSubFactionName: {
     margin: "auto",
     flexDirection: "row",
     marginTop: 10,
   },
-  tableRow: {
-    margin: "auto",
-    flexDirection: "row",
-  },
+
   tableCol: {
     width: "25%",
     fontFamily: "jaapokkiRegular",

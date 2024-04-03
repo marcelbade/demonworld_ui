@@ -7,4 +7,13 @@ export const commonStyles = {
     fontFamily: "notMaryKate",
     margin: 5,
   },
+
+  table: {
+    display: "table",
+    width: "auto",
+  },
+  tableRow: {
+    margin: "auto",
+    flexDirection: "row",
+  },
 };

@@ -15,7 +15,6 @@ const CardFooter = (props) => {
         hitPoints={props.unit.hitpoints} //
         index={props.index}
       />
-      <Text style={detailedStyles.separator}></Text>
       <ItemRow
         items={props.unit.equipment} //
         index={props.index}
