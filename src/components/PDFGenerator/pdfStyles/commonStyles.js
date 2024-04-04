@@ -1,4 +1,9 @@
 export const commonStyles = {
+  viewport: {
+    width: "100%",
+    height: "100vh",
+  },
+
   armyName: {
     display: "flex",
     justifyContent: "center",

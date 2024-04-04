@@ -5,6 +5,8 @@ import { PDFViewer } from "@react-pdf/renderer";
 // components and functions
 import StandardListPDF from "./standardListPDF/StandardListPDF";
 import DetailedCardPDF from "./detailedCardPDF/DetailedCardPDF";
+// styles
+import { commonStyles } from "./pdfStyles/commonStyles";
 
 // Create the PDF Document. The browser's pdf view will open in a new tab.
 const PdfBox = () => {
@@ -28,7 +30,7 @@ const PdfBox = () => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return data.list.length > 0 ? (
-    <PDFViewer style={{ width: "100%", height: "100vh" }}>
+    <PDFViewer style={commonStyles.viewport}>
       {data.options.printDefaultList ? ( //
         <StandardListPDF data={data} />
       ) : (
