@@ -4,6 +4,7 @@ import React from "react";
 import { Text, View, Document } from "@react-pdf/renderer";
 // styles
 import { commonStyles } from "../../pdfStyles/commonStyles";
+import { STATS } from "../../../../constants/textsAndMessages";
 
 const TitleAndStats = (props) => {
   return (
@@ -12,8 +13,8 @@ const TitleAndStats = (props) => {
         <Text> {props.armyName} </Text>
       </View>
       <View style={commonStyles.armyStatsBox}>
-        <Text style={commonStyles.armyStats}> {`Punkte: ${9999}`} </Text>
-        <Text style={commonStyles.armyStats}>{`Spähfaktor: ${50}`} </Text>
+        <Text style={commonStyles.armyStats}> {`${STATS.POINTS}: ${9999}`} </Text>
+        <Text style={commonStyles.armyStats}>{`${STATS.SCOUT_FACTOR}: ${50}`} </Text>
       </View>
     </Document>
   );

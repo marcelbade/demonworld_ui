@@ -5,9 +5,10 @@ export const ALTTEXT = {
   MELEE_SKILL: "Nahkampffertigkeit",
 };
 
-export const SUBFACTION_STATS = {
+export const STATS = {
   POINTS: "Punkte",
   PERCENT: "Prozent",
+  SCOUT_FACTOR: "Spähfaktor",
 };
 
 export const LANDINGPAGE = {
