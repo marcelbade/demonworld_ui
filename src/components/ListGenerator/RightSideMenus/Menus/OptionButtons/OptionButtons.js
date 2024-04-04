@@ -13,6 +13,8 @@ import { OPTIONS } from "../../../../../constants/textsAndMessages";
 import { filterForSubFaction } from "../../../ListGeneratorFunctions";
 import LightSwitch from "../../../../shared/LightSwitch";
 import ChoosePdfType from "./ChoosePdfType";
+import calculateScoutingFactor from "../../../../../gameLogic/scoutFactorCalculator/scoutingFactorCalculator";
+import useSubFactionStats from "../../../../../customHooks/UseSubFactionStats";
 
 const OptionButtons = () => {
   const AC = useContext(ArmyContext);
@@ -20,6 +22,7 @@ const OptionButtons = () => {
   const SEC = useContext(SelectionContext);
 
   const history = useHistory();
+  const stats = useSubFactionStats();
   const [showPdfVariantButtons, setShowPdfVariantButtons] = useState(false);
 
   /**
@@ -39,20 +42,27 @@ const OptionButtons = () => {
    * Function opens the pdf generator in a new tab and sends all data needed via the window object.
    */
   const openPDfInNewTab = (options) => {
-    //TODO: replace in production!!
+    //TODO: replace URL in production!!
 
     let list = [];
 
     AC.subFactionDTOs
       .map((sF) => sF.name)
       .forEach((name) => {
-        list.push({ subFaction: name, units: filterForSubFaction(SEC.selectedUnits, name) });
+        list.push({
+          subFaction: name, //
+          units: filterForSubFaction(SEC.selectedUnits, name),
+          subFactionTotal: stats.currentTotal(filterForSubFaction(SEC.selectedUnits, name)),
+          subFactionPercentage: stats.currentPercentage(filterForSubFaction(SEC.selectedUnits, name), SEC.maxPointsAllowance),
+        });
       });
 
     const URL = "http://localhost:3000/PdfBox";
     const transportObj = {
       armyName: AC.armyName,
-      pdfData: list,
+      list: list,
+      scoutingFactor: calculateScoutingFactor(SEC.selectedUnits),
+      totalArmyPoints: SEC.maxPointsAllowance,
       options: options,
     };
 
