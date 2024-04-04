@@ -16,21 +16,20 @@ const PdfBox = () => {
 
   useEffect(() => {
     const transportObj = JSON.parse(localStorage.getItem("transportObj"));
+
     setData({
       ...data, //
-      list: transportObj.pdfData,
-      armyName: transportObj.armyName,
       options: transportObj.options,
+      armyName: transportObj.armyName,
+      list: transportObj.list,
+      totalArmyPoints: transportObj.totalArmyPoints,
+      scoutingFactor: transportObj.scoutingFactor,
     });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return data.list.length > 0 ? (
     <PDFViewer style={{ width: "100%", height: "100vh" }}>
-      {data.options.printDefaultList ? (
-        <StandardListPDF armyName={data.armyName} pdfData={data.list} />
-      ) : (
-        <DetailedCardPDF armyName={data.armyName} pdfData={data.list} />
-      )}
+      {data.options.printDefaultList ? <StandardListPDF data={data} /> : <DetailedCardPDF armyName={data.armyName} list={data.list} />}
     </PDFViewer>
   ) : null;
 };
