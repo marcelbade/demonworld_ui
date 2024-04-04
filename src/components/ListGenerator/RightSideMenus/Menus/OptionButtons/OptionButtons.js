@@ -49,11 +49,13 @@ const OptionButtons = () => {
     AC.subFactionDTOs
       .map((sF) => sF.name)
       .forEach((name) => {
+        const subFactionUnits = filterForSubFaction(SEC.selectedUnits, name);
+
         list.push({
           subFaction: name, //
-          units: filterForSubFaction(SEC.selectedUnits, name),
-          subFactionTotal: stats.currentTotal(filterForSubFaction(SEC.selectedUnits, name)),
-          subFactionPercentage: stats.currentPercentage(filterForSubFaction(SEC.selectedUnits, name), SEC.maxPointsAllowance),
+          units: subFactionUnits,
+          subFactionTotal: stats.currentTotal(subFactionUnits),
+          subFactionPercentage: stats.currentPercentage(subFactionUnits, SEC.maxPointsAllowance),
         });
       });
 
