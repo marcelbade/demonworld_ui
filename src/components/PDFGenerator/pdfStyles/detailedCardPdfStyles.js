@@ -3,12 +3,6 @@ export const detailedStyles = {
     marginTop: 10,
   },
 
-  subFactionName: {
-    font: 5,
-    fontFamily: "notMaryKate",
-    margin: 10,
-  },
-
   cardBox: {
     flexDirection: "column",
     marginLeft: 20,

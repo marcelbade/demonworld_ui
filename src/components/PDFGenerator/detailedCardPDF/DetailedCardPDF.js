@@ -13,7 +13,7 @@ import FirstBlackRow from "./detailedCardsComponets/firstBlackRow/FirstBlackRow"
 import CardHeader from "./detailedCardsComponets/header/Header";
 import SecondBlackRow from "./detailedCardsComponets/secondBlackRow/SecondBlackRow";
 import CardFooter from "./detailedCardsComponets/footer/CardFooter";
-import SubfactionSubtitle from "./detailedCardsComponets/SubfactionSubtitle";
+import SubfactionSubtitle from "../sharedPDFComponents/SubfactionSubtitle";
 import TitleAndStats from "../sharedPDFComponents/TitleAndStats";
 
 // Register font

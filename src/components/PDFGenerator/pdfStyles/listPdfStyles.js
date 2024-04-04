@@ -35,14 +35,7 @@ export const listStyles = {
   tableColEquipmentFiller: {
     width: "40%",
   },
-  tableCellSubFactioStats: {
-    fontFamily: "jaapokkiRegular",
-    margin: "auto",
-    textAlign: "left",
-    marginTop: 5,
-    marginLeft: 20,
-    fontSize: 10,
-  },
+
   tableCellUnit: {
     fontFamily: "jaapokkiRegular",
     margin: "auto",

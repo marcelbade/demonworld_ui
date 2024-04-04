@@ -18,6 +18,15 @@ export const commonStyles = {
     font: "9",
   },
 
+  subFactioStats: {
+    fontFamily: "jaapokkiRegular",
+    margin: "auto",
+    textAlign: "left",
+    marginTop: 5,
+    marginLeft: 20,
+    fontSize: 10,
+  },
+
   table: {
     display: "table",
     width: "auto",
