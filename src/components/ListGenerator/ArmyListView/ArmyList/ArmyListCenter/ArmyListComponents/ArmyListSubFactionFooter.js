@@ -13,12 +13,7 @@ const ArmyListSubFactionFooter = (props) => {
   const AC = useContext(ArmyContext);
   const SEC = useContext(SelectionContext);
 
-  const stats = useSubFactionStats(
-    props.subFactionUnits, //
-    props.subFactionName,
-    AC.selectedFactionName,
-    SEC.maxPointsAllowance
-  );
+  const stats = useSubFactionStats();
 
   return (
     <List>
