@@ -1,12 +1,12 @@
 // react
 import React from "react";
 // fonts
-import jaapokkiRegular from "../../../../assets/fonts/jaapokkiRegular.ttf";
+import jaapokkiRegular from "../../../assets/fonts/jaapokkiRegular.ttf";
 // react-pdf
 import { Text, View, Document, Font } from "@react-pdf/renderer";
 // styles
-import { commonStyles } from "../../pdfStyles/commonStyles";
-import { STATS } from "../../../../constants/textsAndMessages";
+import { commonStyles } from "../pdfStyles/commonStyles";
+import { STATS } from "../../../constants/textsAndMessages";
 
 // Register font
 Font.register({ family: "jaapokkiRegular", src: jaapokkiRegular });
