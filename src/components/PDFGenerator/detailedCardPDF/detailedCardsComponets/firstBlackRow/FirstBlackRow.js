@@ -1,7 +1,7 @@
 // react
 import React from "react";
 // react-pdf
-import { View, Text } from "@react-pdf/renderer";
+import { View } from "@react-pdf/renderer";
 // styles
 import { detailedStyles } from "../../../pdfStyles/detailedCardPdfStyles";
 // pdf components
