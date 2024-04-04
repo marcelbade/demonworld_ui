@@ -7,34 +7,22 @@ import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 // components and functions
 import useArmyValidation from "../../../../customHooks/UseArmyValidation";
 import useUnitEnricher from "../../../../customHooks/UseUnitEnricher";
-import { SelectionContext } from "../../../../contexts/selectionContext";
 import ContextHelpButton from "../../../shared/ContextHelpButton";
+//constants
 import { PUSH_MESSAGE_TYPES } from "../../../../constants/textsAndMessages";
-
-// textBlock: {
-//   width: "25em",
-// },
-
-// unblockedLeafNode: {
-//   paddingRight: "0.5em",
-// },
-
-// unblockedBttn: {
-//   alignContent: "center",
-//   color: "black",
-// },
-// blockedBttn: {
-//
-// },
+// contexts
+import { SelectionContext } from "../../../../contexts/selectionContext";
 
 const TreeUnitNode = (props) => {
   const SEC = useContext(SelectionContext);
+
   const validation = useArmyValidation();
   const enrichUnit = useUnitEnricher(props.unit);
+
   const theme = useTheme();
 
   /**
-   * Function adds a selected unit and uses the custom UseUnitEnricher hook to add necessary information.
+   * Function adds a selected unit to the provided array, uses the custom UseUnitEnricher hook to add necessary information to it, and revalidates the the unit selection.
    * @param {unitCard object} unit
    */
   const addUnit = () => {
@@ -46,11 +34,13 @@ const TreeUnitNode = (props) => {
     validation.validateList(tempArray, SEC.maxPointsAllowance);
   };
 
+  /**
+   * Function checks whether the unit is valid according to the army's validation rules.
+   * @param {boolean} isBlocked
+   * @returns true, if unit is a valid choice
+   */
   const displayValidNode = (isBlocked) => {
     return isBlocked ? { color: theme.palette.disabled } : null;
-  };
-  const displayBttn = (isBlocked) => {
-    return isBlocked ? { paddingLeft: "1em" } : null;
   };
 
   return (
@@ -67,7 +57,6 @@ const TreeUnitNode = (props) => {
           //
           onClick={addUnit}
           disabled={!props.isValidUnit}
-          sx={displayBttn(props.isBlocked)}
           size="large"
         >
           <AddCircleOutlineIcon />
