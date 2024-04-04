@@ -3,10 +3,11 @@ import React, { useContext } from "react";
 // Material UI
 import { ListItemText, List } from "@mui/material";
 // components and functions
-import { ArmyContext } from "../../../../../../contexts/armyContext";
-import { SelectionContext } from "../../../../../../contexts/selectionContext";
 import useSubFactionStats from "../../../../../../customHooks/UseSubFactionStats";
 import { TEXTS } from "../../../../../../constants/textsAndMessages";
+// contexts
+import { ArmyContext } from "../../../../../../contexts/armyContext";
+import { SelectionContext } from "../../../../../../contexts/selectionContext";
 
 const ArmyListSubFactionFooter = (props) => {
   const AC = useContext(ArmyContext);
