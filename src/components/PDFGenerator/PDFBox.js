@@ -29,7 +29,11 @@ const PdfBox = () => {
 
   return data.list.length > 0 ? (
     <PDFViewer style={{ width: "100%", height: "100vh" }}>
-      {data.options.printDefaultList ? <StandardListPDF data={data} /> : <DetailedCardPDF armyName={data.armyName} list={data.list} />}
+      {data.options.printDefaultList ? ( //
+        <StandardListPDF data={data} />
+      ) : (
+        <DetailedCardPDF data={data} />
+      )}
     </PDFViewer>
   ) : null;
 };
