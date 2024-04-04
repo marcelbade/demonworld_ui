@@ -9,7 +9,7 @@ import { listStyles } from "../pdfStyles/listPdfStyles";
 
 // pdf components
 import SubfactionName from "./standardListComponents/SubfactionName";
-import TitleAndStats from "./standardListComponents/TitleAndStats";
+import TitleAndStats from "../sharedPDFComponents/TitleAndStats";
 import Unit from "./standardListComponents/Unit";
 import Equipment from "./standardListComponents/Equipment";
 import EquipmentLine from "./standardListComponents/EquipmentLine";
