@@ -2,7 +2,7 @@
 import { ruleObjectProvider } from "../gameLogic/armyListValidationRules/ruleObjectProvider";
 import usePointCostCalculator from "./UsePointCostCalculator";
 // constants
-import { SUBFACTION_STATS } from "../constants/textsAndMessages";
+import { STATS } from "../constants/textsAndMessages";
 
 const useSubFactionStats = () => {
   const calculator = usePointCostCalculator();
@@ -45,13 +45,13 @@ const useSubFactionStats = () => {
    */
   const displayPoints = (unitList) => {
     const total = calculateTotal(unitList);
-    return total === 0 ? null : `${total} ${SUBFACTION_STATS.POINTS}`;
+    return total === 0 ? null : `${total} ${STATS.POINTS}`;
   };
 
   const displayPercentage = (unitList, maxPointsAllowance) => {
     const total = calculateTotal(unitList);
     let percentage = (total / maxPointsAllowance) * 100;
-    return percentage * 100 === 0 ? null : `${SUBFACTION_STATS.PERCENT} ${Number(percentage).toFixed(2)} %`;
+    return percentage * 100 === 0 ? null : `${STATS.PERCENT} ${Number(percentage).toFixed(2)} %`;
   };
 
   return {
