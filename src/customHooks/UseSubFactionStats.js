@@ -1,19 +1,32 @@
 // components and functions
 import { ruleObjectProvider } from "../gameLogic/armyListValidationRules/ruleObjectProvider";
 import usePointCostCalculator from "./UsePointCostCalculator";
+// constants
+import { SUBFACTION_STATS } from "../constants/textsAndMessages";
 
-const useSubFactionStats = (unitList, subFactionName, factionName, maxPointsAllowance) => {
+const useSubFactionStats = () => {
   const calculator = usePointCostCalculator();
-  let total = 0;
 
-  if (unitList) {
-    unitList.forEach((u) => (total += calculator.calculateTotalUnitCost(u)));
-  }
+  /**
+   * Function calculates the current total point cost.
+   * @returns
+   */
+  const calculateTotal = (unitList) => {
+    let total = 0;
+    if (unitList) {
+      unitList.forEach((u) => (total += calculator.calculateTotalUnitCost(u)));
+    }
+    return total;
+  };
 
-  const calculateMinAndMaxPercentages = () => {
-    const ruleArray = ruleObjectProvider(factionName);
+  /**
+   * Function calculates the least and most points that can be spent on a subFaction.
+   * @returns an object containing the minimum and maximum ponts allowed for that sub faction.
+   */
+  const calculateMinAndMaxPercentages = (faction, subFaction) => {
+    const ruleArray = ruleObjectProvider(faction);
 
-    const filteredArray = ruleArray.filter((r) => r.cardNames.includes(subFactionName));
+    const filteredArray = ruleArray.filter((r) => r.cardNames.includes(subFaction));
 
     // when changing armies, the ruleArray briefly becomes undefined. Hence the test for length.
     const minPercentage = filteredArray.length !== 0 ? filteredArray[0].min * 100 : 0;
@@ -25,24 +38,26 @@ const useSubFactionStats = (unitList, subFactionName, factionName, maxPointsAllo
     };
   };
 
-  const displayPoints = (total) => {
-    return total === 0 ? null : `${total} Punkte`;
+  /**
+   * Function returns the total
+   * @param {[unitCard]} unitList
+   * @returns
+   */
+  const displayPoints = (unitList) => {
+    const total = calculateTotal(unitList);
+    return total === 0 ? null : `${total} ${SUBFACTION_STATS.POINTS}`;
   };
 
-  const displayPercents = (total) => {
+  const displayPercentage = (unitList, maxPointsAllowance) => {
+    const total = calculateTotal(unitList);
     let percentage = (total / maxPointsAllowance) * 100;
-    return percentage * 100 === 0 ? null : `Prozent ${Number(percentage).toFixed(2)} %`;
+    return percentage * 100 === 0 ? null : `${SUBFACTION_STATS.PERCENT} ${Number(percentage).toFixed(2)} %`;
   };
-
-  const limits = calculateMinAndMaxPercentages();
-  const currentPoints = displayPoints(total);
-  const currentPercent = displayPercents(total);
 
   return {
-    currentTotal: currentPoints,
-    currentPercent: currentPercent,
-    minPercentage: limits.min,
-    maxPercentage: limits.max,
+    currentTotal: displayPoints,
+    currentPercentage: displayPercentage,
+    minAndMaxAllowance: calculateMinAndMaxPercentages,
   };
 };
 

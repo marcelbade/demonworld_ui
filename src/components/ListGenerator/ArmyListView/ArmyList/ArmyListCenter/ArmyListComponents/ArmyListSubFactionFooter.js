@@ -32,14 +32,14 @@ const ArmyListSubFactionFooter = (props) => {
         key={props.subFaction}
         primary={
           <span sx={{ gap: "1em", display: "flex", flexDirection: "row" }}>
-            <span>{stats.currentTotal}</span>
-            <span> {stats.currentPercent}</span>
+            <span>{stats.currentTotal(props.subFactionUnits)}</span>
+            <span> {stats.currentPercentage(props.subFactionUnits, SEC.maxPointsAllowance)}</span>
           </span>
         }
         secondary={
           <span sx={{ gap: "1em", display: "flex", flexDirection: "row" }}>
-            <span>{`Minimum: ${stats.minPercentage} %`}</span>
-            <span>{`Maximum ${stats.maxPercentage} %`}</span>
+            <span>{`Minimum: ${stats.minAndMaxAllowance(AC.selectedFactionName, props.subFactionName).min} %`}</span>
+            <span>{`Maximum ${stats.minAndMaxAllowance(AC.selectedFactionName, props.subFactionName).max} %`}</span>
           </span>
         }
       />
