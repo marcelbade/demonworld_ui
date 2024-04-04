@@ -44,6 +44,24 @@ const OptionButtons = () => {
   const openPDfInNewTab = (options) => {
     //TODO: replace URL in production!!
 
+    const URL = "http://localhost:3000/PdfBox";
+    const transportObj = {
+      armyName: AC.armyName,
+      list: createPDFData(),
+      scoutingFactor: calculateScoutingFactor(SEC.selectedUnits),
+      totalArmyPoints: SEC.maxPointsAllowance,
+      options: options,
+    };
+
+    window.localStorage.setItem("transportObj", JSON.stringify(transportObj));
+    window.open(URL, "_blank", "noopener,noreferrer");
+  };
+
+  /**
+   * Function cresates the data structure for the PDF view.
+   * @returns an array of objects eacdh containing all data for one subFaction of the army list.
+   */
+  const createPDFData = () => {
     let list = [];
 
     AC.subFactionDTOs
@@ -59,17 +77,7 @@ const OptionButtons = () => {
         });
       });
 
-    const URL = "http://localhost:3000/PdfBox";
-    const transportObj = {
-      armyName: AC.armyName,
-      list: list,
-      scoutingFactor: calculateScoutingFactor(SEC.selectedUnits),
-      totalArmyPoints: SEC.maxPointsAllowance,
-      options: options,
-    };
-
-    window.localStorage.setItem("transportObj", JSON.stringify(transportObj));
-    window.open(URL, "_blank", "noopener,noreferrer");
+    return list;
   };
 
   // TODO STUD. Replace with REST Call once DB and BE are parts are done.
