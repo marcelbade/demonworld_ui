@@ -7,6 +7,16 @@ export const commonStyles = {
     fontFamily: "notMaryKate",
     margin: 5,
   },
+  armyStatsBox: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  armyStats: {
+    fontFamily: "jaapokkiRegular",
+    font: "9",
+  },
 
   table: {
     display: "table",
