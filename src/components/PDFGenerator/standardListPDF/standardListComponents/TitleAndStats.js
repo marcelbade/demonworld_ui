@@ -1,20 +1,25 @@
 // react
 import React from "react";
+// fonts
+import jaapokkiRegular from "../../../../assets/fonts/jaapokkiRegular.ttf";
 // react-pdf
-import { Text, View, Document } from "@react-pdf/renderer";
+import { Text, View, Document, Font } from "@react-pdf/renderer";
 // styles
 import { commonStyles } from "../../pdfStyles/commonStyles";
 import { STATS } from "../../../../constants/textsAndMessages";
+
+// Register font
+Font.register({ family: "jaapokkiRegular", src: jaapokkiRegular });
 
 const TitleAndStats = (props) => {
   return (
     <Document>
       <View style={commonStyles.armyName}>
-        <Text> {props.armyName} </Text>
+        <Text> {props.data.armyName} </Text>
       </View>
       <View style={commonStyles.armyStatsBox}>
-        <Text style={commonStyles.armyStats}> {`${STATS.POINTS}: ${9999}`} </Text>
-        <Text style={commonStyles.armyStats}>{`${STATS.SCOUT_FACTOR}: ${50}`} </Text>
+        <Text style={commonStyles.armyStats}> {`${STATS.POINTS}: ${props.data.totalArmyPoints}`} </Text>
+        <Text style={commonStyles.armyStats}>{`${STATS.SCOUT_FACTOR}: ${props.data.scoutingFactor}`} </Text>
       </View>
     </Document>
   );

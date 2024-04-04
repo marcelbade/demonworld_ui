@@ -22,12 +22,12 @@ const StandardListPDF = (props) => {
     <Document>
       <Page style={listStyles.body}>
         <View style={listStyles.table}>
-          <TitleAndStats armyName={props.armyName} />
-          {props.pdfData
+          <TitleAndStats data={props.data} />
+          {props.data.list
             .filter((subFaction) => subFaction.units.length > 0)
             .map((obj, i) => (
               <View key={i} style={listStyles.table}>
-                <SubfactionName name={obj.subFaction} />
+                <SubfactionName data={obj} />
                 {obj.units.map((u, i) => (
                   <View key={i} style={listStyles.table}>
                     <Unit unit={u} />
