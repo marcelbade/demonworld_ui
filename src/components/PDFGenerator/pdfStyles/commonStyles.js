@@ -31,7 +31,15 @@ export const commonStyles = {
     fontFamily: "jaapokkiRegular",
     fontSize: FONT_SIZE_TEXT,
   },
-  
+
+  subFactionTitleBoxNoSeparator: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingTop: MARGIN_SUBFACTION_BLOCK,
+    marginLeft: MARGIN_LEFT,
+    width: "50%",
+  },
+
   subFactionTitleBox: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -66,5 +74,11 @@ export const commonStyles = {
     marginTop: 5,
     flexDirection: "row",
     marginLeft: MARGIN_LEFT,
+  },
+
+  pageNumber: {
+    position: "absolute",
+    right: 10,
+    bottom: 15,
   },
 };

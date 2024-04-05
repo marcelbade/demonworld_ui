@@ -232,10 +232,8 @@ export const detailedStyles = {
     backgroundColor: "lightgrey",
   },
 
-  pageNumber: {
-    position: "absolute",
-    right: 10,
-    bottom: 15,
+  tableRowDetailedList: {
+    flexDirection: "row",
   },
 
   cell: {

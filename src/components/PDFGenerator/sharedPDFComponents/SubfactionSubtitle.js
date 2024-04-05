@@ -16,7 +16,13 @@ const SubfactionSubtitle = (props) => {
 
   return (
     <Document>
-      <View style={commonStyles.subFactionTitleBox}>
+      <View
+        style={
+          props.displaySeparator //
+            ? commonStyles.subFactionTitleBox
+            : commonStyles.subFactionTitleBoxNoSeparator
+        }
+      >
         <View style={listStyles.subFactionTitleCol}>
           <Text style={commonStyles.subFactionTitleAndStats}>{props.data.subFaction}</Text>
         </View>

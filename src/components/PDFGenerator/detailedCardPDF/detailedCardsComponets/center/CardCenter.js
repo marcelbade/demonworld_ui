@@ -17,7 +17,7 @@ import { NO_RANGE_WEAPON } from "../../../../../constants/textsAndMessages";
 const CardCenter = (props) => {
   return (
     <View style={commonStyles.table}>
-      <View style={commonStyles.tableRow}>
+      <View style={detailedStyles.tableRowDetailedList}>
         <View style={detailedStyles.cell}>
           {props.unit.rangedWeapon === NO_RANGE_WEAPON ? null : (
             <RangeWeaponRow
