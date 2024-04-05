@@ -3,22 +3,20 @@ import React from "react";
 // react-pdf
 import { Text, View, Document } from "@react-pdf/renderer";
 // styles
-import { commonStyles } from "../../pdfStyles/commonStyles";
 import { listStyles } from "../../pdfStyles/listPdfStyles";
 
 const Equipment = (props) => {
   return (
-    <Document>
+    <Document style={listStyles.equipmentBox}>
       {props.equipment.length > 0
         ? props.equipment.map((e) => (
-            <View style={commonStyles.tableRow}>
-              <View style={listStyles.tableColEquipment}>
+            <View style={listStyles.equipmentInnerBox}>
+              <View style={listStyles.tableRowEquipment}>
                 <Text style={listStyles.tableCellEquipment}>{e.name}</Text>
               </View>
-              <View style={listStyles.tableColUnit}>
+              <View style={listStyles.tableRowEquipment}>
                 <Text style={listStyles.tableCellEquipment}>{e.points}</Text>
               </View>
-              <View style={listStyles.tableColEquipmentFiller}></View>
             </View>
           ))
         : null}

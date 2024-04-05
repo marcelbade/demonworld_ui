@@ -10,7 +10,6 @@ import { listStyles } from "../pdfStyles/listPdfStyles";
 import TitleAndStats from "../sharedPDFComponents/TitleAndStats";
 import Unit from "./standardListComponents/Unit";
 import Equipment from "./standardListComponents/Equipment";
-import EquipmentLine from "./standardListComponents/EquipmentLine";
 import SubfactionSubtitle from "../sharedPDFComponents/SubfactionSubtitle";
 
 // Register font
@@ -19,18 +18,17 @@ Font.register({ family: "notMaryKate", src: notMaryKate });
 const StandardListPDF = (props) => {
   return (
     <Document>
-      <Page style={listStyles.body}>
-        <View style={listStyles.table}>
+      <Page>
+        <View style={listStyles.test}>
           <TitleAndStats data={props.data} />
           {props.data.list
             .filter((subFaction) => subFaction.units.length > 0)
             .map((obj, i) => (
-              <View key={i} style={listStyles.table}>
+              <View key={i}>
                 <SubfactionSubtitle data={obj} />
                 {obj.units.map((u, i) => (
-                  <View key={i} style={listStyles.table}>
+                  <View key={i}>
                     <Unit unit={u} />
-                    <EquipmentLine equipment={u.equipment} />
                     <Equipment equipment={u.equipment} />
                   </View>
                 ))}

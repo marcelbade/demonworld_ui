@@ -1,3 +1,11 @@
+import {
+  FONT_SIZE_PAGE_TITLE, //
+  FONT_SIZE_SUB_TITLE,
+  FONT_SIZE_TEXT,
+  MARGIN_LEFT,
+  MARGIN_SUBFACTION_BLOCK,
+} from "./styleValues";
+
 export const commonStyles = {
   viewport: {
     width: "100%",
@@ -8,28 +16,46 @@ export const commonStyles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    font: "15",
+    fontSize: FONT_SIZE_PAGE_TITLE,
     fontFamily: "notMaryKate",
     margin: 5,
   },
   armyStatsBox: {
     display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
+    flexDirection: "column",
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
+    marginLeft: MARGIN_LEFT,
   },
   armyStats: {
     fontFamily: "jaapokkiRegular",
-    font: "9",
+    fontSize: FONT_SIZE_TEXT,
+  },
+  
+  subFactionTitleBox: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingTop: MARGIN_SUBFACTION_BLOCK,
+    marginLeft: MARGIN_LEFT,
+    width: "50%",
+    borderBottom: "solid 1px dashed black",
+  },
+
+  subFactionTitleAndStats: {
+    fontFamily: "jaapokkiRegular",
+    fontSize: FONT_SIZE_SUB_TITLE,
+  },
+
+  subFactionName: {
+    fontFamily: "notMaryKate",
+    fontSize: FONT_SIZE_SUB_TITLE,
+    textAlign: "start",
   },
 
   subFactioStats: {
     fontFamily: "jaapokkiRegular",
-    margin: "auto",
     textAlign: "left",
-    marginTop: 5,
-    marginLeft: 20,
-    fontSize: 10,
+    fontSize: FONT_SIZE_SUB_TITLE,
   },
 
   table: {
@@ -37,7 +63,8 @@ export const commonStyles = {
     width: "auto",
   },
   tableRow: {
-    margin: "auto",
+    marginTop: 5,
     flexDirection: "row",
+    marginLeft: MARGIN_LEFT,
   },
 };

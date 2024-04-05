@@ -1,55 +1,80 @@
+import { EQUIPMENT_MARGIN_LEFT, FONT_SIZE_TEXT } from "./styleValues";
+
 export const listStyles = {
-  tableRowSubFactionName: {
-    margin: "auto",
-    flexDirection: "row",
-    marginTop: 10,
+  test: {
+    width: "100%",
   },
 
   tableCol: {
     width: "25%",
     fontFamily: "jaapokkiRegular",
   },
+
   tableColSubFactionName: {
     width: "100%",
     fontFamily: "jaapokkiRegular",
   },
+
   tableColUnit: {
-    width: "75%",
+    width: "30%",
     fontFamily: "jaapokkiRegular",
-    paddingBottom: 5,
-  },
-  tableColEquipment: {
-    width: "25%",
-    fontFamily: "jaapokkiRegular",
-    borderLeftWidth: 0,
-    borderWidth: 1,
-    borderBottomWidth: 0,
-    borderTopWidth: 0,
-    borderRightWidth: 0,
-    marginLeft: 15,
   },
 
-  tableColUnitFiller: {
-    width: "70%",
+  subFactionStatCol: {
+    width: "35%",
+    fontFamily: "jaapokkiRegular",
   },
+
+  subFactionTitleCol: {
+    width: "75%",
+    fontFamily: "jaapokkiRegular",
+  },
+
+  tableColSecondSubFaction: {
+    width: "20%",
+    fontFamily: "jaapokkiRegular",
+  },
+
+  tableColPoints: {
+    width: "5%",
+    fontFamily: "jaapokkiRegular",
+  },
+
   tableColEquipmentFiller: {
     width: "40%",
   },
 
   tableCellUnit: {
     fontFamily: "jaapokkiRegular",
-    margin: "auto",
     textAlign: "left",
-    marginTop: 5,
-    marginLeft: 20,
-    fontSize: 10,
+    fontSize: FONT_SIZE_TEXT,
   },
+
+  tableCellPoints: {
+    fontFamily: "jaapokkiRegular",
+    textAlign: "right",
+    fontSize: FONT_SIZE_TEXT,
+  },
+
   tableCellEquipment: {
     fontFamily: "jaapokkiRegular",
-    margin: "auto",
     textAlign: "left",
+    fontSize: FONT_SIZE_TEXT,
+  },
+
+  equipmentBox: {
     marginTop: 5,
-    marginLeft: 5,
-    fontSize: 10,
+    marginLeft: EQUIPMENT_MARGIN_LEFT,
+    paddingLeft: 2,
+    borderLeft: "1px solid black",
+    marginBottom: 5,
+  },
+
+  equipmentInnerBox: {
+    flexDirection: "row",
+  },
+
+  tableRowEquipment: {
+    width: "20%",
   },
 };
