@@ -11,6 +11,7 @@ import TitleAndStats from "../sharedPDFComponents/TitleAndStats";
 import Unit from "./standardListComponents/Unit";
 import Equipment from "./standardListComponents/Equipment";
 import SubfactionSubtitle from "../sharedPDFComponents/SubfactionSubtitle";
+import PageNumber from "../sharedPDFComponents/PageNumber";
 
 // Register font
 Font.register({ family: "notMaryKate", src: notMaryKate });
@@ -35,6 +36,7 @@ const StandardListPDF = (props) => {
               </View>
             ))}
         </View>
+        <PageNumber />
       </Page>
     </Document>
   );

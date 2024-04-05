@@ -1,7 +1,7 @@
 // react
 import React from "react";
 // react-pdf
-import { Page, View, Document, Font, Text } from "@react-pdf/renderer";
+import { Page, View, Document, Font } from "@react-pdf/renderer";
 // fonts
 import notMaryKate from "../../../assets/fonts/notMaryKate.ttf";
 import jaapokkiRegular from "../../../assets/fonts/jaapokkiRegular.ttf";
@@ -15,6 +15,7 @@ import SecondBlackRow from "./detailedCardsComponets/secondBlackRow/SecondBlackR
 import CardFooter from "./detailedCardsComponets/footer/CardFooter";
 import SubfactionSubtitle from "../sharedPDFComponents/SubfactionSubtitle";
 import TitleAndStats from "../sharedPDFComponents/TitleAndStats";
+import PageNumber from "../sharedPDFComponents/PageNumber";
 
 // Register font
 Font.register({ family: "notMaryKate", src: notMaryKate });
@@ -30,9 +31,9 @@ const ListPDF = (props) => {
             .filter((subFaction) => subFaction.units.length > 0)
             .map((obj, i) => (
               <View>
-                <SubfactionSubtitle index={i} key={i} data={obj} />
+                <SubfactionSubtitle key={i} data={obj} displaySeparator={props.displaySeparator} />
                 {obj.units.map((u, i) => (
-                  <View index={i} key={i} style={detailedStyles.cardBox} wrap={false}>
+                  <View key={i} style={detailedStyles.cardBox} wrap={false}>
                     <CardHeader unit={u} />
                     <FirstBlackRow unit={u} />
                     <CardCenter unit={u} />
@@ -43,7 +44,7 @@ const ListPDF = (props) => {
               </View>
             ))}
         </View>
-        <Text style={detailedStyles.pageNumber} render={({ pageNumber, totalPages }) => `${pageNumber}/${totalPages} `} fixed />
+        <PageNumber />
       </Page>
     </Document>
   );
