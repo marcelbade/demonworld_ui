@@ -76,7 +76,7 @@ export const TOURNAMENT_RULES = {
 
 export const OPTIONS = {
   CHANGE_TOURNAMENT_RULES: "Turnierregeln Ändern",
-  CREATE_DEFAULT_LIST: "Standard Liste Erzeugen",
+  CREATE_DEFAULT_LIST: "Standardliste Erzeugen",
   CREATE_DETAILED_LIST: "Detailierte Liste Erzeugen",
   CREATE_PDF: "PDF Erzeugen ",
   LIGHT_SWITCH: "Wechsel zw. dunklen und hellen Theme",
