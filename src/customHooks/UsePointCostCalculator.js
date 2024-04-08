@@ -7,7 +7,7 @@ const usePointCostCalculator = () => {
 
   /**
    * Function calculates the total point cost of all the unit's items.
-   * If the the `onlyLostItems` flag is true, only lostitems are counted.
+   * If the the `onlyLostItems` flag is true, only lost items are counted.
    * Note that this only factors in items that are carried by a single element.
    * Items held by all elements of a unit are already included to the unit's point cost.
    * @param {[itemCard]} equipmentList an array with all the units items
