@@ -26,7 +26,7 @@ const StandardListPDF = (props) => {
             .filter((subFaction) => subFaction.units.length > 0)
             .map((obj, i) => (
               <View key={i}>
-                <SubfactionSubtitle data={obj} displaySeparator={props.displaySeparator} />
+                <SubfactionSubtitle data={obj}  />
                 {obj.units.map((u, i) => (
                   <View key={i}>
                     <Unit unit={u} />

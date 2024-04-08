@@ -32,7 +32,7 @@ const ListPDF = (props) => {
             .filter((subFaction) => subFaction.units.length > 0)
             .map((obj, i) => (
               <View>
-                <SubfactionSubtitle key={i} data={obj} displaySeparator={props.displaySeparator} />
+                <SubfactionSubtitle key={i} data={obj} />
                 {obj.units.map((u, i) => (
                   <View key={i} style={detailedStyles.cardBox} wrap={false}>
                     <CardHeader unit={u} />

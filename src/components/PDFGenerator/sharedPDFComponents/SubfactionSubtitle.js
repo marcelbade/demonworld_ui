@@ -15,22 +15,10 @@ const SubfactionSubtitle = (props) => {
 
   return (
     <Document>
-      <View
-        style={
-          props.displaySeparator // dashed line is only shown for the default list
-            ? commonStyles.subFactionTitleBox
-            : commonStyles.subFactionTitleBoxNoSeparator
-        }
-      >
-        <View style={commonStyles.subFactionTitleCol}>
-          <Text style={commonStyles.subFactionTitleAndStats}>{props.data.subFaction}</Text>
-        </View>
-        <View style={commonStyles.subFactionStatCol}>
-          <Text style={commonStyles.subFactionTitleAndStats}>{props.data.subFactionTotal}</Text>
-        </View>
-        <View style={commonStyles.subFactionStatCol}>
-          <Text style={commonStyles.subFactionTitleAndStats}>{props.data.subFactionPercentage}</Text>
-        </View>
+      <View style={commonStyles.subFactionTitleBox}>
+        <Text style={commonStyles.subFactionTitleAndStats}>{props.data.subFaction}</Text>
+        <Text style={commonStyles.subFactionTitleAndStats}>{props.data.subFactionTotal}</Text>
+        <Text style={commonStyles.subFactionTitleAndStats}>{props.data.subFactionPercentage}</Text>
       </View>
     </Document>
   );

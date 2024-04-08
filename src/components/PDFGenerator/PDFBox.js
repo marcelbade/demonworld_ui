@@ -32,9 +32,9 @@ const PdfBox = () => {
   return data.list.length > 0 ? (
     <PDFViewer style={commonStyles.viewport}>
       {data.options.printDefaultList ? ( //
-        <StandardListPDF data={data} displaySeparator={true} />
+        <StandardListPDF data={data} />
       ) : (
-        <DetailedCardPDF data={data} displaySeparator={false} />
+        <DetailedCardPDF data={data} />
       )}
     </PDFViewer>
   ) : null;

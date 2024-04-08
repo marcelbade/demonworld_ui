@@ -5,7 +5,7 @@ import {
   MARGIN_LEFT,
   MARGIN_PAGE_TOP,
   MARGIN_SUBFACTION_BLOCK,
-  CONTENT_WIDTH
+  CONTENT_WIDTH,
 } from "./styleValues";
 
 export const commonStyles = {
@@ -16,7 +16,6 @@ export const commonStyles = {
 
   pageLayout: {
     width: CONTENT_WIDTH,
-    backgroundColor: "yellow",
     marginTop: MARGIN_PAGE_TOP,
   },
 
@@ -52,19 +51,10 @@ export const commonStyles = {
     flexDirection: "row",
     justifyContent: "space-between",
     paddingTop: MARGIN_SUBFACTION_BLOCK,
+    marginBottom: MARGIN_SUBFACTION_BLOCK,
     marginLeft: MARGIN_LEFT,
     width: "50%",
     borderBottom: "solid 1px dashed black",
-  },
-
-  subFactionTitleCol: {
-    width: "50%",
-    fontFamily: "jaapokkiRegular",
-  },
-
-  subFactionStatCol: {
-    width: "25%",
-    fontFamily: "jaapokkiRegular",
   },
 
   subFactionTitleAndStats: {
