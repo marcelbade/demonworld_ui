@@ -5,12 +5,6 @@ export const ALTTEXT = {
   MELEE_SKILL: "Nahkampffertigkeit",
 };
 
-export const STATS = {
-  POINTS: "Punkte",
-  PERCENT: "Prozent",
-  SCOUT_FACTOR: "Spähfaktor",
-};
-
 export const LANDINGPAGE = {
   COMPENDIUM: "Kompendium",
   LIST_GENERATOR: "Listengenerator",
@@ -90,13 +84,18 @@ export const GENERAL_ERRRORS = {
 };
 
 export const INPUT_TEXTS = {
-  ARMY_NAME:"Name der Liste",
+  ARMY_NAME: "Name der Liste",
   PLAYER_NAME: "Spielername",
   TEAM_NAME: "Teamname",
   SELECT_FACTION: "Wähle Eine Fraktion:",
   SELECT_UNIT: "Suche nach Einheit:",
   TOTAL_POINTS: "Gesamtpunktzahl :",
   POINTS: "Punkte",
+};
+
+export const STATS = {
+  PERCENT: "Prozent",
+  SCOUT_FACTOR: "Spähfaktor",
 };
 
 export const BUTTON_TEXTS = {
