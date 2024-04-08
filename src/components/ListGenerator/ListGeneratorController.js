@@ -35,7 +35,9 @@ const ListGeneratorController = () => {
   // intialize local states
   const [fetchedFactions, setFetchedFactions] = useState([]);
   const [fetchedItems, setFetchedItems] = useState([]);
-  // army name
+  // army meta data
+  const [teamName, setTeamName] = useState("");
+  const [playerName, setPlayerName] = useState("");
   const [armyName, setArmyName] = useState("");
   // selected faction
   const [selectedFactionName, setSelectedFactionName] = useState(NONE);
@@ -251,6 +253,8 @@ const ListGeneratorController = () => {
                     <ArmyProvider
                       value={{
                         // ARMY
+                        playerName: playerName,
+                        teamName: teamName,
                         armyName: armyName,
                         setArmyName: setArmyName,
                         selectedFactionName: selectedFactionName,
@@ -264,6 +268,8 @@ const ListGeneratorController = () => {
                         setListOfAllFactionUnits: setListOfAllFactionUnits,
                         setSubFactionDTOs: setSubFactionDTOs,
                         // setListofAlternativeSubFactions: setListofAlternativeSubFactions
+                        setTeamName: setTeamName,
+                        setPlayerName: setPlayerName,
                       }}
                     >
                       <SnackbarProvider

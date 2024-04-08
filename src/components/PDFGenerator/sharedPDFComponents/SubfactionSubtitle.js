@@ -13,12 +13,17 @@ const SubfactionSubtitle = (props) => {
   Font.register({ family: "jaapokkiRegular", src: jaapokkiRegular });
   Font.register({ family: "notMaryKate", src: notMaryKate });
 
+  const renderMinMaxPercentageString = () => {
+    return `(${props.data.minSubFactionPercentage}% - ${props.data.maxSubFactionPercentage}%)`;
+  };
+
   return (
     <Document>
       <View style={commonStyles.subFactionTitleBox}>
         <Text style={commonStyles.subFactionTitleAndStats}>{props.data.subFaction}</Text>
         <Text style={commonStyles.subFactionTitleAndStats}>{props.data.subFactionTotal}</Text>
-        <Text style={commonStyles.subFactionTitleAndStats}>{props.data.subFactionPercentage}</Text>
+        <Text style={commonStyles.subFactionTitleAndStats}>{`${props.data.subFactionPercentage}%`}</Text>
+        <Text style={commonStyles.subFactionTitleAndStats}>{renderMinMaxPercentageString()}</Text>
       </View>
     </Document>
   );

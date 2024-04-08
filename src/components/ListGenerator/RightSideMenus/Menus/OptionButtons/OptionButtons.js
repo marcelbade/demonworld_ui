@@ -45,13 +45,7 @@ const OptionButtons = () => {
     //TODO: replace URL in production!!
 
     const URL = "http://localhost:3000/PdfBox";
-    const transportObj = {
-      armyName: AC.armyName,
-      list: createPDFData(),
-      scoutingFactor: calculateScoutingFactor(SEC.selectedUnits),
-      totalArmyPoints: SEC.maxPointsAllowance,
-      options: options,
-    };
+    const transportObj = createPDFData(options);
 
     window.localStorage.setItem("transportObj", JSON.stringify(transportObj));
     window.open(URL, "_blank", "noopener,noreferrer");
@@ -61,7 +55,7 @@ const OptionButtons = () => {
    * Function cresates the data structure for the PDF view.
    * @returns an array of objects eacdh containing all data for one subFaction of the army list.
    */
-  const createPDFData = () => {
+  const createPDFData = (options) => {
     let list = [];
 
     AC.subFactionDTOs
@@ -74,10 +68,20 @@ const OptionButtons = () => {
           units: subFactionUnits,
           subFactionTotal: stats.currentTotal(subFactionUnits),
           subFactionPercentage: stats.currentPercentage(subFactionUnits, SEC.maxPointsAllowance),
+          minSubFactionPercentage: stats.minAndMaxAllowance(AC.selectedFactionName, name).min,
+          maxSubFactionPercentage: stats.minAndMaxAllowance(AC.selectedFactionName, name).max,
         });
       });
 
-    return list;
+    return {
+      playerName: AC.playerName,
+      teamName: AC.teamName,
+      armyName: AC.armyName,
+      list: list,
+      scoutingFactor: calculateScoutingFactor(SEC.selectedUnits),
+      totalArmyPoints: SEC.maxPointsAllowance,
+      options: options,
+    };
   };
 
   // TODO STUD. Replace with REST Call once DB and BE are parts are done.

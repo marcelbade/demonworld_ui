@@ -22,6 +22,8 @@ const PdfBox = () => {
     setData({
       ...data, //
       options: transportObj.options,
+      playerName: transportObj.playerName,
+      teamName: transportObj.teamName,
       armyName: transportObj.armyName,
       list: transportObj.list,
       totalArmyPoints: transportObj.totalArmyPoints,

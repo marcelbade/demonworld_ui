@@ -90,6 +90,9 @@ export const GENERAL_ERRRORS = {
 };
 
 export const INPUT_TEXTS = {
+  ARMY_NAME:"Name der Liste",
+  PLAYER_NAME: "Spielername",
+  TEAM_NAME: "Teamname",
   SELECT_FACTION: "Wähle Eine Fraktion:",
   SELECT_UNIT: "Suche nach Einheit:",
   TOTAL_POINTS: "Gesamtpunktzahl :",
