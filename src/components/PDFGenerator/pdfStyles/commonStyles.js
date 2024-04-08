@@ -49,6 +49,19 @@ export const commonStyles = {
     borderBottom: "solid 1px dashed black",
   },
 
+
+  subFactionTitleCol: {
+    width: "75%",
+    fontFamily: "jaapokkiRegular",
+  },
+
+  
+  subFactionStatCol: {
+    width: "35%",
+    fontFamily: "jaapokkiRegular",
+  },
+
+
   subFactionTitleAndStats: {
     fontFamily: "jaapokkiRegular",
     fontSize: FONT_SIZE_SUB_TITLE,
@@ -71,7 +84,6 @@ export const commonStyles = {
     width: "auto",
   },
   tableRow: {
-    marginTop: 5,
     flexDirection: "row",
     marginLeft: MARGIN_LEFT,
   },

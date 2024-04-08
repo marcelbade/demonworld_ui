@@ -7,7 +7,6 @@ import notMaryKate from "../../../assets/fonts/notMaryKate.ttf";
 import { Text, View, Document, Font } from "@react-pdf/renderer";
 // styles
 import { commonStyles } from "../pdfStyles/commonStyles";
-import { listStyles } from "../pdfStyles/listPdfStyles";
 
 const SubfactionSubtitle = (props) => {
   // Register font
@@ -18,18 +17,18 @@ const SubfactionSubtitle = (props) => {
     <Document>
       <View
         style={
-          props.displaySeparator //
+          props.displaySeparator // dashed line is only shown for the default list
             ? commonStyles.subFactionTitleBox
             : commonStyles.subFactionTitleBoxNoSeparator
         }
       >
-        <View style={listStyles.subFactionTitleCol}>
+        <View style={commonStyles.subFactionTitleCol}>
           <Text style={commonStyles.subFactionTitleAndStats}>{props.data.subFaction}</Text>
         </View>
-        <View style={listStyles.subFactionStatCol}>
+        <View style={commonStyles.subFactionStatCol}>
           <Text style={commonStyles.subFactionTitleAndStats}>{props.data.subFactionTotal}</Text>
         </View>
-        <View style={listStyles.subFactionStatCol}>
+        <View style={commonStyles.subFactionStatCol}>
           <Text style={commonStyles.subFactionTitleAndStats}>{props.data.subFactionPercentage}</Text>
         </View>
       </View>

@@ -20,15 +20,6 @@ export const listStyles = {
     fontFamily: "jaapokkiRegular",
   },
 
-  subFactionStatCol: {
-    width: "35%",
-    fontFamily: "jaapokkiRegular",
-  },
-
-  subFactionTitleCol: {
-    width: "75%",
-    fontFamily: "jaapokkiRegular",
-  },
 
   tableColSecondSubFaction: {
     width: "20%",
