@@ -15,6 +15,21 @@ const ArmyListSubFactionFooter = (props) => {
 
   const stats = useSubFactionStats();
 
+  const displayCurrentTotal = () => {
+    const total = stats.currentTotal(props.subFactionUnits);
+
+    return total === 0 ? `` : `${total}`;
+  };
+
+  const displayCurrentPercentage = () => {
+    const percentage = stats.currentPercentage(props.subFactionUnits, SEC.maxPointsAllowance);
+
+    return percentage === 0 ? `` : `${percentage}%`;
+  };
+
+  const MIN_PERCENTAGE = `Minimum: ${stats.minAndMaxAllowance(AC.selectedFactionName, props.subFactionName).min} %`;
+  const MAX_PERCENTAGE = `Maximum: ${stats.minAndMaxAllowance(AC.selectedFactionName, props.subFactionName).max} %`;
+
   return (
     <List>
       <ListItemText //
@@ -27,14 +42,14 @@ const ArmyListSubFactionFooter = (props) => {
         key={props.subFaction}
         primary={
           <span sx={{ gap: "1em", display: "flex", flexDirection: "row" }}>
-            <span>{stats.currentTotal(props.subFactionUnits)}</span>
-            <span> {stats.currentPercentage(props.subFactionUnits, SEC.maxPointsAllowance)}</span>
+            <span>{displayCurrentTotal()}</span>
+            <span> {displayCurrentPercentage()}</span>
           </span>
         }
         secondary={
           <span sx={{ gap: "1em", display: "flex", flexDirection: "row" }}>
-            <span>{`Minimum: ${stats.minAndMaxAllowance(AC.selectedFactionName, props.subFactionName).min} %`}</span>
-            <span>{`Maximum ${stats.minAndMaxAllowance(AC.selectedFactionName, props.subFactionName).max} %`}</span>
+            <span>{MIN_PERCENTAGE}</span>
+            <span> {MAX_PERCENTAGE}</span>
           </span>
         }
       />

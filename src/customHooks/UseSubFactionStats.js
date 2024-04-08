@@ -45,13 +45,13 @@ const useSubFactionStats = () => {
    */
   const displayPoints = (unitList) => {
     const total = calculateTotal(unitList);
-    return total === 0 ? null : `${total} ${STATS.POINTS}`;
+    return total === 0 ? 0 : `${total} ${STATS.POINTS}`;
   };
 
   const displayPercentage = (unitList, maxPointsAllowance) => {
     const total = calculateTotal(unitList);
     let percentage = (total / maxPointsAllowance) * 100;
-    return percentage * 100 === 0 ? null : `${STATS.PERCENT} ${Number(percentage).toFixed(2)} %`;
+    return percentage * 100 === 0 ? 0 : Number(percentage).toFixed(2);
   };
 
   return {
