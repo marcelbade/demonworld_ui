@@ -1,8 +1,12 @@
 // style values fot the pdf
 
-// left margin for the entire page
+// margins for the entire page
+export const MARGIN_PAGE_TOP = 10;
 export const MARGIN_LEFT = 15;
 export const EQUIPMENT_MARGIN_LEFT = 25;
+
+// content width on page in percent
+export const CONTENT_WIDTH = "100%";
 
 // margin between two subfaction blocks
 export const MARGIN_SUBFACTION_BLOCK = 10;

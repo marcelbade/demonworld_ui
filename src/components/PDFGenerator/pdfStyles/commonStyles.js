@@ -3,19 +3,21 @@ import {
   FONT_SIZE_SUB_TITLE,
   FONT_SIZE_TEXT,
   MARGIN_LEFT,
+  MARGIN_PAGE_TOP,
   MARGIN_SUBFACTION_BLOCK,
+  CONTENT_WIDTH
 } from "./styleValues";
 
 export const commonStyles = {
   viewport: {
-    width: "100%",
+    width: CONTENT_WIDTH,
     height: "100vh",
   },
 
   pageLayout: {
-    width: "100%",
+    width: CONTENT_WIDTH,
     backgroundColor: "yellow",
-    marginTop: 10,
+    marginTop: MARGIN_PAGE_TOP,
   },
 
   armyName: {
