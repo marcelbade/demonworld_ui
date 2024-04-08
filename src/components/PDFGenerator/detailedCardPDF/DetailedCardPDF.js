@@ -16,6 +16,7 @@ import CardFooter from "./detailedCardsComponets/footer/CardFooter";
 import SubfactionSubtitle from "../sharedPDFComponents/SubfactionSubtitle";
 import TitleAndStats from "../sharedPDFComponents/TitleAndStats";
 import PageNumber from "../sharedPDFComponents/PageNumber";
+import { commonStyles } from "../pdfStyles/commonStyles";
 
 // Register font
 Font.register({ family: "notMaryKate", src: notMaryKate });
@@ -24,7 +25,7 @@ Font.register({ family: "jaapokkiRegular", src: jaapokkiRegular });
 const ListPDF = (props) => {
   return (
     <Document>
-      <Page style={detailedStyles.pageTopMargin}>
+      <Page style={commonStyles.pageLayout}>
         <TitleAndStats data={props.data} />
         <View>
           {props.data.list

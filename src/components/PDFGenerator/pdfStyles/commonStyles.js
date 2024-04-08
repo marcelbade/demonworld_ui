@@ -12,6 +12,12 @@ export const commonStyles = {
     height: "100vh",
   },
 
+  pageLayout: {
+    width: "100%",
+    backgroundColor: "yellow",
+    marginTop: 10,
+  },
+
   armyName: {
     display: "flex",
     justifyContent: "center",
@@ -49,18 +55,15 @@ export const commonStyles = {
     borderBottom: "solid 1px dashed black",
   },
 
-
   subFactionTitleCol: {
-    width: "75%",
+    width: "50%",
     fontFamily: "jaapokkiRegular",
   },
 
-  
   subFactionStatCol: {
-    width: "35%",
+    width: "25%",
     fontFamily: "jaapokkiRegular",
   },
-
 
   subFactionTitleAndStats: {
     fontFamily: "jaapokkiRegular",

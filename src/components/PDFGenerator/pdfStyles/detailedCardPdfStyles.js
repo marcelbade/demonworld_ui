@@ -1,8 +1,4 @@
 export const detailedStyles = {
-  pageTopMargin: {
-    marginTop: 10,
-  },
-
   cardBox: {
     flexDirection: "column",
     marginLeft: 20,

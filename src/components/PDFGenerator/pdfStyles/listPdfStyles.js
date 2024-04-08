@@ -1,10 +1,6 @@
 import { EQUIPMENT_MARGIN_LEFT, FONT_SIZE_TEXT } from "./styleValues";
 
 export const listStyles = {
-  test: {
-    width: "100%",
-  },
-
   tableCol: {
     width: "25%",
     fontFamily: "jaapokkiRegular",
@@ -19,7 +15,6 @@ export const listStyles = {
     width: "30%",
     fontFamily: "jaapokkiRegular",
   },
-
 
   tableColSecondSubFaction: {
     width: "20%",

@@ -5,7 +5,7 @@ import { Page, View, Document, Font } from "@react-pdf/renderer";
 // fonts
 import notMaryKate from "../../../assets/fonts/notMaryKate.ttf";
 // styles
-import { listStyles } from "../pdfStyles/listPdfStyles";
+import { commonStyles } from "../pdfStyles/commonStyles";
 // pdf components
 import TitleAndStats from "../sharedPDFComponents/TitleAndStats";
 import Unit from "./standardListComponents/Unit";
@@ -20,13 +20,13 @@ const StandardListPDF = (props) => {
   return (
     <Document>
       <Page>
-        <View style={listStyles.test}>
+        <View style={commonStyles.pageLayout}>
           <TitleAndStats data={props.data} />
           {props.data.list
             .filter((subFaction) => subFaction.units.length > 0)
             .map((obj, i) => (
               <View key={i}>
-                <SubfactionSubtitle data={obj} displaySeparator= {props.displaySeparator} />
+                <SubfactionSubtitle data={obj} displaySeparator={props.displaySeparator} />
                 {obj.units.map((u, i) => (
                   <View key={i}>
                     <Unit unit={u} />
