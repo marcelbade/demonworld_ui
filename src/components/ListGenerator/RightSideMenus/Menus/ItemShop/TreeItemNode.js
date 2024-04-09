@@ -96,7 +96,7 @@ const TreeItemNode = (props) => {
       <AccordionDetails>
         <Typography
           variant="body1" //
-          sx={{ width: "40em" }}
+          sx={{ width: "50em" }}
         >
           {props.item.specialRules}
         </Typography>
