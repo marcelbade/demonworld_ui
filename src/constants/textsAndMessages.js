@@ -59,7 +59,7 @@ export const COMPENDIUM = {
 
 export const TOOLTIPS = {
   DELETE_ARMY_LIST: "Komplette Liste löschen.",
-  RULE_BOOK_TEXT : "Regelbuchtext",
+  RULE_BOOK_TEXT: "Regelbuchtext",
 };
 
 export const TOURNAMENT_RULES = {
@@ -91,12 +91,12 @@ export const INPUT_TEXTS = {
   SELECT_FACTION: "Wähle Eine Fraktion:",
   SELECT_UNIT: "Suche nach Einheit:",
   TOTAL_POINTS: "Gesamtpunktzahl :",
-  POINTS: "Punkte",
 };
 
 export const STATS = {
   PERCENT: "Prozent",
   SCOUT_FACTOR: "Spähfaktor",
+  POINTS: "Punkte",
 };
 
 export const BUTTON_TEXTS = {
@@ -178,7 +178,6 @@ export const CARD_PREVIEW = {
   FEAR: "Furchtfaktor",
   MORAL: "Moral",
   CONTROL_AREA: "Kontrollbereich",
-  POINTS: "Punkte",
   ELEMENTS: "Elemente",
   SINGLE_ELEMENT: "Element",
   LEADER: "Anführer",

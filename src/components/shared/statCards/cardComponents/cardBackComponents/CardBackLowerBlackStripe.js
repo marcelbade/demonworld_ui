@@ -7,14 +7,14 @@ import { useTheme } from "@emotion/react";
 import { StateCardContext } from "../../../../../contexts/statCardContext";
 import usePointCostCalculator from "../../../../../customHooks/UsePointCostCalculator";
 // constants
-import { CARD_PREVIEW } from "../../../../../constants/textsAndMessages";
+import { STATS } from "../../../../../constants/textsAndMessages";
 
 const CardBackLowerBlackStripe = () => {
   const calculator = usePointCostCalculator();
   const theme = useTheme();
 
   const SC = useContext(StateCardContext);
-  const totalPoints = `${calculator.calculateTotalUnitCost(SC.unit)} ${CARD_PREVIEW.POINTS}`;
+  const totalPoints = `${calculator.calculateTotalUnitCost(SC.unit)} ${STATS.POINTS}`;
 
   return (
     <Grid>
