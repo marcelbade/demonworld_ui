@@ -5,9 +5,12 @@ import { Typography, IconButton, Accordion, AccordionSummary, AccordionDetails, 
 import { ItemContext } from "../../../../../contexts/itemContext";
 import { SelectionContext } from "../../../../../contexts/selectionContext";
 import useUnitEqipmentLimits from "../../../../../customHooks/useUnitEqipmentLimits";
+import CustomIcon from "../../../../shared/statCards/CustomIcon";
 // icons
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import SpellBookIcon from "../../../../../assets/icons/spellbook-black.png";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+// constants
+import { TOOLTIPS } from "../../../../../constants/textsAndMessages";
 
 const TreeItemNode = (props) => {
   const IC = useContext(ItemContext);
@@ -48,15 +51,22 @@ const TreeItemNode = (props) => {
     SEC.setSelectedUnits([...tempArray]);
   };
 
-  //TODO points, set item flags for units
-
   return (
     <Accordion
       key={props.item.itemName} //
       style={{ boxShadow: "none" }}
     >
       <AccordionSummary
-        expandIcon={<ExpandMoreIcon />} //
+        expandIcon={
+          <CustomIcon //
+            icon={SpellBookIcon}
+            altText={TOOLTIPS.RULE_BOOK_TEXT}
+            height={35}
+            width={35}
+            boxHeight={45}
+            boxWidth={45}
+          />
+        } //
         aria-controls="panel1a-content"
         id="shopItem"
       >
