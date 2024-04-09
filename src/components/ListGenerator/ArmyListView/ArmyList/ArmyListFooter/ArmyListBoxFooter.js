@@ -8,7 +8,7 @@ import useArmyValidation from "../../../../../customHooks/UseArmyValidation";
 // import { calculateTotalPointCost } from "../../../../../util/utilityFunctions";
 import usePointCostCalculator from "../../../../../customHooks/UsePointCostCalculator";
 // constants
-import { GENERAL_ERRRORS, INPUT_TEXTS, TEXTS } from "../../../../../constants/textsAndMessages";
+import { GENERAL_ERRRORS, STATS, TEXTS, INPUT_TEXTS } from "../../../../../constants/textsAndMessages";
 
 const ArmyListBoxFooter = () => {
   const SEC = useContext(SelectionContext);
@@ -51,7 +51,7 @@ const ArmyListBoxFooter = () => {
                 pading: "50px",
                 width: "130px",
               },
-              endAdornment: <InputAdornment position="end">{INPUT_TEXTS.POINTS}</InputAdornment>,
+              endAdornment: <InputAdornment position="end">{STATS.POINTS}</InputAdornment>,
             }}
             onChange={changeMaximumPointValue}
             required
