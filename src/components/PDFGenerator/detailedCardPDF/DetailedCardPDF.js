@@ -1,7 +1,7 @@
 // react
 import React from "react";
 // react-pdf
-import { Page, View, Document, Font } from "@react-pdf/renderer";
+import { View, Document, Font } from "@react-pdf/renderer";
 // fonts
 import notMaryKate from "../../../assets/fonts/notMaryKate.ttf";
 import jaapokkiRegular from "../../../assets/fonts/jaapokkiRegular.ttf";
@@ -14,9 +14,6 @@ import CardHeader from "./detailedCardsComponets/header/Header";
 import SecondBlackRow from "./detailedCardsComponets/secondBlackRow/SecondBlackRow";
 import CardFooter from "./detailedCardsComponets/footer/CardFooter";
 import SubfactionSubtitle from "../sharedPDFComponents/SubfactionSubtitle";
-import TitleAndStats from "../sharedPDFComponents/TitleAndStats";
-import PageNumber from "../sharedPDFComponents/PageNumber";
-import { commonStyles } from "../pdfStyles/commonStyles";
 
 // Register font
 Font.register({ family: "notMaryKate", src: notMaryKate });
@@ -25,28 +22,22 @@ Font.register({ family: "jaapokkiRegular", src: jaapokkiRegular });
 const ListPDF = (props) => {
   return (
     <Document>
-      <Page style={commonStyles.pageLayout}>
-        <TitleAndStats data={props.data} />
-        <View>
-          {props.data.list
-            .filter((subFaction) => subFaction.units.length > 0)
-            .map((obj, i) => (
-              <View>
-                <SubfactionSubtitle key={i} data={obj} />
-                {obj.units.map((u, i) => (
-                  <View key={i} style={detailedStyles.cardBox} wrap={false}>
-                    <CardHeader unit={u} />
-                    <FirstBlackRow unit={u} />
-                    <CardCenter unit={u} />
-                    <SecondBlackRow unit={u} />
-                    <CardFooter unit={u} />
-                  </View>
-                ))}
+      {props.data.list
+        .filter((subFaction) => subFaction.units.length > 0)
+        .map((obj, i) => (
+          <View>
+            <SubfactionSubtitle key={i} data={obj} />
+            {obj.units.map((u, i) => (
+              <View key={i} style={detailedStyles.cardBox} wrap={false}>
+                <CardHeader unit={u} />
+                <FirstBlackRow unit={u} />
+                <CardCenter unit={u} />
+                <SecondBlackRow unit={u} />
+                <CardFooter unit={u} />
               </View>
             ))}
-        </View>
-        <PageNumber />
-      </Page>
+          </View>
+        ))}
     </Document>
   );
 };
