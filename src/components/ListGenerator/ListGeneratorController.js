@@ -14,6 +14,9 @@ import ArmyListBox from "./ArmyListView/ArmyListBox";
 import AlternativeArmyLists from "./ArmySelectorView/AlternativeArmyListSelection/AlternativeArmyLists";
 import MenuBox from "./RightSideMenus/MenuBox";
 import MainMenuReturnButton from "../shared/MainMenuReturnButton";
+import ArmySelector from "./ArmySelectorView/ArmySelector";
+import CustomIcon from "../shared/statCards/CustomIcon";
+import customStyledErrorMessage from "../../AppTheme/notiStackTheme";
 // context providers
 import ArmyProvider from "../../contexts/armyContext";
 import AllyProvider from "../../contexts/allyContext";
@@ -27,9 +30,7 @@ import TournamentRulesProvider from "../../contexts/tournamentRulesContext";
 // constants
 import { NONE } from "../../constants/factions";
 import { NO_ALLY } from "../../constants/factions";
-import ArmySelector from "./ArmySelectorView/ArmySelector";
-import CustomIcon from "../shared/statCards/CustomIcon";
-import customStyledErrorMessage from "../../AppTheme/notiStackTheme";
+import { TOOLTIPS } from "../../constants/textsAndMessages";
 
 const ListGeneratorController = () => {
   // intialize local states
@@ -283,7 +284,7 @@ const ListGeneratorController = () => {
                           error: (
                             <CustomIcon //
                               icon={SpellBookIcon}
-                              altText={"Regelbuchtext"}
+                              altText={TOOLTIPS.RULE_BOOK_TEXT}
                               height={35}
                               width={35}
                               boxHeight={45}
