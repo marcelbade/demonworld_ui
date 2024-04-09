@@ -59,6 +59,7 @@ export const COMPENDIUM = {
 
 export const TOOLTIPS = {
   DELETE_ARMY_LIST: "Komplette Liste löschen.",
+  RULE_BOOK_TEXT : "Regelbuchtext",
 };
 
 export const TOURNAMENT_RULES = {
