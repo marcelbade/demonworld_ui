@@ -77,7 +77,7 @@ const rules = [
   },
 ];
 
-const LizardMenRules = {
+const southernCityStatesRules = {
   testSubFactionRules: (validationData) => {
     //  general rules
     let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(
@@ -207,4 +207,10 @@ const totalPointsForMagiciansAndHeroes = (selectedUnits, availableUnits, totalPo
   return result;
 };
 
-export { LizardMenRules, rules };
+// TODO: Helden und Befehlshaber des Nordens (Südens) dür-fen nur aufgestellt werden, wenn auch mindestens eine Einheit des Nordens (Südens) rekrutiert wird.
+
+const provincesRule = () => {
+
+};
+
+export { southernCityStatesRules, rules };
