@@ -9,6 +9,7 @@ import { NorwingerRules } from "./factionValidationRules/norwingerRules";
 import { UndeadRules } from "./factionValidationRules/undeadRules";
 import { ThainRules } from "./factionValidationRules/thainRules";
 import { LizardMenRules } from "./factionValidationRules/lizardmenRules";
+import { SouthernCityStatesRules } from "./factionValidationRules/southernCityStatesRules";
 
 /**
  * Logic and abstraction layer for validating army lists. Returns a validator object with a testSubFactionRules function that differs for every faction.
@@ -39,8 +40,9 @@ export const ruleValidation = (faction) => {
       return DwarfRules;
     case "Echsenmenschen":
       return LizardMenRules;
+    case "Südliche Stadtstaaten":
+      return SouthernCityStatesRules;
     default:
-      // there is no default case.
-      break;
+      throw new Error("ruleValidationSelector could not find validator for supplied faction.");
   }
 };
