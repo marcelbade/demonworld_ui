@@ -9,7 +9,7 @@ import { rules as NorwingerRulesList } from "./factionValidationRules/norwingerR
 import { rules as UndeadRulesList } from "./factionValidationRules/undeadRules";
 import { rules as ThainRulesList } from "./factionValidationRules/thainRules";
 import { rules as LizardMenRulesList } from "./factionValidationRules/lizardmenRules";
-import { rules as southernCityStatesRulesList } from "./factionValidationRules/southernCityStates";
+import { rules as SouthernCityStatesRulesList } from "./factionValidationRules/southernCityStatesRules";
 
 /**
  * In order to calculate the point allowance for a faction's subFactions dynamically, the rules object containing the percentages for the faction has to be made available.
@@ -40,8 +40,8 @@ export const ruleObjectProvider = (faction) => {
       return DwarfRulesList;
     case "Echsenmenschen":
       return LizardMenRulesList;
-    case "SüdlicheStadtStaaten":
-      return southernCityStatesRulesList;
+    case "Südliche Stadtstaaten":
+      return SouthernCityStatesRulesList;
     default:
       // there is no default case, hence an error is thrown.
       throw new Error(" RuleObjectProvider could not find ruleObject for provided faction.");
