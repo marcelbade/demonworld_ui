@@ -328,7 +328,7 @@ const thanarilCovenRule = (selectedUnits) => {
 };
 
 /**
- * Function implements the second part of the Coven rule: if a Thanaril hero is removed anbd there is more than one unit of the same coven present in the list, it must be removbed automatically.
+ * Function implements the second part of the Coven rule: if a Thanaril hero is removed and there is more than one unit of the same coven present in the list, it must be removbed automatically.
  * @param {[unitCard]} selectedUnits
  * @returns an array of units that need to be removed from the army list automatically.
  */
