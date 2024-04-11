@@ -351,7 +351,22 @@ export const UNDEAD = {
   },
   ERRORS: {
     UNDEAD_COMMANDER: "Deine Liste muss einen Nekromanten oder einen Helden oder Befehlshaber mit 2 oder mehr ★ enthalten.",
-    MAX_LIMIT_CHARACTERS: "Die Armee darf zu max. 50% aus Helden, Befehlshaber und Magiern bestehen!.",
+    MAX_LIMIT_CHARACTERS: "Die Armee darf zu max. 50% aus Helden, Befehlshaber und Magiern bestehen.",
     ALLIES: "Diese Einheit steht nicht als Alliierter zur Verfügung.",
+  },
+};
+export const SOUTHERN_CITY_STATES = {
+  SUB_FACTION_RULES: {
+    PROVINVIAL_TROOPS: "Deine Armeeliste muss zu mindestens 30% aus Einheiten des Provinzheeres bestehen.",
+    NORTHERN_TROOPS: "Deine Armeeliste darf zu höchstens 50% aus Truppen des Nordens bestehen.",
+    SOUTHERN_TROOPS: "Deine Armeeliste darf zu höchstens 50% aus Truppen des Südens bestehen.",
+    ORDER_OF_TRUE_FAITH: "Deine Armeeliste darf zu höchstens 40% aus Truppen des Orden des wahren Glaubens bestehen.",
+    BROTHERHOOD_OF_SAND: "Deine Armeeliste darf zu höchstens 40% aus Truppen der Bruderschaft des Sandes bestehen.",
+  },
+  ERRORS: {
+    BROTHERHOOD_ORDER:"Die Armee kann entweder nur Truppen des Ordens des wahren Glaubens oder der Bruderschaft des Sands enthalten.",
+    
+    MAX_LIMIT_CHARACTERS:"Die Armee darf zu max. 50% aus Helden, Befehlshaber und Magiern bestehen:",
+
   },
 };
