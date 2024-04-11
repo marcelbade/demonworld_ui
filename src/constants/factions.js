@@ -1,20 +1,21 @@
 // SINGLE FACTIONS
-export const DUNKELFELFEN = "Dunkelelfen";
-export const ECHSENMENSCHEN = "Echsenmenschen";
-export const ELFEN = "Elfen";
+export const DARKELVES = "Dunkelelfen";
+export const LIZARDKIN = "Echsenmenschen";
+export const ELVES = "Elfen";
 export const GOBLINS = "Goblins";
-export const IMPERIUM = "Imperium";
+export const EMPIRE = "Imperium";
 export const ISHTAK = "Ishtak";
 export const ORKS = "Orks";
 export const NORWINGER = "Norwinger";
 export const THAIN = "Thain";
-export const UNTOTE = "Untote";
-export const ZWERGE = "Zwerge";
+export const UNDEAD = "Untote";
+export const DWARVES = "Zwerge";
+export const SOUTHERN_CITY_STATES = "Südliche Stadtstaaten";
 export const NONE = "NONE";
 export const NO_ALLY = "NO_ALLY";
 
 // ALL FACTIONS
-export const ALL_FACTIONS_ARRAY = [DUNKELFELFEN, ELFEN, GOBLINS, IMPERIUM, ISHTAK, NORWINGER, ORKS, THAIN, UNTOTE, ZWERGE, ECHSENMENSCHEN];
+export const ALL_FACTIONS_ARRAY = [DARKELVES, ELVES, GOBLINS, EMPIRE, ISHTAK, NORWINGER, ORKS, THAIN, UNDEAD, DWARVES, LIZARDKIN, SOUTHERN_CITY_STATES];
 
 export const ALTERNATIVE_ARMY_SELECTION_TEXT = {
   Imperium: "Wähle eine der Marken",
@@ -35,7 +36,7 @@ export const ARMIES_ADDITIONAL_SUBFACTIONS_MAPPING = [
   },
 ];
 
-export const ARMIES_TWO_CHOICES_PER_ALTERNATIVE_LIST = [ZWERGE];
+export const ARMIES_TWO_CHOICES_PER_ALTERNATIVE_LIST = [DWARVES];
 
 // THAIN
 export const THAIN_TRIBES = ["Eberstamm", "Bärenstamm", "Wolfsstamm", "Berglöwenstamm", "Adlerstamm"];
