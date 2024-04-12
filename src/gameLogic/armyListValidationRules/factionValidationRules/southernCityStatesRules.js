@@ -8,28 +8,28 @@ const rules = [
     subFaction: "provincialTroops",
     min: 0.3,
     max: 1.0,
-    cardNames: ["Provinzheer"],
+    cardNames: [SOUTHERN_CITY_STATES.SUB_FACTIONS.PROVINCIAL_TROOPS],
     error: SOUTHERN_CITY_STATES.SUB_FACTION_RULES.PROVINVIAL_TROOPS,
   },
   {
     subFaction: "northernTroops",
     min: 0.0,
     max: 0.5,
-    cardNames: ["Truppen des Nordens"],
+    cardNames: [SOUTHERN_CITY_STATES.SUB_FACTIONS.NORTHERN_TROOPS],
     error: SOUTHERN_CITY_STATES.SUB_FACTION_RULES.NORTHERN_TROOPS,
   },
   {
     subFaction: "southernTroops",
     min: 0.0,
     max: 0.5,
-    cardNames: ["Truppen des Südens"],
+    cardNames: [SOUTHERN_CITY_STATES.SUB_FACTIONS.SOUTHERN_TROOPS],
     error: SOUTHERN_CITY_STATES.SUB_FACTION_RULES.SOUTHERN_TROOPS,
   },
   {
     subFaction: "orderOfTrueFaith",
     min: 0.0,
     max: 0.4,
-    cardNames: ["Orden des wahren Glaubens"],
+    cardNames: [SOUTHERN_CITY_STATES.SUB_FACTIONS.ORDER_OF_TRUE_FAITH],
     error: SOUTHERN_CITY_STATES.SUB_FACTION_RULES.ORDER_OF_TRUE_FAITH,
   },
 
@@ -99,15 +99,15 @@ const SouthernCityStatesRules = {
     // special faction rules
 
     const NORTHERN_REGION_TROOPS = {
-      name: "Truppen des Nordens",
+      name: SOUTHERN_CITY_STATES.SUB_FACTIONS.NORTHERN_TROOPS,
       units: (availableUnits) => {
-        return availableUnits.filter((u) => u.subFaction === "Truppen des Nordens");
+        return availableUnits.filter((u) => u.subFaction === SOUTHERN_CITY_STATES.SUB_FACTIONS.NORTHERN_TROOPS);
       },
     };
     const SOUTHERN_REGION_TROOPS = {
-      name: "Truppen des Südens",
+      name: SOUTHERN_CITY_STATES.SUB_FACTIONS.NORTHERN_TROOPS,
       units: (availableUnits) => {
-        return availableUnits.filter((u) => u.subFaction === "Truppen des Südens");
+        return availableUnits.filter((u) => u.subFaction === SOUTHERN_CITY_STATES.SUB_FACTIONS.SOUTHERN_TROOPS);
       },
     };
 
@@ -169,7 +169,10 @@ const SouthernCityStatesRules = {
  */
 const brotherhoodOrOrder = (selectedUnits, availableUnits) => {
   const MESSAGE = SOUTHERN_CITY_STATES.ERRORS.BROTHERHOOD_ORDER;
-  let FACTIONS = ["Orden des wahren Glaubens", "Bruderschaft des Sandes"];
+  let FACTIONS = [
+    SOUTHERN_CITY_STATES.SUB_FACTIONS.ORDER_OF_TRUE_FAITH, //
+    SOUTHERN_CITY_STATES.SUB_FACTIONS.BROTHERHOOD_OF_SAND,
+  ];
 
   let result = [];
 
@@ -228,7 +231,8 @@ const totalPointsForMagiciansAndHeroes = (selectedUnits, availableUnits, totalPo
  */
 const regionRule = (selectedUnits, availableUnits, region, message) => {
   let result = [];
-  let areRegionalUnitsPresent = selectedUnits.filter((selectedUnits) => region.units(availableUnits).includes(selectedUnits.unitName)).length > 0;
+  let areRegionalUnitsPresent =
+    selectedUnits.filter((selectedUnits) => region.units(availableUnits).includes(selectedUnits.unitName)).length > 0;
 
   if (!areRegionalUnitsPresent) {
     availableUnits
