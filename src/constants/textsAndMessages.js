@@ -356,6 +356,15 @@ export const UNDEAD = {
   },
 };
 export const SOUTHERN_CITY_STATES = {
+  SUB_FACTIONS: {
+    PROVINCIAL_TROOPS: "Provinzheer",
+    NORTHERN_TROOPS: "Truppen des Nordens",
+    SOUTHERN_TROOPS: "Truppen des Südens",
+    ORDER_OF_TRUE_FAITH: "Orden des wahren Glaubens",
+    BROTHERHOOD_OF_SAND: "Bruderschaft des Sandes",
+    SUMMONS: "Beschwörung",
+  },
+
   SUB_FACTION_RULES: {
     PROVINVIAL_TROOPS: "Deine Armeeliste muss zu mindestens 30% aus Einheiten des Provinzheeres bestehen.",
     NORTHERN_TROOPS: "Deine Armeeliste darf zu höchstens 50% aus Truppen des Nordens bestehen.",
