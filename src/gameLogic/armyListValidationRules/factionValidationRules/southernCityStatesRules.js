@@ -1,46 +1,11 @@
-/**
-Die zur Verfügung stehenden Punkte können bei einer Armee der Südlichen Stadtstaaten wie folgt verwendet werden:
-
-1.	Provinzheer (einschließlich Persönlichkeiten)	mindestens 30%
-	
-2.	Truppen des Nordens (einschließlich Persönlichkeiten)	maximal 50%
-	
-3.	Truppen des Südens (einschließlich Persönlichkeiten) *	maximal 50%
-	
-			oder	
-	
-	Truppen Z'ahras (einschließlich Persönlichkeiten / keine Spezialtruppen Gaetas) *	maximal 20%
-	
-4.	Orden des wahren Glaubens (einschließlich Persönlichkeiten) **	maximal 40%
-	
-			oder	
-	
-	Bruderschaft des Sandes (einschließlich Persönlichkeiten) **	maximal 40%
-	
-*	Truppen des Südens können nicht gemeinsam mit Truppen des verbündeten Zwergenreiches Z'ahra aufgestellt werden.
-**	Truppenkontingente des Ordens des wahren Glaubens und der Bruderschaft des Sandes sind nicht kombinierbar.
-	
-Außerdem sind folgende Beschränkungen und Regelungen zu beachten:	
-	
-Helden, Befehlshaber, Zauberer	maximal 40%
-	
-Großelemente	maximal 30% 
-	
-Jede Armee der Südlichen Stadtstaaten muss mindestens über einen menschlichen Befehlshaber mit '**' oder mehr verfügen. Ysastra und Arokles zählen in diesem Zusammenhang nicht als **-Befehlshaber.
-	
-Helden und Befehlshaber des Nordens (Südens) dürfen nur aufgestellt werden, wenn auch mindestens eine Einheit des Nordens (Südens) rekrutiert wird.
-	
-In den folgenden Kapiteln wird vereinzelt auf weitere Beschränkungen verwiesen, wie z. B. beim Phönix.
-**/
-
 import { SOUTHERN_CITY_STATES } from "../../../constants/textsAndMessages";
-import { MAGE, HERO } from "../../../constants/unitTypes";
+import { MAGE, HERO, UNIT, GIANT } from "../../../constants/unitTypes";
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
 
 const rules = [
   {
-    subFaction: "provinvialTroops",
+    subFaction: "provincialTroops",
     min: 0.3,
     max: 1.0,
     cardNames: ["Provinzheer"],
@@ -74,6 +39,13 @@ const rules = [
     max: 0.4,
     cardNames: ["Bruderschaft des Sandes"],
     error: SOUTHERN_CITY_STATES.SUB_FACTION_RULES.BROTHERHOOD_OF_SAND,
+  },
+  {
+    subFaction: "Summons",
+    min: 0.0,
+    max: 1.0,
+    cardNames: ["Beschwörung"],
+    error: SOUTHERN_CITY_STATES.SUB_FACTION_RULES.SUMMONS,
   },
 ];
 
@@ -125,9 +97,47 @@ const SouthernCityStatesRules = {
       : [];
 
     // special faction rules
-    // TODO
+
+    // TODO: make dynamic !!!!!
+    const NORTHERN_REGION = {
+      name: "Norden",
+      units: [
+        "Abile Spada",
+        "Haubitze",
+        "Landsknechte m.beidh.Hiebwaffen",
+        "Landsknechte m.Hellebarden",
+        "Musikkorps",
+        "Musketenträger",
+        "Orgelkanone",
+        "Pistoleros",
+        "Ritterbund",
+        "Zyklop",
+      ],
+    };
+    const SOUTHERN_REGION = {
+      name: "Süden",
+      units: [
+        "Amazonen m.Langbögen",
+        "Amazonenkriegerinnen",
+        "Gladiatorenstreitwagen",
+        "Greifen",
+        "Kamelreiter",
+        "Kamelreiter mit Wurfspeeren",
+        "Löwenrudel",
+        "Riesenschlange",
+        "Verlorene Söhne",
+      ],
+    };
+
+    const MESSAGE_SOUTH = SOUTHERN_CITY_STATES.ERRORS.REGION_HEROES_SOUTH;
+    const MESSAGE_NORTH = SOUTHERN_CITY_STATES.ERRORS.REGION_HEROES_NORTH;
+
     brotherhoodOrOrder(validationData.selectedUnits, validationData.availableUnits);
     totalPointsForMagiciansAndHeroes(validationData.selectedUnits, validationData.availableUnits, validationData.totalPointsAllowance);
+    regionRule(validationData.selectedUnit, validationData.availableUnits, NORTHERN_REGION, MESSAGE_NORTH);
+    regionRule(validationData.selectedUnit, validationData.availableUnits, SOUTHERN_REGION, MESSAGE_SOUTH);
+    regionalArmyRemove(validationData.selectedUnit, NORTHERN_REGION);
+    regionalArmyRemove(validationData.selectedUnit, SOUTHERN_REGION);
 
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [
@@ -183,6 +193,7 @@ const brotherhoodOrOrder = (selectedUnits, availableUnits) => {
  * @returns an array where each element is an object with blocked unit and an error message giving the reaosn
  * for the block.
  */
+// TODO: remove function missing, make function global since there are several armies with this logic. This army needs the function twice: heroes/wizards and giants.
 const totalPointsForMagiciansAndHeroes = (selectedUnits, availableUnits, totalPointsAllowance) => {
   const MAGICIAN_AND_HEROES_LIMIT = 40;
   const max_percentage = (totalPointsAllowance * MAGICIAN_AND_HEROES_LIMIT) / 100;
@@ -207,10 +218,46 @@ const totalPointsForMagiciansAndHeroes = (selectedUnits, availableUnits, totalPo
   return result;
 };
 
-// TODO: Helden und Befehlshaber des Nordens (Südens) dür-fen nur aufgestellt werden, wenn auch mindestens eine Einheit des Nordens (Südens) rekrutiert wird.
+/**
+ * Function implements the rule for the regional troops. Heroes of the south (north) can only be selected if at least one unit of the south (north) has been selected first.
+ * @param {[unitCard]} selectedUnits
+ * @param {[unitCard]} availableUnits
+ * @returns array of objects containing a blocked unit and an error message.
+ */
+const regionRule = (selectedUnits, availableUnits, region, message) => {
+  let result = [];
+  let areRegionalUnitsPresent = selectedUnits.filter((selectedUnits) => region.units.includes(selectedUnits.unitName)).length > 0;
 
-const provincesRule = () => {
+  if (!areRegionalUnitsPresent) {
+    availableUnits
+      .filter((u) => u.subFaction === region.name && (u.unitType === UNIT || u.unitType === GIANT))
+      .forEach((u) => {
+        result.push({ unitBlockedbyRules: u.unitName, message: message });
+      });
+  }
+  return result;
+};
 
+/**
+ * Function implements the rule for the heroes / magicians of the provincial troops:
+ * if the army list contains no provincial units but
+ * still contains provincial heroes / magicians, they are removed.
+ * @param {[unitCard]} selectedUnits
+ * @returns array of units that need to be removed from the army list automatically.
+ */
+const regionalArmyRemove = (selectedUnits, region) => {
+  let result = [];
+
+  let areProvincialUnitsPresent = selectedUnits.filter((selectedUnit) => region.units.includes(selectedUnit.unitName)).length > 0;
+
+  if (!areProvincialUnitsPresent) {
+    selectedUnits
+      .filter((u) => u.subFaction === region.name)
+      .forEach((u) => {
+        result.push(u);
+      });
+  }
+  return result;
 };
 
 export { SouthernCityStatesRules, rules };
