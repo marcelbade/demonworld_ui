@@ -98,46 +98,35 @@ const SouthernCityStatesRules = {
 
     // special faction rules
 
-    // TODO: make dynamic !!!!!
-    const NORTHERN_REGION = {
-      name: "Norden",
-      units: [
-        "Abile Spada",
-        "Haubitze",
-        "Landsknechte m.beidh.Hiebwaffen",
-        "Landsknechte m.Hellebarden",
-        "Musikkorps",
-        "Musketenträger",
-        "Orgelkanone",
-        "Pistoleros",
-        "Ritterbund",
-        "Zyklop",
-      ],
+    const NORTHERN_REGION_TROOPS = {
+      name: "Truppen des Nordens",
+      units: (availableUnits) => {
+        return availableUnits.filter((u) => u.subFaction === "Truppen des Nordens");
+      },
     };
-    const SOUTHERN_REGION = {
-      name: "Süden",
-      units: [
-        "Amazonen m.Langbögen",
-        "Amazonenkriegerinnen",
-        "Gladiatorenstreitwagen",
-        "Greifen",
-        "Kamelreiter",
-        "Kamelreiter mit Wurfspeeren",
-        "Löwenrudel",
-        "Riesenschlange",
-        "Verlorene Söhne",
-      ],
+    const SOUTHERN_REGION_TROOPS = {
+      name: "Truppen des Südens",
+      units: (availableUnits) => {
+        return availableUnits.filter((u) => u.subFaction === "Truppen des Südens");
+      },
     };
 
     const MESSAGE_SOUTH = SOUTHERN_CITY_STATES.ERRORS.REGION_HEROES_SOUTH;
     const MESSAGE_NORTH = SOUTHERN_CITY_STATES.ERRORS.REGION_HEROES_NORTH;
 
-    brotherhoodOrOrder(validationData.selectedUnits, validationData.availableUnits);
-    totalPointsForMagiciansAndHeroes(validationData.selectedUnits, validationData.availableUnits, validationData.totalPointsAllowance);
-    regionRule(validationData.selectedUnit, validationData.availableUnits, NORTHERN_REGION, MESSAGE_NORTH);
-    regionRule(validationData.selectedUnit, validationData.availableUnits, SOUTHERN_REGION, MESSAGE_SOUTH);
-    regionalArmyRemove(validationData.selectedUnit, NORTHERN_REGION);
-    regionalArmyRemove(validationData.selectedUnit, SOUTHERN_REGION);
+    let testForBrotherhoodOrOrder = brotherhoodOrOrder(validationData.selectedUnits, validationData.availableUnits);
+    let testForHeroMagicianTotal = totalPointsForMagiciansAndHeroes(
+      validationData.selectedUnits,
+      validationData.availableUnits,
+      validationData.totalPointsAllowance
+    );
+    let testNorthernRegion = regionRule(validationData.selectedUnit, validationData.availableUnits, NORTHERN_REGION_TROOPS, MESSAGE_NORTH);
+    let testSouthernthernRegion = regionRule(
+      validationData.selectedUnit,
+      validationData.availableUnits,
+      SOUTHERN_REGION_TROOPS,
+      MESSAGE_SOUTH
+    );
 
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [
@@ -146,12 +135,25 @@ const SouthernCityStatesRules = {
       ...testForHeroCapResult,
       ...testForMax2Result,
       ...isAboveSubFactionMax,
+      ...testForBrotherhoodOrOrder,
+      ...testForHeroMagicianTotal,
+      ...testNorthernRegion,
+      ...testSouthernthernRegion,
     ];
     // result for sub factions below limit.
     validationResults.subFactionBelowMinimum = isBelowSubFactionMin;
 
     // result - is a commander present?
     validationResults.commanderIsPresent = hasNoCommander;
+
+    // Are there units that need to be removed from the list?
+    let testNorthernRegionRemove = regionalArmyRemove(validationData.selectedUnit, NORTHERN_REGION_TROOPS);
+    let testSouthernRegionRemove = regionalArmyRemove(validationData.selectedUnit, SOUTHERN_REGION_TROOPS);
+
+    validationResults.removeUnitsNoLongerValid = [
+      ...testNorthernRegionRemove, //
+      ...testSouthernRegionRemove,
+    ];
 
     return validationResults;
   },
@@ -226,7 +228,7 @@ const totalPointsForMagiciansAndHeroes = (selectedUnits, availableUnits, totalPo
  */
 const regionRule = (selectedUnits, availableUnits, region, message) => {
   let result = [];
-  let areRegionalUnitsPresent = selectedUnits.filter((selectedUnits) => region.units.includes(selectedUnits.unitName)).length > 0;
+  let areRegionalUnitsPresent = selectedUnits.filter((selectedUnits) => region.units(availableUnits).includes(selectedUnits.unitName)).length > 0;
 
   if (!areRegionalUnitsPresent) {
     availableUnits
