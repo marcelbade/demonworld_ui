@@ -25,10 +25,10 @@ const globalRules = {
   },
 
   /**
-   * Function checks whether a unit has already been selected. if so, it is blocked.
+   * Function checks whether a unique unit has already been selected. If so, it is blocked.
    * @param {*} selectedUnits  array of selected units
-   * @returns array consisting of objects. Every object contains a unit that must be blocked and an error message to
-   * be displayed as a tool tip.
+   * @returns array consisting of objects. Every object contains a
+   * unit that must be blocked and an error message to be displayed as a tool tip.
    */
   noDuplicateUniques: (selectedUnits) => {
     const result = [];
