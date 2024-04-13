@@ -1,8 +1,8 @@
-import { NORWINGER } from "../../../constants/textsAndMessages";
-import { AUTOMATON, GIANT, HERO, UNIT } from "../../../constants/unitTypes";
-import { areGivenUnitsPresent, findUnits } from "../../../util/utilityFunctions";
+// functions and components
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
+// constants
+import { NORWINGER } from "../../../constants/textsAndMessages";
 
 const rules = [
   {
