@@ -201,12 +201,14 @@ export const SUMMONS = {
 };
 
 export const DARKELVES = {
-  SUB_FACTIONS: {
-    warriorCaste: "Kriegerkaste",
-    nobleCaste: "Adelskaste",
-    magicianCaste: "Magierkaste",
-    priestCaste: "Priesterkaste",
-    priests: "Priesterin",
+  SF: {
+    WARRIORCASTE: "Kriegerkaste",
+    NOBLECASTE: "Adelskaste",
+    MAGICIANCASTE: "Magierkaste",
+    PRIESTCASTE: "Priesterkaste",
+    PRIESTRESSES: "Priesterin",
+    HERO: "Held",
+    COMMANDER: "Befehlshaber",
   },
 
   SUB_FACTION_RULES: {
@@ -236,7 +238,7 @@ export const ELVES = {
   TERLOR: "Terlor der Pegasus",
   FARENDIL: "Farendil der Dachs",
   KELAH: "Kelah das Einhorn",
-  
+
   ARROW_LORDS: "Pfeillords",
   SWORD_MASTERS: "Schwertmeister",
   FORREST_RIDERS: "Waldreiter",

@@ -1,49 +1,49 @@
-import { DARKELVES, SUMMONS } from "../../../constants/textsAndMessages";
+import { DARKELVES, SUMMONS, UNIT_TYPES } from "../../../constants/textsAndMessages";
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
 
 const rules = [
   {
     subFaction: "warriorCaste",
-    cardNames: ["Kriegerkaste"],
+    cardNames: [DARKELVES.SF.WARRIORCASTE],
     min: 0.3,
     max: 1.0,
     error: DARKELVES.SUB_FACTION_RULES.WARRIOR_CASTE,
   },
   {
     subFaction: "nobleCaste",
-    cardNames: ["Adelskaste"],
+    cardNames: [DARKELVES.SF.NOBLECASTE],
     min: 0.0,
     max: 0.5,
     error: DARKELVES.SUB_FACTION_RULES.NOBLE_CASTE,
   },
   {
     subFaction: "magicianCaste",
-    cardNames: ["Magierkaste", "Magier"],
+    cardNames: [DARKELVES.SF.MAGICIANCASTE, UNIT_TYPES.M],
     min: 0.0,
     max: 0.4,
     error: DARKELVES.SUB_FACTION_RULES.MAGICIAN_CASTE,
   },
   {
     subFaction: "priestCaste",
-    cardNames: ["Priesterkaste", "Priesterin"],
+    cardNames: [DARKELVES.SF.PRIESTCASTE, DARKELVES.SF.PRIESTRESSES],
     min: 0.0,
     max: 0.4,
     error: DARKELVES.SUB_FACTION_RULES.PRIEST_CASTE,
   },
   {
     subFaction: "heroes",
-    cardNames: ["Befehlshaber", "Held", "Helden/Befehlshaber"],
+    cardNames: [DARKELVES.SF.COMMANDER, DARKELVES.SF.HERO, UNIT_TYPES.H],
     min: 0.0,
     max: 0.4,
     error: DARKELVES.SUB_FACTION_RULES.HEROES,
   },
   {
     subFaction: "summons",
-    cardNames: ["Beschwörung"],
+    cardNames: [SUMMONS.TYPE],
     min: 0.0,
     max: 0.0,
-    error:  SUMMONS.ERROR,
+    error: SUMMONS.ERROR,
   },
 ];
 
@@ -105,8 +105,8 @@ const DarkElveRules = {
     const magiciansVsPriests = () => {
       const INCREMENT = 10;
       const NET_TOTAL = 4; // 40% default allowance for either caste
-      const PRIESTS = ["Priesterin", "Priesterkaste", "magicianCaste"];
-      const MAGICIANS = ["Magier", "Magierkaste", "priestCaste"];
+      const PRIESTS = [DARKELVES.SF.PRIESTRESSES, DARKELVES.SF.PRIESTCASTE, "magicianCaste"];
+      const MAGICIANS = [UNIT_TYPES.M, DARKELVES.SF.MAGICIANCASTE, "priestCaste"];
 
       if (validationData.selectedUnits !== undefined && validationData.selectedUnits.length > 0) {
         for (let i = validationData.selectedUnits.length - 1; i >= 0; i--) {
