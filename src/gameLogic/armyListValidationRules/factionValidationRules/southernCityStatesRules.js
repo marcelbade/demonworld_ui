@@ -1,4 +1,4 @@
-import { SOUTHERN_CITY_STATES } from "../../../constants/textsAndMessages";
+import { CITY_STATES, SUMMONS } from "../../../constants/textsAndMessages";
 import { MAGE, HERO, UNIT, GIANT } from "../../../constants/unitTypes";
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
@@ -8,44 +8,44 @@ const rules = [
     subFaction: "provincialTroops",
     min: 0.3,
     max: 1.0,
-    cardNames: [SOUTHERN_CITY_STATES.SUB_FACTIONS.PROVINCIAL_TROOPS],
-    error: SOUTHERN_CITY_STATES.SUB_FACTION_RULES.PROVINVIAL_TROOPS,
+    cardNames: [CITY_STATES.SF.PROVINCIAL],
+    error: CITY_STATES.SF_RULES.PROVINCIAL,
   },
   {
     subFaction: "northernTroops",
     min: 0.0,
     max: 0.5,
-    cardNames: [SOUTHERN_CITY_STATES.SUB_FACTIONS.NORTHERN_TROOPS],
-    error: SOUTHERN_CITY_STATES.SUB_FACTION_RULES.NORTHERN_TROOPS,
+    cardNames: [CITY_STATES.SF.NORTH],
+    error: CITY_STATES.SF_RULES.NORTH,
   },
   {
     subFaction: "southernTroops",
     min: 0.0,
     max: 0.5,
-    cardNames: [SOUTHERN_CITY_STATES.SUB_FACTIONS.SOUTHERN_TROOPS],
-    error: SOUTHERN_CITY_STATES.SUB_FACTION_RULES.SOUTHERN_TROOPS,
+    cardNames: [CITY_STATES.SF.SOUTH],
+    error: CITY_STATES.SF_RULES.SOUTH,
   },
   {
     subFaction: "orderOfTrueFaith",
     min: 0.0,
     max: 0.4,
-    cardNames: [SOUTHERN_CITY_STATES.SUB_FACTIONS.ORDER_OF_TRUE_FAITH],
-    error: SOUTHERN_CITY_STATES.SUB_FACTION_RULES.ORDER_OF_TRUE_FAITH,
+    cardNames: [CITY_STATES.SF.ORDER],
+    error: CITY_STATES.SF_RULES.ORDER,
   },
 
   {
     subFaction: "brotherhoodOfSand",
     min: 0.0,
     max: 0.4,
-    cardNames: ["Bruderschaft des Sandes"],
-    error: SOUTHERN_CITY_STATES.SUB_FACTION_RULES.BROTHERHOOD_OF_SAND,
+    cardNames: [CITY_STATES.SF.BROTHERHOOD],
+    error: CITY_STATES.SF_RULES.BROTHERHOOD_OF_SAND,
   },
   {
     subFaction: "Summons",
     min: 0.0,
-    max: 1.0,
+    max: 0.0,
     cardNames: ["Beschwörung"],
-    error: SOUTHERN_CITY_STATES.SUB_FACTION_RULES.SUMMONS,
+    error: SUMMONS.ERROR,
   },
 ];
 
@@ -97,22 +97,6 @@ const SouthernCityStatesRules = {
       : [];
 
     // special faction rules
-
-    const NORTHERN_REGION_TROOPS = {
-      name: SOUTHERN_CITY_STATES.SUB_FACTIONS.NORTHERN_TROOPS,
-      units: (availableUnits) => {
-        return availableUnits.filter((u) => u.subFaction === SOUTHERN_CITY_STATES.SUB_FACTIONS.NORTHERN_TROOPS);
-      },
-    };
-    const SOUTHERN_REGION_TROOPS = {
-      name: SOUTHERN_CITY_STATES.SUB_FACTIONS.NORTHERN_TROOPS,
-      units: (availableUnits) => {
-        return availableUnits.filter((u) => u.subFaction === SOUTHERN_CITY_STATES.SUB_FACTIONS.SOUTHERN_TROOPS);
-      },
-    };
-
-    const MESSAGE_SOUTH = SOUTHERN_CITY_STATES.ERRORS.REGION_HEROES_SOUTH;
-    const MESSAGE_NORTH = SOUTHERN_CITY_STATES.ERRORS.REGION_HEROES_NORTH;
 
     let testForBrotherhoodOrOrder = brotherhoodOrOrder(validationData.selectedUnits, validationData.availableUnits);
     let testForHeroMagicianTotal = totalPointsForMagiciansAndHeroes(
@@ -168,10 +152,10 @@ const SouthernCityStatesRules = {
  * @returns array of objects containing a blocked unit and an error message.
  */
 const brotherhoodOrOrder = (selectedUnits, availableUnits) => {
-  const MESSAGE = SOUTHERN_CITY_STATES.ERRORS.BROTHERHOOD_ORDER;
+  const MESSAGE = CITY_STATES.ERRORS.BROTHERHOOD_ORDER;
   let FACTIONS = [
-    SOUTHERN_CITY_STATES.SUB_FACTIONS.ORDER_OF_TRUE_FAITH, //
-    SOUTHERN_CITY_STATES.SUB_FACTIONS.BROTHERHOOD_OF_SAND,
+    CITY_STATES.SF.ORDER_OF_TRUE_FAITH, //
+    CITY_STATES.SF.BROTHERHOOD_OF_SAND,
   ];
 
   let result = [];
@@ -190,6 +174,25 @@ const brotherhoodOrOrder = (selectedUnits, availableUnits) => {
 
   return result;
 };
+
+// special rules implementations
+
+const NORTHERN_REGION_TROOPS = {
+  name: CITY_STATES.SF.NORTHERN_TROOPS,
+  units: (availableUnits) => {
+    return availableUnits.filter((u) => u.subFaction === CITY_STATES.SF.NORTH);
+  },
+};
+const SOUTHERN_REGION_TROOPS = {
+  name: CITY_STATES.SF.NORTHERN_TROOPS,
+  units: (availableUnits) => {
+    return availableUnits.filter((u) => u.subFaction === CITY_STATES.SF.SOUTH);
+  },
+};
+
+const MESSAGE_SOUTH = CITY_STATES.ERRORS.REGION_HEROES_SOUTH;
+const MESSAGE_NORTH = CITY_STATES.ERRORS.REGION_HEROES_NORTH;
+
 
 /**
  * The army can only consist of 40% shamans and heroes.
@@ -216,7 +219,7 @@ const totalPointsForMagiciansAndHeroes = (selectedUnits, availableUnits, totalPo
     .filter((u) => u.unitType === HERO || u.unitType === MAGE)
     .forEach((u) => {
       if (shamansAndHeroesTotal + u.points > max_percentage) {
-        result.push({ unitBlockedbyRules: u.unitName, message: SOUTHERN_CITY_STATES.ERRORS.MAX_LIMIT_CHARACTERS });
+        result.push({ unitBlockedbyRules: u.unitName, message: CITY_STATES.ERRORS.MAX_LIMIT_CHARACTERS });
       }
     });
 
