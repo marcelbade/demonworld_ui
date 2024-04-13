@@ -4,7 +4,7 @@ import React, { useContext } from "react";
 import { AppBar, Dialog, IconButton, Toolbar, Typography, Slide } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 // components and functions
-import ToggleColumnsMenu from "./ToggleColumnsMenu";
+import ToggleColumnsMenu from "./toggleColumnsMenu";
 // constants
 import { COMPENDIUM } from "../../../../constants/textsAndMessages";
 import { TableContext } from "../../../../contexts/tableContext";
