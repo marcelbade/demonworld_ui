@@ -35,7 +35,7 @@ const rules = [
   },
   {
     subFaction: "mightyNorthernBeings",
-    cardNames: ["Mächtige Wesen des Nordens"],
+    cardNames: ["Mächtige Wesen"],
     min: 0.0,
     max: 0.4,
     error: NORWINGER.SUB_FACTION_RULES.MIGHTY_NORTHERN_BEINGS,
