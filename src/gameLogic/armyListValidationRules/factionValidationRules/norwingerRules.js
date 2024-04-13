@@ -7,7 +7,7 @@ import validationResults from "./validationResultsObjectProvider";
 const rules = [
   {
     subFaction: "barbarians",
-    cardNames: [NORWINGER.SF.BARBARIANS],
+    cardNames: ["Barbaren"],
     min: 0.2,
     max: 0.75,
     error: NORWINGER.SUB_FACTION_RULES.BARBARIANS,
@@ -107,8 +107,8 @@ const NorwingerRules = {
 
     // special faction rule
     const testForMountainKing = mountainKingRule(validationData.availableUnits, validationData.selectedUnits);
-    const testForGiantYeti = yetiRule(validationData.availableUnits, validationData.selectedUnits);
-    const testForNeander = neanderRule(validationData.availableUnits, validationData.selectedUnits);
+    // const testForGiantYeti = yetiRule(validationData.availableUnits, validationData.selectedUnits);
+    // const testForNeander = neanderRule(validationData.availableUnits, validationData.selectedUnits);
 
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [
@@ -119,8 +119,8 @@ const NorwingerRules = {
       ...isAboveCharLimit,
       ...testForHeroCapResult,
       ...testForMountainKing,
-      ...testForGiantYeti,
-      ...testForNeander,
+      // ...testForGiantYeti,
+      // ...testForNeander,
     ];
     // result for sub factions below limit.
     validationResults.subFactionBelowMinimum = isBelowSubFactionMin;
@@ -129,9 +129,9 @@ const NorwingerRules = {
     validationResults.commanderIsPresent = hasNoCommander;
 
     // Are there units that need to be removed from the list?
-    mountainKingRuleRemove(validationData.selectedUnits);
-    yetiRuleRemove(validationData.selectedUnits);
-    neanderRuleRemove(validationData.selectedUnits);
+    // mountainKingRuleRemove(validationData.selectedUnits);
+    // yetiRuleRemove(validationData.selectedUnits);
+    // neanderRuleRemove(validationData.selectedUnits);
 
     return validationResults;
   },
@@ -248,18 +248,18 @@ const yetiRuleRemove = (selectedUnits) => {
  */
 const mountainKingRule = (availableUnits, selectedUnits) => {
   const MESSAGE = NORWINGER.SUB_FACTION_RULES.MOUNTAIN_KING_RULE;
-  const alliedUnits = findUnits(selectedUnits, NORWINGER.SF.NORTHERN_ALLIES, [UNIT, GIANT, AUTOMATON]);
-  const areAlliesPresent = areGivenUnitsPresent(selectedUnits, alliedUnits);
+  const areAlliesPresent = selectedUnits.filter((u) => u.subFaction === NORWINGER.SF.NORTHERN_ALLIES).length > 0;
 
   let result = [];
 
   if (!areAlliesPresent) {
     availableUnits
-      .filter((u) => u.subFaction === NORWINGER.SF.NORTHERN_ALLIES && u.unitType === HERO)
+      .filter((u) => u.unitName === NORWINGER.MOUNTAIN_KING)
       .forEach((u) => {
         result.push({ unitBlockedbyRules: u.unitName, message: MESSAGE });
       });
   }
+
   return result;
 };
 
