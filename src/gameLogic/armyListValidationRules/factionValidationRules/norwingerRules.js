@@ -7,14 +7,14 @@ import validationResults from "./validationResultsObjectProvider";
 const rules = [
   {
     subFaction: "barbarians",
-    cardNames: ["Barbaren"],
+    cardNames: [NORWINGER.SF.BARBARIANS],
     min: 0.2,
     max: 0.75,
     error: NORWINGER.SUB_FACTION_RULES.BARBARIANS,
   },
   {
     subFaction: "veterans",
-    cardNames: [NORWINGER.SF.BARBARIANS],
+    cardNames: [NORWINGER.SF.VETERANS],
     min: 0.0,
     max: 0.4,
     error: NORWINGER.SUB_FACTION_RULES.VETERANS,
@@ -52,63 +52,63 @@ const rules = [
 ];
 
 const NorwingerRules = {
-  testSubFactionRules: (validationData) => {
+  testSubFactionRules: (data) => {
     //  general rules
     let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(
-      validationData.selectedUnits, //
-      validationData.availableUnits,
-      validationData.totalPointsAllowance
+      data.selectedUnits, //
+      data.availableUnits,
+      data.totalPointsAllowance
     );
     let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(
       rules,
-      validationData.selectedUnits,
-      validationData.totalPointsAllowance,
-      validationData.subFactions
+      data.selectedUnits,
+      data.totalPointsAllowance,
+      data.subFactions
     );
     let isAboveSubFactionMax = globalRules.unitsAboveSubFactionMax(
       rules,
-      validationData.selectedUnits,
-      validationData.totalPointsAllowance,
-      validationData.availableUnits
+      data.selectedUnits,
+      data.totalPointsAllowance,
+      data.availableUnits
     );
-    let hasNoCommander = globalRules.isArmyCommanderPresent(validationData.selectedUnits);
+    let hasNoCommander = globalRules.isArmyCommanderPresent(data.selectedUnits);
 
     // tournament rules
     let maxCopies;
     let heroPointCap;
 
-    if (validationData.tournamentOverrideRules.enableOverride) {
-      maxCopies = validationData.tournamentOverrideRules.maxNumber;
-      heroPointCap = validationData.tournamentOverrideRules.maxHeroValue;
+    if (data.tournamentOverrideRules.enableOverride) {
+      maxCopies = data.tournamentOverrideRules.maxNumber;
+      heroPointCap = data.tournamentOverrideRules.maxHeroValue;
     } else {
       maxCopies = 2;
       // faction rule => 50% cap
       heroPointCap = 50;
     }
 
-    let testForMax2Result = globalRules.maximumCopiesOfUnit(validationData.selectedUnits, maxCopies);
+    let testForMax2Result = globalRules.maximumCopiesOfUnit(data.selectedUnits, maxCopies);
     let testForHeroCapResult = globalRules.belowMaxPercentageHeroes(
-      validationData.selectedUnits,
-      validationData.totalPointsAllowance,
-      validationData.availableUnits,
+      data.selectedUnits,
+      data.totalPointsAllowance,
+      data.availableUnits,
       heroPointCap
     );
 
     let isAboveCharLimit = globalRules.belowMaxPercentageHeroes(
-      validationData.selectedUnits,
-      validationData.totalPointsAllowance,
-      validationData.availableUnits,
+      data.selectedUnits,
+      data.totalPointsAllowance,
+      data.availableUnits,
       heroPointCap
     );
 
-    let hasDuplicateUniques = validationData.tournamentOverrideRules.uniquesOnlyOnce //
-      ? globalRules.noDuplicateUniques(validationData.selectedUnits)
+    let hasDuplicateUniques = data.tournamentOverrideRules.uniquesOnlyOnce //
+      ? globalRules.noDuplicateUniques(data.selectedUnits)
       : [];
 
     // special faction rule
-    const testForMountainKing = mountainKingRule(validationData.availableUnits, validationData.selectedUnits);
-    // const testForGiantYeti = yetiRule(validationData.availableUnits, validationData.selectedUnits);
-    // const testForNeander = neanderRule(validationData.availableUnits, validationData.selectedUnits);
+    let testForMountainKing = mountainKingRule(data.availableUnits, data.selectedUnits);
+    let testForGiantYeti = yetiRule(data.availableUnits, data.selectedUnits);
+    let testForNeander = neanderRule(data.availableUnits, data.selectedUnits);
 
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [
@@ -119,8 +119,8 @@ const NorwingerRules = {
       ...isAboveCharLimit,
       ...testForHeroCapResult,
       ...testForMountainKing,
-      // ...testForGiantYeti,
-      // ...testForNeander,
+      ...testForGiantYeti,
+      ...testForNeander,
     ];
     // result for sub factions below limit.
     validationResults.subFactionBelowMinimum = isBelowSubFactionMin;
@@ -129,9 +129,15 @@ const NorwingerRules = {
     validationResults.commanderIsPresent = hasNoCommander;
 
     // Are there units that need to be removed from the list?
-    // mountainKingRuleRemove(validationData.selectedUnits);
-    // yetiRuleRemove(validationData.selectedUnits);
-    // neanderRuleRemove(validationData.selectedUnits);
+    let testForKingRemoval = mountainKingRuleRemove(data.selectedUnits);
+    let testForYetiRemoval = yetiRuleRemove(data.selectedUnits);
+    let testForNeanderRemoval = neanderRuleRemove(data.selectedUnits);
+
+    validationResults.removeUnitsNoLongerValid = [
+      ...testForKingRemoval, //
+      ...testForYetiRemoval,
+      ...testForNeanderRemoval,
+    ];
 
     return validationResults;
   },
@@ -149,11 +155,11 @@ const neanderRule = (availableUnits, selectedUnits) => {
   const excludedBarbarianUnits = [NORWINGER.NEANDERS, NORWINGER.SNOW_OGRES];
   const barabarianCount = selectedUnits.filter(
     (u) =>
-      (u.subFaction =
-        NORWINGER.SF.BARBARIANS && //
-        !excludedBarbarianUnits.includes(u.unitName))
+      u.subFaction === NORWINGER.SF.BARBARIANS && //
+      !excludedBarbarianUnits.includes(u.unitName)
   ).length;
-  const neandersCount = selectedUnits.filter((u) => (u.subFaction = u.unitName === NORWINGER.NEANDERS)).length;
+
+  const neandersCount = selectedUnits.filter((u) => u.unitName === NORWINGER.NEANDERS).length;
 
   let result = [];
 
@@ -178,20 +184,20 @@ const neanderRuleRemove = (selectedUnits) => {
   const excludedBarbarianUnits = [NORWINGER.NEANDERS, NORWINGER.SNOW_OGRES];
   const barabarianCount = selectedUnits.filter(
     (u) =>
-      (u.subFaction =
-        NORWINGER.SF.BARBARIANS && //
-        !excludedBarbarianUnits.includes(u.unitName))
+      u.subFaction === NORWINGER.SF.BARBARIANS && //
+      !excludedBarbarianUnits.includes(u.unitName)
   ).length;
-  const neandersCount = selectedUnits.filter((u) => (u.subFaction = u.unitName === NORWINGER.NEANDERS)).length;
+
+  const neandersCount = selectedUnits.filter((u) => u.unitName === NORWINGER.NEANDERS).length;
 
   let result = [];
 
   if (neandersCount > barabarianCount) {
-    const difference = neandersCount - barabarianCount;
-    while (difference >= 0) {
-      const unit = selectedUnits.find((u) => u.unitName === NORWINGER.NEANDERS);
-      result.push(unit);
-    }
+    selectedUnits
+      .filter((u) => u.unitName === NORWINGER.NEANDERS)
+      .forEach((u) => {
+        result.push(u);
+      });
   }
 
   return result;
@@ -205,13 +211,13 @@ const neanderRuleRemove = (selectedUnits) => {
  */
 const yetiRule = (availableUnits, selectedUnits) => {
   const MESSAGE = NORWINGER.SUB_FACTION_RULES.GIANT_YETI_RULE;
-  const areYetisPresent = selectedUnits.filter((u) => (u.unitName = NORWINGER.YETIS)).length > 0;
+  const areYetisPresent = selectedUnits.filter((u) => u.unitName === NORWINGER.YETIS).length > 0;
 
   let result = [];
 
   if (!areYetisPresent) {
     availableUnits
-      .filter((u) => u.subFaction === NORWINGER.GIANT_YETI)
+      .filter((u) => u.unitName === NORWINGER.GIANT_YETI)
       .forEach((u) => {
         result.push({ unitBlockedbyRules: u.unitName, message: MESSAGE });
       });
@@ -225,8 +231,8 @@ const yetiRule = (availableUnits, selectedUnits) => {
  * @returns an array of units that need to be removed from the army list immediately.
  */
 const yetiRuleRemove = (selectedUnits) => {
-  const areGiantYetisPresent = selectedUnits.filter((u) => (u.unitName = NORWINGER.GIANT_YETI)).length > 0;
-  const areYetisPresent = selectedUnits.filter((u) => (u.unitName = NORWINGER.YETIS)).length > 0;
+  const areGiantYetisPresent = selectedUnits.filter((u) => u.unitName === NORWINGER.GIANT_YETI).length > 0;
+  const areYetisPresent = selectedUnits.filter((u) => u.unitName === NORWINGER.YETIS).length > 0;
 
   let result = [];
 
@@ -253,13 +259,9 @@ const mountainKingRule = (availableUnits, selectedUnits) => {
   let result = [];
 
   if (!areAlliesPresent) {
-    availableUnits
-      .filter((u) => u.unitName === NORWINGER.MOUNTAIN_KING)
-      .forEach((u) => {
-        result.push({ unitBlockedbyRules: u.unitName, message: MESSAGE });
-      });
+    const foundUnit = availableUnits.find((u) => u.unitName === NORWINGER.MOUNTAIN_KING);
+    result.push({ unitBlockedbyRules: foundUnit.unitName, message: MESSAGE });
   }
-
   return result;
 };
 
@@ -269,18 +271,14 @@ const mountainKingRule = (availableUnits, selectedUnits) => {
  * @returns an array of units that need to be removed from the army list immediately.
  */
 const mountainKingRuleRemove = (selectedUnits) => {
-  const isMountainKingPresent = selectedUnits.filter((u) => (u.unitName = NORWINGER.MOUNTAIN_KING)).length > 0;
-  const alliedUnits = findUnits(selectedUnits, NORWINGER.SF.NORTHERN_ALLIES, [UNIT, GIANT, AUTOMATON]);
-  const areAlliesPresent = areGivenUnitsPresent(selectedUnits, alliedUnits);
+  const isMountainKingPresent = selectedUnits.filter((u) => u.unitName === NORWINGER.MOUNTAIN_KING).length > 0;
+  const areAlliesPresent = selectedUnits.filter((u) => u.subFaction === NORWINGER.SF.NORTHERN_ALLIES).length > 0;
 
   let result = [];
 
   if (isMountainKingPresent && !areAlliesPresent) {
-    selectedUnits
-      .filter((u) => u.unitName === NORWINGER.MOUNTAIN_KING)
-      .forEach((u) => {
-        result.push(u);
-      });
+    const foundUnit = selectedUnits.find((u) => u.unitName === NORWINGER.MOUNTAIN_KING);
+    result.push(foundUnit);
   }
   return result;
 };
