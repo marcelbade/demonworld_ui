@@ -1,9 +1,11 @@
-import { EXCEMPT_FROM_TRIBES_RULE, THAIN_TRIBES } from "../../../constants/factions";
-import { UNIT } from "../../../constants/itemShopConstants";
-import { THAIN } from "../../../constants/textsAndMessages";
-import { MAGE } from "../../../constants/unitTypes";
+//  functions and components
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
+//  constants
+import { EXCEMPT_FROM_TRIBES_RULE, THAIN_TRIBES } from "../../../constants/factions";
+import { UNIT, MAGE } from "../../../constants/unitTypes";
+import { THAIN } from "../../../constants/textsAndMessages";
+import { areGivenUnitsPresent, findUnits } from "../../../util/utilityFunctions";
 
 const rules = [
   {
@@ -283,11 +285,11 @@ const greatChampionRemove = (selectedUnits) => {
  * @returns array of objects containing a blocked unit and an error message.
  */
 const dorgaPriestRule = (selectedUnits, availableUnits) => {
-  let result = [];
-
   const MESSAGE = THAIN.ERRORS.DORGA_MESSAGE;
+  const dorgaUnits = findUnits(selectedUnits, "Dorga-Kirche", [UNIT]);
+  const listHasDorgaUnit = areGivenUnitsPresent(selectedUnits, dorgaUnits);
 
-  let listHasDorgaUnit = selectedUnits.filter((u) => u.subFaction === "Dorga-Kirche" && u.unitType === UNIT).length > 0;
+  let result = [];
 
   if (!listHasDorgaUnit) {
     availableUnits
@@ -306,11 +308,12 @@ const dorgaPriestRule = (selectedUnits, availableUnits) => {
  * @returns an array of units that need to be removed from the army list automatically.
  */
 const dorgaPriestRemove = (selectedUnits) => {
+  const dorgaUnits = findUnits(selectedUnits, "Dorga-Kirche", [UNIT]);
+  const listHasDorgaUnit = areGivenUnitsPresent(selectedUnits, dorgaUnits);
+
   let result = [];
 
-  let isDorgaUnitpresent = selectedUnits.filter((u) => u.subFaction === "Dorga-Kirche" && u.unitType === UNIT).length > 0;
-
-  if (!isDorgaUnitpresent) {
+  if (!listHasDorgaUnit) {
     selectedUnits
       .filter((u) => u.subFaction === "Dorga-Kirche")
       .forEach((u) => {
@@ -326,9 +329,9 @@ const dorgaPriestRemove = (selectedUnits) => {
  * @returns array of objects containing a blocked unit and an error message.
  */
 const veteranRule = (selectedUnits, availableUnits) => {
-  let result = [];
-
   const MESSAGE = THAIN.ERRORS.VETERAN_MESSAGE;
+
+  let result = [];
 
   let presentTribes = selectedUnits
     .filter((u) => u.subFaction === "Stammeskrieger" && THAIN_TRIBES.includes(u.secondSubFaction))
