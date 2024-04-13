@@ -323,8 +323,8 @@ export const NORWINGER = {
   YETIS: "Yetikrieger",
   GIANT_YETI: "Riesenyeti",
   NEANDERS: "Neanders",
-  SNOW_OGRES: "Schneeoger",
-  SF: {
+  SNOW_OGRES: "Schnee-Oger",
+  SF: { 
     BARBARIANS: "Barbaren",
     VETERANS: "Veteranen",
     HEROES: "Helden",
@@ -341,7 +341,7 @@ export const NORWINGER = {
     SPELLCASTERS: "Deine Armeeliste darf zu höchstens 30% aus Sturmlords und Hexen bestehen.",
     MIGHTY_NORTHERN_BEINGS: "Deine Armeeliste darf zu höchstens 40% aus mächtigen Wesenn des Nordens bestehen.",
     NORTHERN_ALLIES: "Deine Armeeliste darf zu höchstens 25% aus Verbündeten des Nordens bestehen.",
-    NEANDERS_RULE: "Für Jede Einheit Neanders muss mindestens eine andere Barbareneinheit (außer Schneeoger) aufgestellt werden.",
+    NEANDERS_RULE: "Für Jede Einheit Neanders muss mindestens eine andere Barbareneinheit (außer Schnee-Oger) aufgestellt werden.",
     GIANT_YETI_RULE: "Ein Riesenyeti darf nur aufgestellt werden, wenn die Armeeliste mindestens eine Einheit Yetis enthält.",
     MOUNTAIN_KING_RULE:
       "Ungin Eisenbruch, Bergkönig, darf nur aufgestellt werden, wenn die Armeeliste mindestens eine Einheit Zwerge enthält.",
