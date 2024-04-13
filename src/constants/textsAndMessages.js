@@ -230,7 +230,20 @@ export const DWARVES = {
 };
 
 export const ELVES = {
-  SUB_FACTIONS: {
+  ATHULAE: "Athulae der Pfeil",
+  LAURELION: "Laurelion das Schwert",
+  THINUVIEL: "Thinuviel die Geschwinde",
+  TERLOR: "Terlor der Pegasus",
+  FARENDIL: "Farendil der Dachs",
+  KELAH: "Kelah das Einhorn",
+
+  ARROW_LORDS: "Pfeillords",
+  SWORD_MASTERS: "Schwertmeister",
+  FORREST_RIDERS: "Waldreiter",
+  PEGASI: "Pegasusreiter",
+  BADGERS: "Dachsleute",
+  UNICORN_RIDERS: "Einhorn-Elfenreiterinnen",
+  SF: {
     THANARIEL_CLAN_TROOPS: "Thanaril",
     THANARIEL_COVENS: "Thanaril-Kriegerbünde",
     THANARIEL_CLANLORDS_AND_BARDS: "Thanaril-Clanlords / Befehlshaber",
@@ -324,7 +337,7 @@ export const NORWINGER = {
   GIANT_YETI: "Riesenyeti",
   NEANDERS: "Neanders",
   SNOW_OGRES: "Schnee-Oger",
-  SF: { 
+  SF: {
     BARBARIANS: "Barbaren",
     VETERANS: "Veteranen",
     HEROES: "Helden",

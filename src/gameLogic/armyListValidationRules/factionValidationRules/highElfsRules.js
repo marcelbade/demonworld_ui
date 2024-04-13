@@ -1,12 +1,15 @@
-import { ELVES } from "../../../constants/textsAndMessages";
-import { GIANT, HERO, MAGE, UNIT } from "../../../constants/unitTypes";
+//  functions and components
+import { areGivenUnitsPresent, findUnits } from "../../../util/utilityFunctions";
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
+//  constants
+import { ELVES } from "../../../constants/textsAndMessages";
+import { GIANT, HERO, MAGE, UNIT } from "../../../constants/unitTypes";
 
 const rules = [
   {
     subFaction: "ThanarielClantroops",
-    cardNames: ["Thanaril"],
+    cardNames: [ELVES.SF.THANARIEL_CLAN_TROOPS],
     min: 0.3,
     max: 0.7,
     error: ELVES.SUB_FACTION_RULES.THANARIL_CLAN_TROOPS,
@@ -22,7 +25,7 @@ const rules = [
 
   {
     subFaction: "ThanarielClanlordsAndBards",
-    cardNames: ["Thanaril-Clanlords / Befehlshaber"],
+    cardNames: [ELVES.SF.THANARIEL_CLANLORDS_AND_BARDS],
     min: 0.0,
     max: 0.3,
     error: ELVES.SUB_FACTION_RULES.THANARIL_CLAN_LORDS,
@@ -30,15 +33,15 @@ const rules = [
 
   {
     subFaction: "Dyrea/Loreath",
-    cardNames: ["Barde / Dyrea / Loreaths"],
+    cardNames: [ELVES.SF.DYREA_LOREATH],
     min: 0.0,
     max: 0.4,
     error: ELVES.SUB_FACTION_RULES.LOREATH_DYREA,
   },
 
   {
-    subFaction: "Ilah Ri", // Ratsarmee
-    cardNames: ["Ilah Ri"],
+    subFaction: "Ilah Ri", // Council Army
+    cardNames: [ELVES.SF.ILAH_RI],
     min: 0.0,
     max: 0.5,
     error: ELVES.SUB_FACTION_RULES.ILAH_RI,
@@ -46,28 +49,28 @@ const rules = [
 
   {
     subFaction: "Orea Vanar",
-    cardNames: ["Orea Vanar"],
+    cardNames: [ELVES.SF.OREA_VANAR],
     min: 0.0,
     max: 0.3,
     error: ELVES.SUB_FACTION_RULES.OREA_VANAR,
   },
   {
     subFaction: "Treelords",
-    cardNames: ["Baumherren"],
+    cardNames: [ELVES.SF.TREELORDS],
     min: 0.0,
     max: 0.25,
     error: ELVES.SUB_FACTION_RULES.TREANTS,
   },
   {
     subFaction: "Centaurs",
-    cardNames: ["Zentauren"],
+    cardNames: [ELVES.SF.CENTAURS],
     min: 0.0,
     max: 0.25,
     error: ELVES.SUB_FACTION_RULES.CENTAURS,
   },
   {
     subFaction: "Old Hero",
-    cardNames: ["Alter Held"],
+    cardNames: [ELVES.SF.OLD_HERO],
     min: 0.0,
     max: 0.25,
     error: ELVES.SUB_FACTION_RULES.OLD_HERO,
@@ -127,7 +130,7 @@ const ElfRules = {
     let testForThanarilCovenUnits = thanarilCovenRule(validationData.selectedUnits);
     let testForEntsVsCentaurs = entsOrCentaurs(validationData.selectedUnits, validationData.availableUnits);
     let testForIlahRi = councilArmyRule(validationData.selectedUnits, validationData.availableUnits);
-    let testIlahRiForRemoval = councilArmyRemove(validationData.selectedUnits);
+    let testIlahRiForRemoval = councilArmyRemove(validationData.availableUnits, validationData.selectedUnits);
     let testOldHeroForRemoval = oldHeroRemove(validationData.selectedUnits);
     let testOreaVanarMasterRemoval = removeOreaVanar(validationData.selectedUnits);
     let testThanarilCovenRemoval = removeThanarilCoven(validationData.selectedUnits);
@@ -173,13 +176,13 @@ const numberOfOldHeroes = (selectedUnits, availableUnits) => {
 
   // the old heroes must start blocked
   availableUnits
-    .filter((u) => u.subFaction === "Alter Held")
+    .filter((u) => u.subFaction === ELVES.SF.OLD_HERO)
     .forEach((u) => {
       result.push({ unitBlockedbyRules: u.unitName, message: MESSAGE });
     });
 
   // unblock if condition is met
-  const numberOldHeroesAlreadySelected = selectedUnits.filter((su) => su.subFaction === "Alter Held").length;
+  const numberOldHeroesAlreadySelected = selectedUnits.filter((su) => su.subFaction === ELVES.SF.OLD_HERO).length;
   const allowance = allowedNumberOldHeroes(selectedUnits);
 
   if (numberOldHeroesAlreadySelected < allowance) {
@@ -200,14 +203,14 @@ const numberOfOldHeroes = (selectedUnits, availableUnits) => {
 const oldHeroRemove = (selectedUnits) => {
   let result = [];
 
-  const numberOldHeroesAlreadySelected = selectedUnits.filter((su) => su.subFaction === "Alter Held").length;
+  const numberOldHeroesAlreadySelected = selectedUnits.filter((su) => su.subFaction === ELVES.SF.OLD_HERO).length;
   const allowance = allowedNumberOldHeroes(selectedUnits);
 
   if (numberOldHeroesAlreadySelected > allowance) {
     let difference = numberOldHeroesAlreadySelected - allowance;
 
     for (let i = selectedUnits.length - 1; i >= 0; i--) {
-      if (selectedUnits[i].subFaction === "Alter Held" && difference > 0) {
+      if (selectedUnits[i].subFaction === ELVES.SF.OLD_HERO && difference > 0) {
         result.push(selectedUnits[i]);
         --difference;
       }
@@ -220,7 +223,7 @@ const oldHeroRemove = (selectedUnits) => {
 // Function calculates the maximum number of Old Hero units allowed in the current army list.
 const allowedNumberOldHeroes = (selectedUnits) => {
   const UNITS_PER_HERO = 5;
-  const relevantSubFactions = ["Thanaril", "Ilah Ri"];
+  const relevantSubFactions = [ELVES.SF.THANARIEL_CLAN_TROOPS, ELVES.SF.ILAH_RI];
 
   const countRelevantUnits = selectedUnits.filter((su) => su.unitType === UNIT && relevantSubFactions.includes(su.subFaction)).length;
   return parseInt(countRelevantUnits / UNITS_PER_HERO);
@@ -285,12 +288,12 @@ const removeOreaVanar = (selectedUnits) => {
 };
 
 const heroesCovenantsMapping = [
-  { lord: "Athulae der Pfeil", units: ["Pfeillords"] },
-  { lord: "Laurelion das Schwert", units: ["Schwertmeister"] },
-  { lord: "Thinuviel die Geschwinde", units: ["Waldreiter"] },
-  { lord: "Terlor der Pegasus", units: ["Pegasusreiter"] },
-  { lord: "Farendil der Dachs", units: ["Dachsleute"] },
-  { lord: "Kelah das Einhorn", units: ["Einhorn-Elfenreiterinnen"] },
+  { lord: ELVES.ATHULAE, units: [ELVES.ARROW_LORDS] },
+  { lord: ELVES.LAURELION, units: [ELVES.SWORD_MASTERS] },
+  { lord: ELVES.THINUVIEL, units: [ELVES.FORREST_RIDERS] },
+  { lord: ELVES.TERLOR, units: [ELVES.PEGASI] },
+  { lord: ELVES.FARENDIL, units: [ELVES.BADGERS] },
+  { lord: ELVES.KELAH, units: [ELVES.UNICORN_RIDERS] },
 ];
 
 /**
@@ -305,11 +308,11 @@ const thanarilCovenRule = (selectedUnits) => {
   let result = [];
 
   const selectedCovens = selectedUnits
-    .filter((u) => u.unitType === UNIT && u.subFaction === "Thanaril-Kriegerbünde")
+    .filter((u) => u.unitType === UNIT && u.subFaction === ELVES.SF.THANARIEL_COVENS)
     .map((u) => u.unitName);
 
   const selectedCovenHeroes = selectedUnits
-    .filter((u) => (u.unitType === MAGE || u.unitType === HERO) && u.subFaction === "Thanaril-Kriegerbünde")
+    .filter((u) => (u.unitType === MAGE || u.unitType === HERO) && u.subFaction === ELVES.SF.THANARIEL_COVENS)
     .map((u) => u.unitName);
 
   for (let i = 0; i < heroesCovenantsMapping.length; i++) {
@@ -360,13 +363,14 @@ const removeThanarilCoven = (selectedUnits) => {
  */
 const councilArmyRule = (selectedUnits, availableUnits) => {
   const MESSAGE = ELVES.ERRORS.ILAH_RI_COMMANDER_MESSAGE;
-  const ILAH_RI_HEROES = ["Athulain Gilfar", "Generalin Caliar Ildriel"];
+  const ILAH_RI_HEROES = findUnits(availableUnits, ELVES.SF.ILAH_RI, [HERO, MAGE]);
+  const isIlaRiHeroPresent = areGivenUnitsPresent(selectedUnits, ILAH_RI_HEROES);
+
   let result = [];
-  let isIlaRiHeroPresent = selectedUnits.filter((selectedUnits) => ILAH_RI_HEROES.includes(selectedUnits.unitName)).length > 0;
 
   if (!isIlaRiHeroPresent) {
     availableUnits
-      .filter((u) => u.subFaction === "Ilah Ri" && (u.unitType === UNIT || u.unitType === GIANT))
+      .filter((u) => u.subFaction === ELVES.SF.ILAH_RI && (u.unitType === UNIT || u.unitType === GIANT))
       .forEach((u) => {
         result.push({ unitBlockedbyRules: u.unitName, message: MESSAGE });
       });
@@ -381,15 +385,16 @@ const councilArmyRule = (selectedUnits, availableUnits) => {
  * @param {[unitCard]} selectedUnits
  * @returns array of units that need to be removed from the army list automatically.
  */
-const councilArmyRemove = (selectedUnits) => {
-  const ILAH_RI_HEROES = ["Athulain Gilfar", "Generalin Caliar Ildriel"];
-  let result = [];
+const councilArmyRemove = (availableUnits, selectedUnits) => {
+  const ILAH_RI_HEROES = findUnits(availableUnits, ELVES.SF.ILAH_RI, [HERO, MAGE]);
 
-  let isIlaRiHeroPresent = selectedUnits.filter((selectedUnit) => ILAH_RI_HEROES.includes(selectedUnit.unitName)).length > 0;
+  let isIlaRiHeroPresent = areGivenUnitsPresent(selectedUnits, ILAH_RI_HEROES);
+
+  let result = [];
 
   if (!isIlaRiHeroPresent) {
     selectedUnits
-      .filter((u) => u.subFaction === "Ilah Ri")
+      .filter((u) => u.subFaction === ELVES.SF.ILAH_RI)
       .forEach((u) => {
         result.push(u);
       });
@@ -405,7 +410,7 @@ const councilArmyRemove = (selectedUnits) => {
  */
 const entsOrCentaurs = (selectedUnits, availableUnits) => {
   const MESSAGE = ELVES.ERRORS.TREANTS_CENTAUR;
-  let FACTIONS = ["Baumherren", "Zentauren"];
+  const FACTIONS = [ELVES.SF.TREELORDS, ELVES.SF.CENTAURS];
 
   let result = [];
 
