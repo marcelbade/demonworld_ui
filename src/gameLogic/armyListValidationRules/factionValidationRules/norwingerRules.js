@@ -108,6 +108,7 @@ const NorwingerRules = {
     // special faction rule
     const testForMountainKing = mountainKingRule(validationData.availableUnits, validationData.selectedUnits);
     const testForGiantYeti = yetiRule(validationData.availableUnits, validationData.selectedUnits);
+    const testForNeander = neanderRule(validationData.availableUnits, validationData.selectedUnits);
 
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [
@@ -119,6 +120,7 @@ const NorwingerRules = {
       ...testForHeroCapResult,
       ...testForMountainKing,
       ...testForGiantYeti,
+      ...testForNeander,
     ];
     // result for sub factions below limit.
     validationResults.subFactionBelowMinimum = isBelowSubFactionMin;
@@ -129,9 +131,70 @@ const NorwingerRules = {
     // Are there units that need to be removed from the list?
     mountainKingRuleRemove(validationData.selectedUnits);
     yetiRuleRemove(validationData.selectedUnits);
+    neanderRuleRemove(validationData.selectedUnits);
 
     return validationResults;
   },
+};
+
+/**
+ * Function implements the rule that for each Neander unit the list must also contain a
+ * barbarian unit, excluding Snow Orgres.
+ * @param {[unitCard]} availableUnits
+ * @param {[unitCard]} selectedUnits
+ * @returns an array of objects containing a blocked unit and an error message.
+ */
+const neanderRule = (availableUnits, selectedUnits) => {
+  const MESSAGE = NORWINGER.SUB_FACTION_RULES.NEANDERS_RULE;
+  const excludedBarbarianUnits = [NORWINGER.NEANDERS, NORWINGER.SNOW_OGRES];
+  const barabarianCount = selectedUnits.filter(
+    (u) =>
+      (u.subFaction =
+        NORWINGER.SF.BARBARIANS && //
+        !excludedBarbarianUnits.includes(u.unitName))
+  ).length;
+  const neandersCount = selectedUnits.filter((u) => (u.subFaction = u.unitName === NORWINGER.NEANDERS)).length;
+
+  let result = [];
+
+  if (neandersCount === barabarianCount) {
+    availableUnits
+      .filter((u) => u.unitName === NORWINGER.NEANDERS)
+      .forEach((u) => {
+        result.push({ unitBlockedbyRules: u.unitName, message: MESSAGE });
+      });
+  }
+  return result;
+};
+
+/**
+ * Function implements second part of the Neander Rule: if the army list contains more Neanders
+ * then other barbarian units (excluding once again Snow Ogres), then Neander Units must be removed
+ * until the rule is no longer violated.
+ * @param {[unitCard]} selectedUnits
+ * @returns an array of units that need to be removed from the army list immediately.
+ */
+const neanderRuleRemove = (selectedUnits) => {
+  const excludedBarbarianUnits = [NORWINGER.NEANDERS, NORWINGER.SNOW_OGRES];
+  const barabarianCount = selectedUnits.filter(
+    (u) =>
+      (u.subFaction =
+        NORWINGER.SF.BARBARIANS && //
+        !excludedBarbarianUnits.includes(u.unitName))
+  ).length;
+  const neandersCount = selectedUnits.filter((u) => (u.subFaction = u.unitName === NORWINGER.NEANDERS)).length;
+
+  let result = [];
+
+  if (neandersCount > barabarianCount) {
+    const difference = neandersCount - barabarianCount;
+    while (difference >= 0) {
+      const unit = selectedUnits.find((u) => u.unitName === NORWINGER.NEANDERS);
+      result.push(unit);
+    }
+  }
+
+  return result;
 };
 
 /**

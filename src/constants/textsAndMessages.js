@@ -196,7 +196,20 @@ export const UNIT_TYPES = {
   S: "Beschworenes Element",
 };
 
+export const SUMMONS = {
+  TYPE: "Beschwörung",
+  ERROR: "Beschwörungen kosten keine Punkte und sind hier nur aufgeführt um die passenden Rekrutierungskarten zu erzeugen.",
+};
+
 export const DARKELVES = {
+  SUB_FACTIONS: {
+    warriorCaste: "Kriegerkaste",
+    nobleCaste: "Adelskaste",
+    magicianCaste: "Magierkaste",
+    priestCaste: "Priesterkaste",
+    priests: "Priesterin",
+  },
+
   SUB_FACTION_RULES: {
     WARRIOR_CASTE: "Deine Armeeliste muss zu mindestens 30% aus Einheiten der Kriegerkaste bestehen.",
     NOBLE_CASTE: "Deine Armee darf höchstens zu 50% aus Einheiten der Adelskaste bestehen.",
@@ -218,6 +231,18 @@ export const DWARVES = {
 };
 
 export const ELVES = {
+  SUB_FACTIONS: {
+    THANARIEL_CLAN_TROOPS: "Thanaril",
+    THANARIEL_COVENS: "Thanaril-Kriegerbünde",
+    THANARIEL_CLANLORDS_AND_BARDS: "Thanaril-Clanlords / Befehlshaber",
+    DYREA_LOREATH: "Barde / Dyrea / Loreaths",
+    ILAH_RI: "Ilah Ri",
+    OREA_VANAR: "Orea Vanar",
+    TREELORDS: "Baumherren",
+    CENTAURS: "Zentauren",
+    OLD_HERO: "Alter Held",
+  },
+
   SUB_FACTION_RULES: {
     THANARIL_CLAN_TROOPS: "Deine Armeeliste muss zu 30% bis 70% aus Thanaril-Clantruppen bestehen.",
     THANARIL_COVENS: "Deine Armeeliste darf zu höchstens 30% aus Thanaril-Kriegerbünden und Ihren Anführern bestehen.",
@@ -295,6 +320,21 @@ export const LIZARDMEN = {
 };
 
 export const NORWINGER = {
+  MOUNTAIN_KING: "Ungin Eisenbruch",
+  YETIS: "Yetikrieger",
+  GIANT_YETI: "Riesenyeti",
+  NEANDERS: "Neanders",
+  SNOW_OGRES: "Schneeoger",
+  SF: {
+    BARBARIANS: "Barbaren",
+    VETERANS: "Veteranen",
+    HEROES: "Helden",
+    COMMANDERS: "Befehlshaber",
+    WITCH: "Hexe",
+    STORMLORD: "Sturmlord",
+    MIGHTY_BEINGS: "Mächtige Wesen",
+    NORTHERN_ALLIES: "Verbündete des Nordens",
+  },
   SUB_FACTION_RULES: {
     BARBARIANS: "Deine Armeeliste muss zu 20% bis 75% aus Barbaren bestehen.",
     VETERANS: "Deine Armeeliste darf zu höchstens 40% aus Veteranen bestehen.",
@@ -302,6 +342,10 @@ export const NORWINGER = {
     SPELLCASTERS: "Deine Armeeliste darf zu höchstens 30% aus Sturmlords und Hexen bestehen.",
     MIGHTY_NORTHERN_BEINGS: "Deine Armeeliste darf zu höchstens 40% aus mächtigen Wesenn des Nordens bestehen.",
     NORTHERN_ALLIES: "Deine Armeeliste darf zu höchstens 25% aus Verbündeten des Nordens bestehen.",
+    NEANDERS_RULE: "Für Jede Einheit Neanders muss mindestens eine andere Barbareneinheit (außer Schneeoger) aufgestellt werden.",
+    GIANT_YETI_RULE: "Ein Riesenyeti darf nur aufgestellt werden, wenn die Armeeliste mindestens eine Einheit Yetis enthält.",
+    MOUNTAIN_KING_RULE:
+      "Ungin Eisenbruch, Bergkönig, darf nur aufgestellt werden, wenn die Armeeliste mindestens eine Einheit Zwerge enthält.",
   },
 };
 
@@ -355,22 +399,22 @@ export const UNDEAD = {
     ALLIES: "Diese Einheit steht nicht als Alliierter zur Verfügung.",
   },
 };
-export const SOUTHERN_CITY_STATES = {
-  SUB_FACTIONS: {
-    PROVINCIAL_TROOPS: "Provinzheer",
-    NORTHERN_TROOPS: "Truppen des Nordens",
-    SOUTHERN_TROOPS: "Truppen des Südens",
-    ORDER_OF_TRUE_FAITH: "Orden des wahren Glaubens",
-    BROTHERHOOD_OF_SAND: "Bruderschaft des Sandes",
+export const CITY_STATES = {
+  SF: {
+    PROVINCIAL: "Provinzheer",
+    NORTH: "Truppen des Nordens",
+    SOUTH: "Truppen des Südens",
+    ORDER: "Orden des wahren Glaubens",
+    BROTHERHOOD: "Bruderschaft des Sandes",
     SUMMONS: "Beschwörung",
   },
 
-  SUB_FACTION_RULES: {
-    PROVINVIAL_TROOPS: "Deine Armeeliste muss zu mindestens 30% aus Einheiten des Provinzheeres bestehen.",
-    NORTHERN_TROOPS: "Deine Armeeliste darf zu höchstens 50% aus Truppen des Nordens bestehen.",
-    SOUTHERN_TROOPS: "Deine Armeeliste darf zu höchstens 50% aus Truppen des Südens bestehen.",
-    ORDER_OF_TRUE_FAITH: "Deine Armeeliste darf zu höchstens 40% aus Truppen des Orden des wahren Glaubens bestehen.",
-    BROTHERHOOD_OF_SAND: "Deine Armeeliste darf zu höchstens 40% aus Truppen der Bruderschaft des Sandes bestehen.",
+  SF_RULES: {
+    PROVINCIAL: "Deine Armeeliste muss zu mindestens 30% aus Einheiten des Provinzheeres bestehen.",
+    NORTH: "Deine Armeeliste darf zu höchstens 50% aus Truppen des Nordens bestehen.",
+    SOUTH: "Deine Armeeliste darf zu höchstens 50% aus Truppen des Südens bestehen.",
+    ORDER: "Deine Armeeliste darf zu höchstens 40% aus Truppen des Orden des wahren Glaubens bestehen.",
+    BROTHERHOOD: "Deine Armeeliste darf zu höchstens 40% aus Truppen der Bruderschaft des Sandes bestehen.",
   },
   ERRORS: {
     BROTHERHOOD_ORDER: "Die Armee kann entweder nur Truppen des Ordens des wahren Glaubens oder der Bruderschaft des Sands enthalten.",
@@ -379,6 +423,5 @@ export const SOUTHERN_CITY_STATES = {
       "Du musst mindestens eine Einheit des Südens aufstellen, um einen Befehlshaber oder Helden des Süden aufstellen zu können.",
     REGION_HEROES_NORTH:
       "Du musst mindestens eine Einehit des Nordens aufstellen, um einen Befehlshaber oder Helden des Nordens aufstellen zu können.",
-    SUMMONS: "Beschwörungen kosten keine Punkte und sind hier nur aufgeführt um die passenden Rekrutierungskarten zu erzeugen.",
   },
 };
