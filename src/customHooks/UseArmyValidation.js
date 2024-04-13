@@ -40,6 +40,7 @@ const useArmyValidation = () => {
    */
   const runValidation = (currentList, currentTotalPointAllowance, currentSubFactions) => {
     let validator = ruleValidation(AC.selectedFactionName);
+
     let validationResult = validator.testSubFactionRules({
       availableUnits: AC.listOfAllFactionUnits,
       selectedUnits: currentList,
@@ -55,17 +56,17 @@ const useArmyValidation = () => {
 
   /**
    * Function adds all invalid units and subfactions to the block list.
-   * @param {{}} validationResult
+   * @param {{}} result
    */
-  const collectValidatioResults = (currentList, validationResult) => {
+  const collectValidatioResults = (currentList, result) => {
     const currentValidationResult = {
       ...VC.listValidationResults,
-      unitsBlockedbyRules: validationResult.unitsBlockedbyRules,
-      subFactionBelowMinimum: validationResult.subFactionBelowMinimum,
-      commanderIsPresent: validationResult.commanderIsPresent,
-      removeUnitsNoLongerValid: validationResult.removeUnitsNoLongerValid,
-      secondSubFactionMissing: validationResult.secondSubFactionMissing,
-      alliedUnitsBlockedbyRules: validationResult.alliedUnitsBlockedbyRules,
+      unitsBlockedbyRules: result.unitsBlockedbyRules,
+      subFactionBelowMinimum: result.subFactionBelowMinimum,
+      commanderIsPresent: result.commanderIsPresent,
+      removeUnitsNoLongerValid: result.removeUnitsNoLongerValid,
+      secondSubFactionMissing: result.secondSubFactionMissing,
+      alliedUnitsBlockedbyRules: result.alliedUnitsBlockedbyRules,
     };
 
     VC.setListValidationResults(currentValidationResult);
