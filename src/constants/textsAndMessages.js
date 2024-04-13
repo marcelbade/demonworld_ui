@@ -236,7 +236,7 @@ export const ELVES = {
   TERLOR: "Terlor der Pegasus",
   FARENDIL: "Farendil der Dachs",
   KELAH: "Kelah das Einhorn",
-
+  
   ARROW_LORDS: "Pfeillords",
   SWORD_MASTERS: "Schwertmeister",
   FORREST_RIDERS: "Waldreiter",
