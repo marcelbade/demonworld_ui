@@ -333,7 +333,7 @@ export const NORWINGER = {
     WITCH: "Hexe",
     STORMLORD: "Sturmlord",
     MIGHTY_BEINGS: "Mächtige Wesen",
-    NORTHERN_ALLIES: "Verbündete des Nordens",
+    NORTHERN_ALLIES: "Verbündete",
   },
   SUB_FACTION_RULES: {
     BARBARIANS: "Deine Armeeliste muss zu 20% bis 75% aus Barbaren bestehen.",
