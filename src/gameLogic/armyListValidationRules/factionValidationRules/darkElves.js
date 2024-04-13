@@ -1,4 +1,4 @@
-import { DARKELVES } from "../../../constants/textsAndMessages";
+import { DARKELVES, SUMMONS } from "../../../constants/textsAndMessages";
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
 
@@ -43,7 +43,7 @@ const rules = [
     cardNames: ["Beschwörung"],
     min: 0.0,
     max: 0.0,
-    error: "",
+    error:  SUMMONS.ERROR,
   },
 ];
 
@@ -98,13 +98,13 @@ const DarkElveRules = {
      * Function implements a special faction rule: per full 10% of the max point allowance
      * spent on the priest caste, your point allowance
      * for the magicians' caste decreases by 10% and vice versa.
-     * Note that the algorithm is different from all the other validator logic-
+     * Note that the algorithm is different from all the other validator logic -
      * it does not create a list of unit Card objects that are added to a "block list",
      * it instead directly decreases the limit.
      */
     const magiciansVsPriests = () => {
       const INCREMENT = 10;
-      const NET_TOTAL = 4; // 40% allowance
+      const NET_TOTAL = 4; // 40% default allowance for either caste
       const PRIESTS = ["Priesterin", "Priesterkaste", "magicianCaste"];
       const MAGICIANS = ["Magier", "Magierkaste", "priestCaste"];
 
