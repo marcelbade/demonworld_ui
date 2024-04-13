@@ -17,9 +17,6 @@ export const ITEM_TYPE_WEAPON = "weapon";
 // Item can be used by any faction
 export const ALL = "*";
 
-// unit types
-export const UNIT = "U";
-export const GIANT = "G";
 // unit has no range weapons
 
 // These item types are magical items for the purpose of setting a unit's item flags.

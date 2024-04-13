@@ -2,6 +2,8 @@ import { useContext } from "react";
 // contexts
 import { ItemContext } from "../contexts/itemContext";
 import { SelectionContext } from "../contexts/selectionContext";
+// functions and components
+import { do2ArraysHaveCommonElements } from "../util/utilityFunctions";
 //constants
 import {
   ALL,
@@ -20,10 +22,9 @@ import {
   LANCE_TYPES,
   BOW_TYPES,
   CROSSBOW_TYPES,
-  UNIT,
 } from "../constants/itemShopConstants";
-import { do2ArraysHaveCommonElements } from "../util/utilityFunctions";
 import { ITEM_LIMIT_MESSAGE } from "../constants/textsAndMessages";
+import { UNIT } from "../constants/unitTypes";
 
 const useItemFilters = () => {
   const IC = useContext(ItemContext);
