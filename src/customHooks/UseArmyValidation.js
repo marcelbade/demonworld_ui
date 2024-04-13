@@ -33,10 +33,11 @@ const useArmyValidation = () => {
 
   //TODO: memoize AC.X properties!
   /**
-   *
-   * @param {*} currentList
-   * @param {*} currentTotalPointAllowance
-   * @param {*} currentSubFactions
+   * Function avalidates the current list by generating the correct validator for the faction,
+   * calling the validators test function and finally collecting the results.
+   * @param {[unitCard]} currentList
+   * @param {number} currentTotalPointAllowance
+   * @param {[String]} currentSubFactions
    */
   const runValidation = (currentList, currentTotalPointAllowance, currentSubFactions) => {
     let validator = ruleValidation(AC.selectedFactionName);
@@ -56,10 +57,11 @@ const useArmyValidation = () => {
 
   /**
    * Function adds all invalid units and subfactions to the block list.
-   * @param {{}} result
+   * @param {[unitCard]} currentList
+   * @param {[unitCard]} result
    */
   const collectValidatioResults = (currentList, result) => {
-    const currentValidationResult = {
+    const tempArray = {
       ...VC.listValidationResults,
       unitsBlockedbyRules: result.unitsBlockedbyRules,
       subFactionBelowMinimum: result.subFactionBelowMinimum,
@@ -69,22 +71,22 @@ const useArmyValidation = () => {
       alliedUnitsBlockedbyRules: result.alliedUnitsBlockedbyRules,
     };
 
-    VC.setListValidationResults(currentValidationResult);
-    removeInvalidUnits(currentList, currentValidationResult);
+    VC.setListValidationResults(tempArray);
+    removeInvalidUnits(currentList, tempArray);
   };
 
   /**
    * Function removes units from the list that can no longer be included according to the rules.
-   * @param {[unitCards]} currentList
-   * @param {[obj]} currentValidationResult
+   * @param {[unitCards]} unitList
+   * @param {[obj]} validationResult
    */
-  const removeInvalidUnits = (currentList, currentValidationResult) => {
-    if (currentValidationResult.removeUnitsNoLongerValid.length > 0) {
-      let currentState = [...currentList];
+  const removeInvalidUnits = (unitList, validationResult) => {
+    if (validationResult.removeUnitsNoLongerValid.length > 0) {
+      let tempArray = [...unitList];
 
-      currentState = currentState.filter((u) => !currentValidationResult.removeUnitsNoLongerValid.includes(u));
+      tempArray = tempArray.filter((u) => !validationResult.removeUnitsNoLongerValid.includes(u));
 
-      SEC.setSelectedUnits([...currentState]);
+      SEC.setSelectedUnits([...tempArray]);
     }
   };
 
