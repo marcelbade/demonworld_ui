@@ -2,7 +2,7 @@
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
 // constants
-import { NORWINGER } from "../../../constants/textsAndMessages";
+import { NORWINGER, SUMMONS } from "../../../constants/textsAndMessages";
 
 const rules = [
   {
@@ -30,7 +30,7 @@ const rules = [
 
   {
     subFaction: "heroes",
-    cardNames: [NORWINGER.SF.HEROES, NORWINGER.SF.COMMANDERS],
+    cardNames: [NORWINGER.SF.HEROES ],
     min: 0.0,
     max: 0.3,
     error: NORWINGER.SUB_FACTION_RULES.HEROES,
@@ -48,6 +48,13 @@ const rules = [
     min: 0.0,
     max: 0.25,
     error: NORWINGER.SUB_FACTION_RULES.NORTHERN_ALLIES,
+  },
+  {
+    subFaction: "summons",
+    cardNames: [SUMMONS.TYPE],
+    min: 0.0,
+    max: 1.0,
+    error: SUMMONS.ERROR,
   },
 ];
 
