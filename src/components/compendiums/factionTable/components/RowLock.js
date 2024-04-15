@@ -15,8 +15,8 @@ const RowLock = (props) => {
    * Function sets the unitLocked property for a unit.
    */
   const toggleRowLock = () => {
-    TC.setTableData(
-      TC.tableData.map((t) => {
+    TC.setDisplayUnits(
+      TC.displayUnits.map((t) => {
         if (props.unit.unitName === t.unitName) {
           t.unitLocked = !t.unitLocked;
         }
