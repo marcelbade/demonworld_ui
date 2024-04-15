@@ -342,8 +342,7 @@ export const NORWINGER = {
   SF: {
     BARBARIANS: "Barbaren",
     VETERANS: "Veteranen",
-    HEROES: "Helden",
-    COMMANDERS: "Befehlshaber",
+    HEROES: "Held/Befehlshaber",
     WITCH: "Hexe",
     STORMLORD: "Sturmlord",
     MIGHTY_BEINGS: "Mächtige Wesen",
