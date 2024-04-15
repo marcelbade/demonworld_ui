@@ -17,6 +17,11 @@ export const commonStyles = {
   pageLayout: {
     width: CONTENT_WIDTH,
     marginTop: MARGIN_PAGE_TOP,
+    height: "100%",
+  },
+
+  content: {
+    height: "90%",
   },
 
   armyName: {
@@ -83,9 +88,11 @@ export const commonStyles = {
     marginLeft: MARGIN_LEFT,
   },
 
-  pageNumber: {
-    position: "absolute",
-    right: 10,
-    bottom: 15,
-  },
+  // pageNumber: {
+  //   // width:"100%",
+  //   backgroundColor:"red",
+  //   position: "absolute",
+  //   right: "3%",
+  //   top: "10%",
+  // },
 };

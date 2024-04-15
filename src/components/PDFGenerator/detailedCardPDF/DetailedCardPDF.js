@@ -25,7 +25,7 @@ const ListPDF = (props) => {
       {props.data.list
         .filter((subFaction) => subFaction.units.length > 0)
         .map((obj, i) => (
-          <View>
+          <View wrap={false}>
             <SubfactionSubtitle key={i} data={obj} />
             {obj.units.map((u, i) => (
               <View key={i} style={detailedStyles.cardBox} wrap={false}>

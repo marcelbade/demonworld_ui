@@ -3,7 +3,7 @@ import React from "react";
 // fonts
 import jaapokkiRegular from "../../../assets/fonts/jaapokkiRegular.ttf";
 // react-pdf
-import { Text, Document, Font } from "@react-pdf/renderer";
+import { Document, Font, Text } from "@react-pdf/renderer";
 // styles
 import { commonStyles } from "../pdfStyles/commonStyles";
 

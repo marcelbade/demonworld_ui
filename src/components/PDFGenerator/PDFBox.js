@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 // react-pdf
 import { PDFViewer, Document, Page } from "@react-pdf/renderer";
 // components and functions
-import PageNumber from "./sharedPDFComponents/PageNumber";
+// import PageNumber from "./sharedPDFComponents/PageNumber";
 import TitleAndStats from "./sharedPDFComponents/TitleAndStats";
 import StandardListPDF from "./standardListPDF/StandardListPDF";
 import DetailedCardPDF from "./detailedCardPDF/DetailedCardPDF";
@@ -36,7 +36,7 @@ const PdfBox = () => {
   return data.list.length > 0 ? (
     <PDFViewer style={commonStyles.viewport}>
       <Document>
-        <Page wrap={true} style={commonStyles.pageLayout}>
+        <Page wrap={false} style={commonStyles.pageLayout}>
           <TitleAndStats data={data} />
           {data.options.printDefaultList ? ( //
             <StandardListPDF data={data} />
@@ -44,7 +44,6 @@ const PdfBox = () => {
             <DetailedCardPDF data={data} />
           )}
         </Page>
-        <PageNumber fixed />
       </Document>
     </PDFViewer>
   ) : null;
