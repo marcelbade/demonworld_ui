@@ -88,6 +88,7 @@ export const INPUT_TEXTS = {
   PLAYER_NAME: "Spielername",
   TEAM_NAME: "Teamname",
   SELECT_FACTION: "Wähle Eine Fraktion:",
+  SELECT_SUBFACTION: "Wähle Eine Unterfraktion:",
   SELECT_UNIT: "Suche nach Einheit:",
   TOTAL_POINTS: "Gesamtpunktzahl :",
 };
