@@ -1,5 +1,5 @@
 // React
-import React, { useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 // Axios
 import axios from "axios";
 // import {makeStyles} from "@material-ui/core";
@@ -18,13 +18,16 @@ import OptionsDialog from "./OptionsDialog";
 import TableProvider from "../../../../contexts/tableContext";
 // constants
 import { COMPENDIUM } from "../../../../constants/textsAndMessages";
+import DropDownTest from "./DropDown";
 
 const FactionTable = () => {
   // intialize local state
   const [receivedData, setReceivedData] = useState([]);
-  const [allFactions, setAllFactions] = useState([]);
-  const [singleFilteredFaction, setSingleFilteredFaction] = useState([]);
-  const [tableData, setTableData] = useState([]);
+  const [data, setData] = useState([]);
+  const [selectedFaction, setSelectedFaction] = useState("");
+  const [selectedSubFaction, setSelectedSubFaction] = useState("");
+  const [displaySubFactions, setDisplaySubFactions] = useState([]);
+  const [displayUnits, setDisplayUnits] = useState([]);
   const [selectedStatCards, setSelectedStatCards] = useState([]);
   const [allBoxes, setAllBoxes] = useState(false);
   const [openOptions, setOpenOptions] = useState(false);
@@ -41,8 +44,8 @@ const FactionTable = () => {
   };
 
   useEffect(() => {
-    setAllFactions(receivedData);
-    setTableData(receivedData);
+    setData(receivedData);
+    setDisplayUnits(receivedData);
   }, [receivedData]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const addLock = (rawUnits) => {
@@ -139,26 +142,32 @@ const FactionTable = () => {
     setOpenOptions(true);
   };
 
+  console.log("displayUnits", displayUnits);
+
   return receivedData ? (
     <>
       <TableProvider
         value={{
-          tableData: tableData,
-          allFactions: allFactions,
+          displayUnits: displayUnits,
+          displaySubFactions: displaySubFactions,
+          data: data,
           openOptions: openOptions,
           allBoxes: allBoxes,
           columns: columns,
           toggleGroups: toggleGroups,
-          singleFilteredFaction: singleFilteredFaction,
+          selectedFaction: selectedFaction,
+          selectedSubFaction: selectedSubFaction,
           selectedStatCards: selectedStatCards,
-          setAllFactions: setAllFactions,
-          setTableData: setTableData,
+          setData: setData,
+          setDisplaySubFactions: setDisplaySubFactions,
+          setDisplayUnits: setDisplayUnits,
           setOpenOptions: setOpenOptions,
           setColumns: setColumns,
           toggleColumn: toggleColumn,
           toggleAllColumns: toggleAllColumns,
           toggleGroupsOfColumns: toggleGroupsOfColumns,
-          setSingleFilteredFaction: setSingleFilteredFaction,
+          setSelectedFaction: setSelectedFaction,
+          setSelectedSubFaction: setSelectedSubFaction,
           toggleUnitCard: toggleUnitCard,
         }}
       >
@@ -194,6 +203,7 @@ const FactionTable = () => {
               <IconButton onClick={handleOptionsOpen}>
                 <MenuIcon />
               </IconButton>
+              <DropDownTest />
             </Grid>
           </Grid>
           <Grid item container direction="row">
@@ -213,14 +223,15 @@ const FactionTable = () => {
             </Grid>
           </Grid>
           <OptionsDialog />
+
           <Grid item xs={12}>
             {receivedData ? (
               <table rules="none">
                 <FactionTableHeader columns={columns} />
                 <tbody>
-                  {tableData.map((unit, i) => {
+                  {displayUnits.map((unit, i) => {
                     return (
-                      <>
+                      <Fragment key={i}>
                         <FactionTableRow
                           unit={unit} //
                           rowNumber={i}
@@ -229,9 +240,9 @@ const FactionTable = () => {
                         <DetailedCardView
                           selectedCards={selectedStatCards} //
                           unit={unit}
-                          key={unit.unitName}
+                          key={`${i},${unit.unitName},${unit.subFaction}`}
                         />
-                      </>
+                      </Fragment>
                     );
                   })}
                 </tbody>
