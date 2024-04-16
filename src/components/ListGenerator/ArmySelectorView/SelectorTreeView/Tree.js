@@ -45,7 +45,7 @@ const Tree = (props) => {
             onClick={() => controller.getNodeId([`${i}`])}
           >
             {unitCardMultiSort(dto.units)
-              // if unit has multiple card (werwolves, changelings,...) sho only one
+              // if unit has multiple card (werwolves, changelings,...) show only one
               .filter((u) => u.multiStateOrderNumber < 2)
               .map((u) => validation.returnValidationResult(UNIT, u, true))
               .map((validationObj, i) => {
