@@ -41,12 +41,12 @@ const FactionAndUnitSelectors = (props) => {
    * @returns [String]
    */
   const setUnitNamesOptions = () => {
-    const options = TC.selectedFaction === "" ? TC.data : TC.displayUnits;
+    const options = TC.selectedFaction === "" ? TC.data : TC.displayUnits.filter((u) => !u.unitLocked);
     return options.map((u) => u.unitName).sort();
   };
 
   /**
-   * Function for OnChangeEvent. Sets th selected faction and selects all
+   * Function for onChange event. Sets the selected faction and selects all
    * units of one faction to be displayed in the table. Subfactions and units are cleared.
    * @param {[FactionObject]} selectedFaction
    */
@@ -55,16 +55,24 @@ const FactionAndUnitSelectors = (props) => {
     TC.setDisplayUnits(TC.data.filter((u) => u.faction.includes(selectedFaction) || u.unitLocked));
   };
 
+  /**
+   * Function for onChange event. Sets  the selected sub faction and selects all units of that subFaction
+   * @param {String} selectedSubFaction
+   */
   const selectSubFaction = (selectedSubFaction) => {
     TC.setSelectedSubFaction(TC.data.map((u) => u.subFaction).find((name) => name === selectedSubFaction));
 
-    TC.setDisplayUnits(
-      TC.data.filter((u) => (u.faction === TC.selectedFaction && u.subFaction.includes(selectedSubFaction)) || u.unitLocked)
-    );
+    if (TC.selectedFaction === "") {
+      TC.setDisplayUnits(TC.data.filter((u) => u.subFaction.includes(selectedSubFaction) || u.unitLocked));
+    } else {
+      TC.setDisplayUnits(
+        TC.data.filter((u) => (u.faction === TC.selectedFaction && u.subFaction.includes(selectedSubFaction)) || u.unitLocked)
+      );
+    }
   };
 
   /**
-   * Function for OnChangeEvent. Select all a single unit fpr the selected faction.
+   * Function for onChange event. Select all a single unit fpr the selected faction.
    * @param {[{}]} selectedUnit
    */
   const selectUnit = (selectedUnit) => {
@@ -83,7 +91,9 @@ const FactionAndUnitSelectors = (props) => {
   };
 
   const clearUnit = () => {
-    TC.setDisplayUnits(TC.data.filter((u) => u.faction === TC.selectedFaction && u.subFaction.includes(TC.selectedSubFaction)));
+    TC.setDisplayUnits(
+      TC.data.filter((u) => (u.faction === TC.selectedFaction && u.subFaction.includes(TC.selectedSubFaction)) || u.unitLocked)
+    );
   };
 
   return (
