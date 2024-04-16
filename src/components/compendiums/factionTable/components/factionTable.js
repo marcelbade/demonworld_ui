@@ -2,8 +2,9 @@
 import React, { Fragment, useEffect, useState } from "react";
 // Axios
 import axios from "axios";
-// import {makeStyles} from "@material-ui/core";
+// material ui
 import { Grid, Typography } from "@mui/material";
+import { useTheme } from "@emotion/react";
 // components & functions
 import FactionTableRow from "./factionTableRow";
 import DetailedCardView from "./detailedCardView";
@@ -30,6 +31,8 @@ const FactionTable = () => {
   const [allBoxes, setAllBoxes] = useState(false);
   const [columns, setColumns] = useState(columnsStateObjects);
   const [toggleGroups, setToggleGroups] = useState(columnGroupObjects);
+
+  const theme = useTheme();
 
   useEffect(() => {
     fetchData();
@@ -189,7 +192,6 @@ const FactionTable = () => {
               justifyContent="end"
             >
               <LightSwitch />
-              <DropDown />
             </Grid>
           </Grid>
           <Grid item container direction="row">
@@ -208,9 +210,17 @@ const FactionTable = () => {
               <FactionAndUnitSelectors />
             </Grid>
           </Grid>
-        
 
           <Grid item xs={12}>
+            <Grid
+              container
+              justifyContent="flex-end"
+              sx={{
+                backgroundColor: theme.palette.compendiumHeaderBackground,
+              }}
+            >
+              <DropDown />
+            </Grid>
             {receivedData ? (
               <table rules="none">
                 <FactionTableHeader columns={columns} />
