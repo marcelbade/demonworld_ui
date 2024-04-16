@@ -7,14 +7,14 @@ import { Grid, Button, Fade } from "@mui/material";
 import { ArmyContext } from "../../../../../contexts/armyContext";
 import { TournamentRulesContext } from "../../../../../contexts/tournamentRulesContext";
 import { SelectionContext } from "../../../../../contexts/selectionContext";
-// constants
-import { OPTIONS } from "../../../../../constants/textsAndMessages";
 // components and functions
-import { filterForSubFaction } from "../../../ListGeneratorFunctions";
 import LightSwitch from "../../../../shared/LightSwitch";
 import ChoosePdfType from "./ChoosePdfType";
 import calculateScoutingFactor from "../../../../../gameLogic/scoutFactorCalculator/scoutingFactorCalculator";
 import useSubFactionStats from "../../../../../customHooks/UseSubFactionStats";
+import useUnitEnricher from "../../../../../customHooks/UseUnitEnricher";
+// constants
+import { OPTIONS } from "../../../../../constants/textsAndMessages";
 
 const OptionButtons = () => {
   const AC = useContext(ArmyContext);
@@ -23,6 +23,8 @@ const OptionButtons = () => {
 
   const history = useHistory();
   const stats = useSubFactionStats();
+  const enrichUnit = useUnitEnricher();
+
   const [showPdfVariantButtons, setShowPdfVariantButtons] = useState(false);
 
   /**
@@ -57,12 +59,14 @@ const OptionButtons = () => {
    */
   const createPDFData = (options) => {
     let list = [];
+    let selectedUnits = [...SEC.selectedUnits];
+
+    const allSelectedCards = addCardsForMultiStateUnits(selectedUnits);
 
     AC.subFactionDTOs
       .map((sF) => sF.name)
       .forEach((name) => {
-        const subFactionUnits = filterForSubFaction(SEC.selectedUnits, name);
-
+        const subFactionUnits = allSelectedCards.filter((u) => u.subFaction === name);
         list.push({
           subFaction: name, //
           units: subFactionUnits,
@@ -78,10 +82,34 @@ const OptionButtons = () => {
       teamName: AC.teamName,
       armyName: AC.armyName,
       list: list,
-      scoutingFactor: calculateScoutingFactor(SEC.selectedUnits),
+      scoutingFactor: calculateScoutingFactor(selectedUnits),
       totalArmyPoints: SEC.maxPointsAllowance,
       options: options,
     };
+  };
+
+  /**
+   * Function adds the missing cards for multi state units to the array of selected cards.
+   * If a unit has multiple stat cards, then only one is displayed by the app and can be selected for the list.
+   * The function puts those card objects back to ensure that the detailed PDF contains all cards needed.
+   * @param {[unitCards]} selectedUnits
+   * @returns a unitCard array with the all cards for multi state units added.
+   */
+  const addCardsForMultiStateUnits = (selectedUnits) => {
+    selectedUnits.forEach((u) => {
+      if (u.isMultiStateUnit) {
+        const subFaction = AC.subFactionDTOs.find((sF) => sF.name === u.subFaction);
+        const cards = subFaction.units.filter(
+          (subFactionUnit) =>
+            subFactionUnit.unitName.includes(u.unitName) && //
+            subFactionUnit.multiStateOrderNumber > 1
+        );
+
+        cards.forEach((c) => selectedUnits.push(enrichUnit(c)));
+      }
+    });
+
+    return selectedUnits;
   };
 
   // TODO STUD. Replace with REST Call once DB and BE are parts are done.
