@@ -2,10 +2,10 @@
 import React, { useContext } from "react";
 // components & functions
 import { TableContext } from "../../../../contexts/tableContext";
+import SelectionInput from "../../../shared/selectionInput";
 //  Constants
 import { ALL_FACTIONS_ARRAY } from "../../../../constants/factions";
 import { INPUT_TEXTS } from "../../../../constants/textsAndMessages";
-import SelectionInput from "../../../shared/selectionInput";
 
 const FactionAndUnitSelectors = (props) => {
   const TC = useContext(TableContext);
