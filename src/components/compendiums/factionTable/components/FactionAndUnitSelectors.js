@@ -1,5 +1,5 @@
 //  React
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 // components & functions
 import { TableContext } from "../../../../contexts/tableContext";
 import SelectionInput from "../../../shared/selectionInput";
@@ -41,7 +41,23 @@ const FactionAndUnitSelectors = (props) => {
    * @returns [String]
    */
   const setUnitNamesOptions = () => {
-    const options = TC.selectedFaction === "" ? TC.data : TC.displayUnits.filter((u) => !u.unitLocked);
+    let options = [];
+
+    if (TC.selectedFaction === "" && TC.selectedSubFaction === "") {
+      options = TC.data;
+    } else if (TC.selectedFaction === "" && TC.selectedSubFaction !== "") {
+      options = TC.data.filter((u) => u.subFaction.includes(TC.selectedSubFaction) && !u.unitLocked);
+    } else if (TC.selectedFaction !== "" && TC.selectedSubFaction === "") {
+      options = TC.data.filter((u) => u.faction.includes(TC.selectedFaction) && !u.unitLocked);
+    } else if (TC.selectedFaction !== "" && TC.selectedSubFaction !== "") {
+      options = TC.data.filter(
+        (u) =>
+          u.faction.includes(TC.selectedFaction) && //
+          u.subFaction.includes(TC.selectedSubFaction) &&
+          !u.unitLocked
+      );
+    }
+
     return options.map((u) => u.unitName).sort();
   };
 
