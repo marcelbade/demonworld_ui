@@ -142,8 +142,6 @@ const FactionTable = () => {
     setOpenOptions(true);
   };
 
-  console.log("displayUnits", displayUnits);
-
   return receivedData ? (
     <>
       <TableProvider

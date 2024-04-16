@@ -14,7 +14,7 @@ const FactionAndUnitSelectors = (props) => {
    * Function generates the options for the faction name selector.
    * @returns an array containing all faction names.
    */
-  const setSelectorFactionNames = () => {
+  const setFactionNamesOptions = () => {
     return ALL_FACTIONS_ARRAY.sort();
   };
 
@@ -22,7 +22,7 @@ const FactionAndUnitSelectors = (props) => {
    * Function generates the options for the sub faction name selector.
    * @returns an array containing all sub faction names for the given faction(s).
    */
-  const setSelectorSubFactionNames = () => {
+  const setSubFactionNamesOptions = () => {
     let options = [];
 
     let rawValues = TC.data.filter((u) => u.faction.includes(TC.selectedFaction));
@@ -40,19 +40,18 @@ const FactionAndUnitSelectors = (props) => {
    * otherwise ALL unit names in the games are displayed (localFactions).
    * @returns [String]
    */
-  const setSelectorUnitNames = () => {
+  const setUnitNamesOptions = () => {
     const options = TC.selectedFaction === "" ? TC.data : TC.displayUnits;
     return options.map((u) => u.unitName).sort();
   };
 
   /**
-   * Function for OnChangeEvent. Select all units of one faction to be displayed in the table.
+   * Function for OnChangeEvent. Sets th selected faction and selects all
+   * units of one faction to be displayed in the table. Subfactions and units are cleared.
    * @param {[FactionObject]} selectedFaction
    */
   const selectFaction = (selectedFaction) => {
-    // store selected faction name
     TC.setSelectedFaction(TC.data.map((u) => u.faction).find((name) => name === selectedFaction));
-    // filter displayed units
     TC.setDisplayUnits(TC.data.filter((u) => u.faction.includes(selectedFaction) || u.unitLocked));
   };
 
@@ -73,12 +72,14 @@ const FactionAndUnitSelectors = (props) => {
   };
 
   const clearFaction = () => {
+    TC.setSelectedFaction("");
+    TC.setSelectedSubFaction("");
     TC.setDisplayUnits(TC.data);
-    clearSubFaction();
   };
 
   const clearSubFaction = () => {
-    TC.setDisplaySubFactions(setSelectorSubFactionNames());
+    TC.setSelectedSubFaction("");
+    TC.setDisplayUnits(TC.data.filter((u) => u.faction.includes(TC.selectedFaction)));
   };
 
   const clearUnit = () => {
@@ -88,19 +89,19 @@ const FactionAndUnitSelectors = (props) => {
   return (
     <>
       <SelectionInput
-        alternatives={setSelectorFactionNames()}
+        alternatives={setFactionNamesOptions()}
         filterFunction={selectFaction}
         clearFunction={clearFaction}
         label={INPUT_TEXTS.SELECT_FACTION}
       />
       <SelectionInput
-        alternatives={setSelectorSubFactionNames()}
+        alternatives={setSubFactionNamesOptions()}
         filterFunction={selectSubFaction}
         clearFunction={clearSubFaction}
         label={INPUT_TEXTS.SELECT_SUBFACTION}
       />
       <SelectionInput
-        alternatives={setSelectorUnitNames()}
+        alternatives={setUnitNamesOptions()}
         filterFunction={selectUnit}
         clearFunction={clearUnit}
         label={INPUT_TEXTS.SELECT_UNIT}
