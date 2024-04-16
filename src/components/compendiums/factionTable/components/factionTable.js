@@ -3,7 +3,7 @@ import React, { Fragment, useEffect, useState } from "react";
 // Axios
 import axios from "axios";
 // import {makeStyles} from "@material-ui/core";
-import { Grid, IconButton, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 // components & functions
 import FactionTableRow from "./factionTableRow";
 import DetailedCardView from "./detailedCardView";
@@ -12,13 +12,11 @@ import LightSwitch from "../../../shared/LightSwitch";
 import MainMenuReturnButton from "../../../shared/MainMenuReturnButton";
 import { columnGroupObjects, columnsStateObjects } from "./columnsStateObject";
 //icons
-import MenuIcon from "@mui/icons-material/Menu";
 import FactionAndUnitSelectors from "./FactionAndUnitSelectors";
-import OptionsDialog from "./OptionsDialog";
 import TableProvider from "../../../../contexts/tableContext";
 // constants
 import { COMPENDIUM } from "../../../../constants/textsAndMessages";
-import DropDownTest from "./DropDown";
+import DropDown from "./DropDown";
 
 const FactionTable = () => {
   // intialize local state
@@ -30,7 +28,6 @@ const FactionTable = () => {
   const [displayUnits, setDisplayUnits] = useState([]);
   const [selectedStatCards, setSelectedStatCards] = useState([]);
   const [allBoxes, setAllBoxes] = useState(false);
-  const [openOptions, setOpenOptions] = useState(false);
   const [columns, setColumns] = useState(columnsStateObjects);
   const [toggleGroups, setToggleGroups] = useState(columnGroupObjects);
 
@@ -138,10 +135,6 @@ const FactionTable = () => {
     setAllBoxes((prevState) => !prevState);
   };
 
-  const handleOptionsOpen = () => {
-    setOpenOptions(true);
-  };
-
   return receivedData ? (
     <>
       <TableProvider
@@ -149,7 +142,6 @@ const FactionTable = () => {
           displayUnits: displayUnits,
           displaySubFactions: displaySubFactions,
           data: data,
-          openOptions: openOptions,
           allBoxes: allBoxes,
           columns: columns,
           toggleGroups: toggleGroups,
@@ -159,7 +151,6 @@ const FactionTable = () => {
           setData: setData,
           setDisplaySubFactions: setDisplaySubFactions,
           setDisplayUnits: setDisplayUnits,
-          setOpenOptions: setOpenOptions,
           setColumns: setColumns,
           toggleColumn: toggleColumn,
           toggleAllColumns: toggleAllColumns,
@@ -198,10 +189,7 @@ const FactionTable = () => {
               justifyContent="end"
             >
               <LightSwitch />
-              <IconButton onClick={handleOptionsOpen}>
-                <MenuIcon />
-              </IconButton>
-              <DropDownTest />
+              <DropDown />
             </Grid>
           </Grid>
           <Grid item container direction="row">
@@ -220,7 +208,7 @@ const FactionTable = () => {
               <FactionAndUnitSelectors />
             </Grid>
           </Grid>
-          <OptionsDialog />
+        
 
           <Grid item xs={12}>
             {receivedData ? (
