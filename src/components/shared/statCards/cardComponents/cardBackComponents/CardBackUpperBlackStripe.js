@@ -28,9 +28,9 @@ const CardBackUpperBlackStripe = () => {
   const elements = `${displayUnitElements()} ${CARD_PREVIEW.ELEMENTS}`;
   const singleElement = `1 ${CARD_PREVIEW.SINGLE_ELEMENT}`;
   const specialFigures =
-    `${SC.unit.leader ? CARD_PREVIEW.LEADER : null} / ` +
-    `${SC.unit.standardBearer ? CARD_PREVIEW.STANDARD_BEARER : null} / ` +
-    `${SC.unit.musician ? CARD_PREVIEW.MUSICIAN : null}`;
+    `${SC.unit.leader ? CARD_PREVIEW.LEADER : ""}` +
+    `${SC.unit.standardBearer ? ` / ${CARD_PREVIEW.STANDARD_BEARER}` : ""}` +
+    `${SC.unit.musician ? ` / ${CARD_PREVIEW.MUSICIAN}` : ""}`;
 
   return (
     <Grid
