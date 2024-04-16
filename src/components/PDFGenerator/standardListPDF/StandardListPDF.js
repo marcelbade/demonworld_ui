@@ -20,12 +20,15 @@ const StandardListPDF = (props) => {
         .map((obj, i) => (
           <View key={i}>
             <SubfactionSubtitle data={obj} />
-            {obj.units.map((u, i) => (
-              <View key={i}>
-                <Unit unit={u} />
-                <Equipment equipment={u.equipment} />
-              </View>
-            ))}
+            {obj.units
+              // don't show all cards for multistate units in this view!
+              .filter((u) => u.multiStateOrderNumber < 2)
+              .map((u, i) => (
+                <View key={i}>
+                  <Unit unit={u} />
+                  <Equipment equipment={u.equipment} />
+                </View>
+              ))}
           </View>
         ))}
     </Document>

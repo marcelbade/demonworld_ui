@@ -27,15 +27,17 @@ const ListPDF = (props) => {
         .map((obj, i) => (
           <View wrap={false}>
             <SubfactionSubtitle key={i} data={obj} />
-            {obj.units.map((u, i) => (
-              <View key={i} style={detailedStyles.cardBox} wrap={false}>
-                <CardHeader unit={u} />
-                <FirstBlackRow unit={u} />
-                <CardCenter unit={u} />
-                <SecondBlackRow unit={u} />
-                <CardFooter unit={u} />
-              </View>
-            ))}
+            {obj.units
+              .sort((a, b) => a.unitName - b.unitName)
+              .map((u, i) => (
+                <View key={i} style={detailedStyles.cardBox} wrap={false}>
+                  <CardHeader unit={u} />
+                  <FirstBlackRow unit={u} />
+                  <CardCenter unit={u} />
+                  <SecondBlackRow unit={u} />
+                  <CardFooter unit={u} />
+                </View>
+              ))}
           </View>
         ))}
     </Document>
