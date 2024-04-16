@@ -1,6 +1,6 @@
 import { uuidGenerator } from "../util/utilityFunctions";
 
-const useUnitEnricher = (unit) => {
+const useUnitEnricher = () => {
   /**
    * Functions adds a UUID as unique id so the user can select the
    * same unit twice in a row. Without it, the useEffect does not fire, since the
@@ -33,7 +33,7 @@ const useUnitEnricher = (unit) => {
   /**
    * Function adds a property which allows equipment to be added,
    * as well as to check what equipment can be added/ was added.
-   * There are, at this moment, 5 types of items. Each type can be selected once. 
+   * There are, at this moment, 5 types of items. Each type can be selected once.
    * @param {unitCard object} unit
    * @returns unit object with equipment + equipmentTypes property.
    */
@@ -51,7 +51,7 @@ const useUnitEnricher = (unit) => {
     };
   };
 
-  const enrichUnit = () => {
+  const enrichUnit = (unit) => {
     unit = addUniqueIdToUnit(unit);
     unit = addLossCounterToUnit(unit);
     unit = addEquipmentSlotsToUnit(unit);

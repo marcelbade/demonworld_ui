@@ -17,7 +17,7 @@ const TreeUnitNode = (props) => {
   const SEC = useContext(SelectionContext);
 
   const validation = useArmyValidation();
-  const enrichUnit = useUnitEnricher(props.unit);
+  const enrichUnit = useUnitEnricher();
 
   const theme = useTheme();
 
