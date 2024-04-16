@@ -72,24 +72,36 @@ const FactionAndUnitSelectors = (props) => {
   };
 
   /**
-   * Function for onChange event. Select all a single unit fpr the selected faction.
+   * Function for onChange event. Select all a single unit.
    * @param {[{}]} selectedUnit
    */
   const selectUnit = (selectedUnit) => {
     TC.setDisplayUnits(TC.data.filter((u) => u.unitName.includes(selectedUnit) || u.unitLocked));
   };
 
+  /**
+   * Function for clear event. Clears values for selected faction and sub faction
+   * and resets the unit list to all units received from the BE.
+   */
   const clearFaction = () => {
     TC.setSelectedFaction("");
     TC.setSelectedSubFaction("");
     TC.setDisplayUnits(TC.data);
   };
 
+  /**
+   * Function for clear event. Clears values for selected sub faction
+   * and resets the unit list to all units for the selected faction.
+   */
   const clearSubFaction = () => {
     TC.setSelectedSubFaction("");
     TC.setDisplayUnits(TC.data.filter((u) => u.faction.includes(TC.selectedFaction)));
   };
 
+  /**
+   * Function for clear event. Clears values for selected unit
+   * and resets the unit list to all units for the selected faction and sub faction.
+   */
   const clearUnit = () => {
     TC.setDisplayUnits(
       TC.data.filter((u) => (u.faction === TC.selectedFaction && u.subFaction.includes(TC.selectedSubFaction)) || u.unitLocked)
