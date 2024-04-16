@@ -1,5 +1,5 @@
 //  React
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 // components & functions
 import { TableContext } from "../../../../contexts/tableContext";
 import SelectionInput from "../../../shared/selectionInput";
