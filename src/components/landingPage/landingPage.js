@@ -1,7 +1,7 @@
 // React
 import React from "react";
 // Material UI
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 // icons
 import deathIcon from "../../assets/icons/icons8-death-64.png";
 import calculatorIcon from "../../assets/icons/icons8-calculator-64.png";
@@ -16,38 +16,42 @@ const LandingPage = () => {
   const theme = useTheme();
 
   return (
-    <Grid container>
+    <Grid container direction="row">
       <Grid
-        container
+        container //
+        item
         xs={12}
-        item //
-        justifyContent="flex-end"
+        justifyContent="space-between"
         alignContent="center"
       >
-        <Grid item sx={{ marginRight: "2em", marginTop: "1em" }}>
+        <Grid
+          item //
+          sx={{ marginLeft: "1em" }}
+        >
+          <Typography variant="h3">{LANDINGPAGE.TITLE}</Typography>
+        </Grid>
+        <Grid
+          item //
+          justifyContent="flex-end"
+          alignContent="center"
+          sx={{
+            paddingTop: "2px",
+            height: "5vh",
+            width: "3vw",
+          }}
+        >
           <LightSwitch />
         </Grid>
       </Grid>
+
       <Grid
         container //
         item
         justifyContent="center"
         alignContent="center"
         sx={{
+          height: "80vh",
           width: "100vw",
-          height: "100vh",
-
-          [theme.breakpoints.up("md")]: {
-            flexDirection: "row",
-          },
-          [theme.breakpoints.down("lg")]: {
-            flexDirection: "column",
-            "@media (orientation:landscape)": {
-              flexDirection: "row",
-              justifyContent: "space-between",
-              padding: "1em",
-            },
-          },
         }}
       >
         <LandingPageNaviButton

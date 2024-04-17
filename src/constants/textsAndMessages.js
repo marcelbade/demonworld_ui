@@ -6,6 +6,7 @@ export const ALTTEXT = {
 };
 
 export const LANDINGPAGE = {
+  TITLE:"Armeelistentool",
   COMPENDIUM: "Kompendium",
   LIST_GENERATOR: "Listengenerator",
   LOSS_CALCULATOR: "Verlustrechner",
