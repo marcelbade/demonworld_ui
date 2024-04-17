@@ -9,9 +9,8 @@ import UnitLossCalcBttnGroup from "../LossCalcInputButtons/UnitLossCalcBttnGroup
 import EquipmentList from "../LossCalcEquipmentList/EquipmentList";
 import ListElementName from "./ListElementName";
 import TotalLossButton from "../LossCalcInputButtons/TotalLossButton";
-import ContextHelpButton from "../../shared/ContextHelpButton";
 // constants
-import { LOSS_CALCULATOR, PUSH_MESSAGE_TYPES } from "../../../constants/textsAndMessages";
+import { LOSS_CALCULATOR } from "../../../constants/textsAndMessages";
 
 const LostUnitListElement = (props) => {
   const BORDER_NORMAL = {
@@ -33,7 +32,6 @@ const LostUnitListElement = (props) => {
         container
         direction="row"
         alignItems="center"
-        alignContent="center"
         justifyContent="center"
         sx={props.unit.unitDestroyed ? BORDER_LOST : BORDER_NORMAL}
       >
@@ -69,7 +67,6 @@ const LostUnitListElement = (props) => {
 
         <Grid item xs={1}>
           <Typography variant="h6" align="center">
-            {/* //TODO   */}
             {calcContext.unitPointsLost}
           </Typography>
         </Grid>
@@ -80,12 +77,7 @@ const LostUnitListElement = (props) => {
           container
           justifyContent="flex-end"
           alignItems="flex-end"
-        >
-          <ContextHelpButton
-            message={LOSS_CALCULATOR.LOSS_BUTTON_HELP} //
-            type={PUSH_MESSAGE_TYPES.INFO}
-          />
-        </Grid>
+        ></Grid>
       </Grid>
     </ListItem>
   );
