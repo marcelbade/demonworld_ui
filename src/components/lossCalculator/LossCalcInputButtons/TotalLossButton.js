@@ -7,9 +7,7 @@ import CustomIcon from "../../shared/statCards/CustomIcon";
 import { LossCalcContext } from "../../../contexts/LossCalculatorContext";
 // icons
 import skullsIcon from "../../../assets/icons/skulls.png";
-// constants
-import { LOSS_CALCULATOR } from "../../../constants/textsAndMessages";
- 
+
 const TotalLossButton = (props) => {
   const calcContext = useContext(LossCalcContext);
 
@@ -39,10 +37,12 @@ const TotalLossButton = (props) => {
         unitDestroyed();
         allItemsMarkedLost();
       }}
+      sx={{ height: "100%", width: "100%", backgroundColor: "green" }}
     >
       <CustomIcon
         icon={skullsIcon} //
-        altText={LOSS_CALCULATOR.UNIT_ROUTED}
+        boxHeight={45}
+        boxWidth={45}
         height={40}
         width={40}
       />

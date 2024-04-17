@@ -13,27 +13,31 @@ import TotalLossButton from "../LossCalcInputButtons/TotalLossButton";
 import { LOSS_CALCULATOR } from "../../../constants/textsAndMessages";
 
 const LostUnitListElement = (props) => {
-  const BORDER_NORMAL = {
+  const calcContext = useContext(LossCalcContext);
+
+  const STYLES = {
+    border: "solid 0.1em",
     borderColor: "black",
-    border: "solid 0.1em",
-    borderRadius: "4px",
-  };
-  const BORDER_LOST = {
-    borderColor: "red",
-    border: "solid 0.1em",
     borderRadius: "4px",
   };
 
-  const calcContext = useContext(LossCalcContext);
+  const setStyles = () => {
+    return props.unitDestroyed
+      ? {
+          ...STYLES,
+          borderColor: "red",
+        }
+      : STYLES;
+  };
 
   return (
     <ListItem>
       <Grid
-        container
+        container //
         direction="row"
         alignItems="center"
         justifyContent="center"
-        sx={props.unit.unitDestroyed ? BORDER_LOST : BORDER_NORMAL}
+        sx={setStyles()}
       >
         <Grid container item xs={5} direction="column">
           <Grid item>
@@ -48,7 +52,9 @@ const LostUnitListElement = (props) => {
         </Grid>
         <Grid item xs={1}>
           <Typography variant="button">
-            {calcContext.isHeroMageOrGiantElement(props.unit) ? LOSS_CALCULATOR.TEXT_SINGLE_ELEMENTS : LOSS_CALCULATOR.TEXT_UNITS}
+            {calcContext.isHeroMageOrGiantElement(props.unit) //
+              ? LOSS_CALCULATOR.TEXT_SINGLE_ELEMENTS
+              : LOSS_CALCULATOR.TEXT_UNITS}
           </Typography>
         </Grid>
         <Grid
@@ -61,7 +67,13 @@ const LostUnitListElement = (props) => {
         >
           <UnitLossCalcBttnGroup unit={props.unit} />
         </Grid>
-        <Grid item xs={1}>
+        <Grid
+          item
+          container
+          xs={2} //
+          alignItems="center"
+          justifyContent="center"
+         >
           <TotalLossButton unit={props.unit} />
         </Grid>
 
