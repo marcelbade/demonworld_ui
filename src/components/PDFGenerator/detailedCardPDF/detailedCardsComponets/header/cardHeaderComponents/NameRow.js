@@ -33,7 +33,7 @@ const NameRow = (props) => {
           </Text>
         </View>
       </View>
-      <Text key={props.index}>{props.unit.unitName}</Text>
+      <Text key={props.index}> {props.unit.isMultiStateUnit ? props.unit.multiCardName : props.unit.unitName} </Text>
       <Text key={props.index}> </Text>
     </View>
   );

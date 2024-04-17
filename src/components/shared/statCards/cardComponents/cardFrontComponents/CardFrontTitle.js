@@ -7,6 +7,13 @@ import { renderDynamicIcons } from "../../../../compendiums/factionTable/depenci
 import { Grid, Typography } from "@mui/material";
 import { StateCardContext } from "../../../../../contexts/statCardContext";
 
+/**
+ * creates the card title. The name displayed is, by default, the unit's name.
+ * However if the unit has multiple stat cards (isMultiStateUnit flag), the multiCardName
+ *  is protrayed, i.e., the name of one of the stat cards that belong to the unit.
+ *  E.g.: "Riesenyeti"
+ * @returns html element
+ */
 const CardFrontTitle = () => {
   const theme = useTheme();
   const SC = useContext(StateCardContext);
@@ -27,7 +34,7 @@ const CardFrontTitle = () => {
         })}
       </Typography>
       <Typography sx={theme.palette.statCards.cardTitle} variant="h4" align="center">
-        {SC.unit.unitName}
+        {SC.unit.isMultiStateUnit ? SC.unit.multiCardName : SC.unit.unitName}
       </Typography>
       <Typography sx={theme.palette.cardTitle} variant="h6" align="center">
         {renderDynamicIcons({
