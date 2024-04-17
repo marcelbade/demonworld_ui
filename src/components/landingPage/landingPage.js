@@ -10,11 +10,8 @@ import bookIcon from "../../assets/icons/icons8-book-64.png";
 import LandingPageNaviButton from "./LandingPageNaviButton";
 import { LANDINGPAGE } from "../../constants/textsAndMessages";
 import LightSwitch from "../shared/LightSwitch";
-import { useTheme } from "@emotion/react";
 
 const LandingPage = () => {
-  const theme = useTheme();
-
   return (
     <Grid container direction="row">
       <Grid
