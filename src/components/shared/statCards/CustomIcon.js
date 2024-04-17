@@ -7,8 +7,13 @@ import { Icon } from "@mui/material";
 const CustomIcon = (props) => {
   const LC = useContext(LightSwitchContext);
 
-  // const STYLES = { height: `${props.height + 5}px`, width: `${props.height + 5}px` };
-  const STYLES = { height: props.boxHeight, width: props.boxWidth };
+  const STYLES = {
+    height: props.boxHeight, //
+    width: props.boxWidth,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  };
 
   /**
    * Function checks whether the app is using the dark theme and flipps the icon color if necessary.
