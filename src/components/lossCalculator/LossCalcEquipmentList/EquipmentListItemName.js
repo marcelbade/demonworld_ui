@@ -17,7 +17,7 @@ const EquipmentListItemName = (props) => {
   };
 
   /**
-   * Function returns the correct css conditionally.x
+   * Function returns the correct css conditionally.
    * @returns an object containing css.
    */
   const switchCssClass = () => {
