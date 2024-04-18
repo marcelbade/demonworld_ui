@@ -7,7 +7,7 @@ import { Grid, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components & functions
 import CompendiumTableRow from "./CompendiumTableRow";
-import DetailedCardView from "./DetailedCardView";
+import DetailedCardView from "./CardRow";
 import CompendiumTableHeader from "./CompendiumTableHeader";
 import LightSwitch from "../../../shared/LightSwitch";
 import MainMenuReturnButton from "../../../shared/MainMenuReturnButton";

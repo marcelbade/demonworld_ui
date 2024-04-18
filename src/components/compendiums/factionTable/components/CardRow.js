@@ -16,12 +16,12 @@ const DetailedCardView = (props) => {
   const TC = useContext(TableContext);
 
   const displayCard = () => {
-    const name =
+    const displayName =
       props.unit.multiCardName === "" //
         ? props.unit.unitName
         : props.unit.multiCardName;
 
-    return TC.selectedStatCards.includes(props.unit.faction + name) ? ( //
+    return TC.selectedStatCards.includes(props.unit.faction + displayName) ? ( //
       <StatCard
         unit={props.unit} //
         alignment={ROW}
