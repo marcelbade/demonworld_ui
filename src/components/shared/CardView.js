@@ -11,8 +11,6 @@ const CardView = (props) => {
   const [displayCard, setLocalDisplayCard] = useState({});
   const [cardNumber, setCardNumber] = useState(0);
 
-  console.log("props", props);
-
   // rerender to correctly display the new unit, whenever the supplied unit changes.
   useEffect(() => {
     const temp = { ...props.unit };
