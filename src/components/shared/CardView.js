@@ -1,11 +1,10 @@
 // React
 import React, { Fragment, useEffect, useState } from "react";
 // material ui
-import { Grid, IconButton } from "@mui/material";
-// icons
-import { ChevronLeft, ChevronRight } from "@mui/icons-material";
+import { Grid } from "@mui/material";
 // components and functions
 import StatCard from "./statCards/StatCard";
+import StatCardCarousellButton from "./StatCardCarousellButton";
 
 const CardView = (props) => {
   const [displayCard, setLocalDisplayCard] = useState({});
@@ -52,45 +51,23 @@ const CardView = (props) => {
         alignItems="center"
         justifyContent="center"
         alignContent="center"
+        minHeight="60vh"
+        maxHeight="60vh"
       >
         <Grid item>
-          {props.isMultiStateCard ? (
-            <IconButton
-              onClick={() => {
-                carouselBackward();
-              }}
-              size="large"
-            >
-              <ChevronLeft
-                sx={{
-                  width: "2em",
-                  height: "2em",
-                }}
-              />
-            </IconButton>
+          {props.isMultiStateCard ? ( //
+            <StatCardCarousellButton action={carouselBackward} side={"left"} />
           ) : null}
         </Grid>
-        <Grid>
+        <Grid item>
           <StatCard
             isSingleElement={props.isSingleElement} //
             unit={displayCard}
           />
         </Grid>
         <Grid item>
-          {props.isMultiStateCard ? (
-            <IconButton
-              onClick={() => {
-                carouselForward();
-              }}
-              size="large"
-            >
-              <ChevronRight
-                sx={{
-                  width: "2em",
-                  height: "2em",
-                }}
-              />
-            </IconButton>
+          {props.isMultiStateCard ? ( //
+            <StatCardCarousellButton action={carouselForward} side={"right"} />
           ) : null}
         </Grid>
       </Grid>
