@@ -4,6 +4,7 @@ import React, { useContext } from "react";
 import { TableContext } from "../../../../contexts/tableContext";
 import CardView from "../../../shared/CardView";
 import { isSingleElementCard } from "../../../../util/utilityFunctions";
+import { TableRow } from "@mui/material";
 
 /**
  * displays the unit card in the compendium table
@@ -20,6 +21,7 @@ const DetailedCardView = (props) => {
         : props.unit.multiCardName;
 
     const isSingleElement = isSingleElementCard(props.unit);
+
     const carouselCards = TC.displayUnits.filter(
       (u) =>
         u.belongsToUnit !== "NONE" && //
@@ -37,10 +39,9 @@ const DetailedCardView = (props) => {
   };
 
   return (
-    <tr key={` ${props.unit.unitName},${props.unit.subFaction}`}>
-      <td colSpan={"10%"}></td>
+    <TableRow key={` ${props.unit.unitName},${props.unit.subFaction}`}>
       <td colSpan={"30%"}>{displayCard()}</td>
-    </tr>
+    </TableRow>
   );
 };
 
