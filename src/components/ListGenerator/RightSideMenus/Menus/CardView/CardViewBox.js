@@ -5,7 +5,7 @@ import { Grid, IconButton, ThemeProvider, CssBaseline } from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
 // components and functions
 import { RightMenuContext } from "../../../../../contexts/rightMenuContext";
-import CardView from "./CardView";
+import CardView from "../../../../shared/CardView";
 // theme
 import lightTheme from "../../../../../AppTheme/lightTheme";
 import darkTheme from "../../../../../AppTheme/darkTheme";
@@ -17,36 +17,14 @@ const CardViewBox = () => {
 
   const COLUMN = "column";
 
-  /**
-   * Function allwos user to cycle through the multiple stat cards counter-clockwise.
-   */
-  const carouselForward = () => {
-    const number = RC.displayedCard.multiStateOrderNumber;
-
-    if (number < RC.carouselCards.length) {
-      RC.setDisplayedCard(RC.carouselCards[number]);
-    } else {
-      RC.setDisplayedCard(RC.carouselCards[0]);
-    }
-  };
-
-  /**
-   * Function allows user to cycle through the multiple stat cards clockwise.
-   */
-  const carouselBackward = () => {
-    const number = RC.displayedCard.multiStateOrderNumber;
-
-    if (number > 1) {
-      RC.setDisplayedCard(RC.carouselCards[number - 2]);
-    } else {
-      RC.setDisplayedCard(RC.carouselCards[RC.carouselCards.length - 1]);
-    }
-  };
-
   return (
     <ThemeProvider theme={LC.darkModeOff ? lightTheme : darkTheme}>
       <CssBaseline />
-      <Grid container direction="column" sx={{ height: "100vh", width: "30vw", padding: "2em" }}>
+      <Grid
+        container //
+        direction={COLUMN}
+        sx={{ height: "100vh", width: "30vw", padding: "2em" }}
+      >
         <Grid item>
           <IconButton
             onClick={() => {
@@ -61,11 +39,10 @@ const CardViewBox = () => {
           {RC.statCardState.clickedUnit !== undefined ? (
             <CardView
               isMultiStateCard={RC.statCardState.clickedUnit?.isMultiStateUnit}
-              cardData={RC.displayedCard}
+              unit={RC.displayedCard}
               alignment={COLUMN}
               isSingleElement={RC.isSingleElement}
-              carouselForward={carouselForward}
-              carouselBackward={carouselBackward}
+              carouselCards={RC.carouselCards}
             />
           ) : null}
         </Grid>
