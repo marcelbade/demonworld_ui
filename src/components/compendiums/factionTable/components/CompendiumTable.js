@@ -233,22 +233,23 @@ const CompendiumTable = () => {
               <table rules="none">
                 <CompendiumTableHeader columns={columns} />
                 <tbody>
-                  {displayUnits.map((unit, i) => {
-                    return (
-                      <Fragment key={i}>
-                        <CompendiumTableRow
-                          unit={unit} //
-                          rowNumber={i}
-                          key={i}
-                        />
-                        <DetailedCardView
-                          selectedCards={selectedStatCards} //
-                          unit={unit}
-                          key={`${i},${unit.unitName},${unit.subFaction}`}
-                        />
-                      </Fragment>
-                    );
-                  })}
+                  {displayUnits
+                    .filter((u) => u.multiStateOrderNumber < 2)
+                    .map((unit, i) => {
+                      return (
+                        <Fragment key={i}>
+                          <CompendiumTableRow
+                            unit={unit} //
+                            rowNumber={i}
+                            key={i}
+                          />
+                          <DetailedCardView
+                            unit={unit} //
+                            key={`${i},${unit.unitName},${unit.subFaction}`}
+                          />
+                        </Fragment>
+                      );
+                    })}
                 </tbody>
               </table>
             ) : null}
