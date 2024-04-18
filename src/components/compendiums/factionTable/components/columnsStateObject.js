@@ -101,7 +101,7 @@ export const columnsStateObjects = [
   },
   {
     column: "squareFormation",
-    label: COMPENDIUM.NAME,
+    label: COMPENDIUM.SQUAREFORMATION,
     displayed: true,
     toggleGroup: "unitCharacteristics",
     type: "boolean",
