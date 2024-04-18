@@ -45,7 +45,14 @@ const CardView = (props) => {
 
   return (
     <Fragment>
-      <Grid item container direction="row" alignItems="center" justifyContent="center" alignContent="center">
+      <Grid
+        container //
+        item
+        direction="row"
+        alignItems="center"
+        justifyContent="center"
+        alignContent="center"
+      >
         <Grid item>
           {props.isMultiStateCard ? (
             <IconButton
@@ -66,7 +73,6 @@ const CardView = (props) => {
         <Grid>
           <StatCard
             isSingleElement={props.isSingleElement} //
-            alignment={props.alignment}
             unit={displayCard}
           />
         </Grid>

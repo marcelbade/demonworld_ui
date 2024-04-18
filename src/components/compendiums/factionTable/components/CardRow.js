@@ -5,9 +5,6 @@ import { TableContext } from "../../../../contexts/tableContext";
 import CardView from "../../../shared/CardView";
 import { isSingleElementCard } from "../../../../util/utilityFunctions";
 
-// front and back side of the displayed unit cards are alligned horizontally.
-const COLUMN = "column";
-
 /**
  * displays the unit card in the compendium table
  * @param {*} props
@@ -33,7 +30,6 @@ const DetailedCardView = (props) => {
       <CardView
         isMultiStateCard={props.unit.isMultiStateUnit}
         unit={props.unit} //
-        alignment={COLUMN}
         isSingleElement={isSingleElement}
         carouselCards={carouselCards}
       />
