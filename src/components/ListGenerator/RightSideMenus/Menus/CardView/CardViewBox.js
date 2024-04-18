@@ -4,18 +4,27 @@ import { Grid, IconButton, ThemeProvider, CssBaseline } from "@mui/material";
 // icons
 import CancelIcon from "@mui/icons-material/Cancel";
 // components and functions
-import { RightMenuContext } from "../../../../../contexts/rightMenuContext";
 import CardView from "../../../../shared/CardView";
+import { isSingleElementCard } from "../../../../../util/utilityFunctions";
+// context
+import { RightMenuContext } from "../../../../../contexts/rightMenuContext";
+import { LightSwitchContext } from "../../../../../contexts/lightSwitchContext";
+import { ArmyContext } from "../../../../../contexts/armyContext";
 // theme
 import lightTheme from "../../../../../AppTheme/lightTheme";
 import darkTheme from "../../../../../AppTheme/darkTheme";
-import { LightSwitchContext } from "../../../../../contexts/lightSwitchContext";
 
 const CardViewBox = () => {
   const RC = useContext(RightMenuContext);
   const LC = useContext(LightSwitchContext);
+  const AC = useContext(ArmyContext);
 
   const COLUMN = "column";
+  const isSingleElement = isSingleElementCard(RC.displayedCard);
+
+  const allStateCards = RC.displayedCard.isMultiStateUnit
+    ? AC.listOfAllFactionUnits.filter((u) => u.belongsToUnit === RC.displayedCard.unitName)
+    : [];
 
   return (
     <ThemeProvider theme={LC.darkModeOff ? lightTheme : darkTheme}>
@@ -41,8 +50,8 @@ const CardViewBox = () => {
               isMultiStateCard={RC.statCardState.clickedUnit?.isMultiStateUnit}
               unit={RC.displayedCard}
               alignment={COLUMN}
-              isSingleElement={RC.isSingleElement}
-              carouselCards={RC.carouselCards}
+              isSingleElement={isSingleElement}
+              carouselCards={allStateCards}
             />
           ) : null}
         </Grid>

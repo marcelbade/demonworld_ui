@@ -7,7 +7,6 @@ import { ListItemButton } from "@mui/material";
 import { BUTTON_TEXTS } from "../../../../../../../constants/textsAndMessages";
 // context
 import { SecondSubFactionContext } from "../../../../../../../contexts/secondSubFactionContext";
-import { ArmyContext } from "../../../../../../../contexts/armyContext";
 import { RightMenuContext } from "../../../../../../../contexts/rightMenuContext";
 import { ItemContext } from "../../../../../../../contexts/itemContext";
 import { TournamentRulesContext } from "../../../../../../../contexts/tournamentRulesContext";
@@ -17,7 +16,6 @@ const UnitElementButtons = (props) => {
   const IC = useContext(ItemContext);
   const RC = useContext(RightMenuContext);
   const TC = useContext(TournamentRulesContext);
-  const AC = useContext(ArmyContext);
 
   // menu names
   const UNIT_CARDS = "UNIT_CARDS";
@@ -86,11 +84,6 @@ const UnitElementButtons = (props) => {
   const setCard = (clickedUnit) => {
     if (clickedUnit !== undefined) {
       RC.setDisplayedCard({ ...clickedUnit });
-    }
-
-    if (clickedUnit !== undefined && clickedUnit.isMultiStateUnit) {
-      const allStateCards = AC.listOfAllFactionUnits.filter((u) => u.belongsToUnit === clickedUnit.unitName);
-      RC.setCarouselCards(allStateCards);
     }
   };
 

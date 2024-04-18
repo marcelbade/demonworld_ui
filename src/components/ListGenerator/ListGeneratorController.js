@@ -101,7 +101,6 @@ const ListGeneratorController = () => {
     lastclickedUnit: {},
     show: false,
   });
-  const [carouselCards, setCarouselCards] = useState([]);
   const [displayedCard, setDisplayedCard] = useState({});
   // right side options menu
   const [showOptionButtons, setShowOptionButtons] = useState(true);
@@ -201,11 +200,10 @@ const ListGeneratorController = () => {
               <RightMenuContext
                 value={{
                   // RIGHT SIDE MENU
-                  statCardState: statCardState, // TODO
+                  statCardState: statCardState,
                   secondSubFactionMenuState: secondSubFactionMenuState,
                   itemShopState: itemShopState,
                   showOptionButtons: showOptionButtons,
-                  carouselCards: carouselCards, // TODO
                   displayedCard: displayedCard, // TODO
                   setStatCardState: setStatCardState,
                   setItemShopState: setItemShopState,
@@ -214,7 +212,6 @@ const ListGeneratorController = () => {
                   closeItemShop: closeItemShop,
                   closeSecondSubFactionMenu: closeSecondSubFactionMenu,
                   setShowOptionButtons: setShowOptionButtons,
-                  setCarouselCards: setCarouselCards,
                   setDisplayedCard: setDisplayedCard,
                 }}
               >
