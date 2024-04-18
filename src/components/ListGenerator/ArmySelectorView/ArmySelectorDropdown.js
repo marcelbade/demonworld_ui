@@ -19,7 +19,7 @@ import { AlternativeListContext } from "../../../contexts/alternativeListContext
 import { AllyContext } from "../../../contexts/allyContext";
 import { SecondSubFactionContext } from "../../../contexts/secondSubFactionContext";
 
-const ArmySelector = () => {
+const ArmySelectorDropdown = () => {
   const AC = useContext(ArmyContext);
   const IC = useContext(ItemContext);
   const VC = useContext(ValidationContext);
@@ -137,4 +137,4 @@ const ArmySelector = () => {
   );
 };
 
-export default ArmySelector;
+export default ArmySelectorDropdown;

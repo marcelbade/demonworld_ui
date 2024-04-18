@@ -14,7 +14,7 @@ import ArmyListBox from "./ArmyListView/ArmyListBox";
 import AlternativeArmyLists from "./ArmySelectorView/AlternativeArmyListSelection/AlternativeArmyLists";
 import MenuBox from "./RightSideMenus/MenuBox";
 import MainMenuReturnButton from "../shared/MainMenuReturnButton";
-import ArmySelector from "./ArmySelectorView/ArmySelector";
+import ArmySelectorDropdown from "./ArmySelectorView/ArmySelectorDropdown";
 import CustomIcon from "../shared/statCards/CustomIcon";
 import customStyledErrorMessage from "../../AppTheme/notiStackTheme";
 // context providers
@@ -293,7 +293,7 @@ const ListGeneratorController = () => {
                               <MainMenuReturnButton />
                             </Grid>
                             <Grid item>
-                              <ArmySelector xs={1} />
+                              <ArmySelectorDropdown xs={1} />
                             </Grid>
                             <Grid item>
                               <AlternativeArmyLists />
