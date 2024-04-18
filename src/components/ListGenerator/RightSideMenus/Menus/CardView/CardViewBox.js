@@ -30,7 +30,7 @@ const CardViewBox = () => {
       <CssBaseline />
       <Grid
         container //
-        direction={COLUMN}
+        direction="column"
         sx={{ height: "100vh", width: "30vw", padding: "2em" }}
       >
         <Grid item>
