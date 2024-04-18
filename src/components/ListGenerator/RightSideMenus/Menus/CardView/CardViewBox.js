@@ -19,7 +19,6 @@ const CardViewBox = () => {
   const LC = useContext(LightSwitchContext);
   const AC = useContext(ArmyContext);
 
-  const COLUMN = "column";
   const isSingleElement = isSingleElementCard(RC.displayedCard);
 
   const allStateCards = RC.displayedCard.isMultiStateUnit
@@ -49,7 +48,6 @@ const CardViewBox = () => {
             <CardView
               isMultiStateCard={RC.statCardState.clickedUnit?.isMultiStateUnit}
               unit={RC.displayedCard}
-              alignment={COLUMN}
               isSingleElement={isSingleElement}
               carouselCards={allStateCards}
             />
