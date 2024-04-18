@@ -29,7 +29,7 @@ const StatCard = (props) => {
         unit: props.unit,
       }}
     >
-      <Grid container direction={props.alignment}>
+      <Grid container direction="column">
         <Grid
           item //
           sx={CSS}
