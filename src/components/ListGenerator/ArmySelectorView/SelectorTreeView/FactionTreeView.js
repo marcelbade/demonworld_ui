@@ -17,7 +17,9 @@ const FactionTreeView = () => {
   const AYC = useContext(AllyContext);
 
   /**
-   * Function checks if the user is done selecting an army.
+   * Function checks if the user is done selecting an army,
+   * by checking if this army has alternative lists. If that's the case
+   * the flag altArmyListSelectionComplete is returned, otherwise it defaults to true.
    * @returns true, if selection is complete.
    */
   const selectionComplete = () => {
