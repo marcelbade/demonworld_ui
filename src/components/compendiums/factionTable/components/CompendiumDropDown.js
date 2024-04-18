@@ -8,7 +8,7 @@ import Select from "@mui/material/Select";
 import Checkbox from "@mui/material/Checkbox";
 import { TableContext } from "../../../../contexts/tableContext";
 
-const DropDown = () => {
+const CompendiumDropDown = () => {
   const TC = useContext(TableContext);
 
   return (
@@ -38,4 +38,4 @@ const DropDown = () => {
   );
 };
 
-export default DropDown;
+export default CompendiumDropDown;

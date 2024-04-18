@@ -6,7 +6,7 @@ import { useTheme } from "@emotion/react";
 import { TableContext } from "../../../../contexts/tableContext";
 import { TableCell, TableHead, TableRow } from "@mui/material";
 
-const FactionTableHeader = () => {
+const CompendiumTableHeader = () => {
   const theme = useTheme();
   const TC = useContext(TableContext);
 
@@ -36,4 +36,4 @@ const FactionTableHeader = () => {
   );
 };
 
-export default React.memo(FactionTableHeader);
+export default React.memo(CompendiumTableHeader);

@@ -6,9 +6,9 @@ import axios from "axios";
 import { Grid, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components & functions
-import FactionTableRow from "./factionTableRow";
+import CompendiumTableRow from "./CompendiumTableRow";
 import DetailedCardView from "./DetailedCardView";
-import FactionTableHeader from "./factionTableHeader";
+import CompendiumTableHeader from "./CompendiumTableHeader";
 import LightSwitch from "../../../shared/LightSwitch";
 import MainMenuReturnButton from "../../../shared/MainMenuReturnButton";
 import { columnGroupObjects, columnsStateObjects } from "./columnsStateObject";
@@ -17,7 +17,7 @@ import FactionAndUnitSelectors from "./FactionAndUnitSelectors";
 import TableProvider from "../../../../contexts/tableContext";
 // constants
 import { COMPENDIUM } from "../../../../constants/textsAndMessages";
-import DropDown from "./DropDown";
+import CompendiumDropDown from "./CompendiumDropDown";
 
 const CompendiumTable = () => {
   // intialize local state
@@ -227,16 +227,16 @@ const CompendiumTable = () => {
                 backgroundColor: theme.palette.compendiumHeaderBackground,
               }}
             >
-              <DropDown />
+              <CompendiumDropDown />
             </Grid>
             {receivedData ? (
               <table rules="none">
-                <FactionTableHeader columns={columns} />
+                <CompendiumTableHeader columns={columns} />
                 <tbody>
                   {displayUnits.map((unit, i) => {
                     return (
                       <Fragment key={i}>
-                        <FactionTableRow
+                        <CompendiumTableRow
                           unit={unit} //
                           rowNumber={i}
                           key={i}

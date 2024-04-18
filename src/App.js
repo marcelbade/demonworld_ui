@@ -6,7 +6,7 @@ import { Grid,  StyledEngineProvider, CssBaseline } from "@mui/material";
 import { Route, Switch } from "react-router-dom";
 // components and functions
 import landingPage from "./components/landingPage/landingPage";
-import factionTable from "./components/compendiums/factionTable/components/factionTable";
+import CompendiumTable from "./components/compendiums/factionTable/components/CompendiumTable";
 import ListGeneratorController from "./components/ListGenerator/ListGeneratorController";
 import LossCalculator from "./components/LossCalculator/LossCalculator";
 import PdfBox from "./components/PDFGenerator/PDFBox";
@@ -33,7 +33,7 @@ function App() {
           <Grid container>
             <Switch>
               <Route path="/" component={landingPage} exact />
-              <Route path="/compendium" component={factionTable} exact />
+              <Route path="/compendium" component={CompendiumTable} exact />
               <Route path="/listGenerator" component={ListGeneratorController} />
               <Route path="/lossCalculator" component={LossCalculator} />
               <Route path="/PdfBox" component={PdfBox} />

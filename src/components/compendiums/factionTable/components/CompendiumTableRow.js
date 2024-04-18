@@ -14,7 +14,7 @@ import CardButton from "./CardButton";
 import RowLock from "./RowLock";
 import { TableRow } from "@mui/material";
 
-const FactionTableRow = (props) => {
+const CompendiumTableRow = (props) => {
   const TC = useContext(TableContext);
 
   const displayValue = (c) => {
@@ -80,4 +80,4 @@ const FactionTableRow = (props) => {
   );
 };
 
-export default React.memo(FactionTableRow);
+export default React.memo(CompendiumTableRow);
