@@ -1,11 +1,12 @@
 // react
 import React, { useContext } from "react";
 // components & functions
-import StatCard from "../../../shared/statCards/StatCard";
 import { TableContext } from "../../../../contexts/tableContext";
+import CardView from "../../../shared/CardView";
+import { isSingleElementCard } from "../../../../util/utilityFunctions";
 
 // front and back side of the displayed unit cards are alligned horizontally.
-const ROW = "row";
+const COLUMN = "column";
 
 /**
  * displays the unit card in the compendium table
@@ -21,10 +22,20 @@ const DetailedCardView = (props) => {
         ? props.unit.unitName
         : props.unit.multiCardName;
 
+    const isSingleElement = isSingleElementCard(props.unit);
+    const carouselCards = TC.displayUnits.filter(
+      (u) =>
+        u.belongsToUnit !== "NONE" && //
+        u.belongsToUnit === props.unit.belongsToUnit
+    );
+
     return TC.selectedStatCards.includes(props.unit.faction + displayName) ? ( //
-      <StatCard
+      <CardView
+        isMultiStateCard={props.unit.isMultiStateUnit}
         unit={props.unit} //
-        alignment={ROW}
+        alignment={COLUMN}
+        isSingleElement={isSingleElement}
+        carouselCards={carouselCards}
       />
     ) : null;
   };
