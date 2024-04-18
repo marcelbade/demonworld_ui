@@ -3,20 +3,12 @@ import React, { useEffect, useState } from "react";
 // axios
 import axios from "axios";
 // material ui
-import { Grid, Fade } from "@mui/material";
-// notistack
-import { SnackbarProvider } from "notistack";
-// icons
-import SpellBookIcon from "../../assets/icons/spellbook-white.png";
+import { Grid } from "@mui/material";
 // components and functions
-import FactionTreeView from "./ArmySelectorView/SelectorTreeView/FactionTreeView";
 import ArmyListBox from "./ArmyListView/ArmyListBox";
-import AlternativeArmyLists from "./ArmySelectorView/AlternativeArmyListSelection/AlternativeArmyLists";
 import MenuBox from "./RightSideMenus/MenuBox";
 import MainMenuReturnButton from "../shared/MainMenuReturnButton";
-import ArmySelectorDropdown from "./ArmySelectorView/ArmySelectorDropdown";
-import CustomIcon from "../shared/statCards/CustomIcon";
-import customStyledErrorMessage from "../../AppTheme/notiStackTheme";
+
 // context providers
 import ArmyProvider from "../../contexts/armyContext";
 import AllyProvider from "../../contexts/allyContext";
@@ -30,7 +22,8 @@ import TournamentRulesProvider from "../../contexts/tournamentRulesContext";
 // constants
 import { NONE } from "../../constants/factions";
 import { NO_ALLY } from "../../constants/factions";
-import { TOOLTIPS } from "../../constants/textsAndMessages";
+import ArmySelectionBox from "./ArmySelectorView/ArmySelectionBox";
+import CustomSnackBarProvider from "../shared/statCards/CustomSnackBarProvider";
 
 const ListGeneratorController = () => {
   // intialize local states
@@ -267,51 +260,20 @@ const ListGeneratorController = () => {
                         setPlayerName: setPlayerName,
                       }}
                     >
-                      <SnackbarProvider
-                        Components={{
-                          error: customStyledErrorMessage,
-                        }}
-                        preventDuplicate
-                        maxSnack={3}
-                        TransitionComponent={Fade}
-                        iconVariant={{
-                          error: (
-                            <CustomIcon //
-                              icon={SpellBookIcon}
-                              altText={TOOLTIPS.RULE_BOOK_TEXT}
-                              height={35}
-                              width={35}
-                              boxHeight={45}
-                              boxWidth={45}
-                            />
-                          ),
-                        }}
-                      >
+                      <CustomSnackBarProvider>
                         <Grid container direction="row">
                           <Grid container item direction="column" xs={4} sx={{ paddingLeft: "2em" }}>
-                            <Grid item>
-                              <MainMenuReturnButton />
-                            </Grid>
-                            <Grid item>
-                              <ArmySelectorDropdown xs={1} />
-                            </Grid>
-                            <Grid item>
-                              <AlternativeArmyLists />
-                            </Grid>
-                            <Grid item>
-                              <FactionTreeView />
-                            </Grid>
+                            <MainMenuReturnButton />
+                            <ArmySelectionBox />
                           </Grid>
                           <Grid item xs={3}>
                             <ArmyListBox />
                           </Grid>
-                          {/* </Grid>
-                          </Grid> */}
                           <Grid item xs={3}>
                             <MenuBox />
                           </Grid>
                         </Grid>
-                      </SnackbarProvider>
+                      </CustomSnackBarProvider>
                     </ArmyProvider>
                   </AllyProvider>
                 </AlternativeListProvider>

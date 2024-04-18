@@ -2,21 +2,17 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useHistory } from "react-router-dom";
 //Material UI
-import { Fade, Grid } from "@mui/material";
-// notistack
-import { SnackbarProvider } from "notistack";
+import { Grid } from "@mui/material";
 // components and functions
 import LossCalcProvider from "../../contexts/LossCalculatorContext";
 import CreateListScreen from "./CreateListScreen";
 import LostPointDisplay from "./LostPointDisplay";
 import ReturnButton from "./ReturnButton";
 import LostUnitList from "./LostUnitList/LostUnitList";
-import customStyledMessage from "../../AppTheme/notiStackTheme";
-import CustomIcon from "../shared/statCards/CustomIcon";
 import LightSwitch from "../shared/LightSwitch";
 import usePointCostCalculator from "../../customHooks/UsePointCostCalculator";
 // icons
-import SpellBookIcon from "../../assets/icons/spellbook-white.png";
+import CustomSnackBarProvider from "../shared/statCards/CustomSnackBarProvider";
 
 const LossCalculator = () => {
   const history = useHistory();
@@ -100,27 +96,7 @@ const LossCalculator = () => {
   };
 
   return (
-    <SnackbarProvider
-      Components={{
-        error: customStyledMessage,
-        info: customStyledMessage,
-      }}
-      preventDuplicate
-      maxSnack={3}
-      TransitionComponent={Fade}
-      iconVariant={{
-        error: (
-          <CustomIcon
-            icon={SpellBookIcon} //
-            altText={"Regelbuchtext"}
-            height={35}
-            width={35}
-            boxHeight={45}
-            boxWidth={45}
-          />
-        ),
-      }}
-    >
+    <CustomSnackBarProvider>
       <LossCalcProvider
         value={{
           list: list,
@@ -180,7 +156,7 @@ const LossCalculator = () => {
           <CreateListScreen navigateToPage={navigateToPage} />
         )}
       </LossCalcProvider>
-    </SnackbarProvider>
+    </CustomSnackBarProvider>
   );
 };
 
