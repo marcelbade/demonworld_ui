@@ -5,7 +5,6 @@ import { List } from "@mui/material";
 import { ListItemButton } from "@mui/material";
 // components and functions
 import { BUTTON_TEXTS } from "../../../../../../../constants/textsAndMessages";
-import { isSingleElementCard } from "../../../../../../../util/utilityFunctions";
 // context
 import { SecondSubFactionContext } from "../../../../../../../contexts/secondSubFactionContext";
 import { ArmyContext } from "../../../../../../../contexts/armyContext";
@@ -87,7 +86,6 @@ const UnitElementButtons = (props) => {
   const setCard = (clickedUnit) => {
     if (clickedUnit !== undefined) {
       RC.setDisplayedCard({ ...clickedUnit });
-      RC.setIsSingleElement(isSingleElementCard(clickedUnit));
     }
 
     if (clickedUnit !== undefined && clickedUnit.isMultiStateUnit) {
