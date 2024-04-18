@@ -61,19 +61,13 @@ const CompendiumTable = () => {
    * @param {UnitCard} unit
    */
   const toggleUnitCard = (unit) => {
-    console.log("unit", unit);
-
     const name = unit.multiCardName === "" ? unit.unitName : unit.multiCardName;
 
     const id = unit.faction + name;
 
-    console.log("id", id);
-
     selectedStatCards.includes(id)
       ? setSelectedStatCards(selectedStatCards.filter((c) => c !== id))
       : setSelectedStatCards([...selectedStatCards, id]);
-
-    console.log("selectedStatCards", selectedStatCards);
   };
 
   /**
