@@ -1,7 +1,8 @@
 // react
-import React from "react";
+import React, { useContext } from "react";
 // components & functions
 import StatCard from "../../../shared/statCards/StatCard";
+import { TableContext } from "../../../../contexts/tableContext";
 
 // front and back side of the displayed unit cards are alligned horizontally.
 const ROW = "row";
@@ -12,19 +13,28 @@ const ROW = "row";
  * @returns
  */
 const DetailedCardView = (props) => {
+  const TC = useContext(TableContext);
+
+  const displayCard = () => {
+    const name =
+      props.unit.multiCardName === "" //
+        ? props.unit.unitName
+        : props.unit.multiCardName;
+
+    return TC.selectedStatCards.includes(props.unit.faction + name) ? ( //
+      <StatCard
+        unit={props.unit} //
+        alignment={ROW}
+      />
+    ) : null;
+  };
+
   return (
-    <tr key={props.unit.uniqueID}>
+    <tr key={` ${props.unit.unitName},${props.unit.subFaction}`}>
       <td colSpan={"10%"}></td>
-      <td key={props.unit.uniqueID} colSpan={"30%"}>
-        {props.selectedCards.includes(props.unit.faction + props.unit.unitName) ? ( //
-          <StatCard
-            unit={props.unit} //
-            alignment={ROW}
-          />
-        ) : null}
-      </td>
+      <td colSpan={"30%"}>{displayCard()}</td>
     </tr>
   );
 };
 
-export default React.memo(DetailedCardView);
+export default DetailedCardView;

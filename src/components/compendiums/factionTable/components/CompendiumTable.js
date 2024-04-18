@@ -7,7 +7,7 @@ import { Grid, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components & functions
 import FactionTableRow from "./factionTableRow";
-import DetailedCardView from "./detailedCardView";
+import DetailedCardView from "./DetailedCardView";
 import FactionTableHeader from "./factionTableHeader";
 import LightSwitch from "../../../shared/LightSwitch";
 import MainMenuReturnButton from "../../../shared/MainMenuReturnButton";
@@ -19,7 +19,7 @@ import TableProvider from "../../../../contexts/tableContext";
 import { COMPENDIUM } from "../../../../constants/textsAndMessages";
 import DropDown from "./DropDown";
 
-const FactionTable = () => {
+const CompendiumTable = () => {
   // intialize local state
   const [receivedData, setReceivedData] = useState([]);
   const [data, setData] = useState([]);
@@ -57,15 +57,23 @@ const FactionTable = () => {
   };
 
   /**
-   * Function toggles the unitCard view onand off for a single table Column.
+   * Function toggles the unitCard view on and off for a single table row.
    * @param {UnitCard} unit
    */
   const toggleUnitCard = (unit) => {
-    const id = unit.faction + unit.unitName;
+    console.log("unit", unit);
+
+    const name = unit.multiCardName === "" ? unit.unitName : unit.multiCardName;
+
+    const id = unit.faction + name;
+
+    console.log("id", id);
 
     selectedStatCards.includes(id)
       ? setSelectedStatCards(selectedStatCards.filter((c) => c !== id))
       : setSelectedStatCards([...selectedStatCards, id]);
+
+    console.log("selectedStatCards", selectedStatCards);
   };
 
   /**
@@ -251,4 +259,4 @@ const FactionTable = () => {
   ) : null;
 };
 
-export default FactionTable;
+export default CompendiumTable;
