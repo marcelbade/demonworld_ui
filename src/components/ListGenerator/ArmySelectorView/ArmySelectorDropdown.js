@@ -40,9 +40,7 @@ const ArmySelectorDropdown = () => {
    * @param {String} factionName
    */
   const setFactionProperties = (factionName) => {
-
-    // TODO replace with find()
-    const factionObj = AC.fetchedFactions.filter((f) => f.factionName === factionName)[0];
+    const factionObj = AC.fetchedFactions.find((f) => f.factionName === factionName);
     const allSubFactions = [...factionObj.subFactions.map((sF) => sF.name)];
     const allFactionUnits = captureAllFactionUnits(factionObj.subFactions);
 
@@ -71,7 +69,6 @@ const ArmySelectorDropdown = () => {
     }
 
     if (ARMIES_ADDITIONAL_SUBFACTIONS.includes(factionObj.factionName)) {
-      // TODO can use find() instead??
       const result = ARMIES_ADDITIONAL_SUBFACTIONS_MAPPING.filter((e) => e.army === factionObj.factionName);
 
       SFC.setHasAdditionalSubFaction(true);
@@ -133,7 +130,7 @@ const ArmySelectorDropdown = () => {
   return (
     <SelectionInput //
       filterFunction={handleInput}
-       alternatives={ALL_FACTIONS_ARRAY}
+      alternatives={ALL_FACTIONS_ARRAY}
       label={INPUT_TEXTS.SELECT_FACTION}
     />
   );
