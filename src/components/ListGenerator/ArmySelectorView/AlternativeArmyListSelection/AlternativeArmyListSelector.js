@@ -1,14 +1,17 @@
 // React
 import React, { useContext, useState } from "react";
 // components and functions
-import { ArmyContext } from "../../../../contexts/armyContext";
 import SelectionInput from "../../../shared/selectionInput";
-import { AlternativeListContext } from "../../../../contexts/alternativeListContext";
 import { ALTERNATIVE_ARMY_SELECTION_TEXT } from "../../../../constants/factions";
+// context
+import { ArmyContext } from "../../../../contexts/armyContext";
+import { AlternativeListContext } from "../../../../contexts/alternativeListContext";
+import { AllyContext } from "../../../../contexts/allyContext";
 
 const AlternativeArmyListSelector = () => {
   const AC = useContext(ArmyContext);
   const ALC = useContext(AlternativeListContext);
+  const AYC = useContext(AllyContext);
 
   const [selectionArray, setSelectionArray] = useState(Array(ALC.numberOfAlternativeChoices).fill(""));
 
@@ -57,7 +60,21 @@ const AlternativeArmyListSelector = () => {
    */
   const isSelectionComplete = (tempArray) => {
     const elementsFilled = tempArray.filter((e) => e !== "").length;
-    ALC.setAltArmyListSelectionComplete(elementsFilled === ALC.numberOfAlternativeChoices);
+    const isComplete = elementsFilled === ALC.numberOfAlternativeChoices;
+
+    ALC.setAltArmyListSelectionComplete(isComplete);
+    if (isComplete) {
+      setGlobalState(tempArray);
+    }
+  };
+
+  /**
+   * Function sets the relevant fields of the global state
+   * when the selection is complete.
+   */
+  const setGlobalState = (tempArray) => {
+    ALC.setSelectedAlternativeLists(tempArray);
+    ALC.setAllyIsAlternativeOption(tempArray.includes(AYC.setAllyName));
   };
 
   return ALC.armyHasAlternativeLists
