@@ -40,6 +40,8 @@ const ArmySelectorDropdown = () => {
    * @param {String} factionName
    */
   const setFactionProperties = (factionName) => {
+
+    // TODO replace with find()
     const factionObj = AC.fetchedFactions.filter((f) => f.factionName === factionName)[0];
     const allSubFactions = [...factionObj.subFactions.map((sF) => sF.name)];
     const allFactionUnits = captureAllFactionUnits(factionObj.subFactions);
@@ -64,11 +66,12 @@ const ArmySelectorDropdown = () => {
     if (factionObj.hasAlternativeLists) {
       ALC.setArmyHasAlternativeLists(factionObj.hasAlternativeLists);
       ALC.setNumberOfAlternativeChoices(factionObj.numberOfAlternativeArmySelections);
-      ALC.setAlternateListSubFactions(factionObj.alternativeOptions.subFactions);
+      ALC.setAlternateListNames(factionObj.alternativeOptions.subFactions);
       ALC.setAllyIsAlternativeOption(factionObj.allyIsAlternativeOption);
     }
 
     if (ARMIES_ADDITIONAL_SUBFACTIONS.includes(factionObj.factionName)) {
+      // TODO can use find() instead??
       const result = ARMIES_ADDITIONAL_SUBFACTIONS_MAPPING.filter((e) => e.army === factionObj.factionName);
 
       SFC.setHasAdditionalSubFaction(true);
@@ -102,8 +105,8 @@ const ArmySelectorDropdown = () => {
   const resetTheState = () => {
     SEC.setSelectedUnits([]);
     IC.setAllEquippedItems([]);
-    ALC.setSelectedAlternativeList([]);
-    ALC.setAlternateListSubFactions([]);
+    ALC.setSelectedAlternativeLists([]);
+    ALC.setAlternateListNames([]);
     ALC.setArmyHasAlternativeLists(false);
     ALC.setAltArmyListSelectionComplete(false);
     SFC.setHasAdditionalSubFaction(false);
