@@ -137,7 +137,6 @@ const calculateNewMeleeWeaponValue = (unit, modifier) => {
   }
 
   // 5 Miniatures per base
-  //  TODO add to DB!
   if (unit.closedOrder) {
     newWeapon1Value += BONUS;
   }

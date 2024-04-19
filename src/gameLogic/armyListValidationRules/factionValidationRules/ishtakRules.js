@@ -2,7 +2,7 @@ import { ISHTAK } from "../../../constants/textsAndMessages";
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
 
-//TODO: change the error messages!!
+
 const rules = [
   {
     subFaction: "humans",
