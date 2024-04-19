@@ -133,8 +133,7 @@ const ArmySelectorDropdown = () => {
   return (
     <SelectionInput //
       filterFunction={handleInput}
-      isArmySelector={true}
-      alternatives={ALL_FACTIONS_ARRAY}
+       alternatives={ALL_FACTIONS_ARRAY}
       label={INPUT_TEXTS.SELECT_FACTION}
     />
   );

@@ -1,115 +1,80 @@
 // React
-import React, { useContext, useState } from "react";
-import makeStyles from '@mui/styles/makeStyles';
-import { Typography } from "@mui/material";
+import React, { useContext } from "react";
 // components and functions
 import { ArmyContext } from "../../../../contexts/armyContext";
 import SelectionInput from "../../../shared/selectionInput";
 import { AlternativeListContext } from "../../../../contexts/alternativeListContext";
-import { AllyContext } from "../../../../contexts/allyContext";
-// import useArmyValidation from "../../../../customHooks/UseArmyValidation";
-// constants
-import { ALTERNATIVE_ARMY_SELECTION_TEXT, ARMY_ALTERNATIVES_LIST_MAPPER, NO_ALLY } from "../../../../constants/factions";
+import { ALTERNATIVE_ARMY_SELECTION_TEXT } from "../../../../constants/factions";
 
-const useStyles = makeStyles(() => ({
-  alternativeListSelector: {
-    marginTop: "3em",
-    backgroundColor: "red",
-    "& .MuiInputBase-input": {
-      height: "5.5rem",
-    },
-  },
-}));
-const AlternativeArmyListSelector = (props) => {
-  const classes = useStyles();
+const AlternativeArmyListSelector = () => {
   const AC = useContext(ArmyContext);
   const ALC = useContext(AlternativeListContext);
-  const AYC = useContext(AllyContext);
 
-  const [allyName] = useState(AYC.allyName);
+ 
 
-  const allAlternativeOptions = ARMY_ALTERNATIVES_LIST_MAPPER[AC.selectedFactionName];
+  /**
+   * Filter function for the Selection Inputs. Assigns a value
+   * to the element of the selectedAlternativeLists that corrsponds
+   * to te selector Number.
+   * @param {Event.target.value} value
+   * @param {integer} selectorNumber
+   */
+  const selectAlternateList = (value, selectorNumber) => {
+    let tempArray = [...ALC.selectedAlternativeLists];
 
-  const handleInput = (value) => {
-    redoSubFactionSet(value);
-  };
-
-  const redoSubFactionSet = (value) => {
-    const subFactions = AC.subFactions;
-
-    if (props.firstSelector) {
-      ALC.setSelectedAlternativeList(value);
-      createAlternativeSubFactionList(value, subFactions, allAlternativeOptions);
-      ALC.setAltArmyListSelectionComplete(true);
-    } else {
-      createListWithSecondChoice(value, subFactions, allAlternativeOptions);
-      ALC.setAltArmyListSelectionComplete(true);
-    }
+    tempArray[selectorNumber] = value;
+    ALC.setSelectedAlternativeLists(tempArray);
+    isSelectionComplete(tempArray.length);
+    setAlternatives(tempArray);
   };
 
   /**
-   * Function filters the default sub faction list to create the alternative army list.
-   * @param {event.value} value selected alternative list
-   * @param {[String]} subFactions name list
-   * @param {[String]} allOptions  name list
+   * Clear functon for the Selection Inputs. Removes
+   * the value from selectedAlternativeLists element that corrsponds
+   * to the selectorNumber
+   * @param {int} selectorNumber
    */
-  const createAlternativeSubFactionList = (value, subFactions, allOptions) => {
-    const notSelectedOptions = allOptions.filter((o) => value !== o);
-    const newSubFactionList = subFactions.filter((sF) => !notSelectedOptions.includes(sF));
-    ALC.setAlternateListSubFactions(newSubFactionList);
+  const clearAlternateList = (selectorNumber) => {
+    let tempArray = [...ALC.selectedAlternativeLists];
+
+    tempArray.splice(selectorNumber, 1);
+
+    ALC.setSelectedAlternativeLists(tempArray);
+    isSelectionComplete(tempArray.length);
+  };
+
+  const setAlternatives = (selectedValues) => {
+    tempArray = ALC.alternateListNames.filter((n) => !selectedValues.includes(n));
+
+    return tempArray;
   };
 
   /**
-   * Function filters the default sub faction list to create the alternative army list
-   * for armies that require two choices for the alternative list.
-   * @param {event.value} value selected alternative list
-   * @param {[String]} subFactions name list
-   * @param {[String]} allOptions  name list
+   * Function tests if the selection is complete. Thhis is the case
+   * if the number of selected values is equal to the number of input elements.
+   * If complete, the army selection tree is displayed in the UI.
+   * @param {int} length
    */
-  const createListWithSecondChoice = (value, subFactions, allOptions) => {
-    const allChoices = [value, ALC.selectedAlternativeList];
-    const notSelectedOptions = allOptions.filter((o) => !allChoices.includes(o));
-    const newSubFactionList = subFactions.filter((sF) => !notSelectedOptions.includes(sF));
-
-    isAllyAnOption(newSubFactionList);
-    ALC.setAlternateListSubFactions(newSubFactionList);
+  const isSelectionComplete = (length) => {
+    ALC.setAltArmyListSelectionComplete(length === ALC.numberOfAlternativeChoices);
   };
 
-  /**
-   * Function checks if the ally is one of the alternatives. If so, and if it is not selected,  the state is changed so it isn't displayed.
-   */
-  const isAllyAnOption = (subFactionList) => {
-    if (
-      allAlternativeOptions.includes(AYC.allyName) && //
-      !subFactionList.includes(AYC.allyName)
-    ) {
-      AYC.setAllyName(NO_ALLY);
-    } else {
-      AYC.setAllyName(allyName);
-    }
-  };
-
-  /**
-   * Function computes the options available to the user after he made the first choice.
-   * @returns an array of the available options to be diplayed in the dropdown.
-   */
-  const setSecondOptionList = () => {
-    return allAlternativeOptions.filter((o) => o !== ALC.selectedAlternativeList);
-  };
-
-  return (
-    <SelectionInput
-      className={classes.alternativeListSelector}
-      filterFunction={handleInput}
-      isArmySelector={true}
-      options={
-        props.firstSelector //
-          ? ARMY_ALTERNATIVES_LIST_MAPPER[AC.selectedFactionName]
-          : setSecondOptionList()
-      }
-      label={<Typography>{ALTERNATIVE_ARMY_SELECTION_TEXT[AC.selectedFactionName]}</Typography>}
-    />
-  );
+  return ALC.armyHasAlternativeLists
+    ? Array(ALC.numberOfAlternativeChoices)
+        .fill()
+        .map((i, j) => {
+          return (
+            <SelectionInput //
+              key={i}
+              selectorNumber={j}
+              alternatives={setAlternatives()}
+              filterFunction={selectAlternateList}
+              clearFunction={clearAlternateList}
+              label={ALTERNATIVE_ARMY_SELECTION_TEXT[AC.selectedFactionName]}
+            />
+          );
+        })
+    : null;
 };
 
 export default AlternativeArmyListSelector;
