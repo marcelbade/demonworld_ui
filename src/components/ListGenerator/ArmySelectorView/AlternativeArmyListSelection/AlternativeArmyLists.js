@@ -1,34 +1,55 @@
 // React
-import { useContext, Fragment } from "react";
-import makeStyles from '@mui/styles/makeStyles';
+import { useContext, useState } from "react";
 // components and functions
 import AlternativeArmyListSelector from "./AlternativeArmyListSelector";
 import { AlternativeListContext } from "../../../../contexts/alternativeListContext";
+import { useEffect } from "react";
 
-const useStyles = makeStyles(() => ({}));
-
-const AlternativeArmyListBox = () => {
+const AlternativeArmyLists = () => {
   const ALC = useContext(AlternativeListContext);
-  const classes = useStyles();
 
-  return (
-    <Fragment>
-      {ALC.armyHasAlternativeLists && ALC.numberOfAlternativeChoices > 0 ? (
-        <AlternativeArmyListSelector //
-          firstSelector={true}
-          isArmySelector={false}
-          className={classes.selector}
-        />
-      ) : null}
-      {ALC.armyHasAlternativeLists && ALC.numberOfAlternativeChoices > 1 ? (
-        <AlternativeArmyListSelector //
-          firstSelector={false}
-          isArmySelector={false}
-          className={classes.selector}
-        />
-      ) : null}
-    </Fragment>
-  );
+  const [alternatives, setAlternatives] = useState([]);
+
+  /**
+   * Function implements a filter logic so that the last picked value is not displayed as an option in the dropdown menu(s).
+   * @param {String} lastChoice
+   */
+  const setUpNextDropDown = (lastChoice) => {
+    const temp = [alternatives];
+
+    for (let i = 0; i < ALC.numberOfAlternativeChoices; i++) {
+      temp[i] = {
+        values: ALC.alternateListSubFactions.filter((a) => a !== lastChoice),
+      };
+    }
+
+    setAlternatives([...temp]);
+  };
+
+  // set up correct dropdown value after first render.
+  useEffect(() => {
+    setUpNextDropDown(undefined);
+  }, [ALC.alternateListSubFactions]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  return ALC.armyHasAlternativeLists
+    ? Array(ALC.numberOfAlternativeChoices)
+        .fill()
+        .map((i, j) => {
+          return (
+            <AlternativeArmyListSelector //
+              key={j}
+              alternatives={
+                alternatives[i] !== undefined //
+                  ? alternatives[i].values
+                  : ALC.numberOfAlternativeChoices
+              }
+              isArmySelector={false}
+              setUpNextDropDown={setUpNextDropDown}
+              selectorNumber={i}
+            />
+          );
+        })
+    : null;
 };
 
-export default AlternativeArmyListBox;
+export default AlternativeArmyLists;
