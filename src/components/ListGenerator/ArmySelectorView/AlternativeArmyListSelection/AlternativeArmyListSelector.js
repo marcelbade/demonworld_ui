@@ -11,9 +11,8 @@ const AlternativeArmyListSelector = () => {
   const ALC = useContext(AlternativeListContext);
 
   const [selectionArray, setSelectionArray] = useState(Array(ALC.numberOfAlternativeChoices).fill(""));
-  const OPTIONS = ALC.alternateListNames;
 
-  console.log(selectionArray);
+  const OPTIONS = ALC.alternateListNames;
 
   /**
    * Filter function for the Selection Inputs. Assigns a value
