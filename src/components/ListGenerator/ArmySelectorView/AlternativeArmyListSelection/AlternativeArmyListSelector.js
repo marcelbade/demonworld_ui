@@ -1,5 +1,5 @@
 // React
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 // components and functions
 import { ArmyContext } from "../../../../contexts/armyContext";
 import SelectionInput from "../../../shared/selectionInput";
@@ -10,7 +10,10 @@ const AlternativeArmyListSelector = () => {
   const AC = useContext(ArmyContext);
   const ALC = useContext(AlternativeListContext);
 
- 
+  const [selectionArray, setSelectionArray] = useState(Array(ALC.numberOfAlternativeChoices).fill(""));
+  const OPTIONS = ALC.alternateListNames;
+
+  console.log(selectionArray);
 
   /**
    * Filter function for the Selection Inputs. Assigns a value
@@ -20,33 +23,31 @@ const AlternativeArmyListSelector = () => {
    * @param {integer} selectorNumber
    */
   const selectAlternateList = (value, selectorNumber) => {
-    let tempArray = [...ALC.selectedAlternativeLists];
-
+    let tempArray = [...selectionArray];
     tempArray[selectorNumber] = value;
-    ALC.setSelectedAlternativeLists(tempArray);
-    isSelectionComplete(tempArray.length);
-    setAlternatives(tempArray);
+
+    setSelectionArray(tempArray);
+    setAlternatives();
+    isSelectionComplete(tempArray);
   };
 
   /**
-   * Clear functon for the Selection Inputs. Removes
+   * Clear function for the Selection Inputs. Removes
    * the value from selectedAlternativeLists element that corrsponds
    * to the selectorNumber
    * @param {int} selectorNumber
    */
   const clearAlternateList = (selectorNumber) => {
-    let tempArray = [...ALC.selectedAlternativeLists];
+    let tempArray = [...selectionArray];
+    tempArray[selectorNumber] = "";
 
-    tempArray.splice(selectorNumber, 1);
-
-    ALC.setSelectedAlternativeLists(tempArray);
-    isSelectionComplete(tempArray.length);
+    setSelectionArray(tempArray);
+    setAlternatives();
+    isSelectionComplete(tempArray);
   };
 
-  const setAlternatives = (selectedValues) => {
-    tempArray = ALC.alternateListNames.filter((n) => !selectedValues.includes(n));
-
-    return tempArray;
+  const setAlternatives = () => {
+    return OPTIONS.filter((o) => !selectionArray.includes(o));
   };
 
   /**
@@ -55,8 +56,9 @@ const AlternativeArmyListSelector = () => {
    * If complete, the army selection tree is displayed in the UI.
    * @param {int} length
    */
-  const isSelectionComplete = (length) => {
-    ALC.setAltArmyListSelectionComplete(length === ALC.numberOfAlternativeChoices);
+  const isSelectionComplete = (tempArray) => {
+    const elementsFilled = tempArray.filter((e) => e !== "").length;
+    ALC.setAltArmyListSelectionComplete(elementsFilled === ALC.numberOfAlternativeChoices);
   };
 
   return ALC.armyHasAlternativeLists
