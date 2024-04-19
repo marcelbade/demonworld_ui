@@ -65,8 +65,8 @@ const ListGeneratorController = () => {
   // alternative lists
   const [armyHasAlternativeLists, setArmyHasAlternativeLists] = useState(false);
   const [numberOfAlternativeChoices, setNumberOfAlternativeChoices] = useState(0);
-  const [selectedAlternativeList, setSelectedAlternativeList] = useState([]);
-  const [alternateListSubFactions, setAlternateListSubFactions] = useState([]);
+  const [selectedAlternativeLists, setSelectedAlternativeLists] = useState([]);
+  const [alternateListNames, setAlternateListNames] = useState([]);
   const [altArmyListSelectionComplete, setAltArmyListSelectionComplete] = useState(false);
   const [allyIsAlternativeOption, setAllyIsAlternativeOption] = useState(false);
   // additional subFactions - currently only important for the Thain faction!
@@ -213,14 +213,14 @@ const ListGeneratorController = () => {
                     // ALTERNATIVE LISTS
                     armyHasAlternativeLists: armyHasAlternativeLists,
                     numberOfAlternativeChoices: numberOfAlternativeChoices,
-                    selectedAlternativeList: selectedAlternativeList,
+                    selectedAlternativeLists: selectedAlternativeLists,
                     altArmyListSelectionComplete: altArmyListSelectionComplete,
-                    alternateListSubFactions: alternateListSubFactions,
+                    alternateListNames: alternateListNames,
                     allyIsAlternativeOption: allyIsAlternativeOption,
                     setNumberOfAlternativeChoices: setNumberOfAlternativeChoices,
-                    setAlternateListSubFactions: setAlternateListSubFactions,
+                    setAlternateListNames: setAlternateListNames,
                     setAltArmyListSelectionComplete: setAltArmyListSelectionComplete,
-                    setSelectedAlternativeList: setSelectedAlternativeList,
+                    setSelectedAlternativeLists: setSelectedAlternativeLists,
                     setArmyHasAlternativeLists: setArmyHasAlternativeLists,
                     setAllyIsAlternativeOption: setAllyIsAlternativeOption,
                   }}

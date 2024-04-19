@@ -21,7 +21,7 @@ const useArmyValidation = () => {
 
   const validateList = (currentList, currentTotalPointAllowance) => {
     const IsFactionSelected = AC.selectedFactionName !== NONE && AC.selectedFactionName !== undefined;
-    const isAlternativeListSelected = ALC.selectedAlternativeList.length !== 0;
+    const isAlternativeListSelected = ALC.selectedAlternativeLists.length !== 0;
 
     if (
       (IsFactionSelected && ALC.armyHasAlternativeLists && isAlternativeListSelected) || //
@@ -47,7 +47,7 @@ const useArmyValidation = () => {
       selectedUnits: currentList,
       totalPointsAllowance: currentTotalPointAllowance,
       subFactions: currentSubFactions,
-      selectedAlternativeList: ALC.selectedAlternativeList,
+      selectedAlternativeLists: ALC.selectedAlternativeLists,
       tournamentOverrideRules: TC.tournamentOverrideRules,
       listOfAlliedUnits: AYC.listOfAlliedUnits,
     });

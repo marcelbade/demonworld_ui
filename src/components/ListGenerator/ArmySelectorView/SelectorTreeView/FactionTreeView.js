@@ -33,7 +33,7 @@ const FactionTreeView = () => {
    */
   const displayAlly = () => {
     if (ALC.allyIsAlternativeOption) {
-      return ALC.selectedAlternativeList.includes(AYC.allyName);
+      return ALC.selectedAlternativeLists.includes(AYC.allyName);
     }
 
     return AYC.allyName !== NO_ALLY;

@@ -65,7 +65,7 @@ const OrkRules = {
     validationData 
    ) => {
     // Switch between alternative ruule objects!
-    switchBetweenAlternativeRules(validationData.selectedAlternativeList);
+    switchBetweenAlternativeRules(validationData.selectedAlternativeLists);
 
     //  general rules
     let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(validationData.selectedUnits, validationData.availableUnits, validationData.totalPointsAllowance);
@@ -94,8 +94,8 @@ const OrkRules = {
 
     // special faction rules
     let goblinsAboveMax = checkForGoblinMax(validationData.selectedUnits, validationData.totalPointsAllowance, validationData.availableUnits);
-    let hasNoCommander = isOrkArmyCommanderPresent(validationData.selectedUnits, validationData.selectedAlternativeList);
-    let availlableClanUnits = setUnitsForClans(validationData.availableUnits, validationData.selectedAlternativeList);
+    let hasNoCommander = isOrkArmyCommanderPresent(validationData.selectedUnits, validationData.selectedAlternativeLists);
+    let availlableClanUnits = setUnitsForClans(validationData.availableUnits, validationData.selectedAlternativeLists);
 
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [
@@ -138,14 +138,14 @@ const ORK_SUBFACTION_LIMITS = {
 /**
  * Function changes the max. limits for the validationData.subFactions depending on which alternative army list has been selected.
  */
-const switchBetweenAlternativeRules = ( selectedAlternativeList) => {
-  //  validationData.selectedAlternativeList  --> Clanngett, Steinclan,...
+const switchBetweenAlternativeRules = ( selectedAlternativeLists) => {
+  //  validationData.selectedAlternativeLists  --> Clanngett, Steinclan,...
   let mapperArray;
   const CLANNGETT = "Clanngett";
   const MAPPER_A = "clanngett";
   const MAPPER_B = "clantroops";
 
-  if (selectedAlternativeList.includes(CLANNGETT)) {
+  if (selectedAlternativeLists.includes(CLANNGETT)) {
     mapperArray = ORK_SUBFACTION_LIMITS[MAPPER_A];
   } else {
     mapperArray = ORK_SUBFACTION_LIMITS[MAPPER_B];
@@ -170,8 +170,8 @@ const switchBetweenAlternativeRules = ( selectedAlternativeList) => {
  * @param {unitCard} selectedUnits
  * @returns true, if either a 2 * commander (clans) or a 2* commander and a Clanngett hero is present.
  */
-const isOrkArmyCommanderPresent = (selectedUnits, selectedAlternativeList) => {
-  if (!selectedAlternativeList.includes("Clanngett")) {
+const isOrkArmyCommanderPresent = (selectedUnits, selectedAlternativeLists) => {
+  if (!selectedAlternativeLists.includes("Clanngett")) {
     return globalRules.isArmyCommanderPresent(selectedUnits);
   }
 
@@ -186,12 +186,12 @@ const isOrkArmyCommanderPresent = (selectedUnits, selectedAlternativeList) => {
  * Functions implement the rule that each clan has only access to a small sub set of clan units.
  * All other units are blocked.
  * @param {[unitCard]} availableUnits
- * @param {String} selectedAlternativeList
+ * @param {String} selectedAlternativeLists
  * @returns an array of objects, each containing a blocked unit and an error message.
  */
-const setUnitsForClans = (availableUnits, selectedAlternativeList) => {
+const setUnitsForClans = (availableUnits, selectedAlternativeLists) => {
   let result = [];
-  const selectedAlternative = selectedAlternativeList[0];
+  const selectedAlternative = selectedAlternativeLists[0];
 
   availableUnits.forEach((u) => {
     if (u.subFaction === "Clanntruppen" && !ORK_CLANS_UNIT_MAPPING[selectedAlternative].includes(u.unitName)) {
