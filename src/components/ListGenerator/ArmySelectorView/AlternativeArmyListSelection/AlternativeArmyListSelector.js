@@ -65,16 +65,33 @@ const AlternativeArmyListSelector = () => {
     ALC.setAltArmyListSelectionComplete(isComplete);
     if (isComplete) {
       setGlobalState(tempArray);
+      setSelectedAlternateSubFaction(tempArray);
     }
   };
 
   /**
    * Function sets the relevant fields of the global state
-   * when the selection is complete.
+   * once the selection is complete.
+   * @param {[Strings]} tempArray
    */
   const setGlobalState = (tempArray) => {
     ALC.setSelectedAlternativeLists(tempArray);
     ALC.setAllyIsAlternativeOption(tempArray.includes(AYC.setAllyName));
+  };
+
+  /**
+   * Function sets the "selectedAlternativeOption" flag to true for 
+   * those sub factions that have been selected.
+   * @param {[Strings]} tempArray
+   */
+  const setSelectedAlternateSubFaction = (tempArray) => {
+    const dtoList = [...AC.subFactionDTOs];
+
+    dtoList.forEach((dto) => {
+      dto.selectedAlternativeOption = tempArray.includes(dto.name);
+    });
+
+    AC.setSubFactionDTOs(dtoList);
   };
 
   return ALC.armyHasAlternativeLists
