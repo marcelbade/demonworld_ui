@@ -83,6 +83,7 @@ const DarkElveRules = {
     }
 
     let testForMax2Result = globalRules.maximumCopiesOfUnit(validationData.selectedUnits, maxCopies);
+    
     let isAboveCharLimit = globalRules.belowMaxPercentageHeroes(
       validationData.selectedUnits,
       validationData.totalPointsAllowance,
