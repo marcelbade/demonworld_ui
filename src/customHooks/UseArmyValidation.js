@@ -31,7 +31,6 @@ const useArmyValidation = () => {
     }
   };
 
-  //TODO: memoize AC.X properties!
   /**
    * Function avalidates the current list by generating the correct validator for the faction,
    * calling the validators test function and finally collecting the results.
@@ -146,41 +145,6 @@ const useArmyValidation = () => {
 
     return validationResult;
   };
-
-  //TODO
-  //------------------------------//------------------------------
-  // const testForSecondSubFaction = () => {
-  //   if (ARMIES_ADDITIONAL_SUBFACTIONS.includes(AC.factionName)) {
-  //     isSecondSubFactionsValid();
-  //   }
-  // };
-
-  // /**
-  //  * Function validates that the second subFaction has been selected. Is only called for those armies that require it.
-  //  */
-  // const isSecondSubFactionsValid = (unit) => {
-  //   VC.listValidationResults.secondSubFactionMissing.forEach((u) => {
-  //     if (u.unitWithOutSecondSubFaction === unit.unitName) {
-  //       // setSecondSubFactionCheck({
-  //       //   ...secondSubFactionCheck,
-  //       //   isValid: false,
-  //       //   message: u.message,
-  //       // });
-  //     }
-  //   });
-  // };
-
-  //------------------------------//------------------------------
-
-  // TODO: finish this. Make it so the list can only be safed OR printed when correct,or at least give a warning :D
-  /**
-   * Function checks whether the list is valid.
-   * @param {[unitCard]} blockedUnits
-   * @returns boolean flag; true if list is invalid (no commander OR 1 or more subfaction below min. )
-   */
-  // const violatesRules = (blockedUnits) => {
-  //   return blockedUnits.subFactionBelowMinimum.length > 0 || blockedUnits.commanderIsPresent === false;
-  // };
 
   return {
     validateList: validateList, //
