@@ -1,14 +1,4 @@
-@font-face {
-  font-family: "BreatheOfFire";
-  src: local("BreatheOfFire"), url("./assets/fonts/BreatheOfFire.ttf") format("truetype");
-  font-weight: normal;
-}
-@font-face {
-  font-family: "gonjuring";
-  src: local("gonjuring"), url("./assets/fonts/gonjuring.ttf") format("truetype");
-  font-weight: normal;
-}
-
+ 
 @font-face {
   font-family: "notMaryKate";
   src: local("notMaryKate"), url("./assets/fonts/notMaryKate.ttf") format("truetype");

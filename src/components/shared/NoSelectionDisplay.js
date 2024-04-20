@@ -10,7 +10,6 @@ import makeStyles from '@mui/styles/makeStyles';
 const useStyles = makeStyles({
   message: {
     fontSize: "50px",
-    fontFamily: "BreatheOfFire",
     display: "block",
   },
 });

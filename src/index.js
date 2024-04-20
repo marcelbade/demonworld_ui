@@ -5,10 +5,8 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 //Router
 import { BrowserRouter} from "react-router-dom";
-//web fonts
-import "./assets/fonts/BreatheOfFire.ttf";
-import "./assets/fonts/gonjuring.ttf";
-ReactDOM.render(
+ 
+ ReactDOM.render(
   <BrowserRouter>
     <App />
   </BrowserRouter>,
