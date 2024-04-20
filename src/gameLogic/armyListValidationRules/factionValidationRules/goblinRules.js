@@ -1,5 +1,4 @@
 import { GOBLINS } from "../../../constants/textsAndMessages";
-import { HERO, MAGE } from "../../../constants/unitTypes";
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
 
