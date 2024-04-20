@@ -62,10 +62,6 @@ const rules = [
 
 const GoblinRules = {
   testSubFactionRules: (validationData) => {
-    const MAX_COPIES = 2;
-    // faction rule => 30% cap
-    const HERO_LIMIT = 30;
-
     //  general rules
     let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(
       validationData.selectedUnits,
@@ -94,32 +90,35 @@ const GoblinRules = {
       maxCopies = validationData.tournamentOverrideRules.maxNumber;
       heroPointCap = validationData.tournamentOverrideRules.maxHeroValue;
     } else {
-      maxCopies = MAX_COPIES;
-      heroPointCap = HERO_LIMIT;
+      maxCopies = 2;
+      // faction rule => 40% cap
+      heroPointCap = 40;
     }
 
     let testForMax2Result = globalRules.maximumCopiesOfUnit(validationData.selectedUnits, maxCopies);
+
+    let isAboveCharLimit = globalRules.belowMaxPercentageHeroes(
+      validationData.selectedUnits,
+      validationData.totalPointsAllowance,
+      validationData.availableUnits,
+      heroPointCap
+    );
 
     let hasDuplicateUniques = validationData.tournamentOverrideRules.uniquesOnlyOnce //
       ? globalRules.noDuplicateUniques(validationData.selectedUnits)
       : [];
 
-    // special faction rules
-    let testForTotalShamanAndHeroesLimit = totalPointsForShamansAndHeroes(
-      validationData.selectedUnits,
-      validationData.availableUnits,
-      validationData.totalPointsAllowance
-    );
+    // special faction rules - no special rules exist!
 
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [
       ...isExceedingPointAllowance,
       ...hasDuplicateUniques,
-      // ...testForHeroCapResult,
       ...testForMax2Result,
       ...isAboveSubFactionMax,
-      ...testForTotalShamanAndHeroesLimit,
+      ...isAboveCharLimit,
     ];
+
     // result for sub factions below limit.
     validationResults.subFactionBelowMinimum = isBelowSubFactionMin;
 
@@ -128,39 +127,6 @@ const GoblinRules = {
 
     return validationResults;
   },
-};
-
-//FACTION SPECIAL RULES
-
-/**
- * The army can only consist of 30% shamans and heroes.
- * @param {[unitcard]} selectedUnits
- * @param {int} totalPointsAllowance
- * @returns an array where each element is an object with blocked unit and an error message giving the reaosn
- * for the block.
- */
-const totalPointsForShamansAndHeroes = (selectedUnits, availableUnits, totalPointsAllowance) => {
-  const SHAMAN_AND_HEROES_LIMIT = 40;
-  const limit = (totalPointsAllowance * SHAMAN_AND_HEROES_LIMIT) / 100;
-
-  let shamansAndHeroesTotal = 0;
-  let result = [];
-
-  selectedUnits
-    .filter((u) => u.unitType === HERO || u.unitType === MAGE)
-    .forEach((u) => {
-      shamansAndHeroesTotal = shamansAndHeroesTotal + u.points;
-    });
-
-  availableUnits
-    .filter((u) => u.unitType === HERO || u.unitType === MAGE)
-    .forEach((u) => {
-      if (shamansAndHeroesTotal + u.points > limit) {
-        result.push({ unitBlockedbyRules: u.unitName, message: GOBLINS.ERRORS.SHAMAN_AND_HEROES });
-      }
-    });
-
-  return result;
 };
 
 export { GoblinRules, rules };
