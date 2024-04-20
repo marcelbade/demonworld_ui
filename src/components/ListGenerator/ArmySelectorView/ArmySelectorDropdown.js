@@ -7,7 +7,7 @@ import { ItemContext } from "../../../contexts/itemContext";
 import {
   ALL_FACTIONS_ARRAY,
   ARMIES_ADDITIONAL_SUBFACTIONS,
-  ARMIES_ADDITIONAL_SUBFACTIONS_MAPPING, //
+  ARMIES_ADDITIONAL_SUBFACTIONS_MAPPING, NONE, //
   NO_ALLY,
 } from "../../../constants/factions";
 import { INPUT_TEXTS } from "../../../constants/textsAndMessages";
@@ -36,7 +36,7 @@ const ArmySelectorDropdown = () => {
   };
 
   /**
-   * Function sets the enitre state for a faction when it is selected.
+   * Function sets the entire state for a faction when it is selected.
    * @param {String} factionName
    */
   const setFactionProperties = (factionName) => {
@@ -123,6 +123,23 @@ const ArmySelectorDropdown = () => {
     RC.closeSecondSubFactionMenu();
   };
 
+  const clearFactionName = () => {
+    return currentFactionList();
+  };
+
+  const setFactionList = () => {
+    const resultingList =
+      AC.selectedFactionName !== NONE //
+        ? currentFactionList()
+        : ALL_FACTIONS_ARRAY;
+
+    return resultingList;
+  };
+
+  const currentFactionList = () => {
+    return ALL_FACTIONS_ARRAY.filter((f) => f !== AC.selectedFactionName);
+  };
+
   useEffect(() => {
     validation.validateList([], SEC.maxPointsAllowance);
   }, [AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -130,7 +147,8 @@ const ArmySelectorDropdown = () => {
   return (
     <SelectionInput //
       filterFunction={handleInput}
-      alternatives={ALL_FACTIONS_ARRAY}
+      clearFunction={clearFactionName}
+      alternatives={setFactionList()}
       label={INPUT_TEXTS.SELECT_FACTION}
     />
   );
