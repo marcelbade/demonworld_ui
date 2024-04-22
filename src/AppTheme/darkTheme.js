@@ -8,6 +8,7 @@ const darkTheme = createTheme({
       default: "#130606",
     },
     color: "#0ceda6",
+    errorColor: "red",
     disabled: "darkgrey",
     compendiumHeaderBackground: "#565757",
     statCards: {
