@@ -30,6 +30,15 @@ const LostUnitListElement = (props) => {
       : STYLES;
   };
 
+  /**
+   * Function determines if a unit has more than 1 hit point, i.e, if it is a hero, giant, mage or a unit with multiple hit points per element.
+   * @param {*} unit
+   * @returns true if the unit is a hero, mage, giant, or unit with more than 1 HP per element.
+   */
+  const isHeroMageOrGiantElement = (unit) => {
+    return unit.hitpoints > 1;
+  };
+
   return (
     <ListItem>
       <Grid
@@ -52,7 +61,7 @@ const LostUnitListElement = (props) => {
         </Grid>
         <Grid item xs={1}>
           <Typography variant="button">
-            {calcContext.isHeroMageOrGiantElement(props.unit) //
+            {isHeroMageOrGiantElement(props.unit) //
               ? LOSS_CALCULATOR.TEXT_SINGLE_ELEMENTS
               : LOSS_CALCULATOR.TEXT_UNITS}
           </Typography>
@@ -73,7 +82,7 @@ const LostUnitListElement = (props) => {
           xs={2} //
           alignItems="center"
           justifyContent="center"
-         >
+        >
           <TotalLossButton unit={props.unit} />
         </Grid>
 
