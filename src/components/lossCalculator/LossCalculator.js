@@ -12,7 +12,6 @@ import LightSwitch from "../shared/LightSwitch";
 import usePointCostCalculator from "../../customHooks/UsePointCostCalculator";
 // context
 import { LossCalcContext } from "../../contexts/LossCalculatorContext";
-import { PADDING_PAGE_BOTTOM } from "../PDFGenerator/pdfStyles/styleValues";
 
 const LossCalculator = () => {
   const history = useHistory();
