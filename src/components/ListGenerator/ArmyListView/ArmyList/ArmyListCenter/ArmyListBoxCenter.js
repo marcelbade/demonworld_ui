@@ -10,6 +10,7 @@ import useArmyValidation from "../../../../../customHooks/UseArmyValidation";
 import { NO_ALLY } from "../../../../../constants/factions";
 import { AllyContext } from "../../../../../contexts/allyContext";
 import { isSubFactionAlternativeAndSelective } from "../../../../../util/utilityFunctions";
+import { Grid } from "@mui/material";
 
 const ArmyListBoxCenter = () => {
   const AC = useContext(ArmyContext);
@@ -29,28 +30,30 @@ const ArmyListBoxCenter = () => {
   };
 
   return (
-    <List>
-      {AC.subFactionDTOs
-        .filter((dto) => isSubFactionAlternativeAndSelective(dto))
-        .map((dto) => validation.returnValidationResult("subFaction", dto.name))
-        .map((obj,i) => (
+    <Grid container>
+      <List>
+        {AC.subFactionDTOs
+          .filter((dto) => isSubFactionAlternativeAndSelective(dto))
+          .map((dto) => validation.returnValidationResult("subFaction", dto.name))
+          .map((obj, i) => (
+            <ArmyListSubFactionEntry
+              key={i} //
+              subFaction={obj.subFactionName}
+              valid={obj.valid}
+              message={obj.validationMessage}
+              units={filterUnitsForSubFaction(obj.subFactionName)}
+            />
+          ))}
+        {AYC.allyName !== NO_ALLY ? (
           <ArmyListSubFactionEntry
-            key={i} //
-            subFaction={obj.subFactionName}
-            valid={obj.valid}
-            message={obj.validationMessage}
-            units={filterUnitsForSubFaction(obj.subFactionName)}
+            key={AYC.allyName} //
+            subFaction={AYC.allyName}
+            valid={true}
+            units={filterUnitsForSubFaction(AYC.allyName)}
           />
-        ))}
-      {AYC.allyName !== NO_ALLY ? (
-        <ArmyListSubFactionEntry
-          key={AYC.allyName} //
-          subFaction={AYC.allyName}
-          valid={true}
-          units={filterUnitsForSubFaction(AYC.allyName)}
-        />
-      ) : null}
-    </List>
+        ) : null}
+      </List>
+    </Grid>
   );
 };
 

@@ -12,16 +12,36 @@ import ArmySelectionBox from "./ArmySelectorView/ArmySelectionBox";
 const ListGeneratorController = () => {
   return (
     <Grid container direction="row">
-      <Grid container item direction="column" xs={4} sx={{ paddingLeft: "2em" }}>
+      <Grid
+        item //
+        justifyContent="flex-start"
+        alignItems="center"
+        container
+        xs={12}
+      >
         <MainMenuReturnButton />
-        <ArmySelectionBox />
       </Grid>
-      <Grid item xs={3}>
-        <ArmyListBox />
+
+      <Grid
+        item //
+        container
+        direction="row"
+        xs={12}
+      >
+        <Grid
+          item //
+          xs={3}
+        >
+          <ArmySelectionBox />
+        </Grid>
+        <Grid
+          item //
+          xs={9}
+        >
+          <ArmyListBox />
+        </Grid>
       </Grid>
-      <Grid item xs={3}>
-        <MenuBox />
-      </Grid>
+      <MenuBox />
     </Grid>
   );
 };

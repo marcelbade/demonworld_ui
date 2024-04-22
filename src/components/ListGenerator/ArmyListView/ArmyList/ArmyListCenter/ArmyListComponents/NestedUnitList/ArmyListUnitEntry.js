@@ -2,6 +2,7 @@
 import React, { Fragment, useContext } from "react";
 // Material UI
 import { Grid, ListItemText, Typography } from "@mui/material";
+import { useTheme } from "@emotion/react";
 // components and functions
 import { ValidationContext } from "../../../../../../../contexts/validationContext";
 import ContextHelpButton from "../../../../../../shared/ContextHelpButton";
@@ -10,6 +11,7 @@ import { PUSH_MESSAGE_TYPES } from "../../../../../../../constants/textsAndMessa
 
 const ArmyListUnitEntry = (props) => {
   const VC = useContext(ValidationContext);
+  const theme = useTheme;
 
   /**
    * Function validates that the second subFaction has been selected. Is only called for those armies that require it.
@@ -48,13 +50,12 @@ const ArmyListUnitEntry = (props) => {
               <Typography
                 variant="button"
                 sx={{
-                  color: "red",
+                  color: theme.palette.errorColor,
                   width: "40%",
                   fontFamily: "jaapokkiRegular",
                 }}
               >
-                {" "}
-                {props.unit.unitName}{" "}
+                {props.unit.unitName}
               </Typography>
               <ContextHelpButton
                 message={testForSecondSubFaction.message} //

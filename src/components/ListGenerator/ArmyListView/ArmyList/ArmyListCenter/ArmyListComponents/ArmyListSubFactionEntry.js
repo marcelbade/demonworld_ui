@@ -15,24 +15,23 @@ const ArmyListSubFactionEntry = (props) => {
     <ListItem //
       key="subfactionEntry"
     >
-      <Grid container direction={"column"}>
-        <Grid item>
-          <ArmyListSubFactionHeader
-            subFaction={props.subFaction} //
-            valid={props.valid}
-            message={props.message}
-          />
-          <SubFactionUnitList
-            subFactionUnits={props.units} //
-            subFactionName={props.subFaction}
-          />
-        </Grid>
-        <Grid item>
-          <ArmyListSubFactionFooter
-            subFactionName={props.subFaction} //
-            subFactionUnits={props.units}
-          />
-        </Grid>
+      <Grid
+        container //
+        direction="column"
+      >
+        <ArmyListSubFactionHeader
+          subFaction={props.subFaction} //
+          valid={props.valid}
+          message={props.message}
+        />
+        <SubFactionUnitList
+          subFactionUnits={props.units} //
+          subFactionName={props.subFaction}
+        />
+        <ArmyListSubFactionFooter
+          subFactionName={props.subFaction} //
+          subFactionUnits={props.units}
+        />
       </Grid>
     </ListItem>
   );

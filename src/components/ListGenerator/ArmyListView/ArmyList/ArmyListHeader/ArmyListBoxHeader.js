@@ -1,8 +1,10 @@
 // React
-import React, { useContext, useEffect } from "react";
-import { TextField, IconButton, Tooltip, Typography, Grid } from "@mui/material";
+import React, { Fragment, useContext, useEffect } from "react";
 // icons
 import CancelIcon from "@mui/icons-material/Cancel";
+// material ui
+import { TextField, IconButton, Tooltip, Typography, Grid } from "@mui/material";
+import { useTheme } from "@emotion/react";
 // components and functions
 import { ArmyContext } from "../../../../../contexts/armyContext";
 import { ValidationContext } from "../../../../../contexts/validationContext";
@@ -16,6 +18,8 @@ const ArmyListBoxHeader = () => {
   const AC = useContext(ArmyContext);
   const VC = useContext(ValidationContext);
   const SEC = useContext(SelectionContext);
+
+  const theme = useTheme();
 
   /**
    * Function takes the user input for maximum point allowance, validates it, and sets the state.
@@ -95,56 +99,66 @@ const ArmyListBoxHeader = () => {
   return (
     <Grid
       container //
-      flexdirection="row"
-      alignItems="center"
+      direction="column"
+      alignItems="flex-start"
+      xs={12}
     >
       {inputElements.map((iE) => (
-        <TextField
-          sx={{
-            "& .MuiFormLabel-root": {
-              fontFamily: "NotMaryKate",
-            },
-          }}
-          id={iE.id}
-          autoComplete="off"
-          label={iE.label}
-          type="search"
-          value={iE.value}
-          InputProps={{
-            style: {
-              fontFamily: "NotMaryKate",
-              fontSize: "20px",
-              color:
-                !VC.listValidationResults.commanderIsPresent && iE.value === AC.armyName //
-                  ? "red"
-                  : "black",
-              pading: "50px",
-              width: "330px",
-            },
-          }}
-          onClick={iE.onClick}
-          onChange={iE.onChange}
-          required
-          variant="standard"
-        />
+        <Grid item>
+          <TextField
+            sx={{
+              paddingTop: "1em",
+              paddingBottom: "1em",
+              "& .MuiFormLabel-root": {
+                fontFamily: "NotMaryKate",
+              },
+            }}
+            id={iE.id}
+            autoComplete="off"
+            label={iE.label}
+            type="search"
+            value={iE.value}
+            InputProps={{
+              style: {
+                fontFamily: "NotMaryKate",
+                fontSize: "20px",
+                color:
+                  !VC.listValidationResults.commanderIsPresent && iE.value === AC.armyName //
+                    ? theme.palette.errorColor
+                    : theme.color,
+                pading: "50px",
+                width: "330px",
+              },
+            }}
+            onClick={iE.onClick}
+            onChange={iE.onChange}
+            required
+            variant="standard"
+          />
+          {iE.value === AC.armyName ? (
+            <Fragment>
+              <Tooltip title={<Typography>{TOOLTIPS.DELETE_ARMY_LIST}</Typography>}>
+                <IconButton
+                  variant="outlined"
+                  onClick={() => {
+                    SEC.setSelectedUnits([]);
+                  }}
+                  size="large"
+                >
+                  <CancelIcon />
+                </IconButton>
+              </Tooltip>
+
+              {!VC.listValidationResults.commanderIsPresent ? (
+                <ContextHelpButton
+                  message={VALIDATION.NO_COMMANDER_WARNING} //
+                  type={PUSH_MESSAGE_TYPES.ERROR}
+                />
+              ) : null}
+            </Fragment>
+          ) : null}
+        </Grid>
       ))}
-      <Tooltip title={<Typography>{TOOLTIPS.DELETE_ARMY_LIST}</Typography>}>
-        <IconButton
-          variant="outlined"
-          onClick={() => {
-            SEC.setSelectedUnits([]);
-          }}
-          size="large"
-        >
-          <CancelIcon />
-        </IconButton>
-      </Tooltip>
-      {!VC.listValidationResults.commanderIsPresent ? ( //
-        <ContextHelpButton
-          message={VALIDATION.NO_COMMANDER_WARNING} //
-          type={PUSH_MESSAGE_TYPES.ERROR}
-        />
-      ) : null}
     </Grid>
   );
 };

@@ -42,8 +42,8 @@ const SubFactionUnitList = (props) => {
       {unitCardMultiSort(props.subFactionUnits).map((u, i) => {
         const identifier = u.unitName + u.uniqueID;
         return (
-          <List sx={{ padding: "0px", margin: "0px" }} key={i}>
-            <ListItem sx={{ width: "80%", margin: "-1em", padding: "0em" }}>
+          <List key={i}>
+            <ListItem>
               <IconButton
                 onClick={() => {
                   removeUnit(identifier);
