@@ -7,7 +7,7 @@ const darkTheme = createTheme({
     background: {
       default: "#130606",
     },
-    color: "#0ceda6",
+    color: "white",
     errorColor: "red",
     disabled: "darkgrey",
     compendiumHeaderBackground: "#565757",

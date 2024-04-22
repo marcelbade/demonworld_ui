@@ -111,6 +111,7 @@ const ArmyListBoxHeader = () => {
               paddingBottom: "1em",
               "& .MuiFormLabel-root": {
                 fontFamily: "NotMaryKate",
+                color: theme.palette.color,
               },
             }}
             id={iE.id}
