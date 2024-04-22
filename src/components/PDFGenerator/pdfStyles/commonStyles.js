@@ -4,6 +4,7 @@ import {
   FONT_SIZE_TEXT,
   MARGIN_LEFT,
   MARGIN_PAGE_TOP,
+  PADDING_PAGE_BOTTOM,
   MARGIN_SUBFACTION_BLOCK,
   CONTENT_WIDTH,
 } from "./styleValues";
@@ -18,6 +19,7 @@ export const commonStyles = {
     width: CONTENT_WIDTH,
     marginTop: MARGIN_PAGE_TOP,
     height: "100%",
+    paddingBottom: PADDING_PAGE_BOTTOM,
   },
 
   content: {
@@ -87,12 +89,5 @@ export const commonStyles = {
     flexDirection: "row",
     marginLeft: MARGIN_LEFT,
   },
-
-  // pageNumber: {
-  //   // width:"100%",
-  //   backgroundColor:"red",
-  //   position: "absolute",
-  //   right: "3%",
-  //   top: "10%",
-  // },
+ 
 };
