@@ -5,39 +5,32 @@ import { Grid, Typography } from "@mui/material";
 import ContextHelpButton from "../../../../../shared/ContextHelpButton";
 // constants
 import { PUSH_MESSAGE_TYPES } from "../../../../../../constants/textsAndMessages";
+import { useTheme } from "@emotion/react";
 
 const ArmyListSubFactionHeader = (props) => {
- 
+  const theme = useTheme();
+
+  const STYLES = { width: "60%", borderBottom: "solid 4px black", marginBottom: "1em", fontSize: "20px" };
+
   return (
-    <Grid container>
-      {props.valid ? (
-        <Typography
-          key={props.subFaction} //
-          variant="subtitle1"
-          sx={{ width: "60%", borderBottom: "solid 4px black", marginBottom: "1em" }}
-        >
-          {props.subFaction}
-        </Typography>
-      ) : (
-        <Grid
-          container //
-          direction="row"
-          sx={{ width: "60%", borderBottom: "solid 4px black", marginBottom: "1em", color: "red" }}
-          alignItems="center"
-        >
-          <Typography
-            key={props.subFaction} //
-            sx={{ fontSize: "20px", fontWeight: "bold" }}
-            variant="subtitle1"
-          >
-            {props.subFaction}
-          </Typography>
+    <Grid
+      container //
+      direction="row"
+      alignItems="center"
+    >
+      <Typography
+        key={props.subFaction} //
+        variant="subtitle1"
+        sx={props.valid ? STYLES : { ...STYLES, color: theme.palette.errorColor }}
+      >
+        {props.subFaction}
+        {props.valid ? null : (
           <ContextHelpButton
             message={props.message} //
             type={PUSH_MESSAGE_TYPES.ERROR}
           />
-        </Grid>
-      )}
+        )}
+      </Typography>
     </Grid>
   );
 };
