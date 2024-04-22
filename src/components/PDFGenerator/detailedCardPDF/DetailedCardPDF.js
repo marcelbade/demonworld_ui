@@ -25,7 +25,7 @@ const ListPDF = (props) => {
       {props.data.list
         .filter((subFaction) => subFaction.units.length > 0)
         .map((obj, i) => (
-          <View wrap={false}>
+          <View wrap={true}>
             <SubfactionSubtitle key={i} data={obj} />
             {obj.units
               .sort((a, b) => a.unitName - b.unitName)
