@@ -173,7 +173,6 @@ const OptionButtons = () => {
       }}
     >
       <LightSwitch />
-
       {buttons.map((bttn, i) => (
         <Grid item key={i}>
           {bttn.display ? (
