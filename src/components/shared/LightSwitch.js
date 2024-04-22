@@ -24,7 +24,7 @@ const LightSwitch = () => {
           toggleDarkMode();
         }}
       >
-        {LC.darkModeOff ? <Brightness4Icon /> : <BrightnessHighIcon />}
+        {LC.darkModeOff ? <Brightness4Icon /> : <BrightnessHighIcon style={{ color: "white" }} />}
       </IconButton>
     </Tooltip>
   );
