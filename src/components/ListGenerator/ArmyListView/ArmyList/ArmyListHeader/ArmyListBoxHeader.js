@@ -68,106 +68,66 @@ const ArmyListBoxHeader = () => {
     createDefaultArmyName();
   }, [AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  const inputElements = [
+    {
+      id: "teamName", //
+      label: INPUT_TEXTS.PLAYER_NAME,
+      value: AC.playerName,
+      onClick: deletePlayerName,
+      onChange: changePlayerName,
+    },
+    {
+      id: "teamName", //
+      label: INPUT_TEXTS.TEAM_NAME,
+      value: AC.teamName,
+      onClick: deleteTeamName,
+      onChange: changeTeamName,
+    },
+    {
+      id: "teamName", //
+      label: INPUT_TEXTS.ARMY_NAME,
+      value: AC.armyName,
+      onClick: null,
+      onChange: changeArmyName,
+    },
+  ];
+
   return (
-    <Grid container flexdirection="row" alignItems="center">
-      <TextField
-        sx={{
-          "& .MuiFormLabel-root": {
-            fontFamily: "NotMaryKate",
-          },
-        }}
-        id="playerName"
-        autoComplete="off"
-        label={INPUT_TEXTS.PLAYER_NAME}
-        type="search"
-        value={AC.playerName}
-        InputProps={{
-          style: {
-            fontFamily: "NotMaryKate",
-            fontSize: "20px",
-            color: "lightgrey",
-
-            pading: "50px",
-            width: "330px",
-          },
-        }}
-        onClick={deletePlayerName}
-        onChange={changePlayerName}
-        required
-        variant="standard"
-      />
-      <TextField
-        sx={{
-          "& .MuiFormLabel-root": {
-            fontFamily: "NotMaryKate",
-          },
-        }}
-        id="teamName"
-        label={INPUT_TEXTS.TEAM_NAME}
-        type="search"
-        autoComplete="off"
-        value={AC.teamName}
-        InputProps={{
-          style: {
-            fontFamily: "NotMaryKate",
-            color: "lightgrey",
-            fontSize: "20px",
-
-            pading: "50px",
-            width: "330px",
-          },
-        }}
-        onClick={deleteTeamName}
-        onChange={changeTeamName}
-        required
-        variant="standard"
-      />
-
-      {!VC.listValidationResults.commanderIsPresent ? (
-        <TextField
-          id="armyNameValid"
-          autoComplete="off"
-          value={AC.armyName}
-          InputProps={{
-            style: {
-              fontFamily: "NotMaryKate",
-              fontSize: "20px",
-              fontWeight: "bold",
-              pading: "50px",
-              width: "330px",
-              color: "red",
-            },
-          }}
-          onChange={changeArmyName}
-          required
-          variant="standard"
-        />
-      ) : (
+    <Grid
+      container //
+      flexdirection="row"
+      alignItems="center"
+    >
+      {inputElements.map((iE) => (
         <TextField
           sx={{
             "& .MuiFormLabel-root": {
               fontFamily: "NotMaryKate",
             },
           }}
-          id="armyNameInvalid"
-          label={INPUT_TEXTS.ARMY_NAME}
-          type="search"
+          id={iE.id}
           autoComplete="off"
-          value={AC.armyName}
+          label={iE.label}
+          type="search"
+          value={iE.value}
           InputProps={{
             style: {
               fontFamily: "NotMaryKate",
               fontSize: "20px",
-              fontWeight: "bold",
+              color:
+                !VC.listValidationResults.commanderIsPresent && iE.value === AC.armyName //
+                  ? "red"
+                  : "black",
               pading: "50px",
               width: "330px",
             },
           }}
-          onChange={changeArmyName}
+          onClick={iE.onClick}
+          onChange={iE.onChange}
           required
           variant="standard"
         />
-      )}
+      ))}
       <Tooltip title={<Typography>{TOOLTIPS.DELETE_ARMY_LIST}</Typography>}>
         <IconButton
           variant="outlined"
