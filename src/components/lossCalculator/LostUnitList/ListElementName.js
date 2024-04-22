@@ -2,8 +2,12 @@
 import React from "react";
 //Material UI
 import { Typography, Grid } from "@mui/material";
+import { useTheme } from "@emotion/react";
 
 const ListElementName = (props) => {
+
+  const theme = useTheme()
+
   const STYLES = {
     paddingLeft: "1em", //
     display: "flex",
@@ -15,7 +19,7 @@ const ListElementName = (props) => {
     return props.unitDestroyed
       ? {
           ...STYLES,
-          color: "red",
+          color:theme.palette.errorColor,
           textDecorationLine: "line-through",
           textDecorationThickness: "0.2em",
         }

@@ -33,11 +33,11 @@ const TotalLossButton = (props) => {
 
   return (
     <IconButton
+      sx={{ height: "100%", width: "100%" }}
       onClick={() => {
         unitDestroyed();
         allItemsMarkedLost();
       }}
-      sx={{ height: "100%", width: "100%", backgroundColor: "green" }}
     >
       <CustomIcon
         icon={skullsIcon} //

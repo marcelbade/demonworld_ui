@@ -2,16 +2,19 @@
 import React from "react";
 //Material UI
 import { Grid, ListItemText } from "@mui/material";
+import { useTheme } from "@emotion/react";
 // component and functions
 import ContextHelpButton from "../../shared/ContextHelpButton";
 // constants
 import { LOSS_CALCULATOR, PUSH_MESSAGE_TYPES } from "../../../constants/textsAndMessages";
 
 const EquipmentListItemName = (props) => {
+  const theme = useTheme();
+
   const STRIKETROUGHTEXT = {
     textAlign: "left",
     marginTop: "0.5em",
-    color: "red",
+    color: theme.palette.errorColor,
     textDecorationLine: "line-through",
     textDecorationThickness: "0.2em",
   };

@@ -2,6 +2,7 @@
 import React, { useContext } from "react";
 //Material UI
 import { Typography, Grid } from "@mui/material";
+import { useTheme } from "@emotion/react";
 // components and functions
 import { LossCalcContext } from "../../../contexts/LossCalculatorContext";
 import { ListItem } from "@mui/material";
@@ -14,6 +15,7 @@ import { LOSS_CALCULATOR } from "../../../constants/textsAndMessages";
 
 const LostUnitListElement = (props) => {
   const calcContext = useContext(LossCalcContext);
+  const theme = useTheme();
 
   const STYLES = {
     border: "solid 0.1em",
@@ -25,7 +27,7 @@ const LostUnitListElement = (props) => {
     return props.unitDestroyed
       ? {
           ...STYLES,
-          borderColor: "red",
+          borderColor: theme.palette.errorColor,
         }
       : STYLES;
   };
