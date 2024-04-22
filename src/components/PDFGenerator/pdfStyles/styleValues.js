@@ -2,6 +2,8 @@
 
 // margins for the entire page
 export const MARGIN_PAGE_TOP = 10;
+export const PADDING_PAGE_BOTTOM = 5;
+
 export const MARGIN_LEFT = 15;
 export const EQUIPMENT_MARGIN_LEFT = 25;
 
