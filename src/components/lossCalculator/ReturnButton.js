@@ -21,6 +21,7 @@ const ReturnButton = (props) => {
           sx={{
             width: "2em",
             height: "2em",
+            color: "white",
           }}
         />
       </IconButton>
