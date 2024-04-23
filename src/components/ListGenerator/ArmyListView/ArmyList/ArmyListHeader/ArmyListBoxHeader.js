@@ -101,11 +101,11 @@ const ArmyListBoxHeader = () => {
       container //
       direction="column"
       alignItems="flex-start"
-      xs={12}
     >
-      {inputElements.map((iE) => (
+      {inputElements.map((iE, i) => (
         <Grid item>
           <TextField
+            key={i}
             sx={{
               paddingTop: "1em",
               paddingBottom: "1em",

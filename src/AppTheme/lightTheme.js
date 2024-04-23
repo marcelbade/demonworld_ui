@@ -4,7 +4,7 @@ const lightTheme = createTheme({
   palette: {
     primary: { 500: "#000000" },
     disabled: "grey",
-    color: "white",
+    color: "black",
     errorColor: "red",
     compendiumHeaderBackground: "black",
     statCards: {
