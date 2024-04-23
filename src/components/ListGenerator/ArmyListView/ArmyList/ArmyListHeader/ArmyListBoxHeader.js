@@ -103,9 +103,8 @@ const ArmyListBoxHeader = () => {
       alignItems="flex-start"
     >
       {inputElements.map((iE, i) => (
-        <Grid item>
+        <Grid item key={i}>
           <TextField
-            key={i}
             sx={{
               paddingTop: "1em",
               paddingBottom: "1em",
@@ -137,7 +136,7 @@ const ArmyListBoxHeader = () => {
             variant="standard"
           />
           {iE.value === AC.armyName ? (
-            <Fragment>
+            <Fragment key={iE.value}>
               <Tooltip title={<Typography>{TOOLTIPS.DELETE_ARMY_LIST}</Typography>}>
                 <IconButton
                   variant="outlined"
