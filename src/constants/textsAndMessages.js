@@ -6,7 +6,7 @@ export const ALTTEXT = {
 };
 
 export const LANDINGPAGE = {
-  TITLE:"Armeelistentool",
+  TITLE: "Armeelistentool",
   COMPENDIUM: "Kompendium",
   LIST_GENERATOR: "Listengenerator",
   LOSS_CALCULATOR: "Verlustrechner",
@@ -439,4 +439,8 @@ export const CITY_STATES = {
     REGION_HEROES_NORTH:
       "Du musst mindestens eine Einehit des Nordens aufstellen, um einen Befehlshaber oder Helden des Nordens aufstellen zu können.",
   },
+};
+
+export const SPECIAL_ITEMS = {
+  BRACELET_OF_TRANSFORMATION: "Reif der Verwandlung",
 };
