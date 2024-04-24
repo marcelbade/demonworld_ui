@@ -7,8 +7,10 @@ import { ItemContext } from "../../../contexts/itemContext";
 import {
   ALL_FACTIONS_ARRAY,
   ARMIES_ADDITIONAL_SUBFACTIONS,
-  ARMIES_ADDITIONAL_SUBFACTIONS_MAPPING, NONE, //
+  ARMIES_ADDITIONAL_SUBFACTIONS_MAPPING,
+  NONE, //
   NO_ALLY,
+  SPECIAL,
 } from "../../../constants/factions";
 import { INPUT_TEXTS } from "../../../constants/textsAndMessages";
 import useArmyValidation from "../../../customHooks/UseArmyValidation";
@@ -41,8 +43,9 @@ const ArmySelectorDropdown = () => {
    */
   const setFactionProperties = (factionName) => {
     const factionObj = AC.fetchedFactions.find((f) => f.factionName === factionName);
+    const specials = AC.fetchedFactions.find((f) => f.factionName === SPECIAL);
     const allSubFactions = [...factionObj.subFactions.map((sF) => sF.name)];
-    const allFactionUnits = captureAllFactionUnits(factionObj.subFactions);
+    const allFactionUnits = captureAllFactionUnits(factionObj.subFactions, specials.subFactions);
 
     resetTheState();
 
@@ -80,14 +83,16 @@ const ArmySelectorDropdown = () => {
   };
 
   /**
-   * Function creates array containing every unit of a faction
+   * Function creates array containing every unit of a faction, plus special units (summons,...)
    * @param {[subFactionDTO]} subFactionObjects
    * @returns array of unitCard objects.
    */
-  const captureAllFactionUnits = (subFactionObjects) => {
+  const captureAllFactionUnits = (subFactionObjects, specials) => {
     let result = [];
 
-    subFactionObjects.forEach((sF) => {
+    const tempArray = [...subFactionObjects, ...specials];
+
+    tempArray.forEach((sF) => {
       sF.units.forEach((u) => {
         result.push(u);
       });
