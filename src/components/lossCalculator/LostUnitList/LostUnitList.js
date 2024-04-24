@@ -3,7 +3,6 @@ import React, { useContext } from "react";
 //Material UI
 import { List } from "@mui/material";
 // components and functions
- import { unitCardMultiSort } from "../../../util/utilityFunctions";
 import { LossCalcContext } from "../../../contexts/LossCalculatorContext";
 import LostUnitListElement from "./LostUnitListElement";
 
@@ -12,15 +11,17 @@ const LostUnitList = () => {
 
   return (
     <List>
-      {unitCardMultiSort(calcContext.list).map((u, i) => {
-        return (
-          <LostUnitListElement
-            unit={u} //
-            index={i}
-            key={u.uniqueID}
-          />
-        );
-      })}
+      {calcContext.list
+        .sort((a, b) => a.unitName > b.unitName)
+        .map((u, i) => {
+          return (
+            <LostUnitListElement
+              unit={u} //
+              index={i}
+              key={u.uniqueID}
+            />
+          );
+        })}
     </List>
   );
 };

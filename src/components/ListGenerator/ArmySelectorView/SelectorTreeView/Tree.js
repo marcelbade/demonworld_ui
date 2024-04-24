@@ -6,7 +6,6 @@ import { TreeItem } from "@mui/x-tree-view/TreeItem";
 import TreeUnitNode from "./TreeUnitNode";
 import useArmyValidation from "../../../../customHooks/UseArmyValidation.js";
 import useTreeViewController from "../../../../customHooks/UseTreeViewController.js";
-import { unitCardMultiSort } from "../../../../util/utilityFunctions.js";
 // icons
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
@@ -44,9 +43,10 @@ const Tree = (props) => {
             disabled={testForEmptySubFaction(dto)}
             onClick={() => controller.getNodeId([`${i}`])}
           >
-            {unitCardMultiSort(dto.units)
+            {dto.units.sort((a,b) => a.unitName > b.unitName)
               // if unit has multiple card (werwolves, changelings,...) show only one
               .filter((u) => u.multiStateOrderNumber < 2)
+              // map unitCard to validation object (unit + validation result)
               .map((u) => validation.returnValidationResult(UNIT, u, true))
               .map((validationObj, i) => {
                 return (

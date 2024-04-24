@@ -5,7 +5,6 @@ import { List, ListItem, IconButton } from "@mui/material";
 // icons
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
 // components and functions
-import { unitCardMultiSort } from "../../../../../../../util/utilityFunctions";
 import EquipmentList from "./EquipmentList";
 import UnitElementButtons from "./UnitElementButtons";
 import ArmyListUnitEntry from "./ArmyListUnitEntry";
@@ -39,34 +38,36 @@ const SubFactionUnitList = (props) => {
 
   return (
     <Fragment>
-      {unitCardMultiSort(props.subFactionUnits).map((u, i) => {
-        const identifier = u.unitName + u.uniqueID;
-        return (
-          <List key={i}>
-            <ListItem>
-              <IconButton
-                onClick={() => {
-                  removeUnit(identifier);
-                }}
-              >
-                <RemoveCircleOutlineIcon />
-              </IconButton>
-              <ArmyListUnitEntry unit={u} />
-              {/* BUTTONS */}
-              <UnitElementButtons
-                unit={u} //
-                subFaction={props.subFactionName}
-              />
-            </ListItem>
-            <ListItem>
-              <EquipmentList
-                unit={u} //
-                identifier={identifier}
-              />
-            </ListItem>
-          </List>
-        );
-      })}
+      {props.subFactionUnits
+        .sort((a, b) => a.unitName > b.unitName)
+        .map((u, i) => {
+          const identifier = u.unitName + u.uniqueID;
+          return (
+            <List key={i}>
+              <ListItem>
+                <IconButton
+                  onClick={() => {
+                    removeUnit(identifier);
+                  }}
+                >
+                  <RemoveCircleOutlineIcon />
+                </IconButton>
+                <ArmyListUnitEntry unit={u} />
+                {/* BUTTONS */}
+                <UnitElementButtons
+                  unit={u} //
+                  subFaction={props.subFactionName}
+                />
+              </ListItem>
+              <ListItem>
+                <EquipmentList
+                  unit={u} //
+                  identifier={identifier}
+                />
+              </ListItem>
+            </List>
+          );
+        })}
     </Fragment>
   );
 };
