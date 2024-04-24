@@ -81,7 +81,7 @@ const useItemFilters = () => {
     if (!selectedUnit.musician) {
       itemTypeGroup = itemTypeGroup.filter((group) => group.typeName !== ITEM_TYPE_INSTRUMENT);
     }
-    // filter out almost everything if the unit has no leader
+    // filter out almost everything, if the unit has no leader
     if (!selectedUnit.leader && selectedUnit.unitType === UNIT) {
       itemTypeGroup = itemTypeGroup.filter(
         (group) =>
