@@ -11,12 +11,16 @@ import SpellBookIcon from "../../../../../assets/icons/spellbook-black.png";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 // constants
 import { TOOLTIPS } from "../../../../../constants/textsAndMessages";
+import useSpecialItems from "../../../../../customHooks/UseSpecialItems";
+import { ArmyContext } from "../../../../../contexts/armyContext";
 
 const TreeItemNode = (props) => {
   const IC = useContext(ItemContext);
   const SEC = useContext(SelectionContext);
+  const AC = useContext(ArmyContext);
 
   const limiter = useUnitEqipmentLimits();
+  const special = useSpecialItems();
 
   /**
    * Add the item card object to the selected unit. This means:
@@ -46,9 +50,12 @@ const TreeItemNode = (props) => {
   /**
    * Function causes the list of all selected units to change (w/o actually changing it). This is necessary to correctly calculate the list's point cost whenever an item is added. Without this, the point cost of the item is only added whenever a unit is added or removed from the list, not when the item is added ore removed.
    */
-  const triggerArymListRecalculation = () => {
-    let tempArray = [...SEC.selectedUnits];
-    SEC.setSelectedUnits([...tempArray]);
+  const testForSpecialItems = (item) => {
+    let result = special.testForSpecialItems(IC.unitSelectedForShop, item);
+    let tempArray = result.length === 0 ? [...SEC.selectedUnits] : result;
+
+    SEC.setSelectedUnits(tempArray);
+    AC.setListOfAllFactionUnits([...AC.listOfAllFactionUnits, IC.unitSelectedForShop]);
   };
 
   return (
@@ -84,7 +91,7 @@ const TreeItemNode = (props) => {
                 addItemToUnit(props.item);
                 addItemToCentralList(props.item);
                 limiter.toggleUnitsItemTypeFlags(IC.unitSelectedForShop, props.item, true);
-                triggerArymListRecalculation();
+                testForSpecialItems(props.item);
                 e.stopPropagation();
               }}
             >
