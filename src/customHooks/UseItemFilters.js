@@ -32,7 +32,8 @@ const useItemFilters = () => {
 
   /**
    * Function is a wrapper for the filter logic and calls the filtering functions.
-   * First, the correct item list for the selected faction is returned, then item groups are removed.
+   * First, the correct item list for the selected faction is returned, 
+   * then item groups are removed.
    * @param {unitCard} selectedUnit
    * @param {[itemGroup]} listOfItemGroups
    * @returns an array of items grouped by type, with all item types
@@ -46,7 +47,9 @@ const useItemFilters = () => {
   };
 
   /**
-   * Function takes the DTO from the BE and filters by faction.
+   * Function takes the DTO from the BE and filters by faction. 
+   * Note that generic items have simply been added to every faction DTO 
+   * by the Backend for ease of use.
    * @returns an array of dto filtered by faction.
    */
   const getItemGroupsForSelectedUnit = (selectedUnit, ListOfItemGroups) => {
@@ -69,7 +72,7 @@ const useItemFilters = () => {
 
     itemTypeGroup = itemTypeGroup.filter((group) => group.typeName !== selectedUnit.prohibitedItemType);
 
-    // filter out fortifications if -> (A) it's not a unit (B) mounted (C) the limit for fortification has been reache.
+    // filter out fortifications if -> (A) it's not a unit (B) mounted (C) the limit for fortification has been reached.
     if (selectedUnit.unitType !== UNIT || selectedUnit.isMounted) {
       itemTypeGroup = itemTypeGroup.filter((group) => group.typeName !== ITEM_TYPE_FORTIFICATIONS);
     }
