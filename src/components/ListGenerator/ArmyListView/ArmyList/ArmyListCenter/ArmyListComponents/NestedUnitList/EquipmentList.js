@@ -10,9 +10,6 @@ import { SelectionContext } from "../../../../../../../contexts/selectionContext
 // custom hooks
 import useArmyValidation from "../../../../../../../customHooks/UseArmyValidation";
 import useUnitEquipmentLimits from "../../../../../../../customHooks/useUnitEqipmentLimits";
- 
-
- 
 
 const EquipmentList = (props) => {
   const IC = useContext(ItemContext);
