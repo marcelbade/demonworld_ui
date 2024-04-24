@@ -32,7 +32,7 @@ const useItemFilters = () => {
 
   /**
    * Function is a wrapper for the filter logic and calls the filtering functions.
-   * First, the correct item list for the selected faction is returned, 
+   * First, the correct item list for the selected faction is returned,
    * then item groups are removed.
    * @param {unitCard} selectedUnit
    * @param {[itemGroup]} listOfItemGroups
@@ -47,13 +47,13 @@ const useItemFilters = () => {
   };
 
   /**
-   * Function takes the DTO from the BE and filters by faction. 
-   * Note that generic items have simply been added to every faction DTO 
+   * Function takes the DTO from the BE and filters by faction.
+   * Note that generic items have simply been added to every faction DTO
    * by the Backend for ease of use.
    * @returns an array of dto filtered by faction.
    */
   const getItemGroupsForSelectedUnit = (selectedUnit, ListOfItemGroups) => {
-    return ListOfItemGroups.filter((obj) => obj.factionName === selectedUnit.faction)[0].groupsOfFactionItemsByType;
+    return ListOfItemGroups.find((obj) => obj.factionName === selectedUnit.faction).groupsOfFactionItemsByType;
   };
 
   /**
@@ -65,7 +65,7 @@ const useItemFilters = () => {
    * @returns a filtered down itemGroupList array.
    */
   const filterItemTypes = (selectedUnit, itemTypeGroup) => {
-    // if a hero cannot have any items, return an empty array
+    // if a hero cannot have any items (because they come pre-equipped with their own), return an empty array
     if (selectedUnit.prohibitedItemType === ALL) {
       itemTypeGroup = [];
     }
@@ -106,10 +106,12 @@ const useItemFilters = () => {
   };
 
   /**
-   * Function tests if the selected unit can equip an item.
-   * @param {unitCard} unit
-   * @param {itemCard} item
-   * @returns true, if the item is a valid option for the selected unit.
+   * Function implements the logic to test every individual item in those groups
+   * that haven't been filtered out entirely in the first step.
+   * @param {unitCard} unit currently selected for the item storee
+   * @param {itemCard} item to be tested.
+   * @returns an object that contains a boolen flag and an error message as a String.
+   * The flag is true, if the item is invalid.
    */
   const filterIndividualItems = (unit, item) => {
     const unitWeapons = [unit.weapon1Name, unit.weapon2Name, unit.weapon3Name];
@@ -199,10 +201,8 @@ const useItemFilters = () => {
       // check if the item requires a specific type of unit
       unitTypeItems: (data) => {
         return {
-          isInvalidItem:
-            !data.item.unitType.includes(data.unit.unitType) && //
-            !data.item.unitType === ALL,
-          errorMessage: ITEM_LIMIT_MESSAGE.UNIT_TYPE_ITEMS(data.item.unitType),
+          isInvalidItem: !data.item.unitType.includes(data.unit.unitType),
+          errorMessage: ITEM_LIMIT_MESSAGE.UNIT_TYPE_ITEMS(data.unit.unitType),
         };
       },
 
@@ -220,8 +220,8 @@ const useItemFilters = () => {
       sizeItem: (data) => {
         return {
           isInvalidItem:
-            data.unit.size > data.item.maxSize && //
-            data.item.maxSize > -1,
+            data.unit.unitSize > data.item.maxSize && //
+            data.item.maxSize !== -1,
           errorMessage: ITEM_LIMIT_MESSAGE.UNIT_SIZE_ITEMS(data.item.maxSize),
         };
       },
@@ -257,11 +257,11 @@ const useItemFilters = () => {
       errorMessage: "",
     };
 
-    for (const value of Object.values(itemFilters)) {
-      if (value({ unit: unit, item: item }).isInvalidItem) {
+    for (const filter of Object.values(itemFilters)) {
+      if (filter({ unit: unit, item: item }).isInvalidItem) {
         result = {
-          isInvalidItem: value({ unit: unit, item: item }).isInvalidItem,
-          errorMessage: value({ unit: unit, item: item }).errorMessage,
+          isInvalidItem: filter({ unit: unit, item: item }).isInvalidItem,
+          errorMessage: filter({ unit: unit, item: item }).errorMessage,
         };
         break;
       }

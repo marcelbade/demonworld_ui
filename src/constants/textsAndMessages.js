@@ -131,7 +131,9 @@ export const ITEM_LIMIT_MESSAGE = {
   BOWS_ITEMS: `Nur eine Einheit mit einem Bogen kann diesen Gegenstand erhalten.`,
   CROSSBOWS_ITEMS: `Nur eine Einheit mit Armbrüsten kann diesen Gegenstand erhalten.`,
   UNIT_TYPE_ITEMS: (unitType) => {
-    return `Nur eine Einheit vom Typ ${unitType} kann diesen Gegenstand erhalten.`;
+    return unitType !== UNIT_TYPES.U
+      ? `Eine ${UNIT_TYPES[unitType]} kann diesen Gegenstand nicht erhalten.`
+      : `Ein ${UNIT_TYPES[unitType]} kann diesen Gegenstand nicht erhalten.`;
   },
   UNIT_NAME_ITEMS: (unitName) => {
     return `Nur eine Einheit ${unitName} kann diesen Gegenstand erhalten.`;
