@@ -107,7 +107,8 @@ const useItemFilters = () => {
 
   /**
    * Function implements the logic to test every individual item in those groups
-   * that haven't been filtered out entirely in the first step.
+   * that haven't been filtered out entirely in the first step. It does so by defining a table
+   * with filter functions and error messages for every use case and then iterating through it.
    * @param {unitCard} unit currently selected for the item storee
    * @param {itemCard} item to be tested.
    * @returns an object that contains a boolen flag and an error message as a String.
