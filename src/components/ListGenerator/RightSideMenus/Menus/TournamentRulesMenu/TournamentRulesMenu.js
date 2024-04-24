@@ -8,15 +8,17 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import { TournamentRulesContext } from "../../../../../contexts/tournamentRulesContext";
 // constants
 import { GENERAL_ERRRORS, TOURNAMENT_RULES } from "../../../../../constants/textsAndMessages";
+import { useTheme } from "@emotion/react";
 
 const TournamentRulesMenu = () => {
   const TC = useContext(TournamentRulesContext);
+  const theme = useTheme();
 
   const ENABLED_BTTN_TEXT = {
-    color: "black",
+    color: theme.palette.color,
   };
   const DISBLED_BTTN_TEXT = {
-    color: "grey",
+    color: theme.palette.disabled,
   };
 
   const [errorMessage, setErrorMessage] = useState({
@@ -79,12 +81,22 @@ const TournamentRulesMenu = () => {
       </Grid>
       <Grid item>
         <FormControl component="fieldset" variant="standard">
-          <FormLabel component="legend">{TOURNAMENT_RULES.TOURNAMENT_RULES}</FormLabel>
+          <FormLabel component="legend">
+            <Typography
+              variant="h6"
+              sx={{
+                color: theme.palette.color,
+              }}
+            >
+              {TOURNAMENT_RULES.TOURNAMENT_RULES}
+            </Typography>
+          </FormLabel>
           <FormGroup>
             <FormControlLabel
               control={
                 <Switch //
                   id="toggleAllButtons"
+                  color={theme.palette.color}
                   checked={TC.tournamentOverrideRules.enableOverride}
                   onChange={toggleAllButtons}
                 />
@@ -148,13 +160,16 @@ const TournamentRulesMenu = () => {
       <Grid item>
         <FormControl component="fieldset" variant="standard">
           <FormLabel sx={TC.tournamentOverrideRules.enableOverride ? ENABLED_BTTN_TEXT : DISBLED_BTTN_TEXT} component="legend">
-            {TOURNAMENT_RULES.ENFORCE_UNIQUE_RULE}
+            <Typography sx={TC.tournamentOverrideRules.enableOverride ? ENABLED_BTTN_TEXT : DISBLED_BTTN_TEXT}>
+              {TOURNAMENT_RULES.ENFORCE_UNIQUE_RULE}{" "}
+            </Typography>
           </FormLabel>
           <FormGroup>
             <FormControlLabel
               control={
                 <Switch
                   id="toggleUniqueRule"
+                  color={theme.palette.color}
                   disabled={!TC.tournamentOverrideRules.enableOverride} //
                   checked={TC.tournamentOverrideRules.uniquesOnlyOnce}
                   onChange={enforceUniqueRule}

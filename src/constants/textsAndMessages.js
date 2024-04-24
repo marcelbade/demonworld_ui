@@ -67,6 +67,7 @@ export const TOURNAMENT_RULES = {
   TOURNAMENT_RULES: "Turnierregeln",
   MAX_POINTS_FOR_HERO: "Wieviele Prozent dürfen max. für Helden ausgegeben werden.",
   HOW_MANY_TIMES: "Wie oft darf jede Einheit ausgewählt werden.",
+  ENFORCE_UNIQUE_RULE: "Einzigartige Einheiten dürfen nur einmal ausgewählt werden.",
 };
 
 export const OPTIONS = {
@@ -125,9 +126,9 @@ export const ITEM_LIMIT_MESSAGE = {
   SHIELD_ITEMS: `Nur eine Einheit mit Schild kann diesen Gegenstand erhalten.`,
   MOUNTED_ITEMS: `Nur eine berittene Einheit kann diesen Gegenstand erhalten.`,
   MAGIC_ITEMS: `Nur ein Magier kann diesen Gegenstand erhalten.`,
-  LANCE_ITEMS: `Nur eine Einheitmit Lanzen kann diesen Gegenstand erhalten.`,
+  LANCE_ITEMS: `Nur eine Einheit mit Lanzen kann diesen Gegenstand erhalten.`,
   SPEAR_ITEMS: `Nur eine Einheit mit Speeren kann diesen Gegenstand erhalten.`,
-  BOWS_ITEMS: `Nur eine Einheit mit Bögen kann diesen Gegenstand erhalten.`,
+  BOWS_ITEMS: `Nur eine Einheit mit einem Bogen kann diesen Gegenstand erhalten.`,
   CROSSBOWS_ITEMS: `Nur eine Einheit mit Armbrüsten kann diesen Gegenstand erhalten.`,
   UNIT_TYPE_ITEMS: (unitType) => {
     return `Nur eine Einheit vom Typ ${unitType} kann diesen Gegenstand erhalten.`;
