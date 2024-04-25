@@ -76,7 +76,7 @@ const AlternativeArmyListSelector = () => {
    */
   const setGlobalState = (tempArray) => {
     ALC.setSelectedAlternativeLists(tempArray);
-    ALC.setAllyIsAlternativeOption(tempArray.includes(AYC.setAllyName));
+    ALC.setAllyIsAlternativeOption(tempArray.includes(AYC.allyName));
   };
 
   /**

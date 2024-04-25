@@ -34,6 +34,7 @@ const ArmySelectorDropdown = () => {
   const validation = useArmyValidation();
 
   const handleInput = (value) => {
+    resetTheState();
     setFactionProperties(value);
   };
 
@@ -46,8 +47,6 @@ const ArmySelectorDropdown = () => {
     const specials = AC.fetchedFactions.find((f) => f.factionName === SPECIAL);
     const allSubFactions = [...factionObj.subFactions.map((sF) => sF.name)];
     const allFactionUnits = captureAllFactionUnits(factionObj.subFactions, specials.subFactions);
-
-    resetTheState();
 
     AC.setSubFactionDTOs(factionObj.subFactions);
     AC.setSelectedFactionName(factionObj.factionName);
@@ -112,6 +111,7 @@ const ArmySelectorDropdown = () => {
     ALC.setArmyHasAlternativeLists(false);
     ALC.setAltArmyListSelectionComplete(false);
     SFC.setHasAdditionalSubFaction(false);
+    AYC.setAllyName(NO_ALLY);
 
     VC.setListValidationResults({
       ...VC.listValidationResults,
