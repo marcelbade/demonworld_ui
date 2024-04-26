@@ -35,11 +35,11 @@ const ItemShopTree = () => {
 
   /**
    * Function tests wether all items of one type are blocked.
-   * If so, the treeItem node is shown as disabled.
+   * If so, the branch (item category) is shown as disabled (greyed out).
    * @param {item DTO} dto
    * @returns true, if the node must be disabled.
    */
-  const testForEmptyItemType = (dto) => {
+  const testForEmptyItemCategory = (dto) => {
     const numberOfItems = dto.items.length;
     let numberOfBlockedItems = 0;
 
@@ -97,7 +97,7 @@ const ItemShopTree = () => {
             label={ITEM_CATEGORY_NAME_MAPPING[dto.typeName]}
             key={i}
             onClick={() => controller.getNodeId([`${i}`])}
-            disabled={testForEmptyItemType(dto)}
+            disabled={testForEmptyItemCategory(dto)}
           >
             {dto.items.map((item, i) => {
               const result = isItemBlocked(IC.unitSelectedForShop, item);
