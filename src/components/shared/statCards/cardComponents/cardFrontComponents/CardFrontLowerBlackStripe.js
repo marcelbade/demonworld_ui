@@ -6,7 +6,7 @@ import { useTheme } from "@emotion/react";
 // components & functions
 import { StateCardContext } from "../../../../../contexts/statCardContext";
 import { CARD_PREVIEW } from "../../../../../constants/textsAndMessages";
-import { setUnitStat } from "../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/StatChangesLogic";
+import { setUnitStat } from "../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/unitStatChangesLogic";
 // constants
 import { FEAR, MORAL1, MORAL2 } from "../../../../../constants/stats";
 

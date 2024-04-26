@@ -5,7 +5,7 @@ import { Grid, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components & functions
 import { StateCardContext } from "../../../../../../contexts/statCardContext";
-import { setUnitStat } from "../../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/StatChangesLogic";
+import { setUnitStat } from "../../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/unitStatChangesLogic";
 //constants
 import { INITIATIVE } from "../../../../../../constants/stats";  
 import { CARD_PREVIEW } from "../../../../../../constants/textsAndMessages";

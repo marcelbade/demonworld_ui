@@ -6,7 +6,7 @@ import { useTheme } from "@emotion/react";
 // functions and components
 import { StateCardContext } from "../../../../../contexts/statCardContext";
 import { CARD_PREVIEW } from "../../../../../constants/textsAndMessages";
-import { setUnitStat } from "../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/StatChangesLogic";
+import { setUnitStat } from "../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/unitStatChangesLogic";
 // constants
 import { CHARGE, MOVE, SKIRMISH } from "../../../../../constants/stats";
 

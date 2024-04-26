@@ -3,7 +3,7 @@ import React, { Fragment } from "react";
 // Material UI
 import { Typography } from "@mui/material";
 // components & functions
-import { setUnitStat } from "../../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/StatChangesLogic";
+import { setUnitStat } from "../../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/unitStatChangesLogic";
 import CustomIcon from "../../../CustomIcon";
 
 const StatCardIcon = (props) => {
