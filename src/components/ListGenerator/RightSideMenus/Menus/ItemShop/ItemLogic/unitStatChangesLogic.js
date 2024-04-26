@@ -9,7 +9,7 @@
 const mapUnitStatToItemProperty = (unitStat) => {
   unitStat = unitStat.charAt(0).toUpperCase() + unitStat.slice(1);
   return `alters${unitStat}`;
-};
+}; 
 
 /**
  * Function calculates the stats for a unit's first weapon.
