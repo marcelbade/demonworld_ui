@@ -25,11 +25,23 @@ const ItemShopTree = () => {
   const equipmentLimits = useUnitEqipmentLimits();
 
   const [filteredItemGroups, setFilteredItemGroups] = useState([]);
+  const [disabledCategories, setDisabledCategories] = useState([]);
 
-  // When the selected unit changes, recalculate which item(groups) are filtered out.
+  /**
+   * Whenever the item shop is opened for a new unit, this resets the state. This involves two stweps:
+   * 1. filter out those item categories that the unit can never be equipped with, e.g.: a hero
+   * can never get a banner.
+   * 2. calculate the number of remaining categories and create an array of Boolean flags of the same size,
+   * so that every flag correspond to one category. This array is the used to initialize the disabledCategories state
+   * which controls the display of the branches.
+   */
   useEffect(() => {
     if (!isObjectEmtpy(IC.unitSelectedForShop)) {
-      setFilteredItemGroups(filter.filterItemTypesForUnit(IC.unitSelectedForShop, IC.fetchedItems.factionItems));
+      const tempArray = filter.filterItemTypesForUnit(IC.unitSelectedForShop, IC.fetchedItems.factionItems);
+
+      setFilteredItemGroups(tempArray);
+      const numberOfCategories = tempArray.length;
+      setDisabledCategories(Array(numberOfCategories).fill(false));
     }
   }, [IC.unitSelectedForShop]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -39,7 +51,9 @@ const ItemShopTree = () => {
    * @param {item DTO} dto
    * @returns true, if the node must be disabled.
    */
-  const testForEmptyItemCategory = (dto) => {
+  const testForEmptyItemCategory = (dto, i) => {
+    let tempArray = [...disabledCategories];
+
     const numberOfItems = dto.items.length;
     let numberOfBlockedItems = 0;
 
@@ -52,7 +66,13 @@ const ItemShopTree = () => {
       }
     });
 
-    return numberOfBlockedItems >= numberOfItems;
+    // return numberOfBlockedItems >= numberOfItems;
+
+    tempArray[i] = numberOfBlockedItems >= numberOfItems;
+
+    console.log("tempArray[i] ", tempArray[i]);
+
+    setDisabledCategories(tempArray);
   };
 
   /**
@@ -97,23 +117,28 @@ const ItemShopTree = () => {
             label={ITEM_CATEGORY_NAME_MAPPING[dto.typeName]}
             key={i}
             onClick={() => controller.getNodeId([`${i}`])}
-            disabled={testForEmptyItemCategory(dto)}
+            disabled={disabledCategories[i]}
           >
-            {dto.items.map((item, i) => {
+            {dto.items.map((item, j) => {
               const result = isItemBlocked(IC.unitSelectedForShop, item);
 
               return result.isBlocked ? (
                 <InvalidTreeItemNode
-                  key={i} //
+                  key={j} //
                   item={item}
                   message={result.message}
                 />
               ) : (
                 <Grid
-                  key={i} //
+                  key={j} //
                   container
                 >
-                  <TreeItemNode item={item} />
+                  <TreeItemNode
+                    item={item} //
+                    categoryNumber={i}
+                    categoryObj={dto}
+                    testForEmptyItemCategory={testForEmptyItemCategory}
+                  />
                 </Grid>
               );
             })}

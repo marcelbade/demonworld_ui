@@ -92,6 +92,7 @@ const TreeItemNode = (props) => {
                 addItemToCentralList(props.item);
                 limiter.toggleUnitsItemTypeFlags(IC.unitSelectedForShop, props.item, true);
                 testForSpecialItems(props.item);
+                props.testForEmptyItemCategory(props.categoryObj, props.categoryNumber);
                 e.stopPropagation();
               }}
             >
