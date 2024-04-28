@@ -279,7 +279,7 @@ export const ELVES = {
     TREANTS_CENTAUR: "Die Armee kann nur Baumherren oder Zentauren Einheiten enthalten.",
     THANARIEL_COVEN_MESSAGE:
       "Eine zweite und weitere Einheiten desselben Kriegerbundes können nur aufgestellt werden, wenn auch der Anführer des betreffenden Kriegerbundes anwesend ist.",
-    MASTERS_MESSAGE: "Ein Meister kann nur aufgestellt werden, wenn auch ihre Schule auf dem Schlachtfeld anwesend ist.",
+    MASTERS_MESSAGE: "Ein Meister kann nur aufgestellt werden, wenn zuerst dessen Schule ausgewählt wurde.",
     SCHOOLS_MESSAGE: "Jede Schule der Orea Vanar kann nur einmal aufgestellt werden.",
     OLD_HERO_MESSAGE:
       "Du darfst höchstens einen alten Helden pro aufgestellten 5 Einheiten der Thanaril (keine Kriegerbünde) und/oder der Ilah Ri aufstellen.",
