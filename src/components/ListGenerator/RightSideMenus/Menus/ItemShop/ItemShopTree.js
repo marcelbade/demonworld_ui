@@ -66,11 +66,7 @@ const ItemShopTree = () => {
       }
     });
 
-    // return numberOfBlockedItems >= numberOfItems;
-
     tempArray[i] = numberOfBlockedItems >= numberOfItems;
-
-    console.log("tempArray[i] ", tempArray[i]);
 
     setDisabledCategories(tempArray);
   };
