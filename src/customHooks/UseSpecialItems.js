@@ -11,6 +11,8 @@ const useSpecialItems = () => {
   const SEC = useContext(SelectionContext);
   const AC = useContext(ArmyContext);
 
+  const SPECIAL_ITEMS_LIST = [SPECIAL_ITEMS.BRACELET_OF_TRANSFORMATION];
+
   /**
    * Function implements the fact, that some items have additional effects
    * beyond changing the units stats. The item is tested and if further
@@ -19,46 +21,65 @@ const useSpecialItems = () => {
    * @param {*} selectedItem  item is being added.
    */
   const testForSpecialItems = (selectedUnit, selectedItem) => {
-    let result = [];
     const name = selectedItem.itemName;
     switch (name) {
       case SPECIAL_ITEMS.BRACELET_OF_TRANSFORMATION:
-        result = braceletOfTransformationLogic(selectedUnit);
+        braceletOfTransformationLogic(selectedUnit);
 
         break;
       default:
     }
-    return result;
+  };
+
+  /**
+   * Function finds the intersection of equipment array and the SPECIAL_ITEMS_LIST, i.e.,
+   * items that are special items and equipped by the selected unit.
+   * It then selects the correct logic to remove the item.
+   * @param {*} selectedUnit
+   */
+  const testSpecialItemRemoval = (selectedUnit) => {
+    selectedUnit.equipment.forEach((e) => {
+      const name = e.itemName;
+
+      switch (name) {
+        case SPECIAL_ITEMS.BRACELET_OF_TRANSFORMATION:
+          removeBraceletOfTransformation(selectedUnit);
+          break;
+        default:
+      }
+    });
   };
 
   /**
    * The item "Bracelet Of Transformation / "Reif der Verwandlung" doesn't
-   * just change the units stats, but replaces them completely with a new unitCard when
-   * used. Function implements this rule by adding an additional unit card to the army
-   * list and making it and the selected unit part of a new multiStat unit.
+   * just change the units stats, but turns the unit into a multi state unit
+   * by adding a new unitCard whe used (the monster the hero transforms into).
+   * This function therefore implements the bracelet's rules
+   * by turning the selected unit into a multi state unit.
+   *
+   * PLEASE NOTE: The cards for the caroussel view that allow the user to switch between
+   * the different stat cards of the multi state unit uses are taken from the listOfAllFactionUnits,
+   * not the selected units (since selectedUnits only contains the units clicked on by the user)!
+   * @param {*} selectedUnit
    */
   const braceletOfTransformationLogic = (selectedUnit) => {
-    let monsterCard;
+    let monsterCard = {};
 
-    // get the two special unit cards and add the correct one to the list
+    // find the correct card for the monster. There are two depending on the size of the hero.
     const units = AC.listOfAllFactionUnits.filter((u) => u.subFaction === SPECIAL);
+    const cardName = selectedUnit.unitSize === 1 ? "Kleines Ungeheuer" : "Ungeheuer";
+    const foundUnit = units.find((u) => u.unitName === cardName);
 
-    // select and set the correct card
-    if (selectedUnit.unitSize === 1) {
-      monsterCard = units.find((u) => u.unitName === "Kleines Ungeheuer");
-    } else if (selectedUnit.unitSize === 2) {
-      monsterCard = units.find((u) => u.unitName === "Ungeheuer");
-    }
+    monsterCard = foundUnit;
 
     monsterCard.faction = selectedUnit.faction;
-
     monsterCard.belongsToUnit = selectedUnit.unitName;
     monsterCard.multiCardName = monsterCard.unitName;
-    monsterCard.isMultiStateUnit = 1;
+    monsterCard.isMultiStateUnit = true;
 
     // the selected unit is NOT already a multi state unit
     if (!selectedUnit.isMultiStateUnit) {
-      selectedUnit.isMultiStateUnit = 1;
+      selectedUnit.isMultiStateUnit = true;
       selectedUnit.multiStateOrderNumber = 1;
       monsterCard.multiStateOrderNumber = 2;
       selectedUnit.belongsToUnit = selectedUnit.unitName;
@@ -72,15 +93,46 @@ const useSpecialItems = () => {
       monsterCard.multiStateOrderNumber = ++maxOrderNumber;
     }
 
-    // add the card
-    let tempArray = [...SEC.selectedUnits];
-    tempArray.push(monsterCard);
+    const tempArray = AC.listOfAllFactionUnits;
+    const position = tempArray.findIndex((u) => u.unitName === selectedUnit.unitName);
+    tempArray[position] = selectedUnit;
 
-    return tempArray;
+    AC.setListOfAllFactionUnits(tempArray);
+  };
+
+  /**
+   * Function implements the logic to remove the bracelet from the unit.
+   */
+  const removeBraceletOfTransformation = (selectedUnit) => {
+    let tempArray = AC.listOfAllFactionUnits;
+
+    const cardName = selectedUnit.unitSize === 1 ? "Kleines Ungeheuer" : "Ungeheuer";
+    const monsterCard = tempArray.find((e) => e.unitName === cardName);
+
+    // if the selected unit was not already a multi state unit, reset its properties.
+    if (monsterCard.multiStateOrderNumber === 2) {
+      selectedUnit.multiCardName = "";
+      selectedUnit.isMultiStateUnit = false;
+      selectedUnit.belongsToUnit = "NONE";
+      selectedUnit.multiStateOrderNumber = 0;
+
+      const position = tempArray.findIndex((u) => u.unitName === selectedUnit.unitName);
+      tempArray[position] = selectedUnit;
+    }
+
+    monsterCard.multiCardName = "";
+    monsterCard.isMultiStateUnit = false;
+    monsterCard.belongsToUnit = "NONE";
+    monsterCard.multiStateOrderNumber = 0;
+
+    console.log("tempArray>>>>>", tempArray);
+
+    AC.setListOfAllFactionUnits(tempArray);
   };
 
   return {
     testForSpecialItems: testForSpecialItems, //
+    testSpecialItemRemoval: testSpecialItemRemoval,
   };
 };
 

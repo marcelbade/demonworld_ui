@@ -10,12 +10,15 @@ import { SelectionContext } from "../../../../../../../contexts/selectionContext
 // custom hooks
 import useArmyValidation from "../../../../../../../customHooks/UseArmyValidation";
 import useUnitEquipmentLimits from "../../../../../../../customHooks/useUnitEqipmentLimits";
+import useSpecialItems from "../../../../../../../customHooks/UseSpecialItems";
+import { ConstructionOutlined } from "@mui/icons-material";
 
 const EquipmentList = (props) => {
   const IC = useContext(ItemContext);
   const SEC = useContext(SelectionContext);
   const validation = useArmyValidation();
   const limiter = useUnitEquipmentLimits();
+  const specials = useSpecialItems();
 
   /**
    * Function removes an item from a unit's equipment array, and revalidates the list.
@@ -40,6 +43,10 @@ const EquipmentList = (props) => {
     let temp = [...IC.allEquippedItems];
     temp = temp.filter((i) => !i === item.itemName);
     IC.setAllEquippedItems(temp);
+  };
+
+  const removeSpecialItem = (selectedUnit) => {
+    specials.testSpecialItemRemoval(selectedUnit);
   };
 
   /**
@@ -70,6 +77,7 @@ const EquipmentList = (props) => {
                 <IconButton
                   sx={{ padding: "0", marginRight: "1.5em" }}
                   onClick={() => {
+                    removeSpecialItem(props.unit);
                     removeItem(props.identifier, i);
                     removeItemFromCentralList(e);
                     limiter.toggleUnitsItemTypeFlags(props.unit, e, false);
