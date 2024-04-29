@@ -51,7 +51,7 @@ const TreeItemNode = (props) => {
    * units are displayed correctly.
    */
   const testForSpecialItems = (item) => {
-    special.testForSpecialItems(IC.unitSelectedForShop, item);
+    special.testForSpecialItemEffects(IC.unitSelectedForShop, item);
     SEC.setSelectedUnits([...SEC.selectedUnits]);
   };
 

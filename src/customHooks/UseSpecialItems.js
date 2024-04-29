@@ -11,8 +11,6 @@ const useSpecialItems = () => {
   const SEC = useContext(SelectionContext);
   const AC = useContext(ArmyContext);
 
-  const SPECIAL_ITEMS_LIST = [SPECIAL_ITEMS.BRACELET_OF_TRANSFORMATION];
-
   /**
    * Function implements the fact, that some items have additional effects
    * beyond changing the units stats. The item is tested and if further
@@ -20,7 +18,7 @@ const useSpecialItems = () => {
    * @param {*} selectedUnit  the unit for which the item shop was opened.
    * @param {*} selectedItem  item is being added.
    */
-  const testForSpecialItems = (selectedUnit, selectedItem) => {
+  const testForSpecialItemEffects = (selectedUnit, selectedItem) => {
     const name = selectedItem.itemName;
     switch (name) {
       case SPECIAL_ITEMS.BRACELET_OF_TRANSFORMATION:
@@ -37,7 +35,7 @@ const useSpecialItems = () => {
    * It then selects the correct logic to remove the item.
    * @param {*} selectedUnit
    */
-  const testSpecialItemRemoval = (selectedUnit) => {
+  const testSpecialItemEffectRemoval = (selectedUnit) => {
     selectedUnit.equipment.forEach((e) => {
       const name = e.itemName;
 
@@ -125,14 +123,12 @@ const useSpecialItems = () => {
     monsterCard.belongsToUnit = "NONE";
     monsterCard.multiStateOrderNumber = 0;
 
-    console.log("tempArray>>>>>", tempArray);
-
     AC.setListOfAllFactionUnits(tempArray);
   };
 
   return {
-    testForSpecialItems: testForSpecialItems, //
-    testSpecialItemRemoval: testSpecialItemRemoval,
+    testForSpecialItemEffects: testForSpecialItemEffects, //
+    testSpecialItemEffectRemoval: testSpecialItemEffectRemoval,
   };
 };
 

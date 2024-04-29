@@ -11,7 +11,6 @@ import { SelectionContext } from "../../../../../../../contexts/selectionContext
 import useArmyValidation from "../../../../../../../customHooks/UseArmyValidation";
 import useUnitEquipmentLimits from "../../../../../../../customHooks/useUnitEqipmentLimits";
 import useSpecialItems from "../../../../../../../customHooks/UseSpecialItems";
-import { ConstructionOutlined } from "@mui/icons-material";
 
 const EquipmentList = (props) => {
   const IC = useContext(ItemContext);
@@ -46,7 +45,7 @@ const EquipmentList = (props) => {
   };
 
   const removeSpecialItem = (selectedUnit) => {
-    specials.testSpecialItemRemoval(selectedUnit);
+    specials.testSpecialItemEffectRemoval(selectedUnit);
   };
 
   /**
