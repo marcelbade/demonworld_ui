@@ -9,7 +9,7 @@ import { SelectionContext } from "../../../../../contexts/selectionContext";
 import useArmyValidation from "../../../../../customHooks/UseArmyValidation";
 import { NO_ALLY } from "../../../../../constants/factions";
 import { AllyContext } from "../../../../../contexts/allyContext";
-import { isSubFactionAlternativeAndSelective } from "../../../../../util/utilityFunctions";
+import { isSubFactionAlternativeAndSelected } from "../../../../../util/utilityFunctions";
 import { Grid } from "@mui/material";
 
 const ArmyListBoxCenter = () => {
@@ -33,7 +33,7 @@ const ArmyListBoxCenter = () => {
     <Grid container>
       <List>
         {AC.subFactionDTOs
-          .filter((dto) => isSubFactionAlternativeAndSelective(dto))
+          .filter((dto) => isSubFactionAlternativeAndSelected(dto))
           .map((dto) => validation.returnValidationResult("subFaction", dto.name))
           .map((obj, i) => (
             <ArmyListSubFactionEntry
