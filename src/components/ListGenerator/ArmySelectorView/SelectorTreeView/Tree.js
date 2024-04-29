@@ -79,7 +79,7 @@ const Tree = (props) => {
             key={i}
             disabled={disabledSubFactions[i]}
             onClick={() => {
-              controller.getNodeId([`${i}`]);
+              controller.treeExpansionController([`${i}`]);
               testForEmptySubFaction(props.subFactionDtoList, disabledSubFactions);
             }}
           >
