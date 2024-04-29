@@ -71,8 +71,6 @@ const useArmyValidation = () => {
       alliedUnitsBlockedbyRules: result.alliedUnitsBlockedbyRules,
     };
 
-    console.log("collectValidatioResults", tempArray);
-
     VC.setListValidationResults(tempArray);
     removeInvalidUnits(currentList, tempArray);
   };
