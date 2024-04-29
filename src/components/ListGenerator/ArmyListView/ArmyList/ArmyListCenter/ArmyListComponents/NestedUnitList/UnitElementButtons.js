@@ -4,12 +4,13 @@ import React, { useContext } from "react";
 import { List } from "@mui/material";
 import { ListItemButton } from "@mui/material";
 // components and functions
-import { BUTTON_TEXTS } from "../../../../../../../constants/textsAndMessages";
+import { BUTTON_TEXTS, UNIT_TYPES } from "../../../../../../../constants/textsAndMessages";
 // context
 import { SecondSubFactionContext } from "../../../../../../../contexts/secondSubFactionContext";
 import { RightMenuContext } from "../../../../../../../contexts/rightMenuContext";
 import { ItemContext } from "../../../../../../../contexts/itemContext";
 import { TournamentRulesContext } from "../../../../../../../contexts/tournamentRulesContext";
+import { SUMMONED } from "../../../../../../../constants/unitTypes";
 
 const UnitElementButtons = (props) => {
   const SFC = useContext(SecondSubFactionContext);
@@ -108,7 +109,7 @@ const UnitElementButtons = (props) => {
   // values for buttons
   const buttons = [
     {
-      show: true,
+      show: props.unit.unitType !== SUMMONED,
       action: () => {
         IC.setUnitSelectedForShop(props.unit);
         rightMenuController(props.unit, ITEMS);
@@ -123,7 +124,10 @@ const UnitElementButtons = (props) => {
       text: BUTTON_TEXTS.PREVIEW_CARD,
     },
     {
-      show: SFC.hasAdditionalSubFaction && !SFC.excemptSubFactions.includes(props.subFaction),
+      show:
+        SFC.hasAdditionalSubFaction && //
+        !SFC.excemptSubFactions.includes(props.subFaction) &&
+        props.unit.unitType !== SUMMONED,
       action: () => {
         IC.setUnitSelectedForShop(props.unit);
         rightMenuController(props.unit, SECOND_SUB_FACTION);
