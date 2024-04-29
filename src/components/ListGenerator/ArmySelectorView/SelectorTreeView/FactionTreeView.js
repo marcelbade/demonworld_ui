@@ -22,7 +22,7 @@ const FactionTreeView = () => {
    * the flag altArmyListSelectionComplete is returned, otherwise it defaults to true.
    * @returns true, if selection is complete.
    */
-  const selectionComplete = () => {
+  const isSelectionComplete = () => {
     return ALC.armyHasAlternativeLists ? ALC.altArmyListSelectionComplete : true;
   };
 
@@ -39,7 +39,7 @@ const FactionTreeView = () => {
     return AYC.allyName !== NO_ALLY;
   };
 
-  return selectionComplete() ? (
+  return isSelectionComplete() ? (
     <>
       <Tree subFactionDtoList={AC.subFactionDTOs} />
 
