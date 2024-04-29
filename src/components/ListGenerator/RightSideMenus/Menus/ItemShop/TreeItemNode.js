@@ -6,18 +6,16 @@ import { ItemContext } from "../../../../../contexts/itemContext";
 import { SelectionContext } from "../../../../../contexts/selectionContext";
 import useUnitEqipmentLimits from "../../../../../customHooks/useUnitEqipmentLimits";
 import CustomIcon from "../../../../shared/statCards/CustomIcon";
+import useSpecialItems from "../../../../../customHooks/UseSpecialItems";
 // icons
 import SpellBookIcon from "../../../../../assets/icons/spellbook-black.png";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 // constants
 import { TOOLTIPS } from "../../../../../constants/textsAndMessages";
-import useSpecialItems from "../../../../../customHooks/UseSpecialItems";
-import { ArmyContext } from "../../../../../contexts/armyContext";
 
 const TreeItemNode = (props) => {
   const IC = useContext(ItemContext);
   const SEC = useContext(SelectionContext);
-  const AC = useContext(ArmyContext);
 
   const limiter = useUnitEqipmentLimits();
   const special = useSpecialItems();
@@ -48,14 +46,13 @@ const TreeItemNode = (props) => {
   };
 
   /**
-   * Function causes the list of all selected units to change (w/o actually changing it). This is necessary to correctly calculate the list's point cost whenever an item is added. Without this, the point cost of the item is only added whenever a unit is added or removed from the list, not when the item is added ore removed.
+   * Function checks if a special item was selected. Then, the selected unit property is reset.
+   * This is done regardless of whether the test was positive or not and ensures that the selected
+   * units are displayed correctly.
    */
   const testForSpecialItems = (item) => {
-    let result = special.testForSpecialItems(IC.unitSelectedForShop, item);
-    let tempArray = result.length === 0 ? [...SEC.selectedUnits] : result;
-
-    SEC.setSelectedUnits(tempArray);
-    AC.setListOfAllFactionUnits([...AC.listOfAllFactionUnits, IC.unitSelectedForShop]);
+    special.testForSpecialItems(IC.unitSelectedForShop, item);
+    SEC.setSelectedUnits([...SEC.selectedUnits]);
   };
 
   return (
