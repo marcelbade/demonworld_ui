@@ -1,8 +1,16 @@
 import React, { useContext, useEffect } from "react";
 // components and functions
 import SelectionInput from "../../shared/selectionInput";
+import useUnitEnricher from "../../../customHooks/UseUnitEnricher";
 import { ArmyContext } from "../../../contexts/armyContext";
 import { ItemContext } from "../../../contexts/itemContext";
+import useArmyValidation from "../../../customHooks/UseArmyValidation";
+// context
+import { RightMenuContext } from "../../../contexts/rightMenuContext";
+import { SelectionContext } from "../../../contexts/selectionContext";
+import { AlternativeListContext } from "../../../contexts/alternativeListContext";
+import { AllyContext } from "../../../contexts/allyContext";
+import { SecondSubFactionContext } from "../../../contexts/secondSubFactionContext";
 // constants
 import {
   ALL_FACTIONS_ARRAY,
@@ -13,18 +21,10 @@ import {
   SPECIAL,
 } from "../../../constants/factions";
 import { INPUT_TEXTS } from "../../../constants/textsAndMessages";
-import useArmyValidation from "../../../customHooks/UseArmyValidation";
-import { ValidationContext } from "../../../contexts/validationContext";
-import { RightMenuContext } from "../../../contexts/rightMenuContext";
-import { SelectionContext } from "../../../contexts/selectionContext";
-import { AlternativeListContext } from "../../../contexts/alternativeListContext";
-import { AllyContext } from "../../../contexts/allyContext";
-import { SecondSubFactionContext } from "../../../contexts/secondSubFactionContext";
 
 const ArmySelectorDropdown = () => {
   const AC = useContext(ArmyContext);
   const IC = useContext(ItemContext);
-  const VC = useContext(ValidationContext);
   const RC = useContext(RightMenuContext);
   const SEC = useContext(SelectionContext);
   const ALC = useContext(AlternativeListContext);
@@ -32,6 +32,11 @@ const ArmySelectorDropdown = () => {
   const SFC = useContext(SecondSubFactionContext);
 
   const validation = useArmyValidation();
+  const enricher = useUnitEnricher();
+
+  useEffect(() => {
+    validation.validateList([], SEC.maxPointsAllowance);
+  }, [AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleInput = (value) => {
     resetTheState();
@@ -93,7 +98,7 @@ const ArmySelectorDropdown = () => {
 
     tempArray.forEach((sF) => {
       sF.units.forEach((u) => {
-        result.push(u);
+        result.push(enricher.addAll(u));
       });
     });
 
@@ -113,25 +118,24 @@ const ArmySelectorDropdown = () => {
     SFC.setHasAdditionalSubFaction(false);
     AYC.setAllyName(NO_ALLY);
 
-    VC.setListValidationResults({
-      ...VC.listValidationResults,
-      unitsBlockedbyRules: [],
-      subFactionBelowMinimum: [],
-      commanderIsPresent: false,
-      removeUnitsNoLongerValid: [],
-      secondSubFactionMissing: [],
-      alliedUnitsBlockedbyRules: [],
-    });
-
     RC.closeCardDisplay();
     RC.closeItemShop();
     RC.closeSecondSubFactionMenu();
   };
 
+  /**
+   * Function creates the list of options displayed im the drop down list whenever the
+   * selected value is cleared.
+   * @returns  a filtered array of faction names.
+   */
   const clearFactionName = () => {
     return currentFactionList();
   };
 
+  /**
+   * Function creates the list of factions that is displayed in the drop down list.
+   * @returns an array of factionnames
+   */
   const setFactionList = () => {
     const resultingList =
       AC.selectedFactionName !== NONE //
@@ -141,13 +145,13 @@ const ArmySelectorDropdown = () => {
     return resultingList;
   };
 
+  /**
+   * Function returns all factions in the game minus the currently selected one.
+   * @returns a filtered array of faction names.
+   */
   const currentFactionList = () => {
     return ALL_FACTIONS_ARRAY.filter((f) => f !== AC.selectedFactionName);
   };
-
-  useEffect(() => {
-    validation.validateList([], SEC.maxPointsAllowance);
-  }, [AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <SelectionInput //
