@@ -55,7 +55,8 @@ const useArmyValidation = () => {
   };
 
   /**
-   * Function adds all invalid units and subfactions to the block list.
+   * Function adds all invalid units and subfactions to the block list. This result is stored twice.
+   * Locally, for immediate usasge and in the global state field validationResults.
    * @param {[unitCard]} currentList
    * @param {[unitCard]} result
    */
@@ -69,6 +70,8 @@ const useArmyValidation = () => {
       secondSubFactionMissing: result.secondSubFactionMissing,
       alliedUnitsBlockedbyRules: result.alliedUnitsBlockedbyRules,
     };
+
+    console.log("collectValidatioResults", tempArray);
 
     VC.setListValidationResults(tempArray);
     removeInvalidUnits(currentList, tempArray);
@@ -96,6 +99,7 @@ const useArmyValidation = () => {
    * @returns a custom object with the name of the unit or subfaction,
    *          a flag to mark it as unvalid and an error message.
    */
+  // TODO: turn the tree parameter into an obkect called data with  {type, payload, isFaction}
   const returnValidationResult = (type, payload, factionOrAlly) => {
     switch (type) {
       case "subFaction":
