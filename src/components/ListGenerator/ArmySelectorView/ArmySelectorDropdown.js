@@ -32,7 +32,7 @@ const ArmySelectorDropdown = () => {
   const SFC = useContext(SecondSubFactionContext);
 
   const validation = useArmyValidation();
-  const enricher = useUnitEnricher();
+  const enrichUnit = useUnitEnricher();
 
   useEffect(() => {
     validation.validateList([], SEC.maxPointsAllowance);
@@ -98,7 +98,7 @@ const ArmySelectorDropdown = () => {
 
     tempArray.forEach((sF) => {
       sF.units.forEach((u) => {
-        result.push(enricher.addAll(u));
+        result.push(enrichUnit(u));
       });
     });
 
