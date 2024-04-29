@@ -6,12 +6,10 @@ import { ArmyContext } from "../contexts/armyContext";
 // constants
 import { SPECIAL_ITEMS } from "../constants/textsAndMessages";
 import { SPECIAL } from "../constants/factions";
-import useUnitEnricher from "./UseUnitEnricher";
 
 const useSpecialItems = () => {
   const SEC = useContext(SelectionContext);
   const AC = useContext(ArmyContext);
-  const enrichUnit = useUnitEnricher();
 
   /**
    * Function implements the fact, that some items have additional effects
@@ -76,7 +74,7 @@ const useSpecialItems = () => {
 
     // add the card
     let tempArray = [...SEC.selectedUnits];
-    tempArray.push(enrichUnit(monsterCard));
+    tempArray.push(monsterCard);
 
     return tempArray;
   };
