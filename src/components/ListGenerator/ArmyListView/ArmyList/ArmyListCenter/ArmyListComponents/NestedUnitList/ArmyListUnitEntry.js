@@ -11,7 +11,7 @@ import { PUSH_MESSAGE_TYPES } from "../../../../../../../constants/textsAndMessa
 
 const ArmyListUnitEntry = (props) => {
   const VC = useContext(ValidationContext);
-  const theme = useTheme;
+  const theme = useTheme();
 
   /**
    * Function validates that the second subFaction has been selected. Is only called for those armies that require it.
@@ -44,7 +44,7 @@ const ArmyListUnitEntry = (props) => {
         key={props.unit.secondSubFaction}
         primary={
           testForSecondSubFaction.isValid ? (
-            <span>{props.unit.unitName}</span>
+            <Typography variant="button">{props.unit.unitName}</Typography>
           ) : (
             <Grid container direction="row" alignItems="center">
               <Typography
