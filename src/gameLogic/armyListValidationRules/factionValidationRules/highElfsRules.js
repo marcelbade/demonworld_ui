@@ -237,7 +237,7 @@ const oreaVanarMapping = [
 
 /**
  * Function calculates the number of units of the Orea Vanar.
- * Regardless of the point cost, every school (unit) of the Orea Vanar can only be picked once.
+ * In addition to the point cost, every school (unit) of the Orea Vanar can only be picked once.
  * The Masters (heroes) can only be picked if the corresponding school has already been picked.
  * @param {[unitCard]} selectedUnits
  * @returns array of objects containing a blocked unit and an error message.
@@ -249,7 +249,7 @@ const OreaVanarRules = (selectedUnits) => {
 
   oreaVanarMapping.forEach((ovm) => {
     if (!selectedUnitNames.includes(ovm.school)) {
-      result.push({ unitBlockedbyRules: ovm.master, message: ELVES.ERRORS.MASTERS_MESSAGE });
+      result.push({ unitBlockedbyRules: ovm.master, message: ELVES.ERRORS.MASTERS_MESSAGE(ovm.school) });
     } else {
       result.push({ unitBlockedbyRules: ovm.school, message: ELVES.ERRORS.SCHOOLS_MESSAGE });
     }
