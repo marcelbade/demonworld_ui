@@ -12,8 +12,7 @@ import LightSwitch from "../../../../shared/LightSwitch";
 import ChoosePdfType from "./ChoosePdfType";
 import calculateScoutingFactor from "../../../../../gameLogic/scoutFactorCalculator/scoutingFactorCalculator";
 import useSubFactionStats from "../../../../../customHooks/UseSubFactionStats";
-import useUnitEnricher from "../../../../../customHooks/UseUnitEnricher";
-// constants
+ // constants
 import { OPTIONS } from "../../../../../constants/textsAndMessages";
 
 const OptionButtons = () => {
@@ -23,8 +22,7 @@ const OptionButtons = () => {
 
   const history = useHistory();
   const stats = useSubFactionStats();
-  const enrichUnit = useUnitEnricher();
-
+ 
   const [showPdfVariantButtons, setShowPdfVariantButtons] = useState(false);
 
   /**
@@ -105,7 +103,7 @@ const OptionButtons = () => {
             subFactionUnit.multiStateOrderNumber > 1
         );
 
-        cards.forEach((c) => selectedUnits.push(enrichUnit(c)));
+        cards.forEach((c) => selectedUnits.push(c));
       }
     });
 
