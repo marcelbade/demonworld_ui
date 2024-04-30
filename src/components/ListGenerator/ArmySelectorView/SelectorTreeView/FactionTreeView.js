@@ -8,8 +8,8 @@ import { AllyContext } from "../../../../contexts/allyContext";
 import Tree from "./Tree.js";
 // constants
 import { NO_ALLY } from "../../../../constants/factions";
+import { INPUT_TEXTS } from "../../../../constants/textsAndMessages.js";
 
- 
 // only show the army selection tree if the army and, if it exists, the alternative list has been selected.
 const FactionTreeView = () => {
   const AC = useContext(ArmyContext);
@@ -50,7 +50,7 @@ const FactionTreeView = () => {
             align="left"
             sx={{ marginLeft: "1em", paddingTop: "1em", marginBottom: "1em", borderBottom: "black 1px solid", width: "70%" }}
           >
-            Alliierte: {AYC.allyName}
+            {INPUT_TEXTS.ALLY} {AYC.allyName}
           </Typography>
           <Tree subFactionDtoList={AYC.allySubFactionDTOs} />
         </>

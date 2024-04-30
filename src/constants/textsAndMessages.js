@@ -87,6 +87,7 @@ export const GENERAL_ERRRORS = {
 
 export const INPUT_TEXTS = {
   ARMY_NAME: "Name der Liste",
+  ALLY: "Verbündeter: ",
   PLAYER_NAME: "Spielername",
   TEAM_NAME: "Teamname",
   SELECT_FACTION: "Wähle Eine Fraktion:",
