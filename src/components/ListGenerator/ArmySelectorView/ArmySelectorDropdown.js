@@ -60,7 +60,7 @@ const ArmySelectorDropdown = () => {
 
     if (factionObj.ally !== NO_ALLY) {
       const allAllySubFactions = [...factionObj.allySubFactions.map((sF) => sF.name)];
-      const allAllyUnits = [...factionObj.allySubFactions.map((sF) => sF.name)];
+      const allAllyUnits = captureAllFactionUnits(factionObj.allySubFactions, []);
 
       AYC.setAllyName(factionObj.ally);
       AYC.setAllySubFactionDTOs(factionObj.allySubFactions);
@@ -87,9 +87,11 @@ const ArmySelectorDropdown = () => {
   };
 
   /**
-   * Function creates array containing every unit of a faction, plus special units (summons,...)
-   * @param {[subFactionDTO]} subFactionObjects
-   * @returns array of unitCard objects.
+   * Function creates an array containing all units for either the faction or the ally.
+   * For the faction, special units are added that are needed for the special item logic.
+   * No boolean is necessary. For the ally, the specials array is simply empty.
+   * @param {*} subFactionObjects
+   * @returns an array containing every unitCard object for the faction or its ally.
    */
   const captureAllFactionUnits = (subFactionObjects, specials) => {
     let result = [];
