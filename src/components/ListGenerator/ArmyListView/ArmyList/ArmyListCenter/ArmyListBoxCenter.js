@@ -1,16 +1,18 @@
 // React
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 // Material UI
 import List from "@mui/material/List";
+import { Grid } from "@mui/material";
 // components and functions
 import ArmyListSubFactionEntry from "./ArmyListComponents/ArmyListSubFactionEntry";
-import { ArmyContext } from "../../../../../contexts/armyContext";
-import { SelectionContext } from "../../../../../contexts/selectionContext";
-import useArmyValidation from "../../../../../customHooks/UseArmyValidation";
-import { NO_ALLY } from "../../../../../constants/factions";
-import { AllyContext } from "../../../../../contexts/allyContext";
 import { isSubFactionAlternativeAndSelected } from "../../../../../util/utilityFunctions";
-import { Grid } from "@mui/material";
+import useArmyValidation from "../../../../../customHooks/UseArmyValidation";
+// context
+import { ArmyContext } from "../../../../../contexts/armyContext";
+import { AllyContext } from "../../../../../contexts/allyContext";
+import { SelectionContext } from "../../../../../contexts/selectionContext";
+//  constants
+import { NO_ALLY } from "../../../../../constants/factions";
 
 const ArmyListBoxCenter = () => {
   const AC = useContext(ArmyContext);
