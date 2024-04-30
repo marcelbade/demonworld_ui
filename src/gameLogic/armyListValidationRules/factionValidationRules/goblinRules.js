@@ -1,5 +1,6 @@
 import { ORK_CLANS_UNIT_MAPPING } from "../../../constants/factions";
 import { GOBLINS } from "../../../constants/textsAndMessages";
+import { isObjectEmtpy } from "../../../util/utilityFunctions";
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
 
@@ -162,18 +163,21 @@ const singleClanOnly = (selectedUnits, availableAlliedUnits) => {
   let result = [];
 
   const firstFoundClanUnit = selectedUnits.find((u) => u.subFaction === "Clanntruppen");
+  const clanUnitWasFound = !isObjectEmtpy(firstFoundClanUnit);
 
-  for (const key of Object.keys(ORK_CLANS_UNIT_MAPPING)) {
-    if (ORK_CLANS_UNIT_MAPPING[key].includes(firstFoundClanUnit)) {
-      allowedClanUnits = ORK_CLANS_UNIT_MAPPING[key];
+  if (clanUnitWasFound) {
+    for (const key of Object.keys(ORK_CLANS_UNIT_MAPPING)) {
+      if (ORK_CLANS_UNIT_MAPPING[key].includes(firstFoundClanUnit.unitName) && key !== "Clanngett") {
+        allowedClanUnits = [...allowedClanUnits, ...ORK_CLANS_UNIT_MAPPING[key]];
+      }
     }
+
+    availableAlliedUnits.forEach((u) => {
+      if (u.subFaction === "Clanntruppen" && !allowedClanUnits.includes(u.unitName)) {
+        result.push({ unitBlockedbyRules: u.unitName, message: GOBLINS.SUB_FACTION_RULES.SINGLE_CLAN_ONLY });
+      }
+    });
   }
-
-  availableAlliedUnits.forEach((u) => {
-    if (u.subFaction === "Clanntruppen" && !allowedClanUnits.includes(u.unitName)) {
-      result.push({ unitBlockedbyRules: u.unitName, message: GOBLINS.SUB_FACTION_RULES.SINGLE_CLAN_ONLY });
-    }
-  });
 
   return result;
 };
