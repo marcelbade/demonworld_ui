@@ -4,7 +4,7 @@ import React, { useContext } from "react";
 import { List } from "@mui/material";
 import { ListItemButton } from "@mui/material";
 // components and functions
-import { BUTTON_TEXTS, UNIT_TYPES } from "../../../../../../../constants/textsAndMessages";
+import { BUTTON_TEXTS } from "../../../../../../../constants/textsAndMessages";
 // context
 import { SecondSubFactionContext } from "../../../../../../../contexts/secondSubFactionContext";
 import { RightMenuContext } from "../../../../../../../contexts/rightMenuContext";
