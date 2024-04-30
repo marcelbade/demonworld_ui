@@ -203,7 +203,7 @@ const setUnitsForClans = (availableUnits, selectedAlternativeLists) => {
 };
 
 /**
- * Function implements the rule that Orks don't get allies, insted a fixed percentage of points casn be spent on Goblin units as part of the Clanngett troops.
+ * Function implements the rule that Orks don't get allies, instead a fixed percentage of points casn be spent on Goblin units as part of the Clanngett troops.
  * @param {[unitCard]} selectedUnits
  * @param {Int} totalPointsAllowance
  * @param {[unitCard]} availableUnits
