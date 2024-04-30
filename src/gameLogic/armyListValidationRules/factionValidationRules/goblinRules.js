@@ -1,3 +1,4 @@
+import { ORK_CLANS_UNIT_MAPPING } from "../../../constants/factions";
 import { GOBLINS } from "../../../constants/textsAndMessages";
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
@@ -79,6 +80,7 @@ const GoblinRules = {
       validationData.totalPointsAllowance,
       validationData.availableUnits
     );
+
     let hasNoCommander = globalRules.isArmyCommanderPresent(validationData.selectedUnits);
 
     // tournament rules
@@ -107,7 +109,8 @@ const GoblinRules = {
       ? globalRules.noDuplicateUniques(validationData.selectedUnits)
       : [];
 
-    // special faction rules - no special rules exist!
+    let ClanngettTroops = blockClanngett(validationData.listOfAlliedUnits);
+    let singleClanTroops = singleClanOnly(validationData.selectedUnits, validationData.listOfAlliedUnits);
 
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [
@@ -124,8 +127,55 @@ const GoblinRules = {
     // result - is a commander present?
     validationResults.commanderIsPresent = hasNoCommander;
 
+    //  result - ally rules applied.
+    validationResults.alliedUnitsBlockedbyRules = [
+      ...ClanngettTroops, //
+      ...singleClanTroops,
+    ];
+
     return validationResults;
   },
+
+  // special faction rules
+};
+
+/**
+ * Function implements the rule that no Clanngett troops can be allies in a Goblin list.
+ * @param {untiCards} availableAlliedUnits
+ * @returns an array consisting of objects. Every object contains a unit that must
+ * be blocked and an error message to be displayed as a tool tip.
+ */
+const blockClanngett = (availableAlliedUnits) => {
+  let result = [];
+
+  const clanngettUnits = availableAlliedUnits.filter((u) => u.subFaction === "Clanngett");
+
+  clanngettUnits.forEach((u) => {
+    result.push({ unitBlockedbyRules: u.unitName, message: GOBLINS.SUB_FACTION_RULES.NO_CLANNGETT });
+  });
+
+  return result;
+};
+
+const singleClanOnly = (selectedUnits, availableAlliedUnits) => {
+  let allowedClanUnits = [];
+  let result = [];
+
+  const firstFoundClanUnit = selectedUnits.find((u) => u.subFaction === "Clanntruppen");
+
+  for (const key of Object.keys(ORK_CLANS_UNIT_MAPPING)) {
+    if (ORK_CLANS_UNIT_MAPPING[key].includes(firstFoundClanUnit)) {
+      allowedClanUnits = ORK_CLANS_UNIT_MAPPING[key];
+    }
+  }
+
+  availableAlliedUnits.forEach((u) => {
+    if (u.subFaction === "Clanntruppen" && !allowedClanUnits.includes(u.unitName)) {
+      result.push({ unitBlockedbyRules: u.unitName, message: GOBLINS.SUB_FACTION_RULES.SINGLE_CLAN_ONLY });
+    }
+  });
+
+  return result;
 };
 
 export { GoblinRules, rules };

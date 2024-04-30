@@ -314,6 +314,8 @@ export const GOBLINS = {
     GIANTINSECTS: "Deine Armeeliste darf maximal zu 40% aus Rieseninsekten bestehen.",
     INSECTRIDERS: "Deine Armeeliste darf maximal zu 40% aus Insektenreiter bestehen.",
     ORKS: "Deine Armeeliste darf zu maximal zu 20% aus Orks bestehen.",
+    NO_CLANNGETT: "Clanngett-Truppen dürfen nicht als Alliierte gewählt werden.",
+    SINGLE_CLAN_ONLY: "Deine Armeeliste darf nur Clanntruppen eines Clans beinhalten",
   },
   ERRORS: {
     SHAMAN_AND_HEROES: "Deine Armeeliste darf maximal zu 40% aus Schamanen und Helden bestehen.",
