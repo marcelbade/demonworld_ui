@@ -13,13 +13,26 @@ export const DWARVES = "Zwerge";
 export const SOUTHERN_CITY_STATES = "Südliche Stadtstaaten";
 export const SPECIAL = "Special";
 
-
 // SPECIAL INDICATORS
 export const NONE = "NONE";
 export const NO_ALLY = "NO_ALLY";
 
 // ALL FACTIONS
-export const ALL_FACTIONS_ARRAY = [DARKELVES, ELVES, GOBLINS, EMPIRE, ISHTAK, NORWINGER, ORKS, THAIN, UNDEAD, DWARVES, LIZARDKIN, SOUTHERN_CITY_STATES, SPECIAL];
+export const ALL_FACTIONS_ARRAY = [
+  DARKELVES,
+  ELVES,
+  GOBLINS,
+  EMPIRE,
+  ISHTAK,
+  NORWINGER,
+  ORKS,
+  THAIN,
+  UNDEAD,
+  DWARVES,
+  LIZARDKIN,
+  SOUTHERN_CITY_STATES,
+  SPECIAL,
+];
 
 export const ALTERNATIVE_ARMY_SELECTION_TEXT = {
   Imperium: "Wähle eine der Marken",
