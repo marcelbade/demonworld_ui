@@ -9,8 +9,8 @@ import EquipmentList from "./EquipmentList";
 import UnitElementButtons from "./UnitElementButtons";
 import ArmyListUnitEntry from "./ArmyListUnitEntry";
 import useArmyValidation from "../../../../../../../customHooks/UseArmyValidation";
+// context
 import { SelectionContext } from "../../../../../../../contexts/selectionContext";
-
 /**
  * The component creates the nested unit list for a single sub faction.
  * Every entry contains:
