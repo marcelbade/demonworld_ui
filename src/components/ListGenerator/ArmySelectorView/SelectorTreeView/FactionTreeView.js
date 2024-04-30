@@ -41,7 +41,7 @@ const FactionTreeView = () => {
 
   return isSelectionComplete() ? (
     <>
-      <Tree subFactionDtoList={AC.subFactionDTOs} />
+      <Tree subFactionDtoList={AC.subFactionDTOs} isFactionNotAlly={true} />
 
       {displayAlly() ? (
         <>
@@ -52,7 +52,7 @@ const FactionTreeView = () => {
           >
             {INPUT_TEXTS.ALLY} {AYC.allyName}
           </Typography>
-          <Tree subFactionDtoList={AYC.allySubFactionDTOs} />
+          <Tree subFactionDtoList={AYC.allySubFactionDTOs} isFactionNotAlly={false} />
         </>
       ) : null}
     </>

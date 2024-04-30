@@ -51,7 +51,7 @@ const Tree = (props) => {
       const numberOfUnits = subFactionUnits.length;
 
       for (let j = 0; j < numberOfUnits; j++) {
-        const validationResult = validation.returnValidationResult(UNIT, subFactionUnits[j], true);
+        const validationResult = validation.returnValidationResult(UNIT, subFactionUnits[j], props.isFactionNotAlly);
 
         if (!validationResult.valid) {
           blockedSubFactionUnits++;
@@ -88,7 +88,7 @@ const Tree = (props) => {
               // if unit has multiple card (werwolves, changelings,...) show only one
               .filter((u) => u.multiStateOrderNumber < 2)
               // map unitCard to validation object (unit + validation result)
-              .map((u) => validation.returnValidationResult(UNIT, u, true))
+              .map((u) => validation.returnValidationResult(UNIT, u, props.isFactionNotAlly))
               .map((validationObj, j) => {
                 return (
                   <TreeUnitNode
