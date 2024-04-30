@@ -7,8 +7,8 @@ const globalRules = {
    * @param {[unitCard]} selectedUnits array of already selected units.
    * @param {[unitCard]} availableUnits array of all units available for the list.
    * @param {int} armyPointsAllowance Maximum number of points that can be spent.
-   * @returns array consisting of objects. Every object contains a unit that must be blocked and an error message to
-   * be displayed as a tool tip.
+   * @returns an array consisting of objects. Every object contains a unit that must 
+   * be blocked and an error message to be displayed as a tool tip.
    */
   armyMustNotExceedMaxAllowance: (selectedUnits, availableUnits, armyPointsAllowance) => {
     let result = [];
