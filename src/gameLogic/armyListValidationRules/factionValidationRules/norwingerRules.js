@@ -30,7 +30,7 @@ const rules = [
 
   {
     subFaction: "heroes",
-    cardNames: [NORWINGER.SF.HEROES ],
+    cardNames: [NORWINGER.SF.HEROES],
     min: 0.0,
     max: 0.3,
     error: NORWINGER.SUB_FACTION_RULES.HEROES,
@@ -203,7 +203,7 @@ const neanderRuleRemove = (selectedUnits) => {
     selectedUnits
       .filter((u) => u.unitName === NORWINGER.NEANDERS)
       .forEach((u) => {
-        result.push(u);
+        result.push(u.unitName);
       });
   }
 
@@ -247,7 +247,7 @@ const yetiRuleRemove = (selectedUnits) => {
     selectedUnits
       .filter((u) => u.unitName === NORWINGER.GIANT_YETI)
       .forEach((u) => {
-        result.push(u);
+        result.push(u.unitName);
       });
   }
   return result;
@@ -285,7 +285,7 @@ const mountainKingRuleRemove = (selectedUnits) => {
 
   if (isMountainKingPresent && !areAlliesPresent) {
     const foundUnit = selectedUnits.find((u) => u.unitName === NORWINGER.MOUNTAIN_KING);
-    result.push(foundUnit);
+    result.push(foundUnit.unitName);
   }
   return result;
 };
