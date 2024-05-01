@@ -31,7 +31,6 @@ export const ALL_FACTIONS_ARRAY = [
   DWARVES,
   LIZARDKIN,
   SOUTHERN_CITY_STATES,
-  SPECIAL,
 ];
 
 export const ALTERNATIVE_ARMY_SELECTION_TEXT = {
@@ -84,22 +83,25 @@ export const EXCEMPT_FROM_TRIBES_RULE = [
 ];
 
 export const ORK_CLANS_UNIT_MAPPING = {
-  Steinclan: ["Throigar", "Streitwagen", "Minotauren"],
+
+  // clans im alphabetical order
+  Bergclan: ["Harpyien", "Bärenreiter", "Bärenmeute"],
 
   Blutclan: ["Troll-Garde", "Wolfsreiter", "Wolfsschützen"],
 
-  Wyvernclan: ["Wyvernreiter", "Minotauren"],
-
-  Bergclan: ["Harpyien", "Bärenreiter", "Bärenmeute"],
-
-  Tierclan: ["Wolfsreiter ", "Wolfsschützen", "Wolfsmeute", "Schnee-Oger"],
+  Eisclan: ["Wolfsreiter", "Wolfsschützen", "Streitwagen", "Schnee-Oger"],
 
   Eisenclan: ["Zwergenfresser", "Bärenreiter", "Bärenmeute"],
 
+  Steinclan: ["Throigar", "Streitwagen", "Minotauren"],
+
   Pfeilclan: ["Bärenreiter", "Bärenmeute", "Armbrustschützen"],
 
-  Eisclan: ["Wolfsreiter", "Wolfsschützen", "Streitwagen", "Schnee-Oger"],
+  Tierclan: ["Wolfsreiter ", "Wolfsschützen", "Wolfsmeute", "Schnee-Oger"],
 
+  Wyvernclan: ["Wyvernreiter", "Minotauren"],
+
+  // Clanngett gets everything...
   Clanngett: [
     "Throigar",
     "Troll-Garde",
