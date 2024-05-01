@@ -1,7 +1,9 @@
-import { CITY_STATES, SUMMONS } from "../../../constants/textsAndMessages";
-import { MAGE, HERO, UNIT, GIANT } from "../../../constants/unitTypes";
+// functions and components
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
+// constants
+import { CITY_STATES, SUMMONS } from "../../../constants/textsAndMessages";
+import { MAGE, HERO, UNIT, GIANT } from "../../../constants/unitTypes";
 
 const rules = [
   {
@@ -104,9 +106,9 @@ const SouthernCityStatesRules = {
       validationData.availableUnits,
       validationData.totalPointsAllowance
     );
-    let testNorthernRegion = regionRule(validationData.selectedUnit, validationData.availableUnits, NORTHERN_REGION_TROOPS, MESSAGE_NORTH);
+    let testNorthernRegion = regionRule(validationData.selectedUnits, validationData.availableUnits, NORTHERN_REGION_TROOPS, MESSAGE_NORTH);
     let testSouthernthernRegion = regionRule(
-      validationData.selectedUnit,
+      validationData.selectedUnits,
       validationData.availableUnits,
       SOUTHERN_REGION_TROOPS,
       MESSAGE_SOUTH
@@ -131,8 +133,8 @@ const SouthernCityStatesRules = {
     validationResults.commanderIsPresent = hasNoCommander;
 
     // Are there units that need to be removed from the list?
-    let testNorthernRegionRemove = regionalArmyRemove(validationData.selectedUnit, NORTHERN_REGION_TROOPS);
-    let testSouthernRegionRemove = regionalArmyRemove(validationData.selectedUnit, SOUTHERN_REGION_TROOPS);
+    let testNorthernRegionRemove = regionRuleRemove(validationData.selectedUnits, NORTHERN_REGION_TROOPS);
+    let testSouthernRegionRemove = regionRuleRemove(validationData.selectedUnits, SOUTHERN_REGION_TROOPS);
 
     validationResults.removeUnitsNoLongerValid = [
       ...testNorthernRegionRemove, //
@@ -192,7 +194,6 @@ const SOUTHERN_REGION_TROOPS = {
 
 const MESSAGE_SOUTH = CITY_STATES.ERRORS.REGION_HEROES_SOUTH;
 const MESSAGE_NORTH = CITY_STATES.ERRORS.REGION_HEROES_NORTH;
-
 
 /**
  * The army can only consist of 40% shamans and heroes.
@@ -254,7 +255,7 @@ const regionRule = (selectedUnits, availableUnits, region, message) => {
  * @param {[unitCard]} selectedUnits
  * @returns array of units that need to be removed from the army list automatically.
  */
-const regionalArmyRemove = (selectedUnits, region) => {
+const regionRuleRemove = (selectedUnits, region) => {
   let result = [];
 
   let areProvincialUnitsPresent = selectedUnits.filter((selectedUnit) => region.units.includes(selectedUnit.unitName)).length > 0;
