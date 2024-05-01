@@ -112,7 +112,7 @@ const ItemShopTree = () => {
             nodeId={`${i}`} //
             label={ITEM_CATEGORY_NAME_MAPPING[dto.typeName]}
             key={i}
-            onClick={() => controller.getNodeId([`${i}`])}
+            onClick={() => controller.treeExpansionController([`${i}`])}
             disabled={disabledCategories[i]}
           >
             {dto.items.map((item, j) => {
