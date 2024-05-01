@@ -228,7 +228,8 @@ const setUnitsForClans = (availableUnits, selectedAlternativeLists) => {
  * @returns
  */
 const checkForGoblinMax = (selectedUnits, totalPointsAllowance, availableUnits) => {
-  const goblinUnits = ["Goblin-Spinnenschützen", "Goblin-Spinnenreiter"];
+  const goblinUnits = [ORKS.GOBLIN_MERCENARIES.SPIDER_RIDERS, ORKS.GOBLIN_MERCENARIES.SPIDER_ARCHERS];
+
   const GOBLIN_MAX_PERCENTAGE = 0.2;
   const goblinPointAllowance = totalPointsAllowance * GOBLIN_MAX_PERCENTAGE;
 

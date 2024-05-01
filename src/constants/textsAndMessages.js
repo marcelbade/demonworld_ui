@@ -388,6 +388,10 @@ export const ORKS = {
     GOBLINS: "Deine Armeeliste darf zu maximal zu 20% aus Goblins bestehen.",
     AVAILABLE_CLANUNITS: "Dieser Clan kann diese Einehit nicht auswählen.",
   },
+  GOBLIN_MERCENARIES: {
+    SPIDER_ARCHERS: "Goblin-Spinnenschützen",
+    SPIDER_RIDERS: "Goblin-Spinnenreiter",
+  },
 };
 
 export const THAIN = {
