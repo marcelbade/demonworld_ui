@@ -231,9 +231,10 @@ export const DWARVES = {
   SUB_FACTION_RULES: {
     UNITS: "Deine Armeeliste muss zu mindestens 30% aus Einheiten bestehen.",
     CHARACTERS: "Deine Armeeliste darf zu höchstens 50% aus Helden bestehen.",
-    GAETA: "Deine Armeeliste darf zu höchstens 40% aus Einheiten aus Gaeta bestehen.",
-    ZAHRA: "Deine Armeeliste darf zu höchstens 40% aus Einheiten aus Zah'ra bestehen.",
-    ALLY: "Deine Armeeliste darf zu höchstens 20% aus Einheiten aus Alliierten bestehen.",
+    ALLIES_AND_KINGDOMS_40:
+      "Deine Armmee darf max. zu 40% aus Einheiten des zuerst gewählten Königreiches oder Truppen des Imperiums bestehen. ",
+    ALLIES_AND_KINGDOMS_20:
+      "Deine Armmee darf max. zu 20% aus Einheiten des zweiten gewählten Königreiches oder Truppen des Imperiums bestehen. ",
   },
 };
 
