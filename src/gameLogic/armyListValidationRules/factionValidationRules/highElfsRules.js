@@ -1,5 +1,4 @@
 //  functions and components
-import { areGivenUnitsPresent, findUnits } from "../../../util/utilityFunctions";
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
 //  constants
@@ -130,7 +129,7 @@ const ElfRules = {
     let testForThanarilCovenUnits = thanarilCovenRule(validationData.selectedUnits);
     let testForEntsVsCentaurs = entsOrCentaurs(validationData.selectedUnits, validationData.availableUnits);
     let testForIlahRi = councilArmyRule(validationData.selectedUnits, validationData.availableUnits);
-    let testIlahRiForRemoval = councilArmyRemove(validationData.availableUnits, validationData.selectedUnits);
+    let testIlahRiForRemoval = councilArmyRemove(validationData.selectedUnits);
     let testOldHeroForRemoval = oldHeroRemove(validationData.selectedUnits);
     let testOreaVanarMasterRemoval = removeOreaVanar(validationData.selectedUnits);
     let testThanarilCovenRemoval = removeThanarilCoven(validationData.selectedUnits);
@@ -168,7 +167,16 @@ const ElfRules = {
 
 //SPECIAL FACTION RULES
 
-//Function calculates the max number of "Old Heroes". The number of Old Heroes is calculated differently from anything else in the game - the player can take 1 old hero per 5 Thanaril and/or Ilah Ri units ("Thanaril-Kriegerbünde" do not count!).
+/**
+ * Function calculates the max number of "Old Heroes"a player may pick.
+ * The number of Old Heroes is calculated differently
+ * from anything else in the game. The player can take
+ * 1 old hero per 5 Thanaril and/or Ilah Ri units
+ * ("Thanaril-Kriegerbünde" do not count!).
+ * @param {*} selectedUnits
+ * @param {*} availableUnits
+ * @returns
+ */
 const numberOfOldHeroes = (selectedUnits, availableUnits) => {
   const MESSAGE = ELVES.ERRORS.OLD_HERO_MESSAGE;
 
@@ -280,7 +288,8 @@ const removeOreaVanar = (selectedUnits) => {
 
   oreaVanarMapping.forEach((ovm) => {
     if (!found.includes(ovm.school) && found.includes(ovm.master)) {
-      result.push(selectedUnits.filter((u) => u.unitName === ovm.master)[0]);
+      const foundUnit = selectedUnits.find((u) => u.unitName === ovm.master);
+      result.push(foundUnit.unitName);
     }
   });
 
@@ -303,7 +312,7 @@ const heroesCovenantsMapping = [
  * @returns array of objects containing a blocked unit and an error message.
  */
 const thanarilCovenRule = (selectedUnits) => {
-  const MESSAGE = ELVES.ERRORS.THANARIEL_COVEN_MESSAGE;
+  const message = ELVES.ERRORS.THANARIEL_COVEN_MESSAGE;
 
   let result = [];
 
@@ -322,7 +331,7 @@ const thanarilCovenRule = (selectedUnits) => {
       const CovenUnit = selectedCovens[j];
 
       if (mapping.units.includes(CovenUnit) && !selectedCovenHeroes.includes(mapping.lord)) {
-        result.push({ unitBlockedbyRules: CovenUnit, message: MESSAGE });
+        result.push({ unitBlockedbyRules: CovenUnit, message: message(mapping.lord) });
       }
     }
   }
@@ -331,7 +340,7 @@ const thanarilCovenRule = (selectedUnits) => {
 };
 
 /**
- * Function implements the second part of the Coven rule: if a Thanaril hero is removed and there is more than one unit of the same coven present in the list, it must be removbed automatically.
+ * Function implements the second part of the Coven rule: if a Thanaril hero is removed and there is more than one unit of the same coven present in the list, it must be removed automatically.
  * @param {[unitCard]} selectedUnits
  * @returns an array of units that need to be removed from the army list automatically.
  */
@@ -347,8 +356,8 @@ const removeThanarilCoven = (selectedUnits) => {
 
   heroesCovenantsMapping.forEach((m) => {
     if (!foundLords.includes(m.lord) && foundCovens.filter((c) => m.units.includes(c)).length > 1) {
-      const supernumeralCovens = selectedUnits.filter((u) => m.units.includes(u.unitName));
-      result.push(supernumeralCovens[0]);
+      const supernumeralCoven = selectedUnits.find((u) => m.units.includes(u.unitName));
+      result.push(supernumeralCoven.unitName);
     }
   });
 
@@ -363,14 +372,15 @@ const removeThanarilCoven = (selectedUnits) => {
  */
 const councilArmyRule = (selectedUnits, availableUnits) => {
   const MESSAGE = ELVES.ERRORS.ILAH_RI_COMMANDER_MESSAGE;
-  const ILAH_RI_HEROES = findUnits(availableUnits, ELVES.SF.ILAH_RI, [HERO, MAGE]);
-  const isIlaRiHeroPresent = areGivenUnitsPresent(selectedUnits, ILAH_RI_HEROES);
+  const ILAH_RI_HEROES = ["Athulain Gilfar", "Generalin Caliar Ildriel"];
 
   let result = [];
 
+  let isIlaRiHeroPresent = selectedUnits.filter((selectedUnits) => ILAH_RI_HEROES.includes(selectedUnits.unitName)).length > 0;
+
   if (!isIlaRiHeroPresent) {
     availableUnits
-      .filter((u) => u.subFaction === ELVES.SF.ILAH_RI && (u.unitType === UNIT || u.unitType === GIANT))
+      .filter((u) => u.subFaction === "Ilah Ri" && (u.unitType === UNIT || u.unitType === GIANT))
       .forEach((u) => {
         result.push({ unitBlockedbyRules: u.unitName, message: MESSAGE });
       });
@@ -385,20 +395,20 @@ const councilArmyRule = (selectedUnits, availableUnits) => {
  * @param {[unitCard]} selectedUnits
  * @returns array of units that need to be removed from the army list automatically.
  */
-const councilArmyRemove = (availableUnits, selectedUnits) => {
-  const ILAH_RI_HEROES = findUnits(availableUnits, ELVES.SF.ILAH_RI, [HERO, MAGE]);
-
-  let isIlaRiHeroPresent = areGivenUnitsPresent(selectedUnits, ILAH_RI_HEROES);
-
+const councilArmyRemove = (selectedUnits) => {
+  const ILAH_RI_HEROES = ["Athulain Gilfar", "Generalin Caliar Ildriel"];
   let result = [];
+
+  let isIlaRiHeroPresent = selectedUnits.filter((u) => ILAH_RI_HEROES.includes(u.unitName)).length > 0;
 
   if (!isIlaRiHeroPresent) {
     selectedUnits
       .filter((u) => u.subFaction === ELVES.SF.ILAH_RI)
       .forEach((u) => {
-        result.push(u);
+        result.push(u.unitName);
       });
   }
+
   return result;
 };
 

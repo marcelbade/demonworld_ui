@@ -278,8 +278,9 @@ export const ELVES = {
   ERRORS: {
     ILAH_RI_COMMANDER_MESSAGE: "Du musst mindestens einen Ilah Ri Befehlshaber wählen, um Einheiten der Ratsarmee aufstellen zu können.",
     TREANTS_CENTAUR: "Die Armee kann nur Baumherren oder Zentauren Einheiten enthalten.",
-    THANARIEL_COVEN_MESSAGE:
-      "Eine zweite und weitere Einheiten desselben Kriegerbundes können nur aufgestellt werden, wenn auch der Anführer des betreffenden Kriegerbundes anwesend ist.",
+    THANARIEL_COVEN_MESSAGE: (master) => {
+      return `Wenn du eine zweite und weitere Einheiten dieses Kriegerbundes aufgestellen möchtest, musst du zuerst den Anführer des betreffenden Kriegerbundes, ${master}, auswählen.`;
+    },
     MASTERS_MESSAGE: (school) => {
       return `Dieser Meister kann nur ausgewählt werden, wenn zuerst die Schule der ${school} ausgewählt wurde.`;
     },
