@@ -1,6 +1,9 @@
+//  functions and components
+import globalRules from "../globalValidationRules/globalValidationRules";
+import validationResults from "./validationResultsObjectProvider";
+//  constants
 import { ORK_CLANS_UNIT_MAPPING } from "../../../constants/factions";
 import { ORKS } from "../../../constants/textsAndMessages";
-import globalRules from "../globalValidationRules/globalValidationRules";
 
 const rules = [
   {
@@ -54,23 +57,29 @@ const rules = [
   },
 ];
 
-const validationResults = {
-  unitsBlockedbyRules: [],
-  subFactionBelowMinimum: [],
-  commanderIsPresent: false,
-};
-
 const OrkRules = {
-  testSubFactionRules: (
-    validationData 
-   ) => {
+  testSubFactionRules: (validationData) => {
     // Switch between alternative ruule objects!
     switchBetweenAlternativeRules(validationData.selectedAlternativeLists);
 
     //  general rules
-    let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(validationData.selectedUnits, validationData.availableUnits, validationData.totalPointsAllowance);
-    let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(rules, validationData.selectedUnits, validationData.totalPointsAllowance, validationData.subFactions);
-    let isAboveSubFactionMax = globalRules.unitsAboveSubFactionMax(rules, validationData.selectedUnits, validationData.totalPointsAllowance, validationData.availableUnits);
+    let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(
+      validationData.selectedUnits,
+      validationData.availableUnits,
+      validationData.totalPointsAllowance
+    );
+    let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(
+      rules,
+      validationData.selectedUnits,
+      validationData.totalPointsAllowance,
+      validationData.subFactions
+    );
+    let isAboveSubFactionMax = globalRules.unitsAboveSubFactionMax(
+      rules,
+      validationData.selectedUnits,
+      validationData.totalPointsAllowance,
+      validationData.availableUnits
+    );
 
     // tournament rules
     let maxCopies;
@@ -86,14 +95,23 @@ const OrkRules = {
     }
 
     let testForMax2Result = globalRules.maximumCopiesOfUnit(validationData.selectedUnits, maxCopies);
-    let testForHeroCapResult = globalRules.belowMaxPercentageHeroes(validationData.selectedUnits, validationData.totalPointsAllowance, validationData.availableUnits, heroPointCap);
+    let testForHeroCapResult = globalRules.belowMaxPercentageHeroes(
+      validationData.selectedUnits,
+      validationData.totalPointsAllowance,
+      validationData.availableUnits,
+      heroPointCap
+    );
 
     let hasDuplicateUniques = validationData.tournamentOverrideRules.uniquesOnlyOnce //
       ? globalRules.noDuplicateUniques(validationData.selectedUnits)
       : [];
 
     // special faction rules
-    let goblinsAboveMax = checkForGoblinMax(validationData.selectedUnits, validationData.totalPointsAllowance, validationData.availableUnits);
+    let goblinsAboveMax = checkForGoblinMax(
+      validationData.selectedUnits,
+      validationData.totalPointsAllowance,
+      validationData.availableUnits
+    );
     let hasNoCommander = isOrkArmyCommanderPresent(validationData.selectedUnits, validationData.selectedAlternativeLists);
     let availlableClanUnits = setUnitsForClans(validationData.availableUnits, validationData.selectedAlternativeLists);
 
@@ -138,7 +156,7 @@ const ORK_SUBFACTION_LIMITS = {
 /**
  * Function changes the max. limits for the validationData.subFactions depending on which alternative army list has been selected.
  */
-const switchBetweenAlternativeRules = ( selectedAlternativeLists) => {
+const switchBetweenAlternativeRules = (selectedAlternativeLists) => {
   //  validationData.selectedAlternativeLists  --> Clanngett, Steinclan,...
   let mapperArray;
   const CLANNGETT = "Clanngett";
