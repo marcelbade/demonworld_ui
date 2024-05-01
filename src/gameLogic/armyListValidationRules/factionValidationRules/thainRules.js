@@ -285,11 +285,11 @@ const greatChampionRemove = (selectedUnits) => {
  * @returns array of objects containing a blocked unit and an error message.
  */
 const dorgaPriestRule = (selectedUnits, availableUnits) => {
-  const MESSAGE = THAIN.ERRORS.DORGA_MESSAGE;
-  const dorgaUnits = findUnits(selectedUnits, "Dorga-Kirche", [UNIT]);
-  const listHasDorgaUnit = areGivenUnitsPresent(selectedUnits, dorgaUnits);
-
   let result = [];
+
+  const MESSAGE = THAIN.ERRORS.DORGA_MESSAGE;
+
+  let listHasDorgaUnit = selectedUnits.filter((u) => u.subFaction === "Dorga-Kirche" && u.unitType === UNIT).length > 0;
 
   if (!listHasDorgaUnit) {
     availableUnits
@@ -308,16 +308,15 @@ const dorgaPriestRule = (selectedUnits, availableUnits) => {
  * @returns an array of units that need to be removed from the army list automatically.
  */
 const dorgaPriestRemove = (selectedUnits) => {
-  const dorgaUnits = findUnits(selectedUnits, "Dorga-Kirche", [UNIT]);
-  const listHasDorgaUnit = areGivenUnitsPresent(selectedUnits, dorgaUnits);
-
   let result = [];
 
-  if (!listHasDorgaUnit) {
+  let isDorgaUnitpresent = selectedUnits.filter((u) => u.subFaction === "Dorga-Kirche" && u.unitType === UNIT).length > 0;
+
+  if (!isDorgaUnitpresent) {
     selectedUnits
       .filter((u) => u.subFaction === "Dorga-Kirche")
       .forEach((u) => {
-        result.push(u);
+        result.push(u.unitName);
       });
   }
   return result;
@@ -362,7 +361,7 @@ const tribalVeteranRemove = (selectedUnits) => {
 
   selectedUnits.forEach((u) => {
     if (u.subFaction === "Veteranen der Stämme" && !presentTribes.includes(u.secondSubFaction)) {
-      result.push(u);
+      result.push(u.unitName);
     }
   });
 
