@@ -61,7 +61,7 @@ const useArmyValidation = () => {
    * @param {[unitCard]} result
    */
   const collectValidatioResults = (currentList, result) => {
-    const tempArray = {
+    const tempObj = {
       ...VC.listValidationResults,
       unitsBlockedbyRules: result.unitsBlockedbyRules,
       subFactionBelowMinimum: result.subFactionBelowMinimum,
@@ -71,8 +71,8 @@ const useArmyValidation = () => {
       alliedUnitsBlockedbyRules: result.alliedUnitsBlockedbyRules,
     };
 
-    VC.setListValidationResults(tempArray);
-    removeInvalidUnits(currentList, tempArray);
+    VC.setListValidationResults(tempObj);
+    removeInvalidUnits(currentList, tempObj);
   };
 
   /**
@@ -84,7 +84,7 @@ const useArmyValidation = () => {
     if (validationResult.removeUnitsNoLongerValid.length > 0) {
       let tempArray = [...unitList];
 
-      tempArray = tempArray.filter((u) => !validationResult.removeUnitsNoLongerValid.includes(u));
+      tempArray = tempArray.filter((u) => !validationResult.removeUnitsNoLongerValid.includes(u.unitName));
 
       SEC.setSelectedUnits([...tempArray]);
     }
