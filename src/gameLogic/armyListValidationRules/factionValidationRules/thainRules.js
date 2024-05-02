@@ -310,9 +310,9 @@ const dorgaPriestRule = (selectedUnits, availableUnits) => {
 const dorgaPriestRemove = (selectedUnits) => {
   let result = [];
 
-  let isDorgaUnitpresent = selectedUnits.filter((u) => u.subFaction === "Dorga-Kirche" && u.unitType === UNIT).length > 0;
+  let isDorgaUnitPresent = selectedUnits.filter((u) => u.subFaction === "Dorga-Kirche" && u.unitType === UNIT).length > 0;
 
-  if (!isDorgaUnitpresent) {
+  if (!isDorgaUnitPresent) {
     selectedUnits
       .filter((u) => u.subFaction === "Dorga-Kirche")
       .forEach((u) => {
