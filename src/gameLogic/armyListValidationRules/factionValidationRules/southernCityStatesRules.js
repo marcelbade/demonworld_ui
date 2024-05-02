@@ -233,7 +233,8 @@ const regionRule = (province, selectedUnits, availableUnits) => {
   let result = [];
   const MESSAGE = CITY_STATES.ERRORS.REGION_HEROES(province);
 
-  let listHasProvincialUnits = selectedUnits.filter((u) => u.subFaction === `Truppen des ${province}` && u.unitType === UNIT).length > 0;
+  let listHasProvincialUnits =
+    selectedUnits.filter((u) => u.subFaction === `Truppen des ${province}` && (u.unitType === UNIT || u.unitType === GIANT)).length > 0;
 
   if (!listHasProvincialUnits) {
     availableUnits
