@@ -5,7 +5,6 @@ import validationResults from "./validationResultsObjectProvider";
 import { EXCEMPT_FROM_TRIBES_RULE, THAIN_TRIBES } from "../../../constants/factions";
 import { UNIT, MAGE } from "../../../constants/unitTypes";
 import { THAIN } from "../../../constants/textsAndMessages";
-import { areGivenUnitsPresent, findUnits } from "../../../util/utilityFunctions";
 
 const rules = [
   {
