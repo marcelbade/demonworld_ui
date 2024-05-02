@@ -101,17 +101,21 @@ const SouthernCityStatesRules = {
     // special faction rules
 
     let testForBrotherhoodOrOrder = brotherhoodOrOrder(validationData.selectedUnits, validationData.availableUnits);
+
     let testForHeroMagicianTotal = totalPointsForMagiciansAndHeroes(
       validationData.selectedUnits,
       validationData.availableUnits,
       validationData.totalPointsAllowance
     );
-    let testNorthernRegion = regionRule(validationData.selectedUnits, validationData.availableUnits, NORTHERN_REGION_TROOPS, MESSAGE_NORTH);
-    let testSouthernthernRegion = regionRule(
+    let testNorthernRegion = regionRule(
+      CITY_STATES.REGIONS.NORTHERN, //
       validationData.selectedUnits,
-      validationData.availableUnits,
-      SOUTHERN_REGION_TROOPS,
-      MESSAGE_SOUTH
+      validationData.availableUnits
+    );
+    let testSouthernthernRegion = regionRule(
+      CITY_STATES.REGIONS.SOUTHERN, //
+      validationData.selectedUnits,
+      validationData.availableUnits
     );
 
     //result for maximum limits
@@ -133,8 +137,14 @@ const SouthernCityStatesRules = {
     validationResults.commanderIsPresent = hasNoCommander;
 
     // Are there units that need to be removed from the list?
-    let testNorthernRegionRemove = regionRuleRemove(validationData.selectedUnits, NORTHERN_REGION_TROOPS);
-    let testSouthernRegionRemove = regionRuleRemove(validationData.selectedUnits, SOUTHERN_REGION_TROOPS);
+    let testNorthernRegionRemove = regionRuleRemove(
+      CITY_STATES.REGIONS.NORTHERN,
+      validationData.selectedUnits //
+    );
+    let testSouthernRegionRemove = regionRuleRemove(
+      CITY_STATES.REGIONS.SOUTHERN,
+      validationData.selectedUnits //
+    );
 
     validationResults.removeUnitsNoLongerValid = [
       ...testNorthernRegionRemove, //
@@ -155,9 +165,10 @@ const SouthernCityStatesRules = {
  */
 const brotherhoodOrOrder = (selectedUnits, availableUnits) => {
   const MESSAGE = CITY_STATES.ERRORS.BROTHERHOOD_ORDER;
+
   let FACTIONS = [
-    CITY_STATES.SF.ORDER_OF_TRUE_FAITH, //
-    CITY_STATES.SF.BROTHERHOOD_OF_SAND,
+    CITY_STATES.SF.ORDER, //
+    CITY_STATES.SF.BROTHERHOOD,
   ];
 
   let result = [];
@@ -177,24 +188,6 @@ const brotherhoodOrOrder = (selectedUnits, availableUnits) => {
   return result;
 };
 
-// special rules implementations
-
-const NORTHERN_REGION_TROOPS = {
-  name: CITY_STATES.SF.NORTHERN_TROOPS,
-  units: (availableUnits) => {
-    return availableUnits.filter((u) => u.subFaction === CITY_STATES.SF.NORTH);
-  },
-};
-const SOUTHERN_REGION_TROOPS = {
-  name: CITY_STATES.SF.NORTHERN_TROOPS,
-  units: (availableUnits) => {
-    return availableUnits.filter((u) => u.subFaction === CITY_STATES.SF.SOUTH);
-  },
-};
-
-const MESSAGE_SOUTH = CITY_STATES.ERRORS.REGION_HEROES_SOUTH;
-const MESSAGE_NORTH = CITY_STATES.ERRORS.REGION_HEROES_NORTH;
-
 /**
  * The army can only consist of 40% shamans and heroes.
  * @param {[unitcard]} selectedUnits
@@ -205,6 +198,7 @@ const MESSAGE_NORTH = CITY_STATES.ERRORS.REGION_HEROES_NORTH;
 // TODO: remove function missing, make function global since there are several armies with this logic. This army needs the function twice: heroes/wizards and giants.
 const totalPointsForMagiciansAndHeroes = (selectedUnits, availableUnits, totalPointsAllowance) => {
   const MAGICIAN_AND_HEROES_LIMIT = 40;
+  const MESSAGE = CITY_STATES.ERRORS.MAX_LIMIT_CHARACTERS;
   const max_percentage = (totalPointsAllowance * MAGICIAN_AND_HEROES_LIMIT) / 100;
 
   let shamansAndHeroesTotal = 0;
@@ -220,7 +214,7 @@ const totalPointsForMagiciansAndHeroes = (selectedUnits, availableUnits, totalPo
     .filter((u) => u.unitType === HERO || u.unitType === MAGE)
     .forEach((u) => {
       if (shamansAndHeroesTotal + u.points > max_percentage) {
-        result.push({ unitBlockedbyRules: u.unitName, message: CITY_STATES.ERRORS.MAX_LIMIT_CHARACTERS });
+        result.push({ unitBlockedbyRules: u.unitName, message: MESSAGE });
       }
     });
 
@@ -233,18 +227,22 @@ const totalPointsForMagiciansAndHeroes = (selectedUnits, availableUnits, totalPo
  * @param {[unitCard]} availableUnits
  * @returns array of objects containing a blocked unit and an error message.
  */
-const regionRule = (selectedUnits, availableUnits, region, message) => {
-  let result = [];
-  let areRegionalUnitsPresent =
-    selectedUnits.filter((selectedUnits) => region.units(availableUnits).includes(selectedUnits.unitName)).length > 0;
+const regionRule = (province, selectedUnits, availableUnits) => {
+  // province  ==>  CITY_STATES.REGIONS
 
-  if (!areRegionalUnitsPresent) {
+  let result = [];
+  const MESSAGE = CITY_STATES.ERRORS.REGION_HEROES(province);
+
+  let listHasProvincialUnits = selectedUnits.filter((u) => u.subFaction === `Truppen des ${province}` && u.unitType === UNIT).length > 0;
+
+  if (!listHasProvincialUnits) {
     availableUnits
-      .filter((u) => u.subFaction === region.name && (u.unitType === UNIT || u.unitType === GIANT))
+      .filter((u) => u.subFaction === `Truppen des ${province}` && (u.unitType === MAGE || u.unitType === HERO))
       .forEach((u) => {
-        result.push({ unitBlockedbyRules: u.unitName, message: message });
+        result.push({ unitBlockedbyRules: u.unitName, message: MESSAGE });
       });
   }
+
   return result;
 };
 
@@ -255,16 +253,16 @@ const regionRule = (selectedUnits, availableUnits, region, message) => {
  * @param {[unitCard]} selectedUnits
  * @returns array of units that need to be removed from the army list automatically.
  */
-const regionRuleRemove = (selectedUnits, region) => {
+const regionRuleRemove = (province, selectedUnits) => {
   let result = [];
 
-  let areProvincialUnitsPresent = selectedUnits.filter((selectedUnit) => region.units.includes(selectedUnit.unitName)).length > 0;
+  let isProvincialUnitPresent = selectedUnits.filter((u) => u.subFaction === `Truppen des ${province}` && u.unitType === UNIT).length > 0;
 
-  if (!areProvincialUnitsPresent) {
+  if (!isProvincialUnitPresent) {
     selectedUnits
-      .filter((u) => u.subFaction === region.name)
+      .filter((u) => u.subFaction === `Truppen des ${province}`)
       .forEach((u) => {
-        result.push(u);
+        result.push(u.unitName);
       });
   }
   return result;
