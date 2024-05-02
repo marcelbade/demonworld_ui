@@ -448,11 +448,14 @@ export const CITY_STATES = {
   ERRORS: {
     BROTHERHOOD_ORDER: "Die Armee kann entweder nur Truppen des Ordens des wahren Glaubens oder der Bruderschaft des Sands enthalten.",
     MAX_LIMIT_CHARACTERS: "Die Armee darf zu max. 40% aus Helden, Befehlshaber und Magiern bestehen:",
-    REGION_HEROES_SOUTH:
-      "Du musst mindestens eine Einheit des Südens aufstellen, um einen Befehlshaber oder Helden des Süden aufstellen zu können.",
-    REGION_HEROES_NORTH:
-      "Du musst mindestens eine Einehit des Nordens aufstellen, um einen Befehlshaber oder Helden des Nordens aufstellen zu können.",
+    REGION_HEROES: (province) => {
+      return `Du musst mindestens eine Einheit des ${province} aufstellen, um einen Befehlshaber oder Helden des Süden aufstellen zu können.`;
+    },
   },
+  REGIONS :{
+      NORTHERN:"Nordens",
+      SOUTHERN:"Südens",
+  }
 };
 
 export const SPECIAL_ITEMS = {
