@@ -2,24 +2,25 @@
 import React, { useContext, useState } from "react";
 // components and functions
 import SelectionInput from "../../../shared/selectionInput";
-import { ALTERNATIVE_ARMY_SELECTION_TEXT } from "../../../../constants/factions";
+import useAlternativeFactionRules from "../../../../customHooks/UseAlternativeFactionRules";
 // context
 import { ArmyContext } from "../../../../contexts/armyContext";
 import { AlternativeListContext } from "../../../../contexts/alternativeListContext";
-import { AllyContext } from "../../../../contexts/allyContext";
+// constants
+import { ALTERNATIVE_ARMY_SELECTION_TEXT } from "../../../../constants/factions";
 
 const AlternativeArmyListSelector = () => {
   const AC = useContext(ArmyContext);
   const ALC = useContext(AlternativeListContext);
-  const AYC = useContext(AllyContext);
 
+  // create an array that has many elements as their are choices to make and give each element "" as default value.
   const [selectionArray, setSelectionArray] = useState(Array(ALC.numberOfAlternativeChoices).fill(""));
 
-  const OPTIONS = ALC.alternateListNames;
+  const OPTIONS = useAlternativeFactionRules(AC.selectedFactionName, ALC.alternateListNames);
 
   /**
    * Filter function for the Selection Inputs. Assigns a value
-   * to the element of the selectedAlternativeLists that corrsponds
+   * to the element of the selectedAlternativeLists that corresponds
    * to te selector Number.
    * @param {Event.target.value} value
    * @param {integer} selectorNumber
@@ -29,7 +30,7 @@ const AlternativeArmyListSelector = () => {
     tempArray[selectorNumber] = value;
 
     setSelectionArray(tempArray);
-    setAlternatives();
+    setAlternatives(selectorNumber);
     isSelectionComplete(tempArray);
   };
 
@@ -44,43 +45,48 @@ const AlternativeArmyListSelector = () => {
     tempArray[selectorNumber] = "";
 
     setSelectionArray(tempArray);
-    setAlternatives();
+    setAlternatives(selectorNumber);
     isSelectionComplete(tempArray);
   };
 
-  const setAlternatives = () => {
-    return OPTIONS.filter((o) => !selectionArray.includes(o));
+  /**
+   * Function sets the options that are displayed in the selection input's dropdown menu.
+   * Allready selected values are filtered out.
+   * @returns an array of String values to be displayed.
+   */
+  const setAlternatives = (selectorNumber) => {
+    return OPTIONS[selectorNumber].filter((o) => !selectionArray.includes(o));
   };
 
   /**
-   * Function tests if the selection is complete. Thhis is the case
+   * Function tests if the selection is complete. This is the case
    * if the number of selected values is equal to the number of input elements.
    * If complete, the army selection tree is displayed in the UI.
-   * @param {int} length
+   * @param {[String]} the current value of the selectionArray.
    */
   const isSelectionComplete = (tempArray) => {
     const elementsFilled = tempArray.filter((e) => e !== "").length;
     const isComplete = elementsFilled === ALC.numberOfAlternativeChoices;
 
-    ALC.setAltArmyListSelectionComplete(isComplete);
-    if (isComplete) {
-      setGlobalState(tempArray);
-      setSelectedAlternateSubFaction(tempArray);
-    }
+    // if (isComplete) {
+    setGlobalState(isComplete, tempArray);
+    setSelectedAlternateSubFaction(tempArray);
+    // }
   };
 
   /**
    * Function sets the relevant fields of the global state
    * once the selection is complete.
-   * @param {[Strings]} tempArray
+   * @param {Boolean} isComplete
+   * @param {[String]} tempArray
    */
-  const setGlobalState = (tempArray) => {
+  const setGlobalState = (isComplete, tempArray) => {
+    ALC.setAltArmyListSelectionComplete(isComplete);
     ALC.setSelectedAlternativeLists(tempArray);
-    ALC.setAllyIsAlternativeOption(tempArray.includes(AYC.allyName));
   };
 
   /**
-   * Function sets the "selectedAlternativeOption" flag to true for 
+   * Function sets the "selectedAlternativeOption" flag to true for
    * those sub factions that have been selected.
    * @param {[Strings]} tempArray
    */
@@ -102,10 +108,10 @@ const AlternativeArmyListSelector = () => {
             <SelectionInput //
               key={i}
               selectorNumber={j}
-              alternatives={setAlternatives()}
+              alternatives={setAlternatives(j)}
               filterFunction={selectAlternateList}
               clearFunction={clearAlternateList}
-              label={ALTERNATIVE_ARMY_SELECTION_TEXT[AC.selectedFactionName]}
+              label={ALTERNATIVE_ARMY_SELECTION_TEXT[AC.selectedFactionName][j]}
             />
           );
         })
