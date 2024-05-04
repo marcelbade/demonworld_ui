@@ -23,7 +23,7 @@ const FactionTreeView = () => {
   const display = UseDisplayAlly();
 
   useEffect(() => {
-    display.showAlly();
+    display.showAlly(AC.selectedFactionName);
     validation.validateList([], SEC.maxPointsAllowance);
   }, [JSON.stringify(ALC.selectedAlternativeLists)]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -41,7 +41,7 @@ const FactionTreeView = () => {
     <>
       <Tree subFactionDtoList={AC.subFactionDTOs} isFactionNotAlly={true} />
 
-      {display.showAlly() ? (
+      {display.showAlly(AC.selectedFactionName) ? (
         <>
           <Typography
             variant="h5"

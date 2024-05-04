@@ -47,7 +47,7 @@ const ArmyListBoxCenter = () => {
               units={filterUnitsForSubFaction(obj.subFactionName)}
             />
           ))}
-        {display.showAlly() ? (
+        {display.showAlly(AC.selectedFactionName) ? (
           <ArmyListSubFactionEntry
             key={AYC.allyName} //
             subFaction={AYC.allyName}
