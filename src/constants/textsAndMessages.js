@@ -407,6 +407,17 @@ export const ORKS_TEXTS = {
     SPIDER_ARCHERS: "Goblin-Spinnenschützen",
     SPIDER_RIDERS: "Goblin-Spinnenreiter",
   },
+  CLANS: {
+    ANIMAL: "Tierclan",
+    ARROW: "Pfeilclan",
+    BLOOD: "Blutclan",
+    CLANNGETT: "Clanngett",
+    ICE: "Eisclan",
+    IRON: "Eisenclan",
+    MOUNTAIN: "Bergclan",
+    STONE: "Steinclan",
+    WYVERN: "Wyvernclan",
+  },
   CLAN_UNITS: {
     BEAR_PACK: "Bärenmeute",
     BEAR_RIDERS: "Bärenreiter",
