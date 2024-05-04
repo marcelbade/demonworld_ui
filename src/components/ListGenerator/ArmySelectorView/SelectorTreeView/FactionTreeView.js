@@ -8,8 +8,8 @@ import { AllyContext } from "../../../../contexts/allyContext";
 // components and functions
 import Tree from "./Tree.js";
 import useArmyValidation from "../../../../customHooks/UseArmyValidation.js";
+import UseDisplayAlly from "../../../../customHooks/UseDisplayAlly.js";
 // constants
-import { NO_ALLY } from "../../../../constants/factions";
 import { INPUT_TEXTS } from "../../../../constants/textsAndMessages.js";
 import { SelectionContext } from "../../../../contexts/selectionContext.js";
 
@@ -20,9 +20,10 @@ const FactionTreeView = () => {
   const SEC = useContext(SelectionContext);
 
   const validation = useArmyValidation();
+  const display = UseDisplayAlly();
 
   useEffect(() => {
-    displayAlly();
+    display.showAlly();
     validation.validateList([], SEC.maxPointsAllowance);
   }, [JSON.stringify(ALC.selectedAlternativeLists)]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -36,27 +37,11 @@ const FactionTreeView = () => {
     return ALC.armyHasAlternativeLists ? ALC.altArmyListSelectionComplete : true;
   };
 
-  /**
-   * Function checks if an ally should be displayed.
-   * @returns true, if 2 conditions are met:
-   *  - the faction has an ally
-   *  - if the ally is an alternative subFaction (see dwarves),
-   *    it must be selected by the player. If it's not an alternative
-   *    the condition defaults to true
-   */
-  const displayAlly = () => {
-    if (ALC.allyIsAlternativeOption) {
-      return ALC.selectedAlternativeLists.includes(AYC.allyName);
-    }
-
-    return AYC.allyName !== NO_ALLY;
-  };
-
   return isSelectionComplete() ? (
     <>
       <Tree subFactionDtoList={AC.subFactionDTOs} isFactionNotAlly={true} />
 
-      {displayAlly() ? (
+      {display.showAlly() ? (
         <>
           <Typography
             variant="h5"

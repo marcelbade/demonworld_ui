@@ -7,18 +7,19 @@ import { Grid } from "@mui/material";
 import ArmyListSubFactionEntry from "./ArmyListComponents/ArmyListSubFactionEntry";
 import { isSubFactionAlternativeAndSelected } from "../../../../../util/utilityFunctions";
 import useArmyValidation from "../../../../../customHooks/UseArmyValidation";
+import UseDisplayAlly from "../../../../../customHooks/UseDisplayAlly";
 // context
 import { ArmyContext } from "../../../../../contexts/armyContext";
 import { AllyContext } from "../../../../../contexts/allyContext";
 import { SelectionContext } from "../../../../../contexts/selectionContext";
-//  constants
-import { NO_ALLY } from "../../../../../constants/factions";
 
 const ArmyListBoxCenter = () => {
   const AC = useContext(ArmyContext);
   const SEC = useContext(SelectionContext);
   const AYC = useContext(AllyContext);
+
   const validation = useArmyValidation();
+  const display = UseDisplayAlly();
 
   /**
    * Filters the selected units by subFaction. If allied units have been selected, then their subFaction name is replaced with their faction name.
@@ -46,7 +47,7 @@ const ArmyListBoxCenter = () => {
               units={filterUnitsForSubFaction(obj.subFactionName)}
             />
           ))}
-        {AYC.allyName !== NO_ALLY ? (
+        {display.showAlly() ? (
           <ArmyListSubFactionEntry
             key={AYC.allyName} //
             subFaction={AYC.allyName}
