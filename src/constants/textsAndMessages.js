@@ -230,6 +230,7 @@ export const DARKELF_TEXTS = {
 
 export const DWARF_TEXTS = {
   FACTION_NAME: "Zwerge",
+  ALLY: "Imperium",
   SUB_FACTION_RULES: {
     UNITS: "Deine Armeeliste muss zu mindestens 30% aus Einheiten bestehen.",
     CHARACTERS: "Deine Armeeliste darf zu höchstens 50% aus Helden bestehen.",
@@ -239,8 +240,8 @@ export const DWARF_TEXTS = {
       "Deine Armmee darf max. zu 20% aus Einheiten des zweiten gewählten Königreiches oder Truppen des Imperiums bestehen.",
   },
   SELECTION_TEXTS: {
-    FOURTY_PERCENT: "Wähle ein Königreich oder Alliierte die bis zu 40% deiner Liste bilden dürfen.",
-    TWENTY_PERCENT: "Wähle ein Königreich oder Alliierte die bis zu 20% deiner Liste bilden dürfen.",
+    FOURTY_PERCENT: "Wähle ein Königreich, das bis zu 40% deiner Liste bilden darf.",
+    TWENTY_PERCENT: "Wähle ein Königreich oder Verbündete, die bis zu 20% deiner Liste bilden darf.",
   },
 };
 
