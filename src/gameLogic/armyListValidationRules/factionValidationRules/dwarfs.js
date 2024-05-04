@@ -134,12 +134,9 @@ const percentageKingdomsAndAlly = (SelectedAlternateSubFactions) => {
         if (SelectedAlternateSubFactions[0] === c) {
           r.max = MAX_FIRST_SELECTION;
           r.error = MESSAGE_40_PERCENT;
-          console.log("r", r);
         } else if (SelectedAlternateSubFactions[1] === c) {
           r.max = MAX_SECOND_SELECTION;
           r.error = MESSAGE_20_PERCENT;
-
-          console.log("r", r);
         }
       });
     });
