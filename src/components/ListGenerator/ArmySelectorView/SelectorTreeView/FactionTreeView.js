@@ -1,22 +1,29 @@
 import React, { useContext, useEffect } from "react";
 // material ui
 import { Typography } from "@mui/material";
-// components and functions
+// context
 import { ArmyContext } from "../../../../contexts/armyContext";
 import { AlternativeListContext } from "../../../../contexts/alternativeListContext";
 import { AllyContext } from "../../../../contexts/allyContext";
+// components and functions
 import Tree from "./Tree.js";
+import useArmyValidation from "../../../../customHooks/UseArmyValidation.js";
 // constants
 import { NO_ALLY } from "../../../../constants/factions";
 import { INPUT_TEXTS } from "../../../../constants/textsAndMessages.js";
+import { SelectionContext } from "../../../../contexts/selectionContext.js";
 
 const FactionTreeView = () => {
   const AC = useContext(ArmyContext);
   const ALC = useContext(AlternativeListContext);
   const AYC = useContext(AllyContext);
+  const SEC = useContext(SelectionContext);
+
+  const validation = useArmyValidation();
 
   useEffect(() => {
     displayAlly();
+    validation.validateList([], SEC.maxPointsAllowance);
   }, [JSON.stringify(ALC.selectedAlternativeLists)]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
