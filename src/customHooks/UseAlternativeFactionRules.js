@@ -1,5 +1,5 @@
 // constants
-import { DWARF_TEXTS, EMPIRE_TEXTS } from "../constants/textsAndMessages";
+import { DWARF_TEXTS, EMPIRE_TEXTS, ORKS_TEXTS } from "../constants/textsAndMessages";
 
 /**
  * Hook implements additional game logic so it is kept
@@ -17,13 +17,19 @@ const useAlternativeFactionRules = (faction, alternatives) => {
   let result = [];
 
   switch (faction) {
-    // dwarfs: faction has 2 selections, Ally can onyl be shown in the second!
+    // dwarfs: faction has 2 selections, Ally can only be shown in the second!
     case DWARF_TEXTS.FACTION_NAME:
       result[0] = alternatives.filter((a) => a !== DWARF_TEXTS.ALLY);
       result[1] = alternatives;
 
       break;
+    // empire: normal selection
     case EMPIRE_TEXTS.FACTION_NAME:
+      result[0] = alternatives;
+      break;
+    // orks: normal selection
+    case ORKS_TEXTS.FACTION_NAME:
+      result[0] = alternatives;
       break;
     default:
       break;
