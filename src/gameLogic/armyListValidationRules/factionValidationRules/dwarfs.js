@@ -1,6 +1,8 @@
-import { DWARVES } from "../../../constants/textsAndMessages";
-import globalRules from "../globalValidationRules/globalValidationRules";
+// functions and components
 import validationResults from "./validationResultsObjectProvider";
+// constants
+import { DWARF_TEXTS } from "../../../constants/textsAndMessages";
+import globalRules from "../globalValidationRules/globalValidationRules";
 
 const rules = [
   {
@@ -8,7 +10,7 @@ const rules = [
     cardNames: ["Einheit"],
     min: 0.3,
     max: 1.0,
-    error: DWARVES.SUB_FACTION_RULES.UNITS,
+    error: DWARF_TEXTS.SUB_FACTION_RULES.UNITS,
   },
 
   {
@@ -16,7 +18,7 @@ const rules = [
     cardNames: ["Held", "Befehlshaber", "Helden/Befehlshaber", "Erdpriester", "Erzpriester", "Feuerpriester"],
     min: 0.0,
     max: 0.5,
-    error: DWARVES.SUB_FACTION_RULES.CHARACTERS,
+    error: DWARF_TEXTS.SUB_FACTION_RULES.CHARACTERS,
   },
 
   {
@@ -24,21 +26,21 @@ const rules = [
     cardNames: ["Gaeta"],
     min: 0.0,
     max: 0.4,
-    error: DWARVES.SUB_FACTION_RULES.GAETA,
+    error: "", // special rule: error message is set by function percentageKingdomsAndAlly
   },
   {
     subFaction: "zahra",
     cardNames: ["Zah'ra"],
     min: 0.0,
     max: 0.4,
-    error: DWARVES.SUB_FACTION_RULES.ZAHRA,
+    error: "", // special rule: error message is set by function percentageKingdomsAndAlly
   },
   {
     subFaction: "ally",
     cardNames: ["Imperium"],
     min: 0.0,
     max: 0.2,
-    error: DWARVES.SUB_FACTION_RULES.ALLY,
+    error: DWARF_TEXTS.SUB_FACTION_RULES.ALLY,
   },
 ];
 
@@ -112,48 +114,28 @@ const DwarfRules = {
 
 //SEPCIAL FACTION RULES
 
-// function takes care of the dwarf army list special rule:max.
-// of 40% of the force. Once the choice is made, the player can only take the second kingdom OR the ally and only to a max. of 20%.
+/**
+ * The function implements the rule that it is only allowed to take uo to 40% of special troops from one kingdom or its ally and 20% from a second kingdom or its ally.
+ * @param {unitCards} selectedUnits
+ */
 const percentageKingdomsAndAlly = (selectedUnits) => {
-  let options = ["Gaeta", "Zah'ra", "Imperium"];
-  let first = "";
-  let second = "";
-  let third = "";
-
-  //const MESSAGE = "Die Armee kann nicht Einheiten beider Zwergeneinheiten und des Alliierten enthalten!";
-
-  // TODO: mach das fertig :D
-
-  selectedUnits.forEach((unit) => {
-    // neither kingdom nor ally selected
-    if (options.includes(unit.subFaction) && first === "") {
-      first = unit.subFaction;
-      options = options.filter((option) => option !== first);
-    }
-    // second kingdeom is selected
-    else if (options.includes(unit.subFaction) && first !== "" && second === "") {
-      second = unit.subFaction;
-      options = options.filter((option) => option !== second);
-      third = options[0];
-    }
-    // ally instead of second kingdom selected
-    else if (options.includes(unit.faction) && first !== "") {
-      second = unit.Faction;
-      options = options.filter((option) => option !== second);
-      third = options[0];
-    }
-  });
-
-  if (second) {
-    rules.forEach((rule) => {
-      if (rule.subFaction === second || rule.faction === second) {
-        rule.max = 0.2;
-      }
-      if (rule.subFaction === third || rule.faction === third) {
-        rule.max = 0;
-      }
-    });
-  }
+  // let kindomsAndALly = ["Gaeta", "Zah'ra", "Imperium"];
+  // let firstChoice = "";
+  // let secondChoice = "";
+  // const MESSAGE_A = DWARF_TEXTS.SUB_FACTION_RULES.ALLIES_AND_KINGDOMS_40;
+  // const MESSAGE_B = DWARF_TEXTS.SUB_FACTION_RULES.ALLIES_AND_KINGDOMS_20;
+  // const selectedSubFaction = selectedUnits.map((u) => u.subFaction).find((sF) => kindomsAndALly.includes(sF));
+  // console.log("selectedSubFaction", selectedSubFaction);
+  // if (firstChoice === "") {
+  //   firstChoice = selectedSubFaction;
+  // } else {
+  //   secondChoice = selectedSubFaction;
+  // }
+  // const ruleFirstChoice = firstChoice === "" ? rules.find((r) => r.cardNames[0] === firstChoice) : null;
+  // const ruleSecondChoice = secondChoice === "" ? rules.find((r) => r.cardNames[0] === secondChoice) : null;
+  // ruleFirstChoice.error = MESSAGE_A;
+  // ruleSecondChoice.max = 0.2;
+  // ruleSecondChoice.error = MESSAGE_B;
 };
 
 export { DwarfRules, rules };

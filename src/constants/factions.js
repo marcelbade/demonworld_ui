@@ -1,3 +1,5 @@
+import { DWARF_TEXTS } from "./textsAndMessages";
+
 // SINGLE FACTIONS
 export const DARKELVES = "Dunkelelfen";
 export const LIZARDKIN = "Echsenmenschen";
@@ -36,7 +38,7 @@ export const ALL_FACTIONS_ARRAY = [
 export const ALTERNATIVE_ARMY_SELECTION_TEXT = {
   Imperium: "Wähle eine der Marken",
   Orks: "Wähle einen der Clans oder Clanngett",
-  Zwerge: ["Wähle eines der Königreiche oder Alliierte"],
+  Zwerge: [ DWARF_TEXTS.ALLIES_AND_KINGDOMS_40, DWARF_TEXTS.ALLIES_AND_KINGDOMS_20 ], 
 };
 
 // export const UNIT_OR_SUBFACTION = { units: ["Orks"], subFactions: ["Zwerge", "Imperium"] };

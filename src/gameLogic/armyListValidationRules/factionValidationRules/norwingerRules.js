@@ -2,59 +2,59 @@
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
 // constants
-import { NORWINGER, SUMMONS } from "../../../constants/textsAndMessages";
+import { NORWINGER_TEXTS, SUMMONS_TEXTS } from "../../../constants/textsAndMessages";
 
 const rules = [
   {
     subFaction: "barbarians",
-    cardNames: [NORWINGER.SF.BARBARIANS],
+    cardNames: [NORWINGER_TEXTS.SF.BARBARIANS],
     min: 0.2,
     max: 0.75,
-    error: NORWINGER.SUB_FACTION_RULES.BARBARIANS,
+    error: NORWINGER_TEXTS.SUB_FACTION_RULES.BARBARIANS,
   },
   {
     subFaction: "veterans",
-    cardNames: [NORWINGER.SF.VETERANS],
+    cardNames: [NORWINGER_TEXTS.SF.VETERANS],
     min: 0.0,
     max: 0.4,
-    error: NORWINGER.SUB_FACTION_RULES.VETERANS,
+    error: NORWINGER_TEXTS.SUB_FACTION_RULES.VETERANS,
   },
 
   {
     subFaction: "spellcasters",
-    cardNames: [NORWINGER.SF.STORMLORD, NORWINGER.SF.WITCH],
+    cardNames: [NORWINGER_TEXTS.SF.STORMLORD, NORWINGER_TEXTS.SF.WITCH],
     min: 0.0,
     max: 0.3,
-    error: NORWINGER.SUB_FACTION_RULES.SPELLCASTERS,
+    error: NORWINGER_TEXTS.SUB_FACTION_RULES.SPELLCASTERS,
   },
 
   {
     subFaction: "heroes",
-    cardNames: [NORWINGER.SF.HEROES],
+    cardNames: [NORWINGER_TEXTS.SF.HEROES],
     min: 0.0,
     max: 0.3,
-    error: NORWINGER.SUB_FACTION_RULES.HEROES,
+    error: NORWINGER_TEXTS.SUB_FACTION_RULES.HEROES,
   },
   {
     subFaction: "mightyNorthernBeings",
-    cardNames: [NORWINGER.SF.MIGHTY_BEINGS],
+    cardNames: [NORWINGER_TEXTS.SF.MIGHTY_BEINGS],
     min: 0.0,
     max: 0.4,
-    error: NORWINGER.SUB_FACTION_RULES.MIGHTY_NORTHERN_BEINGS,
+    error: NORWINGER_TEXTS.SUB_FACTION_RULES.MIGHTY_NORTHERN_BEINGS,
   },
   {
     subFaction: "northernAllies",
-    cardNames: [NORWINGER.SF.NORTHERN_ALLIES],
+    cardNames: [NORWINGER_TEXTS.SF.NORTHERN_ALLIES],
     min: 0.0,
     max: 0.25,
-    error: NORWINGER.SUB_FACTION_RULES.NORTHERN_ALLIES,
+    error: NORWINGER_TEXTS.SUB_FACTION_RULES.NORTHERN_ALLIES,
   },
   {
     subFaction: "summons",
-    cardNames: [SUMMONS.TYPE],
+    cardNames: [SUMMONS_TEXTS.TYPE],
     min: 0.0,
     max: 1.0,
-    error: SUMMONS.ERROR,
+    error: SUMMONS_TEXTS.ERROR,
   },
 ];
 
@@ -158,21 +158,21 @@ const NorwingerRules = {
  * @returns an array of objects containing a blocked unit and an error message.
  */
 const neanderRule = (availableUnits, selectedUnits) => {
-  const MESSAGE = NORWINGER.SUB_FACTION_RULES.NEANDERS_RULE;
-  const excludedBarbarianUnits = [NORWINGER.NEANDERS, NORWINGER.SNOW_OGRES];
+  const MESSAGE = NORWINGER_TEXTS.SUB_FACTION_RULES.NEANDERS_RULE;
+  const excludedBarbarianUnits = [NORWINGER_TEXTS.NEANDERS, NORWINGER_TEXTS.SNOW_OGRES];
   const barabarianCount = selectedUnits.filter(
     (u) =>
-      u.subFaction === NORWINGER.SF.BARBARIANS && //
+      u.subFaction === NORWINGER_TEXTS.SF.BARBARIANS && //
       !excludedBarbarianUnits.includes(u.unitName)
   ).length;
 
-  const neandersCount = selectedUnits.filter((u) => u.unitName === NORWINGER.NEANDERS).length;
+  const neandersCount = selectedUnits.filter((u) => u.unitName === NORWINGER_TEXTS.NEANDERS).length;
 
   let result = [];
 
   if (neandersCount === barabarianCount) {
     availableUnits
-      .filter((u) => u.unitName === NORWINGER.NEANDERS)
+      .filter((u) => u.unitName === NORWINGER_TEXTS.NEANDERS)
       .forEach((u) => {
         result.push({ unitBlockedbyRules: u.unitName, message: MESSAGE });
       });
@@ -188,20 +188,20 @@ const neanderRule = (availableUnits, selectedUnits) => {
  * @returns an array of units that need to be removed from the army list immediately.
  */
 const neanderRuleRemove = (selectedUnits) => {
-  const excludedBarbarianUnits = [NORWINGER.NEANDERS, NORWINGER.SNOW_OGRES];
+  const excludedBarbarianUnits = [NORWINGER_TEXTS.NEANDERS, NORWINGER_TEXTS.SNOW_OGRES];
   const barabarianCount = selectedUnits.filter(
     (u) =>
-      u.subFaction === NORWINGER.SF.BARBARIANS && //
+      u.subFaction === NORWINGER_TEXTS.SF.BARBARIANS && //
       !excludedBarbarianUnits.includes(u.unitName)
   ).length;
 
-  const neandersCount = selectedUnits.filter((u) => u.unitName === NORWINGER.NEANDERS).length;
+  const neandersCount = selectedUnits.filter((u) => u.unitName === NORWINGER_TEXTS.NEANDERS).length;
 
   let result = [];
 
   if (neandersCount > barabarianCount) {
     selectedUnits
-      .filter((u) => u.unitName === NORWINGER.NEANDERS)
+      .filter((u) => u.unitName === NORWINGER_TEXTS.NEANDERS)
       .forEach((u) => {
         result.push(u.unitName);
       });
@@ -217,14 +217,14 @@ const neanderRuleRemove = (selectedUnits) => {
  * @returns an array of objects containing a blocked unit and an error message.
  */
 const yetiRule = (availableUnits, selectedUnits) => {
-  const MESSAGE = NORWINGER.SUB_FACTION_RULES.GIANT_YETI_RULE;
-  const areYetisPresent = selectedUnits.filter((u) => u.unitName === NORWINGER.YETIS).length > 0;
+  const MESSAGE = NORWINGER_TEXTS.SUB_FACTION_RULES.GIANT_YETI_RULE;
+  const areYetisPresent = selectedUnits.filter((u) => u.unitName === NORWINGER_TEXTS.YETIS).length > 0;
 
   let result = [];
 
   if (!areYetisPresent) {
     availableUnits
-      .filter((u) => u.unitName === NORWINGER.GIANT_YETI)
+      .filter((u) => u.unitName === NORWINGER_TEXTS.GIANT_YETI)
       .forEach((u) => {
         result.push({ unitBlockedbyRules: u.unitName, message: MESSAGE });
       });
@@ -238,14 +238,14 @@ const yetiRule = (availableUnits, selectedUnits) => {
  * @returns an array of units that need to be removed from the army list immediately.
  */
 const yetiRuleRemove = (selectedUnits) => {
-  const areGiantYetisPresent = selectedUnits.filter((u) => u.unitName === NORWINGER.GIANT_YETI).length > 0;
-  const areYetisPresent = selectedUnits.filter((u) => u.unitName === NORWINGER.YETIS).length > 0;
+  const areGiantYetisPresent = selectedUnits.filter((u) => u.unitName === NORWINGER_TEXTS.GIANT_YETI).length > 0;
+  const areYetisPresent = selectedUnits.filter((u) => u.unitName === NORWINGER_TEXTS.YETIS).length > 0;
 
   let result = [];
 
   if (areGiantYetisPresent && !areYetisPresent) {
     selectedUnits
-      .filter((u) => u.unitName === NORWINGER.GIANT_YETI)
+      .filter((u) => u.unitName === NORWINGER_TEXTS.GIANT_YETI)
       .forEach((u) => {
         result.push(u.unitName);
       });
@@ -260,13 +260,13 @@ const yetiRuleRemove = (selectedUnits) => {
  * @returns an array of objects containing a blocked unit and an error message.
  */
 const mountainKingRule = (availableUnits, selectedUnits) => {
-  const MESSAGE = NORWINGER.SUB_FACTION_RULES.MOUNTAIN_KING_RULE;
-  const areAlliesPresent = selectedUnits.filter((u) => u.subFaction === NORWINGER.SF.NORTHERN_ALLIES).length > 0;
+  const MESSAGE = NORWINGER_TEXTS.SUB_FACTION_RULES.MOUNTAIN_KING_RULE;
+  const areAlliesPresent = selectedUnits.filter((u) => u.subFaction === NORWINGER_TEXTS.SF.NORTHERN_ALLIES).length > 0;
 
   let result = [];
 
   if (!areAlliesPresent) {
-    const foundUnit = availableUnits.find((u) => u.unitName === NORWINGER.MOUNTAIN_KING);
+    const foundUnit = availableUnits.find((u) => u.unitName === NORWINGER_TEXTS.MOUNTAIN_KING);
     result.push({ unitBlockedbyRules: foundUnit.unitName, message: MESSAGE });
   }
   return result;
@@ -278,13 +278,13 @@ const mountainKingRule = (availableUnits, selectedUnits) => {
  * @returns an array of units that need to be removed from the army list immediately.
  */
 const mountainKingRuleRemove = (selectedUnits) => {
-  const isMountainKingPresent = selectedUnits.filter((u) => u.unitName === NORWINGER.MOUNTAIN_KING).length > 0;
-  const areAlliesPresent = selectedUnits.filter((u) => u.subFaction === NORWINGER.SF.NORTHERN_ALLIES).length > 0;
+  const isMountainKingPresent = selectedUnits.filter((u) => u.unitName === NORWINGER_TEXTS.MOUNTAIN_KING).length > 0;
+  const areAlliesPresent = selectedUnits.filter((u) => u.subFaction === NORWINGER_TEXTS.SF.NORTHERN_ALLIES).length > 0;
 
   let result = [];
 
   if (isMountainKingPresent && !areAlliesPresent) {
-    const foundUnit = selectedUnits.find((u) => u.unitName === NORWINGER.MOUNTAIN_KING);
+    const foundUnit = selectedUnits.find((u) => u.unitName === NORWINGER_TEXTS.MOUNTAIN_KING);
     result.push(foundUnit.unitName);
   }
   return result;

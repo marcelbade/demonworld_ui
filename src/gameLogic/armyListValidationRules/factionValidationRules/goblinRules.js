@@ -1,5 +1,5 @@
 import { ORK_CLANS_UNIT_MAPPING } from "../../../constants/factions";
-import { GOBLINS } from "../../../constants/textsAndMessages";
+import { GOBLIN_TEXTS } from "../../../constants/textsAndMessages";
 import { isObjectEmtpy } from "../../../util/utilityFunctions";
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
@@ -13,28 +13,28 @@ const rules = [
     min: 0.3,
     max: 1.0,
     cardNames: ["Infanterie"],
-    error: GOBLINS.SUB_FACTION_RULES.INFANTRY,
+    error: GOBLIN_TEXTS.SUB_FACTION_RULES.INFANTRY,
   },
   {
     subFaction: "engines",
     min: 0.0,
     max: 0.2,
     cardNames: ["Geräte"],
-    error: GOBLINS.SUB_FACTION_RULES.ENGINES,
+    error: GOBLIN_TEXTS.SUB_FACTION_RULES.ENGINES,
   },
   {
     subFaction: "characters",
     min: 0.0,
     max: 0.3,
     cardNames: ["Helden / Befehlshaber"],
-    error: GOBLINS.SUB_FACTION_RULES.CHARACTERS,
+    error: GOBLIN_TEXTS.SUB_FACTION_RULES.CHARACTERS,
   },
   {
     subFaction: "shamans",
     min: 0.0,
     max: 0.3,
     cardNames: ["Schamanen"],
-    error: GOBLINS.SUB_FACTION_RULES.SHAMANS,
+    error: GOBLIN_TEXTS.SUB_FACTION_RULES.SHAMANS,
   },
 
   {
@@ -42,7 +42,7 @@ const rules = [
     min: 0.0,
     max: 0.4,
     cardNames: ["Rieseninsekten"],
-    error: GOBLINS.SUB_FACTION_RULES.GIANTINSECTS,
+    error: GOBLIN_TEXTS.SUB_FACTION_RULES.GIANTINSECTS,
   },
 
   {
@@ -50,14 +50,14 @@ const rules = [
     min: 0.0,
     max: 0.4,
     cardNames: ["Insektenreiter"],
-    error: GOBLINS.SUB_FACTION_RULES.INSECTRIDERS,
+    error: GOBLIN_TEXTS.SUB_FACTION_RULES.INSECTRIDERS,
   },
   {
     subFaction: "orks",
     min: 0.0,
     max: 0.2,
     cardNames: ["Orks"],
-    error: GOBLINS.SUB_FACTION_RULES.ORKS,
+    error: GOBLIN_TEXTS.SUB_FACTION_RULES.ORKS_TEXTS,
   },
 ];
 
@@ -152,7 +152,7 @@ const blockClanngett = (availableAlliedUnits) => {
   const clanngettUnits = availableAlliedUnits.filter((u) => u.subFaction === "Clanngett");
 
   clanngettUnits.forEach((u) => {
-    result.push({ unitBlockedbyRules: u.unitName, message: GOBLINS.SUB_FACTION_RULES.NO_CLANNGETT });
+    result.push({ unitBlockedbyRules: u.unitName, message: GOBLIN_TEXTS.SUB_FACTION_RULES.NO_CLANNGETT });
   });
 
   return result;
@@ -174,7 +174,7 @@ const singleClanOnly = (selectedUnits, availableAlliedUnits) => {
 
     availableAlliedUnits.forEach((u) => {
       if (u.subFaction === "Clanntruppen" && !allowedClanUnits.includes(u.unitName)) {
-        result.push({ unitBlockedbyRules: u.unitName, message: GOBLINS.SUB_FACTION_RULES.SINGLE_CLAN_ONLY });
+        result.push({ unitBlockedbyRules: u.unitName, message: GOBLIN_TEXTS.SUB_FACTION_RULES.SINGLE_CLAN_ONLY });
       }
     });
   }

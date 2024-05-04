@@ -1,4 +1,4 @@
-import { LIZARDMEN } from "../../../constants/textsAndMessages";
+import { LIZARDMEN_TEXTS } from "../../../constants/textsAndMessages";
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
 
@@ -8,28 +8,28 @@ const rules = [
     min: 0.2,
     max: 0.5,
     cardNames: ["Grundtruppen"],
-    error: LIZARDMEN.SUB_FACTION_RULES.BASICTROOPS,
+    error: LIZARDMEN_TEXTS.SUB_FACTION_RULES.BASICTROOPS,
   },
   {
     subFaction: "specialists",
     min: 0.0,
     max: 0.4,
     cardNames: ["Spezialisierte Truppen"],
-    error: LIZARDMEN.SUB_FACTION_RULES.SPECIALISTS,
+    error: LIZARDMEN_TEXTS.SUB_FACTION_RULES.SPECIALISTS,
   },
   {
     subFaction: "heroes",
     min: 0.0,
     max: 0.3,
     cardNames: ["Helden/Befehlshaber"],
-    error: LIZARDMEN.SUB_FACTION_RULES.HEROES,
+    error: LIZARDMEN_TEXTS.SUB_FACTION_RULES.HEROES,
   },
   {
     subFaction: "mages",
     min: 0.0,
     max: 0.3,
     cardNames: ["Magier"],
-    error: LIZARDMEN.SUB_FACTION_RULES.MAGES,
+    error: LIZARDMEN_TEXTS.SUB_FACTION_RULES.MAGES,
   },
 
   {
@@ -37,7 +37,7 @@ const rules = [
     min: 0.0,
     max: 0.35,
     cardNames: ["Großelemente"],
-    error: LIZARDMEN.SUB_FACTION_RULES.GIANTELEMENTS,
+    error: LIZARDMEN_TEXTS.SUB_FACTION_RULES.GIANTELEMENTS,
   },
 ];
 

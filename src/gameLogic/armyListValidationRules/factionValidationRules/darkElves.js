@@ -1,49 +1,49 @@
-import { DARKELVES, SUMMONS, UNIT_TYPES } from "../../../constants/textsAndMessages";
+import { DARKELF_TEXTS, SUMMONS_TEXTS, UNIT_TYPES } from "../../../constants/textsAndMessages";
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
 
 const rules = [
   {
     subFaction: "warriorCaste",
-    cardNames: [DARKELVES.SF.WARRIORCASTE],
+    cardNames: [DARKELF_TEXTS.SF.WARRIORCASTE],
     min: 0.3,
     max: 1.0,
-    error: DARKELVES.SUB_FACTION_RULES.WARRIOR_CASTE,
+    error: DARKELF_TEXTS.SUB_FACTION_RULES.WARRIOR_CASTE,
   },
   {
     subFaction: "nobleCaste",
-    cardNames: [DARKELVES.SF.NOBLECASTE],
+    cardNames: [DARKELF_TEXTS.SF.NOBLECASTE],
     min: 0.0,
     max: 0.5,
-    error: DARKELVES.SUB_FACTION_RULES.NOBLE_CASTE,
+    error: DARKELF_TEXTS.SUB_FACTION_RULES.NOBLE_CASTE,
   },
   {
     subFaction: "magicianCaste",
-    cardNames: [DARKELVES.SF.MAGICIANCASTE, UNIT_TYPES.M],
+    cardNames: [DARKELF_TEXTS.SF.MAGICIANCASTE, UNIT_TYPES.M],
     min: 0.0,
     max: 0.4,
-    error: DARKELVES.SUB_FACTION_RULES.MAGICIAN_CASTE,
+    error: DARKELF_TEXTS.SUB_FACTION_RULES.MAGICIAN_CASTE,
   },
   {
     subFaction: "priestCaste",
-    cardNames: [DARKELVES.SF.PRIESTCASTE, DARKELVES.SF.PRIESTRESSES],
+    cardNames: [DARKELF_TEXTS.SF.PRIESTCASTE, DARKELF_TEXTS.SF.PRIESTRESSES],
     min: 0.0,
     max: 0.4,
-    error: DARKELVES.SUB_FACTION_RULES.PRIEST_CASTE,
+    error: DARKELF_TEXTS.SUB_FACTION_RULES.PRIEST_CASTE,
   },
   {
     subFaction: "heroes",
-    cardNames: [DARKELVES.SF.COMMANDER, DARKELVES.SF.HERO, UNIT_TYPES.H],
+    cardNames: [DARKELF_TEXTS.SF.COMMANDER, DARKELF_TEXTS.SF.HERO, UNIT_TYPES.H],
     min: 0.0,
     max: 0.4,
-    error: DARKELVES.SUB_FACTION_RULES.HEROES,
+    error: DARKELF_TEXTS.SUB_FACTION_RULES.HEROES,
   },
   {
     subFaction: "summons",
-    cardNames: [SUMMONS.TYPE],
+    cardNames: [SUMMONS_TEXTS.TYPE],
     min: 0.0,
     max: 0.0,
-    error: SUMMONS.ERROR,
+    error: SUMMONS_TEXTS.ERROR,
   },
 ];
 
@@ -106,8 +106,8 @@ const DarkElveRules = {
     const magiciansVsPriests = () => {
       const INCREMENT = 10;
       const NET_TOTAL = 4; // 40% default allowance for either caste
-      const PRIESTS = [DARKELVES.SF.PRIESTRESSES, DARKELVES.SF.PRIESTCASTE, "magicianCaste"];
-      const MAGICIANS = [UNIT_TYPES.M, DARKELVES.SF.MAGICIANCASTE, "priestCaste"];
+      const PRIESTS = [DARKELF_TEXTS.SF.PRIESTRESSES, DARKELF_TEXTS.SF.PRIESTCASTE, "magicianCaste"];
+      const MAGICIANS = [UNIT_TYPES.M, DARKELF_TEXTS.SF.MAGICIANCASTE, "priestCaste"];
 
       if (validationData.selectedUnits !== undefined && validationData.selectedUnits.length > 0) {
         for (let i = validationData.selectedUnits.length - 1; i >= 0; i--) {

@@ -3,7 +3,7 @@ import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
 //  constants
 import { ORK_CLANS_UNIT_MAPPING } from "../../../constants/factions";
-import { ORKS } from "../../../constants/textsAndMessages";
+import { ORKS_TEXTS } from "../../../constants/textsAndMessages";
 
 const rules = [
   {
@@ -11,28 +11,28 @@ const rules = [
     cardNames: ["Einheit"],
     min: 0.25,
     max: 1.0,
-    error: ORKS.SUB_FACTION_RULES.UNIT,
+    error: ORKS_TEXTS.SUB_FACTION_RULES.UNIT,
   },
   {
     subFaction: "characters",
     cardNames: ["Helden / Befehlshaber"],
     min: 0.0,
     max: 0.3,
-    error: ORKS.SUB_FACTION_RULES.CHARACTERS,
+    error: ORKS_TEXTS.SUB_FACTION_RULES.CHARACTERS,
   },
   {
     subFaction: "engines",
     cardNames: ["Gerät"],
     min: 0.0,
     max: 0.3,
-    error: ORKS.SUB_FACTION_RULES.ENGINES,
+    error: ORKS_TEXTS.SUB_FACTION_RULES.ENGINES,
   },
   {
     subFaction: "giants",
     cardNames: ["Giganten"],
     min: 0.0,
     max: 0.3,
-    error: ORKS.SUB_FACTION_RULES.GIANTS,
+    error: ORKS_TEXTS.SUB_FACTION_RULES.GIANTS,
   },
   {
     subFaction: "clantroops",
@@ -46,14 +46,14 @@ const rules = [
     cardNames: ["Clanngett"],
     min: 0.0,
     max: 0.5,
-    error: ORKS.SUB_FACTION_RULES.CLANNGETT,
+    error: ORKS_TEXTS.SUB_FACTION_RULES.CLANNGETT,
   },
   {
     subFaction: "wizards",
     cardNames: ["Zauberer"],
     min: 0.0,
     max: 0.3,
-    error: ORKS.SUB_FACTION_RULES.WIZARDS,
+    error: ORKS_TEXTS.SUB_FACTION_RULES.WIZARDS,
   },
 ];
 
@@ -178,7 +178,7 @@ const switchBetweenAlternativeRules = (selectedAlternativeLists) => {
         rule.max = mapping.limit;
       }
       if (rule.subFaction === "clantroops" && rule.subFaction === mapping.subFaction)
-        rule.error = ORKS.SUB_FACTION_RULES.CLANTROOPS(mapping.limit * 100);
+        rule.error = ORKS_TEXTS.SUB_FACTION_RULES.CLANTROOPS(mapping.limit * 100);
     }
   }
 };
@@ -213,7 +213,7 @@ const setUnitsForClans = (availableUnits, selectedAlternativeLists) => {
 
   availableUnits.forEach((u) => {
     if (u.subFaction === "Clanntruppen" && !ORK_CLANS_UNIT_MAPPING[selectedAlternative].includes(u.unitName)) {
-      result.push({ unitBlockedbyRules: u.unitName, message: ORKS.SUB_FACTION_RULES.AVAILABLE_CLANUNITS });
+      result.push({ unitBlockedbyRules: u.unitName, message: ORKS_TEXTS.SUB_FACTION_RULES.AVAILABLE_CLANUNITS });
     }
   });
 
@@ -228,7 +228,7 @@ const setUnitsForClans = (availableUnits, selectedAlternativeLists) => {
  * @returns
  */
 const checkForGoblinMax = (selectedUnits, totalPointsAllowance, availableUnits) => {
-  const goblinUnits = [ORKS.GOBLIN_MERCENARIES.SPIDER_RIDERS, ORKS.GOBLIN_MERCENARIES.SPIDER_ARCHERS];
+  const goblinUnits = [ORKS_TEXTS.GOBLIN_MERCENARIES.SPIDER_RIDERS, ORKS_TEXTS.GOBLIN_MERCENARIES.SPIDER_ARCHERS];
 
   const GOBLIN_MAX_PERCENTAGE = 0.2;
   const goblinPointAllowance = totalPointsAllowance * GOBLIN_MAX_PERCENTAGE;
@@ -250,7 +250,7 @@ const checkForGoblinMax = (selectedUnits, totalPointsAllowance, availableUnits) 
     .filter((u) => goblinUnits.includes(u.unitName))
     .forEach((u) => {
       if (currentGoblinTotal + u.points > goblinPointAllowance) {
-        result.push({ unitBlockedbyRules: u.unitName, message: ORKS.SUB_FACTION_RULES.GOBLINS });
+        result.push({ unitBlockedbyRules: u.unitName, message: ORKS_TEXTS.SUB_FACTION_RULES.GOBLIN_TEXTS });
       }
     });
 

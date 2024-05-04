@@ -1,4 +1,4 @@
-import { EMPIRE } from "../../../constants/textsAndMessages";
+import { EMPIRE_TEXTS } from "../../../constants/textsAndMessages";
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
 
@@ -8,7 +8,7 @@ const rules = [
     cardNames: ["Kaiserheer"],
     min: 0.1,
     max: 0.5,
-    error: EMPIRE.SUB_FACTION_RULES.IMPERIAL_ARMY,
+    error: EMPIRE_TEXTS.SUB_FACTION_RULES.IMPERIAL_ARMY,
   },
 
   {
@@ -16,7 +16,7 @@ const rules = [
     cardNames: ["Provinzheer"],
     min: 0.2,
     max: 0.5,
-    error: EMPIRE.SUB_FACTION_RULES.PROVINCIAL_ARMY,
+    error: EMPIRE_TEXTS.SUB_FACTION_RULES.PROVINCIAL_ARMY,
   },
 
   {
@@ -24,21 +24,21 @@ const rules = [
     cardNames: ["Orden"],
     min: 0.0,
     max: 0.4,
-    error: EMPIRE.SUB_FACTION_RULES.ORDER_TROOPS_AND_MAGICIANS,
+    error: EMPIRE_TEXTS.SUB_FACTION_RULES.ORDER_TROOPS_AND_MAGICIANS,
   },
   {
     subFaction: "heroesAndCommanders",
     cardNames: ["Helden/Befehlshaber", "Held"],
     min: 0.0,
     max: 0.3,
-    error: EMPIRE.SUB_FACTION_RULES.HEROES_AND_COMMANDERS,
+    error: EMPIRE_TEXTS.SUB_FACTION_RULES.HEROES_AND_COMMANDERS,
   },
   {
     subFaction: "spellcasters",
     cardNames: ["Zauberer", "Priester"],
     min: 0.0,
     max: 0.3,
-    error: EMPIRE.SUB_FACTION_RULES.SPELLCASTERS,
+    error: EMPIRE_TEXTS.SUB_FACTION_RULES.SPELLCASTERS,
   },
 
   {
@@ -46,7 +46,7 @@ const rules = [
     cardNames: ["Zentralmark"],
     min: 0.0,
     max: 0.3,
-    error: EMPIRE.SUB_FACTION_RULES.CENTRAL_MARK_SPECIALS,
+    error: EMPIRE_TEXTS.SUB_FACTION_RULES.CENTRAL_MARK_SPECIALS,
   },
 
   {
@@ -54,7 +54,7 @@ const rules = [
     cardNames: ["Ostmark"],
     min: 0.1,
     max: 0.5,
-    error: EMPIRE.SUB_FACTION_RULES.EASTERN_MARK_SPECIALS,
+    error: EMPIRE_TEXTS.SUB_FACTION_RULES.EASTERN_MARK_SPECIALS,
   },
 
   {
@@ -62,7 +62,7 @@ const rules = [
     cardNames: ["Westmark"],
     min: 0.1,
     max: 0.5,
-    error: EMPIRE.SUB_FACTION_RULES.WESTERN_MARK_SPECIALS,
+    error: EMPIRE_TEXTS.SUB_FACTION_RULES.WESTERN_MARK_SPECIALS,
   },
 
   {
@@ -70,7 +70,7 @@ const rules = [
     cardNames: ["Südmark"],
     min: 0.1,
     max: 0.5,
-    error: EMPIRE.SUB_FACTION_RULES.SOUTHERN_MARK_SPECIALS,
+    error: EMPIRE_TEXTS.SUB_FACTION_RULES.SOUTHERN_MARK_SPECIALS,
   },
 
   {
@@ -78,7 +78,7 @@ const rules = [
     cardNames: ["Nordmark"],
     min: 0.1,
     max: 0.5,
-    error: EMPIRE.SUB_FACTION_RULES.NORTHERN_MARK_SPECIALS,
+    error: EMPIRE_TEXTS.SUB_FACTION_RULES.NORTHERN_MARK_SPECIALS,
   },
 
   {
@@ -86,7 +86,7 @@ const rules = [
     cardNames: ["Zwerge"],
     min: 0.0,
     max: 0.2,
-    error: EMPIRE.SUB_FACTION_RULES.ALLY,
+    error: EMPIRE_TEXTS.SUB_FACTION_RULES.ALLY,
   },
 ];
 

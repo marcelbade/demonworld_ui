@@ -201,12 +201,12 @@ export const UNIT_TYPES = {
   S: "Beschworenes Element",
 };
 
-export const SUMMONS = {
+export const SUMMONS_TEXTS = {
   TYPE: "Beschwörung",
   ERROR: "Beschwörungen kosten keine Punkte und sind hier nur aufgeführt um die passenden Rekrutierungskarten zu erzeugen.",
 };
 
-export const DARKELVES = {
+export const DARKELF_TEXTS = {
   SF: {
     WARRIORCASTE: "Kriegerkaste",
     NOBLECASTE: "Adelskaste",
@@ -227,18 +227,22 @@ export const DARKELVES = {
   ERRORS: {},
 };
 
-export const DWARVES = {
+export const DWARF_TEXTS = {
   SUB_FACTION_RULES: {
     UNITS: "Deine Armeeliste muss zu mindestens 30% aus Einheiten bestehen.",
     CHARACTERS: "Deine Armeeliste darf zu höchstens 50% aus Helden bestehen.",
     ALLIES_AND_KINGDOMS_40:
-      "Deine Armmee darf max. zu 40% aus Einheiten des zuerst gewählten Königreiches oder Truppen des Imperiums bestehen. ",
+      "Deine Armmee darf max. zu 40% aus Einheiten des zuerst gewählten Königreiches oder Truppen des Imperiums bestehen.",
     ALLIES_AND_KINGDOMS_20:
-      "Deine Armmee darf max. zu 20% aus Einheiten des zweiten gewählten Königreiches oder Truppen des Imperiums bestehen. ",
+      "Deine Armmee darf max. zu 20% aus Einheiten des zweiten gewählten Königreiches oder Truppen des Imperiums bestehen.",
+  },
+  SELECTION_TEXTS: {
+    FOURTY_PERCENT: "Wähle ein Königreich oder Alliierte die bis zu 40% deiner Liste bilden dürfen.",
+    TWENTY_PERCENT: "Wähle ein Königreich oder Alliierte die bis zu 20% deiner Liste bilden dürfen.",
   },
 };
 
-export const ELVES = {
+export const ELF_TEXTS = {
   ATHULAE: "Athulae der Pfeil",
   LAURELION: "Laurelion das Schwert",
   THINUVIEL: "Thinuviel die Geschwinde",
@@ -291,7 +295,7 @@ export const ELVES = {
   },
 };
 
-export const EMPIRE = {
+export const EMPIRE_TEXTS = {
   SUB_FACTION_RULES: {
     IMPERIAL_ARMY: "Deine Armeeliste muss zu 10% bis 50% aus Einheiten des Kaiserheeres bestehen.",
     PROVINCIAL_ARMY: "Deine Armeeliste muss zu 20% bis 50% aus Einheiten des Provinzheeres bestehen.",
@@ -307,7 +311,7 @@ export const EMPIRE = {
   },
 };
 
-export const GOBLINS = {
+export const GOBLIN_TEXTS = {
   SUB_FACTION_RULES: {
     INFANTRY: "Deine Armeeliste muss zu mindestens 30% aus Infanterie bestehen.",
     ENGINES: "Deine Armeeliste darf maximal zu 20% aus Geräten bestehen.",
@@ -315,7 +319,7 @@ export const GOBLINS = {
     SHAMANS: "Deine Armeeliste darf maximal zu 30% aus Schamanen bestehen.",
     GIANTINSECTS: "Deine Armeeliste darf maximal zu 40% aus Rieseninsekten bestehen.",
     INSECTRIDERS: "Deine Armeeliste darf maximal zu 40% aus Insektenreiter bestehen.",
-    ORKS: "Deine Armeeliste darf zu maximal zu 20% aus Orks bestehen.",
+    ORKS_TEXTS: "Deine Armeeliste darf zu maximal zu 20% aus Orks bestehen.",
     NO_CLANNGETT: "Clanngett-Truppen dürfen nicht als Alliierte gewählt werden.",
     SINGLE_CLAN_ONLY: "Deine Armeeliste darf nur Clanntruppen eines Clans beinhalten",
   },
@@ -324,18 +328,18 @@ export const GOBLINS = {
   },
 };
 
-export const ISHTAK = {
+export const ISHTAK_TEXTS = {
   SUB_FACTION_RULES: {
     HUMANS: "Deine Armeeliste muss zu 10% bis 60% aus Menschen bestehen.",
     BEASTMEN: "Deine Armeeliste muss zu 10% bis 60% aus Tiermenschen bestehen.",
     DEMONS: "Deine Armeeliste darf zu höchstens 50% aus Dämonen bestehen.",
-    UNDEAD: "Deine Armeeliste darf zu höchstens 50% aus Untoten bestehen.",
+    UNDEAD_TEXTS: "Deine Armeeliste darf zu höchstens 50% aus Untoten bestehen.",
     ICEGIANTS: "Deine Armeeliste darf zu höchstens 30% aus Eisriesen bestehen.",
     ICEWITCHES: "Deine Armeeliste muss zu 10% bis 60% aus Eishexen bestehen.",
   },
 };
 
-export const LIZARDMEN = {
+export const LIZARDMEN_TEXTS = {
   SUB_FACTION_RULES: {
     BASICTROOPS: "Deine Armeeliste muss zu mindestens 20% aus Grundtruppen bestehen.",
     SPECIALISTS: "Deine Armeeliste darf maximal zu 40% aus spezialisierten Truppen bestehen.",
@@ -345,7 +349,7 @@ export const LIZARDMEN = {
   },
 };
 
-export const NORWINGER = {
+export const NORWINGER_TEXTS = {
   MOUNTAIN_KING: "Ungin Eisenbruch",
   YETIS: "Yetikrieger",
   GIANT_YETI: "Riesenyeti",
@@ -374,7 +378,7 @@ export const NORWINGER = {
   },
 };
 
-export const ORKS = {
+export const ORKS_TEXTS = {
   SUB_FACTION_RULES: {
     UNIT: "Deine Armeeliste muss zu mindestens 25% aus Einheiten bestehen.",
     CHARACTERS: "Deine Armeeliste darf zu höchstens 30% aus Helden bestehen.",
@@ -385,7 +389,7 @@ export const ORKS = {
     },
     CLANNGETT: "Deine Armeeliste darf zu höchstens 50% aus Einheiten Clanngetts bestehen.",
     WIZARDS: "Deine Armeeliste darf zu höchstens 40% aus Zauberern bestehen.",
-    GOBLINS: "Deine Armeeliste darf zu maximal zu 20% aus Goblins bestehen.",
+    GOBLIN_TEXTS: "Deine Armeeliste darf zu maximal zu 20% aus Goblins bestehen.",
     AVAILABLE_CLANUNITS: "Dieser Clan kann diese Einehit nicht auswählen.",
   },
   GOBLIN_MERCENARIES: {
@@ -394,7 +398,7 @@ export const ORKS = {
   },
 };
 
-export const THAIN = {
+export const THAIN_TEXTS = {
   SUB_FACTION_RULES: {
     TRIBAL_WARRIORS: "Deine Armeeliste muss zu 10% bis 80% aus Stammeskriegern bestehen.",
     VETERANS: "Deine Armeeliste darf zu höchstens 50% aus Veteranen bestehen.",
@@ -413,7 +417,7 @@ export const THAIN = {
   },
 };
 
-export const UNDEAD = {
+export const UNDEAD_TEXTS = {
   SUB_FACTION_RULES: {
     LESSER_COVENANT: "Deine Armeeliste muss zu 20 bis 70% aus Einheiten des Großen Bundes bestehen.",
     GREATER_COVENANT: "Deine Armeeliste muss zu 15 bis 50% aus Einheiten des Großen Bundes bestehen.",
@@ -428,14 +432,14 @@ export const UNDEAD = {
     ALLIES: "Diese Einheit steht nicht als Alliierter zur Verfügung.",
   },
 };
-export const CITY_STATES = {
+export const SOUTHERN_CITY_STATES_TEXTS = {
   SF: {
     PROVINCIAL: "Provinzheer",
     NORTH: "Truppen des Nordens",
     SOUTH: "Truppen des Südens",
     ORDER: "Orden des wahren Glaubens",
     BROTHERHOOD: "Bruderschaft des Sandes",
-    SUMMONS: "Beschwörung",
+    SUMMONS_TEXTS: "Beschwörung",
   },
 
   SF_RULES: {
@@ -452,10 +456,10 @@ export const CITY_STATES = {
       return `Du musst mindestens eine Einheit des ${province} aufstellen, um einen Befehlshaber oder Helden des Süden aufstellen zu können.`;
     },
   },
-  REGIONS :{
-      NORTHERN:"Nordens",
-      SOUTHERN:"Südens",
-  }
+  REGIONS: {
+    NORTHERN: "Nordens",
+    SOUTHERN: "Südens",
+  },
 };
 
 export const SPECIAL_ITEMS = {

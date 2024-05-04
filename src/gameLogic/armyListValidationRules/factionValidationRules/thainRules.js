@@ -4,7 +4,7 @@ import validationResults from "./validationResultsObjectProvider";
 //  constants
 import { EXCEMPT_FROM_TRIBES_RULE, THAIN_TRIBES } from "../../../constants/factions";
 import { UNIT, MAGE } from "../../../constants/unitTypes";
-import { THAIN } from "../../../constants/textsAndMessages";
+import { THAIN_TEXTS } from "../../../constants/textsAndMessages";
 
 const rules = [
   {
@@ -12,7 +12,7 @@ const rules = [
     cardNames: ["Stammeskrieger"],
     min: 0.2,
     max: 0.8,
-    error: THAIN.SUB_FACTION_RULES.TRIBAL_WARRIORS,
+    error: THAIN_TEXTS.SUB_FACTION_RULES.TRIBAL_WARRIORS,
   },
 
   {
@@ -20,7 +20,7 @@ const rules = [
     cardNames: ["Veteranen der Stämme"],
     min: 0.0,
     max: 0.5,
-    error: THAIN.SUB_FACTION_RULES.VETERANS,
+    error: THAIN_TEXTS.SUB_FACTION_RULES.VETERANS,
   },
 
   {
@@ -28,28 +28,28 @@ const rules = [
     cardNames: ["Schamane"],
     min: 0.0,
     max: 0.5,
-    error: THAIN.SUB_FACTION_RULES.SHAMANS,
+    error: THAIN_TEXTS.SUB_FACTION_RULES.SHAMANS,
   },
   {
     subFaction: "GreatChampionsHeroesCommanders",
     cardNames: ["Groß-Champions / Helden / Befehlshaber"],
     min: 0.0,
     max: 0.3,
-    error: THAIN.SUB_FACTION_RULES.GREATCHAMPIONS_HEROES_COMMANDERS,
+    error: THAIN_TEXTS.SUB_FACTION_RULES.GREATCHAMPIONS_HEROES_COMMANDERS,
   },
   {
     subFaction: "Gar'Ydwen",
     cardNames: ["Gar'Ydwen"],
     min: 0.0,
     max: 0.4,
-    error: THAIN.SUB_FACTION_RULES.GAR_Y_DWEN,
+    error: THAIN_TEXTS.SUB_FACTION_RULES.GAR_Y_DWEN,
   },
   {
     subFaction: "dorgaChurch",
     cardNames: ["Dorga-Kirche"],
     min: 0.0,
     max: 0.4,
-    error: THAIN.SUB_FACTION_RULES.DORGA_CHURCH,
+    error: THAIN_TEXTS.SUB_FACTION_RULES.DORGA_CHURCH,
   },
 ];
 
@@ -151,7 +151,7 @@ const ThainRules = {
  */
 const allUnitsNeedTribes = (selectedUnits) => {
   let result = [];
-  const MESSAGE = THAIN.ERRORS.TRIBE_MESSAGE;
+  const MESSAGE = THAIN_TEXTS.ERRORS.TRIBE_MESSAGE;
 
   selectedUnits
     .filter((u) => !EXCEMPT_FROM_TRIBES_RULE.includes(u.unitName))
@@ -235,7 +235,7 @@ const championTribeMapping = [
 const greatChampionRule = (selectedUnits) => {
   let result = [];
 
-  const MESSAGE = THAIN.ERRORS.CHAMPION_MESSAGE;
+  const MESSAGE = THAIN_TEXTS.ERRORS.CHAMPION_MESSAGE;
 
   let presentTribes = selectedUnits.filter((u) => THAIN_TRIBES.includes(u.secondSubFaction)).map((u) => u.secondSubFaction);
   let missingTribes = THAIN_TRIBES.filter((u) => !presentTribes.includes(u));
@@ -286,7 +286,7 @@ const greatChampionRemove = (selectedUnits) => {
 const dorgaPriestRule = (selectedUnits, availableUnits) => {
   let result = [];
 
-  const MESSAGE = THAIN.ERRORS.DORGA_MESSAGE;
+  const MESSAGE = THAIN_TEXTS.ERRORS.DORGA_MESSAGE;
 
   let listHasDorgaUnit = selectedUnits.filter((u) => u.subFaction === "Dorga-Kirche" && u.unitType === UNIT).length > 0;
 
@@ -327,7 +327,7 @@ const dorgaPriestRemove = (selectedUnits) => {
  * @returns array of objects containing a blocked unit and an error message.
  */
 const veteranRule = (selectedUnits, availableUnits) => {
-  const MESSAGE = THAIN.ERRORS.VETERAN_MESSAGE;
+  const MESSAGE = THAIN_TEXTS.ERRORS.VETERAN_MESSAGE;
 
   let result = [];
 

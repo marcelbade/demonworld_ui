@@ -2,7 +2,7 @@
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
 // constants
-import { CITY_STATES, SUMMONS } from "../../../constants/textsAndMessages";
+import { SOUTHERN_CITY_STATES_TEXTS, SUMMONS_TEXTS } from "../../../constants/textsAndMessages";
 import { MAGE, HERO, UNIT, GIANT } from "../../../constants/unitTypes";
 
 const rules = [
@@ -10,44 +10,44 @@ const rules = [
     subFaction: "provincialTroops",
     min: 0.3,
     max: 1.0,
-    cardNames: [CITY_STATES.SF.PROVINCIAL],
-    error: CITY_STATES.SF_RULES.PROVINCIAL,
+    cardNames: [SOUTHERN_CITY_STATES_TEXTS.SF.PROVINCIAL],
+    error: SOUTHERN_CITY_STATES_TEXTS.SF_RULES.PROVINCIAL,
   },
   {
     subFaction: "northernTroops",
     min: 0.0,
     max: 0.5,
-    cardNames: [CITY_STATES.SF.NORTH],
-    error: CITY_STATES.SF_RULES.NORTH,
+    cardNames: [SOUTHERN_CITY_STATES_TEXTS.SF.NORTH],
+    error: SOUTHERN_CITY_STATES_TEXTS.SF_RULES.NORTH,
   },
   {
     subFaction: "southernTroops",
     min: 0.0,
     max: 0.5,
-    cardNames: [CITY_STATES.SF.SOUTH],
-    error: CITY_STATES.SF_RULES.SOUTH,
+    cardNames: [SOUTHERN_CITY_STATES_TEXTS.SF.SOUTH],
+    error: SOUTHERN_CITY_STATES_TEXTS.SF_RULES.SOUTH,
   },
   {
     subFaction: "orderOfTrueFaith",
     min: 0.0,
     max: 0.4,
-    cardNames: [CITY_STATES.SF.ORDER],
-    error: CITY_STATES.SF_RULES.ORDER,
+    cardNames: [SOUTHERN_CITY_STATES_TEXTS.SF.ORDER],
+    error: SOUTHERN_CITY_STATES_TEXTS.SF_RULES.ORDER,
   },
 
   {
     subFaction: "brotherhoodOfSand",
     min: 0.0,
     max: 0.4,
-    cardNames: [CITY_STATES.SF.BROTHERHOOD],
-    error: CITY_STATES.SF_RULES.BROTHERHOOD_OF_SAND,
+    cardNames: [SOUTHERN_CITY_STATES_TEXTS.SF.BROTHERHOOD],
+    error: SOUTHERN_CITY_STATES_TEXTS.SF_RULES.BROTHERHOOD_OF_SAND,
   },
   {
     subFaction: "Summons",
     min: 0.0,
     max: 0.0,
     cardNames: ["Beschwörung"],
-    error: SUMMONS.ERROR,
+    error: SUMMONS_TEXTS.ERROR,
   },
 ];
 
@@ -108,12 +108,12 @@ const SouthernCityStatesRules = {
       validationData.totalPointsAllowance
     );
     let testNorthernRegion = regionRule(
-      CITY_STATES.REGIONS.NORTHERN, //
+      SOUTHERN_CITY_STATES_TEXTS.REGIONS.NORTHERN, //
       validationData.selectedUnits,
       validationData.availableUnits
     );
     let testSouthernthernRegion = regionRule(
-      CITY_STATES.REGIONS.SOUTHERN, //
+      SOUTHERN_CITY_STATES_TEXTS.REGIONS.SOUTHERN, //
       validationData.selectedUnits,
       validationData.availableUnits
     );
@@ -138,11 +138,11 @@ const SouthernCityStatesRules = {
 
     // Are there units that need to be removed from the list?
     let testNorthernRegionRemove = regionRuleRemove(
-      CITY_STATES.REGIONS.NORTHERN,
+      SOUTHERN_CITY_STATES_TEXTS.REGIONS.NORTHERN,
       validationData.selectedUnits //
     );
     let testSouthernRegionRemove = regionRuleRemove(
-      CITY_STATES.REGIONS.SOUTHERN,
+      SOUTHERN_CITY_STATES_TEXTS.REGIONS.SOUTHERN,
       validationData.selectedUnits //
     );
 
@@ -164,11 +164,11 @@ const SouthernCityStatesRules = {
  * @returns array of objects containing a blocked unit and an error message.
  */
 const brotherhoodOrOrder = (selectedUnits, availableUnits) => {
-  const MESSAGE = CITY_STATES.ERRORS.BROTHERHOOD_ORDER;
+  const MESSAGE = SOUTHERN_CITY_STATES_TEXTS.ERRORS.BROTHERHOOD_ORDER;
 
   let FACTIONS = [
-    CITY_STATES.SF.ORDER, //
-    CITY_STATES.SF.BROTHERHOOD,
+    SOUTHERN_CITY_STATES_TEXTS.SF.ORDER, //
+    SOUTHERN_CITY_STATES_TEXTS.SF.BROTHERHOOD,
   ];
 
   let result = [];
@@ -198,7 +198,7 @@ const brotherhoodOrOrder = (selectedUnits, availableUnits) => {
 // TODO: remove function missing, make function global since there are several armies with this logic. This army needs the function twice: heroes/wizards and giants.
 const totalPointsForMagiciansAndHeroes = (selectedUnits, availableUnits, totalPointsAllowance) => {
   const MAGICIAN_AND_HEROES_LIMIT = 40;
-  const MESSAGE = CITY_STATES.ERRORS.MAX_LIMIT_CHARACTERS;
+  const MESSAGE = SOUTHERN_CITY_STATES_TEXTS.ERRORS.MAX_LIMIT_CHARACTERS;
   const max_percentage = (totalPointsAllowance * MAGICIAN_AND_HEROES_LIMIT) / 100;
 
   let shamansAndHeroesTotal = 0;
@@ -228,10 +228,10 @@ const totalPointsForMagiciansAndHeroes = (selectedUnits, availableUnits, totalPo
  * @returns array of objects containing a blocked unit and an error message.
  */
 const regionRule = (province, selectedUnits, availableUnits) => {
-  // province  ==>  CITY_STATES.REGIONS
+  // province  ==>  SOUTHERN_CITY_STATES_TEXTS.REGIONS
 
   let result = [];
-  const MESSAGE = CITY_STATES.ERRORS.REGION_HEROES(province);
+  const MESSAGE = SOUTHERN_CITY_STATES_TEXTS.ERRORS.REGION_HEROES(province);
 
   let listHasProvincialUnits =
     selectedUnits.filter((u) => u.subFaction === `Truppen des ${province}` && (u.unitType === UNIT || u.unitType === GIANT)).length > 0;

@@ -13,7 +13,7 @@ Tiermenschen aufzustellen. Allerdings können keine Schwarzmagier, Dämonen oder
 Eisriesen aufgestellt werden.
  * */
 
-import { UNDEAD } from "../../../constants/textsAndMessages";
+import { UNDEAD_TEXTS } from "../../../constants/textsAndMessages";
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
 
@@ -23,7 +23,7 @@ const rules = [
     cardNames: ["Kleiner Bund "],
     min: 0.2,
     max: 0.7,
-    error: UNDEAD.SUB_FACTION_RULES.LESSER_COVENANT,
+    error: UNDEAD_TEXTS.SUB_FACTION_RULES.LESSER_COVENANT,
   },
 
   {
@@ -31,7 +31,7 @@ const rules = [
     cardNames: ["Großer Bund"],
     min: 0.15,
     max: 0.5,
-    error: UNDEAD.SUB_FACTION_RULES.GREATER_COVENANT,
+    error: UNDEAD_TEXTS.SUB_FACTION_RULES.GREATER_COVENANT,
   },
 
   {
@@ -39,21 +39,21 @@ const rules = [
     cardNames: ["Schattenbund"],
     min: 0.0,
     max: 0.3,
-    error: UNDEAD.SUB_FACTION_RULES.SHADOW_COVENANT,
+    error: UNDEAD_TEXTS.SUB_FACTION_RULES.SHADOW_COVENANT,
   },
   {
     subFaction: "heroes",
     cardNames: ["Helden/Befehlshaber"],
     min: 0.0,
     max: 0.4,
-    error: UNDEAD.SUB_FACTION_RULES.HEROES,
+    error: UNDEAD_TEXTS.SUB_FACTION_RULES.HEROES,
   },
   {
     subFaction: "magician",
     cardNames: ["Magier"],
     min: 0.0,
     max: 0.4,
-    error: UNDEAD.SUB_FACTION_RULES.MAGICIAN,
+    error: UNDEAD_TEXTS.SUB_FACTION_RULES.MAGICIAN,
   },
 
   {
@@ -61,7 +61,7 @@ const rules = [
     cardNames: ["Isthak"],
     min: 0.0,
     max: 0.2,
-    error: UNDEAD.SUB_FACTION_RULES.ALLY,
+    error: UNDEAD_TEXTS.SUB_FACTION_RULES.ALLY,
   },
 ];
 
@@ -142,7 +142,7 @@ const validIshtakAllies = (listOfAlliedUnits) => {
   );
 
   blockedAlliedUnits.forEach((aU) => {
-    result.push({ unitBlockedbyRules: aU.unitName, message: UNDEAD.ERRORS.ALLIES });
+    result.push({ unitBlockedbyRules: aU.unitName, message: UNDEAD_TEXTS.ERRORS.ALLIES });
   });
 
   return result;
