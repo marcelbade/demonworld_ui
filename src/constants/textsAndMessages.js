@@ -207,6 +207,7 @@ export const SUMMONS_TEXTS = {
 };
 
 export const DARKELF_TEXTS = {
+  FACTION_NAME: "Dunkelelfen",
   SF: {
     WARRIORCASTE: "Kriegerkaste",
     NOBLECASTE: "Adelskaste",
@@ -228,6 +229,7 @@ export const DARKELF_TEXTS = {
 };
 
 export const DWARF_TEXTS = {
+  FACTION_NAME: "Zwerge",
   SUB_FACTION_RULES: {
     UNITS: "Deine Armeeliste muss zu mindestens 30% aus Einheiten bestehen.",
     CHARACTERS: "Deine Armeeliste darf zu höchstens 50% aus Helden bestehen.",
@@ -243,6 +245,7 @@ export const DWARF_TEXTS = {
 };
 
 export const ELF_TEXTS = {
+  FACTION_NAME: "Elfen",
   ATHULAE: "Athulae der Pfeil",
   LAURELION: "Laurelion das Schwert",
   THINUVIEL: "Thinuviel die Geschwinde",
@@ -296,6 +299,8 @@ export const ELF_TEXTS = {
 };
 
 export const EMPIRE_TEXTS = {
+  FACTION_NAME: "Imperium",
+  SELECTION_TEXT: "Wähle eine der Marken",
   SUB_FACTION_RULES: {
     IMPERIAL_ARMY: "Deine Armeeliste muss zu 10% bis 50% aus Einheiten des Kaiserheeres bestehen.",
     PROVINCIAL_ARMY: "Deine Armeeliste muss zu 20% bis 50% aus Einheiten des Provinzheeres bestehen.",
@@ -312,6 +317,7 @@ export const EMPIRE_TEXTS = {
 };
 
 export const GOBLIN_TEXTS = {
+  FACTION_NAME: "Goblins",
   SUB_FACTION_RULES: {
     INFANTRY: "Deine Armeeliste muss zu mindestens 30% aus Infanterie bestehen.",
     ENGINES: "Deine Armeeliste darf maximal zu 20% aus Geräten bestehen.",
@@ -329,6 +335,7 @@ export const GOBLIN_TEXTS = {
 };
 
 export const ISHTAK_TEXTS = {
+  FACTION_NAME: "Ishtak",
   SUB_FACTION_RULES: {
     HUMANS: "Deine Armeeliste muss zu 10% bis 60% aus Menschen bestehen.",
     BEASTMEN: "Deine Armeeliste muss zu 10% bis 60% aus Tiermenschen bestehen.",
@@ -340,6 +347,7 @@ export const ISHTAK_TEXTS = {
 };
 
 export const LIZARDMEN_TEXTS = {
+  FACTION_NAME: "Echsenmenschen",
   SUB_FACTION_RULES: {
     BASICTROOPS: "Deine Armeeliste muss zu mindestens 20% aus Grundtruppen bestehen.",
     SPECIALISTS: "Deine Armeeliste darf maximal zu 40% aus spezialisierten Truppen bestehen.",
@@ -350,6 +358,7 @@ export const LIZARDMEN_TEXTS = {
 };
 
 export const NORWINGER_TEXTS = {
+  FACTION_NAME: "Norwinger",
   MOUNTAIN_KING: "Ungin Eisenbruch",
   YETIS: "Yetikrieger",
   GIANT_YETI: "Riesenyeti",
@@ -379,6 +388,8 @@ export const NORWINGER_TEXTS = {
 };
 
 export const ORKS_TEXTS = {
+  FACTION_NAME: "Orks",
+  SELECTION_TEXT: "Wähle einen der Clans oder Clanngett",
   SUB_FACTION_RULES: {
     UNIT: "Deine Armeeliste muss zu mindestens 25% aus Einheiten bestehen.",
     CHARACTERS: "Deine Armeeliste darf zu höchstens 30% aus Helden bestehen.",
@@ -396,9 +407,26 @@ export const ORKS_TEXTS = {
     SPIDER_ARCHERS: "Goblin-Spinnenschützen",
     SPIDER_RIDERS: "Goblin-Spinnenreiter",
   },
+  CLAN_UNITS: {
+    BEAR_PACK: "Bärenmeute",
+    BEAR_RIDERS: "Bärenreiter",
+    CHARIOT: "Streitwagen",
+    DWARF_EATERS: "Zwergenfresser",
+    HARPYS: "Harpyien",
+    MINOTAURS: "Minotauren",
+    SNOW_OGRES: "Schnee-Oger",
+    THROIGAR: "Throigar",
+    TROLL_GUARD: "Troll-Garde",
+    WOLF_ARCHERS: "Wolfsschützen",
+    WOLF_PACK: "Wolfsmeute",
+    WOLF_RIDERS: "Wolfsreiter",
+    WYVERN_RIDER: "Wyvernreiter",
+    CROSS_BOW_MEN: "Armbrustschützen",
+  },
 };
 
 export const THAIN_TEXTS = {
+  FACTION_NAME: "Thain",
   SUB_FACTION_RULES: {
     TRIBAL_WARRIORS: "Deine Armeeliste muss zu 10% bis 80% aus Stammeskriegern bestehen.",
     VETERANS: "Deine Armeeliste darf zu höchstens 50% aus Veteranen bestehen.",
@@ -415,9 +443,45 @@ export const THAIN_TEXTS = {
     VETERAN_MESSAGE:
       "Einheiten und jedes Geräte der Veteranen der Stämme  können nur aufgestellt werden, wenn vorher mindestens 1 Einheit von Stammeskriegern desselben Stammes aufgestellt ausgewählt wurde.",
   },
+  SECOND_SUBFACTIONS: {
+    BOAR: "Eberstamm",
+    BEAR: "Bärenstamm",
+    WOLVE: "Wolfsstamm",
+    MOUNTAIN_LION: "Berglöwenstamm",
+    EAGLE: "Adlerstamm",
+  },
+  SECOND_SUBFACTION_CAPTION: "Stamm Auswählen",
+  SUB_FACTIONS: {
+    CHURCH: "Dorga-Kirche",
+    GIANT_ANIMALS: "Gar'Ydwen",
+  },
+  // TODO finish this
+  EXCEMPT_UNITS: {
+    BANNER_OF_THE_HIGH_KING: "Banner des Hochkönigs",
+    BOAR_CHARIOT: "Tur-Gar'arryd",
+    GIANT_ELK: "Gar'worgar",
+    GIANT_HORNED_ONE: "Gar'morrigu",
+    GIANT_BOAR: "Gar'nar'og",
+    GIANT_OXEN_W_ARCHERS: "Gar'ydwedd mit Bogenschützen",
+    GIANT_OXEN_W_BALLISTA: "Gar'ydwedd mit Pfeilgeschütz",
+    CARNAC: "Car'nac",
+    HARBINGER_OF_DEATH: "Der Bote des Todes",
+    SINNERS: "Die Sünder",
+    ANCESTOR_SPIRITS: "Ahnengeister",
+    MOUNTAIN_LION_SPIRITS: "Berglöwengeister",
+    BOAR_SPIRITS: "Ebergeister",
+    WOLVES_SPIRITS: "Wolfsgeister",
+    EAGLE_SPIRITS: "Adlergeister",
+    EAGLE_TOTEM: "Adlertotem",
+    BOAR_TOTEM: "Ebertotem",
+    BEAR_TOTEM: "Bärengeister",
+    WOLF_TOTEM: "Wolfstotem",
+    MOUNTAIN_LION_TOTEM: "Berglöwentotem",
+  },
 };
 
 export const UNDEAD_TEXTS = {
+  FACTION_NAME: "Untote",
   SUB_FACTION_RULES: {
     LESSER_COVENANT: "Deine Armeeliste muss zu 20 bis 70% aus Einheiten des Großen Bundes bestehen.",
     GREATER_COVENANT: "Deine Armeeliste muss zu 15 bis 50% aus Einheiten des Großen Bundes bestehen.",
@@ -433,6 +497,7 @@ export const UNDEAD_TEXTS = {
   },
 };
 export const SOUTHERN_CITY_STATES_TEXTS = {
+  FACTION_NAME: "Südliche Stadtstaaten",
   SF: {
     PROVINCIAL: "Provinzheer",
     NORTH: "Truppen des Nordens",
@@ -460,6 +525,10 @@ export const SOUTHERN_CITY_STATES_TEXTS = {
     NORTHERN: "Nordens",
     SOUTHERN: "Südens",
   },
+};
+
+export const SPECIAL_TEXTS = {
+  FACTION_NAME: "Special",
 };
 
 export const SPECIAL_ITEMS = {

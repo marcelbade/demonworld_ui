@@ -1,19 +1,33 @@
-import { DWARF_TEXTS } from "./textsAndMessages";
+import {
+  DARKELF_TEXTS,
+  DWARF_TEXTS,
+  EMPIRE_TEXTS,
+  GOBLIN_TEXTS,
+  ISHTAK_TEXTS,
+  LIZARDMEN_TEXTS,
+  NORWINGER_TEXTS,
+  ORKS_TEXTS,
+  SOUTHERN_CITY_STATES_TEXTS,
+  SPECIAL_TEXTS,
+  THAIN_TEXTS,
+  UNDEAD_TEXTS,
+  ELF_TEXTS,
+} from "./textsAndMessages";
 
 // SINGLE FACTIONS
-export const DARKELVES = "Dunkelelfen";
-export const LIZARDKIN = "Echsenmenschen";
-export const ELVES = "Elfen";
-export const GOBLINS = "Goblins";
-export const EMPIRE = "Imperium";
-export const ISHTAK = "Ishtak";
-export const ORKS = "Orks";
-export const NORWINGER = "Norwinger";
-export const THAIN = "Thain";
-export const UNDEAD = "Untote";
-export const DWARVES = "Zwerge";
-export const SOUTHERN_CITY_STATES = "Südliche Stadtstaaten";
-export const SPECIAL = "Special";
+export const DARKELVES = DARKELF_TEXTS.FACTION_NAME;
+export const DWARVES = DWARF_TEXTS.FACTION_NAME;
+export const ELVES = ELF_TEXTS.FACTION_NAME;
+export const EMPIRE = EMPIRE_TEXTS.FACTION_NAME;
+export const GOBLINS = GOBLIN_TEXTS.FACTION_NAME;
+export const ISHTAK = ISHTAK_TEXTS.FACTION_NAME;
+export const LIZARDKIN = LIZARDMEN_TEXTS.FACTION_NAME;
+export const NORWINGER = NORWINGER_TEXTS.FACTION_NAME;
+export const ORKS = ORKS_TEXTS.FACTION_NAME;
+export const SOUTHERN_CITY_STATES = SOUTHERN_CITY_STATES_TEXTS.FACTION_NAME;
+export const SPECIAL = SPECIAL_TEXTS.FACTION_NAME;
+export const THAIN = THAIN_TEXTS.FACTION_NAME;
+export const UNDEAD = UNDEAD_TEXTS.FACTION_NAME;
 
 // SPECIAL INDICATORS
 export const NONE = "NONE";
@@ -22,23 +36,23 @@ export const NO_ALLY = "NO_ALLY";
 // ALL FACTIONS
 export const ALL_FACTIONS_ARRAY = [
   DARKELVES,
+  DWARVES,
   ELVES,
   GOBLINS,
+  LIZARDKIN,
   EMPIRE,
   ISHTAK,
   NORWINGER,
   ORKS,
+  SOUTHERN_CITY_STATES,
   THAIN,
   UNDEAD,
-  DWARVES,
-  LIZARDKIN,
-  SOUTHERN_CITY_STATES,
 ];
 
 export const ALTERNATIVE_ARMY_SELECTION_TEXT = {
-  Imperium: "Wähle eine der Marken",
-  Orks: "Wähle einen der Clans oder Clanngett",
-  Zwerge: [ DWARF_TEXTS.ALLIES_AND_KINGDOMS_40, DWARF_TEXTS.ALLIES_AND_KINGDOMS_20 ], 
+  DWARVES: [DWARF_TEXTS.ALLIES_AND_KINGDOMS_40, DWARF_TEXTS.ALLIES_AND_KINGDOMS_20],
+  EMPIRE: EMPIRE_TEXTS.SELECTION_TEXT,
+  ORKS: ORKS_TEXTS.SELECTION_TEXT,
 };
 
 // export const UNIT_OR_SUBFACTION = { units: ["Orks"], subFactions: ["Zwerge", "Imperium"] };
@@ -48,76 +62,118 @@ export const ARMIES_ADDITIONAL_SUBFACTIONS = [THAIN];
 export const ARMIES_ADDITIONAL_SUBFACTIONS_MAPPING = [
   {
     army: THAIN,
-    secondSubFactionList: ["Eberstamm", "Bärenstamm", "Wolfsstamm", "Berglöwenstamm", "Adlerstamm"],
-    excemptSubFactions: ["Dorga-Kirche", "Gar'Ydwen"],
-    caption: "Stamm Auswählen",
+    secondSubFactionList: [
+      THAIN_TEXTS.SECOND_SUBFACTIONS.BOAR,
+      THAIN_TEXTS.SECOND_SUBFACTIONS.BEAR,
+      THAIN_TEXTS.SECOND_SUBFACTIONS.EAGLE,
+      THAIN_TEXTS.SECOND_SUBFACTIONS.MOUNTAIN_LION,
+      THAIN_TEXTS.SECOND_SUBFACTIONS.WOLVE,
+    ],
+    excemptSubFactions: [THAIN_TEXTS.SUB_FACTIONS.CHURCH, THAIN_TEXTS.SUB_FACTIONS.GIANT_ANIMALS],
+    caption: THAIN_TEXTS.SECOND_SUBFACTION_CAPTION,
   },
 ];
 
 export const ARMIES_TWO_CHOICES_PER_ALTERNATIVE_LIST = [DWARVES];
 
 // THAIN
-export const THAIN_TRIBES = ["Eberstamm", "Bärenstamm", "Wolfsstamm", "Berglöwenstamm", "Adlerstamm"];
+export const THAIN_TRIBES = [
+  THAIN_TEXTS.SECOND_SUBFACTIONS.BOAR,
+  THAIN_TEXTS.SECOND_SUBFACTIONS.BEAR,
+  THAIN_TEXTS.SECOND_SUBFACTIONS.EAGLE,
+  THAIN_TEXTS.SECOND_SUBFACTIONS.MOUNTAIN_LION,
+  THAIN_TEXTS.SECOND_SUBFACTIONS.WOLVE,
+];
 export const EXCEMPT_FROM_TRIBES_RULE = [
-  "Banner des Hochkönigs",
-  "Gar'worgar",
-  "Gar'morrigu",
-  "Gar'nar'og",
-  "Gar'ydwedd mit Bogenschützen",
-  "Gar'ydwedd mit Pfeilgeschütz",
-  "Tur-Gar'arryd",
-  "Gor'yaginor",
-  "Car'nac",
-  "Der Bote des Todes",
-  "Die Sünder",
-  "Todesgarde",
-  "Adlergeister",
-  "Adlertotem",
-  "Ahnengeister",
-  "Berglöwengeister",
-  "Berglöwentotem",
-  "Bärengeister",
-  "Bärentotem",
-  "Ebergeister",
-  "Ebertotem",
-  "Wolfsgeister",
-  "Wolfstotem",
+  THAIN_TEXTS.EXCEMPT_UNITS.ANCESTOR_SPIRITS,
+  THAIN_TEXTS.EXCEMPT_UNITS.BANNER_OF_THE_HIGH_KING,
+  THAIN_TEXTS.EXCEMPT_UNITS.BEAR_TOTEM,
+  THAIN_TEXTS.EXCEMPT_UNITS.BOAR_CHARIOT,
+  THAIN_TEXTS.EXCEMPT_UNITS.BOAR_SPIRITS,
+  THAIN_TEXTS.EXCEMPT_UNITS.BOAR_TOTEM,
+  THAIN_TEXTS.EXCEMPT_UNITS.CARNAC,
+  THAIN_TEXTS.EXCEMPT_UNITS.EAGLE_SPIRITS,
+  THAIN_TEXTS.EXCEMPT_UNITS.EAGLE_TOTEM,
+  THAIN_TEXTS.EXCEMPT_UNITS.GIANT_BOAR,
+  THAIN_TEXTS.EXCEMPT_UNITS.GIANT_ELK,
+  THAIN_TEXTS.EXCEMPT_UNITS.GIANT_HORNED_ONE,
+  THAIN_TEXTS.EXCEMPT_UNITS.GIANT_OXEN_W_ARCHERS,
+  THAIN_TEXTS.EXCEMPT_UNITS.GIANT_OXEN_W_BALLISTA,
+  THAIN_TEXTS.EXCEMPT_UNITS.HARBINGER_OF_DEATH,
+  THAIN_TEXTS.EXCEMPT_UNITS.MOUNTAIN_LION_SPIRITS,
+  THAIN_TEXTS.EXCEMPT_UNITS.MOUNTAIN_LION_TOTEM,
+  THAIN_TEXTS.EXCEMPT_UNITS.SINNERS,
+  THAIN_TEXTS.EXCEMPT_UNITS.WOLF_TOTEM,
+  THAIN_TEXTS.EXCEMPT_UNITS.WOLVES_SPIRITS,
 ];
 
 export const ORK_CLANS_UNIT_MAPPING = {
-
   // clans im alphabetical order
-  Bergclan: ["Harpyien", "Bärenreiter", "Bärenmeute"],
+  Bergclan: [
+    ORKS_TEXTS.CLAN_UNITS.HARPYS, //
+    ORKS_TEXTS.CLAN_UNITS.BEAR_RIDERS,
+    ORKS_TEXTS.CLAN_UNITS.BEAR_PACK,
+  ],
 
-  Blutclan: ["Troll-Garde", "Wolfsreiter", "Wolfsschützen"],
+  Blutclan: [
+    ORKS_TEXTS.CLAN_UNITS.TROLL_GUARD, //
+    ORKS_TEXTS.CLAN_UNITS.WOLF_RIDERS,
+    ORKS_TEXTS.CLAN_UNITS.WOLF_ARCHERS,
+  ],
 
-  Eisclan: ["Wolfsreiter", "Wolfsschützen", "Streitwagen", "Schnee-Oger"],
+  Eisclan: [
+    ORKS_TEXTS.CLAN_UNITS.WOLF_RIDERS,
+    ORKS_TEXTS.CLAN_UNITS.WOLF_ARCHERS,
+    ORKS_TEXTS.CLAN_UNITS.CHARIOT,
+    ORKS_TEXTS.CLAN_UNITS.SNOW_OGRES,
+  ],
 
-  Eisenclan: ["Zwergenfresser", "Bärenreiter", "Bärenmeute"],
+  Eisenclan: [
+    ORKS_TEXTS.CLAN_UNITS.DWARF_EATERS, //
+    ORKS_TEXTS.CLAN_UNITS.BEAR_RIDERS,
+    ORKS_TEXTS.CLAN_UNITS.BEAR_PACK,
+  ],
 
-  Steinclan: ["Throigar", "Streitwagen", "Minotauren"],
+  Steinclan: [
+    ORKS_TEXTS.CLAN_UNITS.THROIGAR, //
+    ORKS_TEXTS.CLAN_UNITS.CHARIOT,
+    ORKS_TEXTS.CLAN_UNITS.MINOTAURS,
+  ],
 
-  Pfeilclan: ["Bärenreiter", "Bärenmeute", "Armbrustschützen"],
+  Pfeilclan: [
+    ORKS_TEXTS.CLAN_UNITS.BEAR_RIDERS, //
+    ORKS_TEXTS.CLAN_UNITS.BEAR_PACK,
+    ORKS_TEXTS.CLAN_UNITS.CROSS_BOW_MEN,
+  ],
 
-  Tierclan: ["Wolfsreiter ", "Wolfsschützen", "Wolfsmeute", "Schnee-Oger"],
+  Tierclan: [
+    ORKS_TEXTS.CLAN_UNITS.WOLF_RIDERS,
+    ORKS_TEXTS.CLAN_UNITS.WOLF_ARCHERS,
+    ORKS_TEXTS.CLAN_UNITS.WOLF_PACK,
+    ORKS_TEXTS.CLAN_UNITS.SNOW_OGRES,
+  ],
 
-  Wyvernclan: ["Wyvernreiter", "Minotauren"],
+  Wyvernclan: [
+    ORKS_TEXTS.CLAN_UNITS.WYVERN_RIDER, //
+    ORKS_TEXTS.CLAN_UNITS.MINOTAURS,
+  ],
 
   // Clanngett gets everything...
   Clanngett: [
-    "Throigar",
-    "Troll-Garde",
-    "Wolfsreiter",
-    "Wolfsschützen",
-    "Wolfsmeute",
-    "Streitwagen",
-    "Wyvernreiter",
-    "Harpyien",
-    "Schnee-Oger",
-    "Minotauren",
-    "Zwergenfresser",
-    "Bärenreiter",
-    "Bärenmeute",
-    "Armbrustschützen",
+    ORKS_TEXTS.CLAN_UNITS.THROIGAR,
+    ORKS_TEXTS.CLAN_UNITS.TROLL_GUARD,
+    ORKS_TEXTS.CLAN_UNITS.WOLF_PACK,
+    ORKS_TEXTS.CLAN_UNITS.WOLF_ARCHERS,
+    ORKS_TEXTS.CLAN_UNITS.WOLF_RIDERS,
+
+    ORKS_TEXTS.CLAN_UNITS.CHARIOT,
+    ORKS_TEXTS.CLAN_UNITS.WYVERN_RIDER,
+    ORKS_TEXTS.CLAN_UNITS.HARPYS,
+    ORKS_TEXTS.CLAN_UNITS.SNOW_OGRES,
+    ORKS_TEXTS.CLAN_UNITS.MINOTAURS,
+    ORKS_TEXTS.CLAN_UNITS.DWARF_EATERS,
+    ORKS_TEXTS.CLAN_UNITS.BEAR_RIDERS,
+    ORKS_TEXTS.CLAN_UNITS.BEAR_PACK,
+    ORKS_TEXTS.CLAN_UNITS.CROSS_BOW_MEN,
   ],
 };
