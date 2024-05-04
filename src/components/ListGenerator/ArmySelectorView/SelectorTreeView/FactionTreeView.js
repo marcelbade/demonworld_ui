@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 // material ui
 import { Typography } from "@mui/material";
 // components and functions
@@ -10,11 +10,14 @@ import Tree from "./Tree.js";
 import { NO_ALLY } from "../../../../constants/factions";
 import { INPUT_TEXTS } from "../../../../constants/textsAndMessages.js";
 
-// only show the army selection tree if the army and, if it exists, the alternative list has been selected.
 const FactionTreeView = () => {
   const AC = useContext(ArmyContext);
   const ALC = useContext(AlternativeListContext);
   const AYC = useContext(AllyContext);
+
+  useEffect(() => {
+    displayAlly();
+  }, [JSON.stringify(ALC.selectedAlternativeLists)]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * Function checks if the user is done selecting an army,
@@ -28,8 +31,11 @@ const FactionTreeView = () => {
 
   /**
    * Function checks if an ally should be displayed.
-   * @returns true if one exists and it is not part
-   * of the alternative army selection
+   * @returns true, if 2 conditions are met:
+   *  - the faction has an ally
+   *  - if the ally is an alternative subFaction (see dwarves),
+   *    it must be selected by the player. If it's not an alternative
+   *    the condition defaults to true
    */
   const displayAlly = () => {
     if (ALC.allyIsAlternativeOption) {
