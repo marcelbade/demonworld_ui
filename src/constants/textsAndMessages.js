@@ -234,8 +234,7 @@ export const DWARF_TEXTS = {
   SUB_FACTION_RULES: {
     UNITS: "Deine Armeeliste muss zu mindestens 30% aus Einheiten bestehen.",
     CHARACTERS: "Deine Armeeliste darf zu höchstens 50% aus Helden bestehen.",
-    ALLIES_AND_KINGDOMS_40:
-      "Deine Armmee darf max.zu 40% aus Einheiten des zuerst gewählten Königreiches bestehen.",
+    ALLIES_AND_KINGDOMS_40: "Deine Armmee darf max.zu 40% aus Einheiten des zuerst gewählten Königreiches bestehen.",
     ALLIES_AND_KINGDOMS_20:
       "Deine Armmee darf max. zu 20% aus Einheiten des zweiten gewählten Königreiches oder Truppen des Imperiums bestehen.",
   },
@@ -301,6 +300,13 @@ export const ELF_TEXTS = {
 
 export const EMPIRE_TEXTS = {
   FACTION_NAME: "Imperium",
+  SUBFACTIONS: {
+    NORTH_MARCH: "Nordmark",
+    SOUTH_MARCH: "Südmark",
+    EAST_MARCH: "Ostmark",
+    WEST_MARCH: "Westmark",
+  },
+
   SELECTION_TEXT: "Wähle eine der Marken",
   SUB_FACTION_RULES: {
     IMPERIAL_ARMY: "Deine Armeeliste muss zu 10% bis 50% aus Einheiten des Kaiserheeres bestehen.",
