@@ -235,7 +235,7 @@ export const DWARF_TEXTS = {
     UNITS: "Deine Armeeliste muss zu mindestens 30% aus Einheiten bestehen.",
     CHARACTERS: "Deine Armeeliste darf zu höchstens 50% aus Helden bestehen.",
     ALLIES_AND_KINGDOMS_40:
-      "Deine Armmee darf max. zu 40% aus Einheiten des zuerst gewählten Königreiches oder Truppen des Imperiums bestehen.",
+      "Deine Armmee darf max.zu 40% aus Einheiten des zuerst gewählten Königreiches bestehen.",
     ALLIES_AND_KINGDOMS_20:
       "Deine Armmee darf max. zu 20% aus Einheiten des zweiten gewählten Königreiches oder Truppen des Imperiums bestehen.",
   },
