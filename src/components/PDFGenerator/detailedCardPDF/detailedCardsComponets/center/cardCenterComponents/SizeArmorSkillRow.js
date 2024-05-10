@@ -8,12 +8,15 @@ import rangeArmorIcon from "../../../../../../assets/icons/range-armor.png";
 import meleeArmorIcon from "../../../../../../assets/icons/melee-armor.png";
 import blackSwordIcon from "../../../../../../assets/icons/sword2.png";
 import blackBowIcon from "../../../../../../assets/icons/bow2.png";
+// constants
+import { CARD_PREVIEW } from "../../../../../../constants/textsAndMessages";
 
 const SizeArmorSkillRow = (props) => {
   return (
     <View key={props.index} style={detailedStyles.sizeArmorSkillBox}>
-      <Text key={props.index}>Größe: {props.unit.unitSize}</Text>
-
+      <Text key={props.index}>
+        {CARD_PREVIEW.SIZE} {props.unit.unitSize}
+      </Text>
       <View style={detailedStyles.armorIconValueGroup}>
         <View style={detailedStyles.iconValueGroup}>
           <Image src={rangeArmorIcon} style={detailedStyles.icon} />
