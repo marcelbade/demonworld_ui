@@ -189,6 +189,10 @@ export const CARD_PREVIEW = {
   MUSICIAN: "Musiker",
   STANDARD_BEARER: "Banner",
   CHARGE_BONUS: "Angriffsbonus",
+  HORDE_FORMATION: "Horde",
+  WEDGE_FORMATION :"Ke",
+  SKIRMISH_FORMATION :"Pl",
+  SQUARE_FORMATION :"Ka",
 };
 
 // FACTIONS & Game Rules
