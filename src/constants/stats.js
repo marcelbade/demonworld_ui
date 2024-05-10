@@ -9,3 +9,4 @@ export const SKILL_RANGE = "skillRange";
 export const INITIATIVE = "initiative";
 export const MORAL1 = "moral1";
 export const MORAL2 = "moral2";
+export const CHARGE_BONUS = "chargeBonus";
