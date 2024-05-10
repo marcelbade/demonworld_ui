@@ -9,7 +9,7 @@
 const mapUnitStatToItemProperty = (unitStat) => {
   unitStat = unitStat.charAt(0).toUpperCase() + unitStat.slice(1);
   return `alters${unitStat}`;
-}; 
+};
 
 /**
  * Function calculates the stats for a unit's first weapon.
@@ -32,6 +32,11 @@ export const weapon1Stats = (unit) => {
   return weapon1Properties;
 };
 
+/**
+ * Function calculates the stats for a unit's range weapon.
+ * @param {unitCard} unit
+ * @returns
+ */
 export const rangedWeaponStats = (unit) => {
   let rangedWeaponProperties = { name: unit.rangedWeapon, value: unit.rangedAttackStats };
   const result = searchForRelevantModifier(unit, "altersRangedWeapon");
@@ -55,6 +60,9 @@ export const rangedWeaponStats = (unit) => {
  * @returns
  */
 export const setUnitStat = (unit, unitStatName) => {
+
+  
+
   let stat = unit[unitStatName];
 
   const result = searchForRelevantModifier(unit, mapUnitStatToItemProperty(unitStatName));
@@ -101,6 +109,11 @@ const searchForRelevantModifier = (unit, property) => {
   return replacementStats;
 };
 
+/**
+ * Function tests if the unit has been equipped with one or more items.
+ * @param {unitCard} unit
+ * @returns true, if the unit has at least 1 item.
+ */
 const unitHasItems = (unit) => {
   return unit.equipment !== undefined && unit.equipment.length !== 0;
 };
