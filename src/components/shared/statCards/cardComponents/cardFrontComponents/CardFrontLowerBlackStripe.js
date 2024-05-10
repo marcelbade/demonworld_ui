@@ -15,11 +15,15 @@ const CardFrontLowerBlackStripe = () => {
   const theme = useTheme();
 
   const fear = `${CARD_PREVIEW.FEAR}: ${setUnitStat(SC.unit, FEAR)}`;
-  const moral = `${CARD_PREVIEW.MORAL}: ${
+  const moral = `${CARD_PREVIEW.MORAL} ${
     SC.unit.moral1 //
       ? setUnitStat(SC.unit, MORAL1)
       : "-"
-  } / ${SC.unit.moral2 ? setUnitStat(SC.unit, MORAL2) : "-"}`;
+  } / ${
+    SC.unit.moral2 //
+      ? setUnitStat(SC.unit, MORAL2)
+      : "-"
+  }`;
 
   return SC.isSingleElement ? (
     <Grid item>
