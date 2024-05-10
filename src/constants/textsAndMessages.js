@@ -188,6 +188,7 @@ export const CARD_PREVIEW = {
   LEADER: "Anführer",
   MUSICIAN: "Musiker",
   STANDARD_BEARER: "Banner",
+  CHARGE_BONUS: "Angriffsbonus",
 };
 
 // FACTIONS & Game Rules
