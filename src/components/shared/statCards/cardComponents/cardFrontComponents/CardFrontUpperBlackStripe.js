@@ -20,7 +20,7 @@ const CardFrontUpperBlackStripe = () => {
    / ${CARD_PREVIEW.CHARGE}: ${setUnitStat(SC.unit, CHARGE)} / ${CARD_PREVIEW.SKIRMISH}: ${setUnitStat(SC.unit, SKIRMISH)}`;
   const maneuvers = `${SC.unit.hold_maneuvers} ${CARD_PREVIEW.MANEUVER}`;
 
-  return SC.isSingleElement ? (
+  return SC.isSingleElement  &&  SC.isHeroOrMage  ?(
     <Grid
       item //
       container

@@ -3,7 +3,7 @@ import React from "react";
 // react-pdf
 import { Text, View, Image } from "@react-pdf/renderer";
 // functions and components
-import { isSingleElementCard } from "../../../../../../util/utilityFunctions";
+import { isHeroOrMage, isSingleElementCard } from "../../../../../../util/utilityFunctions";
 import { CARD_PREVIEW } from "../../../../../../constants/textsAndMessages";
 // icons
 import squareFormationWhite from "../../../../../../assets/icons/squareFormationWhite.png";
@@ -19,7 +19,7 @@ const UnitMovementRow = (props) => {
    */
 
   //unitOrCmdCard
-  return isSingleElementCard(props.unit) ? (
+  return isSingleElementCard(props.unit) && isHeroOrMage(props.unit) ? (
     <View key={props.index} style={detailedStyles.cardUpperBlackRow}>
       <Text key={props.index}>
         {props.unit.move} {CARD_PREVIEW.MOVEMENT_POINTS}

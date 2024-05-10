@@ -5,7 +5,6 @@ import { Grid, IconButton, ThemeProvider, CssBaseline } from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
 // components and functions
 import CardView from "../../../../shared/CardView";
-import { isSingleElementCard } from "../../../../../util/utilityFunctions";
 // context
 import { RightMenuContext } from "../../../../../contexts/rightMenuContext";
 import { LightSwitchContext } from "../../../../../contexts/lightSwitchContext";
@@ -18,8 +17,6 @@ const CardViewBox = () => {
   const RC = useContext(RightMenuContext);
   const LC = useContext(LightSwitchContext);
   const AC = useContext(ArmyContext);
-
-  const isSingleElement = isSingleElementCard(RC.displayedCard);
 
   const allStateCards = RC.displayedCard.isMultiStateUnit
     ? AC.listOfAllFactionUnits.filter((u) => u.belongsToUnit === RC.displayedCard.unitName)
@@ -48,7 +45,6 @@ const CardViewBox = () => {
             <CardView
               isMultiStateCard={RC.statCardState.clickedUnit?.isMultiStateUnit}
               unit={RC.displayedCard}
-              isSingleElement={isSingleElement}
               carouselCards={allStateCards}
             />
           ) : null}

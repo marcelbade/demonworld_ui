@@ -61,7 +61,6 @@ const CardView = (props) => {
         </Grid>
         <Grid item>
           <StatCard
-            isSingleElement={props.isSingleElement} //
             unit={displayCard}
           />
         </Grid>

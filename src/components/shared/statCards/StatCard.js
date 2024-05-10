@@ -6,7 +6,7 @@ import { Grid } from "@mui/material";
 import CardBack from "./cardComponents/CardBack";
 import CardFront from "./cardComponents/CardFront";
 import StatCardProvider from "../../../contexts/statCardContext";
-import { isSingleElementCard } from "../../../util/utilityFunctions";
+import { isHeroOrMage, isSingleElementCard } from "../../../util/utilityFunctions";
 
 /**
  * Wrapper Element. Allows for vertical or horizontal layout of the cards.
@@ -26,6 +26,7 @@ const StatCard = (props) => {
     <StatCardProvider
       value={{
         isSingleElement: isSingleElementCard(props.unit),
+        isHeroOrMage: isHeroOrMage(props.unit),
         unit: props.unit,
       }}
     >
