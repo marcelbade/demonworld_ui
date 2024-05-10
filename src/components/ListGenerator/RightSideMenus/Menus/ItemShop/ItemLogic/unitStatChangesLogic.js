@@ -131,12 +131,12 @@ const calculateNewMeleeWeaponValue = (unit, modifier) => {
     newWeapon1Value += LEADER_BONUS;
   }
 
-  // has mount
+  // has a mount
   if (unit.isMounted) {
     newWeapon1Value += BONUS;
   }
 
-  // 5 Miniatures per base
+  // 5 Miniatures per base (closed order)
   if (unit.closedOrder) {
     newWeapon1Value += BONUS;
   }
