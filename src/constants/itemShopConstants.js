@@ -74,4 +74,4 @@ export const CROSSBOW_TYPES = ["Armbrust", "Repetierarmbrust", "Handarmbrust"];
 export const SPEAR_TYPES = ["Speer", "Langspeer"];
 
 // List of all types of lances in the game that can be replaced by lances from the item list.
-export const LANCE_TYPES = ["Lanze", "Mithrillanze"];
+export const LANCE_TYPES = ["Lanze", "Mithrillanze", "Runenlanze"];
