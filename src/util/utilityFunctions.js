@@ -53,7 +53,7 @@ export const isObjectEmtpy = (obj) => {
 };
 
 /**
- *  Function controls which kind of stat card (unit or character) is displayed.
+ * Function controls which kind of stat card (unit or character) is displayed.
  *
  * @param {[{*}]} unit
  * @returns  JSX element
@@ -63,5 +63,14 @@ export const isSingleElementCard = (unit) => {
   return SINGLE_ELEMENTS_LIST.includes(unit.unitType);
 };
 
- 
- 
+/**
+ * Function tests if unit is a hero or mage. This is important when it 
+ * comes to displaying movement on stat cards.
+ *
+ * @param {[{*}]} unit
+ * @returns  JSX element
+ */
+export const isHeroOrMage = (unit) => {
+  const HERO_MAGE_LIST = [HERO, MAGE];
+  return HERO_MAGE_LIST.includes(unit.unitType);
+};
