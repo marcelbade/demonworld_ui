@@ -11,6 +11,8 @@ import RangeWeaponRow from "./cardCenterComponents/RangedWeaponRow";
 import MeleeWeaponRow from "./cardCenterComponents/MeleeWeaponRow";
 import SizeArmorSkill from "./cardCenterComponents/SizeArmorSkillRow";
 import BackSideRulesRow from "./cardCenterComponents/BackSideRulesRow";
+import InitiativeRow from "./cardCenterComponents/InitiativeRow";
+import ChargeBonusRow from "./cardCenterComponents/ChargeBonusRow";
 // constants
 import { NO_RANGE_WEAPON } from "../../../../../constants/textsAndMessages";
 
@@ -46,6 +48,14 @@ const CardCenter = (props) => {
               index={props.index}
             />
           )}
+          <InitiativeRow
+            unit={props.unit} //
+            index={props.index}
+          />
+          <ChargeBonusRow
+            unit={props.unit} //
+            index={props.index}
+          />
           <SizeArmorSkill
             unit={props.unit} //
             index={props.index}

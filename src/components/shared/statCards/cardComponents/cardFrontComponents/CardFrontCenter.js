@@ -9,6 +9,7 @@ import RangedWeapon from "./CardFrontCenterComponents/RangedWeapon";
 import MeleeWeapons from "./CardFrontCenterComponents/MeleeWeapons";
 import Initiative from "./CardFrontCenterComponents/Initiative";
 import SizeArmorSkills from "./CardFrontCenterComponents/SizeArmorSkills";
+import ChargeBonus from "./CardFrontCenterComponents/ChargeBonus";
 // constants
 import { NO_RANGE_WEAPON } from "../../../../../constants/textsAndMessages";
 
@@ -32,6 +33,7 @@ const CardFrontCenter = () => {
         <MeleeWeapons />
       </Grid>
       <Initiative />
+      <ChargeBonus/>
       <SizeArmorSkills />
     </Fragment>
   );
