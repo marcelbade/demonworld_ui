@@ -102,7 +102,7 @@ const ArmyListBoxHeader = () => {
       direction="column"
       alignItems="flex-start"
     >
-      {inputElements.map((iE, i) => (
+      {inputElements.map((element, i) => (
         <Grid item key={i}>
           <TextField
             sx={{
@@ -113,30 +113,30 @@ const ArmyListBoxHeader = () => {
                 color: theme.palette.color,
               },
             }}
-            id={iE.id}
+            id={element.id}
+            label={element.label}
+            value={element.value}
+            onClick={element.onClick}
+            onChange={element.onChange}
             autoComplete="off"
-            label={iE.label}
             type="search"
-            value={iE.value}
+            required
+            variant="standard"
             InputProps={{
               style: {
                 fontFamily: "NotMaryKate",
                 fontSize: "20px",
                 color:
-                  !VC.listValidationResults.commanderIsPresent && iE.value === AC.armyName //
+                  !VC.listValidationResults.commanderIsPresent && element.value === AC.armyName //
                     ? theme.palette.errorColor
                     : theme.color,
                 pading: "50px",
                 width: "330px",
               },
             }}
-            onClick={iE.onClick}
-            onChange={iE.onChange}
-            required
-            variant="standard"
           />
-          {iE.value === AC.armyName ? (
-            <Fragment key={iE.value}>
+          {element.value === AC.armyName ? (
+            <Fragment key={element.value}>
               <Tooltip title={<Typography>{TOOLTIPS.DELETE_ARMY_LIST}</Typography>}>
                 <IconButton
                   variant="outlined"
