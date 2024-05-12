@@ -1,6 +1,9 @@
-import { EMPIRE_TEXTS } from "../../../constants/textsAndMessages";
+// components and functions
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
+// contants
+import { DWARVES } from "../../../constants/factions";
+import { DWARF_TEXTS, EMPIRE_TEXTS } from "../../../constants/textsAndMessages";
 
 const rules = [
   {
@@ -139,6 +142,7 @@ const EmpireRules = {
 
     // special faction rules
     let zahraTroops = blockZahra(validationData.listOfAlliedUnits);
+    provinceVsDwarves(validationData);
 
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [
@@ -174,13 +178,46 @@ const blockZahra = (availableAlliedUnits) => {
   const MESSAGE = EMPIRE_TEXTS.SUB_FACTION_RULES.NO_ZAHRA;
   let result = [];
 
-  const zahraUnits = availableAlliedUnits.filter((u) => u.subFaction === "Clanngett");
+  const zahraUnits = availableAlliedUnits.filter((u) => u.subFaction === DWARF_TEXTS.SF.ZAHRA);
 
   zahraUnits.forEach((u) => {
     result.push({ unitBlockedbyRules: u.unitName, message: MESSAGE });
   });
 
   return result;
+};
+
+/**
+ * Function implements a special faction rule: A maximum of 20% of the list can
+ * be spent on dwarf troops (except Z'ahra troops). These points however,
+ * count as part of the province, i.e., they must be subtracted from
+ * the province limit.
+ * This is implemented by decreasing the maximum by 1% percent for every
+ * 1% spent on dwarves.
+ * NOTE: since the increment is 1%, it does not appear in the function since
+ * percentage/1 = percentage.
+ *
+ */
+const provinceVsDwarves = (validationData) => {
+  const PROVINCE_MAX = 50; // 50% default allowance for either caste
+  const PROVINCES = [EMPIRE_TEXTS.SF.EAST_MARCH, EMPIRE_TEXTS.SF.SOUTH_MARCH];
+
+  let pointsSpent = 0;
+
+  validationData.selectedUnits
+    .filter((sU) => sU.faction === DWARVES)
+    .forEach((unit) => {
+      pointsSpent += unit.points;
+    });
+
+  const percentage = pointsSpent * (100 / validationData.totalPointsAllowance);
+  const remainder = PROVINCE_MAX - percentage;
+
+  rules
+    .filter((r) => PROVINCES.includes(r.cardNames[0]))
+    .forEach((r) => {
+      r.max = remainder * 0.01;
+    });
 };
 
 export { EmpireRules, rules };
