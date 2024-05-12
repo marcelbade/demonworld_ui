@@ -21,7 +21,9 @@ const ArmyListBoxFooter = () => {
   let netPoints = SEC.selectedUnits !== undefined ? calculator.calculateTotalArmyCost(SEC.selectedUnits) : 0;
 
   /**
-   * Function alloes the user to change the maximum point total for the army.
+   * Function allows the user to change the maximum point total for the army. 
+   * When this happens, the list must reevaluated, so the hook function validateList
+   * is called.
    * @param {event object} event
    */
   const changeMaximumPointValue = (event) => {
