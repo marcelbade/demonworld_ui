@@ -236,6 +236,10 @@ export const DARKELF_TEXTS = {
 export const DWARF_TEXTS = {
   FACTION_NAME: "Zwerge",
   ALLY: "Imperium",
+  SF: {
+    ZAHRA: "Z'ahra",
+    GAETA: "Gaeta",
+  },
   SUB_FACTION_RULES: {
     UNITS: "Deine Armeeliste muss zu mindestens 30% aus Einheiten bestehen.",
     CHARACTERS: "Deine Armeeliste darf zu höchstens 50% aus Helden bestehen.",
