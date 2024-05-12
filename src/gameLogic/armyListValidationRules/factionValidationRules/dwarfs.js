@@ -30,7 +30,7 @@ const rules = [
   },
   {
     subFaction: "zahra",
-    cardNames: ["Zah'ra"],
+    cardNames: ["Z'ahra"],
     min: 0.0,
     max: 0.4,
     error: "", // special rule: error message is set by function percentageKingdomsAndAlly
