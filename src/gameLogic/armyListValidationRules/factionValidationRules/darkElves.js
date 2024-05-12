@@ -1,6 +1,10 @@
-import { DARKELF_TEXTS, SUMMONS_TEXTS, UNIT_TYPES } from "../../../constants/textsAndMessages";
+// components and functions
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
+// contants
+import { DARKELF_TEXTS, SUMMONS_TEXTS, UNIT_TYPES } from "../../../constants/textsAndMessages";
+
+
 
 const rules = [
   {
