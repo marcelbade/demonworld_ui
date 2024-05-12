@@ -136,9 +136,9 @@ const GoblinRules = {
 
     return validationResults;
   },
-
-  // special faction rules
 };
+
+// special faction rules
 
 /**
  * Function implements the rule that no Clanngett troops can be allies in a Goblin list.
@@ -147,12 +147,14 @@ const GoblinRules = {
  * be blocked and an error message to be displayed as a tool tip.
  */
 const blockClanngett = (availableAlliedUnits) => {
+  const MESSAGE = GOBLIN_TEXTS.SUB_FACTION_RULES.NO_CLANNGETT;
+
   let result = [];
 
   const clanngettUnits = availableAlliedUnits.filter((u) => u.subFaction === "Clanngett");
 
   clanngettUnits.forEach((u) => {
-    result.push({ unitBlockedbyRules: u.unitName, message: GOBLIN_TEXTS.SUB_FACTION_RULES.NO_CLANNGETT });
+    result.push({ unitBlockedbyRules: u.unitName, message: MESSAGE });
   });
 
   return result;
