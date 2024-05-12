@@ -305,7 +305,7 @@ export const ELF_TEXTS = {
 
 export const EMPIRE_TEXTS = {
   FACTION_NAME: "Imperium",
-  SUBFACTIONS: {
+  SF: {
     NORTH_MARCH: "Nordmark",
     SOUTH_MARCH: "Südmark",
     EAST_MARCH: "Ostmark",

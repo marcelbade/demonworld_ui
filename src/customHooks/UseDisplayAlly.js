@@ -37,9 +37,9 @@ const useDisplayAlly = () => {
   const empireRule = () => {
     return (
       ALC.selectedAlternativeLists //
-        .includes(EMPIRE_TEXTS.SUBFACTIONS.EAST_MARCH) ||
+        .includes(EMPIRE_TEXTS.SF.EAST_MARCH) ||
       ALC.selectedAlternativeLists //
-        .includes(EMPIRE_TEXTS.SUBFACTIONS.SOUTH_MARCH)
+        .includes(EMPIRE_TEXTS.SF.SOUTH_MARCH)
     );
   };
 
