@@ -190,9 +190,9 @@ export const CARD_PREVIEW = {
   STANDARD_BEARER: "Banner",
   CHARGE_BONUS: "Angriffsbonus",
   HORDE_FORMATION: "Horde",
-  WEDGE_FORMATION :"Ke",
-  SKIRMISH_FORMATION :"Pl",
-  SQUARE_FORMATION :"Ka",
+  WEDGE_FORMATION: "Ke",
+  SKIRMISH_FORMATION: "Pl",
+  SQUARE_FORMATION: "Ka",
 };
 
 // FACTIONS & Game Rules
@@ -325,6 +325,7 @@ export const EMPIRE_TEXTS = {
     SOUTHERN_MARK_SPECIALS: "Deine Armeeliste muss zu 10% bis 50% aus Einheiten der Südmark bestehen.",
     NORTHERN_MARK_SPECIALS: "Deine Armeeliste muss zu 10% bis 50% aus Einheiten der Nordmark bestehen.",
     ALLY: "Deine Armeeliste darf zu höchstens 20% aus Einheiten aus Alliierten bestehen.",
+    NO_ZAHRA: "Z’ahra-Truppen dürfen nicht als Alliierte gewählt werden.",
   },
 };
 
