@@ -137,7 +137,8 @@ const EmpireRules = {
       ? globalRules.noDuplicateUniques(validationData.selectedUnits)
       : [];
 
-    // special faction rules - no special rules for the empire exist.
+    // special faction rules
+    let zahraTroops = blockZahra(validationData.listOfAlliedUnits);
 
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [
@@ -153,8 +154,33 @@ const EmpireRules = {
     // result - is a commander present?
     validationResults.commanderIsPresent = hasNoCommander;
 
+    //  result - ally rules applied.
+    validationResults.alliedUnitsBlockedbyRules = [
+      ...zahraTroops, //
+    ];
+
     return validationResults;
   },
+};
+// special faction rules
+
+/**
+ * Function implements the rule that no Z’ahra troops can be allies in an Empire list.
+ * @param {untiCards} availableAlliedUnits
+ * @returns an array consisting of objects. Every object contains a unit that must
+ * be blocked and an error message to be displayed as a tool tip.
+ */
+const blockZahra = (availableAlliedUnits) => {
+  const MESSAGE = EMPIRE_TEXTS.SUB_FACTION_RULES.NO_ZAHRA;
+  let result = [];
+
+  const zahraUnits = availableAlliedUnits.filter((u) => u.subFaction === "Clanngett");
+
+  zahraUnits.forEach((u) => {
+    result.push({ unitBlockedbyRules: u.unitName, message: MESSAGE });
+  });
+
+  return result;
 };
 
 export { EmpireRules, rules };
