@@ -27,6 +27,12 @@ const Tree = (props) => {
 
   const UNIT = "unit";
 
+  /**
+   * useEffects does 2 things. One, it initializes the disabledSubFactions state,
+   * by creating one Boolean flag element for every subfaction. The flags are set to false.
+   * Two, it calls testForEmptySubFaction(), wich tests for every sub faction if it
+   * should appear disabled.
+   */
   useEffect(() => {
     if (AC.selectedFactionName !== NONE) {
       const tempArray = Array(props.subFactionDtoList.length).fill(false);
@@ -34,7 +40,7 @@ const Tree = (props) => {
       setDisabledSubFactions(tempArray);
       testForEmptySubFaction(props.subFactionDtoList, tempArray);
     }
-  }, [VC.listValidationResults]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [JSON.stringify(VC.listValidationResults)]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * Function tests wether all items of one type are blocked.
@@ -61,7 +67,7 @@ const Tree = (props) => {
       blockedSubFactionUnits = 0;
     }
 
-    setDisabledSubFactions(flagArray);
+    setDisabledSubFactions([...flagArray]);
   };
 
   return (
