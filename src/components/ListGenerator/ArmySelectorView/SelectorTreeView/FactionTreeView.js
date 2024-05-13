@@ -39,7 +39,7 @@ const FactionTreeView = () => {
 
   return isSelectionComplete() ? (
     <>
-      <Tree subFactionDtoList={AC.subFactionDTOs} isFactionNotAlly={true} />
+      <Tree isFactionNotAlly={true} />
 
       {display.showAlly(AC.selectedFactionName) ? (
         <>
