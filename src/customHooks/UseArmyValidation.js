@@ -101,9 +101,9 @@ const useArmyValidation = () => {
   const returnValidationResult = (type, payload, factionOrAlly) => {
     switch (type) {
       case "subFaction":
-        return testSubFaction(payload);
+        return returnSubFaction(payload);
       case "unit":
-        return testUnit(payload, factionOrAlly);
+        return returnUnit(payload, factionOrAlly);
       default:
         throw new Error("returnValidationResult() received an invalid type parameter");
     }
@@ -114,7 +114,7 @@ const useArmyValidation = () => {
    * @param {obj} subFactionName
    * @returns validation result object.
    */
-  const testSubFaction = (subFactionName) => {
+  const returnSubFaction = (subFactionName) => {
     let validationResult = { subFactionName: subFactionName, valid: true, validationMessage: "" };
 
     VC.listValidationResults.subFactionBelowMinimum.forEach((sF) => {
@@ -131,7 +131,7 @@ const useArmyValidation = () => {
    * @param {obj} payload
    * @returns validation result object.
    */
-  const testUnit = (payload, factionOrAlly) => {
+  const returnUnit = (payload, factionOrAlly) => {
     let validationResult = { unit: payload, valid: true, validationMessage: "" };
 
     const factionBlockList = VC.listValidationResults.unitsBlockedbyRules;
