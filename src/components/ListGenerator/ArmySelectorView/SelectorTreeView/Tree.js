@@ -26,6 +26,7 @@ const Tree = (props) => {
    * component. ForceUpdate is a method in class component that immdiately forces a rerender.
    * This is the ONLY WORKING SOLUTION that rerenders all treeView items and correctly shows
    * disabled branches (see testForDisabledSubFaction).
+   * https://legacy.reactjs.org/docs/hooks-faq.html#is-there-something-like-forceupdate
    */
   const [, forceUpdate] = useReducer((x) => x + 1, 0);
 
