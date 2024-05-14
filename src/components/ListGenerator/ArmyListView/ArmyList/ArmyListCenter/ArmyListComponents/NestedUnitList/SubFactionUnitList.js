@@ -11,6 +11,7 @@ import ArmyListUnitEntry from "./ArmyListUnitEntry";
 import useArmyValidation from "../../../../../../../customHooks/UseArmyValidation";
 // context
 import { SelectionContext } from "../../../../../../../contexts/selectionContext";
+
 /**
  * The component creates the nested unit list for a single sub faction.
  * Every entry contains:
@@ -31,9 +32,10 @@ const SubFactionUnitList = (props) => {
    * @param {*} identifier unit.name + unique hash value
    */
   const removeUnit = (identifier) => {
-    let filtered = SEC.selectedUnits.filter((u) => u.name + u.uniqueID !== identifier);
-    validation.validateList(filtered, SEC.maxPointsAllowance);
-    SEC.setSelectedUnits(filtered);
+    let tempArray = [...SEC.selectedUnits];
+
+    tempArray = tempArray.filter((u) => u.name + u.uniqueID !== identifier);
+    validation.validateList(tempArray, SEC.maxPointsAllowance);
   };
 
   return (
