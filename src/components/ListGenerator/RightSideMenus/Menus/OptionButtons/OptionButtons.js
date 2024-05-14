@@ -9,10 +9,11 @@ import { TournamentRulesContext } from "../../../../../contexts/tournamentRulesC
 import { SelectionContext } from "../../../../../contexts/selectionContext";
 // components and functions
 import LightSwitch from "../../../../shared/LightSwitch";
+import ListDisplaySwitch from "../../../../shared/ListDisplaySwitch";
 import ChoosePdfType from "./ChoosePdfType";
 import calculateScoutingFactor from "../../../../../gameLogic/scoutFactorCalculator/scoutingFactorCalculator";
 import useSubFactionStats from "../../../../../customHooks/UseSubFactionStats";
- // constants
+// constants
 import { OPTIONS } from "../../../../../constants/textsAndMessages";
 
 const OptionButtons = () => {
@@ -22,7 +23,7 @@ const OptionButtons = () => {
 
   const history = useHistory();
   const stats = useSubFactionStats();
- 
+
   const [showPdfVariantButtons, setShowPdfVariantButtons] = useState(false);
 
   /**
@@ -171,6 +172,7 @@ const OptionButtons = () => {
       }}
     >
       <LightSwitch />
+      <ListDisplaySwitch />
       {buttons.map((bttn, i) => (
         <Grid item key={i}>
           {bttn.display ? (
