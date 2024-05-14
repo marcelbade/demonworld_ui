@@ -12,6 +12,8 @@ const ArmyListSubFactionHeader = (props) => {
 
   const STYLES = { width: "60%", borderBottom: "solid 4px black", marginBottom: "1em", fontSize: "20px" };
 
+  const TITLE = props.subFaction;
+
   return (
     <Grid
       container //
@@ -23,7 +25,7 @@ const ArmyListSubFactionHeader = (props) => {
         variant="subtitle1"
         sx={props.valid ? STYLES : { ...STYLES, color: theme.palette.errorColor }}
       >
-        {props.subFaction}
+        {TITLE}
         {props.valid ? null : (
           <ContextHelpButton
             message={props.message} //
