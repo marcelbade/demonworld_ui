@@ -4,6 +4,7 @@ import React from "react";
 import { View, Text } from "@react-pdf/renderer";
 // styles
 import { detailedStyles } from "../../../../pdfStyles/detailedCardPdfStyles";
+import { CARD_PREVIEW } from "../../../../../../constants/textsAndMessages";
 
 const ItemRow = (props) => {
   const generateItemNameList = () => {
@@ -14,17 +15,17 @@ const ItemRow = (props) => {
     });
 
     result = result.slice(0, -2);
-
     return result;
   };
 
+  const ITEMS = props.items.length === 0 ? CARD_PREVIEW.NO_ITEMS : generateItemNameList();
+
   return (
-    <View key={props.index} style={detailedStyles.footerRow}>
-      {props.items.length === 0 ? ( //
-        <Text>Keine Gegenstände</Text>
-      ) : (
-        <Text>{generateItemNameList()}</Text>
-      )}
+    <View
+      key={props.index} //
+      style={detailedStyles.footerRow}
+    >
+      <Text>{ITEMS}</Text>
     </View>
   );
 };

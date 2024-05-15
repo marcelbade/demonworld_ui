@@ -9,7 +9,10 @@ import { renderDynamicIcons } from "../../../../../compendiums/factionTable/depe
 
 const HitPointsRow = (props) => {
   return (
-    <View key={props.index} style={detailedStyles.footerRow}>
+    <View
+      key={props.index} //
+      style={detailedStyles.footerRow}
+    >
       <Text key={props.index}>
         {renderDynamicIcons({
           iconString: "[ ]",

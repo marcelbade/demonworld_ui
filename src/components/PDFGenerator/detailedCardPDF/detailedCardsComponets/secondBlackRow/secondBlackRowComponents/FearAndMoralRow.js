@@ -10,20 +10,16 @@ import { detailedStyles } from "../../../../pdfStyles/detailedCardPdfStyles";
 import { CARD_PREVIEW } from "../../../../../../constants/textsAndMessages";
 
 const FearAndMoralRow = (props) => {
-  return isSingleElementCard(props.unit) ? (
-    <View key={props.index} style={detailedStyles.cardBlackRow}>
-      <Text key={props.index}>
-        {CARD_PREVIEW.FEAR} {props.unit.fear}
-      </Text>
-    </View>
-  ) : (
-    <View key={props.index} style={detailedStyles.cardBlackRowFearMoral}>
-      <Text key={props.index}>
-        {CARD_PREVIEW.FEAR} {props.unit.fear}
-      </Text>
-      <Text key={props.index}>
-        {CARD_PREVIEW.MORAL} {props.unit.moral1 ? props.unit.moral1 : "-"} / {props.unit.moral2 ? props.unit.moral2 : "-"}
-      </Text>
+  const FEAR = `${CARD_PREVIEW.FEAR} ${props.unit.fear}`;
+  const MORAL = `${CARD_PREVIEW.MORAL} ${props.unit.moral1 ? props.unit.moral1 : "-"} / ${props.unit.moral2 ? props.unit.moral2 : "-"}`;
+
+  return (
+    <View
+      key={props.index} //
+      style={isSingleElementCard(props.unit) ? detailedStyles.cardBlackRow : detailedStyles.cardBlackRowFearMoral}
+    >
+      <Text key={props.index}>{FEAR}</Text>
+      <Text key={props.index}>{MORAL}</Text>
     </View>
   );
 };
