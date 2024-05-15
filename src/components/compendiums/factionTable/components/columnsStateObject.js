@@ -1,4 +1,4 @@
-import { COMPENDIUM } from "../../../../constants/textsAndMessages";
+import { COMPENDIUM, CARD_PREVIEW } from "../../../../constants/textsAndMessages";
 
 /**
  * Since the state for the table is relatively large, it is put in its own file
@@ -66,7 +66,7 @@ export const columnsStateObjects = [
   },
   {
     column: "numberOfElements", //
-    label: COMPENDIUM.NUMBEROFELEMENTS,
+    label: CARD_PREVIEW.ELEMENTS,
     displayed: true,
     type: "text",
     toggleGroup: "unitCharacteristics",
