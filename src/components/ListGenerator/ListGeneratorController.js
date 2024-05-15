@@ -5,22 +5,31 @@ import { Grid } from "@mui/material";
 // components and functions
 import ArmyListBox from "./ArmyListView/ArmyListBox";
 import MenuBox from "./RightSideMenus/MenuBox";
-import MainMenuReturnButton from "../shared/MainMenuReturnButton";
 import ArmySelectionBox from "./ArmySelectorView/ArmySelectionBox";
-import LightSwitch from "../shared/LightSwitch";
-import ListDisplaySwitch from "../shared/ListDisplaySwitch";
+// icons
+import MenuSwitch from "../shared/MenuSwitch";
+import AppBar from "../shared/AppBar";
 
 const ListGeneratorController = () => {
   return (
     <Grid container direction="row">
       <Grid
+        item //
+        container
+        justifyContent="flex-start"
+        sx={{
+          marginBottom: "2em",
+        }}
+      >
+        <MenuSwitch />
+      </Grid>
+      <AppBar />
+      <Grid
         justifyContent="flex-start" //
         alignItems="center"
         container
         direction="row"
-      >
-        <MainMenuReturnButton />
-      </Grid>
+      ></Grid>
       <Grid
         item //
         container
