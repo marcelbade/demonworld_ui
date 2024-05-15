@@ -1,6 +1,5 @@
 // react
 import React from "react";
-
 // material ui
 import { Grid } from "@mui/material";
 // components and functions
@@ -8,25 +7,24 @@ import ArmyListBox from "./ArmyListView/ArmyListBox";
 import MenuBox from "./RightSideMenus/MenuBox";
 import MainMenuReturnButton from "../shared/MainMenuReturnButton";
 import ArmySelectionBox from "./ArmySelectorView/ArmySelectionBox";
+import LightSwitch from "../shared/LightSwitch";
+import ListDisplaySwitch from "../shared/ListDisplaySwitch";
 
 const ListGeneratorController = () => {
   return (
     <Grid container direction="row">
       <Grid
-        item //
-        justifyContent="flex-start"
+        justifyContent="flex-start" //
         alignItems="center"
         container
-        xs={12}
+        direction="row"
       >
         <MainMenuReturnButton />
       </Grid>
-
       <Grid
         item //
         container
         direction="row"
-        xs={12}
       >
         <Grid
           item //
@@ -37,6 +35,9 @@ const ListGeneratorController = () => {
         <Grid
           item //
           xs={9}
+          sx={{
+            paddingLeft: "10em",
+          }}
         >
           <ArmyListBox />
         </Grid>
