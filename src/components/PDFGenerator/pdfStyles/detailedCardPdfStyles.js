@@ -191,6 +191,11 @@ export const detailedStyles = {
     height: "10em",
   },
 
+  // some icon are smaller...
+  wedgeIcon: {
+    height: "14em",
+  },
+
   squareFormationIcon: {
     height: "20em",
   },
