@@ -9,15 +9,16 @@ import { useTheme } from "@emotion/react";
 import CompendiumTableRow from "./CompendiumTableRow";
 import DetailedCardView from "./CardRow";
 import CompendiumTableHeader from "./CompendiumTableHeader";
-import LightSwitch from "../../../shared/LightSwitch";
-import MainMenuReturnButton from "../../../shared/MainMenuReturnButton";
 import { columnGroupObjects, columnsStateObjects } from "./columnsStateObject";
+import CompendiumDropDown from "./CompendiumDropDown";
+import MenuSwitch from "../../../shared/MenuSwitch";
+import AppBar from "../../../shared/AppBar";
 //icons
 import FactionAndUnitSelectors from "./FactionAndUnitSelectors";
 import TableProvider from "../../../../contexts/tableContext";
 // constants
 import { COMPENDIUM } from "../../../../constants/textsAndMessages";
-import CompendiumDropDown from "./CompendiumDropDown";
+
 
 const CompendiumTable = () => {
   // intialize local state
@@ -166,36 +167,12 @@ const CompendiumTable = () => {
         }}
       >
         <Grid container>
-          <Grid
-            item //
-            container
-            xs={12}
-            alignContent="flex-start"
-            direction="row"
-            justifyContent="space-between"
-            sx={{
-              position: "relative", //
-              paddingRight: "3em",
-            }}
-          >
-            <Grid
-              item //
-              container
-              xs={11}
-            >
-              <MainMenuReturnButton />
-            </Grid>
-
-            <Grid
-              item //
-              container
-              xs={1}
-              alignContent="flex-start"
-              justifyContent="end"
-            >
-              <LightSwitch />
-            </Grid>
-          </Grid>
+          <MenuSwitch
+            iconSize="25em" //
+            bttnSize="2em"
+            margin="0.5em"
+          />
+          <AppBar />
           <Grid item container direction="row">
             <Grid item xs={8}>
               <Typography
