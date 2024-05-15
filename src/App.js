@@ -9,7 +9,7 @@ import { Route, Switch } from "react-router-dom";
 // components and functions
 import landingPage from "./components/landingPage/landingPage";
 import CompendiumTable from "./components/compendiums/factionTable/components/CompendiumTable";
-import ListGeneratorController from "./components/ListGenerator/ListGeneratorController";
+import ListGenerator from "./components/ListGenerator/ListGenerator";
 import LossCalculator from "./components/LossCalculator/LossCalculator";
 import PdfBox from "./components/PDFGenerator/PDFBox";
 // context providers
@@ -317,7 +317,7 @@ function App() {
                                         <Switch>
                                           <Route path="/" component={landingPage} exact />
                                           <Route path="/compendium" component={CompendiumTable} exact />
-                                          <Route path="/listGenerator" component={ListGeneratorController} />
+                                          <Route path="/listGenerator" component={ListGenerator} />
                                           <Route path="/lossCalculator" component={LossCalculator} />
                                           <Route path="/PdfBox" component={PdfBox} />
                                         </Switch>
