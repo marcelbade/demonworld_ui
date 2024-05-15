@@ -22,7 +22,7 @@ export const COMPENDIUM = {
   SUBFACTION: "Unterfraktion",
   NAME: "Name",
   UNITTYPE: "Typ",
-  NUMBEROFELEMENTS: "Elemente",
+
   STANDARDBEARER: "Banner",
   MUSICIAN: "Musiker",
   WEDGEFORMATION: "Keil",
