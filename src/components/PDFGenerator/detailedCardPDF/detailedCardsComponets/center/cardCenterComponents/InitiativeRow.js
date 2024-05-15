@@ -7,11 +7,14 @@ import { detailedStyles } from "../../../../pdfStyles/detailedCardPdfStyles";
 import { CARD_PREVIEW } from "../../../../../../constants/textsAndMessages";
 
 const InitiativeRow = (props) => {
+  const INITIATIVE = `${CARD_PREVIEW.INITIATIVE} ${props.unit.initiative}`;
+
   return (
-    <View key={props.index} style={detailedStyles.sizeArmorSkillBox}>
-      <Text key={props.index}>
-        {CARD_PREVIEW.INITIATIVE} {props.unit.initiative}
-      </Text>
+    <View
+      key={props.index} //
+      style={detailedStyles.sizeArmorSkillBox}
+    >
+      <Text key={props.index}>{INITIATIVE}</Text>
     </View>
   );
 };

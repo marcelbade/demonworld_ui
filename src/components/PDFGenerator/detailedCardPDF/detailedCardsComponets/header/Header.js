@@ -12,7 +12,6 @@ const CardHeader = (props) => {
   return (
     <View style={detailedStyles.cardHeaderBox}>
       <NameRow unit={props.unit} index={props.index} />
-
       <BackSideTitleRow unit={props.unit} index={props.index} />
     </View>
   );

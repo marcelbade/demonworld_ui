@@ -94,7 +94,7 @@ const UnitElementButtons = (props) => {
     !RC.itemShopState.show &&
     !RC.secondSubFactionMenuState.show
   ) {
-    //TODO Warning: Cannot update a component (`ListGeneratorController`) while rendering a different component (`UnitElementButtons`). To locate the bad setState() call inside `UnitElementButtons`,
+    //TODO Warning: Cannot update a component (`ListGenerator`) while rendering a different component (`UnitElementButtons`). To locate the bad setState() call inside `UnitElementButtons`,
     RC.setShowOptionButtons(true);
   }
   if (

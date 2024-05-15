@@ -6,11 +6,14 @@ import { Text, View } from "@react-pdf/renderer";
 import { detailedStyles } from "../../../../pdfStyles/detailedCardPdfStyles";
 
 const RangeWeaponRow = (props) => {
+  const RANGE_WEAPON = `${props.rangedWeapon} ${props.rangedAttackStats}`;
+
   return (
-    <View key={props.index} style={detailedStyles.cardCenterContent}>
-      <Text key={props.index}>
-        {props.rangedWeapon} {props.rangedAttackStats}
-      </Text>
+    <View
+      key={props.index} //
+      style={detailedStyles.cardCenterContent}
+    >
+      <Text key={props.index}>{RANGE_WEAPON}</Text>
     </View>
   );
 };

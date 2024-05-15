@@ -7,6 +7,8 @@ import { detailedStyles } from "../../../../pdfStyles/detailedCardPdfStyles";
 import { renderDynamicIcons } from "../../../../../compendiums/factionTable/depencies/factionTableFunctions";
 
 const NameRow = (props) => {
+  const UNIT_NAME = props.unit.isMultiStateUnit ? props.unit.multiCardName : props.unit.unitName;
+
   return (
     <View key={props.index} style={detailedStyles.headerRow}>
       <View key={props.index} style={detailedStyles.paddingTopHeader}></View>
@@ -33,7 +35,7 @@ const NameRow = (props) => {
           </Text>
         </View>
       </View>
-      <Text key={props.index}> {props.unit.isMultiStateUnit ? props.unit.multiCardName : props.unit.unitName} </Text>
+      <Text key={props.index}> {UNIT_NAME} </Text>
       <Text key={props.index}> </Text>
     </View>
   );
