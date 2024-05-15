@@ -10,8 +10,10 @@ import ListAltIcon from "@mui/icons-material/ListAlt";
 // constants
 import { OPTIONS } from "../../constants/textsAndMessages";
 
-const ListDisplaySwitch = () => {
+const ListDisplaySwitch = (props) => {
   const LDC = useContext(ListDisplayContext);
+
+  const style = { fontSize: props.iconSize };
 
   const toggleListMode = () => {
     LDC.setSimpleMode((prevState) => !prevState);
@@ -20,11 +22,12 @@ const ListDisplaySwitch = () => {
   return (
     <Tooltip title={<Typography>{OPTIONS.LIST_DISPLAY_SWITCH}</Typography>}>
       <IconButton
+        size={props.bttnSize}
         onClick={() => {
           toggleListMode();
         }}
       >
-        {LDC.simpleModeOn ? <ListAltIcon /> : <MenuIcon />}
+        {LDC.simpleModeOn ? <ListAltIcon sx={style} /> : <MenuIcon sx={style} />}
       </IconButton>
     </Tooltip>
   );

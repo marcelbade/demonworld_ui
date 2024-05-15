@@ -7,9 +7,11 @@ import { useTheme } from "@emotion/react";
 // icons
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 
-const MainMenuReturnButton = () => {
+const MainMenuReturnButton = (props) => {
   const history = useHistory();
   const theme = useTheme();
+
+  const style = { fontSize: props.iconSize };
 
   /**
    * Function calls history objects to take user back to main menu.
@@ -29,9 +31,9 @@ const MainMenuReturnButton = () => {
       onClick={() => {
         backToMainmenu();
       }}
-      size="large"
+      size={props.bttnSize}
     >
-      <ChevronLeftIcon sx={{ width: "2em", height: "2em" }} />
+      <ChevronLeftIcon sx={style} />
     </IconButton>
   );
 };
