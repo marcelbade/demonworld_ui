@@ -1,15 +1,19 @@
 // React
-import React from "react";
+import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 // Material UI
 import { IconButton, Grid, Tooltip, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // Functions And Components
 import CustomIcon from "../shared/statCards/CustomIcon";
+// context
+import { MenuContext } from "../../contexts/MenuContext";
 
 const LandingPageNaviButton = (props) => {
   const history = useHistory();
   const theme = useTheme();
+
+  const MC = useContext(MenuContext);
 
   const HEIGHT_WIDTH = "100px";
   const HEIGHT_WIDTH_BOX = "135px";
@@ -46,6 +50,7 @@ const LandingPageNaviButton = (props) => {
         <IconButton
           onClick={() => {
             toPage(props.relativeURL);
+            MC.setOpenMenu(false);
           }}
           size="large"
         >
