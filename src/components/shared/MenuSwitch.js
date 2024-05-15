@@ -13,20 +13,19 @@ import CustomIcon from "./statCards/CustomIcon";
 const MenuSwitch = (props) => {
   const MC = useContext(MenuContext);
 
-  const style = { fontSize: props.iconSize };
-
   return (
-    <Tooltip title={<Typography>{OPTIONS.LIGHT_SWITCH}</Typography>}>
+    <Tooltip title={<Typography>{OPTIONS.MENU_SWITCH}</Typography>}>
       <IconButton
         onClick={() => {
           MC.setOpenMenu(true);
         }}
-        size="large"
+        size={props.bttnSize}
       >
         <CustomIcon
           icon={D20} //
           altText={"placeholder"}
-          sx={style}
+          width={props.iconSize}
+          height={props.iconSize}
         />
       </IconButton>
     </Tooltip>
