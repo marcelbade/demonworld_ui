@@ -10,7 +10,7 @@ import ArmySelectionBox from "./ArmySelectorView/ArmySelectionBox";
 import MenuSwitch from "../shared/MenuSwitch";
 import AppBar from "../shared/AppBar";
 
-const ListGeneratorController = () => {
+const ListGenerator = () => {
   return (
     <Grid container direction="row">
       <Grid
@@ -60,4 +60,4 @@ const ListGeneratorController = () => {
   );
 };
 
-export default ListGeneratorController;
+export default ListGenerator;
