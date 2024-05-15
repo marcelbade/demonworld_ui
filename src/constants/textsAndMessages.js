@@ -77,6 +77,7 @@ export const OPTIONS = {
   CREATE_PDF: "PDF Erzeugen ",
   LIGHT_SWITCH: "Wechsel zw. dunklen und hellen Theme",
   LIST_DISPLAY_SWITCH: "Wechsel zw. einfacher und kompletter Listendarstellung",
+  MENU_SWITCH: "Menü",
   SAVE_LIST: "Liste Speichern",
   TO_LOSS_CALCULATOR: "Zum Verlustrechner",
 };
