@@ -21,7 +21,11 @@ const ListGeneratorController = () => {
           marginBottom: "2em",
         }}
       >
-        <MenuSwitch iconSize = "27em" bttnSize="33em" />
+        <MenuSwitch
+          iconSize="25em" //
+          bttnSize="2em"
+          margin="0.5em"
+        />
       </Grid>
       <AppBar />
       <Grid

@@ -19,7 +19,11 @@ const MenuSwitch = (props) => {
         onClick={() => {
           MC.setOpenMenu(true);
         }}
-        size={props.bttnSize}
+        sx={{
+          width: props.bttnSize,
+          height: props.bttnSize,
+          margin: props.margin
+        }}
       >
         <CustomIcon
           icon={D20} //
