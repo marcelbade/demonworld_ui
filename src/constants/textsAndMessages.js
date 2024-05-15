@@ -195,6 +195,7 @@ export const CARD_PREVIEW = {
   WEDGE_FORMATION: "Ke",
   SKIRMISH_FORMATION: "Pl",
   SQUARE_FORMATION: "Ka",
+  NO_ITEMS : "Keine Gegenstände",
 };
 
 // FACTIONS & Game Rules
