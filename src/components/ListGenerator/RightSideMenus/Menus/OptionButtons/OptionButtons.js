@@ -8,8 +8,6 @@ import { ArmyContext } from "../../../../../contexts/armyContext";
 import { TournamentRulesContext } from "../../../../../contexts/tournamentRulesContext";
 import { SelectionContext } from "../../../../../contexts/selectionContext";
 // components and functions
-import LightSwitch from "../../../../shared/LightSwitch";
-import ListDisplaySwitch from "../../../../shared/ListDisplaySwitch";
 import ChoosePdfType from "./ChoosePdfType";
 import calculateScoutingFactor from "../../../../../gameLogic/scoutFactorCalculator/scoutingFactorCalculator";
 import useSubFactionStats from "../../../../../customHooks/UseSubFactionStats";
@@ -171,8 +169,6 @@ const OptionButtons = () => {
         padding: "2em",
       }}
     >
-      <LightSwitch />
-      <ListDisplaySwitch />
       {buttons.map((bttn, i) => (
         <Grid item key={i}>
           {bttn.display ? (
