@@ -15,12 +15,21 @@ const ArmyListBox = () => {
     <Grid
       container //
       direction="column"
-      justifyContent="center"
+      justifyContent="flex-start"
       alignItems="flex-start"
+      sx={{
+        
+      }}
     >
-      <ArmyListBoxHeader />
-      <ArmyListBoxCenter />
-      <ArmyListBoxFooter />
+      <Grid item>
+        <ArmyListBoxHeader />
+      </Grid>
+      <Grid item>
+        <ArmyListBoxCenter />
+      </Grid>
+      <Grid item>
+        <ArmyListBoxFooter />
+      </Grid>
     </Grid>
   ) : null;
 };
