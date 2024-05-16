@@ -83,11 +83,11 @@ export const renderUnitTypeName = (unitType) => {
 export const renderBooleanAsIcon = (numberOfElements, flag) => {
   const SINGLE_ELEMENT = 1;
 
-  if (numberOfElements !== SINGLE_ELEMENT) {
-    return flag ? <CheckCircleOutlineIcon /> : <CancelIcon />;
-  } else {
+  if (numberOfElements == SINGLE_ELEMENT) {
     return "-";
   }
+
+  return flag ? <CheckCircleOutlineIcon /> : <CancelIcon />;
 };
 
 /**

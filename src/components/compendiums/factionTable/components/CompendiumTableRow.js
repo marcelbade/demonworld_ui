@@ -31,7 +31,7 @@ const CompendiumTableRow = (props) => {
       case "skirmishFormation":
       case "wedgeFormation":
       case "horde":
-        return renderBooleanAsIcon(props.unit[c.column]);
+        return renderBooleanAsIcon(props.unit.numberOfElements, props.unit[c.column]);
       case "weapon1":
         return `${props.unit.weapon1Name} ${props.unit.weapon1}`;
       case "weapon2":
