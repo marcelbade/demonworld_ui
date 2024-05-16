@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 // material ui
 import { useTheme } from "@emotion/react";
 // components & functions
-import { renderDynamicIcons } from "../../../../compendiums/factionTable/depencies/factionTableFunctions";
+import { renderDynamicIcons } from "../../../../../util/utilityFunctions";
 import { Grid, Typography } from "@mui/material";
 import { StateCardContext } from "../../../../../contexts/statCardContext";
 

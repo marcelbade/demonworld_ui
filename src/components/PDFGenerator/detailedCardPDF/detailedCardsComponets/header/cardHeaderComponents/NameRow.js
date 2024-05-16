@@ -4,7 +4,7 @@ import React from "react";
 import { Text, View } from "@react-pdf/renderer";
 // styles
 import { detailedStyles } from "../../../../pdfStyles/detailedCardPdfStyles";
-import { renderDynamicIcons } from "../../../../../compendiums/factionTable/depencies/factionTableFunctions";
+import { renderDynamicIcons } from "../../../../../../util/utilityFunctions";
 
 const NameRow = (props) => {
   const UNIT_NAME = props.unit.isMultiStateUnit ? props.unit.multiCardName : props.unit.unitName;

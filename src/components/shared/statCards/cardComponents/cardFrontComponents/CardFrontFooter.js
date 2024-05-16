@@ -4,7 +4,7 @@ import React, { useContext } from "react";
 import { Grid, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components & functions
-import { renderDynamicIcons } from "../../../../compendiums/factionTable/depencies/factionTableFunctions";
+import { renderDynamicIcons } from  "../../../../../util/utilityFunctions";
 import { StateCardContext } from "../../../../../contexts/statCardContext";
 
 const CardFrontFooter = () => {

@@ -5,7 +5,7 @@ import { Text, View } from "@react-pdf/renderer";
 // styles
 import { detailedStyles } from "../../../../pdfStyles/detailedCardPdfStyles";
 // functions
-import { renderDynamicIcons } from "../../../../../compendiums/factionTable/depencies/factionTableFunctions";
+import { renderDynamicIcons } from "../../../../../../util/utilityFunctions";
 
 const HitPointsRow = (props) => {
   return (

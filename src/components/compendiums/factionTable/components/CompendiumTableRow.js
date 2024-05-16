@@ -9,7 +9,7 @@ import {
   renderUnitTypeName,
   renderEffectiveness_1,
   renderEffectiveness_2,
-} from "../depencies/factionTableFunctions";
+} from "../../../../util/utilityFunctions";
 import CardButton from "./CardButton";
 import RowLock from "./RowLock";
 import { TableRow } from "@mui/material";
