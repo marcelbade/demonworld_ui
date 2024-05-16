@@ -15,6 +15,7 @@ const CardBackUpperBlackStripe = () => {
   const LEADER = SC.unit.leader ? `${CARD_PREVIEW.LEADER} ` : null;
   const STANDARD_BEARER = SC.unit.standardBearer ? `/ ${CARD_PREVIEW.STANDARD_BEARER}` : null;
   const MUSICIAN = SC.unit.musician ? `/ ${CARD_PREVIEW.MUSICIAN}` : null;
+
   return (
     <Grid
       container //
