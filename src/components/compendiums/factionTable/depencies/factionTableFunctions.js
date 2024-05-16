@@ -1,7 +1,7 @@
 // React
 import React from "react";
 //Material UI
-import { Grid, Tooltip, Typography } from "@mui/material";
+import { Tooltip, Typography } from "@mui/material";
 //icons
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import CancelIcon from "@mui/icons-material/Cancel";
@@ -83,7 +83,7 @@ export const renderUnitTypeName = (unitType) => {
 export const renderBooleanAsIcon = (numberOfElements, flag) => {
   const SINGLE_ELEMENT = 1;
 
-  if (numberOfElements == SINGLE_ELEMENT) {
+  if (numberOfElements === SINGLE_ELEMENT) {
     return "-";
   }
 
@@ -98,52 +98,14 @@ export const renderBooleanAsIcon = (numberOfElements, flag) => {
  * @returns a string with a number of symbols equal to the unit's stat.
  */
 export const renderDynamicIcons = (data) => {
-  let icons = "";
-  let zeroMarker = "";
+  let result = "";
+  let zeroMarker = "-";
 
   for (let i = 0; i < data.iconNumber; i++) {
-    icons = icons + data.iconString;
+    result = result + data.iconString;
   }
 
-  if (data.showIfNone) {
-    zeroMarker = "-";
-  }
-
-  return icons.length === 0 ? zeroMarker : icons;
+  return result.length === 0 ? zeroMarker : result;
 };
 
-/**
- * Function calculates the correct number of elements. The finished HTML shows the
- * number of elements, as well as unit leader, standard bearer,
- * and musician, if they exist.
- *
- * @param {unitCard} unit
- * @returns an HTML element cotaining the formatted information
- */
-export const displayUnitElements = (unit) => {
-  let specialElements = 0;
-  if (unit.leader) {
-    ++specialElements;
-  }
-  if (unit.standardBearer) {
-    ++specialElements;
-  }
-  if (unit.musician) {
-    ++specialElements;
-  }
-
-  let number = `${unit.numberOfElements - specialElements}`;
-  let ending = unit.numberOfElements === 1 ? "Element" : "Elemente";
-
-  return (
-    <Grid container direction="row" justifyContent="center" alignItems="center">
-      <Typography variant="h6">
-        {unit.leader ? "Anführer  " : null}
-        {unit.standardBearer ? "/ Standarte" : null}
-        {unit.musician ? "/ Musiker" : null}
-      </Typography>
-      <Typography variant="h6">{number}</Typography>
-      <Typography variant="h6">{ending}</Typography>
-    </Grid>
-  );
-};
+ 
