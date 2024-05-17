@@ -42,7 +42,7 @@ const TreeItemNode = (props) => {
   };
 
   const addItemToCentralList = (item) => {
-    IC.setAllEquippedItems([...IC.allEquippedItems, item]);
+    IC.setAllEquippedItems([...IC.allEquippedItems, item.itemName]);
   };
 
   /**
