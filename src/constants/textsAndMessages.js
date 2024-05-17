@@ -486,7 +486,7 @@ export const THAIN_TEXTS = {
     CHURCH: "Dorga-Kirche",
     GIANT_ANIMALS: "Gar'Ydwen",
   },
-  // TODO finish this
+ 
   EXCEMPT_UNITS: {
     BANNER_OF_THE_HIGH_KING: "Banner des Hochkönigs",
     BOAR_CHARIOT: "Tur-Gar'arryd",
