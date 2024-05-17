@@ -58,8 +58,6 @@ export const ALTERNATIVE_ARMY_SELECTION_TEXT = {
   [ORKS]: [ORKS_TEXTS.SELECTION_TEXT],
 };
 
-// export const UNIT_OR_SUBFACTION = { units: ["Orks"], subFactions: ["Zwerge", "Imperium"] };
-
 // SECOND SUB_FACTION
 export const ARMIES_ADDITIONAL_SUBFACTIONS = [THAIN];
 export const ARMIES_ADDITIONAL_SUBFACTIONS_MAPPING = [
