@@ -13,9 +13,11 @@ const useSubFactionStats = () => {
    */
   const calculateTotal = (unitList) => {
     let total = 0;
-    if (unitList) {
-      unitList.forEach((u) => (total += calculator.calculateTotalUnitCost(u)));
+    if (!unitList) {
+      return total;
     }
+
+    unitList.forEach((u) => (total += calculator.calculateTotalUnitCost(u)));
     return total;
   };
 

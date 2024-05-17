@@ -22,9 +22,15 @@ const LossCalculator = () => {
 
   // Initializes the state by pulling the list from the history object. If none is present, an alternative UI is displayed
   useEffect(() => {
-    if (location.state !== undefined && location.state.selectedArmy !== undefined && location.state.selectedArmy.length !== 0) {
-      LC.setList(location.state.selectedArmy);
+    if (
+      location.state === undefined && //
+      location.state.selectedArmy === undefined &&
+      location.state.selectedArmy.length === 0
+    ) {
+      return;
     }
+
+    LC.setList(location.state.selectedArmy);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
@@ -49,11 +55,7 @@ const LossCalculator = () => {
    * @returns unitCard obj
    */
   const setUnitDestroyedFlag = (u) => {
-    if (u.lossCounter === u.maxCounter) {
-      u.unitDestroyed = true;
-    } else {
-      u.unitDestroyed = false;
-    }
+    u.unitDestroyed = u.lossCounter === u.maxCounter;
     return u;
   };
 

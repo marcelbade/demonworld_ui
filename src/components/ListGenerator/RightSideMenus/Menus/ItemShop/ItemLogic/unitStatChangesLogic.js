@@ -60,9 +60,6 @@ export const rangedWeaponStats = (unit) => {
  * @returns
  */
 export const setUnitStat = (unit, unitStatName) => {
-
-  
-
   let stat = unit[unitStatName];
 
   const result = searchForRelevantModifier(unit, mapUnitStatToItemProperty(unitStatName));
@@ -132,32 +129,25 @@ const calculateNewMeleeWeaponValue = (unit, modifier) => {
 
   let newWeapon1Value = modifier;
 
+  console.log("newWeapon1Value  = modifier;", newWeapon1Value)
+
   // size bonus - capped at 4 for giant mounts
-  if (unit.unitSize <= MAX_SIZE) {
-    newWeapon1Value += unit.unitSize;
-  } else {
-    newWeapon1Value += MAX_SIZE;
-  }
+  newWeapon1Value = unit.unitSize <= MAX_SIZE ? (newWeapon1Value += unit.unitSize) : (newWeapon1Value += MAX_SIZE);
+
+  console.log("size",newWeapon1Value)
+
 
   // leader always has +1
-  if (unit.leader) {
-    newWeapon1Value += LEADER_BONUS;
-  }
-
+  newWeapon1Value = unit.leader ? (newWeapon1Value += LEADER_BONUS) : newWeapon1Value;
   // has a mount
-  if (unit.isMounted) {
-    newWeapon1Value += BONUS;
-  }
+  newWeapon1Value = unit.isMounted ? (newWeapon1Value += BONUS) : newWeapon1Value;
+
+  console.log("isMounted",newWeapon1Value)
 
   // 5 Miniatures per base (closed order)
-  if (unit.closedOrder) {
-    newWeapon1Value += BONUS;
-  }
-
+  newWeapon1Value = unit.closedOrder ? (newWeapon1Value += BONUS) : newWeapon1Value;
   // second hand weapon
-  if (unit.twoHandWeapons) {
-    newWeapon1Value += BONUS;
-  }
+  newWeapon1Value = unit.twoHandWeapons ? (newWeapon1Value += BONUS) : newWeapon1Value;
 
   return newWeapon1Value;
 };

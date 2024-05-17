@@ -24,11 +24,14 @@ const useArmyValidation = () => {
     const isAlternativeListSelected = ALC.selectedAlternativeLists.length !== 0;
 
     if (
-      (IsFactionSelected && ALC.armyHasAlternativeLists && isAlternativeListSelected) || //
-      (IsFactionSelected && !ALC.armyHasAlternativeLists)
+      (!IsFactionSelected && //
+        !ALC.armyHasAlternativeLists &&
+        !isAlternativeListSelected) || //
+      (!IsFactionSelected && ALC.armyHasAlternativeLists)
     ) {
-      runValidation(currentList, currentTotalPointAllowance, AC.subFactions);
+      return;
     }
+    runValidation(currentList, currentTotalPointAllowance, AC.subFactions);
   };
 
   /**
@@ -81,13 +84,13 @@ const useArmyValidation = () => {
    * @param {[obj]} validationResult
    */
   const removeInvalidUnits = (unitList, validationResult) => {
-    if (validationResult.removeUnitsNoLongerValid.length > 0) {
-      let tempArray = [...unitList];
-
-      tempArray = tempArray.filter((u) => !validationResult.removeUnitsNoLongerValid.includes(u.uniqueID));
-
-      SEC.setSelectedUnits([...tempArray]);
+    if (validationResult.removeUnitsNoLongerValid.length === 0) {
+      return;
     }
+
+    let tempArray = [...unitList];
+    tempArray = tempArray.filter((u) => !validationResult.removeUnitsNoLongerValid.includes(u.uniqueID));
+    SEC.setSelectedUnits([...tempArray]);
   };
 
   /**

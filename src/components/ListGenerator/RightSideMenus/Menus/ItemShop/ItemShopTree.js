@@ -36,13 +36,15 @@ const ItemShopTree = () => {
    * which controls the display of the branches.
    */
   useEffect(() => {
-    if (!isObjectEmtpy(IC.unitSelectedForShop)) {
-      const tempArray = filter.filterItemTypesForUnit(IC.unitSelectedForShop, IC.fetchedItems.factionItems);
-
-      setFilteredItemGroups(tempArray);
-      const numberOfCategories = tempArray.length;
-      setDisabledCategories(Array(numberOfCategories).fill(false));
+    if (isObjectEmtpy(IC.unitSelectedForShop)) {
+      return;
     }
+
+    const tempArray = filter.filterItemTypesForUnit(IC.unitSelectedForShop, IC.fetchedItems.factionItems);
+
+    setFilteredItemGroups(tempArray);
+    const numberOfCategories = tempArray.length;
+    setDisabledCategories(Array(numberOfCategories).fill(false));
   }, [IC.unitSelectedForShop]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**

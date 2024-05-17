@@ -56,16 +56,17 @@ const ArmyListBoxHeader = () => {
    * by combining the faction name and the current date.
    */
   const createDefaultArmyName = () => {
-    if (AC.selectedFactionName !== NONE && AC.selectedFactionName !== undefined) {
-      const currentDate = new Date();
-
-      // add 1 to the month since it starts with 0
-      const year = currentDate.getFullYear();
-      const month = 1 + currentDate.getMonth();
-      const dayOfMonth = currentDate.getDate();
-
-      AC.setArmyName(`${AC.selectedFactionName} - ${dayOfMonth}.${month}.${year}`);
+    if (AC.selectedFactionName === NONE && AC.selectedFactionName === undefined) {
+      return;
     }
+    const currentDate = new Date();
+
+    // add 1 to the month since it starts with 0
+    const year = currentDate.getFullYear();
+    const month = 1 + currentDate.getMonth();
+    const dayOfMonth = currentDate.getDate();
+
+    AC.setArmyName(`${AC.selectedFactionName} - ${dayOfMonth}.${month}.${year}`);
   };
 
   useEffect(() => {

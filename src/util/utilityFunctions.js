@@ -73,7 +73,7 @@ export const isSingleElementCard = (unit) => {
 };
 
 /**
- * Function tests if unit is a hero or mage. This is important when it 
+ * Function tests if unit is a hero or mage. This is important when it
  * comes to displaying movement on stat cards.
  *
  * @param {[{*}]} unit
@@ -84,37 +84,28 @@ export const isHeroOrMage = (unit) => {
   return HERO_MAGE_LIST.includes(unit.unitType);
 };
 
-  /**
-   * Function creates the string that contains the numbe of "normal" elements.
-   * Since special elements are mentioned separately,
-   * they have to be substracted from the total count.
-   * @param {unitCard} unit
-   * @returns A String with the correct number of elements and the correct phrasing.
-   */
-  export const numberOfElements = (unit) => {
-    let specialElements = 0;
+/**
+ * Function creates the string that contains the numbe of "normal" elements.
+ * Since special elements are mentioned separately,
+ * they have to be substracted from the total count.
+ * @param {unitCard} unit
+ * @returns A String with the correct number of elements and the correct phrasing.
+ */
+export const numberOfElements = (unit) => {
+  let specialElements = 0;
 
-    if (unit.leader) {
-      ++specialElements;
-    }
-    if (unit.standardBearer) {
-      ++specialElements;
-    }
-    if (unit.musician) {
-      ++specialElements;
-    }
+  specialElements = unit.leader ? ++specialElements : specialElements;
+  specialElements = unit.standardBearer ? ++specialElements : specialElements;
+  specialElements = unit.musician ? ++specialElements : specialElements;
 
-    let number = `${unit.numberOfElements - specialElements}`;
-    let ending =
-      unit.numberOfElements === 1 //
-        ? ` ${CARD_PREVIEW.SINGLE_ELEMENT}`
-        : ` ${CARD_PREVIEW.ELEMENTS}`;
+  let number = `${unit.numberOfElements - specialElements}`;
+  let ending =
+    unit.numberOfElements === 1 //
+      ? ` ${CARD_PREVIEW.SINGLE_ELEMENT}`
+      : ` ${CARD_PREVIEW.ELEMENTS}`;
 
-    return number + ending;
-  };
-
-
-  
+  return number + ending;
+};
 
 /**
  * Function searches the String value of the special rule property for a space (" ").

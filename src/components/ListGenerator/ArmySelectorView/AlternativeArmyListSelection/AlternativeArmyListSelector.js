@@ -68,10 +68,8 @@ const AlternativeArmyListSelector = () => {
     const elementsFilled = tempArray.filter((e) => e !== "").length;
     const isComplete = elementsFilled === ALC.numberOfAlternativeChoices;
 
-    // if (isComplete) {
     setGlobalState(isComplete, tempArray);
     setSelectedAlternateSubFaction(tempArray);
-    // }
   };
 
   /**

@@ -15,16 +15,15 @@ const usePointCostCalculator = () => {
    * @returns the total point cost of all (lost) items
    */
   const calculateEquipmentPointCost = (equipmentList, onlyLostItems) => {
-    let result = 0;
-
-    if (equipmentList !== undefined) {
-      const filterFunction = onlyLostItems.filter //
-        ? (e) => e.itemLost && !e.everyElement
-        : (e) => !e.everyElement;
-
-      result = equipmentList.filter(filterFunction).reduce((sum, { points }) => sum + points, 0);
+    if (equipmentList === undefined) {
+      return 0;
     }
-    return result;
+
+    const filterFunction = onlyLostItems.filter //
+      ? (e) => e.itemLost && !e.everyElement
+      : (e) => !e.everyElement;
+
+    return equipmentList.filter(filterFunction).reduce((sum, { points }) => sum + points, 0);
   };
 
   /**
@@ -33,13 +32,11 @@ const usePointCostCalculator = () => {
    * @returns total ppoint cost
    */
   const calculateUnitAndEveryElementItemCost = (unit) => {
-    let itemsOnEveryELement = 0;
-
-    if (unit.equipment !== undefined) {
-      itemsOnEveryELement = unit.equipment.filter((e) => e.everyElement).reduce((sum, { points }) => sum + points, 0);
+    if (unit.equipment === undefined) {
+      return unit.points;
     }
 
-    return unit.points + itemsOnEveryELement;
+    return unit.points + unit.equipment.filter((e) => e.everyElement).reduce((sum, { points }) => sum + points, 0);
   };
 
   const calculateTotalUnitCost = (unit) => {
