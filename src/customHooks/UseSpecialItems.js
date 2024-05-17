@@ -4,8 +4,8 @@ import { useContext } from "react";
 import { SelectionContext } from "../contexts/selectionContext";
 import { ArmyContext } from "../contexts/armyContext";
 // constants
-import { SPECIAL_ITEMS } from "../constants/textsAndMessages";
-import { SPECIAL } from "../constants/factions";
+import { SPECIAL_ITEMS, SPECIAL_TEXTS } from "../constants/textsAndMessages";
+import { NONE, SPECIAL } from "../constants/factions";
 
 const useSpecialItems = () => {
   const SEC = useContext(SelectionContext);
@@ -65,7 +65,7 @@ const useSpecialItems = () => {
 
     // find the correct card for the monster. There are two depending on the size of the hero.
     const units = AC.listOfAllFactionUnits.filter((u) => u.subFaction === SPECIAL);
-    const cardName = selectedUnit.unitSize === 1 ? "Kleines Ungeheuer" : "Ungeheuer";
+    const cardName = selectedUnit.unitSize === 1 ? SPECIAL_TEXTS.SMALL_MONSTER : SPECIAL_TEXTS.MONSTER;
     const foundUnit = units.find((u) => u.unitName === cardName);
 
     monsterCard = foundUnit;
@@ -104,14 +104,14 @@ const useSpecialItems = () => {
   const removeBraceletOfTransformation = (selectedUnit) => {
     let tempArray = AC.listOfAllFactionUnits;
 
-    const cardName = selectedUnit.unitSize === 1 ? "Kleines Ungeheuer" : "Ungeheuer";
+    const cardName = selectedUnit.unitSize === 1 ? SPECIAL_TEXTS.SMALL_MONSTER : SPECIAL_TEXTS.MONSTER;
     const monsterCard = tempArray.find((e) => e.unitName === cardName);
 
     // if the selected unit was not already a multi state unit, reset its properties.
     if (monsterCard.multiStateOrderNumber === 2) {
       selectedUnit.multiCardName = "";
       selectedUnit.isMultiStateUnit = false;
-      selectedUnit.belongsToUnit = "NONE";
+      selectedUnit.belongsToUnit = NONE;
       selectedUnit.multiStateOrderNumber = 0;
 
       const position = tempArray.findIndex((u) => u.unitName === selectedUnit.unitName);
@@ -120,7 +120,7 @@ const useSpecialItems = () => {
 
     monsterCard.multiCardName = "";
     monsterCard.isMultiStateUnit = false;
-    monsterCard.belongsToUnit = "NONE";
+    monsterCard.belongsToUnit = NONE;
     monsterCard.multiStateOrderNumber = 0;
 
     AC.setListOfAllFactionUnits(tempArray);
