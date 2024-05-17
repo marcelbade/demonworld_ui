@@ -556,6 +556,8 @@ export const SOUTHERN_CITY_STATES_TEXTS = {
 
 export const SPECIAL_TEXTS = {
   FACTION_NAME: "Special",
+  MONSTER: "Ungeheuer",
+  SMALL_MONSTER: "Kleines Ungeheuer",
 };
 
 export const SPECIAL_ITEMS = {
