@@ -42,8 +42,9 @@ const SubFactionUnitList = (props) => {
     <Fragment>
       {props.subFactionUnits
         .sort((a, b) => a.unitName > b.unitName)
-        .map((u, i) => {
-          const identifier = u.unitName + u.uniqueID;
+        .map((u) => validation.returnValidationResult(secondSubFaction, u))
+        .map((validationObj, i) => {
+          const identifier = validationObj.unitName + validationObj.uniqueID;
           return (
             <List key={i}>
               <ListItem>
@@ -54,16 +55,20 @@ const SubFactionUnitList = (props) => {
                 >
                   <RemoveCircleOutlineIcon />
                 </IconButton>
-                <ArmyListUnitEntry unit={u} />
+                <ArmyListUnitEntry
+                  unit={validationObj.unit}
+                  isValid={validationObj.valid}
+                  validationMessage={validationObj.validationMessage}
+                />
                 {/* BUTTONS */}
                 <UnitElementButtons
-                  unit={u} //
+                  unit={validationObj.unit} //
                   subFaction={props.subFactionName}
                 />
               </ListItem>
               <ListItem>
                 <EquipmentList
-                  unit={u} //
+                  unit={validationObj.unit} //
                   identifier={identifier}
                 />
               </ListItem>

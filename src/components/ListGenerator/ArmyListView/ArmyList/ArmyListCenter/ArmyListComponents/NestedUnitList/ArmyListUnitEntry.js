@@ -1,32 +1,15 @@
 // React
-import React, { Fragment, useContext } from "react";
+import React, { Fragment } from "react";
 // Material UI
 import { Grid, ListItemText, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components and functions
-import { ValidationContext } from "../../../../../../../contexts/validationContext";
 import ContextHelpButton from "../../../../../../shared/ContextHelpButton";
 // constants
 import { PUSH_MESSAGE_TYPES } from "../../../../../../../constants/textsAndMessages";
 
 const ArmyListUnitEntry = (props) => {
-  const VC = useContext(ValidationContext);
   const theme = useTheme();
-
-  /**
-   * Function validates that the second subFaction has been selected. Is only called for those armies that require it.
-   */
-  const isSecondSubFactionsValid = () => {
-    let result = { isValid: true, message: "" };
-
-    VC.listValidationResults.secondSubFactionMissing.forEach((u) => {
-      if (u.unitWithOutSecondSubFaction === props.unit.unitName) {
-        result = { isValid: false, message: u.message };
-      }
-    });
-
-    return result;
-  };
 
   /**
    * Function displays the secondSubFaction property, but only if it differs from the subfaction property.
@@ -36,29 +19,28 @@ const ArmyListUnitEntry = (props) => {
     return props.unit.subFaction !== props.unit.secondSubFaction;
   };
 
-  const testForSecondSubFaction = isSecondSubFactionsValid();
+  const UNIT = props.unit.unitName;
 
   return (
     <Fragment>
       <ListItemText
         key={props.unit.secondSubFaction}
         primary={
-          testForSecondSubFaction.isValid ? (
-            <Typography variant="button">{props.unit.unitName}</Typography>
+          props.isValid ? (
+            <Typography variant="button">{UNIT}</Typography>
           ) : (
             <Grid container direction="row" alignItems="center">
               <Typography
                 variant="button"
                 sx={{
                   color: theme.palette.errorColor,
-                  width: "40%",
                   fontFamily: "jaapokkiRegular",
                 }}
               >
-                {props.unit.unitName}
+                {UNIT}
               </Typography>
               <ContextHelpButton
-                message={testForSecondSubFaction.message} //
+                message={props.validationMessage} //
                 type={PUSH_MESSAGE_TYPES.ERROR}
               />
             </Grid>

@@ -107,6 +107,8 @@ const useArmyValidation = () => {
         return returnSubFaction(payload);
       case "unit":
         return returnUnit(payload, factionOrAlly);
+      case "secondSubFaction":
+        return returnSecondSubFaction(payload);
       default:
         throw new Error("returnValidationResult() received an invalid type parameter");
     }
@@ -145,6 +147,20 @@ const useArmyValidation = () => {
     blockedUnits.forEach((bU) => {
       if (bU.unitBlockedbyRules === payload.unitName) {
         validationResult = { unit: payload, valid: false, validationMessage: bU.message };
+      }
+    });
+
+    return validationResult;
+  };
+
+  const returnSecondSubFaction = (payload) => {
+    let validationResult = { unit: payload, valid: true, validationMessage: "" };
+
+    const missingSecondSubFaction = VC.listValidationResults.secondSubFactionMissing;
+
+    missingSecondSubFaction.forEach((mS) => {
+      if (mS.unitWithOutSecondSubFaction === payload.unitName) {
+        validationResult = { unit: payload, valid: false, validationMessage: mS.message };
       }
     });
 
