@@ -195,7 +195,7 @@ export const CARD_PREVIEW = {
   WEDGE_FORMATION: "Ke",
   SKIRMISH_FORMATION: "Pl",
   SQUARE_FORMATION: "Ka",
-  NO_ITEMS : "Keine Gegenstände",
+  NO_ITEMS: "Keine Gegenstände",
 };
 
 // FACTIONS & Game Rules
@@ -486,7 +486,7 @@ export const THAIN_TEXTS = {
     CHURCH: "Dorga-Kirche",
     GIANT_ANIMALS: "Gar'Ydwen",
   },
- 
+
   EXCEMPT_UNITS: {
     BANNER_OF_THE_HIGH_KING: "Banner des Hochkönigs",
     BOAR_CHARIOT: "Tur-Gar'arryd",
@@ -551,10 +551,6 @@ export const SOUTHERN_CITY_STATES_TEXTS = {
     REGION_HEROES: (province) => {
       return `Du musst mindestens eine Einheit des ${province} aufstellen, um einen Befehlshaber oder Helden des Süden aufstellen zu können.`;
     },
-  },
-  REGIONS: {
-    NORTHERN: "Nordens",
-    SOUTHERN: "Südens",
   },
 };
 

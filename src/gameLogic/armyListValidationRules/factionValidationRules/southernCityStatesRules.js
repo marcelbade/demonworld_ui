@@ -108,12 +108,12 @@ const SouthernCityStatesRules = {
       validationData.totalPointsAllowance
     );
     let testNorthernRegion = regionRule(
-      SOUTHERN_CITY_STATES_TEXTS.REGIONS.NORTHERN, //
+      SOUTHERN_CITY_STATES_TEXTS.SF.NORTH, //
       validationData.selectedUnits,
       validationData.availableUnits
     );
     let testSouthernthernRegion = regionRule(
-      SOUTHERN_CITY_STATES_TEXTS.REGIONS.SOUTHERN, //
+      SOUTHERN_CITY_STATES_TEXTS.SF.SOUTH, //
       validationData.selectedUnits,
       validationData.availableUnits
     );
@@ -138,11 +138,11 @@ const SouthernCityStatesRules = {
 
     // Are there units that need to be removed from the list?
     let testNorthernRegionRemove = regionRuleRemove(
-      SOUTHERN_CITY_STATES_TEXTS.REGIONS.NORTHERN,
+      SOUTHERN_CITY_STATES_TEXTS.SF.NORTH,
       validationData.selectedUnits //
     );
     let testSouthernRegionRemove = regionRuleRemove(
-      SOUTHERN_CITY_STATES_TEXTS.REGIONS.SOUTHERN,
+      SOUTHERN_CITY_STATES_TEXTS.SF.SOUTH,
       validationData.selectedUnits //
     );
 
@@ -195,7 +195,6 @@ const brotherhoodOrOrder = (selectedUnits, availableUnits) => {
  * @returns an array where each element is an object with blocked unit and an error message giving the reaosn
  * for the block.
  */
-// TODO: remove function missing, make function global since there are several armies with this logic. This army needs the function twice: heroes/wizards and giants.
 const totalPointsForMagiciansAndHeroes = (selectedUnits, availableUnits, totalPointsAllowance) => {
   const MAGICIAN_AND_HEROES_LIMIT = 40;
   const MESSAGE = SOUTHERN_CITY_STATES_TEXTS.ERRORS.MAX_LIMIT_CHARACTERS;
@@ -234,11 +233,11 @@ const regionRule = (province, selectedUnits, availableUnits) => {
   const MESSAGE = SOUTHERN_CITY_STATES_TEXTS.ERRORS.REGION_HEROES(province);
 
   let listHasProvincialUnits =
-    selectedUnits.filter((u) => u.subFaction === `Truppen des ${province}` && (u.unitType === UNIT || u.unitType === GIANT)).length > 0;
+    selectedUnits.filter((u) => u.subFaction === province && (u.unitType === UNIT || u.unitType === GIANT)).length > 0;
 
   if (!listHasProvincialUnits) {
     availableUnits
-      .filter((u) => u.subFaction === `Truppen des ${province}` && (u.unitType === MAGE || u.unitType === HERO))
+      .filter((u) => u.subFaction === province && (u.unitType === MAGE || u.unitType === HERO))
       .forEach((u) => {
         result.push({ unitBlockedbyRules: u.unitName, message: MESSAGE });
       });
@@ -257,11 +256,11 @@ const regionRule = (province, selectedUnits, availableUnits) => {
 const regionRuleRemove = (province, selectedUnits) => {
   let result = [];
 
-  let isProvincialUnitPresent = selectedUnits.filter((u) => u.subFaction === `Truppen des ${province}` && u.unitType === UNIT).length > 0;
+  let isProvincialUnitPresent = selectedUnits.filter((u) => u.subFaction === province && u.unitType === UNIT).length > 0;
 
   if (!isProvincialUnitPresent) {
     selectedUnits
-      .filter((u) => u.subFaction === `Truppen des ${province}`)
+      .filter((u) => u.subFaction === province)
       .forEach((u) => {
         result.push(u.uniqueID);
       });
