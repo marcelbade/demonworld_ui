@@ -214,12 +214,13 @@ const oldHeroRemove = (selectedUnits) => {
   const numberOldHeroesAlreadySelected = selectedUnits.filter((su) => su.subFaction === ELF_TEXTS.SF.OLD_HERO).length;
   const allowance = allowedNumberOldHeroes(selectedUnits);
 
+  // TODO: replace with while loop, see neanderRemove
   if (numberOldHeroesAlreadySelected > allowance) {
     let difference = numberOldHeroesAlreadySelected - allowance;
 
     for (let i = selectedUnits.length - 1; i >= 0; i--) {
       if (selectedUnits[i].subFaction === ELF_TEXTS.SF.OLD_HERO && difference > 0) {
-        result.push(selectedUnits[i]);
+        result.push(selectedUnits[i].uniqueID);
         --difference;
       }
     }
@@ -281,7 +282,7 @@ const removeOreaVanar = (selectedUnits) => {
         found.push(u.unitName);
       }
       if (ovm.school === u.unitName) {
-        found.push(u.unitName);
+        found.push(u.uniqueID);
       }
     });
   });
@@ -357,7 +358,7 @@ const removeThanarilCoven = (selectedUnits) => {
   heroesCovenantsMapping.forEach((m) => {
     if (!foundLords.includes(m.lord) && foundCovens.filter((c) => m.units.includes(c)).length > 1) {
       const supernumeralCoven = selectedUnits.find((u) => m.units.includes(u.unitName));
-      result.push(supernumeralCoven.unitName);
+      result.push(supernumeralCoven.uniqueID);
     }
   });
 
@@ -405,7 +406,7 @@ const councilArmyRemove = (selectedUnits) => {
     selectedUnits
       .filter((u) => u.subFaction === ELF_TEXTS.SF.ILAH_RI)
       .forEach((u) => {
-        result.push(u.unitName);
+        result.push(u.uniqueID);
       });
   }
 

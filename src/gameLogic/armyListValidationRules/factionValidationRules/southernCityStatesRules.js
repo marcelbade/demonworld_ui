@@ -263,7 +263,7 @@ const regionRuleRemove = (province, selectedUnits) => {
     selectedUnits
       .filter((u) => u.subFaction === `Truppen des ${province}`)
       .forEach((u) => {
-        result.push(u.unitName);
+        result.push(u.uniqueID);
       });
   }
   return result;

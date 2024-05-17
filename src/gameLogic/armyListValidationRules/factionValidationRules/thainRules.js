@@ -264,7 +264,7 @@ const greatChampionRemove = (selectedUnits) => {
         found.push(u.unitName);
       }
       if (ctm.hero === u.unitName) {
-        found.push(u.unitName);
+        found.push(u.uniqueID);
       }
     });
   });
@@ -315,7 +315,7 @@ const dorgaPriestRemove = (selectedUnits) => {
     selectedUnits
       .filter((u) => u.subFaction === "Dorga-Kirche")
       .forEach((u) => {
-        result.push(u.unitName);
+        result.push(u.uniqueID);
       });
   }
   return result;
@@ -360,7 +360,7 @@ const tribalVeteranRemove = (selectedUnits) => {
 
   selectedUnits.forEach((u) => {
     if (u.subFaction === "Veteranen der Stämme" && !presentTribes.includes(u.secondSubFaction)) {
-      result.push(u.unitName);
+      result.push(u.uniqueID);
     }
   });
 

@@ -159,11 +159,11 @@ const NorwingerRules = {
  */
 const neanderRule = (availableUnits, selectedUnits) => {
   const MESSAGE = NORWINGER_TEXTS.SUB_FACTION_RULES.NEANDERS_RULE;
+
   const excludedBarbarianUnits = [NORWINGER_TEXTS.NEANDERS, NORWINGER_TEXTS.SNOW_OGRES];
+
   const barabarianCount = selectedUnits.filter(
-    (u) =>
-      u.subFaction === NORWINGER_TEXTS.SF.BARBARIANS && //
-      !excludedBarbarianUnits.includes(u.unitName)
+    (u) => u.subFaction === NORWINGER_TEXTS.SF.BARBARIANS && !excludedBarbarianUnits.includes(u.unitName)
   ).length;
 
   const neandersCount = selectedUnits.filter((u) => u.unitName === NORWINGER_TEXTS.NEANDERS).length;
@@ -199,12 +199,17 @@ const neanderRuleRemove = (selectedUnits) => {
 
   let result = [];
 
-  if (neandersCount > barabarianCount) {
-    selectedUnits
-      .filter((u) => u.unitName === NORWINGER_TEXTS.NEANDERS)
-      .forEach((u) => {
-        result.push(u.unitName);
-      });
+  let diff = neandersCount > barabarianCount;
+  let tempArray = [...selectedUnits];
+
+  while (diff > 0) {
+    const neanderUnit = tempArray.find((u) => u.unitName === NORWINGER_TEXTS.NEANDERS);
+    result.push(neanderUnit.uniqueID);
+
+    const position = tempArray.findIndex((u) => u.unitName === NORWINGER_TEXTS.NEANDERS);
+    tempArray = tempArray.splice(position, 1);
+
+    diff--;
   }
 
   return result;
@@ -247,7 +252,7 @@ const yetiRuleRemove = (selectedUnits) => {
     selectedUnits
       .filter((u) => u.unitName === NORWINGER_TEXTS.GIANT_YETI)
       .forEach((u) => {
-        result.push(u.unitName);
+        result.push(u.uniqueID);
       });
   }
   return result;
@@ -285,7 +290,7 @@ const mountainKingRuleRemove = (selectedUnits) => {
 
   if (isMountainKingPresent && !areAlliesPresent) {
     const foundUnit = selectedUnits.find((u) => u.unitName === NORWINGER_TEXTS.MOUNTAIN_KING);
-    result.push(foundUnit.unitName);
+    result.push(foundUnit.uniqueID);
   }
   return result;
 };

@@ -84,7 +84,7 @@ const useArmyValidation = () => {
     if (validationResult.removeUnitsNoLongerValid.length > 0) {
       let tempArray = [...unitList];
 
-      tempArray = tempArray.filter((u) => !validationResult.removeUnitsNoLongerValid.includes(u.unitName));
+      tempArray = tempArray.filter((u) => !validationResult.removeUnitsNoLongerValid.includes(u.uniqueID));
 
       SEC.setSelectedUnits([...tempArray]);
     }
