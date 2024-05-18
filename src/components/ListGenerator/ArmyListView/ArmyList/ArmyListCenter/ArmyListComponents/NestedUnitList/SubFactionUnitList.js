@@ -33,18 +33,20 @@ const SubFactionUnitList = (props) => {
    */
   const removeUnit = (identifier) => {
     let tempArray = [...SEC.selectedUnits];
-
     tempArray = tempArray.filter((u) => u.name + u.uniqueID !== identifier);
+
     validation.validateList(tempArray, SEC.maxPointsAllowance);
+
+    SEC.setSelectedUnits(tempArray);
   };
 
   return (
     <Fragment>
       {props.subFactionUnits
         .sort((a, b) => a.unitName > b.unitName)
-        .map((u) => validation.returnValidationResult(secondSubFaction, u))
+        .map((u) => validation.returnValidationResult("secondSubFaction", u))
         .map((validationObj, i) => {
-          const identifier = validationObj.unitName + validationObj.uniqueID;
+          const identifier = validationObj.unit.unitName + validationObj.unit.uniqueID;
           return (
             <List key={i}>
               <ListItem>
