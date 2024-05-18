@@ -25,17 +25,17 @@ const EquipmentList = (props) => {
    * @param {int} position
    */
   const removeItem = (identifier, position) => {
-    let temp = [...SEC.selectedUnits];
+    let tempArray = [...SEC.selectedUnits];
 
-    for (let i = 0; i < temp.length; i++) {
-      if (temp[i].name + temp[i].uniqueID === identifier) {
-        temp[i].equipment.splice(position, 1);
+    for (let i = 0; i < tempArray.length; i++) {
+      if (tempArray[i].name + tempArray[i].uniqueID === identifier) {
+        tempArray[i].equipment.splice(position, 1);
       }
     }
 
-    validation.validateList(temp, SEC.maxPointsAllowance);
+    validation.validateList(tempArray, SEC.maxPointsAllowance);
 
-    SEC.setSelectedUnits(temp);
+    SEC.setSelectedUnits(tempArray);
   };
 
   const removeItemFromCentralList = (item) => {
