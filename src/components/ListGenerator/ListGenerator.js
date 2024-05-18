@@ -9,6 +9,8 @@ import ArmySelectionBox from "./ArmySelectorView/ArmySelectionBox";
 // icons
 import MenuSwitch from "../shared/MenuSwitch";
 import AppBar from "../shared/AppBar";
+// constants
+import { ID } from "../../constants/appBarConstants";
 
 const ListGenerator = () => {
   return (
@@ -27,7 +29,7 @@ const ListGenerator = () => {
           margin="0.5em"
         />
       </Grid>
-      <AppBar />
+      <AppBar hiddenElements={[ID.COMPENDIMUM_DROPDOWN]} />
       <Grid
         justifyContent="flex-start" //
         alignItems="center"
