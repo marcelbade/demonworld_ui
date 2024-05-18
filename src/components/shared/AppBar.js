@@ -8,10 +8,18 @@ import { MenuContext } from "../../contexts/MenuContext";
 import MainMenuReturnButton from "./MainMenuReturnButton";
 import LightSwitch from "./LightSwitch";
 import ListDisplaySwitch from "./ListDisplaySwitch";
+import CompendiumDropDown from "../compendiums/factionTable/components/CompendiumDropDown";
+import { ID } from "../../constants/appBarConstants";
 
-
-const AppBar = () => {
+const AppBar = (props) => {
   const MC = useContext(MenuContext);
+
+  const controls = [
+    { id: ID.RETURN_BTTN, elemnt: <MainMenuReturnButton bttnSize="medium" iconSize="2em" /> },
+    { id: ID.LIST_DISPLAY, elemnt: <ListDisplaySwitch bttnSize="medium" /> },
+    { id: ID.COMPENDIMUM_DROPDOWN, elemnt: <CompendiumDropDown /> },
+    { id: ID.LIGHT_SWITCH, elemnt: <LightSwitch bttnSize="medium" /> },
+  ];
 
   return (
     <Drawer
@@ -22,15 +30,11 @@ const AppBar = () => {
       anchor="top"
     >
       <Grid container direction="row" alignItems="center" justifyContent="space-around">
-        <Grid item>
-          <MainMenuReturnButton bttnSize="medium" iconSize="2em" />
-        </Grid>
-        <Grid item>
-          <ListDisplaySwitch bttnSize="medium" />
-        </Grid>
-        <Grid item>
-          <LightSwitch bttnSize="medium" />
-        </Grid>
+        {controls
+          .filter((c) => !props.hiddenElements.includes(c.id))
+          .map((c) => (
+            <Grid item>{c.elemnt}</Grid>
+          ))}
       </Grid>
     </Drawer>
   );

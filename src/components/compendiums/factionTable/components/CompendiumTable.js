@@ -4,13 +4,11 @@ import React, { Fragment, useEffect, useState } from "react";
 import axios from "axios";
 // material ui
 import { Grid, Typography } from "@mui/material";
-import { useTheme } from "@emotion/react";
 // components & functions
 import CompendiumTableRow from "./CompendiumTableRow";
 import DetailedCardView from "./CardRow";
 import CompendiumTableHeader from "./CompendiumTableHeader";
 import { columnGroupObjects, columnsStateObjects } from "./columnsStateObject";
-import CompendiumDropDown from "./CompendiumDropDown";
 import MenuSwitch from "../../../shared/MenuSwitch";
 import AppBar from "../../../shared/AppBar";
 //icons
@@ -18,7 +16,7 @@ import FactionAndUnitSelectors from "./FactionAndUnitSelectors";
 import TableProvider from "../../../../contexts/tableContext";
 // constants
 import { COMPENDIUM } from "../../../../constants/textsAndMessages";
-
+import { ID } from "../../../../constants/appBarConstants";
 
 const CompendiumTable = () => {
   // intialize local state
@@ -32,8 +30,6 @@ const CompendiumTable = () => {
   const [allBoxes, setAllBoxes] = useState(false);
   const [columns, setColumns] = useState(columnsStateObjects);
   const [toggleGroups, setToggleGroups] = useState(columnGroupObjects);
-
-  const theme = useTheme();
 
   useEffect(() => {
     fetchData();
@@ -172,7 +168,7 @@ const CompendiumTable = () => {
             bttnSize="2em"
             margin="0.5em"
           />
-          <AppBar />
+          <AppBar hiddenElements={[ID.LIST_DISPLAY]} />
           <Grid item container direction="row">
             <Grid item xs={8}>
               <Typography
@@ -191,15 +187,6 @@ const CompendiumTable = () => {
           </Grid>
 
           <Grid item xs={12}>
-            <Grid
-              container
-              justifyContent="flex-end"
-              sx={{
-                backgroundColor: theme.palette.compendiumHeaderBackground,
-              }}
-            >
-              <CompendiumDropDown />
-            </Grid>
             {receivedData ? (
               <table rules="none">
                 <CompendiumTableHeader columns={columns} />
