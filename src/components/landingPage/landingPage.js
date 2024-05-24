@@ -61,11 +61,11 @@ const LandingPage = () => {
           icon={calculatorIcon}
           altText={LANDINGPAGE.LIST_GENERATOR}
         />
-        <LandingPageNaviButton
+        {/* <LandingPageNaviButton
           relativeURL={"/lossCalculator"} //
           icon={deathIcon}
           altText={LANDINGPAGE.LOSS_CALCULATOR}
-        />
+        /> */}
       </Grid>
     </Grid>
   );
