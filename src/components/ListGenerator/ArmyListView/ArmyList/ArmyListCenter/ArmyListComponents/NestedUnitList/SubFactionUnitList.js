@@ -3,7 +3,7 @@ import React, { Fragment, useContext } from "react";
 // Material UI
 import { List, ListItem, IconButton } from "@mui/material";
 // icons
-import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
+import RemoveCircleOutline from "@mui/icons-material/RemoveCircleOutline";
 // components and functions
 import EquipmentList from "./EquipmentList";
 import UnitElementButtons from "./UnitElementButtons";
@@ -55,7 +55,7 @@ const SubFactionUnitList = (props) => {
                     removeUnit(identifier);
                   }}
                 >
-                  <RemoveCircleOutlineIcon />
+                  <RemoveCircleOutline />
                 </IconButton>
                 <ArmyListUnitEntry
                   unit={validationObj.unit}

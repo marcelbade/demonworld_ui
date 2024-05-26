@@ -2,7 +2,7 @@
 import React, { useState, useContext, useEffect } from "react";
 //Material UI
 import { Grid } from "@mui/material";
-import { TreeView } from "@mui/x-tree-view/TreeView";
+import { SimpleTreeView } from "@mui/x-tree-view/SimpleTreeView";
 import { TreeItem } from "@mui/x-tree-view/TreeItem";
 // icons
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
@@ -102,7 +102,7 @@ const ItemShopTree = () => {
   };
 
   return (
-    <TreeView
+    <SimpleTreeView
       aria-label="file system navigator" //
       defaultCollapseIcon={<ExpandMoreIcon />}
       defaultExpandIcon={<ChevronRightIcon />}
@@ -111,7 +111,7 @@ const ItemShopTree = () => {
       {filteredItemGroups.map((dto, i) => {
         return (
           <TreeItem
-            nodeId={`${i}`} //
+            itemId={`${i}`} //
             label={ITEM_CATEGORY_NAME_MAPPING[dto.typeName]}
             key={i}
             onClick={() => controller.treeExpansionController([`${i}`])}
@@ -143,7 +143,7 @@ const ItemShopTree = () => {
           </TreeItem>
         );
       })}
-    </TreeView>
+    </SimpleTreeView>
   );
 };
 

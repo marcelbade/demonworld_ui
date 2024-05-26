@@ -1,6 +1,6 @@
 import React, { useEffect, useContext, useReducer } from "react";
 // material ui
-import { TreeView } from "@mui/x-tree-view/TreeView";
+import { SimpleTreeView } from "@mui/x-tree-view/SimpleTreeView";
 import { TreeItem } from "@mui/x-tree-view/TreeItem";
 // components and functions
 import TreeUnitNode from "./TreeUnitNode";
@@ -70,7 +70,7 @@ const Tree = (props) => {
   };
 
   return (
-    <TreeView
+    <SimpleTreeView
       aria-label="file system navigator" //
       defaultCollapseIcon={<ExpandMoreIcon />}
       defaultExpandIcon={<ChevronRightIcon />}
@@ -79,7 +79,7 @@ const Tree = (props) => {
       {AC.subFactionDTOs.map((dto, i) => {
         return isSubFactionAlternativeAndSelected(dto) ? (
           <TreeItem
-            nodeId={`${i}`} //
+            itemId={`${i}`} //
             label={dto.name}
             key={i}
             disabled={dto.hasNoValidUnits}
@@ -106,7 +106,7 @@ const Tree = (props) => {
           </TreeItem>
         ) : null;
       })}
-    </TreeView>
+    </SimpleTreeView>
   );
 };
 
