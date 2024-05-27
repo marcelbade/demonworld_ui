@@ -4,7 +4,7 @@ import React from "react";
 import { IconButton } from "@mui/material";
 // icons
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
-// components and functions
+
 
 const StatCardCarousellButton = (props) => {
   const ICON_STYLE = { width: "2em", height: "2em" };
