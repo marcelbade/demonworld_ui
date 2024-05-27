@@ -1,0 +1,12 @@
+export const ARMOUR_MELEE = "armourMelee";
+export const ARMOUR_RANGE = "armourRange";
+export const FEAR = "fear";
+export const MOVE = "move";
+export const SKIRMISH = "skirmish";
+export const CHARGE = "skillMelee";
+export const SKILL_MELEE = "skillMelee";
+export const SKILL_RANGE = "skillRange";
+export const INITIATIVE = "initiative";
+export const MORAL1 = "moral1";
+export const MORAL2 = "moral2";
+export const CHARGE_BONUS = "chargeBonus";

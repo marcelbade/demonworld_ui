@@ -1,40 +1,29 @@
 // React
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-// components and functions
-import { Autocomplete } from "@material-ui/lab";
- import { TextField } from "@material-ui/core";
- 
-const useStyles = makeStyles({
-  root: { width: "600px", marginLeft: "40px" },
-  textField: {
-    "& .MuiAutocomplete-input": {
-      fontSize: "40px",
-      fontFamily: "BreatheOfFire",
-    },
-  },
-});
+// material ui
+import { Autocomplete } from "@mui/material";
+import { TextField } from "@mui/material";
 
 /**
- *Function creates the army selection Autocomplete element used by all pages.
+ *Component for the selection Autocomplete input element used by all pages.
  * @param {*} props
  * @returns
  */
 const SelectionInput = (props) => {
-  const classes = useStyles();
- 
   return (
     <Autocomplete
+      sx={{ width: "25em", marginLeft: "2em" }}
       id="arymSelection"
-      className={classes.root}
-      options={props.options}
+      options={props.alternatives}
       onChange={(event, value, reason) => {
-        if ((reason === "clear")) {
-        props.clearFunction(); 
+        if (reason === "clear") {
+          props.clearFunction(props.selectorNumber);
         }
-        if (value) props.filterFunction(value);
+        if (value) {
+          props.filterFunction(value, props.selectorNumber);
+        }
       }}
-      renderInput={(params) => <TextField className={classes.textField} {...params} label={props.label} variant="standard" />}
+      renderInput={(params) => <TextField {...params} label={props.label} variant="standard" />}
     />
   );
 };

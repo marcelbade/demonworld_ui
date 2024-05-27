@@ -5,20 +5,19 @@
 
 // React
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import makeStyles from '@mui/styles/makeStyles';
 
 const useStyles = makeStyles({
   message: {
     fontSize: "50px",
-    fontFamily: "BreatheOfFire",
     display: "block",
   },
 });
 
 const NoSelectionDisplay = (props) => {
-  const classes = useStyles();
+  const theme= useTheme();
 
-  return <span className={classes.message}>show this when nothing was selected :D</span>;
+  return <span sx={classes.message}>show this when nothing was selected :D</span>;
 };
 
 export default NoSelectionDisplay;

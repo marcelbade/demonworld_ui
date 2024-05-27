@@ -1,74 +1,70 @@
 // React
-import React from "react";
-// Material UI
-import { makeStyles } from "@material-ui/core/styles";
-import { Grid, Checkbox, FormControlLabel, FormGroup } from "@material-ui/core";
-import { uuidGenerator } from "../../../shared/sharedFunctions";
+import React, { useContext } from "react";
+// material ui
+import { Grid, Checkbox, FormControlLabel, FormGroup } from "@mui/material";
+// components & functions
+import { TableContext } from "../../../../contexts/tableContext";
 
-const useStyles = makeStyles({
-  toggleGroupBox: {
-    border: 1,
-    borderColor: "pink",
-  },
-  checkBoxLabel: {
-    margin: "10px",
-    width: "250px",
-    "& .MuiFormControlLabel-label": {
-      fontFamily: "BreatheOfFire",
-    },
-  },
-});
+// constants
+import { COMPENDIUM } from "../../../../constants/textsAndMessages";
 
-const ToggleColumnsMenu = (props) => {
-  const classes = useStyles();
+const ToggleColumnsMenu = () => {
+  const FORMGROUP = { display: "flex", justifyContent: "flex-start", flexDirection: "column", margin: "1em" };
+  const TC = useContext(TableContext);
 
   return (
-    <Grid item container xs={12} direction="row">
-      {/* outer loop that goes through toogle groups and creates one box each */}
-      {props.toggleGroups.map((toggle) => (
-        <FormGroup className="classes.toggleGroupBox" key={uuidGenerator()}>
-          <Checkbox
-            key={uuidGenerator()}
-            checked={toggle.displayed}
-            onChange={() => {
-              props.toggleGroupsOfColumns(toggle.unitName, toggle.stats, toggle.displayed);
-            }}
-          />
-          {props.columns
-            .filter((col) => col.column !== "button")
-            .filter((col) => toggle.stats.includes(col.column))
-            .map((col) => (
-              <FormControlLabel
-                key={uuidGenerator()}
-                className={classes.checkBoxLabel}
-                control={
-                  <Checkbox
-                    key={uuidGenerator()}
-                    checked={col.displayed}
-                    onChange={() => {
-                      props.chooseColumnsToDisplay(col.column, col.displayed);
-                    }}
-                  />
-                }
-                label={col.label}
+    <Grid container direction="column">
+      <Grid item container xs={12} direction="row">
+        {/* outer loop that goes through toogle groups and creates one box each */}
+        {TC.toggleGroups.map((g, i) => {
+          return (
+            <FormGroup
+              key={i} //
+              sx={FORMGROUP}
+            >
+              <Checkbox
+                key={i}
+                checked={g.displayEntireGroup}
+                onChange={() => {
+                  TC.toggleGroupsOfColumns(g.toggleGroup);
+                }}
               />
-            ))}
+              {TC.columns
+                .filter((column) => column.toggleGroup === g.toggleGroup)
+                .map((c, i) => (
+                  <FormControlLabel
+                    key={i} //
+                    control={
+                      <Checkbox
+                        key={i}
+                        checked={c.displayed}
+                        onChange={() => {
+                          TC.toggleColumn(c.column, c.displayed);
+                        }}
+                      />
+                    }
+                    label={c.label}
+                  />
+                ))}
+            </FormGroup>
+          );
+        })}
+      </Grid>
+      <Grid item>
+        <FormGroup sx={FORMGROUP}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={TC.allBoxes}
+                onChange={() => {
+                  TC.toggleAllColumns();
+                }}
+              />
+            }
+            label={COMPENDIUM.TOGGLE_OFF_ALL_COLUMNS}
+          />
         </FormGroup>
-      ))}
-      <FormGroup>
-        <FormControlLabel
-          className={classes.checkBoxLabel}
-          control={
-            <Checkbox
-              checked={!props.allBoxes}
-              onChange={() => {
-                props.toggleAllColumns();
-              }}
-            />
-          }
-          label="Blende alle Spalten aus."
-        />
-      </FormGroup>
+      </Grid>
     </Grid>
   );
 };
