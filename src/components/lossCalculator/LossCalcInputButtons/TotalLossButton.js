@@ -1,7 +1,7 @@
 // react
 import React, { useContext } from "react";
 // material ui
-import { IconButton } from "@material-ui/core";
+import { IconButton } from "@mui/material";
 // functions and components
 import CustomIcon from "../../shared/statCards/CustomIcon";
 import { LossCalcContext } from "../../../contexts/LossCalculatorContext";

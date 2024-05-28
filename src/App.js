@@ -10,7 +10,7 @@ import { Route, Switch } from "react-router-dom";
 import landingPage from "./components/landingPage/landingPage";
 import CompendiumTable from "./components/compendiums/factionTable/components/CompendiumTable";
 import ListGenerator from "./components/ListGenerator/ListGenerator";
-import LossCalculator from "./components/LossCalculator/LossCalculator";
+import LossCalculator from "./components/lossCalculator/LossCalculator";
 import PdfBox from "./components/PDFGenerator/PDFBox";
 // context providers
 import LightSwitchProvider from "./contexts/lightSwitchContext";
