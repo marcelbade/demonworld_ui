@@ -202,7 +202,7 @@ export const renderBooleanAsIcon = (numberOfElements, flag) => {
  */
 export const renderDynamicIcons = (data) => {
   let result = "";
-  let zeroMarker = "-";
+  let zeroMarker = "";
 
   for (let i = 0; i < data.iconNumber; i++) {
     result = result + data.iconString;
