@@ -60,8 +60,18 @@ export const commonStyles = {
     paddingTop: MARGIN_SUBFACTION_BLOCK,
     marginBottom: MARGIN_SUBFACTION_BLOCK,
     marginLeft: MARGIN_LEFT,
-    width: "50%",
+    width: "90%",
     borderBottom: "solid 1px dashed black",
+  },
+
+  subFactionNameBox: {
+    width: "50%",
+    flexDirection: "row",
+  },
+  subFactionStatBox: {
+    width: "50%",
+    flexDirection: "row",
+    justifyContent: "space-around",
   },
 
   subFactionTitleAndStats: {
@@ -89,5 +99,4 @@ export const commonStyles = {
     flexDirection: "row",
     marginLeft: MARGIN_LEFT,
   },
- 
 };

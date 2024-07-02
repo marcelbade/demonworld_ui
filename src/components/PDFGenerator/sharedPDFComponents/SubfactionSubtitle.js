@@ -20,10 +20,14 @@ const SubfactionSubtitle = (props) => {
   return (
     <Document>
       <View style={commonStyles.subFactionTitleBox}>
-        <Text style={commonStyles.subFactionTitleAndStats}>{props.data.subFaction}</Text>
-        <Text style={commonStyles.subFactionTitleAndStats}>{props.data.subFactionTotal}</Text>
-        <Text style={commonStyles.subFactionTitleAndStats}>{`${props.data.subFactionPercentage}%`}</Text>
-        <Text style={commonStyles.subFactionTitleAndStats}>{renderMinMaxPercentageString()}</Text>
+        <View  style={commonStyles.subFactionNameBox}>
+          <Text style={commonStyles.subFactionTitleAndStats}>{props.data.subFaction}</Text>
+        </View>
+        <View   style={commonStyles.subFactionStatBox}>
+          <Text style={commonStyles.subFactionTitleAndStats}>{props.data.subFactionTotal}</Text>
+          <Text style={commonStyles.subFactionTitleAndStats}>{`${props.data.subFactionPercentage}%`}</Text>
+          <Text style={commonStyles.subFactionTitleAndStats}>{renderMinMaxPercentageString()}</Text>
+        </View>
       </View>
     </Document>
   );
