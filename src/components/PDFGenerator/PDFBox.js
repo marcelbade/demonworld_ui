@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 // react-pdf
 import { PDFViewer, Document, Page } from "@react-pdf/renderer";
 // components and functions
-// import PageNumber from "./sharedPDFComponents/PageNumber";
 import TitleAndStats from "./sharedPDFComponents/TitleAndStats";
 import StandardListPDF from "./standardListPDF/StandardListPDF";
 import DetailedCardPDF from "./detailedCardPDF/DetailedCardPDF";
