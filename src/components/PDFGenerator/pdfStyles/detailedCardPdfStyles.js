@@ -191,7 +191,7 @@ export const detailedStyles = {
     height: "10em",
   },
 
-  // some icon are smaller...
+  // wedge and square icons are smaller...
   wedgeIcon: {
     height: "14em",
   },
