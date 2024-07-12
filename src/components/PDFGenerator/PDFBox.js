@@ -35,7 +35,7 @@ const PdfBox = () => {
   return data.list.length > 0 ? (
     <PDFViewer style={commonStyles.viewport}>
       <Document>
-        <Page wrap={false} style={commonStyles.pageLayout}>
+        <Page wrap={true} style={commonStyles.pageLayout}>
           <TitleAndStats data={data} />
           {data.options.printDefaultList ? ( //
             <StandardListPDF data={data} />
