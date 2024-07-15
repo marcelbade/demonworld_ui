@@ -13,7 +13,7 @@ const RangedWeapon = () => {
 
   const rangedWeaponProperties = rangedWeaponStats(SC.unit);
 
-  const rangeWeapon = `${rangedWeaponProperties.name} ${rangedWeaponProperties.value}`;
+  const RANGED_WEAPON = `${rangedWeaponProperties.name} ${rangedWeaponProperties.value}`;
 
   return (
     <Grid
@@ -22,7 +22,7 @@ const RangedWeapon = () => {
       justifyContent="center"
     >
       <Typography variant="h6" align="right">
-        {SC.unit.rangedWeapon !== NO_RANGE_WEAPON ? rangeWeapon : null}
+        {RANGED_WEAPON}
       </Typography>
     </Grid>
   );
