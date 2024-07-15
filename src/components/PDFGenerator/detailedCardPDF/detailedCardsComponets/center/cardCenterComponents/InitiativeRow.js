@@ -4,10 +4,10 @@ import { Text, View } from "@react-pdf/renderer";
 // detailedStyles
 import { detailedStyles } from "../../../../pdfStyles/detailedCardPdfStyles";
 // constants
-import { CARD_PREVIEW } from "../../../../../../constants/textsAndMessages";
+import { CARD_TEXT } from "../../../../../../constants/textsAndMessages";
 
 const InitiativeRow = (props) => {
-  const INITIATIVE = `${CARD_PREVIEW.INITIATIVE} ${props.unit.initiative}`;
+  const INITIATIVE = `${CARD_TEXT.INITIATIVE} ${props.unit.initiative}`;
 
   return (
     <View

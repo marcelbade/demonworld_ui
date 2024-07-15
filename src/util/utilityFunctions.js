@@ -7,7 +7,7 @@ import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import CancelIcon from "@mui/icons-material/Cancel";
 // constants
 import { COMPENDIUM, UNIT_TYPES } from "../constants/textsAndMessages";
-import { CARD_PREVIEW } from "../constants/textsAndMessages";
+import { CARD_TEXT } from "../constants/textsAndMessages";
 import { HERO, MAGE, AUTOMATON, GIANT } from "../constants/unitTypes";
 
 /**
@@ -101,8 +101,8 @@ export const numberOfElements = (unit) => {
   let number = `${unit.numberOfElements - specialElements}`;
   let ending =
     unit.numberOfElements === 1 //
-      ? ` ${CARD_PREVIEW.SINGLE_ELEMENT}`
-      : ` ${CARD_PREVIEW.ELEMENTS}`;
+      ? ` ${CARD_TEXT.SINGLE_ELEMENT}`
+      : ` ${CARD_TEXT.ELEMENTS}`;
 
   return number + ending;
 };

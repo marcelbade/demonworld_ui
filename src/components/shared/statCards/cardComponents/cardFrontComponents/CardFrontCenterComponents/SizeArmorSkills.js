@@ -13,7 +13,7 @@ import { StateCardContext } from "../../../../../../contexts/statCardContext";
 import { ARMOUR_RANGE, ARMOUR_MELEE, SKILL_MELEE, SKILL_RANGE } from "../../../../../../constants/stats";
 
 // constants
-import { ALTTEXT, CARD_PREVIEW } from "../../../../../../constants/textsAndMessages";
+import { ALTTEXT, CARD_TEXT } from "../../../../../../constants/textsAndMessages";
 import StatCardIcon from "./StatCardIcon";
 
 const SizeArmorSkills = () => {
@@ -30,7 +30,7 @@ const SizeArmorSkills = () => {
     >
       <Grid item container justifyContent="center">
         <Typography variant="h6">
-          {CARD_PREVIEW.SIZE} {SC.unit.unitSize}
+          {CARD_TEXT.SIZE} {SC.unit.unitSize}
         </Typography>
       </Grid>
       <Grid

@@ -7,11 +7,11 @@ import { isSingleElementCard } from "../../../../../../util/utilityFunctions";
 // styles
 import { detailedStyles } from "../../../../pdfStyles/detailedCardPdfStyles";
 // constants
-import { CARD_PREVIEW } from "../../../../../../constants/textsAndMessages";
+import { CARD_TEXT } from "../../../../../../constants/textsAndMessages";
 
 const FearAndMoralRow = (props) => {
-  const FEAR = `${CARD_PREVIEW.FEAR} ${props.unit.fear}`;
-  const MORAL = `${CARD_PREVIEW.MORAL} ${props.unit.moral1 ? props.unit.moral1 : "-"} / ${props.unit.moral2 ? props.unit.moral2 : "-"}`;
+  const FEAR = `${CARD_TEXT.FEAR} ${props.unit.fear}`;
+  const MORAL = `${CARD_TEXT.MORAL} ${props.unit.moral1 ? props.unit.moral1 : "-"} / ${props.unit.moral2 ? props.unit.moral2 : "-"}`;
 
   return (
     <View

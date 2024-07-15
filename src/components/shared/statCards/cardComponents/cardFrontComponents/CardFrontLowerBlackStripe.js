@@ -5,7 +5,7 @@ import { Grid, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components & functions
 import { StateCardContext } from "../../../../../contexts/statCardContext";
-import { CARD_PREVIEW } from "../../../../../constants/textsAndMessages";
+import { CARD_TEXT } from "../../../../../constants/textsAndMessages";
 import { setUnitStat } from "../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/unitStatChangesLogic";
 // constants
 import { FEAR, MORAL1, MORAL2 } from "../../../../../constants/stats";
@@ -14,8 +14,8 @@ const CardFrontLowerBlackStripe = () => {
   const SC = useContext(StateCardContext);
   const theme = useTheme();
 
-  const fear = `${CARD_PREVIEW.FEAR}: ${setUnitStat(SC.unit, FEAR)}`;
-  const moral = `${CARD_PREVIEW.MORAL} ${
+  const fear = `${CARD_TEXT.FEAR}: ${setUnitStat(SC.unit, FEAR)}`;
+  const moral = `${CARD_TEXT.MORAL} ${
     SC.unit.moral1 //
       ? setUnitStat(SC.unit, MORAL1)
       : "-"

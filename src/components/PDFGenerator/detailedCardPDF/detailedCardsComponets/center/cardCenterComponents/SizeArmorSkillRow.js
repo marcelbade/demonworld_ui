@@ -9,13 +9,13 @@ import meleeArmorIcon from "../../../../../../assets/icons/melee-armor.png";
 import blackSwordIcon from "../../../../../../assets/icons/sword2.png";
 import blackBowIcon from "../../../../../../assets/icons/bow2.png";
 // constants
-import { CARD_PREVIEW } from "../../../../../../constants/textsAndMessages";
+import { CARD_TEXT } from "../../../../../../constants/textsAndMessages";
 
 const SizeArmorSkillRow = (props) => {
   const iconValueStyle = detailedStyles.iconValueGroup;
   const iconStyle = detailedStyles.icon;
 
-  const SIZE = `${CARD_PREVIEW.SIZE} ${props.unit.unitSize}`;
+  const SIZE = `${CARD_TEXT.SIZE} ${props.unit.unitSize}`;
 
   const ARMOUR_RANGE = props.unit.armourRange;
   const ARMOUR_MELEE = props.unit.armourMelee;

@@ -4,10 +4,10 @@ import { Text, View } from "@react-pdf/renderer";
 // detailedStyles
 import { detailedStyles } from "../../../../pdfStyles/detailedCardPdfStyles";
 // constants
-import { CARD_PREVIEW } from "../../../../../../constants/textsAndMessages";
+import { CARD_TEXT } from "../../../../../../constants/textsAndMessages";
 
 const ChargeBonusRow = (props) => {
-  const CHARGE_BONUS = `${CARD_PREVIEW.CHARGE_BONUS} ${props.unit.chargeBonus}`;
+  const CHARGE_BONUS = `${CARD_TEXT.CHARGE_BONUS} ${props.unit.chargeBonus}`;
 
   return props.unit.chargeBonus > 0 ? (
     <View

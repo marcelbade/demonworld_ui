@@ -4,7 +4,7 @@ import React from "react";
 import { Text, View } from "@react-pdf/renderer";
 // styles
 import { detailedStyles } from "../../../../pdfStyles/detailedCardPdfStyles";
-import { CARD_PREVIEW } from "../../../../../../constants/textsAndMessages";
+import { CARD_TEXT } from "../../../../../../constants/textsAndMessages";
 //  components and functions
 import { numberOfElements } from "../../../../../../util/utilityFunctions";
 
@@ -14,9 +14,9 @@ const BackSideElementsRow = (props) => {
     !props.unit.standardBearer &&
     !props.unit.musician;
 
-  const LEADER = props.unit.leader ? `${CARD_PREVIEW.LEADER} ` : null;
-  const STANDARD_BEARER = props.unit.standardBearer ? `/ ${CARD_PREVIEW.STANDARD_BEARER}` : null;
-  const MUSICIAN = props.unit.musician ? `/ ${CARD_PREVIEW.MUSICIAN}` : null;
+  const LEADER = props.unit.leader ? `${CARD_TEXT.LEADER} ` : null;
+  const STANDARD_BEARER = props.unit.standardBearer ? `/ ${CARD_TEXT.STANDARD_BEARER}` : null;
+  const MUSICIAN = props.unit.musician ? `/ ${CARD_TEXT.MUSICIAN}` : null;
 
   return (
     <View key={props.index} style={detailedStyles.cardBlackRow}>

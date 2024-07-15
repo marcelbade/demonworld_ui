@@ -8,7 +8,7 @@ import { StateCardContext } from "../../../../../../contexts/statCardContext";
 import { setUnitStat } from "../../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/unitStatChangesLogic";
 //constants
 import { CHARGE_BONUS } from "../../../../../../constants/stats";
-import { CARD_PREVIEW } from "../../../../../../constants/textsAndMessages";
+import { CARD_TEXT } from "../../../../../../constants/textsAndMessages";
 
 const ChargeBonus = () => {
   const theme = useTheme();
@@ -21,7 +21,7 @@ const ChargeBonus = () => {
       alignItems="center"
       sx={theme.palette.statCards.backGround}
     >
-      <Typography variant="h6">{`${CARD_PREVIEW.CHARGE_BONUS}: ${setUnitStat(SC.unit, CHARGE_BONUS)}`}</Typography>
+      <Typography variant="h6">{`${CARD_TEXT.CHARGE_BONUS}: ${setUnitStat(SC.unit, CHARGE_BONUS)}`}</Typography>
     </Grid>
   ) : null;
 };
