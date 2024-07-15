@@ -181,6 +181,7 @@ export const CARD_TEXT = {
   FEAR: "Furchtfaktor",
   HORDE: "Horde",
   HORDE_FORMATION: "Horde",
+  HOLD: "H",
   INITIATIVE: "Initiative",
   LEADER: "Anführer",
   MOVEMENT_POINTS: " Bewegungspunkte",
