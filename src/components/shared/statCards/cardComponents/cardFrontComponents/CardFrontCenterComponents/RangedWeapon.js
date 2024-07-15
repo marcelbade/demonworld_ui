@@ -5,8 +5,6 @@ import { Grid, Typography } from "@mui/material";
 // components & functions
 import { StateCardContext } from "../../../../../../contexts/statCardContext";
 import { rangedWeaponStats } from "../../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/unitStatChangesLogic";
-// constants
-import { NO_RANGE_WEAPON } from "../../../../../../constants/textsAndMessages";
 
 const RangedWeapon = () => {
   const SC = useContext(StateCardContext);
