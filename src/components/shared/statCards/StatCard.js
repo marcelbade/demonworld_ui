@@ -15,7 +15,7 @@ import { isHeroOrMage, isSingleElementCard } from "../../../util/utilityFunction
  */
 const StatCard = (props) => {
   const CSS = {
-    width: "30em",
+    width: "32em",
     marginTop: "2em",
     border: "1px black solid",
     marginLeft: "0.75em",
