@@ -23,11 +23,14 @@ const CardBackUpperBlackStripe = () => {
       sx={theme.palette.statCards.blackStripe}
       justifyContent="space-around"
     >
-      <Typography variant="h6">
-        {LEADER}
-        {STANDARD_BEARER}
-        {MUSICIAN}
-      </Typography>
+      {/* dont render element for giants & heroes so layout stays correct*/}
+      {SC.unit.numberOfElements > 1 ? (
+        <Typography variant="h6">
+          {LEADER}
+          {STANDARD_BEARER}
+          {MUSICIAN}
+        </Typography>
+      ) : null}
       <Typography variant="h6"> {numberOfElements(SC.unit)} </Typography>
     </Grid>
   );
