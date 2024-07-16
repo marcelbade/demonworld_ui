@@ -47,6 +47,9 @@ const CardFrontUpperBlackStripe = () => {
 
   const OVERRUN_LARGE = `${CARD_TEXT.OVERRUN}: ${setUnitStat(SC.unit, OVERRUN)}`;
 
+  // summons
+  const MAX_FIELDS = `${CARD_TEXT.MAX_FIELDS_MOVE(SC.unit.move)}`;
+
   return (
     <Grid
       item //
@@ -54,19 +57,22 @@ const CardFrontUpperBlackStripe = () => {
       justifyContent="space-around"
       sx={theme.palette.statCards.blackStripe}
     >
-      {SC.unit.unitType === HERO || SC.unit.unitType === MAGE ? (
+      {SC.unit.unitType === HERO ||
+      SC.unit.unitType === MAGE ||
+      (SC.unit.unitType === SUMMONED && SC.unit.numberOfElements === 1 && !SC.unit.maxFieldsMove) ? (
         <Fragment>
           <Typography variant="h6">{MOVEMENTPOINTS}</Typography>
           <Typography> {SC.unit.controlZone > 1 ? <Typography variant="h6">{CONTROLZONE}</Typography> : null}</Typography>
         </Fragment>
       ) : null}
-      {SC.unit.unitType === GIANT ? (
+      {SC.unit.unitType === GIANT || SC.unit.unitType === AUTOMATON ? (
         <Fragment>
           <Typography variant="h6">{MOVEMENT_LARGE}</Typography>
           <Typography variant="h6">{OVERRUN_LARGE}</Typography>
         </Fragment>
       ) : null}
-      {SC.unit.unitType === UNIT || SC.unit.unitType === SUMMONED || SC.unit.unitType === AUTOMATON ? (
+      {SC.unit.unitType === UNIT || //
+      (SC.unit.unitType === SUMMONED && SC.unit.numberOfElements > 1 && !SC.unit.maxFieldsMove) ? (
         <Fragment>
           <Typography variant="h6" align="center">
             {MOVESKIRMISHCHARGE_UNIT}
@@ -100,6 +106,13 @@ const CardFrontUpperBlackStripe = () => {
           ) : null}
           <Typography variant="h6" align="center">
             {HORDE}
+          </Typography>
+        </Fragment>
+      ) : null}
+      {SC.unit.unitType === SUMMONED && SC.unit.maxFieldsMove ? (
+        <Fragment>
+          <Typography variant="h6" align="center">
+            {MAX_FIELDS}
           </Typography>
         </Fragment>
       ) : null}
