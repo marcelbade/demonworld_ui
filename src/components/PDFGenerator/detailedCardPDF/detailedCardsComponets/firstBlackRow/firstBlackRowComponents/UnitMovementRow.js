@@ -3,27 +3,31 @@ import React from "react";
 // react-pdf
 import { Text, View, Image } from "@react-pdf/renderer";
 // functions and components
-import { CARD_TEXT } from "../../../../../../constants/textsAndMessages";
+import {
+  isGiantOrAutomaton,
+  isHeroMageOrSingleSummon,
+  isUnitOrSummonedUnit,
+  isSummonsWithMaxFields,
+} from "../../../../../shared/unitMovementConditions";
+import {
+  renderManeuvers,
+  renderHorde,
+  renderMaxFields,
+  renderOverrunValue,
+  renderMovementLargeElements,
+  renderMovementpoints,
+  renderControlzone,
+  renderUnitMovement,
+} from "../../../../../shared/cardMovementRenderFunctions";
+
 // icons
 import squareFormationWhite from "../../../../../../assets/icons/squareFormationWhite.png";
 import skirmishFormation from "../../../../../../assets/icons/skirmishFormation.png";
 import wedgeFormation from "../../../../../../assets/icons/wedgeFormation.png";
 // styles
 import { detailedStyles } from "../../../../pdfStyles/detailedCardPdfStyles";
-import { MAGE, HERO, GIANT, UNIT, SUMMONED, AUTOMATON } from "../../../../../../constants/unitTypes";
 
 const UnitMovementRow = (props) => {
-  // heroes and magic user
-  const HERO_MAGE_MOVEMENT = `${props.unit.move} ${CARD_TEXT.MOVEMENT_POINTS}`;
-
-  // infantry and cavalry
-  const UNIT_MOVEMENT =
-    `${CARD_TEXT.MOVE}: ${props.unit.move} ` +
-    `/ ${CARD_TEXT.SKIRMISH}: ${props.unit.skirmish} ` +
-    `/ ${CARD_TEXT.CHARGE}: ${props.unit.charge}`;
-
-  const MANEUVERS = `${props.unit.hold_maneuvers} ${CARD_TEXT.MANEUVER}`;
-
   const SKIRMISH_FORMATION = props.unit.skirmishFormation ? ( //
     <Image src={skirmishFormation} style={detailedStyles.icon} />
   ) : null;
@@ -36,20 +40,6 @@ const UnitMovementRow = (props) => {
     <Image src={wedgeFormation} style={detailedStyles.wedgeIcon} />
   ) : null;
 
-  const HORDE_FORMATION = props.unit.horde ? CARD_TEXT.HORDE : null;
-  const CONTROLZONE = `${CARD_TEXT.CONTROL_AREA}: ${props.unit.controlZone}`;
-  const OVERRUN_LARGE = `${CARD_TEXT.OVERRUN}: ${props.unit.overRun}`;
-
-  // large elements
-  const MOVEMENT_LARGE =
-    `${CARD_TEXT.MOVE}: ${props.unit.move} ` +
-    `/ ${CARD_TEXT.CHARGE}: ${props.unit.charge} ` +
-    `/ ${CARD_TEXT.SKIRMISH}: ${props.unit.skirmish} ` +
-    `/ ${CARD_TEXT.HOLD}: ${props.unit.hold_maneuvers}`;
-
-  // summons
-  const MAX_FIELDS = `${CARD_TEXT.MAX_FIELDS_MOVE(props.unit.move)}`;
-
   /**
    * Function decides whether the formation mut be displayed by checking if one of the properties is not null.
    * @returns true, if any of the formation properties is not null
@@ -59,48 +49,47 @@ const UnitMovementRow = (props) => {
       key={props.index} //
       style={detailedStyles.cardUpperBlackRow}
     >
-      {props.unit.unitType === HERO ||
-      props.unit.unitType === MAGE ||
-      (props.unit.unitType === SUMMONED && props.unit.numberOfElements === 1 && !props.unit.maxFieldsMove) ? (
+      {isHeroMageOrSingleSummon(props.unit) ? (
         <View style={detailedStyles.cardUpperBlackRowVariant}>
           <Text style={detailedStyles.movementText} key={props.index}>
-            {HERO_MAGE_MOVEMENT}
+            {renderMovementpoints(props.unit, { isDynamic: false })}
           </Text>
-          {props.unit.controlZone > 1 ? <Text variant="h6">{CONTROLZONE}</Text> : null}
+          {props.unit.controlZone > 1 ? <Text variant="h6">{renderControlzone(props.unit)}</Text> : null}
         </View>
       ) : null}
 
-      {props.unit.unitType === GIANT || props.unit.unitType === AUTOMATON ? (
+      {isGiantOrAutomaton(props.unit) ? (
         <View style={detailedStyles.cardUpperBlackRowVariant}>
           <Text style={detailedStyles.movementText} variant="h6">
-            {MOVEMENT_LARGE}
+            {renderMovementLargeElements(props.unit, { isDynamic: false })}
           </Text>
           {props.unit.overRun > 0 ? (
             <Text style={detailedStyles.movementText} variant="h6">
-              {OVERRUN_LARGE}
+              {renderOverrunValue(props.unit, { isDynamic: false })}
             </Text>
           ) : null}
         </View>
       ) : null}
-      {props.unit.unitType === UNIT ||
-      (props.unit.unitType === SUMMONED && props.unit.numberOfElements > 1 && !props.unit.maxFieldsMove) ? (
+      {isUnitOrSummonedUnit(props.unit) ? (
         <View style={detailedStyles.cardUpperBlackRowVariant}>
           <Text style={detailedStyles.movementText} key={props.index}>
-            {UNIT_MOVEMENT}
+            {renderUnitMovement(props.unit, { isDynamic: false })}
           </Text>
           <Text style={detailedStyles.movementText} key={props.index}>
-            {MANEUVERS}
+            {renderManeuvers(props.unit)}
           </Text>
           {SKIRMISH_FORMATION}
           {SQUARE_FORMATION}
           {WEDGE_FORMATION}
-          {HORDE_FORMATION}
+          {renderHorde(props.unit)}
         </View>
       ) : null}
-      {props.unit.unitType === SUMMONED && props.unit.maxFieldsMove ? (
-        <Text style={detailedStyles.movementText} key={props.index}>
-          {MAX_FIELDS}
-        </Text>
+      {isSummonsWithMaxFields(props.unit) ? (
+        <View style={detailedStyles.cardUpperBlackRowVariant}>
+          <Text style={detailedStyles.movementText} key={props.index}>
+            {renderMaxFields(props.unit)}
+          </Text>
+        </View>
       ) : null}
     </View>
   );

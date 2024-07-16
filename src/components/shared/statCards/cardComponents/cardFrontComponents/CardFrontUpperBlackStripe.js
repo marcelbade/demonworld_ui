@@ -6,15 +6,28 @@ import { useTheme } from "@emotion/react";
 // functions and components
 import { StateCardContext } from "../../../../../contexts/statCardContext";
 import { CARD_TEXT } from "../../../../../constants/textsAndMessages";
-import { setUnitStat } from "../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/unitStatChangesLogic";
+import {
+  isGiantOrAutomaton,
+  isHeroMageOrSingleSummon,
+  isSummonsWithMaxFields,
+  isUnitOrSummonedUnit,
+} from "../../../unitMovementConditions";
 // icons
 import CustomIcon from "../../CustomIcon";
 import wedgeFormationIcon from "../../../../../assets/icons/wedgeFormation.png";
 import skirmishFormationIcon from "../../../../../assets/icons/skirmishFormation.png";
 import squareFormationIcon from "../../../../../assets/icons/squareFormationWhite.png";
 // constants
-import { CHARGE, MOVE, SKIRMISH, HOLD, OVERRUN } from "../../../../../constants/stats";
-import { GIANT, HERO, MAGE, UNIT, SUMMONED, AUTOMATON } from "../../../../../constants/unitTypes";
+import {
+  renderManeuvers,
+  renderHorde,
+  renderMaxFields,
+  renderOverrunValue,
+  renderMovementLargeElements,
+  renderMovementpoints,
+  renderControlzone,
+  renderUnitMovement,
+} from "../../../cardMovementRenderFunctions";
 
 const CardFrontUpperBlackStripe = () => {
   const SC = useContext(StateCardContext);
@@ -25,31 +38,6 @@ const CardFrontUpperBlackStripe = () => {
   const HEIGHT_WIDTH_SQUARE_ICON = "45px";
   const HEIGHT_WIDTH_SKIRMISH_ICON = "20px";
 
-  // heroes and magic user
-  const MOVEMENTPOINTS = `${setUnitStat(SC.unit, MOVE)} ${CARD_TEXT.MOVEMENT_POINTS}`;
-  const CONTROLZONE = `${CARD_TEXT.CONTROL_AREA}: ${SC.unit.controlZone}`;
-
-  // infantry and cavalry
-  const MOVESKIRMISHCHARGE_UNIT =
-    `${CARD_TEXT.MOVE}: ${setUnitStat(SC.unit, MOVE)} ` +
-    `/ ${CARD_TEXT.CHARGE}: ${setUnitStat(SC.unit, CHARGE)} ` +
-    `/ ${CARD_TEXT.SKIRMISH}: ${setUnitStat(SC.unit, SKIRMISH)}`;
-
-  const MANEUVERS = `${SC.unit.hold_maneuvers} ${CARD_TEXT.MANEUVER}`;
-  const HORDE = `${SC.unit.horde ? CARD_TEXT.HORDE : ""}`;
-
-  // large elements
-  const MOVEMENT_LARGE =
-    `${CARD_TEXT.MOVE}: ${setUnitStat(SC.unit, MOVE)} ` +
-    `/ ${CARD_TEXT.CHARGE}: ${setUnitStat(SC.unit, CHARGE)} ` +
-    `/ ${CARD_TEXT.SKIRMISH}: ${setUnitStat(SC.unit, SKIRMISH)} ` +
-    `/ ${CARD_TEXT.HOLD}: ${setUnitStat(SC.unit, HOLD)}`;
-
-  const OVERRUN_LARGE = SC.unit.overRun > 0 ? `${CARD_TEXT.OVERRUN}: ${setUnitStat(SC.unit, OVERRUN)}` : null;
-
-  // summons
-  const MAX_FIELDS = `${CARD_TEXT.MAX_FIELDS_MOVE(SC.unit.move)}`;
-
   return (
     <Grid
       item //
@@ -57,34 +45,37 @@ const CardFrontUpperBlackStripe = () => {
       justifyContent="space-around"
       sx={theme.palette.statCards.blackStripe}
     >
-      {SC.unit.unitType === HERO ||
-      SC.unit.unitType === MAGE ||
-      (SC.unit.unitType === SUMMONED && SC.unit.numberOfElements === 1 && !SC.unit.maxFieldsMove) ? (
-        <Fragment>
-          <Typography variant="h6">{MOVEMENTPOINTS}</Typography>
-          <Typography> {SC.unit.controlZone > 1 ? <Typography variant="h6">{CONTROLZONE}</Typography> : null}</Typography>
-        </Fragment>
-      ) : null}
-      {SC.unit.unitType === GIANT || SC.unit.unitType === AUTOMATON ? (
+      {isHeroMageOrSingleSummon(SC.unit) ? (
         <Fragment>
           <Typography variant="h6" align="center">
-            {MOVEMENT_LARGE}
+            {renderMovementpoints(SC.unit, { isDynamic: true })}
           </Typography>
-          {SC.unit.overRun > 0 ? (
+          {SC.unit.controlZone > 1 ? (
             <Typography variant="h6" align="center">
-              {OVERRUN_LARGE}
+              {renderControlzone(SC.unit)}
             </Typography>
           ) : null}
         </Fragment>
       ) : null}
-      {SC.unit.unitType === UNIT || //
-      (SC.unit.unitType === SUMMONED && SC.unit.numberOfElements > 1 && !SC.unit.maxFieldsMove) ? (
+      {isGiantOrAutomaton(SC.unit) ? (
         <Fragment>
           <Typography variant="h6" align="center">
-            {MOVESKIRMISHCHARGE_UNIT}
+            {renderMovementLargeElements(SC.unit, { isDynamic: true })}
+          </Typography>
+          {SC.unit.overRun > 0 ? (
+            <Typography variant="h6" align="center">
+              {renderOverrunValue(SC.unit, { isDynamic: true })}
+            </Typography>
+          ) : null}
+        </Fragment>
+      ) : null}
+      {isUnitOrSummonedUnit(SC.unit) ? (
+        <Fragment>
+          <Typography variant="h6" align="center">
+            {renderUnitMovement(SC.unit, { isDynamic: true })}
           </Typography>
           <Typography variant="h6" align="center">
-            {MANEUVERS}
+            {renderManeuvers(SC.unit)}
           </Typography>
           {SC.unit.wedgeFormation ? (
             <CustomIcon
@@ -111,14 +102,14 @@ const CardFrontUpperBlackStripe = () => {
             />
           ) : null}
           <Typography variant="h6" align="center">
-            {HORDE}
+            {renderHorde(SC.unit)}
           </Typography>
         </Fragment>
       ) : null}
-      {SC.unit.unitType === SUMMONED && SC.unit.maxFieldsMove ? (
+      {isSummonsWithMaxFields(SC.unit) ? (
         <Fragment>
           <Typography variant="h6" align="center">
-            {MAX_FIELDS}
+            {renderMaxFields(SC.unit)}
           </Typography>
         </Fragment>
       ) : null}
