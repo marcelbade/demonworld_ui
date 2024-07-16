@@ -198,6 +198,9 @@ export const CARD_TEXT = {
   SKIRMISH_FORMATION: "Pl",
   SQUARE_FORMATION: "Ka",
   WEDGE_FORMATION: "Ke",
+  MAX_FIELDS_MOVE: (movementValue) => {
+    return `maximal ${movementValue} Felder`;
+  },
 };
 
 // FACTIONS & Game Rules
