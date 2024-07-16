@@ -13,8 +13,10 @@ import { detailedStyles } from "../../../../pdfStyles/detailedCardPdfStyles";
 import { MAGE, HERO, GIANT, UNIT, SUMMONED, AUTOMATON } from "../../../../../../constants/unitTypes";
 
 const UnitMovementRow = (props) => {
+  // heroes and magic user
   const HERO_MAGE_MOVEMENT = `${props.unit.move} ${CARD_TEXT.MOVEMENT_POINTS}`;
 
+  // infantry and cavalry
   const UNIT_MOVEMENT =
     `${CARD_TEXT.MOVE}: ${props.unit.move} ` +
     `/ ${CARD_TEXT.SKIRMISH}: ${props.unit.skirmish} ` +
@@ -35,10 +37,8 @@ const UnitMovementRow = (props) => {
   ) : null;
 
   const HORDE_FORMATION = props.unit.horde ? CARD_TEXT.HORDE : null;
-
   const CONTROLZONE = `${CARD_TEXT.CONTROL_AREA}: ${props.unit.controlZone}`;
-
-  const OVERRUN_LARGE = props.unit.overRun > 0 ? `${CARD_TEXT.OVERRUN}: ${props.unit.overRun}` : null;
+  const OVERRUN_LARGE = `${CARD_TEXT.OVERRUN}: ${props.unit.overRun}`;
 
   // large elements
   const MOVEMENT_LARGE =
@@ -46,6 +46,9 @@ const UnitMovementRow = (props) => {
     `/ ${CARD_TEXT.CHARGE}: ${props.unit.charge} ` +
     `/ ${CARD_TEXT.SKIRMISH}: ${props.unit.skirmish} ` +
     `/ ${CARD_TEXT.HOLD}: ${props.unit.hold_maneuvers}`;
+
+  // summons
+  const MAX_FIELDS = `${CARD_TEXT.MAX_FIELDS_MOVE(props.unit.move)}`;
 
   /**
    * Function decides whether the formation mut be displayed by checking if one of the properties is not null.
@@ -56,25 +59,31 @@ const UnitMovementRow = (props) => {
       key={props.index} //
       style={detailedStyles.cardUpperBlackRow}
     >
-      {props.unit.unitType === HERO || props.unit.unitType === MAGE ? (
+      {props.unit.unitType === HERO ||
+      props.unit.unitType === MAGE ||
+      (props.unit.unitType === SUMMONED && props.unit.numberOfElements === 1 && !props.unit.maxFieldsMove) ? (
         <View style={detailedStyles.cardUpperBlackRowVariant}>
           <Text style={detailedStyles.movementText} key={props.index}>
             {HERO_MAGE_MOVEMENT}
           </Text>
-          <Text> {props.unit.controlZone > 1 ? <Text variant="h6">{CONTROLZONE}</Text> : null}</Text>
+          {props.unit.controlZone > 1 ? <Text variant="h6">{CONTROLZONE}</Text> : null}
         </View>
       ) : null}
+
       {props.unit.unitType === GIANT || props.unit.unitType === AUTOMATON ? (
         <View style={detailedStyles.cardUpperBlackRowVariant}>
           <Text style={detailedStyles.movementText} variant="h6">
             {MOVEMENT_LARGE}
           </Text>
-          <Text style={detailedStyles.movementText} variant="h6">
-            {OVERRUN_LARGE}
-          </Text>
+          {props.unit.overRun > 0 ? (
+            <Text style={detailedStyles.movementText} variant="h6">
+              {OVERRUN_LARGE}
+            </Text>
+          ) : null}
         </View>
       ) : null}
-      {props.unit.unitType === UNIT || props.unit.unitType === SUMMONED ? (
+      {props.unit.unitType === UNIT ||
+      (props.unit.unitType === SUMMONED && props.unit.numberOfElements > 1 && !props.unit.maxFieldsMove) ? (
         <View style={detailedStyles.cardUpperBlackRowVariant}>
           <Text style={detailedStyles.movementText} key={props.index}>
             {UNIT_MOVEMENT}
@@ -87,6 +96,11 @@ const UnitMovementRow = (props) => {
           {WEDGE_FORMATION}
           {HORDE_FORMATION}
         </View>
+      ) : null}
+      {props.unit.unitType === SUMMONED && props.unit.maxFieldsMove ? (
+        <Text style={detailedStyles.movementText} key={props.index}>
+          {MAX_FIELDS}
+        </Text>
       ) : null}
     </View>
   );
