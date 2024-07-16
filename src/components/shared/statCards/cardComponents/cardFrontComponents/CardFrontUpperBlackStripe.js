@@ -45,7 +45,7 @@ const CardFrontUpperBlackStripe = () => {
     `/ ${CARD_TEXT.SKIRMISH}: ${setUnitStat(SC.unit, SKIRMISH)} ` +
     `/ ${CARD_TEXT.HOLD}: ${setUnitStat(SC.unit, HOLD)}`;
 
-  const OVERRUN_LARGE = `${CARD_TEXT.OVERRUN}: ${setUnitStat(SC.unit, OVERRUN)}`;
+  const OVERRUN_LARGE = SC.unit.overRun > 0 ? `${CARD_TEXT.OVERRUN}: ${setUnitStat(SC.unit, OVERRUN)}` : null;
 
   // summons
   const MAX_FIELDS = `${CARD_TEXT.MAX_FIELDS_MOVE(SC.unit.move)}`;
@@ -67,8 +67,14 @@ const CardFrontUpperBlackStripe = () => {
       ) : null}
       {SC.unit.unitType === GIANT || SC.unit.unitType === AUTOMATON ? (
         <Fragment>
-          <Typography variant="h6">{MOVEMENT_LARGE}</Typography>
-          <Typography variant="h6">{OVERRUN_LARGE}</Typography>
+          <Typography variant="h6" align="center">
+            {MOVEMENT_LARGE}
+          </Typography>
+          {SC.unit.overRun > 0 ? (
+            <Typography variant="h6" align="center">
+              {OVERRUN_LARGE}
+            </Typography>
+          ) : null}
         </Fragment>
       ) : null}
       {SC.unit.unitType === UNIT || //
