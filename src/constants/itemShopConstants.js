@@ -1,5 +1,5 @@
-// Item Types
 
+// Item types. Used for filtering items in the shop 
 export const ITEM_TYPE_ARMOR = "armor";
 export const ITEM_TYPE_BOWS = "arrowsAndBows";
 export const ITEM_TYPE_BANNER = "banner";
@@ -16,26 +16,6 @@ export const ITEM_TYPE_WEAPON = "weapon";
 
 // Item can be used by any faction
 export const ALL = "*";
-
-// unit has no range weapons
-
-// These item types are magical items for the purpose of setting a unit's item flags.
-export const MAGICAL_ITEMS = [
-  "armor",
-  "arrowsAndBows",
-  "banner",
-  "boltsAndCrossbows",
-  "crystal",
-  "imp",
-  "item",
-  "mask",
-  "poison",
-  "potion",
-  "Relicts",
-  "ringsAndAmulets",
-  "weapon",
-  "YarrinsSons",
-];
 
 // Mapps item types in the itemCard obj to the display the German name.
 export const ITEM_CATEGORY_NAME_MAPPING = {
