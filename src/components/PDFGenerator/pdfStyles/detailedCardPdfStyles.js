@@ -73,7 +73,7 @@ export const detailedStyles = {
     fontFamily: "jaapokkiRegular",
   },
 
-  cardUpperBlackRow: {
+  cardBlackRow: {
     height: "20em",
     width: "45%",
     flexDirection: "row",
@@ -83,22 +83,15 @@ export const detailedStyles = {
     backgroundColor: "black",
   },
 
-  cardBlackRow: {
-    width: "45%",
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center",
-    color: "white",
-    backgroundColor: "black",
+  textPadding: {
+    margin: "10em",
+    backgroundColor: "pink",
   },
 
-  cardBlackRowFearMoral: {
-    width: "45%",
+  cardUpperBlackRowVariant: {
     flexDirection: "row",
     justifyContent: "space-around",
-    alignItems: "center",
-    color: "white",
-    backgroundColor: "black",
+    width: "100%",
   },
 
   firstBlackRowBackTwoElements: {
