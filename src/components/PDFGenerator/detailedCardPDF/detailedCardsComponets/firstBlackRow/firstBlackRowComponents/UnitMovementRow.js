@@ -47,7 +47,7 @@ const UnitMovementRow = (props) => {
   return (
     <View
       key={props.index} //
-      style={detailedStyles.cardUpperBlackRow}
+      style={detailedStyles.cardBlackRow}
     >
       {isHeroMageOrSingleSummon(props.unit) ? (
         <View style={detailedStyles.cardUpperBlackRowVariant}>
