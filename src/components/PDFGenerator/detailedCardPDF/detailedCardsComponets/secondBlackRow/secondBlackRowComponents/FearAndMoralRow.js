@@ -16,7 +16,7 @@ const FearAndMoralRow = (props) => {
   return (
     <View
       key={props.index} //
-      style={isSingleElementCard(props.unit) ? detailedStyles.cardBlackRow : detailedStyles.cardBlackRowFearMoral}
+      style={isSingleElementCard(props.unit) ? detailedStyles.cardBlackRow : detailedStyles.cardBlackRow}
     >
       <Text key={props.index}>{FEAR}</Text>
       <Text key={props.index}>{MORAL}</Text>
