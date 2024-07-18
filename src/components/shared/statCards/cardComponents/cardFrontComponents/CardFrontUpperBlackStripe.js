@@ -50,7 +50,7 @@ const CardFrontUpperBlackStripe = () => {
           <Typography variant="h6" align="center">
             {renderMovementpoints(SC.unit, { isDynamic: true })}
           </Typography>
-          {SC.unit.controlZone > 1 ? (
+          {SC.unit.controlZone > 0? (
             <Typography variant="h6" align="center">
               {renderControlzone(SC.unit)}
             </Typography>
