@@ -3,6 +3,7 @@ export const ALTTEXT = {
   MELEE_ARMOR: "Nahkampfpanzerung",
   RANGE_SKILL: "Fernkampffertigkeit",
   MELEE_SKILL: "Nahkampffertigkeit",
+  APP_BAR_SWITCH: "Öffnet und schließt App Bar",
 };
 
 export const LANDINGPAGE = {
