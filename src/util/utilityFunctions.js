@@ -85,7 +85,7 @@ export const isHeroOrMage = (unit) => {
 };
 
 /**
- * Function creates the string that contains the numbe of "normal" elements.
+ * Function creates the string that contains the number of "normal" elements.
  * Since special elements are mentioned separately,
  * they have to be substracted from the total count.
  * @param {unitCard} unit
@@ -210,3 +210,4 @@ export const renderDynamicIcons = (data) => {
 
   return result.length === 0 ? zeroMarker : result;
 };
+
