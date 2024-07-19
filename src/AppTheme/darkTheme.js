@@ -1,4 +1,5 @@
 import { createTheme } from "@mui/material";
+import animationTheme from "./animationTheme";
 
 const darkTheme = createTheme({
   palette: {
@@ -27,6 +28,10 @@ const darkTheme = createTheme({
         color: "white",
         backgroundColor: "black",
       },
+    },
+    animation: {
+      fadeAway: animationTheme.palette.fadeAway,
+      fadeIn: animationTheme.palette.fadeIn,
     },
   },
   components: {
