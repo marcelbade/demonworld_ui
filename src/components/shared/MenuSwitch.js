@@ -10,12 +10,10 @@ import D20 from "../../assets/icons/d20.png";
 import { ALTTEXT, OPTIONS } from "../../constants/textsAndMessages";
 import CustomIcon from "./statCards/CustomIcon";
 
-
-
 /**
  * Function renders a switch represented by an Icon to toggle the App Bar on the top of the screen
- * @param {{*}} props 
- * @returns 
+ * @param {{*}} props
+ * @returns JSX
  */
 const MenuSwitch = (props) => {
   const MC = useContext(MenuContext);
@@ -29,7 +27,7 @@ const MenuSwitch = (props) => {
         sx={{
           width: props.bttnSize,
           height: props.bttnSize,
-          margin: props.margin
+          margin: props.margin,
         }}
       >
         <CustomIcon
