@@ -11,6 +11,12 @@ import ListDisplaySwitch from "./ListDisplaySwitch";
 import CompendiumDropDown from "../compendiums/factionTable/components/CompendiumDropDown";
 import { ID } from "../../constants/appBarConstants";
 
+/**
+ * Function renders an App Bar. The "hiddenElements" prob is used
+ * to hide control elements that are not meant for the current page.
+ * @param {{*}} props
+ * @returns JSX
+ */
 const AppBar = (props) => {
   const MC = useContext(MenuContext);
 
