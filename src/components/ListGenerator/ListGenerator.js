@@ -1,20 +1,49 @@
 // react
-import React from "react";
+import React, { useContext } from "react";
 // material ui
-import { Grid } from "@mui/material";
+import { Grid, Box } from "@mui/material";
+import { useTheme } from "@emotion/react";
 // components and functions
 import ArmyListBox from "./ArmyListView/ArmyListBox";
 import MenuBox from "./RightSideMenus/MenuBox";
 import ArmySelectionBox from "./ArmySelectorView/ArmySelectionBox";
+import ArmySelectorDropdown from "./ArmySelectorView/ArmySelectorDropdown";
+// context
+import { ArmyContext } from "../../contexts/armyContext";
 // icons
 import MenuSwitch from "../shared/MenuSwitch";
 import AppBar from "../shared/AppBar";
 // constants
 import { ID } from "../../constants/appBarConstants";
+import { NONE } from "../../constants/factions";
+import { AlternativeListContext } from "../../contexts/alternativeListContext";
 
 const ListGenerator = () => {
+  const AC = useContext(ArmyContext);
+  const ALC = useContext(AlternativeListContext);
+  const theme = useTheme();
+
+  const selectorBeforeAnimation = {
+    position: "absolute", //
+    top: "30%",
+    left: "40%",
+  };
+ 
+
+  // console.log("  AC.selectedFactionName", AC.selectedFactionName);
+
   return (
     <Grid container direction="row">
+      <Box
+        sx={
+          AC.selectedFactionName === NONE //
+            ? selectorBeforeAnimation
+            : { ...theme.palette.animation.fadeAway, ...selectorBeforeAnimation }
+        }
+      >
+        <ArmySelectorDropdown />
+      </Box>
+
       <Grid
         item //
         container
@@ -54,10 +83,10 @@ const ListGenerator = () => {
             paddingLeft: "10em",
           }}
         >
-          <ArmyListBox />
+          {AC.selectedFactionName !== NONE ? <ArmyListBox /> : null}
         </Grid>
       </Grid>
-      <MenuBox />
+      {AC.selectedFactionName !== NONE ? <MenuBox /> : null}
     </Grid>
   );
 };

@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from "react";
 // material ui
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+import { useTheme } from "@emotion/react";
 // context
 import { ArmyContext } from "../../../../contexts/armyContext";
 import { AlternativeListContext } from "../../../../contexts/alternativeListContext";
@@ -12,6 +13,7 @@ import UseDisplayAlly from "../../../../customHooks/UseDisplayAlly.js";
 // constants
 import { INPUT_TEXTS } from "../../../../constants/textsAndMessages.js";
 import { SelectionContext } from "../../../../contexts/selectionContext.js";
+import { NONE } from "../../../../constants/factions.js";
 
 const FactionTreeView = () => {
   const AC = useContext(ArmyContext);
@@ -21,6 +23,7 @@ const FactionTreeView = () => {
 
   const validation = useArmyValidation();
   const display = UseDisplayAlly();
+  const theme = useTheme();
 
   useEffect(() => {
     display.showAlly(AC.selectedFactionName);
@@ -38,7 +41,13 @@ const FactionTreeView = () => {
   };
 
   return isSelectionComplete() ? (
-    <>
+    <Box
+      sx={
+        AC.selectedFactionName === NONE //
+          ? {}
+          : theme.palette.animation.fadeIn
+      }
+    >
       <Tree isFactionNotAlly={true} />
 
       {display.showAlly(AC.selectedFactionName) ? (
@@ -50,10 +59,13 @@ const FactionTreeView = () => {
           >
             {INPUT_TEXTS.ALLY} {AYC.allyName}
           </Typography>
-          <Tree subFactionDtoList={AYC.allySubFactionDTOs} isFactionNotAlly={false} />
+          <Tree
+            subFactionDtoList={AYC.allySubFactionDTOs} //
+            isFactionNotAlly={false}
+          />
         </>
       ) : null}
-    </>
+    </Box>
   ) : null;
 };
 
