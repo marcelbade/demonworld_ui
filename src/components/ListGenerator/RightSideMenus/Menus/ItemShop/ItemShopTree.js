@@ -104,8 +104,8 @@ const ItemShopTree = () => {
   return (
     <SimpleTreeView
       aria-label="file system navigator" //
-      defaultCollapseIcon={<ExpandMoreIcon />}
-      defaultExpandIcon={<ChevronRightIcon />}
+      defaultcollapseicon={<ExpandMoreIcon />}
+      defaultexpandicon={<ChevronRightIcon />}
       expanded={controller.expansionValue}
     >
       {filteredItemGroups.map((dto, i) => {

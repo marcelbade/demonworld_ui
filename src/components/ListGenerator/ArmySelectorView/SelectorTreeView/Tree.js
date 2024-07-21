@@ -72,8 +72,8 @@ const Tree = (props) => {
   return (
     <SimpleTreeView
       aria-label="file system navigator" //
-      defaultCollapseIcon={<ExpandMoreIcon />}
-      defaultExpandIcon={<ChevronRightIcon />}
+      defaultcollapseicon ={<ExpandMoreIcon />}
+      defaultexpandicon={<ChevronRightIcon />}
       expanded={controller.expansionValue}
     >
       {AC.subFactionDTOs.map((dto, i) => {
