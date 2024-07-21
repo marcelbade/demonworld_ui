@@ -38,8 +38,10 @@ const AppBar = (props) => {
       <Grid container direction="row" alignItems="center" justifyContent="space-around">
         {controls
           .filter((c) => !props.hiddenElements.includes(c.id))
-          .map((c) => (
-            <Grid item>{c.elemnt}</Grid>
+          .map((c, i) => (
+            <Grid key={i} item>
+              {c.elemnt}
+            </Grid>
           ))}
       </Grid>
     </Drawer>
