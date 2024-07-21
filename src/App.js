@@ -115,7 +115,7 @@ function App() {
   });
   const [displayedCard, setDisplayedCard] = useState({});
   // right side options menu
-  const [showOptionButtons, setShowOptionButtons] = useState(true);
+  const [showOptionButtons, setShowOptionButtons] = useState(false);
   //loss calculator
   const [list, setList] = useState([]);
   const [totalPointsLost, setTotalPointsLost] = useState(0);

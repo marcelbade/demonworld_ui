@@ -38,9 +38,17 @@ const ArmySelectorDropdown = () => {
     validation.validateList([], SEC.maxPointsAllowance);
   }, [AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  /**
+   * Function triggers when user enters a value from the dropdown list.
+   * Function simply wraps three function. The last one sets the flag for
+   * the right side menu to true so it opens slowly.
+   * @param {String} value
+   */
   const handleInput = (value) => {
     resetTheState();
     setFactionProperties(value);
+
+    RC.setShowOptionButtons(true);
   };
 
   /**
