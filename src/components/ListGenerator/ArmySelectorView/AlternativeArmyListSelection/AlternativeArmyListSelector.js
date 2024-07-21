@@ -104,7 +104,7 @@ const AlternativeArmyListSelector = () => {
         .map((i, j) => {
           return (
             <SelectionInput //
-              key={i}
+              key={j}
               selectorNumber={j}
               alternatives={setAlternatives(j)}
               filterFunction={selectAlternateList}
