@@ -209,14 +209,16 @@ const isOrkArmyCommanderPresent = (selectedUnits, selectedAlternativeLists) => {
  */
 const setUnitsForClans = (availableUnits, selectedAlternativeLists) => {
   let result = [];
-  const selectedAlternative = selectedAlternativeLists[0];
 
-  availableUnits.forEach((u) => {
-    if (u.subFaction === "Clanntruppen" && !ORK_CLANS_UNIT_MAPPING[selectedAlternative].includes(u.unitName)) {
-      result.push({ unitBlockedbyRules: u.unitName, message: ORKS_TEXTS.SUB_FACTION_RULES.AVAILABLE_CLANUNITS });
-    }
-  });
+  if (selectedAlternativeLists[0] !== undefined) {
+    const selectedAlternative = selectedAlternativeLists[0];
 
+    availableUnits.forEach((u) => {
+      if (u.subFaction === "Clanntruppen" && !ORK_CLANS_UNIT_MAPPING[selectedAlternative].includes(u.unitName)) {
+        result.push({ unitBlockedbyRules: u.unitName, message: ORKS_TEXTS.SUB_FACTION_RULES.AVAILABLE_CLANUNITS });
+      }
+    });
+  }
   return result;
 };
 
