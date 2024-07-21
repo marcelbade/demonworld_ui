@@ -16,11 +16,9 @@ import AppBar from "../shared/AppBar";
 // constants
 import { ID } from "../../constants/appBarConstants";
 import { NONE } from "../../constants/factions";
-import { AlternativeListContext } from "../../contexts/alternativeListContext";
 
 const ListGenerator = () => {
   const AC = useContext(ArmyContext);
-  const ALC = useContext(AlternativeListContext);
   const theme = useTheme();
 
   const selectorBeforeAnimation = {
@@ -28,9 +26,6 @@ const ListGenerator = () => {
     top: "30%",
     left: "40%",
   };
- 
-
-  // console.log("  AC.selectedFactionName", AC.selectedFactionName);
 
   return (
     <Grid container direction="row">
