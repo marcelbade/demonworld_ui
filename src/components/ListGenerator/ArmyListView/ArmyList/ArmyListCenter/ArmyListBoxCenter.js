@@ -19,7 +19,7 @@ const ArmyListBoxCenter = () => {
   const AYC = useContext(AllyContext);
 
   const validation = useArmyValidation();
-  const display = UseDisplayAlly();
+  const useAlly = UseDisplayAlly();
 
   /**
    * Filters the selected units by subFaction. If allied units have been selected, then their subFaction name is replaced with their faction name.
@@ -47,7 +47,7 @@ const ArmyListBoxCenter = () => {
               units={filterUnitsForSubFaction(obj.subFactionName)}
             />
           ))}
-        {display.showAlly(AC.selectedFactionName) ? (
+        {useAlly.showAlly(AC.selectedFactionName) ? (
           <ArmyListSubFactionEntry
             key={AYC.allyName} //
             subFaction={AYC.allyName}
