@@ -5,7 +5,6 @@ import { Typography, TextField, InputAdornment, Grid } from "@mui/material";
 import { SelectionContext } from "../../../../../contexts/selectionContext";
 import calculateScoutingFactor from "../../../../../gameLogic/scoutFactorCalculator/scoutingFactorCalculator";
 import useArmyValidation from "../../../../../customHooks/UseArmyValidation";
-// import { calculateTotalPointCost } from "../../../../../util/utilityFunctions";
 import usePointCostCalculator from "../../../../../customHooks/UsePointCostCalculator";
 // constants
 import { GENERAL_ERRRORS, STATS, TEXTS, INPUT_TEXTS } from "../../../../../constants/textsAndMessages";
@@ -18,10 +17,13 @@ const ArmyListBoxFooter = () => {
 
   const [errorMessage, setErrorMessage] = useState("");
 
-  let netPoints = SEC.selectedUnits !== undefined ? calculator.calculateTotalArmyCost(SEC.selectedUnits) : 0;
+  let netPoints =
+    SEC.selectedUnits !== undefined //
+      ? calculator.calculateTotalArmyCost(SEC.selectedUnits)
+      : 0;
 
   /**
-   * Function allows the user to change the maximum point total for the army. 
+   * Function allows the user to change the maximum point total for the army.
    * When this happens, the list must reevaluated, so the hook function validateList
    * is called.
    * @param {event object} event
