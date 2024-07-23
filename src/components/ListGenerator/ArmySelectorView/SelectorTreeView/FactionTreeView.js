@@ -37,25 +37,27 @@ const FactionTreeView = () => {
    * @returns true, if selection is complete.
    */
   const isSelectionComplete = () => {
-    return ALC.armyHasAlternativeLists ? ALC.altArmyListSelectionComplete : true;
+    return ALC.armyHasAlternativeLists //
+      ? ALC.altArmyListSelectionComplete && AC.selectedFactionName !== NONE
+      : true;
   };
 
   return isSelectionComplete() ? (
-    <Box
-      sx={
-        AC.selectedFactionName === NONE //
-          ? {}
-          : theme.palette.animation.fadeIn
-      }
-    >
-      <Tree isFactionNotAlly={true} />
+    <Box sx={AC.selectedFactionName === NONE ? {} : theme.palette.animation.fadeIn}>
+      {AC.selectedFactionName === NONE ? null :  <Tree isFactionNotAlly={true} />}
 
       {display.showAlly(AC.selectedFactionName) ? (
         <>
           <Typography
             variant="h5"
             align="left"
-            sx={{ marginLeft: "1em", paddingTop: "1em", marginBottom: "1em", borderBottom: "black 1px solid", width: "70%" }}
+            sx={{
+              marginLeft: "1em", //
+              paddingTop: "1em",
+              marginBottom: "1em",
+              borderBottom: "black 1px solid",
+              width: "70%",
+            }}
           >
             {INPUT_TEXTS.ALLY} {AYC.allyName}
           </Typography>

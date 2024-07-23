@@ -81,6 +81,7 @@ export const OPTIONS = {
   MENU_SWITCH: "Menü",
   SAVE_LIST: "Liste Speichern",
   TO_LOSS_CALCULATOR: "Zum Verlustrechner",
+  CHANGE_SELECTED_FACTION: "Fraktion wechseln",
 };
 
 export const GENERAL_ERRRORS = {
@@ -257,8 +258,8 @@ export const DWARF_TEXTS = {
       "Deine Armmee darf max. zu 20% aus Einheiten des zweiten gewählten Königreiches oder Truppen des Imperiums bestehen.",
   },
   SELECTION_TEXTS: {
-    FOURTY_PERCENT: "Wähle ein Königreich, das bis zu 40% deiner Liste bilden darf.",
-    TWENTY_PERCENT: "Wähle ein Königreich oder Verbündete, die bis zu 20% deiner Liste bilden darf.",
+    FOURTY_PERCENT: "Welches Königreich soll bis zu 40% deiner Liste bilden?",
+    TWENTY_PERCENT: "Wähle das 2. Königreich oder das Imperium.",
   },
 };
 

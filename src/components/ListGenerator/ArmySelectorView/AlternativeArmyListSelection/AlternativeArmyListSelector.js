@@ -7,7 +7,7 @@ import useAlternativeFactionRules from "../../../../customHooks/UseAlternativeFa
 import { ArmyContext } from "../../../../contexts/armyContext";
 import { AlternativeListContext } from "../../../../contexts/alternativeListContext";
 // constants
-import { ALTERNATIVE_ARMY_SELECTION_TEXT } from "../../../../constants/factions";
+import { ALTERNATIVE_ARMY_SELECTION_TEXT, NONE } from "../../../../constants/factions";
 
 const AlternativeArmyListSelector = () => {
   const AC = useContext(ArmyContext);
@@ -55,6 +55,10 @@ const AlternativeArmyListSelector = () => {
    * @returns an array of String values to be displayed.
    */
   const setAlternatives = (selectorNumber) => {
+    if (OPTIONS[selectorNumber] === undefined) {
+      return;
+    }
+
     return OPTIONS[selectorNumber].filter((o) => !selectionArray.includes(o));
   };
 
@@ -98,18 +102,32 @@ const AlternativeArmyListSelector = () => {
     AC.setSubFactionDTOs(dtoList);
   };
 
-  return ALC.armyHasAlternativeLists
+  /**
+   * Function returns the text for the altnerative army input field(s)
+   * @param {*} selectorNumber
+   * @returns a string with the selection text for the army and selector.
+   */
+  const setLabel = (selectorNumber) => {
+    if (ALTERNATIVE_ARMY_SELECTION_TEXT[AC.selectedFactionName] === undefined) {
+      return;
+    }
+
+    return ALTERNATIVE_ARMY_SELECTION_TEXT[AC.selectedFactionName][selectorNumber];
+  };
+
+  return AC.selectedFactionName !== NONE && //
+    ALC.armyHasAlternativeLists
     ? Array(ALC.numberOfAlternativeChoices)
         .fill()
-        .map((i, j) => {
+        .map((i, selectorNumber) => {
           return (
             <SelectionInput //
-              key={j}
-              selectorNumber={j}
-              alternatives={setAlternatives(j)}
+              key={selectorNumber}
+              selectorNumber={selectorNumber}
+              alternatives={setAlternatives(selectorNumber)}
               filterFunction={selectAlternateList}
               clearFunction={clearAlternateList}
-              label={ALTERNATIVE_ARMY_SELECTION_TEXT[AC.selectedFactionName][j]}
+              label={setLabel(selectorNumber)}
             />
           );
         })

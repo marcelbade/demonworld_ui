@@ -16,15 +16,17 @@ import AppBar from "../shared/AppBar";
 // constants
 import { ID } from "../../constants/appBarConstants";
 import { NONE } from "../../constants/factions";
+import BackToSelectionButton from "../shared/BackToSelectionButton";
 
 const ListGenerator = () => {
   const AC = useContext(ArmyContext);
   const theme = useTheme();
 
-  const selectorBeforeAnimation = {
+  const factionSelectorStyle = {
     position: "absolute", //
     top: "30%",
-    left: "40%",
+    left: "35%",
+    width: "30em",
   };
 
   return (
@@ -32,13 +34,12 @@ const ListGenerator = () => {
       <Box
         sx={
           AC.selectedFactionName === NONE //
-            ? selectorBeforeAnimation
-            : { ...theme.palette.animation.fadeAway, ...selectorBeforeAnimation }
+            ? factionSelectorStyle
+            : { ...theme.palette.animation.fadeAway, ...factionSelectorStyle }
         }
       >
-        <ArmySelectorDropdown />
+        <ArmySelectorDropdown isArmySelector={true} />
       </Box>
-
       <Grid
         item //
         container
@@ -52,6 +53,7 @@ const ListGenerator = () => {
           bttnSize="2em"
           margin="0.5em"
         />
+        <BackToSelectionButton />
       </Grid>
       <AppBar hiddenElements={[ID.COMPENDIMUM_DROPDOWN]} />
       <Grid

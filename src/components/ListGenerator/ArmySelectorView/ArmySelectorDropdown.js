@@ -22,7 +22,7 @@ import {
 } from "../../../constants/factions";
 import { INPUT_TEXTS } from "../../../constants/textsAndMessages";
 
-const ArmySelectorDropdown = () => {
+const ArmySelectorDropdown = (props) => {
   const AC = useContext(ArmyContext);
   const IC = useContext(ItemContext);
   const RC = useContext(RightMenuContext);
@@ -165,6 +165,7 @@ const ArmySelectorDropdown = () => {
 
   return (
     <SelectionInput //
+      isArmySelector={props.isArmySelector}
       filterFunction={handleInput}
       clearFunction={clearFactionName}
       alternatives={setFactionList()}
