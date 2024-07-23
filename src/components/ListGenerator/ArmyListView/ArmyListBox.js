@@ -1,25 +1,32 @@
 // React
 import React, { useContext } from "react";
-// Material UI
 // components and functions
 import ArmyListBoxHeader from "./ArmyList/ArmyListHeader/ArmyListBoxHeader";
-import { ArmyContext } from "../../../contexts/armyContext";
 import ArmyListBoxCenter from "./ArmyList/ArmyListCenter/ArmyListBoxCenter";
 import ArmyListBoxFooter from "./ArmyList/ArmyListFooter/ArmyListBoxFooter";
 import { Grid } from "@mui/material";
+// context
+import { AlternativeListContext } from "../../../contexts/alternativeListContext";
 
 const ArmyListBox = () => {
-  const AC = useContext(ArmyContext);
+  const ALC = useContext(AlternativeListContext);
 
-  return AC ? (
+  /**
+   * Function checks if the user is done selecting an army,
+   * by checking if this army has alternative lists. If that's the case
+   * the flag altArmyListSelectionComplete is returned, otherwise it defaults to true.
+   * @returns true, if selection is complete.
+   */
+  const isSelectionComplete = () => {
+    return ALC.armyHasAlternativeLists ? ALC.altArmyListSelectionComplete : true;
+  };
+
+  return isSelectionComplete() ? (
     <Grid
       container //
       direction="column"
       justifyContent="flex-start"
       alignItems="flex-start"
-      sx={{
-        
-      }}
     >
       <Grid item>
         <ArmyListBoxHeader />
