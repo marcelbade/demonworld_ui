@@ -33,30 +33,32 @@ const ArmyListBoxCenter = () => {
   };
 
   return (
-    <Grid container>
-      <List>
-        {AC.subFactionDTOs
-          .filter((dto) => isSubFactionAlternativeAndSelected(dto))
-          .map((dto) => validation.returnValidationResult("subFaction", dto.name))
-          .map((obj, i) => (
-            <ArmyListSubFactionEntry
-              key={i} //
-              subFaction={obj.subFactionName}
-              valid={obj.valid}
-              message={obj.validationMessage}
-              units={filterUnitsForSubFaction(obj.subFactionName)}
-            />
-          ))}
-        {useAlly.showAlly(AC.selectedFactionName) ? (
+    <List
+      sx={{
+        minHeight: "60em", //
+      }}
+    >
+      {AC.subFactionDTOs
+        .filter((dto) => isSubFactionAlternativeAndSelected(dto))
+        .map((dto) => validation.returnValidationResult("subFaction", dto.name))
+        .map((obj, i) => (
           <ArmyListSubFactionEntry
-            key={AYC.allyName} //
-            subFaction={AYC.allyName}
-            valid={true}
-            units={filterUnitsForSubFaction(AYC.allyName)}
+            key={i} //
+            subFaction={obj.subFactionName}
+            valid={obj.valid}
+            message={obj.validationMessage}
+            units={filterUnitsForSubFaction(obj.subFactionName)}
           />
-        ) : null}
-      </List>
-    </Grid>
+        ))}
+      {useAlly.showAlly(AC.selectedFactionName) ? (
+        <ArmyListSubFactionEntry
+          key={AYC.allyName} //
+          subFaction={AYC.allyName}
+          valid={true}
+          units={filterUnitsForSubFaction(AYC.allyName)}
+        />
+      ) : null}
+    </List>
   );
 };
 
