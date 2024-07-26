@@ -48,7 +48,8 @@ function App() {
   // toggle list display
   const [simpleModeOn, setSimpleMode] = useState(false);
 
-  // army meta data
+  // army meta data - army name is the name the player gives his army. 
+  // by defauilt it is the faction name + the current date
   const [teamName, setTeamName] = useState("");
   const [playerName, setPlayerName] = useState("");
   const [armyName, setArmyName] = useState("");
@@ -295,18 +296,17 @@ function App() {
                                     playerName: playerName,
                                     teamName: teamName,
                                     armyName: armyName,
-                                    setArmyName: setArmyName,
+
                                     selectedFactionName: selectedFactionName,
                                     fetchedFactions: fetchedFactions,
                                     subFactions: distinctSubFactions,
                                     listOfAllFactionUnits: listOfAllFactionUnits,
                                     subFactionDTOs: subFactionDTOs,
-                                    // listofAlternativeSubFactions: listofAlternativeSubFactions,
+                                    setArmyName: setArmyName,
                                     setSelectedFactionName: setSelectedFactionName,
                                     setDistinctSubFactions: setDistinctSubFactions,
                                     setListOfAllFactionUnits: setListOfAllFactionUnits,
                                     setSubFactionDTOs: setSubFactionDTOs,
-                                    // setListofAlternativeSubFactions: setListofAlternativeSubFactions
                                     setTeamName: setTeamName,
                                     setPlayerName: setPlayerName,
                                   }}
