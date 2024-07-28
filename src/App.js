@@ -12,6 +12,7 @@ import CompendiumTable from "./components/compendiums/factionTable/components/Co
 import ListGenerator from "./components/ListGenerator/ListGenerator";
 import LossCalculator from "./components/lossCalculator/LossCalculator";
 import PdfBox from "./components/PDFGenerator/PDFBox";
+import CardCreator from "./components/cardCreator/CardCreator";
 // context providers
 import LightSwitchProvider from "./contexts/lightSwitchContext";
 import CustomSnackBarProvider from "./components/shared/statCards/CustomSnackBarProvider";
@@ -320,6 +321,7 @@ function App() {
                                           <Route path="/listGenerator" component={ListGenerator} />
                                           <Route path="/lossCalculator" component={LossCalculator} />
                                           <Route path="/PdfBox" component={PdfBox} />
+                                          <Route path="/cardCreator" component={CardCreator} exact />
                                         </Switch>
                                       </Grid>
                                     ) : null}
