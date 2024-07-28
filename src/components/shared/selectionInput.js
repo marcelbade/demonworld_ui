@@ -12,25 +12,15 @@ import { TextField } from "@mui/material";
 const SelectionInput = (props) => {
   return (
     <Autocomplete
-      sx={
-        props.isArmySelector
-          ? {
-              marginLeft: "2em",
-              "& .MuiFormLabel-root": {
-                fontFamily: "NotMaryKate",
-                color: "theme.palette.color",
-                fontSize: "30px",
-              },
-            }
-          : {
-              marginLeft: "2em",
-              "& .MuiFormLabel-root": {
-                fontFamily: "NotMaryKate",
-                color: "theme.palette.color",
-                fontSize: "15px",
-              },
-            }
-      }
+      sx={{
+        marginLeft: "2em",
+        width: props.width === undefined ? null : props.width,
+        "& .MuiFormLabel-root": {
+          fontFamily: "NotMaryKate",
+          color: "theme.palette.color",
+          fontSize: props.isArmySelector ? "30px" : "15px",
+        },
+      }}
       id="arymSelection"
       options={props.alternatives}
       onChange={(event, value, reason) => {
