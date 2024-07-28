@@ -13,7 +13,7 @@ const AlternativeArmyListSelector = () => {
   const AC = useContext(ArmyContext);
   const ALC = useContext(AlternativeListContext);
 
-  // create an array that has many elements as their are choices to make and give each element "" as default value.
+  // create an array that has many elements as there are choices to make and give each element "" as default value.
   const [selectionArray, setSelectionArray] = useState(Array(ALC.numberOfAlternativeChoices).fill(""));
 
   const OPTIONS = useAlternativeFactionRules(AC.selectedFactionName, ALC.alternateListNames);
