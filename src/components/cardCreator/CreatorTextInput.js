@@ -46,7 +46,6 @@ const CreatorTextInput = (props) => {
           <InputAdornment
             sx={{
               color: "white",
-              backgroundColor:"hotpink"
             }}
             position="start"
           >
