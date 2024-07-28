@@ -1,23 +1,20 @@
 // React
 import React, { Fragment, useContext, useEffect } from "react";
 // icons
-import CancelIcon from "@mui/icons-material/Cancel";
 // material ui
-import { TextField, IconButton, Tooltip, Typography, Grid } from "@mui/material";
+import { TextField, Grid } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components and functions
 import { ArmyContext } from "../../../../../contexts/armyContext";
 import { ValidationContext } from "../../../../../contexts/validationContext";
-import { SelectionContext } from "../../../../../contexts/selectionContext";
 import ContextHelpButton from "../../../../shared/ContextHelpButton";
 // constants
-import { INPUT_TEXTS, PUSH_MESSAGE_TYPES, TOOLTIPS, VALIDATION } from "../../../../../constants/textsAndMessages";
+import { INPUT_TEXTS, PUSH_MESSAGE_TYPES, VALIDATION } from "../../../../../constants/textsAndMessages";
 import { NONE } from "../../../../../constants/factions";
 
 const ArmyListBoxHeader = () => {
   const AC = useContext(ArmyContext);
   const VC = useContext(ValidationContext);
-  const SEC = useContext(SelectionContext);
 
   const theme = useTheme();
 
@@ -138,18 +135,6 @@ const ArmyListBoxHeader = () => {
           />
           {input.value === AC.armyName ? (
             <Fragment key={input.value}>
-              <Tooltip title={<Typography>{TOOLTIPS.DELETE_ARMY_LIST}</Typography>}>
-                <IconButton
-                  variant="outlined"
-                  onClick={() => {
-                    SEC.setSelectedUnits([]);
-                  }}
-                  size="large"
-                >
-                  <CancelIcon />
-                </IconButton>
-              </Tooltip>
-
               {!VC.listValidationResults.commanderIsPresent ? (
                 <ContextHelpButton
                   message={VALIDATION.NO_COMMANDER_WARNING} //
