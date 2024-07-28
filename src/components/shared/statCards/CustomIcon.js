@@ -29,8 +29,18 @@ const CustomIcon = (props) => {
       : STYLES;
   };
 
+  const toggleCheckBoxIcon = () => {
+    return props.checkedBoxIcon
+      ? {
+          ...STYLES,
+          webkitFilter: `opacity(50%) grayscale(50%)`,
+          filter: `opacity(50%) grayscale(50%)`,
+        }
+      : STYLES;
+  };
+
   return (
-    <Icon sx={toggleIconColor()}>
+    <Icon sx={{ ...toggleIconColor(), ...toggleCheckBoxIcon() }}>
       <img
         src={props.icon} //
         width={props.width}
