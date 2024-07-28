@@ -80,8 +80,11 @@ const UnitMovementCreator = () => {
             adornment={input.statName}
             width={"7em"}
             backgroundColor={"black"}
+            valueColor={"white"}
           />
-          <Typography variant="h3">/</Typography>
+          <Typography variant="h3" sx={{ color: "white" }}>
+            /
+          </Typography>
         </Fragment>
       ))}
     </Grid>

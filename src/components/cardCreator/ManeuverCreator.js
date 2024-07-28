@@ -24,7 +24,7 @@ const ManeuverCreator = () => {
       onChange={changeManeuver}
       adornment={"Manöver:"}
       width={"6em"}
-      paddingLeft={"1em"}
+      backgroundColor={"black"}
     />
   );
 };

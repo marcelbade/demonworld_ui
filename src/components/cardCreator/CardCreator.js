@@ -243,7 +243,7 @@ const CardCreator = () => {
               alignItems="center"
               justifyContent="center"
               sx={{
-                width: "max-content",
+                width: "100%",
                 backgroundColor: "black",
 
               }}
