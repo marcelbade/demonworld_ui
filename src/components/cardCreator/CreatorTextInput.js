@@ -1,7 +1,7 @@
 // react
 import React from "react";
 // material ui
-import { InputAdornment, TextField } from "@mui/material";
+import { InputAdornment, TextField, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 
 const CreatorTextInput = (props) => {
@@ -9,6 +9,20 @@ const CreatorTextInput = (props) => {
 
   return (
     <TextField
+      id={props.id}
+      label={""}
+      value={props.value}
+      onClick={props.onClick}
+      onChange={props.onChange}
+      autoComplete="off"
+      type="search"
+      required
+      variant="filled"
+      // Since multiline takes no values, all fields are multiline with 1 line
+      //  unless a the maxRows props is used.
+      multiline
+      rows={props.maxRows === undefined ? 1 : props.maxRows}
+      // padding and background of the entire element
       sx={{
         paddingLeft:
           props.paddingLeft === undefined //
@@ -19,39 +33,15 @@ const CreatorTextInput = (props) => {
           props.backgroundColor === undefined //
             ? theme.palette.statCards.backGround
             : props.backgroundColor,
-        color: "white",
-        "& .MuiFormLabel-root": {
-          fontFamily: "NotMaryKate",
-          color: "white",
-          // props.backgroundColor === "black" //
-          //   ? "white"
-          //   : "black",
-        },
-        "& .MuiFilledInput-root": {
-          background: theme.palette.statCards.backGround,
-          color: "white",
-        },
       }}
-      id={props.id}
-      label={""}
-      value={props.value}
-      onClick={props.onClick}
-      onChange={props.onChange}
-      autoComplete="off"
-      type="search"
-      required
-      variant="filled"
       InputProps={{
+        //  descpription
         startAdornment: (
-          <InputAdornment
-            sx={{
-              color: "white",
-            }}
-            position="start"
-          >
-            {props.adornment}
+          <InputAdornment position="start">
+            <Typography sx={{ color: "white" }}>{props.adornment}</Typography>
           </InputAdornment>
         ),
+        // Style of text typed into field
         style: {
           fontFamily: "NotMaryKate",
           fontSize: "20px",
@@ -59,8 +49,6 @@ const CreatorTextInput = (props) => {
           width: props.width,
         },
       }}
-      multiline
-      rows={props.maxRows === undefined ? 1 : props.maxRows}
     />
   );
 };
