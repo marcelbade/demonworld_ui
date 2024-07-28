@@ -5,6 +5,11 @@ import CreatorTextInput from "./CreatorTextInput";
 import { Grid } from "@mui/material";
 // contexts
 import { CardCreationContext } from "../../contexts/cardCreationContext";
+// icons
+import rangeArmorIcon from "../../assets/icons/range-armor.png";
+import meleeArmorIcon from "../../assets/icons/melee-armor.png";
+import blackBowIcon from "../../assets/icons/bow2.png";
+import blackSwordIcon from "../../assets/icons/sword2.png";
 
 const SizeAndSkillCreator = () => {
   const CCC = useContext(CardCreationContext);
@@ -62,6 +67,7 @@ const SizeAndSkillCreator = () => {
       onClick: deleteRangeArmor,
       onChange: changeRangeArmor,
       statName: "Fernkampfrüstung:",
+      icon: rangeArmorIcon,
     },
     {
       id: "charge", //
@@ -70,6 +76,7 @@ const SizeAndSkillCreator = () => {
       onClick: deleteMeleeArmor,
       onChange: changeMeleeArmor,
       statName: "NahkampfRüstung:",
+      icon: meleeArmorIcon,
     },
     {
       id: "Size", //
@@ -78,6 +85,7 @@ const SizeAndSkillCreator = () => {
       onClick: deleteRangeSkill,
       onChange: changeRangeSkill,
       statName: "FK-Fähigkeit:",
+      icon: blackBowIcon,
     },
     {
       id: "Size", //
@@ -86,6 +94,7 @@ const SizeAndSkillCreator = () => {
       onClick: deleteMeleeSkill,
       onChange: changeMeleeSkill,
       statName: "NK-Fähigkeit:",
+      icon: blackSwordIcon,
     },
   ];
 
@@ -107,7 +116,8 @@ const SizeAndSkillCreator = () => {
           onClick={input.onClick}
           onChange={input.onChange}
           adornment={input.statName}
-          width="10em"
+          statIcon={input.icon}
+          width="5em"
         />
       ))}
     </Grid>
