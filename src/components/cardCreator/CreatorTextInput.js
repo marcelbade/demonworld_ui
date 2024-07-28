@@ -3,9 +3,12 @@ import React from "react";
 // material ui
 import { InputAdornment, TextField, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
+import CustomIcon from "../shared/statCards/CustomIcon";
 
 const CreatorTextInput = (props) => {
   const theme = useTheme();
+
+  const ICON_SIZE = 25;
 
   return (
     <TextField
@@ -35,10 +38,21 @@ const CreatorTextInput = (props) => {
             : props.backgroundColor,
       }}
       InputProps={{
-        //  descpription
+        //  descpription text or icon
         startAdornment: (
           <InputAdornment position="start">
-            <Typography sx={{ color: "white" }}>{props.adornment}</Typography>
+            {props.statIcon === undefined ? ( //
+              <Typography sx={{ color: "white" }}>{props.adornment}</Typography>
+            ) : (
+              <CustomIcon //
+                icon={props.statIcon}
+                altText={props.adornment}
+                height={ICON_SIZE}
+                width={ICON_SIZE}
+                boxHeight={ICON_SIZE}
+                boxWidth={ICON_SIZE}
+              />
+            )}
           </InputAdornment>
         ),
         // Style of text typed into field
