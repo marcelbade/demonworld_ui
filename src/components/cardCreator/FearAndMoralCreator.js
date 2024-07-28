@@ -2,7 +2,7 @@
 import React, { useContext } from "react";
 // material ui
 import CreatorTextInput from "./CreatorTextInput";
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 // contexts
 import { CardCreationContext } from "../../contexts/cardCreationContext";
 
@@ -35,8 +35,14 @@ const FearAndMoralCreator = () => {
 
   return (
     <Grid
+      item
+      container
+      direction="row"
+      alignItems="center"
+      justifyContent="space-around"
       sx={{
-        width: "max-content",
+        width: "100%",
+        backgroundColor: "black",
       }}
     >
       <CreatorTextInput
@@ -44,22 +50,43 @@ const FearAndMoralCreator = () => {
         value={CCC.fear}
         onClick={deleteFear}
         onChange={changeFear}
-        adornment={"Fear"}
+        adornment={"Furchtfaktor"}
+        width={"7em"}
+        backgroundColor={"black"}
+        valueColor={"white"}
       />
-      <CreatorTextInput
-        id={"moral1"} //
-        value={CCC.moral1}
-        onClick={deleteMoral1}
-        onChange={changeMoral1}
-        adornment={"1. Moralwert"}
-      />
-      <CreatorTextInput
-        id={"moral2"} //
-        value={CCC.moral2}
-        onClick={deleteMoral2}
-        onChange={changeMoral2}
-        adornment={"2. Moralwert"}
-      />
+      <Grid
+        item
+        container
+        direction="row"
+        sx={{
+          width: "max-content",
+        }}
+      >
+        <CreatorTextInput
+          id={"moral1"} //
+          value={CCC.moral1}
+          onClick={deleteMoral1}
+          onChange={changeMoral1}
+          adornment={"1. Moralwert"}
+          width={"9em"}
+          backgroundColor={"black"}
+          valueColor={"white"}
+        />
+        <Typography variant="h3" sx={{ color: "white" }}>
+          /
+        </Typography>
+        <CreatorTextInput
+          id={"moral2"} //
+          value={CCC.moral2}
+          onClick={deleteMoral2}
+          onChange={changeMoral2}
+          adornment={"2. Moralwert"}
+          width={"9em"}
+          backgroundColor={"black"}
+          valueColor={"white"}
+        />
+      </Grid>
     </Grid>
   );
 };
