@@ -1,42 +1,38 @@
 // react
 import React, { useState } from "react";
 // material ui
-import { Grid, Checkbox, FormControlLabel, FormGroup, IconButton } from "@mui/material";
+import { Grid } from "@mui/material";
 import NameCreator from "./NameCreator";
 // components and functions
 import UnitMovementCreator from "./UnitMovementCreator";
 import RangeWeaponCreator from "./RangeWeaponCreator";
 import MeleeWeaponCreator from "./MeleeWeaponCreator";
-import InitiativeCreator from "./InitiativeCreator";
 import SizeAndSkillCreator from "./SizeAndSkillCreator";
 import HitpointCreator from "./HitpointCreator";
 import SpecialElementsCreator from "./SpecialElementsCreator";
 import SpecialRuleCreator from "./SpecialRuleCreator";
 import PointCostCreator from "./PointCostCreator";
 import FearAndMoralCreator from "./FearAndMoralCreator";
-import ChargeBonusCreator from "./ChargeBonusCreator";
 import FactionNameCreator from "./FactionNameCreator";
-import { useTheme } from "@emotion/react";
 import FormationsAndHordeCreator from "./FormationsAndHordeCreator";
-import ManeuverCreator from "./ManeuverCreator";
 import AppBar from "../shared/AppBar";
 // constants
 import { ID } from "../../constants/appBarConstants";
 import MenuSwitch from "../shared/MenuSwitch";
 import CardCreationProvider from "../../contexts/cardCreationContext";
-// Icons
-import { AddCircle, RemoveCircle } from "@mui/icons-material";
 
 const CardCreator = () => {
-  const theme = useTheme();
-
-  // name + subfaction name
+  // faction name + subfaction name
   const [newFaction, setNewFaction] = useState(false);
   const [factionName, setFactionName] = useState("");
   const [subFactionName, setSubFactionName] = useState("");
+  // name
+  const [unitName, setUnitName] = useState("");
   // melee weapons
   const [meleeWeaponName, setMeleeWeaponName] = useState("");
   const [meleeValue, setMeleeValue] = useState("");
+  const [hasMeleeSkill, setHasMeleeSkill] = useState(false);
+  const [meleeSkill, setMeleeSkill] = useState(0);
   const [lineNumber, setLineNumber] = useState(1);
   // charge bonus
   const [chargeBonus, setChargeBonus] = useState("");
@@ -49,26 +45,29 @@ const CardCreator = () => {
   const [skirmishFormation, setSkirmishFormation] = useState(false);
   const [square, setSquare] = useState(false);
   const [horde, setHorde] = useState(false);
+  // rangedWeapon
+  const [hasRangedWeapon, setHasRangedWeapon] = useState(true);
+  const [rangedWeaponName, setRangedWeaponName] = useState("");
+  const [rangedAttackStats, setRangedAttackStats] = useState("");
+  const [hasRangedSkill, setHasRangedSkill] = useState(false);
+  const [rangeSkill, setRangeSkill] = useState(0);
+  //meleeWeapon
   //
   const [hitpoints, setHitpoints] = useState("");
-  //
   const [initiative, setInitiative] = useState("");
-  //
   const [maneuver, setManeuver] = useState("");
   //
-  const [unitName, setUnitName] = useState("");
+
   //
   const [pointCost, setPointCost] = useState("");
   //
-  const [rangedWeaponName, setRangedWeaponName] = useState("");
-  const [rangedAttackStats, setRangedAttackStats] = useState("");
-  //
   const [size, setSize] = useState("");
-  const [rangeArmor, setRangeArmor] = useState("");
-  const [meleeArmor, setMeleeArmor] = useState("");
-  const [rangeSkill, setRangeSkill] = useState("");
-  const [meleeSkill, setMeleeSkill] = useState("");
-  //
+  const [rangeArmor, setRangeArmor] = useState(0);
+  const [meleeArmor, setMeleeArmor] = useState(0);
+
+  // number of elements and special elements
+
+  const [numberOfElements, setNumberOfElements] = useState(10);
   const [leader, setLeader] = useState(true);
   const [banner, setBanner] = useState(false);
   const [musician, setMusician] = useState(false);
@@ -79,79 +78,97 @@ const CardCreator = () => {
   const [skirmish, setSkirmish] = useState("");
   const [charge, setCharge] = useState("");
 
-  const isNewFaction = () => {
-    setNewFaction((prevState) => !prevState);
-  };
-
   return (
     <CardCreationProvider
       value={{
+        //  faction
         newFaction: newFaction,
         factionName: factionName,
+        subFactionName: subFactionName,
+        setNewFaction: setNewFaction,
+        setSubFactionName: setSubFactionName,
+        setFactionName: setFactionName,
+        // name
+        unitName: unitName,
+        setUnitName: setUnitName,
+        // movment
+        move: move,
+        charge: charge,
+        skirmish: skirmish,
+        maneuver: maneuver,
+        setSkirmish: setSkirmish,
+        setMove: setMove,
+        setCharge: setCharge,
+        setManeuver: setManeuver,
+        // range
+        hasRangedWeapon: hasRangedWeapon,
+        rangedWeaponName: rangedWeaponName,
+        rangedAttackStats: rangedAttackStats,
+        hasRangedSkill: hasRangedSkill,
+        rangeSkill: rangeSkill,
+        setRangedWeaponName: setRangedWeaponName,
+        setRangedAttackStats: setRangedAttackStats,
+        setHasRangedSkill: setHasRangedSkill,
+        setHasRangedWeapon: setHasRangedWeapon,
+        setRangeSkill: setRangeSkill,
+        //  melee
         meleeWeaponName: meleeWeaponName,
         meleeValue: meleeValue,
-        lineNumber: lineNumber,
-        subFactionName: subFactionName,
+        hasMeleeSkill: hasMeleeSkill,
+        meleeSkill: meleeSkill,
         chargeBonus: chargeBonus,
+        lineNumber: lineNumber,
+        setMeleeWeaponName: setMeleeWeaponName,
+        setMeleeValue: setMeleeValue,
+        setHasMeleeSkill: setHasMeleeSkill,
+        setMeleeSkill: setMeleeSkill,
+        setChargeBonus: setChargeBonus,
+        setLineNumber: setLineNumber,
+        // fear & moral
         fear: fear,
         moral1: moral1,
         moral2: moral2,
+        setFear: setFear,
+        setMoral2: setMoral2,
+        setMoral1: setMoral1,
+        // formations
         wedge: wedge,
         skirmishFormation: skirmishFormation,
         square: square,
         horde: horde,
-        hitpoints: hitpoints,
-        initiative: initiative,
-        maneuver: maneuver,
-        pointCost: pointCost,
-        unitName: unitName,
-        rangedWeaponName: rangedWeaponName,
-        rangedAttackStats: rangedAttackStats,
-        size: size,
-        rangeArmor: rangeArmor,
-        meleeArmor: meleeArmor,
-        rangeSkill: rangeSkill,
-        meleeSkill: meleeSkill,
-        leader: leader,
-        banner: banner,
-        musician: musician,
-        specialRule: specialRule,
-        move: move,
-        charge: charge,
-        skirmish: skirmish,
-        setSpecialRule: setSpecialRule,
-        setSkirmish: setSkirmish,
-        setMove: setMove,
-        setCharge: setCharge,
-        setMeleeSkill: setMeleeSkill,
-        setRangeArmor: setRangeArmor,
-        setMeleeArmor: setMeleeArmor,
-        setRangeSkill: setRangeSkill,
-        setSize,
-        setLeader: setLeader,
-        setBanner: setBanner,
-        setMusician: setMusician,
-        setRangedWeaponName: setRangedWeaponName,
-        setRangedAttackStats: setRangedAttackStats,
-        setPointCost: setPointCost,
-        setUnitName: setUnitName,
-        setManeuver: setManeuver,
-        setHitpoints: setHitpoints,
-        setInitiative: setInitiative,
         setWedge: setWedge,
         setSkirmishFormation: setSkirmishFormation,
         setSquare: setSquare,
         setHorde: setHorde,
-        setMoral2: setMoral2,
-        setMoral1: setMoral1,
-        setFear: setFear,
-        setChargeBonus: setChargeBonus,
-        setNewFaction: setNewFaction,
-        setSubFactionName: setSubFactionName,
-        setFactionName: setFactionName,
-        setMeleeWeaponName: setMeleeWeaponName,
-        setMeleeValue: setMeleeValue,
-        setLineNumber: setLineNumber,
+        // special elements
+        leader: leader,
+        banner: banner,
+        musician: musician,
+        numberOfElements: numberOfElements,
+        setLeader: setLeader,
+        setBanner: setBanner,
+        setMusician: setMusician,
+        setNumberOfElements: setNumberOfElements,
+        // hitpoints
+        hitpoints: hitpoints,
+        //  intiative
+        initiative: initiative,
+        //  size & armor
+        size: size,
+        rangeArmor: rangeArmor,
+        meleeArmor: meleeArmor,
+        setRangeArmor: setRangeArmor,
+        setMeleeArmor: setMeleeArmor,
+        setSize,
+        // point cost
+        pointCost: pointCost,
+        setPointCost: setPointCost,
+        // special rules
+        specialRule: specialRule,
+        setSpecialRule: setSpecialRule,
+
+        setHitpoints: setHitpoints,
+        setInitiative: setInitiative,
       }}
     >
       <Grid
@@ -161,7 +178,7 @@ const CardCreator = () => {
         sx={{
           height: "100%",
           width: "100%",
-          backgroundColor: "hotpink",
+          marginLeft: "3em",
         }}
       >
         <AppBar hiddenElements={[ID.COMPENDIMUM_DROPDOWN, ID.LIST_DISPLAY]} />
@@ -183,48 +200,6 @@ const CardCreator = () => {
           direction="row"
         >
           <Grid
-            item //
-            container
-            direction="column"
-            sx={{
-              width: "30em",
-              backgroundColor: "orange",
-            }}
-          >
-            {/* buttons! */}
-            <FormGroup>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={newFaction} //
-                    onChange={isNewFaction}
-                  />
-                }
-                label={"Neue Fraktion Erstellen"}
-                labelPlacement="start"
-              />
-            </FormGroup>
-            <IconButton
-              onClick={() => {
-                setLineNumber(lineNumber + 1);
-              }}
-              size="large"
-            >
-              <AddCircle />
-            </IconButton>
-
-            {lineNumber > 1 ? (
-              <IconButton
-                onClick={() => {
-                  setLineNumber(lineNumber - 1);
-                }}
-                size="large"
-              >
-                <RemoveCircle />
-              </IconButton>
-            ) : null}
-          </Grid>
-          <Grid
             item
             container //
             direction="column"
@@ -232,30 +207,14 @@ const CardCreator = () => {
             justifyContent="center"
             sx={{
               width: "max-content",
-              backgroundColor: theme.palette.statCards.backGround,
             }}
           >
             <FactionNameCreator />
             <NameCreator />
-            <Grid
-              container //
-              direction="row"
-              alignItems="center"
-              justifyContent="center"
-              sx={{
-                width: "100%",
-                backgroundColor: "black",
-
-              }}
-            >
-              <UnitMovementCreator />
-              <ManeuverCreator />
-              <FormationsAndHordeCreator />
-            </Grid>
+            <UnitMovementCreator />
+            <FormationsAndHordeCreator />
             <RangeWeaponCreator />
             <MeleeWeaponCreator />
-            <InitiativeCreator />
-            <ChargeBonusCreator />
             <SizeAndSkillCreator />
             <FearAndMoralCreator />
             <HitpointCreator />

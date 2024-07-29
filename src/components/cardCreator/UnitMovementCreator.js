@@ -33,6 +33,14 @@ const UnitMovementCreator = () => {
     CCC.setCharge(event.target.value);
   };
 
+  const deleteManeuver = () => {
+    CCC.setManeuver("");
+  };
+
+  const changeManeuver = (event) => {
+    CCC.setManeuver(event.target.value);
+  };
+
   const inputElements = [
     {
       id: "move", //
@@ -58,6 +66,14 @@ const UnitMovementCreator = () => {
       onChange: changeCharge,
       statName: "Angriff:",
     },
+    {
+      id: "maneuver", //
+      label: "",
+      value: CCC.maneuver,
+      onClick: deleteManeuver,
+      onChange: changeManeuver,
+      statName: "Manöver:",
+    },
   ];
 
   return (
@@ -66,7 +82,11 @@ const UnitMovementCreator = () => {
       alignItems="center" //
       justifyContent="center"
       sx={{
-        width: "max-content",
+        marginTop: "1em",
+        padding: "1em",
+        width: "50em",
+        border: " solid 2px black",
+        borderRadius: "10px",
       }}
     >
       {inputElements.map((input, i) => (
@@ -79,8 +99,6 @@ const UnitMovementCreator = () => {
             onChange={input.onChange}
             adornment={input.statName}
             width={"7em"}
-            backgroundColor={"black"}
-            valueColor={"white"}
           />
           <Typography variant="h3" sx={{ color: "white" }}>
             /

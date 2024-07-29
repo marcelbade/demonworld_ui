@@ -1,10 +1,14 @@
 // react
 import React, { useContext } from "react";
 // material ui
-import { Grid } from "@mui/material";
+import { FormGroup, Grid, FormControlLabel, Checkbox } from "@mui/material";
 import CreatorTextInput from "./CreatorTextInput";
+// components and functions
+import CustomIcon from "../shared/statCards/CustomIcon";
 // contexts
 import { CardCreationContext } from "../../contexts/cardCreationContext";
+// icons
+import blackBowIcon from "../../assets/icons/bow2.png";
 
 const RangeWeaponCreator = () => {
   const CCC = useContext(CardCreationContext);
@@ -25,33 +29,111 @@ const RangeWeaponCreator = () => {
     CCC.setRangedAttackStats(event.target.value);
   };
 
+  const deleteRangeSkill = () => {
+    CCC.setRangeSkill("");
+  };
+
+  const changeRangeSkill = (event) => {
+    CCC.setRangeSkill(event.target.value);
+  };
+
+  const unitHasRangeWeapon = () => {
+    CCC.setHasRangedWeapon((prevState) => !prevState);
+  };
+
+  const unitHasRangeSkill = () => {
+    CCC.setHasRangedSkill((prevState) => !prevState);
+  };
+
   return (
     <Grid
       container
-      justifyContent="space-around" //
-      direction="row"
+      justifyContent="flex-start" //
+      direction="column"
       sx={{
-        width: "max-content",
+        width: "50em",
       }}
     >
-      <Grid>
-        <CreatorTextInput
-          id={"rangedWeaponName"} //
-          value={CCC.rangedWeaponName}
-          onClick={deleteRangedWeaponName}
-          onChange={changeRangedWeaponName}
-          adornment={"Fernkampfwaffe:"}
-        />
+      <Grid item>
+        <FormGroup
+          sx={{
+            width: "max-Content",
+          }}
+        >
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={CCC.hasRangedWeapon} //
+                onChange={unitHasRangeWeapon}
+              />
+            }
+            label={"Einheit hat eine Fernkampfwaffe"}
+            labelPlacement="start"
+          />
+        </FormGroup>
       </Grid>
-      <Grid>
-        <CreatorTextInput
-          id={"rangedAttackStats"} //
-          value={CCC.rangedAttackStats}
-          onClick={deleteRangedAttackStats}
-          onChange={changeRangedAttackStats}
-          adornment={"Fernkampfwert:"}
-        />
-      </Grid>
+
+      {CCC.hasRangedWeapon ? (
+        <Grid
+          item //
+          container
+          direction="row"
+          sx={{
+            width: "50em",
+            border: " solid 2px black",
+            borderRadius: "10px",
+          }}
+        >
+          <CreatorTextInput
+            id={"rangedWeaponName"} //
+            value={CCC.rangedWeaponName}
+            onClick={deleteRangedWeaponName}
+            onChange={changeRangedWeaponName}
+            adornment={"Fernkampfwaffe:"}
+          />
+
+          <CreatorTextInput
+            id={"rangedAttackStats"} //
+            value={CCC.rangedAttackStats}
+            onClick={deleteRangedAttackStats}
+            onChange={changeRangedAttackStats}
+            adornment={"Fernkampfwert:"}
+          />
+          <Grid
+            item //
+            container
+            direction="row"
+          >
+            <Checkbox
+              checked={!CCC.hasRangedSkill} //
+              onChange={unitHasRangeSkill}
+              icon={
+                <CustomIcon
+                  icon={blackBowIcon} //
+                  height={"20em"}
+                  width={"20em"}
+                />
+              }
+              checkedIcon={
+                <CustomIcon
+                  icon={blackBowIcon} //
+                  checkedBoxIcon={true}
+                  height={"20em"}
+                  width={"20em"}
+                />
+              }
+            />
+            <CreatorTextInput
+              id={"rangedAttackStats"} //
+              value={CCC.rangeSkill}
+              onClick={deleteRangeSkill}
+              onChange={changeRangeSkill}
+              disabled={!CCC.hasRangedSkill}
+              width={"3em"}
+            />
+          </Grid>
+        </Grid>
+      ) : null}
     </Grid>
   );
 };

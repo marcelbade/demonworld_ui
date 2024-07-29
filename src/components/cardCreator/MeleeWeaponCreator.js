@@ -1,11 +1,15 @@
 // react
 import React, { useContext } from "react";
 // material ui
-import { Grid } from "@mui/material";
+import { Grid, Checkbox, IconButton } from "@mui/material";
 // components and functions
 import CreatorTextInput from "./CreatorTextInput";
+import CustomIcon from "../shared/statCards/CustomIcon";
 // contexts
 import { CardCreationContext } from "../../contexts/cardCreationContext";
+// Icons
+import { AddCircle, RemoveCircle } from "@mui/icons-material";
+import blackSwordIcon from "../../assets/icons/sword2.png";
 
 const MeleeWeaponCreator = () => {
   const CCC = useContext(CardCreationContext);
@@ -26,36 +30,168 @@ const MeleeWeaponCreator = () => {
     CCC.setMeleeValue(event.target.value);
   };
 
-  return Array(CCC.lineNumber)
-    .fill()
-    .map((i) => {
-      return (
-        <Grid
-          container
-          justifyContent="space-around" //
-          direction="row"
-          sx={{
-            width: "max-content",
-          }}
-        >
-          <CreatorTextInput
-            id={"MeleeWeaponName"} //
-            value={CCC.meleeWeaponName}
-            onClick={deleteMeleeWeaponName}
-            onChange={changeMeleeWeaponName}
-            adornment={"Nahkampfwaffe:"}
-          />
+  const unitHasMeleeSkill = () => {
+    CCC.setHasMeleeSkill((prevState) => !prevState);
+  };
 
-          <CreatorTextInput
-            id={"MeleeAttackStats"} //
-            value={CCC.meleeValue}
-            onClick={deleteMeleeValue}
-            onChange={changeMeleeValue}
-            adornment={"Nahkampfwert:"}
-          />
-        </Grid>
-      );
-    });
+  const deleteMeleeSkill = () => {
+    CCC.setMeleeSkill("");
+  };
+
+  const changeMeleeSkill = (event) => {
+    CCC.setMeleeSkill(event.target.value);
+  };
+
+  const deleteChargeBonus = () => {
+    CCC.setChargeBonus("");
+  };
+
+  const changeChargeBonus = (event) => {
+    CCC.setChargeBonus(event.target.value);
+  };
+
+  const deleteInitiative = () => {
+    CCC.setInitiative("");
+  };
+
+  const changeInitiative = (event) => {
+    CCC.setInitiative(event.target.value);
+  };
+
+  return (
+    <Grid
+      container
+      direction="column"
+      sx={{
+        marginTop: "1em",
+        padding: "1em",
+        width: "50em",
+        border: " solid 2px black",
+        borderRadius: "10px",
+      }}
+    >
+      {Array(CCC.lineNumber)
+        .fill()
+        .map((i) => {
+          return (
+            <Grid
+              container
+              justifyContent="center" //
+              alignItems="center"
+              direction="row"
+              sx={{
+                width: "max-content",
+              }}
+            >
+              <Grid
+                container
+                item
+                direction="row"
+                sx={{
+                  width: "max-content",
+                }}
+              >
+                <CreatorTextInput
+                  id={"Initiative"} //
+                  value={CCC.initiative}
+                  onClick={deleteInitiative}
+                  onChange={changeInitiative}
+                  adornment={"Initiative:"}
+                  width={"7em"}
+                />
+
+                <CreatorTextInput
+                  id={"MeleeWeaponName"} //
+                  value={CCC.meleeWeaponName}
+                  onClick={deleteMeleeWeaponName}
+                  onChange={changeMeleeWeaponName}
+                  adornment={"Nahkampfwaffe:"}
+                  width={"15em"}
+                />
+
+                <CreatorTextInput
+                  id={"MeleeAttackStats"} //
+                  value={CCC.meleeValue}
+                  onClick={deleteMeleeValue}
+                  onChange={changeMeleeValue}
+                  adornment={"Nahkampfwert:"}
+                  width={"15em"}
+                />
+              </Grid>
+              <Grid
+                item //
+                container
+                direction="row"
+                sx={{
+                  width: "max-content",
+                }}
+              >
+                <IconButton
+                  onClick={() => {
+                    CCC.setLineNumber(CCC.lineNumber + 1);
+                  }}
+                  size="large"
+                >
+                  <AddCircle />
+                </IconButton>
+
+                {CCC.lineNumber > 1 ? (
+                  <IconButton
+                    onClick={() => {
+                      CCC.setLineNumber(CCC.lineNumber - 1);
+                    }}
+                    size="large"
+                  >
+                    <RemoveCircle />
+                  </IconButton>
+                ) : null}
+              </Grid>
+            </Grid>
+          );
+        })}
+      <Grid
+        item //
+        container
+        direction="row"
+      >
+        <Checkbox
+          checked={!CCC.hasRangedSkill} //
+          onChange={unitHasMeleeSkill}
+          icon={
+            <CustomIcon
+              icon={blackSwordIcon} //
+              height={"20em"}
+              width={"20em"}
+            />
+          }
+          checkedIcon={
+            <CustomIcon
+              icon={blackSwordIcon} //
+              checkedBoxIcon={true}
+              height={"20em"}
+              width={"20em"}
+            />
+          }
+        />
+        <CreatorTextInput
+          id={"rangedAttackStats"} //
+          value={CCC.meleeSkill}
+          onClick={deleteMeleeSkill}
+          onChange={changeMeleeSkill}
+          disabled={!CCC.hasMeleeSkill}
+          width={"3em"}
+        />
+        <CreatorTextInput
+          id={"ChargeBonus"} //
+          value={CCC.chargeBonus}
+          onClick={deleteChargeBonus}
+          onChange={changeChargeBonus}
+          adornment={"Angriffsbonus:"}
+          width={"7em"}
+        />
+      </Grid>
+    </Grid>
+  );
 };
 
 export default MeleeWeaponCreator;

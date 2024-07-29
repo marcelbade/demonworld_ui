@@ -8,8 +8,6 @@ import { CardCreationContext } from "../../contexts/cardCreationContext";
 // icons
 import rangeArmorIcon from "../../assets/icons/range-armor.png";
 import meleeArmorIcon from "../../assets/icons/melee-armor.png";
-import blackBowIcon from "../../assets/icons/bow2.png";
-import blackSwordIcon from "../../assets/icons/sword2.png";
 
 const SizeAndSkillCreator = () => {
   const CCC = useContext(CardCreationContext);
@@ -36,21 +34,6 @@ const SizeAndSkillCreator = () => {
     CCC.setMeleeArmor(event.target.value);
   };
 
-  const deleteRangeSkill = () => {
-    CCC.setRangeSkill("");
-  };
-
-  const changeRangeSkill = (event) => {
-    CCC.setRangeSkill(event.target.value);
-  };
-  const deleteMeleeSkill = () => {
-    CCC.setMeleeSkill("");
-  };
-
-  const changeMeleeSkill = (event) => {
-    CCC.setMeleeSkill(event.target.value);
-  };
-
   const inputElements = [
     {
       id: "Size", //
@@ -72,29 +55,11 @@ const SizeAndSkillCreator = () => {
     {
       id: "charge", //
       label: "",
-      value: CCC.meleeArmor,
+      value: CCC.meleeArmor + CCC.size,
       onClick: deleteMeleeArmor,
       onChange: changeMeleeArmor,
       statName: "NahkampfRüstung:",
       icon: meleeArmorIcon,
-    },
-    {
-      id: "Size", //
-      label: "",
-      value: CCC.rangeSkill,
-      onClick: deleteRangeSkill,
-      onChange: changeRangeSkill,
-      statName: "FK-Fähigkeit:",
-      icon: blackBowIcon,
-    },
-    {
-      id: "Size", //
-      label: "",
-      value: CCC.meleeSkill,
-      onClick: deleteMeleeSkill,
-      onChange: changeMeleeSkill,
-      statName: "NK-Fähigkeit:",
-      icon: blackSwordIcon,
     },
   ];
 
@@ -103,9 +68,13 @@ const SizeAndSkillCreator = () => {
       container //
       direction="row"
       alignItems="center"
-      justifyContent="center"
+      justifyContent="space-around"
       sx={{
-        width: "max-content",
+        marginTop: "1em",
+        padding: "1em",
+        width: "50em",
+        border: " solid 2px black",
+        borderRadius: "10px",
       }}
     >
       {inputElements.map((input, i) => (

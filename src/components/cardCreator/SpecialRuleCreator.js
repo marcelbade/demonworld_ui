@@ -1,6 +1,8 @@
 // react
 import React, { useContext } from "react";
 // material ui
+import { Grid,  } from "@mui/material";
+// components and functions
 import CreatorTextInput from "./CreatorTextInput";
 // contexts
 import { CardCreationContext } from "../../contexts/cardCreationContext";
@@ -17,15 +19,25 @@ const SpecialRuleCreator = () => {
   };
 
   return (
-    <CreatorTextInput
-      id={"specialRule"} //
-      value={CCC.specialRule}
-      onClick={deleteSpecialRule}
-      onChange={changeSpecialRule}
-      adornment={"Sonderregel"}
-      width={"20em"}
-      maxRows={5}
-    />
+    <Grid
+      sx={{
+        marginTop: "1em",
+        padding: "1em",
+        width: "50em",
+        border: " solid 2px black",
+        borderRadius: "10px",
+      }}
+    >
+      <CreatorTextInput
+        id={"specialRule"} //
+        value={CCC.specialRule}
+        onClick={deleteSpecialRule}
+        onChange={changeSpecialRule}
+        adornment={"Sonderregel"}
+        width={"20em"}
+        maxRows={5}
+      />
+    </Grid>
   );
 };
 

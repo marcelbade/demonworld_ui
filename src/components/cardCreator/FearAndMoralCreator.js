@@ -1,8 +1,9 @@
 // react
 import React, { useContext } from "react";
 // material ui
-import CreatorTextInput from "./CreatorTextInput";
 import { Grid, Typography } from "@mui/material";
+// components and functions
+import CreatorTextInput from "./CreatorTextInput";
 // contexts
 import { CardCreationContext } from "../../contexts/cardCreationContext";
 
@@ -39,10 +40,13 @@ const FearAndMoralCreator = () => {
       container
       direction="row"
       alignItems="center"
-      justifyContent="space-around"
+      justifyContent="space-evenly"
       sx={{
-        width: "100%",
-        backgroundColor: "black",
+        marginTop: "1em", //
+        padding: "1em",
+        width: "50em",
+        border: " solid 2px black",
+        borderRadius: "10px",
       }}
     >
       <CreatorTextInput
@@ -52,8 +56,6 @@ const FearAndMoralCreator = () => {
         onChange={changeFear}
         adornment={"Furchtfaktor"}
         width={"7em"}
-        backgroundColor={"black"}
-        valueColor={"white"}
       />
       <Grid
         item
@@ -70,10 +72,8 @@ const FearAndMoralCreator = () => {
           onChange={changeMoral1}
           adornment={"1. Moralwert"}
           width={"9em"}
-          backgroundColor={"black"}
-          valueColor={"white"}
         />
-        <Typography variant="h3" sx={{ color: "white" }}>
+        <Typography variant="h3" sx={{ width: "1em" }}>
           /
         </Typography>
         <CreatorTextInput
@@ -83,8 +83,6 @@ const FearAndMoralCreator = () => {
           onChange={changeMoral2}
           adornment={"2. Moralwert"}
           width={"9em"}
-          backgroundColor={"black"}
-          valueColor={"white"}
         />
       </Grid>
     </Grid>

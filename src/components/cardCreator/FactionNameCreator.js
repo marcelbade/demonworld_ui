@@ -1,7 +1,8 @@
 // react
 import React, { Fragment, useContext } from "react";
 // material ui
-import { Grid } from "@mui/material";
+import { FormGroup, Grid, FormControlLabel, Checkbox } from "@mui/material";
+
 import SelectionInput from "../shared/selectionInput";
 // components and functions
 import CreatorTextInput from "./CreatorTextInput";
@@ -68,57 +69,89 @@ const FactionNameCreator = () => {
     CCC.setSubFactionName(event.target.value);
   };
 
+  const isNewFaction = () => {
+    CCC.setNewFaction((prevState) => !prevState);
+  };
+
   return (
     <Grid
       container
-      justifyContent="space-around" //
-      direction="row"
+      alignItems="center"
+      direction="column"
       sx={{
         width: "max-content",
+        border: " solid 2px black",
+        borderRadius: "10px",
       }}
     >
-      {CCC.newFaction ? (
-        <Fragment>
-          <CreatorTextInput
-            id={"factionName"} //
-            value={CCC.factionName}
-            onClick={deleteFactionName}
-            onChange={changeFactionName}
-            adornment={"Fraktion:"}
+      <Grid
+        container //
+        item
+        justifyContent="flex-start"
+        sx={{ width: "100%" }}
+      >
+        <FormGroup>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={CCC.newFaction} //
+                onChange={isNewFaction}
+              />
+            }
+            label={"Neue Fraktion Erstellen"}
+            labelPlacement="start"
           />
+        </FormGroup>
+      </Grid>
+      <Grid
+        item //
+        container
+        direction="row"
+        width="50em"
+      >
+        {CCC.newFaction ? (
+          <Fragment>
+            <CreatorTextInput
+              id={"factionName"} //
+              value={CCC.factionName}
+              onClick={deleteFactionName}
+              onChange={changeFactionName}
+              adornment={"Fraktion:"}
+            />
 
-          <CreatorTextInput
-            id={"subFactionName"} //
-            value={CCC.subFactionName}
-            onClick={deleteSubFactionName}
-            onChange={changeSubFactionName}
-            adornment={"Teilfraktion:"}
-          />
-        </Fragment>
-      ) : (
-        <Fragment>
-          <Grid>
-            <SelectionInput
-              isArmySelector={false}
-              filterFunction={handleFactionInput}
-              clearFunction={clearFactionName}
-              alternatives={setFactionList()}
-              label={"Fraktion:"}
-              width={"20em"}
+            <CreatorTextInput
+              id={"subFactionName"} //
+              value={CCC.subFactionName}
+              onClick={deleteSubFactionName}
+              onChange={changeSubFactionName}
+              adornment={"Teilfraktion:"}
             />
-          </Grid>
-          <Grid>
-            <SelectionInput
-              isArmySelector={false}
-              filterFunction={handleSubFactionInput}
-              clearFunction={clearSubFactionName}
-              alternatives={setSubFactionList()}
-              label={"Teilfraktion:"}
-              width={"20em"}
-            />
-          </Grid>
-        </Fragment>
-      )}
+          </Fragment>
+        ) : (
+          <Fragment>
+            <Grid>
+              <SelectionInput
+                isArmySelector={false}
+                filterFunction={handleFactionInput}
+                clearFunction={clearFactionName}
+                alternatives={setFactionList()}
+                label={"Fraktion:"}
+                width={"20em"}
+              />
+            </Grid>
+            <Grid>
+              <SelectionInput
+                isArmySelector={false}
+                filterFunction={handleSubFactionInput}
+                clearFunction={clearSubFactionName}
+                alternatives={setSubFactionList()}
+                label={"Teilfraktion:"}
+                width={"20em"}
+              />
+            </Grid>
+          </Fragment>
+        )}
+      </Grid>
     </Grid>
   );
 };

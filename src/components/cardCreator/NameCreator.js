@@ -23,7 +23,11 @@ const NameCreator = () => {
       alignItems="center" //
       justifyContent="center"
       sx={{
-        width: "max-content",
+        marginTop: "1em",
+        padding: "1em",
+        width: "50em",
+        border: " solid 2px black",
+        borderRadius: "10px",
       }}
     >
       <CreatorTextInput
@@ -32,7 +36,6 @@ const NameCreator = () => {
         onClick={deleteName}
         onChange={changeName}
         adornment={"Name:"}
-        valueColor="red"
       />
     </Grid>
   );

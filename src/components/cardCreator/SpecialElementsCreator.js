@@ -1,7 +1,8 @@
 // react
 import React, { useContext } from "react";
 // material ui
-import { Checkbox, FormControlLabel, FormGroup } from "@mui/material";
+import { Checkbox, FormControlLabel, Grid } from "@mui/material";
+import CreatorTextInput from "./CreatorTextInput";
 // contexts
 import { CardCreationContext } from "../../contexts/cardCreationContext";
 
@@ -18,6 +19,14 @@ const UnitMovementCreator = () => {
 
   const changeMusician = () => {
     CCC.setMusician((prevState) => !prevState);
+  };
+
+  const deleteNumberOfElements = () => {
+    CCC.setNumberOfElements("");
+  };
+
+  const changeNumberOfElements = (event) => {
+    CCC.setNumberOfElements(event.target.value);
   };
 
   const elements = [
@@ -38,21 +47,63 @@ const UnitMovementCreator = () => {
     },
   ];
 
+  const netNumberOfElements = () => {
+    let modificator = 0;
+
+    if (CCC.leader) {
+      modificator = ++modificator;
+    }
+    if (CCC.banner) {
+      modificator = ++modificator;
+    }
+    if (CCC.musician) {
+      modificator = ++modificator;
+    }
+
+    return CCC.numberOfElements - modificator;
+  };
+
   return (
-    <FormGroup>
-      {elements.map((elmnt) => (
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={elmnt.value} //
-              onChange={elmnt.action}
-              inputProps={{ "aria-label": "controlled" }}
-            />
-          }
-          label={elmnt.name}
+    <Grid
+      container
+      item
+      direction="row"
+      alignItems="center"
+      justifyContent="space-around"
+      sx={{
+        marginTop: "1em",
+        padding: "1em",
+        width: "50em",
+        border: " solid 2px black",
+        borderRadius: "10px",
+      }}
+    >
+      <Grid item>
+        <CreatorTextInput
+          id={"elementNumber"} //
+          value={netNumberOfElements()}
+          onClick={deleteNumberOfElements}
+          onChange={changeNumberOfElements}
+          adornment={"Elemente:"}
+          width={"7em"}
         />
+      </Grid>
+
+      {elements.map((elmnt) => (
+        <Grid>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={elmnt.value} //
+                onChange={elmnt.action}
+                inputProps={{ "aria-label": "controlled" }}
+              />
+            }
+            label={elmnt.name}
+          />
+        </Grid>
       ))}
-    </FormGroup>
+    </Grid>
   );
 };
 
