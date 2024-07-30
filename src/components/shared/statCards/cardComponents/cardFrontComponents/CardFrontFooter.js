@@ -4,7 +4,7 @@ import React, { useContext } from "react";
 import { Grid, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components & functions
-import { renderDynamicIcons } from  "../../../../../util/utilityFunctions";
+import { renderDynamicIcons } from "../../../../../util/utilityFunctions";
 import { StateCardContext } from "../../../../../contexts/statCardContext";
 
 const CardFrontFooter = () => {
@@ -22,7 +22,10 @@ const CardFrontFooter = () => {
       container //
       justifyContent="center"
       direction="row"
-      sx={theme.palette.statCards.backGround}
+      sx={{
+        ...theme.palette.statCards.backGround,
+        height: "2.5em",
+      }}
     >
       <Typography variant="h6">{hitpoints}</Typography>
     </Grid>

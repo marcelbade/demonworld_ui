@@ -102,7 +102,7 @@ const CardFrontUpperBlackStripe = () => {
             />
           ) : null}
           <Typography variant="h6" align="center">
-            {renderHorde(SC.unit)}
+            {renderHorde(SC.unit.horde)}
           </Typography>
         </Fragment>
       ) : null}

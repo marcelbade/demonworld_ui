@@ -6,6 +6,7 @@ import { useTheme } from "@emotion/react";
 import { renderDynamicIcons } from "../../../../../util/utilityFunctions";
 import { Grid, Typography } from "@mui/material";
 import { StateCardContext } from "../../../../../contexts/statCardContext";
+import { Height } from "@mui/icons-material";
 
 /**
  * creates the card title. The name displayed is, by default, the unit's name.
@@ -26,17 +27,32 @@ const CardFrontTitle = () => {
       justifyContent="space-around"
       direction="row"
     >
-      <Typography sx={theme.palette.statCards.cardTitle} variant="h4" align="center">
+      <Typography
+        sx={theme.palette.statCards.cardTitle} //
+        variant="h4"
+        align="center"
+      >
         {renderDynamicIcons({
           iconString: "*",
           iconNumber: SC.unit.commandStars,
           showIfNone: false,
         })}
       </Typography>
-      <Typography sx={theme.palette.statCards.cardTitle} variant="h4" align="center">
+      <Typography
+        variant="h4"
+        align="center"
+        sx={{
+          ...theme.palette.statCards.cardTitle,
+          height: "1.5em",
+        }} //
+      >
         {SC.unit.isMultiStateUnit ? SC.unit.multiCardName : SC.unit.unitName}
       </Typography>
-      <Typography sx={theme.palette.cardTitle} variant="h6" align="center">
+      <Typography
+        sx={theme.palette.cardTitle} //
+        variant="h6"
+        align="center"
+      >
         {renderDynamicIcons({
           iconString: "/",
           iconNumber: SC.unit.magic,
