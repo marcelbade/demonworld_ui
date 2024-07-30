@@ -88,8 +88,8 @@ export const renderManeuvers = (unit) => {
  * @param {unitCard} unit
  * @returns a String as content for an HTML or pdf element.
  */
-export const renderHorde = (unit) => {
-  return `${unit.isHorde ? CARD_TEXT.HORDE : ""}`;
+export const renderHorde = (isHorde) => {
+  return `${isHorde ? CARD_TEXT.HORDE : ""}`;
 };
 
 /**
