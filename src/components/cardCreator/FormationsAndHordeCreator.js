@@ -1,7 +1,7 @@
 // react
 import React, { useContext } from "react";
 // material ui
-import { Checkbox, FormControlLabel, FormGroup, Grid } from "@mui/material";
+import { Checkbox, FormControlLabel, FormGroup, Grid, Button } from "@mui/material";
 // contexts
 import { CardCreationContext } from "../../contexts/cardCreationContext";
 // icons
@@ -9,6 +9,7 @@ import CustomIcon from "../../components/shared/statCards/CustomIcon";
 import wedgeFormationIcon from "../../assets/icons/wedgeFormation.png";
 import skirmishFormationIcon from "../../assets/icons/skirmishFormation.png";
 import squareFormationIcon from "../../assets/icons/squareFormationWhite.png";
+// constants
 import { CARD_TEXT } from "../../constants/textsAndMessages";
 
 const FormationsAndHordeCreator = () => {
@@ -101,29 +102,23 @@ const FormationsAndHordeCreator = () => {
         />
       ),
     },
-    {
-      value: CCC.horde,
-      action: changeHorde,
-      name: "Horde",
-      icon: <CustomIcon />,
-      checkedIcon: <CustomIcon />,
-    },
   ];
 
   return (
     <Grid
       container //
+      alignItems="center"
       direction="row"
       sx={{
         width: "max-content",
       }}
     >
-      {elements.map((elmnt) => (
-        <FormGroup>
+      {elements.map((elmnt, i) => (
+        <FormGroup key={i}>
           <FormControlLabel
             control={
               <Checkbox
-                checked={elmnt.value} //
+                checked={!elmnt.value} //
                 onChange={elmnt.action}
                 inputProps={{ "aria-label": "controlled" }}
                 icon={elmnt.icon}
@@ -133,6 +128,21 @@ const FormationsAndHordeCreator = () => {
           />
         </FormGroup>
       ))}
+      <Button
+        onClick={() => {
+          changeHorde();
+        }}
+        disableRipple
+        size="small"
+        sx={{
+          color: CCC.horde ? "black" : "rgba(0, 0, 0, 0.5)",
+          "&:hover": {
+            backgroundColor: "orange",
+          },
+        }}
+      >
+        Hordes
+      </Button>
     </Grid>
   );
 };

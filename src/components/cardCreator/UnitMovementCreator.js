@@ -3,6 +3,8 @@ import React, { Fragment, useContext } from "react";
 // material ui
 import { Grid, Typography } from "@mui/material";
 import CreatorTextInput from "./CreatorTextInput";
+// components and functions
+import FormationsAndHordeCreator from "./FormationsAndHordeCreator";
 // contexts
 import { CardCreationContext } from "../../contexts/cardCreationContext";
 
@@ -81,6 +83,7 @@ const UnitMovementCreator = () => {
       container //
       alignItems="center" //
       justifyContent="center"
+      direction="column"
       sx={{
         marginTop: "1em",
         padding: "1em",
@@ -89,22 +92,42 @@ const UnitMovementCreator = () => {
         borderRadius: "10px",
       }}
     >
-      {inputElements.map((input, i) => (
-        <Fragment>
-          <CreatorTextInput
-            key={i} //
-            id={input.id}
-            value={input.value}
-            onClick={input.onClick}
-            onChange={input.onChange}
-            adornment={input.statName}
-            width={"7em"}
-          />
-          <Typography variant="h3" sx={{ color: "white" }}>
-            /
-          </Typography>
-        </Fragment>
-      ))}
+      <FormationsAndHordeCreator />
+
+      <Grid
+        container //
+        item
+        direction="row"
+        alignItems="center" //
+        justifyContent="center"
+      >
+        {inputElements.map((input, i) => (
+          <Fragment key={input.id}>
+            <CreatorTextInput
+              id={input.id}
+              value={input.value}
+              onClick={input.onClick}
+              onChange={input.onChange}
+              label={input.statName}
+              width={"7em"}
+            />
+
+            {i < 3 ? (
+              <Typography
+                variant="h3" //
+                sx={{
+                  color: "white", //
+                  marginLeft: "1em",
+                  marginRight: "0.5em",
+                }}
+                key={i}
+              >
+                /
+              </Typography>
+            ) : null}
+          </Fragment>
+        ))}
+      </Grid>
     </Grid>
   );
 };

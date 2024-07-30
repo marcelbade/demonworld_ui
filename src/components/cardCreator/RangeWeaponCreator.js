@@ -89,7 +89,7 @@ const RangeWeaponCreator = () => {
             value={CCC.rangedWeaponName}
             onClick={deleteRangedWeaponName}
             onChange={changeRangedWeaponName}
-            adornment={"Fernkampfwaffe:"}
+            label={"Fernkampfwaffe:"}
           />
 
           <CreatorTextInput
@@ -97,7 +97,7 @@ const RangeWeaponCreator = () => {
             value={CCC.rangedAttackStats}
             onClick={deleteRangedAttackStats}
             onChange={changeRangedAttackStats}
-            adornment={"Fernkampfwert:"}
+            label={"Fernkampfwert:"}
           />
           <Grid
             item //

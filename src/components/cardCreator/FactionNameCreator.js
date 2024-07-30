@@ -116,7 +116,7 @@ const FactionNameCreator = () => {
               value={CCC.factionName}
               onClick={deleteFactionName}
               onChange={changeFactionName}
-              adornment={"Fraktion:"}
+              label={"Fraktion:"}
             />
 
             <CreatorTextInput
@@ -124,7 +124,7 @@ const FactionNameCreator = () => {
               value={CCC.subFactionName}
               onClick={deleteSubFactionName}
               onChange={changeSubFactionName}
-              adornment={"Teilfraktion:"}
+              label={"Teilfraktion:"}
             />
           </Fragment>
         ) : (

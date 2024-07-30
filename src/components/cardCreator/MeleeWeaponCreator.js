@@ -70,6 +70,38 @@ const MeleeWeaponCreator = () => {
         borderRadius: "10px",
       }}
     >
+      <Grid
+        container //
+        item
+        direction="row"
+        alignItems="flex-start"
+        justifyContent="flex-start"
+        sx={{
+          width: "100%",
+          marginBottom:"1em"
+        }}
+      >
+        <CreatorTextInput
+          id={"Initiative"} //
+          value={CCC.initiative}
+          onClick={deleteInitiative}
+          onChange={changeInitiative}
+          label={"Initiative:"}
+          width={"7em"}
+          marginSides={"1em"}
+        />
+
+        <CreatorTextInput
+          id={"ChargeBonus"} //
+          value={CCC.chargeBonus}
+          onClick={deleteChargeBonus}
+          onChange={changeChargeBonus}
+          label={"Angriffsbonus:"}
+          width={"9em"}
+          marginSides={"1em"}
+        />
+      </Grid>
+
       {Array(CCC.lineNumber)
         .fill()
         .map((i) => {
@@ -79,6 +111,7 @@ const MeleeWeaponCreator = () => {
               justifyContent="center" //
               alignItems="center"
               direction="row"
+              key={i}
               sx={{
                 width: "max-content",
               }}
@@ -92,21 +125,13 @@ const MeleeWeaponCreator = () => {
                 }}
               >
                 <CreatorTextInput
-                  id={"Initiative"} //
-                  value={CCC.initiative}
-                  onClick={deleteInitiative}
-                  onChange={changeInitiative}
-                  adornment={"Initiative:"}
-                  width={"7em"}
-                />
-
-                <CreatorTextInput
                   id={"MeleeWeaponName"} //
                   value={CCC.meleeWeaponName}
                   onClick={deleteMeleeWeaponName}
                   onChange={changeMeleeWeaponName}
-                  adornment={"Nahkampfwaffe:"}
+                  label={"Nahkampfwaffe:"}
                   width={"15em"}
+                  marginSides={"3em"}
                 />
 
                 <CreatorTextInput
@@ -114,8 +139,9 @@ const MeleeWeaponCreator = () => {
                   value={CCC.meleeValue}
                   onClick={deleteMeleeValue}
                   onChange={changeMeleeValue}
-                  adornment={"Nahkampfwert:"}
+                  label={"Nahkampfwert:"}
                   width={"15em"}
+                  marginSides={"3em"}
                 />
               </Grid>
               <Grid
@@ -174,20 +200,12 @@ const MeleeWeaponCreator = () => {
           }
         />
         <CreatorTextInput
-          id={"rangedAttackStats"} //
+          id={"meleeAttackStats"} //
           value={CCC.meleeSkill}
           onClick={deleteMeleeSkill}
           onChange={changeMeleeSkill}
           disabled={!CCC.hasMeleeSkill}
           width={"3em"}
-        />
-        <CreatorTextInput
-          id={"ChargeBonus"} //
-          value={CCC.chargeBonus}
-          onClick={deleteChargeBonus}
-          onChange={changeChargeBonus}
-          adornment={"Angriffsbonus:"}
-          width={"7em"}
         />
       </Grid>
     </Grid>

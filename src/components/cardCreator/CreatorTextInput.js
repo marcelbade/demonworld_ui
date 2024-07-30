@@ -13,7 +13,7 @@ const CreatorTextInput = (props) => {
   return (
     <TextField
       id={props.id}
-      label={""}
+      label={props.label}
       value={props.value}
       onClick={props.onClick}
       onChange={props.onChange}
@@ -34,10 +34,25 @@ const CreatorTextInput = (props) => {
             ? 0
             : props.paddingLeft,
 
+        marginLeft:
+          props.marginSides === undefined //
+            ? 0
+            : props.marginSides,
+
+        marginRight:
+          props.marginSides === undefined //
+            ? 0
+            : props.marginSides,
+
         backgroundColor:
           props.backgroundColor === undefined //
             ? null
             : props.backgroundColor,
+
+        "& .MuiFormLabel-root": {
+          color: "black",
+          fontFamily: "notMaryKate",
+        },
       }}
       InputProps={{
         //  descpription text or icon

@@ -35,7 +35,7 @@ const NameCreator = () => {
         value={CCC.unitName}
         onClick={deleteName}
         onChange={changeName}
-        adornment={"Name:"}
+        label={"Name:"}
       />
     </Grid>
   );
