@@ -570,3 +570,30 @@ export const SPECIAL_TEXTS = {
 export const SPECIAL_ITEMS = {
   BRACELET_OF_TRANSFORMATION: "Reif der Verwandlung",
 };
+
+export const CREATOR = {
+  NEW_FACTION: "Neue Fraktion Erstellen",
+  FACTION_NAME: "Fraktion:",
+  SUBFACTION_NAME: "Teilfraktion",
+  UNIT_NAME: "Name:",
+  IS_UNIQUE: "Einheit ist einzigartig.",
+  IS_CAVALERY: "Einheit ist beritten.",
+  HAS_SHIELD: "Einheit besitzt Schilde.",
+  CLOSED_FORMATION: "Einheit kämpft in geschlossener Formation.",
+  LEADER_CLOSED_FORMATION: "Anführer kämpft in geschlossener Formation.",
+  IS_LOW_FLYER: "Einheit kann niedgrig fliegen.",
+  IS_HIGH_FLYER: "Einheit kann hoch fliegen.",
+  MOVE: "Bewegung:",
+  CHARGE: "Angriff:",
+  SKIRMISH: "Plänkeln:",
+  MANEUVER: "Manöver:",
+  ELEMENTS: "Elemente:",
+  LEADER: "Anführer:",
+  BANNER: "Banner:",
+  MUSICIAN: "Musiker:",
+  UNIT_TYPE: "Einheitentyp:",
+  UNIT_OR_SUMMONED_UNIT: "(Beschworene) Einheit",
+  GIANT_OR_AUTOMATON: "Großelement oder Gerät",
+  HERO_MAGE_SINGLESUMMON: "Persönlichkeit oder Magier",
+  SUMMONS_WITH_MAXFIELDS: "Elementar",
+};
