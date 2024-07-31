@@ -5,6 +5,8 @@ import { Checkbox, FormControlLabel, Grid } from "@mui/material";
 import CreatorTextInput from "./CreatorTextInput";
 // contexts
 import { CardCreationContext } from "../../contexts/cardCreationContext";
+// constants
+import { CREATOR } from "../../constants/textsAndMessages";
 
 const UnitMovementCreator = () => {
   const CCC = useContext(CardCreationContext);
@@ -33,17 +35,17 @@ const UnitMovementCreator = () => {
     {
       value: CCC.leader,
       action: changeLeader,
-      name: "Anführer",
+      name: CREATOR.LEADER,
     },
     {
       value: CCC.banner,
       action: changeBanner,
-      name: "Banner",
+      name: CREATOR.BANNER,
     },
     {
       value: CCC.musician,
       action: changeMusician,
-      name: "Musiker",
+      name: CREATOR.MUSICIAN,
     },
   ];
 
@@ -84,7 +86,7 @@ const UnitMovementCreator = () => {
           value={netNumberOfElements()}
           onClick={deleteNumberOfElements}
           onChange={changeNumberOfElements}
-          adornment={"Elemente:"}
+          adornment={CREATOR.ELEMENTS}
           width={"7em"}
         />
       </Grid>

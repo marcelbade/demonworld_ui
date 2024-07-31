@@ -7,6 +7,7 @@ import CreatorTextInput from "./CreatorTextInput";
 import FormationsAndHordeCreator from "./FormationsAndHordeCreator";
 // contexts
 import { CardCreationContext } from "../../contexts/cardCreationContext";
+import { CREATOR } from "../../constants/textsAndMessages";
 
 const UnitMovementCreator = () => {
   const CCC = useContext(CardCreationContext);
@@ -48,33 +49,33 @@ const UnitMovementCreator = () => {
       id: "move", //
       label: "",
       value: CCC.move,
-      onClick: deleteMovement,
+      onClick: changeManeuver,
       onChange: changeMovement,
-      statName: "Bewegung:",
+      statName: CREATOR.MOVE,
     },
     {
       id: "skirmish", //
       label: "",
       value: CCC.skirmish,
-      onClick: deleteSkirmish,
+      onClick: changeManeuver,
       onChange: changeSkirmish,
-      statName: "Plänklen:",
+      statName: CREATOR.SKIRMISH,
     },
     {
       id: "charge", //
       label: "",
       value: CCC.charge,
-      onClick: deleteCharge,
+      onClick: changeCharge,
       onChange: changeCharge,
-      statName: "Angriff:",
+      statName: CREATOR.CHARGE,
     },
     {
       id: "maneuver", //
       label: "",
       value: CCC.maneuver,
-      onClick: deleteManeuver,
+      onClick: changeManeuver,
       onChange: changeManeuver,
-      statName: "Manöver:",
+      statName: CREATOR.MANEUVER,
     },
   ];
 
