@@ -19,7 +19,6 @@ const CreatorTextInput = (props) => {
       onChange={props.onChange}
       autoComplete="off"
       type="search"
-      required
       variant="filled"
       disabled={props.disabled}
       // Since multiline takes no values, all fields are multiline with 1 line
@@ -52,6 +51,10 @@ const CreatorTextInput = (props) => {
         "& .MuiFormLabel-root": {
           color: "black",
           fontFamily: "notMaryKate",
+        },
+
+        "& .MuiFilledInput-root": {
+          background: "orange",
         },
       }}
       InputProps={{
