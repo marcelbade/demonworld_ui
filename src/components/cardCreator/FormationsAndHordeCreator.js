@@ -10,7 +10,7 @@ import wedgeFormationIcon from "../../assets/icons/wedgeFormation.png";
 import skirmishFormationIcon from "../../assets/icons/skirmishFormation.png";
 import squareFormationIcon from "../../assets/icons/squareFormationWhite.png";
 // constants
-import { CARD_TEXT } from "../../constants/textsAndMessages";
+import { CARD_TEXT, COMPENDIUM } from "../../constants/textsAndMessages";
 
 const FormationsAndHordeCreator = () => {
   const CCC = useContext(CardCreationContext);
@@ -40,67 +40,22 @@ const FormationsAndHordeCreator = () => {
       value: CCC.wedge,
       action: changeWedge,
       name: "Keilformation",
-      icon: (
-        <CustomIcon
-          icon={wedgeFormationIcon} //
-          altText={CARD_TEXT.WEDGE_FORMATION}
-          height={HEIGHT_WIDTH_ICON}
-          width={HEIGHT_WIDTH_ICON}
-        />
-      ),
-      checkedIcon: (
-        <CustomIcon
-          icon={wedgeFormationIcon} //
-          altText={CARD_TEXT.WEDGE_FORMATION}
-          height={HEIGHT_WIDTH_ICON}
-          width={HEIGHT_WIDTH_ICON}
-          checkedBoxIcon={true}
-        />
-      ),
+      icon: wedgeFormationIcon,
+      dimension: HEIGHT_WIDTH_ICON,
     },
     {
       value: CCC.skirmishFormation,
       action: changeSkirmish,
       name: "Plänkelformation",
-      icon: (
-        <CustomIcon
-          icon={skirmishFormationIcon} //
-          altText={CARD_TEXT.SKIRMISH_FORMATION}
-          height={HEIGHT_WIDTH_SKIRMISH_ICON}
-          width={HEIGHT_WIDTH_SKIRMISH_ICON}
-        />
-      ),
-      checkedIcon: (
-        <CustomIcon
-          icon={skirmishFormationIcon} //
-          altText={CARD_TEXT.SKIRMISH_FORMATION}
-          height={HEIGHT_WIDTH_SKIRMISH_ICON}
-          width={HEIGHT_WIDTH_SKIRMISH_ICON}
-          checkedBoxIcon={true}
-        />
-      ),
+      icon: skirmishFormationIcon,
+      dimension: HEIGHT_WIDTH_SKIRMISH_ICON,
     },
     {
       value: CCC.square,
       action: changeSquare,
       name: "Karreeformation",
-      icon: (
-        <CustomIcon
-          icon={squareFormationIcon} //
-          altText={CARD_TEXT.SQUARE_FORMATION}
-          height={HEIGHT_WIDTH_SQUARE_ICON}
-          width={HEIGHT_WIDTH_SQUARE_ICON}
-        />
-      ),
-      checkedIcon: (
-        <CustomIcon
-          icon={squareFormationIcon} //
-          altText={CARD_TEXT.SQUARE_FORMATION}
-          height={HEIGHT_WIDTH_SQUARE_ICON}
-          width={HEIGHT_WIDTH_SQUARE_ICON}
-          checkedBoxIcon={true}
-        />
-      ),
+      icon: squareFormationIcon,
+      dimension: HEIGHT_WIDTH_SQUARE_ICON,
     },
   ];
 
@@ -108,9 +63,10 @@ const FormationsAndHordeCreator = () => {
     <Grid
       container //
       alignItems="center"
+      justifyContent="center"
       direction="row"
       sx={{
-        width: "max-content",
+        width: "50em",
       }}
     >
       {elements.map((elmnt, i) => (
@@ -121,8 +77,23 @@ const FormationsAndHordeCreator = () => {
                 checked={!elmnt.value} //
                 onChange={elmnt.action}
                 inputProps={{ "aria-label": "controlled" }}
-                icon={elmnt.icon}
-                checkedIcon={elmnt.checkedIcon}
+                icon={
+                  <CustomIcon
+                    icon={elmnt.icon} //
+                    altText={CARD_TEXT.SQUARE_FORMATION}
+                    height={elmnt.dimension}
+                    width={elmnt.dimension}
+                  />
+                }
+                checkedIcon={
+                  <CustomIcon
+                    icon={elmnt.icon} //
+                    altText={CARD_TEXT.SQUARE_FORMATION}
+                    height={elmnt.dimension}
+                    width={elmnt.dimension}
+                    checkedBoxIcon={true}
+                  />
+                }
               />
             }
           />
@@ -135,13 +106,14 @@ const FormationsAndHordeCreator = () => {
         disableRipple
         size="small"
         sx={{
+          width: "2em",
           color: CCC.horde ? "black" : "rgba(0, 0, 0, 0.5)",
           "&:hover": {
             backgroundColor: "orange",
           },
         }}
       >
-        Hordes
+        {COMPENDIUM.HORDE}
       </Button>
     </Grid>
   );
