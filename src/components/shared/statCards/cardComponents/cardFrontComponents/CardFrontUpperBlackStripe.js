@@ -50,7 +50,7 @@ const CardFrontUpperBlackStripe = () => {
           <Typography variant="h6" align="center">
             {renderMovementpoints(SC.unit, { isDynamic: true })}
           </Typography>
-          {SC.unit.controlZone > 0? (
+          {SC.unit.controlZone > 0 ? (
             <Typography variant="h6" align="center">
               {renderControlzone(SC.unit)}
             </Typography>
@@ -83,6 +83,7 @@ const CardFrontUpperBlackStripe = () => {
               altText={CARD_TEXT.WEDGE_FORMATION}
               height={HEIGHT_WIDTH_ICON}
               width={HEIGHT_WIDTH_ICON}
+              darkBackGround={true}
             />
           ) : null}
           {SC.unit.skirmishFormation ? (
@@ -91,6 +92,7 @@ const CardFrontUpperBlackStripe = () => {
               altText={CARD_TEXT.SKIRMISH_FORMATION}
               height={HEIGHT_WIDTH_SKIRMISH_ICON}
               width={HEIGHT_WIDTH_SKIRMISH_ICON}
+              darkBackGround={true}
             />
           ) : null}
           {SC.unit.squareFormation ? (
@@ -99,6 +101,7 @@ const CardFrontUpperBlackStripe = () => {
               altText={CARD_TEXT.SQUARE_FORMATION}
               height={HEIGHT_WIDTH_SQUARE_ICON}
               width={HEIGHT_WIDTH_SQUARE_ICON}
+              darkBackGround={true}
             />
           ) : null}
           <Typography variant="h6" align="center">

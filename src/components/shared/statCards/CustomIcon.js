@@ -16,11 +16,12 @@ const CustomIcon = (props) => {
   };
 
   /**
-   * Function checks whether the app is using the dark theme and flipps the icon color if necessary.
+   * All icons in the app are black. When using dark mode, the color must be inverted. 
+   * The Same is true for icons on a dark background. 
    * @returns a plain js objkect containing css attributes.
    */
   const toggleIconColor = () => {
-    return !LC.darkModeOff
+    return !LC.darkModeOff || props.darkBackGround
       ? {
           ...STYLES,
           webkitFilter: `invert(100%)`,
