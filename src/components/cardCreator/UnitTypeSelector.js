@@ -1,0 +1,69 @@
+// react
+import React, { useContext } from "react";
+// material ui
+import { Grid, FormControlLabel, FormLabel, FormControl, RadioGroup, Radio } from "@mui/material";
+// contexts
+import { CardCreationContext } from "../../contexts/cardCreationContext";
+import { CREATOR } from "../../constants/textsAndMessages";
+import { GIANT, HERO, UNIT, SUMMONED } from "../../constants/unitTypes";
+
+const UnitTypeSelector = () => {
+  const CCC = useContext(CardCreationContext);
+
+  const handleChange = (event) => {
+    CCC.setUnitType(event.target.value);
+  };
+
+  console.log("CCC.unitType", CCC.unitType);
+
+  return (
+    <Grid
+      container //
+      alignItems="center" //
+      justifyContent="center"
+      direction="column"
+      sx={{
+        marginTop: "1em",
+        padding: "1em",
+        width: "50em",
+        border: " solid 2px black",
+        borderRadius: "10px",
+      }}
+    >
+      <FormControl variant="outlined">
+        <FormLabel sx={{ fontFamily: "NotMaryKate" }} id="unitTypeLabel">
+          {CREATOR.UNIT_TYPE}
+        </FormLabel>
+        <RadioGroup //
+          row
+          name="unit-type-radio-group"
+          value={CCC.unitType}
+          onChange={handleChange}
+        >
+          <FormControlLabel //
+            value={UNIT}
+            control={<Radio />}
+            label={CREATOR.UNIT_OR_SUMMONED_UNIT}
+          />
+          <FormControlLabel //
+            value={GIANT}
+            control={<Radio />}
+            label={CREATOR.GIANT_OR_AUTOMATON}
+          />
+          <FormControlLabel //
+            value={HERO}
+            control={<Radio />}
+            label={CREATOR.HERO_MAGE_SINGLESUMMON}
+          />
+          <FormControlLabel //
+            value={SUMMONED}
+            control={<Radio />}
+            label={CREATOR.SUMMONS_WITH_MAXFIELDS}
+          />
+        </RadioGroup>
+      </FormControl>
+    </Grid>
+  );
+};
+
+export default UnitTypeSelector;
