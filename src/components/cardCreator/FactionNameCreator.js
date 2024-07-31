@@ -11,6 +11,7 @@ import { ArmyContext } from "../../contexts/armyContext";
 import { CardCreationContext } from "../../contexts/cardCreationContext";
 // constants
 import { ALL_FACTIONS_ARRAY, NONE } from "../../constants/factions";
+import { CREATOR } from "../../constants/textsAndMessages";
 
 const FactionNameCreator = () => {
   const AC = useContext(ArmyContext);
@@ -98,7 +99,7 @@ const FactionNameCreator = () => {
                 onChange={isNewFaction}
               />
             }
-            label={"Neue Fraktion Erstellen"}
+            label={CREATOR.NEW_FACTION}
             labelPlacement="start"
           />
         </FormGroup>
@@ -108,6 +109,7 @@ const FactionNameCreator = () => {
         container
         direction="row"
         width="50em"
+        justifyContent="center"
       >
         {CCC.newFaction ? (
           <Fragment>
@@ -116,7 +118,8 @@ const FactionNameCreator = () => {
               value={CCC.factionName}
               onClick={deleteFactionName}
               onChange={changeFactionName}
-              label={"Fraktion:"}
+              label={CREATOR.FACTION_NAME}
+              marginSides="1em"
             />
 
             <CreatorTextInput
@@ -124,7 +127,7 @@ const FactionNameCreator = () => {
               value={CCC.subFactionName}
               onClick={deleteSubFactionName}
               onChange={changeSubFactionName}
-              label={"Teilfraktion:"}
+              label={CREATOR.SUBFACTION_NAME}
             />
           </Fragment>
         ) : (
@@ -135,7 +138,7 @@ const FactionNameCreator = () => {
                 filterFunction={handleFactionInput}
                 clearFunction={clearFactionName}
                 alternatives={setFactionList()}
-                label={"Fraktion:"}
+                label={CREATOR.FACTION_NAME}
                 width={"20em"}
               />
             </Grid>
@@ -145,7 +148,7 @@ const FactionNameCreator = () => {
                 filterFunction={handleSubFactionInput}
                 clearFunction={clearSubFactionName}
                 alternatives={setSubFactionList()}
-                label={"Teilfraktion:"}
+                label={CREATOR.SUBFACTION_NAME}
                 width={"20em"}
               />
             </Grid>
