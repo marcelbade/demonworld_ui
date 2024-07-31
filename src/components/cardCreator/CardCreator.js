@@ -13,6 +13,9 @@ import SpecialRuleCreator from "./SpecialRuleCreator";
 import PointCostCreator from "./PointCostCreator";
 import FearAndMoralCreator from "./FearAndMoralCreator";
 import FactionNameCreator from "./FactionNameCreator";
+import UnitAttributeCreator from "./UnitAttributeCreator";
+import UnitTypeSelector from "./UnitTypeSelector";
+
 import AppBar from "../shared/AppBar";
 import CardPreview from "./CardPreview";
 import MenuSwitch from "../shared/MenuSwitch";
@@ -20,26 +23,37 @@ import MenuSwitch from "../shared/MenuSwitch";
 import CardCreationProvider from "../../contexts/cardCreationContext";
 // constants
 import { ID } from "../../constants/appBarConstants";
+import { UNIT } from "../../constants/unitTypes";
 
 const CardCreator = () => {
   // faction name + subfaction name
   const [newFaction, setNewFaction] = useState(false);
   const [factionName, setFactionName] = useState("");
   const [subFactionName, setSubFactionName] = useState(" ");
+  // unit type
+  const [unitType, setUnitType] = useState(UNIT);
   // name
   const [unitName, setUnitName] = useState("");
+  // unit attribbutes
+  const [isunique, setIsunique] = useState(false);
+  const [isCavalery, setIsCavalery] = useState(false);
+  const [hasShield, setHasShield] = useState(false);
+  const [closedFormation, setClosedFormation] = useState(false);
+  const [leaderClosedFormation, setLeaderClosedFormation] = useState(false);
+  const [isLowFlyer, setIsLowFlyer] = useState(false);
+  const [isHighFlyer, setIsHighFlyer] = useState(false);
+  // movement
+  const [move, setMove] = useState(0);
+  const [skirmish, setSkirmish] = useState(0);
+  const [charge, setCharge] = useState(0);
+  const [maneuver, setManeuver] = useState("");
   // melee weapons
   const [meleeWeaponName, setMeleeWeaponName] = useState("");
   const [meleeValue, setMeleeValue] = useState("");
   const [hasMeleeSkill, setHasMeleeSkill] = useState(false);
   const [meleeSkill, setMeleeSkill] = useState(0);
-  const [lineNumber, setLineNumber] = useState(1);
-  // charge bonus
   const [chargeBonus, setChargeBonus] = useState("");
-  // fear and moral
-  const [fear, setFear] = useState("");
-  const [moral1, setMoral1] = useState("");
-  const [moral2, setMoral2] = useState("");
+  const [lineNumber, setLineNumber] = useState(1);
   //  formations and horde
   const [wedge, setWedge] = useState(false);
   const [skirmishFormation, setSkirmishFormation] = useState(false);
@@ -54,25 +68,23 @@ const CardCreator = () => {
   //meleeWeapon
   const [hitpoints, setHitpoints] = useState("");
   const [initiative, setInitiative] = useState("");
-  const [maneuver, setManeuver] = useState("");
-  // points 
-  const [pointCost, setPointCost] = useState("");
   // size and armor
   const [size, setSize] = useState("");
   const [rangeArmor, setRangeArmor] = useState(0);
   const [meleeArmor, setMeleeArmor] = useState(0);
+  // fear and moral
+  const [fear, setFear] = useState("");
+  const [moral1, setMoral1] = useState("");
+  const [moral2, setMoral2] = useState("");
   // number of elements and special elements
   const [numberOfElements, setNumberOfElements] = useState(10);
   const [leader, setLeader] = useState(true);
   const [banner, setBanner] = useState(false);
   const [musician, setMusician] = useState(false);
-  //
+  // points
+  const [pointCost, setPointCost] = useState("");
+  // special rules
   const [specialRule, setSpecialRule] = useState("");
-  //
-  const [move, setMove] = useState("");
-  const [skirmish, setSkirmish] = useState("");
-  const [charge, setCharge] = useState("");
-
 
   return (
     <CardCreationProvider
@@ -84,9 +96,27 @@ const CardCreator = () => {
         setNewFaction: setNewFaction,
         setSubFactionName: setSubFactionName,
         setFactionName: setFactionName,
+        // unittype
+        unitType: unitType,
+        setUnitType: setUnitType,
         // name
         unitName: unitName,
         setUnitName: setUnitName,
+        // unit attributes
+        isunique: isunique,
+        isCavalery: isCavalery,
+        hasShield: hasShield,
+        closedFormation: closedFormation,
+        leaderClosedFormation: leaderClosedFormation,
+        isLowFlyer: isLowFlyer,
+        isHighFlyer: isHighFlyer,
+        setLeaderClosedFormation: setLeaderClosedFormation,
+        setIsunique: setIsunique,
+        setIsCavalery: setIsCavalery,
+        setHasShield: setHasShield,
+        setClosedFormation: setClosedFormation,
+        setIsLowFlyer: setIsLowFlyer,
+        setIsHighFlyer: setIsHighFlyer,
         // movment
         move: move,
         charge: charge,
@@ -211,6 +241,8 @@ const CardCreator = () => {
             >
               <FactionNameCreator />
               <NameCreator />
+              <UnitTypeSelector />
+              <UnitAttributeCreator />
               <UnitMovementCreator />
               <RangeWeaponCreator />
               <MeleeWeaponCreator />
