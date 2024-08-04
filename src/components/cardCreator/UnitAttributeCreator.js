@@ -2,11 +2,13 @@
 import React, { useContext } from "react";
 // material ui
 import { Grid, Checkbox, FormControlLabel } from "@mui/material";
+// components and functions
+import CreatorTextInput from "./CreatorTextInput";
 // contexts
 import { CardCreationContext } from "../../contexts/cardCreationContext";
 // constants
 import { CREATOR } from "../../constants/textsAndMessages";
-import { UNIT } from "../../constants/unitTypes";
+import { GIANT, HERO, MAGE, UNIT } from "../../constants/unitTypes";
 
 const UnitAttributeCreator = () => {
   const CCC = useContext(CardCreationContext);
@@ -39,6 +41,14 @@ const UnitAttributeCreator = () => {
     CCC.setIsHighFlyer((prevState) => !prevState);
   };
 
+  const changeCommandStars = (event) => {
+    CCC.setCommandStars(event.target.value);
+  };
+
+  const changeMagic = (event) => {
+    CCC.setMagic(event.target.value);
+  };
+
   const elements = [
     {
       value: CCC.isunique, //
@@ -56,7 +66,7 @@ const UnitAttributeCreator = () => {
       value: CCC.hasShield, //
       action: changeHasShield,
       name: CREATOR.HAS_SHIELD,
-      display: true,
+      display: CCC.unitType !== GIANT,
     },
     {
       value: CCC.closedFormation, //
@@ -98,6 +108,35 @@ const UnitAttributeCreator = () => {
         borderRadius: "10px",
       }}
     >
+      <Grid
+        container //
+        direction="row"
+        alignItems="center"
+        justifyContent="space-around"
+        marginBottom="2em"
+      >
+        {CCC.unitType === MAGE || CCC.unitType === HERO ? (
+          <CreatorTextInput
+            id={"name"} //
+            value={CCC.commandStars}
+            onChange={changeCommandStars}
+            label={"Sterne:"}
+            width="7em"
+            marginRight="2em"
+            type="number"
+          />
+        ) : null}
+        {CCC.unitType === MAGE ? (
+          <CreatorTextInput
+            id={"name"} //
+            value={CCC.magic}
+            onChange={changeMagic}
+            label={"Magiepunkte:"}
+            width="7em"
+            type="number"
+          />
+        ) : null}
+      </Grid>
       {elements
         .filter((elmnt) => elmnt.display)
         .map((elmnt) => (
