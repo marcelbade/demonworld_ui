@@ -5,7 +5,7 @@ import { Grid, FormControlLabel, FormLabel, FormControl, RadioGroup, Radio } fro
 // contexts
 import { CardCreationContext } from "../../contexts/cardCreationContext";
 import { CREATOR } from "../../constants/textsAndMessages";
-import { GIANT, HERO, UNIT, SUMMONED } from "../../constants/unitTypes";
+import { GIANT, HERO, UNIT, SUMMONED, MAGE, AUTOMATON } from "../../constants/unitTypes";
 
 const UnitTypeSelector = () => {
   const CCC = useContext(CardCreationContext);
@@ -48,12 +48,22 @@ const UnitTypeSelector = () => {
           <FormControlLabel //
             value={GIANT}
             control={<Radio />}
-            label={CREATOR.GIANT_OR_AUTOMATON}
+            label={CREATOR.GIANT}
+          />
+          <FormControlLabel //
+            value={AUTOMATON}
+            control={<Radio />}
+            label={CREATOR.AUTOMATON}
           />
           <FormControlLabel //
             value={HERO}
             control={<Radio />}
-            label={CREATOR.HERO_MAGE_SINGLESUMMON}
+            label={CREATOR.HERO}
+          />
+          <FormControlLabel //
+            value={MAGE}
+            control={<Radio />}
+            label={CREATOR.MAGE}
           />
           <FormControlLabel //
             value={SUMMONED}
