@@ -6,6 +6,7 @@ import { Grid } from "@mui/material";
 import CreatorTextInput from "./CreatorTextInput";
 // contexts
 import { CardCreationContext } from "../../contexts/cardCreationContext";
+import { CREATOR } from "../../constants/textsAndMessages";
 
 const PointCostCreator = () => {
   const CCC = useContext(CardCreationContext);
@@ -38,7 +39,7 @@ const PointCostCreator = () => {
         value={CCC.pointCost}
         onClick={deletePointCost}
         onChange={changePointCost}
-        adornment={"Punkte"}
+        label={CREATOR.POINTCOST}
       />
     </Grid>
   );

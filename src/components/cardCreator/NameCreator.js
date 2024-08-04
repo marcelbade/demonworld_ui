@@ -5,6 +5,8 @@ import CreatorTextInput from "./CreatorTextInput";
 import { Grid } from "@mui/material";
 // contexts
 import { CardCreationContext } from "../../contexts/cardCreationContext";
+// constants
+import { CREATOR } from "../../constants/textsAndMessages";
 
 const NameCreator = () => {
   const CCC = useContext(CardCreationContext);
@@ -35,7 +37,7 @@ const NameCreator = () => {
         value={CCC.unitName}
         onClick={deleteName}
         onChange={changeName}
-        label={"Name:"}
+        label={CREATOR.UNIT_NAME}
       />
     </Grid>
   );

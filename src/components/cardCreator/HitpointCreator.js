@@ -6,6 +6,7 @@ import { Grid } from "@mui/material";
 import CreatorTextInput from "./CreatorTextInput";
 // contexts
 import { CardCreationContext } from "../../contexts/cardCreationContext";
+import { CREATOR } from "../../constants/textsAndMessages";
 
 const HitpointCreator = () => {
   const CCC = useContext(CardCreationContext);
@@ -38,7 +39,7 @@ const HitpointCreator = () => {
         value={CCC.hitpoints}
         onClick={deleteHitpoints}
         onChange={changeHitpoints}
-        adornment={"Trefferpunkte"}
+        label={CREATOR.HITPOINTS}
       />
     </Grid>
   );
