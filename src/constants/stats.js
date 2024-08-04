@@ -1,6 +1,6 @@
 export const ARMOUR_MELEE = "armourMelee";
 export const ARMOUR_RANGE = "armourRange";
-export const CHARGE = "skillMelee";
+export const CHARGE = "charge";
 export const CHARGE_BONUS = "chargeBonus";
 export const FEAR = "fear";
 export const HOLD = "hold_maneuvers";
