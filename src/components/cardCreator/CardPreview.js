@@ -12,6 +12,8 @@ import { CardCreationContext } from "../../contexts/cardCreationContext";
 const CardPreview = () => {
   const CCC = useContext(CardCreationContext);
 
+  // console.log("card prview ccc charge", CCC.charge);
+
   return (
     <StatCardProvider
       value={{
@@ -32,7 +34,7 @@ const CardPreview = () => {
           wedgeFormation: CCC.wedge,
           horde: CCC.horde,
           // range
-          skillRange: CCC.rangeSkill ,
+          skillRange: CCC.rangeSkill,
           rangedAttackStats: CCC.rangedAttackStats,
           rangedWeapon: CCC.rangedWeaponName,
           // initiative
@@ -60,7 +62,7 @@ const CardPreview = () => {
           musician: CCC.musician,
           // special rules
           specialRules: CCC.specialRule,
-          numberOfElements: 8,
+          numberOfElements: CCC.numberOfElements,
           // hitpoints
           hitpoints: CCC.hitpoints,
           // point cost
