@@ -7,6 +7,7 @@ import CreatorTextInput from "./CreatorTextInput";
 import { CardCreationContext } from "../../contexts/cardCreationContext";
 // constants
 import { CREATOR } from "../../constants/textsAndMessages";
+import { UNIT } from "../../constants/unitTypes";
 
 const UnitMovementCreator = () => {
   const CCC = useContext(CardCreationContext);
@@ -49,20 +50,13 @@ const UnitMovementCreator = () => {
     },
   ];
 
-  const netNumberOfElements = () => {
-    let modificator = 0;
-
-    if (CCC.leader) {
-      modificator = ++modificator;
-    }
-    if (CCC.banner) {
-      modificator = ++modificator;
-    }
-    if (CCC.musician) {
-      modificator = ++modificator;
+  const netNumberOfElements = (unitType) => {
+    if (unitType !== UNIT) {
+      CCC.setNumberOfElements(1);
+      return 1;
     }
 
-    return CCC.numberOfElements - modificator;
+    return CCC.numberOfElements;
   };
 
   return (
@@ -83,28 +77,31 @@ const UnitMovementCreator = () => {
       <Grid item>
         <CreatorTextInput
           id={"elementNumber"} //
-          value={netNumberOfElements()}
+          value={netNumberOfElements(CCC.unitType)}
           onClick={deleteNumberOfElements}
           onChange={changeNumberOfElements}
-          adornment={CREATOR.ELEMENTS}
-          width={"7em"}
+          disabled={CCC.unitType !== UNIT}
+          label={CREATOR.ELEMENTS}
+          width="10em"
         />
       </Grid>
 
-      {elements.map((elmnt) => (
-        <Grid>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={elmnt.value} //
-                onChange={elmnt.action}
-                inputProps={{ "aria-label": "controlled" }}
+      {CCC.unitType === UNIT
+        ? elements.map((elmnt) => (
+            <Grid>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={elmnt.value} //
+                    onChange={elmnt.action}
+                    inputProps={{ "aria-label": "controlled" }}
+                  />
+                }
+                label={elmnt.name}
               />
-            }
-            label={elmnt.name}
-          />
-        </Grid>
-      ))}
+            </Grid>
+          ))
+        : null}
     </Grid>
   );
 };
