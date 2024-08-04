@@ -35,6 +35,8 @@ const CardCreator = () => {
   // name
   const [unitName, setUnitName] = useState("");
   // unit attribbutes
+  const [commandStars, setCommandStars] = useState(0);
+  const [magic, setMagic] = useState(0);
   const [isunique, setIsunique] = useState(false);
   const [isCavalery, setIsCavalery] = useState(false);
   const [hasShield, setHasShield] = useState(false);
@@ -42,6 +44,7 @@ const CardCreator = () => {
   const [leaderClosedFormation, setLeaderClosedFormation] = useState(false);
   const [isLowFlyer, setIsLowFlyer] = useState(false);
   const [isHighFlyer, setIsHighFlyer] = useState(false);
+  const [hasMaxFieldsMove, setHasMaxFieldsMove] = useState(false);
   // movement
   const [move, setMove] = useState(0);
   const [skirmish, setSkirmish] = useState(0);
@@ -78,7 +81,7 @@ const CardCreator = () => {
   const [moral2, setMoral2] = useState("");
   // number of elements and special elements
   const [numberOfElements, setNumberOfElements] = useState(10);
-  const [leader, setLeader] = useState(true);
+  const [leader, setLeader] = useState(false);
   const [banner, setBanner] = useState(false);
   const [musician, setMusician] = useState(false);
   // points
@@ -103,6 +106,8 @@ const CardCreator = () => {
         unitName: unitName,
         setUnitName: setUnitName,
         // unit attributes
+        commandStars: commandStars,
+        magic: magic,
         isunique: isunique,
         isCavalery: isCavalery,
         hasShield: hasShield,
@@ -110,6 +115,11 @@ const CardCreator = () => {
         leaderClosedFormation: leaderClosedFormation,
         isLowFlyer: isLowFlyer,
         isHighFlyer: isHighFlyer,
+        hasMaxFieldsMove: hasMaxFieldsMove,
+        setHasMaxFieldsMove: setHasMaxFieldsMove,
+
+        setMagic: setMagic,
+        setCommandStars: setCommandStars,
         setLeaderClosedFormation: setLeaderClosedFormation,
         setIsunique: setIsunique,
         setIsCavalery: setIsCavalery,
@@ -242,6 +252,7 @@ const CardCreator = () => {
               <FactionNameCreator />
               <NameCreator />
               <UnitTypeSelector />
+              <SpecialElementsCreator />
               <UnitAttributeCreator />
               <UnitMovementCreator />
               <RangeWeaponCreator />
@@ -249,7 +260,6 @@ const CardCreator = () => {
               <SizeAndSkillCreator />
               <FearAndMoralCreator />
               <HitpointCreator />
-              <SpecialElementsCreator />
               <SpecialRuleCreator />
               <PointCostCreator />
             </Grid>
