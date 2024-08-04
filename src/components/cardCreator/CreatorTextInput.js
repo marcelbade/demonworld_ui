@@ -5,7 +5,7 @@ import { InputAdornment, TextField, Typography } from "@mui/material";
 // import { useTheme } from "@emotion/react";
 import CustomIcon from "../shared/statCards/CustomIcon";
 
-const CreatorTextInput = (props) => {
+const   CreatorTextInput = (props) => {
   // const theme = useTheme();
 
   const ICON_SIZE = 25;
@@ -18,9 +18,9 @@ const CreatorTextInput = (props) => {
       onClick={props.onClick}
       onChange={props.onChange}
       autoComplete="off"
-      type="search"
       variant="filled"
       disabled={props.disabled}
+      type={props.type}
       // Since multiline takes no values, all fields are multiline with 1 line
       //  unless a the maxRows props is used.
       multiline
@@ -60,9 +60,15 @@ const CreatorTextInput = (props) => {
       InputProps={{
         //  descpription text or icon
         startAdornment: (
-          <InputAdornment position="start">
+          <InputAdornment
+            position={
+              props.adornmentPosition === undefined //
+                ? "start"
+                : props.adornmentPosition
+            }
+          >
             {props.statIcon === undefined ? ( //
-              <Typography sx={{}}>{props.adornment}</Typography>
+              <Typography>{props.adornment}</Typography>
             ) : (
               <CustomIcon //
                 icon={props.statIcon}
