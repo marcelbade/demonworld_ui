@@ -6,6 +6,9 @@ import { Grid, Typography } from "@mui/material";
 import CreatorTextInput from "./CreatorTextInput";
 // contexts
 import { CardCreationContext } from "../../contexts/cardCreationContext";
+import { UNIT } from "../../constants/unitTypes";
+// constants
+import { CREATOR } from "../../constants/textsAndMessages";
 
 const FearAndMoralCreator = () => {
   const CCC = useContext(CardCreationContext);
@@ -54,37 +57,39 @@ const FearAndMoralCreator = () => {
         value={CCC.fear}
         onClick={deleteFear}
         onChange={changeFear}
-        adornment={"Furchtfaktor"}
+        label={CREATOR.FEAR}
         width={"7em"}
       />
-      <Grid
-        item
-        container
-        direction="row"
-        sx={{
-          width: "max-content",
-        }}
-      >
-        <CreatorTextInput
-          id={"moral1"} //
-          value={CCC.moral1}
-          onClick={deleteMoral1}
-          onChange={changeMoral1}
-          adornment={"1. Moralwert"}
-          width={"9em"}
-        />
-        <Typography variant="h3" sx={{ width: "1em" }}>
-          /
-        </Typography>
-        <CreatorTextInput
-          id={"moral2"} //
-          value={CCC.moral2}
-          onClick={deleteMoral2}
-          onChange={changeMoral2}
-          adornment={"2. Moralwert"}
-          width={"9em"}
-        />
-      </Grid>
+      {CCC.unitType === UNIT ? (
+        <Grid
+          item
+          container
+          direction="row"
+          sx={{
+            width: "max-content",
+          }}
+        >
+          <CreatorTextInput
+            id={"moral1"} //
+            value={CCC.moral1}
+            onClick={deleteMoral1}
+            onChange={changeMoral1}
+            label={CREATOR.MORAL1}
+            width={"9em"}
+          />
+          <Typography variant="h3" sx={{ width: "1em" }}>
+            /
+          </Typography>
+          <CreatorTextInput
+            id={"moral2"} //
+            value={CCC.moral2}
+            onClick={deleteMoral2}
+            onChange={changeMoral2}
+            label={CREATOR.MORAL2}
+            width={"9em"}
+          />
+        </Grid>
+      ) : null}
     </Grid>
   );
 };
