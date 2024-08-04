@@ -12,8 +12,6 @@ import { CardCreationContext } from "../../contexts/cardCreationContext";
 const CardPreview = () => {
   const CCC = useContext(CardCreationContext);
 
-  // console.log("card prview ccc charge", CCC.charge);
-
   return (
     <StatCardProvider
       value={{
