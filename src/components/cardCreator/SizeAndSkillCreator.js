@@ -84,7 +84,7 @@ const SizeAndSkillCreator = () => {
           value={input.value}
           onClick={input.onClick}
           onChange={input.onChange}
-          adornment={input.statName}
+          label={input.statName}
           statIcon={input.icon}
           width="5em"
         />
