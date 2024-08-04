@@ -1,11 +1,12 @@
 // react
 import React, { useContext } from "react";
 // material ui
-import { Grid,  } from "@mui/material";
+import { Grid } from "@mui/material";
 // components and functions
 import CreatorTextInput from "./CreatorTextInput";
 // contexts
 import { CardCreationContext } from "../../contexts/cardCreationContext";
+import { CREATOR } from "../../constants/textsAndMessages";
 
 const SpecialRuleCreator = () => {
   const CCC = useContext(CardCreationContext);
@@ -20,6 +21,9 @@ const SpecialRuleCreator = () => {
 
   return (
     <Grid
+      container
+      alignItems="center"
+      justifyContent="flex-start"
       sx={{
         marginTop: "1em",
         padding: "1em",
@@ -33,8 +37,8 @@ const SpecialRuleCreator = () => {
         value={CCC.specialRule}
         onClick={deleteSpecialRule}
         onChange={changeSpecialRule}
-        adornment={"Sonderregel"}
-        width={"20em"}
+        label={CREATOR.SPECIALRULE}
+        width={"max-content"}
         maxRows={5}
       />
     </Grid>
