@@ -13,28 +13,16 @@ import { CREATOR } from "../../constants/textsAndMessages";
 const FearAndMoralCreator = () => {
   const CCC = useContext(CardCreationContext);
 
-  const deleteFear = () => {
-    CCC.setFear("");
-  };
-
   const changeFear = (event) => {
-    CCC.setFear(event.target.value);
-  };
-
-  const deleteMoral1 = () => {
-    CCC.setMoral1("");
+    CCC.setFear(parseInt(event.target.value));
   };
 
   const changeMoral1 = (event) => {
-    CCC.setMoral1(event.target.value);
-  };
-
-  const deleteMoral2 = () => {
-    CCC.setMoral2("");
+    CCC.setMoral1(parseInt(event.target.value));
   };
 
   const changeMoral2 = (event) => {
-    CCC.setMoral2(event.target.value);
+    CCC.setMoral2(parseInt(event.target.value));
   };
 
   return (
@@ -55,7 +43,6 @@ const FearAndMoralCreator = () => {
       <CreatorTextInput
         id={"Fear"} //
         value={CCC.fear}
-        onClick={deleteFear}
         onChange={changeFear}
         label={CREATOR.FEAR}
         width={"7em"}
@@ -72,7 +59,6 @@ const FearAndMoralCreator = () => {
           <CreatorTextInput
             id={"moral1"} //
             value={CCC.moral1}
-            onClick={deleteMoral1}
             onChange={changeMoral1}
             label={CREATOR.MORAL1}
             width={"9em"}
@@ -83,7 +69,6 @@ const FearAndMoralCreator = () => {
           <CreatorTextInput
             id={"moral2"} //
             value={CCC.moral2}
-            onClick={deleteMoral2}
             onChange={changeMoral2}
             label={CREATOR.MORAL2}
             width={"9em"}

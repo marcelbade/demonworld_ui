@@ -12,26 +12,16 @@ import meleeArmorIcon from "../../assets/icons/melee-armor.png";
 const SizeAndSkillCreator = () => {
   const CCC = useContext(CardCreationContext);
 
-  const deleteSize = () => {
-    CCC.setSize("");
-  };
-
   const changeSize = (event) => {
-    CCC.setSize(event.target.value);
-  };
-  const deleteRangeArmor = () => {
-    CCC.setRangeArmor("");
+    CCC.setSize(parseInt(event.target.value));
   };
 
   const changeRangeArmor = (event) => {
-    CCC.setRangeArmor(event.target.value);
-  };
-  const deleteMeleeArmor = () => {
-    CCC.setMeleeArmor("");
+    CCC.setRangeArmor(parseInt(event.target.value));
   };
 
   const changeMeleeArmor = (event) => {
-    CCC.setMeleeArmor(event.target.value);
+    CCC.setMeleeArmor(parseInt(event.target.value));
   };
 
   const inputElements = [
@@ -39,26 +29,21 @@ const SizeAndSkillCreator = () => {
       id: "Size", //
       label: "",
       value: CCC.size,
-      onClick: deleteSize,
       onChange: changeSize,
       statName: "Größe:",
     },
     {
-      id: "skirmish", //
+      id: "rangeArmor", //
       label: "",
       value: CCC.rangeArmor,
-      onClick: deleteRangeArmor,
       onChange: changeRangeArmor,
-      statName: "Fernkampfrüstung:",
       icon: rangeArmorIcon,
     },
     {
-      id: "charge", //
+      id: "meleeArmor", //
       label: "",
-      value: CCC.meleeArmor + CCC.size,
-      onClick: deleteMeleeArmor,
+      value: CCC.meleeArmor,
       onChange: changeMeleeArmor,
-      statName: "NahkampfRüstung:",
       icon: meleeArmorIcon,
     },
   ];
@@ -82,7 +67,6 @@ const SizeAndSkillCreator = () => {
           key={i}
           id={input.id} //
           value={input.value}
-          onClick={input.onClick}
           onChange={input.onChange}
           label={input.statName}
           statIcon={input.icon}

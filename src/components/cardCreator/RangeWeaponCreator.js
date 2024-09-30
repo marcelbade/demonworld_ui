@@ -103,10 +103,14 @@ const RangeWeaponCreator = () => {
             item //
             container
             direction="row"
+            alignItems="center"
           >
             <Checkbox
               checked={!CCC.hasRangedSkill} //
               onChange={unitHasRangeSkill}
+              sx={{
+                marginTop: "0.5em",
+              }}
               icon={
                 <CustomIcon
                   icon={blackBowIcon} //
