@@ -98,6 +98,7 @@ const UnitMovementCreator = () => {
                   />
                 }
                 label={elmnt.name}
+                labelPlacement="start"
               />
             </Grid>
           ))
