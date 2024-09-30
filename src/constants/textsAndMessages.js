@@ -607,4 +607,13 @@ export const CREATOR = {
   HITPOINTS: "Trefferpunkte:",
   SPECIALRULE: "Sonderregel:",
   POINTCOST: "Punkte:",
-};
+  INITIATIVE: "Intiative:",
+  CHARGE_BONUS: "Angriffsbonus:",
+  MELEE_WEAPON_1: "1. Nahkampfwaffe:",
+  MELEE_WEAPON_2: "2. Nahkampfwaffe:",
+  MELEE_WEAPON_3: "3. Nahkampfwaffe:",
+  MELEE_VALUE_1: "1. Nahkampfwert:",
+  MELEE_VALUE_2: "2. Nahkampfwert:",
+  MELEE_VALUE_3: "3. Nahkampfwert:",
+  HAS_MELEE_SKILL: "Einheit hat NK-Fertigkeit",
+ };
