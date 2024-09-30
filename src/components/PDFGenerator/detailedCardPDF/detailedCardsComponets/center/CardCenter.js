@@ -29,25 +29,8 @@ const CardCenter = (props) => {
             />
           )}
           <MeleeWeaponRow
-            weaponName={props.unit.weapon1Name} //
-            weapon={props.unit.weapon1}
-            index={props.index}
+            unit={props.unit} //
           />
-          {props.unit.weapon2 === 0 ? null : (
-            <MeleeWeaponRow
-              weaponName={props.unit.weapon2Name} //
-              weapon={props.unit.weapon2}
-              index={props.index}
-            />
-          )}
-
-          {props.unit.weapon3 === 0 ? null : (
-            <MeleeWeaponRow
-              weaponName={props.unit.weapon3Name} //
-              weapon={props.unit.weapon3}
-              index={props.index}
-            />
-          )}
           <InitiativeRow
             unit={props.unit} //
             index={props.index}

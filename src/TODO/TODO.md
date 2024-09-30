@@ -1,15 +1,19 @@
 
-# useTreeViewController
+# TODO
+
+- prüfe später ob die Anzeige "Horde" für stat cards noch funktioniert.
 
 # game logic
 
 # Bugs
 - if a unit with a unique item is removed from the list, the unique item remains on the bann master list of equipped unique items :D
 
-# IMPROVEMENTS
+- Goblins: ALly doesnt work WTF
 
-TODO: src\components\shared\NoSelectionDisplay.js
-You need a pic, if you want to use this :D.
+# IMPROVEMENTS
+ 
+- StatCardProvider is not defined in App.js - change that please
+
 
 # ItemShop
 

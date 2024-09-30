@@ -4,17 +4,44 @@ import React from "react";
 import { Text, View } from "@react-pdf/renderer";
 // styles
 import { detailedStyles } from "../../../../pdfStyles/detailedCardPdfStyles";
+// functions and components
+import { weapon1Stats } from "../../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/unitStatChangesLogic";
 
 const MeleeWeaponRow = (props) => {
-  const MELEE_WEAPON = `${props.weaponName}: ${props.weapon}`;
+  //  weapon={props.unit.weapon1}
+  const weaponOneProperties = weapon1Stats(props.unit);
 
-  return (
-    <View
-      key={props.index} //
-      style={detailedStyles.cardRow}
-    >
-      <Text key={props.index}>{MELEE_WEAPON}</Text>
-    </View>
-  );
+  const weapons = [
+    {
+      // weapon one can be replaced by a magical item
+      weaponString:
+        props.unit.weapon1 === 0 //
+          ? null
+          : `${weaponOneProperties.name}: ${weaponOneProperties.value}`,
+    },
+    {
+      weaponString:
+        props.unit.weapon2 === 0 //
+          ? null
+          : `${props.unit.weapon2Name}: ${props.unit.weapon2}`,
+    },
+    {
+      weaponString:
+        props.unit.weapon3 === 0 //
+          ? null
+          : `${props.unit.weapon3Name}: ${props.unit.weapon3}`,
+    },
+  ];
+
+  return weapons.map((w, i) => {
+    return (
+      <View
+        key={i} //
+        style={detailedStyles.cardRow}
+      >
+        <Text key={props.index}>{w.weaponString}</Text>
+      </View>
+    );
+  });
 };
 export default MeleeWeaponRow;
