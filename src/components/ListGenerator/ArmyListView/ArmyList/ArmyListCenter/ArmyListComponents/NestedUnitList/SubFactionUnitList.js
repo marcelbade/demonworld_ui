@@ -53,6 +53,7 @@ const SubFactionUnitList = (props) => {
                 <IconButton
                   onClick={() => {
                     removeUnit(identifier);
+                    props.fadeOutFunc(); 
                   }}
                 >
                   <RemoveCircleOutline />

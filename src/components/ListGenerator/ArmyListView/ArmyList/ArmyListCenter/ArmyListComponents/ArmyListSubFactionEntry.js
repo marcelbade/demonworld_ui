@@ -1,8 +1,9 @@
 // React
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 // Material UI
 import ListItem from "@mui/material/ListItem";
 import { Grid } from "@mui/material";
+import { useTheme } from "@emotion/react";
 // components and functions
 import SubFactionUnitList from "./NestedUnitList/SubFactionUnitList";
 import ArmyListSubFactionHeader from "./ArmyListSubFactionHeader";
@@ -15,13 +16,29 @@ import ArmyListSubFactionFooter from "./ArmyListSubFactionFooter";
 const ArmyListSubFactionEntry = (props) => {
   const LDC = useContext(ListDisplayContext);
 
+  const theme = useTheme();
+
+  const [fadeAwayFlag, setFadeAwayFlag] = useState(false);
+
+  const fadeOutFunc = () => {
+    if (props.units.length === 0) {
+      setFadeAwayFlag(true);
+    }
+  };
+
   return (
     <ListItem //
       key="subfactionEntry"
+      sx={props.units.length === 0 && !fadeAwayFlag ? { display: "none" } : { display: "block" }}
     >
       <Grid
         container //
         direction="column"
+        sx={
+          fadeAwayFlag //
+            ? theme.palette.animation.fadeAway
+            : theme.palette.animation.fadeIn
+        }
       >
         {LDC.simpleModeOn ? null : (
           <ArmyListSubFactionHeader
@@ -33,6 +50,7 @@ const ArmyListSubFactionEntry = (props) => {
         <SubFactionUnitList
           subFactionUnits={props.units} //
           subFactionName={props.subFaction}
+          fadeOutFunc={fadeOutFunc}
         />
         {LDC.simpleModeOn ? null : (
           <ArmyListSubFactionFooter
