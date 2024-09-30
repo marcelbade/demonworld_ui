@@ -40,12 +40,12 @@ const CardPreview = () => {
           //  melee
           chargeBonus: CCC.chargeBonus,
           skillMelee: CCC.meleeSkill,
-          weapon1: CCC.meleeValue,
-          weapon1Name: CCC.meleeWeaponName,
-          weapon2: CCC.meleeValue,
-          weapon2Name: CCC.meleeWeaponName,
-          weapon3: CCC.meleeValue,
-          weapon3Name: CCC.meleeWeaponName,
+          weapon1Name: CCC.meleeWeaponName1,
+          weapon1: CCC.meleeValue1,
+          weapon2Name: CCC.meleeWeaponName2,
+          weapon2: CCC.meleeValue2,
+          weapon3Name: CCC.meleeWeaponName3,
+          weapon3: CCC.meleeValue3,
           //  size & armor
           unitSize: CCC.size,
           armourRange: CCC.rangeArmor,
@@ -89,7 +89,6 @@ const CardPreview = () => {
       <CardFront />
       <Divider
         sx={{
-          backgroundColor: "hotpink",
           width: "45%",
           paddingTop: "4em",
         }}

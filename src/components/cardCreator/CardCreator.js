@@ -49,10 +49,14 @@ const CardCreator = () => {
   const [move, setMove] = useState(0);
   const [skirmish, setSkirmish] = useState(0);
   const [charge, setCharge] = useState(0);
-  const [maneuver, setManeuver] = useState("");
+  const [maneuver, setManeuver] = useState(0);
   // melee weapons
-  const [meleeWeaponName, setMeleeWeaponName] = useState("");
-  const [meleeValue, setMeleeValue] = useState("");
+  const [meleeWeaponName1, setMeleeWeaponName1] = useState("");
+  const [meleeValue1, setMeleeValue1] = useState(0);
+  const [meleeWeaponName2, setMeleeWeaponName2] = useState("");
+  const [meleeValue2, setMeleeValue2] = useState(0);
+  const [meleeWeaponName3, setMeleeWeaponName3] = useState("");
+  const [meleeValue3, setMeleeValue3] = useState(0);
   const [hasMeleeSkill, setHasMeleeSkill] = useState(false);
   const [meleeSkill, setMeleeSkill] = useState(0);
   const [chargeBonus, setChargeBonus] = useState("");
@@ -72,20 +76,20 @@ const CardCreator = () => {
   const [hitpoints, setHitpoints] = useState("");
   const [initiative, setInitiative] = useState("");
   // size and armor
-  const [size, setSize] = useState("");
+  const [size, setSize] = useState(2);
   const [rangeArmor, setRangeArmor] = useState(0);
   const [meleeArmor, setMeleeArmor] = useState(0);
   // fear and moral
-  const [fear, setFear] = useState("");
-  const [moral1, setMoral1] = useState("");
-  const [moral2, setMoral2] = useState("");
+  const [fear, setFear] = useState(0);
+  const [moral1, setMoral1] = useState(0);
+  const [moral2, setMoral2] = useState(0);
   // number of elements and special elements
   const [numberOfElements, setNumberOfElements] = useState(10);
   const [leader, setLeader] = useState(false);
   const [banner, setBanner] = useState(false);
   const [musician, setMusician] = useState(false);
   // points
-  const [pointCost, setPointCost] = useState("");
+  const [pointCost, setPointCost] = useState(0);
   // special rules
   const [specialRule, setSpecialRule] = useState("");
 
@@ -159,14 +163,22 @@ const CardCreator = () => {
         //  intiative
         initiative: initiative,
         //  melee
-        meleeWeaponName: meleeWeaponName,
-        meleeValue: meleeValue,
+        meleeWeaponName1: meleeWeaponName1,
+        meleeValue1: meleeValue1,
+        meleeWeaponName2: meleeWeaponName2,
+        meleeValue2: meleeValue2,
+        meleeWeaponName3: meleeWeaponName3,
+        meleeValue3: meleeValue3,
         hasMeleeSkill: hasMeleeSkill,
         meleeSkill: meleeSkill,
         chargeBonus: chargeBonus,
         lineNumber: lineNumber,
-        setMeleeWeaponName: setMeleeWeaponName,
-        setMeleeValue: setMeleeValue,
+        setMeleeWeaponName1: setMeleeWeaponName1,
+        setMeleeValue1: setMeleeValue1,
+        setMeleeWeaponName2: setMeleeWeaponName2,
+        setMeleeValue2: setMeleeValue2,
+        setMeleeWeaponName3: setMeleeWeaponName3,
+        setMeleeValue3: setMeleeValue3,
         setHasMeleeSkill: setHasMeleeSkill,
         setMeleeSkill: setMeleeSkill,
         setChargeBonus: setChargeBonus,
@@ -219,7 +231,7 @@ const CardCreator = () => {
             height: "100%",
             width: "50%",
             marginLeft: "3em",
-            backgroundColor: "orange",
+          
           }}
         >
           <Grid
@@ -270,8 +282,7 @@ const CardCreator = () => {
           item
           direction="column"
           sx={{
-            backgroundColor: "hotpink",
-            width: "45%",
+            width: "35%",
             paddingTop: "4em",
           }}
         >
