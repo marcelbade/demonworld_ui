@@ -11,11 +11,6 @@ const CardBackCenter = () => {
   const theme = useTheme();
   const SC = useContext(StateCardContext);
 
-  const EQUIPMENT_CSS = {
-    fontFamily: "Beryliumbold",
-    paddingLeft: "0.5em",
-  };
-
   const specialRules = SC.unit.specialRules === "" ? COMPENDIUM.NO_SPECIAL_RULES : SC.unit.specialRules;
   const hasEquipment = "equipment" in SC.unit && SC.unit.equipment.length !== 0;
 
@@ -29,15 +24,11 @@ const CardBackCenter = () => {
         {specialRules}
         {hasEquipment
           ? SC.unit.equipment.map((e, i) => {
+              console.log("e", e);
+
               return (
                 <Fragment key={i}>
-                  <Typography variant="body1" sx={EQUIPMENT_CSS}>
-                    {e.name}
-                  </Typography>
-                  <Typography>_______</Typography>
-                  <Typography variant="body1" sx={EQUIPMENT_CSS}>
-                    {e.rule}
-                  </Typography>
+                  <Typography variant="body1">{e.name}</Typography>
                 </Fragment>
               );
             })
