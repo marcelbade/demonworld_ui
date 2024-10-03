@@ -4,12 +4,12 @@ import React, { useContext } from "react";
 import { Grid, Typography } from "@mui/material";
 // components & functions
 import { StateCardContext } from "../../../../../../contexts/statCardContext";
-import { rangedWeaponStats } from "../../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/unitStatChangesLogic";
+import { setRangedWeaponStats } from "../../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/unitStatChangesLogic";
 
 const RangedWeapon = () => {
   const SC = useContext(StateCardContext);
 
-  const rangedWeaponProperties = rangedWeaponStats(SC.unit);
+  const rangedWeaponProperties = setRangedWeaponStats(SC.unit);
 
   const RANGED_WEAPON = `${rangedWeaponProperties.name} ${rangedWeaponProperties.value}`;
 

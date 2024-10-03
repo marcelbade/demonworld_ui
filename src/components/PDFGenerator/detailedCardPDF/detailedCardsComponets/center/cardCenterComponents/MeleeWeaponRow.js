@@ -5,11 +5,11 @@ import { Text, View } from "@react-pdf/renderer";
 // styles
 import { detailedStyles } from "../../../../pdfStyles/detailedCardPdfStyles";
 // functions and components
-import { generateWeaponStats } from "../../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/unitStatChangesLogic";
+import { setWeaponStats } from "../../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/unitStatChangesLogic";
 
 const MeleeWeaponRow = (props) => {
   //  weapon={props.unit.weapon1}
-  const weaponOneProperties = generateWeaponStats(props.unit);
+  const weaponOneProperties = setWeaponStats(props.unit);
 
   const weapons = [
     {

@@ -1,5 +1,5 @@
 /**
- * Since all item properties that alter unit stats follow the same naming convention,
+ * Since all item properties that alter unit stats must follow the same naming convention,
  * the mapping is done via a simple String concotenation
  * + making the first character of the stat's name upper case.
  * E.g.: moral2 => altersMoral2.
@@ -12,12 +12,13 @@ const mapUnitStatToItemProperty = (unitStat) => {
 };
 
 /**
- * Function calculates the stats for a unit's weapon . 
+ * Function sets the stats for a unit's weapon after selecting an item.
+ * This function is necessesary, as weapons require a different logic then stats.
  * (weapon 1)
  * @param {unitCard} unit
  * @returns the value for the property weapon1
- */ 
-export const generateWeaponStats = (unit) => {
+ */
+export const setWeaponStats = (unit) => {
   let weapon1Properties = { name: unit.weapon1Name, value: unit.weapon1 };
   const result = searchForRelevantModifier(unit, "altersWeapon1");
 
@@ -33,11 +34,12 @@ export const generateWeaponStats = (unit) => {
 };
 
 /**
- * Function calculates the stats for a unit's range weapon.
+ * Function calculates the stats for a unit's range weapon after selecting an item.
+ * This function is necessesary, as weapons require a different logic then stats.
  * @param {unitCard} unit
  * @returns
  */
-export const rangedWeaponStats = (unit) => {
+export const setRangedWeaponStats = (unit) => {
   let rangedWeaponProperties = { name: unit.rangedWeapon, value: unit.rangedAttackStats };
   const result = searchForRelevantModifier(unit, "altersRangedWeapon");
 
@@ -129,24 +131,19 @@ const calculateNewMeleeWeaponValue = (unit, modifier) => {
 
   let newWeapon1Value = modifier;
 
-  console.log("newWeapon1Value  = modifier;", newWeapon1Value)
-
   // size bonus - capped at 4 for giant mounts
   newWeapon1Value = unit.unitSize <= MAX_SIZE ? (newWeapon1Value += unit.unitSize) : (newWeapon1Value += MAX_SIZE);
 
-  console.log("size",newWeapon1Value)
-
-
   // leader always has +1
   newWeapon1Value = unit.leader ? (newWeapon1Value += LEADER_BONUS) : newWeapon1Value;
-  // has a mount
+
+  // unit is mounted
   newWeapon1Value = unit.isMounted ? (newWeapon1Value += BONUS) : newWeapon1Value;
 
-  console.log("isMounted",newWeapon1Value)
-
-  // 5 Miniatures per base (closed order)
+  // 5 miniatures per base (closed order)
   newWeapon1Value = unit.closedOrder ? (newWeapon1Value += BONUS) : newWeapon1Value;
-  // second hand weapon
+
+  // unit is equipped with a second hand weapon
   newWeapon1Value = unit.twoHandWeapons ? (newWeapon1Value += BONUS) : newWeapon1Value;
 
   return newWeapon1Value;
