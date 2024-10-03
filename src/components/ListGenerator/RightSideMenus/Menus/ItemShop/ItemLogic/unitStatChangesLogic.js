@@ -12,12 +12,12 @@ const mapUnitStatToItemProperty = (unitStat) => {
 };
 
 /**
- * Function calculates the stats for a unit's first weapon.
+ * Function calculates the stats for a unit's weapon . 
  * (weapon 1)
  * @param {unitCard} unit
  * @returns the value for the property weapon1
- */
-export const weapon1Stats = (unit) => {
+ */ 
+export const generateWeaponStats = (unit) => {
   let weapon1Properties = { name: unit.weapon1Name, value: unit.weapon1 };
   const result = searchForRelevantModifier(unit, "altersWeapon1");
 

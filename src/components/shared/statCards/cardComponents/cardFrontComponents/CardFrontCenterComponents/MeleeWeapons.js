@@ -4,12 +4,12 @@ import React, { useContext } from "react";
 import { Grid, Typography } from "@mui/material";
 // components & functions
 import { StateCardContext } from "../../../../../../contexts/statCardContext";
-import { weapon1Stats } from "../../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/unitStatChangesLogic";
+import { generateWeaponStats } from "../../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/unitStatChangesLogic";
 
 const MeleeWeapons = () => {
   const SC = useContext(StateCardContext);
 
-  const weaponOneProperties = weapon1Stats(SC.unit);
+  const weaponOneProperties = generateWeaponStats(SC.unit);
 
   const weapons = [
     {
