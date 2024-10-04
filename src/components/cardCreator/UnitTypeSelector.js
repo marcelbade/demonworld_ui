@@ -14,8 +14,6 @@ const UnitTypeSelector = () => {
     CCC.setUnitType(event.target.value);
   };
 
-  console.log("CCC.unitType", CCC.unitType);
-
   return (
     <Grid
       container //
