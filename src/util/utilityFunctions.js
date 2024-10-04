@@ -73,18 +73,6 @@ export const isSingleElementCard = (unit) => {
 };
 
 /**
- * Function tests if unit is a hero or mage. This is important when it
- * comes to displaying movement on stat cards.
- *
- * @param {[{*}]} unit
- * @returns  JSX element
- */
-export const isHeroOrMage = (unit) => {
-  const HERO_MAGE_LIST = [HERO, MAGE];
-  return HERO_MAGE_LIST.includes(unit.unitType);
-};
-
-/**
  * Function creates the string that contains the number of "normal" elements.
  * Since special elements are mentioned separately,
  * they have to be substracted from the total count.
@@ -202,12 +190,10 @@ export const renderBooleanAsIcon = (numberOfElements, flag) => {
  */
 export const renderDynamicIcons = (data) => {
   let result = "";
-  let zeroMarker = "";
 
   for (let i = 0; i < data.iconNumber; i++) {
     result = result + data.iconString;
   }
 
-  return result.length === 0 ? zeroMarker : result;
+  return result;
 };
-
