@@ -1,18 +1,16 @@
 // React
-import React, { useContext, Fragment } from "react";
+import React, { Fragment } from "react";
 // Material UI
 import { useTheme } from "@emotion/react";
 import { Grid, Typography } from "@mui/material";
 // functions and modules
-import { StateCardContext } from "../../../../../contexts/statCardContext";
 import { COMPENDIUM } from "../../../../../constants/textsAndMessages";
 
-const CardBackCenter = () => {
+const CardBackCenter = (props) => {
   const theme = useTheme();
-  const SC = useContext(StateCardContext);
 
-  const specialRules = SC.unit.specialRules === "" ? COMPENDIUM.NO_SPECIAL_RULES : SC.unit.specialRules;
-  const hasEquipment = "equipment" in SC.unit && SC.unit.equipment.length !== 0;
+  const specialRules = props.unit.specialRules === "" ? COMPENDIUM.NO_SPECIAL_RULES : props.unit.specialRules;
+  const hasEquipment = "equipment" in props.unit && props.unit.equipment.length !== 0;
 
   return (
     <Grid item>
@@ -23,9 +21,7 @@ const CardBackCenter = () => {
       >
         {specialRules}
         {hasEquipment
-          ? SC.unit.equipment.map((e, i) => {
-              console.log("e", e);
-
+          ? props.unit.equipment.map((e, i) => {
               return (
                 <Fragment key={i}>
                   <Typography variant="body1">{e.name}</Typography>
