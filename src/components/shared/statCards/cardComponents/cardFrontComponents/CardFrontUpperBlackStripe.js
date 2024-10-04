@@ -1,10 +1,9 @@
 // React
-import React, { useContext, Fragment } from "react";
+import React, { Fragment } from "react";
 // material ui
 import { Grid, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // functions and components
-import { StateCardContext } from "../../../../../contexts/statCardContext";
 import { CARD_TEXT } from "../../../../../constants/textsAndMessages";
 import {
   isGiantOrAutomaton,
@@ -29,8 +28,7 @@ import {
   renderUnitMovement,
 } from "../../../cardMovementRenderFunctions";
 
-const CardFrontUpperBlackStripe = () => {
-  const SC = useContext(StateCardContext);
+const CardFrontUpperBlackStripe = (props) => {
   const theme = useTheme();
 
   // icon sizes
@@ -45,39 +43,39 @@ const CardFrontUpperBlackStripe = () => {
       justifyContent="space-around"
       sx={theme.palette.statCards.blackStripe}
     >
-      {isHeroMageOrSingleSummon(SC.unit) ? (
+      {isHeroMageOrSingleSummon(props.unit) ? (
         <Fragment>
           <Typography variant="h6" align="center">
-            {renderMovementpoints(SC.unit, { isDynamic: true })}
+            {renderMovementpoints(props.unit)}
           </Typography>
-          {SC.unit.controlZone > 0 ? (
+          {props.unit.controlZone > 0 ? (
             <Typography variant="h6" align="center">
-              {renderControlzone(SC.unit)}
+              {renderControlzone(props.unit)}
             </Typography>
           ) : null}
         </Fragment>
       ) : null}
-      {isGiantOrAutomaton(SC.unit) ? (
+      {isGiantOrAutomaton(props.unit) ? (
         <Fragment>
           <Typography variant="h6" align="center">
-            {renderMovementLargeElements(SC.unit, { isDynamic: true })}
+            {renderMovementLargeElements(props.unit)}
           </Typography>
-          {SC.unit.overRun > 0 ? (
+          {props.unit.overRun > 0 ? (
             <Typography variant="h6" align="center">
-              {renderOverrunValue(SC.unit, { isDynamic: true })}
+              {renderOverrunValue(props.unit)}
             </Typography>
           ) : null}
         </Fragment>
       ) : null}
-      {isUnitOrSummonedUnit(SC.unit) ? (
+      {isUnitOrSummonedUnit(props.unit) ? (
         <Fragment>
           <Typography variant="h6" align="center">
-            {renderUnitMovement(SC.unit, { isDynamic: true })}
+            {renderUnitMovement(props.unit)}
           </Typography>
           <Typography variant="h6" align="center">
-            {renderManeuvers(SC.unit)}
+            {renderManeuvers(props.unit)}
           </Typography>
-          {SC.unit.wedgeFormation ? (
+          {props.unit.wedgeFormation ? (
             <CustomIcon
               icon={wedgeFormationIcon} //
               altText={CARD_TEXT.WEDGE_FORMATION}
@@ -86,7 +84,7 @@ const CardFrontUpperBlackStripe = () => {
               darkBackGround={true}
             />
           ) : null}
-          {SC.unit.skirmishFormation ? (
+          {props.unit.skirmishFormation ? (
             <CustomIcon
               icon={skirmishFormationIcon} //
               altText={CARD_TEXT.SKIRMISH_FORMATION}
@@ -95,7 +93,7 @@ const CardFrontUpperBlackStripe = () => {
               darkBackGround={true}
             />
           ) : null}
-          {SC.unit.squareFormation ? (
+          {props.unit.squareFormation ? (
             <CustomIcon
               icon={squareFormationIcon} //
               altText={CARD_TEXT.SQUARE_FORMATION}
@@ -105,14 +103,14 @@ const CardFrontUpperBlackStripe = () => {
             />
           ) : null}
           <Typography variant="h6" align="center">
-            {renderHorde(SC.unit.horde)}
+            {renderHorde(props.unit.horde)}
           </Typography>
         </Fragment>
       ) : null}
-      {isSummonsWithMaxFields(SC.unit) ? (
+      {isSummonsWithMaxFields(props.unit) ? (
         <Fragment>
           <Typography variant="h6" align="center">
-            {renderMaxFields(SC.unit)}
+            {renderMaxFields(props.unit)}
           </Typography>
         </Fragment>
       ) : null}

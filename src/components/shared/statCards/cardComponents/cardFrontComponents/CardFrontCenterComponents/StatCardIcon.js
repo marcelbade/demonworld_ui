@@ -10,6 +10,8 @@ const StatCardIcon = (props) => {
   const HEIGHT_WIDTH = "25px";
   const HEIGHT_WIDTH_BOX = "35px";
 
+  const stat = setUnitStat(props.unit, props.stat);
+
   return (
     <Fragment>
       <CustomIcon
@@ -20,7 +22,7 @@ const StatCardIcon = (props) => {
         boxHeight={HEIGHT_WIDTH_BOX}
         boxWidth={HEIGHT_WIDTH_BOX}
       />
-      <Typography variant="h6">{setUnitStat(props.unit, props.stat)}</Typography>
+      <Typography variant="h6">{stat.value}</Typography>
     </Fragment>
   );
 };

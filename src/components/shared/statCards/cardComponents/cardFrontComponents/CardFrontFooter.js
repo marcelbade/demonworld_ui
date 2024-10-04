@@ -1,19 +1,17 @@
 // React
-import React, { useContext } from "react";
+import React from "react";
 // Material UI
 import { Grid, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components & functions
 import { renderDynamicIcons } from "../../../../../util/utilityFunctions";
-import { StateCardContext } from "../../../../../contexts/statCardContext";
 
-const CardFrontFooter = () => {
-  const SC = useContext(StateCardContext);
+const CardFrontFooter = (props) => {
   const theme = useTheme();
 
   const hitpoints = renderDynamicIcons({
     iconString: "[ ]",
-    iconNumber: SC.unit.hitpoints,
+    iconNumber: props.unit.hitpoints,
     showIfNone: false,
   });
 

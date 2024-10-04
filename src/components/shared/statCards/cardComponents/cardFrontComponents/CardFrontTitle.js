@@ -1,12 +1,10 @@
 // React
-import React, { useContext } from "react";
+import React from "react";
 // material ui
 import { useTheme } from "@emotion/react";
 // components & functions
 import { renderDynamicIcons } from "../../../../../util/utilityFunctions";
 import { Grid, Typography } from "@mui/material";
-import { StateCardContext } from "../../../../../contexts/statCardContext";
-import { Height } from "@mui/icons-material";
 
 /**
  * creates the card title. The name displayed is, by default, the unit's name.
@@ -15,9 +13,8 @@ import { Height } from "@mui/icons-material";
  *  E.g.: "Riesenyeti"
  * @returns html element
  */
-const CardFrontTitle = () => {
+const CardFrontTitle = (props) => {
   const theme = useTheme();
-  const SC = useContext(StateCardContext);
 
   return (
     <Grid
@@ -34,7 +31,7 @@ const CardFrontTitle = () => {
       >
         {renderDynamicIcons({
           iconString: "*",
-          iconNumber: SC.unit.commandStars,
+          iconNumber: props.unit.commandStars,
           showIfNone: false,
         })}
       </Typography>
@@ -46,7 +43,7 @@ const CardFrontTitle = () => {
           height: "1.5em",
         }} //
       >
-        {SC.unit.isMultiStateUnit ? SC.unit.multiCardName : SC.unit.unitName}
+        {props.unit.isMultiStateUnit ? props.unit.multiCardName : props.unit.unitName}
       </Typography>
       <Typography
         sx={theme.palette.cardTitle} //
@@ -55,7 +52,7 @@ const CardFrontTitle = () => {
       >
         {renderDynamicIcons({
           iconString: "/",
-          iconNumber: SC.unit.magic,
+          iconNumber: props.unit.magic,
           showIfNone: false,
         })}
       </Typography>

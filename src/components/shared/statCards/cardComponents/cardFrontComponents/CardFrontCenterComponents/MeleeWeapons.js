@@ -1,35 +1,35 @@
 // React
-import React, { useContext } from "react";
+import React from "react";
 // Material UI
 import { Grid, Typography } from "@mui/material";
 // components & functions
-import { StateCardContext } from "../../../../../../contexts/statCardContext";
-import { setWeaponStats } from "../../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/unitStatChangesLogic";
+import { setUnitStat } from "../../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/unitStatChangesLogic";
+import { WEAPON_1 } from "../../../../../../constants/stats";
 
-const MeleeWeapons = () => {
-  const SC = useContext(StateCardContext);
+const MeleeWeapons = (props) => {
+  const weapon1Stat = setUnitStat(props.unit, WEAPON_1);
 
-  const weaponOneProperties = setWeaponStats(SC.unit);
+  weapon1Stat.name = weapon1Stat.name === undefined ? props.unit.Weapon1Name : weapon1Stat.name;
 
   const weapons = [
     {
       // weapon one can be replaced by a magical item
       weaponString:
-        SC.unit.weapon1 === 0 //
+        props.unit.weapon1 === 0 //
           ? null
-          : `${weaponOneProperties.name}: ${weaponOneProperties.value}`,
+          : `${weapon1Stat.name}: ${weapon1Stat.value}`,
     },
     {
       weaponString:
-        SC.unit.weapon2 === 0 //
+        props.unit.weapon2 === 0 //
           ? null
-          : `${SC.unit.weapon2Name}: ${SC.unit.weapon2}`,
+          : `${props.unit.weapon2Name}: ${props.unit.weapon2}`,
     },
     {
       weaponString:
-        SC.unit.weapon3 === 0 //
+        props.unit.weapon3 === 0 //
           ? null
-          : `${SC.unit.weapon3Name}: ${SC.unit.weapon3}`,
+          : `${props.unit.weapon3Name}: ${props.unit.weapon3}`,
     },
   ];
 

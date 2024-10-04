@@ -1,17 +1,16 @@
 // React
-import React, { useContext } from "react";
+import React from "react";
 // Material UI
 import { Grid, Typography } from "@mui/material";
 // components & functions
-import { StateCardContext } from "../../../../../../contexts/statCardContext";
-import { setRangedWeaponStats } from "../../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/unitStatChangesLogic";
+import { setUnitStat } from "../../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/unitStatChangesLogic";
+// constants
+import { RANGED_WEAPON } from "../../../../../../constants/stats";
 
-const RangedWeapon = () => {
-  const SC = useContext(StateCardContext);
+const RangedWeapon = (props) => {
+  const rangedWeaponProperties = setUnitStat(props.unit, RANGED_WEAPON);
 
-  const rangedWeaponProperties = setRangedWeaponStats(SC.unit);
-
-  const RANGED_WEAPON = `${rangedWeaponProperties.name} ${rangedWeaponProperties.value}`;
+  const RANGED_WEAPON_STAT = `${rangedWeaponProperties.name} ${rangedWeaponProperties.value}`;
 
   return (
     <Grid
@@ -20,7 +19,7 @@ const RangedWeapon = () => {
       justifyContent="center"
     >
       <Typography variant="h6" align="right">
-        {RANGED_WEAPON}
+        {RANGED_WEAPON_STAT}
       </Typography>
     </Grid>
   );

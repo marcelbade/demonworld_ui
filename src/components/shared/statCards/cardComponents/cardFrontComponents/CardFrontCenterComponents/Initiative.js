@@ -1,18 +1,18 @@
 // React
-import React, { useContext } from "react";
+import React from "react";
 // Material UI
 import { Grid, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components & functions
-import { StateCardContext } from "../../../../../../contexts/statCardContext";
 import { setUnitStat } from "../../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/unitStatChangesLogic";
 //constants
-import { INITIATIVE } from "../../../../../../constants/stats";  
+import { INITIATIVE } from "../../../../../../constants/stats";
 import { CARD_TEXT } from "../../../../../../constants/textsAndMessages";
 
-const Initiative = () => {
+const Initiative = (props) => {
   const theme = useTheme();
-  const SC = useContext(StateCardContext);
+
+  const iniStat = setUnitStat(props.unit, INITIATIVE);
 
   return (
     <Grid
@@ -21,7 +21,7 @@ const Initiative = () => {
       alignItems="center"
       sx={theme.palette.statCards.backGround}
     >
-      <Typography variant="h6">{`${CARD_TEXT.INITIATIVE}: ${setUnitStat(SC.unit, INITIATIVE)}`}</Typography>
+      <Typography variant="h6">{`${CARD_TEXT.INITIATIVE}: ${iniStat.value}`}</Typography>
     </Grid>
   );
 };

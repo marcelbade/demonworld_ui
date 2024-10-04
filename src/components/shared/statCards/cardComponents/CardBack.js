@@ -6,13 +6,13 @@ import CardBackTitle from "./cardBackComponents/CardBackTitle";
 import CardBackLowerBlackStripe from "./cardBackComponents/CardBackLowerBlackStripe";
 import CardBackUpperBlackStripe from "./cardBackComponents/CardBackUpperBlackStripe";
 
-const CardBack = () => {
+const CardBack = (props) => {
   return (
     <Fragment>
-      <CardBackTitle />
-      <CardBackUpperBlackStripe />
-      <CardBackCenter />
-      <CardBackLowerBlackStripe />
+      <CardBackTitle unit={props.unit} />
+      <CardBackUpperBlackStripe unit={props.unit} />
+      <CardBackCenter unit={props.unit} />
+      <CardBackLowerBlackStripe unit={props.unit} />
     </Fragment>
   );
 };

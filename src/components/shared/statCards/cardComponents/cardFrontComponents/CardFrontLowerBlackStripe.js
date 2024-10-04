@@ -1,38 +1,42 @@
 // React
-import React, { useContext } from "react";
+import React from "react";
 // material ui
 import { Grid, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components & functions
-import { StateCardContext } from "../../../../../contexts/statCardContext";
 import { CARD_TEXT } from "../../../../../constants/textsAndMessages";
 import { setUnitStat } from "../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/unitStatChangesLogic";
+import { isSingleElementCard } from "../../../../../util/utilityFunctions";
 // constants
 import { FEAR, MORAL1, MORAL2 } from "../../../../../constants/stats";
 
-const CardFrontLowerBlackStripe = () => {
-  const SC = useContext(StateCardContext);
+const CardFrontLowerBlackStripe = (props) => {
   const theme = useTheme();
 
-  const fear = `${CARD_TEXT.FEAR}: ${setUnitStat(SC.unit, FEAR)}`;
-  const moral = `${CARD_TEXT.MORAL} ${
-    SC.unit.moral1 //
-      ? setUnitStat(SC.unit, MORAL1)
+  const fearStat = setUnitStat(props.unit, FEAR);
+  const moral1Stat = setUnitStat(props.unit, MORAL1);
+  const moral2Stat = setUnitStat(props.unit, MORAL2);
+
+  const fearText = `${CARD_TEXT.FEAR}: ${fearStat.value}`;
+
+  const moralText = `${CARD_TEXT.MORAL} ${
+    props.unit.moral1 !== 0 //
+      ? moral1Stat.value
       : "-"
   } / ${
-    SC.unit.moral2 //
-      ? setUnitStat(SC.unit, MORAL2)
+    props.unit.moral2 !== 0 //
+      ? moral2Stat.value
       : "-"
   }`;
 
-  return SC.isSingleElement ? (
+  return isSingleElementCard(props.unit) ? (
     <Grid item>
       <Typography
         variant="h6" //
         align="center"
         sx={theme.palette.statCards.blackStripe}
       >
-        {fear}
+        {fearText}
       </Typography>
     </Grid>
   ) : (
@@ -42,8 +46,8 @@ const CardFrontLowerBlackStripe = () => {
       justifyContent="space-around"
       sx={theme.palette.statCards.blackStripe}
     >
-      <Typography variant="h6"> {fear}</Typography>
-      <Typography variant="h6">{moral}</Typography>
+      <Typography variant="h6"> {fearText}</Typography>
+      <Typography variant="h6">{moralText}</Typography>
     </Grid>
   );
 };
