@@ -1,12 +1,11 @@
 // React
-import React from "react";
+import React, { useEffect, useState } from "react";
 // Material UI
 import { Grid } from "@mui/material";
 // components & functions
 import CardBack from "./cardComponents/CardBack";
 import CardFront from "./cardComponents/CardFront";
-import StatCardProvider from "../../../contexts/statCardContext";
-import { isHeroOrMage, isSingleElementCard } from "../../../util/utilityFunctions";
+import { isObjectEmtpy } from "../../../util/utilityFunctions";
 
 /**
  * Wrapper Element. Allows for vertical or horizontal layout of the cards.
@@ -22,29 +21,27 @@ const StatCard = (props) => {
     marginRight: "0.75em",
   };
 
-  return (
-    <StatCardProvider
-      value={{
-        isSingleElement: isSingleElementCard(props.unit),
-        isHeroOrMage: isHeroOrMage(props.unit),
-        unit: props.unit,
-      }}
-    >
-      <Grid container direction="column">
-        <Grid
-          item //
-          sx={CSS}
-        >
-          <CardFront />
-        </Grid>
-        <Grid
-          item //
-          sx={CSS}
-        >
-          <CardBack />
-        </Grid>
+  const [data, setData] = useState(props.unit);
+
+  useEffect(() => {
+    setData(props.unit);
+  }, [props.unit]);
+
+  return data === undefined || isObjectEmtpy(data) ? null : (
+    <Grid container direction="column">
+      <Grid
+        item //
+        sx={CSS}
+      >
+        <CardFront unit={data} />
       </Grid>
-    </StatCardProvider>
+      <Grid
+        item //
+        sx={CSS}
+      >
+        <CardBack unit={data} />
+      </Grid>
+    </Grid>
   );
 };
 
