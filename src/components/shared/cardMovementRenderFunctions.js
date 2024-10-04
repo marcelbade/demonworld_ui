@@ -10,10 +10,10 @@ import { setUnitStat } from "../ListGenerator/RightSideMenus/Menus/ItemShop/Item
  * @param {Boolean} value
  * @returns a String as content for an HTML or pdf element.
  */
-export const renderMovementpoints = (unit, stat) => {
-  const resultingValue = stat.isDynamic ? setUnitStat(unit, MOVE) : unit.move;
+export const renderMovementpoints = (unit) => {
+  const MovementStat = setUnitStat(unit, MOVE);
 
-  return `${resultingValue} ${CARD_TEXT.MOVEMENT_POINTS}`;
+  return `${MovementStat.value} ${CARD_TEXT.MOVEMENT_POINTS}`;
 };
 
 /**
@@ -31,15 +31,15 @@ export const renderControlzone = (unit) => {
  * @param {Boolean} stat
  * @returns a String as content for an HTML or pdf element.
  */
-export const renderUnitMovement = (unit, stat) => {
-  const resultingMoveValue = stat.isDynamic ? setUnitStat(unit, MOVE) : unit.move;
-  const resultingChargeValue = stat.isDynamic ? setUnitStat(unit, CHARGE) : unit.charge;
-  const resultingSkirmishValue = stat.isDynamic ? setUnitStat(unit, SKIRMISH) : unit.skirmish;
+export const renderUnitMovement = (unit) => {
+  const movementStat = setUnitStat(unit, MOVE);
+  const chargeStat = setUnitStat(unit, CHARGE);
+  const skirmishStat = setUnitStat(unit, SKIRMISH);
 
   return (
-    `${CARD_TEXT.MOVE}: ${resultingMoveValue} ` +
-    `/ ${CARD_TEXT.CHARGE}: ${resultingChargeValue} ` +
-    `/ ${CARD_TEXT.SKIRMISH}: ${resultingSkirmishValue}`
+    `${CARD_TEXT.MOVE}: ${movementStat.value} ` +
+    `/ ${CARD_TEXT.CHARGE}: ${chargeStat.value} ` +
+    `/ ${CARD_TEXT.SKIRMISH}: ${skirmishStat.value}`
   );
 };
 
@@ -49,17 +49,17 @@ export const renderUnitMovement = (unit, stat) => {
  * @param {Boolean} stat
  * @returns a String as content for an HTML or pdf element.
  */
-export const renderMovementLargeElements = (unit, stat) => {
-  const resultingMoveValue = stat.isDynamic ? setUnitStat(unit, MOVE) : unit.move;
-  const resultingChargeValue = stat.isDynamic ? setUnitStat(unit, CHARGE) : unit.charge;
-  const resultingSkirmishValue = stat.isDynamic ? setUnitStat(unit, SKIRMISH) : unit.skirmish;
-  const resultingHoldValue = stat.isDynamic ? setUnitStat(unit, HOLD) : unit.hold_maneuvers;
+export const renderMovementLargeElements = (unit) => {
+  const movementStat = setUnitStat(unit, MOVE);
+  const chargeStat = setUnitStat(unit, CHARGE);
+  const skirmishStat = setUnitStat(unit, SKIRMISH);
+  const holdStat = setUnitStat(unit, HOLD);
 
   return (
-    `${CARD_TEXT.MOVE}: ${resultingMoveValue} ` +
-    `/ ${CARD_TEXT.CHARGE}: ${resultingChargeValue} ` +
-    `/ ${CARD_TEXT.SKIRMISH}: ${resultingSkirmishValue} ` +
-    `/ ${CARD_TEXT.HOLD}: ${resultingHoldValue}`
+    `${CARD_TEXT.MOVE}: ${movementStat.value} ` +
+    `/ ${CARD_TEXT.CHARGE}: ${chargeStat.value} ` +
+    `/ ${CARD_TEXT.SKIRMISH}: ${skirmishStat.value} ` +
+    `/ ${CARD_TEXT.HOLD}: ${holdStat.value}`
   );
 };
 
@@ -69,9 +69,10 @@ export const renderMovementLargeElements = (unit, stat) => {
  * @param {Boolean} stat
  * @returns a String as content for an HTML or pdf element.
  */
-export const renderOverrunValue = (unit, stat) => {
-  const resultingValue = stat.isDynamic ? setUnitStat(unit, OVERRUN) : unit.overRun;
-  return `${CARD_TEXT.OVERRUN}: ${resultingValue}`;
+export const renderOverrunValue = (unit) => {
+  const overrunStat = setUnitStat(unit, OVERRUN);
+
+  return `${overrunStat.value}: ${overrunStat.value}`;
 };
 
 /**
@@ -80,7 +81,11 @@ export const renderOverrunValue = (unit, stat) => {
  * @returns a String as content for an HTML or pdf element.
  */
 export const renderManeuvers = (unit) => {
-  return `${unit.hold_maneuvers} ${CARD_TEXT.MANEUVER}`;
+
+  const  holdStat = setUnitStat(unit, HOLD);
+
+
+  return `${holdStat.value} ${CARD_TEXT.MANEUVER}`;
 };
 
 /**
