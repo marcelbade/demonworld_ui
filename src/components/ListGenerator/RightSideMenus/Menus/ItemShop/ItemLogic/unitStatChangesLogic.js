@@ -1,58 +1,6 @@
-/**
- * Since all item properties that alter unit stats must follow the same naming convention,
- * the mapping is done via a simple String concotenation
- * + making the first character of the stat's name upper case.
- * E.g.: moral2 => altersMoral2.
- * @param {String} unitStat
- * @returns a String that is the name of the corresponding item property.
- */
-const mapUnitStatToItemProperty = (unitStat) => {
-  unitStat = unitStat.charAt(0).toUpperCase() + unitStat.slice(1);
-  return `alters${unitStat}`;
-};
-
-/**
- * Function sets the stats for a unit's weapon after selecting an item.
- * This function is necessesary, as weapons require a different logic then stats.
- * (weapon 1)
- * @param {unitCard} unit
- * @returns the value for the property weapon1
- */
-export const setWeaponStats = (unit) => {
-  let weapon1Properties = { name: unit.weapon1Name, value: unit.weapon1 };
-  const result = searchForRelevantModifier(unit, "altersWeapon1");
-
-  if (result.modifierFound) {
-    weapon1Properties = {
-      ...weapon1Properties, //
-      name: result.newName,
-      value: calculateNewMeleeWeaponValue(unit, result.modifier),
-    };
-  }
-
-  return weapon1Properties;
-};
-
-/**
- * Function calculates the stats for a unit's range weapon after selecting an item.
- * This function is necessesary, as weapons require a different logic then stats.
- * @param {unitCard} unit
- * @returns
- */
-export const setRangedWeaponStats = (unit) => {
-  let rangedWeaponProperties = { name: unit.rangedWeapon, value: unit.rangedAttackStats };
-  const result = searchForRelevantModifier(unit, "altersRangedWeapon");
-
-  if (result.modifierFound) {
-    rangedWeaponProperties = {
-      ...rangedWeaponProperties, //
-      name: result.newName,
-      value: result.modifier,
-    };
-  }
-
-  return rangedWeaponProperties;
-};
+//  constants
+import { ITEM_TYPE_BOWS, ITEM_TYPE_CROSSBOWS, ITEM_TYPE_WEAPON } from "../../../../../../constants/itemShopConstants";
+import { RANGED_WEAPON, WEAPON_1 } from "../../../../../../constants/stats";
 
 /**
  * Function calculates the new value for a unit's stat
@@ -62,64 +10,106 @@ export const setRangedWeaponStats = (unit) => {
  * @returns
  */
 export const setUnitStat = (unit, unitStatName) => {
-  let stat = unit[unitStatName];
-
-  const result = searchForRelevantModifier(unit, mapUnitStatToItemProperty(unitStatName));
-
-  if (result.modifierFound) {
-    stat += result.modifier;
+  if (unitHasNoItems(unit)) {
+    return setStatWithoutItems(unit, unitStatName);
   }
 
-  return stat;
+  return searchForRelevantModifier(unit, unitStatName);
+};
+
+const setStatWithoutItems = (unit, unitStatName) => {
+  let newName = unitStatName;
+  if (unitStatName === WEAPON_1) {
+    newName = unit.weapon1Name;
+  }
+  if (unitStatName === RANGED_WEAPON) {
+    newName = unit.rangedWeapon;
+  }
+
+  return { name: newName, value: unit[unitStatName] };
 };
 
 /**
- * Function iterates through a unit's items, if they exist.
- * If one of the items has the correct property with a value !== 0
- * it is returned. If several items fullfill the requirement,
- * the largest value is returnd.
+ * Function iterates through a unit's items, if they exist. If one of the
+ * items has a property with a name matching the passed proprty name
+ * and with a value !== 0 it is returned. If several items fullfill the requirement,
+ * the largest value is returned.
  * @param {unitCard} unit
- * @param {String} property
+ * @param {String} propertyName
  * @returns the modifier for the given unit property. If none is found, 0 is returned.
  */
-const searchForRelevantModifier = (unit, property) => {
-  let replacementStats = {
-    modifierFound: false,
-    modifier: 0,
+const searchForRelevantModifier = (unit, propertyName) => {
+  let newStats = {
+    name: null,
+    value: 10,
   };
 
-  if (unitHasItems(unit)) {
-    unit.equipment.forEach((item) => {
-      const itemFields = Object.entries(item);
-      itemFields.forEach((i) => {
-        //i = [property, value]
-        if (i[0] === property && i[1] !== 0 && i[1] > replacementStats.modifier) {
-          replacementStats = {
-            ...replacementStats, //
-            modifierFound: true,
-            newName: item.itemName,
-            modifier: i[1],
-          };
-        }
-      });
-    });
-  }
+  unit.equipment.forEach((item) => {
+    const itemFields = Object.entries(item);
 
-  return replacementStats;
+    itemFields.forEach((i) => {
+      const fieldName = i[0];
+      const fieldValue = i[1];
+
+      if (
+        fieldName === propertyName && //
+        fieldValue !== 0 &&
+        fieldValue > newStats.value
+      ) {
+        newStats = {
+          ...newStats, //
+          name: setNewName(item, propertyName), // NEW --> ONLY WEAPONS !!
+          value: setModifier(fieldValue, propertyName, unit),
+        };
+      }
+    });
+  });
+
+  return newStats;
 };
 
 /**
  * Function tests if the unit has been equipped with one or more items.
  * @param {unitCard} unit
- * @returns true, if the unit has at least 1 item.
+ * @returns true, if the unit has no items.
  */
-const unitHasItems = (unit) => {
-  return unit.equipment !== undefined && unit.equipment.length !== 0;
+const unitHasNoItems = (unit) => {
+  return unit.equipment === undefined || unit.equipment.length === 0;
+};
+
+const setModifier = (modificator, propertyName, unit) => {
+  let newValue = 0;
+
+  if (propertyName === WEAPON_1) {
+    newValue = calculateNewMeleeWeaponValue(unit, modificator);
+  } else if (propertyName === RANGED_WEAPON) {
+    newValue = modificator;
+  } else {
+    newValue = unit[propertyName] + modificator;
+  }
+
+  return newValue;
+};
+
+const setNewName = (item, propertyName) => {
+  const isWeapon = item.itemType === ITEM_TYPE_WEAPON;
+  const isCrossbow = item.itemType === ITEM_TYPE_CROSSBOWS;
+  const isBow = item.itemType === ITEM_TYPE_BOWS;
+
+  console.log("1wwewe");
+
+  if (isWeapon || isBow || isCrossbow) {
+    return item.itemName;
+  }
+
+  console.log("propertyName", propertyName);
+
+  return propertyName;
 };
 
 /**
- * Function calculates the new value of the unit's melee attack
- * when chosing a magical weapon.
+ * Function recalculates the value of a unit's melee attack
+ * after chosing a magical weapon.
  * @param {unitCard} unit
  * @param {int} modifier of chosen weapon
  * @returns the new value of the melee attack
