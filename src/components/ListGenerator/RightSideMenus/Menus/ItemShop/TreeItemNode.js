@@ -103,7 +103,7 @@ const TreeItemNode = (props) => {
           variant="body1" //
           sx={{ width: "50em" }}
         >
-          {props.item.specialRules}
+          {props.item.itemRules}
         </Typography>
       </AccordionDetails>
     </Accordion>
