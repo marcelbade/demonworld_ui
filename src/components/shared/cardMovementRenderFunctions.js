@@ -72,7 +72,7 @@ export const renderMovementLargeElements = (unit) => {
 export const renderOverrunValue = (unit) => {
   const overrunStat = setUnitStat(unit, OVERRUN);
 
-  return `${overrunStat.value}: ${overrunStat.value}`;
+  return `${CARD_TEXT.OVERRUN}: ${overrunStat.value}`;
 };
 
 /**
