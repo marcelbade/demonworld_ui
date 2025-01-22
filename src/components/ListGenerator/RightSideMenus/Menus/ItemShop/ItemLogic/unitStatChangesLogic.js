@@ -1,6 +1,6 @@
 //  constants
 import { ITEM_TYPE_BOWS, ITEM_TYPE_CROSSBOWS, ITEM_TYPE_WEAPON } from "../../../../../../constants/itemShopConstants";
-import { RANGED_WEAPON, WEAPON_1 } from "../../../../../../constants/stats";
+import { RANGED_WEAPON, WEAPON_1, RANGED_WEAPON_STATS } from "../../../../../../constants/stats";
 
 /**
  * Function calculates the new value for a unit's stat
@@ -17,31 +17,54 @@ export const setUnitStat = (unit, unitStatName) => {
   return searchForRelevantModifier(unit, unitStatName);
 };
 
+/**
+ * Function sets the passed stat if the unit has no items. Note that the
+ * first weapon and ragend weapon always require a name.
+ * @param {unitCard} unit
+ * @param {String} unitStatName
+ * @returns an object containing the stat' value and the name in case it is the
+ * units first meleee or ranged weapon.
+ */
 const setStatWithoutItems = (unit, unitStatName) => {
-  let newName = unitStatName;
-  if (unitStatName === WEAPON_1) {
-    newName = unit.weapon1Name;
-  }
-  if (unitStatName === RANGED_WEAPON) {
-    newName = unit.rangedWeapon;
-  }
-
-  return { name: newName, value: unit[unitStatName] };
+  return {
+    name: setDefaultName(unit, unitStatName), //
+    value: unit[unitStatName],
+  };
 };
 
 /**
- * Function iterates through a unit's items, if they exist. If one of the
- * items has a property with a name matching the passed proprty name
- * and with a value !== 0 it is returned. If several items fullfill the requirement,
+ * Function sets default names for weapons. Since Weapons are only renamed when an a weapon type item is equipped, a default name must be set.  
+ * @param {Obj} unit 
+ * @param {String} unitStatName 
+ * @returns 
+ */
+const setDefaultName = (unit, unitStatName) => {
+  let newName = "";
+
+  if (unitStatName === WEAPON_1) {
+    newName = unit.weapon1Name;
+  }
+
+  if (unitStatName === RANGED_WEAPON_STATS) {
+    newName = unit.rangedWeapon;
+  }
+
+  return newName;
+};
+
+/**
+ * Function iterates through a unit's items. If one of the
+ * items has a property with a name matching the passed property name
+ * and with a value not equal to 0, it is returned. If several items fullfill the requirement,
  * the largest value is returned.
  * @param {unitCard} unit
- * @param {String} propertyName
- * @returns the modifier for the given unit property. If none is found, 0 is returned.
+ * @param {String} unitStat
+ * @returns an object containing the name (in case of weapons) and the stats' new value.
  */
-const searchForRelevantModifier = (unit, propertyName) => {
+const searchForRelevantModifier = (unit, unitStat) => {
   let newStats = {
-    name: null,
-    value: 10,
+    name: setDefaultName(unit, unitStat),
+    value: unit[unitStat],
   };
 
   unit.equipment.forEach((item) => {
@@ -51,16 +74,14 @@ const searchForRelevantModifier = (unit, propertyName) => {
       const fieldName = i[0];
       const fieldValue = i[1];
 
-      if (
-        fieldName === propertyName && //
-        fieldValue !== 0 &&
-        fieldValue > newStats.value
-      ) {
+      if (fieldName === unitStat && fieldValue !== 0) {
         newStats = {
           ...newStats, //
-          name: setNewName(item, propertyName), // NEW --> ONLY WEAPONS !!
-          value: setModifier(fieldValue, propertyName, unit),
+          name: setNewName(item, unitStat, unit),
+          value: setValue(fieldValue, unitStat, unit),
         };
+
+        newStats.value = setValue(fieldValue, unitStat, unit);
       }
     });
   });
@@ -77,7 +98,14 @@ const unitHasNoItems = (unit) => {
   return unit.equipment === undefined || unit.equipment.length === 0;
 };
 
-const setModifier = (modificator, propertyName, unit) => {
+/**
+ * Function calculates the new value for the given property.
+ * @param {number} modificator
+ * @param {String} propertyName
+ * @param {Obj} unit
+ * @returns the new value for the given property.
+ */
+const setValue = (modificator, propertyName, unit) => {
   let newValue = 0;
 
   if (propertyName === WEAPON_1) {
@@ -91,20 +119,18 @@ const setModifier = (modificator, propertyName, unit) => {
   return newValue;
 };
 
-const setNewName = (item, propertyName) => {
+const setNewName = (item) => {
   const isWeapon = item.itemType === ITEM_TYPE_WEAPON;
   const isCrossbow = item.itemType === ITEM_TYPE_CROSSBOWS;
   const isBow = item.itemType === ITEM_TYPE_BOWS;
 
-  console.log("1wwewe");
+  let name = "";
 
   if (isWeapon || isBow || isCrossbow) {
-    return item.itemName;
+    name = item.itemName;
   }
 
-  console.log("propertyName", propertyName);
-
-  return propertyName;
+  return name;
 };
 
 /**
@@ -116,12 +142,12 @@ const setNewName = (item, propertyName) => {
  */
 const calculateNewMeleeWeaponValue = (unit, modifier) => {
   const MAX_SIZE = 4;
-  const LEADER_BONUS = 1;
   const BONUS = 2;
+  const LEADER_BONUS = 1;
 
   let newWeapon1Value = modifier;
 
-  // size bonus - capped at 4 for giant mounts
+  // size bonus - capped at 4
   newWeapon1Value = unit.unitSize <= MAX_SIZE ? (newWeapon1Value += unit.unitSize) : (newWeapon1Value += MAX_SIZE);
 
   // leader always has +1
