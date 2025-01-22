@@ -52,7 +52,7 @@ const UnitMovementRow = (props) => {
       {isHeroMageOrSingleSummon(props.unit) ? (
         <View style={detailedStyles.cardUpperBlackRowVariant}>
           <Text style={detailedStyles.movementText} key={props.index}>
-            {renderMovementpoints(props.unit, { isDynamic: false })}
+            {renderMovementpoints(props.unit)}
           </Text>
           {props.unit.controlZone > 1 ? <Text variant="h6">{renderControlzone(props.unit)}</Text> : null}
         </View>
@@ -61,11 +61,11 @@ const UnitMovementRow = (props) => {
       {isGiantOrAutomaton(props.unit) ? (
         <View style={detailedStyles.cardUpperBlackRowVariant}>
           <Text style={detailedStyles.movementText} variant="h6">
-            {renderMovementLargeElements(props.unit, { isDynamic: false })}
+            {renderMovementLargeElements(props.unit)}
           </Text>
           {props.unit.overRun > 0 ? (
             <Text style={detailedStyles.movementText} variant="h6">
-              {renderOverrunValue(props.unit, { isDynamic: false })}
+              {renderOverrunValue(props.unit)}
             </Text>
           ) : null}
         </View>
@@ -73,7 +73,7 @@ const UnitMovementRow = (props) => {
       {isUnitOrSummonedUnit(props.unit) ? (
         <View style={detailedStyles.cardUpperBlackRowVariant}>
           <Text style={detailedStyles.movementText} key={props.index}>
-            {renderUnitMovement(props.unit, { isDynamic: false })}
+            {renderUnitMovement(props.unit)}
           </Text>
           <Text style={detailedStyles.movementText} key={props.index}>
             {renderManeuvers(props.unit)}

@@ -9,8 +9,6 @@ import { WEAPON_1 } from "../../../../../../constants/stats";
 const MeleeWeapons = (props) => {
   const weapon1Stat = setUnitStat(props.unit, WEAPON_1);
 
-  weapon1Stat.name = weapon1Stat.name === undefined ? props.unit.Weapon1Name : weapon1Stat.name;
-
   const weapons = [
     {
       // weapon one can be replaced by a magical item

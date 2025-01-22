@@ -24,7 +24,7 @@ const CardFrontCenter = (props) => {
         sx={theme.palette.statCards.backGround}
       >
         {props.unit.rangedWeapon !== NO_RANGE_WEAPON ? ( //
-          <RangedWeapon />
+          <RangedWeapon unit={props.unit} />
         ) : null}
       </Grid>
       <Grid item container direction="column" sx={theme.palette.statCards.backGround}>
