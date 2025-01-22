@@ -14,4 +14,4 @@ export const SKILL_RANGE = "skillRange";
 export const SKIRMISH = "skirmish";
 export const WEAPON_1 = "weapon1";
 export const RANGED_WEAPON = "rangedWeapon";
-
+export const RANGED_WEAPON_STATS = "rangedAttackStats";
