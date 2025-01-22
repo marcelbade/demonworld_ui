@@ -1,7 +1,7 @@
 import { createContext } from "react";
 
-const StateCardContext = createContext();
-const StatCardProvider = StateCardContext.Provider;
+const StatCardContext = createContext();
+const StatCardProvider = StatCardContext.Provider;
 
-export { StateCardContext };
+export { StatCardContext };
 export default StatCardProvider;
