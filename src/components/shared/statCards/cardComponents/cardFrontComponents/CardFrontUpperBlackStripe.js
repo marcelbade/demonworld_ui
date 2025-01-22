@@ -3,7 +3,7 @@ import React, { Fragment } from "react";
 // material ui
 import { Grid, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
-// functions and components
+// constants 
 import { CARD_TEXT } from "../../../../../constants/textsAndMessages";
 import {
   isGiantOrAutomaton,
@@ -16,7 +16,7 @@ import CustomIcon from "../../CustomIcon";
 import wedgeFormationIcon from "../../../../../assets/icons/wedgeFormation.png";
 import skirmishFormationIcon from "../../../../../assets/icons/skirmishFormation.png";
 import squareFormationIcon from "../../../../../assets/icons/squareFormationWhite.png";
-// constants
+// functions and components
 import {
   renderManeuvers,
   renderHorde,
