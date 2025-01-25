@@ -11,6 +11,7 @@ export const LANDINGPAGE = {
   COMPENDIUM: "Kompendium",
   LIST_GENERATOR: "Listengenerator",
   LOSS_CALCULATOR: "Verlustrechner",
+  CARD_CREATOR: "Einheitengenerator",
 };
 
 export const COMPENDIUM = {
@@ -23,7 +24,6 @@ export const COMPENDIUM = {
   SUBFACTION: "Unterfraktion",
   NAME: "Name",
   UNITTYPE: "Typ",
-
   STANDARDBEARER: "Banner",
   MUSICIAN: "Musiker",
   WEDGEFORMATION: "Keil",
@@ -616,4 +616,4 @@ export const CREATOR = {
   MELEE_VALUE_2: "2. Nahkampfwert:",
   MELEE_VALUE_3: "3. Nahkampfwert:",
   HAS_MELEE_SKILL: "Einheit hat NK-Fertigkeit",
- };
+};
