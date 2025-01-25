@@ -12,11 +12,11 @@ const SpecialRuleCreator = () => {
   const CCC = useContext(CardCreationContext);
 
   const deleteSpecialRule = () => {
-    CCC.setSpecialRule("");
+    CCC.setUnit({ ...CCC.unit, specialRules: "" });
   };
 
   const changeSpecialRule = (event) => {
-    CCC.setSpecialRule(event.target.value);
+    CCC.setUnit({ ...CCC.unit, specialRules: event.target.value });
   };
 
   return (
@@ -34,7 +34,7 @@ const SpecialRuleCreator = () => {
     >
       <CreatorTextInput
         id={"specialRule"} //
-        value={CCC.specialRule}
+        value={CCC.unit.specialRules}
         onClick={deleteSpecialRule}
         onChange={changeSpecialRule}
         label={CREATOR.SPECIALRULE}

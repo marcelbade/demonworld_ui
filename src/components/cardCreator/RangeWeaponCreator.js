@@ -14,28 +14,29 @@ const RangeWeaponCreator = () => {
   const CCC = useContext(CardCreationContext);
 
   const deleteRangedWeaponName = () => {
-    CCC.setRangedWeaponName("");
+    CCC.setUnit({ ...CCC.unit, rangedWeapon: "x" });
   };
 
   const changeRangedWeaponName = (event) => {
-    CCC.setRangedWeaponName(event.target.value);
+    CCC.setUnit({ ...CCC.unit, rangedWeapon: event.target.value });
   };
 
   const deleteRangedAttackStats = () => {
-    CCC.setRangedAttackStats("");
+    CCC.setUnit({ ...CCC.unit, rangedAttackStats: "" });
   };
 
   const changeRangedAttackStats = (event) => {
-    CCC.setRangedAttackStats(event.target.value);
+    CCC.setUnit({ ...CCC.unit, rangedAttackStats: event.target.value });
   };
 
   const deleteRangeSkill = () => {
-    CCC.setRangeSkill("");
+    CCC.setUnit({ ...CCC.unit, skillRange: "" });
   };
 
   const changeRangeSkill = (event) => {
-    CCC.setRangeSkill(event.target.value);
-  };
+    CCC.setUnit({ ...CCC.unit, skillRange: event.target.value });
+
+   };
 
   const unitHasRangeWeapon = () => {
     CCC.setHasRangedWeapon((prevState) => !prevState);

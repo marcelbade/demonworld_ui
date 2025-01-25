@@ -13,36 +13,33 @@ const SizeAndSkillCreator = () => {
   const CCC = useContext(CardCreationContext);
 
   const changeSize = (event) => {
-    CCC.setSize(parseInt(event.target.value));
+    CCC.setUnit({ ...CCC.unit, unitSize: parseInt(event.target.value) });
   };
 
   const changeRangeArmor = (event) => {
-    CCC.setRangeArmor(parseInt(event.target.value));
+    CCC.setUnit({ ...CCC.unit, armourRange: parseInt(event.target.value) });
   };
 
   const changeMeleeArmor = (event) => {
-    CCC.setMeleeArmor(parseInt(event.target.value));
+    CCC.setUnit({ ...CCC.unit, armourMelee: parseInt(event.target.value) });
   };
 
   const inputElements = [
     {
-      id: "Size", //
       label: "",
-      value: CCC.size,
+      value: CCC.unit.unitSize,
       onChange: changeSize,
       statName: "Größe:",
     },
     {
-      id: "rangeArmor", //
       label: "",
-      value: CCC.rangeArmor,
+      value: CCC.unit.armourRange,
       onChange: changeRangeArmor,
       icon: rangeArmorIcon,
     },
     {
-      id: "meleeArmor", //
       label: "",
-      value: CCC.meleeArmor,
+      value: CCC.unit.armourMelee,
       onChange: changeMeleeArmor,
       icon: meleeArmorIcon,
     },
@@ -65,7 +62,7 @@ const SizeAndSkillCreator = () => {
       {inputElements.map((input, i) => (
         <CreatorTextInput
           key={i}
-          id={input.id} //
+          id={i} //
           value={input.value}
           onChange={input.onChange}
           label={input.statName}

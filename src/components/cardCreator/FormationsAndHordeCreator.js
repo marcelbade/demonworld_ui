@@ -16,18 +16,18 @@ const FormationsAndHordeCreator = () => {
   const CCC = useContext(CardCreationContext);
 
   const changeWedge = () => {
-    CCC.setWedge((prevState) => !prevState);
+    CCC.setUnit({ ...CCC.unit, wedgeFormation: !CCC.unit.wedgeFormation });
   };
 
   const changeSkirmish = () => {
-    CCC.setSkirmishFormation((prevState) => !prevState);
+    CCC.setUnit({ ...CCC.unit, skirmishFormation: !CCC.unit.skirmishFormation });
   };
 
   const changeSquare = () => {
-    CCC.setSquare((prevState) => !prevState);
+    CCC.setUnit({ ...CCC.unit, squareFormation: !CCC.unit.squareFormation });
   };
   const changeHorde = () => {
-    CCC.setHorde((prevState) => !prevState);
+    CCC.setUnit({ ...CCC.unit, horde: !CCC.unit.horde });
   };
 
   // icon sizes
@@ -37,23 +37,23 @@ const FormationsAndHordeCreator = () => {
 
   const elements = [
     {
-      value: CCC.wedge,
+      value: CCC.unit.wedgeFormation,
       action: changeWedge,
-      name: "Keilformation",
+      name: COMPENDIUM.WEDGEFORMATION,
       icon: wedgeFormationIcon,
       dimension: HEIGHT_WIDTH_ICON,
     },
     {
-      value: CCC.skirmishFormation,
+      value: CCC.unit.skirmishFormation,
       action: changeSkirmish,
-      name: "Plänkelformation",
+      name: COMPENDIUM.SKIRMISHFORMATION,
       icon: skirmishFormationIcon,
       dimension: HEIGHT_WIDTH_SKIRMISH_ICON,
     },
     {
-      value: CCC.square,
+      value: CCC.unit.squareFormation,
       action: changeSquare,
-      name: "Karreeformation",
+      name: COMPENDIUM.SQUAREFORMATION,
       icon: squareFormationIcon,
       dimension: HEIGHT_WIDTH_SQUARE_ICON,
     },
@@ -107,7 +107,7 @@ const FormationsAndHordeCreator = () => {
         size="small"
         sx={{
           width: "2em",
-          color: CCC.horde ? "black" : "rgba(0, 0, 0, 0.5)",
+          color: CCC.unit.horde ? "black" : "rgba(0, 0, 0, 0.5)",
           "&:hover": {
             backgroundColor: "orange",
           },

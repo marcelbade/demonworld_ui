@@ -9,27 +9,27 @@ import { CardCreationContext } from "../../contexts/cardCreationContext";
 import { CREATOR } from "../../constants/textsAndMessages";
 import { UNIT } from "../../constants/unitTypes";
 
-const UnitMovementCreator = () => {
+const SpecialElementsCreator = () => {
   const CCC = useContext(CardCreationContext);
 
   const changeLeader = () => {
-    CCC.setLeader((prevState) => !prevState);
+    CCC.setUnit({ ...CCC.unit, leader: (prevState) => !prevState });
   };
 
-  const changeBanner = () => {
-    CCC.setBanner((prevState) => !prevState);
+  const changeStandardBearer = () => {
+    CCC.setUnit({ ...CCC.unit, standardBearer: (prevState) => !prevState });
   };
 
   const changeMusician = () => {
-    CCC.setMusician((prevState) => !prevState);
+    CCC.setUnit({ ...CCC.unit, musician: (prevState) => !prevState });
   };
 
   const deleteNumberOfElements = () => {
-    CCC.setNumberOfElements("");
+    CCC.setUnit({ ...CCC.unit, numberOfElements: 0 });
   };
 
   const changeNumberOfElements = (event) => {
-    CCC.setNumberOfElements(event.target.value);
+    CCC.setUnit({ ...CCC.unit, numberOfElements: event.target.value });
   };
 
   const elements = [
@@ -40,7 +40,7 @@ const UnitMovementCreator = () => {
     },
     {
       value: CCC.banner,
-      action: changeBanner,
+      action: changeStandardBearer,
       name: CREATOR.BANNER,
     },
     {
@@ -52,7 +52,6 @@ const UnitMovementCreator = () => {
 
   const netNumberOfElements = (unitType) => {
     if (unitType !== UNIT) {
-      CCC.setNumberOfElements(1);
       return 1;
     }
 
@@ -77,16 +76,16 @@ const UnitMovementCreator = () => {
       <Grid item>
         <CreatorTextInput
           id={"elementNumber"} //
-          value={netNumberOfElements(CCC.unitType)}
+          value={netNumberOfElements(CCC.unit.unitType)}
           onClick={deleteNumberOfElements}
           onChange={changeNumberOfElements}
-          disabled={CCC.unitType !== UNIT}
+          disabled={CCC.unit.unitType !== UNIT}
           label={CREATOR.ELEMENTS}
           width="10em"
         />
       </Grid>
 
-      {CCC.unitType === UNIT
+      {CCC.unit.unitType === UNIT
         ? elements.map((elmnt) => (
             <Grid>
               <FormControlLabel
@@ -107,4 +106,4 @@ const UnitMovementCreator = () => {
   );
 };
 
-export default UnitMovementCreator;
+export default SpecialElementsCreator;

@@ -12,11 +12,11 @@ const NameCreator = () => {
   const CCC = useContext(CardCreationContext);
 
   const deleteName = () => {
-    CCC.setUnitName("");
+    CCC.setUnit({...CCC.unit, unitName: ""});
   };
 
   const changeName = (event) => {
-    CCC.setUnitName(event.target.value);
+    CCC.setUnit({...CCC.unit, unitName: event.target.value});
   };
 
   return (

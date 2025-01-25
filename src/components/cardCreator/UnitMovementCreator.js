@@ -15,70 +15,70 @@ const UnitMovementCreator = () => {
   const CCC = useContext(CardCreationContext);
 
   const changeMovement = (event) => {
-    CCC.setMove(parseInt(event.target.value));
+    CCC.setUnit({ ...CCC.unit, move: parseInt(event.target.value) });
   };
 
   const changeSkirmish = (event) => {
-    CCC.setSkirmish(parseInt(event.target.value));
+    CCC.setUnit({ ...CCC.unit, skirmish: parseInt(event.target.value) });
   };
 
   const changeCharge = (event) => {
-    CCC.setCharge(parseInt(event.target.value));
+    CCC.setUnit({ ...CCC.unit, charge: parseInt(event.target.value) });
   };
 
   const changeManeuver = (event) => {
-    CCC.setManeuver(parseInt(event.target.value));
+    CCC.setUnit({ ...CCC.unit, hold_maneuvers: parseInt(event.target.value) });
   };
 
   const changeHasMaxFieldsMove = () => {
-    CCC.setHasMaxFieldsMove((prevState) => !prevState);
+    CCC.setUnit({ ...CCC.unit, maxFieldsMove: !CCC.unit.maxFieldsMove });
   };
+
   const renderSummonsMovLabelText = () => {
-    return CCC.hasMaxFieldsMove ? CREATOR.MAX_MOVE_POINTS : CREATOR.MOVMENT_POINTS;
+    return CCC.unit.maxFieldsMove ? CREATOR.MAX_MOVE_POINTS : CREATOR.MOVMENT_POINTS;
   };
 
   const inputElements = [
     {
       id: "move", //
       label: "",
-      value: CCC.move,
+      value: CCC.unit.move,
       onChange: changeMovement,
       statName: CREATOR.MOVE,
-      display: CCC.unitType === UNIT || CCC.unitType === GIANT || CCC.unitType === AUTOMATON,
+      display: CCC.unit.unitType === UNIT || CCC.unit.unitType === GIANT || CCC.unit.unitType === AUTOMATON,
     },
     {
       id: "skirmish", //
       label: "",
-      value: CCC.skirmish,
+      value: CCC.unit.skirmish,
       onChange: changeSkirmish,
       statName: CREATOR.SKIRMISH,
-      display: CCC.unitType === UNIT || CCC.unitType === GIANT || CCC.unitType === AUTOMATON,
+      display: CCC.unit.unitType === UNIT || CCC.unit.unitType === GIANT || CCC.unit.unitType === AUTOMATON,
     },
     {
       id: "charge", //
       label: "",
-      value: CCC.charge,
+      value: CCC.unit.charge,
       onChange: changeCharge,
       statName: CREATOR.CHARGE,
-      display: CCC.unitType === UNIT || CCC.unitType === GIANT || CCC.unitType === AUTOMATON,
+      display: CCC.unit.unitType === UNIT || CCC.unit.unitType === GIANT || CCC.unit.unitType === AUTOMATON,
     },
     {
       id: "maneuver", //
       label: "",
-      value: CCC.maneuver,
-
+      value: CCC.unit.maneuver,
       onChange: changeManeuver,
       statName: CREATOR.MANEUVER,
-      display: CCC.unitType === UNIT,
+      display: CCC.unit.unitType === UNIT,
     },
     {
       id: "movementPoints", //
       label: "",
-      value: CCC.move,
+      value: CCC.unit.move,
 
       onChange: changeMovement,
       statName: CREATOR.MOVMENT_POINTS,
-      display: CCC.unitType === HERO || CCC.unitType === MAGE,
+      display: CCC.unit.unitType === HERO || CCC.unit.unitType === MAGE,
     },
     {
       id: "hold", //
@@ -87,23 +87,23 @@ const UnitMovementCreator = () => {
 
       onChange: changeManeuver,
       statName: CREATOR.HOLD,
-      display: CCC.unitType === GIANT || CCC.unitType === AUTOMATON,
+      display: CCC.unit.unitType === GIANT || CCC.unit.unitType === AUTOMATON,
     },
     {
       id: "maxMovementPoints", //
       label: "",
-      value: CCC.move,
+      value: CCC.unit.move,
 
       onChange: changeMovement,
       statName: renderSummonsMovLabelText(),
-      display: CCC.unitType === SUMMONED,
+      display: CCC.unit.unitType === SUMMONED,
     },
   ];
 
   const renderSeparator = (iterator) => {
     const MAX_STAT_NUMBER = 3;
 
-    if (CCC.unitType === HERO || CCC.unitType === MAGE || CCC.unitType === SUMMONED) {
+    if (CCC.unit.unitType === HERO || CCC.unit.unitType === MAGE || CCC.unit.unitType === SUMMONED) {
       return false;
     }
 
@@ -124,7 +124,7 @@ const UnitMovementCreator = () => {
         borderRadius: "10px",
       }}
     >
-      {CCC.unitType === UNIT ? <FormationsAndHordeCreator /> : null}
+      {CCC.unit.unitType === UNIT ? <FormationsAndHordeCreator /> : null}
       <Grid
         container //
         item
@@ -161,11 +161,11 @@ const UnitMovementCreator = () => {
             </Fragment>
           ))}
       </Grid>
-      {CCC.unitType === SUMMONED ? (
+      {CCC.unit.unitType === SUMMONED ? (
         <FormControlLabel
           control={
             <Checkbox
-              checked={CCC.hasMaxFieldsMove} //
+              checked={CCC.unit.hasMaxFieldsMove} //
               onChange={changeHasMaxFieldsMove}
             />
           }

@@ -12,11 +12,11 @@ const HitpointCreator = () => {
   const CCC = useContext(CardCreationContext);
 
   const deleteHitpoints = () => {
-    CCC.setHitpoints("");
+    CCC.setUnit({ ...CCC.unit, hitpoints: 0 });
   };
 
   const changeHitpoints = (event) => {
-    CCC.setHitpoints(event.target.value);
+    CCC.setUnit({ ...CCC.unit, hitpoints: parseInt(event.target.value) });
   };
 
   return (
@@ -36,7 +36,7 @@ const HitpointCreator = () => {
     >
       <CreatorTextInput
         id={"Hitpoints"} //
-        value={CCC.hitpoints}
+        value={CCC.unit.hitpoints}
         onClick={deleteHitpoints}
         onChange={changeHitpoints}
         label={CREATOR.HITPOINTS}

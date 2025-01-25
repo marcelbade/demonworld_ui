@@ -14,80 +14,80 @@ const UnitAttributeCreator = () => {
   const CCC = useContext(CardCreationContext);
 
   const changeIsUnique = () => {
-    CCC.setIsunique((prevState) => !prevState);
+    CCC.setUnit({ ...CCC.unit, uniqueUnit: !CCC.unit.uniqueUnit });
   };
 
-  const changeIsCavalery = () => {
-    CCC.setIsCavalery((prevState) => !prevState);
+  const changeIsMounted = () => {
+    CCC.setUnit({ ...CCC.unit, isMounted: !CCC.unit.isMounted });
   };
 
   const changeHasShield = () => {
-    CCC.setHasShield((prevState) => !prevState);
+    CCC.setUnit({ ...CCC.unit, hasShield: !CCC.unit.hasShield });
   };
 
   const changeInClosedFormation = () => {
-    CCC.setClosedFormation((prevState) => !prevState);
+    CCC.setUnit({ ...CCC.unit, unitIsClosedOrder: !CCC.unit.unitIsClosedOrder });
   };
 
   const changeLeaderInClosedFormation = () => {
-    CCC.setLeaderClosedFormation((prevState) => !prevState);
+    CCC.setUnit({ ...CCC.unit, leaderIsClosedOrderUnit: !CCC.unit.leaderIsClosedOrder });
   };
 
   const changeIsLowFLyer = () => {
-    CCC.setIsLowFlyer((prevState) => !prevState);
+    CCC.setUnit({ ...CCC.unit, isLowFlyer: !CCC.unit.isLowFlyer });
   };
 
   const changeIsHighFlyer = () => {
-    CCC.setIsHighFlyer((prevState) => !prevState);
+    CCC.setUnit({ ...CCC.unit, isHighFlyer: !CCC.unit.isHighFlyer });
   };
 
   const changeCommandStars = (event) => {
-    CCC.setCommandStars(event.target.value);
+    CCC.setUnit({ ...CCC.unit, commandStars: event.target.value });
   };
 
   const changeMagic = (event) => {
-    CCC.setMagic(event.target.value);
+    CCC.setUnit({ ...CCC.unit, magic: event.target.value });
   };
 
   const elements = [
     {
-      value: CCC.isunique, //
+      value: CCC.unit.uniqueUnit, //
       action: changeIsUnique,
       name: CREATOR.IS_UNIQUE,
       display: true,
     },
     {
-      value: CCC.isCavalery, //
-      action: changeIsCavalery,
+      value: CCC.unit.isMounted, //
+      action: changeIsMounted,
       name: CREATOR.IS_CAVALERY,
       display: true,
     },
     {
-      value: CCC.hasShield, //
+      value: CCC.unit.hasShield, //
       action: changeHasShield,
       name: CREATOR.HAS_SHIELD,
       display: CCC.unitType !== GIANT,
     },
     {
-      value: CCC.closedFormation, //
+      value: CCC.unit.unitIsClosedOrder, //
       action: changeInClosedFormation,
       name: CREATOR.CLOSED_FORMATION,
       display: true,
     },
     {
-      value: CCC.leaderClosedFormation, //
+      value: CCC.unit.leaderIsClosedOrder, //
       action: changeLeaderInClosedFormation,
       name: CREATOR.LEADER_CLOSED_FORMATION,
       display: CCC.unitType === UNIT,
     },
     {
-      value: CCC.isLowFlyer, //
+      value: CCC.unit.isLowFlyer, //
       action: changeIsLowFLyer,
       name: CREATOR.IS_LOW_FLYER,
       display: !CCC.isHighFlyer,
     },
     {
-      value: CCC.isHighFlyer, //
+      value: CCC.unit.isHighFlyer, //
       action: changeIsHighFlyer,
       name: CREATOR.IS_HIGH_FLYER,
       display: !CCC.isLowFlyer,
@@ -115,10 +115,10 @@ const UnitAttributeCreator = () => {
         justifyContent="space-around"
         marginBottom="2em"
       >
-        {CCC.unitType === MAGE || CCC.unitType === HERO ? (
+        {CCC.unit.unitType === MAGE || CCC.unit.unitType === HERO ? (
           <CreatorTextInput
             id={"name"} //
-            value={CCC.commandStars}
+            value={CCC.unit.commandStars}
             onChange={changeCommandStars}
             label={"Sterne:"}
             width="7em"
@@ -126,7 +126,7 @@ const UnitAttributeCreator = () => {
             type="number"
           />
         ) : null}
-        {CCC.unitType === MAGE ? (
+        {CCC.unit.unitType === MAGE ? (
           <CreatorTextInput
             id={"name"} //
             value={CCC.magic}

@@ -16,43 +16,75 @@ const MeleeWeaponCreator = () => {
 
   const CCC = useContext(CardCreationContext);
 
-  const changeMeleeWeaponName1 = (event) => {
-    CCC.setMeleeWeaponName1(event.target.value);
+  const changeMeleeWeapon1Name = (event) => {
+    CCC.setUnit({ ...CCC.unit, weapon1Name: event.target.value });
   };
 
-  const changeMeleeValue1 = (event) => {
-    CCC.setMeleeValue1(parseInt(event.target.value));
-  };
-  const changeMeleeWeaponName2 = (event) => {
-    CCC.setMeleeWeaponName2(event.target.value);
+  const changeWeapon1 = (event) => {
+    CCC.setUnit({ ...CCC.unit, weapon1: parseInt(event.target.value) });
   };
 
-  const changeMeleeValue2 = (event) => {
-    CCC.setMeleeValue2(parseInt(event.target.value));
-  };
-  const changeMeleeWeaponName3 = (event) => {
-    CCC.setMeleeWeaponName3(event.target.value);
+  const changeMeleeWeapon2Name = (event) => {
+    CCC.setUnit({ ...CCC.unit, weapon2Name: event.target.value });
   };
 
-  const changeMeleeValue3 = (event) => {
-    CCC.setMeleeValue3(parseInt(event.target.value));
+  const changeWeapon2 = (event) => {
+    CCC.setUnit({ ...CCC.unit, weapon2: parseInt(event.target.value) });
+  };
+  const changeMeleeWeapon3Name = (event) => {
+    CCC.setUnit({ ...CCC.unit, weapon3Name: event.target.value });
+  };
+
+  const changeWeapon3 = (event) => {
+    CCC.setUnit({ ...CCC.unit, weapon3: parseInt(event.target.value) });
   };
 
   const unitHasMeleeSkill = () => {
     CCC.setHasMeleeSkill((prevState) => !prevState);
   };
 
-  const changeMeleeSkill = (event) => {
-    CCC.setMeleeSkill(event.target.value);
+  const changeSkillMelee = (event) => {
+    CCC.setUnit({ ...CCC.unit, skillMelee: parseInt(event.target.value) });
   };
 
   const changeChargeBonus = (event) => {
-    CCC.setChargeBonus(event.target.value);
+    CCC.setUnit({ ...CCC.unit, chargeBonus: parseInt(event.target.value) });
   };
 
   const changeInitiative = (event) => {
-    CCC.setInitiative(event.target.value);
+    CCC.setUnit({ ...CCC.unit, initiative: parseInt(event.target.value) });
   };
+
+  const elmnts = [
+    {
+      direction: "row",
+      nameTitle: CREATOR.MELEE_WEAPON_1,
+      valueTitle: CREATOR.MELEE_VALUE_1,
+      name: CCC.unit.weapon1Name,
+      value: CCC.unit.weapon1,
+      nameFunc: changeMeleeWeapon1Name,
+      valueFunc: changeWeapon1,
+    },
+
+    {
+      direction: "row",
+      nameTitle: CREATOR.MELEE_WEAPON_2,
+      valueTitle: CREATOR.MELEE_VALUE_2,
+      name: CCC.unit.weapon2Name,
+      value: CCC.unit.weapon2,
+      nameFunc: changeMeleeWeapon2Name,
+      valueFunc: changeWeapon2,
+    },
+    {
+      direction: "row",
+      nameTitle: CREATOR.MELEE_WEAPON_3,
+      valueTitle: CREATOR.MELEE_VALUE_3,
+      name: CCC.unit.weapon3Name,
+      value: CCC.unit.weapon3,
+      nameFunc: changeMeleeWeapon3Name,
+      valueFunc: changeWeapon3,
+    },
+  ];
 
   return (
     <Grid
@@ -76,72 +108,40 @@ const MeleeWeaponCreator = () => {
       >
         <CreatorTextInput
           id={CREATOR.INITIATIVE} //
-          value={CCC.initiative}
+          value={CCC.unit.initiative}
           onChange={changeInitiative}
           label={CREATOR.INITIATIVE}
         />
         <CreatorTextInput
           id={CREATOR.CHARGE_BONUS} //
-          value={CCC.chargeBonus}
+          value={CCC.unit.chargeBonus}
           onChange={changeChargeBonus}
           label={CREATOR.CHARGE_BONUS}
         />
       </Grid>
 
-      <Grid
-        container //
-        item
-        direction="row"
-      >
-        <CreatorTextInput
-          id={CREATOR.MELEE_WEAPON_1} //
-          value={CCC.meleeWeaponName1}
-          onChange={changeMeleeWeaponName1}
-          label={CREATOR.MELEE_WEAPON_1}
-        />
-        <CreatorTextInput
-          id={CREATOR.MELEE_VALUE_1} //
-          value={CCC.meleeValue1}
-          onChange={changeMeleeValue1}
-          label={CREATOR.MELEE_VALUE_1}
-        />
-      </Grid>
-      <Grid
-        container //
-        item
-        direction="row"
-      >
-        <CreatorTextInput
-          id={CREATOR.MELEE_WEAPON_2} //
-          value={CCC.meleeWeaponName2}
-          onChange={changeMeleeWeaponName2}
-          label={CREATOR.MELEE_WEAPON_2}
-        />
-        <CreatorTextInput
-          id={CREATOR.MELEE_VALUE_2} //
-          value={CCC.meleeValue2}
-          onChange={changeMeleeValue2}
-          label={CREATOR.MELEE_VALUE_2}
-        />
-      </Grid>
-      <Grid
-        container //
-        item
-        direction="row"
-      >
-        <CreatorTextInput
-          id={CREATOR.MELEE_WEAPON_3} //
-          value={CCC.meleeWeaponName3}
-          onChange={changeMeleeWeaponName3}
-          label={CREATOR.MELEE_WEAPON_3}
-        />
-        <CreatorTextInput
-          id={CCC.MELEE_VALUE_3} //
-          value={CCC.meleeValue3}
-          onChange={changeMeleeValue3}
-          label={CREATOR.MELEE_VALUE_3}
-        />
-      </Grid>
+      {elmnts.map((e, i) => (
+        <Grid
+          container //
+          item
+          direction={e.direction}
+          key={i}
+        >
+          <CreatorTextInput
+            id={e.nameTitle} //
+            value={e.name}
+            onChange={e.nameFunc}
+            label={e.nameTitle}
+          />
+          <CreatorTextInput
+            id={e.valueTitle} //
+            value={e.value}
+            onChange={e.valueFunc}
+            label={e.valueTitle}
+          />
+        </Grid>
+      ))}
+
       <Grid //
         item
         container
@@ -177,9 +177,9 @@ const MeleeWeaponCreator = () => {
         />
 
         <CreatorTextInput
-          id={CCC.meleeSkill} //
-          value={CCC.meleeSkill}
-          onChange={changeMeleeSkill}
+          id={CCC.unit.skillMelee} //
+          value={CCC.unit.skillMelee}
+          onChange={changeSkillMelee}
           disabled={!CCC.hasMeleeSkill}
           width="3em"
         />

@@ -14,15 +14,15 @@ const FearAndMoralCreator = () => {
   const CCC = useContext(CardCreationContext);
 
   const changeFear = (event) => {
-    CCC.setFear(parseInt(event.target.value));
+    CCC.setUnit({ ...CCC.unit, fear: parseInt(event.target.value) });
   };
 
   const changeMoral1 = (event) => {
-    CCC.setMoral1(parseInt(event.target.value));
+    CCC.setUnit({ ...CCC.unit, moral1: parseInt(event.target.value) });
   };
 
   const changeMoral2 = (event) => {
-    CCC.setMoral2(parseInt(event.target.value));
+    CCC.setUnit({ ...CCC.unit, moral2: parseInt(event.target.value) });
   };
 
   return (
@@ -42,12 +42,12 @@ const FearAndMoralCreator = () => {
     >
       <CreatorTextInput
         id={"Fear"} //
-        value={CCC.fear}
+        value={CCC.unit.fear}
         onChange={changeFear}
         label={CREATOR.FEAR}
         width={"7em"}
       />
-      {CCC.unitType === UNIT ? (
+      {CCC.unit.unitType === UNIT ? (
         <Grid
           item
           container
@@ -58,7 +58,7 @@ const FearAndMoralCreator = () => {
         >
           <CreatorTextInput
             id={"moral1"} //
-            value={CCC.moral1}
+            value={CCC.unit.moral1}
             onChange={changeMoral1}
             label={CREATOR.MORAL1}
             width={"9em"}
@@ -68,7 +68,7 @@ const FearAndMoralCreator = () => {
           </Typography>
           <CreatorTextInput
             id={"moral2"} //
-            value={CCC.moral2}
+            value={CCC.unit.moral2}
             onChange={changeMoral2}
             label={CREATOR.MORAL2}
             width={"9em"}

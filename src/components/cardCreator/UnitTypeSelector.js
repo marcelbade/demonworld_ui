@@ -11,8 +11,8 @@ const UnitTypeSelector = () => {
   const CCC = useContext(CardCreationContext);
 
   const handleChange = (event) => {
-    CCC.setUnitType(event.target.value);
-  };
+    CCC.setUnit({...CCC.unit, unitType: event.target.value});
+   };
 
   return (
     <Grid

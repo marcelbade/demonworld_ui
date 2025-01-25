@@ -18,7 +18,7 @@ const FactionNameCreator = () => {
   const CCC = useContext(CardCreationContext);
 
   const handleFactionInput = (name) => {
-    CCC.setFactionName(name);
+    CCC.setUnit({ ...CCC.unit, faction: name });
   };
 
   const clearFactionName = () => {
@@ -28,46 +28,46 @@ const FactionNameCreator = () => {
   const setFactionList = () => {
     const resultingList =
       CCC.factionName !== NONE //
-        ? ALL_FACTIONS_ARRAY.filter((f) => f !== CCC.factionName)
+        ? ALL_FACTIONS_ARRAY.filter((f) => f !== CCC.unit.faction)
         : ALL_FACTIONS_ARRAY;
 
     return resultingList;
   };
 
   const handleSubFactionInput = (name) => {
-    CCC.setSubFactionName(name);
+    CCC.setUnit({ ...CCC.unit, subFaction: name });
   };
 
   const clearSubFactionName = () => {
-    const faction = AC.fetchedFactions.filter((f) => f.factionName === CCC.factionName);
+    const faction = AC.fetchedFactions.filter((f) => f.factionName === CCC.unit.faction);
     return faction.subFactions.map((sF) => sF.name);
   };
 
   const setSubFactionList = () => {
-    if (CCC.factionName !== "") {
+    if (CCC.unit.faction !== "") {
       return AC.fetchedFactions
-        .find((f) => f.factionName === CCC.factionName) // find army obj
+        .find((f) => f.factionName === CCC.unit.faction) // find army obj
         .subFactions.map((sF) => sF.name) // return array of sub faction names
-        .filter((sf) => sf !== CCC.subFactionName); // do not show current selection in the dropdown list
+        .filter((sf) => sf !== CCC.unit.subFaction); // do not show current selection in the dropdown list
     } else {
       return [];
     }
   };
 
   const deleteFactionName = () => {
-    CCC.setFactionName("");
+    CCC.setUnit({ ...CCC.unit, faction: "" });
   };
 
   const changeFactionName = (event) => {
-    CCC.setFactionName(event.target.value);
+    CCC.setUnit({ ...CCC.unit, faction: event.target.value });
   };
 
   const deleteSubFactionName = () => {
-    CCC.setSubFactionName("");
+    CCC.setUnit({ ...CCC.unit, subFaction: "" });
   };
 
   const changeSubFactionName = (event) => {
-    CCC.setSubFactionName(event.target.value);
+    CCC.setUnit({ ...CCC.unit, subFaction: event.target.value });
   };
 
   const isNewFaction = () => {
@@ -115,7 +115,7 @@ const FactionNameCreator = () => {
           <Fragment>
             <CreatorTextInput
               id={"factionName"} //
-              value={CCC.factionName}
+              value={CCC.unit.factionName}
               onClick={deleteFactionName}
               onChange={changeFactionName}
               label={CREATOR.FACTION_NAME}
@@ -124,7 +124,7 @@ const FactionNameCreator = () => {
 
             <CreatorTextInput
               id={"subFactionName"} //
-              value={CCC.subFactionName}
+              value={CCC.unit.subFactionName}
               onClick={deleteSubFactionName}
               onChange={changeSubFactionName}
               label={CREATOR.SUBFACTION_NAME}
