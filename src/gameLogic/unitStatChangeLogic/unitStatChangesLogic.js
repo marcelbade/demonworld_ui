@@ -1,6 +1,8 @@
 //  constants
-import { ITEM_TYPE_BOWS, ITEM_TYPE_CROSSBOWS, ITEM_TYPE_WEAPON } from "../../../../../../constants/itemShopConstants";
-import { RANGED_WEAPON, WEAPON_1, RANGED_WEAPON_STATS } from "../../../../../../constants/stats";
+import { ITEM_TYPE_BOWS, ITEM_TYPE_CROSSBOWS, ITEM_TYPE_WEAPON } from "../../constants/itemShopConstants";
+import { RANGED_WEAPON, WEAPON_1, RANGED_WEAPON_STATS } from "../../constants/stats";
+
+
 
 /**
  * Function calculates the new value for a unit's stat

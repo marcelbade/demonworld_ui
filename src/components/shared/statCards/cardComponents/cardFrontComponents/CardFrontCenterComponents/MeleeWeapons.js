@@ -3,7 +3,7 @@ import React from "react";
 // Material UI
 import { Grid, Typography } from "@mui/material";
 // components & functions
-import { setUnitStat } from "../../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/unitStatChangesLogic";
+import { setUnitStat } from "../../../../../../gameLogic/unitStatChangeLogic/unitStatChangesLogic";
 import { WEAPON_1 } from "../../../../../../constants/stats";
 
 const MeleeWeapons = (props) => {

@@ -5,7 +5,7 @@ import { Grid, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components & functions
 import { CARD_TEXT } from "../../../../../constants/textsAndMessages";
-import { setUnitStat } from "../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/unitStatChangesLogic";
+import { setUnitStat } from "../../../../../gameLogic/unitStatChangeLogic/unitStatChangesLogic";
 import { isSingleElementCard } from "../../../../../util/utilityFunctions";
 // constants
 import { FEAR, MORAL1, MORAL2 } from "../../../../../constants/stats";

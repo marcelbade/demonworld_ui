@@ -4,7 +4,7 @@ import React from "react";
 import { Grid, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components & functions
-import { setUnitStat } from "../../../../../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/unitStatChangesLogic";
+import { setUnitStat } from "../../../../../../gameLogic/unitStatChangeLogic/unitStatChangesLogic";
 //constants
 import { INITIATIVE } from "../../../../../../constants/stats";
 import { CARD_TEXT } from "../../../../../../constants/textsAndMessages";

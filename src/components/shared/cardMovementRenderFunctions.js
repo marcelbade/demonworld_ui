@@ -2,7 +2,7 @@
 import { CHARGE, MOVE, SKIRMISH, HOLD, OVERRUN } from "../../constants/stats";
 import { CARD_TEXT } from "../../constants/textsAndMessages";
 // functions
-import { setUnitStat } from "../ListGenerator/RightSideMenus/Menus/ItemShop/ItemLogic/unitStatChangesLogic";
+import { setUnitStat } from "../../gameLogic/unitStatChangeLogic/unitStatChangesLogic";
 
 /**
  * Function creates a String that contains the movement value for heroes/mages/summons.
