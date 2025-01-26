@@ -11,8 +11,6 @@ import { CardCreationContext } from "../../contexts/cardCreationContext";
 const CardPreview = () => {
   const CCC = useContext(CardCreationContext);
 
-  console.log("CCC.unit", CCC.unit);
-
   return (
     <Fragment>
       {CCC.unit !== undefined ? <CardFront unit={CCC.unit} /> : null}
