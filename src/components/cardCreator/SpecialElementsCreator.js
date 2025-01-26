@@ -13,15 +13,15 @@ const SpecialElementsCreator = () => {
   const CCC = useContext(CardCreationContext);
 
   const changeLeader = () => {
-    CCC.setUnit({ ...CCC.unit, leader: (prevState) => !prevState });
+    CCC.setUnit({ ...CCC.unit, leader: !CCC.unit.leader });
   };
 
   const changeStandardBearer = () => {
-    CCC.setUnit({ ...CCC.unit, standardBearer: (prevState) => !prevState });
+    CCC.setUnit({ ...CCC.unit, standardBearer: !CCC.unit.standardBearer });
   };
 
   const changeMusician = () => {
-    CCC.setUnit({ ...CCC.unit, musician: (prevState) => !prevState });
+    CCC.setUnit({ ...CCC.unit, musician: !CCC.unit.musician });
   };
 
   const deleteNumberOfElements = () => {

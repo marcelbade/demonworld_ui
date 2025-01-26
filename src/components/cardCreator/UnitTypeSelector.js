@@ -10,14 +10,23 @@ import { GIANT, HERO, UNIT, SUMMONED, MAGE, AUTOMATON } from "../../constants/un
 const UnitTypeSelector = () => {
   const CCC = useContext(CardCreationContext);
 
+  /**
+   * function sets the unit type of the new / edited unit.
+   * NOTE: if the selected type is not unit (i.e. more than 1 element)
+   * all relevant fields must be reset.
+   * @param {Obj} event
+   */
   const handleChange = (event) => {
     CCC.setUnit({ ...CCC.unit, unitType: event.target.value });
 
     if (event.target.value !== UNIT) {
       CCC.setUnit({
         ...CCC.unit,
-        numberOfElements: 1, //
+        numberOfElements: 1,
         unitType: event.target.value,
+        leader: false,
+        standardBearer: false,
+        musician: false,
       });
     }
   };

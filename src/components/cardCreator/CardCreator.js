@@ -66,7 +66,7 @@ const CardCreator = () => {
     standardBearer: false,
     musician: false,
     specialRules: "",
-    numberOfElements: 1,
+    numberOfElements: 10,
     hitpoints: 0,
     points: 0,
     secondSubFaction: "",
@@ -86,8 +86,10 @@ const CardCreator = () => {
     controlZone: 0,
     overRun: 0,
     uniqueUnit: false,
-    unitType: "",
+    unitType: "U",
   });
+
+  console.log("leader >>>>", unit.leader);
 
   return (
     <CardCreationProvider
