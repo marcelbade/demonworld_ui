@@ -177,7 +177,7 @@ const MeleeWeaponCreator = () => {
         />
 
         <CreatorTextInput
-          id={CCC.unit.skillMelee} //
+          id={CCC.unit.skillMelee.toString()} //
           value={CCC.unit.skillMelee}
           onChange={changeSkillMelee}
           disabled={!CCC.hasMeleeSkill}

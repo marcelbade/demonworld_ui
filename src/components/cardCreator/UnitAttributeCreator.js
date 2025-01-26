@@ -139,8 +139,8 @@ const UnitAttributeCreator = () => {
       </Grid>
       {elements
         .filter((elmnt) => elmnt.display)
-        .map((elmnt) => (
-          <Grid>
+        .map((elmnt, i) => (
+          <Grid key={i}>
             <FormControlLabel
               control={
                 <Checkbox

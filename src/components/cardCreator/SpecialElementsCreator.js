@@ -78,8 +78,8 @@ const SpecialElementsCreator = () => {
       </Grid>
 
       {CCC.unit.unitType === UNIT
-        ? elements.map((elmnt) => (
-            <Grid>
+        ? elements.map((elmnt, i) => (
+            <Grid key={i}>
               <FormControlLabel
                 control={
                   <Checkbox

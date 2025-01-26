@@ -62,7 +62,7 @@ const SizeAndSkillCreator = () => {
       {inputElements.map((input, i) => (
         <CreatorTextInput
           key={i}
-          id={i} //
+          id={input.value.toString()} //
           value={input.value}
           onChange={input.onChange}
           label={input.statName}
