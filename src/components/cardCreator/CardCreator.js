@@ -50,7 +50,7 @@ const CardCreator = () => {
     initiative: 2,
     chargeBonus: 0,
     skillMelee: 0,
-    weapon1Name: "",
+    weapon1Name: "Nahkampfangriff",
     weapon1: 10,
     weapon2Name: "",
     weapon2: 0,
