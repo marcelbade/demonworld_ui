@@ -66,7 +66,7 @@ const CardCreator = () => {
     standardBearer: false,
     musician: false,
     specialRules: "",
-    numberOfElements: 0,
+    numberOfElements: 1,
     hitpoints: 0,
     points: 0,
     secondSubFaction: "",

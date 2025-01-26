@@ -29,7 +29,7 @@ const SpecialElementsCreator = () => {
   };
 
   const changeNumberOfElements = (event) => {
-    CCC.setUnit({ ...CCC.unit, numberOfElements: event.target.value });
+    CCC.setUnit({ ...CCC.unit, numberOfElements: parseInt(event.target.value) });
   };
 
   const elements = [
@@ -50,14 +50,6 @@ const SpecialElementsCreator = () => {
     },
   ];
 
-  const netNumberOfElements = (unitType) => {
-    if (unitType !== UNIT) {
-      return 1;
-    }
-
-    return CCC.numberOfElements;
-  };
-
   return (
     <Grid
       container
@@ -75,8 +67,8 @@ const SpecialElementsCreator = () => {
     >
       <Grid item>
         <CreatorTextInput
-          id={"elementNumber"} //
-          value={netNumberOfElements(CCC.unit.unitType)}
+          id={"elementNumber"}
+          value={CCC.unit.numberOfElements}
           onClick={deleteNumberOfElements}
           onChange={changeNumberOfElements}
           disabled={CCC.unit.unitType !== UNIT}

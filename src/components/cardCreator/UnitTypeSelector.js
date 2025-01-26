@@ -11,8 +11,16 @@ const UnitTypeSelector = () => {
   const CCC = useContext(CardCreationContext);
 
   const handleChange = (event) => {
-    CCC.setUnit({...CCC.unit, unitType: event.target.value});
-   };
+    CCC.setUnit({ ...CCC.unit, unitType: event.target.value });
+
+    if (event.target.value !== UNIT) {
+      CCC.setUnit({
+        ...CCC.unit,
+        numberOfElements: 1, //
+        unitType: event.target.value,
+      });
+    }
+  };
 
   return (
     <Grid
@@ -37,6 +45,7 @@ const UnitTypeSelector = () => {
           name="unit-type-radio-group"
           value={CCC.unitType}
           onChange={handleChange}
+          defaultValue={UNIT}
         >
           <FormControlLabel //
             value={UNIT}
