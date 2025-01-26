@@ -31,6 +31,8 @@ const CardCreator = () => {
   const [hasRangedWeapon, setHasRangedWeapon] = useState(false);
   const [hasRangedSkill, setHasRangedSkill] = useState(false);
   const [hasMeleeSkill, setHasMeleeSkill] = useState(false);
+  const [isFearless, setIsFearless] = useState(false);
+  const [neverImpetuous, setNeverImpetuous] = useState(false);
 
   const [unit, setUnit] = useState({
     faction: "",
@@ -89,7 +91,8 @@ const CardCreator = () => {
     unitType: "U",
   });
 
-  console.log("leader >>>>", unit.leader);
+  console.log("moral 1 >>>>", unit.moral1);
+  console.log("moral 2 >>>>", unit.moral2);
 
   return (
     <CardCreationProvider
@@ -108,6 +111,11 @@ const CardCreator = () => {
         //
         hasMeleeSkill: hasMeleeSkill,
         setHasMeleeSkill: setHasMeleeSkill,
+        //
+        neverImpetuous: neverImpetuous,
+        setNeverImpetuous: setNeverImpetuous,
+        isFearless: isFearless,
+        setIsFearless: setIsFearless,
       }}
     >
       <Box
