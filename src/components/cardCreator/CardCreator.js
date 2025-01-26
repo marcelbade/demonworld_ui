@@ -1,7 +1,8 @@
 // react
 import React, { useState } from "react";
 // material ui
-import { Grid } from "@mui/material";
+import { Box, Grid } from "@mui/material";
+
 //
 import FactionNameCreator from "./FactionNameCreator";
 import FearAndMoralCreator from "./FearAndMoralCreator";
@@ -107,31 +108,38 @@ const CardCreator = () => {
         setHasMeleeSkill: setHasMeleeSkill,
       }}
     >
-      <Grid container direction="row">
+      <Box
+        sx={{
+          width: "100%",
+          height: "100%",
+          display: "flex", //
+        }}
+      >
         <AppBar hiddenElements={[ID.COMPENDIMUM_DROPDOWN, ID.LIST_DISPLAY]} />
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            position: "fixed",
+          }}
+        >
+          <MenuSwitch
+            iconSize="25em" //
+            bttnSize="2em"
+            margin="0.5em"
+          />
+        </Box>
         <Grid
           container
-          item
           alignItems="center"
           justifyContent="center"
           sx={{
-            height: "100%",
+            height: "50%",
             width: "50%",
-            marginLeft: "3em",
+            marginLeft: "5em",
+            marginTop: "3em",
           }}
         >
-          <Grid
-            item
-            container //
-            alignItems="center"
-            justifyContent="flex-start"
-          >
-            <MenuSwitch
-              iconSize="25em" //
-              bttnSize="2em"
-              margin="0.5em"
-            />
-          </Grid>
           <Grid
             item //
             container
@@ -163,18 +171,19 @@ const CardCreator = () => {
             </Grid>
           </Grid>
         </Grid>
-        <Grid
-          container
-          item
-          direction="column"
+        <Box
           sx={{
+            display: "flex",
+            flexDirection: "column",
             width: "35%",
-            paddingTop: "4em",
+            position: "fixed",
+            top: "5%",
+            left: "60%",
           }}
         >
           <CardPreview />
-        </Grid>
-      </Grid>
+        </Box>
+      </Box>
     </CardCreationProvider>
   );
 };
