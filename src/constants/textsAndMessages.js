@@ -203,6 +203,8 @@ export const CARD_TEXT = {
   MAX_FIELDS_MOVE: (movementValue) => {
     return `maximal ${movementValue} Felder`;
   },
+  UNIT_IS_IMPETUOUS: "Einheit hat keinen 2. Moralwert.",
+  UNIT_IS_FEARLESS: "Einheit hat keinen 1. Moralwert.",
 };
 
 // FACTIONS & Game Rules
