@@ -65,8 +65,8 @@ const UnitAttributeCreator = () => {
     {
       value: CCC.unit.hasShield, //
       action: changeHasShield,
-      name: CREATOR.HAS_SHIELD,
-      display: CCC.unitType !== GIANT,
+      name: CCC.unit.unitType === UNIT ? CREATOR.HAS_SHIELD : CREATOR.HAS_SHIELD_HERO,
+      display: CCC.unit.unitType !== GIANT,
     },
     {
       value: CCC.unit.unitIsClosedOrder, //
@@ -78,19 +78,19 @@ const UnitAttributeCreator = () => {
       value: CCC.unit.leaderIsClosedOrder, //
       action: changeLeaderInClosedFormation,
       name: CREATOR.LEADER_CLOSED_FORMATION,
-      display: CCC.unitType === UNIT,
+      display: CCC.unit.unitType === UNIT,
     },
     {
       value: CCC.unit.isLowFlyer, //
       action: changeIsLowFLyer,
       name: CREATOR.IS_LOW_FLYER,
-      display: !CCC.isHighFlyer,
+      display: !CCC.unit.isHighFlyer,
     },
     {
       value: CCC.unit.isHighFlyer, //
       action: changeIsHighFlyer,
       name: CREATOR.IS_HIGH_FLYER,
-      display: !CCC.isLowFlyer,
+      display: !CCC.unit.isLowFlyer,
     },
   ];
 
