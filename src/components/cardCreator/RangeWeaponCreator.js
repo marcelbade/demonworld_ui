@@ -12,7 +12,6 @@ import { CardCreationContext } from "../../contexts/cardCreationContext";
 import blackBowIcon from "../../assets/icons/bow2.png";
 
 const RangeWeaponCreator = () => {
-
   const theme = useTheme();
 
   const CCC = useContext(CardCreationContext);
@@ -39,8 +38,7 @@ const RangeWeaponCreator = () => {
 
   const changeRangeSkill = (event) => {
     CCC.setUnit({ ...CCC.unit, skillRange: event.target.value });
-
-   };
+  };
 
   const unitHasRangeWeapon = () => {
     CCC.setHasRangedWeapon((prevState) => !prevState);
@@ -70,6 +68,7 @@ const RangeWeaponCreator = () => {
               <Checkbox
                 checked={CCC.hasRangedWeapon} //
                 onChange={unitHasRangeWeapon}
+                sx={theme.palette.cardCreator.checkbox}
               />
             }
             label={"Einheit hat eine Fernkampfwaffe"}

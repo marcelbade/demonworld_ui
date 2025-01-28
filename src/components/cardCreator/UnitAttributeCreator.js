@@ -143,6 +143,7 @@ const UnitAttributeCreator = () => {
                   checked={elmnt.value} //
                   onChange={elmnt.action}
                   inputProps={{ "aria-label": "controlled" }}
+                  sx={theme.palette.cardCreator.checkbox}
                 />
               }
               label={elmnt.name}

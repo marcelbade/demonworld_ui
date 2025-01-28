@@ -42,6 +42,12 @@ const darkTheme = createTheme({
         border: " solid 2px white",
         borderRadius: "10px",
       },
+      checkbox: {
+        color: "white",
+        "&.Mui-checked": {
+          color: "white",
+        },
+      },
     },
     animation: {
       fadeAway: animationTheme.palette.fadeAway,

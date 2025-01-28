@@ -26,10 +26,23 @@ const lightTheme = createTheme({
       },
     },
     cardCreator: {
-      box: {
+      name: {
         width: "max-content",
         border: " solid 2px black",
         borderRadius: "10px",
+      },
+      box: {
+        marginTop: "1em",
+        padding: "1em",
+        width: "50em",
+        border: " solid 2px black",
+        borderRadius: "10px",
+      },
+      checkbox: {
+        color: "black",
+        "&.Mui-checked": {
+          color: "black",
+        },
       },
     },
     animation: {

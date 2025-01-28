@@ -97,6 +97,7 @@ const FactionNameCreator = () => {
               <Checkbox
                 checked={CCC.newFaction} //
                 onChange={isNewFaction}
+                sx={theme.palette.cardCreator.checkbox}
               />
             }
             label={CREATOR.NEW_FACTION}

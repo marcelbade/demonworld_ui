@@ -71,6 +71,7 @@ const FearAndMoralCreator = () => {
                 checked={CCC.isFearless} //
                 onChange={setUnitFearless}
                 inputProps={{ "aria-label": "controlled" }}
+                sx={theme.palette.cardCreator.checkbox}
               />
             }
             label={CARD_TEXT.UNIT_IS_FEARLESS}
