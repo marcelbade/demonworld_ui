@@ -91,9 +91,6 @@ const CardCreator = () => {
     unitType: "U",
   });
 
-  console.log("moral 1 >>>>", unit.moral1);
-  console.log("moral 2 >>>>", unit.moral2);
-
   return (
     <CardCreationProvider
       value={{
