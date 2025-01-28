@@ -1,6 +1,7 @@
 // react
 import React, { Fragment, useContext } from "react";
 // material ui
+import { useTheme } from "@emotion/react";
 import { Grid, Typography, FormControlLabel, Checkbox } from "@mui/material";
 import CreatorTextInput from "./CreatorTextInput";
 // components and functions
@@ -12,6 +13,8 @@ import { CREATOR } from "../../constants/textsAndMessages";
 import { AUTOMATON, GIANT, HERO, MAGE, SUMMONED, UNIT } from "../../constants/unitTypes";
 
 const UnitMovementCreator = () => {
+  const theme = useTheme();
+
   const CCC = useContext(CardCreationContext);
 
   const changeMovement = (event) => {
@@ -116,13 +119,7 @@ const UnitMovementCreator = () => {
       alignItems="center" //
       justifyContent="center"
       direction="column"
-      sx={{
-        marginTop: "1em",
-        padding: "1em",
-        width: "50em",
-        border: " solid 2px black",
-        borderRadius: "10px",
-      }}
+      sx={theme.palette.cardCreator.box}
     >
       {CCC.unit.unitType === UNIT ? <FormationsAndHordeCreator /> : null}
       <Grid

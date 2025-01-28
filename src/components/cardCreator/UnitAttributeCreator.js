@@ -1,6 +1,7 @@
 // react
 import React, { useContext } from "react";
 // material ui
+import { useTheme } from "@emotion/react";
 import { Grid, Checkbox, FormControlLabel } from "@mui/material";
 // components and functions
 import CreatorTextInput from "./CreatorTextInput";
@@ -11,6 +12,7 @@ import { CREATOR } from "../../constants/textsAndMessages";
 import { GIANT, HERO, MAGE, UNIT } from "../../constants/unitTypes";
 
 const UnitAttributeCreator = () => {
+  const theme = useTheme();
   const CCC = useContext(CardCreationContext);
 
   const changeIsUnique = () => {
@@ -100,13 +102,7 @@ const UnitAttributeCreator = () => {
       direction="column"
       alignItems="flex-start" //
       justifyContent="center"
-      sx={{
-        marginTop: "1em",
-        padding: "1em",
-        width: "50em",
-        border: " solid 2px black",
-        borderRadius: "10px",
-      }}
+      sx={theme.palette.cardCreator.box}
     >
       <Grid
         container //

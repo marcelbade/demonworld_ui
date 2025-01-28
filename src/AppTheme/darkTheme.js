@@ -29,6 +29,20 @@ const darkTheme = createTheme({
         backgroundColor: "black",
       },
     },
+    cardCreator: {
+      name: {
+        width: "max-content",
+        border: " solid 2px white",
+        borderRadius: "10px",
+      },
+      box: {
+        marginTop: "1em",
+        padding: "1em",
+        width: "50em",
+        border: " solid 2px white",
+        borderRadius: "10px",
+      },
+    },
     animation: {
       fadeAway: animationTheme.palette.fadeAway,
       fadeIn: animationTheme.palette.fadeIn,

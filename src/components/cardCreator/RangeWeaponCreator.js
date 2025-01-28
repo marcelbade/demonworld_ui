@@ -1,6 +1,7 @@
 // react
 import React, { useContext } from "react";
 // material ui
+import { useTheme } from "@emotion/react";
 import { FormGroup, Grid, FormControlLabel, Checkbox } from "@mui/material";
 import CreatorTextInput from "./CreatorTextInput";
 // components and functions
@@ -11,6 +12,9 @@ import { CardCreationContext } from "../../contexts/cardCreationContext";
 import blackBowIcon from "../../assets/icons/bow2.png";
 
 const RangeWeaponCreator = () => {
+
+  const theme = useTheme();
+
   const CCC = useContext(CardCreationContext);
 
   const deleteRangedWeaponName = () => {
@@ -79,11 +83,7 @@ const RangeWeaponCreator = () => {
           item //
           container
           direction="row"
-          sx={{
-            width: "50em",
-            border: " solid 2px black",
-            borderRadius: "10px",
-          }}
+          sx={theme.palette.cardCreator.box}
         >
           <CreatorTextInput
             id={"rangedWeaponName"} //

@@ -1,6 +1,7 @@
 // react
 import React, { useContext } from "react";
 // material ui
+import { useTheme } from "@emotion/react";
 import { Checkbox, FormControlLabel, Grid } from "@mui/material";
 import CreatorTextInput from "./CreatorTextInput";
 // contexts
@@ -10,6 +11,7 @@ import { CREATOR } from "../../constants/textsAndMessages";
 import { UNIT } from "../../constants/unitTypes";
 
 const SpecialElementsCreator = () => {
+  const theme = useTheme();
   const CCC = useContext(CardCreationContext);
 
   const changeLeader = () => {
@@ -51,20 +53,7 @@ const SpecialElementsCreator = () => {
   ];
 
   return (
-    <Grid
-      container
-      item
-      direction="row"
-      alignItems="center"
-      justifyContent="space-around"
-      sx={{
-        marginTop: "1em",
-        padding: "1em",
-        width: "50em",
-        border: " solid 2px black",
-        borderRadius: "10px",
-      }}
-    >
+    <Grid container item direction="row" alignItems="center" justifyContent="space-around" sx={theme.palette.cardCreator.box}>
       <Grid item>
         <CreatorTextInput
           id={"elementNumber"}

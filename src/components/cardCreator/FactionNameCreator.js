@@ -2,9 +2,9 @@
 import React, { Fragment, useContext } from "react";
 // material ui
 import { FormGroup, Grid, FormControlLabel, Checkbox } from "@mui/material";
-
-import SelectionInput from "../shared/selectionInput";
+import { useTheme } from "@emotion/react";
 // components and functions
+import SelectionInput from "../shared/selectionInput";
 import CreatorTextInput from "./CreatorTextInput";
 // contexts
 import { ArmyContext } from "../../contexts/armyContext";
@@ -14,6 +14,10 @@ import { ALL_FACTIONS_ARRAY, NONE } from "../../constants/factions";
 import { CREATOR } from "../../constants/textsAndMessages";
 
 const FactionNameCreator = () => {
+  const theme = useTheme();
+
+  console.log("theme.palette.cardCreator.frame", theme.palette.cardCreator.frame);
+
   const AC = useContext(ArmyContext);
   const CCC = useContext(CardCreationContext);
 
@@ -76,14 +80,10 @@ const FactionNameCreator = () => {
 
   return (
     <Grid
-      container
+      container //
       alignItems="center"
       direction="column"
-      sx={{
-        width: "max-content",
-        border: " solid 2px black",
-        borderRadius: "10px",
-      }}
+      sx={theme.palette.cardCreator.name}
     >
       <Grid
         container //

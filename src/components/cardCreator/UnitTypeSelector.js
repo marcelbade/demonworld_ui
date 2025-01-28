@@ -1,6 +1,7 @@
 // react
 import React, { useContext } from "react";
 // material ui
+import { useTheme } from "@emotion/react";
 import { Grid, FormControlLabel, FormLabel, FormControl, RadioGroup, Radio } from "@mui/material";
 // contexts
 import { CardCreationContext } from "../../contexts/cardCreationContext";
@@ -8,6 +9,8 @@ import { CREATOR } from "../../constants/textsAndMessages";
 import { GIANT, HERO, UNIT, SUMMONED, MAGE, AUTOMATON } from "../../constants/unitTypes";
 
 const UnitTypeSelector = () => {
+  const theme = useTheme();
+
   const CCC = useContext(CardCreationContext);
 
   /**
@@ -37,13 +40,7 @@ const UnitTypeSelector = () => {
       alignItems="center" //
       justifyContent="center"
       direction="column"
-      sx={{
-        marginTop: "1em",
-        padding: "1em",
-        width: "50em",
-        border: " solid 2px black",
-        borderRadius: "10px",
-      }}
+      sx={theme.palette.cardCreator.box}
     >
       <FormControl variant="outlined">
         <FormLabel sx={{ fontFamily: "NotMaryKate" }} id="unitTypeLabel">

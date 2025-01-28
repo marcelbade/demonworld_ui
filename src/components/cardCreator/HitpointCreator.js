@@ -1,6 +1,7 @@
 // react
 import React, { useContext } from "react";
 // material ui
+import { useTheme } from "@emotion/react";
 import { Grid } from "@mui/material";
 // components and functions
 import CreatorTextInput from "./CreatorTextInput";
@@ -9,6 +10,10 @@ import { CardCreationContext } from "../../contexts/cardCreationContext";
 import { CREATOR } from "../../constants/textsAndMessages";
 
 const HitpointCreator = () => {
+  
+    const theme = useTheme();
+
+    
   const CCC = useContext(CardCreationContext);
 
   const deleteHitpoints = () => {
@@ -26,13 +31,7 @@ const HitpointCreator = () => {
       direction="row"
       alignItems="center"
       justifyContent="space-evenly"
-      sx={{
-        marginTop: "1em", //
-        padding: "1em",
-        width: "50em",
-        border: " solid 2px black",
-        borderRadius: "10px",
-      }}
+      sx={theme.palette.cardCreator.box}
     >
       <CreatorTextInput
         id={"Hitpoints"} //

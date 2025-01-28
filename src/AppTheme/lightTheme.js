@@ -25,6 +25,13 @@ const lightTheme = createTheme({
         backgroundColor: "black",
       },
     },
+    cardCreator: {
+      box: {
+        width: "max-content",
+        border: " solid 2px black",
+        borderRadius: "10px",
+      },
+    },
     animation: {
       fadeAway: animationTheme.palette.fadeAway,
       fadeIn: animationTheme.palette.fadeIn,

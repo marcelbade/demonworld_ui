@@ -1,6 +1,7 @@
 // react
 import React, { useContext } from "react";
 // material ui
+import { useTheme } from "@emotion/react";
 import { Grid, Checkbox } from "@mui/material";
 // components and functions
 import CreatorTextInput from "./CreatorTextInput";
@@ -12,6 +13,10 @@ import blackSwordIcon from "../../assets/icons/sword2.png";
 import { CREATOR } from "../../constants/textsAndMessages";
 
 const MeleeWeaponCreator = () => {
+
+  
+    const theme = useTheme();
+
   const ICON_SIZE = "20em";
 
   const CCC = useContext(CardCreationContext);
@@ -90,13 +95,7 @@ const MeleeWeaponCreator = () => {
     <Grid
       container
       direction="column"
-      sx={{
-        marginTop: "1em",
-        padding: "1em",
-        width: "50em",
-        border: " solid 2px black",
-        borderRadius: "10px",
-      }}
+      sx={theme.palette.cardCreator.box}
     >
       <Grid
         container //

@@ -1,6 +1,7 @@
 // react
 import React, { useContext } from "react";
 // material ui
+import { useTheme } from "@emotion/react";
 import { Checkbox, FormControlLabel, Grid } from "@mui/material";
 // components and functions
 import CreatorTextInput from "./CreatorTextInput";
@@ -11,6 +12,8 @@ import { UNIT } from "../../constants/unitTypes";
 import { CARD_TEXT, CREATOR } from "../../constants/textsAndMessages";
 
 const FearAndMoralCreator = () => {
+  const theme = useTheme();
+
   const CCC = useContext(CardCreationContext);
 
   const setUnitFearless = () => {
@@ -49,18 +52,12 @@ const FearAndMoralCreator = () => {
 
   return (
     <Grid
-      item
+      item //
       container
       direction="column"
       alignItems="center"
       justifyContent="space-evenly"
-      sx={{
-        marginTop: "1em", //
-        padding: "1em",
-        width: "50em",
-        border: " solid 2px black",
-        borderRadius: "10px",
-      }}
+      sx={theme.palette.cardCreator.box}
     >
       <Grid
         container //

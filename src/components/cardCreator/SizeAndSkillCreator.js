@@ -1,6 +1,7 @@
 // react
 import React, { useContext } from "react";
 // material ui
+import { useTheme } from "@emotion/react";
 import CreatorTextInput from "./CreatorTextInput";
 import { Grid } from "@mui/material";
 // contexts
@@ -10,6 +11,9 @@ import rangeArmorIcon from "../../assets/icons/range-armor.png";
 import meleeArmorIcon from "../../assets/icons/melee-armor.png";
 
 const SizeAndSkillCreator = () => {
+
+  const theme = useTheme();
+
   const CCC = useContext(CardCreationContext);
 
   const changeSize = (event) => {
@@ -51,13 +55,7 @@ const SizeAndSkillCreator = () => {
       direction="row"
       alignItems="center"
       justifyContent="space-around"
-      sx={{
-        marginTop: "1em",
-        padding: "1em",
-        width: "50em",
-        border: " solid 2px black",
-        borderRadius: "10px",
-      }}
+      sx={theme.palette.cardCreator.box}
     >
       {inputElements.map((input, i) => (
         <CreatorTextInput

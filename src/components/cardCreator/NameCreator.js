@@ -1,6 +1,7 @@
 // react
 import React, { useContext } from "react";
 // material ui
+import { useTheme } from "@emotion/react";
 import CreatorTextInput from "./CreatorTextInput";
 import { Grid } from "@mui/material";
 // contexts
@@ -11,12 +12,14 @@ import { CREATOR } from "../../constants/textsAndMessages";
 const NameCreator = () => {
   const CCC = useContext(CardCreationContext);
 
+  const theme = useTheme();
+
   const deleteName = () => {
-    CCC.setUnit({...CCC.unit, unitName: ""});
+    CCC.setUnit({ ...CCC.unit, unitName: "" });
   };
 
   const changeName = (event) => {
-    CCC.setUnit({...CCC.unit, unitName: event.target.value});
+    CCC.setUnit({ ...CCC.unit, unitName: event.target.value });
   };
 
   return (
@@ -24,13 +27,7 @@ const NameCreator = () => {
       container
       alignItems="center" //
       justifyContent="center"
-      sx={{
-        marginTop: "1em",
-        padding: "1em",
-        width: "50em",
-        border: " solid 2px black",
-        borderRadius: "10px",
-      }}
+      sx={theme.palette.cardCreator.box}
     >
       <CreatorTextInput
         id={"name"} //
