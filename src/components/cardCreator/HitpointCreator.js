@@ -21,7 +21,7 @@ const HitpointCreator = () => {
   };
 
   const changeHitpoints = (event) => {
-    CCC.setUnit({ ...CCC.unit, hitpoints: parseInt(event.target.value) });
+    CCC.setUnit({ ...CCC.unit, hitpoints: event.target.value });
   };
 
   return (

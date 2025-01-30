@@ -18,19 +18,19 @@ const UnitMovementCreator = () => {
   const CCC = useContext(CardCreationContext);
 
   const changeMovement = (event) => {
-    CCC.setUnit({ ...CCC.unit, move: parseInt(event.target.value) });
+    CCC.setUnit({ ...CCC.unit, move: event.target.value });
   };
 
   const changeSkirmish = (event) => {
-    CCC.setUnit({ ...CCC.unit, skirmish: parseInt(event.target.value) });
+    CCC.setUnit({ ...CCC.unit, skirmish: event.target.value });
   };
 
   const changeCharge = (event) => {
-    CCC.setUnit({ ...CCC.unit, charge: parseInt(event.target.value) });
+    CCC.setUnit({ ...CCC.unit, charge: event.target.value });
   };
 
   const changeManeuver = (event) => {
-    CCC.setUnit({ ...CCC.unit, hold_maneuvers: parseInt(event.target.value) });
+    CCC.setUnit({ ...CCC.unit, hold_maneuvers: event.target.value });
   };
 
   const changeHasMaxFieldsMove = () => {

@@ -39,15 +39,15 @@ const FearAndMoralCreator = () => {
   };
 
   const changeFear = (event) => {
-    CCC.setUnit({ ...CCC.unit, fear: parseInt(event.target.value) });
+    CCC.setUnit({ ...CCC.unit, fear: event.target.value });
   };
 
   const changeMoral1 = (event) => {
-    CCC.setUnit({ ...CCC.unit, moral1: parseInt(event.target.value) });
+    CCC.setUnit({ ...CCC.unit, moral1: event.target.value });
   };
 
   const changeMoral2 = (event) => {
-    CCC.setUnit({ ...CCC.unit, moral2: parseInt(event.target.value) });
+    CCC.setUnit({ ...CCC.unit, moral2: event.target.value });
   };
 
   return (

@@ -26,7 +26,7 @@ const MeleeWeaponCreator = () => {
   };
 
   const changeWeapon1 = (event) => {
-    CCC.setUnit({ ...CCC.unit, weapon1: parseInt(event.target.value) });
+    CCC.setUnit({ ...CCC.unit, weapon1: event.target.value });
   };
 
   const changeMeleeWeapon2Name = (event) => {
@@ -34,14 +34,14 @@ const MeleeWeaponCreator = () => {
   };
 
   const changeWeapon2 = (event) => {
-    CCC.setUnit({ ...CCC.unit, weapon2: parseInt(event.target.value) });
+    CCC.setUnit({ ...CCC.unit, weapon2: event.target.value });
   };
   const changeMeleeWeapon3Name = (event) => {
     CCC.setUnit({ ...CCC.unit, weapon3Name: event.target.value });
   };
 
   const changeWeapon3 = (event) => {
-    CCC.setUnit({ ...CCC.unit, weapon3: parseInt(event.target.value) });
+    CCC.setUnit({ ...CCC.unit, weapon3: event.target.value });
   };
 
   const unitHasMeleeSkill = () => {
@@ -49,15 +49,15 @@ const MeleeWeaponCreator = () => {
   };
 
   const changeSkillMelee = (event) => {
-    CCC.setUnit({ ...CCC.unit, skillMelee: parseInt(event.target.value) });
+    CCC.setUnit({ ...CCC.unit, skillMelee: event.target.value });
   };
 
   const changeChargeBonus = (event) => {
-    CCC.setUnit({ ...CCC.unit, chargeBonus: parseInt(event.target.value) });
+    CCC.setUnit({ ...CCC.unit, chargeBonus: event.target.value });
   };
 
   const changeInitiative = (event) => {
-    CCC.setUnit({ ...CCC.unit, initiative: parseInt(event.target.value) });
+    CCC.setUnit({ ...CCC.unit, initiative: event.target.value });
   };
 
   const elmnts = [

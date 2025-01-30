@@ -31,7 +31,7 @@ const SpecialElementsCreator = () => {
   };
 
   const changeNumberOfElements = (event) => {
-    CCC.setUnit({ ...CCC.unit, numberOfElements: parseInt(event.target.value) });
+    CCC.setUnit({ ...CCC.unit, numberOfElements: event.target.value });
   };
 
   const elements = [

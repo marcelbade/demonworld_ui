@@ -17,15 +17,15 @@ const SizeAndSkillCreator = () => {
   const CCC = useContext(CardCreationContext);
 
   const changeSize = (event) => {
-    CCC.setUnit({ ...CCC.unit, unitSize: parseInt(event.target.value) });
+    CCC.setUnit({ ...CCC.unit, unitSize: event.target.value });
   };
 
   const changeRangeArmor = (event) => {
-    CCC.setUnit({ ...CCC.unit, armourRange: parseInt(event.target.value) });
+    CCC.setUnit({ ...CCC.unit, armourRange: event.target.value });
   };
 
   const changeMeleeArmor = (event) => {
-    CCC.setUnit({ ...CCC.unit, armourMelee: parseInt(event.target.value) });
+    CCC.setUnit({ ...CCC.unit, armourMelee: event.target.value });
   };
 
   const inputElements = [
