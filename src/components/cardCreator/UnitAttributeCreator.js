@@ -32,7 +32,7 @@ const UnitAttributeCreator = () => {
   };
 
   const changeLeaderInClosedFormation = () => {
-    CCC.setUnit({ ...CCC.unit, leaderIsClosedOrderUnit: !CCC.unit.leaderIsClosedOrder });
+    CCC.setUnit({ ...CCC.unit, leaderIsClosedOrder: !CCC.unit.leaderIsClosedOrder });
   };
 
   const changeIsLowFLyer = () => {
@@ -53,46 +53,46 @@ const UnitAttributeCreator = () => {
 
   const elements = [
     {
-      value: CCC.unit.uniqueUnit, //
+      value: CCC.unit.uniqueUnit,
       action: changeIsUnique,
       name: CREATOR.IS_UNIQUE,
-      display: true,
+      disable: false,
     },
     {
-      value: CCC.unit.isMounted, //
+      value: CCC.unit.isMounted,
       action: changeIsMounted,
       name: CREATOR.IS_CAVALERY,
-      display: true,
+      disable: false,
     },
     {
-      value: CCC.unit.hasShield, //
+      value: CCC.unit.hasShield,
       action: changeHasShield,
       name: CCC.unit.unitType === UNIT ? CREATOR.HAS_SHIELD : CREATOR.HAS_SHIELD_HERO,
-      display: CCC.unit.unitType !== GIANT,
+      disable: CCC.unit.unitType === GIANT,
     },
     {
-      value: CCC.unit.unitIsClosedOrder, //
+      value: CCC.unit.unitIsClosedOrder,
       action: changeInClosedFormation,
       name: CREATOR.CLOSED_FORMATION,
-      display: true,
+      disable: false,
     },
     {
-      value: CCC.unit.leaderIsClosedOrder, //
+      value: CCC.unit.leaderIsClosedOrder,
       action: changeLeaderInClosedFormation,
       name: CREATOR.LEADER_CLOSED_FORMATION,
-      display: CCC.unit.unitType === UNIT,
+      disable: CCC.unit.unitType !== UNIT || CCC.unit.unitIsClosedOrder,
     },
     {
-      value: CCC.unit.isLowFlyer, //
+      value: CCC.unit.isLowFlyer,
       action: changeIsLowFLyer,
       name: CREATOR.IS_LOW_FLYER,
-      display: !CCC.unit.isHighFlyer,
+      disable: CCC.unit.isHighFlyer,
     },
     {
-      value: CCC.unit.isHighFlyer, //
+      value: CCC.unit.isHighFlyer,
       action: changeIsHighFlyer,
       name: CREATOR.IS_HIGH_FLYER,
-      display: !CCC.unit.isLowFlyer,
+      disable: CCC.unit.isLowFlyer,
     },
   ];
 
@@ -133,23 +133,22 @@ const UnitAttributeCreator = () => {
           />
         ) : null}
       </Grid>
-      {elements
-        .filter((elmnt) => elmnt.display)
-        .map((elmnt, i) => (
-          <Grid key={i}>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  checked={elmnt.value} //
-                  onChange={elmnt.action}
-                  inputProps={{ "aria-label": "controlled" }}
-                  sx={theme.palette.cardCreator.checkbox}
-                />
-              }
-              label={elmnt.name}
-            />
-          </Grid>
-        ))}
+      {elements.map((elmnt, i) => (
+        <Grid key={i}>
+          <FormControlLabel
+            control={
+              <Checkbox
+                checked={elmnt.value} //
+                onChange={elmnt.action}
+                inputProps={{ "aria-label": "controlled" }}
+                disabled={elmnt.disable}
+                sx={theme.palette.cardCreator.checkbox}
+              />
+            }
+            label={elmnt.name}
+          />
+        </Grid>
+      ))}
     </Grid>
   );
 };
