@@ -52,35 +52,77 @@ const UnitTypeSelector = () => {
           value={CCC.unitType}
           onChange={handleChange}
           defaultValue={UNIT}
+          sx={{
+            color: theme.palette.cardCreator.checkbox.color,
+            "&.Mui-checked": {
+              color: theme.palette.cardCreator.checkbox.color,
+            },
+          }}
         >
           <FormControlLabel //
             value={UNIT}
-            control={<Radio />}
+            control={
+              <Radio
+                style={{
+                  color: theme.palette.cardCreator.checkbox.color,
+                }}
+              />
+            }
             label={CREATOR.UNIT_OR_SUMMONED_UNIT}
           />
           <FormControlLabel //
             value={GIANT}
-            control={<Radio />}
+            control={
+              <Radio
+                style={{
+                  color: theme.palette.cardCreator.checkbox.color,
+                }}
+              />
+            }
             label={CREATOR.GIANT}
           />
           <FormControlLabel //
             value={AUTOMATON}
-            control={<Radio />}
+            control={
+              <Radio
+                style={{
+                  color: theme.palette.cardCreator.checkbox.color,
+                }}
+              />
+            }
             label={CREATOR.AUTOMATON}
           />
           <FormControlLabel //
             value={HERO}
-            control={<Radio />}
+            control={
+              <Radio
+                style={{
+                  color: theme.palette.cardCreator.checkbox.color,
+                }}
+              />
+            }
             label={CREATOR.HERO}
           />
           <FormControlLabel //
             value={MAGE}
-            control={<Radio />}
+            control={
+              <Radio
+                style={{
+                  color: theme.palette.cardCreator.checkbox.color,
+                }}
+              />
+            }
             label={CREATOR.MAGE}
           />
           <FormControlLabel //
             value={SUMMONED}
-            control={<Radio />}
+            control={
+              <Radio
+                style={{
+                  color: theme.palette.cardCreator.checkbox.color,
+                }}
+              />
+            }
             label={CREATOR.SUMMONS_WITH_MAXFIELDS}
           />
         </RadioGroup>
