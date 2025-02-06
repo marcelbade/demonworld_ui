@@ -15,6 +15,7 @@ const ArmyListBox = () => {
    * Function checks if the user is done selecting an army,
    * by checking if this army has alternative lists. If that's the case
    * the flag altArmyListSelectionComplete is returned, otherwise it defaults to true.
+   * If true, the component is displayed.
    * @returns true, if selection is complete.
    */
   const isSelectionComplete = () => {
