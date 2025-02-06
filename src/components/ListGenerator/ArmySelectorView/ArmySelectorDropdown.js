@@ -40,7 +40,7 @@ const ArmySelectorDropdown = (props) => {
 
   /**
    * Function triggers when user enters a value from the dropdown list.
-   * Function simply wraps three function. The last one sets the flag for
+   * The Function simply wraps three function. The last one sets the flag for
    * the right side menu to true so it opens slowly.
    * @param {String} value
    */
@@ -165,7 +165,7 @@ const ArmySelectorDropdown = (props) => {
 
   return (
     <SelectionInput //
-      isArmySelector={props.isArmySelector}
+      isArmySelector={true}
       filterFunction={handleInput}
       clearFunction={clearFactionName}
       alternatives={setFactionList()}

@@ -43,7 +43,7 @@ const ListGenerator = () => {
             : { ...theme.palette.animation.fadeAway, ...factionSelectorStyle }
         }
       >
-        <ArmySelectorDropdown isArmySelector={true} />
+        <ArmySelectorDropdown />
       </Box>
       <Grid
         item //
