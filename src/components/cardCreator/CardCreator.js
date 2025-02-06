@@ -20,7 +20,7 @@ import UnitTypeSelector from "./UnitTypeSelector";
 
 import AppBar from "../shared/AppBar";
 import CardPreview from "./CardPreview";
-import MenuSwitch from "../shared/MenuSwitch";
+import MenuToggle from "../shared/MenuToggle";
 //  contexts
 import CardCreationProvider from "../../contexts/cardCreationContext";
 // constants
@@ -130,7 +130,7 @@ const CardCreator = () => {
             position: "fixed",
           }}
         >
-          <MenuSwitch
+          <MenuToggle
             iconSize="25em" //
             bttnSize="2em"
             margin="0.5em"

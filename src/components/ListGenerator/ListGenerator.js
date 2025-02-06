@@ -13,7 +13,7 @@ import ArmySelectorDropdown from "./ArmySelectorView/ArmySelectorDropdown";
 import { ArmyContext } from "../../contexts/armyContext";
 import { SelectionContext } from "../../contexts/selectionContext";
 // icons
-import MenuSwitch from "../shared/MenuSwitch";
+import MenuToggle from "../shared/MenuToggle";
 import AppBar from "../shared/AppBar";
 // constants
 import { ID } from "../../constants/appBarConstants";
@@ -34,15 +34,15 @@ const ListGenerator = () => {
     width: "30em",
   };
 
+  const setStyle = () => {
+    return AC.selectedFactionName === NONE //
+      ? factionSelectorStyle
+      : { ...theme.palette.animation.fadeAway, ...factionSelectorStyle };
+  };
+
   return (
     <Grid container direction="row">
-      <Box
-        sx={
-          AC.selectedFactionName === NONE //
-            ? factionSelectorStyle
-            : { ...theme.palette.animation.fadeAway, ...factionSelectorStyle }
-        }
-      >
+      <Box sx={setStyle()}>
         <ArmySelectorDropdown />
       </Box>
       <Grid
@@ -53,10 +53,11 @@ const ListGenerator = () => {
           marginBottom: "2em",
         }}
       >
-        <MenuSwitch
+        <MenuToggle
           iconSize="25em" //
           bttnSize="2em"
           margin="0.5em"
+         
         />
         <BackToSelectionButton />
         <Tooltip title={<Typography>{TOOLTIPS.DELETE_ARMY_LIST}</Typography>}>

@@ -15,7 +15,7 @@ import CustomIcon from "./statCards/CustomIcon";
  * @param {{*}} props
  * @returns JSX
  */
-const MenuSwitch = (props) => {
+const MenuToggle = (props) => {
   const MC = useContext(MenuContext);
 
   return (
@@ -41,4 +41,4 @@ const MenuSwitch = (props) => {
   );
 };
 
-export default MenuSwitch;
+export default MenuToggle;
