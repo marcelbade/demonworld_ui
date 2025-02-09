@@ -149,34 +149,6 @@ function App() {
     setFetchedItems(result.data);
   };
 
-  //TODO: working, fine, but doesn't belong here!
-  /**
-   * in order to work, the state setter needs a unit at the start. Since the view is not visible, the first unit in the list is used.
-   */
-  const closeCardDisplay = () => {
-    setStatCardState({
-      clickedUnit: selectedUnits[0], //
-      lastclickedUnit: selectedUnits[0],
-      show: false,
-    });
-  };
-
-  const closeItemShop = () => {
-    setItemShopState({
-      clickedUnit: selectedUnits[0], //
-      lastclickedUnit: selectedUnits[0],
-      show: false,
-    });
-  };
-
-  const closeSecondSubFactionMenu = () => {
-    setSecondSubFactionMenuState({
-      clickedUnit: selectedUnits[0], //
-      lastclickedUnit: selectedUnits[0],
-      show: false,
-    });
-  };
-
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={darkModeOff ? lightTheme : darkTheme}>
@@ -266,9 +238,6 @@ function App() {
                               setStatCardState: setStatCardState,
                               setItemShopState: setItemShopState,
                               setSecondSubFactionMenuState: setSecondSubFactionMenuState,
-                              closeCardDisplay: closeCardDisplay,
-                              closeItemShop: closeItemShop,
-                              closeSecondSubFactionMenu: closeSecondSubFactionMenu,
                               setShowOptionButtons: setShowOptionButtons,
                               setDisplayedCard: setDisplayedCard,
                             }}

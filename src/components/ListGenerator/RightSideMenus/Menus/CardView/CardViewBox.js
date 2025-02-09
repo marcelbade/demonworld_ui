@@ -9,6 +9,8 @@ import CardView from "../../../../shared/CardView";
 import { RightMenuContext } from "../../../../../contexts/rightMenuContext";
 import { LightSwitchContext } from "../../../../../contexts/lightSwitchContext";
 import { ArmyContext } from "../../../../../contexts/armyContext";
+// custom hooks
+import useRightSideMenuController from "../../../../../customHooks/useRightSideMenuController";
 // theme
 import lightTheme from "../../../../../AppTheme/lightTheme";
 import darkTheme from "../../../../../AppTheme/darkTheme";
@@ -17,6 +19,8 @@ const CardViewBox = () => {
   const RC = useContext(RightMenuContext);
   const LC = useContext(LightSwitchContext);
   const AC = useContext(ArmyContext);
+
+  const sideMenuController = useRightSideMenuController({}, "", {});
 
   const allStateCards = RC.displayedCard.isMultiStateUnit
     ? AC.listOfAllFactionUnits.filter((u) => u.belongsToUnit === RC.displayedCard.unitName)
@@ -33,7 +37,7 @@ const CardViewBox = () => {
         <Grid item>
           <IconButton
             onClick={() => {
-              RC.closeCardDisplay();
+              sideMenuController.closeCardDisplay();
             }}
             size="large"
           >

@@ -7,7 +7,7 @@ import { ListItemButton } from "@mui/material";
 import useRightSideMenuController from "../../../../../../../customHooks/useRightSideMenuController";
 
 const UnitElementButtons = (props) => {
-  const buttons = useRightSideMenuController(
+  const sideMenuController = useRightSideMenuController(
     props.unit, //
     props.subFaction,
     {
@@ -19,7 +19,7 @@ const UnitElementButtons = (props) => {
 
   return (
     <List key={props.unit.uniqueID}>
-      {buttons.map((b, i) => {
+      {sideMenuController.buttons.map((b, i) => {
         return (
           <ListItemButton
             key={i} //

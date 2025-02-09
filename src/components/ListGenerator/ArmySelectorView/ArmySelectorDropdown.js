@@ -4,7 +4,9 @@ import SelectionInput from "../../shared/selectionInput";
 import useUnitEnricher from "../../../customHooks/UseUnitEnricher";
 import { ArmyContext } from "../../../contexts/armyContext";
 import { ItemContext } from "../../../contexts/itemContext";
+//  custom hooks
 import useArmyValidation from "../../../customHooks/UseArmyValidation";
+import useRightSideMenuController from "../../../customHooks/useRightSideMenuController";
 // context
 import { RightMenuContext } from "../../../contexts/rightMenuContext";
 import { SelectionContext } from "../../../contexts/selectionContext";
@@ -32,6 +34,7 @@ const ArmySelectorDropdown = (props) => {
   const SFC = useContext(SecondSubFactionContext);
 
   const validation = useArmyValidation();
+  const sideMenuController = useRightSideMenuController({}, "", {});
   const enrichUnit = useUnitEnricher();
 
   useEffect(() => {
@@ -128,9 +131,9 @@ const ArmySelectorDropdown = (props) => {
     SFC.setHasAdditionalSubFaction(false);
     AYC.setAllyName(NO_ALLY);
 
-    RC.closeCardDisplay();
-    RC.closeItemShop();
-    RC.closeSecondSubFactionMenu();
+    sideMenuController.closeCardDisplay();
+    sideMenuController.closeItemShop();
+    sideMenuController.closeSecondSubFactionMenu();
   };
 
   /**

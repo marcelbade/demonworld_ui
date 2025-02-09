@@ -1,39 +1,77 @@
 // react
 import { useContext } from "react";
 // context
-import { RightMenuContext } from "../contexts/rightMenuContext";
 import { ItemContext } from "../contexts/itemContext";
-import { TournamentRulesContext } from "../contexts/tournamentRulesContext";
 import { SecondSubFactionContext } from "../contexts/secondSubFactionContext";
+import { SelectionContext } from "../contexts/selectionContext";
+import { RightMenuContext } from "../contexts/rightMenuContext";
+import { TournamentRulesContext } from "../contexts/tournamentRulesContext";
 // components and functions
 import { BUTTON_TEXTS } from "../constants/textsAndMessages";
 import { SUMMONED } from "../constants/unitTypes";
 
-/**
- *  - use bttnSelectorObj to select which buttons to display
- *  - paste all the logic for the rightSideMenucrontroller here
- *  - dont forget the context !
- *  - RETURN VALUE: object with:
- *      - rightMenuController function
- *      -
- *
- * @param {*} bttnSelectorObj
+/**Function toggles the menus on the right side. It controls what menu
+ * and what content for which unit is shown. In order to do this, the menus are
+ * not toggled by a simple boolean flag, instead an object stores the previously 
+ * clicked unit, a boolean flag and the clicked unit. This makes 
+ * it possible to close a menu if the same button is clicked again 
+ * or leave the menub open and rerender the content if needed.
+ * Note: if only the close functions are needed as a return value, the the the 
+ * three parameters can be empty ({},"",{})! 
+ * @param {unitCard} unit
+ * @param {String} subFaction
+ * @param {obj} bttnSelectorObj
+ * @returns an object containing four fields: 
+ * - an array of button objects. The object describe the button separately
+ *   from the UI implementation by storing the button action, 
+ *   the button text and whether to display it.
+ * - three functions that close the corrsponing menu
  */
 const useRightSideMenuController = (unit, subFaction, bttnSelectorObj) => {
-  const SFC = useContext(SecondSubFactionContext);
   const IC = useContext(ItemContext);
   const RC = useContext(RightMenuContext);
+  const SEC = useContext(SelectionContext);
+  const SFC = useContext(SecondSubFactionContext);
   const TC = useContext(TournamentRulesContext);
 
   const UNIT_CARDS = "UNIT_CARDS";
   const ITEMS = "ITEMS";
   const SECOND_SUB_FACTION = "SECOND_SUB_FACTION";
 
+  //TODO: working, fine, but doesn't belong here!
   /**
-   * Function toggles the menus on the right side.
-   * It controls what menu and what content for which unit is shown.
-   * In order to do this, the menus are not toggled by a simple boolean flag,
-   * instead an object stores the previously clicked unit, a boolean flag and the clicked unit.
+   * in order to work, the state setter needs a unit at the start. Since the view is not visible, the first unit in the list is used.
+   */
+  const closeCardDisplay = () => {
+    RC.setStatCardState({
+      clickedUnit: SEC.selectedUnits[0], //
+      lastclickedUnit: SEC.selectedUnits[0],
+      show: false,
+    });
+  };
+
+  const closeItemShop = () => {
+    RC.setItemShopState({
+      clickedUnit: SEC.selectedUnits[0], //
+      lastclickedUnit: SEC.selectedUnits[0],
+      show: false,
+    });
+  };
+
+  const closeSecondSubFactionMenu = () => {
+    RC.setSecondSubFactionMenuState({
+      clickedUnit: SEC.selectedUnits[0], //
+      lastclickedUnit: SEC.selectedUnits[0],
+      show: false,
+    });
+  };
+
+  /**
+   * Function contains the button logic. The function has two parts: First, it checks
+   * which button is clicked (card, shop or second faction) and initializes two objects:
+   * the state object receives the state of the menu and the setter item its setter function.
+   * In the second part it checks the current state of the menu to
+   * execute one of 4 possible actions.
    * @param {unitCard} unit
    * @param {String} menu
    */
@@ -47,20 +85,20 @@ const useRightSideMenuController = (unit, subFaction, bttnSelectorObj) => {
 
         stateObj = RC.statCardState;
         stateObjSetter = RC.setStatCardState;
-        RC.closeItemShop();
-        RC.closeSecondSubFactionMenu();
+        closeItemShop();
+        closeSecondSubFactionMenu();
         break;
       case ITEMS:
         stateObj = RC.itemShopState;
         stateObjSetter = RC.setItemShopState;
-        RC.closeCardDisplay();
-        RC.closeSecondSubFactionMenu();
+        closeCardDisplay();
+        closeSecondSubFactionMenu();
         break;
       case SECOND_SUB_FACTION: // Thain faction only
         stateObj = RC.secondSubFactionMenuState;
         stateObjSetter = RC.setSecondSubFactionMenuState;
-        RC.closeCardDisplay();
-        RC.closeItemShop();
+        closeCardDisplay();
+        closeItemShop();
         break;
       default:
         throw Error("rightMenuController function received invalid menu parameter: unknown menu name");
@@ -104,9 +142,6 @@ const useRightSideMenuController = (unit, subFaction, bttnSelectorObj) => {
     !RC.itemShopState.show &&
     !RC.secondSubFactionMenuState.show
   ) {
-    //TODO Warning: Cannot update a component
-    // (`ListGenerator`) while rendering a different component (`UnitElementButtons`).
-    // To locate the bad setState() call inside `UnitElementButtons`,
     RC.setShowOptionButtons(true);
   }
   if (
@@ -138,7 +173,7 @@ const useRightSideMenuController = (unit, subFaction, bttnSelectorObj) => {
    * @returns
    */
   const testForSummons = () => {
-    return unit.unitType !== SUMMONED;
+    return unit !== undefined && unit.unitType !== SUMMONED;
   };
 
   // values for buttons
@@ -172,7 +207,12 @@ const useRightSideMenuController = (unit, subFaction, bttnSelectorObj) => {
     },
   ];
 
-  return buttons.filter((b) => b.display);
+  return {
+    buttons: buttons.filter((b) => b.display),
+    closeCardDisplay: closeCardDisplay,
+    closeItemShop: closeItemShop,
+    closeSecondSubFactionMenu: closeSecondSubFactionMenu,
+  };
 };
 
 export default useRightSideMenuController;

@@ -8,9 +8,10 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import { SecondSubFactionContext } from "../../../../../contexts/secondSubFactionContext";
 import { ItemContext } from "../../../../../contexts/itemContext";
 import { SelectionContext } from "../../../../../contexts/selectionContext";
-import { RightMenuContext } from "../../../../../contexts/rightMenuContext";
-import useArmyValidation from "../../../../../customHooks/UseArmyValidation";
 import { LightSwitchContext } from "../../../../../contexts/lightSwitchContext";
+// custon hooks
+import useArmyValidation from "../../../../../customHooks/UseArmyValidation";
+import useRightSideMenuController from "../../../../../customHooks/useRightSideMenuController";
 // theme
 import lightTheme from "../../../../../AppTheme/lightTheme";
 import darkTheme from "../../../../../AppTheme/darkTheme";
@@ -19,10 +20,10 @@ const SecondSubFactionMenu = () => {
   const IC = useContext(ItemContext);
   const SEC = useContext(SelectionContext);
   const SFC = useContext(SecondSubFactionContext);
-  const RC = useContext(RightMenuContext);
   const LC = useContext(LightSwitchContext);
 
   const validation = useArmyValidation();
+  const sideMenuController = useRightSideMenuController({}, "", {});
 
   /**
    * Function takes the selected unit from the list, sets a new value for
@@ -54,7 +55,7 @@ const SecondSubFactionMenu = () => {
         <Grid item>
           <IconButton
             onClick={() => {
-              RC.closeSecondSubFactionMenu();
+              sideMenuController.closeSecondSubFactionMenu();
             }}
             size="large"
           >

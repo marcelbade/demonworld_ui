@@ -4,31 +4,25 @@ import { Typography, Grid, IconButton } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // icons
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-
-import cardIcon from "../../../../assets/icons/card.png";
-
+import PaymentIcon from "@mui/icons-material/Payment";
 // components and functions
 import ContextHelpButton from "../../../shared/ContextHelpButton";
-import CustomIcon from "../../../shared/CustomIcon";
-
 //constants
 import { PUSH_MESSAGE_TYPES } from "../../../../constants/textsAndMessages";
 // contexts
 import { SelectionContext } from "../../../../contexts/selectionContext";
 // custom hooks
 import useArmyValidation from "../../../../customHooks/UseArmyValidation";
-import useUnitEnricher from "../../../../customHooks/UseUnitEnricher";
 import useRightSideMenuController from "../../../../customHooks/useRightSideMenuController";
+import useUnitEnricher from "../../../../customHooks/UseUnitEnricher";
 
 const TreeUnitNode = (props) => {
   const SEC = useContext(SelectionContext);
 
+  const theme = useTheme();
   const validation = useArmyValidation();
   const enrichUnit = useUnitEnricher();
-
-  const theme = useTheme();
-
-  const menuBttns = useRightSideMenuController(
+  const sideMenuController = useRightSideMenuController(
     props.unit, //
     props.unit.subFaction,
     {
@@ -37,8 +31,6 @@ const TreeUnitNode = (props) => {
       secondSubFaction: false,
     }
   );
-
-  console.log(">>", menuBttns);
 
   /**
    * Function adds a selected unit to the provided array, uses the custom UseUnitEnricher hook to add necessary information to it, and revalidates the the unit selection.
@@ -69,9 +61,10 @@ const TreeUnitNode = (props) => {
       direction="row"
       alignItems="center"
       justifyContent="space-around"
+      xs={12}
     >
       <Grid
-        xs={6}
+        xs={12}
         item //
         container
         direction="column"
@@ -85,19 +78,15 @@ const TreeUnitNode = (props) => {
 
         <Typography variant="button">{props.unit.points}</Typography>
       </Grid>
-      <Grid item xs={5}>
-        {menuBttns.map((b, i) => {
+      <Grid item xs={6}>
+        {sideMenuController.buttons.map((b, i) => {
           return (
             <IconButton
               key={i} //
               onClick={b.action}
               disabled={!props.isValidUnit}
             >
-              <CustomIcon
-                icon={cardIcon} //
-                width={"20em"}
-                height={"20em"}
-              />
+              <PaymentIcon />
             </IconButton>
           );
         })}
