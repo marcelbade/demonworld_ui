@@ -60,6 +60,7 @@ const ArmySelectorDropdown = (props) => {
    */
   const setFactionProperties = (factionName) => {
     const factionObj = AC.fetchedFactions.find((f) => f.factionName === factionName);
+    // units available to every faction
     const specials = AC.fetchedFactions.find((f) => f.factionName === SPECIAL);
     const allSubFactions = [...factionObj.subFactions.map((sF) => sF.name)];
     const allFactionUnits = captureAllFactionUnits(factionObj.subFactions, specials.subFactions);
@@ -69,6 +70,7 @@ const ArmySelectorDropdown = (props) => {
     AC.setDistinctSubFactions(allSubFactions);
     AC.setListOfAllFactionUnits(allFactionUnits);
 
+    // faction has an ally
     if (factionObj.ally !== NO_ALLY) {
       const allAllySubFactions = [...factionObj.allySubFactions.map((sF) => sF.name)];
       const allAllyUnits = captureAllFactionUnits(factionObj.allySubFactions, []);

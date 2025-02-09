@@ -44,7 +44,7 @@ const FactionTreeView = () => {
 
   return isSelectionComplete() ? (
     <Box sx={AC.selectedFactionName === NONE ? {} : theme.palette.animation.fadeIn}>
-      {AC.selectedFactionName === NONE ? null :  <Tree isFactionNotAlly={true} />}
+      {AC.selectedFactionName === NONE ? null :  <Tree isFaction={true} />}
 
       {display.showAlly(AC.selectedFactionName) ? (
         <>
@@ -63,7 +63,7 @@ const FactionTreeView = () => {
           </Typography>
           <Tree
             subFactionDtoList={AYC.allySubFactionDTOs} //
-            isFactionNotAlly={false}
+            isFaction={false}
           />
         </>
       ) : null}
