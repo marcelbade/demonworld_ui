@@ -94,7 +94,9 @@ const UnitElementButtons = (props) => {
     !RC.itemShopState.show &&
     !RC.secondSubFactionMenuState.show
   ) {
-    //TODO Warning: Cannot update a component (`ListGenerator`) while rendering a different component (`UnitElementButtons`). To locate the bad setState() call inside `UnitElementButtons`,
+    //TODO Warning: Cannot update a component 
+    // (`ListGenerator`) while rendering a different component (`UnitElementButtons`). 
+    // To locate the bad setState() call inside `UnitElementButtons`,
     RC.setShowOptionButtons(true);
   }
   if (
@@ -106,10 +108,33 @@ const UnitElementButtons = (props) => {
     RC.setShowOptionButtons(false);
   }
 
+  /**
+   * Function implements an additional rule for the the thain faction:
+   * for certain units the player must select a tribe.
+   * For these units, an extra button is dislayed.
+   * @returns
+   */
+  const displayTribeSelectorButton = () => {
+    return (
+      SFC.hasAdditionalSubFaction && //
+      !SFC.excemptSubFactions.includes(props.subFaction) &&
+      props.unit.unitType !== SUMMONED
+    );
+  };
+
+  /**
+   * Function tests whether a unit has the type "SUMMONED".
+   * if true, the item button is not displayed.
+   * @returns
+   */
+  const testForSummons = () => {
+    return props.unit.unitType !== SUMMONED;
+  };
+
   // values for buttons
   const buttons = [
     {
-      show: props.unit.unitType !== SUMMONED,
+      display: testForSummons(),
       action: () => {
         IC.setUnitSelectedForShop(props.unit);
         rightMenuController(props.unit, ITEMS);
@@ -117,17 +142,14 @@ const UnitElementButtons = (props) => {
       text: BUTTON_TEXTS.SHOW_ITEM_SHOP,
     },
     {
-      show: true,
+      display: true,
       action: () => {
         rightMenuController(props.unit, UNIT_CARDS);
       },
       text: BUTTON_TEXTS.PREVIEW_CARD,
     },
     {
-      show:
-        SFC.hasAdditionalSubFaction && //
-        !SFC.excemptSubFactions.includes(props.subFaction) &&
-        props.unit.unitType !== SUMMONED,
+      display: displayTribeSelectorButton(),
       action: () => {
         IC.setUnitSelectedForShop(props.unit);
         rightMenuController(props.unit, SECOND_SUB_FACTION);
@@ -139,7 +161,7 @@ const UnitElementButtons = (props) => {
   return (
     <List key={props.unit.uniqueID}>
       {buttons.map((b, i) => {
-        return b.show ? (
+        return b.display ? (
           <ListItemButton
             key={i} //
             variant="outlined"
