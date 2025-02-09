@@ -35,7 +35,7 @@ const useArmyValidation = () => {
   };
 
   /**
-   * Function avalidates the current list by generating the correct validator for the faction,
+   * Function validates the current list by generating the correct validator for the faction,
    * calling the validators test function and finally collecting the results.
    * @param {[unitCard]} currentList
    * @param {number} currentTotalPointAllowance
@@ -100,7 +100,7 @@ const useArmyValidation = () => {
    * @returns a custom object with the name of the unit or subfaction,
    *          a flag to mark it as unvalid and an error message.
    */
-  // TODO: turn the tree parameter into an obkect called data with  {type, payload, isFaction}
+  // TODO: turn the tree parameter into an object called data with  {type, payload, isFaction}
   const returnValidationResult = (type, payload, factionOrAlly) => {
     switch (type) {
       case "subFaction":
