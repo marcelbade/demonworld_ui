@@ -72,7 +72,7 @@ const Tree = (props) => {
   return (
     <SimpleTreeView
       aria-label="file system navigator" //
-      defaultcollapseicon ={<ExpandMoreIcon />}
+      defaultcollapseicon={<ExpandMoreIcon />}
       defaultexpandicon={<ChevronRightIcon />}
       expanded={controller.expansionValue}
     >
@@ -86,6 +86,7 @@ const Tree = (props) => {
             onClick={() => {
               controller.treeExpansionController([`${i}`]);
             }}
+            sx={{ width: "20em" }}
           >
             {dto.units
               .sort((a, b) => a.unitName > b.unitName)
