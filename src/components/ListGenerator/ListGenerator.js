@@ -1,8 +1,7 @@
 // react
 import React, { useContext } from "react";
 // material ui
-import { Grid, Box, IconButton, Tooltip, Typography } from "@mui/material";
-import CancelIcon from "@mui/icons-material/Cancel";
+import { Grid, Box } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components and functions
 import ArmyListBox from "./ArmyListView/ArmyListBox";
@@ -11,7 +10,6 @@ import ArmySelectionBox from "./ArmySelectorView/ArmySelectionBox";
 import ArmySelectorDropdown from "./ArmySelectorView/ArmySelectorDropdown";
 // context
 import { ArmyContext } from "../../contexts/armyContext";
-import { SelectionContext } from "../../contexts/selectionContext";
 // icons
 import MenuToggle from "../shared/MenuToggle";
 import AppBar from "../shared/AppBar";
@@ -19,11 +17,10 @@ import AppBar from "../shared/AppBar";
 import { ID } from "../../constants/appBarConstants";
 import { NONE } from "../../constants/factions";
 import BackToSelectionButton from "../shared/BackToSelectionButton";
-import { TOOLTIPS } from "../../constants/textsAndMessages";
+import DeleteArmyListButton from "../shared/DeleteArmyListButton";
 
 const ListGenerator = () => {
   const AC = useContext(ArmyContext);
-  const SEC = useContext(SelectionContext);
 
   const theme = useTheme();
 
@@ -34,7 +31,7 @@ const ListGenerator = () => {
     width: "30em",
   };
 
-  const setStyle = () => {
+  const setArmySelectorBoxStyle = () => {
     return AC.selectedFactionName === NONE //
       ? factionSelectorStyle
       : { ...theme.palette.animation.fadeAway, ...factionSelectorStyle };
@@ -42,7 +39,7 @@ const ListGenerator = () => {
 
   return (
     <Grid container direction="row">
-      <Box sx={setStyle()}>
+      <Box sx={setArmySelectorBoxStyle()}>
         <ArmySelectorDropdown />
       </Box>
       <Grid
@@ -50,27 +47,16 @@ const ListGenerator = () => {
         container
         justifyContent="flex-start"
         sx={{
-          marginBottom: "2em",
+          position: "fixed",
         }}
       >
         <MenuToggle
           iconSize="25em" //
           bttnSize="2em"
           margin="0.5em"
-         
         />
         <BackToSelectionButton />
-        <Tooltip title={<Typography>{TOOLTIPS.DELETE_ARMY_LIST}</Typography>}>
-          <IconButton
-            variant="outlined"
-            onClick={() => {
-              SEC.setSelectedUnits([]);
-            }}
-            size="large"
-          >
-            <CancelIcon />
-          </IconButton>
-        </Tooltip>
+        <DeleteArmyListButton />
       </Grid>
       <AppBar hiddenElements={[ID.COMPENDIMUM_DROPDOWN]} />
       <Grid
@@ -87,6 +73,8 @@ const ListGenerator = () => {
         <Grid
           item //
           xs={3}
+          position={"fixed"}
+          marginTop={"5em"}
         >
           <ArmySelectionBox />
         </Grid>
@@ -94,7 +82,8 @@ const ListGenerator = () => {
           item //
           xs={9}
           sx={{
-            paddingLeft: "10em",
+            paddingLeft: "50em",
+            marginTop: "5em",
           }}
         >
           {AC.selectedFactionName !== NONE ? <ArmyListBox /> : null}
