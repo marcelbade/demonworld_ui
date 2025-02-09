@@ -49,7 +49,7 @@ function App() {
   // toggle list display
   const [simpleModeOn, setSimpleMode] = useState(false);
 
-  // army meta data - army name is the name the player gives his army. 
+  // army meta data - army name is the name the player gives his army.
   // by defauilt it is the faction name + the current date
   const [teamName, setTeamName] = useState("");
   const [playerName, setPlayerName] = useState("");
@@ -154,15 +154,27 @@ function App() {
    * in order to work, the state setter needs a unit at the start. Since the view is not visible, the first unit in the list is used.
    */
   const closeCardDisplay = () => {
-    setStatCardState({ clickedUnit: selectedUnits[0], lastclickedUnit: selectedUnits[0], show: false });
+    setStatCardState({
+      clickedUnit: selectedUnits[0], //
+      lastclickedUnit: selectedUnits[0],
+      show: false,
+    });
   };
 
   const closeItemShop = () => {
-    setItemShopState({ clickedUnit: selectedUnits[0], lastclickedUnit: selectedUnits[0], show: false });
+    setItemShopState({
+      clickedUnit: selectedUnits[0], //
+      lastclickedUnit: selectedUnits[0],
+      show: false,
+    });
   };
 
   const closeSecondSubFactionMenu = () => {
-    setSecondSubFactionMenuState({ clickedUnit: selectedUnits[0], lastclickedUnit: selectedUnits[0], show: false });
+    setSecondSubFactionMenuState({
+      clickedUnit: selectedUnits[0], //
+      lastclickedUnit: selectedUnits[0],
+      show: false,
+    });
   };
 
   return (
