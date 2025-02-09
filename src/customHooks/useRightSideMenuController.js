@@ -15,7 +15,7 @@ import { SUMMONED } from "../constants/unitTypes";
  * clicked unit, a boolean flag and the clicked unit. This makes
  * it possible to close a menu if the same button is clicked again
  * or leave the menub open and rerender the content if needed.
- * Note: if only the close functions are needed as a return value, the the the
+ * Please note: if only the close functions are needed as a return value, the
  * three parameters can be empty ({},"",{})!
  * @param {unitCard} unit
  * @param {String} subFaction
