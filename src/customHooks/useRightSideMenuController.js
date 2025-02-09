@@ -3,7 +3,6 @@ import { useContext } from "react";
 // context
 import { ItemContext } from "../contexts/itemContext";
 import { SecondSubFactionContext } from "../contexts/secondSubFactionContext";
-import { SelectionContext } from "../contexts/selectionContext";
 import { RightMenuContext } from "../contexts/rightMenuContext";
 import { TournamentRulesContext } from "../contexts/tournamentRulesContext";
 // components and functions
@@ -12,25 +11,24 @@ import { SUMMONED } from "../constants/unitTypes";
 
 /**Function toggles the menus on the right side. It controls what menu
  * and what content for which unit is shown. In order to do this, the menus are
- * not toggled by a simple boolean flag, instead an object stores the previously 
- * clicked unit, a boolean flag and the clicked unit. This makes 
- * it possible to close a menu if the same button is clicked again 
+ * not toggled by a simple boolean flag, instead an object stores the previously
+ * clicked unit, a boolean flag and the clicked unit. This makes
+ * it possible to close a menu if the same button is clicked again
  * or leave the menub open and rerender the content if needed.
- * Note: if only the close functions are needed as a return value, the the the 
- * three parameters can be empty ({},"",{})! 
+ * Note: if only the close functions are needed as a return value, the the the
+ * three parameters can be empty ({},"",{})!
  * @param {unitCard} unit
  * @param {String} subFaction
  * @param {obj} bttnSelectorObj
- * @returns an object containing four fields: 
+ * @returns an object containing four fields:
  * - an array of button objects. The object describe the button separately
- *   from the UI implementation by storing the button action, 
+ *   from the UI implementation by storing the button action,
  *   the button text and whether to display it.
  * - three functions that close the corrsponing menu
  */
 const useRightSideMenuController = (unit, subFaction, bttnSelectorObj) => {
   const IC = useContext(ItemContext);
   const RC = useContext(RightMenuContext);
-  const SEC = useContext(SelectionContext);
   const SFC = useContext(SecondSubFactionContext);
   const TC = useContext(TournamentRulesContext);
 
@@ -38,30 +36,35 @@ const useRightSideMenuController = (unit, subFaction, bttnSelectorObj) => {
   const ITEMS = "ITEMS";
   const SECOND_SUB_FACTION = "SECOND_SUB_FACTION";
 
-  //TODO: working, fine, but doesn't belong here!
   /**
-   * in order to work, the state setter needs a unit at the start. Since the view is not visible, the first unit in the list is used.
+   * Function closes the card preview.
    */
   const closeCardDisplay = () => {
     RC.setStatCardState({
-      clickedUnit: SEC.selectedUnits[0], //
-      lastclickedUnit: SEC.selectedUnits[0],
+      clickedUnit: {}, //
+      lastclickedUnit: {},
       show: false,
     });
   };
 
+  /**
+   * Function closes the item shop.
+   */
   const closeItemShop = () => {
     RC.setItemShopState({
-      clickedUnit: SEC.selectedUnits[0], //
-      lastclickedUnit: SEC.selectedUnits[0],
+      clickedUnit: {}, //
+      lastclickedUnit: {},
       show: false,
     });
   };
 
+  /**
+   * Function closes the second sub faction menu.
+   */
   const closeSecondSubFactionMenu = () => {
     RC.setSecondSubFactionMenuState({
-      clickedUnit: SEC.selectedUnits[0], //
-      lastclickedUnit: SEC.selectedUnits[0],
+      clickedUnit: {}, //
+      lastclickedUnit: {},
       show: false,
     });
   };
