@@ -5,7 +5,7 @@ import { Typography, IconButton, Accordion, AccordionSummary, AccordionDetails, 
 import { ItemContext } from "../../../../../contexts/itemContext";
 import { SelectionContext } from "../../../../../contexts/selectionContext";
 import useUnitEqipmentLimits from "../../../../../customHooks/useUnitEqipmentLimits";
-import CustomIcon from "../../../../shared/statCards/CustomIcon";
+import CustomIcon from "../../../../shared/CustomIcon";
 import useSpecialItems from "../../../../../customHooks/UseSpecialItems";
 // icons
 import SpellBookIcon from "../../../../../assets/icons/spellbook-black.png";
