@@ -3,7 +3,7 @@ import React from "react";
 // Material UI
 import { Grid, Typography } from "@mui/material";
 // icons
-// import deathIcon from "../../assets/icons/icons8-death-64.png";
+import deathIcon from "../../assets/icons/icons8-death-64.png";
 import calculatorIcon from "../../assets/icons/icons8-calculator-64.png";
 import bookIcon from "../../assets/icons/icons8-book-64.png";
 // functions and components
@@ -61,11 +61,16 @@ const LandingPage = () => {
           icon={calculatorIcon}
           altText={LANDINGPAGE.LIST_GENERATOR}
         />
-        {/* <LandingPageNaviButton
+        <LandingPageNaviButton
           relativeURL={"/lossCalculator"} //
           icon={deathIcon}
           altText={LANDINGPAGE.LOSS_CALCULATOR}
-        /> */}
+        />
+        <LandingPageNaviButton
+          relativeURL={"/cardCreator"} //
+          icon={deathIcon}
+          altText={LANDINGPAGE.CARD_CREATOR}
+        />
       </Grid>
     </Grid>
   );
