@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import { IconButton, Grid, Tooltip, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // Functions And Components
-import CustomIcon from "../shared/statCards/CustomIcon";
+import CustomIcon from "../shared/CustomIcon";
 // context
 import { MenuContext } from "../../contexts/MenuContext";
 

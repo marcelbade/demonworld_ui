@@ -5,7 +5,7 @@ import { SnackbarProvider } from "notistack";
 //Material UI
 import { Fade } from "@mui/material";
 // components and functions
-import CustomIcon from "./CustomIcon";
+import CustomIcon from "../CustomIcon";
 import customStyledMessage from "../../../AppTheme/notiStackTheme";
 // icons
 import SpellBookIcon from "../../../assets/icons/spellbook-white.png";

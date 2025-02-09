@@ -12,7 +12,7 @@ import {
   isUnitOrSummonedUnit,
 } from "../../../unitMovementConditions";
 // icons
-import CustomIcon from "../../CustomIcon";
+import CustomIcon from "../../../CustomIcon";
 import wedgeFormationIcon from "../../../../../assets/icons/wedgeFormation.png";
 import skirmishFormationIcon from "../../../../../assets/icons/skirmishFormation.png";
 import squareFormationIcon from "../../../../../assets/icons/squareFormationWhite.png";

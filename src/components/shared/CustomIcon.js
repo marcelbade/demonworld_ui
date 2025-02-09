@@ -1,7 +1,7 @@
 // React
 import React, { useContext } from "react";
 // components and functions
-import { LightSwitchContext } from "../../../contexts/lightSwitchContext";
+import { LightSwitchContext } from "../../contexts/lightSwitchContext";
 import { Icon } from "@mui/material";
 
 const CustomIcon = (props) => {

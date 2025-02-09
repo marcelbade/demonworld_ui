@@ -4,7 +4,7 @@ import React, { Fragment } from "react";
 import { Typography } from "@mui/material";
 // components & functions
 import { setUnitStat } from "../../../../../../gameLogic/unitStatChangeLogic/unitStatChangesLogic";
-import CustomIcon from "../../../CustomIcon";
+import CustomIcon from "../../../../CustomIcon";
 
 const StatCardIcon = (props) => {
   const HEIGHT_WIDTH = "25px";

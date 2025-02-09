@@ -3,7 +3,7 @@ import React from "react";
 // material ui
 import { InputAdornment, TextField, Typography } from "@mui/material";
 // import { useTheme } from "@emotion/react";
-import CustomIcon from "../shared/statCards/CustomIcon";
+import CustomIcon from "../shared/CustomIcon";
 
 const   CreatorTextInput = (props) => {
   // const theme = useTheme();

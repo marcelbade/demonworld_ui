@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 // material ui
 import { IconButton } from "@mui/material";
 // functions and components
-import CustomIcon from "../../shared/statCards/CustomIcon";
+import CustomIcon from "../../shared/CustomIcon";
 import { LossCalcContext } from "../../../contexts/LossCalculatorContext";
 // icons
 import skullsIcon from "../../../assets/icons/skulls.png";

@@ -5,7 +5,7 @@ import { Checkbox, FormControlLabel, FormGroup, Grid, Button } from "@mui/materi
 // contexts
 import { CardCreationContext } from "../../contexts/cardCreationContext";
 // icons
-import CustomIcon from "../../components/shared/statCards/CustomIcon";
+import CustomIcon from "../../components/shared/CustomIcon";
 import wedgeFormationIcon from "../../assets/icons/wedgeFormation.png";
 import skirmishFormationIcon from "../../assets/icons/skirmishFormation.png";
 import squareFormationIcon from "../../assets/icons/squareFormationWhite.png";

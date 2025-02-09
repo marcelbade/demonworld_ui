@@ -8,7 +8,7 @@ import { MenuContext } from "../../contexts/MenuContext";
 import D20 from "../../assets/icons/d20.png";
 // constants
 import { ALTTEXT, OPTIONS } from "../../constants/textsAndMessages";
-import CustomIcon from "./statCards/CustomIcon";
+import CustomIcon from "./CustomIcon";
 
 /**
  * Function renders a switch represented by an Icon to toggle the App Bar on the top of the screen

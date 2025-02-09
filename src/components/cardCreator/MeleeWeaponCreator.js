@@ -5,7 +5,7 @@ import { useTheme } from "@emotion/react";
 import { Grid, Checkbox } from "@mui/material";
 // components and functions
 import CreatorTextInput from "./CreatorTextInput";
-import CustomIcon from "../shared/statCards/CustomIcon";
+import CustomIcon from "../shared/CustomIcon";
 // contexts
 import { CardCreationContext } from "../../contexts/cardCreationContext";
 // Icons
@@ -13,9 +13,7 @@ import blackSwordIcon from "../../assets/icons/sword2.png";
 import { CREATOR } from "../../constants/textsAndMessages";
 
 const MeleeWeaponCreator = () => {
-
-  
-    const theme = useTheme();
+  const theme = useTheme();
 
   const ICON_SIZE = "20em";
 
@@ -92,11 +90,7 @@ const MeleeWeaponCreator = () => {
   ];
 
   return (
-    <Grid
-      container
-      direction="column"
-      sx={theme.palette.cardCreator.box}
-    >
+    <Grid container direction="column" sx={theme.palette.cardCreator.box}>
       <Grid
         container //
         item
