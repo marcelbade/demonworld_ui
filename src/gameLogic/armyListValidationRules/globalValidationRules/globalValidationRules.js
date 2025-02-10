@@ -7,7 +7,7 @@ const globalRules = {
    * @param {[unitCard]} selectedUnits array of already selected units.
    * @param {[unitCard]} availableUnits array of all units available for the list.
    * @param {int} armyPointsAllowance Maximum number of points that can be spent.
-   * @returns an array consisting of objects. Every object contains a unit that must 
+   * @returns an array consisting of objects. Every object contains a unit that must
    * be blocked and an error message to be displayed as a tool tip.
    */
   armyMustNotExceedMaxAllowance: (selectedUnits, availableUnits, armyPointsAllowance) => {
@@ -123,7 +123,10 @@ const globalRules = {
   },
 
   /**
-   *Function tests for all sub factions in the list whether they are above the minimum point allowance for that sub faction.
+   * Function tests for all sub factions in the list whether
+   * they are above the minimum point allowance for that sub faction.
+   * It does so by checkoing if there is a minimum points limit for the subfaction (rule.min > 0).
+   * If that's the case it caluclates the minimum points and sees if it is under the limit.
    * @param {rule obj} rules rule object for army.
    * @param {[unitCard]} selectedUnits an array of unit card objects.
    * @param {int} maxArmyPoints max. army points allowance.
@@ -138,12 +141,15 @@ const globalRules = {
       .forEach((factionRule) => {
         const subFactionMin = maxArmyPoints * factionRule.min;
         const spentPoints = calculateCurrentlySpentPoints(selectedUnits, factionRule.cardNames);
-
-        if (spentPoints < subFactionMin && !result.includes(factionRule.subFaction) && subFactions.includes(factionRule.cardNames[0])) {
+        // subFactions === current subfactions !
+        if (
+          spentPoints < subFactionMin &&
+          !result.includes(factionRule.subFaction) &&
+          subFactions.some((sF) => factionRule.cardNames.includes(sF))
+        ) {
           result.push({ subFactionUnderMinimum: factionRule.cardNames, message: factionRule.error });
         }
       });
-
     return result;
   },
 
