@@ -52,7 +52,10 @@ const TreeUnitNode = (props) => {
    * @returns true, if unit is a valid choice
    */
   const displayValidNodeStyle = (isBlocked) => {
-    return isBlocked ? { color: theme.palette.disabled } : null;
+    const NAME_WIDTH = "25em";
+    const style = { minWidth: NAME_WIDTH };
+
+    return isBlocked ? { ...style, color: theme.palette.disabled } : style;
   };
 
   return (
@@ -62,23 +65,30 @@ const TreeUnitNode = (props) => {
       alignItems="center"
       justifyContent="space-around"
       xs={12}
+      sx={{ minWidth: "35em" }}
     >
       <Grid
-        xs={12}
         item //
         container
-        direction="column"
+        direction="row"
+        sx={{
+          alignItems: "center", //
+        }}
       >
         <Typography
           variant="button" //
+          align="left"
           sx={displayValidNodeStyle(!props.isValidUnit)}
         >
           {props.unit.unitName}
         </Typography>
-
-        <Typography variant="button">{props.unit.points}</Typography>
-      </Grid>
-      <Grid item xs={6}>
+        <Typography
+          variant="button" //
+          align="left"
+          sx={{ minWidth: "3em" }}
+        >
+          {props.unit.points}
+        </Typography>
         {sideMenuController.buttons.map((b, i) => {
           return (
             <IconButton
