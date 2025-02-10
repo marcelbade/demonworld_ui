@@ -97,7 +97,7 @@ const GoblinRules = {
       heroPointCap = 40;
     }
 
-    let testForMax2Result = globalRules.maximumCopiesOfUnit(validationData.selectedUnits, maxCopies);
+    let testForMaxCopiesResult = globalRules.maximumCopiesOfUnit(validationData.selectedUnits, maxCopies);
 
     let isAboveCharLimit = globalRules.belowMaxPercentageHeroes(
       validationData.selectedUnits,
@@ -117,7 +117,7 @@ const GoblinRules = {
     validationResults.unitsBlockedbyRules = [
       ...isExceedingPointAllowance,
       ...hasDuplicateUniques,
-      ...testForMax2Result,
+      ...testForMaxCopiesResult,
       ...isAboveSubFactionMax,
       ...isAboveCharLimit,
     ];
