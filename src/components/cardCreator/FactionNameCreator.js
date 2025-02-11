@@ -16,8 +16,6 @@ import { CREATOR } from "../../constants/textsAndMessages";
 const FactionNameCreator = () => {
   const theme = useTheme();
 
-  console.log("theme.palette.cardCreator.frame", theme.palette.cardCreator.frame);
-
   const AC = useContext(ArmyContext);
   const CCC = useContext(CardCreationContext);
 
