@@ -65,6 +65,7 @@ const TreeUnitNode = (props) => {
       direction="row"
       alignItems="center"
       justifyContent="space-around"
+      item
       xs={12}
       sx={{ minWidth: "35em" }}
     >
