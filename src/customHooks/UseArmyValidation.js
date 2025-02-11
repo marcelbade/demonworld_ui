@@ -50,7 +50,8 @@ const useArmyValidation = () => {
     let validator = ruleValidation(AC.selectedFactionName);
 
     let validationResult = validator.testSubFactionRules({
-      availableUnits: AC.listOfAllFactionUnits,
+      // all available units - faction and ally
+      availableUnits: [...AC.listOfAllFactionUnits, ...AYC.listOfAlliedUnits],
       selectedUnits: currentList,
       totalPointsAllowance: currentTotalPointAllowance,
       subFactions: currentSubFactions,

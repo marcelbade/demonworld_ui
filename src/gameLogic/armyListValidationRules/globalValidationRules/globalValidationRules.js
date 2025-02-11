@@ -111,7 +111,8 @@ const globalRules = {
       const spentPoints = calculateCurrentlySpentPoints(selectedUnits, r.cardNames);
 
       availableUnits
-        .filter((availableUnit) => r.cardNames.includes(availableUnit.subFaction))
+        // .filter((availableUnit) => r.cardNames.includes(availableUnit.subFaction) || r.cardNames.includes(availableUnit.faction))
+        .filter((availableUnit) => unitBelongsToSubFaction(r.cardNames, availableUnit))
         .forEach((subFactionUnit) => {
           if (subFactionUnit.points + spentPoints > subFactionMax) {
             result.push({ unitBlockedbyRules: subFactionUnit.unitName, message: r.error });
@@ -164,7 +165,20 @@ const globalRules = {
   },
 };
 
-// private, non-exported functions
+// auxilliary functions - outfactored, shared code
+
+/**
+ * Function tests if the passed unit is part of a subFaction by testing if
+ * its subFaction property is included in the passed cardNames array.
+ * NOTE: for allied units the faction instead of the subFaction property is used, hence
+ * the OR operator.
+ * @param {[String]} ruleCardNames
+ * @param {unitCard} unit
+ * @returns true, if the unit is part of the subFaction.
+ */
+const unitBelongsToSubFaction = (ruleCardNames, unit) => {
+  return ruleCardNames.includes(unit.subFaction) || ruleCardNames.includes(unit.faction);
+};
 
 /**
  * Function returns how many points have already been spent for a subfaction.
@@ -173,10 +187,13 @@ const calculateCurrentlySpentPoints = (selectedUnits, cardNames) => {
   let actualValue = 0;
 
   selectedUnits.forEach((selectedUnit) => {
-    if (cardNames.includes(selectedUnit.subFaction)) {
+    if (cardNames.includes(selectedUnit.subFaction) || cardNames.includes(selectedUnit.faction)) {
       actualValue += selectedUnit.points;
     }
-    if (cardNames.includes(selectedUnit.subFaction) && selectedUnit.equipment.length > 0) {
+    if (
+      (cardNames.includes(selectedUnit.subFaction) || cardNames.includes(selectedUnit.faction)) && //
+      selectedUnit.equipment.length > 0
+    ) {
       const equipmentTotal = calculateEquipmentCost(selectedUnit);
       actualValue += equipmentTotal;
     }
