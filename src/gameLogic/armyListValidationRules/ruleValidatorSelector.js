@@ -27,7 +27,9 @@ import {
 } from "../../constants/textsAndMessages";
 
 /**
- * Logic and abstraction layer for validating army lists. Returns a validator object with a testSubFactionRules function that differs for every faction.
+ * Logic and abstraction layer for validating army lists. 
+ * Returns a validator object with a testSubFactionRules 
+ * function that differs for every faction.
  * @param {String} faction
  * @returns the validator object for the selected faction.
  */
