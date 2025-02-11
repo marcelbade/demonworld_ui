@@ -10,20 +10,18 @@ import { isSubFactionAlternativeAndSelected } from "../../../../util/utilityFunc
 // context
 import { AllyContext } from "../../../../contexts/allyContext.js";
 import { ArmyContext } from "../../../../contexts/armyContext.js";
-import { ValidationContext } from "../../../../contexts/validationContext.js";
 // icons
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import { SelectionContext } from "../../../../contexts/selectionContext.js";
 
 const Tree = (props) => {
   const AC = useContext(ArmyContext);
-  const VC = useContext(ValidationContext);
   const ALC = useContext(AllyContext);
+  const SEC = useContext(SelectionContext);
 
   const validation = useArmyValidation();
   const controller = useTreeViewController();
-
-  const UNIT = "unit";
 
   /**
    * The following is a contreived hack to have a forceUpdate function in a functional
@@ -39,15 +37,6 @@ const Tree = (props) => {
   }, [JSON.stringify(AC.subFactionDTOs)]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
-   * useEffect resets the AC.subFactionDTOs array everytime the army list is validated.
-   * The reset toggles the hasNoValidUnits flag for those sub factions where every unit has
-   * been blocked by validation rules.
-   */
-  useEffect(() => {
-    AC.setSubFactionDTOs(testForDisabledSubFaction());
-  }, [JSON.stringify(VC.listValidationResults)]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  /**
    * Function checks whether the tree displays the faction or the ally
    * and returns the correct DTOs.
    * @returns an array of SubFaction DTOs.
@@ -56,29 +45,27 @@ const Tree = (props) => {
     return props.isFaction ? AC.subFactionDTOs : ALC.allySubFactionDTOs;
   };
 
-  /**
-   * Function tests wether all items of one type are blocked.
-   * If so, the hasNoValidUnits lag is set to true and the branch is greyed out.
-   * @param {item DTO} dto
-   * @returns true, if the node must be disabled.
-   */
-  const testForDisabledSubFaction = () => {
-    let tempArray = [...AC.subFactionDTOs];
+  const testForDisabledSubFaction = (subFaction, invalidUnits) => {
+    let tempObj = [...AC.subFactionDTOs];
 
-    tempArray.forEach((dto) => {
-      let blockedSubFactionUnits = 0;
+    tempObj.forEach((dto) => {
+      if (dto.name === subFaction) {
+        const subFactionUnits = dto.units.map((u) => u.unitName);
+        const invalidUnitNames = invalidUnits.map((iu) => iu.unitBlockedbyRules);
+        const uniqueInvalidUnitNames = [...new Set(invalidUnitNames)];
 
-      dto.units.forEach((u) => {
-        const validationResult = validation.returnValidationResult(UNIT, u, props.isFaction);
-        if (!validationResult.valid) {
-          blockedSubFactionUnits++;
+        if (uniqueInvalidUnitNames.length !== 0) {
+          const allInvalid =
+            JSON.stringify(uniqueInvalidUnitNames.sort()) === //
+            JSON.stringify(subFactionUnits.sort());
+
+          dto.hasNoValidUnits = allInvalid;
         }
-      });
-      dto.hasNoValidUnits = blockedSubFactionUnits === dto.units.length;
+      }
     });
 
-    return tempArray;
-  };
+    AC.setSubFactionDTOs([...tempObj]);
+  }; // END
 
   return (
     <SimpleTreeView
@@ -88,7 +75,6 @@ const Tree = (props) => {
       expanded={controller.expansionValue}
     >
       {selectCorrectDTOs().map((dto, i) => {
-        // {AC.subFactionDTOs.map((dto, i) => {
         return isSubFactionAlternativeAndSelected(dto) ? (
           <TreeItem
             itemId={`${i}`} //
@@ -105,7 +91,15 @@ const Tree = (props) => {
               // if unit has multiple card (werwolves, changelings,...) show only one
               .filter((u) => u.multiStateOrderNumber < 2)
               // map unitCard to validation object (unit + validation result)
-              .map((u) => validation.returnValidationResult(UNIT, u, props.isFaction))
+
+              .map((u) =>
+                validation.createUnitObject(
+                  u,
+                  props.isFaction, //
+                  validation.validateList(SEC.selectedUnits, SEC.maxPointsAllowance)
+                )
+              )
+
               .map((validationObj, j) => {
                 return (
                   <TreeUnitNode
@@ -113,6 +107,7 @@ const Tree = (props) => {
                     unit={validationObj.unit}
                     isValidUnit={validationObj.valid}
                     validationMessage={validationObj.validationMessage}
+                    testForDisabledSubFaction={testForDisabledSubFaction}
                   />
                 );
               })}

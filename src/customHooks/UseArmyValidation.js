@@ -3,7 +3,7 @@ import { useContext } from "react";
 // components and functions
 import { ArmyContext } from "../contexts/armyContext";
 import { TournamentRulesContext } from "../contexts/tournamentRulesContext";
-import { ValidationContext } from "../contexts/validationContext";
+// import { ValidationContext } from "../contexts/validationContext";
 import { SelectionContext } from "../contexts/selectionContext";
 import { AllyContext } from "../contexts/allyContext";
 import { AlternativeListContext } from "../contexts/alternativeListContext";
@@ -13,25 +13,25 @@ import { NONE } from "../constants/factions";
 
 const useArmyValidation = () => {
   const AC = useContext(ArmyContext);
-  const TC = useContext(TournamentRulesContext);
-  const VC = useContext(ValidationContext);
-  const SEC = useContext(SelectionContext);
-  const AYC = useContext(AllyContext);
   const ALC = useContext(AlternativeListContext);
+  const AYC = useContext(AllyContext);
+  const SEC = useContext(SelectionContext);
+  const TC = useContext(TournamentRulesContext);
 
+  /**
+   * Function checks whether the user finished selecting their faction before calling the actual functtion
+   * @param {[unitCard]} currentList
+   * @param {int} currentTotalPointAllowance
+   * @returns nothing, function exits if the selection is not finished.
+   */
   const validateList = (currentList, currentTotalPointAllowance) => {
     const IsFactionSelected = AC.selectedFactionName !== NONE && AC.selectedFactionName !== undefined;
-    const isAlternativeListSelected = ALC.selectedAlternativeLists.length !== 0;
+    const areNoAlternativesSelected = ALC.selectedAlternativeLists.length === 0;
 
-    if (
-      (!IsFactionSelected && //
-        !ALC.armyHasAlternativeLists &&
-        !isAlternativeListSelected) || //
-      (!IsFactionSelected && ALC.armyHasAlternativeLists)
-    ) {
+    if (!IsFactionSelected || (ALC.armyHasAlternativeLists && areNoAlternativesSelected)) {
       return;
     }
-    runValidation(currentList, currentTotalPointAllowance, AC.subFactions);
+    return runValidation(currentList, currentTotalPointAllowance, AC.subFactions);
   };
 
   /**
@@ -54,7 +54,7 @@ const useArmyValidation = () => {
       listOfAlliedUnits: AYC.listOfAlliedUnits,
     });
 
-    collectValidatioResults(currentList, validationResult);
+    return collectValidatioResults(currentList, validationResult);
   };
 
   /**
@@ -64,18 +64,18 @@ const useArmyValidation = () => {
    * @param {[unitCard]} result
    */
   const collectValidatioResults = (currentList, result) => {
-    const tempObj = {
-      ...VC.listValidationResults,
+    const validationObj = {
       unitsBlockedbyRules: result.unitsBlockedbyRules,
       subFactionBelowMinimum: result.subFactionBelowMinimum,
-      commanderIsPresent: result.commanderIsPresent,
       removeUnitsNoLongerValid: result.removeUnitsNoLongerValid,
       secondSubFactionMissing: result.secondSubFactionMissing,
       alliedUnitsBlockedbyRules: result.alliedUnitsBlockedbyRules,
+      commanderIsPresent: result.commanderIsPresent,
     };
 
-    VC.setListValidationResults(tempObj);
-    removeInvalidUnits(currentList, tempObj);
+    removeInvalidUnits(currentList, validationObj);
+
+    return validationObj;
   };
 
   /**
@@ -94,82 +94,82 @@ const useArmyValidation = () => {
   };
 
   /**
-   * Function returns the result of the validation process for sub factions or units.
-   * @param {String} type
-   * @param {obj} payload can be subFaction name or unitCard object.
-   * @returns a custom object with the name of the unit or subfaction,
-   *          a flag to mark it as unvalid and an error message.
+   * Function takes the validation result, tests if it contains the passed sub faction
+   * and if found, creates an object with the sub faction and the error message.
+   * @param {unitCard} unit
+   * @param {boolean} factionOrAlly
+   * @param {obj} validationResult
+   * @returns object containing the unit a flag and the error message if it is invalid.
    */
-  // TODO: turn the tree parameter into an object called data with  {type, payload, isFaction}
-  const returnValidationResult = (type, payload, factionOrAlly) => {
-    switch (type) {
-      case "subFaction":
-        return returnSubFaction(payload);
-      case "unit":
-        return returnUnit(payload, factionOrAlly);
-      case "secondSubFaction":
-        return returnSecondSubFaction(payload);
-      default:
-        throw new Error("returnValidationResult() received an invalid type parameter");
-    }
-  };
+  const createSubFactionResultObject = (subFactionName, results) => {
+    let subFactionObjet = { subFactionName: subFactionName, valid: true, validationMessage: "" };
 
-  /**
-   * Function tests if a subFaction is valid.
-   * @param {obj} subFactionName
-   * @returns validation result object.
-   */
-  const returnSubFaction = (subFactionName) => {
-    let validationResult = { subFactionName: subFactionName, valid: true, validationMessage: "" };
-
-    VC.listValidationResults.subFactionBelowMinimum.forEach((sF) => {
+    results.subFactionBelowMinimum.forEach((sF) => {
       if (sF.subFactionUnderMinimum.includes(subFactionName)) {
-        validationResult = { subFactionName: subFactionName, valid: false, validationMessage: sF.message };
+        subFactionObjet = { subFactionName: subFactionName, valid: false, validationMessage: sF.message };
       }
     });
 
-    return validationResult;
+    return subFactionObjet;
   };
 
   /**
-   * Function tests if a unit is valid.
-   * @param {obj} payload
-   * @returns validation result object.
+   * Function takes the validation result, tests if it contains the passed unit
+   * and if found, creates an object with the unit and the error message.
+   * @param {unitCard} unit
+   * @param {boolean} factionOrAlly
+   * @param {obj} validationResult
+   * @returns object containing the unit a flag and the error message if it is invalid.
    */
-  const returnUnit = (payload, factionOrAlly) => {
-    let validationResult = { unit: payload, valid: true, validationMessage: "" };
+  const createUnitObject = (unit, factionOrAlly, validationResult) => {
+    let unitObject = { unit: unit, valid: true, validationMessage: "" };
 
-    const factionBlockList = VC.listValidationResults.unitsBlockedbyRules;
-    const alliedBlockList = VC.listValidationResults.alliedUnitsBlockedbyRules;
+    if (validationResult === undefined) {
+      return unitObject;
+    }
+
+    const factionBlockList = validationResult.unitsBlockedbyRules;
+    const alliedBlockList = validationResult.alliedUnitsBlockedbyRules;
 
     const blockedUnits = factionOrAlly ? factionBlockList : alliedBlockList;
 
     blockedUnits.forEach((bU) => {
-      if (bU.unitBlockedbyRules === payload.unitName) {
-        validationResult = { unit: payload, valid: false, validationMessage: bU.message };
+      if (bU.unitBlockedbyRules === unit.unitName) {
+        unitObject = { unit: unit, valid: false, validationMessage: bU.message };
       }
     });
 
-    return validationResult;
+    return unitObject;
   };
 
-  const returnSecondSubFaction = (payload) => {
-    let validationResult = { unit: payload, valid: true, validationMessage: "" };
+  /**
+   * Function takes the validation result, tests if it contains the passed second
+   * sub faction and if found, creates an object with the unit and the error message.
+   * @param {unitCard} unit
+   * @param {boolean} factionOrAlly
+   * @param {obj} validationResult
+   * @returns object containing the second sub faction a flag and the error message if it is invalid.
+   */
+  const createSecondSubFactionObject = (unit, validationResult) => {
+    let secondSubFactionObj = { unit: unit, valid: true, validationMessage: "" };
 
-    const missingSecondSubFaction = VC.listValidationResults.secondSubFactionMissing;
+    const missingSecondSubFaction = validationResult.secondSubFactionMissing;
 
     missingSecondSubFaction.forEach((mS) => {
-      if (mS.unitWithOutSecondSubFaction === payload.unitName) {
-        validationResult = { unit: payload, valid: false, validationMessage: mS.message };
+      if (mS.unitWithOutSecondSubFaction === unit.unitName) {
+        secondSubFactionObj = { unit: unit, valid: false, validationMessage: mS.message };
       }
     });
 
-    return validationResult;
+    return secondSubFactionObj;
   };
 
   return {
     validateList: validateList, //
-    returnValidationResult: returnValidationResult,
+    // returnValidationResult: returnValidationResult,
+    createSubFactionResultObject: createSubFactionResultObject,
+    createSecondSubFactionObject: createSecondSubFactionObject,
+    createUnitObject: createUnitObject,
   };
 };
 

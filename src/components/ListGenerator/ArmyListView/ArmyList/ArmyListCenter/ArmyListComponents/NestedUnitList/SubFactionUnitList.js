@@ -44,7 +44,8 @@ const SubFactionUnitList = (props) => {
     <Fragment>
       {props.subFactionUnits
         .sort((a, b) => a.unitName > b.unitName)
-        .map((u) => validation.returnValidationResult("secondSubFaction", u))
+        .map((u) => validation.createSecondSubFactionObject(u, validation.validateList(SEC.selectedUnits, SEC.maxPointsAllowance)))
+
         .map((validationObj, i) => {
           const identifier = validationObj.unit.unitName + validationObj.unit.uniqueID;
           return (
@@ -53,7 +54,7 @@ const SubFactionUnitList = (props) => {
                 <IconButton
                   onClick={() => {
                     removeUnit(identifier);
-                    props.fadeOutFunc(); 
+                    props.fadeOutFunc();
                   }}
                 >
                   <RemoveCircleOutline />

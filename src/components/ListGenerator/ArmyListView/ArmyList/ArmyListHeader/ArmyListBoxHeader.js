@@ -6,15 +6,21 @@ import { TextField, Grid } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components and functions
 import { ArmyContext } from "../../../../../contexts/armyContext";
-import { ValidationContext } from "../../../../../contexts/validationContext";
+// import { ValidationContext } from "../../../../../contexts/validationContext";
 import ContextHelpButton from "../../../../shared/ContextHelpButton";
 // constants
 import { INPUT_TEXTS, PUSH_MESSAGE_TYPES, VALIDATION } from "../../../../../constants/textsAndMessages";
 import { NONE } from "../../../../../constants/factions";
+// custom hooks
+import useArmyValidation from "../../../../../customHooks/UseArmyValidation";
+import { SelectionContext } from "../../../../../contexts/selectionContext";
 
 const ArmyListBoxHeader = () => {
   const AC = useContext(ArmyContext);
-  const VC = useContext(ValidationContext);
+  const SEC = useContext(SelectionContext);
+
+  // const VC = useContext(ValidationContext);
+  const validation = useArmyValidation();
 
   const theme = useTheme();
 
@@ -58,8 +64,9 @@ const ArmyListBoxHeader = () => {
     }
     const currentDate = new Date();
 
-    // add 1 to the month since it starts with 0
     const year = currentDate.getFullYear();
+
+    // add 1 to the month since it starts with 0
     const month = 1 + currentDate.getMonth();
     const dayOfMonth = currentDate.getDate();
 
@@ -69,6 +76,11 @@ const ArmyListBoxHeader = () => {
   useEffect(() => {
     createDefaultArmyName();
   }, [AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const isArmyCommanderMissing = (validation, value) => {
+    const result = validation.validateList(SEC.selectedUnits, SEC.maxPointsAllowance);
+    return !result.commanderPresent && value === AC.armyName;
+  };
 
   const inputElements = [
     {
@@ -100,7 +112,7 @@ const ArmyListBoxHeader = () => {
       direction="column"
       alignItems="flex-start"
     >
-      {inputElements.map((input, i) => (
+      {inputElements.map((inputElmnt, i) => (
         <Grid item key={i}>
           <TextField
             sx={{
@@ -111,11 +123,11 @@ const ArmyListBoxHeader = () => {
                 color: theme.palette.color,
               },
             }}
-            id={input.id}
-            label={input.label}
-            value={input.value}
-            onClick={input.onClick}
-            onChange={input.onChange}
+            id={inputElmnt.id}
+            label={inputElmnt.label}
+            value={inputElmnt.value}
+            onClick={inputElmnt.onClick}
+            onChange={inputElmnt.onChange}
             autoComplete="off"
             type="search"
             required
@@ -124,18 +136,18 @@ const ArmyListBoxHeader = () => {
               style: {
                 fontFamily: "NotMaryKate",
                 fontSize: "20px",
-                color:
-                  !VC.listValidationResults.commanderIsPresent && input.value === AC.armyName //
-                    ? theme.palette.errorColor
-                    : theme.color,
+                // TODO -> refactor validation
+                color: isArmyCommanderMissing(validation, inputElmnt.value) //
+                  ? theme.palette.errorColor
+                  : theme.color,
                 pading: "50px",
                 width: "330px",
               },
             }}
           />
-          {input.value === AC.armyName ? (
-            <Fragment key={input.value}>
-              {!VC.listValidationResults.commanderIsPresent ? (
+          {inputElmnt.value === AC.armyName ? (
+            <Fragment key={inputElmnt.value}>
+              {!validation.validateList(SEC.selectedUnits, SEC.maxPointsAllowance).commanderIsPresent ? (
                 <ContextHelpButton
                   message={VALIDATION.NO_COMMANDER_WARNING} //
                   type={PUSH_MESSAGE_TYPES.ERROR}

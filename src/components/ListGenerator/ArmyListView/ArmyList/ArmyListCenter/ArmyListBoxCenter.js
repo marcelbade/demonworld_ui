@@ -2,7 +2,6 @@
 import React, { useContext } from "react";
 // Material UI
 import List from "@mui/material/List";
-import { Grid } from "@mui/material";
 // components and functions
 import ArmyListSubFactionEntry from "./ArmyListComponents/ArmyListSubFactionEntry";
 import { isSubFactionAlternativeAndSelected } from "../../../../../util/utilityFunctions";
@@ -40,7 +39,7 @@ const ArmyListBoxCenter = () => {
     >
       {AC.subFactionDTOs
         .filter((dto) => isSubFactionAlternativeAndSelected(dto))
-        .map((dto) => validation.returnValidationResult("subFaction", dto.name))
+        .map((dto) => validation.createSubFactionResultObject(dto.name, validation.validateList( SEC.selectedUnits, SEC.maxPointsAllowance)))
         .map((obj, i) => (
           <ArmyListSubFactionEntry
             key={i} //
