@@ -33,7 +33,7 @@ import {
  */
 export const ruleValidation = (faction) => {
   switch (faction) {
-    case DARKELF_TEXTS.FACTION_NAME: // TODO: Replace with ENums?!
+    case DARKELF_TEXTS.FACTION_NAME:  
       return DarkElveRules;
     case DWARF_TEXTS.FACTION_NAME:
       return DwarfRules;
