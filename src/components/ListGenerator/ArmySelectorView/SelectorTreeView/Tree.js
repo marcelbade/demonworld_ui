@@ -88,13 +88,7 @@ const Tree = (props) => {
               // if unit has multiple card (werwolves, changelings,...) show only one
               .filter((u) => u.multiStateOrderNumber < 2)
               // map unitCard to validation object (unit + validation result)
-              .map((u) =>
-                validation.createUnitObject(
-                  u,
-                  props.isFaction, //
-                  validation.validateList(SEC.selectedUnits, SEC.maxPointsAllowance)
-                )
-              )
+              .map((u) => validation.createUnitObject(u, validation.validateList(SEC.selectedUnits, SEC.maxPointsAllowance)))
               .map((validationObj, j) => {
                 return (
                   <TreeUnitNode

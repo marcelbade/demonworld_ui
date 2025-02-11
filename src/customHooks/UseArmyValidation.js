@@ -127,7 +127,7 @@ const useArmyValidation = () => {
    * @param {obj} validationResult
    * @returns object containing the unit a flag and the error message if it is invalid.
    */
-  const createUnitObject = (unit, factionOrAlly, validationResult) => {
+  const createUnitObject = (unit, validationResult) => {
     let unitObject = { unit: unit, valid: true, validationMessage: "" };
 
     if (validationResult === undefined) {
@@ -137,7 +137,7 @@ const useArmyValidation = () => {
     const factionBlockList = validationResult.unitsBlockedbyRules;
     const alliedBlockList = validationResult.alliedUnitsBlockedbyRules;
 
-    const blockedUnits = factionOrAlly ? factionBlockList : alliedBlockList;
+    const blockedUnits = [...factionBlockList, ...alliedBlockList];
 
     blockedUnits.forEach((bU) => {
       if (bU.unitBlockedbyRules === unit.unitName) {
