@@ -19,10 +19,11 @@ const useArmyValidation = () => {
   const TC = useContext(TournamentRulesContext);
 
   /**
-   * Function checks whether the user finished selecting their faction before calling the actual functtion
+   * Function checks whether the user finished selecting their faction
+   * before the validation logic is called.
    * @param {[unitCard]} currentList
    * @param {int} currentTotalPointAllowance
-   * @returns nothing, function exits if the selection is not finished.
+   * @returns a function call: runValidation()
    */
   const validateList = (currentList, currentTotalPointAllowance) => {
     const IsFactionSelected = AC.selectedFactionName !== NONE && AC.selectedFactionName !== undefined;
@@ -35,11 +36,15 @@ const useArmyValidation = () => {
   };
 
   /**
-   * Function validates the current list by generating the correct validator for the faction,
-   * calling the validators test function and finally collecting the results.
+   * Function validates the current list by generating the correct 
+   * validator for the faction and calling the validators
+   * test function to validate the list. 
+   * The results are passed to a function.
    * @param {[unitCard]} currentList
    * @param {number} currentTotalPointAllowance
    * @param {[String]} currentSubFactions
+   * @returns a function call: collectValidatioResults()
+
    */
   const runValidation = (currentList, currentTotalPointAllowance, currentSubFactions) => {
     let validator = ruleValidation(AC.selectedFactionName);
@@ -58,10 +63,11 @@ const useArmyValidation = () => {
   };
 
   /**
-   * Function adds all invalid units and subfactions to the block list. This result is stored twice.
-   * Locally, for immediate usasge and in the global state field validationResults.
+   * Function collects the results of the army list validation and collects
+   * it in a dto. it passes the object to the another function and returns it.
    * @param {[unitCard]} currentList
-   * @param {[unitCard]} result
+   * @param {dto} result
+   * @returns a dto with the validation results.
    */
   const collectValidatioResults = (currentList, result) => {
     const validationObj = {
