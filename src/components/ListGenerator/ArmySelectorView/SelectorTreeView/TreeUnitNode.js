@@ -101,7 +101,6 @@ const TreeUnitNode = (props) => {
             <IconButton
               key={i} //
               onClick={b.action}
-              disabled={!props.isValidUnit}
             >
               <PaymentIcon />
             </IconButton>

@@ -1,5 +1,6 @@
 import React, { useEffect, useContext, useReducer } from "react";
 // material ui
+import { useTheme } from "@emotion/react";
 import { SimpleTreeView } from "@mui/x-tree-view/SimpleTreeView";
 import { TreeItem } from "@mui/x-tree-view/TreeItem";
 // components and functions
@@ -22,6 +23,8 @@ const Tree = (props) => {
 
   const validation = useArmyValidation();
   const controller = useTreeViewController();
+
+  const theme = useTheme();
 
   /**
    * The following is a contreived hack to have a forceUpdate function in a functional
@@ -65,7 +68,24 @@ const Tree = (props) => {
     });
 
     AC.setSubFactionDTOs([...tempObj]);
-  }; // END
+  };
+
+  /**
+   * FUnction styles the branches of the tree menu.
+   * the branch gets the same style as the units,
+   * if all units in the branch are disabled.
+   * @param {boolean} isInValid
+   * @returns
+   */
+  const styleTreebranches = (isInValid) => {
+    let styleObj = { width: "20em" };
+
+    if (isInValid) {
+      styleObj = { ...styleObj, color: theme.palette.disabled };
+    }
+
+    return styleObj;
+  };
 
   return (
     <SimpleTreeView
@@ -80,18 +100,16 @@ const Tree = (props) => {
             itemId={`${i}`} //
             label={dto.name}
             key={i}
-            disabled={dto.hasNoValidUnits} //TODO  -> how to display if all units of sF are invalid?
             onClick={() => {
               controller.treeExpansionController([`${i}`]);
             }}
-            sx={{ width: "20em" }}
+            sx={styleTreebranches(dto.hasNoValidUnits)}
           >
             {dto.units
               .sort((a, b) => a.unitName > b.unitName)
               // if unit has multiple card (werwolves, changelings,...) show only one
               .filter((u) => u.multiStateOrderNumber < 2)
               // map unitCard to validation object (unit + validation result)
-
               .map((u) =>
                 validation.createUnitObject(
                   u,
@@ -99,7 +117,6 @@ const Tree = (props) => {
                   validation.validateList(SEC.selectedUnits, SEC.maxPointsAllowance)
                 )
               )
-
               .map((validationObj, j) => {
                 return (
                   <TreeUnitNode
