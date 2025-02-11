@@ -170,12 +170,34 @@ const useArmyValidation = () => {
     return secondSubFactionObj;
   };
 
+  /**
+   * Function tests whether all units in a branch are invalid.
+   * If true, the flag "hasNoValidUnits" is set to true for the
+   * subFactionDTO.
+   * @param {String} subFaction
+   * @param {*[dto]} invalidUnits
+   */
+  const testForDisabledSubFaction = (invalidUnits) => {
+    let tempObj = [...AC.subFactionDTOs];
+
+    tempObj.forEach((dto) => {
+      const subFactionUnitNames = dto.units.map((u) => u.unitName);
+      const invalidUnitNames = invalidUnits.map((iu) => iu.unitBlockedbyRules);
+
+      const allInvalid = subFactionUnitNames.every((unit) => invalidUnitNames.includes(unit));
+
+      dto.hasNoValidUnits = allInvalid;
+    });
+
+    AC.setSubFactionDTOs([...tempObj]);
+  };
+
   return {
     validateList: validateList, //
-    // returnValidationResult: returnValidationResult,
     createSubFactionResultObject: createSubFactionResultObject,
     createSecondSubFactionObject: createSecondSubFactionObject,
     createUnitObject: createUnitObject,
+    testForDisabledSubFaction: testForDisabledSubFaction,
   };
 };
 

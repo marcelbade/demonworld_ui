@@ -8,6 +8,8 @@ import { SelectionContext } from "../../contexts/selectionContext";
 import CancelIcon from "@mui/icons-material/Cancel";
 // constants
 import { TOOLTIPS } from "../../constants/textsAndMessages";
+// custom hooks
+import useArmyValidation from "../../customHooks/UseArmyValidation";
 
 /**
  * Function renders a button that deletes the entire army list.
@@ -16,6 +18,7 @@ import { TOOLTIPS } from "../../constants/textsAndMessages";
  */
 const DeleteArmyListButton = () => {
   const SEC = useContext(SelectionContext);
+  const validation = useArmyValidation();
 
   return (
     <Tooltip title={<Typography>{TOOLTIPS.DELETE_ARMY_LIST}</Typography>}>
@@ -23,6 +26,10 @@ const DeleteArmyListButton = () => {
         variant="outlined"
         onClick={() => {
           SEC.setSelectedUnits([]);
+          // pass emtpy array since all units are removed from the list
+          const validationResult = validation.validateList([], SEC.maxPointsAllowance);
+
+          validation.testForDisabledSubFaction(validationResult.unitsBlockedbyRules);
         }}
         size="large"
       >

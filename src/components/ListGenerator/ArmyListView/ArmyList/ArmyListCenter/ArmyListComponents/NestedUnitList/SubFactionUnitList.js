@@ -35,7 +35,8 @@ const SubFactionUnitList = (props) => {
     let tempArray = [...SEC.selectedUnits];
     tempArray = tempArray.filter((u) => u.name + u.uniqueID !== identifier);
 
-    validation.validateList(tempArray, SEC.maxPointsAllowance);
+    const validationResult = validation.validateList(tempArray, SEC.maxPointsAllowance);
+    validation.testForDisabledSubFaction(validationResult.unitsBlockedbyRules);
 
     SEC.setSelectedUnits(tempArray);
   };

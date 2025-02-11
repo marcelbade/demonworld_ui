@@ -38,7 +38,10 @@ const ArmySelectorDropdown = (props) => {
   const enrichUnit = useUnitEnricher();
 
   useEffect(() => {
+    // pass emtpy array since all units are removed from the list
     validation.validateList([], SEC.maxPointsAllowance);
+
+    validation.testForDisabledSubFaction([]);
   }, [AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**

@@ -48,34 +48,12 @@ const Tree = (props) => {
     return props.isFaction ? AC.subFactionDTOs : ALC.allySubFactionDTOs;
   };
 
-  const testForDisabledSubFaction = (subFaction, invalidUnits) => {
-    let tempObj = [...AC.subFactionDTOs];
-
-    tempObj.forEach((dto) => {
-      if (dto.name === subFaction) {
-        const subFactionUnits = dto.units.map((u) => u.unitName);
-        const invalidUnitNames = invalidUnits.map((iu) => iu.unitBlockedbyRules);
-        const uniqueInvalidUnitNames = [...new Set(invalidUnitNames)];
-
-        if (uniqueInvalidUnitNames.length !== 0) {
-          const allInvalid =
-            JSON.stringify(uniqueInvalidUnitNames.sort()) === //
-            JSON.stringify(subFactionUnits.sort());
-
-          dto.hasNoValidUnits = allInvalid;
-        }
-      }
-    });
-
-    AC.setSubFactionDTOs([...tempObj]);
-  };
-
   /**
-   * FUnction styles the branches of the tree menu.
+   * Function styles the branches of the tree menu.
    * the branch gets the same style as the units,
    * if all units in the branch are disabled.
    * @param {boolean} isInValid
-   * @returns
+   * @returns object with css styles.
    */
   const styleTreebranches = (isInValid) => {
     let styleObj = { width: "20em" };
@@ -124,7 +102,6 @@ const Tree = (props) => {
                     unit={validationObj.unit}
                     isValidUnit={validationObj.valid}
                     validationMessage={validationObj.validationMessage}
-                    testForDisabledSubFaction={testForDisabledSubFaction}
                   />
                 );
               })}
