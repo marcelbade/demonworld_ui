@@ -176,12 +176,34 @@ const useArmyValidation = () => {
    * If true, the flag "hasNoValidUnits" is set to true for the
    * subFactionDTO.
    * @param {String} subFaction
-   * @param {*[dto]} invalidUnits
+   * @param {[dto]} invalidUnits
    */
   const testForDisabledSubFaction = (invalidUnits) => {
-    let tempObj = [...AC.subFactionDTOs];
+    let tempObj = [];
 
-    tempObj.forEach((dto) => {
+    tempObj = [...AC.subFactionDTOs];
+
+    iterateSubFactions(tempObj, invalidUnits);
+
+    AC.setSubFactionDTOs([...tempObj]);
+
+    tempObj = [...AYC.allySubFactionDTOs];
+
+    iterateSubFactions(tempObj, invalidUnits);
+
+    AYC.setAllySubFactionDTOs([...tempObj]);
+  };
+
+  /**
+   * Function iterates through an array of subFaction dtos and tests
+   * whether all units in an object are invalid. If so, the
+   * hasNoValidUnits is set to true.
+   * @param {[dto]} dtoList
+   * @param {[dto]} invalidUnits
+   * @returns the list of (allied) subfactions with the hasNoValidUnits flag reset.
+   */
+  const iterateSubFactions = (dtoList, invalidUnits) => {
+    dtoList.forEach((dto) => {
       const subFactionUnitNames = dto.units.map((u) => u.unitName);
       const invalidUnitNames = invalidUnits.map((iu) => iu.unitBlockedbyRules);
 
@@ -190,7 +212,7 @@ const useArmyValidation = () => {
       dto.hasNoValidUnits = allInvalid;
     });
 
-    AC.setSubFactionDTOs([...tempObj]);
+    return dtoList;
   };
 
   return {

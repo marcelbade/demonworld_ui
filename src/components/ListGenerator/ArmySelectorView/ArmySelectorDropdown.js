@@ -24,7 +24,7 @@ import {
 } from "../../../constants/factions";
 import { INPUT_TEXTS } from "../../../constants/textsAndMessages";
 
-const ArmySelectorDropdown = (props) => {
+const ArmySelectorDropdown = () => {
   const AC = useContext(ArmyContext);
   const IC = useContext(ItemContext);
   const RC = useContext(RightMenuContext);
@@ -38,13 +38,18 @@ const ArmySelectorDropdown = (props) => {
   const enrichUnit = useUnitEnricher();
 
   useEffect(() => {
-    // pass emtpy array since all units are removed from the list
-    validation.validateList([], SEC.maxPointsAllowance);
+    if (AC.selectedFactionName !== NONE) {
+      // pass emtpy array since all units are removed from the list
+      const validationResult = validation.validateList([], SEC.maxPointsAllowance);
 
-    validation.testForDisabledSubFaction([]);
+      validation.testForDisabledSubFaction([
+        ...validationResult.unitsBlockedbyRules, //
+        ...validationResult.alliedUnitsBlockedbyRules,
+      ]);
+    }
   }, [AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  /**
+  /** 
    * Function triggers when user enters a value from the dropdown list.
    * The Function simply wraps three function. The last one sets the flag for
    * the right side menu to true so it opens slowly.
@@ -124,7 +129,7 @@ const ArmySelectorDropdown = (props) => {
   };
 
   /**
-   * Function resets the entire state back to default.
+   * Function resets the entire state back to default and closes all menus.
    */
   const resetTheState = () => {
     SEC.setSelectedUnits([]);
