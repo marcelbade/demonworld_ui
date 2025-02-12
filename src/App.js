@@ -14,19 +14,19 @@ import LossCalculator from "./components/lossCalculator/LossCalculator";
 import PdfBox from "./components/PDFGenerator/PDFBox";
 import CardCreator from "./components/cardCreator/CardCreator";
 // context providers
-import LightSwitchProvider from "./contexts/lightSwitchContext";
-import CustomSnackBarProvider from "./components/shared/statCards/CustomSnackBarProvider";
-import ArmyProvider from "./contexts/armyContext";
 import AllyProvider from "./contexts/allyContext";
 import AlternativeListProvider from "./contexts/alternativeListContext";
-import RightMenuContext from "./contexts/rightMenuContext";
-import SelectionContext from "./contexts/selectionContext";
+import ArmyProvider from "./contexts/armyContext";
+import CustomSnackBarProvider from "./components/shared/statCards/CustomSnackBarProvider";
 import ItemContext from "./contexts/itemContext";
-import SecondSubFactionProvider from "./contexts/secondSubFactionContext";
-import TournamentRulesProvider from "./contexts/tournamentRulesContext";
-import LossCalcProvider from "./contexts/LossCalculatorContext";
+import LightSwitchProvider from "./contexts/lightSwitchContext";
 import ListDisplayProvider from "./contexts/ListDisplayContext";
+import LossCalcProvider from "./contexts/LossCalculatorContext";
 import MenuProvider from "./contexts/MenuContext";
+import RightMenuContext from "./contexts/rightMenuContext";
+import SecondSubFactionProvider from "./contexts/secondSubFactionContext";
+import SelectionContext from "./contexts/selectionContext";
+import TournamentRulesProvider from "./contexts/tournamentRulesContext";
 // theme
 import lightTheme from "./AppTheme/lightTheme";
 import darkTheme from "./AppTheme/darkTheme";
