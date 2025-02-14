@@ -38,7 +38,7 @@ const ArmySelectorDropdown = () => {
   const enrichUnit = useUnitEnricher();
 
   useEffect(() => {
-    if (AC.selectedFactionName !== NONE) {
+    if (AC.selectedFactionName !== NONE  &&  ALC.altArmyListSelectionComplete  ) {
       // pass emtpy array since all units are removed from the list
       const validationResult = validation.validateList([], SEC.maxPointsAllowance);
 
