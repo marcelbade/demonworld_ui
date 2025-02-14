@@ -44,7 +44,7 @@ const Tree = (props) => {
    * and returns the correct DTOs.
    * @returns an array of SubFaction DTOs.
    */
-  const selectCorrectDTOs = () => {
+  const selectCorrectSubFactions = () => {
     return props.isFaction ? AC.subFactionDTOs : ALC.allySubFactionDTOs;
   };
 
@@ -64,6 +64,7 @@ const Tree = (props) => {
 
     return styleObj;
   };
+ 
 
   return (
     <SimpleTreeView
@@ -71,8 +72,14 @@ const Tree = (props) => {
       defaultcollapseicon={<ExpandMoreIcon />}
       defaultexpandicon={<ChevronRightIcon />}
       expanded={controller.expansionValue}
+      sx={{
+        height: "50em",
+        width: "40em",
+        overflowY: "auto",
+     
+      }}
     >
-      {selectCorrectDTOs().map((dto, i) => {
+      {selectCorrectSubFactions().map((dto, i) => {
         return isSubFactionAlternativeAndSelected(dto) ? (
           <TreeItem
             itemId={`${i}`} //
