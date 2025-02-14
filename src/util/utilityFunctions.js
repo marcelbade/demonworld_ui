@@ -14,7 +14,9 @@ import { HERO, MAGE, AUTOMATON, GIANT } from "../constants/unitTypes";
  * Function checks if a subFaction is an alternative sub faction.
  * If true, it is only displayed if the flag selectedAlternativeOption is set to true too.
  * @param {subFaction dto} subfactionDataObject
- * @returns
+ * @returns true if the subFaction is either:
+ *  - not an alternative option
+ *  - is an alternative option that has bem selected  
  */
 export const isSubFactionAlternativeAndSelected = (subfactionDataObject) => {
   if (subfactionDataObject.alternativeListOption) {
