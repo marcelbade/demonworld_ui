@@ -4,7 +4,7 @@ import { useTheme } from "@emotion/react";
 import { SimpleTreeView } from "@mui/x-tree-view/SimpleTreeView";
 import { TreeItem } from "@mui/x-tree-view/TreeItem";
 // components and functions
-import TreeUnitNode from "./TreeUnitNode";
+import TreeUnitNode from "./TreeUnitNode.js";
 import useArmyValidation from "../../../../customHooks/UseArmyValidation.js";
 import useTreeViewController from "../../../../customHooks/UseTreeViewController.js";
 import { isSubFactionAlternativeAndSelected } from "../../../../util/utilityFunctions.js";
@@ -16,7 +16,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { SelectionContext } from "../../../../contexts/selectionContext.js";
 
-const Tree = (props) => {
+const UnitSelectionTree = (props) => {
   const AC = useContext(ArmyContext);
   const ALC = useContext(AllyContext);
   const SEC = useContext(SelectionContext);
@@ -113,4 +113,4 @@ const Tree = (props) => {
   );
 };
 
-export default Tree;
+export default UnitSelectionTree;
