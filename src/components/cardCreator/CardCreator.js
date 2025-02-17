@@ -126,7 +126,7 @@ const CardCreator = () => {
         <Box
           sx={{
             display: "flex",
-            flexDirection: "column",
+            direction: "column",
             position: "fixed",
           }}
         >
