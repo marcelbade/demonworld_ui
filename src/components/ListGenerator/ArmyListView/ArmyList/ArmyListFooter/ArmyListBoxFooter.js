@@ -34,7 +34,8 @@ const ArmyListBoxFooter = () => {
     let isValid = new RegExp(/^[0-9]*$/).test(event.target.value);
     isValid ? setErrorMessage("") : setErrorMessage(GENERAL_ERRRORS.ONLY_NUMBERS);
 
-    validation.validateList(SEC.selectedUnits, event.target.value);
+    const validationResult = validation.validateList(SEC.selectedUnits, event.target.value);
+    validation.testForDisabledSubFaction(validationResult.unitsBlockedbyRules);
   };
 
   return (
