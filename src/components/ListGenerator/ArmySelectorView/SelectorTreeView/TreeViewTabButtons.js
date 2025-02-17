@@ -4,6 +4,7 @@ import React, { useContext } from "react";
 import { Button, Grid } from "@mui/material";
 // context
 import { AllyContext } from "../../../../contexts/allyContext";
+import { CREATOR } from "../../../../constants/textsAndMessages";
 
 const TreeViewTabButtons = (props) => {
   const AYC = useContext(AllyContext);
@@ -20,7 +21,7 @@ const TreeViewTabButtons = (props) => {
           props.handleTabChange(props.SHOW_ARMY);
         }}
       >
-        {"Fraktion"}
+        {CREATOR.FACTION_NAME}
       </Button>
       <Button
         sx={props.styleButtons(props.tabValue, props.SHOW_ALLY)}
@@ -28,10 +29,10 @@ const TreeViewTabButtons = (props) => {
           props.handleTabChange(props.SHOW_ALLY);
         }}
       >
-        {`Allierter: ${AYC.allyName}`}
+        {CREATOR.ALLY} {AYC.allyName}
       </Button>
     </Grid>
   );
 };
-
+//
 export default TreeViewTabButtons;
