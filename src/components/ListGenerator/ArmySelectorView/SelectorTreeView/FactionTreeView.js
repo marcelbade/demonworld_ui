@@ -53,20 +53,50 @@ const FactionTreeView = () => {
       : { width: "50%" };
   };
 
-  const handleTabChange = (newValue) => {
-    setTabValue(newValue);
+  /**
+   * Function tests, whether the tree view should be displayed.
+   * @returns true, if
+   *  - the army has no alternative lists
+   *  - the alternative list selection is complete.
+   */
+  const showTreeView = () => {
+    return ALC.armyHasAlternativeLists //
+      ? ALC.altArmyListSelectionComplete
+      : true;
   };
 
-  return (
+  /**
+   * Function tests, whether the tab buttons and the ally tab
+   * should be displayed.
+   * @returns true, if
+   * - the faction has an ally that is not also an
+   *   alternative list
+   * - the faction has an ally it`s an alternative list and
+   *   it was selected
+   */
+  const showTabBttns = () => {
+    let factionHasAlly = AYC.allyName !== NO_ALLY;
+    let isAllySelected = true;
+
+    if (ALC.armyHasAlternativeLists) {
+      isAllySelected =
+        ALC.armyHasAlternativeLists && //
+        ALC.selectedAlternativeLists.includes(AYC.allyName);
+    }
+
+    return factionHasAlly && isAllySelected;
+  };
+
+  return showTreeView() ? (
     <Grid
       container
       direction="column" //
       sx={{ width: "40em" }}
     >
-      {AYC.allyName !== NO_ALLY ? (
+      {showTabBttns() ? (
         <TreeViewTabButtons
           styleButtons={styleButtons} //
-          handleTabChange={handleTabChange}
+          handleTabChange={setTabValue}
           SHOW_ARMY={SHOW_ARMY}
           SHOW_ALLY={SHOW_ALLY}
           tabValue={tabValue}
@@ -88,7 +118,7 @@ const FactionTreeView = () => {
         />
       </Grid>
     </Grid>
-  );
+  ) : null;
 };
 
 export default FactionTreeView;
