@@ -32,11 +32,12 @@ const useDisplayAlly = () => {
     }
 
     const hasAlly = AYC.allyName !== NO_ALLY;
+
     return hasAlly && additionalFactionRules(factionName);
   };
 
   /**
-   * Function searches for additional rules for the selected faction. 
+   * Function searches for additional rules for the selected faction.
    * if found they are called and the resulting boolean flag is returned.
    * @param {String} factionName
    * @returns either additional rules for this faction that return a boolean flag, or true, if no
@@ -52,7 +53,7 @@ const useDisplayAlly = () => {
   };
 
   /**
-   * EMPIRE ONLY 
+   * EMPIRE ONLY
    * Function implements the rule that you can only select allied dwarf troops,
    * if the southern or eastern march has been selected.
    */
