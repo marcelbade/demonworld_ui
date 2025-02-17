@@ -175,7 +175,6 @@ const useArmyValidation = () => {
    * Function tests whether all units in a branch are invalid.
    * If true, the flag "hasNoValidUnits" is set to true for the
    * subFactionDTO.
-   * @param {String} subFaction
    * @param {[dto]} invalidUnits
    */
   const testForDisabledSubFaction = (invalidUnits) => {
