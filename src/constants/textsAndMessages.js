@@ -430,7 +430,7 @@ export const ORKS_TEXTS = {
     CLANNGETT: "Deine Armeeliste darf zu höchstens 50% aus Einheiten Clanngetts bestehen.",
     WIZARDS: "Deine Armeeliste darf zu höchstens 40% aus Zauberern bestehen.",
     GOBLIN_TEXTS: "Deine Armeeliste darf zu maximal zu 20% aus Goblins bestehen.",
-    AVAILABLE_CLANUNITS: "Dieser Clan kann diese Einehit nicht auswählen.",
+    AVAILABLE_CLANUNITS: "Dieser Clan kann diese Einheit nicht auswählen.",
   },
   GOBLIN_MERCENARIES: {
     SPIDER_ARCHERS: "Goblin-Spinnenschützen",
