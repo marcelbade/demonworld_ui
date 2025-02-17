@@ -67,7 +67,6 @@ const TreeUnitNode = (props) => {
       justifyContent="space-around"
       item
       xs={12}
-      sx={{ minWidth: "35em" }}
     >
       <Grid
         item //
@@ -87,7 +86,7 @@ const TreeUnitNode = (props) => {
         <Typography
           variant="button" //
           align="left"
-          sx={{ minWidth: "3em" }}
+          sx={{ minWidth: "10em" }}
         >
           {props.unit.points}
         </Typography>

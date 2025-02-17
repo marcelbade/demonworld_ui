@@ -1,7 +1,7 @@
-import React, { useContext, useEffect } from "react";
+// react
+import React, { useContext, useEffect, useState } from "react";
 // material ui
-import { Box, Tabs, Typography } from "@mui/material";
-import { useTheme } from "@emotion/react";
+import { Grid } from "@mui/material";
 // context
 import { ArmyContext } from "../../../../contexts/armyContext";
 import { AlternativeListContext } from "../../../../contexts/alternativeListContext";
@@ -11,9 +11,9 @@ import UnitSelectionTree from "./UnitSelectionTree.js";
 import useArmyValidation from "../../../../customHooks/UseArmyValidation.js";
 import UseDisplayAlly from "../../../../customHooks/UseDisplayAlly.js";
 // constants
-import { INPUT_TEXTS } from "../../../../constants/textsAndMessages.js";
 import { SelectionContext } from "../../../../contexts/selectionContext.js";
-import { NONE } from "../../../../constants/factions.js";
+import { NO_ALLY } from "../../../../constants/factions.js";
+import TreeViewTabButtons from "./TreeViewTabButtons.js";
 
 const FactionTreeView = () => {
   const AC = useContext(ArmyContext);
@@ -23,7 +23,11 @@ const FactionTreeView = () => {
 
   const validation = useArmyValidation();
   const display = UseDisplayAlly();
-  const theme = useTheme();
+
+  const [tabValue, setTabValue] = useState(0);
+
+  const SHOW_ARMY = 0;
+  const SHOW_ALLY = 1;
 
   useEffect(() => {
     display.showAlly(AC.selectedFactionName);
@@ -31,42 +35,59 @@ const FactionTreeView = () => {
   }, [JSON.stringify(ALC.selectedAlternativeLists)]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
-   * Function conditionally returns object thatlets tree fade in.
-   * @returns style to slowly fade in the tree view, if flag true.
+   * Function controls the buttons` styling. The selected Button/Tab
+   * is highlighted.
+   * @param {int} tab
+   * @param {int} index
+   * @param {boolean} showBttn
+   * @returns an object with css properties.
    */
-  const styleTree = () => {
-    return AC.selectedFactionName === NONE //
-      ? {}
-      : theme.palette.animation.fadeIn;
+  const styleButtons = (tab, index) => {
+    return tab === index //
+      ? {
+          backgroundColor: "lightgrey", //
+          borderBottom: "solid 0.1em black",
+          borderRadius: 0,
+          width: "50%",
+        }
+      : { width: "50%" };
+  };
+
+  const handleTabChange = (newValue) => {
+    setTabValue(newValue);
   };
 
   return (
-    <Box>
-      <Box sx={styleTree()}>
-        <UnitSelectionTree isFaction={true} />
-        {display.showAlly(AC.selectedFactionName) ? (
-          <>
-            <Typography
-              variant="h5"
-              align="left"
-              sx={{
-                marginLeft: "1em", //
-                paddingTop: "1em",
-                marginBottom: "1em",
-                borderBottom: "black 1px solid",
-                width: "70%",
-              }}
-            >
-              {INPUT_TEXTS.ALLY} {AYC.allyName}
-            </Typography>
-            <UnitSelectionTree
-              subFactionDtoList={AYC.allySubFactionDTOs} //
-              isFaction={false}
-            />
-          </>
-        ) : null}
-      </Box>
-    </Box>
+    <Grid
+      container
+      direction="column" //
+      sx={{ width: "40em" }}
+    >
+      {AYC.allyName !== NO_ALLY ? (
+        <TreeViewTabButtons
+          styleButtons={styleButtons} //
+          handleTabChange={handleTabChange}
+          SHOW_ARMY={SHOW_ARMY}
+          SHOW_ALLY={SHOW_ALLY}
+          tabValue={tabValue}
+        />
+      ) : null}
+      <Grid
+        container
+        direction="row" //
+      >
+        <UnitSelectionTree
+          isFaction={true} //
+          tabValue={tabValue}
+          SHOW_ALLY={SHOW_ARMY}
+        />
+        <UnitSelectionTree
+          isFaction={false} //
+          tabValue={tabValue}
+          SHOW_ALLY={SHOW_ALLY}
+        />
+      </Grid>
+    </Grid>
   );
 };
 
