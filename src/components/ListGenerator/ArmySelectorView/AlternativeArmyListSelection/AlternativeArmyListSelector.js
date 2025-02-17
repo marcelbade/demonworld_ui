@@ -103,7 +103,7 @@ const AlternativeArmyListSelector = () => {
   };
 
   /**
-   * Function returns the text for the altnerative army input field(s)
+   * Function returns the text for the alternative army input field(s)
    * @param {*} selectorNumber
    * @returns a string with the selection text for the army and selector.
    */
@@ -115,13 +115,25 @@ const AlternativeArmyListSelector = () => {
     return ALTERNATIVE_ARMY_SELECTION_TEXT[AC.selectedFactionName][selectorNumber];
   };
 
-  return AC.selectedFactionName !== NONE && //
-    ALC.armyHasAlternativeLists
+  /**
+   * Functinon tests whether the army has alternative lists.
+   * @returns true, if a fation has been selected and the army
+   * has alternative lists.
+   */
+  const areAlternativeListsPresent = () => {
+    return (
+      AC.selectedFactionName !== NONE && //
+      ALC.armyHasAlternativeLists
+    );
+  };
+
+  return areAlternativeListsPresent()
     ? Array(ALC.numberOfAlternativeChoices)
         .fill()
         .map((i, selectorNumber) => {
           return (
             <SelectionInput //
+              width={"32em"}
               key={selectorNumber}
               selectorNumber={selectorNumber}
               alternatives={setAlternatives(selectorNumber)}
