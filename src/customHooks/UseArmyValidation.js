@@ -3,7 +3,6 @@ import { useContext } from "react";
 // components and functions
 import { ArmyContext } from "../contexts/armyContext";
 import { TournamentRulesContext } from "../contexts/tournamentRulesContext";
-// import { ValidationContext } from "../contexts/validationContext";
 import { SelectionContext } from "../contexts/selectionContext";
 import { AllyContext } from "../contexts/allyContext";
 import { AlternativeListContext } from "../contexts/alternativeListContext";
