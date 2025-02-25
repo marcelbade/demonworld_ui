@@ -218,7 +218,7 @@ function App() {
                             secondSubFactionMenuState: secondSubFactionMenuState,
                             itemShopState: itemShopState,
                             showOptionButtons: showOptionButtons,
-                            displayedCard: displayedCard, // TODO
+                            displayedCard: displayedCard,
                             setStatCardState: setStatCardState,
                             setItemShopState: setItemShopState,
                             setSecondSubFactionMenuState: setSecondSubFactionMenuState,
