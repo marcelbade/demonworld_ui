@@ -13,8 +13,9 @@ const useSpecialItems = () => {
 
   /**
    * Function implements the fact, that some items have additional effects
-   * beyond changing the units stats. The item is tested and if further
-   * rules do exist, they are applied. By default however, nothing happens.
+   * beyond changing the units stats or adding rules. 
+   * The item is tested and if further rules do exist, they are applied. 
+   * By default however, nothing happens.
    * @param {*} selectedUnit  the unit for which the item shop was opened.
    * @param {*} selectedItem  item is being added.
    */
@@ -22,6 +23,7 @@ const useSpecialItems = () => {
     const name = selectedItem.itemName;
     switch (name) {
       case SPECIAL_ITEMS.BRACELET_OF_TRANSFORMATION:
+        // add 2nd unit card to unit
         braceletOfTransformationLogic(selectedUnit);
 
         break;
