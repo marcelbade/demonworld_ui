@@ -1,53 +1,11 @@
 // React
-import React, { useContext } from "react";
+import React from "react";
 // Material UI
 import { List, ListItemText, ListItem, IconButton } from "@mui/material";
 // icons
 import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
-// components and functions
-import { ItemContext } from "../../../../../../../contexts/itemContext";
-import { SelectionContext } from "../../../../../../../contexts/selectionContext";
-// custom hooks
-import useArmyValidation from "../../../../../../../customHooks/UseArmyValidation";
-import useUnitEquipmentLimits from "../../../../../../../customHooks/useUnitEqipmentLimits";
-import useSpecialItems from "../../../../../../../customHooks/UseSpecialItems";
 
 const EquipmentList = (props) => {
-  const IC = useContext(ItemContext);
-  const SEC = useContext(SelectionContext);
-  const validation = useArmyValidation();
-  const limiter = useUnitEquipmentLimits();
-  const specials = useSpecialItems();
-
-  /**
-   * Function removes an item from a unit's equipment array, and revalidates the list.
-   * @param {name + uniqueID} identifier
-   * @param {int} position
-   */
-  const removeItem = (identifier, position) => {
-    let tempArray = [...SEC.selectedUnits];
-
-    for (let i = 0; i < tempArray.length; i++) {
-      if (tempArray[i].name + tempArray[i].uniqueID === identifier) {
-        tempArray[i].equipment.splice(position, 1);
-      }
-    }
-
-    validation.validateList(tempArray, SEC.maxPointsAllowance);
-
-    SEC.setSelectedUnits(tempArray);
-  };
-
-  const removeItemFromCentralList = (item) => {
-    let temp = [...IC.allEquippedItems];
-    temp = temp.filter((i) => !i === item.itemName);
-    IC.setAllEquippedItems(temp);
-  };
-
-  const removeSpecialItem = (selectedUnit) => {
-    specials.testSpecialItemEffectRemoval(selectedUnit);
-  };
-
   /**
    * Function draws horizontal divider is displayed when the equipment list is not empty.
    * @returns css class
@@ -67,8 +25,13 @@ const EquipmentList = (props) => {
         };
   };
 
+  console.log("props.unit", props.unit);
+
   return (
-    <List sx={displayListTop()} key={props.unit.uniqueID}>
+    <List
+      sx={displayListTop()} //
+      key={props.unit.uniqueID}
+    >
       {props.unit.equipment.length !== 0
         ? props.unit.equipment.map((e, i) => {
             return (
@@ -76,10 +39,7 @@ const EquipmentList = (props) => {
                 <IconButton
                   sx={{ padding: "0", marginRight: "1.5em" }}
                   onClick={() => {
-                    removeSpecialItem(props.unit);
-                    removeItem(props.identifier, i);
-                    removeItemFromCentralList(e);
-                    limiter.toggleUnitsItemTypeFlags(props.unit, e, false);
+                    props.removeItemButtonHandler(props.unit, e, i);
                   }}
                 >
                   <RemoveCircleOutlineIcon />
