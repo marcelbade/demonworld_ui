@@ -25,8 +25,6 @@ const EquipmentList = (props) => {
         };
   };
 
-  console.log("props.unit", props.unit);
-
   return (
     <List
       sx={displayListTop()} //
