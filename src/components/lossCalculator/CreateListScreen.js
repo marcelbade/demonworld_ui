@@ -6,11 +6,13 @@ import { Button, Grid, IconButton } from "@mui/material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 // constants
 import { LOSS_CALCULATOR } from "../../constants/textsAndMessages";
+import LogInButton from "../Login/LogInButton";
+import LightSwitch from "../shared/LightSwitch";
 
 const CreateListScreen = (props) => {
   return (
     <Grid container direction="column">
-      <Grid>
+      <Grid container item justifyContent="space-between">
         <IconButton
           onClick={() => {
             // navigate to landing page
@@ -20,34 +22,49 @@ const CreateListScreen = (props) => {
         >
           <ChevronLeftIcon sx={{ width: "2em", height: "2em" }} />
         </IconButton>
+        <LightSwitch iconSize={"large"} />
       </Grid>
-      <Grid container direction="column" alignContent="center" justifyContent="center">
-        <Button
-          variant="outlined"
-          sx={{
-            margin: "2em",
-            width: "30em",
-            height: "3em",
-          }}
-          onClick={() => {
-            props.navigateToPage("ListGenerator");
-          }}
+      <Grid
+        container //
+        item
+        direction="column"
+        alignContent="center"
+        justifyContent="center"
+      >
+        <Grid
+          item //
+          container
+          width={"45em"}
+          alignContent="center"
+          justifyContent="center"
         >
-          {LOSS_CALCULATOR.CREATE_LIST}
-        </Button>
-        <Button
-          variant="outlined"
-          sx={{
-            margin: "2em",
-            width: "30em",
-            height: "3em",
-          }}
-          onClick={() => {
-            //TODO open login prompt
-          }}
+          <Button
+            variant="outlined"
+            sx={{
+              margin: "2em",
+              width: "30em",
+              height: "3em",
+            }}
+            onClick={() => {
+              props.navigateToPage("ListGenerator");
+            }}
+          >
+            {LOSS_CALCULATOR.CREATE_LIST}
+          </Button>
+        </Grid>
+        <Grid
+          item //
+          container
+          width={"45em"}
+          alignContent="center"
+          justifyContent="center"
         >
-          {LOSS_CALCULATOR.LOG_INTO_ACCOUNT}
-        </Button>
+          <LogInButton
+            buttonHeight={"5em"} //
+            buttonWidth={"5em"}
+            iconSize={"large"}
+          />
+        </Grid>
       </Grid>
     </Grid>
   );
