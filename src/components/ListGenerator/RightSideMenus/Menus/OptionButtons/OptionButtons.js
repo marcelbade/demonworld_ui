@@ -109,7 +109,6 @@ const OptionButtons = () => {
     return selectedUnits;
   };
 
-  // TODO STUD. Replace with REST Call once DB and BE are parts are done.
   const storeList = () => {
     // Call REST
   };
