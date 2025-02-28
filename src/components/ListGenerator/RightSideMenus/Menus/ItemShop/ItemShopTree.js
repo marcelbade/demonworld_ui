@@ -36,6 +36,7 @@ const ItemShopTree = () => {
    * which controls the display of the branches.
    */
   useEffect(() => {
+    // 
     if (isObjectEmtpy(IC.unitSelectedForShop)) {
       return;
     }
