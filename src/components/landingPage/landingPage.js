@@ -7,9 +7,11 @@ import deathIcon from "../../assets/icons/icons8-death-64.png";
 import calculatorIcon from "../../assets/icons/icons8-calculator-64.png";
 import bookIcon from "../../assets/icons/icons8-book-64.png";
 // functions and components
-import LandingPageNaviButton from "./LandingPageNaviButton";
+import NaviButton from "./NaviButton";
 import { LANDINGPAGE } from "../../constants/textsAndMessages";
 import LightSwitch from "../shared/LightSwitch";
+import LogInButton from "../Login/LogInButton";
+import LoginPrompt from "../Login/LogInPrompt";
 
 const LandingPage = () => {
   return (
@@ -28,19 +30,23 @@ const LandingPage = () => {
           <Typography variant="h3">{LANDINGPAGE.TITLE}</Typography>
         </Grid>
         <Grid
+          container
           item //
-          justifyContent="flex-end"
+          justifyContent="space-between"
+          direction={"row"}
           alignContent="center"
           sx={{
             paddingTop: "2px",
+            marginRight: "20px",
             height: "5vh",
-            width: "3vw",
+            width: "10em",
           }}
         >
-          <LightSwitch />
+          <LightSwitch iconSize={"large"} />
+          <LogInButton iconSize={"large"} />
         </Grid>
       </Grid>
-
+      <LoginPrompt />
       <Grid
         container //
         item
@@ -51,25 +57,32 @@ const LandingPage = () => {
           width: "100vw",
         }}
       >
-        <LandingPageNaviButton
+        <NaviButton
           relativeURL={"/compendium"} //
+          isIconButton={true}
+          isCustomIcon={true}
           icon={bookIcon}
-          altText={LANDINGPAGE.COMPENDIUM}
+          text={LANDINGPAGE.COMPENDIUM}
+          width={"20em"}
+          height={"20em"}
         />
-        <LandingPageNaviButton
+        <NaviButton
           relativeURL={"/listGenerator"} //
+          isIconButton={true}
+          isCustomIcon={true}
           icon={calculatorIcon}
-          altText={LANDINGPAGE.LIST_GENERATOR}
+          text={LANDINGPAGE.LIST_GENERATOR}
+          width={"20em"}
+          height={"20em"}
         />
-        <LandingPageNaviButton
+        <NaviButton
           relativeURL={"/lossCalculator"} //
+          isIconButton={true}
+          isCustomIcon={true}
           icon={deathIcon}
-          altText={LANDINGPAGE.LOSS_CALCULATOR}
-        />
-        <LandingPageNaviButton
-          relativeURL={"/cardCreator"} //
-          icon={deathIcon}
-          altText={LANDINGPAGE.CARD_CREATOR}
+          text={LANDINGPAGE.LOSS_CALCULATOR}
+          width={"20em"}
+          height={"20em"}
         />
       </Grid>
     </Grid>
