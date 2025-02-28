@@ -14,6 +14,12 @@ import LogInButton from "../Login/LogInButton";
 import LoginPrompt from "../Login/LogInPrompt";
 
 const LandingPage = () => {
+  const naviButtons = [
+    { text: "LANDINGPAGE.COMPENDIUM", relativeURL: "/compendium", icon: bookIcon },
+    { text: "LANDINGPAGE.LIST_GENERATOR", relativeURL: "/listGenerator", icon: calculatorIcon },
+    { text: "LANDINGPAGE.LOSS_CALCULATOR", relativeURL: "/lossCalculator", icon: deathIcon },
+  ];
+
   return (
     <Grid container direction="row">
       <Grid
@@ -57,33 +63,18 @@ const LandingPage = () => {
           width: "100vw",
         }}
       >
-        <NaviButton
-          relativeURL={"/compendium"} //
-          isIconButton={true}
-          isCustomIcon={true}
-          icon={bookIcon}
-          text={LANDINGPAGE.COMPENDIUM}
-          width={"20em"}
-          height={"20em"}
-        />
-        <NaviButton
-          relativeURL={"/listGenerator"} //
-          isIconButton={true}
-          isCustomIcon={true}
-          icon={calculatorIcon}
-          text={LANDINGPAGE.LIST_GENERATOR}
-          width={"20em"}
-          height={"20em"}
-        />
-        <NaviButton
-          relativeURL={"/lossCalculator"} //
-          isIconButton={true}
-          isCustomIcon={true}
-          icon={deathIcon}
-          text={LANDINGPAGE.LOSS_CALCULATOR}
-          width={"20em"}
-          height={"20em"}
-        />
+        {naviButtons.map((n, i) => (
+          <NaviButton
+            key={i}
+            relativeURL={n.relativeURL} //
+            isIconButton={true}
+            isCustomIcon={true}
+            icon={n.icon}
+            text={n.text}
+            width={"20em"}
+            height={"20em"}
+          />
+        ))}
       </Grid>
     </Grid>
   );
