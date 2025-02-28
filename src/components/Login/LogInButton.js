@@ -6,7 +6,7 @@ import { IconButton, Tooltip, Typography } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import FaceIcon from "@mui/icons-material/Face";
 // functions and components
-import { OPTIONS } from "../../constants/textsAndMessages";
+import { LOGIN } from "../../constants/textsAndMessages";
 // contexts
 import { UserContext } from "../../contexts/userContext";
 
@@ -18,15 +18,21 @@ const LogInButton = (props) => {
   };
 
   return (
-    <Tooltip title={<Typography>{OPTIONS.LOGIN}</Typography>}>
+    <Tooltip title={<Typography>{LOGIN.LOGIN_BUTTON}</Typography>}>
       <IconButton
-        sx={{ paddingTop: "2em" }}
-        size={props.bttnSize}
+        sx={{
+          width: props.buttonWidth,
+          height: props.buttonHeight,
+        }}
         onClick={() => {
           displayLogInPrompt();
         }}
       >
-        {UC.userLoggedIn ? <FaceIcon /> : <AccountCircleIcon />}
+        {UC.userLoggedIn ? ( //
+          <FaceIcon fontSize={props.iconSize} />
+        ) : (
+          <AccountCircleIcon fontSize={props.iconSize} />
+        )}
       </IconButton>
     </Tooltip>
   );
