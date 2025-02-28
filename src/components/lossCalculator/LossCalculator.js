@@ -1,20 +1,21 @@
 // React
 import React, { useContext, useEffect } from "react";
-import { useLocation, useHistory } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 //Material UI
 import { Grid } from "@mui/material";
 // components and functions
 import CreateListScreen from "./CreateListScreen";
 import LostPointDisplay from "./LostPointDisplay";
-import ReturnButton from "./ReturnButton";
 import LostUnitList from "./LostUnitList/LostUnitList";
 import LightSwitch from "../shared/LightSwitch";
 import usePointCostCalculator from "../../customHooks/UsePointCostCalculator";
+import NaviButton from "../landingPage/NaviButton";
 // context
 import { LossCalcContext } from "../../contexts/LossCalculatorContext";
+// icons
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 
 const LossCalculator = () => {
-  const history = useHistory();
   const location = useLocation();
   const calculator = usePointCostCalculator();
 
@@ -59,13 +60,6 @@ const LossCalculator = () => {
     return u;
   };
 
-  /**
-   * Function calls history objects to take user back to main menu.
-   */
-  const navigateToPage = (destination) => {
-    history.push(`/${destination}`);
-  };
-
   return LC.list.length !== 0 ? (
     <Grid
       container
@@ -81,7 +75,15 @@ const LossCalculator = () => {
         justifyContent="space-between"
         alignItems="center"
       >
-        <ReturnButton navigateToPage={navigateToPage} />
+        <NaviButton
+          isIconButton={true}
+          relativeURL={"/listGenerator"} //
+          isCustomIcon={false}
+          icon={ChevronLeftIcon}
+          altText={""}
+          width={"3em"}
+          height={"3em"}
+        />
         <Grid item sx={{ marginRight: "4em" }}>
           <LightSwitch />
         </Grid>
@@ -119,7 +121,7 @@ const LossCalculator = () => {
       ></Grid>
     </Grid>
   ) : (
-    <CreateListScreen navigateToPage={navigateToPage} />
+    <CreateListScreen />
   );
 };
 

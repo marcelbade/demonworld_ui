@@ -1,13 +1,15 @@
 // React
 import React from "react";
 //Material UI
-import { Button, Grid, IconButton } from "@mui/material";
+import { Grid, IconButton } from "@mui/material";
 // icons
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 // constants
 import { LOSS_CALCULATOR } from "../../constants/textsAndMessages";
 import LogInButton from "../Login/LogInButton";
 import LightSwitch from "../shared/LightSwitch";
+//  components and functions
+import NaviButton from "../landingPage/NaviButton";
 
 const CreateListScreen = (props) => {
   return (
@@ -38,19 +40,13 @@ const CreateListScreen = (props) => {
           alignContent="center"
           justifyContent="center"
         >
-          <Button
-            variant="outlined"
-            sx={{
-              margin: "2em",
-              width: "30em",
-              height: "3em",
-            }}
-            onClick={() => {
-              props.navigateToPage("ListGenerator");
-            }}
-          >
-            {LOSS_CALCULATOR.CREATE_LIST}
-          </Button>
+          <NaviButton
+            relativeURL={"/ListGenerator"} //
+            isIconButton={false}
+            text={LOSS_CALCULATOR.CREATE_LIST}
+            width={"30em"}
+            height={"3em"}
+          />
         </Grid>
         <Grid
           item //
