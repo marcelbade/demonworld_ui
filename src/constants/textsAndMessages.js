@@ -84,6 +84,13 @@ export const OPTIONS = {
   CHANGE_SELECTED_FACTION: "Fraktion wechseln",
 };
 
+export const LOGIN = {
+  LOGIN_PROMPT_TITLE: "Willkommen",
+  LOGIN_USER: "Benutzername",
+  LOGIN_PW: "Passwort",
+  LOGIN_ACTION: "Einloggen",
+};
+
 export const GENERAL_ERRRORS = {
   ONLY_NUMBERS: "Bitte nur Zahlen eingeben.",
   NO_ITEMS_FOR_UNIT: "Diese Einheit kann keine Gegenstände erhalten.",
