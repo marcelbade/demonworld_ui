@@ -59,6 +59,7 @@ const TreeItemNode = (props) => {
     <Accordion
       key={props.item.itemName} //
       style={{ boxShadow: "none" }}
+      sx={{ width: "75%" }}
     >
       <AccordionSummary
         expandIcon={
@@ -74,34 +75,39 @@ const TreeItemNode = (props) => {
         aria-controls="panel1a-content"
         id="shopItem"
       >
-        <Grid container alignItems="center" direction="row">
-          <Grid item container direction="column" xs={3}>
+        <Grid
+          container //
+          alignItems="center"
+          direction="row"
+        >
+          <Grid
+            item //
+            container
+            direction="column"
+            xs={3}
+          >
             <Typography variant="body1">{props.item.itemName}</Typography>
-            <Typography variant="body1" sx={{ color: "grey" }}>
-              {props.item.points}
-            </Typography>
+            <Typography variant="body1">{props.item.points}</Typography>
           </Grid>
-          <Grid item xs={6}>
-            <IconButton
-              size="large"
-              onClick={(e) => {
-                addItemToUnit(props.item);
-                addItemToCentralList(props.item);
-                limiter.toggleUnitsItemTypeFlags(IC.unitSelectedForShop, props.item, true);
-                testForSpecialItems(props.item);
-                props.testForEmptyItemCategory(props.categoryObj, props.categoryNumber);
-                e.stopPropagation();
-              }}
-            >
-              <AddCircleOutlineIcon />
-            </IconButton>
-          </Grid>
+          <IconButton
+            size="large"
+            onClick={(e) => {
+              addItemToUnit(props.item);
+              addItemToCentralList(props.item);
+              limiter.toggleUnitsItemTypeFlags(IC.unitSelectedForShop, props.item, true);
+              testForSpecialItems(props.item);
+              props.testForEmptyItemCategory(props.categoryObj, props.categoryNumber);
+              e.stopPropagation();
+            }}
+          >
+            <AddCircleOutlineIcon />
+          </IconButton>
         </Grid>
       </AccordionSummary>
       <AccordionDetails>
         <Typography
           variant="body1" //
-          sx={{ width: "50em" }}
+          sx={{ width: "100%" }}
         >
           {props.item.itemRules}
         </Typography>

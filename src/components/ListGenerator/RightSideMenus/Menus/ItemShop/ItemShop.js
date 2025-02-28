@@ -8,7 +8,7 @@ import ItemShopTree from "./ItemShopTree";
 
 const ItemShop = () => {
   return (
-    <Grid container direction="column" sx={{ height: "100vh", width: "45vw" }}>
+    <Grid container direction="column" sx={{  width: "65em" }}>
       <ItemShopHeader />
 
       <Grid
