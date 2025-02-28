@@ -136,7 +136,6 @@ const ArmyListBoxHeader = () => {
               style: {
                 fontFamily: "NotMaryKate",
                 fontSize: "20px",
-                // TODO -> refactor validation
                 color: isArmyCommanderMissing(validation, inputElmnt.value) //
                   ? theme.palette.errorColor
                   : theme.color,
