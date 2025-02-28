@@ -12,6 +12,7 @@ export const LANDINGPAGE = {
   LIST_GENERATOR: "Listengenerator",
   LOSS_CALCULATOR: "Verlustrechner",
   CARD_CREATOR: "Einheitengenerator",
+  BACK_TO_LANDINGPAGE:"Hauptseite",
 };
 
 export const COMPENDIUM = {
@@ -89,6 +90,9 @@ export const LOGIN = {
   LOGIN_USER: "Benutzername",
   LOGIN_PW: "Passwort",
   LOGIN_ACTION: "Einloggen",
+  LOGIN_BUTTON: "Ins Konto einloggen",
+  NEW_ACCOUNT: "Neues Konto Anlegen",
+
 };
 
 export const GENERAL_ERRRORS = {
