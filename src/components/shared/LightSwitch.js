@@ -13,8 +13,8 @@ import { OPTIONS } from "../../constants/textsAndMessages";
 const LightSwitch = (props) => {
   const LC = useContext(LightSwitchContext);
 
-  const style_light = { fontSize: props.iconSize, color: "black" };
-  const style_dark = { fontSize: props.iconSize, color: "white" };
+  const style_light = { color: "black" };
+  const style_dark = { color: "white" };
 
   const toggleDarkMode = () => {
     LC.setDarkModeOff((prevState) => !prevState);
@@ -23,12 +23,23 @@ const LightSwitch = (props) => {
   return (
     <Tooltip title={<Typography>{OPTIONS.LIGHT_SWITCH}</Typography>}>
       <IconButton
-        size={props.bttnSize}
+        width={ props.width}
+        height={props.height}
         onClick={() => {
           toggleDarkMode();
         }}
       >
-        {LC.darkModeOff ? <Brightness4Icon sx={style_light} /> : <BrightnessHighIcon sx={style_dark} />}
+        {LC.darkModeOff ? (
+          <Brightness4Icon
+            fontSize={props.iconSize} //
+            sx={style_light}
+          />
+        ) : (
+          <BrightnessHighIcon
+            fontSize={props.iconSize} //
+            sx={style_dark}
+          />
+        )}
       </IconButton>
     </Tooltip>
   );
