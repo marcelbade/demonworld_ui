@@ -29,6 +29,7 @@ const AppBar = (props) => {
       elemnt: (
         <NaviButton
           relativeURL={"/"} //
+          isIconButton={true}
           isCustomIcon={false}
           icon={ChevronLeftIcon}
           altText={LANDINGPAGE.BACK_TO_LANDINGPAGE}
