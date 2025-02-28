@@ -140,8 +140,6 @@ const percentageKingdomsAndAlly = (SelectedAlternateSubFactions) => {
         }
       });
     });
-
-    //TODO set the error message!
   }
 };
 

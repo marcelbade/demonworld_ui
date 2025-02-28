@@ -214,7 +214,6 @@ const oldHeroRemove = (selectedUnits) => {
   const numberOldHeroesAlreadySelected = selectedUnits.filter((su) => su.subFaction === ELF_TEXTS.SF.OLD_HERO).length;
   const allowance = allowedNumberOldHeroes(selectedUnits);
 
-  // TODO: replace with while loop, see neanderRemove
   if (numberOldHeroesAlreadySelected > allowance) {
     let difference = numberOldHeroesAlreadySelected - allowance;
 
