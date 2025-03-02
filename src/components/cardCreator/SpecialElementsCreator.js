@@ -2,7 +2,7 @@
 import React, { useContext } from "react";
 // material ui
 import { useTheme } from "@emotion/react";
-import { Checkbox, FormControlLabel, Grid } from "@mui/material";
+import { Checkbox, FormControlLabel, Grid2 as Grid } from "@mui/material";
 import CreatorTextInput from "./CreatorTextInput";
 // contexts
 import { CardCreationContext } from "../../contexts/cardCreationContext";
@@ -53,8 +53,14 @@ const SpecialElementsCreator = () => {
   ];
 
   return (
-    <Grid container item direction="row" alignItems="center" justifyContent="space-around" sx={theme.palette.cardCreator.box}>
-      <Grid item>
+    <Grid
+      container //
+      direction="row"
+      alignItems="center"
+      justifyContent="space-around"
+      sx={theme.palette.cardCreator.box}
+    >
+      <Grid>
         <CreatorTextInput
           id={"elementNumber"}
           value={CCC.unit.numberOfElements}
@@ -76,7 +82,6 @@ const SpecialElementsCreator = () => {
                     onChange={elmnt.action}
                     inputProps={{ "aria-label": "controlled" }}
                     sx={theme.palette.cardCreator.checkbox}
-
                   />
                 }
                 label={elmnt.name}

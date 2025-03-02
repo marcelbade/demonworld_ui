@@ -1,7 +1,7 @@
 // React
 import React from "react";
 // Material UI
-import { Grid, Typography } from "@mui/material";
+import { Grid2 as Grid, Typography } from "@mui/material";
 // components & functions
 import { setUnitStat } from "../../../../../../gameLogic/unitStatChangeLogic/unitStatChangesLogic";
 import { WEAPON_1 } from "../../../../../../constants/stats";
@@ -32,15 +32,13 @@ const MeleeWeapons = (props) => {
   ];
 
   return (
-    <Grid
-      item //
+    <Grid //
       container
       direction="column"
     >
       {weapons.map((w, i) => {
         return (
-          <Grid
-            item //
+          <Grid //
             container
             justifyContent="center"
             key={i}

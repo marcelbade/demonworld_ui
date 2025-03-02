@@ -1,7 +1,7 @@
 // React
 import React, { useContext } from "react";
 //Material UI
-import { Button, Grid, ButtonGroup, Typography, IconButton, ThemeProvider, CssBaseline } from "@mui/material";
+import { Button, Grid2 as Grid, ButtonGroup, Typography, IconButton, ThemeProvider, CssBaseline } from "@mui/material";
 // icons
 import CancelIcon from "@mui/icons-material/Cancel";
 // components and functions
@@ -62,8 +62,12 @@ const SecondSubFactionMenu = () => {
             <CancelIcon />
           </IconButton>
         </Grid>
-        <Grid item container direction="row" justifyContent="center">
-          <Grid item xs={9}>
+        <Grid //
+          container
+          direction="row"
+          justifyContent="center"
+        >
+          <Grid xs={9}>
             <Typography
               variant="h5" //
               align="center"
@@ -73,14 +77,18 @@ const SecondSubFactionMenu = () => {
             </Typography>
           </Grid>
         </Grid>
-        <Grid item container direction="row" justifyContent="center">
+        <Grid //
+          container
+          direction="row"
+          justifyContent="center"
+        >
           <ButtonGroup size="large" orientation="vertical">
-            {SFC.secondSubFactionList.map((ssf) => {
+            {SFC.secondSubFactionList.map((ssf, i) => {
               return ssf === IC.unitSelectedForShop.secondSubFaction ? (
                 <Button
                   disabled={true} //
                   variant="text"
-                  key={ssf}
+                  key={i}
                 >
                   {ssf}
                 </Button>

@@ -2,7 +2,7 @@
 import React, { useContext } from "react";
 // material ui
 import { useTheme } from "@emotion/react";
-import { Checkbox, FormControlLabel, Grid } from "@mui/material";
+import { Checkbox, FormControlLabel, Grid2 as Grid } from "@mui/material";
 // components and functions
 import CreatorTextInput from "./CreatorTextInput";
 // contexts
@@ -52,8 +52,7 @@ const FearAndMoralCreator = () => {
 
   return (
     <Grid
-      item //
-      container
+      container //
       direction="column"
       alignItems="center"
       justifyContent="space-evenly"
@@ -61,10 +60,9 @@ const FearAndMoralCreator = () => {
     >
       <Grid
         container //
-        item
         direction="column"
       >
-        <Grid item>
+        <Grid>
           <FormControlLabel
             control={
               <Checkbox
@@ -92,7 +90,6 @@ const FearAndMoralCreator = () => {
       </Grid>
       <Grid
         container //
-        item
         direction="row"
       >
         <CreatorTextInput
@@ -104,7 +101,6 @@ const FearAndMoralCreator = () => {
         />
         {CCC.unit.unitType === UNIT ? (
           <Grid
-            item
             container
             direction="row"
             sx={{

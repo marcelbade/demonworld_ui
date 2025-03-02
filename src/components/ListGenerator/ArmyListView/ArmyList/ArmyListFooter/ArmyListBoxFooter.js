@@ -1,6 +1,6 @@
 // React
 import React, { useState, useContext, Fragment } from "react";
-import { Typography, TextField, InputAdornment, Grid } from "@mui/material";
+import { Typography, TextField, InputAdornment, Grid2 as Grid } from "@mui/material";
 // components and functions
 import { SelectionContext } from "../../../../../contexts/selectionContext";
 import calculateScoutingFactor from "../../../../../gameLogic/scoutFactorCalculator/scoutingFactorCalculator";
@@ -40,8 +40,14 @@ const ArmyListBoxFooter = () => {
 
   return (
     <Fragment>
-      <Grid container direction="column">
-        <Grid container direction="row">
+      <Grid //
+        container
+        direction="column"
+      >
+        <Grid //
+          container
+          direction="row"
+        >
           <Typography variant="subtitle1">
             {INPUT_TEXTS.TOTAL_POINTS} {netPoints} /
           </Typography>

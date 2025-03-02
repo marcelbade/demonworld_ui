@@ -1,7 +1,7 @@
 // React
 import React, { useContext } from "react";
 // Material UI
-import { Grid, Drawer } from "@mui/material";
+import { Grid2 as Grid, Drawer } from "@mui/material";
 // context
 import { MenuContext } from "../../contexts/MenuContext";
 // components and functions

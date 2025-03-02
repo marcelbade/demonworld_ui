@@ -1,6 +1,6 @@
 import React from "react";
 // material ui
-import { Typography, IconButton, Grid } from "@mui/material";
+import { Typography, IconButton, Grid2 as Grid } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // icons
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
@@ -12,8 +12,16 @@ const InvalidTreeItemNode = (props) => {
   const theme = useTheme();
 
   return (
-    <Grid container alignItems="center" direction="row">
-      <Grid item container direction="column" xs={2}>
+    <Grid //
+      container
+      alignItems="center"
+      direction="row"
+    >
+      <Grid //
+        container
+        direction="column"
+        xs={2}
+      >
         <Typography
           variant="body1" //
           sx={{
@@ -31,7 +39,7 @@ const InvalidTreeItemNode = (props) => {
           {props.item.points}
         </Typography>
       </Grid>
-      <Grid item xs={6}>
+      <Grid xs={6}>
         <IconButton size="large" disabled={true}>
           <AddCircleOutlineIcon />
         </IconButton>

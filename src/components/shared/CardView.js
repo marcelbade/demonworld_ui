@@ -1,7 +1,7 @@
 // React
 import React, { Fragment, useEffect, useState } from "react";
 // material ui
-import { Grid } from "@mui/material";
+import { Grid2 as Grid } from "@mui/material";
 // components and functions
 import StatCard from "./statCards/StatCard";
 import StatCardCarousellButton from "./StatCardCarousellButton";
@@ -46,7 +46,6 @@ const CardView = (props) => {
     <Fragment>
       <Grid
         container //
-        item
         direction="row"
         alignItems="center"
         justifyContent="center"
@@ -54,17 +53,15 @@ const CardView = (props) => {
         minHeight="60vh"
         maxHeight="60vh"
       >
-        <Grid item>
+        <Grid>
           {props.isMultiStateCard ? ( //
             <StatCardCarousellButton action={carouselBackward} side={"left"} />
           ) : null}
         </Grid>
-        <Grid item>
-          <StatCard
-            unit={displayCard}
-          />
+        <Grid>
+          <StatCard unit={displayCard} />
         </Grid>
-        <Grid item>
+        <Grid>
           {props.isMultiStateCard ? ( //
             <StatCardCarousellButton action={carouselForward} side={"right"} />
           ) : null}

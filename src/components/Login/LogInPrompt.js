@@ -8,7 +8,7 @@ import {
   DialogTitle, //
   TextField,
   IconButton,
-  Grid,
+  Grid2 as Grid,
 } from "@mui/material";
 // icons
 import CancelIcon from "@mui/icons-material/Cancel";
@@ -61,7 +61,10 @@ const LoginPrompt = () => {
         </IconButton>
       </Grid>
       <DialogContent>
-        <Grid container direction={"column"}>
+        <Grid //
+          container
+          direction={"column"}
+        >
           <TextField
             autoFocus //
             required
@@ -80,7 +83,11 @@ const LoginPrompt = () => {
           />
         </Grid>
       </DialogContent>
-      <Grid container item alignItems="center" justifyContent="space-between">
+      <Grid //
+        container
+        alignItems="center"
+        justifyContent="space-between"
+      >
         <NaviButton
           relativeURL={"/addNewAccount"} //
           isIconButton={false}

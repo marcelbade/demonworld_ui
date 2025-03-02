@@ -1,11 +1,11 @@
-import { Button, Grid } from "@mui/material";
+import { Button, Grid2 as Grid } from "@mui/material";
 import React from "react";
 import { OPTIONS } from "../../../../../constants/textsAndMessages";
 
 const ChoosePdfType = (props) => {
   return props.display ? (
     <Grid container direction="row" justifyContent="space-between">
-      <Grid item xs={5}>
+      <Grid xs={5}>
         <Button
           variant="outlined"
           onClick={() => {
@@ -16,7 +16,7 @@ const ChoosePdfType = (props) => {
           {OPTIONS.CREATE_DEFAULT_LIST}
         </Button>
       </Grid>
-      <Grid item xs={5}>
+      <Grid xs={5}>
         <Button
           variant="outlined"
           onClick={() => {

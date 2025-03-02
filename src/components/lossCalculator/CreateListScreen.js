@@ -1,7 +1,7 @@
 // React
 import React from "react";
 //Material UI
-import { Grid } from "@mui/material";
+import { Grid2 as Grid } from "@mui/material";
 // icons
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 // constants
@@ -13,7 +13,10 @@ import NaviButton from "../landingPage/NaviButton";
 
 const CreateListScreen = () => {
   return (
-    <Grid container direction="column">
+    <Grid //
+      container
+      direction="column"
+    >
       <Grid container item justifyContent="space-between">
         <NaviButton
           relativeURL={"/"} //
@@ -28,13 +31,11 @@ const CreateListScreen = () => {
       </Grid>
       <Grid
         container //
-        item
         direction="column"
         alignContent="center"
         justifyContent="center"
       >
-        <Grid
-          item //
+        <Grid //
           container
           width={"45em"}
           alignContent="center"
@@ -48,8 +49,7 @@ const CreateListScreen = () => {
             height={"3em"}
           />
         </Grid>
-        <Grid
-          item //
+        <Grid //
           container
           width={"45em"}
           alignContent="center"

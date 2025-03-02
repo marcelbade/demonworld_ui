@@ -1,12 +1,11 @@
 // React
 import React from "react";
 //Material UI
-import { Typography, Grid } from "@mui/material";
+import { Typography, Grid2 as Grid } from "@mui/material";
 import { useTheme } from "@emotion/react";
 
 const ListElementName = (props) => {
-
-  const theme = useTheme()
+  const theme = useTheme();
 
   const STYLES = {
     paddingLeft: "1em", //
@@ -19,7 +18,7 @@ const ListElementName = (props) => {
     return props.unitDestroyed
       ? {
           ...STYLES,
-          color:theme.palette.errorColor,
+          color: theme.palette.errorColor,
           textDecorationLine: "line-through",
           textDecorationThickness: "0.2em",
         }
@@ -27,7 +26,7 @@ const ListElementName = (props) => {
   };
 
   return (
-    <Grid item>
+    <Grid>
       <Typography variant="h6" sx={setStyles()}>
         {props.unitName}
       </Typography>

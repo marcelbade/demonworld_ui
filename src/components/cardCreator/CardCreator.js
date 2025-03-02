@@ -1,7 +1,7 @@
 // react
 import React, { useState } from "react";
 // material ui
-import { Box, Grid } from "@mui/material";
+import { Box, Grid2 as Grid } from "@mui/material";
 
 //
 import FactionNameCreator from "./FactionNameCreator";
@@ -148,12 +148,10 @@ const CardCreator = () => {
           }}
         >
           <Grid
-            item //
-            container
+            container //
             direction="row"
           >
             <Grid
-              item
               container //
               direction="column"
               alignItems="center"

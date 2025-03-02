@@ -1,7 +1,7 @@
 // React
 import React, { useContext } from "react";
 //Material UI
-import { Typography, Grid } from "@mui/material";
+import { Typography, Grid2 as Grid } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components and functions
 import { LossCalcContext } from "../../../contexts/LossCalculatorContext";
@@ -57,7 +57,7 @@ const LostUnitListElement = (props) => {
               unitDestroyed={props.unit.unitDestroyed}
             />
           </Grid>
-          <Grid item>
+          <Grid>
             <EquipmentList unit={props.unit} />
           </Grid>
         </Grid>
@@ -69,7 +69,6 @@ const LostUnitListElement = (props) => {
           </Typography>
         </Grid>
         <Grid
-          item
           container
           xs={2}
           direction="row" //
@@ -79,7 +78,6 @@ const LostUnitListElement = (props) => {
           <UnitLossCalcBttnGroup unit={props.unit} />
         </Grid>
         <Grid
-          item
           container
           xs={2} //
           alignItems="center"
@@ -93,9 +91,8 @@ const LostUnitListElement = (props) => {
             {calcContext.unitPointsLost}
           </Typography>
         </Grid>
-        <Grid
+        <Grid //
           xs={1}
-          item //
           direction="column"
           container
           justifyContent="flex-end"

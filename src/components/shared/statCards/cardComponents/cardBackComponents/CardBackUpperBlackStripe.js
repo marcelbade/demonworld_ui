@@ -2,7 +2,7 @@
 import React from "react";
 // Material UI
 import { useTheme } from "@emotion/react";
-import { Grid, Typography } from "@mui/material";
+import { Grid2 as Grid, Typography } from "@mui/material";
 import { CARD_TEXT } from "../../../../../constants/textsAndMessages";
 //  components and functions
 import { numberOfElements } from "../../../../../util/utilityFunctions";

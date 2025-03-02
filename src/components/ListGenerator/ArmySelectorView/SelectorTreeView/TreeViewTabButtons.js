@@ -1,7 +1,7 @@
 // react
 import React, { useContext } from "react";
 // material ui
-import { Button, Grid } from "@mui/material";
+import { Button,  Grid2 as Grid } from "@mui/material";
 // context
 import { AllyContext } from "../../../../contexts/allyContext";
 import { CREATOR } from "../../../../constants/textsAndMessages";

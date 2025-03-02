@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 // material ui
 import { useTheme } from "@emotion/react";
 import CreatorTextInput from "./CreatorTextInput";
-import { Grid } from "@mui/material";
+import { Grid2 as Grid } from "@mui/material";
 // contexts
 import { CardCreationContext } from "../../contexts/cardCreationContext";
 // icons

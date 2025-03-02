@@ -2,7 +2,7 @@
 import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 // Material UI
-import { Grid, Button, Fade } from "@mui/material";
+import { Grid2 as Grid, Button, Fade } from "@mui/material";
 // context
 import { ArmyContext } from "../../../../../contexts/armyContext";
 import { TournamentRulesContext } from "../../../../../contexts/tournamentRulesContext";
@@ -169,7 +169,7 @@ const OptionButtons = () => {
       }}
     >
       {buttons.map((bttn, i) => (
-        <Grid item key={i}>
+        <Grid key={i}>
           {bttn.display ? (
             <Fade in={true}>
               <Button

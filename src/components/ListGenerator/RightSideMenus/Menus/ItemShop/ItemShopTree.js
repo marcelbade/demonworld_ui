@@ -1,7 +1,7 @@
 // React
 import React, { useState, useContext, useEffect } from "react";
 //Material UI
-import { Grid } from "@mui/material";
+import { Grid2 as Grid } from "@mui/material";
 import { SimpleTreeView } from "@mui/x-tree-view/SimpleTreeView";
 import { TreeItem } from "@mui/x-tree-view/TreeItem";
 // icons
@@ -128,7 +128,7 @@ const ItemShopTree = () => {
                   message={result.message}
                 />
               ) : (
-                <Grid
+                <Grid // TODO needed??
                   key={j} //
                   container
                 >

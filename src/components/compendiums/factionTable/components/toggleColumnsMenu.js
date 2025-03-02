@@ -1,7 +1,7 @@
 // React
 import React, { useContext } from "react";
 // material ui
-import { Grid, Checkbox, FormControlLabel, FormGroup } from "@mui/material";
+import { Grid2 as Grid, Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 // components & functions
 import { TableContext } from "../../../../contexts/tableContext";
 
@@ -13,8 +13,15 @@ const ToggleColumnsMenu = () => {
   const TC = useContext(TableContext);
 
   return (
-    <Grid container direction="column">
-      <Grid item container xs={12} direction="row">
+    <Grid //
+      container
+      direction="column"
+    >
+      <Grid //
+        container
+        xs={12}
+        direction="row"
+      >
         {/* outer loop that goes through toogle groups and creates one box each */}
         {TC.toggleGroups.map((g, i) => {
           return (
@@ -50,7 +57,7 @@ const ToggleColumnsMenu = () => {
           );
         })}
       </Grid>
-      <Grid item>
+      <Grid>
         <FormGroup sx={FORMGROUP}>
           <FormControlLabel
             control={

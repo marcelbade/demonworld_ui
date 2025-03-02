@@ -1,7 +1,7 @@
 // React
 import React, { Fragment } from "react";
 // Material UI
-import { Grid } from "@mui/material";
+import { Grid2 as Grid } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components & functions
 import RangedWeapon from "./CardFrontCenterComponents/RangedWeapon";
@@ -17,8 +17,7 @@ const CardFrontCenter = (props) => {
 
   return (
     <Fragment>
-      <Grid
-        item //
+      <Grid //
         container
         justifyContent="center"
         sx={theme.palette.statCards.backGround}

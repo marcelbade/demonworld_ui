@@ -2,7 +2,7 @@
 import React, { useContext } from "react";
 // material ui
 import { useTheme } from "@emotion/react";
-import { Grid } from "@mui/material";
+import { Grid2 as Grid } from "@mui/material";
 // components and functions
 import CreatorTextInput from "./CreatorTextInput";
 // contexts
@@ -23,7 +23,12 @@ const SpecialRuleCreator = () => {
   };
 
   return (
-    <Grid container alignItems="center" justifyContent="flex-start" sx={theme.palette.cardCreator.box}>
+    <Grid
+      container //
+      alignItems="center"
+      justifyContent="flex-start"
+      sx={theme.palette.cardCreator.box}
+    >
       <CreatorTextInput
         id={"specialRule"} //
         value={CCC.unit.specialRules}

@@ -1,7 +1,7 @@
 // React
 import React from "react";
 // material ui
-import { Grid, Typography } from "@mui/material";
+import { Grid2 as Grid, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components & functions
 import { CARD_TEXT } from "../../../../../constants/textsAndMessages";
@@ -30,7 +30,7 @@ const CardFrontLowerBlackStripe = (props) => {
   }`;
 
   return isSingleElementCard(props.unit) ? (
-    <Grid item>
+    <Grid>
       <Typography
         variant="h6" //
         align="center"

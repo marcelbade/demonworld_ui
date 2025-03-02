@@ -2,7 +2,7 @@
 import React, { Fragment, useContext } from "react";
 // material ui
 import { useTheme } from "@emotion/react";
-import { Grid, Typography, FormControlLabel, Checkbox } from "@mui/material";
+import { Grid2 as Grid, Typography, FormControlLabel, Checkbox } from "@mui/material";
 import CreatorTextInput from "./CreatorTextInput";
 // components and functions
 import FormationsAndHordeCreator from "./FormationsAndHordeCreator";
@@ -124,7 +124,6 @@ const UnitMovementCreator = () => {
       {CCC.unit.unitType === UNIT ? <FormationsAndHordeCreator /> : null}
       <Grid
         container //
-        item
         direction="row"
         alignItems="center" //
         justifyContent="center"

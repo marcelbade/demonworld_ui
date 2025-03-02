@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 // material ui
-import { Typography, Grid, IconButton } from "@mui/material";
+import { Typography,  Grid2 as Grid, IconButton } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // icons
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
@@ -68,8 +68,8 @@ const TreeUnitNode = (props) => {
       item
       xs={12}
     >
-      <Grid
-        item //
+      <Grid //
+         
         container
         direction="row"
         sx={{

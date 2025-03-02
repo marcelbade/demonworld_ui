@@ -2,7 +2,7 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 // Material UI
-import { IconButton, Grid, Tooltip, Typography, Button } from "@mui/material";
+import { IconButton, Grid2 as Grid, Tooltip, Typography, Button } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // Functions And Components
 import CustomIcon from "../shared/CustomIcon";
@@ -35,7 +35,6 @@ const NaviButton = (props) => {
 
   return (
     <Grid
-      item
       sx={{
         width: props.width,
         height: props.height,

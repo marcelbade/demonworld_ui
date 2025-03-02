@@ -1,7 +1,17 @@
 // React
 import React, { useContext, useState } from "react";
 // Material UI
-import { Grid, FormControl, FormControlLabel, FormLabel, FormGroup, TextField, Switch, Typography, IconButton } from "@mui/material";
+import {
+  Grid2 as Grid,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
+  FormGroup,
+  TextField,
+  Switch,
+  Typography,
+  IconButton,
+} from "@mui/material";
 // Icons
 import CancelIcon from "@mui/icons-material/Cancel";
 // context
@@ -79,7 +89,7 @@ const TournamentRulesMenu = () => {
           <CancelIcon />
         </IconButton>
       </Grid>
-      <Grid item>
+      <Grid>
         <FormControl component="fieldset" variant="standard">
           <FormLabel component="legend">
             <Typography
@@ -105,7 +115,7 @@ const TournamentRulesMenu = () => {
           </FormGroup>
         </FormControl>
       </Grid>
-      <Grid item>
+      <Grid>
         <Typography //
           sx={TC.tournamentOverrideRules.enableOverride ? ENABLED_BTTN_TEXT : DISBLED_BTTN_TEXT}
         >
@@ -132,7 +142,7 @@ const TournamentRulesMenu = () => {
           variant="standard"
         />
       </Grid>
-      <Grid item>
+      <Grid>
         <Typography sx={TC.tournamentOverrideRules.enableOverride ? ENABLED_BTTN_TEXT : DISBLED_BTTN_TEXT}>
           {TOURNAMENT_RULES.HOW_MANY_TIMES}
         </Typography>
@@ -157,7 +167,7 @@ const TournamentRulesMenu = () => {
           variant="standard"
         />
       </Grid>
-      <Grid item>
+      <Grid>
         <FormControl component="fieldset" variant="standard">
           <FormLabel sx={TC.tournamentOverrideRules.enableOverride ? ENABLED_BTTN_TEXT : DISBLED_BTTN_TEXT} component="legend">
             <Typography sx={TC.tournamentOverrideRules.enableOverride ? ENABLED_BTTN_TEXT : DISBLED_BTTN_TEXT}>

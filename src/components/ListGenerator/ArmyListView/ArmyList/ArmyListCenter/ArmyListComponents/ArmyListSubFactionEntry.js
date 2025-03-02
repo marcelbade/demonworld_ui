@@ -2,7 +2,7 @@
 import React, { useContext, useState } from "react";
 // Material UI
 import ListItem from "@mui/material/ListItem";
-import { Grid } from "@mui/material";
+import {  Grid2 as Grid } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components and functions
 import SubFactionUnitList from "./NestedUnitList/SubFactionUnitList";

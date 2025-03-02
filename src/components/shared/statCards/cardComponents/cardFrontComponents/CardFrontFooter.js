@@ -1,7 +1,7 @@
 // React
 import React from "react";
 // Material UI
-import { Grid, Typography } from "@mui/material";
+import { Grid2 as Grid, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components & functions
 import { renderDynamicIcons } from "../../../../../util/utilityFunctions";

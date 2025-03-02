@@ -2,7 +2,7 @@
 import React, { useContext } from "react";
 // material ui
 import { useTheme } from "@emotion/react";
-import { FormGroup, Grid, FormControlLabel, Checkbox } from "@mui/material";
+import { FormGroup, Grid2 as Grid, FormControlLabel, Checkbox } from "@mui/material";
 import CreatorTextInput from "./CreatorTextInput";
 // components and functions
 import CustomIcon from "../shared/CustomIcon";
@@ -79,8 +79,7 @@ const RangeWeaponCreator = () => {
 
       {CCC.hasRangedWeapon ? (
         <Grid
-          item //
-          container
+          container //
           direction="row"
           sx={theme.palette.cardCreator.box}
         >
@@ -100,8 +99,7 @@ const RangeWeaponCreator = () => {
             label={"Fernkampfwert:"}
           />
           <Grid
-            item //
-            container
+            container //
             direction="row"
             alignItems="center"
           >

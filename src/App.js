@@ -1,7 +1,7 @@
 // React
 import React, { useState, useEffect } from "react";
 // Material UI
-import { Grid, StyledEngineProvider, CssBaseline } from "@mui/material";
+import { Grid2 as Grid, StyledEngineProvider, CssBaseline } from "@mui/material";
 // axios
 import axios from "axios";
 // router

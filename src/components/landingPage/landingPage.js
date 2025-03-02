@@ -1,7 +1,7 @@
 // React
 import React from "react";
 // Material UI
-import { Grid, Typography } from "@mui/material";
+import { Grid2 as Grid, Typography } from "@mui/material";
 // icons
 import deathIcon from "../../assets/icons/icons8-death-64.png";
 import calculatorIcon from "../../assets/icons/icons8-calculator-64.png";
@@ -18,35 +18,28 @@ const LandingPage = () => {
     { text: LANDINGPAGE.COMPENDIUM, relativeURL: "/compendium", icon: bookIcon },
     { text: LANDINGPAGE.LIST_GENERATOR, relativeURL: "/listGenerator", icon: calculatorIcon },
     { text: LANDINGPAGE.LOSS_CALCULATOR, relativeURL: "/lossCalculator", icon: deathIcon },
+    // remove in production for now
+    { text: LANDINGPAGE.CARD_CREATOR, relativeURL: "/cardCreator", icon: deathIcon },
   ];
 
   return (
-    <Grid container direction="row">
+    <Grid
+      container //
+      direction="row"
+    >
       <Grid
         container //
-        item
-        xs={12}
-        justifyContent="space-between"
-        alignContent="center"
+        justifyContent={"space-between"}
+        sx={{
+          width: "100%",
+          height: "3em",
+        }}
       >
-        <Grid
-          item //
-          sx={{ marginLeft: "1em" }}
-        >
-          <Typography variant="h3">{LANDINGPAGE.TITLE}</Typography>
-        </Grid>
+        <Typography variant="h3">{LANDINGPAGE.TITLE}</Typography>
         <Grid
           container
-          item //
-          justifyContent="space-between"
-          direction={"row"}
-          alignContent="center"
-          sx={{
-            paddingTop: "2px",
-            marginRight: "20px",
-            height: "5vh",
-            width: "10em",
-          }}
+          justifyContent={"space-between"} //
+          size={0.5}
         >
           <LightSwitch iconSize={"large"} />
           <LogInButton iconSize={"large"} />
@@ -55,7 +48,6 @@ const LandingPage = () => {
       <LoginPrompt />
       <Grid
         container //
-        item
         justifyContent="center"
         alignContent="center"
         sx={{

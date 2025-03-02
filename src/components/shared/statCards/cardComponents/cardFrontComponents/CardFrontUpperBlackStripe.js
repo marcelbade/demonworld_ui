@@ -1,7 +1,7 @@
 // React
 import React, { Fragment } from "react";
 // material ui
-import { Grid, Typography } from "@mui/material";
+import { Grid2 as Grid, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // constants 
 import { CARD_TEXT } from "../../../../../constants/textsAndMessages";
@@ -37,8 +37,7 @@ const CardFrontUpperBlackStripe = (props) => {
   const HEIGHT_WIDTH_SKIRMISH_ICON = "20px";
 
   return (
-    <Grid
-      item //
+    <Grid //
       container
       justifyContent="space-around"
       sx={theme.palette.statCards.blackStripe}

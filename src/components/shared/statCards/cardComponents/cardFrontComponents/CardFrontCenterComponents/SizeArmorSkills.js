@@ -1,6 +1,6 @@
 // React
 import React, { Fragment } from "react";
-import { Grid, Typography } from "@mui/material";
+import { Grid2 as Grid, Typography } from "@mui/material";
 // Material UI
 import { useTheme } from "@emotion/react";
 // icons
@@ -21,19 +21,26 @@ const SizeArmorSkills = (props) => {
   const unitHasNoSkills = props.unit.skillRange === 0 && props.unit.skillMelee === 0;
 
   return (
-    <Grid
-      item //
+    <Grid //
       container
       alignItems="center"
       direction="row"
       sx={{ ...theme.palette.statCards.backGround, flexWrap: "nowrap" }}
     >
-      <Grid item container justifyContent="center">
+      <Grid //
+        container
+        justifyContent="center"
+      >
         <Typography variant="h6">
           {CARD_TEXT.SIZE} {props.unit.unitSize}
         </Typography>
       </Grid>
-      <Grid item container direction="row" alignItems="center" justifyContent="center">
+      <Grid //
+        container
+        direction="row"
+        alignItems="center"
+        justifyContent="center"
+      >
         <StatCardIcon
           icon={rangeArmorIcon} //
           altText={ALTTEXT.RANGE_ARMOR}
@@ -48,7 +55,7 @@ const SizeArmorSkills = (props) => {
         />
       </Grid>
       {unitHasNoSkills ? null : (
-        <Grid
+        <Grid //
           container
           justifyContent="center"
           direction="row" //

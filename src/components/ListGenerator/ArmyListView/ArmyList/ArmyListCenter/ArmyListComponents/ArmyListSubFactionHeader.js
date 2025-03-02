@@ -1,6 +1,6 @@
 // React
 import React from "react";
-import { Grid, Typography } from "@mui/material";
+import {  Grid2 as Grid, Typography } from "@mui/material";
 // components and functions
 import ContextHelpButton from "../../../../../shared/ContextHelpButton";
 // constants

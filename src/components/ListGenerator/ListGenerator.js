@@ -1,7 +1,7 @@
 // react
 import React, { useContext } from "react";
 // material ui
-import { Grid, Box } from "@mui/material";
+import { Grid2 as Grid, Box } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components and functions
 import ArmyListBox from "./ArmyListView/ArmyListBox";
@@ -42,8 +42,7 @@ const ListGenerator = () => {
       <Box sx={setArmySelectorBoxStyle()}>
         <ArmySelectorDropdown />
       </Box>
-      <Grid
-        item //
+      <Grid //
         container
         justifyContent="flex-start"
         sx={{
@@ -65,21 +64,18 @@ const ListGenerator = () => {
         container
         direction="row"
       ></Grid>
-      <Grid
-        item //
+      <Grid //
         container
         direction="row"
       >
-        <Grid
-          item //
+        <Grid //
           xs={3}
           position={"fixed"}
           marginTop={"5em"}
         >
           <ArmySelectionBox />
         </Grid>
-        <Grid
-          item //
+        <Grid //
           xs={9}
           sx={{
             paddingLeft: "50em",

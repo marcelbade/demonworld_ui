@@ -1,7 +1,7 @@
 // React
 import React, { Fragment } from "react";
 // Material UI
-import { Grid, ListItemText, Typography } from "@mui/material";
+import { Grid2 as Grid, ListItemText, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components and functions
 import ContextHelpButton from "../../../../../../shared/ContextHelpButton";
@@ -29,7 +29,11 @@ const ArmyListUnitEntry = (props) => {
           props.isValid ? (
             <Typography variant="button">{UNIT}</Typography>
           ) : (
-            <Grid container direction="row" alignItems="center">
+            <Grid //
+              container
+              direction="row"
+              alignItems="center"
+            >
               <Typography
                 variant="button"
                 sx={{

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 // material ui
-import { Typography, IconButton, Accordion, AccordionSummary, AccordionDetails, Grid } from "@mui/material";
+import { Typography, IconButton, Accordion, AccordionSummary, AccordionDetails, Grid2 as Grid } from "@mui/material";
 // components and functions
 import { ItemContext } from "../../../../../contexts/itemContext";
 import { SelectionContext } from "../../../../../contexts/selectionContext";
@@ -80,8 +80,7 @@ const TreeItemNode = (props) => {
           alignItems="center"
           direction="row"
         >
-          <Grid
-            item //
+          <Grid //
             container
             direction="column"
             xs={3}

@@ -1,6 +1,6 @@
 // React
 import { useContext } from "react";
-import { Grid, IconButton, ThemeProvider, CssBaseline } from "@mui/material";
+import { Grid2 as Grid, IconButton, ThemeProvider, CssBaseline } from "@mui/material";
 // icons
 import CancelIcon from "@mui/icons-material/Cancel";
 // components and functions
@@ -34,7 +34,7 @@ const CardViewBox = () => {
         direction="column"
         sx={{ height: "100vh", width: "40vw", padding: "2em" }}
       >
-        <Grid item>
+        <Grid>
           <IconButton
             onClick={() => {
               sideMenuController.closeCardDisplay();
@@ -44,7 +44,7 @@ const CardViewBox = () => {
             <CancelIcon />
           </IconButton>
         </Grid>
-        <Grid container item>
+        <Grid container>
           {RC.statCardState.clickedUnit !== undefined ? (
             <CardView
               isMultiStateCard={RC.statCardState.clickedUnit?.isMultiStateUnit}

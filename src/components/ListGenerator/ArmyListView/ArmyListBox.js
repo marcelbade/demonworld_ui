@@ -4,7 +4,7 @@ import React, { useContext } from "react";
 import ArmyListBoxHeader from "./ArmyList/ArmyListHeader/ArmyListBoxHeader";
 import ArmyListBoxCenter from "./ArmyList/ArmyListCenter/ArmyListBoxCenter";
 import ArmyListBoxFooter from "./ArmyList/ArmyListFooter/ArmyListBoxFooter";
-import { Grid } from "@mui/material";
+import { Grid2 as Grid } from "@mui/material";
 // context
 import { AlternativeListContext } from "../../../contexts/alternativeListContext";
 
@@ -29,13 +29,13 @@ const ArmyListBox = () => {
       justifyContent="flex-start"
       alignItems="flex-start"
     >
-      <Grid item>
+      <Grid>
         <ArmyListBoxHeader />
       </Grid>
-      <Grid item>
+      <Grid>
         <ArmyListBoxCenter />
       </Grid>
-      <Grid item>
+      <Grid>
         <ArmyListBoxFooter />
       </Grid>
     </Grid>

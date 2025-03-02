@@ -2,7 +2,7 @@
 import React, { useContext } from "react";
 // material ui
 import { useTheme } from "@emotion/react";
-import { Grid } from "@mui/material";
+import { Grid2 as Grid } from "@mui/material";
 // components and functions
 import CreatorTextInput from "./CreatorTextInput";
 // contexts
@@ -10,10 +10,8 @@ import { CardCreationContext } from "../../contexts/cardCreationContext";
 import { CREATOR } from "../../constants/textsAndMessages";
 
 const HitpointCreator = () => {
-  
-    const theme = useTheme();
+  const theme = useTheme();
 
-    
   const CCC = useContext(CardCreationContext);
 
   const deleteHitpoints = () => {
@@ -26,8 +24,7 @@ const HitpointCreator = () => {
 
   return (
     <Grid
-      item
-      container
+      container //
       direction="row"
       alignItems="center"
       justifyContent="space-evenly"

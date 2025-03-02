@@ -2,7 +2,7 @@
 import React, { useContext } from "react";
 // material ui
 import { useTheme } from "@emotion/react";
-import { Grid, Checkbox } from "@mui/material";
+import { Grid2 as Grid, Checkbox } from "@mui/material";
 // components and functions
 import CreatorTextInput from "./CreatorTextInput";
 import CustomIcon from "../shared/CustomIcon";
@@ -93,7 +93,6 @@ const MeleeWeaponCreator = () => {
     <Grid container direction="column" sx={theme.palette.cardCreator.box}>
       <Grid
         container //
-        item
         direction="row"
         sx={{
           marginBottom: "3em",
@@ -116,7 +115,6 @@ const MeleeWeaponCreator = () => {
       {elmnts.map((e, i) => (
         <Grid
           container //
-          item
           direction={e.direction}
           key={i}
         >
@@ -136,7 +134,6 @@ const MeleeWeaponCreator = () => {
       ))}
 
       <Grid //
-        item
         container
         direction="row"
         sx={{

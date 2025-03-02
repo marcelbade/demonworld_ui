@@ -3,7 +3,7 @@ import React, { Fragment, useEffect, useState } from "react";
 // Axios
 import axios from "axios";
 // material ui
-import { Grid, Typography } from "@mui/material";
+import { Grid2 as Grid, Typography } from "@mui/material";
 // components & functions
 import CompendiumTableRow from "./CompendiumTableRow";
 import DetailedCardView from "./CardRow";
@@ -169,8 +169,11 @@ const CompendiumTable = () => {
             margin="0.5em"
           />
           <AppBar hiddenElements={[ID.LIST_DISPLAY]} />
-          <Grid item container direction="row">
-            <Grid item xs={8}>
+          <Grid //
+            container
+            direction="row"
+          >
+            <Grid xs={8}>
               <Typography
                 variant="h3"
                 sx={{
@@ -186,7 +189,7 @@ const CompendiumTable = () => {
             </Grid>
           </Grid>
 
-          <Grid item xs={12}>
+          <Grid xs={12}>
             {receivedData ? (
               <table rules="none">
                 <CompendiumTableHeader columns={columns} />

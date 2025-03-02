@@ -1,7 +1,7 @@
 // react
 import React, { Fragment, useContext } from "react";
 // material ui
-import { FormGroup, Grid, FormControlLabel, Checkbox } from "@mui/material";
+import { FormGroup, Grid2 as Grid, FormControlLabel, Checkbox } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components and functions
 import SelectionInput from "../shared/selectionInput";
@@ -85,7 +85,6 @@ const FactionNameCreator = () => {
     >
       <Grid
         container //
-        item
         justifyContent="flex-start"
         sx={{ width: "100%" }}
       >
@@ -104,8 +103,7 @@ const FactionNameCreator = () => {
         </FormGroup>
       </Grid>
       <Grid
-        item //
-        container
+        container //
         direction="row"
         width="50em"
         justifyContent="center"

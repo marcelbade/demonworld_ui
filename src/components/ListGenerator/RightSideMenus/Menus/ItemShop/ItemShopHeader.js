@@ -1,7 +1,7 @@
 // React
 import React, { useContext } from "react";
 //Material UI
-import { Grid, Typography, IconButton } from "@mui/material";
+import { Grid2 as Grid, Typography, IconButton } from "@mui/material";
 // icons
 import CancelIcon from "@mui/icons-material/Cancel";
 // components and functions
@@ -26,7 +26,11 @@ const ItemShopHeader = () => {
       >
         <CancelIcon />
       </IconButton>
-      <Grid item container direction="row" justifyContent="center">
+      <Grid //
+        container
+        direction="row"
+        justifyContent="center"
+      >
         <Typography
           variant="h5"
           align="center"

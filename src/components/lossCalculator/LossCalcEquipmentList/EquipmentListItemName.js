@@ -1,7 +1,7 @@
 // React
 import React from "react";
 //Material UI
-import { Grid, ListItemText } from "@mui/material";
+import { Grid2 as Grid, ListItemText } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // component and functions
 import ContextHelpButton from "../../shared/ContextHelpButton";
@@ -28,7 +28,11 @@ const EquipmentListItemName = (props) => {
   };
 
   return props.notSingleElementItem ? (
-    <Grid container direction="row" justifyContent="flex-start">
+    <Grid //
+      container
+      direction="row"
+      justifyContent="flex-start"
+    >
       <ListItemText
         primary={<span>{props.itemName}</span>} //
         secondary={<span> {props.pointCost}</span>}

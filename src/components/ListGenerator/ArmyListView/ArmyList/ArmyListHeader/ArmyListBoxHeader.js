@@ -2,7 +2,7 @@
 import React, { Fragment, useContext, useEffect } from "react";
 // icons
 // material ui
-import { TextField, Grid } from "@mui/material";
+import { TextField, Grid2 as Grid } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components and functions
 import { ArmyContext } from "../../../../../contexts/armyContext";
@@ -113,7 +113,7 @@ const ArmyListBoxHeader = () => {
       alignItems="flex-start"
     >
       {inputElements.map((inputElmnt, i) => (
-        <Grid item key={i}>
+        <Grid key={i}>
           <TextField
             sx={{
               paddingTop: "1em",

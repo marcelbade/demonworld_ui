@@ -2,7 +2,7 @@
 import React, { useContext, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 //Material UI
-import { Grid } from "@mui/material";
+import { Grid2 as Grid } from "@mui/material";
 // components and functions
 import CreateListScreen from "./CreateListScreen";
 import LostPointDisplay from "./LostPointDisplay";
@@ -67,8 +67,7 @@ const LossCalculator = () => {
       justifyContent="flex-start"
       alignItems="flex-start"
     >
-      <Grid
-        item //
+      <Grid //
         xs={12}
         container
         direction="row"
@@ -84,20 +83,18 @@ const LossCalculator = () => {
           width={"3em"}
           height={"3em"}
         />
-        <Grid item sx={{ marginRight: "4em" }}>
+        <Grid sx={{ marginRight: "4em" }}>
           <LightSwitch />
         </Grid>
       </Grid>
       <Grid
         container //
         xs={4}
-        item
         direction="column"
       >
         <LostUnitList list={LC.list} />
       </Grid>
       <Grid
-        item
         sx={{
           marginTop: "4em", //
           marginLeft: "4em", //
@@ -110,7 +107,6 @@ const LossCalculator = () => {
       </Grid>
       <Grid
         container //
-        item
         xs={7}
         justifyContent="flex-end"
         alignItems="center"

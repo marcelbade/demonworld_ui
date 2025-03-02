@@ -2,7 +2,7 @@
 import React, { Fragment } from "react";
 // Material UI
 import { useTheme } from "@emotion/react";
-import { Grid, Typography } from "@mui/material";
+import { Grid2 as Grid, Typography } from "@mui/material";
 // functions and modules
 import { COMPENDIUM } from "../../../../../constants/textsAndMessages";
 
@@ -13,7 +13,7 @@ const CardBackCenter = (props) => {
   const hasEquipment = "equipment" in props.unit && props.unit.equipment.length !== 0;
 
   return (
-    <Grid item>
+    <Grid>
       <Typography
         variant="body1" //
         align="center"
