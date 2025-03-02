@@ -88,10 +88,11 @@ export const OPTIONS = {
 export const LOGIN = {
   LOGIN_PROMPT_TITLE: "Willkommen",
   LOGIN_USER: "Benutzername",
-  LOGIN_PW: "Passwort",
+  LOGIN_PW: "Passwort eigeben",
+  REPEAT_LOGIN_PW: "Passwort wiederholen",
   LOGIN_ACTION: "Einloggen",
   LOGIN_BUTTON: "Ins Konto einloggen",
-  NEW_ACCOUNT: "Neues Konto Anlegen",
+  CREATE_NEW_ACCOUNT: "Neues Konto Anlegen",
 
 };
 
