@@ -15,9 +15,9 @@ import LoginPrompt from "../Login/LogInPrompt";
 
 const LandingPage = () => {
   const naviButtons = [
-    { text: "LANDINGPAGE.COMPENDIUM", relativeURL: "/compendium", icon: bookIcon },
-    { text: "LANDINGPAGE.LIST_GENERATOR", relativeURL: "/listGenerator", icon: calculatorIcon },
-    { text: "LANDINGPAGE.LOSS_CALCULATOR", relativeURL: "/lossCalculator", icon: deathIcon },
+    { text: LANDINGPAGE.COMPENDIUM, relativeURL: "/compendium", icon: bookIcon },
+    { text: LANDINGPAGE.LIST_GENERATOR, relativeURL: "/listGenerator", icon: calculatorIcon },
+    { text: LANDINGPAGE.LOSS_CALCULATOR, relativeURL: "/lossCalculator", icon: deathIcon },
   ];
 
   return (
