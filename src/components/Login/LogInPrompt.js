@@ -18,7 +18,7 @@ import { LOGIN } from "../../constants/textsAndMessages";
 import { UserContext } from "../../contexts/userContext";
 import NaviButton from "../landingPage/NaviButton";
 
-const LoginPrompt = (props) => {
+const LoginPrompt = () => {
   const UC = useContext(UserContext);
 
   const handleClose = () => {
@@ -82,9 +82,9 @@ const LoginPrompt = (props) => {
       </DialogContent>
       <Grid container item alignItems="center" justifyContent="space-between">
         <NaviButton
-          relativeURL={"/lossCalculator"} //
+          relativeURL={"/addNewAccount"} //
           isIconButton={false}
-          text={LOGIN.NEW_ACCOUNT}
+          text={LOGIN.CREATE_NEW_ACCOUNT}
           width={"3em"}
           height={"3em"}
         />
