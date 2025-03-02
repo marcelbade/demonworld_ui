@@ -13,6 +13,7 @@ import ListGenerator from "./components/ListGenerator/ListGenerator";
 import LossCalculator from "./components/lossCalculator/LossCalculator";
 import PdfBox from "./components/PDFGenerator/PDFBox";
 import CardCreator from "./components/cardCreator/CardCreator";
+import AddNewAccount from "./components/Login/AddNewAccount";
 // context providers
 import AllyProvider from "./contexts/allyContext";
 import AlternativeListProvider from "./contexts/alternativeListContext";
@@ -299,6 +300,7 @@ function App() {
                                           <Route path="/lossCalculator" component={LossCalculator} />
                                           <Route path="/PdfBox" component={PdfBox} />
                                           <Route path="/cardCreator" component={CardCreator} exact />
+                                          <Route path="/addNewAccount" component={AddNewAccount} exact />
                                         </Switch>
                                       </Grid>
                                     ) : null}
