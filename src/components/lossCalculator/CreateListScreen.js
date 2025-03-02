@@ -1,29 +1,29 @@
 // React
 import React from "react";
 //Material UI
-import { Grid, IconButton } from "@mui/material";
+import { Grid } from "@mui/material";
 // icons
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 // constants
-import { LOSS_CALCULATOR } from "../../constants/textsAndMessages";
+import { LANDINGPAGE, LOSS_CALCULATOR } from "../../constants/textsAndMessages";
 import LogInButton from "../Login/LogInButton";
 import LightSwitch from "../shared/LightSwitch";
 //  components and functions
 import NaviButton from "../landingPage/NaviButton";
 
-const CreateListScreen = (props) => {
+const CreateListScreen = () => {
   return (
     <Grid container direction="column">
       <Grid container item justifyContent="space-between">
-        <IconButton
-          onClick={() => {
-            // navigate to landing page
-            props.navigateToPage("");
-          }}
-          size="large"
-        >
-          <ChevronLeftIcon sx={{ width: "2em", height: "2em" }} />
-        </IconButton>
+        <NaviButton
+          relativeURL={"/"} //
+          isIconButton={true}
+          isCustomIcon={false}
+          icon={ChevronLeftIcon}
+          altText={LANDINGPAGE.BACK_TO_LANDINGPAGE}
+          width={"3em"}
+          height={"3em"}
+        />
         <LightSwitch iconSize={"large"} />
       </Grid>
       <Grid
