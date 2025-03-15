@@ -37,7 +37,6 @@ import { ThemeProvider } from "@mui/material";
 import { NONE, NO_ALLY } from "./constants/factions";
 import { FACTION_DTOS_URL, ITEM_DTOS_URL } from "./constants/URLs";
 import ServerErrorProvider from "./contexts/serverErrorContext";
-import UserTokenProvider from "./contexts/userTokenContext";
 
 function App() {
   // user accounts
@@ -157,14 +156,12 @@ function App() {
     setFetchedItems(result.data);
   };
 
-  console.log("user", user);
-
   return (
     <StyledEngineProvider injectFirst>
       <ThemeProvider theme={darkModeOff ? lightTheme : darkTheme}>
         <CssBaseline />
 
-        <UserTokenProvider
+        <UserProvider
           value={{
             user: user,
             setUser: setUser,
@@ -346,7 +343,7 @@ function App() {
               </ListDisplayProvider>
             </UserProvider>
           </ServerErrorProvider>
-        </UserTokenProvider>
+        </UserProvider>
       </ThemeProvider>
     </StyledEngineProvider>
   );
