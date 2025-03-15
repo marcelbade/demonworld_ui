@@ -56,6 +56,8 @@ const LoginPrompt = () => {
         token: response?.data?.token,
       });
 
+      
+
       // TODO user roles. Should be an array, maybe. Add roles to server first.
       const roles = response?.data?.roles;
     } catch (error) {
