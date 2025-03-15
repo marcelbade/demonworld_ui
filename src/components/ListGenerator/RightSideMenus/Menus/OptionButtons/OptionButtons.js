@@ -13,6 +13,7 @@ import calculateScoutingFactor from "../../../../../gameLogic/scoutFactorCalcula
 import useSubFactionStats from "../../../../../customHooks/UseSubFactionStats";
 // constants
 import { OPTIONS } from "../../../../../constants/textsAndMessages";
+import { PDF_URL } from "../../../../../constants/URLs";
 
 const OptionButtons = () => {
   const AC = useContext(ArmyContext);
@@ -43,7 +44,7 @@ const OptionButtons = () => {
   const openPDfInNewTab = (options) => {
     //TODO: replace URL in production!!
 
-    const URL = "http://localhost:3000/PdfBox";
+    const URL = PDF_URL;
     const transportObj = createPDFData(options);
 
     window.localStorage.setItem("transportObj", JSON.stringify(transportObj));
