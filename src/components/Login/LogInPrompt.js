@@ -15,7 +15,7 @@ import axios from "axios";
 // icons
 import CancelIcon from "@mui/icons-material/Cancel";
 // functions and components
-import { LOGIN } from "../../constants/textsAndMessages";
+import { USER_AUTH } from "../../constants/textsAndMessages";
 import NaviButton from "../landingPage/NaviButton";
 // contexts
 import { UserContext } from "../../contexts/userContext";
@@ -24,7 +24,7 @@ import { LOGIN_USER_URL } from "../../constants/URLs";
 
 const LoginPrompt = () => {
   const UC = useContext(UserContext);
-  const SC = useContext(ServerErrorContext); 
+  const SC = useContext(ServerErrorContext);
 
   const handleClose = () => {
     UC.setDisplayLogInPrompt(false);
@@ -56,7 +56,8 @@ const LoginPrompt = () => {
         token: response?.data?.token,
       });
 
-      
+      UC.setDisplayLogInPrompt(false);
+      UC.setUserLoggedIn(true);
 
       // TODO user roles. Should be an array, maybe. Add roles to server first.
       const roles = response?.data?.roles;
@@ -92,7 +93,7 @@ const LoginPrompt = () => {
         direction={"row"}
         justifyContent={"space-between"}
       >
-        <DialogTitle>{LOGIN.LOGIN_PROMPT_TITLE}</DialogTitle>
+        <DialogTitle>{USER_AUTH.LOGIN_PROMPT_TITLE}</DialogTitle>
         <IconButton
           sx={{ marginRight: "1em" }} //
           onClick={handleClose}
@@ -111,7 +112,7 @@ const LoginPrompt = () => {
             id="name"
             name="name"
             variant="outlined"
-            label={LOGIN.LOGIN_USER}
+            label={USER_AUTH.LOGIN_USER}
           />
           <TextField
             sx={{ marginTop: "2em" }}
@@ -119,7 +120,7 @@ const LoginPrompt = () => {
             id="outlined-password-input" //
             name="pw"
             variant="outlined"
-            label={LOGIN.LOGIN_PW}
+            label={USER_AUTH.LOGIN_PW}
             type="password"
           />
         </Grid>
@@ -132,7 +133,7 @@ const LoginPrompt = () => {
         <NaviButton
           relativeURL={"/addNewAccount"} //
           isIconButton={false}
-          text={LOGIN.CREATE_NEW_ACCOUNT}
+          text={USER_AUTH.CREATE_NEW_ACCOUNT}
           width={"3em"}
           height={"3em"}
         />
@@ -142,7 +143,7 @@ const LoginPrompt = () => {
           variant="outlined"
           type="submit"
         >
-          {LOGIN.LOGIN_ACTION}
+          {USER_AUTH.LOGIN_ACTION}
         </Button>
       </Grid>
     </Dialog>
