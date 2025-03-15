@@ -1,25 +1,28 @@
 // React
-import React from "react";
+import React, { useContext } from "react";
 // Material UI
 import { Grid2 as Grid, Typography } from "@mui/material";
 // icons
 import deathIcon from "../../assets/icons/icons8-death-64.png";
 import calculatorIcon from "../../assets/icons/icons8-calculator-64.png";
 import bookIcon from "../../assets/icons/icons8-book-64.png";
+import scrollIcon from "../../assets/icons/scroll.png";
 // functions and components
 import NaviButton from "./NaviButton";
 import { LANDINGPAGE } from "../../constants/textsAndMessages";
 import LightSwitch from "../shared/LightSwitch";
 import LogInButton from "../Login/LogInButton";
 import LoginPrompt from "../Login/LogInPrompt";
+import { UserContext } from "../../contexts/userContext";
 
 const LandingPage = () => {
+  const UC = useContext(UserContext);
+
   const naviButtons = [
-    { text: LANDINGPAGE.COMPENDIUM, relativeURL: "/compendium", icon: bookIcon },
-    { text: LANDINGPAGE.LIST_GENERATOR, relativeURL: "/listGenerator", icon: calculatorIcon },
-    { text: LANDINGPAGE.LOSS_CALCULATOR, relativeURL: "/lossCalculator", icon: deathIcon },
-    // remove in production for now
-    { text: LANDINGPAGE.CARD_CREATOR, relativeURL: "/cardCreator", icon: deathIcon },
+    { text: LANDINGPAGE.COMPENDIUM, relativeURL: "/compendium", icon: bookIcon, display: true },
+    { text: LANDINGPAGE.LIST_GENERATOR, relativeURL: "/listGenerator", icon: calculatorIcon, display: true },
+    { text: LANDINGPAGE.LOSS_CALCULATOR, relativeURL: "/lossCalculator", icon: deathIcon, display: true },
+    { text: LANDINGPAGE.CARD_CREATOR, relativeURL: "/cardCreator", icon: scrollIcon, display: UC.userLoggedIn },
   ];
 
   return (
@@ -55,18 +58,20 @@ const LandingPage = () => {
           width: "100vw",
         }}
       >
-        {naviButtons.map((n, i) => (
-          <NaviButton
-            key={i}
-            relativeURL={n.relativeURL} //
-            isIconButton={true}
-            isCustomIcon={true}
-            icon={n.icon}
-            text={n.text}
-            width={"20em"}
-            height={"20em"}
-          />
-        ))}
+        {naviButtons.map((n, i) =>
+          n.display ? (
+            <NaviButton
+              key={i}
+              relativeURL={n.relativeURL} //
+              isIconButton={true}
+              isCustomIcon={true}
+              icon={n.icon}
+              text={n.text}
+              width={"20em"}
+              height={"20em"}
+            />
+          ) : null
+        )}
       </Grid>
     </Grid>
   );
