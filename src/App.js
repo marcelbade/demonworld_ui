@@ -35,6 +35,7 @@ import darkTheme from "./AppTheme/darkTheme";
 import { ThemeProvider } from "@mui/material";
 // constants
 import { NONE, NO_ALLY } from "./constants/factions";
+import { FACTION_DTOS_URL, ITEM_DTOS_URL } from "./constants/URLs";
 
 function App() {
   // intialize local states
@@ -134,16 +135,16 @@ function App() {
 
   //TODO Change URL in Production!
   const fetchFactionData = async () => {
-    // http://localhost:8080/factions
-    const result = await axios(`http://localhost:8080/factionDTOs`);
+    const result = await axios(FACTION_DTOS_URL);
     setFetchedFactions(result.data);
   };
 
   //TODO Change URL in Production!
   const fetchItemData = async () => {
-    const result = await axios(`http://localhost:8080/itemDTOs`);
+    const result = await axios(ITEM_DTOS_URL);
     setFetchedItems(result.data);
   };
+
 
   return (
     <StyledEngineProvider injectFirst>

@@ -17,6 +17,7 @@ import TableProvider from "../../../../contexts/tableContext";
 // constants
 import { COMPENDIUM } from "../../../../constants/textsAndMessages";
 import { ID } from "../../../../constants/appBarConstants";
+import { ALL_UNITS_URL } from "../../../../constants/URLs";
 
 const CompendiumTable = () => {
   // intialize local state
@@ -36,7 +37,7 @@ const CompendiumTable = () => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const fetchData = async () => {
-    const result = await axios(`http://localhost:8080/factions`);
+    const result = await axios(ALL_UNITS_URL);
     setReceivedData(addLock(result.data));
   };
 
