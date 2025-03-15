@@ -11,8 +11,9 @@ import scrollIcon from "../../assets/icons/scroll.png";
 import NaviButton from "./NaviButton";
 import { LANDINGPAGE } from "../../constants/textsAndMessages";
 import LightSwitch from "../shared/LightSwitch";
-import LogInButton from "../Login/LogInButton";
 import LoginPrompt from "../Login/LogInPrompt";
+import UserLogButton from "../Login/UserLogButton";
+// contexts
 import { UserContext } from "../../contexts/userContext";
 
 const LandingPage = () => {
@@ -45,7 +46,7 @@ const LandingPage = () => {
           size={0.5}
         >
           <LightSwitch iconSize={"large"} />
-          <LogInButton iconSize={"large"} />
+          <UserLogButton iconSize={"large"} />
         </Grid>
       </Grid>
       <LoginPrompt />

@@ -6,7 +6,7 @@ import { Grid2 as Grid } from "@mui/material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 // constants
 import { LANDINGPAGE, LOSS_CALCULATOR } from "../../constants/textsAndMessages";
-import LogInButton from "../Login/LogInButton";
+import UserLogButton from "../Login/UserLogButton";
 import LightSwitch from "../shared/LightSwitch";
 //  components and functions
 import NaviButton from "../landingPage/NaviButton";
@@ -55,7 +55,7 @@ const CreateListScreen = () => {
           alignContent="center"
           justifyContent="center"
         >
-          <LogInButton
+          <UserLogButton
             buttonHeight={"5em"} //
             buttonWidth={"5em"}
             iconSize={"large"}

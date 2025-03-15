@@ -4,13 +4,12 @@ import React, { useContext } from "react";
 import { Avatar, IconButton, Tooltip, Typography } from "@mui/material";
 // icons
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import FaceIcon from "@mui/icons-material/Face";
 // functions and components
 import { USER_AUTH } from "../../constants/textsAndMessages";
 // contexts
 import { UserContext } from "../../contexts/userContext";
 
-const LogInButton = (props) => {
+const UserLogButton = (props) => {
   const UC = useContext(UserContext);
 
   const displayLogInPrompt = () => {
@@ -62,4 +61,4 @@ const LogInButton = (props) => {
   );
 };
 
-export default LogInButton;
+export default UserLogButton;
