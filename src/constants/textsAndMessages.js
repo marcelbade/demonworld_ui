@@ -12,7 +12,7 @@ export const LANDINGPAGE = {
   LIST_GENERATOR: "Listengenerator",
   LOSS_CALCULATOR: "Verlustrechner",
   CARD_CREATOR: "Einheitengenerator",
-  BACK_TO_LANDINGPAGE:"Hauptseite",
+  BACK_TO_LANDINGPAGE: "Hauptseite",
 };
 
 export const COMPENDIUM = {
@@ -85,15 +85,15 @@ export const OPTIONS = {
   CHANGE_SELECTED_FACTION: "Fraktion wechseln",
 };
 
-export const LOGIN = {
+export const USER_AUTH = {
   LOGIN_PROMPT_TITLE: "Willkommen",
   LOGIN_USER: "Benutzername",
   LOGIN_PW: "Passwort eigeben",
   REPEAT_LOGIN_PW: "Passwort wiederholen",
   LOGIN_ACTION: "Einloggen",
   LOGIN_BUTTON: "Ins Konto einloggen",
+  LOGOUT_BUTTON: "Aus dem Konto ausloggen",
   CREATE_NEW_ACCOUNT: "Neues Konto Anlegen",
-
 };
 
 export const GENERAL_ERRRORS = {
