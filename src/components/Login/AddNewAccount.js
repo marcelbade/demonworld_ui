@@ -5,7 +5,7 @@ import { TextField, Typography, Grid2 as Grid, Button } from "@mui/material";
 // icons
 import { ChevronLeft } from "@mui/icons-material";
 // functions and components
-import { LANDINGPAGE, LOGIN } from "../../constants/textsAndMessages";
+import { LANDINGPAGE, USER_AUTH } from "../../constants/textsAndMessages";
 import NaviButton from "../landingPage/NaviButton";
 // contexts
 import { UserContext } from "../../contexts/userContext";
@@ -50,7 +50,7 @@ const AddNewAccount = () => {
         <LightSwitch />
       </Grid>
 
-      <Typography variant="h3">{LOGIN.LOGIN_PROMPT_TITLE}</Typography>
+      <Typography variant="h3">{USER_AUTH.LOGIN_PROMPT_TITLE}</Typography>
 
       <TextField
         sx={{ width: INPUT_WIDTH, marginTop: MARGIN }}
@@ -59,7 +59,7 @@ const AddNewAccount = () => {
         id="name"
         name="name"
         variant="outlined"
-        label={LOGIN.LOGIN_USER}
+        label={USER_AUTH.LOGIN_USER}
       />
 
       <TextField
@@ -67,7 +67,7 @@ const AddNewAccount = () => {
         required
         id="outlined-password-input" //
         variant="outlined"
-        label={LOGIN.LOGIN_PW}
+        label={USER_AUTH.LOGIN_PW}
         type="password"
       />
       <TextField
@@ -75,7 +75,7 @@ const AddNewAccount = () => {
         required
         id="outlined-password-input" //
         variant="outlined"
-        label={LOGIN.REPEAT_LOGIN_PW}
+        label={USER_AUTH.REPEAT_LOGIN_PW}
         type="password"
       />
 
@@ -84,7 +84,7 @@ const AddNewAccount = () => {
           marginTop: "4em",
         }}
       >
-        {LOGIN.CREATE_NEW_ACCOUNT}
+        {USER_AUTH.CREATE_NEW_ACCOUNT}
       </Button>
     </Grid>
   );
