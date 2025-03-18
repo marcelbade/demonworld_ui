@@ -43,7 +43,8 @@ const LandingPage = () => {
         <Grid
           container
           justifyContent={"space-between"} //
-          size={0.5}
+          size={0.75}
+          paddingRight="2em"
         >
           <LightSwitch iconSize={"large"} />
           <UserLogButton iconSize={"large"} />
