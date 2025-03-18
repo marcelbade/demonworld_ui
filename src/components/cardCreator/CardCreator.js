@@ -4,22 +4,22 @@ import React, { useState } from "react";
 import { Box, Grid2 as Grid } from "@mui/material";
 
 //
-import FactionNameCreator from "./FactionNameCreator";
-import FearAndMoralCreator from "./FearAndMoralCreator";
-import HitpointCreator from "./HitpointCreator";
-import MeleeWeaponCreator from "./MeleeWeaponCreator";
-import NameCreator from "./NameCreator";
-import PointCostCreator from "./PointCostCreator";
-import RangeWeaponCreator from "./RangeWeaponCreator";
-import SizeAndSkillCreator from "./SizeAndSkillCreator";
-import SpecialElementsCreator from "./SpecialElementsCreator";
-import SpecialRuleCreator from "./SpecialRuleCreator";
-import UnitMovementCreator from "./UnitMovementCreator";
-import UnitAttributeCreator from "./UnitAttributeCreator";
-import UnitTypeSelector from "./UnitTypeSelector";
+import FactionNameCreator from "./components/FactionNameCreator";
+import FearAndMoralCreator from "./components/FearAndMoralCreator";
+import HitpointCreator from "./components/HitpointCreator";
+import MeleeWeaponCreator from "./components/MeleeWeaponCreator";
+import NameCreator from "./components/NameCreator";
+import PointCostCreator from "./components/PointCostCreator";
+import RangeWeaponCreator from "./components/RangeWeaponCreator";
+import SizeAndSkillCreator from "./components/SizeAndSkillCreator";
+import SpecialElementsCreator from "./components/SpecialElementsCreator";
+import SpecialRuleCreator from "./components/SpecialRuleCreator";
+import UnitMovementCreator from "./components/UnitMovementCreator";
+import UnitAttributeCreator from "./components/UnitAttributeCreator";
+import UnitTypeSelector from "./components/UnitTypeSelector";
 
 import AppBar from "../shared/AppBar";
-import CardPreview from "./CardPreview";
+import CardPreview from "./components/CardPreview";
 import MenuToggle from "../shared/MenuToggle";
 //  contexts
 import CardCreationProvider from "../../contexts/cardCreationContext";
