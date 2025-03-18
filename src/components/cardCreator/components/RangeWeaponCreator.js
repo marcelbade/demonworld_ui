@@ -9,7 +9,7 @@ import CustomIcon from "../../shared/CustomIcon";
 // contexts
 import { CardCreationContext } from "../../../contexts/cardCreationContext";
 // icons
-import blackBowIcon from "../../assets/icons/bow2.png";
+import blackBowIcon from "../../../assets/icons/bow2.png";
 
 const RangeWeaponCreator = () => {
   const theme = useTheme();

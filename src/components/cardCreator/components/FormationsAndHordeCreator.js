@@ -6,9 +6,9 @@ import { Checkbox, FormControlLabel, FormGroup, Grid2 as Grid, Button } from "@m
 import { CardCreationContext } from "../../../contexts/cardCreationContext";
 // icons
 import CustomIcon from "../../shared/CustomIcon";
-import wedgeFormationIcon from "../../assets/icons/wedgeFormation.png";
-import skirmishFormationIcon from "../../assets/icons/skirmishFormation.png";
-import squareFormationIcon from "../../assets/icons/squareFormationWhite.png";
+import wedgeFormationIcon from "../../../assets/icons/wedgeFormation.png";
+import skirmishFormationIcon from "../../../assets/icons/skirmishFormation.png";
+import squareFormationIcon from "../../../assets/icons/squareFormationWhite.png";
 // constants
 import { CARD_TEXT, COMPENDIUM } from "../../../constants/textsAndMessages";
 
