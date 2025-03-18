@@ -3,10 +3,10 @@ import React, { Fragment, useContext } from "react";
 // material ui
 import { Divider } from "@mui/material";
 // components and functions
-import CardFront from "../shared/statCards/cardComponents/CardFront";
-import CardBack from "../shared/statCards/cardComponents/CardBack";
+import CardFront from "../../shared/statCards/cardComponents/CardFront";
+import CardBack from "../../shared/statCards/cardComponents/CardBack";
 // providers and contexts
-import { CardCreationContext } from "../../contexts/cardCreationContext";
+import { CardCreationContext } from "../../../contexts/cardCreationContext";
 
 const CardPreview = () => {
   const CCC = useContext(CardCreationContext);

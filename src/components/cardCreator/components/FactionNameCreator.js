@@ -4,14 +4,14 @@ import React, { Fragment, useContext } from "react";
 import { FormGroup, Grid2 as Grid, FormControlLabel, Checkbox } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components and functions
-import SelectionInput from "../shared/selectionInput";
+import SelectionInput from "../../shared/selectionInput";
 import CreatorTextInput from "./CreatorTextInput";
 // contexts
-import { ArmyContext } from "../../contexts/armyContext";
-import { CardCreationContext } from "../../contexts/cardCreationContext";
+import { ArmyContext } from "../../../contexts/armyContext";
+import { CardCreationContext } from "../../../contexts/cardCreationContext";
 // constants
-import { ALL_FACTIONS_ARRAY, NONE } from "../../constants/factions";
-import { CREATOR } from "../../constants/textsAndMessages";
+import { ALL_FACTIONS_ARRAY, NONE } from "../../../constants/factions";
+import { CREATOR } from "../../../constants/textsAndMessages";
 
 const FactionNameCreator = () => {
   const theme = useTheme();

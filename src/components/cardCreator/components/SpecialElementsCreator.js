@@ -5,10 +5,10 @@ import { useTheme } from "@emotion/react";
 import { Checkbox, FormControlLabel, Grid2 as Grid } from "@mui/material";
 import CreatorTextInput from "./CreatorTextInput";
 // contexts
-import { CardCreationContext } from "../../contexts/cardCreationContext";
+import { CardCreationContext } from "../../../contexts/cardCreationContext";
 // constants
-import { CREATOR } from "../../constants/textsAndMessages";
-import { UNIT } from "../../constants/unitTypes";
+import { CREATOR } from "../../../constants/textsAndMessages";
+import { UNIT } from "../../../constants/unitTypes";
 
 const SpecialElementsCreator = () => {
   const theme = useTheme();

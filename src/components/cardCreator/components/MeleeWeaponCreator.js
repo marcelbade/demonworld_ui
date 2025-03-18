@@ -5,12 +5,12 @@ import { useTheme } from "@emotion/react";
 import { Grid2 as Grid, Checkbox } from "@mui/material";
 // components and functions
 import CreatorTextInput from "./CreatorTextInput";
-import CustomIcon from "../shared/CustomIcon";
+import CustomIcon from "../../shared/CustomIcon";
 // contexts
-import { CardCreationContext } from "../../contexts/cardCreationContext";
+import { CardCreationContext } from "../../../contexts/cardCreationContext";
 // Icons
 import blackSwordIcon from "../../assets/icons/sword2.png";
-import { CREATOR } from "../../constants/textsAndMessages";
+import { CREATOR } from "../../../constants/textsAndMessages";
 
 const MeleeWeaponCreator = () => {
   const theme = useTheme();

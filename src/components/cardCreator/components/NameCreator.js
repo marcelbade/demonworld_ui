@@ -5,9 +5,9 @@ import { useTheme } from "@emotion/react";
 import CreatorTextInput from "./CreatorTextInput";
 import { Grid2 as Grid } from "@mui/material";
 // contexts
-import { CardCreationContext } from "../../contexts/cardCreationContext";
+import { CardCreationContext } from "../../../contexts/cardCreationContext";
 // constants
-import { CREATOR } from "../../constants/textsAndMessages";
+import { CREATOR } from "../../../constants/textsAndMessages";
 
 const NameCreator = () => {
   const CCC = useContext(CardCreationContext);

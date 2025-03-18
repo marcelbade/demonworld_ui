@@ -6,10 +6,10 @@ import { Checkbox, FormControlLabel, Grid2 as Grid } from "@mui/material";
 // components and functions
 import CreatorTextInput from "./CreatorTextInput";
 // contexts
-import { CardCreationContext } from "../../contexts/cardCreationContext";
-import { UNIT } from "../../constants/unitTypes";
+import { CardCreationContext } from "../../../contexts/cardCreationContext";
+import { UNIT } from "../../../constants/unitTypes";
 // constants
-import { CARD_TEXT, CREATOR } from "../../constants/textsAndMessages";
+import { CARD_TEXT, CREATOR } from "../../../constants/textsAndMessages";
 
 const FearAndMoralCreator = () => {
   const theme = useTheme();

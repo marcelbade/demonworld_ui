@@ -6,8 +6,8 @@ import { Grid2 as Grid } from "@mui/material";
 // components and functions
 import CreatorTextInput from "./CreatorTextInput";
 // contexts
-import { CardCreationContext } from "../../contexts/cardCreationContext";
-import { CREATOR } from "../../constants/textsAndMessages";
+import { CardCreationContext } from "../../../contexts/cardCreationContext";
+import { CREATOR } from "../../../constants/textsAndMessages";
 
 const HitpointCreator = () => {
   const theme = useTheme();

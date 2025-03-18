@@ -7,10 +7,10 @@ import CreatorTextInput from "./CreatorTextInput";
 // components and functions
 import FormationsAndHordeCreator from "./FormationsAndHordeCreator";
 // contexts
-import { CardCreationContext } from "../../contexts/cardCreationContext";
+import { CardCreationContext } from "../../../contexts/cardCreationContext";
 // constants
-import { CREATOR } from "../../constants/textsAndMessages";
-import { AUTOMATON, GIANT, HERO, MAGE, SUMMONED, UNIT } from "../../constants/unitTypes";
+import { CREATOR } from "../../../constants/textsAndMessages";
+import { AUTOMATON, GIANT, HERO, MAGE, SUMMONED, UNIT } from "../../../constants/unitTypes";
 
 const UnitMovementCreator = () => {
   const theme = useTheme();

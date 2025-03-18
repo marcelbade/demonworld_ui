@@ -5,7 +5,7 @@ import { useTheme } from "@emotion/react";
 import CreatorTextInput from "./CreatorTextInput";
 import { Grid2 as Grid } from "@mui/material";
 // contexts
-import { CardCreationContext } from "../../contexts/cardCreationContext";
+import { CardCreationContext } from "../../../contexts/cardCreationContext";
 // icons
 import rangeArmorIcon from "../../assets/icons/range-armor.png";
 import meleeArmorIcon from "../../assets/icons/melee-armor.png";

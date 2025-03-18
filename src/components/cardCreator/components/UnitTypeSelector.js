@@ -4,9 +4,9 @@ import React, { useContext } from "react";
 import { useTheme } from "@emotion/react";
 import { Grid2 as Grid, FormControlLabel, FormLabel, FormControl, RadioGroup, Radio } from "@mui/material";
 // contexts
-import { CardCreationContext } from "../../contexts/cardCreationContext";
-import { CREATOR } from "../../constants/textsAndMessages";
-import { GIANT, HERO, UNIT, SUMMONED, MAGE, AUTOMATON } from "../../constants/unitTypes";
+import { CardCreationContext } from "../../../contexts/cardCreationContext";
+import { CREATOR } from "../../../constants/textsAndMessages";
+import { GIANT, HERO, UNIT, SUMMONED, MAGE, AUTOMATON } from "../../../constants/unitTypes";
 
 const UnitTypeSelector = () => {
   const theme = useTheme();

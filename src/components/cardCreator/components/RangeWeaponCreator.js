@@ -5,9 +5,9 @@ import { useTheme } from "@emotion/react";
 import { FormGroup, Grid2 as Grid, FormControlLabel, Checkbox } from "@mui/material";
 import CreatorTextInput from "./CreatorTextInput";
 // components and functions
-import CustomIcon from "../shared/CustomIcon";
+import CustomIcon from "../../shared/CustomIcon";
 // contexts
-import { CardCreationContext } from "../../contexts/cardCreationContext";
+import { CardCreationContext } from "../../../contexts/cardCreationContext";
 // icons
 import blackBowIcon from "../../assets/icons/bow2.png";
 

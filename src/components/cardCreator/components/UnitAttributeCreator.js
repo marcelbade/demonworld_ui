@@ -6,10 +6,10 @@ import { Grid2 as Grid, Checkbox, FormControlLabel } from "@mui/material";
 // components and functions
 import CreatorTextInput from "./CreatorTextInput";
 // contexts
-import { CardCreationContext } from "../../contexts/cardCreationContext";
+import { CardCreationContext } from "../../../contexts/cardCreationContext";
 // constants
-import { CREATOR } from "../../constants/textsAndMessages";
-import { GIANT, HERO, MAGE, UNIT } from "../../constants/unitTypes";
+import { CREATOR } from "../../../constants/textsAndMessages";
+import { GIANT, HERO, MAGE, UNIT } from "../../../constants/unitTypes";
 
 const UnitAttributeCreator = () => {
   const theme = useTheme();
