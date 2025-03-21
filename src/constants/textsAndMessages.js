@@ -96,6 +96,11 @@ export const USER_AUTH = {
   CREATE_NEW_ACCOUNT: "Neues Konto Anlegen",
 };
 
+export const PASSWORDS = {
+  PASSWORDS_DONT_MATCH: "Passwörter stimmen nicht überein.",
+  PASSWORD_GUIDELINES_VIOLATED: "Dein Passwort ist nicht stark genug.",
+};
+
 export const GENERAL_ERRRORS = {
   ONLY_NUMBERS: "Bitte nur Zahlen eingeben.",
   NO_ITEMS_FOR_UNIT: "Diese Einheit kann keine Gegenstände erhalten.",
