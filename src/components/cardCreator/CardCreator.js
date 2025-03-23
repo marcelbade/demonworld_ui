@@ -2,8 +2,8 @@
 import React, { useState } from "react";
 // material ui
 import { Box, Grid2 as Grid } from "@mui/material";
-
-//
+// functions and components
+import SaveCardForm from "./components/SaveCardForm";
 import FactionNameCreator from "./components/FactionNameCreator";
 import FearAndMoralCreator from "./components/FearAndMoralCreator";
 import HitpointCreator from "./components/HitpointCreator";
@@ -17,7 +17,6 @@ import SpecialRuleCreator from "./components/SpecialRuleCreator";
 import UnitMovementCreator from "./components/UnitMovementCreator";
 import UnitAttributeCreator from "./components/UnitAttributeCreator";
 import UnitTypeSelector from "./components/UnitTypeSelector";
-
 import AppBar from "../shared/AppBar";
 import CardPreview from "./components/CardPreview";
 import MenuToggle from "../shared/MenuToggle";
@@ -187,6 +186,7 @@ const CardCreator = () => {
           }}
         >
           <CardPreview />
+          <SaveCardForm/>
         </Box>
       </Box>
     </CardCreationProvider>
