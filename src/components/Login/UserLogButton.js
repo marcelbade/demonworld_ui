@@ -23,7 +23,7 @@ const UserLogButton = (props) => {
       title={
         <Typography>
           {UC.userLoggedIn //
-            ? USER_AUTH.LOGOUT_BUTTON
+            ? USER_AUTH.LOGOUT_ACCOUNT
             : USER_AUTH.LOGIN_BUTTON}
         </Typography>
       }
@@ -35,7 +35,7 @@ const UserLogButton = (props) => {
             height: props.buttonHeight,
           }}
           onClick={() => {
-            Logout();
+            props.setShowUserAvatarMenu(true);
           }}
         >
           <Avatar sx={{ backgroundColor: "green" }}>
