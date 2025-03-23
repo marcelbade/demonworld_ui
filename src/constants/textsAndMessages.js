@@ -92,11 +92,15 @@ export const USER_AUTH = {
   REPEAT_LOGIN_PW: "Passwort wiederholen",
   LOGIN_ACTION: "Einloggen",
   LOGIN_BUTTON: "Ins Konto einloggen",
-  LOGOUT_BUTTON: "Aus dem Konto ausloggen",
+  LOGOUT_ACCOUNT: "Aus dem Konto ausloggen",
   CREATE_NEW_ACCOUNT: "Neues Konto Anlegen",
+  ACCOUNT_CREATED: "Konto erfolgreich erstellt.",
+  SWITCH_USER: "Benutzerkonto Wechseln",
+  CHANGE_PASSWORD: "Passwort Ändern",
 };
 
 export const PASSWORDS = {
+  USER_NAME_ALREADY_TAKEN: "Dieser Nuztername ist bereits vergeben.",
   PASSWORDS_DONT_MATCH: "Passwörter stimmen nicht überein.",
   PASSWORD_GUIDELINES_VIOLATED: "Dein Passwort ist nicht stark genug.",
 };
@@ -190,6 +194,7 @@ export const LOSS_CALCULATOR = {
 export const PUSH_MESSAGE_TYPES = {
   ERROR: "error",
   INFO: "info",
+  SUCCESS: "success",
 };
 
 export const CARD_TEXT = {
