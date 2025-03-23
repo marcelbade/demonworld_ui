@@ -1,5 +1,6 @@
 // React
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 //  axios
 import axios from "axios";
 // Material UI
@@ -8,18 +9,29 @@ import { TextField, Typography, Grid2 as Grid, Button, Box } from "@mui/material
 import { ChevronLeft } from "@mui/icons-material";
 // functions and components
 import NaviButton from "../landingPage/NaviButton";
+import usePushMessages from "../../customHooks/UsePushMessages";
+
 // contexts
-import { UserContext } from "../../contexts/userContext";
 import LightSwitch from "../shared/LightSwitch";
+import { ServerErrorContext } from "../../contexts/serverErrorContext";
 // constants
-import { LANDINGPAGE, PASSWORDS, USER_AUTH } from "../../constants/textsAndMessages";
-import { ALL_USER_NAMES } from "../../constants/URLs";
+import { LANDINGPAGE, PASSWORDS, PUSH_MESSAGE_TYPES, USER_AUTH } from "../../constants/textsAndMessages";
+import { ALL_USER_NAMES, REGISTER_USER_URL } from "../../constants/URLs";
 
 const AddNewAccount = () => {
-  const UC = useContext(UserContext);
+  const MARGIN = "2em";
+  const INPUT_WIDTH = "30em";
 
-  const [errorMessage, setErrorMessage] = useState("");
+  const SC = useContext(ServerErrorContext);
+  const pushMessages = usePushMessages();
+
+  const history = useHistory();
+
   const [allUserNames, setAllUserNames] = useState([]);
+  const [isUserTaken, setIsUserTaken] = useState(false);
+  const [isPasswordInvalid, setIsPasswordInvalid] = useState(false);
+  const [passwordsNotIdentical, setPasswordsNotIdentical] = useState(false);
+  const [disableSubmission, setDisableSubmission] = useState(true);
 
   useEffect(() => {
     fetchUserNames();
@@ -30,39 +42,61 @@ const AddNewAccount = () => {
     setAllUserNames(result.data);
   };
 
-  const MARGIN = "2em";
-  const INPUT_WIDTH = "30em";
-
   // TODO finish this!
   /**
    * Function evaluates the user input while typing
    * - makes sure that userName is not already taken
    * - makes sure that passwords equals or exceeds the password requirements
    */
-  const showProgress = (event) => {
-    console.log(event.target.value);
-
-    // is userName already taken?
-
-  //  if(allUserNames.includes(event.getValue())  )
-
-  };
-
-  const registerUser = (event) => {
-    event.preventDefault();
+  const validateInput = (event) => {
     const formData = new FormData(event.currentTarget);
-
     const userName = formData.get("name");
     const pw = formData.get("pw");
     const pwRepeated = formData.get("pwRepeated");
+    const passwordRegEx = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/);
 
-    if (pw !== pwRepeated) {
-      setErrorMessage(PASSWORDS.PASSWORDS_DONT_MATCH);
-      return;
-    }
+    setIsUserTaken(allUserNames.includes(event.target.value) && userName.length !== 0);
 
-    let isValid = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/).test(event.target.value);
-    isValid ? setErrorMessage("") : setErrorMessage(PASSWORDS.PASSWORD_GUIDELINES_VIOLATED);
+    setIsPasswordInvalid(!passwordRegEx.test(event.target.value) && pw.length !== 0);
+
+    setPasswordsNotIdentical(pw !== pwRepeated && pw.length !== 0 && pwRepeated.length !== 0);
+  };
+
+  const registerUser = async (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+
+    await axios
+      .post(
+        REGISTER_USER_URL,
+        JSON.stringify({
+          userName: formData.get("name"),
+          password: formData.get("pw"),
+        }),
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: false,
+        }
+      )
+      .then((response) => {
+        // return to the landing page and display push message
+
+        history.push({
+          pathname: "/",
+          state: {
+            lastPage: "landingPage",
+          },
+        });
+
+        if (response.data.userName === formData.get("name")) {
+          pushMessages.showSnackBar(USER_AUTH.ACCOUNT_CREATED, PUSH_MESSAGE_TYPES.SUCCESS);
+        }
+      })
+      .catch((error) => {
+        if (!error?.response) {
+          SC.setServerErrorMessage("no server response");
+        }
+      });
   };
 
   return (
@@ -101,9 +135,7 @@ const AddNewAccount = () => {
 
       <Box
         component="form"
-        onChange={() => {
-          showProgress();
-        }}
+        onChange={validateInput}
         onSubmit={(event) => {
           registerUser(event);
         }}
@@ -122,8 +154,9 @@ const AddNewAccount = () => {
           name="name"
           variant="outlined"
           label={USER_AUTH.LOGIN_USER}
+          error={isUserTaken}
+          helperText={isUserTaken ? PASSWORDS.USER_NAME_ALREADY_TAKEN : null}
         />
-
         <TextField
           sx={{ width: INPUT_WIDTH, marginTop: MARGIN }}
           required
@@ -132,6 +165,8 @@ const AddNewAccount = () => {
           variant="outlined"
           label={USER_AUTH.LOGIN_PW}
           type="password"
+          error={isPasswordInvalid}
+          helperText={isPasswordInvalid ? PASSWORDS.PASSWORD_GUIDELINES_VIOLATED : null}
         />
         <TextField
           sx={{ width: INPUT_WIDTH, marginTop: MARGIN }}
@@ -141,8 +176,9 @@ const AddNewAccount = () => {
           variant="outlined"
           label={USER_AUTH.REPEAT_LOGIN_PW}
           type="password"
+          error={passwordsNotIdentical}
+          helperText={passwordsNotIdentical ? PASSWORDS.PASSWORDS_DONT_MATCH : null}
         />
-
         <Button
           type="submit"
           sx={{
