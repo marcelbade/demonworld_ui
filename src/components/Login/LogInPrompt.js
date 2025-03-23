@@ -15,12 +15,13 @@ import axios from "axios";
 // icons
 import CancelIcon from "@mui/icons-material/Cancel";
 // functions and components
-import { USER_AUTH } from "../../constants/textsAndMessages";
 import NaviButton from "../landingPage/NaviButton";
 // contexts
 import { UserContext } from "../../contexts/userContext";
 import { ServerErrorContext } from "../../contexts/serverErrorContext";
 import { LOGIN_USER_URL } from "../../constants/URLs";
+//  constants
+import { USER_AUTH } from "../../constants/textsAndMessages";
 
 const LoginPrompt = () => {
   const UC = useContext(UserContext);
