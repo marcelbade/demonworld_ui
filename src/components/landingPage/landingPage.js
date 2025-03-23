@@ -1,15 +1,16 @@
 // React
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 // Material UI
-import { Grid2 as Grid, Typography } from "@mui/material";
+import { Button, Drawer, Grid2 as Grid, IconButton, Typography } from "@mui/material";
 // icons
 import deathIcon from "../../assets/icons/icons8-death-64.png";
 import calculatorIcon from "../../assets/icons/icons8-calculator-64.png";
 import bookIcon from "../../assets/icons/icons8-book-64.png";
 import scrollIcon from "../../assets/icons/scroll.png";
+import CancelIcon from "@mui/icons-material/Cancel";
 // functions and components
 import NaviButton from "./NaviButton";
-import { LANDINGPAGE } from "../../constants/textsAndMessages";
+import { LANDINGPAGE, USER_AUTH } from "../../constants/textsAndMessages";
 import LightSwitch from "../shared/LightSwitch";
 import LoginPrompt from "../Login/LogInPrompt";
 import UserLogButton from "../Login/UserLogButton";
@@ -18,6 +19,8 @@ import { UserContext } from "../../contexts/userContext";
 
 const LandingPage = () => {
   const UC = useContext(UserContext);
+
+  const [showUserAvatarMenu, setShowUserAvatarMenu] = useState(false);
 
   const naviButtons = [
     { text: LANDINGPAGE.COMPENDIUM, relativeURL: "/compendium", icon: bookIcon, display: true },
@@ -47,7 +50,10 @@ const LandingPage = () => {
           paddingRight="2em"
         >
           <LightSwitch iconSize={"large"} />
-          <UserLogButton iconSize={"large"} />
+          <UserLogButton
+            iconSize={"large"} //
+            setShowUserAvatarMenu={setShowUserAvatarMenu}
+          />
         </Grid>
       </Grid>
       <LoginPrompt />
@@ -75,6 +81,79 @@ const LandingPage = () => {
           ) : null
         )}
       </Grid>
+
+      <Drawer
+        anchor={"right"} //
+        variant="persistent"
+        open={showUserAvatarMenu}
+      >
+        <Grid
+          container //
+          alignItems="self-start"
+          flexDirection="column"
+          sx={{
+            width: "25em",
+          }}
+        >
+          <IconButton
+            onClick={() => {
+              setShowUserAvatarMenu(false);
+            }} //
+            sx={{
+              paddingTop: "1em",
+              paddingLeft: "1em",
+              marginBottom: "5em",
+            }}
+          >
+            <CancelIcon />
+          </IconButton>
+          <Grid
+            container
+            item //
+            flexDirection="column"
+            alignItems="center"
+            justifyItems="center"
+            sx={{
+              width: "100%",
+            }}
+          >
+            <Button
+              onClick={() => {
+                   // TODO logout
+
+              }} //
+              variant="outlined"
+              sx={{
+                marginBottom: "5em",
+              }}
+            >
+              {USER_AUTH.LOGOUT_ACCOUNT}
+            </Button>
+            <Button
+              onClick={() => {
+                  // TODO switch users
+
+              }} //
+              variant="outlined"
+              sx={{
+                marginBottom: "5em",
+              }}
+            >
+              {USER_AUTH.SWITCH_USER}
+            </Button>
+            <Button
+              onClick={() => {
+                   // TODO change password
+
+
+              }} //
+              variant="outlined"
+            >
+              {USER_AUTH.CHANGE_PASSWORD}
+            </Button>
+          </Grid>
+        </Grid>
+      </Drawer>
     </Grid>
   );
 };
