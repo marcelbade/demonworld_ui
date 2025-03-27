@@ -16,7 +16,7 @@ import LightSwitch from "../shared/LightSwitch";
 import { ServerErrorContext } from "../../contexts/serverErrorContext";
 // constants
 import { LANDINGPAGE, PASSWORDS, PUSH_MESSAGE_TYPES, USER_AUTH } from "../../constants/textsAndMessages";
-import { ALL_USER_NAMES, REGISTER_USER_URL } from "../../constants/URLs";
+import { ALL_USER_NAMES_URL, REGISTER_USER_URL } from "../../constants/URLs";
 
 const AddNewAccount = () => {
   const MARGIN = "2em";
@@ -38,7 +38,7 @@ const AddNewAccount = () => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const fetchUserNames = async () => {
-    const result = await axios(ALL_USER_NAMES);
+    const result = await axios(ALL_USER_NAMES_URL);
     setAllUserNames(result.data);
   };
 
