@@ -70,7 +70,7 @@ function App() {
   const [teamName, setTeamName] = useState("");
   const [playerName, setPlayerName] = useState("");
   const [armyName, setArmyName] = useState("");
-  // selected faction
+  // selected faction & army list
   const [selectedFactionName, setSelectedFactionName] = useState(NONE);
   const [distinctSubFactions, setDistinctSubFactions] = useState([]);
   const [listOfAllFactionUnits, setListOfAllFactionUnits] = useState([]);
@@ -231,8 +231,8 @@ function App() {
                             fetchedItems: fetchedItems,
                             allEquippedItems: allEquippedItems,
                             unitSelectedForShop: unitSelectedForShop,
-                            setUnitSelectedForShop: setUnitSelectedForShop,
                             setAllEquippedItems: setAllEquippedItems,
+                            setUnitSelectedForShop: setUnitSelectedForShop,
                           }}
                         >
                           <SelectionContext
@@ -242,6 +242,7 @@ function App() {
                               maxPointsAllowance: maxPointsAllowance,
                               setSelectedUnits: setSelectedUnits,
                               setMaxPointsAllowance: setMaxPointsAllowance,
+                              setSelectedUnits: setSelectedUnits,
                             }}
                           >
                             <RightMenuContext
@@ -295,7 +296,6 @@ function App() {
                                       playerName: playerName,
                                       teamName: teamName,
                                       armyName: armyName,
-
                                       selectedFactionName: selectedFactionName,
                                       fetchedFactions: fetchedFactions,
                                       subFactions: distinctSubFactions,
