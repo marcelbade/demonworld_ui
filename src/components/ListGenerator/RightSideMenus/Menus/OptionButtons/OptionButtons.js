@@ -2,28 +2,33 @@
 import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 // Material UI
-import { Grid2 as Grid, Button, Fade } from "@mui/material";
+import { Grid2 as Grid, Button } from "@mui/material";
 // context
 import { ArmyContext } from "../../../../../contexts/armyContext";
 import { TournamentRulesContext } from "../../../../../contexts/tournamentRulesContext";
 import { SelectionContext } from "../../../../../contexts/selectionContext";
+import { UserContext } from "../../../../../contexts/userContext";
 // components and functions
-import ChoosePdfType from "./ChoosePdfType";
 import calculateScoutingFactor from "../../../../../gameLogic/scoutFactorCalculator/scoutingFactorCalculator";
 import useSubFactionStats from "../../../../../customHooks/UseSubFactionStats";
 // constants
-import { OPTIONS } from "../../../../../constants/textsAndMessages";
+import { OPTIONS, PDF } from "../../../../../constants/textsAndMessages";
 import { PDF_URL } from "../../../../../constants/URLs";
+import LoginPrompt from "../../../../Login/LogInPrompt";
+import SelectPdfTypePrompt from "./SelectPdfTypePrompt";
+import StoreArmyListPrompt from "./StoreArmyListPrompt";
 
 const OptionButtons = () => {
   const AC = useContext(ArmyContext);
   const TC = useContext(TournamentRulesContext);
   const SEC = useContext(SelectionContext);
+  const UC = useContext(UserContext);
 
   const history = useHistory();
   const stats = useSubFactionStats();
 
-  const [showPdfVariantButtons, setShowPdfVariantButtons] = useState(false);
+  const [showPdfTypePrompt, setShowPdfTypePrompt] = useState(false);
+  const [showArmySavePrompt, setShowArmySavePrompt] = useState(false);
 
   /**
    * Function graps the current army list as an object, stores it in the history object and naviagat3s to the LossCalculator component.
@@ -111,49 +116,40 @@ const OptionButtons = () => {
   };
 
   const storeList = () => {
-    // Call REST
-  };
-
-  const disablePdfButton = () => {
-    return AC.disableOptionButtons || !showPdfVariantButtons;
+    UC.userLoggedIn ? setShowArmySavePrompt(true) : UC.setDisplayLogInPrompt(true);
   };
 
   const buttons = [
     {
-      display: disablePdfButton(),
+      disabled: SEC.selectedUnits.length === 0,
       action: () => {
-        setShowPdfVariantButtons(true);
+        setShowPdfTypePrompt(true);
       },
-      text: OPTIONS.CREATE_PDF,
-    },
-    {
-      isComplexElement: true,
+      text: PDF.CREATE_PDF,
     },
 
+    // HEREEEE!!!!
     {
-      // TODO VERSION 2.0 -> addd this
-      disabled: true,
+      disabled: SEC.selectedUnits.length === 0,
       action: () => {
         storeList();
       },
-      text: OPTIONS.SAVE_LIST,
-      display: true,
+      text: OPTIONS.STORE_LIST,
     },
+
     {
-      disabled: AC.disableOptionButtons,
+      disabled: SEC.selectedUnits.length === 0,
       action: () => {
         navigateToLossCalculator();
       },
       text: OPTIONS.TO_LOSS_CALCULATOR,
-      display: true,
     },
     {
-      disabled: false,
+      disabled: false, // always switched on
       action: () => {
         TC.setShowTournamentRulesMenu(true);
       },
       text: OPTIONS.CHANGE_TOURNAMENT_RULES,
-      display: true,
     },
   ];
 
@@ -169,26 +165,25 @@ const OptionButtons = () => {
         padding: "2em",
       }}
     >
+      <LoginPrompt />
+      <SelectPdfTypePrompt
+        openPDfInNewTab={openPDfInNewTab} //
+        setShowPdfTypePrompt={setShowPdfTypePrompt}
+        showPdfTypePrompt={showPdfTypePrompt}
+      />
+      <StoreArmyListPrompt
+        showArmySavePrompt={showArmySavePrompt} //
+        setShowArmySavePrompt={setShowArmySavePrompt} //
+      />
       {buttons.map((bttn, i) => (
         <Grid key={i}>
-          {bttn.display ? (
-            <Fade in={true}>
-              <Button
-                variant="outlined" //
-                disabled={bttn.disabled}
-                onClick={bttn.action}
-              >
-                {bttn.text}
-              </Button>
-            </Fade>
-          ) : null}
-          {bttn.isComplexElement ? (
-            <ChoosePdfType
-              openPDfInNewTab={openPDfInNewTab} //
-              setShowPdfVariantButtons={setShowPdfVariantButtons}
-              display={showPdfVariantButtons}
-            />
-          ) : null}
+          <Button
+            variant="outlined" //
+            disabled={bttn.disabled}
+            onClick={bttn.action}
+          >
+            {bttn.text}
+          </Button>
         </Grid>
       ))}
     </Grid>
