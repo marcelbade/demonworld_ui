@@ -72,17 +72,38 @@ export const TOURNAMENT_RULES = {
   ENFORCE_UNIQUE_RULE: "Einzigartige Einheiten dürfen nur einmal ausgewählt werden.",
 };
 
+export const PDF = {
+  SELECT_PDF_TYPE: "Bitte Wähle den PDF Typ",
+  CREATE_PDF: "PDF Erzeugen ",
+  PDF_CONTEXT_HELP:
+    'Eine "Kompakte Liste" enthält nur die Namen der Einheiten, Gegenstände, sowie ihre Punktkosten und Prozentangaben.\n  "Armeekarten" generiert Karten für alle gewählten Einheiten, sowie die Punktkosten und Prozentangaben.',
+};
+
 export const OPTIONS = {
   CHANGE_TOURNAMENT_RULES: "Turnierregeln Ändern",
   CREATE_DEFAULT_LIST: "Standardliste Erzeugen",
   CREATE_DETAILED_LIST: "Detailierte Liste Erzeugen",
-  CREATE_PDF: "PDF Erzeugen ",
+
   LIGHT_SWITCH: "Wechsel zw. dunklen und hellen Theme",
   LIST_DISPLAY_SWITCH: "Wechsel zw. einfacher und kompletter Listendarstellung",
   MENU_SWITCH: "Menü",
-  SAVE_LIST: "Liste Speichern",
+  STORE_LIST: "Liste Speichern",
   TO_LOSS_CALCULATOR: "Zum Verlustrechner",
   CHANGE_SELECTED_FACTION: "Fraktion wechseln",
+};
+
+export const ARMY_LIST = {
+  LIST_STORED: "Liste gespeichert",
+  STORE_ARMY_LIST: "Armeeliste Speichern",
+  SELECT_EVENT:"Wähle einen Event",
+  LIST_IS_EVENT_LIST: "Soll die ArmeeListe für ein Turnier oder Event freigegeben werden?",
+  LIST_IS_EVENT_LIST_INFO:
+    "Ist die Liste für den Event freigegeben, so kann der Organisator diese unter Listen/Andere User einsehen und unter Events verwalten.",
+
+  SELECT_USERS: "Wähle einen oder mehrere User",  
+  LIST_IS_VISIBLE: "Soll die Armeeliste für einen oder mehrere Nutzer freigegeben werden?",
+  LIST_IS_VISIBLE_INFO: "Jeder ausgewählte Nutzer kann die Armeeliste unter Listen/andere Nutzer einsehen.",
+  SEND_LIST:"Absenden",
 };
 
 export const USER_AUTH = {
