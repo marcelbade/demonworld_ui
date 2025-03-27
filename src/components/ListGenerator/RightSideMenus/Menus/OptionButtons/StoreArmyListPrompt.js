@@ -14,6 +14,7 @@ import {
   TextField,
   useTheme,
   Checkbox,
+  MenuItem,
 } from "@mui/material";
 // icons
 import CancelIcon from "@mui/icons-material/Cancel";
@@ -109,6 +110,17 @@ const StoreArmyListPrompt = (props) => {
       });
   };
 
+  const createNameOptions = () => {
+    let names = [];
+    names.push(UC.user.userName);
+
+    if (AC.playerName !== "") {
+      names.push(AC.playerName);
+    }
+
+    return names;
+  };
+
   const isForEventHandler = () => {
     setIsForEvent((prevState) => !prevState);
   };
@@ -150,7 +162,7 @@ const StoreArmyListPrompt = (props) => {
           "& .MuiPaper-root": {
             minWidth: "50em",
             minHeight: "45em",
-            padding: "5em",
+            padding: "1em",
           },
         },
       }}
@@ -181,11 +193,28 @@ const StoreArmyListPrompt = (props) => {
             autoFocus //
             sx={{ marginTop: "2em" }}
             required
+            select
             id="playerName" //
             name="playerName"
             variant="outlined"
             label={INPUT_TEXTS.PLAYER_NAME}
-            value={UC.user.userName}
+            defaultValue={UC.user.userName}
+          >
+            {createNameOptions().map((n) => (
+              <MenuItem
+                value={n} //
+              >
+                {n}
+              </MenuItem>
+            ))}
+          </TextField>
+          <TextField
+            required //
+            id="teamName"
+            name="teamName"
+            variant="outlined"
+            label={ARMY_LIST.SELECT_TEAM_NAME}
+            defaultValue={AC.teamName}
           />
           <TextField
             required //
@@ -193,18 +222,33 @@ const StoreArmyListPrompt = (props) => {
             name="armyListname"
             variant="outlined"
             label={INPUT_TEXTS.ARMY_NAME}
-            value={AC.armyName}
+            defaultValue={AC.armyName}
           />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={isForEvent} //
-                onChange={isForEventHandler}
+          <Grid
+            container //
+            size={12}
+            item
+            flexDirection="row"
+            alignItems="center"
+          >
+            <Grid item size={10}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={isForEvent} //
+                    onChange={isForEventHandler}
+                  />
+                }
+                label={ARMY_LIST.LIST_IS_EVENT_LIST}
               />
-            }
-            label={ARMY_LIST.LIST_IS_EVENT_LIST}
-          />
-
+            </Grid>
+            <Grid item size={2}>
+              <ContextHelpButton
+                message={ARMY_LIST.LIST_IS_EVENT_LIST_INFO} //
+                type={PUSH_MESSAGE_TYPES.INFO}
+              />
+            </Grid>
+          </Grid>
           <SelectionInput
             allowsMultiple={false}
             isArmySelector={false}
@@ -214,19 +258,30 @@ const StoreArmyListPrompt = (props) => {
             alternatives={setEventList()}
             label={ARMY_LIST.SELECT_EVENT}
           />
-          <ContextHelpButton
-            message={ARMY_LIST.LIST_IS_EVENT_LIST_INFO} //
-            type={PUSH_MESSAGE_TYPES.INFO}
-          />
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={isvisibleForOtherUsers} //
-                onChange={isVisibleHandler}
+          <Grid
+            container //
+            item
+            size={12}
+            flexDirection="row"
+            alignItems="center"
+          >
+            <Grid item size={10}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={isvisibleForOtherUsers} //
+                    onChange={isVisibleHandler}
+                  />
+                }
+                label={ARMY_LIST.LIST_IS_VISIBLE}
               />
-            }
-            label={ARMY_LIST.LIST_IS_VISIBLE}
-          />
+            </Grid>
+
+            <Grid item size={2}>
+              <ContextHelpButton message={ARMY_LIST.LIST_IS_VISIBLE_INFO} type={PUSH_MESSAGE_TYPES.INFO} />
+            </Grid>
+          </Grid>
+
           <SelectionInput
             allowsMultiple={true}
             isArmySelector={false}
@@ -236,11 +291,10 @@ const StoreArmyListPrompt = (props) => {
             alternatives={allUsers}
             label={ARMY_LIST.SELECT_USERS}
           />
-
-          <ContextHelpButton message={ARMY_LIST.LIST_IS_VISIBLE_INFO} type={PUSH_MESSAGE_TYPES.INFO} />
         </Grid>
         <Button
           variant="outlined" //
+          type="submit"
         >
           {ARMY_LIST.SEND_LIST}
         </Button>
