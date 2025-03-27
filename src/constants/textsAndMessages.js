@@ -93,27 +93,27 @@ export const OPTIONS = {
 };
 
 export const ARMY_LIST = {
-  LIST_STORED: "Liste gespeichert",
+  SELECT_TEAM_NAME: "Name des Teams",
   STORE_ARMY_LIST: "Armeeliste Speichern",
-  SELECT_EVENT:"Wähle einen Event",
+  SELECT_EVENT: "Wähle einen Event",
+  SELECT_USERS: "Wähle einen oder mehrere User",
+  LIST_STORED: "Liste gespeichert",
   LIST_IS_EVENT_LIST: "Soll die ArmeeListe für ein Turnier oder Event freigegeben werden?",
   LIST_IS_EVENT_LIST_INFO:
     "Ist die Liste für den Event freigegeben, so kann der Organisator diese unter Listen/Andere User einsehen und unter Events verwalten.",
-
-  SELECT_USERS: "Wähle einen oder mehrere User",  
   LIST_IS_VISIBLE: "Soll die Armeeliste für einen oder mehrere Nutzer freigegeben werden?",
   LIST_IS_VISIBLE_INFO: "Jeder ausgewählte Nutzer kann die Armeeliste unter Listen/andere Nutzer einsehen.",
-  SEND_LIST:"Absenden",
+  SEND_LIST: "Absenden",
 };
 
 export const USER_AUTH = {
   LOGIN_PROMPT_TITLE: "Willkommen",
   LOGIN_USER: "Benutzername",
   LOGIN_PW: "Passwort eigeben",
-  REPEAT_LOGIN_PW: "Passwort wiederholen",
   LOGIN_ACTION: "Einloggen",
   LOGIN_BUTTON: "Ins Konto einloggen",
   LOGOUT_ACCOUNT: "Aus dem Konto ausloggen",
+  REPEAT_LOGIN_PW: "Passwort wiederholen",
   CREATE_NEW_ACCOUNT: "Neues Konto Anlegen",
   ACCOUNT_CREATED: "Konto erfolgreich erstellt.",
   SWITCH_USER: "Benutzerkonto Wechseln",
