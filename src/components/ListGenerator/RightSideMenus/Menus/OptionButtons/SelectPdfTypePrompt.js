@@ -1,0 +1,93 @@
+// react
+import React from "react";
+//  material ui
+import { Button, Dialog, DialogContent, DialogTitle, Grid2 as Grid, IconButton } from "@mui/material";
+import CancelIcon from "@mui/icons-material/Cancel";
+// functions and components
+import ContextHelpButton from "../../../../shared/ContextHelpButton";
+// constants
+import { OPTIONS, PDF, PUSH_MESSAGE_TYPES } from "../../../../../constants/textsAndMessages";
+
+const SelectPdfTypePrompt = (props) => {
+  const handleClose = () => {
+    props.setShowPdfTypePrompt(false);
+  };
+
+  return (
+    <Dialog
+      sx={{
+        "& .MuiDialog-container": {
+          "& .MuiPaper-root": {
+            minWidth: "30em",
+            height: "15em",
+          },
+        },
+      }}
+      open={props.showPdfTypePrompt} //
+      onClose={handleClose}
+    >
+      <Grid
+        container //
+        justifyItems="center"
+        justifyContent="center"
+      >
+        <Grid
+          container //
+          item
+          size={12}
+          justifyItems="flex-start"
+        >
+          <IconButton
+            onClick={handleClose} //
+          >
+            <CancelIcon />
+          </IconButton>
+        </Grid>
+        <Grid
+          container //
+          item
+          size={12}
+          flexDirection="row"
+          justifyContent="start"
+        >
+          <DialogTitle>{PDF.SELECT_PDF_TYPE}</DialogTitle>
+
+          <ContextHelpButton
+            message={PDF.PDF_CONTEXT_HELP} //
+            type={PUSH_MESSAGE_TYPES.INFO}
+          />
+        </Grid>
+        <Grid
+          container //
+          item
+          justifyContent="space-between"
+          sx={{
+            width: "90%",
+          }}
+        >
+          <Button
+            variant="outlined"
+            onClick={() => {
+              props.openPDfInNewTab({ printDefaultList: true });
+              props.setShowPdfVariantButtons(false);
+            }}
+          >
+            {OPTIONS.CREATE_DEFAULT_LIST}
+          </Button>
+
+          <Button
+            variant="outlined"
+            onClick={() => {
+              props.openPDfInNewTab({ printDefaultList: false });
+              props.setShowPdfVariantButtons(false);
+            }}
+          >
+            {OPTIONS.CREATE_DETAILED_LIST}
+          </Button>
+        </Grid>
+      </Grid>
+    </Dialog>
+  );
+};
+
+export default SelectPdfTypePrompt;
