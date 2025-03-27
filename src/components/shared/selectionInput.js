@@ -12,6 +12,8 @@ import { TextField } from "@mui/material";
 const SelectionInput = (props) => {
   return (
     <Autocomplete
+      multiple={props.allowsMultiple}
+      disabled={props.disabled === undefined ? false : props.disabled}
       sx={{
         marginLeft: "2em",
         width: props.width === undefined ? null : props.width,
@@ -23,6 +25,7 @@ const SelectionInput = (props) => {
       }}
       id="arymSelection"
       options={props.alternatives}
+      // event is necessary!!
       onChange={(event, value, reason) => {
         if (reason === "clear") {
           props.clearFunction(props.selectorNumber);
