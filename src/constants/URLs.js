@@ -8,6 +8,7 @@ export const ALL_USER_NAMES_URL = `${PREFIX_BE}/public/user/allUserNames`;
 
 //store army list
 export const STORE_ARMY_LIST_URL = `${PREFIX_BE}/auth/armyLists/addList`;
+export const RETREIVE_ARMY_LIST_URL = (user) => `${PREFIX_BE}/auth/armyLists/getListsForUser?userName=${user}`;
 
 // game data
 export const FACTION_DTOS_URL = `${PREFIX_BE}/public/game/factionDTOs`;
