@@ -105,6 +105,8 @@ export const ARMY_LIST = {
   LIST_IS_VISIBLE: "Soll die Armeeliste für einen oder mehrere Nutzer freigegeben werden?",
   LIST_IS_VISIBLE_INFO: "Jeder ausgewählte Nutzer kann die Armeeliste unter Listen/andere Nutzer einsehen.",
   SEND_LIST: "Absenden",
+  LOAD_LIST: "Liste Laden",
+  DELETE_LIST: "Liste Löschen",
 };
 
 export const USER_AUTH = {
