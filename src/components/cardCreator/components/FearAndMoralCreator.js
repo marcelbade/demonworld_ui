@@ -75,7 +75,7 @@ const FearAndMoralCreator = () => {
             label={CARD_TEXT.UNIT_IS_FEARLESS}
           />
         </Grid>
-        <Grid item>
+        <Grid>
           <FormControlLabel
             control={
               <Checkbox

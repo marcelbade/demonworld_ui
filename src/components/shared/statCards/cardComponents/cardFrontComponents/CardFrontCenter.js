@@ -26,7 +26,7 @@ const CardFrontCenter = (props) => {
           <RangedWeapon unit={props.unit} />
         ) : null}
       </Grid>
-      <Grid item container direction="column" sx={theme.palette.statCards.backGround}>
+      <Grid container direction="column" sx={theme.palette.statCards.backGround}>
         <MeleeWeapons unit={props.unit} />
       </Grid>
       <Initiative unit={props.unit} />

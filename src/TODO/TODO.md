@@ -1,36 +1,39 @@
-
 # TODO
 
 - prüfe später ob die Anzeige "Horde" für stat cards noch funktioniert.
-- Limit für Helden klappt auf manchmal  nicht ????
-- equipment wird nicht gelöscht wenn Armee gewechselt wird??
-- der Regeltext der GEgenstände im Shop funktioniewrt nicht mehr (du hast den Namen der Property geändert!)
+ ### user auth, accounts,..
+ - password validation; letter, numbers, special characters  
+ - remember: it#s ok to store the password in state, but send it  via https...
+ - option buttons: REST call for saving army lists is stud
+ - user avatar upload....
+ - LoginButton: replace placeholder FaceIcon 
+ - "Kein Konto -> anlegen"
+ - Landing page:  lightswitch / login button too small
+
+ - MOVE NaviButton to the shared folder 
 
 
-- testForDisabledSubFaction 
-     - it must be applied when changing the army points!!!
-     
  
-
-
-# WICHTIG
-wenn man eine Armee wählt und zurück geht auf die Landing page, bleibt die Wahl erhalten. Lassen oder nicht?
+# Compendium
+- Menu: chose visible columns: you're missing the option to uncheck all columms!
 
 
 # game logic
 
 # Bugs
-- if a unit with a unique item is removed from the list, the unique item remains on the bann master list of equipped unique items :D
+ - wenn man eine neue Armee wähl, wird weiterhin der tree links angezeigt
+  
 
- 
+
+       
+
+
 
 # CardCreator (v2)
- 
- 
- # IMPROVEMENTS
- 
-- StatCardProvider is not defined in App.js - change that please
 
+# IMPROVEMENTS
+
+- StatCardProvider is not defined in App.js - change that please
 
 # ItemShop
 
@@ -42,11 +45,12 @@ wenn man eine Armee wählt und zurück geht auf die Landing page, bleibt die Wah
 - user accounts (!!)
 - RESPONSIVE DESIGN
 
-
 =====================================================================
-# FINAL TESTS 
+
+# FINAL TESTS
 
 ### FACTIONS
-    - 
 
-### ITEMS 
+    -
+
+### ITEMS

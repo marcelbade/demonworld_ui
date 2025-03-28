@@ -198,8 +198,9 @@ const StoreArmyListPrompt = (props) => {
             label={INPUT_TEXTS.PLAYER_NAME}
             defaultValue={UC.user.userName}
           >
-            {createNameOptions().map((n) => (
+            {createNameOptions().map((n, i) => (
               <MenuItem
+                key={i}
                 value={n} //
               >
                 {n}
@@ -229,7 +230,7 @@ const StoreArmyListPrompt = (props) => {
             flexDirection="row"
             alignItems="center"
           >
-            <Grid item size={10}>
+            <Grid size={10}>
               <FormControlLabel
                 control={
                   <Checkbox
@@ -240,7 +241,7 @@ const StoreArmyListPrompt = (props) => {
                 label={ARMY_LIST.LIST_IS_EVENT_LIST}
               />
             </Grid>
-            <Grid item size={2}>
+            <Grid size={2}>
               <ContextHelpButton
                 message={ARMY_LIST.LIST_IS_EVENT_LIST_INFO} //
                 type={PUSH_MESSAGE_TYPES.INFO}
@@ -263,7 +264,7 @@ const StoreArmyListPrompt = (props) => {
             flexDirection="row"
             alignItems="center"
           >
-            <Grid item size={10}>
+            <Grid size={10}>
               <FormControlLabel
                 control={
                   <Checkbox
@@ -275,7 +276,7 @@ const StoreArmyListPrompt = (props) => {
               />
             </Grid>
 
-            <Grid item size={2}>
+            <Grid size={2}>
               <ContextHelpButton message={ARMY_LIST.LIST_IS_VISIBLE_INFO} type={PUSH_MESSAGE_TYPES.INFO} />
             </Grid>
           </Grid>

@@ -52,7 +52,7 @@ const SecondSubFactionMenu = () => {
           width: "30vw",
         }}
       >
-        <Grid item>
+        <Grid>
           <IconButton
             onClick={() => {
               sideMenuController.closeSecondSubFactionMenu();
