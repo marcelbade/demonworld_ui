@@ -120,7 +120,13 @@ const ArmyListBoxHeader = () => {
               paddingBottom: "1em",
               "& .MuiFormLabel-root": {
                 fontFamily: "NotMaryKate",
-                color: theme.palette.color,
+                color: isArmyCommanderMissing(validation, inputElmnt.value) //
+                  ? theme.palette.errorColor
+                  : theme.color,
+
+                pading: "50px",
+                width: "330px",
+                fontSize: "20px",
               },
             }}
             id={inputElmnt.id}
@@ -132,17 +138,7 @@ const ArmyListBoxHeader = () => {
             type="search"
             required
             variant="standard"
-            InputProps={{
-              style: {
-                fontFamily: "NotMaryKate",
-                fontSize: "20px",
-                color: isArmyCommanderMissing(validation, inputElmnt.value) //
-                  ? theme.palette.errorColor
-                  : theme.color,
-                pading: "50px",
-                width: "330px",
-              },
-            }}
+          
           />
           {inputElmnt.value === AC.armyName ? (
             <Fragment key={inputElmnt.value}>
