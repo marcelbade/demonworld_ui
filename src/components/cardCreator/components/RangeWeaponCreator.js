@@ -57,7 +57,7 @@ const RangeWeaponCreator = () => {
         width: "50em",
       }}
     >
-      <Grid item>
+      <Grid>
         <FormGroup
           sx={{
             width: "max-Content",
