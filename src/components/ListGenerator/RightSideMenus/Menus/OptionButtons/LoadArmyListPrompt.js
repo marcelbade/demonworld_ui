@@ -3,33 +3,26 @@ import axios from "axios";
 //  react
 import React, { useContext, useState, useEffect } from "react";
 // material ui
-import {
-  Dialog,
-  IconButton,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-  Typography,
-  Avatar,
-  ListItemButton,
-  ListItemIcon,
-} from "@mui/material";
+import { Dialog, IconButton, List, ListItem, ListItemAvatar, ListItemText, Typography, Avatar, Tooltip } from "@mui/material";
 // icons
 import CancelIcon from "@mui/icons-material/Cancel";
 import DeleteIcon from "@mui/icons-material/Delete";
 import DownloadIcon from "@mui/icons-material/Download";
 // contexts
 import { UserContext } from "../../../../../contexts/userContext";
+import { ArmyContext } from "../../../../../contexts/armyContext";
+import { SelectionContext } from "../../../../../contexts/selectionContext";
 // hooks
 import usePushMessages from "../../../../../customHooks/UsePushMessages";
 // constants
-import { RETREIVE_ARMY_LIST_URL } from "../../../../../constants/URLs";
+import { DELETE_ARMY_LIST_URL, RETREIVE_ARMY_LIST_URL } from "../../../../../constants/URLs";
 import { ARMY_LIST, COMPENDIUM } from "../../../../../constants/textsAndMessages";
 import { FACTION_COLORS } from "../../../../../constants/factions";
 
 const LoadArmyListPrompt = (props) => {
   const UC = useContext(UserContext);
+  const AC = useContext(ArmyContext);
+  const SC = useContext(SelectionContext);
 
   const [allLists, setAllLists] = useState([]);
   const factionColors = FACTION_COLORS();
@@ -38,9 +31,14 @@ const LoadArmyListPrompt = (props) => {
 
   useEffect(() => {
     fetchLists();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  //TODO  GET all stored army lists of the user and all army lists with access
+  /**
+   * Async Function sends REST request and returns all stored lists
+   * from the DB that either:
+   * - were created by the user
+   * - or have the user listed as having access
+   */
   const fetchLists = async () => {
     axios
       .get(
@@ -53,12 +51,18 @@ const LoadArmyListPrompt = (props) => {
       .catch((error) => console.log("error>>> ", error));
   };
 
+  /**
+   * Function closes the prompt
+   */
   const handleClose = () => {
     props.setShowArmyLoadPrompt(false);
   };
 
-  console.log("all lists", allLists);
-
+  /**
+   * Function calculates the the nest army point cost of the list.
+   * @param {[unitCard]} list
+   * @returns the net army point cost for the army
+   */
   const armySize = (list) => {
     let netPoints = 0;
 
@@ -69,8 +73,38 @@ const LoadArmyListPrompt = (props) => {
     return netPoints;
   };
 
+  /**
+   * Function sets the event name for the list entry. If the stored
+   * list is not linked to an event, a message is displayed.
+   * @param {String} eventName
+   * @returns the event name or a message, of none was stored.
+   */
   const setEvent = (eventName) => {
     return eventName !== "NO_EVENT" ? eventName : ARMY_LIST.NO_EVENT;
+  };
+
+  /**
+   * Function loads the list entry into the army tool and closes the prompt.
+   * @param {StoredListObj} listObj
+   */
+  const loadListintoTool = (listObj) => {
+    AC.setSelectedFactionName(listObj.faction);
+    AC.setPlayerName(listObj.userName);
+    // AC.setTeamName(listObj.teamName);
+    SC.setSelectedUnits(listObj.list);
+    props.setShowArmyLoadPrompt((prevState) => !prevState);
+  };
+
+  const deleteArmyListButton = async (listObj) => {
+    axios
+      .delete(
+        DELETE_ARMY_LIST_URL(listObj.userName, listObj.listName), //
+        { headers: { Authorization: `Bearer ${UC.user.token}` } }
+      )
+      .then((response) => {
+        console.log("response list deleted>>", response);
+      })
+      .catch((error) => console.log("error>>> ", error));
   };
 
   return (
@@ -128,18 +162,35 @@ const LoadArmyListPrompt = (props) => {
               primary={l.listName}
               secondary={
                 <React.Fragment>
-                  <Typography component="span" variant="body2" sx={{ color: "text.primary", display: "inline" }}>
+                  <Typography
+                    component="span" //
+                    variant="body2"
+                    sx={{ color: "text.primary", display: "inline" }}
+                  >
                     {`${l.faction} - ${armySize(l.list)} ${COMPENDIUM.POINTS} - ${setEvent(l.eventName)} `}
                   </Typography>
                 </React.Fragment>
               }
             />
-            <IconButton sx={{ marginRight: "3em" }}>
-              <DownloadIcon />
-            </IconButton>
-            <IconButton>
-              <DeleteIcon />
-            </IconButton>
+            <Tooltip title={<Typography sx={{ fontSize: "20px" }}>{ARMY_LIST.LOAD_LIST}</Typography>}>
+              <IconButton
+                sx={{ marginRight: "3em" }} //
+                onClick={() => {
+                  loadListintoTool(l);
+                }}
+              >
+                <DownloadIcon />
+              </IconButton>
+            </Tooltip>
+            <Tooltip title={<Typography sx={{ fontSize: "20px" }}>{ARMY_LIST.DELETE_LIST}</Typography>}>
+              <IconButton
+                onClick={() => {
+                  deleteArmyListButton(l);
+                }} //
+              >
+                <DeleteIcon />
+              </IconButton>
+            </Tooltip>
           </ListItem>
         ))}
       </List>
