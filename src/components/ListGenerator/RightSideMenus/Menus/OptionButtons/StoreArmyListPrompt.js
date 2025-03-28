@@ -12,7 +12,6 @@ import {
   Grid2 as Grid,
   IconButton,
   TextField,
-  useTheme,
   Checkbox,
   MenuItem,
 } from "@mui/material";
@@ -44,7 +43,6 @@ const StoreArmyListPrompt = (props) => {
   const [selectedEventName, setSelectedEventName] = useState("");
   const [selectedUser, setSelectedUser] = useState([]);
 
-  const theme = useTheme();
   const pushMessages = usePushMessages();
 
   useEffect(() => {
