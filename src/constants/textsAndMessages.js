@@ -83,11 +83,11 @@ export const OPTIONS = {
   CHANGE_TOURNAMENT_RULES: "Turnierregeln Ändern",
   CREATE_DEFAULT_LIST: "Standardliste Erzeugen",
   CREATE_DETAILED_LIST: "Detailierte Liste Erzeugen",
-
   LIGHT_SWITCH: "Wechsel zw. dunklen und hellen Theme",
   LIST_DISPLAY_SWITCH: "Wechsel zw. einfacher und kompletter Listendarstellung",
   MENU_SWITCH: "Menü",
   STORE_LIST: "Liste Speichern",
+  LOAD_LIST: "Listen Anzeigen",
   TO_LOSS_CALCULATOR: "Zum Verlustrechner",
   CHANGE_SELECTED_FACTION: "Fraktion wechseln",
 };
@@ -95,6 +95,7 @@ export const OPTIONS = {
 export const ARMY_LIST = {
   SELECT_TEAM_NAME: "Name des Teams",
   STORE_ARMY_LIST: "Armeeliste Speichern",
+  NO_EVENT: "Liste gehört zu keinen Event/Turnier",
   SELECT_EVENT: "Wähle einen Event",
   SELECT_USERS: "Wähle einen oder mehrere User",
   LIST_STORED: "Liste gespeichert",
