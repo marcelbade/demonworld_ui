@@ -17,6 +17,7 @@ import { PDF_URL } from "../../../../../constants/URLs";
 import LoginPrompt from "../../../../Login/LogInPrompt";
 import SelectPdfTypePrompt from "./SelectPdfTypePrompt";
 import StoreArmyListPrompt from "./StoreArmyListPrompt";
+import LoadArmyListPrompt from "./LoadArmyListPrompt";
 
 const OptionButtons = () => {
   const AC = useContext(ArmyContext);
@@ -29,6 +30,7 @@ const OptionButtons = () => {
 
   const [showPdfTypePrompt, setShowPdfTypePrompt] = useState(false);
   const [showArmySavePrompt, setShowArmySavePrompt] = useState(false);
+  const [showArmyLoadPrompt, setShowArmyLoadPrompt] = useState(false);
 
   /**
    * Function graps the current army list as an object, stores it in the history object and naviagat3s to the LossCalculator component.
@@ -119,6 +121,10 @@ const OptionButtons = () => {
     UC.userLoggedIn ? setShowArmySavePrompt(true) : UC.setDisplayLogInPrompt(true);
   };
 
+  const loadList = () => {
+    setShowArmyLoadPrompt(true);
+  };
+
   const buttons = [
     {
       disabled: SEC.selectedUnits.length === 0,
@@ -128,13 +134,19 @@ const OptionButtons = () => {
       text: PDF.CREATE_PDF,
     },
 
-    // HEREEEE!!!!
     {
       disabled: SEC.selectedUnits.length === 0,
       action: () => {
         storeList();
       },
       text: OPTIONS.STORE_LIST,
+    },
+    {
+      disabled: !UC.userLoggedIn,
+      action: () => {
+        loadList();
+      },
+      text: OPTIONS.LOAD_LIST,
     },
 
     {
@@ -174,6 +186,10 @@ const OptionButtons = () => {
       <StoreArmyListPrompt
         showArmySavePrompt={showArmySavePrompt} //
         setShowArmySavePrompt={setShowArmySavePrompt} //
+      />
+      <LoadArmyListPrompt
+        showArmyLoadPrompt={showArmyLoadPrompt} //
+        setShowArmyLoadPrompt={setShowArmyLoadPrompt} //
       />
       {buttons.map((bttn, i) => (
         <Grid key={i}>
