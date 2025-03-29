@@ -20,7 +20,7 @@ const ListElementName = (props) => {
           ...STYLES,
           color: theme.palette.errorColor,
           textDecorationLine: "line-through",
-          textDecorationThickness: "0.2em",
+          textDecorationThickness: "0.1em",
         }
       : STYLES;
   };
