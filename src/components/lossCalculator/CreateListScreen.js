@@ -1,23 +1,35 @@
 // React
-import React from "react";
+import React, { useState } from "react";
 //Material UI
-import { Grid2 as Grid } from "@mui/material";
+import { Button, Grid2 as Grid } from "@mui/material";
 // icons
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-// constants
-import { LANDINGPAGE, LOSS_CALCULATOR } from "../../constants/textsAndMessages";
-import UserLogButton from "../Login/UserLogButton";
-import LightSwitch from "../shared/LightSwitch";
 //  components and functions
 import NaviButton from "../landingPage/NaviButton";
+import LoginPrompt from "../Login/LogInPrompt";
+// constants
+import { LANDINGPAGE, LOSS_CALCULATOR, OPTIONS } from "../../constants/textsAndMessages";
+import UserLogButton from "../Login/UserLogButton";
+import LightSwitch from "../shared/LightSwitch";
+import LoadArmyListPrompt from "../ListGenerator/RightSideMenus/Menus/OptionButtons/LoadArmyListPrompt";
 
 const CreateListScreen = () => {
+  const [showArmyLoadPrompt, setShowArmyLoadPrompt] = useState(false);
+
+  const showLoadListPrompt = () => {
+    setShowArmyLoadPrompt(true);
+  };
+
   return (
     <Grid //
       container
       direction="column"
+      sx={{
+        width: "100%",
+        height: "100vh",
+      }}
     >
-      <Grid container item justifyContent="space-between">
+      <Grid container justifyContent="space-between">
         <NaviButton
           relativeURL={"/"} //
           isIconButton={true}
@@ -59,6 +71,20 @@ const CreateListScreen = () => {
             buttonHeight={"5em"} //
             buttonWidth={"5em"}
             iconSize={"large"}
+          />
+          <Button
+            variant="outlined" //
+            disabled={false}
+            onClick={() => {
+              showLoadListPrompt();
+            }}
+          >
+            {OPTIONS.LOAD_LIST}
+          </Button>
+          <LoginPrompt />
+          <LoadArmyListPrompt
+            showArmyLoadPrompt={showArmyLoadPrompt} //
+            setShowArmyLoadPrompt={setShowArmyLoadPrompt} //
           />
         </Grid>
       </Grid>
