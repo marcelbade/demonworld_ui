@@ -21,6 +21,7 @@ const LostUnitListElement = (props) => {
     border: "solid 0.1em",
     borderColor: "black",
     borderRadius: "4px",
+    width: "100%",
   };
 
   const setStyles = () => {
@@ -35,7 +36,7 @@ const LostUnitListElement = (props) => {
   /**
    * Function determines if a unit has more than 1 hit point, i.e, if it is a hero, giant, mage or a unit with multiple hit points per element.
    * @param {*} unit
-   * @returns true if the unit is a hero, mage, giant, or unit with more than 1 HP per element.
+   * @returns true, if the unit is a hero, mage, giant, or unit with more than 1 HP per element.
    */
   const isHeroMageOrGiantElement = (unit) => {
     return unit.hitpoints > 1;
@@ -50,7 +51,7 @@ const LostUnitListElement = (props) => {
         justifyContent="center"
         sx={setStyles()}
       >
-        <Grid container size={5} direction="column">
+        <Grid container size={12} direction="column">
           <Grid>
             <ListElementName //
               unitName={props.unit.unitName}
@@ -70,7 +71,7 @@ const LostUnitListElement = (props) => {
         </Grid>
         <Grid
           container
-          size={2}
+          size={6}
           direction="row" //
           alignItems="center"
           justifyContent="center"
