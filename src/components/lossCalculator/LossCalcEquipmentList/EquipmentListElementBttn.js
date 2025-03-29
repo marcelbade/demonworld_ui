@@ -21,6 +21,7 @@ const EquipmentListElementBttn = (props) => {
     let tempArray = [...LC.list];
 
     let unitIndex = tempArray.findIndex((u) => u.uniqueID === selectedUnit.uniqueID);
+
     tempArray[unitIndex].equipment.forEach((e) => {
       if (e.name === itemName) {
         e.itemLost = isLost;
