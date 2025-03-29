@@ -89,7 +89,7 @@ const LossCalculator = () => {
       </Grid>
       <Grid
         container //
-        size={4}
+        size={10}
         direction="column"
       >
         <LostUnitList list={LC.list} />
