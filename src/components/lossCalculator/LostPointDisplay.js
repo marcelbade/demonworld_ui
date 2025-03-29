@@ -1,7 +1,7 @@
 // React
 import React from "react";
 //Material UI
-import { Grid2 as Grid , Typography } from "@mui/material";
+import { Grid2 as Grid, Typography } from "@mui/material";
 // functions and components
 import ContextHelpButton from "../shared/ContextHelpButton";
 // constants
@@ -19,13 +19,7 @@ const LostPointDisplay = (props) => {
         sx={{ marginRight: "1em" }} //
         variant="h6"
       >
-        {LOSS_CALCULATOR.LOST_POINTS}
-      </Typography>
-      <Typography
-        sx={{ marginRight: "2em" }} //
-        variant="h6"
-      >
-        {props.totalPointsLost.toFixed(2)}
+        {`${LOSS_CALCULATOR.LOST_POINTS} ${props.totalPointsLost.toFixed(2)}`}
       </Typography>
       <ContextHelpButton
         message={LOSS_CALCULATOR.LOSS_BUTTON_HELP} //
