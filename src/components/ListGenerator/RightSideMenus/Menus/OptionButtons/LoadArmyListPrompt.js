@@ -18,6 +18,7 @@ import usePushMessages from "../../../../../customHooks/UsePushMessages";
 import { DELETE_ARMY_LIST_URL, RETREIVE_ARMY_LIST_URL } from "../../../../../constants/URLs";
 import { ARMY_LIST, COMPENDIUM } from "../../../../../constants/textsAndMessages";
 import { FACTION_COLORS } from "../../../../../constants/factions";
+import useUnitEnricher from "../../../../../customHooks/UseUnitEnricher";
 
 const LoadArmyListPrompt = (props) => {
   const UC = useContext(UserContext);
@@ -25,13 +26,18 @@ const LoadArmyListPrompt = (props) => {
   const SC = useContext(SelectionContext);
 
   const [allLists, setAllLists] = useState([]);
+
+  const enrichUnit = useUnitEnricher();
+
   const factionColors = FACTION_COLORS();
 
   const pushMessages = usePushMessages();
 
   useEffect(() => {
-    fetchLists();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    if (props.showArmyLoadPrompt) {
+      fetchLists();
+    }
+  }, [props.showArmyLoadPrompt]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * Async Function sends REST request and returns all stored lists
@@ -84,15 +90,47 @@ const LoadArmyListPrompt = (props) => {
   };
 
   /**
-   * Function loads the list entry into the army tool and closes the prompt.
+   * Function loads the list entry into the army tool and closes the
+   * prompt. In addtion, the necessary flags are added to the unit
+   * and the equipment array.
    * @param {StoredListObj} listObj
    */
   const loadListintoTool = (listObj) => {
     AC.setSelectedFactionName(listObj.faction);
     AC.setPlayerName(listObj.userName);
     // AC.setTeamName(listObj.teamName);
-    SC.setSelectedUnits(listObj.list);
+
+    let result = [];
+
+    listObj.list.forEach((u) => {
+      const appendedEquipment = addItemLostFlag(u.equipment);
+      u.equipment = appendedEquipment;
+
+      result.push(enrichUnit(u));
+    });
+
+    console.log("result >>>", result);
+
+    SC.setSelectedUnits(result);
     props.setShowArmyLoadPrompt((prevState) => !prevState);
+  };
+
+  /**
+   * Function adds an itemLost flag to every element
+   * in the equipment array.
+   * @param {itemCard} equipment
+   * @returns the equipment array, with each item now an object.
+   */
+  const addItemLostFlag = (equipment) => {
+    let result = [];
+
+    if (equipment.length !== 0) {
+      equipment.forEach((e) => {
+        result.push({ ...e, itemLost: false });
+      });
+    }
+
+    return result;
   };
 
   const deleteArmyListButton = async (listObj) => {
