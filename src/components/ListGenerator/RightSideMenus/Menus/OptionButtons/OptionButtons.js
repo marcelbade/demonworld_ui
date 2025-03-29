@@ -121,7 +121,7 @@ const OptionButtons = () => {
     UC.userLoggedIn ? setShowArmySavePrompt(true) : UC.setDisplayLogInPrompt(true);
   };
 
-  const loadList = () => {
+  const showLoadListPrompt = () => {
     setShowArmyLoadPrompt(true);
   };
 
@@ -144,7 +144,7 @@ const OptionButtons = () => {
     {
       disabled: !UC.userLoggedIn,
       action: () => {
-        loadList();
+        showLoadListPrompt();
       },
       text: OPTIONS.LOAD_LIST,
     },
