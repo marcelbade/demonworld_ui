@@ -83,7 +83,7 @@ const TreeItemNode = (props) => {
           <Grid //
             container
             direction="column"
-            xs={3}
+            size={3}
           >
             <Typography variant="body1">{props.item.itemName}</Typography>
             <Typography variant="body1">{props.item.points}</Typography>

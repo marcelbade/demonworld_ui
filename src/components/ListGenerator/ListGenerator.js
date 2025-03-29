@@ -69,14 +69,14 @@ const ListGenerator = () => {
         direction="row"
       >
         <Grid //
-          xs={3}
+          size={3}
           position={"fixed"}
           marginTop={"5em"}
         >
           <ArmySelectionBox />
         </Grid>
         <Grid //
-          xs={9}
+          size={9}
           sx={{
             paddingLeft: "50em",
             marginTop: "5em",

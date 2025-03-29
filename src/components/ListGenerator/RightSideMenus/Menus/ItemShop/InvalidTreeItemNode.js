@@ -20,7 +20,7 @@ const InvalidTreeItemNode = (props) => {
       <Grid //
         container
         direction="column"
-        xs={2}
+        size={2}
       >
         <Typography
           variant="body1" //
@@ -39,7 +39,7 @@ const InvalidTreeItemNode = (props) => {
           {props.item.points}
         </Typography>
       </Grid>
-      <Grid xs={6}>
+      <Grid size={6}>
         <IconButton size="large" disabled={true}>
           <AddCircleOutlineIcon />
         </IconButton>

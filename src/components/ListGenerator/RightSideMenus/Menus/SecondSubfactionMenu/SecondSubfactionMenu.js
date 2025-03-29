@@ -67,7 +67,7 @@ const SecondSubFactionMenu = () => {
           direction="row"
           justifyContent="center"
         >
-          <Grid xs={9}>
+          <Grid size={9}>
             <Typography
               variant="h5" //
               align="center"

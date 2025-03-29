@@ -61,7 +61,7 @@ const AppBar = (props) => {
         {controls
           .filter((c) => !props.hiddenElements.includes(c.id))
           .map((c, i) => (
-            <Grid key={i} item>
+            <Grid key={i}>
               {c.elemnt}
             </Grid>
           ))}

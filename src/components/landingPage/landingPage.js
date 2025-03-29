@@ -109,7 +109,6 @@ const LandingPage = () => {
           </IconButton>
           <Grid
             container
-            item //
             flexDirection="column"
             alignItems="center"
             justifyItems="center"
@@ -119,8 +118,7 @@ const LandingPage = () => {
           >
             <Button
               onClick={() => {
-                   // TODO logout
-
+                // TODO logout
               }} //
               variant="outlined"
               sx={{
@@ -131,8 +129,7 @@ const LandingPage = () => {
             </Button>
             <Button
               onClick={() => {
-                  // TODO switch users
-
+                // TODO switch users
               }} //
               variant="outlined"
               sx={{
@@ -143,9 +140,7 @@ const LandingPage = () => {
             </Button>
             <Button
               onClick={() => {
-                   // TODO change password
-
-
+                // TODO change password
               }} //
               variant="outlined"
             >

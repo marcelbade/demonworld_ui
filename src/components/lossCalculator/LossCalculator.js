@@ -68,7 +68,7 @@ const LossCalculator = () => {
       alignItems="flex-start"
     >
       <Grid //
-        xs={12}
+        size={12}
         container
         direction="row"
         justifyContent="space-between"
@@ -89,7 +89,7 @@ const LossCalculator = () => {
       </Grid>
       <Grid
         container //
-        xs={4}
+        size={4}
         direction="column"
       >
         <LostUnitList list={LC.list} />
@@ -107,7 +107,7 @@ const LossCalculator = () => {
       </Grid>
       <Grid
         container //
-        xs={7}
+        size={7}
         justifyContent="flex-end"
         alignItems="center"
         sx={{

@@ -174,7 +174,7 @@ const CompendiumTable = () => {
             container
             direction="row"
           >
-            <Grid xs={8}>
+            <Grid size={8}>
               <Typography
                 variant="h3"
                 sx={{
@@ -190,7 +190,7 @@ const CompendiumTable = () => {
             </Grid>
           </Grid>
 
-          <Grid xs={12}>
+          <Grid size={12}>
             {receivedData ? (
               <table rules="none">
                 <CompendiumTableHeader columns={columns} />

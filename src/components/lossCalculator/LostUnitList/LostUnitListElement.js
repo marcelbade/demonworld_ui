@@ -50,7 +50,7 @@ const LostUnitListElement = (props) => {
         justifyContent="center"
         sx={setStyles()}
       >
-        <Grid container item xs={5} direction="column">
+        <Grid container size={5} direction="column">
           <Grid>
             <ListElementName //
               unitName={props.unit.unitName}
@@ -61,7 +61,7 @@ const LostUnitListElement = (props) => {
             <EquipmentList unit={props.unit} />
           </Grid>
         </Grid>
-        <Grid xs={1}>
+        <Grid size={1}>
           <Typography variant="button">
             {isHeroMageOrGiantElement(props.unit) //
               ? LOSS_CALCULATOR.TEXT_SINGLE_ELEMENTS
@@ -70,7 +70,7 @@ const LostUnitListElement = (props) => {
         </Grid>
         <Grid
           container
-          xs={2}
+          size={2}
           direction="row" //
           alignItems="center"
           justifyContent="center"
@@ -79,20 +79,20 @@ const LostUnitListElement = (props) => {
         </Grid>
         <Grid
           container
-          xs={2} //
+          size={2} //
           alignItems="center"
           justifyContent="center"
         >
           <TotalLossButton unit={props.unit} />
         </Grid>
 
-        <Grid xs={1}>
+        <Grid size={1}>
           <Typography variant="h6" align="center">
             {calcContext.unitPointsLost}
           </Typography>
         </Grid>
         <Grid //
-          xs={1}
+          size={1}
           direction="column"
           container
           justifyContent="flex-end"

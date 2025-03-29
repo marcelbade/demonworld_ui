@@ -19,7 +19,7 @@ const ToggleColumnsMenu = () => {
     >
       <Grid //
         container
-        xs={12}
+        size={12}
         direction="row"
       >
         {/* outer loop that goes through toogle groups and creates one box each */}
