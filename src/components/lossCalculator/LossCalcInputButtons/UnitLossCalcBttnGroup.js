@@ -53,19 +53,25 @@ const UnitLossCalcBttnGroup = (props) => {
   };
 
   /**
-   * Function prevents the user from choosing a number of lost elements larger than the number of elements or hitpoints the unit has.
-   * @returns boolean flag
+   * Function prevents the user from choosing a number of lost elements larger than the number of elements the unit has.
+   * @returns true, if the numbe rof lost elements is equal to the maximum.
    */
   const notGreaterThanNumberOfIncrements = () => {
     return props.unit.lossCounter === props.unit.maxCounter;
   };
+
+  /**
+   * Function prevents the user from choosing a number of lost elements and
+   * HP greater than the number of elememts and HP the unit has.
+   * @returns true, if the number of lost HP and elements is equal to the maximum.
+   */
   const notGreaterThanNumberOfHitpoints = () => {
     return props.unit.lossCounter + props.unit.hitpoints > props.unit.maxCounter;
   };
 
   /**
    * Function prevents the user from choosing a negative number of lost elements.
-   * @returns  boolean flag
+   * @returns true, if counter equals zero.
    */
   const notLessThanZero = () => {
     return props.unit.lossCounter === 0;
