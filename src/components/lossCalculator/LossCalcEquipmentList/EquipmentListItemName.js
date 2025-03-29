@@ -16,14 +16,15 @@ const EquipmentListItemName = (props) => {
     marginTop: "0.5em",
     color: theme.palette.errorColor,
     textDecorationLine: "line-through",
-    textDecorationThickness: "0.2em",
+    textDecorationThickness: "0.1em",
   };
 
   /**
    * Function returns the correct css conditionally.
    * @returns an object containing css.
    */
-  const switchCssClass = () => {
+  const switchStyle = () => {
+
     return props.isItemLost ? STRIKETROUGHTEXT : null;
   };
 
@@ -44,7 +45,8 @@ const EquipmentListItemName = (props) => {
     </Grid>
   ) : (
     <ListItemText
-      primary={<span sx={switchCssClass()}>{props.itemName}</span>} //
+      sx={switchStyle()}
+      primary={<span>{props.itemName}</span>} //
       secondary={<span> {props.pointCost}</span>}
     />
   );
