@@ -17,7 +17,7 @@ const LostPointDisplay = (props) => {
     >
       <Typography
         sx={{ marginRight: "1em" }} //
-        variant="h6"
+        variant="h5"
       >
         {`${LOSS_CALCULATOR.LOST_POINTS} ${props.totalPointsLost.toFixed(2)}`}
       </Typography>
