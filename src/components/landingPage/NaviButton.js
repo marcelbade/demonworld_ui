@@ -65,6 +65,7 @@ const NaviButton = (props) => {
         </Tooltip>
       ) : (
         <Button
+          variant={props.variant}
           onClick={() => {
             toPage(props.relativeURL);
             MC.setOpenMenu(false);
