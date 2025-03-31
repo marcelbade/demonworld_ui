@@ -7,13 +7,13 @@ import { Grid2 as Grid } from "@mui/material";
 import CreateListScreen from "./CreateListScreen";
 import LostPointDisplay from "./LostPointDisplay";
 import LostUnitList from "./LostUnitList/LostUnitList";
-import LightSwitch from "../shared/LightSwitch";
 import usePointCostCalculator from "../../customHooks/UsePointCostCalculator";
-import NaviButton from "../landingPage/NaviButton";
 // context
 import { LossCalcContext } from "../../contexts/LossCalculatorContext";
 // icons
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import AppBar from "../shared/AppBar";
+import AppBarToggle from "../shared/AppBarToggle";
+import { ID } from "../../constants/appBarConstants";
 
 const LossCalculator = () => {
   const location = useLocation();
@@ -67,30 +67,26 @@ const LossCalculator = () => {
       justifyContent="flex-start"
       alignItems="flex-start"
     >
-      <Grid //
-        size={12}
-        container
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
+      <Grid
+        sx={{
+          position: "fixed",
+        }}
       >
-        <NaviButton
-          isIconButton={true}
-          relativeURL={"/listGenerator"} //
-          isCustomIcon={false}
-          icon={ChevronLeftIcon}
-          altText={""}
-          width={"3em"}
-          height={"3em"}
+        <AppBarToggle
+          iconSize="25em" //
+          bttnSize="2em"
+          margin="0.5em"
         />
-        <Grid sx={{ marginRight: "4em" }}>
-          <LightSwitch />
-        </Grid>
+        <AppBar hiddenElements={[ID.COMPENDIMUM_DROPDOWN, ID.LIST_DISPLAY]} />
       </Grid>
       <Grid
         container //
         size={10}
         direction="column"
+        sx={{
+          marginLeft: "5em",
+          marginTop: "5em",
+        }}
       >
         <LostUnitList list={LC.list} />
       </Grid>
