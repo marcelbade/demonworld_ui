@@ -207,7 +207,7 @@ export const ITEM_LIMIT_MESSAGE = {
 export const NO_RANGE_WEAPON = "x";
 
 export const LOSS_CALCULATOR = {
-  CREATE_LIST: "Liste Erstellen.",
+  CREATE_LIST: "Liste Erstellen",
   LOG_INTO_ACCOUNT: " Ins Konto einloggen und Liste Laden.",
   LOST_POINTS: "Verlorene Punkte:",
   LOSS_BUTTON_HELP:
