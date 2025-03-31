@@ -1,5 +1,5 @@
 // React
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 // Material UI
 import {
   Button,
@@ -27,6 +27,9 @@ const LoginPrompt = () => {
   const UC = useContext(UserContext);
   const SC = useContext(ServerErrorContext);
 
+  const [inputUserNameError, setInputUserNameError] = useState(false);
+  const [inputPasswordError, setInputPasswordError] = useState(false);
+
   const handleClose = () => {
     UC.setDisplayLogInPrompt(false);
   };
@@ -36,8 +39,8 @@ const LoginPrompt = () => {
 
     const formData = new FormData(event.currentTarget);
 
-    try {
-      const response = await axios.post(
+    axios
+      .post(
         LOGIN_USER_URL,
         JSON.stringify({
           userName: formData.get("name"),
@@ -47,29 +50,41 @@ const LoginPrompt = () => {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,
         }
-      );
+      )
+      .then((response) => {
+        UC.setUser({
+          ...UC.user,
+          userName: response?.data?.userName,
+          isAdmin: response?.data?.isAdmin,
+          isOwner: response?.data?.isOwner,
+          token: response?.data?.token,
+        });
 
-      UC.setUser({
-        ...UC.user,
-        userName: response?.data?.userName,
-        isAdmin: response?.data?.isAdmin,
-        isOwner: response?.data?.isOwner,
-        token: response?.data?.token,
+        UC.setDisplayLogInPrompt(false);
+        UC.setUserLoggedIn(true);
+
+        // TODO user roles. Should be an array, maybe. Add roles to server first.
+        //   const roles = response?.data?.roles;
+      })
+      .catch((error) => {
+        if (!error?.response) {
+          SC.setServerErrorMessage("no server response");
+        }
+        if (error.response.data.message === "Unknown user") {
+          setInputUserNameError(true);
+        }
+        if (error.response.data.message === "Invalid password") {
+          setInputPasswordError(true);
+        }
       });
+  };
 
-      UC.setDisplayLogInPrompt(false);
-      UC.setUserLoggedIn(true);
+  const resetInputUserError = () => {
+    setInputUserNameError(false);
+  };
 
-      // TODO user roles. Should be an array, maybe. Add roles to server first.
-      const roles = response?.data?.roles;
-    } catch (error) {
-      if (!error?.response) {
-        SC.setServerErrorMessage("no server response");
-      }
-      if (error?.response && error?.response.status === 400) {
-        SC.setServerErrorMessage("missing user name or password");
-      }
-    }
+  const resetInputPasswordError = () => {
+    setInputPasswordError(false);
   };
 
   return (
@@ -82,7 +97,8 @@ const LoginPrompt = () => {
         "& .MuiDialog-container": {
           "& .MuiPaper-root": {
             minWidth: "50em",
-            height: "25em",
+            height: "30em",
+            padding: "1em",
           },
         },
       }}
@@ -108,21 +124,31 @@ const LoginPrompt = () => {
           direction={"column"}
         >
           <TextField
+            onChange={() => {
+              resetInputUserError();
+            }}
             autoFocus //
             required
             id="name"
             name="name"
             variant="outlined"
             label={USER_AUTH.LOGIN_USER}
+            error={inputUserNameError}
+            helperText={inputUserNameError ? USER_AUTH.UNKNOWN_USER : null}
           />
           <TextField
             sx={{ marginTop: "2em" }}
+            onChange={() => {
+              resetInputPasswordError();
+            }}
             required
             id="outlined-password-input" //
             name="pw"
             variant="outlined"
             label={USER_AUTH.LOGIN_PW}
             type="password"
+            error={inputPasswordError}
+            helperText={inputUserNameError ? USER_AUTH.INVALID_PW : null}
           />
         </Grid>
       </DialogContent>
@@ -133,6 +159,7 @@ const LoginPrompt = () => {
       >
         <NaviButton
           relativeURL={"/addNewAccount"} //
+          variant={"outlined"}
           isIconButton={false}
           text={USER_AUTH.CREATE_NEW_ACCOUNT}
           width={"3em"}
