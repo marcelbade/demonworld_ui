@@ -2,16 +2,16 @@
 import React, { useState } from "react";
 //Material UI
 import { Button, Grid2 as Grid } from "@mui/material";
-// icons
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 //  components and functions
 import NaviButton from "../landingPage/NaviButton";
 import LoginPrompt from "../Login/LogInPrompt";
+import AppBar from "../shared/AppBar";
+import AppBarToggle from "../shared/AppBarToggle";
 // constants
-import { LANDINGPAGE, LOSS_CALCULATOR, OPTIONS } from "../../constants/textsAndMessages";
+import { LOSS_CALCULATOR, OPTIONS } from "../../constants/textsAndMessages";
 import UserLogButton from "../Login/UserLogButton";
-import LightSwitch from "../shared/LightSwitch";
 import LoadArmyListPrompt from "../ListGenerator/RightSideMenus/Menus/OptionButtons/LoadArmyListPrompt";
+import { ID } from "../../constants/appBarConstants";
 
 const CreateListScreen = () => {
   const [showArmyLoadPrompt, setShowArmyLoadPrompt] = useState(false);
@@ -29,64 +29,42 @@ const CreateListScreen = () => {
         height: "100vh",
       }}
     >
-      <Grid container justifyContent="space-between">
-        <NaviButton
-          relativeURL={"/"} //
-          isIconButton={true}
-          isCustomIcon={false}
-          icon={ChevronLeftIcon}
-          altText={LANDINGPAGE.BACK_TO_LANDINGPAGE}
-          width={"3em"}
-          height={"3em"}
-        />
-        <LightSwitch iconSize={"large"} />
-      </Grid>
+      <AppBar hiddenElements={[ID.COMPENDIMUM_DROPDOWN, ID.LIST_DISPLAY]} />
+      <AppBarToggle
+        iconSize="25em" //
+        bttnSize="2em"
+        margin="0.5em"
+      />
+
       <Grid
         container //
         direction="column"
-        alignContent="center"
-        justifyContent="center"
+        alignItems="center"
+        justifyItems="center"
+        spacing={8}
       >
-        <Grid //
-          container
-          width={"45em"}
-          alignContent="center"
-          justifyContent="center"
+        <NaviButton
+          relativeURL={"/ListGenerator"} //
+          isIconButton={false}
+          variant={"outlined"} //
+          text={LOSS_CALCULATOR.CREATE_LIST}
+          width={"30em"}
+          height={"3em"}
+        />
+        <Button
+          variant="outlined" //
+          disabled={false}
+          onClick={() => {
+            showLoadListPrompt();
+          }}
         >
-          <NaviButton
-            relativeURL={"/ListGenerator"} //
-            isIconButton={false}
-            text={LOSS_CALCULATOR.CREATE_LIST}
-            width={"30em"}
-            height={"3em"}
-          />
-        </Grid>
-        <Grid //
-          container
-          width={"45em"}
-          alignContent="center"
-          justifyContent="center"
-        >
-          <UserLogButton
-            buttonHeight={"5em"} //
-            buttonWidth={"5em"}
-            iconSize={"large"}
-          />
-          <Button
-            variant="outlined" //
-            disabled={false}
-            onClick={() => {
-              showLoadListPrompt();
-            }}
-          >
-            {OPTIONS.LOAD_LIST}
-          </Button>
-          <LoginPrompt />
-          <LoadArmyListPrompt
-            showArmyLoadPrompt={showArmyLoadPrompt} //
-            setShowArmyLoadPrompt={setShowArmyLoadPrompt} //
-          />
-        </Grid>
+          {OPTIONS.LOAD_LIST}
+        </Button>
+        <LoginPrompt />
+        <LoadArmyListPrompt
+          showArmyLoadPrompt={showArmyLoadPrompt} //
+          setShowArmyLoadPrompt={setShowArmyLoadPrompt} //
+        />
       </Grid>
     </Grid>
   );
