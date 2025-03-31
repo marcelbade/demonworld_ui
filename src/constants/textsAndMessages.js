@@ -87,7 +87,7 @@ export const OPTIONS = {
   LIST_DISPLAY_SWITCH: "Wechsel zw. einfacher und kompletter Listendarstellung",
   MENU_SWITCH: "Menü",
   STORE_LIST: "Liste Speichern",
-  LOAD_LIST: "Listen Anzeigen",
+  LOAD_LIST: "Liste Laden",
   TO_LOSS_CALCULATOR: "Zum Verlustrechner",
   CHANGE_SELECTED_FACTION: "Fraktion wechseln",
 };
