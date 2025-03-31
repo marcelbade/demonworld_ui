@@ -11,7 +11,7 @@ import ArmySelectorDropdown from "./ArmySelectorView/ArmySelectorDropdown";
 // context
 import { ArmyContext } from "../../contexts/armyContext";
 // icons
-import MenuToggle from "../shared/MenuToggle";
+import AppBarToggle from "../shared/AppBarToggle";
 import AppBar from "../shared/AppBar";
 // constants
 import { ID } from "../../constants/appBarConstants";
@@ -49,7 +49,7 @@ const ListGenerator = () => {
           position: "fixed",
         }}
       >
-        <MenuToggle
+        <AppBarToggle
           iconSize="25em" //
           bttnSize="2em"
           margin="0.5em"

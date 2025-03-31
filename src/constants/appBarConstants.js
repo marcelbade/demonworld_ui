@@ -3,4 +3,5 @@ export const ID = {
   LIST_DISPLAY: "listDisplay",
   COMPENDIMUM_DROPDOWN: "compendimumDropdown",
   LIGHT_SWITCH: "lightSwitch",
+  LOG_BUTTON: "LogButton",
 };

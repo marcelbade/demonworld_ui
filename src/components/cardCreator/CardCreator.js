@@ -19,7 +19,7 @@ import UnitAttributeCreator from "./components/UnitAttributeCreator";
 import UnitTypeSelector from "./components/UnitTypeSelector";
 import AppBar from "../shared/AppBar";
 import CardPreview from "./components/CardPreview";
-import MenuToggle from "../shared/MenuToggle";
+import AppBarToggle from "../shared/AppBarToggle";
 //  contexts
 import CardCreationProvider from "../../contexts/cardCreationContext";
 // constants
@@ -129,7 +129,7 @@ const CardCreator = () => {
             position: "fixed",
           }}
         >
-          <MenuToggle
+          <AppBarToggle
             iconSize="25em" //
             bttnSize="2em"
             margin="0.5em"

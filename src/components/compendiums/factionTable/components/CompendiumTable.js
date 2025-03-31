@@ -9,7 +9,7 @@ import CompendiumTableRow from "./CompendiumTableRow";
 import DetailedCardView from "./CardRow";
 import CompendiumTableHeader from "./CompendiumTableHeader";
 import { columnGroupObjects, columnsStateObjects } from "./columnsStateObject";
-import MenuToggle from "../../../shared/MenuToggle";
+import AppBarToggle from "../../../shared/AppBarToggle";
 import AppBar from "../../../shared/AppBar";
 //icons
 import FactionAndUnitSelectors from "./FactionAndUnitSelectors";
@@ -164,7 +164,7 @@ const CompendiumTable = () => {
         }}
       >
         <Grid container>
-          <MenuToggle
+          <AppBarToggle
             iconSize="25em" //
             bttnSize="2em"
             margin="0.5em"

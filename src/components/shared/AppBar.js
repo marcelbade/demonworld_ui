@@ -11,6 +11,7 @@ import ListDisplaySwitch from "./ListDisplaySwitch";
 import CompendiumDropDown from "../compendiums/factionTable/components/CompendiumDropDown";
 import { ID } from "../../constants/appBarConstants";
 import { LANDINGPAGE } from "../../constants/textsAndMessages";
+import UserLogButton from "../Login/UserLogButton";
 // icons
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 
@@ -41,6 +42,7 @@ const AppBar = (props) => {
     { id: ID.LIST_DISPLAY, elemnt: <ListDisplaySwitch bttnSize="medium" /> },
     { id: ID.COMPENDIMUM_DROPDOWN, elemnt: <CompendiumDropDown /> },
     { id: ID.LIGHT_SWITCH, elemnt: <LightSwitch bttnSize="medium" /> },
+    { id: ID.LOG_BUTTON, elemnt: <UserLogButton /> },
   ];
 
   return (
@@ -61,9 +63,7 @@ const AppBar = (props) => {
         {controls
           .filter((c) => !props.hiddenElements.includes(c.id))
           .map((c, i) => (
-            <Grid key={i}>
-              {c.elemnt}
-            </Grid>
+            <Grid key={i}>{c.elemnt}</Grid>
           ))}
       </Grid>
     </Drawer>

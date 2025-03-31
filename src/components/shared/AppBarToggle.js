@@ -15,7 +15,7 @@ import CustomIcon from "./CustomIcon";
  * @param {{*}} props
  * @returns JSX
  */
-const MenuToggle = (props) => {
+const AppBarToggle = (props) => {
   const MC = useContext(MenuContext);
 
   return (
@@ -41,4 +41,4 @@ const MenuToggle = (props) => {
   );
 };
 
-export default MenuToggle;
+export default AppBarToggle;
