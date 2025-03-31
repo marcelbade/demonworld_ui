@@ -59,6 +59,9 @@ const AppBar = (props) => {
         alignItems="center"
         alignContent="center"
         justifyContent="space-around"
+        sx={{
+          minHeight: "4em",
+        }}
       >
         {controls
           .filter((c) => !props.hiddenElements.includes(c.id))
