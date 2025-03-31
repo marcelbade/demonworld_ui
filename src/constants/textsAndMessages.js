@@ -121,6 +121,9 @@ export const USER_AUTH = {
   ACCOUNT_CREATED: "Konto erfolgreich erstellt.",
   SWITCH_USER: "Benutzerkonto Wechseln",
   CHANGE_PASSWORD: "Passwort Ändern",
+  UNKNOWN_USER:"Unbekannter Benutzer",
+  INVALID_PW:"Falsches Password",
+
 };
 
 export const PASSWORDS = {
