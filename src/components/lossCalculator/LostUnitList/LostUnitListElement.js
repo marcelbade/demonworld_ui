@@ -12,6 +12,7 @@ import ListElementName from "./ListElementName";
 import TotalLossButton from "../LossCalcInputButtons/TotalLossButton";
 // constants
 import { LOSS_CALCULATOR } from "../../../constants/textsAndMessages";
+import { Height } from "@mui/icons-material";
 
 const LostUnitListElement = (props) => {
   const calcContext = useContext(LossCalcContext);
@@ -22,7 +23,9 @@ const LostUnitListElement = (props) => {
     borderColor: "black",
     borderRadius: "4px",
     width: "100%",
-  };
+    height:"100%",
+    paddingBottom: "0.5em"
+   };
 
   const setStyles = () => {
     return props.unitDestroyed
@@ -33,14 +36,6 @@ const LostUnitListElement = (props) => {
       : STYLES;
   };
 
-  /**
-   * Function determines if a unit has more than 1 hit point, i.e, if it is a hero, giant, mage or a unit with multiple hit points per element.
-   * @param {*} unit
-   * @returns true, if the unit is a hero, mage, giant, or unit with more than 1 HP per element.
-   */
-  const isHeroMageOrGiantElement = (unit) => {
-    return unit.hitpoints > 1;
-  };
 
   return (
     <ListItem>
@@ -52,22 +47,11 @@ const LostUnitListElement = (props) => {
         sx={setStyles()}
       >
         <Grid container size={12} direction="column">
-          <Grid>
-            <ListElementName //
-              unitName={props.unit.unitName}
-              unitDestroyed={props.unit.unitDestroyed}
-            />
-          </Grid>
-          <Grid>
-            <EquipmentList unit={props.unit} />
-          </Grid>
-        </Grid>
-        <Grid size={1}>
-          <Typography variant="button">
-            {isHeroMageOrGiantElement(props.unit) //
-              ? LOSS_CALCULATOR.TEXT_SINGLE_ELEMENTS
-              : LOSS_CALCULATOR.TEXT_UNITS}
-          </Typography>
+          <ListElementName //
+            unitName={props.unit.unitName}
+            unitDestroyed={props.unit.unitDestroyed}
+          />
+          <EquipmentList unit={props.unit} />
         </Grid>
         <Grid
           container
@@ -83,7 +67,7 @@ const LostUnitListElement = (props) => {
           size={2} //
           alignItems="center"
           justifyContent="center"
-        >
+         >
           <TotalLossButton unit={props.unit} />
         </Grid>
 

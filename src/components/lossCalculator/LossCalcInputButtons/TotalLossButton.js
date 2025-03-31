@@ -41,8 +41,8 @@ const TotalLossButton = (props) => {
     >
       <CustomIcon
         icon={skullsIcon} //
-        boxHeight={45}
-        boxWidth={45}
+        boxHeight={60}
+        boxWidth={60}
         height={40}
         width={40}
       />
