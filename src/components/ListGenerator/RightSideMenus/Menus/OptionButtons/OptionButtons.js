@@ -188,6 +188,7 @@ const OptionButtons = () => {
         setShowArmySavePrompt={setShowArmySavePrompt} //
       />
       <LoadArmyListPrompt
+        listSetter={SEC.setSelectedUnits}
         showArmyLoadPrompt={showArmyLoadPrompt} //
         setShowArmyLoadPrompt={setShowArmyLoadPrompt} //
       />

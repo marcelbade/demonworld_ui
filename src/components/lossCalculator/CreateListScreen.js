@@ -1,5 +1,5 @@
 // React
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 //Material UI
 import { Button, Grid2 as Grid } from "@mui/material";
 //  components and functions
@@ -9,11 +9,13 @@ import AppBar from "../shared/AppBar";
 import AppBarToggle from "../shared/AppBarToggle";
 // constants
 import { LOSS_CALCULATOR, OPTIONS } from "../../constants/textsAndMessages";
-import UserLogButton from "../Login/UserLogButton";
 import LoadArmyListPrompt from "../ListGenerator/RightSideMenus/Menus/OptionButtons/LoadArmyListPrompt";
 import { ID } from "../../constants/appBarConstants";
+import { LossCalcContext } from "../../contexts/LossCalculatorContext";
 
 const CreateListScreen = () => {
+  const LC = useContext(LossCalcContext);
+
   const [showArmyLoadPrompt, setShowArmyLoadPrompt] = useState(false);
 
   const showLoadListPrompt = () => {
@@ -62,6 +64,7 @@ const CreateListScreen = () => {
         </Button>
         <LoginPrompt />
         <LoadArmyListPrompt
+          listSetter={LC.setList}
           showArmyLoadPrompt={showArmyLoadPrompt} //
           setShowArmyLoadPrompt={setShowArmyLoadPrompt} //
         />

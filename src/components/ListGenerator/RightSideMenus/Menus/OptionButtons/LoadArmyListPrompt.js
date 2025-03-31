@@ -11,7 +11,6 @@ import DownloadIcon from "@mui/icons-material/Download";
 // contexts
 import { UserContext } from "../../../../../contexts/userContext";
 import { ArmyContext } from "../../../../../contexts/armyContext";
-import { SelectionContext } from "../../../../../contexts/selectionContext";
 // hooks
 import usePushMessages from "../../../../../customHooks/UsePushMessages";
 // constants
@@ -23,7 +22,6 @@ import useUnitEnricher from "../../../../../customHooks/UseUnitEnricher";
 const LoadArmyListPrompt = (props) => {
   const UC = useContext(UserContext);
   const AC = useContext(ArmyContext);
-  const SC = useContext(SelectionContext);
 
   const [allLists, setAllLists] = useState([]);
 
@@ -31,6 +29,7 @@ const LoadArmyListPrompt = (props) => {
 
   const factionColors = FACTION_COLORS();
 
+  //TODO
   const pushMessages = usePushMessages();
 
   useEffect(() => {
@@ -98,6 +97,7 @@ const LoadArmyListPrompt = (props) => {
   const loadListintoTool = (listObj) => {
     AC.setSelectedFactionName(listObj.faction);
     AC.setPlayerName(listObj.userName);
+    // TODO;
     // AC.setTeamName(listObj.teamName);
 
     let result = [];
@@ -109,9 +109,7 @@ const LoadArmyListPrompt = (props) => {
       result.push(enrichUnit(u));
     });
 
-    console.log("result >>>", result);
-
-    SC.setSelectedUnits(result);
+    props.listSetter(result);
     props.setShowArmyLoadPrompt((prevState) => !prevState);
   };
 
