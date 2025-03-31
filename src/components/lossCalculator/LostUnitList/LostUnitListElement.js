@@ -10,9 +10,6 @@ import UnitLossCalcBttnGroup from "../LossCalcInputButtons/UnitLossCalcBttnGroup
 import EquipmentList from "../LossCalcEquipmentList/EquipmentList";
 import ListElementName from "./ListElementName";
 import TotalLossButton from "../LossCalcInputButtons/TotalLossButton";
-// constants
-import { LOSS_CALCULATOR } from "../../../constants/textsAndMessages";
-import { Height } from "@mui/icons-material";
 
 const LostUnitListElement = (props) => {
   const calcContext = useContext(LossCalcContext);
@@ -23,9 +20,9 @@ const LostUnitListElement = (props) => {
     borderColor: "black",
     borderRadius: "4px",
     width: "100%",
-    height:"100%",
-    paddingBottom: "0.5em"
-   };
+    height: "100%",
+    paddingBottom: "0.5em",
+  };
 
   const setStyles = () => {
     return props.unitDestroyed
@@ -35,7 +32,6 @@ const LostUnitListElement = (props) => {
         }
       : STYLES;
   };
-
 
   return (
     <ListItem>
@@ -67,7 +63,7 @@ const LostUnitListElement = (props) => {
           size={2} //
           alignItems="center"
           justifyContent="center"
-         >
+        >
           <TotalLossButton unit={props.unit} />
         </Grid>
 
