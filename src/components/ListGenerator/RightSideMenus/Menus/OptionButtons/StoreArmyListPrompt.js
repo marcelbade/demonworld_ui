@@ -149,6 +149,10 @@ const StoreArmyListPrompt = (props) => {
     return allUsers;
   };
 
+  const selectableUsers = () => {
+    return allUsers.filter((u) => u !== UC.user.userName);
+  };
+
   return (
     <Dialog
       component={"form"}
@@ -287,7 +291,7 @@ const StoreArmyListPrompt = (props) => {
             filterFunction={handleUserSelection}
             disabled={!isvisibleForOtherUsers}
             clearFunction={clearUserSelection}
-            alternatives={allUsers}
+            alternatives={selectableUsers()}
             label={ARMY_LIST.SELECT_USERS}
           />
         </Grid>
