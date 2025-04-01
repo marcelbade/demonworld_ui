@@ -65,7 +65,6 @@ const TreeUnitNode = (props) => {
       direction="row"
       alignItems="center"
       justifyContent="space-around"
-      item
       size={12}
     >
       <Grid //
