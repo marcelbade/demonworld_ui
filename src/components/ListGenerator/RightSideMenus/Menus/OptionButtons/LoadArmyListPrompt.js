@@ -3,11 +3,22 @@ import axios from "axios";
 //  react
 import React, { useContext, useState, useEffect } from "react";
 // material ui
-import { Dialog, IconButton, List, ListItem, ListItemAvatar, ListItemText, Typography, Avatar, Tooltip } from "@mui/material";
+import {
+  Dialog,
+  IconButton,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  Typography,
+  Avatar,
+  Tooltip,
+  Grid2 as Grid,
+} from "@mui/material";
 // icons
 import CancelIcon from "@mui/icons-material/Cancel";
 import DeleteIcon from "@mui/icons-material/Delete";
-import DownloadIcon from "@mui/icons-material/Download";
+import FileUploadIcon from "@mui/icons-material/FileUpload";
 // contexts
 import { UserContext } from "../../../../../contexts/userContext";
 import { ArmyContext } from "../../../../../contexts/armyContext";
@@ -158,17 +169,23 @@ const LoadArmyListPrompt = (props) => {
       }}
       open={props.showArmyLoadPrompt}
     >
-      <IconButton
-        sx={{ marginRight: "1em" }} //
-        onClick={() => {
-          handleClose();
+      <Grid
+        container //
+        justifyContent="flex-end"
+        sx={{
+          width: "100%",
+          height: "100%",
         }}
       >
-        <CancelIcon />
-      </IconButton>
-
-      {/* try avatar list :D */}
-
+        <IconButton
+          sx={{ marginRight: "1em" }} //
+          onClick={() => {
+            handleClose();
+          }}
+        >
+          <CancelIcon />
+        </IconButton>
+      </Grid>
       <List
         sx={{
           width: "100%", //
@@ -183,6 +200,7 @@ const LoadArmyListPrompt = (props) => {
             sx={{
               border: "solid 1px black", //
               borderRadius: "8px",
+              marginTop: "0.5em",
             }}
           >
             <ListItemAvatar>
@@ -215,7 +233,7 @@ const LoadArmyListPrompt = (props) => {
                   loadListintoTool(l);
                 }}
               >
-                <DownloadIcon />
+                <FileUploadIcon />
               </IconButton>
             </Tooltip>
             <Tooltip title={<Typography sx={{ fontSize: "20px" }}>{ARMY_LIST.DELETE_LIST}</Typography>}>
