@@ -77,29 +77,55 @@ const StoreArmyListPrompt = (props) => {
   };
 
   //TODO Change URL in Production!
+  /**
+   * Async function posts a new army list to the backend to add it to the DB. The
+   * data is talen from the army list generator or the prompt dependending on wether
+   * the user entered data
+   * @param {eventObj} event
+   */
   const storeList = async (event) => {
     event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+
+    const teamName =
+      AC.teamName !== "" //
+        ? AC.teamName
+        : formData.get("teamName");
+
+    const listName =
+      formData.get("armyListName") !== "" //
+        ? formData.get("armyListName")
+        : AC.armyName;
+
+    const eventName =
+      selectedEventName !== "" //
+        ? selectedEventName
+        : "NO_EVENT";
 
     await axios
       .post(
         STORE_ARMY_LIST_URL,
         JSON.stringify({
           userName: UC.user.userName,
-          listName: AC.armyName,
+          teamName: teamName,
+          listName: listName,
           faction: AC.selectedFactionName,
           list: SEC.selectedUnits,
-          eventName: selectedEventName,
+          eventName: eventName,
           userWithAccess: selectedUser,
+          creationDate: new Date(),
         }),
-        { headers: { Authorization: `Bearer ${UC.user.token}` } }
-      )
-      .then((response) => {
-        console.log(response);
-
-        // return to the landing page and display push message
-        if (response.data.userName === UC.user.userName) {
-          pushMessages.showSnackBar(ARMY_LIST.LIST_STORED, PUSH_MESSAGE_TYPES.SUCCESS);
+        {
+          headers: {
+            Authorization: `Bearer ${UC.user.token}`, //
+            "Content-Type": "application/json;charset=UTF-8",
+          },
         }
+      )
+      .then(() => {
+        props.setShowArmySavePrompt(false);
+        pushMessages.showSnackBar(ARMY_LIST.LIST_STORED, PUSH_MESSAGE_TYPES.SUCCESS);
       })
       .catch((error) => {
         if (!error?.response) {
@@ -150,7 +176,9 @@ const StoreArmyListPrompt = (props) => {
   };
 
   const selectableUsers = () => {
-    return allUsers.filter((u) => u !== UC.user.userName);
+    let result = allUsers.filter((u) => u !== UC.user.userName);
+
+    return result;
   };
 
   return (
@@ -221,8 +249,8 @@ const StoreArmyListPrompt = (props) => {
           />
           <TextField
             required //
-            id="armyListname"
-            name="armyListname"
+            id="armyListName"
+            name="armyListName"
             variant="outlined"
             label={INPUT_TEXTS.ARMY_NAME}
             defaultValue={AC.armyName}
