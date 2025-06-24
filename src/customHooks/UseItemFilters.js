@@ -36,8 +36,8 @@ const useItemFilters = () => {
    * then item groups are removed.
    * @param {unitCard} selectedUnit
    * @param {[itemGroup]} listOfItemGroups
-   * @returns an array of items grouped by type, with all item types
-   * and items filtered out that the selected unit cannot equip.
+   * @returns a filtered array of items grouped by type. Filtered out are all item types
+   * and items that the selected unit cannot equip.
    */
   const filterItemTypesForUnit = (selectedUnit, listOfItemGroups) => {
     const itemGroupsForUnit = getItemGroupsForSelectedUnit(selectedUnit, listOfItemGroups);
@@ -76,14 +76,17 @@ const useItemFilters = () => {
     if (selectedUnit.unitType !== UNIT || selectedUnit.isMounted) {
       itemTypeGroup = itemTypeGroup.filter((group) => group.typeName !== ITEM_TYPE_FORTIFICATIONS);
     }
+
     // filter out banners if there is no standard bearer
     if (!selectedUnit.standardBearer) {
       itemTypeGroup = itemTypeGroup.filter((group) => group.typeName !== ITEM_TYPE_BANNER);
     }
+
     // filter out instruments if there is no musician
     if (!selectedUnit.musician) {
       itemTypeGroup = itemTypeGroup.filter((group) => group.typeName !== ITEM_TYPE_INSTRUMENT);
     }
+
     // filter out almost everything, if the unit has no leader
     if (!selectedUnit.leader && selectedUnit.unitType === UNIT) {
       itemTypeGroup = itemTypeGroup.filter(
@@ -97,6 +100,7 @@ const useItemFilters = () => {
           group.typeName !== ITEM_TYPE_WEAPON
       );
     }
+
     //filter out imps if the unit is a non-casters or a mounted magic users
     if (selectedUnit.magic === 0 || selectedUnit.isMounted) {
       itemTypeGroup = itemTypeGroup.filter((group) => group.typeName !== ITEM_TYPE_IMP);
@@ -119,6 +123,7 @@ const useItemFilters = () => {
     const SPEARS = "spears";
     const LANCES = "lances";
 
+    // table
     const itemFilters = {
       // unique items can only be selected once.
       uniqueItems: (data) => {

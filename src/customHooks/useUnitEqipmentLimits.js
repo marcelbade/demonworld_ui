@@ -6,14 +6,14 @@ import { ITEM_LIMIT_MESSAGE } from "../constants/textsAndMessages";
 const useUnitEquipmentLimits = () => {
   /**
    * While useItemFilters makes sure that items that a unit can not equip 
-   * are not shown or disabled, this logic implements item selection
+   * are either not shown or disabled, this logic implements item selection
    * selection rules by toggling the item's corresponding add button on/off.
    * The Rules are as follows:
    *  - Only generic items can be given to multiple units.
    *  - A hero, magicican or unit leader can only get ONE magical item.
    *  - A unit may get one banner, if it has a banner bearer.
    *  - A unit may get one instrument, if it has a musician.
-   *  - A unit may get one item that every element equips (shields...).
+   *  - A unit may get one item that every element equips (e.g. shields).
    *  - A unit may get 1 fortification, as long as no more than 10% of the army's points are spent on them.
    * @param {itemCard Object} item
    * @returns true, if the flag corresponding to the item's itemType is true.
@@ -21,7 +21,6 @@ const useUnitEquipmentLimits = () => {
    */
   const disableItem = (unit, item) => {
  
-
     let disable = {
       disableButton: false,
       errorMessage: "",
@@ -80,8 +79,8 @@ const useUnitEquipmentLimits = () => {
   /**
    * Function sets the itemType flags of a unitCard to correctly toggle the item buttons
    * in the item shop on and off.
-   * @param {*} item
-   * @param {*} newFlagValue booleam flag. True, if the item is added, false if the item is removed.
+   * @param {itemCard} item
+   * @param {boolean} newFlagValue True, if the item is added, false if the item is removed.
    */
   const toggleUnitsItemTypeFlags = (unit, item, newFlagValue) => {
     if (item.everyElement) {
