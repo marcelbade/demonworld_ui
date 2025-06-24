@@ -48,13 +48,20 @@ const SubFactionUnitList = (props) => {
     SEC.setSelectedUnits(tempArray);
   };
 
+  /**
+   * Function contains logic for the "remove item" icon button
+   * displayed next to every selected item in the army list.
+   * @param {unitCard} unit
+   * @param {itemCard} item
+   * @param {int} position
+   */
   const removeItemButtonHandler = (unit, item, position) => {
     const identifier = unit.unitName + unit.uniqueID;
 
     removeItem(identifier, item);
     removeItemFromCentralList(position);
     specials.testSpecialItemEffectRemoval(unit);
-    limiter.toggleUnitsItemTypeFlags(unit, position, false);
+    limiter.toggleUnitsItemTypeFlags(unit, item, false);
   };
 
   /**
