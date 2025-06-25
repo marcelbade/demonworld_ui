@@ -1,6 +1,6 @@
 // React
 import React from "react";
-import {  Grid2 as Grid, Typography } from "@mui/material";
+import { Grid2 as Grid, Typography } from "@mui/material";
 // components and functions
 import ContextHelpButton from "../../../../../shared/ContextHelpButton";
 // constants
@@ -26,12 +26,12 @@ const ArmyListSubFactionHeader = (props) => {
         sx={props.valid ? STYLES : { ...STYLES, color: theme.palette.errorColor }}
       >
         {TITLE}
-        {props.valid ? null : (
-          <ContextHelpButton
-            message={props.message} //
-            type={PUSH_MESSAGE_TYPES.ERROR}
-          />
-        )}
+
+        <ContextHelpButton
+          isVisible={!props.valid}
+          message={props.message} //
+          type={PUSH_MESSAGE_TYPES.ERROR}
+        />
       </Typography>
     </Grid>
   );

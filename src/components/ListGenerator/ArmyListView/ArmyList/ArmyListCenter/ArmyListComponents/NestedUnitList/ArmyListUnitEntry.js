@@ -44,6 +44,7 @@ const ArmyListUnitEntry = (props) => {
                 {UNIT}
               </Typography>
               <ContextHelpButton
+                isVisible = {true}
                 message={props.validationMessage} //
                 type={PUSH_MESSAGE_TYPES.ERROR}
               />

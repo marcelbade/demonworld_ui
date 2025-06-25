@@ -53,6 +53,7 @@ const SelectPdfTypePrompt = (props) => {
           <DialogTitle>{PDF.SELECT_PDF_TYPE}</DialogTitle>
 
           <ContextHelpButton
+            isVisible={true}
             message={PDF.PDF_CONTEXT_HELP} //
             type={PUSH_MESSAGE_TYPES.INFO}
           />

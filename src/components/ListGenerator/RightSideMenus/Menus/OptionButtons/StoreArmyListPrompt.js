@@ -275,6 +275,7 @@ const StoreArmyListPrompt = (props) => {
             </Grid>
             <Grid size={2}>
               <ContextHelpButton
+                isVisible={true}
                 message={ARMY_LIST.LIST_IS_EVENT_LIST_INFO} //
                 type={PUSH_MESSAGE_TYPES.INFO}
               />

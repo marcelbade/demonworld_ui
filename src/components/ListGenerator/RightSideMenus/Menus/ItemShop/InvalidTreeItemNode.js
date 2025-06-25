@@ -44,6 +44,7 @@ const InvalidTreeItemNode = (props) => {
           <AddCircleOutlineIcon />
         </IconButton>
         <ContextHelpButton
+          isVisible={true}
           message={props.message} //
           type={PUSH_MESSAGE_TYPES.ERROR}
         />

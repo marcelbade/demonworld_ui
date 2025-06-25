@@ -24,7 +24,6 @@ const EquipmentListItemName = (props) => {
    * @returns an object containing css.
    */
   const switchStyle = () => {
-
     return props.isItemLost ? STRIKETROUGHTEXT : null;
   };
 
@@ -39,6 +38,7 @@ const EquipmentListItemName = (props) => {
         secondary={<span> {props.pointCost}</span>}
       />
       <ContextHelpButton
+        isVisible={true}
         message={LOSS_CALCULATOR.NOT_SINGLE_ELEMENT_ITEM_MESSAGE} //
         type={PUSH_MESSAGE_TYPES.INFO}
       />

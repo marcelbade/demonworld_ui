@@ -22,6 +22,7 @@ const LostPointDisplay = (props) => {
         {`${LOSS_CALCULATOR.LOST_POINTS} ${props.totalPointsLost.toFixed(2)}`}
       </Typography>
       <ContextHelpButton
+        isVisible={true}
         message={LOSS_CALCULATOR.LOSS_BUTTON_HELP} //
         type={PUSH_MESSAGE_TYPES.INFO}
       />
