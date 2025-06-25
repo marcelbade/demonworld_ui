@@ -111,6 +111,9 @@ const ArmyListBoxHeader = () => {
       container //
       direction="column"
       alignItems="flex-start"
+      sx={{
+        minWidth: "40em ",
+      }}
     >
       {inputElements.map((inputElmnt, i) => (
         <Grid key={i}>
@@ -125,7 +128,7 @@ const ArmyListBoxHeader = () => {
                   : theme.color,
 
                 pading: "50px",
-                width: "330px",
+                width: "40em",
                 fontSize: "20px",
               },
             }}
@@ -138,16 +141,14 @@ const ArmyListBoxHeader = () => {
             type="search"
             required
             variant="standard"
-          
           />
           {inputElmnt.value === AC.armyName ? (
             <Fragment key={inputElmnt.value}>
-              {!validation.validateList(SEC.selectedUnits, SEC.maxPointsAllowance).commanderIsPresent ? (
-                <ContextHelpButton
-                  message={VALIDATION.NO_COMMANDER_WARNING} //
-                  type={PUSH_MESSAGE_TYPES.ERROR}
-                />
-              ) : null}
+              <ContextHelpButton
+                isVisible={isArmyCommanderMissing(validation, inputElmnt.value)}
+                message={VALIDATION.NO_COMMANDER_WARNING} //
+                type={PUSH_MESSAGE_TYPES.ERROR}
+              />
             </Fragment>
           ) : null}
         </Grid>
