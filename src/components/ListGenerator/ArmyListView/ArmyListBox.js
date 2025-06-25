@@ -26,8 +26,11 @@ const ArmyListBox = () => {
     <Grid
       container //
       direction="column"
-      justifyContent="flex-start"
-      alignItems="flex-start"
+      justifyContent="center"
+      alignItems="center"
+      sx={{
+        minWidth: "40em",
+      }}
     >
       <Grid>
         <ArmyListBoxHeader />
