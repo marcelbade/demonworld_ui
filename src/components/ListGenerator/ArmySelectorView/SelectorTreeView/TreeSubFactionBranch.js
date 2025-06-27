@@ -53,7 +53,7 @@ const TreeSubFactionBranch = (props, { children }) => {
    * @returns object with css styles.
    */
   const styleTreebranches = (isInValid) => {
-    let styleObj = { width: "20em" };
+    let styleObj = { width: "30em" };
 
     if (isInValid) {
       styleObj = { ...styleObj, color: theme.palette.disabled };

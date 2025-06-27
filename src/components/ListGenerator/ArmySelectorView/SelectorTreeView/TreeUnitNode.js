@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 // material ui
-import { Typography, Grid2 as Grid, IconButton } from "@mui/material";
+import { Typography, IconButton, Stack } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // icons
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
@@ -54,72 +54,67 @@ const TreeUnitNode = (props) => {
    * @returns true, if unit is a valid choice
    */
   const displayValidNodeStyle = (isBlocked) => {
-    const NAME_WIDTH = "25em";
-    const style = { minWidth: NAME_WIDTH };
+    const NAME_WIDTH = "75%";
+    const NAME_HEIGHT = "50%";
+    const style = { minWidth: NAME_WIDTH, NAME_HEIGHT };
 
     return isBlocked ? { ...style, color: theme.palette.disabled } : style;
   };
 
   return (
-    <Grid
-      container //
-      direction="row"
-      alignItems="center"
-      justifyContent="space-around"
-      size={12}
-      sx={{ backgroundColor: "green" }}
-    >
-      <Typography
-        variant="button" //
-        align="left"
-        sx={displayValidNodeStyle(!props.isValidUnit)}
-      >
-        {props.unit.unitName}
-      </Typography>
-
-      {sideMenuController.buttons.map((b, i) => {
-        return (
-          <IconButton
-            key={i} //
-            onClick={b.action}
-          >
-            <PaymentIcon />
-          </IconButton>
-        );
-      })}
-      <IconButton
-        onClick={addUnit} //
-        disabled={!props.isValidUnit}
-        size="large"
-      >
-        <AddCircleOutlineIcon />
-      </IconButton>
-      <ContextHelpButton
-        isVisible={props.isValidUnit}
-        message={props.validationMessage} //
-        type={PUSH_MESSAGE_TYPES.ERROR}
-      />
-      {props.unit.commandStars > 0 ? (
-        <Typography
-          variant="button" //
-          align="left"
-          sx={displayValidNodeStyle(!props.isValidUnit)}
+    <Stack>
+      <Stack alignItems="center" direction="row">
+        <Typography sx={displayValidNodeStyle(!props.isValidUnit)}>{props.unit.unitName}</Typography>
+        {sideMenuController.buttons.map((b, i) => {
+          return (
+            <IconButton
+              key={i} //
+              onClick={b.action}
+            >
+              <PaymentIcon />
+            </IconButton>
+          );
+        })}
+        <IconButton
+          onClick={addUnit} //
+          disabled={!props.isValidUnit}
         >
-          {renderDynamicIcons({
-            iconString: "*",
-            iconNumber: props.unit.commandStars,
-            showIfNone: false,
-          })}
-        </Typography>
-      ) : null}
-      <Typography
-        variant="button" //
-        align="left"
-        sx={{ width: "100%" }}
-      >
-        {props.unit.points}
-      </Typography>
-    </Grid>
+          <AddCircleOutlineIcon />
+        </IconButton>
+        <ContextHelpButton
+          isVisible={!props.isValidUnit}
+          message={props.validationMessage} //
+          type={PUSH_MESSAGE_TYPES.ERROR}
+        />
+      </Stack>
+      <Stack sx={{ marginTop: "-1.2em" }} alignItems="center" direction="row">
+        {
+          <Typography
+            sx={{
+              backgroundColor: "white", //
+              marginTop: "0.8em",
+              marginRight: "1em",
+            }}
+          >
+            {renderDynamicIcons({
+              iconString: "*",
+              iconNumber: props.unit.commandStars,
+              showIfNone: false,
+            })}
+          </Typography>
+        }
+        {
+          <Typography sx={{ backgroundColor: "white" }}>
+            {renderDynamicIcons({
+              iconString: "/",
+              iconNumber: props.unit.commandStars,
+              showIfNone: false,
+            })}
+          </Typography>
+        }
+      </Stack>
+      <Typography>{props.unit.points}</Typography>
+    </Stack>
   );
 };
 export default TreeUnitNode;
