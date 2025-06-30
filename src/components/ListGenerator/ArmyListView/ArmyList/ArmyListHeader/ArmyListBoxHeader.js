@@ -77,9 +77,15 @@ const ArmyListBoxHeader = () => {
     createDefaultArmyName();
   }, [AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const isArmyCommanderMissing = (validation, value) => {
+  /**
+   * Function checks, whether the list has an army commander (hero or leader with command >= 2).
+   * If not, the entire list is flagged as invalid.
+   * @param {[validationObject]} validation
+   * @returns true, if the list passed the test.
+   */
+  const isArmyCommanderMissing = (validation) => {
     const result = validation.validateList(SEC.selectedUnits, SEC.maxPointsAllowance);
-    return !result.commanderPresent && value === AC.armyName;
+    return !result.commanderIsPresent;
   };
 
   const inputElements = [
@@ -123,7 +129,7 @@ const ArmyListBoxHeader = () => {
               paddingBottom: "1em",
               "& .MuiFormLabel-root": {
                 fontFamily: "NotMaryKate",
-                color: isArmyCommanderMissing(validation, inputElmnt.value) //
+                color: isArmyCommanderMissing(validation) //
                   ? theme.palette.errorColor
                   : theme.color,
 
