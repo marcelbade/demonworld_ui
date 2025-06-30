@@ -32,6 +32,8 @@ const useRightSideMenuController = (unit, subFaction, bttnSelectorObj) => {
   const SFC = useContext(SecondSubFactionContext);
   const TC = useContext(TournamentRulesContext);
 
+
+  // switch cases
   const UNIT_CARDS = "UNIT_CARDS";
   const ITEMS = "ITEMS";
   const SECOND_SUB_FACTION = "SECOND_SUB_FACTION";
@@ -182,6 +184,7 @@ const useRightSideMenuController = (unit, subFaction, bttnSelectorObj) => {
   // table holds values for buttons
   const buttons = [
     {
+      // item shop button
       display: testForSummons() && bttnSelectorObj.displayItemShop,
       action: () => {
         IC.setUnitSelectedForShop(unit);
@@ -191,6 +194,7 @@ const useRightSideMenuController = (unit, subFaction, bttnSelectorObj) => {
       icon: null,
     },
     {
+      // stat card button
       display: bttnSelectorObj.displayCard,
       action: () => {
         rightMenuController(unit, UNIT_CARDS);
@@ -200,6 +204,7 @@ const useRightSideMenuController = (unit, subFaction, bttnSelectorObj) => {
       icon: null,
     },
     {
+      // tribe selection button (only Thain faction)
       display: displayTribeSelectorButton() && bttnSelectorObj.secondSubFaction,
       action: () => {
         IC.setUnitSelectedForShop(unit);
