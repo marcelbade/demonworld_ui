@@ -65,7 +65,7 @@ const TreeSubFactionBranch = (props, { children }) => {
   const transform = (units) => {
     return (
       units
-        .sort((a, b) => a.unitName > b.unitName)
+        .sort((a, b) => a.points > b.points)
         // if unit has multiple card (werwolves, changelings,...) show only one
         .filter((u) => u.multiStateOrderNumber < 2)
         // map unitCard to validation object (unit + validation result)
