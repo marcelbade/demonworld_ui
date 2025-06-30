@@ -1,7 +1,5 @@
-// react
-import React from "react";
 //  material ui
-import { Button, Dialog, DialogContent, DialogTitle, Grid2 as Grid, IconButton } from "@mui/material";
+import { Button, Dialog, DialogTitle, Grid2 as Grid, IconButton } from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
 // functions and components
 import ContextHelpButton from "../../../../shared/ContextHelpButton";
@@ -70,7 +68,7 @@ const SelectPdfTypePrompt = (props) => {
             variant="outlined"
             onClick={() => {
               props.openPDfInNewTab({ printDefaultList: true });
-              props.setShowPdfVariantButtons(false);
+              props.setShowPdfTypePrompt(false);
             }}
           >
             {OPTIONS.CREATE_DEFAULT_LIST}
@@ -80,7 +78,7 @@ const SelectPdfTypePrompt = (props) => {
             variant="outlined"
             onClick={() => {
               props.openPDfInNewTab({ printDefaultList: false });
-              props.setShowPdfVariantButtons(false);
+              props.setShowPdfTypePrompt(false);
             }}
           >
             {OPTIONS.CREATE_DETAILED_LIST}

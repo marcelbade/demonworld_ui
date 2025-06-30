@@ -33,7 +33,7 @@ const OptionButtons = () => {
   const [showArmyLoadPrompt, setShowArmyLoadPrompt] = useState(false);
 
   /**
-   * Function graps the current army list as an object, stores it in the history object and naviagat3s to the LossCalculator component.
+   * Function takes the current army list as an object, stores it in the history object and naviagat3s to the LossCalculator component.
    */
   const navigateToLossCalculator = () => {
     history.push({
