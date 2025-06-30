@@ -179,7 +179,7 @@ const useRightSideMenuController = (unit, subFaction, bttnSelectorObj) => {
     return unit !== undefined && unit.unitType !== SUMMONED;
   };
 
-  // values for buttons
+  // table holds values for buttons
   const buttons = [
     {
       display: testForSummons() && bttnSelectorObj.displayItemShop,
