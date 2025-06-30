@@ -8,12 +8,14 @@ const globalRules = {
    * @param {[unitCard]} availableUnits array of all units available for the list.
    * @param {int} armyPointsAllowance Maximum number of points that can be spent.
    * @returns an array consisting of objects. Every object contains a unit that must
-   * be blocked and an error message to be displayed as a tool tip.
+   * be blocked and an error message meant to be displayed as a tool tip.
    */
   armyMustNotExceedMaxAllowance: (selectedUnits, availableUnits, armyPointsAllowance) => {
     let result = [];
     let spentPoints = 0;
+
     selectedUnits.forEach((u) => (spentPoints += u.points));
+    selectedUnits.forEach((u) => (spentPoints += calculateEquipmentCost(u)));
 
     availableUnits.forEach((aU) => {
       if (aU.points + spentPoints > armyPointsAllowance) {
@@ -28,7 +30,7 @@ const globalRules = {
    * Function checks whether a unique unit has already been selected. If so, it is blocked.
    * @param {*} selectedUnits  array of selected units
    * @returns array consisting of objects. Every object contains a
-   * unit that must be blocked and an error message to be displayed as a tool tip.
+   * unit that must be blocked and an error message meant to be displayed as a tool tip.
    */
   noDuplicateUniques: (selectedUnits) => {
     const result = [];
