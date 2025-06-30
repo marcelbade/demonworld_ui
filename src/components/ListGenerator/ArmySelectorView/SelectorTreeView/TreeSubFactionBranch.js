@@ -69,7 +69,12 @@ const TreeSubFactionBranch = (props, { children }) => {
         // if unit has multiple card (werwolves, changelings,...) show only one
         .filter((u) => u.multiStateOrderNumber < 2)
         // map unitCard to validation object (unit + validation result)
-        .map((u) => validation.createUnitObject(u, validation.validateList(SEC.selectedUnits, SEC.maxPointsAllowance)))
+        .map((u) =>
+          validation.createUnitObject(
+            u, //
+            validation.testArmySelectionAndRunValidation(SEC.selectedUnits, SEC.maxPointsAllowance)
+          )
+        )
     );
   };
 

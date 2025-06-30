@@ -34,6 +34,7 @@ const ArmySelectorDropdown = () => {
   const SFC = useContext(SecondSubFactionContext);
 
   const validation = useArmyValidation();
+  // Initialize the menu on the right side w/o any unit selected
   const sideMenuController = useRightSideMenuController({}, "", {});
   const enrichUnit = useUnitEnricher();
 
@@ -44,7 +45,7 @@ const ArmySelectorDropdown = () => {
 
     if (AC.selectedFactionName !== NONE && altListFinished) {
       // pass emtpy array since all units are removed from the list
-      const validationResult = validation.validateList([], SEC.maxPointsAllowance);
+      const validationResult = validation.testArmySelectionAndRunValidation([], SEC.maxPointsAllowance);
 
       validation.testForDisabledSubFaction([
         ...validationResult.unitsBlockedbyRules, //

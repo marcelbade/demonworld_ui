@@ -24,13 +24,17 @@ const useArmyValidation = () => {
    * @param {int} currentTotalPointAllowance
    * @returns a function call: runValidation()
    */
-  const validateList = (currentList, currentTotalPointAllowance) => {
-    const IsFactionSelected = AC.selectedFactionName !== NONE && AC.selectedFactionName !== undefined;
+  const testArmySelectionAndRunValidation = (currentList, currentTotalPointAllowance) => {
+    const IsFactionSelected =
+      AC.selectedFactionName !== NONE && //
+      AC.selectedFactionName !== undefined;
+
     const areNoAlternativesSelected = ALC.selectedAlternativeLists.length === 0;
 
     if (!IsFactionSelected || (ALC.armyHasAlternativeLists && areNoAlternativesSelected)) {
       return;
     }
+
     return runValidation(currentList, currentTotalPointAllowance, AC.subFactions);
   };
 
@@ -214,7 +218,7 @@ const useArmyValidation = () => {
   };
 
   return {
-    validateList: validateList, //
+    testArmySelectionAndRunValidation: testArmySelectionAndRunValidation, //
     createSubFactionResultObject: createSubFactionResultObject,
     createSecondSubFactionObject: createSecondSubFactionObject,
     createUnitObject: createUnitObject,

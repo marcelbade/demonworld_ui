@@ -1,4 +1,4 @@
-  // React
+// React
 import React, { useContext } from "react";
 // Material UI
 import List from "@mui/material/List";
@@ -40,7 +40,12 @@ const ArmyListBoxCenter = () => {
       {/* show army entries */}
       {AC.subFactionDTOs
         .filter((dto) => isSubFactionAlternativeAndSelected(dto))
-        .map((dto) => validation.createSubFactionResultObject(dto.name, validation.validateList(SEC.selectedUnits, SEC.maxPointsAllowance)))
+        .map((dto) =>
+          validation.createSubFactionResultObject(
+            dto.name,
+            validation.testArmySelectionAndRunValidation(SEC.selectedUnits, SEC.maxPointsAllowance)
+          )
+        )
         .map((obj, i) => (
           <ArmyListSubFactionEntry
             key={i} //

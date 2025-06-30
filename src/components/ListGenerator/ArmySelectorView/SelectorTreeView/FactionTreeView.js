@@ -31,7 +31,7 @@ const FactionTreeView = () => {
 
   useEffect(() => {
     display.showAlly(AC.selectedFactionName);
-    validation.validateList([], SEC.maxPointsAllowance);
+    validation.testArmySelectionAndRunValidation([], SEC.maxPointsAllowance);
   }, [JSON.stringify(ALC.selectedAlternativeLists)]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**

@@ -84,7 +84,7 @@ const ArmyListBoxHeader = () => {
    * @returns true, if the list passed the test.
    */
   const isArmyCommanderMissing = (validation) => {
-    const result = validation.validateList(SEC.selectedUnits, SEC.maxPointsAllowance);
+    const result = validation.testArmySelectionAndRunValidation(SEC.selectedUnits, SEC.maxPointsAllowance);
     return !result.commanderIsPresent;
   };
 
