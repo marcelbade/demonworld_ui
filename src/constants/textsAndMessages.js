@@ -427,7 +427,7 @@ export const ISHTAK_TEXTS = {
 export const LIZARDMEN_TEXTS = {
   FACTION_NAME: "Echsenmenschen",
   SUB_FACTION_RULES: {
-    BASICTROOPS: "Deine Armeeliste muss zu mindestens 20% aus Grundtruppen bestehen.",
+    BASICTROOPS: "Deine Armeeliste muss zu 20% und 50% aus Grundtruppen bestehen.",
     SPECIALISTS: "Deine Armeeliste darf maximal zu 40% aus spezialisierten Truppen bestehen.",
     HEROES: "Deine Armeeliste darf maximal zu 30% aus Helden und Befehlshabern bestehen.",
     MAGES: "Deine Armeeliste darf maximal zu 30% aus Magiern bestehen.",
