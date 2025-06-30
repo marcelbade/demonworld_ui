@@ -43,7 +43,7 @@ const TreeUnitNode = (props) => {
     tempArray.push(enrichUnit(props.unit));
     SEC.setSelectedUnits(tempArray);
 
-    const validationResult = validation.validateList(tempArray, SEC.maxPointsAllowance);
+    const validationResult = validation.testArmySelectionAndRunValidation(tempArray, SEC.maxPointsAllowance);
     validation.testForDisabledSubFaction(validationResult.unitsBlockedbyRules);
   };
 
