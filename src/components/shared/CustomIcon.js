@@ -16,8 +16,10 @@ const CustomIcon = (props) => {
   };
 
   /**
-   * All icons in the app are black. When using dark mode, the color must be inverted. 
-   * The Same is true for icons on a dark background. 
+   *Function toggles the color of the custom icons. 
+   * All icons in the app are black.
+   * When using dark mode, the color is inverted.
+   * The Same is true for icons on a dark background.
    * @returns a plain js objkect containing css attributes.
    */
   const toggleIconColor = () => {
