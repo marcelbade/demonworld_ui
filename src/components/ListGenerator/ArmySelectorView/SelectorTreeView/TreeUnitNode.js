@@ -54,7 +54,7 @@ const TreeUnitNode = (props) => {
    * @returns true, if unit is a valid choice
    */
   const displayValidNodeStyle = (isBlocked) => {
-    const NAME_WIDTH = "75%";
+    const NAME_WIDTH = "65%";
     const NAME_HEIGHT = "50%";
     const style = { minWidth: NAME_WIDTH, NAME_HEIGHT };
 
@@ -113,7 +113,7 @@ const TreeUnitNode = (props) => {
           </Typography>
         }
       </Stack>
-      <Typography>{props.unit.points}</Typography>
+      <Typography  sx={displayValidNodeStyle(!props.isValidUnit)}>{props.unit.points}</Typography>
     </Stack>
   );
 };
