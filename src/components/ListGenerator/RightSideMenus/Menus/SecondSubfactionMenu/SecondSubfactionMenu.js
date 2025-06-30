@@ -99,7 +99,7 @@ const SecondSubFactionMenu = () => {
                   onClick={() => {
                     setSecondSubFactionInArmyList(IC.unitSelectedForShop, ssf);
                     // immediately re-evaluate list so the unit is shown correctly
-                    validation.validateList(
+                    validation.testArmySelectionAndRunValidation(
                       SEC.selectedUnits, //
                       SEC.maxPointsAllowance
                     );
