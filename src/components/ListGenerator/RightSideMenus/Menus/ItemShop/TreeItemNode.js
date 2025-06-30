@@ -22,8 +22,8 @@ const TreeItemNode = (props) => {
 
   /**
    * Add the item card object to the selected unit. This means:
-   * - if it is a melee wapon, the item name replaces the weapon1Name value and the a new value
-   *   for weapon1 is calculated.
+   * - if it is a melee wapon, the item name replaces the weapon1Name 
+   *   value and the a new value for weapon1 is calculated.
    * - if it is a range weapon, the item name replaces the rangedWeapon property
    * - a flag to track whether the item was lost is added for the lossCalculator component.
    * @param {itemCard object} item
