@@ -21,7 +21,8 @@ const ArmyListBoxCenter = () => {
   const useAlly = UseDisplayAlly();
 
   /**
-   * Filters the selected units by subFaction. If allied units have been selected, then their subFaction name is replaced with their faction name.
+   * Filters the selected units by subFaction. If allied units have been selected,
+   * then their subFaction name is replaced with their faction name.
    * @param {[unitCard Objects]} allSelectedUnits
    * @param {String} subFaction
    * @returns
@@ -31,6 +32,21 @@ const ArmyListBoxCenter = () => {
     return SEC.selectedUnits.filter((u) => u.subFaction === subFaction);
   };
 
+  /**
+   *
+   * @param {*} subFactionDtoList
+   * @returns
+   */
+  const filterAndCreateSubFactionValidationObjectList = (subFactionDtoList) => {
+    let clonedSubFactionList = structuredClone(subFactionDtoList);
+
+    const testResult = validation.testArmySelectionAndRunValidation(SEC.selectedUnits, SEC.maxPointsAllowance);
+
+    return clonedSubFactionList
+      .filter((subFactionDTO) => isSubFactionAlternativeAndSelected(subFactionDTO))
+      .map((subFactionDTO) => validation.createSubFactionResultObject(subFactionDTO.name, testResult));
+  };
+
   return (
     <List
       sx={{
@@ -38,21 +54,14 @@ const ArmyListBoxCenter = () => {
       }}
     >
       {/* show army entries */}
-      {AC.subFactionDTOs
-        .filter((dto) => isSubFactionAlternativeAndSelected(dto))
-        .map((dto) =>
-          validation.createSubFactionResultObject(
-            dto.name,
-            validation.testArmySelectionAndRunValidation(SEC.selectedUnits, SEC.maxPointsAllowance)
-          )
-        )
-        .map((obj, i) => (
+      {filterAndCreateSubFactionValidationObjectList(AC.subFactionDTOs) //
+        .map((validationObj, i) => (
           <ArmyListSubFactionEntry
             key={i} //
-            subFaction={obj.subFactionName}
-            valid={obj.valid}
-            message={obj.validationMessage}
-            units={filterUnitsForSubFaction(obj.subFactionName)}
+            subFaction={validationObj.subFactionName}
+            valid={validationObj.valid}
+            message={validationObj.validationMessage}
+            units={filterUnitsForSubFaction(validationObj.subFactionName)}
           />
         ))}
       {/* show ally entries */}

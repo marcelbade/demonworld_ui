@@ -93,13 +93,13 @@ const AlternativeArmyListSelector = () => {
    * @param {[Strings]} tempArray
    */
   const setSelectedAlternateSubFaction = (tempArray) => {
-    const dtoList = [...AC.subFactionDTOs];
+    const clonedSubFactionList = structuredClone(AC.subFactionDTOs);
 
-    dtoList.forEach((dto) => {
+    clonedSubFactionList.forEach((dto) => {
       dto.selectedAlternativeOption = tempArray.includes(dto.name);
     });
 
-    AC.setSubFactionDTOs(dtoList);
+    AC.setSubFactionDTOs(clonedSubFactionList);
   };
 
   /**
