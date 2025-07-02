@@ -27,7 +27,7 @@ const DeleteArmyListButton = () => {
         onClick={() => {
           SEC.setSelectedUnits([]);
           // pass emtpy array since all units are removed from the list
-          const validationResult = validation.validateList([], SEC.maxPointsAllowance);
+          const validationResult = validation.testArmySelectionAndRunValidation([], SEC.maxPointsAllowance);
 
           validation.testForDisabledSubFaction(validationResult.unitsBlockedbyRules);
         }}

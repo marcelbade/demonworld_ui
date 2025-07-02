@@ -63,7 +63,7 @@ const useArmyValidation = () => {
       listOfAlliedUnits: AYC.listOfAlliedUnits,
     });
 
-    return collectValidatioResults(currentList, validationResult);
+    return collectValidationResults(currentList, validationResult);
   };
 
   /**
@@ -73,7 +73,7 @@ const useArmyValidation = () => {
    * @param {dto} result
    * @returns a dto with the validation results.
    */
-  const collectValidatioResults = (currentList, result) => {
+  const collectValidationResults = (currentList, result) => {
     const validationObj = {
       unitsBlockedbyRules: result.unitsBlockedbyRules,
       subFactionBelowMinimum: result.subFactionBelowMinimum,
@@ -124,28 +124,37 @@ const useArmyValidation = () => {
   };
 
   /**
-   * Function takes the validation result, tests if it contains the passed unit
-   * and if found, creates an object with the unit and the error message.
+   * Function creates an object that contains the unit, a flag that shows
+   * whether the unit is valid and can therefore be selected and an error message.
+   * The validation result is passed as a parameter, and if it contains the unit,
+   * the flag is set to false and an error message added. Otherwise, the flag reimains
+   * false and the message is set to an empty string.
    * @param {unitCard} unit
    * @param {boolean} factionOrAlly
    * @param {obj} validationResult
-   * @returns object containing the unit a flag and the error message if it is invalid.
+   * @returns object containing the unit, a flag, and the error message.
    */
-  const createUnitObject = (unit, validationResult) => {
+  const createValidationUnitObject = (unit, validationResult) => {
+    // create object, default: valid unit
     let unitObject = { unit: unit, valid: true, validationMessage: "" };
 
     if (validationResult === undefined) {
       return unitObject;
     }
 
+    // gather validation results.
     const factionBlockList = validationResult.unitsBlockedbyRules;
     const alliedBlockList = validationResult.alliedUnitsBlockedbyRules;
-
     const blockedUnits = [...factionBlockList, ...alliedBlockList];
 
+    // test if unit is valid
     blockedUnits.forEach((bU) => {
       if (bU.unitBlockedbyRules === unit.unitName) {
-        unitObject = { unit: unit, valid: false, validationMessage: bU.message };
+        unitObject = {
+          unit: unit, //
+          valid: false,
+          validationMessage: bU.message,
+        };
       }
     });
 
@@ -154,11 +163,14 @@ const useArmyValidation = () => {
 
   /**
    * Function takes the validation result, tests if it contains the passed second
-   * sub faction and if found, creates an object with the unit and the error message.
+   * sub faction and if it is not found, creates an object with the unit and the error message.
    * @param {unitCard} unit
    * @param {boolean} factionOrAlly
    * @param {obj} validationResult
-   * @returns object containing the second sub faction a flag and the error message if it is invalid.
+   * @returns object containing:
+   * - unit: the unit
+   * - valid: true, if the unit passed validation
+   * - validationMessage: the error message if the validation failed
    */
   const createSecondSubFactionObject = (unit, validationResult) => {
     let secondSubFactionObj = { unit: unit, valid: true, validationMessage: "" };
@@ -177,22 +189,20 @@ const useArmyValidation = () => {
   /**
    * Function tests whether all units in a branch are invalid.
    * If true, the flag "hasNoValidUnits" is set to true for the
-   * subFactionDTO.
+   * subFactionDTO. The test is fdone twice: for the faction and the ally.
    * @param {[dto]} invalidUnits
    */
   const testForDisabledSubFaction = (invalidUnits) => {
     let tempObj = [];
 
-    tempObj = [...AC.subFactionDTOs];
-
-    iterateSubFactions(tempObj, invalidUnits);
-
+    // test faction
+    tempObj = structuredClone(AC.subFactionDTOs);
+    checkIfAllUnitsAreInvalid(tempObj, invalidUnits);
     AC.setSubFactionDTOs([...tempObj]);
 
+    //  test ally
     tempObj = [...AYC.allySubFactionDTOs];
-
-    iterateSubFactions(tempObj, invalidUnits);
-
+    checkIfAllUnitsAreInvalid(tempObj, invalidUnits);
     AYC.setAllySubFactionDTOs([...tempObj]);
   };
 
@@ -200,28 +210,28 @@ const useArmyValidation = () => {
    * Function iterates through an array of subFaction dtos and tests
    * whether all units in an object are invalid. If so, the
    * hasNoValidUnits is set to true.
-   * @param {[dto]} dtoList
+   * @param {[dto]} subFactionDTOList
    * @param {[dto]} invalidUnits
    * @returns the list of (allied) subfactions with the hasNoValidUnits flag reset.
    */
-  const iterateSubFactions = (dtoList, invalidUnits) => {
-    dtoList.forEach((dto) => {
-      const subFactionUnitNames = dto.units.map((u) => u.unitName);
+  const checkIfAllUnitsAreInvalid = (subFactionDTOList, invalidUnits) => {
+    subFactionDTOList.forEach((subFaction) => {
+      const subFactionUnitNames = subFaction.units.map((u) => u.unitName);
       const invalidUnitNames = invalidUnits.map((iu) => iu.unitBlockedbyRules);
 
       const allInvalid = subFactionUnitNames.every((unit) => invalidUnitNames.includes(unit));
 
-      dto.hasNoValidUnits = allInvalid;
+      subFaction.hasNoValidUnits = allInvalid;
     });
 
-    return dtoList;
+    return subFactionDTOList;
   };
 
   return {
     testArmySelectionAndRunValidation: testArmySelectionAndRunValidation, //
     createSubFactionResultObject: createSubFactionResultObject,
     createSecondSubFactionObject: createSecondSubFactionObject,
-    createUnitObject: createUnitObject,
+    createValidationUnitObject: createValidationUnitObject,
     testForDisabledSubFaction: testForDisabledSubFaction,
   };
 };

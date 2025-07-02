@@ -33,7 +33,8 @@ const SubFactionUnitList = (props) => {
   const specials = useSpecialItems();
 
   /**
-   * Function removes a unit from the current list, then revalidates the list.
+   * Function removes a unit from the current list, 
+   * then re-validates the list.
    * @param {Obj} validatedUnit returned from the validation logic.
    */
   const removeUnit = (validatedUnit) => {
@@ -42,7 +43,7 @@ const SubFactionUnitList = (props) => {
     let tempArray = [...SEC.selectedUnits];
     tempArray = tempArray.filter((u) => u.name + u.uniqueID !== identifier);
 
-    const validationResult = validation.validateList(tempArray, SEC.maxPointsAllowance);
+    const validationResult = validation.testArmySelectionAndRunValidation(tempArray, SEC.maxPointsAllowance);
     validation.testForDisabledSubFaction(validationResult.unitsBlockedbyRules);
 
     SEC.setSelectedUnits(tempArray);
@@ -78,7 +79,7 @@ const SubFactionUnitList = (props) => {
       }
     }
 
-    validation.validateList(tempArray, SEC.maxPointsAllowance);
+    validation.testArmySelectionAndRunValidation(tempArray, SEC.maxPointsAllowance);
 
     SEC.setSelectedUnits(tempArray);
   };
@@ -108,10 +109,16 @@ const SubFactionUnitList = (props) => {
     <Fragment>
       {props.subFactionUnits
         .sort((a, b) => a.unitName > b.unitName)
-        .map((u) => validation.createSecondSubFactionObject(u, validation.validateList(SEC.selectedUnits, SEC.maxPointsAllowance)))
+        .map((u) =>
+          validation.createSecondSubFactionObject(
+            u,
+            validation.testArmySelectionAndRunValidation(SEC.selectedUnits, SEC.maxPointsAllowance)
+          )
+        )
         .map((validationObj, i) => {
           return (
             <List key={i}>
+              {/* unit entry w. buttons */}
               <ListItem>
                 <IconButton
                   onClick={() => {

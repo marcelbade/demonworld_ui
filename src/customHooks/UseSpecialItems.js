@@ -23,7 +23,7 @@ const useSpecialItems = () => {
     const name = selectedItem.itemName;
     switch (name) {
       case SPECIAL_ITEMS.BRACELET_OF_TRANSFORMATION:
-        // add 2nd unit card to unit
+        // adds 2nd unit card to unit
         braceletOfTransformationLogic(selectedUnit);
 
         break;
@@ -53,8 +53,8 @@ const useSpecialItems = () => {
   /**
    * The item "Bracelet Of Transformation / "Reif der Verwandlung" doesn't
    * just change the units stats, but turns the unit into a multi state unit
-   * by adding a new unitCard whe used (the monster the hero transforms into).
-   * This function therefore implements the bracelet's rules
+   * by adding a second unitCard (the monster the hero transforms into).
+   * This function implements the bracelet's rules
    * by turning the selected unit into a multi state unit.
    *
    * PLEASE NOTE: The cards for the caroussel view that allow the user to switch between

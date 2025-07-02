@@ -39,9 +39,10 @@ const TreeSubFactionBranch = (props, { children }) => {
   /**
    * Function checks whether the tree displays the faction or the ally
    * and returns the correct DTOs.
-   * @returns an array of SubFaction DTOs.
+   * @returns an array of SubFaction DTOs that either 
+   * belong to the selected faction, or its ally.
    */
-  const selectCorrectSubFactions = () => {
+  const displayEitherSubFactionOrAlly = () => {
     return props.isFaction ? AC.subFactionDTOs : ALC.allySubFactionDTOs;
   };
 
@@ -62,7 +63,15 @@ const TreeSubFactionBranch = (props, { children }) => {
     return styleObj;
   };
 
-  const transform = (units) => {
+  /**
+   * Function sorts the units, makes sure that units with multiple 
+   * unit stat cards are only displayed once in the tree and
+   * validates every unit. Invalid units are displayed, but cannot be selected
+   * and gain a button that displays a message detailing why it is invalid.  
+   * @param {[unitCard]} units -
+   * @returns an array of validation objects (see createValidationUnitObject function) 
+   */
+  const sortFilterValidate = (units) => {
     return (
       units
         .sort((a, b) => a.points > b.points)
@@ -70,7 +79,7 @@ const TreeSubFactionBranch = (props, { children }) => {
         .filter((u) => u.multiStateOrderNumber < 2)
         // map unitCard to validation object (unit + validation result)
         .map((u) =>
-          validation.createUnitObject(
+          validation.createValidationUnitObject(
             u, //
             validation.testArmySelectionAndRunValidation(SEC.selectedUnits, SEC.maxPointsAllowance)
           )
@@ -78,20 +87,20 @@ const TreeSubFactionBranch = (props, { children }) => {
     );
   };
 
-  return selectCorrectSubFactions().map((dto, i) =>
-    isSubFactionAlternativeAndSelected(dto) ? (
+  return displayEitherSubFactionOrAlly().map((subFactionDTO, i) =>
+    isSubFactionAlternativeAndSelected(subFactionDTO) ? (
       <TreeItem
         itemId={`${i}`} //
-        label={dto.name}
+        label={subFactionDTO.name}
         key={i}
         onClick={() => {
           controller.treeExpansionController([`${i}`]);
         }}
-        sx={styleTreebranches(dto.hasNoValidUnits)}
+        sx={styleTreebranches(subFactionDTO.hasNoValidUnits)}
       >
-        {transform(dto.units).map((validationObj, j) => (
+        {sortFilterValidate(subFactionDTO.units).map((validationObj, i) => (
           <TreeUnitNode
-            key={j} //
+            key={i} //
             unit={validationObj.unit}
             isValidUnit={validationObj.valid}
             validationMessage={validationObj.validationMessage}
