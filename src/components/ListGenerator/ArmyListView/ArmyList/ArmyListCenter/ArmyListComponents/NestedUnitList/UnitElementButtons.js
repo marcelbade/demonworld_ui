@@ -6,7 +6,16 @@ import { ListItemButton } from "@mui/material";
 // custom hooks
 import useRightSideMenuController from "../../../../../../../customHooks/useRightSideMenuController";
 
+/**
+ * Component generates the buttons for the right side menu.
+ * The buttons are displayed for every unit in the army list.
+ * Buttons are generated via a table-driven function.
+ * @param {*} props
+ * @returns JSX elemment
+ */
 const UnitElementButtons = (props) => {
+  const ICON_SIZE = 25;
+
   const sideMenuController = useRightSideMenuController(
     props.unit, //
     props.subFaction,
