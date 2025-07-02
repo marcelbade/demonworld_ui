@@ -22,7 +22,7 @@ const TreeItemNode = (props) => {
 
   /**
    * Add the item card object to the selected unit. This means:
-   * - if it is a melee wapon, the item name replaces the weapon1Name 
+   * - if it is a melee wapon, the item name replaces the weapon1Name
    *   value and the a new value for weapon1 is calculated.
    * - if it is a range weapon, the item name replaces the rangedWeapon property
    * - a flag to track whether the item was lost is added for the lossCalculator component.
@@ -33,7 +33,6 @@ const TreeItemNode = (props) => {
 
     tempObj.equipment.push({
       ...item,
-      itemLost: false,
     });
 
     IC.setUnitSelectedForShop({
@@ -41,6 +40,11 @@ const TreeItemNode = (props) => {
     });
   };
 
+  /**
+   * Function adds item name to the central item list to ensure that
+   * unique items cannot be selected twice.
+   * @param {itemCard} item
+   */
   const addItemToCentralList = (item) => {
     IC.setAllEquippedItems([...IC.allEquippedItems, item.itemName]);
   };
