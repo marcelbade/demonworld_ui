@@ -33,7 +33,7 @@ const SubFactionUnitList = (props) => {
   const specials = useSpecialItems();
 
   /**
-   * Function removes a unit from the current list, 
+   * Function removes a unit from the current list,
    * then re-validates the list.
    * @param {Obj} validatedUnit returned from the validation logic.
    */
@@ -59,9 +59,9 @@ const SubFactionUnitList = (props) => {
   const removeItemButtonHandler = (unit, item, position) => {
     const identifier = unit.unitName + unit.uniqueID;
 
+    specials.testSpecialItemEffectRemoval(unit);
     removeItem(identifier, item);
     removeItemFromCentralList(position);
-    specials.testSpecialItemEffectRemoval(unit);
     limiter.toggleUnitsItemTypeFlags(unit, item, false);
   };
 
