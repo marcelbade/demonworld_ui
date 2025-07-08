@@ -11,7 +11,7 @@ const MeleeWeapons = (props) => {
 
   const weapons = [
     {
-      // weapon one can be replaced by a magical item
+      // only weapon one can be replaced by a magical item
       weaponString:
         props.unit.weapon1 === 0 //
           ? null
