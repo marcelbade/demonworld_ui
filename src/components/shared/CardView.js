@@ -7,7 +7,7 @@ import StatCard from "./statCards/StatCard";
 import StatCardCarousellButton from "./StatCardCarousellButton";
 
 const CardView = (props) => {
-  const [displayCard, setLocalDisplayCard] = useState({});
+  const [localDisplayCard, setLocalDisplayCard] = useState({});
   const [cardNumber, setCardNumber] = useState(0);
 
   // rerender to correctly display the new unit, whenever the supplied unit changes.
@@ -54,17 +54,21 @@ const CardView = (props) => {
         maxHeight="60vh"
       >
         <Grid>
-          {props.isMultiStateCard ? ( //
-            <StatCardCarousellButton action={carouselBackward} side={"left"} />
-          ) : null}
+          <StatCardCarousellButton
+            display={props.isMultiStateCard} //
+            action={carouselBackward}
+            side={"left"}
+          />
         </Grid>
         <Grid>
-          <StatCard unit={displayCard} />
+          <StatCard unit={localDisplayCard} />
         </Grid>
         <Grid>
-          {props.isMultiStateCard ? ( //
-            <StatCardCarousellButton action={carouselForward} side={"right"} />
-          ) : null}
+          <StatCardCarousellButton
+            display={props.isMultiStateCard} //
+            action={carouselForward}
+            side={"right"}
+          />
         </Grid>
       </Grid>
     </Fragment>
