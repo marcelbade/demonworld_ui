@@ -107,7 +107,7 @@ const TreeUnitNode = (props) => {
           <Typography sx={{ backgroundColor: "white" }}>
             {renderDynamicIcons({
               iconString: "/",
-              iconNumber: props.unit.commandStars,
+              iconNumber: props.unit.magic,
               showIfNone: false,
             })}
           </Typography>
