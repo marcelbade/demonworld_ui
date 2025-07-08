@@ -14,7 +14,7 @@ const CardView = (props) => {
   useEffect(() => {
     const temp = { ...props.unit };
     setLocalDisplayCard(temp);
-  }, [props.unit]);
+  }, [JSON.stringify(props.unit)]);
 
   /**
    * Function allwos user to cycle through the multiple stat cards counter-clockwise.
