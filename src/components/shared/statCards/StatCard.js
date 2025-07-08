@@ -21,19 +21,13 @@ const StatCard = (props) => {
     marginRight: "0.75em",
   };
 
-  const [data, setData] = useState(props.unit);
-
-  useEffect(() => {
-    setData(props.unit);
-  }, [props.unit]);
-
-  return data === undefined || isObjectEmtpy(data) ? null : (
+  return (
     <Grid container direction="column">
       <Grid sx={CSS}>
-        <CardFront unit={data} />
+        <CardFront unit={props.unit} />
       </Grid>
       <Grid sx={CSS}>
-        <CardBack unit={data} />
+        <CardBack unit={props.unit} />
       </Grid>
     </Grid>
   );
