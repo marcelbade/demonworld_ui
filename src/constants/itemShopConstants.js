@@ -1,5 +1,4 @@
-
-// Item types. Used for filtering items in the shop 
+// Item types. Used for filtering items in the shop
 export const ITEM_TYPE_ARMOR = "armor";
 export const ITEM_TYPE_BOWS = "arrowsAndBows";
 export const ITEM_TYPE_BANNER = "banner";
@@ -33,6 +32,9 @@ export const ITEM_CATEGORY_NAME_MAPPING = {
   weapon: "Waffen",
   warpaint: "Kriegsbemalung",
 };
+
+// Items that do are not a range weapon, have this string as value for "rangedAttackStats"
+export const NOT_A_RANGE_WEAPON = " -- ";
 
 // List of all range weapons in the game that can use artefacts meant for bows.
 export const BOW_TYPES = [
