@@ -1,5 +1,5 @@
 //  constants
-import { WEAPON_1, RANGED_WEAPON_STATS, WEAPON_2 } from "../../constants/stats";
+import { WEAPON_1, RANGED_WEAPON_STATS } from "../../constants/stats";
 import { ITEM_TYPE_WEAPON, NOT_A_RANGE_WEAPON } from "../../constants/itemShopConstants";
 
 /**
@@ -166,7 +166,7 @@ const calculateRangeValue = (unit) => {
 const addBonus = (unit, unitStatName) => {
   let unmodifiedStat = unit[unitStatName];
   let result = 0;
-  
+
   unit.equipment.forEach((item) => {
     if (item[unitStatName] !== 0 && item[unitStatName] + unmodifiedStat > result) {
       result = unmodifiedStat + item[unitStatName];

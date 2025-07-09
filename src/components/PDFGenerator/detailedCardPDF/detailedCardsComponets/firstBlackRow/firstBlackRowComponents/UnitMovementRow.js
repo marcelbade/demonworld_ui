@@ -8,7 +8,7 @@ import {
   isHeroMageOrSingleSummon,
   isUnitOrSummonedUnit,
   isSummonsWithMaxFields,
-} from "../../../../../shared/unitMovementConditions";
+} from "../../../../../shared/statCards/unitMovementConditions";
 import {
   renderManeuvers,
   renderHorde,
@@ -18,7 +18,7 @@ import {
   renderMovementpoints,
   renderControlzone,
   renderUnitMovement,
-} from "../../../../../shared/cardMovementRenderFunctions";
+} from "../../../../../shared/statCards/cardMovementRenderFunctions";
 
 // icons
 import squareFormationWhite from "../../../../../../assets/icons/squareFormationWhite.png";

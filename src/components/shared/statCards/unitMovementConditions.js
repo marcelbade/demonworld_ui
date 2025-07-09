@@ -1,5 +1,5 @@
 // constants
-import { GIANT, HERO, MAGE, UNIT, SUMMONED, AUTOMATON } from "../../constants/unitTypes";
+import { GIANT, HERO, MAGE, UNIT, SUMMONED, AUTOMATON } from "../../../constants/unitTypes";
 
 /**
  * Function tests whether the passed unit card is of the type.
