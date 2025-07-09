@@ -1,5 +1,5 @@
-// React
-import React, { useEffect, useState } from "react";
+// react
+import { useEffect, useState } from "react";
 // Material UI
 import { Grid2 as Grid } from "@mui/material";
 // components & functions
@@ -21,13 +21,19 @@ const StatCard = (props) => {
     marginRight: "0.75em",
   };
 
-  return (
+  const [data, setData] = useState(props.unit);
+
+  useEffect(() => {
+    setData(props.unit);
+  }, [props.unit]);
+
+  return data === undefined || isObjectEmtpy(data) ? null : (
     <Grid container direction="column">
       <Grid sx={CSS}>
-        <CardFront unit={props.unit} />
+        <CardFront unit={data} />
       </Grid>
       <Grid sx={CSS}>
-        <CardBack unit={props.unit} />
+        <CardBack unit={data} />
       </Grid>
     </Grid>
   );
