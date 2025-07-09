@@ -1,10 +1,10 @@
 // React
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 // Material UI
 import { Typography } from "@mui/material";
 // components & functions
-import { setUnitStat } from "../../../../../../gameLogic/unitStatChangeLogic/unitStatChangesLogic";
-import CustomIcon from "../../../../CustomIcon";
+import { setUnitStat } from "../../../gameLogic/unitStatChangeLogic/unitStatChangesLogic";
+import CustomIcon from "../CustomIcon";
 
 const StatCardIcon = (props) => {
   const HEIGHT_WIDTH = "25px";
