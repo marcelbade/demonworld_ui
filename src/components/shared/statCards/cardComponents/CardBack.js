@@ -1,5 +1,5 @@
 // React
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 // functions and modules
 import CardBackCenter from "./cardBackComponents/CardBackCenter";
 import CardBackTitle from "./cardBackComponents/CardBackTitle";

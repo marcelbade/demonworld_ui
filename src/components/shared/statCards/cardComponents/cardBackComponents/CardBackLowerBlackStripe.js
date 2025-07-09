@@ -3,7 +3,7 @@ import React from "react";
 // Material UI
 import { Grid2 as Grid, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
-// functions and modules
+// components and functions
 import usePointCostCalculator from "../../../../../customHooks/UsePointCostCalculator";
 // constants
 import { STATS } from "../../../../../constants/textsAndMessages";

@@ -1,5 +1,5 @@
 // React
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 import { Grid2 as Grid, Typography } from "@mui/material";
 // Material UI
 import { useTheme } from "@emotion/react";
@@ -8,12 +8,10 @@ import rangeArmorIcon from "../../../../../../assets/icons/range-armor.png";
 import meleeArmorIcon from "../../../../../../assets/icons/melee-armor.png";
 import blackBowIcon from "../../../../../../assets/icons/bow2.png";
 import blackSwordIcon from "../../../../../../assets/icons/sword2.png";
-// components & functions
-import { ARMOUR_RANGE, ARMOUR_MELEE, SKILL_MELEE, SKILL_RANGE } from "../../../../../../constants/stats";
-
 // constants
+import { ARMOUR_RANGE, ARMOUR_MELEE, SKILL_MELEE, SKILL_RANGE } from "../../../../../../constants/stats";
 import { ALTTEXT, CARD_TEXT } from "../../../../../../constants/textsAndMessages";
-import StatCardIcon from "./StatCardIcon";
+import StatCardIcon from "../../../StatCardIcon";
 
 const SizeArmorSkills = (props) => {
   const theme = useTheme();

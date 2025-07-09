@@ -1,5 +1,3 @@
-// react
-import React from "react";
 // react-pdf
 import { Text, View, Image } from "@react-pdf/renderer";
 // functions and components
