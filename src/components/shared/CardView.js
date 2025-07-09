@@ -14,7 +14,7 @@ const CardView = (props) => {
   useEffect(() => {
     const temp = { ...props.unit };
     setLocalDisplayCard(temp);
-  }, [JSON.stringify(props.unit)]);
+  }, [JSON.stringify(props.unit)]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * Function allwos user to cycle through the multiple stat cards counter-clockwise.
