@@ -1,168 +1,177 @@
 //  constants
-import { ITEM_TYPE_BOWS, ITEM_TYPE_CROSSBOWS, ITEM_TYPE_WEAPON } from "../../constants/itemShopConstants";
-import { RANGED_WEAPON, WEAPON_1, RANGED_WEAPON_STATS } from "../../constants/stats";
-
-
+import { WEAPON_1, RANGED_WEAPON_STATS } from "../../constants/stats";
+import { ITEM_TYPE_WEAPON, NOT_A_RANGE_WEAPON } from "../../constants/itemShopConstants";
 
 /**
  * Function calculates the new value for a unit's stat
- * after choosing an item that permanently changes a stat.
+ * after an item that permanently changes a stat was picked. There are two use cases:
+ * - weapons: change the name and the attack value for the weapon must be recalculated
+ * - items: simply add a fixed bonus
  * @param {unitCard} unit
  * @param {String} stateName
  * @returns
  */
 export const setUnitStat = (unit, unitStatName) => {
-  if (unitHasNoItems(unit)) {
-    return setStatWithoutItems(unit, unitStatName);
+  // return the default value, if no range weapon has been picked
+  if (
+    unitStatName === RANGED_WEAPON_STATS && //
+    (unitHasNoEquipment(unit) || unitHasNoRangeWeapons(unit))
+  ) {
+    return {
+      name: unit.rangedWeapon,
+      value: unit[unitStatName],
+    };
+    // return the default value, if no melee weapon has been picked
+  } else if (
+    unitStatName === WEAPON_1 && //
+    (unitHasNoEquipment(unit) || unitHasNoMeleeWeapon(unit))
+  ) {
+    return {
+      name: unit.weapon1Name,
+      value: unit[unitStatName],
+    };
+    // calculate the final value for the equipped melee weapon
+  } else if (unitStatName === WEAPON_1) {
+    return calculateMeleeValue(unit, unitStatName);
   }
-
-  return searchForRelevantModifier(unit, unitStatName);
-};
-
-/**
- * Function sets the passed stat if the unit has no items. Note that the
- * first weapon and ragend weapon always require a name.
- * @param {unitCard} unit
- * @param {String} unitStatName
- * @returns an object containing the stat' value and the name in case it is the
- * units first meleee or ranged weapon.
- */
-const setStatWithoutItems = (unit, unitStatName) => {
-  return {
-    name: setDefaultName(unit, unitStatName), //
-    value: unit[unitStatName],
-  };
-};
-
-/**
- * Function sets default names for weapons. Since Weapons are only renamed when an a weapon type item is equipped, a default name must be set.  
- * @param {Obj} unit 
- * @param {String} unitStatName 
- * @returns 
- */
-const setDefaultName = (unit, unitStatName) => {
-  let newName = "";
-
-  if (unitStatName === WEAPON_1) {
-    newName = unit.weapon1Name;
+  // calculate the value for the equipped ranged weapon
+  else if (unitStatName === RANGED_WEAPON_STATS) {
+    return calculateRangeValue(unit);
   }
-
-  if (unitStatName === RANGED_WEAPON_STATS) {
-    newName = unit.rangedWeapon;
+  // add any bonus given by any other kind of item
+  else {
+    return addBonus(unit, unitStatName);
   }
-
-  return newName;
 };
 
 /**
- * Function iterates through a unit's items. If one of the
- * items has a property with a name matching the passed property name
- * and with a value not equal to 0, it is returned. If several items fullfill the requirement,
- * the largest value is returned.
- * @param {unitCard} unit
- * @param {String} unitStat
- * @returns an object containing the name (in case of weapons) and the stats' new value.
+ * Function tests whether the unit has no equipment.
+ * @param {unitCard} unit 
+ * @returns true, if the equipment array is undefined or empty
  */
-const searchForRelevantModifier = (unit, unitStat) => {
-  let newStats = {
-    name: setDefaultName(unit, unitStat),
-    value: unit[unitStat],
-  };
-
-  unit.equipment.forEach((item) => {
-    const itemFields = Object.entries(item);
-
-    itemFields.forEach((i) => {
-      const fieldName = i[0];
-      const fieldValue = i[1];
-
-      if (fieldName === unitStat && fieldValue !== 0) {
-        newStats = {
-          ...newStats, //
-          name: setNewName(item, unitStat, unit),
-          value: setValue(fieldValue, unitStat, unit),
-        };
-
-        newStats.value = setValue(fieldValue, unitStat, unit);
-      }
-    });
-  });
-
-  return newStats;
-};
-
-/**
- * Function tests if the unit has been equipped with one or more items.
- * @param {unitCard} unit
- * @returns true, if the unit has no items.
- */
-const unitHasNoItems = (unit) => {
+const unitHasNoEquipment = (unit) => {
   return unit.equipment === undefined || unit.equipment.length === 0;
 };
 
 /**
- * Function calculates the new value for the given property.
- * @param {number} modificator
- * @param {String} propertyName
- * @param {Obj} unit
- * @returns the new value for the given property.
+ * Function tests whether the unit has no items that are range weapons. 
+ * @param {unitCard} unit 
+ * @returns true, if the equipment array contains no 
+ * items that are range weapons 
  */
-const setValue = (modificator, propertyName, unit) => {
-  let newValue = 0;
+const unitHasNoRangeWeapons = (unit) => {
+  let hasNoRangeWeapon = true;
 
-  if (propertyName === WEAPON_1) {
-    newValue = calculateNewMeleeWeaponValue(unit, modificator);
-  } else if (propertyName === RANGED_WEAPON) {
-    newValue = modificator;
-  } else {
-    newValue = unit[propertyName] + modificator;
-  }
+  unit.equipment.forEach((item) => {
+    if (item.rangedWeapon !== NOT_A_RANGE_WEAPON) {
+      hasNoRangeWeapon = false;
+    }
+  });
 
-  return newValue;
-};
-
-const setNewName = (item) => {
-  const isWeapon = item.itemType === ITEM_TYPE_WEAPON;
-  const isCrossbow = item.itemType === ITEM_TYPE_CROSSBOWS;
-  const isBow = item.itemType === ITEM_TYPE_BOWS;
-
-  let name = "";
-
-  if (isWeapon || isBow || isCrossbow) {
-    name = item.itemName;
-  }
-
-  return name;
+  return hasNoRangeWeapon;
 };
 
 /**
- * Function recalculates the value of a unit's melee attack
- * after chosing a magical weapon.
- * @param {unitCard} unit
- * @param {int} modifier of chosen weapon
- * @returns the new value of the melee attack
+ * Function tests whether the unit has no items that are melee weapons. 
+ * @param {unitCard} unit 
+ * @returns true, if the equipment array contains no 
+ * items that are melee weapons 
  */
-const calculateNewMeleeWeaponValue = (unit, modifier) => {
+const unitHasNoMeleeWeapon = (unit) => {
+  let hasNoMeleeWeapon = true;
+
+  unit.equipment.forEach((item) => {
+    if (item.itemType === ITEM_TYPE_WEAPON || item.weapon1 > 0) {
+      hasNoMeleeWeapon = false;
+    }
+  });
+
+  return hasNoMeleeWeapon;
+};
+
+/**
+ * Function calculates the new melee value of a 
+ * unit that has a weapon or item that changes the value
+ * equipped.  
+ * @param {unitCard} unit 
+ * @param {*} unitStatName 
+ * @returns the new value of the unit's melee attack stat.
+ */
+const calculateMeleeValue = (unit, unitStatName) => {
+  // possible boni
   const MAX_SIZE = 4;
   const BONUS = 2;
   const LEADER_BONUS = 1;
 
-  let newWeapon1Value = modifier;
+  let weaponStats;
+  let isWeapon = false;
 
-  // size bonus - capped at 4
-  newWeapon1Value = unit.unitSize <= MAX_SIZE ? (newWeapon1Value += unit.unitSize) : (newWeapon1Value += MAX_SIZE);
+  unit.equipment.forEach((item) => {
+    if (item[unitStatName] > 0 && item.itemType === ITEM_TYPE_WEAPON) {
+      weaponStats = { name: item.itemName, value: item[unitStatName] };
+      isWeapon = true;
+    } else if (item[unitStatName] > 0 && item.itemType !== ITEM_TYPE_WEAPON) {
+      weaponStats = { name: unit.weapon1Name, value: unit.weapon1 + item[unitStatName] };
+    }
+  });
 
-  // leader always has +1
-  newWeapon1Value = unit.leader ? (newWeapon1Value += LEADER_BONUS) : newWeapon1Value;
+  if (isWeapon) {
+    // size bonus - capped at 4
+    weaponStats.value = unit.unitSize <= MAX_SIZE ? (weaponStats.value += unit.unitSize) : (weaponStats.value += MAX_SIZE);
 
-  // unit is mounted
-  newWeapon1Value = unit.isMounted ? (newWeapon1Value += BONUS) : newWeapon1Value;
+    // leader always has +1
+    weaponStats.value = unit.leader ? (weaponStats.value += LEADER_BONUS) : weaponStats.value;
 
-  // 5 miniatures per base (closed order)
-  newWeapon1Value = unit.closedOrder ? (newWeapon1Value += BONUS) : newWeapon1Value;
+    // unit is mounted
+    weaponStats.value = unit.isMounted ? (weaponStats.value += BONUS) : weaponStats.value;
 
-  // unit is equipped with a second hand weapon
-  newWeapon1Value = unit.twoHandWeapons ? (newWeapon1Value += BONUS) : newWeapon1Value;
+    // 5 miniatures per base (closed order)
+    weaponStats.value = unit.closedOrder ? (weaponStats.value += BONUS) : weaponStats.value;
 
-  return newWeapon1Value;
+    // unit is equipped with a second hand weapon
+    weaponStats.value = unit.twoHandWeapons ? (weaponStats.value += BONUS) : weaponStats.value;
+  }
+
+  return weaponStats;
+};
+
+/**
+ * Function calculates the new range value of a 
+ * unit that has a weapon or item that changes the value
+ * equipped.  
+ * @param {unitCard} unit 
+ * @returns the new value of the unit's range attack stat.
+ */
+const calculateRangeValue = (unit) => {
+  let weapon;
+
+  unit.equipment.forEach((item) => {
+    if (item.rangedWeapon !== NOT_A_RANGE_WEAPON) {
+      weapon = { name: item.itemName, value: item.rangedWeapon };
+    }
+  });
+
+  return weapon;
+};
+
+/**
+ * Function adds boni from any items that is not a weapon.
+ * Since theoritcally, multiple items can give a bonus to the same
+ * stat, but boni are never cumulative, the logic picks only the highest bonus.
+ * If no bonus is found, the stat's default value is returned.
+ * @param {unitStatCard} unit
+ * @param {String} unitStatName
+ * @returns the sum of the value of the stat + the highes bonus.
+ */
+const addBonus = (unit, unitStatName) => {
+  let unmodifiedStat = unit[unitStatName];
+  let result = 0;
+
+  unit.equipment.forEach((item) => {
+    if (item[unitStatName] !== 0 && item[unitStatName] + unmodifiedStat > result) {
+      result = unmodifiedStat + item[unitStatName];
+    }
+  });
+
+  return unmodifiedStat > result ? unmodifiedStat : result;
 };

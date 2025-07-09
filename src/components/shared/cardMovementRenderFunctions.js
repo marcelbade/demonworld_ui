@@ -13,7 +13,7 @@ import { setUnitStat } from "../../gameLogic/unitStatChangeLogic/unitStatChanges
 export const renderMovementpoints = (unit) => {
   const MovementStat = setUnitStat(unit, MOVE);
 
-  return `${MovementStat.value} ${CARD_TEXT.MOVEMENT_POINTS}`;
+  return `${MovementStat} ${CARD_TEXT.MOVEMENT_POINTS}`;
 };
 
 /**
@@ -37,9 +37,9 @@ export const renderUnitMovement = (unit) => {
   const skirmishStat = setUnitStat(unit, SKIRMISH);
 
   return (
-    `${CARD_TEXT.MOVE}: ${movementStat.value} ` +
-    `/ ${CARD_TEXT.CHARGE}: ${chargeStat.value} ` +
-    `/ ${CARD_TEXT.SKIRMISH}: ${skirmishStat.value}`
+    `${CARD_TEXT.MOVE}: ${movementStat} ` +
+    `/ ${CARD_TEXT.CHARGE}: ${chargeStat} ` +
+    `/ ${CARD_TEXT.SKIRMISH}: ${skirmishStat}`
   );
 };
 
@@ -56,10 +56,10 @@ export const renderMovementLargeElements = (unit) => {
   const holdStat = setUnitStat(unit, HOLD);
 
   return (
-    `${CARD_TEXT.MOVE}: ${movementStat.value} ` +
-    `/ ${CARD_TEXT.CHARGE}: ${chargeStat.value} ` +
-    `/ ${CARD_TEXT.SKIRMISH}: ${skirmishStat.value} ` +
-    `/ ${CARD_TEXT.HOLD}: ${holdStat.value}`
+    `${CARD_TEXT.MOVE}: ${movementStat} ` +
+    `/ ${CARD_TEXT.CHARGE}: ${chargeStat} ` +
+    `/ ${CARD_TEXT.SKIRMISH}: ${skirmishStat} ` +
+    `/ ${CARD_TEXT.HOLD}: ${holdStat}`
   );
 };
 
@@ -72,7 +72,7 @@ export const renderMovementLargeElements = (unit) => {
 export const renderOverrunValue = (unit) => {
   const overrunStat = setUnitStat(unit, OVERRUN);
 
-  return `${CARD_TEXT.OVERRUN}: ${overrunStat.value}`;
+  return `${CARD_TEXT.OVERRUN}: ${overrunStat}`;
 };
 
 /**
@@ -85,7 +85,7 @@ export const renderManeuvers = (unit) => {
   const  holdStat = setUnitStat(unit, HOLD);
 
 
-  return `${holdStat.value} ${CARD_TEXT.MANEUVER}`;
+  return `${holdStat} ${CARD_TEXT.MANEUVER}`;
 };
 
 /**

@@ -17,15 +17,15 @@ const CardFrontLowerBlackStripe = (props) => {
   const moral1Stat = setUnitStat(props.unit, MORAL1);
   const moral2Stat = setUnitStat(props.unit, MORAL2);
 
-  const fearText = `${CARD_TEXT.FEAR}: ${fearStat.value}`;
+  const fearText = `${CARD_TEXT.FEAR}: ${fearStat}`;
 
   const moralText = `${CARD_TEXT.MORAL} ${
     props.unit.moral1 !== 0 //
-      ? moral1Stat.value
+      ? moral1Stat
       : "-"
   } / ${
     props.unit.moral2 !== 0 //
-      ? moral2Stat.value
+      ? moral2Stat
       : "-"
   }`;
 

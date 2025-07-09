@@ -21,7 +21,7 @@ const ChargeBonus = (props) => {
       alignItems="center"
       sx={theme.palette.statCards.backGround}
     >
-      <Typography variant="h6">{`${CARD_TEXT.CHARGE_BONUS}: ${chargeBonusStat.value}`}</Typography>
+      <Typography variant="h6">{`${CARD_TEXT.CHARGE_BONUS}: ${chargeBonusStat}`}</Typography>
     </Grid>
   ) : null;
 };

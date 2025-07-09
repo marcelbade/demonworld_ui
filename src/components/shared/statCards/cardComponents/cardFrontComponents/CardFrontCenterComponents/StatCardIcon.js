@@ -22,7 +22,7 @@ const StatCardIcon = (props) => {
         boxHeight={HEIGHT_WIDTH_BOX}
         boxWidth={HEIGHT_WIDTH_BOX}
       />
-      <Typography variant="h6">{stat.value}</Typography>
+      <Typography variant="h6">{stat}</Typography>
     </Fragment>
   );
 };
