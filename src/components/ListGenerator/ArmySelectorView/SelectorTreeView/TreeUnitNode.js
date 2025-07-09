@@ -87,12 +87,11 @@ const TreeUnitNode = (props) => {
           type={PUSH_MESSAGE_TYPES.ERROR}
         />
       </Stack>
-      <Stack sx={{ marginTop: "-1.2em" }} alignItems="center" direction="row">
+      <Stack alignItems="center" direction="row">
         {
           <Typography
             sx={{
-              backgroundColor: "white", //
-              marginTop: "0.8em",
+              marginTop: "-0.8em",
               marginRight: "1em",
             }}
           >
@@ -104,7 +103,11 @@ const TreeUnitNode = (props) => {
           </Typography>
         }
         {
-          <Typography sx={{ backgroundColor: "white" }}>
+          <Typography
+            sx={{
+              marginTop: "-0.8em", //
+            }}
+          >
             {renderDynamicIcons({
               iconString: "/",
               iconNumber: props.unit.magic,
@@ -113,7 +116,7 @@ const TreeUnitNode = (props) => {
           </Typography>
         }
       </Stack>
-      <Typography  sx={displayValidNodeStyle(!props.isValidUnit)}>{props.unit.points}</Typography>
+      <Typography sx={displayValidNodeStyle(!props.isValidUnit)}>{props.unit.points}</Typography>
     </Stack>
   );
 };
