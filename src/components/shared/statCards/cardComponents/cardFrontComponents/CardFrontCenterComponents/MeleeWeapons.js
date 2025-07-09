@@ -4,10 +4,11 @@ import React from "react";
 import { Grid2 as Grid, Typography } from "@mui/material";
 // components & functions
 import { setUnitStat } from "../../../../../../gameLogic/unitStatChangeLogic/unitStatChangesLogic";
-import { WEAPON_1 } from "../../../../../../constants/stats";
+import { WEAPON_1, WEAPON_2 } from "../../../../../../constants/stats";
 
 const MeleeWeapons = (props) => {
   const weapon1Stat = setUnitStat(props.unit, WEAPON_1);
+  const weapon2Stat = setUnitStat(props.unit, WEAPON_2);
 
   const weapons = [
     {
@@ -21,7 +22,7 @@ const MeleeWeapons = (props) => {
       weaponString:
         props.unit.weapon2 === 0 //
           ? null
-          : `${props.unit.weapon2Name}: ${props.unit.weapon2}`,
+          : `${props.unit.weapon2Name}: ${weapon2Stat}`,
     },
     {
       weaponString:

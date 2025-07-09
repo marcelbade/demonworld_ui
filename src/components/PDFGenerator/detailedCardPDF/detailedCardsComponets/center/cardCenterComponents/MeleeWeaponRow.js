@@ -7,11 +7,12 @@ import { detailedStyles } from "../../../../pdfStyles/detailedCardPdfStyles";
 // functions and components
 import { setUnitStat } from "../../../../../../gameLogic/unitStatChangeLogic/unitStatChangesLogic";
 // contants
-import { WEAPON_1 } from "../../../../../../constants/stats";
+import { WEAPON_1, WEAPON_2 } from "../../../../../../constants/stats";
 
 const MeleeWeaponRow = (props) => {
   //  weapon={props.unit.weapon1}
   const weaponOneProperties = setUnitStat(props.unit, WEAPON_1);
+  const weaponTwoProperties = setUnitStat(props.unit, WEAPON_2);
 
   const weapons = [
     {
@@ -25,7 +26,7 @@ const MeleeWeaponRow = (props) => {
       weaponString:
         props.unit.weapon2 === 0 //
           ? null
-          : `${props.unit.weapon2Name}: ${props.unit.weapon2}`,
+          : `${props.unit.weapon2Name}: ${weaponTwoProperties}`,
     },
     {
       weaponString:
