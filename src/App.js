@@ -18,7 +18,7 @@ import AddNewAccount from "./components/Login/AddNewAccount";
 import AllyProvider from "./contexts/allyContext";
 import AlternativeListProvider from "./contexts/alternativeListContext";
 import ArmyProvider from "./contexts/armyContext";
-import CustomSnackBarProvider from "./components/shared/statCards/CustomSnackBarProvider";
+import CustomSnackBarProvider from "./components/shared/CustomSnackBarProvider";
 import ItemContext from "./contexts/itemContext";
 import LightSwitchProvider from "./contexts/lightSwitchContext";
 import ListDisplayProvider from "./contexts/ListDisplayContext";
@@ -242,7 +242,6 @@ function App() {
                               maxPointsAllowance: maxPointsAllowance,
                               setSelectedUnits: setSelectedUnits,
                               setMaxPointsAllowance: setMaxPointsAllowance,
-                              setSelectedUnits: setSelectedUnits,
                             }}
                           >
                             <RightMenuContext
