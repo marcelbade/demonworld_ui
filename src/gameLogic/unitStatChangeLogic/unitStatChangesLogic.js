@@ -1,5 +1,5 @@
 //  constants
-import { WEAPON_1, RANGED_WEAPON_STATS } from "../../constants/stats";
+import { WEAPON_1, RANGED_WEAPON_STATS, WEAPON_2 } from "../../constants/stats";
 import { ITEM_TYPE_WEAPON, NOT_A_RANGE_WEAPON } from "../../constants/itemShopConstants";
 
 /**
@@ -46,7 +46,7 @@ export const setUnitStat = (unit, unitStatName) => {
 
 /**
  * Function tests whether the unit has no equipment.
- * @param {unitCard} unit 
+ * @param {unitCard} unit
  * @returns true, if the equipment array is undefined or empty
  */
 const unitHasNoEquipment = (unit) => {
@@ -54,10 +54,10 @@ const unitHasNoEquipment = (unit) => {
 };
 
 /**
- * Function tests whether the unit has no items that are range weapons. 
- * @param {unitCard} unit 
- * @returns true, if the equipment array contains no 
- * items that are range weapons 
+ * Function tests whether the unit has no items that are range weapons.
+ * @param {unitCard} unit
+ * @returns true, if the equipment array contains no
+ * items that are range weapons
  */
 const unitHasNoRangeWeapons = (unit) => {
   let hasNoRangeWeapon = true;
@@ -72,10 +72,10 @@ const unitHasNoRangeWeapons = (unit) => {
 };
 
 /**
- * Function tests whether the unit has no items that are melee weapons. 
- * @param {unitCard} unit 
- * @returns true, if the equipment array contains no 
- * items that are melee weapons 
+ * Function tests whether the unit has no items that are melee weapons.
+ * @param {unitCard} unit
+ * @returns true, if the equipment array contains no
+ * items that are melee weapons
  */
 const unitHasNoMeleeWeapon = (unit) => {
   let hasNoMeleeWeapon = true;
@@ -90,11 +90,11 @@ const unitHasNoMeleeWeapon = (unit) => {
 };
 
 /**
- * Function calculates the new melee value of a 
+ * Function calculates the new melee value of a
  * unit that has a weapon or item that changes the value
- * equipped.  
- * @param {unitCard} unit 
- * @param {*} unitStatName 
+ * equipped.
+ * @param {unitCard} unit
+ * @param {*} unitStatName
  * @returns the new value of the unit's melee attack stat.
  */
 const calculateMeleeValue = (unit, unitStatName) => {
@@ -136,10 +136,10 @@ const calculateMeleeValue = (unit, unitStatName) => {
 };
 
 /**
- * Function calculates the new range value of a 
+ * Function calculates the new range value of a
  * unit that has a weapon or item that changes the value
- * equipped.  
- * @param {unitCard} unit 
+ * equipped.
+ * @param {unitCard} unit
  * @returns the new value of the unit's range attack stat.
  */
 const calculateRangeValue = (unit) => {
@@ -166,7 +166,7 @@ const calculateRangeValue = (unit) => {
 const addBonus = (unit, unitStatName) => {
   let unmodifiedStat = unit[unitStatName];
   let result = 0;
-
+  
   unit.equipment.forEach((item) => {
     if (item[unitStatName] !== 0 && item[unitStatName] + unmodifiedStat > result) {
       result = unmodifiedStat + item[unitStatName];
