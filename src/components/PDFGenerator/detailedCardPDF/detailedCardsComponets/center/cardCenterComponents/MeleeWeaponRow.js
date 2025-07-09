@@ -1,40 +1,12 @@
-// react
-import React from "react";
 // react-pdf
 import { Text, View } from "@react-pdf/renderer";
 // styles
 import { detailedStyles } from "../../../../pdfStyles/detailedCardPdfStyles";
-// functions and components
-import { setUnitStat } from "../../../../../../gameLogic/unitStatChangeLogic/unitStatChangesLogic";
 // contants
-import { WEAPON_1, WEAPON_2 } from "../../../../../../constants/stats";
+import { meleeWeaponSetter } from "../../../../../shared/statCards/unitStatSetters";
 
 const MeleeWeaponRow = (props) => {
-  //  weapon={props.unit.weapon1}
-  const weaponOneProperties = setUnitStat(props.unit, WEAPON_1);
-  const weaponTwoProperties = setUnitStat(props.unit, WEAPON_2);
-
-  const weapons = [
-    {
-      // weapon one can be replaced by a magical item
-      weaponString:
-        props.unit.weapon1 === 0 //
-          ? null
-          : `${weaponOneProperties.name}: ${weaponOneProperties.value}`,
-    },
-    {
-      weaponString:
-        props.unit.weapon2 === 0 //
-          ? null
-          : `${props.unit.weapon2Name}: ${weaponTwoProperties}`,
-    },
-    {
-      weaponString:
-        props.unit.weapon3 === 0 //
-          ? null
-          : `${props.unit.weapon3Name}: ${props.unit.weapon3}`,
-    },
-  ];
+  const weapons = meleeWeaponSetter(props.unit);
 
   return weapons.map((w, i) => {
     return (

@@ -1,6 +1,5 @@
-import React from "react";
 // react-pdf
-import { Text, View, Image } from "@react-pdf/renderer";
+import { Text, View } from "@react-pdf/renderer";
 // detailedStyles
 import { detailedStyles } from "../../../../pdfStyles/detailedCardPdfStyles";
 //  icons
@@ -8,46 +7,64 @@ import rangeArmorIcon from "../../../../../../assets/icons/range-armor.png";
 import meleeArmorIcon from "../../../../../../assets/icons/melee-armor.png";
 import blackSwordIcon from "../../../../../../assets/icons/sword2.png";
 import blackBowIcon from "../../../../../../assets/icons/bow2.png";
+// pdf components
+import PdfStatCardIcon from "../../../../../../components/shared/statCards/pdfStatCardIcon";
 // constants
+import { ARMOUR_RANGE, ARMOUR_MELEE, SKILL_MELEE, SKILL_RANGE } from "../../../../../../constants/stats";
 import { CARD_TEXT } from "../../../../../../constants/textsAndMessages";
 
 const SizeArmorSkillRow = (props) => {
-  const iconValueStyle = detailedStyles.iconValueGroup;
-  const iconStyle = detailedStyles.icon;
-
   const SIZE = `${CARD_TEXT.SIZE} ${props.unit.unitSize}`;
 
-  const ARMOUR_RANGE = props.unit.armourRange;
-  const ARMOUR_MELEE = props.unit.armourMelee;
-  const MELEE_SKILL = props.unit.skillMelee;
-  const RANGE_SKILL = props.unit.skillRange;
+  const armorIcons = [
+    {
+      display: true, //
+      icon: rangeArmorIcon,
+      stat: ARMOUR_RANGE,
+    },
+    {
+      display: true, //
+      icon: meleeArmorIcon,
+      stat: ARMOUR_MELEE,
+    },
+  ];
+  const skillIcons = [
+    {
+      display: props.unit.skillMelee !== 0,
+      icon: blackSwordIcon,
+      stat: SKILL_MELEE,
+    },
+    {
+      display: props.unit.skillRange !== 0,
+      icon: blackBowIcon,
+      stat: SKILL_RANGE,
+    },
+  ];
 
   return (
     <View key={props.index} style={detailedStyles.sizeArmorSkillBox}>
       <Text key={props.index}>{SIZE}</Text>
       <View style={detailedStyles.armorIconValueGroup}>
-        <View style={iconValueStyle}>
-          <Image src={rangeArmorIcon} style={iconStyle} />
-          <Text key={props.index}>{ARMOUR_RANGE}</Text>
-        </View>
-        <View style={iconValueStyle}>
-          <Image src={meleeArmorIcon} style={iconStyle} />
-          <Text key={props.index}>{ARMOUR_MELEE}</Text>
-        </View>
+        {armorIcons.map((elmnt, i) => (
+          <PdfStatCardIcon
+            key={i} //
+            display={elmnt.display}
+            icon={elmnt.icon}
+            unit={props.unit}
+            stat={elmnt.stat}
+          />
+        ))}
       </View>
       <View style={detailedStyles.skillGroup}>
-        {props.unit.skillMelee !== 0 ? (
-          <View style={iconValueStyle}>
-            <Image src={blackSwordIcon} style={iconStyle} />
-            <Text key={props.index}>{MELEE_SKILL}</Text>
-          </View>
-        ) : null}
-        {props.unit.skillRange !== 0 ? (
-          <View style={iconValueStyle}>
-            <Image src={blackBowIcon} style={iconStyle} />
-            <Text key={props.index}>{RANGE_SKILL}</Text>
-          </View>
-        ) : null}
+        {skillIcons.map((elmnt, i) => (
+          <PdfStatCardIcon
+            key={i} //
+            display={elmnt.display}
+            icon={elmnt.icon}
+            unit={props.unit}
+            stat={elmnt.stat}
+          />
+        ))}
       </View>
     </View>
   );

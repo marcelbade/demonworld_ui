@@ -20,8 +20,7 @@ const CardCenter = (props) => {
       <View style={detailedStyles.tableRowDetailedList}>
         <View style={detailedStyles.cell}>
           <RangedWeaponRow
-            weaponName={props.unit.rangedWeapon} //
-            rangedAttackStats={props.unit.rangedAttackStats}
+            unit={props.unit} //
             index={props.index}
           />
           <MeleeWeaponRow

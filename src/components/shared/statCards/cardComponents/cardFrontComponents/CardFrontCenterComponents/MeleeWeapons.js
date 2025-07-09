@@ -1,36 +1,10 @@
-// React
-import React from "react";
 // Material UI
 import { Grid2 as Grid, Typography } from "@mui/material";
 // components & functions
-import { setUnitStat } from "../../../../../../gameLogic/unitStatChangeLogic/unitStatChangesLogic";
-import { WEAPON_1, WEAPON_2 } from "../../../../../../constants/stats";
+import { meleeWeaponSetter } from "../../../unitStatSetters";
 
 const MeleeWeapons = (props) => {
-  const weapon1Stat = setUnitStat(props.unit, WEAPON_1);
-  const weapon2Stat = setUnitStat(props.unit, WEAPON_2);
-
-  const weapons = [
-    {
-      // only weapon one can be replaced by a magical item
-      weaponString:
-        props.unit.weapon1 === 0 //
-          ? null
-          : `${weapon1Stat.name}: ${weapon1Stat.value}`,
-    },
-    {
-      weaponString:
-        props.unit.weapon2 === 0 //
-          ? null
-          : `${props.unit.weapon2Name}: ${weapon2Stat}`,
-    },
-    {
-      weaponString:
-        props.unit.weapon3 === 0 //
-          ? null
-          : `${props.unit.weapon3Name}: ${props.unit.weapon3}`,
-    },
-  ];
+  const weapons = meleeWeaponSetter(props.unit);
 
   return (
     <Grid //

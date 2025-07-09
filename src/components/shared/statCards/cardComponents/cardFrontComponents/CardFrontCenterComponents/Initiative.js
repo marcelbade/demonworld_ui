@@ -3,16 +3,15 @@ import React from "react";
 // Material UI
 import { Grid2 as Grid, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
-// components & functions
-import { setUnitStat } from "../../../../../../gameLogic/unitStatChangeLogic/unitStatChangesLogic";
+// components and functions
+import { initiativeSetter } from "../../../unitStatSetters";
 //constants
-import { INITIATIVE } from "../../../../../../constants/stats";
 import { CARD_TEXT } from "../../../../../../constants/textsAndMessages";
 
 const Initiative = (props) => {
   const theme = useTheme();
 
-  const initiativeStat = setUnitStat(props.unit, INITIATIVE);
+  const intiative = `${CARD_TEXT.INITIATIVE} ${initiativeSetter(props.unit)}`;
 
   return (
     <Grid
@@ -21,7 +20,7 @@ const Initiative = (props) => {
       alignItems="center"
       sx={theme.palette.statCards.backGround}
     >
-      <Typography variant="h6">{`${CARD_TEXT.INITIATIVE}: ${initiativeStat}`}</Typography>
+      <Typography variant="h6">{intiative}</Typography>
     </Grid>
   );
 };

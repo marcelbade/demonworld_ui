@@ -1,33 +1,12 @@
-// React
-import React from "react";
 // material ui
 import { Grid2 as Grid, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components & functions
-import { CARD_TEXT } from "../../../../../constants/textsAndMessages";
-import { setUnitStat } from "../../../../../gameLogic/unitStatChangeLogic/unitStatChangesLogic";
 import { isSingleElementCard } from "../../../../../util/utilityFunctions";
-// constants
-import { FEAR, MORAL1, MORAL2 } from "../../../../../constants/stats";
+import { fearSetter, moralSetter } from "../../unitStatSetters";
 
 const CardFrontLowerBlackStripe = (props) => {
   const theme = useTheme();
-
-  const fearStat = setUnitStat(props.unit, FEAR);
-  const moral1Stat = setUnitStat(props.unit, MORAL1);
-  const moral2Stat = setUnitStat(props.unit, MORAL2);
-
-  const fearText = `${CARD_TEXT.FEAR}: ${fearStat}`;
-
-  const moralText = `${CARD_TEXT.MORAL} ${
-    props.unit.moral1 !== 0 //
-      ? moral1Stat
-      : "-"
-  } / ${
-    props.unit.moral2 !== 0 //
-      ? moral2Stat
-      : "-"
-  }`;
 
   return isSingleElementCard(props.unit) ? (
     <Grid>
@@ -36,7 +15,7 @@ const CardFrontLowerBlackStripe = (props) => {
         align="center"
         sx={theme.palette.statCards.blackStripe}
       >
-        {fearText}
+        {fearSetter(props.unit)}
       </Typography>
     </Grid>
   ) : (
@@ -46,8 +25,8 @@ const CardFrontLowerBlackStripe = (props) => {
       justifyContent="space-around"
       sx={theme.palette.statCards.blackStripe}
     >
-      <Typography variant="h6"> {fearText}</Typography>
-      <Typography variant="h6">{moralText}</Typography>
+      <Typography variant="h6"> {fearSetter(props.unit)}</Typography>
+      <Typography variant="h6">{moralSetter(props.unit)}</Typography>
     </Grid>
   );
 };

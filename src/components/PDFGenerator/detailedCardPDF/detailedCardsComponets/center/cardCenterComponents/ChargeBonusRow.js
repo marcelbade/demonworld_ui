@@ -3,18 +3,16 @@ import React from "react";
 import { Text, View } from "@react-pdf/renderer";
 // detailedStyles
 import { detailedStyles } from "../../../../pdfStyles/detailedCardPdfStyles";
-// constants
-import { CARD_TEXT } from "../../../../../../constants/textsAndMessages";
+// components & functions
+import { chargeBonusSetter } from "../../../../../shared/statCards/unitStatSetters";
 
 const ChargeBonusRow = (props) => {
-  const CHARGE_BONUS = `${CARD_TEXT.CHARGE_BONUS} ${props.unit.chargeBonus}`;
-
   return props.unit.chargeBonus > 0 ? (
     <View
       key={props.index} //
       style={detailedStyles.sizeArmorSkillBox}
     >
-      <Text key={props.index}>{CHARGE_BONUS}</Text>
+      <Text key={props.index}>{chargeBonusSetter(props.unit)}</Text>
     </View>
   ) : null;
 };

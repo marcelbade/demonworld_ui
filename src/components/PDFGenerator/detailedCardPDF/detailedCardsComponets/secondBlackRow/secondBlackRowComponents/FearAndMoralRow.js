@@ -1,5 +1,3 @@
-// react
-import React from "react";
 // react-pdf
 import { Text, View } from "@react-pdf/renderer";
 // functions and components
@@ -7,19 +5,23 @@ import { isSingleElementCard } from "../../../../../../util/utilityFunctions";
 // styles
 import { detailedStyles } from "../../../../pdfStyles/detailedCardPdfStyles";
 // constants
-import { CARD_TEXT } from "../../../../../../constants/textsAndMessages";
+import { fearSetter, moralSetter } from "../../../../../shared/statCards/unitStatSetters";
 
 const FearAndMoralRow = (props) => {
-  const FEAR = `${CARD_TEXT.FEAR} ${props.unit.fear}`;
-  const MORAL = `${CARD_TEXT.MORAL} ${props.unit.moral1 ? props.unit.moral1 : "-"} / ${props.unit.moral2 ? props.unit.moral2 : "-"}`;
-
-  return (
+  return isSingleElementCard(props.unit) ? (
     <View
       key={props.index} //
-      style={isSingleElementCard(props.unit) ? detailedStyles.cardBlackRow : detailedStyles.cardBlackRow}
+      style={detailedStyles.cardBlackRow}
     >
-      <Text key={props.index}>{FEAR}</Text>
-      <Text key={props.index}>{MORAL}</Text>
+      <Text key={props.index}>{fearSetter(props.unit)}</Text>
+    </View>
+  ) : (
+    <View
+      key={props.index} //
+      style={detailedStyles.cardBlackRow}
+    >
+      <Text key={props.index}>{fearSetter(props.unit)}</Text>
+      <Text key={props.index}>{moralSetter(props.unit)}</Text>
     </View>
   );
 };
