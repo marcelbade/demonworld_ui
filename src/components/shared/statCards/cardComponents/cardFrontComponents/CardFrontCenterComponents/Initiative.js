@@ -12,7 +12,7 @@ import { CARD_TEXT } from "../../../../../../constants/textsAndMessages";
 const Initiative = (props) => {
   const theme = useTheme();
 
-  const iniStat = setUnitStat(props.unit, INITIATIVE);
+  const initiativeStat = setUnitStat(props.unit, INITIATIVE);
 
   return (
     <Grid
@@ -21,7 +21,7 @@ const Initiative = (props) => {
       alignItems="center"
       sx={theme.palette.statCards.backGround}
     >
-      <Typography variant="h6">{`${CARD_TEXT.INITIATIVE}: ${iniStat.value}`}</Typography>
+      <Typography variant="h6">{`${CARD_TEXT.INITIATIVE}: ${initiativeStat}`}</Typography>
     </Grid>
   );
 };
