@@ -1,5 +1,5 @@
 // react
-import React, { useContext } from "react";
+import { useContext } from "react";
 // components & functions
 import { TableContext } from "../../../../contexts/tableContext";
 import CardView from "../../../shared/CardView";
