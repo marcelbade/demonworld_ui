@@ -36,7 +36,7 @@ const ItemShopTree = () => {
    * which controls the display of the branches.
    */
   useEffect(() => {
-    // 
+    //
     if (isObjectEmtpy(IC.unitSelectedForShop)) {
       return;
     }
@@ -128,7 +128,7 @@ const ItemShopTree = () => {
                   message={result.message}
                 />
               ) : (
-                <Grid // TODO needed??
+                <Grid
                   key={j} //
                   container
                 >
