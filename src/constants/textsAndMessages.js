@@ -73,16 +73,17 @@ export const TOURNAMENT_RULES = {
 };
 
 export const PDF = {
-  SELECT_PDF_TYPE: "Bitte Wähle den PDF Typ",
   CREATE_PDF: "PDF Erzeugen ",
+  SELECT_PDF_TYPE: "Bitte Wähle den PDF Typ",
+  CREATE_DEFAULT_LIST: "Einfache Liste Erzeugen",
+  CREATE_DETAILED_LIST: "Armeekarten Erzeugen",
   PDF_CONTEXT_HELP:
-    'Eine "Kompakte Liste" enthält nur die Namen der Einheiten, Gegenstände, sowie ihre Punktkosten und Prozentangaben.\n  "Armeekarten" generiert Karten für alle gewählten Einheiten, sowie die Punktkosten und Prozentangaben.',
+    'Eine "einfache Liste" enthält nur die Namen der Einheiten, Gegenstände, sowie ihre Punktkosten und Prozentangaben.\n  "Armeekarten" generiert Karten für alle gewählten Einheiten, sowie die Punktkosten und Prozentangaben.',
 };
 
 export const OPTIONS = {
   CHANGE_TOURNAMENT_RULES: "Turnierregeln Ändern",
-  CREATE_DEFAULT_LIST: "Standardliste Erzeugen",
-  CREATE_DETAILED_LIST: "Detailierte Liste Erzeugen",
+
   LIGHT_SWITCH: "Wechsel zw. dunklen und hellen Theme",
   LIST_DISPLAY_SWITCH: "Wechsel zw. einfacher und kompletter Listendarstellung",
   MENU_SWITCH: "Menü",
@@ -121,9 +122,8 @@ export const USER_AUTH = {
   ACCOUNT_CREATED: "Konto erfolgreich erstellt.",
   SWITCH_USER: "Benutzerkonto Wechseln",
   CHANGE_PASSWORD: "Passwort Ändern",
-  UNKNOWN_USER:"Unbekannter Benutzer",
-  INVALID_PW:"Falsches Password",
-
+  UNKNOWN_USER: "Unbekannter Benutzer",
+  INVALID_PW: "Falsches Password",
 };
 
 export const PASSWORDS = {

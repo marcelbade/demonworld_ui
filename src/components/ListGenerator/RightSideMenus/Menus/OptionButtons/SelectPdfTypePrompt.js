@@ -4,7 +4,7 @@ import CancelIcon from "@mui/icons-material/Cancel";
 // functions and components
 import ContextHelpButton from "../../../../shared/ContextHelpButton";
 // constants
-import { OPTIONS, PDF, PUSH_MESSAGE_TYPES } from "../../../../../constants/textsAndMessages";
+import { PDF, PUSH_MESSAGE_TYPES } from "../../../../../constants/textsAndMessages";
 
 const SelectPdfTypePrompt = (props) => {
   const handleClose = () => {
@@ -18,6 +18,7 @@ const SelectPdfTypePrompt = (props) => {
           "& .MuiPaper-root": {
             minWidth: "30em",
             height: "15em",
+            borderRadius: "1em",
           },
         },
       }}
@@ -33,7 +34,7 @@ const SelectPdfTypePrompt = (props) => {
           container //
           item
           size={12}
-          justifyItems="flex-start"
+          justifyContent="flex-end"
         >
           <IconButton
             onClick={handleClose} //
@@ -46,7 +47,7 @@ const SelectPdfTypePrompt = (props) => {
           item
           size={12}
           flexDirection="row"
-          justifyContent="start"
+          justifyContent="center"
         >
           <DialogTitle>{PDF.SELECT_PDF_TYPE}</DialogTitle>
 
@@ -71,7 +72,7 @@ const SelectPdfTypePrompt = (props) => {
               props.setShowPdfTypePrompt(false);
             }}
           >
-            {OPTIONS.CREATE_DEFAULT_LIST}
+            {PDF.CREATE_DEFAULT_LIST}
           </Button>
 
           <Button
@@ -81,7 +82,7 @@ const SelectPdfTypePrompt = (props) => {
               props.setShowPdfTypePrompt(false);
             }}
           >
-            {OPTIONS.CREATE_DETAILED_LIST}
+            {PDF.CREATE_DETAILED_LIST}
           </Button>
         </Grid>
       </Grid>
