@@ -65,6 +65,7 @@ const TreeUnitNode = (props) => {
     <Stack>
       <Stack alignItems="center" direction="row">
         <Typography sx={displayValidNodeStyle(!props.isValidUnit)}>{props.unit.unitName}</Typography>
+        {/* card preview button */}
         {sideMenuController.buttons.map((b, i) => {
           return (
             <IconButton
