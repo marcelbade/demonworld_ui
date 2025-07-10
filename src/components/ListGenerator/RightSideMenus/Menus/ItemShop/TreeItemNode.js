@@ -83,11 +83,9 @@ const TreeItemNode = (props) => {
           container
           alignItems="center" //
           justifyContent="flex-start"
-        
         >
           <Grid
-            item //
-            direction="row"
+            direction="row" //
             size={{ xs: 10 }}
           >
             <Typography
@@ -98,8 +96,7 @@ const TreeItemNode = (props) => {
             </Typography>
           </Grid>
           <Grid
-            item //
-            direction="row"
+            direction="row" //
             size={{ xs: 2 }}
           >
             <IconButton
