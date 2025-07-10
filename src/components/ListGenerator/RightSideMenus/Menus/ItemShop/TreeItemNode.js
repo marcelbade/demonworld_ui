@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 // material ui
-import { Typography, IconButton, Accordion, AccordionSummary, AccordionDetails, Grid2 as Grid } from "@mui/material";
+import { Typography, IconButton, Accordion, AccordionSummary, AccordionDetails, Grid2 as Grid, Stack } from "@mui/material";
 // components and functions
 import { ItemContext } from "../../../../../contexts/itemContext";
 import { SelectionContext } from "../../../../../contexts/selectionContext";
@@ -80,31 +80,42 @@ const TreeItemNode = (props) => {
         id="shopItem"
       >
         <Grid
-          container //
-          alignItems="center"
-          direction="row"
+          container
+          alignItems="center" //
+          justifyContent="flex-start"
+        
         >
-          <Grid //
-            container
-            direction="column"
-            size={3}
+          <Grid
+            item //
+            direction="row"
+            size={{ xs: 10 }}
           >
-            <Typography variant="body1">{props.item.itemName}</Typography>
-            <Typography variant="body1">{props.item.points}</Typography>
+            <Typography
+              sx={{ minWidth: "12em" }} //
+              variant="body1"
+            >
+              {props.item.itemName}
+            </Typography>
           </Grid>
-          <IconButton
-            size="large"
-            onClick={(e) => {
-              addItemToUnit(props.item);
-              addItemToCentralList(props.item);
-              limiter.toggleUnitsItemTypeFlags(IC.unitSelectedForShop, props.item, true);
-              testForSpecialItems(props.item);
-              props.testForEmptyItemCategory(props.categoryObj, props.categoryNumber);
-              e.stopPropagation();
-            }}
+          <Grid
+            item //
+            direction="row"
+            size={{ xs: 2 }}
           >
-            <AddCircleOutlineIcon />
-          </IconButton>
+            <IconButton
+              onClick={(e) => {
+                addItemToUnit(props.item);
+                addItemToCentralList(props.item);
+                limiter.toggleUnitsItemTypeFlags(IC.unitSelectedForShop, props.item, true);
+                testForSpecialItems(props.item);
+                props.testForEmptyItemCategory(props.categoryObj, props.categoryNumber);
+                e.stopPropagation();
+              }}
+            >
+              <AddCircleOutlineIcon />
+            </IconButton>
+          </Grid>
+          <Typography variant="body1">{props.item.points}</Typography>
         </Grid>
       </AccordionSummary>
       <AccordionDetails>
