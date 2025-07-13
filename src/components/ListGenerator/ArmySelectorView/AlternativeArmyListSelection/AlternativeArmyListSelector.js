@@ -130,7 +130,7 @@ const AlternativeArmyListSelector = () => {
   return areAlternativeListsPresent()
     ? Array(ALC.numberOfAlternativeChoices)
         .fill()
-        .map((i, selectorNumber) => {
+        .map(( selectorNumber) => {
           return (
             <SelectionInput //
               width={"32em"}
