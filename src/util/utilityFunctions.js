@@ -16,7 +16,7 @@ import { HERO, MAGE, AUTOMATON, GIANT } from "../constants/unitTypes";
  * @param {subFaction dto} subfactionDataObject
  * @returns true if the subFaction is either:
  *  - not an alternative option
- *  - is an alternative option that has bem selected  
+ *  - is an alternative option that has bem selected
  */
 export const isSubFactionAlternativeAndSelected = (subfactionDataObject) => {
   if (subfactionDataObject.alternativeListOption) {
@@ -184,8 +184,11 @@ export const renderBooleanAsIcon = (numberOfElements, flag) => {
 };
 
 /**
- * Functions renders the dynamic icons, i.e., Those who depend on the
- * units stats: hitpoint markers, command stars, magic markers.
+ * Functions renders the dynamic icons, i.e., those that depend on the
+ * units stats:
+ * - hitpoint markers
+ * - command stars
+ * - magic markers
  * The icons are simply special characters.
  * @param {{iconString, numberOfIcons, showZeroMarker}} data
  * @returns a string with a number of symbols equal to the unit's stat.
