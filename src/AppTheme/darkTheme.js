@@ -77,7 +77,20 @@ const darkTheme = createTheme({
         },
       },
     },
-
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          fontFamily: "jaapokkiRegular",
+        },
+      },
+    },
+    MuiSelect: {
+      styleOverrides: {
+        root: {
+          fontFamily: "jaapokkiRegular",
+        },
+      },
+    },
     MuiTypography: {
       styleOverrides: {
         button: {
