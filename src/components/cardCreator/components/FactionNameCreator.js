@@ -30,7 +30,7 @@ const FactionNameCreator = () => {
   const setFactionList = () => {
     const resultingList =
       CCC.factionName !== NONE //
-        ? ALL_FACTIONS_ARRAY.filter((f) => f !== CCC.unit.faction)
+        ? clearFactionName()
         : ALL_FACTIONS_ARRAY;
 
     return resultingList;
