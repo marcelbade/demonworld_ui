@@ -45,15 +45,23 @@ const StoreArmyListPrompt = (props) => {
 
   const pushMessages = usePushMessages();
 
+  const NO_LOOGED_IN_USER = {
+    userName: "", //
+    isAdmin: "",
+    isOwner: "",
+    token: "",
+  };
+
   useEffect(() => {
-    fetchEvents();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+    if (JSON.stringify(UC.user) !== JSON.stringify(NO_LOOGED_IN_USER)) {
+      fetchEvents();
+    }
+  }, [UC.user]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     fetchAllUsers();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  //TODO  GET
   const fetchEvents = async () => {
     axios
       .get(GET_EVENTS_URL, { headers: { Authorization: `Bearer ${UC.user.token}` } })
@@ -154,7 +162,18 @@ const StoreArmyListPrompt = (props) => {
   };
 
   const setEventList = () => {
-    return allEvents.map((e) => e.eventName);
+    const NO_EVENT = "NO_EVENT";
+
+    return allEvents //
+      .filter((a) => a.eventName !== NO_EVENT && eventNotInThePast(a.eventDate))
+      .map((e) => e.eventName);
+  };
+
+  const eventNotInThePast = (eventDateString) => {
+    const currentDate = new Date();
+    const eventDate = new Date(eventDateString);
+
+    return eventDate >= currentDate;
   };
 
   const clearEventSelection = () => {
