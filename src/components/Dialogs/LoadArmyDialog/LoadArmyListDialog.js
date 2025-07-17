@@ -135,9 +135,6 @@ const LoadArmyListPrompt = (props) => {
     setFilteredFaction(event.target.value);
   };
 
-  console.log("filteredEvent >>>>>>", filteredEvent);
-  console.log("filteredFaction >>>>", filteredFaction);
-
   const handleFilteredEventInput = (event) => {
     if (event.target.value === LOAD_ARMY_LIST_PROMPT.SHOW_EVERYTHING_REGARDLESS_OF_EVENT) {
       setFilteredEvent("");
