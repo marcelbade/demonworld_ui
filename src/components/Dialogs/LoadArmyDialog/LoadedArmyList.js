@@ -75,6 +75,9 @@ const LoadedArmyList = (props) => {
         width: "100%", //
         minWidth: "100%",
         bgcolor: "background.paper",
+        overflowY: "scroll",
+        maxHeight: "50em",
+        minHeight: "50em",
       }}
     >
       {props.allLists
