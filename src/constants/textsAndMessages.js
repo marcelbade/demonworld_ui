@@ -138,6 +138,7 @@ export const LOAD_ARMY_LIST_PROMPT = {
   FILTER_FOR_FACTION: "Fraktion auswählen",
   FILTER_FOR_EVENT: "Event auswählen",
   NOT_PART_OF_EVENT: "Nicht Teil eines Turniers oder Events",
+  LOADED_LIST_SUCCESSFULLY:"Liste erfolgreich geladen",
 };
 
 export const GENERAL_ERRRORS = {
