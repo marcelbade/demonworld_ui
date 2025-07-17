@@ -134,6 +134,7 @@ export const PASSWORDS = {
 
 export const LOAD_ARMY_LIST_PROMPT = {
   SHOW_ALL_FACTIONS: "Alle Fraktionen anzeigen",
+  SHOW_EVERYTHING_REGARDLESS_OF_EVENT: "Alle Listen mit und ohne Events anzeigen",
   FILTER_FOR_FACTION: "Fraktion auswählen",
   FILTER_FOR_EVENT: "Event auswählen",
   NOT_PART_OF_EVENT: "Nicht Teil eines Turniers oder Events",
