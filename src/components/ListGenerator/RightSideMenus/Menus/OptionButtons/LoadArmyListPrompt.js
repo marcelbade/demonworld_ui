@@ -14,6 +14,11 @@ import {
   Avatar,
   Tooltip,
   Grid2 as Grid,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  useTheme,
 } from "@mui/material";
 // icons
 import CancelIcon from "@mui/icons-material/Cancel";
@@ -26,21 +31,51 @@ import { ArmyContext } from "../../../../../contexts/armyContext";
 import usePushMessages from "../../../../../customHooks/UsePushMessages";
 // constants
 import { DELETE_ARMY_LIST_URL, RETREIVE_ARMY_LIST_URL } from "../../../../../constants/URLs";
-import { ARMY_LIST, COMPENDIUM } from "../../../../../constants/textsAndMessages";
-import { FACTION_COLORS } from "../../../../../constants/factions";
+import { ARMY_LIST, COMPENDIUM, LOAD_ARMY_LIST_PROMPT } from "../../../../../constants/textsAndMessages";
+import { ALL_FACTIONS_ARRAY, FACTION_COLORS } from "../../../../../constants/factions";
 import useUnitEnricher from "../../../../../customHooks/UseUnitEnricher";
+import { NO_EVENT } from "../../../../../constants/eventConstants";
 
 const LoadArmyListPrompt = (props) => {
   const UC = useContext(UserContext);
   const AC = useContext(ArmyContext);
 
+  const theme = useTheme();
+
   const [allLists, setAllLists] = useState([]);
+  const [filteredFaction, setFilteredFaction] = useState("");
+  const [filteredEvent, setFilteredEvent] = useState("");
 
   const enrichUnit = useUnitEnricher();
 
+  const createFactionSelectOptions = () => {
+    const result = [];
+    result.push(LOAD_ARMY_LIST_PROMPT.SHOW_ALL_FACTIONS);
+    ALL_FACTIONS_ARRAY.sort((a, b) => a > b).forEach((f) => result.push(f));
+
+    return result;
+  };
+
+  const createEventSelectOptions = () => {
+    const events = allLists
+      .map((l) => l.eventName) //
+      .filter((l) => l !== NO_EVENT);
+
+    const onlyDistinctEvents = events.reduce(
+      (distinct, e) =>
+        distinct.indexOf(e) !== -1 //
+          ? distinct
+          : [...distinct, e],
+      []
+    );
+
+    return [LOAD_ARMY_LIST_PROMPT.NOT_PART_OF_EVENT, ...onlyDistinctEvents];
+  };
+
+  // color the list avatar
   const factionColors = FACTION_COLORS();
 
-  //TODO
+  //TODO: pushmesssage: loading successful
   const pushMessages = usePushMessages();
 
   useEffect(() => {
@@ -74,8 +109,9 @@ const LoadArmyListPrompt = (props) => {
     props.setShowArmyLoadPrompt(false);
   };
 
+  // TODO you have a file with functions that do this shit! - is this nevessary?
   /**
-   * Function calculates the the nest army point cost of the list.
+   * Function calculates the net army point cost of the list.
    * @param {[unitCard]} list
    * @returns the net army point cost for the army
    */
@@ -96,7 +132,7 @@ const LoadArmyListPrompt = (props) => {
    * @returns the event name or a message, of none was stored.
    */
   const setEvent = (eventName) => {
-    return eventName !== "NO_EVENT" ? eventName : ARMY_LIST.NO_EVENT;
+    return eventName !== NO_EVENT ? eventName : ARMY_LIST.NO_EVENT;
   };
 
   /**
@@ -105,6 +141,7 @@ const LoadArmyListPrompt = (props) => {
    * and the equipment array.
    * @param {StoredListObj} listObj
    */
+  // TODO ok, not working yet.
   const loadListintoTool = (listObj) => {
     AC.setSelectedFactionName(listObj.faction);
     AC.setPlayerName(listObj.userName);
@@ -142,6 +179,10 @@ const LoadArmyListPrompt = (props) => {
     return result;
   };
 
+  /**
+   * Async function deletes an army list from the DB
+   * @param {*} listObj
+   */
   const deleteArmyListButton = async (listObj) => {
     axios
       .delete(
@@ -154,10 +195,43 @@ const LoadArmyListPrompt = (props) => {
       .catch((error) => console.log("error>>> ", error));
   };
 
+  const handleFilteredFactionInput = (event) => {
+    if (event.target.value === LOAD_ARMY_LIST_PROMPT.SHOW_ALL_FACTIONS) {
+      setFilteredFaction("");
+      return;
+    }
+
+    setFilteredFaction(event.target.value);
+  };
+
+  const filterListObjByFaction = (listObj) => {
+    if (filteredFaction === "") {
+      return true;
+    }
+
+    return listObj.faction === filteredFaction;
+  };
+
+  const filterListByEvent = (listObj) => {
+    return listObj.eventName === filteredEvent;
+  };
+
+  const accentuateFactionsWithLists = (faction, allListObjects) => {
+    const presentFactions = allListObjects.map((l) => l.faction);
+
+    return presentFactions.includes(faction) //
+      ? null
+      : { color: theme.palette.disabled };
+  };
+
+  const handleFilteredEventInput = (event) => {
+    setFilteredEvent(event.target.value);
+  };
+
   return (
     <Dialog
       component={"form"}
-      onSubmit={(event) => {}}
+      onSubmit={() => {}} // TODO needed?
       sx={{
         "& .MuiDialog-container": {
           "& .MuiPaper-root": {
@@ -171,11 +245,8 @@ const LoadArmyListPrompt = (props) => {
     >
       <Grid
         container //
+        direction="row"
         justifyContent="flex-end"
-        sx={{
-          width: "100%",
-          height: "100%",
-        }}
       >
         <IconButton
           sx={{ marginRight: "1em" }} //
@@ -186,6 +257,50 @@ const LoadArmyListPrompt = (props) => {
           <CancelIcon />
         </IconButton>
       </Grid>
+      <Grid
+        spacing={3}
+        direction="row"
+        sx={{
+          width: "100%",
+          height: "100%",
+        }}
+      >
+        <FormControl variant="standard" sx={{ minWidth: "15em", marginRight: "2em" }}>
+          <InputLabel>{LOAD_ARMY_LIST_PROMPT.FILTER_FOR_FACTION}</InputLabel>
+          <Select
+            value={filteredFaction} //
+            onChange={handleFilteredFactionInput}
+            label="Faction"
+          >
+            {createFactionSelectOptions().map((f, i) => (
+              <MenuItem
+                key={i} //
+                value={f}
+                sx={accentuateFactionsWithLists(f, allLists)}
+              >
+                {f}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+        <FormControl variant="standard" sx={{ minWidth: "15em" }}>
+          <InputLabel>{LOAD_ARMY_LIST_PROMPT.FILTER_FOR_EVENT}</InputLabel>
+          <Select
+            value={filteredEvent} //
+            onChange={handleFilteredEventInput}
+            label="Event"
+          >
+            {createEventSelectOptions().map((e, i) => (
+              <MenuItem
+                key={i} //
+                value={e}
+              >
+                {e}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
+      </Grid>
       <List
         sx={{
           width: "100%", //
@@ -193,60 +308,62 @@ const LoadArmyListPrompt = (props) => {
           bgcolor: "background.paper",
         }}
       >
-        {allLists.map((l, i) => (
-          <ListItem
-            key={i} //
-            alignItems="flex-start"
-            sx={{
-              border: "solid 1px black", //
-              borderRadius: "8px",
-              marginTop: "0.5em",
-            }}
-          >
-            <ListItemAvatar>
-              <Avatar
-                sx={{
-                  backgroundColor: factionColors.get(l.faction), //
-                }}
-              >
-                {l.faction.charAt(0).toUpperCase()}
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText
-              primary={l.listName}
-              secondary={
-                <React.Fragment>
-                  <Typography
-                    component="span" //
-                    variant="body2"
-                    sx={{ color: "text.primary", display: "inline" }}
-                  >
-                    {`${l.faction} - ${armySize(l.list)} ${COMPENDIUM.POINTS} - ${setEvent(l.eventName)} `}
-                  </Typography>
-                </React.Fragment>
-              }
-            />
-            <Tooltip title={<Typography sx={{ fontSize: "20px" }}>{ARMY_LIST.LOAD_LIST}</Typography>}>
-              <IconButton
-                sx={{ marginRight: "3em" }} //
-                onClick={() => {
-                  loadListintoTool(l);
-                }}
-              >
-                <FileUploadIcon />
-              </IconButton>
-            </Tooltip>
-            <Tooltip title={<Typography sx={{ fontSize: "20px" }}>{ARMY_LIST.DELETE_LIST}</Typography>}>
-              <IconButton
-                onClick={() => {
-                  deleteArmyListButton(l);
-                }} //
-              >
-                <DeleteIcon />
-              </IconButton>
-            </Tooltip>
-          </ListItem>
-        ))}
+        {allLists
+          .filter((l) => filterListObjByFaction(l) && filterListByEvent(l))
+          .map((l, i) => (
+            <ListItem
+              key={i} //
+              alignItems="flex-start"
+              sx={{
+                border: "solid 1px black", //
+                borderRadius: "8px",
+                marginTop: "0.5em ",
+              }}
+            >
+              <ListItemAvatar>
+                <Avatar
+                  sx={{
+                    backgroundColor: factionColors.get(l.faction), //
+                  }}
+                >
+                  {l.faction.charAt(0).toUpperCase()}
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText
+                primary={l.listName}
+                secondary={
+                  <React.Fragment>
+                    <Typography
+                      component="span" //
+                      variant="body2"
+                      sx={{ color: "text.primary", display: "inline" }}
+                    >
+                      {`${l.faction} - ${armySize(l.list)} ${COMPENDIUM.POINTS} - ${setEvent(l.eventName)} `}
+                    </Typography>
+                  </React.Fragment>
+                }
+              />
+              <Tooltip title={<Typography sx={{ fontSize: "20px" }}>{ARMY_LIST.LOAD_LIST}</Typography>}>
+                <IconButton
+                  sx={{ marginRight: "3em" }} //
+                  onClick={() => {
+                    loadListintoTool(l);
+                  }}
+                >
+                  <FileUploadIcon />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title={<Typography sx={{ fontSize: "20px" }}>{ARMY_LIST.DELETE_LIST}</Typography>}>
+                <IconButton
+                  onClick={() => {
+                    deleteArmyListButton(l);
+                  }} //
+                >
+                  <DeleteIcon />
+                </IconButton>
+              </Tooltip>
+            </ListItem>
+          ))}
       </List>
     </Dialog>
   );
