@@ -17,7 +17,7 @@ import { ArmyContext } from "../../../contexts/armyContext";
 import usePushMessages from "../../../customHooks/UsePushMessages";
 // constants
 import { DELETE_ARMY_LIST_URL, RETREIVE_ARMY_LIST_URL } from "../../../constants/URLs";
-import { LOAD_ARMY_LIST_PROMPT } from "../../../constants/textsAndMessages";
+import { LOAD_ARMY_LIST_PROMPT, PUSH_MESSAGE_TYPES } from "../../../constants/textsAndMessages";
 import useUnitEnricher from "../../../customHooks/UseUnitEnricher";
 import LoadedArmyList from "./LoadedArmyList";
 import ListFactionFilter from "./ListFactionFilter";
@@ -91,6 +91,11 @@ const LoadArmyListPrompt = (props) => {
 
     props.listSetter(result);
     props.setShowArmyLoadPrompt((prevState) => !prevState);
+
+    pushMessages.showSnackBar(
+      LOAD_ARMY_LIST_PROMPT.LOADED_LIST_SUCCESSFULLY, //
+      PUSH_MESSAGE_TYPES.SUCCESS
+    );
   };
 
   /**
