@@ -88,6 +88,7 @@ const CardCreator = () => {
     overRun: 0,
     uniqueUnit: false,
     unitType: "U",
+    equipment: [],
   });
 
   return (
@@ -186,7 +187,7 @@ const CardCreator = () => {
           }}
         >
           <CardPreview />
-          <SaveCardForm/>
+          <SaveCardForm />
         </Box>
       </Box>
     </CardCreationProvider>
