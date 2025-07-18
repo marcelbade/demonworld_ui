@@ -23,10 +23,6 @@ const LoadedArmyList = (props) => {
   // color the list avatar
   const factionColors = FACTION_COLORS();
 
-  // useEffect( ()=>{},[
-  //   props.filteredFaction, props.filteredEvent
-  // ] )
-
   const filterListObjByFaction = (listObj) => {
     if (props.filteredFaction === "") {
       return true;

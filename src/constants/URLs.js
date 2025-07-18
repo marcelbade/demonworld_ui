@@ -9,8 +9,8 @@ export const ALL_USER_NAMES_URL = `${PREFIX_BE}/public/user/allUserNames`;
 // army lists
 export const STORE_ARMY_LIST_URL = `${PREFIX_BE}/auth/armyLists/addList`;
 export const RETREIVE_ARMY_LIST_URL = (user) => `${PREFIX_BE}/auth/armyLists/getListsForUser?userName=${user}`;
-export const DELETE_ARMY_LIST_URL = (userName, listName) =>
-  `${PREFIX_BE}/auth/armyLists/deleteList?userName=${userName}&listName=${listName}`;
+export const DELETE_ARMY_LIST_URL = (userName, listId) =>
+  `${PREFIX_BE}/auth/armyLists/deleteList?userName=${userName}&listId=${listId}`;
 
 // game data
 export const FACTION_DTOS_URL = `${PREFIX_BE}/public/game/factionDTOs`;

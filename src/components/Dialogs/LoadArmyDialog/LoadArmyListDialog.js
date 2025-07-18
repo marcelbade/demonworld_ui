@@ -123,15 +123,23 @@ const LoadArmyListPrompt = (props) => {
   const deleteArmyListButton = async (listObj) => {
     axios
       .delete(
-        DELETE_ARMY_LIST_URL(listObj.userName, listObj.listName), //
+        DELETE_ARMY_LIST_URL(listObj.userName, listObj.id), //
         { headers: { Authorization: `Bearer ${UC.user.token}` } }
       )
       .then((response) => {
+        const result = allLists.filter((l) => l.id !== listObj.id);
+        setAllLists(result);
+
         console.log("response list deleted>>", response);
       })
       .catch((error) => console.log("error>>> ", error));
   };
 
+  /**
+   *
+   * @param {eventObj} event
+   * @returns
+   */
   const handleFilteredFactionInput = (event) => {
     if (event.target.value === LOAD_ARMY_LIST_PROMPT.SHOW_ALL_FACTIONS) {
       setFilteredFaction("");
