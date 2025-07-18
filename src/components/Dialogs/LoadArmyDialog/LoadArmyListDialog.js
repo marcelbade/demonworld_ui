@@ -17,11 +17,12 @@ import { ArmyContext } from "../../../contexts/armyContext";
 import usePushMessages from "../../../customHooks/UsePushMessages";
 // constants
 import { DELETE_ARMY_LIST_URL, RETREIVE_ARMY_LIST_URL } from "../../../constants/URLs";
-import { LOAD_ARMY_LIST_PROMPT, PUSH_MESSAGE_TYPES } from "../../../constants/textsAndMessages";
+import { LOAD_ARMY_LIST_DIALOG, PUSH_MESSAGE_TYPES } from "../../../constants/textsAndMessages";
 import useUnitEnricher from "../../../customHooks/UseUnitEnricher";
 import LoadedArmyList from "./LoadedArmyList";
 import ListFactionFilter from "./ListFactionFilter";
 import ListEventFilter from "./ListEventFilter";
+import DeleteConfirmationDialog from "../ConfirmationDialog.js/DeleteConfirmationDialog";
 
 const LoadArmyListPrompt = (props) => {
   const UC = useContext(UserContext);
@@ -30,6 +31,7 @@ const LoadArmyListPrompt = (props) => {
   const [allLists, setAllLists] = useState([]);
   const [filteredFaction, setFilteredFaction] = useState("");
   const [filteredEvent, setFilteredEvent] = useState("");
+  const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
 
   const enrichUnit = useUnitEnricher();
 
@@ -93,7 +95,7 @@ const LoadArmyListPrompt = (props) => {
     props.setShowArmyLoadPrompt((prevState) => !prevState);
 
     pushMessages.showSnackBar(
-      LOAD_ARMY_LIST_PROMPT.LOADED_LIST_SUCCESSFULLY, //
+      LOAD_ARMY_LIST_DIALOG.LOADED_LIST_SUCCESSFULLY, //
       PUSH_MESSAGE_TYPES.SUCCESS
     );
   };
@@ -120,7 +122,11 @@ const LoadArmyListPrompt = (props) => {
    * Async function deletes an army list from the DB
    * @param {*} listObj
    */
-  const deleteArmyListButton = async (listObj) => {
+  const deleteArmyListButton = () => {
+    setShowConfirmationDialog(true);
+  };
+
+  const confirmAndDeleteList = async (listObj) => {
     axios
       .delete(
         DELETE_ARMY_LIST_URL(listObj.userName, listObj.id), //
@@ -133,7 +139,11 @@ const LoadArmyListPrompt = (props) => {
         console.log("response list deleted>>", response);
       })
       .catch((error) => console.log("error>>> ", error));
+
+      closeAndConfirmationDialog();
   };
+
+  const closeAndConfirmationDialog = () => { setShowConfirmationDialog(false)};
 
   /**
    *
@@ -141,7 +151,7 @@ const LoadArmyListPrompt = (props) => {
    * @returns
    */
   const handleFilteredFactionInput = (event) => {
-    if (event.target.value === LOAD_ARMY_LIST_PROMPT.SHOW_ALL_FACTIONS) {
+    if (event.target.value === LOAD_ARMY_LIST_DIALOG.SHOW_ALL_FACTIONS) {
       setFilteredFaction("");
       return;
     }
@@ -149,7 +159,7 @@ const LoadArmyListPrompt = (props) => {
   };
 
   const handleFilteredEventInput = (event) => {
-    if (event.target.value === LOAD_ARMY_LIST_PROMPT.SHOW_EVERYTHING_REGARDLESS_OF_EVENT) {
+    if (event.target.value === LOAD_ARMY_LIST_DIALOG.SHOW_EVERYTHING_REGARDLESS_OF_EVENT) {
       setFilteredEvent("");
       return;
     }
@@ -210,6 +220,11 @@ const LoadArmyListPrompt = (props) => {
         filteredEvent={filteredEvent}
         loadListintoTool={loadListintoTool}
         deleteArmyListButton={deleteArmyListButton}
+      />
+      <DeleteConfirmationDialog
+        showConfirmationDialog={showConfirmationDialog} //
+        confirmAndDeleteList={confirmAndDeleteList} 
+        closeAndConfirmationDialog={closeAndConfirmationDialog} 
       />
     </Dialog>
   );

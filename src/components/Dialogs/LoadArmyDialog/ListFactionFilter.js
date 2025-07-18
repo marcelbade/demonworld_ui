@@ -8,7 +8,7 @@ import {
   Select,
 } from "@mui/material";
 // constants
-import { LOAD_ARMY_LIST_PROMPT } from "../../../constants/textsAndMessages";
+import { LOAD_ARMY_LIST_DIALOG } from "../../../constants/textsAndMessages";
 import { ALL_FACTIONS_ARRAY } from "../../../constants/factions";
 
 const ListFactionFilter = (props) => {
@@ -16,7 +16,7 @@ const ListFactionFilter = (props) => {
 
   const createFactionSelectOptions = () => {
     const result = [];
-    result.push(LOAD_ARMY_LIST_PROMPT.SHOW_ALL_FACTIONS);
+    result.push(LOAD_ARMY_LIST_DIALOG.SHOW_ALL_FACTIONS);
     ALL_FACTIONS_ARRAY.sort((a, b) => a > b).forEach((f) => result.push(f));
 
     return result;
@@ -24,7 +24,7 @@ const ListFactionFilter = (props) => {
 
   const emphaziseFactionsWithLists = (faction, allListObjects) => {
     const presentFactions = allListObjects.map((l) => l.faction);
-    presentFactions.push(LOAD_ARMY_LIST_PROMPT.SHOW_ALL_FACTIONS);
+    presentFactions.push(LOAD_ARMY_LIST_DIALOG.SHOW_ALL_FACTIONS);
 
     return presentFactions.includes(faction) //
       ? null
@@ -39,7 +39,7 @@ const ListFactionFilter = (props) => {
         marginRight: "2em",
       }}
     >
-      <InputLabel>{LOAD_ARMY_LIST_PROMPT.FILTER_FOR_FACTION}</InputLabel>
+      <InputLabel>{LOAD_ARMY_LIST_DIALOG.FILTER_FOR_FACTION}</InputLabel>
       <Select
         value={props.filteredFaction} //
         defaultValue={props.filteredFaction} //

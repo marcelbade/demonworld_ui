@@ -132,13 +132,17 @@ export const PASSWORDS = {
   PASSWORD_GUIDELINES_VIOLATED: "Dein Passwort ist nicht stark genug.",
 };
 
-export const LOAD_ARMY_LIST_PROMPT = {
+export const LOAD_ARMY_LIST_DIALOG = {
   SHOW_ALL_FACTIONS: "Alle Fraktionen anzeigen",
   SHOW_EVERYTHING_REGARDLESS_OF_EVENT: "Alle Listen mit und ohne Events anzeigen",
   FILTER_FOR_FACTION: "Fraktion auswählen",
   FILTER_FOR_EVENT: "Event auswählen",
   NOT_PART_OF_EVENT: "Nicht Teil eines Turniers oder Events",
   LOADED_LIST_SUCCESSFULLY:"Liste erfolgreich geladen",
+  ConfirmationDialogTitle: "Soll diese Liste wirklich gelöscht werden?",
+  ConfirmationDialogText: "Wenn du die Löschung bestätigst, wird die Liste unwiederruflich gelöscht.",
+  ConfirmationDialogButtonConfirm: "Liste Löschen",
+  ConfirmationDialogButtonCancel: "Abbrechen",
 };
 
 export const GENERAL_ERRRORS = {

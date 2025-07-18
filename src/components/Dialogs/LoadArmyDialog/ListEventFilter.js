@@ -6,7 +6,7 @@ import {
   Select,
 } from "@mui/material";
 // constants
-import { LOAD_ARMY_LIST_PROMPT } from "../../../constants/textsAndMessages";
+import { LOAD_ARMY_LIST_DIALOG } from "../../../constants/textsAndMessages";
 import { NO_EVENT } from "../../../constants/eventConstants";
 
 const ListEventFilter = (props) => {
@@ -22,14 +22,14 @@ const ListEventFilter = (props) => {
     );
 
     return [
-      LOAD_ARMY_LIST_PROMPT.SHOW_EVERYTHING_REGARDLESS_OF_EVENT, //
+      LOAD_ARMY_LIST_DIALOG.SHOW_EVERYTHING_REGARDLESS_OF_EVENT, //
       ...onlyDistinctEvents,
     ];
   };
 
   return (
     <FormControl variant="standard" sx={{ minWidth: "15em" }}>
-      <InputLabel>{LOAD_ARMY_LIST_PROMPT.FILTER_FOR_EVENT}</InputLabel>
+      <InputLabel>{LOAD_ARMY_LIST_DIALOG.FILTER_FOR_EVENT}</InputLabel>
       <Select
         value={props.filteredEvent} //
         defaultValue={props.filteredEvent}
@@ -45,7 +45,7 @@ const ListEventFilter = (props) => {
               // substitute constant for proper UI text snippet
               e !== NO_EVENT
                 ? e //
-                : LOAD_ARMY_LIST_PROMPT.NOT_PART_OF_EVENT
+                : LOAD_ARMY_LIST_DIALOG.NOT_PART_OF_EVENT
             }
           </MenuItem>
         ))}
