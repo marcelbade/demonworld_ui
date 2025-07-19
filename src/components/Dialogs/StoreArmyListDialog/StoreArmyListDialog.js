@@ -41,22 +41,15 @@ const StoreArmyListDialog = (props) => {
 
   const callAxios = useAxios();
 
-  const NO_LOOGED_IN_USER = {
-    userName: "", //
-    isAdmin: "",
-    isOwner: "",
-    token: "",
-  };
-
-  useEffect(() => {
-    if (JSON.stringify(UC.user) !== JSON.stringify(NO_LOOGED_IN_USER)) {
-      fetchEvents();
-    }
-  }, [UC.user]); // eslint-disable-line react-hooks/exhaustive-deps
-
   useEffect(() => {
     fetchAllUsers();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (UC.user.userName !== "") {
+      fetchEvents();
+    }
+  }, [UC.user]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const fetchEvents = async () => {
     callAxios.fetchProtectedData(setAllEvents, GET_EVENTS_URL);
