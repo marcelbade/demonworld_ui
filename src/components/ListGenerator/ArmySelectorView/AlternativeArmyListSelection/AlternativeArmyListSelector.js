@@ -1,5 +1,5 @@
 // React
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 // components and functions
 import SelectionInput from "../../../shared/selectionInput";
 import useAlternativeFactionRules from "../../../../customHooks/UseAlternativeFactionRules";
@@ -36,7 +36,7 @@ const AlternativeArmyListSelector = () => {
 
   /**
    * Clear function for the Selection Inputs. Removes
-   * the value from selectedAlternativeLists element that corrsponds
+   * the value from selectedAlternativeLists element that corresponds
    * to the selectorNumber
    * @param {int} selectorNumber
    */
@@ -55,6 +55,10 @@ const AlternativeArmyListSelector = () => {
    * @returns an array of String values to be displayed.
    */
   const setAlternatives = (selectorNumber) => {
+    if (OPTIONS === undefined) {
+      return;
+    }
+
     if (OPTIONS[selectorNumber] === undefined) {
       return;
     }
@@ -128,21 +132,19 @@ const AlternativeArmyListSelector = () => {
   };
 
   return areAlternativeListsPresent()
-    ? Array(ALC.numberOfAlternativeChoices)
-        .fill()
-        .map(( selectorNumber) => {
-          return (
-            <SelectionInput //
-              width={"32em"}
-              key={selectorNumber}
-              selectorNumber={selectorNumber}
-              alternatives={setAlternatives(selectorNumber)}
-              filterFunction={selectAlternateList}
-              clearFunction={clearAlternateList}
-              label={setLabel(selectorNumber)}
-            />
-          );
-        })
+    ? [...Array(ALC.numberOfAlternativeChoices).keys()].map((selectorNumber) => {
+        return (
+          <SelectionInput //
+            width={"32em"}
+            key={selectorNumber}
+            selectorNumber={selectorNumber}
+            alternatives={setAlternatives(selectorNumber)}
+            filterFunction={selectAlternateList}
+            clearFunction={clearAlternateList}
+            label={setLabel(selectorNumber)}
+          />
+        );
+      })
     : null;
 };
 
