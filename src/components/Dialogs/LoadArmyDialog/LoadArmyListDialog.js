@@ -1,5 +1,3 @@
-// axios
-import axios from "axios";
 //  react
 import { useContext, useState, useEffect } from "react";
 // material ui
@@ -23,20 +21,21 @@ import LoadedArmyList from "./LoadedArmyList";
 import ListFactionFilter from "./ListFactionFilter";
 import ListEventFilter from "./ListEventFilter";
 import DeleteConfirmationDialog from "../ConfirmationDialog.js/DeleteConfirmationDialog";
+import useAxios from "../../../customHooks/UseAxios";
 
 const LoadArmyListPrompt = (props) => {
   const UC = useContext(UserContext);
   const AC = useContext(ArmyContext);
 
+  const callAxios = useAxios();
+  const pushMessages = usePushMessages();
+  const enrichUnit = useUnitEnricher();
+
   const [allLists, setAllLists] = useState([]);
   const [filteredFaction, setFilteredFaction] = useState("");
   const [filteredEvent, setFilteredEvent] = useState("");
   const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
-
-  const enrichUnit = useUnitEnricher();
-
-  //TODO: pushmesssage: loading successful
-  const pushMessages = usePushMessages();
+  const [listToDelete, setListToDelete] = useState({});
 
   useEffect(() => {
     if (props.showArmyLoadPrompt) {
@@ -51,15 +50,7 @@ const LoadArmyListPrompt = (props) => {
    * - or have the user listed as having access
    */
   const fetchLists = async () => {
-    axios
-      .get(
-        RETREIVE_ARMY_LIST_URL(UC.user.userName), //
-        { headers: { Authorization: `Bearer ${UC.user.token}` } }
-      )
-      .then((response) => {
-        setAllLists(response.data);
-      })
-      .catch((error) => console.log("error>>> ", error));
+    callAxios.fetchProtectedData(setAllLists, RETREIVE_ARMY_LIST_URL(UC.user.userName));
   };
 
   /**
@@ -122,28 +113,23 @@ const LoadArmyListPrompt = (props) => {
    * Async function deletes an army list from the DB
    * @param {*} listObj
    */
-  const deleteArmyListButton = () => {
+  const deleteArmyListButton = (l) => {
     setShowConfirmationDialog(true);
+    setListToDelete(l);
   };
 
-  const confirmAndDeleteList = async (listObj) => {
-    axios
-      .delete(
-        DELETE_ARMY_LIST_URL(listObj.userName, listObj.id), //
-        { headers: { Authorization: `Bearer ${UC.user.token}` } }
-      )
-      .then((response) => {
-        const result = allLists.filter((l) => l.id !== listObj.id);
-        setAllLists(result);
+  const confirmAndDeleteList = async () => {
+    callAxios.deleteProtectedData(DELETE_ARMY_LIST_URL(listToDelete.userName, listToDelete.id));
 
-        console.log("response list deleted>>", response);
-      })
-      .catch((error) => console.log("error>>> ", error));
+    const result = allLists.filter((l) => l.id !== listToDelete.id);
+    setAllLists(result);
 
-      closeAndConfirmationDialog();
+    closeAndConfirmationDialog();
   };
 
-  const closeAndConfirmationDialog = () => { setShowConfirmationDialog(false)};
+  const closeAndConfirmationDialog = () => {
+    setShowConfirmationDialog(false);
+  };
 
   /**
    *
@@ -170,7 +156,6 @@ const LoadArmyListPrompt = (props) => {
   return (
     <Dialog
       component={"form"}
-      onSubmit={() => {}} // TODO needed?
       sx={{
         "& .MuiDialog-container": {
           "& .MuiPaper-root": {
@@ -223,8 +208,8 @@ const LoadArmyListPrompt = (props) => {
       />
       <DeleteConfirmationDialog
         showConfirmationDialog={showConfirmationDialog} //
-        confirmAndDeleteList={confirmAndDeleteList} 
-        closeAndConfirmationDialog={closeAndConfirmationDialog} 
+        confirmAndDeleteList={confirmAndDeleteList}
+        closeAndConfirmationDialog={closeAndConfirmationDialog}
       />
     </Dialog>
   );
