@@ -1,5 +1,5 @@
 // React
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 // Material UI
 import { Button, Drawer, Grid2 as Grid, IconButton, Typography } from "@mui/material";
 // icons
@@ -12,7 +12,7 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import NaviButton from "./NaviButton";
 import { LANDINGPAGE, USER_AUTH } from "../../constants/textsAndMessages";
 import LightSwitch from "../shared/LightSwitch";
-import LoginPrompt from "../Login/LogInPrompt";
+import LoginDialog from "../Login/LogInDialog";
 import UserLogButton from "../Login/UserLogButton";
 // contexts
 import { UserContext } from "../../contexts/userContext";
@@ -56,7 +56,7 @@ const LandingPage = () => {
           />
         </Grid>
       </Grid>
-      <LoginPrompt />
+      <LoginDialog />
       <Grid
         container //
         justifyContent="center"

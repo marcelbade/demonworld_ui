@@ -1,5 +1,5 @@
 // React
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 // Material UI
 import {
   Button,
@@ -23,7 +23,7 @@ import { LOGIN_USER_URL } from "../../constants/URLs";
 //  constants
 import { USER_AUTH } from "../../constants/textsAndMessages";
 
-const LoginPrompt = () => {
+const LoginDialog = () => {
   const UC = useContext(UserContext);
   const SC = useContext(ServerErrorContext);
 
@@ -178,4 +178,4 @@ const LoginPrompt = () => {
   );
 };
 
-export default LoginPrompt;
+export default LoginDialog;

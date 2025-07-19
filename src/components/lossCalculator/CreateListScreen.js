@@ -1,16 +1,17 @@
 // React
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 //Material UI
 import { Button, Grid2 as Grid } from "@mui/material";
 //  components and functions
 import NaviButton from "../landingPage/NaviButton";
-import LoginPrompt from "../Login/LogInPrompt";
+import LoginDialog from "../Login/LogInDialog";
 import AppBar from "../shared/AppBar";
 import AppBarToggle from "../shared/AppBarToggle";
 // constants
 import { LOSS_CALCULATOR, OPTIONS } from "../../constants/textsAndMessages";
-import LoadArmyListPrompt from "../ListGenerator/RightSideMenus/Menus/OptionButtons/LoadArmyListPrompt";
+import LoadArmyListPrompt from "../Dialogs/LoadArmyDialog/LoadArmyListDialog";
 import { ID } from "../../constants/appBarConstants";
+// contexts
 import { LossCalcContext } from "../../contexts/LossCalculatorContext";
 
 const CreateListScreen = () => {
@@ -62,7 +63,7 @@ const CreateListScreen = () => {
         >
           {OPTIONS.LOAD_LIST}
         </Button>
-        <LoginPrompt />
+        <LoginDialog />
         <LoadArmyListPrompt
           listSetter={LC.setList}
           showArmyLoadPrompt={showArmyLoadPrompt} //
