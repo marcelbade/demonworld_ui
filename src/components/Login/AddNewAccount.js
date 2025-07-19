@@ -20,14 +20,12 @@ const AddNewAccount = () => {
   const INPUT_WIDTH = "30em";
 
   const callAxios = useAxios();
-
   const history = useHistory();
 
   const [allUserNames, setAllUserNames] = useState([]);
   const [isUserTaken, setIsUserTaken] = useState(false);
   const [isPasswordInvalid, setIsPasswordInvalid] = useState(false);
   const [passwordsNotIdentical, setPasswordsNotIdentical] = useState(false);
-  // const [disableSubmission, setDisableSubmission] = useState(true);
 
   useEffect(() => {
     fetchUserNames();
@@ -159,6 +157,7 @@ const AddNewAccount = () => {
         />
         <Button
           type="submit"
+          disabled={isUserTaken || isPasswordInvalid || passwordsNotIdentical}
           sx={{
             marginTop: "4em",
           }}
