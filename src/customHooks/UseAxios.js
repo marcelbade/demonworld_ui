@@ -14,12 +14,30 @@ const useAxios = () => {
 
   const pushMessage = usePushMessages();
 
+  const fetchData = (setter, url) => {
+    axios
+      .get(url)
+      .then((response) => {
+        setter(response.data);
+      })
+      .catch((error) => pushMessage.showSnackBar(error, PUSH_MESSAGE_TYPES.ERROR));
+  };
+
   const fetchProtectedData = (setter, url) => {
     axios
       .get(url, { headers: { Authorization: `Bearer ${UC.user.token}` } })
       .then((response) => {
         setter(response.data);
       })
+      .catch((error) => pushMessage.showSnackBar(error, PUSH_MESSAGE_TYPES.ERROR));
+  };
+
+  const storeData = (data, url) => {
+    axios
+      .post(url, data, {
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${UC.user.token}` },
+      })
+      .then()
       .catch((error) => pushMessage.showSnackBar(error, PUSH_MESSAGE_TYPES.ERROR));
   };
 
@@ -36,7 +54,9 @@ const useAxios = () => {
   };
 
   return {
+    fetchData,
     fetchProtectedData,
+    storeData,
     deleteProtectedData,
   };
 };

@@ -13,6 +13,7 @@ import { UserContext } from "../../../contexts/userContext";
 import { ArmyContext } from "../../../contexts/armyContext";
 // hooks
 import usePushMessages from "../../../customHooks/UsePushMessages";
+import useAxios from "../../../customHooks/UseAxios";
 // constants
 import { DELETE_ARMY_LIST_URL, RETREIVE_ARMY_LIST_URL } from "../../../constants/URLs";
 import { LOAD_ARMY_LIST_DIALOG, PUSH_MESSAGE_TYPES } from "../../../constants/textsAndMessages";
@@ -20,8 +21,9 @@ import useUnitEnricher from "../../../customHooks/UseUnitEnricher";
 import LoadedArmyList from "./LoadedArmyList";
 import ListFactionFilter from "./ListFactionFilter";
 import ListEventFilter from "./ListEventFilter";
-import DeleteConfirmationDialog from "../ConfirmationDialog.js/DeleteConfirmationDialog";
-import useAxios from "../../../customHooks/UseAxios";
+import DeleteConfirmationDialog from "../ConfirmationDialog/DeleteConfirmationDialog";
+
+ 
 
 const LoadArmyListPrompt = (props) => {
   const UC = useContext(UserContext);

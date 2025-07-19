@@ -1,29 +1,25 @@
 // React
-import React, { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-//  axios
-import axios from "axios";
 // Material UI
 import { TextField, Typography, Grid2 as Grid, Button, Box } from "@mui/material";
 // icons
 import { ChevronLeft } from "@mui/icons-material";
 // functions and components
 import NaviButton from "../landingPage/NaviButton";
-import usePushMessages from "../../customHooks/UsePushMessages";
-
 // contexts
 import LightSwitch from "../shared/LightSwitch";
-import { ServerErrorContext } from "../../contexts/serverErrorContext";
 // constants
-import { LANDINGPAGE, PASSWORDS, PUSH_MESSAGE_TYPES, USER_AUTH } from "../../constants/textsAndMessages";
+import { LANDINGPAGE, PASSWORDS, USER_AUTH } from "../../constants/textsAndMessages";
 import { ALL_USER_NAMES_URL, REGISTER_USER_URL } from "../../constants/URLs";
+// custom hooks
+import useAxios from "../../customHooks/UseAxios";
 
 const AddNewAccount = () => {
   const MARGIN = "2em";
   const INPUT_WIDTH = "30em";
 
-  const SC = useContext(ServerErrorContext);
-  const pushMessages = usePushMessages();
+  const callAxios = useAxios();
 
   const history = useHistory();
 
@@ -31,15 +27,14 @@ const AddNewAccount = () => {
   const [isUserTaken, setIsUserTaken] = useState(false);
   const [isPasswordInvalid, setIsPasswordInvalid] = useState(false);
   const [passwordsNotIdentical, setPasswordsNotIdentical] = useState(false);
-  const [disableSubmission, setDisableSubmission] = useState(true);
+  // const [disableSubmission, setDisableSubmission] = useState(true);
 
   useEffect(() => {
     fetchUserNames();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const fetchUserNames = async () => {
-    const result = await axios(ALL_USER_NAMES_URL);
-    setAllUserNames(result.data);
+    callAxios.fetchData(setAllUserNames, ALL_USER_NAMES_URL);
   };
 
   // TODO finish this!
@@ -66,37 +61,19 @@ const AddNewAccount = () => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
 
-    await axios
-      .post(
-        REGISTER_USER_URL,
-        JSON.stringify({
-          userName: formData.get("name"),
-          password: formData.get("pw"),
-        }),
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: false,
-        }
-      )
-      .then((response) => {
-        // return to the landing page and display push message
-
-        history.push({
-          pathname: "/",
-          state: {
-            lastPage: "landingPage",
-          },
-        });
-
-        if (response.data.userName === formData.get("name")) {
-          pushMessages.showSnackBar(USER_AUTH.ACCOUNT_CREATED, PUSH_MESSAGE_TYPES.SUCCESS);
-        }
-      })
-      .catch((error) => {
-        if (!error?.response) {
-          SC.setServerErrorMessage("no server response");
-        }
-      });
+    callAxios.storeData(
+      JSON.stringify({
+        userName: formData.get("name"),
+        password: formData.get("pw"),
+      }),
+      REGISTER_USER_URL
+    );
+    history.push({
+      pathname: "/",
+      state: {
+        lastPage: "landingPage",
+      },
+    });
   };
 
   return (

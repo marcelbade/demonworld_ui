@@ -1,7 +1,5 @@
 // React
-import React, { Fragment, useEffect, useState } from "react";
-// Axios
-import axios from "axios";
+import { Fragment, useEffect, useState } from "react";
 // material ui
 import { Grid2 as Grid, Typography } from "@mui/material";
 // components & functions
@@ -18,6 +16,8 @@ import TableProvider from "../../../../contexts/tableContext";
 import { COMPENDIUM } from "../../../../constants/textsAndMessages";
 import { ID } from "../../../../constants/appBarConstants";
 import { ALL_UNITS_URL } from "../../../../constants/URLs";
+// custom hooks
+import useAxios from "../../../../customHooks/UseAxios";
 
 const CompendiumTable = () => {
   // intialize local state
@@ -32,16 +32,18 @@ const CompendiumTable = () => {
   const [columns, setColumns] = useState(columnsStateObjects);
   const [toggleGroups, setToggleGroups] = useState(columnGroupObjects);
 
+  const callAxios = useAxios();
+
   useEffect(() => {
     fetchData();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const fetchData = async () => {
-    const result = await axios(ALL_UNITS_URL);
-    setReceivedData(addLock(result.data));
+    callAxios.fetchData(setReceivedData, ALL_UNITS_URL);
   };
 
   useEffect(() => {
+    setReceivedData(addLock(receivedData));
     setData(receivedData);
     setDisplayUnits(receivedData);
   }, [receivedData]); // eslint-disable-line react-hooks/exhaustive-deps

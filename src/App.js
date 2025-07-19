@@ -1,9 +1,7 @@
 // React
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 // Material UI
 import { Grid2 as Grid, StyledEngineProvider, CssBaseline } from "@mui/material";
-// axios
-import axios from "axios";
 // router
 import { Route, Switch } from "react-router-dom";
 // components and functions
@@ -37,8 +35,12 @@ import { ThemeProvider } from "@mui/material";
 import { NONE, NO_ALLY } from "./constants/factions";
 import { FACTION_DTOS_URL, ITEM_DTOS_URL } from "./constants/URLs";
 import ServerErrorProvider from "./contexts/serverErrorContext";
+// custom hooks
+import useAxios from "./customHooks/UseAxios";
 
 function App() {
+  const callAxios = useAxios();
+
   // user accounts
   const [user, setUser] = useState({
     userName: "",
@@ -146,14 +148,12 @@ function App() {
 
   //TODO Change URL in Production!
   const fetchFactionData = async () => {
-    const result = await axios(FACTION_DTOS_URL);
-    setFetchedFactions(result.data);
+    callAxios.fetchData(setFetchedFactions, FACTION_DTOS_URL);
   };
 
   //TODO Change URL in Production!
   const fetchItemData = async () => {
-    const result = await axios(ITEM_DTOS_URL);
-    setFetchedItems(result.data);
+    callAxios.fetchData(setFetchedItems, ITEM_DTOS_URL);
   };
 
   return (

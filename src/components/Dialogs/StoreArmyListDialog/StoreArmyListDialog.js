@@ -1,7 +1,5 @@
-// axios
-import axios from "axios";
 //  react
-import React, { useContext, useState, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 // material ui
 import {
   Button,
@@ -18,23 +16,21 @@ import {
 // icons
 import CancelIcon from "@mui/icons-material/Cancel";
 // contexts
-import { UserContext } from "../../../../../contexts/userContext";
-import { SelectionContext } from "../../../../../contexts/selectionContext";
-import { ArmyContext } from "../../../../../contexts/armyContext";
-import { ServerErrorContext } from "../../../../../contexts/serverErrorContext";
+import { UserContext } from "../../../contexts/userContext";
+import { SelectionContext } from "../../../contexts/selectionContext";
+import { ArmyContext } from "../../../contexts/armyContext";
 // hooks
-import usePushMessages from "../../../../../customHooks/UsePushMessages";
+import useAxios from "../../../customHooks/UseAxios";
 // constants
-import { ALL_USER_NAMES_URL, GET_EVENTS_URL, STORE_ARMY_LIST_URL } from "../../../../../constants/URLs";
-import { ARMY_LIST, INPUT_TEXTS, PUSH_MESSAGE_TYPES } from "../../../../../constants/textsAndMessages";
-import ContextHelpButton from "../../../../shared/ContextHelpButton";
-import SelectionInput from "../../../../shared/selectionInput";
+import { ALL_USER_NAMES_URL, GET_EVENTS_URL, STORE_ARMY_LIST_URL } from "../../../constants/URLs";
+import { ARMY_LIST, INPUT_TEXTS, PUSH_MESSAGE_TYPES } from "../../../constants/textsAndMessages";
+import ContextHelpButton from "../../shared/ContextHelpButton";
+import SelectionInput from "../../shared/selectionInput";
 
-const StoreArmyListPrompt = (props) => {
+const StoreArmyListDialog = (props) => {
   const UC = useContext(UserContext);
   const SEC = useContext(SelectionContext);
   const AC = useContext(ArmyContext);
-  const SC = useContext(ServerErrorContext);
 
   const [allEvents, setAllEvents] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
@@ -43,7 +39,7 @@ const StoreArmyListPrompt = (props) => {
   const [selectedEventName, setSelectedEventName] = useState("");
   const [selectedUser, setSelectedUser] = useState([]);
 
-  const pushMessages = usePushMessages();
+  const callAxios = useAxios();
 
   const NO_LOOGED_IN_USER = {
     userName: "", //
@@ -63,31 +59,20 @@ const StoreArmyListPrompt = (props) => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const fetchEvents = async () => {
-    axios
-      .get(GET_EVENTS_URL, { headers: { Authorization: `Bearer ${UC.user.token}` } })
-      .then((response) => {
-        setAllEvents(response.data);
-      })
-      .catch((error) => console.log("error>>> ", error));
+    callAxios.fetchProtectedData(setAllEvents, GET_EVENTS_URL);
   };
 
   const fetchAllUsers = async () => {
-    axios
-      .get(ALL_USER_NAMES_URL, { headers: { Authorization: `Bearer ${UC.user.token}` } })
-      .then((response) => {
-        setAllUsers(response.data);
-      })
-      .catch((error) => console.log("error>>> ", error));
+    callAxios.fetchProtectedData(setAllUsers, ALL_USER_NAMES_URL);
   };
 
   const handleClose = () => {
     props.setShowArmySavePrompt(false);
   };
 
-  //TODO Change URL in Production!
   /**
    * Async function posts a new army list to the backend to add it to the DB. The
-   * data is talen from the army list generator or the prompt dependending on wether
+   * data is taken from the army list generator or the prompt dependending on wether
    * the user entered data
    * @param {eventObj} event
    */
@@ -111,35 +96,19 @@ const StoreArmyListPrompt = (props) => {
         ? selectedEventName
         : "NO_EVENT";
 
-    await axios
-      .post(
-        STORE_ARMY_LIST_URL,
-        JSON.stringify({
-          userName: UC.user.userName,
-          teamName: teamName,
-          listName: listName,
-          faction: AC.selectedFactionName,
-          list: SEC.selectedUnits,
-          eventName: eventName,
-          userWithAccess: selectedUser,
-          creationDate: new Date(),
-        }),
-        {
-          headers: {
-            Authorization: `Bearer ${UC.user.token}`, //
-            "Content-Type": "application/json;charset=UTF-8",
-          },
-        }
-      )
-      .then(() => {
-        props.setShowArmySavePrompt(false);
-        pushMessages.showSnackBar(ARMY_LIST.LIST_STORED, PUSH_MESSAGE_TYPES.SUCCESS);
-      })
-      .catch((error) => {
-        if (!error?.response) {
-          SC.setServerErrorMessage("no server response");
-        }
-      });
+    callAxios.storeData(
+      JSON.stringify({
+        userName: UC.user.userName,
+        teamName: teamName,
+        listName: listName,
+        faction: AC.selectedFactionName,
+        list: SEC.selectedUnits,
+        eventName: eventName,
+        userWithAccess: selectedUser,
+        creationDate: new Date(),
+      }),
+      STORE_ARMY_LIST_URL
+    );
   };
 
   const createNameOptions = () => {
@@ -359,4 +328,4 @@ const StoreArmyListPrompt = (props) => {
   );
 };
 
-export default StoreArmyListPrompt;
+export default StoreArmyListDialog;
