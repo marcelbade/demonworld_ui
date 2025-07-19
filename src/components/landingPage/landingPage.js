@@ -1,21 +1,21 @@
 // React
 import { useContext, useState } from "react";
 // Material UI
-import { Button, Drawer, Grid2 as Grid, IconButton, Typography } from "@mui/material";
+import { Grid2 as Grid, Typography } from "@mui/material";
 // icons
 import deathIcon from "../../assets/icons/icons8-death-64.png";
 import calculatorIcon from "../../assets/icons/icons8-calculator-64.png";
 import bookIcon from "../../assets/icons/icons8-book-64.png";
 import scrollIcon from "../../assets/icons/scroll.png";
-import CancelIcon from "@mui/icons-material/Cancel";
 // functions and components
 import NaviButton from "./NaviButton";
-import { LANDINGPAGE, USER_AUTH } from "../../constants/textsAndMessages";
+import { LANDINGPAGE } from "../../constants/textsAndMessages";
 import LightSwitch from "../shared/LightSwitch";
 import LoginDialog from "../Dialogs/LogInDialog/LogInDialog";
 import UserLogButton from "../Login/UserLogButton";
 // contexts
 import { UserContext } from "../../contexts/userContext";
+import UserAccountDrawer from "../Login/UserAccountDrawer";
 
 const LandingPage = () => {
   const UC = useContext(UserContext);
@@ -82,73 +82,10 @@ const LandingPage = () => {
         )}
       </Grid>
 
-      <Drawer
-        anchor={"right"} //
-        variant="persistent"
-        open={showUserAvatarMenu}
-      >
-        <Grid
-          container //
-          alignItems="self-start"
-          flexDirection="column"
-          sx={{
-            width: "25em",
-          }}
-        >
-          <IconButton
-            onClick={() => {
-              setShowUserAvatarMenu(false);
-            }} //
-            sx={{
-              paddingTop: "1em",
-              paddingLeft: "1em",
-              marginBottom: "5em",
-            }}
-          >
-            <CancelIcon />
-          </IconButton>
-          <Grid
-            container
-            flexDirection="column"
-            alignItems="center"
-            justifyItems="center"
-            sx={{
-              width: "100%",
-            }}
-          >
-            <Button
-              onClick={() => {
-                // TODO logout
-              }} //
-              variant="outlined"
-              sx={{
-                marginBottom: "5em",
-              }}
-            >
-              {USER_AUTH.LOGOUT_ACCOUNT}
-            </Button>
-            <Button
-              onClick={() => {
-                // TODO switch users
-              }} //
-              variant="outlined"
-              sx={{
-                marginBottom: "5em",
-              }}
-            >
-              {USER_AUTH.SWITCH_USER}
-            </Button>
-            <Button
-              onClick={() => {
-                // TODO change password
-              }} //
-              variant="outlined"
-            >
-              {USER_AUTH.CHANGE_PASSWORD}
-            </Button>
-          </Grid>
-        </Grid>
-      </Drawer>
+      <UserAccountDrawer
+        showUserAvatarMenu={showUserAvatarMenu} //
+        setShowUserAvatarMenu={setShowUserAvatarMenu}
+      />
     </Grid>
   );
 };
