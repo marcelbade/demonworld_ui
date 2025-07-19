@@ -5,7 +5,7 @@ import { DWARF_TEXTS, EMPIRE_TEXTS, ORKS_TEXTS } from "../constants/textsAndMess
  * Hook implements additional game logic so it is kept
  * separate from the UI logic. Some faction have
  * additional rules regarding alternative sub factions and their selection:
- * E.g., they limit which alternative subFaction can be selected
+ * I.e., the Rules limit which alternative sub factions can be selected
  * at what point of the selection process.
  * @param {String} faction
  * @param {[String]} alternatives
