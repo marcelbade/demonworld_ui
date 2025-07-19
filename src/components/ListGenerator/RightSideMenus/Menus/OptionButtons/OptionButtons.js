@@ -1,5 +1,5 @@
 // React
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 // Material UI
 import { Grid2 as Grid, Button } from "@mui/material";
@@ -11,13 +11,14 @@ import { UserContext } from "../../../../../contexts/userContext";
 // components and functions
 import calculateScoutingFactor from "../../../../../gameLogic/scoutFactorCalculator/scoutingFactorCalculator";
 import useSubFactionStats from "../../../../../customHooks/UseSubFactionStats";
+import LoginDialog from "../../../../Dialogs/LogInDialog/LogInDialog";
+import SelectPdfTypeDialog from "../../../../Dialogs/SelectPdfTypeDialog/SelectPdfTypeDialog";
+import StoreArmyListDialog from "../../../../Dialogs/StoreArmyListDialog/StoreArmyListDialog";
+import LoadArmyListPrompt from "../../../../Dialogs/LoadArmyDialog/LoadArmyListDialog";
+import ArmyListBoxFooter from "../../../ArmyListView/ArmyList/ArmyListFooter/ArmyListBoxFooter";
 // constants
 import { OPTIONS, PDF } from "../../../../../constants/textsAndMessages";
 import { PDF_URL } from "../../../../../constants/URLs";
-import LoginPrompt from "../../../../Login/LogInPrompt";
-import SelectPdfTypePrompt from "./SelectPdfTypePrompt";
-import StoreArmyListPrompt from "./StoreArmyListPrompt";
-import LoadArmyListPrompt from "./LoadArmyListPrompt";
 
 const OptionButtons = () => {
   const AC = useContext(ArmyContext);
@@ -59,7 +60,7 @@ const OptionButtons = () => {
   };
 
   /**
-   * Function cresates the data structure for the PDF view.
+   * Function creates the data structure for the PDF view.
    * @returns an array of objects eacdh containing all data for one subFaction of the army list.
    */
   const createPDFData = (options) => {
@@ -177,13 +178,13 @@ const OptionButtons = () => {
         padding: "2em",
       }}
     >
-      <LoginPrompt />
-      <SelectPdfTypePrompt
+      <LoginDialog />
+      <SelectPdfTypeDialog
         openPDfInNewTab={openPDfInNewTab} //
         setShowPdfTypePrompt={setShowPdfTypePrompt}
         showPdfTypePrompt={showPdfTypePrompt}
       />
-      <StoreArmyListPrompt
+      <StoreArmyListDialog
         showArmySavePrompt={showArmySavePrompt} //
         setShowArmySavePrompt={setShowArmySavePrompt} //
       />
@@ -203,6 +204,9 @@ const OptionButtons = () => {
           </Button>
         </Grid>
       ))}
+      <Grid>
+        <ArmyListBoxFooter />
+      </Grid>
     </Grid>
   );
 };

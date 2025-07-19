@@ -2,11 +2,11 @@
 import { Button, Dialog, DialogTitle, Grid2 as Grid, IconButton } from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
 // functions and components
-import ContextHelpButton from "../../../../shared/ContextHelpButton";
+import ContextHelpButton from "../../shared/ContextHelpButton";
 // constants
-import { PDF, PUSH_MESSAGE_TYPES } from "../../../../../constants/textsAndMessages";
+import { PDF, PUSH_MESSAGE_TYPES } from "../../../constants/textsAndMessages";
 
-const SelectPdfTypePrompt = (props) => {
+const SelectPdfTypeDialog = (props) => {
   const handleClose = () => {
     props.setShowPdfTypePrompt(false);
   };
@@ -90,4 +90,4 @@ const SelectPdfTypePrompt = (props) => {
   );
 };
 
-export default SelectPdfTypePrompt;
+export default SelectPdfTypeDialog;
