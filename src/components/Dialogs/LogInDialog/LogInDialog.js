@@ -13,14 +13,14 @@ import {
 // icons
 import CancelIcon from "@mui/icons-material/Cancel";
 // functions and components
-import NaviButton from "../landingPage/NaviButton";
+import NaviButton from "../../landingPage/NaviButton";
 // contexts
-import { UserContext } from "../../contexts/userContext";
-import { LOGIN_USER_URL } from "../../constants/URLs";
+import { UserContext } from "../../../contexts/userContext";
+import { LOGIN_USER_URL } from "../../../constants/URLs";
 //  constants
-import { USER_AUTH } from "../../constants/textsAndMessages";
+import { USER_AUTH } from "../../../constants/textsAndMessages";
 //  custom hooks
-import useAxios from "../../customHooks/UseAxios";
+import useAxios from "../../../customHooks/UseAxios";
 
 const LoginDialog = () => {
   const UC = useContext(UserContext);

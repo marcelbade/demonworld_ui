@@ -4,7 +4,7 @@ import { useContext, useState } from "react";
 import { Button, Grid2 as Grid } from "@mui/material";
 //  components and functions
 import NaviButton from "../landingPage/NaviButton";
-import LoginDialog from "../Login/LogInDialog";
+import LoginDialog from "../Dialogs/LogInDialog/LogInDialog";
 import AppBar from "../shared/AppBar";
 import AppBarToggle from "../shared/AppBarToggle";
 // constants

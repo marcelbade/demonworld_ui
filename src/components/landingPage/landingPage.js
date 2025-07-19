@@ -12,7 +12,7 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import NaviButton from "./NaviButton";
 import { LANDINGPAGE, USER_AUTH } from "../../constants/textsAndMessages";
 import LightSwitch from "../shared/LightSwitch";
-import LoginDialog from "../Login/LogInDialog";
+import LoginDialog from "../Dialogs/LogInDialog/LogInDialog";
 import UserLogButton from "../Login/UserLogButton";
 // contexts
 import { UserContext } from "../../contexts/userContext";
