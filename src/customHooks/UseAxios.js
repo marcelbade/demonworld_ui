@@ -32,12 +32,16 @@ const useAxios = () => {
       .catch((error) => pushMessage.showSnackBar(error, PUSH_MESSAGE_TYPES.ERROR));
   };
 
-  const storeData = (data, url) => {
+  const storeData = (data, url, setter) => {
     axios
       .post(url, data, {
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${UC.user.token}` },
       })
-      .then()
+      .then((response) => {
+        if (setter !== null) {
+          setter(response);
+        }
+      })
       .catch((error) => pushMessage.showSnackBar(error, PUSH_MESSAGE_TYPES.ERROR));
   };
 

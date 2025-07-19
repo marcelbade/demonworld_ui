@@ -10,22 +10,22 @@ import {
   IconButton,
   Grid2 as Grid,
 } from "@mui/material";
-//axios
-import axios from "axios";
 // icons
 import CancelIcon from "@mui/icons-material/Cancel";
 // functions and components
 import NaviButton from "../landingPage/NaviButton";
 // contexts
 import { UserContext } from "../../contexts/userContext";
-import { ServerErrorContext } from "../../contexts/serverErrorContext";
 import { LOGIN_USER_URL } from "../../constants/URLs";
 //  constants
 import { USER_AUTH } from "../../constants/textsAndMessages";
+//  custom hooks
+import useAxios from "../../customHooks/UseAxios";
 
 const LoginDialog = () => {
   const UC = useContext(UserContext);
-  const SC = useContext(ServerErrorContext);
+
+  const callAxios = useAxios();
 
   const [inputUserNameError, setInputUserNameError] = useState(false);
   const [inputPasswordError, setInputPasswordError] = useState(false);
@@ -39,44 +39,27 @@ const LoginDialog = () => {
 
     const formData = new FormData(event.currentTarget);
 
-    axios
-      .post(
-        LOGIN_USER_URL,
-        JSON.stringify({
-          userName: formData.get("name"),
-          password: formData.get("pw"),
-        }),
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
-      )
-      .then((response) => {
-        UC.setUser({
-          ...UC.user,
-          userName: response?.data?.userName,
-          isAdmin: response?.data?.isAdmin,
-          isOwner: response?.data?.isOwner,
-          token: response?.data?.token,
-        });
+    callAxios.storeData(
+      JSON.stringify({
+        userName: formData.get("name"),
+        password: formData.get("pw"),
+      }),
+      LOGIN_USER_URL,
+      loginUser
+    );
+  };
 
-        UC.setDisplayLogInPrompt(false);
-        UC.setUserLoggedIn(true);
+  const loginUser = (response) => {
+    UC.setUser({
+      ...UC.user,
+      userName: response?.data?.userName,
+      isAdmin: response?.data?.isAdmin,
+      isOwner: response?.data?.isOwner,
+      token: response?.data?.token,
+    });
 
-        // TODO user roles. Should be an array, maybe. Add roles to server first.
-        //   const roles = response?.data?.roles;
-      })
-      .catch((error) => {
-        if (!error?.response) {
-          SC.setServerErrorMessage("no server response");
-        }
-        if (error.response.data.message === "Unknown user") {
-          setInputUserNameError(true);
-        }
-        if (error.response.data.message === "Invalid password") {
-          setInputPasswordError(true);
-        }
-      });
+    UC.setDisplayLogInPrompt(false);
+    UC.setUserLoggedIn(true);
   };
 
   const resetInputUserError = () => {

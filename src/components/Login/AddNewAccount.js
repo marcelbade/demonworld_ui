@@ -66,7 +66,8 @@ const AddNewAccount = () => {
         userName: formData.get("name"),
         password: formData.get("pw"),
       }),
-      REGISTER_USER_URL
+      REGISTER_USER_URL,
+      null
     );
     history.push({
       pathname: "/",

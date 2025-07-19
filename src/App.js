@@ -34,7 +34,6 @@ import { ThemeProvider } from "@mui/material";
 // constants
 import { NONE, NO_ALLY } from "./constants/factions";
 import { FACTION_DTOS_URL, ITEM_DTOS_URL } from "./constants/URLs";
-import ServerErrorProvider from "./contexts/serverErrorContext";
 // custom hooks
 import useAxios from "./customHooks/UseAxios";
 
@@ -50,9 +49,6 @@ function App() {
   });
   const [userLoggedIn, setUserLoggedIn] = useState(false);
   const [displayLogInPrompt, setDisplayLogInPrompt] = useState(false);
-
-  // server
-  const [serverErrorMessage, setServerErrorMessage] = useState({});
 
   // intialize local states
   const [fetchedFactions, setFetchedFactions] = useState([]);
@@ -161,183 +157,176 @@ function App() {
       <ThemeProvider theme={darkModeOff ? lightTheme : darkTheme}>
         <CssBaseline />
 
-        <ServerErrorProvider
+        <UserProvider
           value={{
-            serverErrorMessage: serverErrorMessage,
-            setServerErrorMessage: setServerErrorMessage,
+            user: user,
+            userLoggedIn: userLoggedIn,
+            displayLogInPrompt: displayLogInPrompt,
+            setUser: setUser,
+            setUserLoggedIn: setUserLoggedIn,
+            setDisplayLogInPrompt: setDisplayLogInPrompt,
           }}
         >
-          <UserProvider
+          <ListDisplayProvider
             value={{
-              user: user,
-              userLoggedIn: userLoggedIn,
-              displayLogInPrompt: displayLogInPrompt,
-              setUser: setUser,
-              setUserLoggedIn: setUserLoggedIn,
-              setDisplayLogInPrompt: setDisplayLogInPrompt,
+              simpleModeOn: simpleModeOn,
+              setSimpleMode: setSimpleMode,
             }}
           >
-            <ListDisplayProvider
+            <MenuProvider
               value={{
-                simpleModeOn: simpleModeOn,
-                setSimpleMode: setSimpleMode,
+                openMenu: openMenu,
+                setOpenMenu: setOpenMenu,
               }}
             >
-              <MenuProvider
+              <LightSwitchProvider
                 value={{
-                  openMenu: openMenu,
-                  setOpenMenu: setOpenMenu,
+                  darkModeOff: darkModeOff,
+                  setDarkModeOff: setDarkModeOff,
                 }}
               >
-                <LightSwitchProvider
+                <LossCalcProvider
                   value={{
-                    darkModeOff: darkModeOff,
-                    setDarkModeOff: setDarkModeOff,
+                    list: list,
+                    totalPointsLost: totalPointsLost,
+                    setList: setList,
+                    setTotalPointsLost: setTotalPointsLost,
                   }}
                 >
-                  <LossCalcProvider
+                  <TournamentRulesProvider
                     value={{
-                      list: list,
-                      totalPointsLost: totalPointsLost,
-                      setList: setList,
-                      setTotalPointsLost: setTotalPointsLost,
+                      // TOURNAMENT RULES OVERRIDE
+                      tournamentOverrideRules: tournamentOverrideRules,
+                      showTournamentRulesMenu: showTournamentRulesMenu,
+                      setShowTournamentRulesMenu: setShowTournamentRulesMenu,
+                      setTournamentOverrideRules: setTournamentOverrideRules,
                     }}
                   >
-                    <TournamentRulesProvider
+                    <SecondSubFactionProvider
                       value={{
-                        // TOURNAMENT RULES OVERRIDE
-                        tournamentOverrideRules: tournamentOverrideRules,
-                        showTournamentRulesMenu: showTournamentRulesMenu,
-                        setShowTournamentRulesMenu: setShowTournamentRulesMenu,
-                        setTournamentOverrideRules: setTournamentOverrideRules,
+                        // SECOND SUB FACTION
+                        hasAdditionalSubFaction: hasAdditionalSubFaction,
+                        secondSubFactionList: secondSubFactionList,
+                        excemptSubFactions: excemptSubFactions,
+                        secondSubfactionCaption: secondSubfactionCaption,
+                        setHasAdditionalSubFaction: setHasAdditionalSubFaction,
+                        setSecondSubFactionList: setSecondSubFactionList,
+                        setExcemptSubFactions: setExcemptSubFactions,
+                        setSecondSubfactionCaption: setSecondSubfactionCaption,
                       }}
                     >
-                      <SecondSubFactionProvider
+                      <ItemContext
                         value={{
-                          // SECOND SUB FACTION
-                          hasAdditionalSubFaction: hasAdditionalSubFaction,
-                          secondSubFactionList: secondSubFactionList,
-                          excemptSubFactions: excemptSubFactions,
-                          secondSubfactionCaption: secondSubfactionCaption,
-                          setHasAdditionalSubFaction: setHasAdditionalSubFaction,
-                          setSecondSubFactionList: setSecondSubFactionList,
-                          setExcemptSubFactions: setExcemptSubFactions,
-                          setSecondSubfactionCaption: setSecondSubfactionCaption,
+                          // ITEMSHOP
+                          fetchedItems: fetchedItems,
+                          allEquippedItems: allEquippedItems,
+                          unitSelectedForShop: unitSelectedForShop,
+                          setAllEquippedItems: setAllEquippedItems,
+                          setUnitSelectedForShop: setUnitSelectedForShop,
                         }}
                       >
-                        <ItemContext
+                        <SelectionContext
                           value={{
-                            // ITEMSHOP
-                            fetchedItems: fetchedItems,
-                            allEquippedItems: allEquippedItems,
-                            unitSelectedForShop: unitSelectedForShop,
-                            setAllEquippedItems: setAllEquippedItems,
-                            setUnitSelectedForShop: setUnitSelectedForShop,
+                            // SELECTED UNIT LIST
+                            selectedUnits: selectedUnits,
+                            maxPointsAllowance: maxPointsAllowance,
+                            setSelectedUnits: setSelectedUnits,
+                            setMaxPointsAllowance: setMaxPointsAllowance,
                           }}
                         >
-                          <SelectionContext
+                          <RightMenuContext
                             value={{
-                              // SELECTED UNIT LIST
-                              selectedUnits: selectedUnits,
-                              maxPointsAllowance: maxPointsAllowance,
-                              setSelectedUnits: setSelectedUnits,
-                              setMaxPointsAllowance: setMaxPointsAllowance,
+                              // RIGHT SIDE MENU
+                              statCardState: statCardState,
+                              secondSubFactionMenuState: secondSubFactionMenuState,
+                              itemShopState: itemShopState,
+                              showOptionButtons: showOptionButtons,
+                              displayedCard: displayedCard,
+                              setStatCardState: setStatCardState,
+                              setItemShopState: setItemShopState,
+                              setSecondSubFactionMenuState: setSecondSubFactionMenuState,
+                              setShowOptionButtons: setShowOptionButtons,
+                              setDisplayedCard: setDisplayedCard,
                             }}
                           >
-                            <RightMenuContext
+                            <AlternativeListProvider
                               value={{
-                                // RIGHT SIDE MENU
-                                statCardState: statCardState,
-                                secondSubFactionMenuState: secondSubFactionMenuState,
-                                itemShopState: itemShopState,
-                                showOptionButtons: showOptionButtons,
-                                displayedCard: displayedCard,
-                                setStatCardState: setStatCardState,
-                                setItemShopState: setItemShopState,
-                                setSecondSubFactionMenuState: setSecondSubFactionMenuState,
-                                setShowOptionButtons: setShowOptionButtons,
-                                setDisplayedCard: setDisplayedCard,
+                                // ALTERNATIVE LISTS
+                                armyHasAlternativeLists: armyHasAlternativeLists,
+                                numberOfAlternativeChoices: numberOfAlternativeChoices,
+                                selectedAlternativeLists: selectedAlternativeLists,
+                                altArmyListSelectionComplete: altArmyListSelectionComplete,
+                                alternateListNames: alternateListNames,
+                                allyIsAlternativeOption: allyIsAlternativeOption,
+                                setNumberOfAlternativeChoices: setNumberOfAlternativeChoices,
+                                setAlternateListNames: setAlternateListNames,
+                                setAltArmyListSelectionComplete: setAltArmyListSelectionComplete,
+                                setSelectedAlternativeLists: setSelectedAlternativeLists,
+                                setArmyHasAlternativeLists: setArmyHasAlternativeLists,
+                                setAllyIsAlternativeOption: setAllyIsAlternativeOption,
                               }}
                             >
-                              <AlternativeListProvider
+                              <AllyProvider
                                 value={{
-                                  // ALTERNATIVE LISTS
-                                  armyHasAlternativeLists: armyHasAlternativeLists,
-                                  numberOfAlternativeChoices: numberOfAlternativeChoices,
-                                  selectedAlternativeLists: selectedAlternativeLists,
-                                  altArmyListSelectionComplete: altArmyListSelectionComplete,
-                                  alternateListNames: alternateListNames,
-                                  allyIsAlternativeOption: allyIsAlternativeOption,
-                                  setNumberOfAlternativeChoices: setNumberOfAlternativeChoices,
-                                  setAlternateListNames: setAlternateListNames,
-                                  setAltArmyListSelectionComplete: setAltArmyListSelectionComplete,
-                                  setSelectedAlternativeLists: setSelectedAlternativeLists,
-                                  setArmyHasAlternativeLists: setArmyHasAlternativeLists,
-                                  setAllyIsAlternativeOption: setAllyIsAlternativeOption,
+                                  // ALLY
+                                  allyName: allyName,
+                                  allySubFactions: distinctAllySubFactions,
+                                  listOfAlliedUnits: listOfAlliedUnits,
+                                  allySubFactionDTOs: allySubFactionDTOs,
+                                  setAllyName: setAllyName,
+                                  setListOfAlliedUnits: setListOfAlliedUnits,
+                                  setDistinctAllySubFactions: setDistinctAllySubFactions,
+                                  setAllySubFactionDTOs: setAllySubFactionDTOs,
                                 }}
                               >
-                                <AllyProvider
+                                <ArmyProvider
                                   value={{
-                                    // ALLY
-                                    allyName: allyName,
-                                    allySubFactions: distinctAllySubFactions,
-                                    listOfAlliedUnits: listOfAlliedUnits,
-                                    allySubFactionDTOs: allySubFactionDTOs,
-                                    setAllyName: setAllyName,
-                                    setListOfAlliedUnits: setListOfAlliedUnits,
-                                    setDistinctAllySubFactions: setDistinctAllySubFactions,
-                                    setAllySubFactionDTOs: setAllySubFactionDTOs,
+                                    // ARMY
+                                    playerName: playerName,
+                                    teamName: teamName,
+                                    armyName: armyName,
+                                    selectedFactionName: selectedFactionName,
+                                    fetchedFactions: fetchedFactions,
+                                    subFactions: distinctSubFactions,
+                                    listOfAllFactionUnits: listOfAllFactionUnits,
+                                    subFactionDTOs: subFactionDTOs,
+                                    setArmyName: setArmyName,
+                                    setSelectedFactionName: setSelectedFactionName,
+                                    setDistinctSubFactions: setDistinctSubFactions,
+                                    setListOfAllFactionUnits: setListOfAllFactionUnits,
+                                    setSubFactionDTOs: setSubFactionDTOs,
+                                    setTeamName: setTeamName,
+                                    setPlayerName: setPlayerName,
                                   }}
                                 >
-                                  <ArmyProvider
-                                    value={{
-                                      // ARMY
-                                      playerName: playerName,
-                                      teamName: teamName,
-                                      armyName: armyName,
-                                      selectedFactionName: selectedFactionName,
-                                      fetchedFactions: fetchedFactions,
-                                      subFactions: distinctSubFactions,
-                                      listOfAllFactionUnits: listOfAllFactionUnits,
-                                      subFactionDTOs: subFactionDTOs,
-                                      setArmyName: setArmyName,
-                                      setSelectedFactionName: setSelectedFactionName,
-                                      setDistinctSubFactions: setDistinctSubFactions,
-                                      setListOfAllFactionUnits: setListOfAllFactionUnits,
-                                      setSubFactionDTOs: setSubFactionDTOs,
-                                      setTeamName: setTeamName,
-                                      setPlayerName: setPlayerName,
-                                    }}
-                                  >
-                                    <CustomSnackBarProvider>
-                                      {fetchedFactions && fetchedItems ? (
-                                        <Grid container>
-                                          <Switch>
-                                            <Route path="/" component={landingPage} exact />
-                                            <Route path="/compendium" component={CompendiumTable} exact />
-                                            <Route path="/listGenerator" component={ListGenerator} />
-                                            <Route path="/lossCalculator" component={LossCalculator} />
-                                            <Route path="/PdfBox" component={PdfBox} />
-                                            <Route path="/cardCreator" component={CardCreator} exact />
-                                            <Route path="/addNewAccount" component={AddNewAccount} exact />
-                                          </Switch>
-                                        </Grid>
-                                      ) : null}
-                                    </CustomSnackBarProvider>
-                                  </ArmyProvider>
-                                </AllyProvider>
-                              </AlternativeListProvider>
-                            </RightMenuContext>
-                          </SelectionContext>
-                        </ItemContext>
-                      </SecondSubFactionProvider>
-                    </TournamentRulesProvider>
-                  </LossCalcProvider>
-                </LightSwitchProvider>
-              </MenuProvider>
-            </ListDisplayProvider>
-          </UserProvider>
-        </ServerErrorProvider>
+                                  <CustomSnackBarProvider>
+                                    {fetchedFactions && fetchedItems ? (
+                                      <Grid container>
+                                        <Switch>
+                                          <Route path="/" component={landingPage} exact />
+                                          <Route path="/compendium" component={CompendiumTable} exact />
+                                          <Route path="/listGenerator" component={ListGenerator} />
+                                          <Route path="/lossCalculator" component={LossCalculator} />
+                                          <Route path="/PdfBox" component={PdfBox} />
+                                          <Route path="/cardCreator" component={CardCreator} exact />
+                                          <Route path="/addNewAccount" component={AddNewAccount} exact />
+                                        </Switch>
+                                      </Grid>
+                                    ) : null}
+                                  </CustomSnackBarProvider>
+                                </ArmyProvider>
+                              </AllyProvider>
+                            </AlternativeListProvider>
+                          </RightMenuContext>
+                        </SelectionContext>
+                      </ItemContext>
+                    </SecondSubFactionProvider>
+                  </TournamentRulesProvider>
+                </LossCalcProvider>
+              </LightSwitchProvider>
+            </MenuProvider>
+          </ListDisplayProvider>
+        </UserProvider>
       </ThemeProvider>
     </StyledEngineProvider>
   );

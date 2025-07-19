@@ -107,7 +107,8 @@ const StoreArmyListDialog = (props) => {
         userWithAccess: selectedUser,
         creationDate: new Date(),
       }),
-      STORE_ARMY_LIST_URL
+      STORE_ARMY_LIST_URL,
+      null
     );
   };
 
