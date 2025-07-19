@@ -5,7 +5,7 @@ import { useContext } from "react";
 //  hooks
 import usePushMessages from "./UsePushMessages";
 // constants
-import { PUSH_MESSAGE_TYPES } from "../constants/textsAndMessages";
+import { axiosTexts, PUSH_MESSAGE_TYPES } from "../constants/textsAndMessages";
 // contexts
 import { UserContext } from "../contexts/userContext";
 
@@ -30,7 +30,7 @@ const useAxios = () => {
         { headers: { Authorization: `Bearer ${UC.user.token}` } }
       )
       .then(() => {
-        pushMessage.showSnackBar("Löschen erfolgreich", PUSH_MESSAGE_TYPES.SUCCESS);
+        pushMessage.showSnackBar(axiosTexts.DELETION_SUCCESFUL, PUSH_MESSAGE_TYPES.SUCCESS);
       })
       .catch((error) => pushMessage.showSnackBar(error, PUSH_MESSAGE_TYPES.ERROR));
   };

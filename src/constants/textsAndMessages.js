@@ -1,3 +1,7 @@
+export const axiosTexts = {
+  DELETION_SUCCESFUL: "Löschen erfolgreich",
+};
+
 export const ALTTEXT = {
   RANGE_ARMOR: "Fernkampfpanzerung",
   MELEE_ARMOR: "Nahkampfpanzerung",
@@ -138,7 +142,7 @@ export const LOAD_ARMY_LIST_DIALOG = {
   FILTER_FOR_FACTION: "Fraktion auswählen",
   FILTER_FOR_EVENT: "Event auswählen",
   NOT_PART_OF_EVENT: "Nicht Teil eines Turniers oder Events",
-  LOADED_LIST_SUCCESSFULLY:"Liste erfolgreich geladen",
+  LOADED_LIST_SUCCESSFULLY: "Liste erfolgreich geladen",
   ConfirmationDialogTitle: "Soll diese Liste wirklich gelöscht werden?",
   ConfirmationDialogText: "Wenn du die Löschung bestätigst, wird die Liste unwiederruflich gelöscht.",
   ConfirmationDialogButtonConfirm: "Liste Löschen",
