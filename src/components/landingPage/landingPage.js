@@ -1,5 +1,5 @@
 // React
-import { useContext, useState } from "react";
+import { useContext } from "react";
 // Material UI
 import { Grid2 as Grid, Typography } from "@mui/material";
 // icons
@@ -19,8 +19,6 @@ import UserAccountDrawer from "../Login/UserAccountDrawer";
 
 const LandingPage = () => {
   const UC = useContext(UserContext);
-
-  const [showUserAvatarMenu, setShowUserAvatarMenu] = useState(false);
 
   const naviButtons = [
     { text: LANDINGPAGE.COMPENDIUM, relativeURL: "/compendium", icon: bookIcon, display: true },
@@ -52,7 +50,6 @@ const LandingPage = () => {
           <LightSwitch iconSize={"large"} />
           <UserLogButton
             iconSize={"large"} //
-            setShowUserAvatarMenu={setShowUserAvatarMenu}
           />
         </Grid>
       </Grid>
@@ -82,10 +79,7 @@ const LandingPage = () => {
         )}
       </Grid>
 
-      <UserAccountDrawer
-        showUserAvatarMenu={showUserAvatarMenu} //
-        setShowUserAvatarMenu={setShowUserAvatarMenu}
-      />
+      <UserAccountDrawer />
     </Grid>
   );
 };

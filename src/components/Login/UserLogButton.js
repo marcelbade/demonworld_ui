@@ -1,5 +1,5 @@
 // React
-import React, { useContext } from "react";
+import { useContext } from "react";
 // Material UI
 import { Avatar, IconButton, Tooltip, Typography } from "@mui/material";
 // icons
@@ -15,8 +15,6 @@ const UserLogButton = (props) => {
   const displayLogInPrompt = () => {
     UC.setDisplayLogInPrompt(true);
   };
-
-  const Logout = () => {};
 
   return (
     <Tooltip
@@ -35,10 +33,14 @@ const UserLogButton = (props) => {
             height: props.buttonHeight,
           }}
           onClick={() => {
-            props.setShowUserAvatarMenu(true);
+            UC.setShowUserAvatarDrawer(true);
           }}
         >
-          <Avatar sx={{ backgroundColor: "green" }}>
+          <Avatar
+            sx={{
+              backgroundColor: "green", //
+            }}
+          >
             {UC.user.userName //
               .charAt(0)
               .toUpperCase()}

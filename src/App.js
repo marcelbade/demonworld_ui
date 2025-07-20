@@ -49,6 +49,7 @@ function App() {
   });
   const [userLoggedIn, setUserLoggedIn] = useState(false);
   const [displayLogInPrompt, setDisplayLogInPrompt] = useState(false);
+  const [showUserAvatarDrawer, setShowUserAvatarDrawer] = useState(false);
 
   // intialize local states
   const [fetchedFactions, setFetchedFactions] = useState([]);
@@ -142,12 +143,10 @@ function App() {
     fetchItemData();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  //TODO Change URL in Production!
   const fetchFactionData = async () => {
     callAxios.fetchData(setFetchedFactions, FACTION_DTOS_URL);
   };
 
-  //TODO Change URL in Production!
   const fetchItemData = async () => {
     callAxios.fetchData(setFetchedItems, ITEM_DTOS_URL);
   };
@@ -162,9 +161,11 @@ function App() {
             user: user,
             userLoggedIn: userLoggedIn,
             displayLogInPrompt: displayLogInPrompt,
+            showUserAvatarDrawer: showUserAvatarDrawer,
             setUser: setUser,
             setUserLoggedIn: setUserLoggedIn,
             setDisplayLogInPrompt: setDisplayLogInPrompt,
+            setShowUserAvatarDrawer: setShowUserAvatarDrawer,
           }}
         >
           <ListDisplayProvider

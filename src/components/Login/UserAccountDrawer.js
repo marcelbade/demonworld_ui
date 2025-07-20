@@ -24,14 +24,21 @@ const UserAccountDrawer = (props) => {
       isOwner: "",
       token: "",
     });
-
-    // TODO: reload page, close drawer!
+    UC.setUserLoggedIn(false);
+    UC.setShowUserAvatarDrawer(false);
   };
 
+  const changeAccount = () => {
+    logOut();
 
-  const changeAccount = () => {};
+    //TODO
+
+    UC.setDisplayLogInPrompt(true);
+  };
+
   const changePassword = () => {};
 
+  // buttons generated via table-driven function
   const buttons = [
     { onClickAction: logOut, buttonText: USER_AUTH.LOGOUT_ACCOUNT },
     { onClickAction: changeAccount, buttonText: USER_AUTH.SWITCH_USER },
@@ -42,7 +49,7 @@ const UserAccountDrawer = (props) => {
     <Drawer
       anchor={"right"} //
       variant="persistent"
-      open={props.showUserAvatarMenu}
+      open={UC.showUserAvatarDrawer}
     >
       <Grid
         container //
@@ -54,7 +61,7 @@ const UserAccountDrawer = (props) => {
       >
         <IconButton
           onClick={() => {
-            props.setShowUserAvatarMenu(false);
+            UC.setShowUserAvatarDrawer(false);
           }} //
           sx={{
             paddingTop: "1em",
