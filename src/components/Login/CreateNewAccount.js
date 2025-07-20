@@ -7,6 +7,7 @@ import { TextField, Typography, Grid2 as Grid, Button, Box } from "@mui/material
 import { ChevronLeft } from "@mui/icons-material";
 // functions and components
 import NaviButton from "../landingPage/NaviButton";
+import { isThePasswordValid } from "./PasswordCriteriaCheck";
 // contexts
 import LightSwitch from "../shared/LightSwitch";
 // constants
@@ -15,7 +16,7 @@ import { ALL_USER_NAMES_URL, REGISTER_USER_URL } from "../../constants/URLs";
 // custom hooks
 import useAxios from "../../customHooks/UseAxios";
 
-const AddNewAccount = () => {
+const CreateNewAccount = () => {
   const MARGIN = "2em";
   const INPUT_WIDTH = "30em";
 
@@ -45,11 +46,10 @@ const AddNewAccount = () => {
     const userName = formData.get("name");
     const pw = formData.get("pw");
     const pwRepeated = formData.get("pwRepeated");
-    const passwordRegEx = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/);
-
+ 
     setIsUserTaken(allUserNames.includes(event.target.value) && userName.length !== 0);
 
-    setIsPasswordInvalid(!passwordRegEx.test(event.target.value) && pw.length !== 0);
+    setIsPasswordInvalid(!isThePasswordValid(event.target.value) && pw.length !== 0);
 
     setPasswordsNotIdentical(pw !== pwRepeated && pw.length !== 0 && pwRepeated.length !== 0);
   };
@@ -168,4 +168,4 @@ const AddNewAccount = () => {
   );
 };
 
-export default AddNewAccount;
+export default CreateNewAccount;
