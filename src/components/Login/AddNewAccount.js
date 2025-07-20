@@ -35,7 +35,6 @@ const AddNewAccount = () => {
     callAxios.fetchData(setAllUserNames, ALL_USER_NAMES_URL);
   };
 
-  // TODO finish this!
   /**
    * Function evaluates the user input while typing
    * - makes sure that userName is not already taken
