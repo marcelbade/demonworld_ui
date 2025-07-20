@@ -128,6 +128,9 @@ export const USER_AUTH = {
   CHANGE_PASSWORD: "Passwort Ändern",
   UNKNOWN_USER: "Unbekannter Benutzer",
   INVALID_PW: "Falsches Password",
+  OLD_PW:"Bitte altes Passwort eingeben",
+  NEW_PW:"Bitte neues Passwort eingeben",
+  REPEAT_NEW_PW:"Bitte neues Passwort wiederholen",
 };
 
 export const PASSWORDS = {
