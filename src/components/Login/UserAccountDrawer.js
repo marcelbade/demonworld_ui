@@ -30,13 +30,12 @@ const UserAccountDrawer = (props) => {
 
   const changeAccount = () => {
     logOut();
-
-    //TODO
-
     UC.setDisplayLogInPrompt(true);
   };
 
-  const changePassword = () => {};
+  const changePassword = () => {
+    UC.setShowPasswordReset(true);
+  };
 
   // buttons generated via table-driven function
   const buttons = [
