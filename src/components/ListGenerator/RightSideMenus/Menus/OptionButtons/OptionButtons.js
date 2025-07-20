@@ -50,8 +50,6 @@ const OptionButtons = () => {
    * Function opens the pdf generator in a new tab and sends all data needed via the window object.
    */
   const openPDfInNewTab = (options) => {
-    //TODO: replace URL in production!!
-
     const URL = PDF_URL;
     const transportObj = createPDFData(options);
 

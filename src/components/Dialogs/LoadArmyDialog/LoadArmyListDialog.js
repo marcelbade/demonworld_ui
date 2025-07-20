@@ -72,7 +72,6 @@ const LoadArmyListPrompt = (props) => {
   const loadListintoTool = (listObj) => {
     AC.setSelectedFactionName(listObj.faction);
     AC.setPlayerName(listObj.userName);
-    // TODO;
     // AC.setTeamName(listObj.teamName);
 
     let result = [];
