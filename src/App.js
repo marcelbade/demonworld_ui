@@ -11,7 +11,7 @@ import ListGenerator from "./components/ListGenerator/ListGenerator";
 import LossCalculator from "./components/lossCalculator/LossCalculator";
 import PdfBox from "./components/PDFGenerator/PDFBox";
 import CardCreator from "./components/cardCreator/CardCreator";
-import AddNewAccount from "./components/Login/AddNewAccount";
+import CreateNewAccount from "./components/Login/CreateNewAccount";
 // context providers
 import AllyProvider from "./contexts/allyContext";
 import AlternativeListProvider from "./contexts/alternativeListContext";
@@ -50,6 +50,7 @@ function App() {
   const [userLoggedIn, setUserLoggedIn] = useState(false);
   const [displayLogInPrompt, setDisplayLogInPrompt] = useState(false);
   const [showUserAvatarDrawer, setShowUserAvatarDrawer] = useState(false);
+  const [showPasswordReset, setShowPasswordReset] = useState(false);
 
   // intialize local states
   const [fetchedFactions, setFetchedFactions] = useState([]);
@@ -162,10 +163,12 @@ function App() {
             userLoggedIn: userLoggedIn,
             displayLogInPrompt: displayLogInPrompt,
             showUserAvatarDrawer: showUserAvatarDrawer,
+            showPasswordReset: showPasswordReset,
             setUser: setUser,
             setUserLoggedIn: setUserLoggedIn,
             setDisplayLogInPrompt: setDisplayLogInPrompt,
             setShowUserAvatarDrawer: setShowUserAvatarDrawer,
+            setShowPasswordReset: setShowPasswordReset,
           }}
         >
           <ListDisplayProvider
@@ -310,7 +313,7 @@ function App() {
                                           <Route path="/lossCalculator" component={LossCalculator} />
                                           <Route path="/PdfBox" component={PdfBox} />
                                           <Route path="/cardCreator" component={CardCreator} exact />
-                                          <Route path="/addNewAccount" component={AddNewAccount} exact />
+                                          <Route path="/addNewAccount" component={CreateNewAccount} exact />
                                         </Switch>
                                       </Grid>
                                     ) : null}
