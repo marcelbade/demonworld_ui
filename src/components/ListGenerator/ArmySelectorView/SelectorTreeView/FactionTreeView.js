@@ -5,7 +5,7 @@ import {  Grid2 as Grid } from "@mui/material";
 // context
 import { ArmyContext } from "../../../../contexts/armyContext";
 import { AlternativeListContext } from "../../../../contexts/alternativeListContext";
-import { AllyContext } from "../../../../contexts/allyContext";
+import { AllyContext } from "../../../../contexts/allyContext.js";
 // components and functions
 import UnitSelectionTree from "./UnitSelectionTree.js";
 import useArmyValidation from "../../../../customHooks/UseArmyValidation.js";
