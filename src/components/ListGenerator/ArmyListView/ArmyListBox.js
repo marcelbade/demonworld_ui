@@ -1,5 +1,5 @@
 // React
-import React, { useContext } from "react";
+import { useContext } from "react";
 // components and functions
 import ArmyListBoxHeader from "./ArmyList/ArmyListHeader/ArmyListBoxHeader";
 import ArmyListBoxCenter from "./ArmyList/ArmyListCenter/ArmyListBoxCenter";
@@ -37,9 +37,6 @@ const ArmyListBox = () => {
       </Grid>
       <Grid>
         <ArmyListBoxCenter />
-      </Grid>
-      <Grid>
-        <ArmyListBoxFooter />
       </Grid>
     </Grid>
   ) : null;
