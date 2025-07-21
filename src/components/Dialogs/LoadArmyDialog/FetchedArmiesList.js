@@ -21,7 +21,7 @@ import { FACTION_COLORS } from "../../../constants/factions";
 // hooks
 import usePointCostCalculator from "../../../customHooks/UsePointCostCalculator";
 
-const LoadedArmyList = (props) => {
+const FetchedArmiesList = (props) => {
   // color the list avatar
   const factionColors = FACTION_COLORS();
 
@@ -124,4 +124,4 @@ const LoadedArmyList = (props) => {
   );
 };
 
-export default LoadedArmyList;
+export default FetchedArmiesList;
