@@ -45,7 +45,8 @@ const LoginDialog = () => {
         password: formData.get("pw"),
       }),
       LOGIN_USER_URL,
-      loginUser
+      loginUser,
+      USER_AUTH.LOGIN_SUCCESSFULL
     );
   };
 

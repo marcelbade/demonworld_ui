@@ -32,7 +32,18 @@ const useAxios = () => {
       .catch((error) => pushMessage.showSnackBar(error, PUSH_MESSAGE_TYPES.ERROR));
   };
 
-  const storeData = (data, url, setter) => {
+  /**
+   * Function calls the Axios POST method to send data to the BE.
+   * If a useState setter function is supplied, the response value will
+   * be passed to the function, as the new state value.
+   * If the request is successfull (201), a toast message is displayed.
+   * If any error is returned, the error message is shown as toast message
+   * @param {String} data stringified JSON object
+   * @param {String} url
+   * @param {function} setter must be null if no setter function is passed
+   * @param {String} successMessage
+   */
+  const storeData = (data, url, setter, successMessage) => {
     axios
       .post(url, data, {
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${UC.user.token}` },
@@ -41,6 +52,7 @@ const useAxios = () => {
         if (setter !== null) {
           setter(response);
         }
+        pushMessage.showSnackBar(successMessage, PUSH_MESSAGE_TYPES.SUCCESS);
       })
       .catch((error) => pushMessage.showSnackBar(error, PUSH_MESSAGE_TYPES.ERROR));
   };

@@ -101,7 +101,8 @@ const StoreArmyListDialog = (props) => {
         creationDate: new Date(),
       }),
       STORE_ARMY_LIST_URL,
-      null
+      null,
+      ARMY_LIST.LIST_CREATED
     );
   };
 
