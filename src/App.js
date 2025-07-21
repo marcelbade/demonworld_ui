@@ -70,6 +70,8 @@ function App() {
   const [teamName, setTeamName] = useState("");
   const [playerName, setPlayerName] = useState("");
   const [armyName, setArmyName] = useState("");
+  // army list was loaded, i.e. fetched from DB
+  const [isFetchedArmyList, setIsFetchedArmyList] = useState(false);
   // selected faction & army list
   const [selectedFactionName, setSelectedFactionName] = useState(NONE);
   const [distinctSubFactions, setDistinctSubFactions] = useState([]);
@@ -289,6 +291,7 @@ function App() {
                                     playerName: playerName,
                                     teamName: teamName,
                                     armyName: armyName,
+                                    isFetchedArmyList: isFetchedArmyList,
                                     selectedFactionName: selectedFactionName,
                                     fetchedFactions: fetchedFactions,
                                     subFactions: distinctSubFactions,
@@ -301,6 +304,7 @@ function App() {
                                     setSubFactionDTOs: setSubFactionDTOs,
                                     setTeamName: setTeamName,
                                     setPlayerName: setPlayerName,
+                                    setIsFetchedArmyList: setIsFetchedArmyList,
                                   }}
                                 >
                                   <CustomSnackBarProvider>
