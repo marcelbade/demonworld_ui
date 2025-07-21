@@ -18,10 +18,14 @@ import FileUploadIcon from "@mui/icons-material/FileUpload";
 import { NO_EVENT } from "../../../constants/eventConstants";
 import { ARMY_LIST, COMPENDIUM } from "../../../constants/textsAndMessages";
 import { FACTION_COLORS } from "../../../constants/factions";
+// hooks
+import usePointCostCalculator from "../../../customHooks/UsePointCostCalculator";
 
 const LoadedArmyList = (props) => {
   // color the list avatar
   const factionColors = FACTION_COLORS();
+
+  const calculator = usePointCostCalculator();
 
   const filterListObjByFaction = (listObj) => {
     if (props.filteredFaction === "") {
@@ -37,22 +41,6 @@ const LoadedArmyList = (props) => {
     }
 
     return listObj.eventName === props.filteredEvent;
-  };
-
-  // TODO you have a file with functions that do this shit! - is this nevessary?
-  /**
-   * Function calculates the net army point cost of the list.
-   * @param {[unitCard]} list
-   * @returns the net army point cost for the army
-   */
-  const armySize = (list) => {
-    let netPoints = 0;
-
-    list.forEach((l) => {
-      netPoints += l.points;
-    });
-
-    return netPoints;
   };
 
   /**
@@ -106,7 +94,7 @@ const LoadedArmyList = (props) => {
                     variant="body2"
                     sx={{ color: "text.primary", display: "inline" }}
                   >
-                    {`${l.faction} - ${armySize(l.list)} ${COMPENDIUM.POINTS} - ${setEvent(l.eventName)} `}
+                    {`${l.faction} - ${calculator.calculateTotalArmyCost(l.list)} ${COMPENDIUM.POINTS} - ${setEvent(l.eventName)} `}
                   </Typography>
                 </React.Fragment>
               }
