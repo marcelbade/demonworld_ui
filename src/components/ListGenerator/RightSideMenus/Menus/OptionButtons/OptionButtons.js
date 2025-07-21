@@ -14,7 +14,7 @@ import useSubFactionStats from "../../../../../customHooks/UseSubFactionStats";
 import LoginDialog from "../../../../Dialogs/LogInDialog/LogInDialog";
 import SelectPdfTypeDialog from "../../../../Dialogs/SelectPdfTypeDialog/SelectPdfTypeDialog";
 import StoreArmyListDialog from "../../../../Dialogs/StoreArmyListDialog/StoreArmyListDialog";
-import LoadArmyListPrompt from "../../../../Dialogs/LoadArmyDialog/LoadArmyListDialog";
+import LoadArmyListDialog from "../../../../Dialogs/LoadArmyDialog/LoadArmyListDialog";
 import ArmyListBoxFooter from "../../../ArmyListView/ArmyList/ArmyListFooter/ArmyListBoxFooter";
 // constants
 import { OPTIONS, PDF } from "../../../../../constants/textsAndMessages";
@@ -186,7 +186,7 @@ const OptionButtons = () => {
         showArmySavePrompt={showArmySavePrompt} //
         setShowArmySavePrompt={setShowArmySavePrompt} //
       />
-      <LoadArmyListPrompt
+      <LoadArmyListDialog
         listSetter={SEC.setSelectedUnits}
         showArmyLoadPrompt={showArmyLoadPrompt} //
         setShowArmyLoadPrompt={setShowArmyLoadPrompt} //
