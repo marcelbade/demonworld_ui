@@ -18,20 +18,20 @@ import useAxios from "../../../customHooks/UseAxios";
 import { DELETE_ARMY_LIST_URL, RETREIVE_ARMY_LIST_URL } from "../../../constants/URLs";
 import { LOAD_ARMY_LIST_DIALOG, PUSH_MESSAGE_TYPES } from "../../../constants/textsAndMessages";
 import useUnitEnricher from "../../../customHooks/UseUnitEnricher";
-import LoadedArmyList from "./LoadedArmyList";
+import FetchedArmiesList from "./FetchedArmiesList";
 import ListFactionFilter from "./ListFactionFilter";
 import ListEventFilter from "./ListEventFilter";
 import DeleteConfirmationDialog from "../ConfirmationDialog/DeleteConfirmationDialog";
+import UseArmyStateLoader from "../../../customHooks/UseArmyStateLoader";
 
- 
-
-const LoadArmyListPrompt = (props) => {
+const LoadArmyListDialog = (props) => {
   const UC = useContext(UserContext);
   const AC = useContext(ArmyContext);
 
   const callAxios = useAxios();
   const pushMessages = usePushMessages();
   const enrichUnit = useUnitEnricher();
+  const stateLoader = UseArmyStateLoader();
 
   const [allLists, setAllLists] = useState([]);
   const [filteredFaction, setFilteredFaction] = useState("");
@@ -56,7 +56,7 @@ const LoadArmyListPrompt = (props) => {
   };
 
   /**
-   * Function closes the prompt
+   * Function closes the dialog.
    */
   const handleClose = () => {
     props.setShowArmyLoadPrompt(false);
@@ -70,20 +70,22 @@ const LoadArmyListPrompt = (props) => {
    */
   // TODO ok, not working yet.
   const loadListintoTool = (listObj) => {
-    AC.setSelectedFactionName(listObj.faction);
+    // Reset List Tool to the correct army
     AC.setPlayerName(listObj.userName);
-    // AC.setTeamName(listObj.teamName);
+    AC.setTeamName(listObj.teamName);
+    stateLoader.setFactionProperties(listObj.faction);
 
-    let result = [];
+    // load list
+    let list = [];
 
     listObj.list.forEach((u) => {
       const appendedEquipment = addItemLostFlag(u.equipment);
       u.equipment = appendedEquipment;
 
-      result.push(enrichUnit(u));
+      list.push(u); 
     });
 
-    props.listSetter(result);
+    props.listSetter(list);
     props.setShowArmyLoadPrompt((prevState) => !prevState);
 
     pushMessages.showSnackBar(
@@ -132,11 +134,6 @@ const LoadArmyListPrompt = (props) => {
     setShowConfirmationDialog(false);
   };
 
-  /**
-   *
-   * @param {eventObj} event
-   * @returns
-   */
   const handleFilteredFactionInput = (event) => {
     if (event.target.value === LOAD_ARMY_LIST_DIALOG.SHOW_ALL_FACTIONS) {
       setFilteredFaction("");
@@ -200,7 +197,7 @@ const LoadArmyListPrompt = (props) => {
           handleFilteredEventInput={handleFilteredEventInput} //
         />
       </Grid>
-      <LoadedArmyList
+      <FetchedArmiesList
         allLists={allLists}
         filteredFaction={filteredFaction} //
         filteredEvent={filteredEvent}
@@ -216,4 +213,4 @@ const LoadArmyListPrompt = (props) => {
   );
 };
 
-export default LoadArmyListPrompt;
+export default LoadArmyListDialog;
