@@ -17,7 +17,6 @@ import useAxios from "../../../customHooks/UseAxios";
 // constants
 import { DELETE_ARMY_LIST_URL, RETREIVE_ARMY_LIST_URL } from "../../../constants/URLs";
 import { LOAD_ARMY_LIST_DIALOG, PUSH_MESSAGE_TYPES } from "../../../constants/textsAndMessages";
-import useUnitEnricher from "../../../customHooks/UseUnitEnricher";
 import FetchedArmiesList from "./FetchedArmiesList";
 import ListFactionFilter from "./ListFactionFilter";
 import ListEventFilter from "./ListEventFilter";
@@ -30,7 +29,6 @@ const LoadArmyListDialog = (props) => {
 
   const callAxios = useAxios();
   const pushMessages = usePushMessages();
-  const enrichUnit = useUnitEnricher();
   const stateLoader = UseArmyStateLoader();
 
   const [allLists, setAllLists] = useState([]);
@@ -82,7 +80,7 @@ const LoadArmyListDialog = (props) => {
       const appendedEquipment = addItemLostFlag(u.equipment);
       u.equipment = appendedEquipment;
 
-      list.push(u); 
+      list.push(u);
     });
 
     props.listSetter(list);
