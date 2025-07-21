@@ -112,11 +112,13 @@ export const ARMY_LIST = {
   SEND_LIST: "Absenden",
   LOAD_LIST: "Liste Laden",
   DELETE_LIST: "Liste Löschen",
+  LIST_CREATED: "Armeeliste erfolgreich gespeichert",
 };
 
 export const USER_AUTH = {
   LOGIN_PROMPT_TITLE: "Willkommen",
   LOGIN_USER: "Benutzername",
+  EMAIL_USER: "E-Mail",
   LOGIN_PW: "Passwort eigeben",
   LOGIN_ACTION: "Einloggen",
   LOGIN_BUTTON: "Ins Konto einloggen",
@@ -124,19 +126,21 @@ export const USER_AUTH = {
   REPEAT_LOGIN_PW: "Passwort wiederholen",
   CREATE_NEW_ACCOUNT: "Neues Konto Anlegen",
   ACCOUNT_CREATED: "Konto erfolgreich erstellt.",
+  LOGIN_SUCCESSFULL: "Erfolgreich ins Konto eingelogt",
   SWITCH_USER: "Benutzerkonto Wechseln",
   CHANGE_PASSWORD: "Passwort Ändern",
   UNKNOWN_USER: "Unbekannter Benutzer",
   INVALID_PW: "Falsches Password",
-  OLD_PW:"Bitte altes Passwort eingeben",
-  NEW_PW:"Bitte neues Passwort eingeben",
-  REPEAT_NEW_PW:"Bitte neues Passwort wiederholen",
+  OLD_PW: "Bitte altes Passwort eingeben",
+  NEW_PW: "Bitte neues Passwort eingeben",
+  REPEAT_NEW_PW: "Bitte neues Passwort wiederholen",
 };
 
 export const PASSWORDS = {
   USER_NAME_ALREADY_TAKEN: "Dieser Nuztername ist bereits vergeben.",
   PASSWORDS_DONT_MATCH: "Passwörter stimmen nicht überein.",
-  PASSWORD_GUIDELINES_VIOLATED: "Dein Passwort ist nicht stark genug.",
+  PASSWORD_GUIDELINES_VIOLATED:
+    "Ein gültiges Password besteht aus mindestens 8 Zeichen. Es muss Groß- und Kleinbuchstaben sowie mindestens 1 Zahl und ein Sonderzeichen enthalten.",
 };
 
 export const LOAD_ARMY_LIST_DIALOG = {
@@ -652,7 +656,6 @@ export const CREATOR = {
   IS_CAVALERY: "Einheit ist beritten.",
   HAS_SHIELD: "Einheit besitzt Schilde.",
   HAS_SHIELD_HERO: "Einheit besitzt ein Schild.",
-
   CLOSED_FORMATION: "Einheit kämpft in geschlossener Formation.",
   LEADER_CLOSED_FORMATION: "Anführer kämpft in geschlossener Formation.",
   IS_LOW_FLYER: "Einheit kann niedgrig fliegen.",
@@ -690,4 +693,5 @@ export const CREATOR = {
   MELEE_VALUE_2: "2. Nahkampfwert:",
   MELEE_VALUE_3: "3. Nahkampfwert:",
   HAS_MELEE_SKILL: "Einheit hat NK-Fertigkeit",
+  CARD_CREATED:"Einheitenkarte erfolgreich gespeichert",
 };
