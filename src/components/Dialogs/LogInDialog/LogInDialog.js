@@ -16,14 +16,16 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import NaviButton from "../../landingPage/NaviButton";
 // contexts
 import { UserContext } from "../../../contexts/userContext";
-import { LOGIN_USER_URL } from "../../../constants/URLs";
+import { MenuContext } from "../../../contexts/MenuContext";
 //  constants
+import { LOGIN_USER_URL } from "../../../constants/URLs";
 import { USER_AUTH } from "../../../constants/textsAndMessages";
 //  custom hooks
 import useAxios from "../../../customHooks/UseAxios";
 
 const LoginDialog = () => {
   const UC = useContext(UserContext);
+  const MC = useContext(MenuContext);
 
   const callAxios = useAxios();
 
@@ -60,6 +62,7 @@ const LoginDialog = () => {
     });
 
     UC.setDisplayLogInPrompt(false);
+    MC.setOpenMenu(false);
     UC.setUserLoggedIn(true);
   };
 
