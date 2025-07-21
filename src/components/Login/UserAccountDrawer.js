@@ -80,8 +80,9 @@ const UserAccountDrawer = (props) => {
             width: "100%",
           }}
         >
-          {buttons.map((b) => (
+          {buttons.map((b, i) => (
             <Button
+              key={i}
               onClick={() => {
                 b.onClickAction();
               }}
