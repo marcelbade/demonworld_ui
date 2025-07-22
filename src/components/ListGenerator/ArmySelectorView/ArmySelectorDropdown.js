@@ -64,6 +64,9 @@ const ArmySelectorDropdown = () => {
     resetTheState();
     stateLoader.setFactionProperties(value);
     RC.setShowOptionButtons(true);
+
+    // army is not fetched from DB
+    AC.setIsFetchedArmyList(false);
   };
 
   /**
