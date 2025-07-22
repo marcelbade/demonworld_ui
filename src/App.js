@@ -78,6 +78,8 @@ function App() {
   const [listOfAllFactionUnits, setListOfAllFactionUnits] = useState([]);
   const [subFactionDTOs, setSubFactionDTOs] = useState([]);
   const [selectedUnits, setSelectedUnits] = useState([]);
+  const [enableUpdateListBttn, setEnableUpdateListBttn] = useState(false);
+
   // maximum point allowance
   const [maxPointsAllowance, setMaxPointsAllowance] = useState(2000);
   // allied faction
@@ -236,8 +238,10 @@ function App() {
                             // SELECTED UNIT LIST
                             selectedUnits: selectedUnits,
                             maxPointsAllowance: maxPointsAllowance,
+                            enableUpdateListBttn: enableUpdateListBttn,
                             setSelectedUnits: setSelectedUnits,
                             setMaxPointsAllowance: setMaxPointsAllowance,
+                            setEnableUpdateListBttn: setEnableUpdateListBttn,
                           }}
                         >
                           <RightMenuContext
@@ -291,12 +295,12 @@ function App() {
                                     playerName: playerName,
                                     teamName: teamName,
                                     armyName: armyName,
-                                    isFetchedArmyList: isFetchedArmyList,
                                     selectedFactionName: selectedFactionName,
                                     fetchedFactions: fetchedFactions,
                                     subFactions: distinctSubFactions,
                                     listOfAllFactionUnits: listOfAllFactionUnits,
                                     subFactionDTOs: subFactionDTOs,
+                                    isFetchedArmyList: isFetchedArmyList,
                                     setArmyName: setArmyName,
                                     setSelectedFactionName: setSelectedFactionName,
                                     setDistinctSubFactions: setDistinctSubFactions,
