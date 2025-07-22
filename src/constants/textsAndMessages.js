@@ -93,8 +93,10 @@ export const OPTIONS = {
   MENU_SWITCH: "Menü",
   STORE_LIST: "Liste Speichern",
   LOAD_LIST: "Liste Laden",
+  UPDATE_LIST: "Liste aktualisieren",
   TO_LOSS_CALCULATOR: "Zum Verlustrechner",
   CHANGE_SELECTED_FACTION: "Fraktion wechseln",
+ 
 };
 
 export const ARMY_LIST = {
@@ -113,6 +115,8 @@ export const ARMY_LIST = {
   LOAD_LIST: "Liste Laden",
   DELETE_LIST: "Liste Löschen",
   LIST_CREATED: "Armeeliste erfolgreich gespeichert",
+  LIST_UPDATED: "Armeeliste erfolgreich aktualisiert",
+  
 };
 
 export const USER_AUTH = {

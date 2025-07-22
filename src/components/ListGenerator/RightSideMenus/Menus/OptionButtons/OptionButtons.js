@@ -17,8 +17,9 @@ import StoreArmyListDialog from "../../../../Dialogs/StoreArmyListDialog/StoreAr
 import LoadArmyListDialog from "../../../../Dialogs/LoadArmyDialog/LoadArmyListDialog";
 import ArmyListBoxFooter from "../../../ArmyListView/ArmyList/ArmyListFooter/ArmyListBoxFooter";
 // constants
-import { OPTIONS, PDF } from "../../../../../constants/textsAndMessages";
-import { PDF_URL } from "../../../../../constants/URLs";
+import { ARMY_LIST, OPTIONS, PDF } from "../../../../../constants/textsAndMessages";
+import { PDF_URL, UPDATE_ARMY_LIST_URL } from "../../../../../constants/URLs";
+import useAxios from "../../../../../customHooks/UseAxios";
 
 const OptionButtons = () => {
   const AC = useContext(ArmyContext);
@@ -28,6 +29,7 @@ const OptionButtons = () => {
 
   const history = useHistory();
   const stats = useSubFactionStats();
+  const callAxios = useAxios();
 
   const [showPdfTypePrompt, setShowPdfTypePrompt] = useState(false);
   const [showArmySavePrompt, setShowArmySavePrompt] = useState(false);
@@ -124,6 +126,10 @@ const OptionButtons = () => {
     setShowArmyLoadPrompt(true);
   };
 
+  const updateStoredList = () => {
+    callAxios.updateData(SEC.selectedUnits, "URL", OPTIONS.UPDATE_LIST);
+  };
+
   const buttons = [
     {
       disabled: SEC.selectedUnits.length === 0,
@@ -162,6 +168,13 @@ const OptionButtons = () => {
       },
       text: OPTIONS.CHANGE_TOURNAMENT_RULES,
     },
+    {
+      disabled: SEC.enableUpdateListBttn,
+      action: () => {
+        updateStoredList( SEC.selectedUnits, UPDATE_ARMY_LIST_URL, ARMY_LIST.LIST_UPDATED);
+      },
+      text: OPTIONS.UPDATE_LIST,
+    },
   ];
 
   return (
@@ -187,7 +200,6 @@ const OptionButtons = () => {
         setShowArmySavePrompt={setShowArmySavePrompt} //
       />
       <LoadArmyListDialog
-        listSetter={SEC.setSelectedUnits}
         showArmyLoadPrompt={showArmyLoadPrompt} //
         setShowArmyLoadPrompt={setShowArmyLoadPrompt} //
       />

@@ -69,11 +69,23 @@ const useAxios = () => {
       .catch((error) => pushMessage.showSnackBar(error, PUSH_MESSAGE_TYPES.ERROR));
   };
 
+  const updateData = (data, url, successMessage) => {
+    axios
+      .put(url, data, {
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${UC.user.token}` },
+      })
+      .then(() => {
+        pushMessage.showSnackBar(successMessage, PUSH_MESSAGE_TYPES.SUCCESS);
+      })
+      .catch((error) => pushMessage.showSnackBar(error, PUSH_MESSAGE_TYPES.ERROR));
+  };
+
   return {
     fetchData,
     fetchProtectedData,
     storeData,
     deleteProtectedData,
+    updateData,
   };
 };
 

@@ -11,21 +11,24 @@ import CancelIcon from "@mui/icons-material/Cancel";
 // contexts
 import { UserContext } from "../../../contexts/userContext";
 import { ArmyContext } from "../../../contexts/armyContext";
+import { SelectionContext } from "../../../contexts/selectionContext";
 // hooks
 import usePushMessages from "../../../customHooks/UsePushMessages";
 import useAxios from "../../../customHooks/UseAxios";
-// constants
-import { DELETE_ARMY_LIST_URL, RETREIVE_ARMY_LIST_URL } from "../../../constants/URLs";
-import { LOAD_ARMY_LIST_DIALOG, PUSH_MESSAGE_TYPES } from "../../../constants/textsAndMessages";
+// functions and compoents
 import FetchedArmiesList from "./FetchedArmiesList";
 import ListFactionFilter from "./ListFactionFilter";
 import ListEventFilter from "./ListEventFilter";
 import DeleteConfirmationDialog from "../ConfirmationDialog/DeleteConfirmationDialog";
 import UseArmyStateLoader from "../../../customHooks/UseArmyStateLoader";
+// constants
+import { DELETE_ARMY_LIST_URL, RETREIVE_ARMY_LIST_URL } from "../../../constants/URLs";
+import { LOAD_ARMY_LIST_DIALOG, PUSH_MESSAGE_TYPES } from "../../../constants/textsAndMessages";
 
 const LoadArmyListDialog = (props) => {
   const UC = useContext(UserContext);
   const AC = useContext(ArmyContext);
+  const SEC = useContext(SelectionContext);
 
   const callAxios = useAxios();
   const pushMessages = usePushMessages();
@@ -61,31 +64,44 @@ const LoadArmyListDialog = (props) => {
   };
 
   /**
-   * Function loads the list entry into the army tool and closes the
-   * prompt. In addtion, the necessary flags are added to the unit
-   * and the equipment array.
-   * @param {StoredListObj} listObj
+   * Function loads the fetched army list into the list tool
+   * by
+   * - marking the list as fetched from the DB
+   * - setting the tool state to the correct army
+   * - loading the army list into the tool
+   * - displaying a success message.
+   * @param {ListObj} listObj
    */
-  // TODO ok, not working yet.
   const loadListintoTool = (listObj) => {
-    // Reset List Tool to the correct army
-    AC.setPlayerName(listObj.userName);
-    AC.setTeamName(listObj.teamName);
-    stateLoader.setFactionProperties(listObj.faction);
+    AC.setIsFetchedArmyList(true);
 
-    // load list
+    setListToolState(listObj);
+    storeListInState(listObj);
+
+    props.setShowArmyLoadPrompt((prevState) => !prevState);
+
+    showSuccessMessage();
+  };
+
+  const storeListInState = (listObj) => {
     let list = [];
 
     listObj.list.forEach((u) => {
       const appendedEquipment = addItemLostFlag(u.equipment);
       u.equipment = appendedEquipment;
-
       list.push(u);
     });
 
-    props.listSetter(list);
-    props.setShowArmyLoadPrompt((prevState) => !prevState);
+    SEC.setSelectedUnits(list);
+  };
 
+  const setListToolState = (listObj) => {
+    AC.setPlayerName(listObj.userName);
+    AC.setTeamName(listObj.teamName);
+    stateLoader.setFactionProperties(listObj.faction);
+  };
+
+  const showSuccessMessage = () => {
     pushMessages.showSnackBar(
       LOAD_ARMY_LIST_DIALOG.LOADED_LIST_SUCCESSFULLY, //
       PUSH_MESSAGE_TYPES.SUCCESS
