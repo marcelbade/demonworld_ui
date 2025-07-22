@@ -1,5 +1,5 @@
 // React
-import React, { Fragment, useContext } from "react";
+import  { Fragment, useContext } from "react";
 // Material UI
 import { List, ListItem, IconButton } from "@mui/material";
 // icons

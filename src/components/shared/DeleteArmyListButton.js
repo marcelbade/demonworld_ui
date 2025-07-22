@@ -1,5 +1,5 @@
 // React
-import React, { useContext } from "react";
+import { useContext } from "react";
 // Material UI
 import { IconButton, Tooltip, Typography } from "@mui/material";
 // context
