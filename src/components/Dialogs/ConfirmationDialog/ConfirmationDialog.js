@@ -7,9 +7,9 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@mui/material";
-import { LOAD_ARMY_LIST_DIALOG } from "../../../constants/textsAndMessages";
+import { CONFIRMATION_DIALOG } from "../../../constants/textsAndMessages";
 
-const DeleteConfirmationDialog = (props) => {
+const ConfirmationDialog = (props) => {
   return (
     <Dialog
       open={props.showConfirmationDialog}
@@ -20,30 +20,30 @@ const DeleteConfirmationDialog = (props) => {
       <DialogTitle
         id="alert-dialog-title" //
       >
-        {LOAD_ARMY_LIST_DIALOG.ConfirmationDialogTitle}
+        {CONFIRMATION_DIALOG[props.type].CONFIRM_TITLE}
       </DialogTitle>
       <DialogContent>
         <DialogContentText
           id="alert-dialog-description" //
         >
-          {LOAD_ARMY_LIST_DIALOG.ConfirmationDialogText}
+          {CONFIRMATION_DIALOG[props.type].CONFIRM_TEXT}
         </DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button
-          onClick={props.confirmAndDeleteList} //
+          onClick={props.confirmAndExecute} //
         >
-          {LOAD_ARMY_LIST_DIALOG.ConfirmationDialogButtonConfirm}
+          {CONFIRMATION_DIALOG[props.type].CONFIRM}
         </Button>
         <Button
-          onClick={props.closeAndConfirmationDialog} //
+          onClick={props.closeDialog} //
           autoFocus
         >
-          {LOAD_ARMY_LIST_DIALOG.ConfirmationDialogButtonCancel}
+          {CONFIRMATION_DIALOG[props.type].CANCEL}
         </Button>
       </DialogActions>
     </Dialog>
   );
 };
 
-export default DeleteConfirmationDialog;
+export default ConfirmationDialog;

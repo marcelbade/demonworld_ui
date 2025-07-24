@@ -19,11 +19,12 @@ import useAxios from "../../../customHooks/UseAxios";
 import FetchedArmiesList from "./FetchedArmiesList";
 import ListFactionFilter from "./ListFactionFilter";
 import ListEventFilter from "./ListEventFilter";
-import DeleteConfirmationDialog from "../ConfirmationDialog/DeleteConfirmationDialog";
+import ConfirmationDialog from "../ConfirmationDialog/ConfirmationDialog";
 import UseArmyStateLoader from "../../../customHooks/UseArmyStateLoader";
 // constants
 import { DELETE_ARMY_LIST_URL, RETREIVE_ARMY_LIST_URL } from "../../../constants/URLs";
 import { LOAD_ARMY_LIST_DIALOG, PUSH_MESSAGE_TYPES } from "../../../constants/textsAndMessages";
+import { CONFIRMATION_DIALOG_TYPE } from "../../../constants/MenuAndDialogConstants";
 
 const LoadArmyListDialog = (props) => {
   const UC = useContext(UserContext);
@@ -141,10 +142,10 @@ const LoadArmyListDialog = (props) => {
     const result = allLists.filter((l) => l.id !== listToDelete.id);
     setAllLists(result);
 
-    closeAndConfirmationDialog();
+    closeConfirmationDialog();
   };
 
-  const closeAndConfirmationDialog = () => {
+  const closeConfirmationDialog = () => {
     setShowConfirmationDialog(false);
   };
 
@@ -218,10 +219,11 @@ const LoadArmyListDialog = (props) => {
         loadListintoTool={loadListintoTool}
         deleteArmyListButton={deleteArmyListButton}
       />
-      <DeleteConfirmationDialog
+      <ConfirmationDialog
+        type={CONFIRMATION_DIALOG_TYPE.DELETE}
         showConfirmationDialog={showConfirmationDialog} //
-        confirmAndDeleteList={confirmAndDeleteList}
-        closeAndConfirmationDialog={closeAndConfirmationDialog}
+        confirmAndExecute={confirmAndDeleteList}
+        closeDialog={closeConfirmationDialog}
       />
     </Dialog>
   );

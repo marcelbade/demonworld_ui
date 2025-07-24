@@ -96,7 +96,6 @@ export const OPTIONS = {
   UPDATE_LIST: "Liste aktualisieren",
   TO_LOSS_CALCULATOR: "Zum Verlustrechner",
   CHANGE_SELECTED_FACTION: "Fraktion wechseln",
- 
 };
 
 export const ARMY_LIST = {
@@ -116,7 +115,6 @@ export const ARMY_LIST = {
   DELETE_LIST: "Liste Löschen",
   LIST_CREATED: "Armeeliste erfolgreich gespeichert",
   LIST_UPDATED: "Armeeliste erfolgreich aktualisiert",
-  
 };
 
 export const USER_AUTH = {
@@ -154,10 +152,21 @@ export const LOAD_ARMY_LIST_DIALOG = {
   FILTER_FOR_EVENT: "Event auswählen",
   NOT_PART_OF_EVENT: "Nicht Teil eines Turniers oder Events",
   LOADED_LIST_SUCCESSFULLY: "Liste erfolgreich geladen",
-  ConfirmationDialogTitle: "Soll diese Liste wirklich gelöscht werden?",
-  ConfirmationDialogText: "Wenn du die Löschung bestätigst, wird die Liste unwiederruflich gelöscht.",
-  ConfirmationDialogButtonConfirm: "Liste Löschen",
-  ConfirmationDialogButtonCancel: "Abbrechen",
+};
+
+export const CONFIRMATION_DIALOG = {
+  DELETE: {
+    CONFIRM_TITLE: "Soll diese Liste wirklich gelöscht werden?",
+    CONFIRM_TEXT: "Wenn du die Löschung bestätigst, wird die Liste unwiederruflich gelöscht.",
+    CONFIRM: "Liste Löschen",
+    CANCEL: "Abbrechen",
+  },
+  OVERRIDE: {
+    CONFIRM_TITLE: "Soll diese Liste wirklich geändert werden?",
+    CONFIRM_TEXT: "Wenn du bestätigst, wird die Liste unwiederruflich geändert.",
+    CONFIRM: "Liste aktualisieren",
+    CANCEL: "Abbrechen",
+  },
 };
 
 export const GENERAL_ERRRORS = {
@@ -697,5 +706,5 @@ export const CREATOR = {
   MELEE_VALUE_2: "2. Nahkampfwert:",
   MELEE_VALUE_3: "3. Nahkampfwert:",
   HAS_MELEE_SKILL: "Einheit hat NK-Fertigkeit",
-  CARD_CREATED:"Einheitenkarte erfolgreich gespeichert",
+  CARD_CREATED: "Einheitenkarte erfolgreich gespeichert",
 };
