@@ -9,7 +9,7 @@ import NaviButton from "../landingPage/NaviButton";
 import LightSwitch from "./LightSwitch";
 import ListDisplaySwitch from "./ListDisplaySwitch";
 import CompendiumDropDown from "../compendiums/factionTable/components/CompendiumDropDown";
-import { ID } from "../../constants/appBarConstants";
+import { ID } from "../../constants/MenuAndDialogConstants";
 import { LANDINGPAGE } from "../../constants/textsAndMessages";
 import UserLogButton from "../Login/UserLogButton";
 // icons

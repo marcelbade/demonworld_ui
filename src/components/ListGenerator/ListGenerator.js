@@ -14,7 +14,7 @@ import { ArmyContext } from "../../contexts/armyContext";
 import AppBarToggle from "../shared/AppBarToggle";
 import AppBar from "../shared/AppBar";
 // constants
-import { ID } from "../../constants/appBarConstants";
+import { ID } from "../../constants/MenuAndDialogConstants";
 import { NONE } from "../../constants/factions";
 import BackToSelectionButton from "../shared/BackToSelectionButton";
 import DeleteArmyListButton from "../shared/DeleteArmyListButton";

@@ -10,7 +10,7 @@ import AppBarToggle from "../shared/AppBarToggle";
 // constants
 import { LOSS_CALCULATOR, OPTIONS } from "../../constants/textsAndMessages";
 import LoadArmyListPrompt from "../Dialogs/LoadArmyDialog/LoadArmyListDialog";
-import { ID } from "../../constants/appBarConstants";
+import { ID } from "../../constants/MenuAndDialogConstants";
 // contexts
 import { LossCalcContext } from "../../contexts/LossCalculatorContext";
 

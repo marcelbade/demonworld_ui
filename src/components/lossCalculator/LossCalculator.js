@@ -13,7 +13,7 @@ import { LossCalcContext } from "../../contexts/LossCalculatorContext";
 // icons
 import AppBar from "../shared/AppBar";
 import AppBarToggle from "../shared/AppBarToggle";
-import { ID } from "../../constants/appBarConstants";
+import { ID } from "../../constants/MenuAndDialogConstants";
 
 const LossCalculator = () => {
   const location = useLocation();
