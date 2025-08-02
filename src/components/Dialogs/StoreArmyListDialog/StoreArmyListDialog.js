@@ -15,35 +15,43 @@ import {
 } from "@mui/material";
 // icons
 import CancelIcon from "@mui/icons-material/Cancel";
+//  functions and components
+import ContextHelpButton from "../../shared/ContextHelpButton";
+import SelectionInput from "../../shared/selectionInput";
 // contexts
 import { UserContext } from "../../../contexts/userContext";
 import { SelectionContext } from "../../../contexts/selectionContext";
 import { ArmyContext } from "../../../contexts/armyContext";
+import ConfirmationDialog from "../ConfirmationDialog/ConfirmationDialog";
 // hooks
 import useAxios from "../../../customHooks/UseAxios";
 // constants
 import { ALL_USER_NAMES_URL, GET_EVENTS_URL, STORE_ARMY_LIST_URL } from "../../../constants/URLs";
-import { ARMY_LIST, INPUT_TEXTS, PUSH_MESSAGE_TYPES } from "../../../constants/textsAndMessages";
-import ContextHelpButton from "../../shared/ContextHelpButton";
-import SelectionInput from "../../shared/selectionInput";
+import { ARMY_LIST, CONFIRMATION_DIALOG, INPUT_TEXTS, PUSH_MESSAGE_TYPES } from "../../../constants/textsAndMessages";
+import { MenuContext } from "../../../contexts/MenuContext";
 
 const StoreArmyListDialog = (props) => {
   const UC = useContext(UserContext);
   const SEC = useContext(SelectionContext);
   const AC = useContext(ArmyContext);
 
+  const MC = useContext(MenuContext);
+
   const [allEvents, setAllEvents] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
   const [isForEvent, setIsForEvent] = useState(false);
   const [isvisibleForOtherUsers, setIsvisibleForOtherUsers] = useState(false);
-  const [selectedEventName, setSelectedEventName] = useState("");
-  const [selectedUser, setSelectedUser] = useState([]);
+  const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
 
   const callAxios = useAxios();
 
   useEffect(() => {
     fetchAllUsers();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const fetchAllUsers = async () => {
+    callAxios.fetchProtectedData(setAllUsers, ALL_USER_NAMES_URL);
+  };
 
   useEffect(() => {
     if (UC.user.userName !== "") {
@@ -55,50 +63,63 @@ const StoreArmyListDialog = (props) => {
     callAxios.fetchProtectedData(setAllEvents, GET_EVENTS_URL);
   };
 
-  const fetchAllUsers = async () => {
-    callAxios.fetchProtectedData(setAllUsers, ALL_USER_NAMES_URL);
+  const handleClose = () => {
+    props.setShowArmySaveDialog(false);
   };
 
-  const handleClose = () => {
-    props.setShowArmySavePrompt(false);
+  const closeConfirmationDialog = () => {
+    setShowConfirmationDialog(false);
   };
 
   /**
-   * Async function posts a new army list to the backend to add it to the DB. The
-   * data is taken from the army list generator or the prompt dependending on wether
-   * the user entered data
-   * @param {eventObj} event
+   * Function checks flag do decide whether the list is stored for the first time.
+   * If this is not the case, a dialog is displayed to confirm the override.
+   * @param {event} event
+   * @returns nothing
    */
-  const storeList = async (event) => {
+  const storeOrUpdate = (event) => {
     event.preventDefault();
+    processFormData(event);
 
+    if (AC.isFetchedArmyList && !MC.blockDialog.confirmationDialog) {
+      setShowConfirmationDialog(true);
+      return;
+    }
+
+    sendData();
+  };
+
+  const setDialogState = () => {
+    MC.setblockDialog({
+      ...MC.blockDialog,
+      confirmationDialog: !MC.blockDialog.confirmationDialog,
+    });
+  };
+
+  const processFormData = (event) => {
+    // player can change the default values sown in the dialog
     const formData = new FormData(event.currentTarget);
 
-    const teamName =
-      AC.teamName !== "" //
-        ? AC.teamName
-        : formData.get("teamName");
+    const playerName = formData.get("playerName");
+    const teamName = formData.get("teamName");
+    const listName = formData.get("armyListName");
 
-    const listName =
-      formData.get("armyListName") !== "" //
-        ? formData.get("armyListName")
-        : AC.armyName;
+    AC.setPlayerName(playerName);
+    AC.setTeamName(teamName);
+    AC.setArmyName(listName);
+  };
 
-    const eventName =
-      selectedEventName !== "" //
-        ? selectedEventName
-        : "NO_EVENT";
-
+  const sendData = async () => {
     callAxios.storeData(
       JSON.stringify({
-        userName: UC.user.userName,
-        teamName: teamName,
-        listName: listName,
+        userName: AC.playerName,
+        teamName: AC.teamName,
+        listName: AC.armyName,
         faction: AC.selectedFactionName,
         list: SEC.selectedUnits,
-        eventName: eventName,
-        userWithAccess: selectedUser,
-        creationDate: new Date(),
+        eventName: AC.eventName,
+        userWithAccess: AC.selectedAccessUser,
+        creationDate: AC.creationDate,
       }),
       STORE_ARMY_LIST_URL,
       null,
@@ -106,6 +127,7 @@ const StoreArmyListDialog = (props) => {
     );
   };
 
+  // Username can be different from player name
   const createNameOptions = () => {
     let names = [];
     names.push(UC.user.userName);
@@ -122,11 +144,11 @@ const StoreArmyListDialog = (props) => {
   };
 
   const handleEventSelection = (name) => {
-    setSelectedEventName(name);
+    AC.setSelectedEventName(name);
   };
 
   const setEventList = () => {
-    const NO_EVENT = "NO_EVENT";
+    const NO_EVENT = "NO_EVENT"; // TODO Necessary???
 
     return allEvents //
       .filter((a) => a.eventName !== NO_EVENT && eventNotInThePast(a.eventDate))
@@ -151,7 +173,7 @@ const StoreArmyListDialog = (props) => {
   const handleUserSelection = (users) => {
     let result = [];
     result.push(users);
-    setSelectedUser(result);
+    AC.setSelectedAccessUser(result);
   };
 
   const clearUserSelection = () => {
@@ -168,7 +190,7 @@ const StoreArmyListDialog = (props) => {
     <Dialog
       component={"form"}
       onSubmit={(event) => {
-        storeList(event);
+        storeOrUpdate(event);
       }}
       sx={{
         "& .MuiDialog-container": {
@@ -179,14 +201,18 @@ const StoreArmyListDialog = (props) => {
           },
         },
       }}
-      open={props.showArmySavePrompt}
+      open={props.showArmySaveDialog}
     >
       <Grid
         container //
         direction={"row"}
         justifyContent={"space-between"}
       >
-        <DialogTitle>{ARMY_LIST.STORE_ARMY_LIST}</DialogTitle>
+        <DialogTitle>
+          {AC.isFetchedArmyList //
+            ? ARMY_LIST.UPDATE_ARMY_LIST
+            : ARMY_LIST.STORE_ARMY_LIST}
+        </DialogTitle>
         <IconButton
           sx={{ marginRight: "1em" }} //
           onClick={() => {
@@ -319,6 +345,14 @@ const StoreArmyListDialog = (props) => {
         alignItems="center"
         justifyContent="space-between"
       ></Grid>
+      <ConfirmationDialog
+        type={CONFIRMATION_DIALOG.OVERRIDE}
+        showConfirmationDialog={showConfirmationDialog} //
+        confirmAndExecute={sendData}
+        closeDialog={closeConfirmationDialog}
+        dialogBoxState={MC.blockDialog.confirmationDialog}
+        setDialogBoxState={setDialogState}
+      />
     </Dialog>
   );
 };
