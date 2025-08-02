@@ -17,9 +17,8 @@ import StoreArmyListDialog from "../../../../Dialogs/StoreArmyListDialog/StoreAr
 import LoadArmyListDialog from "../../../../Dialogs/LoadArmyDialog/LoadArmyListDialog";
 import ArmyListBoxFooter from "../../../ArmyListView/ArmyList/ArmyListFooter/ArmyListBoxFooter";
 // constants
-import { ARMY_LIST, OPTIONS, PDF } from "../../../../../constants/textsAndMessages";
-import { PDF_URL, UPDATE_ARMY_LIST_URL } from "../../../../../constants/URLs";
-import useAxios from "../../../../../customHooks/UseAxios";
+import { OPTIONS, PDF } from "../../../../../constants/textsAndMessages";
+import { PDF_URL } from "../../../../../constants/URLs";
 
 const OptionButtons = () => {
   const AC = useContext(ArmyContext);
@@ -29,11 +28,10 @@ const OptionButtons = () => {
 
   const history = useHistory();
   const stats = useSubFactionStats();
-  const callAxios = useAxios();
 
-  const [showPdfTypePrompt, setShowPdfTypePrompt] = useState(false);
-  const [showArmySavePrompt, setShowArmySavePrompt] = useState(false);
-  const [showArmyLoadPrompt, setShowArmyLoadPrompt] = useState(false);
+  const [showPdfTypeDialog, setShowPdfTypeDialog] = useState(false);
+  const [showArmySaveDialog, setShowArmySaveDialog] = useState(false);
+  const [showArmyLoadDialog, setShowArmyLoadDialog] = useState(false);
 
   /**
    * Function takes the current army list as an object, stores it in the history object and naviagat3s to the LossCalculator component.
@@ -118,23 +116,19 @@ const OptionButtons = () => {
     return selectedUnits;
   };
 
-  const storeList = () => {
-    UC.userLoggedIn ? setShowArmySavePrompt(true) : UC.setDisplayLogInPrompt(true);
+  const checkForLoginStatus = () => {
+    UC.userLoggedIn ? setShowArmySaveDialog(true) : UC.setDisplayLogInDialog(true);
   };
 
   const showLoadListPrompt = () => {
-    setShowArmyLoadPrompt(true);
-  };
-
-  const updateStoredList = () => {
-    callAxios.updateData(SEC.selectedUnits, "URL", OPTIONS.UPDATE_LIST);
+    setShowArmyLoadDialog(true);
   };
 
   const buttons = [
     {
       disabled: SEC.selectedUnits.length === 0,
       action: () => {
-        setShowPdfTypePrompt(true);
+        setShowPdfTypeDialog(true);
       },
       text: PDF.CREATE_PDF,
     },
@@ -142,9 +136,9 @@ const OptionButtons = () => {
     {
       disabled: SEC.selectedUnits.length === 0,
       action: () => {
-        storeList();
+        checkForLoginStatus();
       },
-      text: OPTIONS.STORE_LIST,
+      text: AC.isFetchedArmyList ? OPTIONS.UPDATE_LIST : OPTIONS.STORE_LIST,
     },
     {
       disabled: !UC.userLoggedIn,
@@ -168,13 +162,6 @@ const OptionButtons = () => {
       },
       text: OPTIONS.CHANGE_TOURNAMENT_RULES,
     },
-    {
-      disabled: SEC.enableUpdateListBttn,
-      action: () => {
-        updateStoredList( SEC.selectedUnits, UPDATE_ARMY_LIST_URL, ARMY_LIST.LIST_UPDATED);
-      },
-      text: OPTIONS.UPDATE_LIST,
-    },
   ];
 
   return (
@@ -192,16 +179,16 @@ const OptionButtons = () => {
       <LoginDialog />
       <SelectPdfTypeDialog
         openPDfInNewTab={openPDfInNewTab} //
-        setShowPdfTypePrompt={setShowPdfTypePrompt}
-        showPdfTypePrompt={showPdfTypePrompt}
+        setShowPdfTypePrompt={setShowPdfTypeDialog}
+        showPdfTypePrompt={showPdfTypeDialog}
       />
       <StoreArmyListDialog
-        showArmySavePrompt={showArmySavePrompt} //
-        setShowArmySavePrompt={setShowArmySavePrompt} //
+        showArmySaveDialog={showArmySaveDialog} //
+        setShowArmySaveDialog={setShowArmySaveDialog} //
       />
       <LoadArmyListDialog
-        showArmyLoadPrompt={showArmyLoadPrompt} //
-        setShowArmyLoadPrompt={setShowArmyLoadPrompt} //
+        showArmyLoadPrompt={showArmyLoadDialog} //
+        setShowArmyLoadPrompt={setShowArmyLoadDialog} //
       />
       {buttons.map((bttn, i) => (
         <Grid key={i}>
@@ -209,6 +196,9 @@ const OptionButtons = () => {
             variant="outlined" //
             disabled={bttn.disabled}
             onClick={bttn.action}
+            sx={{
+              borderRadius: "1em",
+            }}
           >
             {bttn.text}
           </Button>
