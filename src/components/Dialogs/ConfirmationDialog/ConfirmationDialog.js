@@ -1,5 +1,5 @@
 // mui
-import { Cancel, CheckBox } from "@mui/icons-material";
+import { Cancel } from "@mui/icons-material";
 import {
   Button,
   Checkbox,
@@ -13,8 +13,6 @@ import {
 } from "@mui/material";
 
 const ConfirmationDialog = (props) => {
-  console.log("props.dialogBoxState >>>>", props.dialogBoxState);
-
   return (
     <Dialog
       open={props.showConfirmationDialog}
