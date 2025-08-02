@@ -48,7 +48,7 @@ function App() {
     token: "",
   });
   const [userLoggedIn, setUserLoggedIn] = useState(false);
-  const [displayLogInPrompt, setDisplayLogInPrompt] = useState(false);
+  const [displayLogInDialog, setDisplayLogInDialog] = useState(false);
   const [showUserAvatarDrawer, setShowUserAvatarDrawer] = useState(false);
   const [showPasswordReset, setShowPasswordReset] = useState(false);
 
@@ -56,8 +56,12 @@ function App() {
   const [fetchedFactions, setFetchedFactions] = useState([]);
   const [fetchedItems, setFetchedItems] = useState([]);
 
-  // toggle top menu
+  // toggle top menu, confirmation Dialog
   const [openMenu, setOpenMenu] = useState(false);
+  const [blockDialog, setblockDialog] = useState({
+    confirmationDialog: false,
+    deletionDialog: false,
+  });
 
   // toggle app theme
   const [darkModeOff, setDarkModeOff] = useState(true);
@@ -65,11 +69,14 @@ function App() {
   // toggle list display
   const [simpleModeOn, setSimpleMode] = useState(false);
 
-  // army meta data - army name is the name the player gives his army.
-  // by defauilt it is the faction name + the current date
+  // army meta data
   const [teamName, setTeamName] = useState("");
   const [playerName, setPlayerName] = useState("");
   const [armyName, setArmyName] = useState("");
+  const [eventName, setEventName] = useState("");
+  const [selectedAccessUser, setSelectedAccessUser] = useState([]);
+  const [creationDate, setCreationDate] = useState(new Date());
+
   // army list was loaded, i.e. fetched from DB
   const [isFetchedArmyList, setIsFetchedArmyList] = useState(false);
   // selected faction & army list
@@ -165,12 +172,12 @@ function App() {
           value={{
             user: user,
             userLoggedIn: userLoggedIn,
-            displayLogInPrompt: displayLogInPrompt,
+            displayLogInDialog: displayLogInDialog,
             showUserAvatarDrawer: showUserAvatarDrawer,
             showPasswordReset: showPasswordReset,
             setUser: setUser,
             setUserLoggedIn: setUserLoggedIn,
-            setDisplayLogInPrompt: setDisplayLogInPrompt,
+            setDisplayLogInDialog: setDisplayLogInDialog,
             setShowUserAvatarDrawer: setShowUserAvatarDrawer,
             setShowPasswordReset: setShowPasswordReset,
           }}
@@ -184,7 +191,9 @@ function App() {
             <MenuProvider
               value={{
                 openMenu: openMenu,
+                blockDialog: blockDialog,
                 setOpenMenu: setOpenMenu,
+                setblockDialog: setblockDialog,
               }}
             >
               <LightSwitchProvider
@@ -296,15 +305,21 @@ function App() {
                                     teamName: teamName,
                                     armyName: armyName,
                                     selectedFactionName: selectedFactionName,
+                                    eventName: eventName,
+                                    selectedAccessUser: selectedAccessUser,
+                                    creationDate: creationDate,
                                     fetchedFactions: fetchedFactions,
                                     subFactions: distinctSubFactions,
                                     listOfAllFactionUnits: listOfAllFactionUnits,
                                     subFactionDTOs: subFactionDTOs,
                                     isFetchedArmyList: isFetchedArmyList,
                                     setArmyName: setArmyName,
+                                    setEventName: setEventName,
+                                    setSelectedAccessUser: setSelectedAccessUser,
                                     setSelectedFactionName: setSelectedFactionName,
                                     setDistinctSubFactions: setDistinctSubFactions,
                                     setListOfAllFactionUnits: setListOfAllFactionUnits,
+                                    setCreationDate: setCreationDate,
                                     setSubFactionDTOs: setSubFactionDTOs,
                                     setTeamName: setTeamName,
                                     setPlayerName: setPlayerName,
