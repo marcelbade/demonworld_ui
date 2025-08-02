@@ -101,6 +101,7 @@ export const OPTIONS = {
 export const ARMY_LIST = {
   SELECT_TEAM_NAME: "Name des Teams",
   STORE_ARMY_LIST: "Armeeliste Speichern",
+  UPDATE_ARMY_LIST: "Armeeliste Aktualiseren",
   NO_EVENT: "Liste gehört zu keinen Event/Turnier",
   SELECT_EVENT: "Wähle einen Event",
   SELECT_USERS: "Wähle einen oder mehrere User",
@@ -156,16 +157,18 @@ export const LOAD_ARMY_LIST_DIALOG = {
 
 export const CONFIRMATION_DIALOG = {
   DELETE: {
-    CONFIRM_TITLE: "Soll diese Liste wirklich gelöscht werden?",
+    CONFIRM_TITLE: "Liste wirklich löschen?",
     CONFIRM_TEXT: "Wenn du die Löschung bestätigst, wird die Liste unwiederruflich gelöscht.",
-    CONFIRM: "Liste Löschen",
-    CANCEL: "Abbrechen",
+    CONFIRM: "Ja",
+    CANCEL: "Nein",
+    DONT_SHOW_Dialog: "Diesen Dialog nicht mehr anzeigen",
   },
   OVERRIDE: {
-    CONFIRM_TITLE: "Soll diese Liste wirklich geändert werden?",
+    CONFIRM_TITLE: "Liste wirklich überschreiben?",
     CONFIRM_TEXT: "Wenn du bestätigst, wird die Liste unwiederruflich geändert.",
-    CONFIRM: "Liste aktualisieren",
-    CANCEL: "Abbrechen",
+    CONFIRM: "Ja",
+    CANCEL: "Nein",
+    DONT_SHOW_Dialog: "Diesen Dialog nicht mehr anzeigen",
   },
 };
 
