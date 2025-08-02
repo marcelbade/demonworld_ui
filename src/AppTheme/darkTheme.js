@@ -118,6 +118,10 @@ const darkTheme = createTheme({
         contained: {
           fontFamily: "NotMaryKate",
           color: "white",
+          ":hover": {
+            color: "white", //
+            backgroundColor: "darkRed",
+          },
         },
 
         outlined: {
@@ -126,6 +130,10 @@ const darkTheme = createTheme({
           padding: "2em",
           height: "5em",
           fontFamily: "NotMaryKate",
+          ":hover": {
+            color: "white", //
+            backgroundColor: "darkRed",
+          },
         },
         text: {
           color: "white",
@@ -134,7 +142,8 @@ const darkTheme = createTheme({
           height: "5em",
           fontFamily: "NotMaryKate",
           ":hover": {
-            backgroundColor: "white",
+            color: "white", //
+            backgroundColor: "darkRed",
           },
         },
       },
@@ -190,6 +199,21 @@ const darkTheme = createTheme({
         root: {
           color: "red",
           fontFamily: "jaapokkiRegular",
+        },
+      },
+    },
+    MuiDialogTitle: {
+      styleOverrides: {
+        root: {
+          padding: "0.5em",
+        },
+      },
+    },
+    MuiDialogActions: {
+      styleOverrides: {
+        root: {
+          display: "flex",
+          justifyContent: "center",
         },
       },
     },
