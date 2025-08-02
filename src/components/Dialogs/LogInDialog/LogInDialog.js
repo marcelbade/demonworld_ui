@@ -33,7 +33,7 @@ const LoginDialog = () => {
   const [inputPasswordError, setInputPasswordError] = useState(false);
 
   const handleClose = () => {
-    UC.setDisplayLogInPrompt(false);
+    UC.setDisplayLogInDialog(false);
   };
 
   const callLogIn = async (event) => {
@@ -61,7 +61,7 @@ const LoginDialog = () => {
       token: response?.data?.token,
     });
 
-    UC.setDisplayLogInPrompt(false);
+    UC.setDisplayLogInDialog(false);
     MC.setOpenMenu(false);
     UC.setUserLoggedIn(true);
   };
@@ -89,7 +89,7 @@ const LoginDialog = () => {
           },
         },
       }}
-      open={UC.displayLogInPrompt}
+      open={UC.displayLogInDialog}
       onClose={handleClose}
     >
       <Grid
