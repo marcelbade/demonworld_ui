@@ -12,8 +12,8 @@ import { UserContext } from "../../contexts/userContext";
 const UserLogButton = (props) => {
   const UC = useContext(UserContext);
 
-  const displayLogInPrompt = () => {
-    UC.setDisplayLogInPrompt(true);
+  const displayLogInDialog = () => {
+    UC.setDisplayLogInDialog(true);
   };
 
   return (
@@ -53,7 +53,7 @@ const UserLogButton = (props) => {
             height: props.buttonHeight,
           }}
           onClick={() => {
-            displayLogInPrompt();
+            displayLogInDialog();
           }}
         >
           <AccountCircleIcon fontSize={props.iconSize} />
