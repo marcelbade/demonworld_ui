@@ -30,7 +30,7 @@ const UserAccountDrawer = (props) => {
 
   const changeAccount = () => {
     logOut();
-    UC.setDisplayLogInPrompt(true);
+    UC.setDisplayLogInDialog(true);
   };
 
   const changePassword = () => {
