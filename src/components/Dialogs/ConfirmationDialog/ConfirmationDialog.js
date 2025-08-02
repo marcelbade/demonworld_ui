@@ -7,9 +7,9 @@ import {
   DialogContentText,
   DialogTitle,
 } from "@mui/material";
-import { CONFIRMATION_DIALOG } from "../../../constants/textsAndMessages";
 
 const ConfirmationDialog = (props) => {
+  
   return (
     <Dialog
       open={props.showConfirmationDialog}
@@ -20,26 +20,28 @@ const ConfirmationDialog = (props) => {
       <DialogTitle
         id="alert-dialog-title" //
       >
-        {CONFIRMATION_DIALOG[props.type].CONFIRM_TITLE}
+        {props.type.CONFIRM_TITLE}
       </DialogTitle>
       <DialogContent>
         <DialogContentText
           id="alert-dialog-description" //
         >
-          {CONFIRMATION_DIALOG[props.type].CONFIRM_TEXT}
+          {props.type.CONFIRM_TEXT}
         </DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button
+          variant="text"
           onClick={props.confirmAndExecute} //
         >
-          {CONFIRMATION_DIALOG[props.type].CONFIRM}
+          {props.type.CONFIRM}
         </Button>
         <Button
+          variant="text"
           onClick={props.closeDialog} //
           autoFocus
         >
-          {CONFIRMATION_DIALOG[props.type].CANCEL}
+          {props.type.CANCEL}
         </Button>
       </DialogActions>
     </Dialog>
