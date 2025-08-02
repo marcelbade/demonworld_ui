@@ -81,7 +81,6 @@ const FearAndMoralCreator = () => {
               <Checkbox
                 checked={CCC.neverImpetuous} //
                 onChange={setUnitImpetuous}
-                inputProps={{ "aria-label": "controlled" }}
               />
             }
             label={CARD_TEXT.UNIT_IS_IMPETUOUS}
