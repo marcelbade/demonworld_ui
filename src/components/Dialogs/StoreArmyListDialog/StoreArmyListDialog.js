@@ -23,12 +23,13 @@ import { UserContext } from "../../../contexts/userContext";
 import { SelectionContext } from "../../../contexts/selectionContext";
 import { ArmyContext } from "../../../contexts/armyContext";
 import ConfirmationDialog from "../ConfirmationDialog/ConfirmationDialog";
+import { MenuContext } from "../../../contexts/MenuContext";
 // hooks
 import useAxios from "../../../customHooks/UseAxios";
 // constants
 import { ALL_USER_NAMES_URL, GET_EVENTS_URL, STORE_ARMY_LIST_URL } from "../../../constants/URLs";
 import { ARMY_LIST, CONFIRMATION_DIALOG, INPUT_TEXTS, PUSH_MESSAGE_TYPES } from "../../../constants/textsAndMessages";
-import { MenuContext } from "../../../contexts/MenuContext";
+import { NO_EVENT } from "../../../constants/eventConstants";
 
 const StoreArmyListDialog = (props) => {
   const UC = useContext(UserContext);
@@ -148,10 +149,8 @@ const StoreArmyListDialog = (props) => {
   };
 
   const setEventList = () => {
-    const NO_EVENT = "NO_EVENT"; // TODO Necessary???
-
-    return allEvents //
-      .filter((a) => a.eventName !== NO_EVENT && eventNotInThePast(a.eventDate))
+    return allEvents
+      .filter((a) => a.eventName !== NO_EVENT && eventNotInThePast(a.eventDate)) //
       .map((e) => e.eventName);
   };
 
