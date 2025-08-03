@@ -5,9 +5,10 @@ import {
   Dialog, //
   IconButton,
   Grid2 as Grid,
+  Box,
 } from "@mui/material";
 // icons
-import CancelIcon from "@mui/icons-material/Cancel";
+import { Cancel } from "@mui/icons-material";
 // contexts
 import { UserContext } from "../../../contexts/userContext";
 import { ArmyContext } from "../../../contexts/armyContext";
@@ -186,9 +187,9 @@ const LoadArmyListDialog = (props) => {
       sx={{
         "& .MuiDialog-container": {
           "& .MuiPaper-root": {
-            minWidth: "50em",
+            minWidth: "75em",
             minHeight: "45em",
-            padding: "1em",
+         
           },
         },
       }}
@@ -198,6 +199,9 @@ const LoadArmyListDialog = (props) => {
         container //
         direction="row"
         justifyContent="flex-end"
+        sx={{
+          backgroundColor: "black",
+        }}
       >
         <IconButton
           sx={{ marginRight: "1em" }} //
@@ -205,13 +209,14 @@ const LoadArmyListDialog = (props) => {
             handleClose();
           }}
         >
-          <CancelIcon />
+          <Cancel color="error" />
         </IconButton>
       </Grid>
       <Grid
         container
-        spacing={3}
+        spacing={1}
         direction="row"
+        justifyContent="space-around"
         sx={{
           width: "100%",
           height: "100%",
@@ -226,13 +231,19 @@ const LoadArmyListDialog = (props) => {
           handleFilteredEventInput={handleFilteredEventInput} //
         />
       </Grid>
-      <FetchedArmiesList
-        allLists={allLists}
-        filteredFaction={filteredFaction} //
-        filteredEvent={filteredEvent}
-        loadListintoTool={loadListintoTool}
-        deleteArmyListButton={deleteArmyListButton}
-      />
+      <Grid
+        container
+        alignContent="center" //
+        justifyContent="center"
+      >
+        <FetchedArmiesList
+          allLists={allLists}
+          filteredFaction={filteredFaction} //
+          filteredEvent={filteredEvent}
+          loadListintoTool={loadListintoTool}
+          deleteArmyListButton={deleteArmyListButton}
+        />
+      </Grid>
       <ConfirmationDialog
         type={CONFIRMATION_DIALOG.DELETE}
         showConfirmationDialog={showConfirmationDialog} //

@@ -56,12 +56,13 @@ const FetchedArmiesList = (props) => {
   return (
     <List
       sx={{
-        width: "100%", //
-        minWidth: "100%",
+        width: "90%", //
+        minWidth: "90%",
         bgcolor: "background.paper",
         overflowY: "scroll",
         maxHeight: "50em",
         minHeight: "50em",
+        marginBottom: "2em",
       }}
     >
       {props.allLists

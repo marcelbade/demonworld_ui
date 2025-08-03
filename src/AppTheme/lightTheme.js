@@ -197,6 +197,13 @@ const lightTheme = createTheme({
         },
       },
     },
+    MuiDialog: {
+      styleOverrides: {
+        paper: {
+          borderRadius: "0.75em",
+        },
+      },
+    },
     MuiDialogTitle: {
       styleOverrides: {
         root: {

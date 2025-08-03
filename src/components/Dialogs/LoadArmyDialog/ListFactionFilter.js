@@ -36,7 +36,6 @@ const ListFactionFilter = (props) => {
       variant="standard"
       sx={{
         minWidth: "15em", //
-        marginRight: "2em",
       }}
     >
       <InputLabel>{LOAD_ARMY_LIST_DIALOG.FILTER_FOR_FACTION}</InputLabel>
