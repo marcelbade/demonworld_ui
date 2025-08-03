@@ -3,7 +3,7 @@
 import { ITEM_TYPE_FORTIFICATIONS } from "../constants/itemShopConstants";
 import { ITEM_LIMIT_MESSAGE } from "../constants/textsAndMessages";
 
-const useUnitEquipmentLimits = () => {
+const UseUnitEquipmentLimits = () => {
   /**
    * While useItemFilters makes sure that items that a unit can not equip 
    * are either not shown or disabled, this logic implements item selection
@@ -106,4 +106,4 @@ const useUnitEquipmentLimits = () => {
   };
 };
 
-export default useUnitEquipmentLimits;
+export default UseUnitEquipmentLimits;

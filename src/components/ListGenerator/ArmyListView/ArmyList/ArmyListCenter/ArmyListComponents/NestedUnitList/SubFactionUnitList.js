@@ -13,7 +13,7 @@ import { SelectionContext } from "../../../../../../../contexts/selectionContext
 import { ItemContext } from "../../../../../../../contexts/itemContext";
 // custom hooks
 import useArmyValidation from "../../../../../../../customHooks/UseArmyValidation";
-import useUnitEquipmentLimits from "../../../../../../../customHooks/useUnitEqipmentLimits";
+import useUnitEquipmentLimits from "../../../../../../../customHooks/UseUnitEquipmentLimits";
 import useSpecialItems from "../../../../../../../customHooks/UseSpecialItems";
 /**
  * The component creates the nested unit list for a single sub faction.

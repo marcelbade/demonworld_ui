@@ -16,13 +16,13 @@ import useTreeViewController from "../../../../../customHooks/UseTreeViewControl
 import InvalidTreeItemNode from "./InvalidTreeItemNode";
 // constants
 import { ITEM_CATEGORY_NAME_MAPPING } from "../../../../../constants/itemShopConstants";
-import useUnitEqipmentLimits from "../../../../../customHooks/useUnitEqipmentLimits";
+import UseUnitEqipmentLimits from "../../../../../customHooks/UseUnitEquipmentLimits";
 
 const ItemShopTree = () => {
   const IC = useContext(ItemContext);
   const controller = useTreeViewController();
   const filter = useItemFilters();
-  const equipmentLimits = useUnitEqipmentLimits();
+  const equipmentLimits = UseUnitEqipmentLimits();
 
   const [filteredItemGroups, setFilteredItemGroups] = useState([]);
   const [disabledCategories, setDisabledCategories] = useState([]);

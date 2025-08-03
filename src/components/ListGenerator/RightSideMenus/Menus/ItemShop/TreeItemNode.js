@@ -4,7 +4,7 @@ import { Typography, IconButton, Accordion, AccordionSummary, AccordionDetails, 
 // components and functions
 import { ItemContext } from "../../../../../contexts/itemContext";
 import { SelectionContext } from "../../../../../contexts/selectionContext";
-import useUnitEqipmentLimits from "../../../../../customHooks/useUnitEqipmentLimits";
+import UseUnitEqipmentLimits from "../../../../../customHooks/UseUnitEquipmentLimits";
 import CustomIcon from "../../../../shared/CustomIcon";
 import useSpecialItems from "../../../../../customHooks/UseSpecialItems";
 // icons
@@ -17,7 +17,7 @@ const TreeItemNode = (props) => {
   const IC = useContext(ItemContext);
   const SEC = useContext(SelectionContext);
 
-  const limiter = useUnitEqipmentLimits();
+  const limiter = UseUnitEqipmentLimits();
   const special = useSpecialItems();
 
   /**
