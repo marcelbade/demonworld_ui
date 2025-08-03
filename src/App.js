@@ -17,14 +17,11 @@ import AllyProvider from "./contexts/allyContext";
 import AlternativeListProvider from "./contexts/alternativeListContext";
 import ArmyProvider from "./contexts/armyContext";
 import CustomSnackBarProvider from "./components/shared/CustomSnackBarProvider";
-import ItemContext from "./contexts/itemContext";
 import LightSwitchProvider from "./contexts/lightSwitchContext";
 import ListDisplayProvider from "./contexts/ListDisplayContext";
 import LossCalcProvider from "./contexts/LossCalculatorContext";
 import MenuProvider from "./contexts/MenuContext";
-import RightMenuContext from "./contexts/rightMenuContext";
 import SecondSubFactionProvider from "./contexts/secondSubFactionContext";
-import SelectionContext from "./contexts/selectionContext";
 import TournamentRulesProvider from "./contexts/tournamentRulesContext";
 import UserProvider from "./contexts/userContext";
 // theme
@@ -36,6 +33,9 @@ import { NONE, NO_ALLY } from "./constants/factions";
 import { FACTION_DTOS_URL, ITEM_DTOS_URL } from "./constants/URLs";
 // custom hooks
 import useAxios from "./customHooks/UseAxios";
+import ItemProvider from "./contexts/itemContext";
+import SelectionProvider from "./contexts/selectionContext";
+import RightMenuProvider from "./contexts/rightMenuContext";
 
 function App() {
   const callAxios = useAxios();
@@ -232,7 +232,7 @@ function App() {
                         setSecondSubfactionCaption: setSecondSubfactionCaption,
                       }}
                     >
-                      <ItemContext
+                      <ItemProvider
                         value={{
                           // ITEMSHOP
                           fetchedItems: fetchedItems,
@@ -242,7 +242,7 @@ function App() {
                           setUnitSelectedForShop: setUnitSelectedForShop,
                         }}
                       >
-                        <SelectionContext
+                        <SelectionProvider
                           value={{
                             // SELECTED UNIT LIST
                             selectedUnits: selectedUnits,
@@ -253,7 +253,7 @@ function App() {
                             setEnableUpdateListBttn: setEnableUpdateListBttn,
                           }}
                         >
-                          <RightMenuContext
+                          <RightMenuProvider
                             value={{
                               // RIGHT SIDE MENU
                               statCardState: statCardState,
@@ -344,9 +344,9 @@ function App() {
                                 </ArmyProvider>
                               </AllyProvider>
                             </AlternativeListProvider>
-                          </RightMenuContext>
-                        </SelectionContext>
-                      </ItemContext>
+                          </RightMenuProvider>
+                        </SelectionProvider>
+                      </ItemProvider>
                     </SecondSubFactionProvider>
                   </TournamentRulesProvider>
                 </LossCalcProvider>
