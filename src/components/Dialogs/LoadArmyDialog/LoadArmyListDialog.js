@@ -12,6 +12,7 @@ import CancelIcon from "@mui/icons-material/Cancel";
 import { UserContext } from "../../../contexts/userContext";
 import { ArmyContext } from "../../../contexts/armyContext";
 import { SelectionContext } from "../../../contexts/selectionContext";
+import { MenuContext } from "../../../contexts/MenuContext";
 // hooks
 import usePushMessages from "../../../customHooks/UsePushMessages";
 import useAxios from "../../../customHooks/UseAxios";
@@ -23,23 +24,23 @@ import ConfirmationDialog from "../ConfirmationDialog/ConfirmationDialog";
 import UseArmyStateLoader from "../../../customHooks/UseArmyStateLoader";
 // constants
 import { DELETE_ARMY_LIST_URL, RETREIVE_ARMY_LIST_URL } from "../../../constants/URLs";
-import { LOAD_ARMY_LIST_DIALOG, PUSH_MESSAGE_TYPES } from "../../../constants/textsAndMessages";
-import { CONFIRMATION_DIALOG_TYPE } from "../../../constants/MenuAndDialogConstants";
+import { CONFIRMATION_DIALOG, LOAD_ARMY_LIST_DIALOG, PUSH_MESSAGE_TYPES } from "../../../constants/textsAndMessages";
 
 const LoadArmyListDialog = (props) => {
   const UC = useContext(UserContext);
   const AC = useContext(ArmyContext);
   const SEC = useContext(SelectionContext);
+  const MC = useContext(MenuContext);
 
-  const callAxios = useAxios();
+  const sendData = useAxios();
   const pushMessages = usePushMessages();
   const stateLoader = UseArmyStateLoader();
 
   const [allLists, setAllLists] = useState([]);
   const [filteredFaction, setFilteredFaction] = useState("");
   const [filteredEvent, setFilteredEvent] = useState("");
-  const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
   const [listToDelete, setListToDelete] = useState({});
+  const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
 
   useEffect(() => {
     if (props.showArmyLoadPrompt) {
@@ -54,7 +55,7 @@ const LoadArmyListDialog = (props) => {
    * - or have the user listed as having access
    */
   const fetchLists = async () => {
-    callAxios.fetchProtectedData(setAllLists, RETREIVE_ARMY_LIST_URL(UC.user.userName));
+    sendData.fetchProtectedData(setAllLists, RETREIVE_ARMY_LIST_URL(UC.user.userName));
   };
 
   /**
@@ -132,12 +133,18 @@ const LoadArmyListDialog = (props) => {
    * @param {*} listObj
    */
   const deleteArmyListButton = (l) => {
-    setShowConfirmationDialog(true);
     setListToDelete(l);
+
+    if (!MC.blockDialog.deletionDialog) {
+      setShowConfirmationDialog(true);
+      return;
+    }
+
+    deleteList();
   };
 
-  const confirmAndDeleteList = async () => {
-    callAxios.deleteProtectedData(DELETE_ARMY_LIST_URL(listToDelete.userName, listToDelete.id));
+  const deleteList = async () => {
+    sendData.deleteProtectedData(DELETE_ARMY_LIST_URL(listToDelete.userName, listToDelete.id));
 
     const result = allLists.filter((l) => l.id !== listToDelete.id);
     setAllLists(result);
@@ -147,6 +154,13 @@ const LoadArmyListDialog = (props) => {
 
   const closeConfirmationDialog = () => {
     setShowConfirmationDialog(false);
+  };
+
+  const setDialogState = () => {
+    MC.setblockDialog({
+      ...MC.blockDialog,
+      confirmationDialog: !MC.blockDialog.confirmationDialog,
+    });
   };
 
   const handleFilteredFactionInput = (event) => {
@@ -220,10 +234,12 @@ const LoadArmyListDialog = (props) => {
         deleteArmyListButton={deleteArmyListButton}
       />
       <ConfirmationDialog
-        type={CONFIRMATION_DIALOG_TYPE.DELETE}
+        type={CONFIRMATION_DIALOG.DELETE}
         showConfirmationDialog={showConfirmationDialog} //
-        confirmAndExecute={confirmAndDeleteList}
+        confirmAndExecute={deleteList}
         closeDialog={closeConfirmationDialog}
+        dialogBoxState={MC.blockDialog.confirmationDialog}
+        setDialogBoxState={setDialogState}
       />
     </Dialog>
   );
