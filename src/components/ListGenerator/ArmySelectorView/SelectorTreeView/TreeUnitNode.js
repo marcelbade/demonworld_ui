@@ -13,7 +13,7 @@ import { PUSH_MESSAGE_TYPES } from "../../../../constants/textsAndMessages";
 import { SelectionContext } from "../../../../contexts/selectionContext";
 // custom hooks
 import useArmyValidation from "../../../../customHooks/UseArmyValidation";
-import useRightSideMenuController from "../../../../customHooks/useRightSideMenuController";
+import useRightSideMenuController from "../../../../customHooks/UseRightSideMenuController";
 import useUnitEnricher from "../../../../customHooks/UseUnitEnricher";
 import { renderDynamicIcons } from "../../../../util/utilityFunctions";
 

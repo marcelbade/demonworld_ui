@@ -4,7 +4,7 @@ import React from "react";
 import { List } from "@mui/material";
 import { ListItemButton } from "@mui/material";
 // custom hooks
-import useRightSideMenuController from "../../../../../../../customHooks/useRightSideMenuController";
+import useRightSideMenuController from "../../../../../../../customHooks/UseRightSideMenuController";
 
 /**
  * Component generates the buttons for the right side menu.

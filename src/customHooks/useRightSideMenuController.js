@@ -7,7 +7,7 @@ import { RightMenuContext } from "../contexts/rightMenuContext";
 import { TournamentRulesContext } from "../contexts/tournamentRulesContext";
 // components and functions
 import { BUTTON_TEXTS } from "../constants/textsAndMessages";
-import { SUMMONED } from "../constants/unitTypes";
+import { SUMMONED } from "../constants/unitTypes"; 
 
 /**Function toggles the menus on the right side. It controls what menu
  * and what content for which unit is shown. In order to do this, the menus are
@@ -26,7 +26,7 @@ import { SUMMONED } from "../constants/unitTypes";
  *   the button text and whether to display it.
  * - three functions that close the corrsponing menu
  */
-const useRightSideMenuController = (unit, subFaction, bttnSelectorObj) => {
+const UseRightSideMenuController = (unit, subFaction, bttnSelectorObj) => {
   const IC = useContext(ItemContext);
   const RC = useContext(RightMenuContext);
   const SFC = useContext(SecondSubFactionContext);
@@ -223,4 +223,4 @@ const useRightSideMenuController = (unit, subFaction, bttnSelectorObj) => {
   };
 };
 
-export default useRightSideMenuController;
+export default UseRightSideMenuController;

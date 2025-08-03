@@ -10,7 +10,7 @@ import { RightMenuContext } from "../../../../../contexts/rightMenuContext";
 import { LightSwitchContext } from "../../../../../contexts/lightSwitchContext";
 import { ArmyContext } from "../../../../../contexts/armyContext";
 // custom hooks
-import useRightSideMenuController from "../../../../../customHooks/useRightSideMenuController";
+import useRightSideMenuController from "../../../../../customHooks/UseRightSideMenuController";
 // theme
 import lightTheme from "../../../../../AppTheme/lightTheme";
 import darkTheme from "../../../../../AppTheme/darkTheme";

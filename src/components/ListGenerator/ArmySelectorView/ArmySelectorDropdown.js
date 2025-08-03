@@ -6,7 +6,7 @@ import { ArmyContext } from "../../../contexts/armyContext";
 import { ItemContext } from "../../../contexts/itemContext";
 //  custom hooks
 import useArmyValidation from "../../../customHooks/UseArmyValidation";
-import useRightSideMenuController from "../../../customHooks/useRightSideMenuController";
+import useRightSideMenuController from "../../../customHooks/UseRightSideMenuController";
 import UseArmyStateLoader from "../../../customHooks/UseArmyStateLoader";
 // context
 import { RightMenuContext } from "../../../contexts/rightMenuContext";

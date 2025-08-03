@@ -11,10 +11,11 @@ import { SelectionContext } from "../../../../../contexts/selectionContext";
 import { LightSwitchContext } from "../../../../../contexts/lightSwitchContext";
 // custon hooks
 import useArmyValidation from "../../../../../customHooks/UseArmyValidation";
-import useRightSideMenuController from "../../../../../customHooks/useRightSideMenuController";
+ 
 // theme
 import lightTheme from "../../../../../AppTheme/lightTheme";
 import darkTheme from "../../../../../AppTheme/darkTheme";
+import UseRightSideMenuController from "../../../../../customHooks/UseRightSideMenuController";
 
 const SecondSubFactionMenu = () => {
   const IC = useContext(ItemContext);
@@ -23,7 +24,7 @@ const SecondSubFactionMenu = () => {
   const LC = useContext(LightSwitchContext);
 
   const validation = useArmyValidation();
-  const sideMenuController = useRightSideMenuController({}, "", {});
+  const sideMenuController = UseRightSideMenuController({}, "", {});
 
   /**
    * Function takes the selected unit from the list, sets a new value for

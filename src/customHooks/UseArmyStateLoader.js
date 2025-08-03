@@ -9,6 +9,14 @@ import { SecondSubFactionContext } from "../contexts/secondSubFactionContext";
 import { ARMIES_ADDITIONAL_SUBFACTIONS, ARMIES_ADDITIONAL_SUBFACTIONS_MAPPING, NO_ALLY, SPECIAL } from "../constants/factions";
 import useUnitEnricher from "./UseUnitEnricher";
 
+/**
+ * Custom hook supplies a single function that sets the entire state of the list generator. This encompasses:
+ * - faction data (units, subfaction, ...)
+ * - ally data
+ * - alternative list data
+ * In additon, the useUnitEnricher hook is called for all units.
+ * @returns setFactionPropertiesfunction( factionName: String ) -> Function sets the entire state for a faction when it is selected.
+ */
 const UseArmyStateLoader = () => {
   const AC = useContext(ArmyContext);
   const ALC = useContext(AlternativeListContext);

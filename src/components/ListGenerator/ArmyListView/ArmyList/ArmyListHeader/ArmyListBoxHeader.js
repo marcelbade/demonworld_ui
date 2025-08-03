@@ -1,12 +1,10 @@
 // React
-import React, { Fragment, useContext, useEffect } from "react";
-// icons
+import { Fragment, useContext, useEffect } from "react";
 // material ui
 import { TextField, Grid2 as Grid } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components and functions
 import { ArmyContext } from "../../../../../contexts/armyContext";
-// import { ValidationContext } from "../../../../../contexts/validationContext";
 import ContextHelpButton from "../../../../shared/ContextHelpButton";
 // constants
 import { INPUT_TEXTS, PUSH_MESSAGE_TYPES, VALIDATION } from "../../../../../constants/textsAndMessages";
@@ -24,33 +22,25 @@ const ArmyListBoxHeader = () => {
 
   const theme = useTheme();
 
-  /**
-   * Function takes the user input for maximum point allowance, validates it, and sets the state.
-   * @param {event object} event
-   */
+  useEffect(() => {
+    createDefaultArmyName();
+  }, [AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const changeArmyName = (event) => {
     AC.setArmyName(event.target.value);
   };
 
-  /**
-   * Function takes the user input for maximum point allowance, validates it, and sets the state.
-   * @param {event object} event
-   */
   const changePlayerName = (event) => {
     AC.setPlayerName(event.target.value);
   };
 
-  /**
-   * Function takes the user input for maximum point allowance, validates it, and sets the state.
-   * @param {event object} event
-   */
   const changeTeamName = (event) => {
     AC.setTeamName(event.target.value);
   };
-  const deletePlayerName = (event) => {
+  const deletePlayerName = () => {
     AC.setPlayerName("");
   };
-  const deleteTeamName = (event) => {
+  const deleteTeamName = () => {
     AC.setTeamName("");
   };
 
@@ -72,10 +62,6 @@ const ArmyListBoxHeader = () => {
 
     AC.setArmyName(`${AC.selectedFactionName} - ${dayOfMonth}.${month}.${year}`);
   };
-
-  useEffect(() => {
-    createDefaultArmyName();
-  }, [AC.selectedFactionName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
    * Function checks, whether the list has an army commander (hero or leader with command >= 2).
@@ -115,10 +101,10 @@ const ArmyListBoxHeader = () => {
   return (
     <Grid
       container //
-      direction="column"
+      spacing={3}
       alignItems="flex-start"
       sx={{
-        minWidth: "40em ",
+        minWidth: "50em ",
       }}
     >
       {inputElements.map((inputElmnt, i) => (
