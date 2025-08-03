@@ -64,6 +64,8 @@ const ConfirmationDialog = (props) => {
       </DialogActions>
       <Grid
         container
+        alignContent="center"
+
         sx={{
           marginTop: "2em",
           marginBottom: "0.5em",
@@ -75,10 +77,14 @@ const ConfirmationDialog = (props) => {
           sx={{
             marginLeft: "1em",
             marginRight: "0.5em",
+            marginBottom:"0.1em",
+       
           }}
         />
         <DialogContentText
           id="alert-dialog-description" //
+       
+          alignContent="center"
         >
           {props.type.DONT_SHOW_Dialog}
         </DialogContentText>
