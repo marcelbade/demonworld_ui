@@ -257,19 +257,19 @@ const StoreArmyListDialog = (props) => {
           </TextField>
           <TextField
             required //
-            id="teamName"
-            name="teamName"
-            variant="outlined"
-            label={ARMY_LIST.SELECT_TEAM_NAME}
-            defaultValue={AC.teamName}
-          />
-          <TextField
-            required //
             id="armyListName"
             name="armyListName"
             variant="outlined"
             label={INPUT_TEXTS.ARMY_NAME}
             defaultValue={AC.armyName}
+          />
+          <TextField
+            required //
+            id="teamName"
+            name="teamName"
+            variant="outlined"
+            label={ARMY_LIST.SELECT_TEAM_NAME}
+            defaultValue={AC.teamName}
           />
           <Grid
             container //
