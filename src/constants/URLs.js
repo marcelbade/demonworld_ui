@@ -7,7 +7,7 @@ export const REGISTER_USER_URL = `${PREFIX_BE}/public/user/register`;
 export const ALL_USER_NAMES_URL = `${PREFIX_BE}/public/user/allUserNames`;
 
 // army lists
-export const STORE_ARMY_LIST_URL = `${PREFIX_BE}/auth/armyLists/addList`;
+export const STORE_ARMY_LIST_URL = `${PREFIX_BE}/auth/armyLists/storeList`;
 
 export const RETRIEVE_ARMY_LISTS_URL = (user) => `${PREFIX_BE}/auth/armyLists/getListsForUser?userName=${user}`;
 
