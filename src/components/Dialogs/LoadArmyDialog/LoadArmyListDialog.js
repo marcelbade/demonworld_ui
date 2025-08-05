@@ -5,7 +5,6 @@ import {
   Dialog, //
   IconButton,
   Grid2 as Grid,
-  Box,
 } from "@mui/material";
 // icons
 import { Cancel } from "@mui/icons-material";
@@ -24,7 +23,7 @@ import ListEventFilter from "./ListEventFilter";
 import ConfirmationDialog from "../ConfirmationDialog/ConfirmationDialog";
 import UseArmyStateLoader from "../../../customHooks/UseArmyStateLoader";
 // constants
-import { DELETE_ARMY_LIST_URL, RETREIVE_ARMY_LIST_URL } from "../../../constants/URLs";
+import { DELETE_ARMY_LIST_URL, RETRIEVE_ARMY_LISTS_URL } from "../../../constants/URLs";
 import { CONFIRMATION_DIALOG, LOAD_ARMY_LIST_DIALOG, PUSH_MESSAGE_TYPES } from "../../../constants/textsAndMessages";
 
 const LoadArmyListDialog = (props) => {
@@ -56,7 +55,7 @@ const LoadArmyListDialog = (props) => {
    * - or have the user listed as having access
    */
   const fetchLists = async () => {
-    sendData.fetchProtectedData(setAllLists, RETREIVE_ARMY_LIST_URL(UC.user.userName));
+    sendData.fetchProtectedData(setAllLists, RETRIEVE_ARMY_LISTS_URL(UC.user.userName));
   };
 
   /**
@@ -99,6 +98,7 @@ const LoadArmyListDialog = (props) => {
   };
 
   const setListToolState = (listObj) => {
+    AC.setArmyID(listObj.id);
     AC.setPlayerName(listObj.userName);
     AC.setTeamName(listObj.teamName);
     stateLoader.setFactionProperties(listObj.faction);
@@ -189,7 +189,6 @@ const LoadArmyListDialog = (props) => {
           "& .MuiPaper-root": {
             minWidth: "75em",
             minHeight: "45em",
-         
           },
         },
       }}

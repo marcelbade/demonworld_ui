@@ -87,7 +87,7 @@ const StoreArmyListDialog = (props) => {
       return;
     }
 
-    sendData();
+    storeList();
   };
 
   const setDialogState = () => {
@@ -110,9 +110,10 @@ const StoreArmyListDialog = (props) => {
     AC.setArmyName(listName);
   };
 
-  const sendData = async () => {
+  const storeList = async () => {
     callAxios.storeData(
       JSON.stringify({
+        id: AC.armyID,
         userName: AC.playerName,
         teamName: AC.teamName,
         listName: AC.armyName,
@@ -126,6 +127,12 @@ const StoreArmyListDialog = (props) => {
       null,
       ARMY_LIST.LIST_CREATED
     );
+    
+    cleanup();
+  };
+
+  const cleanup = () => {
+    setShowConfirmationDialog(false);
   };
 
   // Username can be different from player name
@@ -347,7 +354,7 @@ const StoreArmyListDialog = (props) => {
       <ConfirmationDialog
         type={CONFIRMATION_DIALOG.OVERRIDE}
         showConfirmationDialog={showConfirmationDialog} //
-        confirmAndExecute={sendData}
+        confirmAndExecute={storeList}
         closeDialog={closeConfirmationDialog}
         dialogBoxState={MC.blockDialog.confirmationDialog}
         setDialogBoxState={setDialogState}

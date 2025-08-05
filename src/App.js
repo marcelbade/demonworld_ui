@@ -70,6 +70,8 @@ function App() {
   const [simpleModeOn, setSimpleMode] = useState(false);
 
   // army meta data
+  // DB primary key - do not initialize as a number to avoid write errors!
+  const [armyID, setArmyID] = useState(null);
   const [teamName, setTeamName] = useState("");
   const [playerName, setPlayerName] = useState("");
   const [armyName, setArmyName] = useState("");
@@ -79,6 +81,7 @@ function App() {
 
   // army list was loaded, i.e. fetched from DB
   const [isFetchedArmyList, setIsFetchedArmyList] = useState(false);
+
   // selected faction & army list
   const [selectedFactionName, setSelectedFactionName] = useState(NONE);
   const [distinctSubFactions, setDistinctSubFactions] = useState([]);
@@ -89,11 +92,13 @@ function App() {
 
   // maximum point allowance
   const [maxPointsAllowance, setMaxPointsAllowance] = useState(2000);
+
   // allied faction
   const [allyName, setAllyName] = useState(NO_ALLY);
   const [distinctAllySubFactions, setDistinctAllySubFactions] = useState([]);
   const [listOfAlliedUnits, setListOfAlliedUnits] = useState([]);
   const [allySubFactionDTOs, setAllySubFactionDTOs] = useState([]);
+
   // tournament rules
   const [showTournamentRulesMenu, setShowTournamentRulesMenu] = useState(false);
   const [tournamentOverrideRules, setTournamentOverrideRules] = useState({
@@ -102,6 +107,7 @@ function App() {
     maxNumber: 2,
     uniquesOnlyOnce: true,
   });
+
   // alternative lists
   const [armyHasAlternativeLists, setArmyHasAlternativeLists] = useState(false);
   const [numberOfAlternativeChoices, setNumberOfAlternativeChoices] = useState(0);
@@ -109,17 +115,20 @@ function App() {
   const [alternateListNames, setAlternateListNames] = useState([]);
   const [altArmyListSelectionComplete, setAltArmyListSelectionComplete] = useState(false);
   const [allyIsAlternativeOption, setAllyIsAlternativeOption] = useState(false);
+
   // additional subFactions - currently only important for the Thain faction!
   const [hasAdditionalSubFaction, setHasAdditionalSubFaction] = useState(false);
   const [secondSubFactionList, setSecondSubFactionList] = useState([]);
   const [secondSubfactionCaption, setSecondSubfactionCaption] = useState("");
   const [excemptSubFactions, setExcemptSubFactions] = useState([]);
+
   // second SubFaction Menu view
   const [secondSubFactionMenuState, setSecondSubFactionMenuState] = useState({
     clickedUnit: {},
     lastclickedUnit: {},
     show: false,
   });
+
   // item shop
   const [allEquippedItems, setAllEquippedItems] = useState([]);
   const [itemShopState, setItemShopState] = useState({
@@ -128,6 +137,7 @@ function App() {
     show: false,
   });
   const [unitSelectedForShop, setUnitSelectedForShop] = useState({});
+
   // unit card view
   const [statCardState, setStatCardState] = useState({
     clickedUnit: {},
@@ -135,8 +145,10 @@ function App() {
     show: false,
   });
   const [displayedCard, setDisplayedCard] = useState({});
+
   // right side options menu
   const [showOptionButtons, setShowOptionButtons] = useState(false);
+
   //loss calculator
   const [list, setList] = useState([]);
   const [totalPointsLost, setTotalPointsLost] = useState(0);
@@ -301,6 +313,7 @@ function App() {
                                 <ArmyProvider
                                   value={{
                                     // ARMY
+                                    armyID: armyID,
                                     playerName: playerName,
                                     teamName: teamName,
                                     armyName: armyName,
@@ -313,6 +326,7 @@ function App() {
                                     listOfAllFactionUnits: listOfAllFactionUnits,
                                     subFactionDTOs: subFactionDTOs,
                                     isFetchedArmyList: isFetchedArmyList,
+                                    setArmyID: setArmyID,
                                     setArmyName: setArmyName,
                                     setEventName: setEventName,
                                     setSelectedAccessUser: setSelectedAccessUser,
