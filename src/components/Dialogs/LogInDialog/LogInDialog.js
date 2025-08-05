@@ -9,6 +9,7 @@ import {
   TextField,
   IconButton,
   Grid2 as Grid,
+  useTheme,
 } from "@mui/material";
 // icons
 import CancelIcon from "@mui/icons-material/Cancel";
@@ -27,6 +28,7 @@ const LoginDialog = () => {
   const UC = useContext(UserContext);
   const MC = useContext(MenuContext);
 
+  const theme = useTheme();
   const callAxios = useAxios();
 
   const [inputUserNameError, setInputUserNameError] = useState(false);
@@ -84,8 +86,7 @@ const LoginDialog = () => {
         "& .MuiDialog-container": {
           "& .MuiPaper-root": {
             minWidth: "50em",
-            height: "30em",
-            padding: "1em",
+            height: "25em",
           },
         },
       }}
@@ -96,13 +97,14 @@ const LoginDialog = () => {
         container //
         direction={"row"}
         justifyContent={"space-between"}
+        sx={theme.palette.dialogs.title}
       >
         <DialogTitle>{USER_AUTH.LOGIN_PROMPT_TITLE}</DialogTitle>
         <IconButton
           sx={{ marginRight: "1em" }} //
           onClick={handleClose}
         >
-          <CancelIcon />
+          <CancelIcon color="error" />
         </IconButton>
       </Grid>
       <DialogContent>
@@ -141,8 +143,9 @@ const LoginDialog = () => {
       </DialogContent>
       <Grid //
         container
-        alignItems="center"
-        justifyContent="space-between"
+        alignContent="center"
+        justifyContent="space-around"
+        sx={{ marginBottom: "1em" }}
       >
         <NaviButton
           relativeURL={"/addNewAccount"} //
@@ -154,8 +157,7 @@ const LoginDialog = () => {
         />
 
         <Button
-          sx={{ margin: "2em" }} //
-          variant="outlined"
+          variant="outlined" //
           type="submit"
         >
           {USER_AUTH.LOGIN_ACTION}

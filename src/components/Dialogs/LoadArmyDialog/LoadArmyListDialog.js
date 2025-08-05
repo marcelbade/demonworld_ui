@@ -5,6 +5,7 @@ import {
   Dialog, //
   IconButton,
   Grid2 as Grid,
+  useTheme,
 } from "@mui/material";
 // icons
 import { Cancel } from "@mui/icons-material";
@@ -31,6 +32,8 @@ const LoadArmyListDialog = (props) => {
   const AC = useContext(ArmyContext);
   const SEC = useContext(SelectionContext);
   const MC = useContext(MenuContext);
+
+  const theme = useTheme()
 
   const sendData = useAxios();
   const pushMessages = usePushMessages();
@@ -198,9 +201,7 @@ const LoadArmyListDialog = (props) => {
         container //
         direction="row"
         justifyContent="flex-end"
-        sx={{
-          backgroundColor: "black",
-        }}
+          sx={theme.palette.dialogs.title}
       >
         <IconButton
           sx={{ marginRight: "1em" }} //

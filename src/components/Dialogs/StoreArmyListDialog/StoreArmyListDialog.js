@@ -12,6 +12,7 @@ import {
   TextField,
   Checkbox,
   MenuItem,
+  useTheme,
 } from "@mui/material";
 // icons
 import CancelIcon from "@mui/icons-material/Cancel";
@@ -35,8 +36,9 @@ const StoreArmyListDialog = (props) => {
   const UC = useContext(UserContext);
   const SEC = useContext(SelectionContext);
   const AC = useContext(ArmyContext);
-
   const MC = useContext(MenuContext);
+
+  const theme = useTheme();
 
   const [allEvents, setAllEvents] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
@@ -213,7 +215,7 @@ const StoreArmyListDialog = (props) => {
         container //
         direction={"row"}
         justifyContent={"space-between"}
-        sx={{ backgroundColor: "black", color: "white" }}
+        sx={theme.palette.dialogs.title}
       >
         <DialogTitle>
           {AC.isExistingList //
@@ -226,7 +228,7 @@ const StoreArmyListDialog = (props) => {
             close();
           }}
         >
-          <CancelIcon  color="error" />
+          <CancelIcon color="error" />
         </IconButton>
       </Grid>
       <DialogContent>

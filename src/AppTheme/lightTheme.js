@@ -8,6 +8,13 @@ const lightTheme = createTheme({
     color: "black",
     errorColor: "red",
     compendiumHeaderBackground: "black",
+    dialogs: {
+      title: {
+        backgroundColor: "black",
+        color: "white",
+      },
+    },
+
     statCards: {
       backGround: {
         backgroundColor: "lightgrey", //

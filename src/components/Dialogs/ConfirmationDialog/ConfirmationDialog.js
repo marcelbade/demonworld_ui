@@ -10,9 +10,12 @@ import {
   DialogTitle,
   Grid2 as Grid,
   IconButton,
+  useTheme,
 } from "@mui/material";
 
 const ConfirmationDialog = (props) => {
+  const theme = useTheme();
+
   return (
     <Dialog
       open={props.showConfirmationDialog}
@@ -20,14 +23,7 @@ const ConfirmationDialog = (props) => {
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
-      <Grid
-        container
-        justifyContent="space-between"
-        sx={{
-          backgroundColor: "black",
-          color: "white",
-        }}
-      >
+      <Grid container justifyContent="space-between" sx={theme.palette.dialogs.title}>
         <DialogTitle
           id="alert-dialog-title" //
         >
@@ -65,7 +61,6 @@ const ConfirmationDialog = (props) => {
       <Grid
         container
         alignContent="center"
-
         sx={{
           marginTop: "2em",
           marginBottom: "0.5em",
@@ -77,13 +72,11 @@ const ConfirmationDialog = (props) => {
           sx={{
             marginLeft: "1em",
             marginRight: "0.5em",
-            marginBottom:"0.1em",
-       
+            marginBottom: "0.1em",
           }}
         />
         <DialogContentText
           id="alert-dialog-description" //
-       
           alignContent="center"
         >
           {props.type.DONT_SHOW_Dialog}

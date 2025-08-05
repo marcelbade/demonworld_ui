@@ -27,7 +27,7 @@ const ContextHelpButton = (props) => {
       }}
       size="large"
     >
-      <HelpIcon />
+      <HelpIcon color="error" />
     </IconButton>
   ) : null;
 };
