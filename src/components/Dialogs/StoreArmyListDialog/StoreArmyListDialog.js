@@ -204,7 +204,6 @@ const StoreArmyListDialog = (props) => {
           "& .MuiPaper-root": {
             minWidth: "50em",
             minHeight: "45em",
-            padding: "1em",
           },
         },
       }}
@@ -214,6 +213,7 @@ const StoreArmyListDialog = (props) => {
         container //
         direction={"row"}
         justifyContent={"space-between"}
+        sx={{ backgroundColor: "black", color: "white" }}
       >
         <DialogTitle>
           {AC.isExistingList //
@@ -226,7 +226,7 @@ const StoreArmyListDialog = (props) => {
             close();
           }}
         >
-          <CancelIcon />
+          <CancelIcon  color="error" />
         </IconButton>
       </Grid>
       <DialogContent>
