@@ -12,6 +12,12 @@ const darkTheme = createTheme({
     errorColor: "red",
     disabled: "darkgrey",
     compendiumHeaderBackground: "#565757",
+    dialogs: {
+      title: {
+        backgroundColor: "black",
+        color: "white",
+      },
+    },
     statCards: {
       backGround: {
         backgroundColor: "#5f6a6a", //
