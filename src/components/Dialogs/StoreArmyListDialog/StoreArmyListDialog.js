@@ -64,7 +64,7 @@ const StoreArmyListDialog = (props) => {
     callAxios.fetchProtectedData(setAllEvents, GET_EVENTS_URL);
   };
 
-  const handleClose = () => {
+  const close = () => {
     props.setShowArmySaveDialog(false);
   };
 
@@ -113,7 +113,7 @@ const StoreArmyListDialog = (props) => {
   const storeList = async () => {
     callAxios.storeData(
       JSON.stringify({
-        id: AC.armyID,
+        id: props.isExistingList ? AC.armyID : null, // update existing list?
         userName: AC.playerName,
         teamName: AC.teamName,
         listName: AC.armyName,
@@ -127,7 +127,7 @@ const StoreArmyListDialog = (props) => {
       null,
       ARMY_LIST.LIST_CREATED
     );
-    
+
     cleanup();
   };
 
@@ -197,6 +197,7 @@ const StoreArmyListDialog = (props) => {
       component={"form"}
       onSubmit={(event) => {
         storeOrUpdate(event);
+        close();
       }}
       sx={{
         "& .MuiDialog-container": {
@@ -215,14 +216,14 @@ const StoreArmyListDialog = (props) => {
         justifyContent={"space-between"}
       >
         <DialogTitle>
-          {AC.isFetchedArmyList //
+          {AC.isExistingList //
             ? ARMY_LIST.UPDATE_ARMY_LIST
             : ARMY_LIST.STORE_ARMY_LIST}
         </DialogTitle>
         <IconButton
           sx={{ marginRight: "1em" }} //
           onClick={() => {
-            handleClose();
+            close();
           }}
         >
           <CancelIcon />

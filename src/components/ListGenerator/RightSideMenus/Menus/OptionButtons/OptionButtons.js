@@ -32,6 +32,7 @@ const OptionButtons = () => {
   const [showPdfTypeDialog, setShowPdfTypeDialog] = useState(false);
   const [showArmySaveDialog, setShowArmySaveDialog] = useState(false);
   const [showArmyLoadDialog, setShowArmyLoadDialog] = useState(false);
+  const [isExistingList, setIsExistingList] = useState(false);
 
   /**
    * Function takes the current army list as an object, stores it in the history object and naviagat3s to the LossCalculator component.
@@ -116,7 +117,7 @@ const OptionButtons = () => {
     return selectedUnits;
   };
 
-  const checkForLoginStatus = () => {
+  const displayStoreArmyDialog = () => {
     UC.userLoggedIn ? setShowArmySaveDialog(true) : UC.setDisplayLogInDialog(true);
   };
 
@@ -126,6 +127,7 @@ const OptionButtons = () => {
 
   const buttons = [
     {
+      // create pdf button
       disabled: SEC.selectedUnits.length === 0,
       action: () => {
         setShowPdfTypeDialog(true);
@@ -134,13 +136,25 @@ const OptionButtons = () => {
     },
 
     {
+      // store army list
       disabled: SEC.selectedUnits.length === 0,
       action: () => {
-        checkForLoginStatus();
+        setIsExistingList(false);
+        displayStoreArmyDialog();
       },
-      text: AC.isFetchedArmyList ? OPTIONS.UPDATE_LIST : OPTIONS.STORE_LIST,
+      text: OPTIONS.STORE_LIST,
     },
     {
+      // update army list
+      disabled: SEC.selectedUnits.length === 0,
+      action: () => {
+        setIsExistingList(true);
+        displayStoreArmyDialog();
+      },
+      text: OPTIONS.UPDATE_LIST,
+    },
+    {
+      // load army lists /delete army lists
       disabled: !UC.userLoggedIn,
       action: () => {
         showLoadListPrompt();
@@ -149,6 +163,7 @@ const OptionButtons = () => {
     },
 
     {
+      // go to loss calculator
       disabled: SEC.selectedUnits.length === 0,
       action: () => {
         navigateToLossCalculator();
@@ -156,6 +171,7 @@ const OptionButtons = () => {
       text: OPTIONS.TO_LOSS_CALCULATOR,
     },
     {
+      // display options
       disabled: false, // always switched on
       action: () => {
         TC.setShowTournamentRulesMenu(true);
@@ -185,6 +201,7 @@ const OptionButtons = () => {
       <StoreArmyListDialog
         showArmySaveDialog={showArmySaveDialog} //
         setShowArmySaveDialog={setShowArmySaveDialog} //
+        isExistingList={isExistingList}
       />
       <LoadArmyListDialog
         showArmyLoadPrompt={showArmyLoadDialog} //
