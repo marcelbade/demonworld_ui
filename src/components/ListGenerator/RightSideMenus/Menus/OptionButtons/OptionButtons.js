@@ -146,7 +146,7 @@ const OptionButtons = () => {
     },
     {
       // update army list
-      disabled: SEC.selectedUnits.length === 0,
+      disabled: !UC.userLoggedIn,
       action: () => {
         setIsExistingList(true);
         displayStoreArmyDialog();
