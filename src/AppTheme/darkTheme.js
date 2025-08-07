@@ -14,7 +14,7 @@ const darkTheme = createTheme({
     compendiumHeaderBackground: "#565757",
     dialogs: {
       title: {
-        backgroundColor: "black",
+        backgroundColor: "darkgrey",
         color: "white",
       },
     },
