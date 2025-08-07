@@ -66,6 +66,11 @@ const LoginDialog = () => {
     UC.setDisplayLogInDialog(false);
     MC.setOpenMenu(false);
     UC.setUserLoggedIn(true);
+    MC.setblockDialog({
+      ...MC.blockDialog,
+      showOverrideDialog: response?.data?.displayOverrideConfirmation,
+      showDeletionDialog: response?.data?.displayDeleteConfirmation,
+    });
   };
 
   const resetInputUserError = () => {

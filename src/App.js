@@ -59,8 +59,8 @@ function App() {
   // toggle top menu, confirmation Dialog
   const [openMenu, setOpenMenu] = useState(false);
   const [blockDialog, setblockDialog] = useState({
-    confirmationDialog: false,
-    deletionDialog: false,
+    showOverrideDialog: true,
+    showDeletionDialog: true,
   });
 
   // toggle app theme

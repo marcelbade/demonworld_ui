@@ -6,6 +6,10 @@ export const LOGIN_USER_URL = `${PREFIX_BE}/public/user/login`;
 export const REGISTER_USER_URL = `${PREFIX_BE}/public/user/register`;
 export const ALL_USER_NAMES_URL = `${PREFIX_BE}/public/user/allUserNames`;
 
+// user settings
+export const SET_DELETE_DIALOG_URL = `${PREFIX_BE}/auth/user/setDisplayDeleteConfirmation`;
+export const SET_OVERRIDE_DIALOG_URL = `${PREFIX_BE}/auth/user/setDisplayOverrideConfirmation`;
+
 // army lists
 export const STORE_ARMY_LIST_URL = `${PREFIX_BE}/auth/armyLists/storeList`;
 

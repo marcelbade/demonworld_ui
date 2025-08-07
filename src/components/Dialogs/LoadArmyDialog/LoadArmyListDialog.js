@@ -139,7 +139,7 @@ const LoadArmyListDialog = (props) => {
   const deleteArmyListButton = (l) => {
     setListToDelete(l);
 
-    if (!MC.blockDialog.deletionDialog) {
+    if (!MC.blockDialog.showDeletionDialog) {
       setShowConfirmationDialog(true);
       return;
     }
@@ -163,7 +163,7 @@ const LoadArmyListDialog = (props) => {
   const setDialogState = () => {
     MC.setblockDialog({
       ...MC.blockDialog,
-      confirmationDialog: !MC.blockDialog.confirmationDialog,
+      confirmationDialog: !MC.blockDialog.showDeletionDialog,
     });
   };
 

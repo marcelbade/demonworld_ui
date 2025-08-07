@@ -28,7 +28,7 @@ import { MenuContext } from "../../../contexts/MenuContext";
 // hooks
 import useAxios from "../../../customHooks/UseAxios";
 // constants
-import { ALL_USER_NAMES_URL, GET_EVENTS_URL, STORE_ARMY_LIST_URL } from "../../../constants/URLs";
+import { ALL_USER_NAMES_URL, GET_EVENTS_URL, SET_OVERRIDE_DIALOG_URL, STORE_ARMY_LIST_URL } from "../../../constants/URLs";
 import { ARMY_LIST, CONFIRMATION_DIALOG, INPUT_TEXTS, PUSH_MESSAGE_TYPES } from "../../../constants/textsAndMessages";
 import { NO_EVENT } from "../../../constants/eventConstants";
 
@@ -39,14 +39,13 @@ const StoreArmyListDialog = (props) => {
   const MC = useContext(MenuContext);
 
   const theme = useTheme();
+  const callAxios = useAxios();
 
   const [allEvents, setAllEvents] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
   const [isForEvent, setIsForEvent] = useState(false);
   const [isvisibleForOtherUsers, setIsvisibleForOtherUsers] = useState(false);
   const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
-
-  const callAxios = useAxios();
 
   useEffect(() => {
     fetchAllUsers();
@@ -64,6 +63,23 @@ const StoreArmyListDialog = (props) => {
 
   const fetchEvents = async () => {
     callAxios.fetchProtectedData(setAllEvents, GET_EVENTS_URL);
+  };
+
+  useEffect(() => {
+    storeConfirmationDialog();
+  }, [JSON.stringify(MC.blockDialog)]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const storeConfirmationDialog = () => {
+    callAxios.storeData(
+      JSON.stringify({
+        userName: UC.user.userName,
+        displayDeleteConfirmation: MC.blockDialog.showDeletionDialog,
+        displayOverrideConfirmation: MC.blockDialog.showOverrideDialog,
+      }),
+      SET_OVERRIDE_DIALOG_URL,
+      null,
+      "Entscheidung gespeichert" // TODO
+    );
   };
 
   const close = () => {
@@ -84,7 +100,7 @@ const StoreArmyListDialog = (props) => {
     event.preventDefault();
     processFormData(event);
 
-    if (AC.isFetchedArmyList && !MC.blockDialog.confirmationDialog) {
+    if (AC.isFetchedArmyList && MC.blockDialog.showOverrideDialog) {
       setShowConfirmationDialog(true);
       return;
     }
@@ -92,10 +108,10 @@ const StoreArmyListDialog = (props) => {
     storeList();
   };
 
-  const setDialogState = () => {
+  const setConfirmationDialogSetting = () => {
     MC.setblockDialog({
       ...MC.blockDialog,
-      confirmationDialog: !MC.blockDialog.confirmationDialog,
+      showOverrideDialog: !MC.blockDialog.showOverrideDialog,
     });
   };
 
@@ -129,7 +145,6 @@ const StoreArmyListDialog = (props) => {
       null,
       ARMY_LIST.LIST_CREATED
     );
-
     cleanup();
   };
 
@@ -360,7 +375,7 @@ const StoreArmyListDialog = (props) => {
         confirmAndExecute={storeList}
         closeDialog={closeConfirmationDialog}
         dialogBoxState={MC.blockDialog.confirmationDialog}
-        setDialogBoxState={setDialogState}
+        setDialogBoxState={setConfirmationDialogSetting}
       />
     </Dialog>
   );
