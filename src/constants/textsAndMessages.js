@@ -170,6 +170,7 @@ export const CONFIRMATION_DIALOG = {
     CANCEL: "Nein",
     DONT_SHOW_Dialog: "Diesen Dialog nicht mehr anzeigen",
   },
+  PUSH_MESSAGE: "Entscheidung gespeichert",   
 };
 
 export const GENERAL_ERRRORS = {
