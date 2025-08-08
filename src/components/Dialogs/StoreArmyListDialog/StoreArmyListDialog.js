@@ -51,38 +51,21 @@ const StoreArmyListDialog = (props) => {
     fetchAllUsers();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const fetchAllUsers = async () => {
-    callAxios.fetchProtectedData(setAllUsers, ALL_USER_NAMES_URL);
-  };
-
   useEffect(() => {
     if (UC.user.userName !== "") {
       fetchEvents();
     }
   }, [UC.user]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  const fetchAllUsers = async () => {
+    callAxios.fetchProtectedData(setAllUsers, ALL_USER_NAMES_URL);
+  };
+
   const fetchEvents = async () => {
     callAxios.fetchProtectedData(setAllEvents, GET_EVENTS_URL);
   };
 
-  useEffect(() => {
-    storeConfirmationDialog();
-  }, [JSON.stringify(MC.blockDialog)]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const storeConfirmationDialog = () => {
-    callAxios.storeData(
-      JSON.stringify({
-        userName: UC.user.userName,
-        displayDeleteConfirmation: MC.blockDialog.showDeletionDialog,
-        displayOverrideConfirmation: MC.blockDialog.showOverrideDialog,
-      }),
-      SET_OVERRIDE_DIALOG_URL,
-      null,
-      "Entscheidung gespeichert" // TODO
-    );
-  };
-
-  const close = () => {
+  const closeStoreArmyDialog = () => {
     props.setShowArmySaveDialog(false);
   };
 
@@ -96,7 +79,7 @@ const StoreArmyListDialog = (props) => {
    * @param {event} event
    * @returns nothing
    */
-  const storeOrUpdate = (event) => {
+  const submit = (event) => {
     event.preventDefault();
     processFormData(event);
 
@@ -113,6 +96,20 @@ const StoreArmyListDialog = (props) => {
       ...MC.blockDialog,
       showOverrideDialog: !MC.blockDialog.showOverrideDialog,
     });
+
+    storeConfirmationDialogSetting();
+  };
+
+  const storeConfirmationDialogSetting = () => {
+    callAxios.storeData(
+      JSON.stringify({
+        userName: UC.user.userName,
+        displayOverrideConfirmation: !MC.blockDialog.showOverrideDialog,
+      }),
+      SET_OVERRIDE_DIALOG_URL,
+      null,
+      CONFIRMATION_DIALOG.PUSH_MESSAGE
+    );
   };
 
   const processFormData = (event) => {
@@ -128,10 +125,15 @@ const StoreArmyListDialog = (props) => {
     AC.setArmyName(listName);
   };
 
+  /**
+   * Async function sends the army list to the BE to store it persistently.
+   * If the id property is null, a new army list is created and added to the DB.
+   * If the id property is not null, the matching army list in the DB is updated.
+   */
   const storeList = async () => {
     callAxios.storeData(
       JSON.stringify({
-        id: props.isExistingList ? AC.armyID : null, // update existing list?
+        id: props.isExistingList ? AC.armyID : null,
         userName: AC.playerName,
         teamName: AC.teamName,
         listName: AC.armyName,
@@ -145,11 +147,13 @@ const StoreArmyListDialog = (props) => {
       null,
       ARMY_LIST.LIST_CREATED
     );
+
     cleanup();
   };
 
   const cleanup = () => {
-    setShowConfirmationDialog(false);
+    closeConfirmationDialog();
+    closeStoreArmyDialog();
   };
 
   // Username can be different from player name
@@ -213,8 +217,7 @@ const StoreArmyListDialog = (props) => {
     <Dialog
       component={"form"}
       onSubmit={(event) => {
-        storeOrUpdate(event);
-        close();
+        submit(event);
       }}
       sx={{
         "& .MuiDialog-container": {
@@ -240,7 +243,7 @@ const StoreArmyListDialog = (props) => {
         <IconButton
           sx={{ marginRight: "1em" }} //
           onClick={() => {
-            close();
+            closeStoreArmyDialog();
           }}
         >
           <CancelIcon color="error" />
