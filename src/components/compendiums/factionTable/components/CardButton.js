@@ -3,22 +3,25 @@ import React, { useContext } from "react";
 // material ui
 import { IconButton } from "@mui/material";
 // components & functions
-import { TableContext } from "../../../../contexts/tableContext";
+import { CompendiumContext } from "../../../../contexts/tableContext";
 // icons
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import CloseIcon from "@mui/icons-material/Close";
+// custom hooks
+import useCompendiumTableControl from "../../../../customHooks/UseCompendiumTableControl";
 
 const CardButton = (props) => {
-  const TC = useContext(TableContext);
+  const CC = useContext(CompendiumContext);
+  const compendiumTableControl = useCompendiumTableControl();
 
   return (
     <IconButton
       onClick={() => {
-        TC.toggleUnitCard(props.unit);
+        compendiumTableControl.toggleUnitCard(props.unit);
       }}
       size="large"
     >
-      {TC.selectedStatCards.includes(props.unit.faction + props.unit.unitName) ? <CloseIcon /> : <ArrowForwardIosIcon />}
+      {CC.selectedStatCards.includes(props.unit.faction + props.unit.unitName) ? <CloseIcon /> : <ArrowForwardIosIcon />}
     </IconButton>
   );
 };

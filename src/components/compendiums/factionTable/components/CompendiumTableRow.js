@@ -1,7 +1,7 @@
 // React
 import React, { useContext } from "react";
 // components & functions
-import { TableContext } from "../../../../contexts/tableContext";
+import { CompendiumContext } from "../../../../contexts/tableContext";
 import {
   renderBooleanAsIcon,
   renderSpecialRules,
@@ -15,7 +15,7 @@ import RowLock from "./RowLock";
 import { TableRow } from "@mui/material";
 
 const CompendiumTableRow = (props) => {
-  const TC = useContext(TableContext);
+  const TC = useContext(CompendiumContext);
 
   const displayValue = (c) => {
     switch (c.column) {

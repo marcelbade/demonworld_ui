@@ -1,7 +1,7 @@
 // React
 import React, { useContext } from "react";
 // components & functions
-import { TableContext } from "../../../../contexts/tableContext";
+import { CompendiumContext } from "../../../../contexts/tableContext";
 
 import { IconButton } from "@mui/material";
 // icons
@@ -9,7 +9,7 @@ import LockIcon from "@mui/icons-material/Lock";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 
 const RowLock = (props) => {
-  const TC = useContext(TableContext);
+  const TC = useContext(CompendiumContext);
 
   /**
    * Function sets the unitLocked property for a unit.

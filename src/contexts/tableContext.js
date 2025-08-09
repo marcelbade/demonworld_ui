@@ -1,7 +1,7 @@
 import { createContext } from "react";
 
-const TableContext = createContext();
-const TableProvider = TableContext.Provider;
+const CompendiumContext = createContext();
+const CompendiumProvider = CompendiumContext.Provider;
 
-export { TableContext };
-export default TableProvider;
+export { CompendiumContext };
+export default CompendiumProvider;

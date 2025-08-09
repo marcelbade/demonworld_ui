@@ -1,32 +1,37 @@
-import React, { useContext } from "react";
+// react
+import { useContext } from "react";
+// mui
 import OutlinedInput from "@mui/material/OutlinedInput";
-// import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import ListItemText from "@mui/material/ListItemText";
 import Select from "@mui/material/Select";
 import Checkbox from "@mui/material/Checkbox";
-import { TableContext } from "../../../../contexts/tableContext";
+// contexts
+import { CompendiumContext } from "../../../../contexts/tableContext";
+//  custom hooks
+import useCompendiumTableControl from "../../../../customHooks/UseCompendiumTableControl";
 
 const CompendiumDropDown = () => {
-  const TC = useContext(TableContext);
+  const CC = useContext(CompendiumContext);
+  const compendiumTableControl = useCompendiumTableControl();
 
   return (
     <div>
       <FormControl sx={{ m: 1, width: 300 }}>
         <Select
           multiple //
-          value={TC.columns}
-          onChange={null}
+          value={CC.columns}
+          onChange={null} //TODO ???
           input={<OutlinedInput />}
-          renderValue={() => "Angezeigte Spalten"}
+          renderValue={() => "Angezeigte Spalten"} // TODO add to texts
         >
-          {TC.columns.map((c, i) => (
+          {CC.columns.map((c, i) => (
             <MenuItem key={i} value={c.label}>
               <Checkbox
                 checked={c.displayed}
                 onChange={() => {
-                  TC.toggleColumn(c.column, c.displayed);
+                  compendiumTableControl.toggleColumn(c.column, c.displayed);
                 }}
               />
               <ListItemText primary={c.label} />

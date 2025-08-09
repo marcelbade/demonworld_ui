@@ -4,11 +4,14 @@ import React, { useContext } from "react";
 import { Grid2 as Grid, Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 // components & functions
 import { TableContext } from "../../../../contexts/tableContext";
-
 // constants
 import { COMPENDIUM } from "../../../../constants/textsAndMessages";
+// custom hooks
+import useCompendiumTableControl from "../../../../customHooks/UseCompendiumTableControl";
 
 const ToggleColumnsMenu = () => {
+  const compendiumTableControl = useCompendiumTableControl();
+
   const FORMGROUP = { display: "flex", justifyContent: "flex-start", flexDirection: "column", margin: "1em" };
   const TC = useContext(TableContext);
 
@@ -33,7 +36,7 @@ const ToggleColumnsMenu = () => {
                 key={i}
                 checked={g.displayEntireGroup}
                 onChange={() => {
-                  TC.toggleGroupsOfColumns(g.toggleGroup);
+                  compendiumTableControl.toggleGroupsOfColumns(g.toggleGroup);
                 }}
               />
               {TC.columns
@@ -46,7 +49,7 @@ const ToggleColumnsMenu = () => {
                         key={i}
                         checked={c.displayed}
                         onChange={() => {
-                          TC.toggleColumn(c.column, c.displayed);
+                          compendiumTableControl.toggleColumn(c.column, c.displayed);
                         }}
                       />
                     }
@@ -64,7 +67,7 @@ const ToggleColumnsMenu = () => {
               <Checkbox
                 checked={TC.allBoxes}
                 onChange={() => {
-                  TC.toggleAllColumns();
+                  compendiumTableControl.toggleAllColumns();
                 }}
               />
             }

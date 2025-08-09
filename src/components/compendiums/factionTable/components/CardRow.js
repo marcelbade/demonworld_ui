@@ -1,7 +1,7 @@
 // react
 import { useContext } from "react";
 // components & functions
-import { TableContext } from "../../../../contexts/tableContext";
+import { CompendiumContext } from "../../../../contexts/tableContext";
 import CardView from "../../../shared/CardView";
 import { isSingleElementCard } from "../../../../util/utilityFunctions";
 import { TableRow } from "@mui/material";
@@ -12,7 +12,7 @@ import { TableRow } from "@mui/material";
  * @returns
  */
 const DetailedCardView = (props) => {
-  const TC = useContext(TableContext);
+  const TC = useContext(CompendiumContext);
 
   const displayCard = () => {
     const displayName =

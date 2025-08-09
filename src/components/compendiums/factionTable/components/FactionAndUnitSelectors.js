@@ -1,14 +1,14 @@
 //  React
 import React, { useContext } from "react";
 // components & functions
-import { TableContext } from "../../../../contexts/tableContext";
+import { CompendiumContext } from "../../../../contexts/tableContext";
 import SelectionInput from "../../../shared/selectionInput";
 //  Constants
 import { ALL_FACTIONS_ARRAY } from "../../../../constants/factions";
 import { INPUT_TEXTS } from "../../../../constants/textsAndMessages";
 
 const FactionAndUnitSelectors = (props) => {
-  const TC = useContext(TableContext);
+  const TC = useContext(CompendiumContext);
 
   /**
    * Function generates the options for the faction name selector.
