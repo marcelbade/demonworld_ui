@@ -10,7 +10,7 @@ import AppBarToggle from "../../../shared/AppBarToggle";
 import AppBar from "../../../shared/AppBar";
 //icons
 import FactionAndUnitSelectors from "./FactionAndUnitSelectors";
-import { CompendiumContext } from "../../../../contexts/tableContext";
+import { CompendiumContext } from "../../../../contexts/compendiumContext";
 // constants
 import { COMPENDIUM } from "../../../../constants/textsAndMessages";
 import { ID } from "../../../../constants/MenuAndDialogConstants";

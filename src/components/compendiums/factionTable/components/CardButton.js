@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 // material ui
 import { IconButton } from "@mui/material";
 // components & functions
-import { CompendiumContext } from "../../../../contexts/tableContext";
+import { CompendiumContext } from "../../../../contexts/compendiumContext";
 // icons
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import CloseIcon from "@mui/icons-material/Close";

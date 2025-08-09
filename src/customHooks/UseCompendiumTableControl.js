@@ -1,7 +1,7 @@
 //  react
 import { useContext } from "react";
 //  contexts
-import { CompendiumContext } from "../contexts/tableContext";
+import { CompendiumContext } from "../contexts/compendiumContext";
 
 const useCompendiumTableControl = () => {
   const CC = useContext(CompendiumContext);

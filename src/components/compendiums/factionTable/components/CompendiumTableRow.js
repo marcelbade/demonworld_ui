@@ -1,7 +1,7 @@
 // React
 import React, { useContext } from "react";
 // components & functions
-import { CompendiumContext } from "../../../../contexts/tableContext";
+import { CompendiumContext } from "../../../../contexts/compendiumContext";
 import {
   renderBooleanAsIcon,
   renderSpecialRules,

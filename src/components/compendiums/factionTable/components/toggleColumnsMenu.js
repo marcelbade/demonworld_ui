@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 // material ui
 import { Grid2 as Grid, Checkbox, FormControlLabel, FormGroup } from "@mui/material";
 // components & functions
-import { TableContext } from "../../../../contexts/tableContext";
+import { TableContext } from "../../../../contexts/compendiumContext";
 // constants
 import { COMPENDIUM } from "../../../../constants/textsAndMessages";
 // custom hooks

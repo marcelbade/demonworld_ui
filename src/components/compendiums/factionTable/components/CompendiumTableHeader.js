@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 // material ui
 import { useTheme } from "@emotion/react";
 // components & functions
-import { CompendiumContext } from "../../../../contexts/tableContext";
+import { CompendiumContext } from "../../../../contexts/compendiumContext";
 import { TableCell, TableHead, TableRow } from "@mui/material";
 
 const CompendiumTableHeader = () => {

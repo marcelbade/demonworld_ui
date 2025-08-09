@@ -1,7 +1,7 @@
 // react
 import { useContext } from "react";
 // components & functions
-import { CompendiumContext } from "../../../../contexts/tableContext";
+import { CompendiumContext } from "../../../../contexts/compendiumContext";
 import CardView from "../../../shared/CardView";
 import { isSingleElementCard } from "../../../../util/utilityFunctions";
 import { TableRow } from "@mui/material";

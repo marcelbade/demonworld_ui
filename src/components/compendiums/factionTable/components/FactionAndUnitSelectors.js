@@ -1,7 +1,7 @@
 //  React
 import React, { useContext } from "react";
 // components & functions
-import { CompendiumContext } from "../../../../contexts/tableContext";
+import { CompendiumContext } from "../../../../contexts/compendiumContext";
 import SelectionInput from "../../../shared/selectionInput";
 //  Constants
 import { ALL_FACTIONS_ARRAY } from "../../../../constants/factions";

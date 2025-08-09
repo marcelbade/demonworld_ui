@@ -8,7 +8,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Select from "@mui/material/Select";
 import Checkbox from "@mui/material/Checkbox";
 // contexts
-import { CompendiumContext } from "../../../../contexts/tableContext";
+import { CompendiumContext } from "../../../../contexts/compendiumContext";
 //  custom hooks
 import useCompendiumTableControl from "../../../../customHooks/UseCompendiumTableControl";
 

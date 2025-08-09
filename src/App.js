@@ -28,7 +28,7 @@ import UserProvider from "./contexts/userContext";
 import ItemProvider from "./contexts/itemContext";
 import SelectionProvider from "./contexts/selectionContext";
 import RightMenuProvider from "./contexts/rightMenuContext";
-import CompendiumProvider from "./contexts/tableContext";
+import CompendiumProvider from "./contexts/compendiumContext";
 // theme
 import lightTheme from "./AppTheme/lightTheme";
 import darkTheme from "./AppTheme/darkTheme";
