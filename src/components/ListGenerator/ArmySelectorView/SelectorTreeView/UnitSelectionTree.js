@@ -11,7 +11,7 @@ import TreeSubFactionBranch from "./TreeSubFactionBranch.js";
 const UnitSelectionTree = (props) => {
   const controller = useTreeViewController();
 
-  return props.tabValue === props.SHOW_ALLY ? (
+  return (
     <SimpleTreeView
       aria-label="file system navigator" //
       defaultcollapseicon={<ExpandMoreIcon />}
@@ -26,7 +26,7 @@ const UnitSelectionTree = (props) => {
         isFaction={props.isFaction} //
       />
     </SimpleTreeView>
-  ) : null;
+  );
 };
 
 export default UnitSelectionTree;
