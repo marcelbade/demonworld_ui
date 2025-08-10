@@ -12,7 +12,7 @@ import ArmySelectorDropdown from "./ArmySelectorView/ArmySelectorDropdown";
 import { ArmyContext } from "../../contexts/armyContext";
 // icons
 import AppBarToggle from "../shared/AppBarToggle";
-import AppBar from "../shared/AppBar";
+import AppBar from "../shared/options/OptionsMenu";
 // constants
 import { ID } from "../../constants/MenuAndDialogConstants";
 import { NONE } from "../../constants/factions";

@@ -5,7 +5,7 @@ import { Button, Grid2 as Grid } from "@mui/material";
 //  components and functions
 import NaviButton from "../landingPage/NaviButton";
 import LoginDialog from "../Dialogs/LogInDialog/LogInDialog";
-import AppBar from "../shared/AppBar";
+import OptionsMenu from "../shared/options/OptionsMenu";
 import AppBarToggle from "../shared/AppBarToggle";
 // constants
 import { LOSS_CALCULATOR, OPTIONS } from "../../constants/textsAndMessages";
@@ -32,7 +32,7 @@ const CreateListScreen = () => {
         height: "100vh",
       }}
     >
-      <AppBar hiddenElements={[ID.COMPENDIMUM_DROPDOWN, ID.LIST_DISPLAY]} />
+      <OptionsMenu hiddenElements={[ID.COMPENDIMUM_DROPDOWN, ID.LIST_DISPLAY]} />
       <AppBarToggle
         iconSize="25em" //
         bttnSize="2em"

@@ -1,7 +1,7 @@
 // react
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 // material ui
-import {  Grid2 as Grid } from "@mui/material";
+import { Grid2 as Grid } from "@mui/material";
 // context
 import { ArmyContext } from "../../../../contexts/armyContext";
 import { AlternativeListContext } from "../../../../contexts/alternativeListContext";
@@ -13,7 +13,9 @@ import UseDisplayAlly from "../../../../customHooks/UseDisplayAlly.js";
 // constants
 import { SelectionContext } from "../../../../contexts/selectionContext.js";
 import { NO_ALLY } from "../../../../constants/factions.js";
-import TreeViewTabButtons from "./TreeViewTabButtons.js";
+import TabButtons from "../../../shared/TabButtons.js";
+import { CREATOR } from "../../../../constants/textsAndMessages.js";
+import TabPanel from "../../../shared/TabPanel.js";
 
 const FactionTreeView = () => {
   const AC = useContext(ArmyContext);
@@ -26,32 +28,10 @@ const FactionTreeView = () => {
 
   const [tabValue, setTabValue] = useState(0);
 
-  const SHOW_ARMY = 0;
-  const SHOW_ALLY = 1;
-
   useEffect(() => {
     display.showAlly(AC.selectedFactionName);
     validation.testArmySelectionAndRunValidation([], SEC.maxPointsAllowance);
   }, [JSON.stringify(ALC.selectedAlternativeLists)]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  /**
-   * Function controls the buttons` styling. The selected Button/Tab
-   * is highlighted.
-   * @param {int} tab
-   * @param {int} index
-   * @param {boolean} showBttn
-   * @returns an object with css properties.
-   */
-  const styleButtons = (tab, index) => {
-    return tab === index //
-      ? {
-          backgroundColor: "lightgrey", //
-          borderBottom: "solid 0.1em black",
-          borderRadius: 0,
-          width: "50%",
-        }
-      : { width: "50%" };
-  };
 
   /**
    * Function tests, whether the tree view should be displayed.
@@ -94,11 +74,9 @@ const FactionTreeView = () => {
       sx={{ width: "40em" }}
     >
       {showTabBttns() ? (
-        <TreeViewTabButtons
-          styleButtons={styleButtons} //
-          handleTabChange={setTabValue}
-          SHOW_ARMY={SHOW_ARMY}
-          SHOW_ALLY={SHOW_ALLY}
+        <TabButtons
+          handleTabChange={setTabValue} //
+          altPanels={[CREATOR.FACTION_NAME, CREATOR.ALLY]}
           tabValue={tabValue}
         />
       ) : null}
@@ -106,15 +84,23 @@ const FactionTreeView = () => {
         container
         direction="row" //
       >
-        <UnitSelectionTree
-          isFaction={true} //
+        <TabPanel
+          panelNr={0}
           tabValue={tabValue}
-          SHOW_ALLY={SHOW_ARMY}
+          content={
+            <UnitSelectionTree
+              isFaction={true} //
+            />
+          }
         />
-        <UnitSelectionTree
-          isFaction={false} //
+        <TabPanel
+          panelNr={1}
           tabValue={tabValue}
-          SHOW_ALLY={SHOW_ALLY}
+          content={
+            <UnitSelectionTree
+              isFaction={false} //
+            />
+          }
         />
       </Grid>
     </Grid>

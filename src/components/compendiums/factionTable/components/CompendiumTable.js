@@ -7,7 +7,7 @@ import CompendiumTableRow from "./CompendiumTableRow";
 import DetailedCardView from "./CardRow";
 import CompendiumTableHeader from "./CompendiumTableHeader";
 import AppBarToggle from "../../../shared/AppBarToggle";
-import AppBar from "../../../shared/AppBar";
+import AppBar from "../../../shared/options/OptionsMenu";
 //icons
 import FactionAndUnitSelectors from "./FactionAndUnitSelectors";
 import { CompendiumContext } from "../../../../contexts/compendiumContext";

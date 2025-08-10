@@ -11,9 +11,10 @@ import usePointCostCalculator from "../../customHooks/UsePointCostCalculator";
 // context
 import { LossCalcContext } from "../../contexts/LossCalculatorContext";
 // icons
-import AppBar from "../shared/AppBar";
+
 import AppBarToggle from "../shared/AppBarToggle";
 import { ID } from "../../constants/MenuAndDialogConstants";
+import OptionsMenu from "../shared/options/OptionsMenu";
 
 const LossCalculator = () => {
   const location = useLocation();
@@ -77,7 +78,7 @@ const LossCalculator = () => {
           bttnSize="2em"
           margin="0.5em"
         />
-        <AppBar hiddenElements={[ID.COMPENDIMUM_DROPDOWN, ID.LIST_DISPLAY]} />
+        <OptionsMenu hiddenElements={[ID.COMPENDIMUM_DROPDOWN, ID.LIST_DISPLAY]} />
       </Grid>
       <Grid
         container //

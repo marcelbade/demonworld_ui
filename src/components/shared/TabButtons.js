@@ -1,5 +1,5 @@
 // material ui
-import { Button, Grid2 as Grid } from "@mui/material";
+import { Button, Grid2 as Grid, Stack } from "@mui/material";
 
 const TabButtons = (props) => {
   /**
@@ -22,9 +22,8 @@ const TabButtons = (props) => {
   };
 
   return (
-    <Grid
-      container
-      direction="row" //
+    <Stack
+      direction={props.direction} //
       sx={{ width: "35em" }}
     >
       {props.altPanels.map((panel, i) => (
@@ -38,7 +37,7 @@ const TabButtons = (props) => {
           {panel}
         </Button>
       ))}
-    </Grid>
+    </Stack>
   );
 };
 
