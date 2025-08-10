@@ -665,9 +665,9 @@ export const SPECIAL_ITEMS = {
 
 export const CREATOR = {
   NEW_FACTION: "Neue Fraktion Erstellen",
-  FACTION_NAME: "Fraktion:",
+  FACTION_NAME: "Fraktion",
   SUBFACTION_NAME: "Teilfraktion",
-  ALLY: "Allierter:",
+  ALLY: "Allierter",
   UNIT_NAME: "Name:",
   IS_UNIQUE: "Einheit ist einzigartig.",
   IS_CAVALERY: "Einheit ist beritten.",
