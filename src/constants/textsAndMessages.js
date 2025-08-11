@@ -86,8 +86,10 @@ export const PDF = {
 };
 
 export const OPTIONS = {
+  OPTIONS_DIALOG_TITLE: "Optionen",
+  GAME_RULES_OPTIONS: "Optionen Regelwerk",
+  APP_OPTIONS: "App Optionen",
   CHANGE_TOURNAMENT_RULES: "Turnierregeln Ändern",
-
   LIGHT_SWITCH: "Wechsel zw. dunklen und hellen Theme",
   LIST_DISPLAY_SWITCH: "Wechsel zw. einfacher und kompletter Listendarstellung",
   MENU_SWITCH: "Menü",
@@ -170,7 +172,7 @@ export const CONFIRMATION_DIALOG = {
     CANCEL: "Nein",
     DONT_SHOW_Dialog: "Diesen Dialog nicht mehr anzeigen",
   },
-  PUSH_MESSAGE: "Entscheidung gespeichert",   
+  PUSH_MESSAGE: "Entscheidung gespeichert",
 };
 
 export const GENERAL_ERRRORS = {
