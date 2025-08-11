@@ -1,7 +1,7 @@
 // React
-import React, { useContext } from "react";
+import { useContext } from "react";
 // Material UI
-import { IconButton, Tooltip, Typography } from "@mui/material";
+import { Grid2 as Grid, IconButton, Tooltip, Typography } from "@mui/material";
 // components and functions
 import { ListDisplayContext } from "../../contexts/ListDisplayContext";
 // icons
@@ -20,16 +20,18 @@ const ListDisplaySwitch = (props) => {
   };
 
   return (
-    <Tooltip title={<Typography>{OPTIONS.LIST_DISPLAY_SWITCH}</Typography>}>
-      <IconButton
-        size={props.bttnSize}
-        onClick={() => {
-          toggleListMode();
-        }}
-      >
-        {LDC.simpleModeOn ? <ListAltIcon sx={style} /> : <MenuIcon sx={style} />}
-      </IconButton>
-    </Tooltip>
+    <Grid>
+      <Tooltip title={<Typography>{OPTIONS.LIST_DISPLAY_SWITCH}</Typography>}>
+        <IconButton
+          size={props.bttnSize}
+          onClick={() => {
+            toggleListMode();
+          }}
+        >
+          {LDC.simpleModeOn ? <ListAltIcon sx={style} /> : <MenuIcon sx={style} />}
+        </IconButton>
+      </Tooltip>
+    </Grid>
   );
 };
 
