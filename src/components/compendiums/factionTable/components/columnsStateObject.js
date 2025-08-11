@@ -110,7 +110,7 @@ export const columnsStateObjects = [
     column: "horde",
     label: COMPENDIUM.HORDE,
     displayed: true,
-    toggleGroup: "",
+    toggleGroup: "unitCharacteristics",
     type: "boolean",
   },
   // movement group
