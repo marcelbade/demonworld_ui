@@ -78,6 +78,7 @@ const FactionTreeView = () => {
           handleTabChange={setTabValue} //
           altPanels={[CREATOR.FACTION_NAME, CREATOR.ALLY]}
           tabValue={tabValue}
+          showBottomBorder={true}
         />
       ) : null}
       <Grid
