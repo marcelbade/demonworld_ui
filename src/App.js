@@ -104,7 +104,6 @@ function App() {
   const [allySubFactionDTOs, setAllySubFactionDTOs] = useState([]);
 
   // tournament rules
-  const [showTournamentRulesMenu, setShowTournamentRulesMenu] = useState(false);
   const [tournamentOverrideRules, setTournamentOverrideRules] = useState({
     enableOverride: false,
     maxHeroValue: 30,
@@ -280,8 +279,6 @@ function App() {
                       value={{
                         // TOURNAMENT RULES OVERRIDE
                         tournamentOverrideRules: tournamentOverrideRules,
-                        showTournamentRulesMenu: showTournamentRulesMenu,
-                        setShowTournamentRulesMenu: setShowTournamentRulesMenu,
                         setTournamentOverrideRules: setTournamentOverrideRules,
                       }}
                     >
