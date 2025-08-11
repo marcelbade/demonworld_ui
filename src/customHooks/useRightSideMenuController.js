@@ -142,7 +142,7 @@ const UseRightSideMenuController = (unit, subFaction, bttnSelectorObj) => {
    * instead of the stat card preview, the item shop or the menu for the second sub faction.
    */
   if (
-    !TC.showTournamentRulesMenu && //
+    // !TC.showTournamentRulesMenu && // TODO remove
     !RC.statCardState.show &&
     !RC.itemShopState.show &&
     !RC.secondSubFactionMenuState.show
@@ -150,7 +150,7 @@ const UseRightSideMenuController = (unit, subFaction, bttnSelectorObj) => {
     RC.setShowOptionButtons(true);
   }
   if (
-    TC.showTournamentRulesMenu || //
+    // TC.showTournamentRulesMenu || // TODO remove
     RC.statCardState.show ||
     RC.itemShopState.show ||
     RC.secondSubFactionMenuState.show

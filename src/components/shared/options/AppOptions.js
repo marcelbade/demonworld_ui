@@ -1,15 +1,18 @@
-import { Grid2 as Grid } from "@mui/material";
-import CompendiumDropdDown from "../../compendiums/factionTable/components/CompendiumDropDown";
-import ListDisplaySwitch from "../ListDisplaySwitch";
+import { Divider, Grid2 as Grid } from "@mui/material";
+import CompendiumTableColOptions from "../../compendiums/factionTable/components/CompendiumTableColOptions";
 import LightSwitch from "../LightSwitch";
-
-
 
 const AppOptions = () => {
   return (
-    <Grid>
-      <CompendiumDropdDown />
-      <ListDisplaySwitch bttnSize="medium" />
+    <Grid
+      container
+      direction="column"
+      sx={{
+        height: "100%",
+      }}
+    >
+      <CompendiumTableColOptions />
+      <Divider sx={{ marginBottom: "2em" }} />
       <LightSwitch bttnSize="medium" />
     </Grid>
   );

@@ -170,14 +170,6 @@ const OptionButtons = () => {
       },
       text: OPTIONS.TO_LOSS_CALCULATOR,
     },
-    {
-      // display options
-      disabled: false, // always switched on
-      action: () => {
-        TC.setShowTournamentRulesMenu(true);
-      },
-      text: OPTIONS.CHANGE_TOURNAMENT_RULES,
-    },
   ];
 
   return (
