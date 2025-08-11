@@ -10,6 +10,7 @@ import TabPanel from "../TabPanel";
 import GameOptions from "./GameOptions";
 import AppOptions from "./AppOptions";
 import { OPTIONS } from "../../../constants/textsAndMessages";
+import UserOptions from "./UserOptions";
 
 const Transition = forwardRef(function Transition(props, ref) {
   return (
@@ -34,7 +35,7 @@ const OptionsMenu = () => {
 
   const [tabValue, setTabValue] = useState(0);
 
-  const TABS = [OPTIONS.GAME_RULES_OPTIONS, OPTIONS.APP_OPTIONS];
+  const TABS = [OPTIONS.GAME_RULES_OPTIONS, OPTIONS.APP_OPTIONS, OPTIONS.USER_OPTIONS];
 
   return (
     <Fragment>
@@ -63,7 +64,7 @@ const OptionsMenu = () => {
         <Grid
           container //
           direction="row"
-          sx={{height:"100%"}}
+          sx={{ height: "100%" }}
         >
           <Grid size={2}>
             <TabButtons
@@ -84,6 +85,11 @@ const OptionsMenu = () => {
               panelNr={1} //
               tabValue={tabValue}
               content={<AppOptions />}
+            />
+            <TabPanel
+              panelNr={2} //
+              tabValue={tabValue}
+              content={<UserOptions />}
             />
           </Grid>
         </Grid>
