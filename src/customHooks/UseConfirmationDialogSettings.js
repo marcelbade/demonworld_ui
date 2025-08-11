@@ -4,10 +4,13 @@ import { MenuContext } from "../contexts/MenuContext";
 // custom hooks
 import useAxios from "./UseAxios";
 // constants
-import { SET_OVERRIDE_DIALOG_URL } from "../constants/URLs";
+import { SET_OVERRIDE_DIALOG_URL, SET_DELETE_DIALOG_URL } from "../constants/URLs";
 import { CONFIRMATION_DIALOG } from "../constants/textsAndMessages";
+import { UserContext } from "../contexts/userContext";
 
 const useConfirmationDialogSettings = () => {
+ 
+  const UC = useContext(UserContext);
   const MC = useContext(MenuContext);
 
   const callAxios = useAxios();
