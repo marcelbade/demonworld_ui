@@ -6,9 +6,12 @@ import { Grid2 as Grid, Switch, FormGroup, FormControlLabel } from "@mui/materia
 import UserLogButton from "../../Login/UserLogButton";
 // contexts
 import { UserContext } from "../../../contexts/userContext";
+import useConfirmationDialogSettings from "../../../customHooks/UseConfirmationDialogSettings";
 
 const UserOptions = () => {
   const UC = useContext(UserContext);
+
+  const dialogSettings = useConfirmationDialogSettings();
 
   return UC.userLoggedIn ? (
     <Grid
@@ -22,10 +25,10 @@ const UserOptions = () => {
         <FormControlLabel
           control={
             <Switch
-              id="toggleAllButtons" //
+              id="toggleDisplayOverrideDialog" //
               color="error"
-              checked={null} // TODO add !
-              onChange={null} // TODO add !
+              checked={dialogSettings.showOverrideDialog}
+              onChange={dialogSettings.setOverrideDialogSetting}
             />
           } // TODO text file!
           label="Beim Überschreiben von Armeelisten immer um Bestätigung bitten"
@@ -33,10 +36,10 @@ const UserOptions = () => {
         <FormControlLabel
           control={
             <Switch
-              id="toggleAllButtons" //
+              id="toggleDisplayDeleteDialog" //
               color="error"
-              checked={null}
-              onChange={null} // TODO add !
+              checked={dialogSettings.showDeletionDialog}
+              onChange={dialogSettings.setDeletetionDialogSetting}
             />
           } // TODO text file!
           label="Beim Löschen von Armeelisten immer um Bestätigung bitten"

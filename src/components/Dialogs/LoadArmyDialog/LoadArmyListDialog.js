@@ -14,9 +14,11 @@ import { UserContext } from "../../../contexts/userContext";
 import { ArmyContext } from "../../../contexts/armyContext";
 import { SelectionContext } from "../../../contexts/selectionContext";
 import { MenuContext } from "../../../contexts/MenuContext";
-// hooks
+// custom hooks
 import usePushMessages from "../../../customHooks/UsePushMessages";
 import useAxios from "../../../customHooks/UseAxios";
+import useConfirmationDialogSettings from "../../../customHooks/UseConfirmationDialogSettings";
+import { CONFIRMATION_DIALOG, LOAD_ARMY_LIST_DIALOG, PUSH_MESSAGE_TYPES } from "../../../constants/textsAndMessages";
 // functions and compoents
 import FetchedArmiesList from "./FetchedArmiesList";
 import ListFactionFilter from "./ListFactionFilter";
@@ -25,7 +27,6 @@ import ConfirmationDialog from "../ConfirmationDialog/ConfirmationDialog";
 import UseArmyStateLoader from "../../../customHooks/UseArmyStateLoader";
 // constants
 import { DELETE_ARMY_LIST_URL, RETRIEVE_ARMY_LISTS_URL } from "../../../constants/URLs";
-import { CONFIRMATION_DIALOG, LOAD_ARMY_LIST_DIALOG, PUSH_MESSAGE_TYPES } from "../../../constants/textsAndMessages";
 
 const LoadArmyListDialog = (props) => {
   const UC = useContext(UserContext);
@@ -33,11 +34,12 @@ const LoadArmyListDialog = (props) => {
   const SEC = useContext(SelectionContext);
   const MC = useContext(MenuContext);
 
-  const theme = useTheme()
+  const theme = useTheme();
 
   const sendData = useAxios();
   const pushMessages = usePushMessages();
   const stateLoader = UseArmyStateLoader();
+  const dialogSettings = useConfirmationDialogSettings();
 
   const [allLists, setAllLists] = useState([]);
   const [filteredFaction, setFilteredFaction] = useState("");
@@ -160,13 +162,6 @@ const LoadArmyListDialog = (props) => {
     setShowConfirmationDialog(false);
   };
 
-  const setDialogState = () => {
-    MC.setblockDialog({
-      ...MC.blockDialog,
-      confirmationDialog: !MC.blockDialog.showDeletionDialog,
-    });
-  };
-
   const handleFilteredFactionInput = (event) => {
     if (event.target.value === LOAD_ARMY_LIST_DIALOG.SHOW_ALL_FACTIONS) {
       setFilteredFaction("");
@@ -201,7 +196,7 @@ const LoadArmyListDialog = (props) => {
         container //
         direction="row"
         justifyContent="flex-end"
-          sx={theme.palette.dialogs.title}
+        sx={theme.palette.dialogs.title}
       >
         <IconButton
           sx={{ marginRight: "1em" }} //
@@ -249,8 +244,8 @@ const LoadArmyListDialog = (props) => {
         showConfirmationDialog={showConfirmationDialog} //
         confirmAndExecute={deleteList}
         closeDialog={closeConfirmationDialog}
-        dialogBoxState={MC.blockDialog.confirmationDialog}
-        setDialogBoxState={setDialogState}
+        dialogBoxState={dialogSettings.showDeletionDialog}
+        setDialogBoxState={dialogSettings.setDeletetionDialogSetting}
       />
     </Dialog>
   );

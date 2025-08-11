@@ -25,10 +25,11 @@ import { SelectionContext } from "../../../contexts/selectionContext";
 import { ArmyContext } from "../../../contexts/armyContext";
 import ConfirmationDialog from "../ConfirmationDialog/ConfirmationDialog";
 import { MenuContext } from "../../../contexts/MenuContext";
-// hooks
+// custom hooks
 import useAxios from "../../../customHooks/UseAxios";
+import useConfirmationDialogSettings from "../../../customHooks/UseConfirmationDialogSettings";
 // constants
-import { ALL_USER_NAMES_URL, GET_EVENTS_URL, SET_OVERRIDE_DIALOG_URL, STORE_ARMY_LIST_URL } from "../../../constants/URLs";
+import { ALL_USER_NAMES_URL, GET_EVENTS_URL, STORE_ARMY_LIST_URL } from "../../../constants/URLs";
 import { ARMY_LIST, CONFIRMATION_DIALOG, INPUT_TEXTS, PUSH_MESSAGE_TYPES } from "../../../constants/textsAndMessages";
 import { NO_EVENT } from "../../../constants/eventConstants";
 
@@ -40,6 +41,7 @@ const StoreArmyListDialog = (props) => {
 
   const theme = useTheme();
   const callAxios = useAxios();
+  const dialogSettings = useConfirmationDialogSettings();
 
   const [allEvents, setAllEvents] = useState([]);
   const [allUsers, setAllUsers] = useState([]);
@@ -89,27 +91,6 @@ const StoreArmyListDialog = (props) => {
     }
 
     storeList();
-  };
-
-  const setConfirmationDialogSetting = () => {
-    MC.setblockDialog({
-      ...MC.blockDialog,
-      showOverrideDialog: !MC.blockDialog.showOverrideDialog,
-    });
-
-    storeConfirmationDialogSetting();
-  };
-
-  const storeConfirmationDialogSetting = () => {
-    callAxios.storeData(
-      JSON.stringify({
-        userName: UC.user.userName,
-        displayOverrideConfirmation: !MC.blockDialog.showOverrideDialog,
-      }),
-      SET_OVERRIDE_DIALOG_URL,
-      null,
-      CONFIRMATION_DIALOG.PUSH_MESSAGE
-    );
   };
 
   const processFormData = (event) => {
@@ -377,8 +358,8 @@ const StoreArmyListDialog = (props) => {
         showConfirmationDialog={showConfirmationDialog} //
         confirmAndExecute={storeList}
         closeDialog={closeConfirmationDialog}
-        dialogBoxState={MC.blockDialog.confirmationDialog}
-        setDialogBoxState={setConfirmationDialogSetting}
+        dialogBoxState={dialogSettings.showOverrideDialog}
+        setDialogBoxState={dialogSettings.setOverrideDialogSetting}
       />
     </Dialog>
   );
