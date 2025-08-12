@@ -69,13 +69,6 @@ export const TOOLTIPS = {
   RULE_BOOK_TEXT: "Regelbuchtext",
 };
 
-export const TOURNAMENT_RULES = {
-  TOURNAMENT_RULES: "Turnierregeln",
-  MAX_POINTS_FOR_HERO: "Wieviele Prozent dürfen max. für Helden ausgegeben werden.",
-  HOW_MANY_TIMES: "Wie oft darf jede Einheit ausgewählt werden.",
-  ENFORCE_UNIQUE_RULE: "Einzigartige Einheiten dürfen nur einmal ausgewählt werden.",
-};
-
 export const PDF = {
   CREATE_PDF: "PDF Erzeugen ",
   SELECT_PDF_TYPE: "Bitte Wähle den PDF Typ",
@@ -88,6 +81,10 @@ export const PDF = {
 export const OPTIONS = {
   OPTIONS_DIALOG_TITLE: "Optionen",
   GAME_RULES_OPTIONS: "Regeln und Armeelisten",
+  TOURNAMENT_RULES_TITLE: "Turnierregeln",
+  MAX_POINTS_FOR_HERO: "Wieviele Prozent dürfen max. für Helden ausgegeben werden.",
+  HOW_MANY_TIMES: "Wie oft darf jede Einheit ausgewählt werden.",
+  ENFORCE_UNIQUE_RULE: "Einzigartige Einheiten dürfen nur einmal ausgewählt werden.",
   APP_OPTIONS: "App",
   USER_OPTIONS: "User",
   CHANGE_TOURNAMENT_RULES: "Turnierregeln Ändern",

@@ -106,7 +106,7 @@ const darkTheme = createTheme({
           fontFamily: "jaapokkiRegular",
         },
         subtitle1: {
-          fontFamily: "NotMaryKate",
+          fontFamily: "jaapokkiRegular",
         },
         h5: {
           fontFamily: "NotMaryKate",
