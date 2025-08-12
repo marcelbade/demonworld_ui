@@ -1,15 +1,16 @@
 // react
 import { useContext } from "react";
 // mui
-import { FormControlLabel, FormGroup, Checkbox, Stack, Grid2 as Grid, Typography } from "@mui/material";
+import { FormGroup, Stack, Grid2 as Grid, Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
+// icons
+import ExpandCircleDownIcon from "@mui/icons-material/ExpandCircleDown";
 // contexts
 import { CompendiumContext } from "../../../contexts/compendiumContext";
-//  custom hooks
-import useCompendiumTableControl from "../../../customHooks/UseCompendiumTableControl";
+// components and functions
+import CompendiumTableColToggleGroup from "./CompendiumTableColToggleGroup";
 
 const CompendiumTableColOptions = () => {
   const CC = useContext(CompendiumContext);
-  const compendiumTableControl = useCompendiumTableControl();
 
   const createOrderedDisplayArray = () => {
     const distinctToggleGroups = findDistinctGroupings();
@@ -43,39 +44,32 @@ const CompendiumTableColOptions = () => {
   };
 
   return (
-    <FormGroup>
-      <Grid
-        spacing={3} //
-        container
-        direction="row"
-      >
-        {createOrderedDisplayArray().map((e) => {
-          return (
-            <Stack
-              direction="column" //
-            >
-              <Typography> {e.group}</Typography>
-              {e.bttns.map((c, i) => {
-                return (
-                  <FormControlLabel
-                    key={i}
-                    control={
-                      <Checkbox
-                        checked={c.displayed}
-                        onChange={() => {
-                          compendiumTableControl.toggleColumn(c.column, c.displayed);
-                        }}
-                      />
-                    }
-                    label={c.label}
+    <Accordion>
+      <AccordionSummary
+        expandIcon={<ExpandCircleDownIcon color="error" />} //
+      ></AccordionSummary>
+      <AccordionDetails>
+        <FormGroup>
+          <Grid
+            spacing={3} //
+            container
+            direction="row"
+          >
+            {createOrderedDisplayArray().map((e) => {
+              return (
+                <Stack
+                  direction="column" //
+                >
+                  <CompendiumTableColToggleGroup
+                    toggleGroup={e.bttns} //
                   />
-                );
-              })}
-            </Stack>
-          );
-        })}
-      </Grid>
-    </FormGroup>
+                </Stack>
+              );
+            })}
+          </Grid>
+        </FormGroup>
+      </AccordionDetails>
+    </Accordion>
   );
 };
 
