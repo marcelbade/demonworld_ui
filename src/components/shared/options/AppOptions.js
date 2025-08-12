@@ -1,5 +1,5 @@
 import { Divider, Grid2 as Grid } from "@mui/material";
-import CompendiumTableColOptions from "../../compendiums/factionTable/components/CompendiumTableColOptions";
+import CompendiumTableColOptions from "./CompendiumTableColOptions";
 import LightSwitch from "../LightSwitch";
 
 const AppOptions = () => {

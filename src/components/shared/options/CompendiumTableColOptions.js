@@ -3,41 +3,52 @@ import { useContext } from "react";
 // mui
 import { FormControlLabel, FormGroup, Checkbox, Stack, Grid2 as Grid, Typography } from "@mui/material";
 // contexts
-import { CompendiumContext } from "../../../../contexts/compendiumContext";
+import { CompendiumContext } from "../../../contexts/compendiumContext";
 //  custom hooks
-import useCompendiumTableControl from "../../../../customHooks/UseCompendiumTableControl";
+import useCompendiumTableControl from "../../../customHooks/UseCompendiumTableControl";
 
 const CompendiumTableColOptions = () => {
   const CC = useContext(CompendiumContext);
   const compendiumTableControl = useCompendiumTableControl();
 
   const createOrderedDisplayArray = () => {
-    // get all distinct toggle groups
-    const allToggleGroups = CC.columns
-      .map((c) => c.toggleGroup) //
-      .reduce((distinct, e) => (distinct.indexOf(e) !== -1 ? distinct : [...distinct, e]), []);
+    const distinctToggleGroups = findDistinctGroupings();
+    const objectArray = createDataStructure(distinctToggleGroups);
 
-    // create filter array
-    const orderedDisplayArray = allToggleGroups.map((a) => {
-      return { group: a, bttns: [] };
-    });
-
-    // fill filterArray
-    for (let i = 0; i < allToggleGroups.length; i++) {
+    for (let i = 0; i < distinctToggleGroups.length; i++) {
       for (let j = 0; j < CC.columns.length; j++) {
         const bttn = CC.columns[j];
-        if (bttn.toggleGroup === orderedDisplayArray[i].group) {
-          orderedDisplayArray[i].bttns.push(bttn);
+        if (bttn.toggleGroup === objectArray[i].group) {
+          objectArray[i].bttns.push(bttn);
         }
       }
     }
 
-    return orderedDisplayArray;
+    return objectArray;
+  };
+
+  const findDistinctGroupings = () => {
+    return CC.columns
+      .map((c) => c.toggleGroup) //
+      .reduce((distinct, e) => (distinct.indexOf(e) !== -1 ? distinct : [...distinct, e]), []);
+  };
+
+  const createDataStructure = (distinctToggleGroups) => {
+    return distinctToggleGroups.map((a) => {
+      return {
+        group: a, //
+        bttns: [],
+      };
+    });
   };
 
   return (
     <FormGroup>
-      <Grid spacing={3} container direction="row">
+      <Grid
+        spacing={3} //
+        container
+        direction="row"
+      >
         {createOrderedDisplayArray().map((e) => {
           return (
             <Stack
