@@ -87,7 +87,7 @@ export const PDF = {
 
 export const OPTIONS = {
   OPTIONS_DIALOG_TITLE: "Optionen",
-  GAME_RULES_OPTIONS: "Regelwerk",
+  GAME_RULES_OPTIONS: "Regeln und Armeelisten",
   APP_OPTIONS: "App",
   USER_OPTIONS: "User",
   CHANGE_TOURNAMENT_RULES: "Turnierregeln Ändern",
@@ -99,6 +99,11 @@ export const OPTIONS = {
   UPDATE_LIST: "Liste aktualisieren",
   TO_LOSS_CALCULATOR: "Zum Verlustrechner",
   CHANGE_SELECTED_FACTION: "Fraktion wechseln",
+  EXPLAINATION_TOURNAMENT_RULES:
+    "Wähle aus ob die normalen Regeln für die Erstellung einer Armeeliste gelten sollen, oder ob du diese ändern möchtest. Das Abschalten dieser Option setzt alle Einstellungen zurück!",
+  TITLE_LIST_TOGGLE: "Darstellung der Armeeliste",
+  EXPLAINATION_LIST_TOGGLE:
+    "Wähle aus, ob die Armeeliste im Tool mit allen Informationen dargestellt werden soll. Wird diese Ansicht ausgeschaltet, so werden nur die ausgewählten Einheiten und Ausrüstungsgegenstände angezeigt.",
 };
 
 export const ARMY_LIST = {
