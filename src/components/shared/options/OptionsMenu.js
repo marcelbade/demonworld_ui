@@ -11,6 +11,7 @@ import GameOptions from "./GameOptions";
 import AppOptions from "./AppOptions";
 import { OPTIONS } from "../../../constants/textsAndMessages";
 import UserOptions from "./UserOptions";
+import CompendiumOptions from "./CompendiumOptions";
 
 const Transition = forwardRef(function Transition(props, ref) {
   return (
@@ -35,7 +36,19 @@ const OptionsMenu = () => {
 
   const [tabValue, setTabValue] = useState(0);
 
-  const TABS = [OPTIONS.GAME_RULES_OPTIONS, OPTIONS.APP_OPTIONS, OPTIONS.USER_OPTIONS];
+  const TABS = [
+    OPTIONS.GAME_RULES_OPTIONS, //
+    OPTIONS.COMPENDIUM_RULES_OPTIONS, //
+    OPTIONS.APP_OPTIONS,
+    OPTIONS.USER_OPTIONS,
+  ];
+
+  const panels = [
+    <GameOptions />, //
+    <CompendiumOptions />,
+    <AppOptions />,
+    <UserOptions />,
+  ];
 
   return (
     <Fragment>
@@ -76,21 +89,13 @@ const OptionsMenu = () => {
             />
           </Grid>
           <Grid size={10}>
-            <TabPanel
-              panelNr={0} //
-              tabValue={tabValue}
-              content={<GameOptions />}
-            />
-            <TabPanel
-              panelNr={1} //
-              tabValue={tabValue}
-              content={<AppOptions />}
-            />
-            <TabPanel
-              panelNr={2} //
-              tabValue={tabValue}
-              content={<UserOptions />}
-            />
+            {panels.map((p, i) => (
+              <TabPanel
+                panelNr={i} //
+                tabValue={tabValue}
+                content={p}
+              />
+            ))}
           </Grid>
         </Grid>
       </Dialog>

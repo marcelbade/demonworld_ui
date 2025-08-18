@@ -80,27 +80,46 @@ export const PDF = {
 
 export const OPTIONS = {
   OPTIONS_DIALOG_TITLE: "Optionen",
+
+  // tabs in options menu
+  USER_OPTIONS: "User",
   GAME_RULES_OPTIONS: "Regeln und Armeelisten",
+  APP_OPTIONS: "App",
+
+  // tab tournament rules
   TOURNAMENT_RULES_TITLE: "Turnierregeln",
+  EXPLAINATION_TOURNAMENT_RULES:
+    "Wähle aus ob die normalen Regeln für die Erstellung einer Armeeliste gelten sollen, oder ob du diese ändern möchtest. Das Abschalten dieser Option setzt alle Einstellungen zurück!",
   MAX_POINTS_FOR_HERO: "Wieviele Prozent dürfen max. für Helden ausgegeben werden.",
   HOW_MANY_TIMES: "Wie oft darf jede Einheit ausgewählt werden.",
   ENFORCE_UNIQUE_RULE: "Einzigartige Einheiten dürfen nur einmal ausgewählt werden.",
-  APP_OPTIONS: "App",
-  USER_OPTIONS: "User",
-  CHANGE_TOURNAMENT_RULES: "Turnierregeln Ändern",
-  LIGHT_SWITCH: "Wechsel zw. dunklen und hellen Theme",
+  LIST_TOGGLE_TITLE: "Darstellung der Armeeliste",
   LIST_DISPLAY_SWITCH: "Wechsel zw. einfacher und kompletter Listendarstellung",
+  EXPLAINATION_LIST_TOGGLE:
+    "Wähle aus, ob die Armeeliste im Tool mit allen Informationen dargestellt werden soll. Wird diese Ansicht ausgeschaltet, so werden nur die ausgewählten Einheiten und Ausrüstungsgegenstände angezeigt.",
+
+  // tab compendium
+  COMPENDIUM_ROWS_TITLE: "Tabellenspalten",
+  COMPENDIUM_RULES_OPTIONS: "Kompendium",
+  COMPENDIUM_EXPLAINATION:
+    "Wähle aus, welche Spalten in der Tabelle angezeigt werden sollen. Es könnnen auch ganze Gruppen an/abgeschaltet werden.",
+
+  // tab app
+  THEME_TITLE: "Erscheinungsbild",
+  LIGHT_SWITCH: "Wechsel zw. dunklen und hellen Theme",
+
+  // tab user
+  CONFIRMATION_TITLE: "Bestätigungen",
+  CONFIRMATION_EXPLAINATION: "Wähle aus, welche Bestätigungsdialoge angezeigt werden.",
+  GLOBAL_OVERRIDE_CONFIRMATION: "Beim Überschreiben von Armeelisten immer um Bestätigung bitten",
+  GLOBAL_DELETE_CONFIRMATION: "Beim Löschen von Armeelisten immer um Bestätigung bitten",
+
   MENU_SWITCH: "Menü",
   STORE_LIST: "Liste Speichern",
   LOAD_LIST: "Liste Laden",
   UPDATE_LIST: "Liste aktualisieren",
   TO_LOSS_CALCULATOR: "Zum Verlustrechner",
   CHANGE_SELECTED_FACTION: "Fraktion wechseln",
-  EXPLAINATION_TOURNAMENT_RULES:
-    "Wähle aus ob die normalen Regeln für die Erstellung einer Armeeliste gelten sollen, oder ob du diese ändern möchtest. Das Abschalten dieser Option setzt alle Einstellungen zurück!",
-  TITLE_LIST_TOGGLE: "Darstellung der Armeeliste",
-  EXPLAINATION_LIST_TOGGLE:
-    "Wähle aus, ob die Armeeliste im Tool mit allen Informationen dargestellt werden soll. Wird diese Ansicht ausgeschaltet, so werden nur die ausgewählten Einheiten und Ausrüstungsgegenstände angezeigt.",
 };
 
 export const ARMY_LIST = {

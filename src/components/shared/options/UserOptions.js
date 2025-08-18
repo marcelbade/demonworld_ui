@@ -1,12 +1,14 @@
 // react
 import { useContext } from "react";
 // material ui
-import { Grid2 as Grid, Switch, FormGroup, FormControlLabel } from "@mui/material";
+import { Grid2 as Grid, Switch, FormGroup, FormControlLabel, Typography } from "@mui/material";
 // components and functions
 import UserLogButton from "../../Login/UserLogButton";
 // contexts
 import { UserContext } from "../../../contexts/userContext";
 import useConfirmationDialogSettings from "../../../customHooks/UseConfirmationDialogSettings";
+// constants
+import { OPTIONS } from "../../../constants/textsAndMessages";
 
 const UserOptions = () => {
   const UC = useContext(UserContext);
@@ -17,10 +19,13 @@ const UserOptions = () => {
     <Grid
       container
       direction="column"
+      spacing={2}
       sx={{
         height: "100%",
       }}
     >
+      <Typography variant="h6">{OPTIONS.CONFIRMATION_TITLE}</Typography>
+      <Typography variant="body1">{OPTIONS.CONFIRMATION_EXPLAINATION}</Typography>
       <FormGroup>
         <FormControlLabel
           control={
@@ -30,8 +35,8 @@ const UserOptions = () => {
               checked={dialogSettings.showOverrideDialog}
               onChange={dialogSettings.setOverrideDialogSetting}
             />
-          } // TODO text file!
-          label="Beim Überschreiben von Armeelisten immer um Bestätigung bitten"
+          }
+          label={OPTIONS.GLOBAL_OVERRIDE_CONFIRMATION}
         />
         <FormControlLabel
           control={
@@ -41,8 +46,8 @@ const UserOptions = () => {
               checked={dialogSettings.showDeletionDialog}
               onChange={dialogSettings.setDeletetionDialogSetting}
             />
-          } // TODO text file!
-          label="Beim Löschen von Armeelisten immer um Bestätigung bitten"
+          }
+          label={OPTIONS.GLOBAL_DELETE_CONFIRMATION}
         />
       </FormGroup>
     </Grid>
