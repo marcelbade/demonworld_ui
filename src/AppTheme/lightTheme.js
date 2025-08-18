@@ -14,7 +14,9 @@ const lightTheme = createTheme({
         color: "white",
       },
     },
-
+    options: {
+      title: { marginTop: "1em" },
+    },
     statCards: {
       backGround: {
         backgroundColor: "lightgrey", //

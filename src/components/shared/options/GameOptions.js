@@ -1,3 +1,5 @@
+// react
+import { useTheme } from "@emotion/react";
 // Material UI
 import { Grid2 as Grid, Typography, Divider } from "@mui/material";
 // components and functions
@@ -7,6 +9,8 @@ import { OPTIONS } from "../../../constants/textsAndMessages";
 import TournamentRules from "./TournamentRules";
 
 const GameOptions = () => {
+  const theme = useTheme();
+
   return (
     <Grid
       container //
@@ -14,7 +18,9 @@ const GameOptions = () => {
       alignContent="flex-start"
       spacing={2}
     >
-      <Typography variant="h6">{OPTIONS.TOURNAMENT_RULES_TITLE}</Typography>
+      <Typography sx={theme.palette.options.title} variant="h6">
+        {OPTIONS.TOURNAMENT_RULES_TITLE}
+      </Typography>
       <Typography variant="body1">{OPTIONS.EXPLAINATION_TOURNAMENT_RULES}</Typography>
       <TournamentRules />
       <Divider sx={{ marginTop: "5em", width: "100%" }} />

@@ -1,5 +1,6 @@
 // react
 import { useContext } from "react";
+import { useTheme } from "@emotion/react";
 // material ui
 import { Grid2 as Grid, Switch, FormGroup, FormControlLabel, Typography } from "@mui/material";
 // components and functions
@@ -11,6 +12,7 @@ import useConfirmationDialogSettings from "../../../customHooks/UseConfirmationD
 import { OPTIONS } from "../../../constants/textsAndMessages";
 
 const UserOptions = () => {
+  const theme = useTheme();
   const UC = useContext(UserContext);
 
   const dialogSettings = useConfirmationDialogSettings();
@@ -24,7 +26,9 @@ const UserOptions = () => {
         height: "100%",
       }}
     >
-      <Typography variant="h6">{OPTIONS.CONFIRMATION_TITLE}</Typography>
+      <Typography sx={theme.palette.options.title} variant="h6">
+        {OPTIONS.CONFIRMATION_TITLE}
+      </Typography>
       <Typography variant="body1">{OPTIONS.CONFIRMATION_EXPLAINATION}</Typography>
       <FormGroup>
         <FormControlLabel
