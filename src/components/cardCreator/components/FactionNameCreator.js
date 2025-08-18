@@ -1,8 +1,8 @@
 // react
-import React, { Fragment, useContext } from "react";
+import { Fragment, useContext } from "react";
+import { useTheme } from "@emotion/react";
 // material ui
 import { FormGroup, Grid2 as Grid, FormControlLabel, Checkbox } from "@mui/material";
-import { useTheme } from "@emotion/react";
 // components and functions
 import SelectionInput from "../../shared/selectionInput";
 import CreatorTextInput from "./CreatorTextInput";
