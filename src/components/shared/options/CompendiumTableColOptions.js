@@ -1,9 +1,7 @@
 // react
 import { useContext } from "react";
 // mui
-import { FormGroup, Stack, Grid2 as Grid, Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
-// icons
-import ExpandCircleDownIcon from "@mui/icons-material/ExpandCircleDown";
+import { FormGroup, Stack, Grid2 as Grid } from "@mui/material";
 // contexts
 import { CompendiumContext } from "../../../contexts/compendiumContext";
 // components and functions
@@ -44,32 +42,25 @@ const CompendiumTableColOptions = () => {
   };
 
   return (
-    <Accordion>
-      <AccordionSummary
-        expandIcon={<ExpandCircleDownIcon color="error" />} //
-      ></AccordionSummary>
-      <AccordionDetails>
-        <FormGroup>
-          <Grid
-            spacing={3} //
-            container
-            direction="row"
-          >
-            {createOrderedDisplayArray().map((e) => {
-              return (
-                <Stack
-                  direction="column" //
-                >
-                  <CompendiumTableColToggleGroup
-                    toggleGroup={e.bttns} //
-                  />
-                </Stack>
-              );
-            })}
-          </Grid>
-        </FormGroup>
-      </AccordionDetails>
-    </Accordion>
+    <FormGroup>
+      <Grid
+        spacing={3} //
+        container
+        direction="row"
+      >
+        {createOrderedDisplayArray().map((e) => {
+          return (
+            <Stack
+              direction="column" //
+            >
+              <CompendiumTableColToggleGroup
+                toggleGroup={e.bttns} //
+              />
+            </Stack>
+          );
+        })}
+      </Grid>
+    </FormGroup>
   );
 };
 
