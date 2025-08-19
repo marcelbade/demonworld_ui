@@ -12,7 +12,7 @@ import LossCalculator from "./components/lossCalculator/LossCalculator";
 import PdfBox from "./components/PDFGenerator/PDFBox";
 import CardCreator from "./components/cardCreator/CardCreator";
 import CreateNewAccount from "./components/Login/CreateNewAccount";
-import { columnGroupObjects, columnsStateObjects } from "./components/compendiums/factionTable/components/columnsStateObject";
+import { columnStateArray } from "./components/compendiums/factionTable/components/columnsStateArray";
 // context providers
 import AllyProvider from "./contexts/allyContext";
 import AlternativeListProvider from "./contexts/alternativeListContext";
@@ -164,9 +164,7 @@ function App() {
   const [displaySubFactions, setDisplaySubFactions] = useState([]);
   const [displayUnits, setDisplayUnits] = useState([]);
   const [selectedStatCards, setSelectedStatCards] = useState([]);
-  const [allBoxes, setAllBoxes] = useState(false);
-  const [columns, setColumns] = useState(columnsStateObjects);
-  const [toggleGroups, setToggleGroups] = useState(columnGroupObjects);
+  const [toggleGroups, setToggleGroups] = useState(columnStateArray);
 
   useEffect(() => {
     fetchTableData();
@@ -248,8 +246,6 @@ function App() {
                     displayUnits: displayUnits,
                     displaySubFactions: displaySubFactions,
                     data: tableData,
-                    allBoxes: allBoxes,
-                    columns: columns,
                     toggleGroups: toggleGroups,
                     selectedFaction: selectedCompendiumFaction,
                     selectedSubFaction: selectedSubFaction,
@@ -258,12 +254,10 @@ function App() {
                     setData: setTableData,
                     setDisplaySubFactions: setDisplaySubFactions,
                     setDisplayUnits: setDisplayUnits,
-                    setColumns: setColumns,
                     setSelectedFaction: setSelectedCompendiumFaction,
                     setSelectedSubFaction: setSelectedSubFaction,
                     setToggleGroups: setToggleGroups,
                     setSelectedStatCards: setSelectedStatCards,
-                    setAllBoxes: setAllBoxes,
                     setUnitData: setUnitData,
                   }}
                 >
