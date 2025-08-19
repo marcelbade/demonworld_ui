@@ -15,20 +15,26 @@ const useCompendiumTableControl = () => {
   };
 
   /**
-   * Function triggered by the Checkboxes. Controls which columns of the table are displayed by
-   * setting the displayed property.
-   * @param {String} column
-   * @param {boolean} isChecked
+   * Function triggered by the Checkboxes. Controls which
+   * columns of the table are displayed by setting the
+   * displayed property.
+   * @param {String} columnName
    */
-  const toggleColumn = (column, isChecked) => {
-    CC.setColumns(
-      CC.columns.filter((c) => {
-        if (c.column === column) {
-          c.displayed = !isChecked;
+  const toggleColumn = (columnName) => {
+    let tempArray = [...CC.toggleGroups];
+
+    for (let i = 0; i < tempArray.length; i++) {
+      const group = tempArray[i];
+
+      for (let j = 0; j < group.columns.length; j++) {
+        const col = group.columns[j];
+        if (col.column === columnName) {
+          col.displayed = !col.displayed;
+          break;
         }
-        return c;
-      })
-    );
+      }
+    }
+    CC.setToggleGroups(tempArray);
   };
 
   /**
@@ -36,54 +42,20 @@ const useCompendiumTableControl = () => {
    *
    * @param {String} name
    * @param {[String]} columnGroup
-   * @param {boolean} isChecked
    */
   const toggleGroupsOfColumns = (groupName) => {
-    let oldGroupToggleValue;
+    let tempArray = [...CC.toggleGroups];
 
-    CC.setToggleGroups(
-      CC.toggleGroups.map((t) => {
-        if (t.toggleGroup === groupName) {
-          oldGroupToggleValue = t.displayEntireGroup;
-          t.displayEntireGroup = !t.displayEntireGroup;
-        }
-        return t;
-      })
-    );
-
-    CC.setColumns(
-      CC.columns.map((c) => {
-        if (c.toggleGroup === groupName) {
-          c.displayed = !oldGroupToggleValue;
-        }
-        return c;
-      })
-    );
+    for (let i = 0; i < tempArray.length; i++) {
+      if (tempArray[i].toggleGroup === groupName) {
+        tempArray[i].displayGroup = !tempArray[i].displayGroup;
+        tempArray[i].columns.forEach((c) => (c.displayed = tempArray[i].displayGroup));
+      }
+    }
+    CC.setToggleGroups(tempArray);
   };
 
-  /**
-   * Function toggles all table columns.
-   */
-  const toggleAllColumns = () => {
-    const temp = CC.allBoxes;
-
-    CC.setColumns(
-      CC.columns.map((c) => {
-        c.displayed = temp;
-        return c;
-      })
-    );
-
-    CC.setToggleGroups(
-      CC.toggleGroups.map((t) => {
-        t.displayEntireGroup = temp;
-        return t;
-      })
-    );
-
-    CC.setAllBoxes((prevState) => !prevState);
-  };
-
+ 
   /**
    * Function toggles the unitCard view on and off for a single table row.
    * @param {UnitCard} unit
@@ -98,10 +70,15 @@ const useCompendiumTableControl = () => {
       : CC.setSelectedStatCards([...CC.selectedStatCards, id]);
   };
 
+  const getAllTableColumns = () => {
+    const colGroups = CC.toggleGroups.map((group) => group.columns);
+    return [].concat(...colGroups);
+  };
+
   return {
+    getAllTableColumns: getAllTableColumns,
     addLock: addLock,
     toggleColumn: toggleColumn,
-    toggleAllColumns: toggleAllColumns,
     toggleGroupsOfColumns: toggleGroupsOfColumns,
     toggleUnitCard: toggleUnitCard,
   };

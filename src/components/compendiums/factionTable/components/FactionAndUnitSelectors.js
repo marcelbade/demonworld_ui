@@ -7,8 +7,13 @@ import SelectionInput from "../../../shared/selectionInput";
 import { ALL_FACTIONS_ARRAY } from "../../../../constants/factions";
 import { INPUT_TEXTS } from "../../../../constants/textsAndMessages";
 
-const FactionAndUnitSelectors = (props) => {
-  const TC = useContext(CompendiumContext);
+const FactionAndUnitSelectors = () => {
+  const CC = useContext(CompendiumContext);
+
+  const noSelectedFaction = CC.selectedFaction === "";
+  const noSelectedSubFaction = CC.selectedSubFaction === "";
+  const factionSelected = CC.selectedFaction !== "";
+  const subFactionSelected = CC.selectedSubFaction !== "";
 
   /**
    * Function generates the options for the faction name selector.
@@ -25,7 +30,7 @@ const FactionAndUnitSelectors = (props) => {
   const setSubFactionNamesOptions = () => {
     let options = [];
 
-    let rawValues = TC.data.filter((u) => u.faction.includes(TC.selectedFaction));
+    let rawValues = CC.data.filter((u) => u.faction.includes(CC.selectedFaction));
     rawValues = rawValues.map((u) => u.subFaction).sort();
 
     // remove duplicate values
@@ -43,17 +48,20 @@ const FactionAndUnitSelectors = (props) => {
   const setUnitNamesOptions = () => {
     let options = [];
 
-    if (TC.selectedFaction === "" && TC.selectedSubFaction === "") {
-      options = TC.data;
-    } else if (TC.selectedFaction === "" && TC.selectedSubFaction !== "") {
-      options = TC.data.filter((u) => u.subFaction.includes(TC.selectedSubFaction) && !u.unitLocked);
-    } else if (TC.selectedFaction !== "" && TC.selectedSubFaction === "") {
-      options = TC.data.filter((u) => u.faction.includes(TC.selectedFaction) && !u.unitLocked);
-    } else if (TC.selectedFaction !== "" && TC.selectedSubFaction !== "") {
-      options = TC.data.filter(
+    if (noSelectedFaction && noSelectedSubFaction) {
+      options = CC.data;
+      //
+    } else if (noSelectedFaction && subFactionSelected) {
+      options = CC.data.filter((u) => u.subFaction.includes(CC.selectedSubFaction) && !u.unitLocked);
+      //
+    } else if (factionSelected && noSelectedSubFaction) {
+      options = CC.data.filter((u) => u.faction.includes(CC.selectedFaction) && !u.unitLocked);
+      //
+    } else if (factionSelected && subFactionSelected) {
+      options = CC.data.filter(
         (u) =>
-          u.faction.includes(TC.selectedFaction) && //
-          u.subFaction.includes(TC.selectedSubFaction) &&
+          u.faction.includes(CC.selectedFaction) && //
+          u.subFaction.includes(CC.selectedSubFaction) &&
           !u.unitLocked
       );
     }
@@ -67,8 +75,8 @@ const FactionAndUnitSelectors = (props) => {
    * @param {[FactionObject]} selectedFaction
    */
   const selectFaction = (selectedFaction) => {
-    TC.setSelectedFaction(TC.data.map((u) => u.faction).find((name) => name === selectedFaction));
-    TC.setDisplayUnits(TC.data.filter((u) => u.faction.includes(selectedFaction) || u.unitLocked));
+    CC.setSelectedFaction(CC.data.map((u) => u.faction).find((name) => name === selectedFaction));
+    CC.setDisplayUnits(CC.data.filter((u) => u.faction.includes(selectedFaction) || u.unitLocked));
   };
 
   /**
@@ -76,13 +84,13 @@ const FactionAndUnitSelectors = (props) => {
    * @param {String} selectedSubFaction
    */
   const selectSubFaction = (selectedSubFaction) => {
-    TC.setSelectedSubFaction(TC.data.map((u) => u.subFaction).find((name) => name === selectedSubFaction));
+    CC.setSelectedSubFaction(CC.data.map((u) => u.subFaction).find((name) => name === selectedSubFaction));
 
-    if (TC.selectedFaction === "") {
-      TC.setDisplayUnits(TC.data.filter((u) => u.subFaction.includes(selectedSubFaction) || u.unitLocked));
+    if (noSelectedFaction) {
+      CC.setDisplayUnits(CC.data.filter((u) => u.subFaction.includes(selectedSubFaction) || u.unitLocked));
     } else {
-      TC.setDisplayUnits(
-        TC.data.filter((u) => (u.faction === TC.selectedFaction && u.subFaction.includes(selectedSubFaction)) || u.unitLocked)
+      CC.setDisplayUnits(
+        CC.data.filter((u) => (u.faction === CC.selectedFaction && u.subFaction.includes(selectedSubFaction)) || u.unitLocked)
       );
     }
   };
@@ -92,7 +100,7 @@ const FactionAndUnitSelectors = (props) => {
    * @param {[{}]} selectedUnit
    */
   const selectUnit = (selectedUnit) => {
-    TC.setDisplayUnits(TC.data.filter((u) => u.unitName.includes(selectedUnit) || u.unitLocked));
+    CC.setDisplayUnits(CC.data.filter((u) => u.unitName.includes(selectedUnit) || u.unitLocked));
   };
 
   /**
@@ -100,9 +108,9 @@ const FactionAndUnitSelectors = (props) => {
    * and resets the unit list to all units received from the BE.
    */
   const clearFaction = () => {
-    TC.setSelectedFaction("");
-    TC.setSelectedSubFaction("");
-    TC.setDisplayUnits(TC.data);
+    CC.setSelectedFaction("");
+    CC.setSelectedSubFaction("");
+    CC.setDisplayUnits(CC.data);
   };
 
   /**
@@ -110,8 +118,8 @@ const FactionAndUnitSelectors = (props) => {
    * and resets the unit list to all units for the selected faction.
    */
   const clearSubFaction = () => {
-    TC.setSelectedSubFaction("");
-    TC.setDisplayUnits(TC.data.filter((u) => u.faction.includes(TC.selectedFaction)));
+    CC.setSelectedSubFaction("");
+    CC.setDisplayUnits(CC.data.filter((u) => u.faction.includes(CC.selectedFaction)));
   };
 
   /**
@@ -119,8 +127,8 @@ const FactionAndUnitSelectors = (props) => {
    * and resets the unit list to all units for the selected faction and sub faction.
    */
   const clearUnit = () => {
-    TC.setDisplayUnits(
-      TC.data.filter((u) => (u.faction === TC.selectedFaction && u.subFaction.includes(TC.selectedSubFaction)) || u.unitLocked)
+    CC.setDisplayUnits(
+      CC.data.filter((u) => (u.faction === CC.selectedFaction && u.subFaction.includes(CC.selectedSubFaction)) || u.unitLocked)
     );
   };
 

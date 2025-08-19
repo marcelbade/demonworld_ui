@@ -1,7 +1,6 @@
 // React
-import React, { useContext } from "react";
+import React from "react";
 // components & functions
-import { CompendiumContext } from "../../../../contexts/compendiumContext";
 import {
   renderBooleanAsIcon,
   renderSpecialRules,
@@ -13,9 +12,11 @@ import {
 import CardButton from "./CardButton";
 import RowLock from "./RowLock";
 import { TableRow } from "@mui/material";
+// custom hook
+import useCompendiumTableControl from "../../../../customHooks/UseCompendiumTableControl";
 
 const CompendiumTableRow = (props) => {
-  const TC = useContext(CompendiumContext);
+  const compendiumTableControl = useCompendiumTableControl();
 
   const displayValue = (c) => {
     switch (c.column) {
@@ -73,7 +74,7 @@ const CompendiumTableRow = (props) => {
         },
       }}
     >
-      {TC.columns.map((col, i) => {
+      {compendiumTableControl.getAllTableColumns().map((col, i) => {
         return col.displayed ? <td key={i}> {displayValue(col)} </td> : null;
       })}
     </TableRow>

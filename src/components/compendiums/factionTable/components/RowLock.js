@@ -9,14 +9,14 @@ import LockIcon from "@mui/icons-material/Lock";
 import LockOpenIcon from "@mui/icons-material/LockOpen";
 
 const RowLock = (props) => {
-  const TC = useContext(CompendiumContext);
+  const CC = useContext(CompendiumContext);
 
   /**
    * Function sets the unitLocked property for a unit.
    */
   const toggleRowLock = () => {
-    TC.setDisplayUnits(
-      TC.displayUnits.map((t) => {
+    CC.setDisplayUnits(
+      CC.displayUnits.map((t) => {
         if (props.unit.unitName === t.unitName) {
           t.unitLocked = !t.unitLocked;
         }

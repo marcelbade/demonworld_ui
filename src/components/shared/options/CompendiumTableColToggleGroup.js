@@ -6,19 +6,19 @@ import useCompendiumTableControl from "../../../customHooks/UseCompendiumTableCo
 const CompendiumTableColToggleGroup = (props) => {
   const compendiumTableControl = useCompendiumTableControl();
 
-  return props.toggleGroup.map((c, i) => {
+  return props.toggleGroup.map((t, i) => {
     return (
       <FormControlLabel
         key={i}
         control={
           <Checkbox
-            checked={c.displayed}
+            checked={t.displayed}
             onChange={() => {
-              compendiumTableControl.toggleColumn(c.column, c.displayed);
+              compendiumTableControl.toggleColumn(t.column);
             }}
           />
         }
-        label={c.label}
+        label={t.label}
       />
     );
   });

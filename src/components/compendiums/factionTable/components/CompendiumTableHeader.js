@@ -1,19 +1,21 @@
 // React
-import React, { useContext } from "react";
+import React from "react";
 // material ui
 import { useTheme } from "@emotion/react";
 // components & functions
-import { CompendiumContext } from "../../../../contexts/compendiumContext";
 import { TableCell, TableHead, TableRow } from "@mui/material";
+// customHooks
+import useCompendiumTableControl from "../../../../customHooks/UseCompendiumTableControl";
 
 const CompendiumTableHeader = () => {
   const theme = useTheme();
-  const TC = useContext(CompendiumContext);
+
+  const compendiumTableControl = useCompendiumTableControl();
 
   return (
     <TableHead>
       <TableRow>
-        {TC.columns.map((col, i) => {
+        {compendiumTableControl.getAllTableColumns().map((col, i) => {
           let element = col.displayed ? (
             <TableCell
               sx={{

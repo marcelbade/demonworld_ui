@@ -1,45 +1,16 @@
 // react
 import { useContext } from "react";
 // mui
-import { FormGroup, Stack, Grid2 as Grid } from "@mui/material";
+import { FormGroup, Stack, Grid2 as Grid, Checkbox } from "@mui/material";
 // contexts
 import { CompendiumContext } from "../../../contexts/compendiumContext";
 // components and functions
 import CompendiumTableColToggleGroup from "./CompendiumTableColToggleGroup";
+import useCompendiumTableControl from "../../../customHooks/UseCompendiumTableControl";
 
 const CompendiumTableColOptions = () => {
   const CC = useContext(CompendiumContext);
-
-  const createOrderedDisplayArray = () => {
-    const distinctToggleGroups = findDistinctGroupings();
-    const objectArray = createDataStructure(distinctToggleGroups);
-
-    for (let i = 0; i < distinctToggleGroups.length; i++) {
-      for (let j = 0; j < CC.columns.length; j++) {
-        const bttn = CC.columns[j];
-        if (bttn.toggleGroup === objectArray[i].group) {
-          objectArray[i].bttns.push(bttn);
-        }
-      }
-    }
-
-    return objectArray;
-  };
-
-  const findDistinctGroupings = () => {
-    return CC.columns
-      .map((c) => c.toggleGroup) //
-      .reduce((distinct, e) => (distinct.indexOf(e) !== -1 ? distinct : [...distinct, e]), []);
-  };
-
-  const createDataStructure = (distinctToggleGroups) => {
-    return distinctToggleGroups.map((a) => {
-      return {
-        group: a, //
-        bttns: [],
-      };
-    });
-  };
+  const compendiumTableControl = useCompendiumTableControl();
 
   return (
     <FormGroup>
@@ -48,13 +19,44 @@ const CompendiumTableColOptions = () => {
         container
         direction="row"
       >
-        {createOrderedDisplayArray().map((e) => {
+        {CC.toggleGroups.map((group, i) => {
           return (
             <Stack
+              key={i}
               direction="column" //
+              sx={{
+                zIndex: 0,
+                border: "0.1em solid black",
+                borderRadius: "1em",
+                width: "12em",
+                height: "30em",
+                padding: "1em",
+                marginTop: "1em",
+              }}
             >
+              {/* grid element is needed to prevent the border to appear inside the checkbox, every time the mouse hovers over it.*/}
+              <Grid
+                container
+                justifyContent="center"
+                sx={{
+                  position: "relative",
+                  bottom: "2.3em",
+                  left: "3.7em",
+                  width: "2em",
+                  height: "2em",
+                  backgroundColor: "white", //
+                  zIndex: 1,
+                }}
+              >
+                <Checkbox
+                  checked={group.displayGroup}
+                  onClick={() => {
+                    compendiumTableControl.toggleGroupsOfColumns(group.toggleGroup);
+                  }}
+                />
+              </Grid>
               <CompendiumTableColToggleGroup
-                toggleGroup={e.bttns} //
+                toggleGroup={group.columns} //
               />
             </Stack>
           );

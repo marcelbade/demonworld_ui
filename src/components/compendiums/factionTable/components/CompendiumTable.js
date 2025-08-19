@@ -12,7 +12,6 @@ import FactionAndUnitSelectors from "./FactionAndUnitSelectors";
 import { CompendiumContext } from "../../../../contexts/compendiumContext";
 // constants
 import { COMPENDIUM } from "../../../../constants/textsAndMessages";
-import { ID } from "../../../../constants/MenuAndDialogConstants";
 
 const CompendiumTable = () => {
   const CC = useContext(CompendiumContext);

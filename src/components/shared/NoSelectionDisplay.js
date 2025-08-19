@@ -3,9 +3,7 @@
  *
  */
 
-// React
-import React from "react";
-
+//TODO you forgot about this LOL.
 const NoSelectionDisplay = (props) => {
   const theme = useTheme();
 

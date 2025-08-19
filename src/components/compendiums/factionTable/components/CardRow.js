@@ -12,7 +12,7 @@ import { TableRow } from "@mui/material";
  * @returns
  */
 const DetailedCardView = (props) => {
-  const TC = useContext(CompendiumContext);
+  const CC = useContext(CompendiumContext);
 
   const displayCard = () => {
     const displayName =
@@ -22,13 +22,13 @@ const DetailedCardView = (props) => {
 
     const isSingleElement = isSingleElementCard(props.unit);
 
-    const carouselCards = TC.displayUnits.filter(
+    const carouselCards = CC.displayUnits.filter(
       (u) =>
         u.belongsToUnit !== "NONE" && //
         u.belongsToUnit === props.unit.belongsToUnit
     );
 
-    return TC.selectedStatCards.includes(props.unit.faction + displayName) ? ( //
+    return CC.selectedStatCards.includes(props.unit.faction + displayName) ? ( //
       <CardView
         isMultiStateCard={props.unit.isMultiStateUnit}
         unit={props.unit} //
