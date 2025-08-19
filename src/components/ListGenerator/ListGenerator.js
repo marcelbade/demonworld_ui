@@ -8,13 +8,10 @@ import ArmyListBox from "./ArmyListView/ArmyListBox";
 import MenuBox from "./RightSideMenus/MenuBox";
 import ArmySelectionBox from "./ArmySelectorView/ArmySelectionBox";
 import ArmySelectorDropdown from "./ArmySelectorView/ArmySelectorDropdown";
+import AppBar from "../shared/options/OptionsMenu";
 // context
 import { ArmyContext } from "../../contexts/armyContext";
-// icons
-import AppBarToggle from "../shared/AppBarToggle";
-import AppBar from "../shared/options/OptionsMenu";
 // constants
-import { ID } from "../../constants/MenuAndDialogConstants";
 import { NONE } from "../../constants/factions";
 import BackToSelectionButton from "../shared/BackToSelectionButton";
 import DeleteArmyListButton from "../shared/DeleteArmyListButton";
@@ -49,15 +46,10 @@ const ListGenerator = () => {
           position: "fixed",
         }}
       >
-        <AppBarToggle
-          iconSize="25em" //
-          bttnSize="2em"
-          margin="0.5em"
-        />
         <BackToSelectionButton />
         <DeleteArmyListButton />
       </Grid>
-      <AppBar hiddenElements={[ID.COMPENDIMUM_DROPDOWN]} />
+      <AppBar />
       <Grid
         justifyContent="flex-start" //
         alignItems="center"

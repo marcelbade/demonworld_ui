@@ -6,11 +6,9 @@ import { Button, Grid2 as Grid } from "@mui/material";
 import NaviButton from "../landingPage/NaviButton";
 import LoginDialog from "../Dialogs/LogInDialog/LogInDialog";
 import OptionsMenu from "../shared/options/OptionsMenu";
-import AppBarToggle from "../shared/AppBarToggle";
 // constants
 import { LOSS_CALCULATOR, OPTIONS } from "../../constants/textsAndMessages";
 import LoadArmyListPrompt from "../Dialogs/LoadArmyDialog/LoadArmyListDialog";
-import { ID } from "../../constants/MenuAndDialogConstants";
 // contexts
 import { LossCalcContext } from "../../contexts/LossCalculatorContext";
 
@@ -32,13 +30,7 @@ const CreateListScreen = () => {
         height: "100vh",
       }}
     >
-      <OptionsMenu hiddenElements={[ID.COMPENDIMUM_DROPDOWN, ID.LIST_DISPLAY]} />
-      <AppBarToggle
-        iconSize="25em" //
-        bttnSize="2em"
-        margin="0.5em"
-      />
-
+      <OptionsMenu />
       <Grid
         container //
         direction="column"

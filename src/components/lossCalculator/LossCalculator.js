@@ -1,20 +1,16 @@
 // React
-import React, { useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-//Material UI
+// Material UI
 import { Grid2 as Grid } from "@mui/material";
 // components and functions
 import CreateListScreen from "./CreateListScreen";
 import LostPointDisplay from "./LostPointDisplay";
 import LostUnitList from "./LostUnitList/LostUnitList";
 import usePointCostCalculator from "../../customHooks/UsePointCostCalculator";
+import OptionsMenu from "../shared/options/OptionsMenu";
 // context
 import { LossCalcContext } from "../../contexts/LossCalculatorContext";
-// icons
-
-import AppBarToggle from "../shared/AppBarToggle";
-import { ID } from "../../constants/MenuAndDialogConstants";
-import OptionsMenu from "../shared/options/OptionsMenu";
 
 const LossCalculator = () => {
   const location = useLocation();
@@ -73,12 +69,7 @@ const LossCalculator = () => {
           position: "fixed",
         }}
       >
-        <AppBarToggle
-          iconSize="25em" //
-          bttnSize="2em"
-          margin="0.5em"
-        />
-        <OptionsMenu hiddenElements={[ID.COMPENDIMUM_DROPDOWN, ID.LIST_DISPLAY]} />
+        <OptionsMenu />
       </Grid>
       <Grid
         container //

@@ -1,7 +1,7 @@
 // react
 import { useContext, Fragment, useState, forwardRef } from "react";
 // material ui
-import { Grid2 as Grid, Button, Dialog, AppBar, Toolbar, IconButton, Slide, Typography } from "@mui/material";
+import { Grid2 as Grid, Dialog, AppBar, Toolbar, IconButton, Slide, Typography } from "@mui/material";
 // components and functions
 import { MenuContext } from "../../../contexts/MenuContext";
 import CancelIcon from "@mui/icons-material/Cancel";
@@ -12,6 +12,8 @@ import AppOptions from "./AppOptions";
 import { OPTIONS } from "../../../constants/textsAndMessages";
 import UserOptions from "./UserOptions";
 import CompendiumOptions from "./CompendiumOptions";
+// icons
+import SettingsIcon from "@mui/icons-material/Settings";
 
 const Transition = forwardRef(function Transition(props, ref) {
   return (
@@ -52,9 +54,9 @@ const OptionsMenu = () => {
 
   return (
     <Fragment>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Open full-screen dialog
-      </Button>
+      <IconButton variant="outlined" onClick={handleClickOpen}>
+        <SettingsIcon />
+      </IconButton>
       <Dialog
         fullScreen
         open={MC.openMenu}
@@ -91,6 +93,7 @@ const OptionsMenu = () => {
           <Grid size={10}>
             {panels.map((p, i) => (
               <TabPanel
+                key={i}
                 panelNr={i} //
                 tabValue={tabValue}
                 content={p}

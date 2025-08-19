@@ -6,7 +6,6 @@ import { Grid2 as Grid, Typography } from "@mui/material";
 import CompendiumTableRow from "./CompendiumTableRow";
 import DetailedCardView from "./CardRow";
 import CompendiumTableHeader from "./CompendiumTableHeader";
-import AppBarToggle from "../../../shared/AppBarToggle";
 import AppBar from "../../../shared/options/OptionsMenu";
 //icons
 import FactionAndUnitSelectors from "./FactionAndUnitSelectors";
@@ -20,12 +19,7 @@ const CompendiumTable = () => {
 
   return (
     <Grid container>
-      <AppBarToggle
-        iconSize="25em" //
-        bttnSize="2em"
-        margin="0.5em"
-      />
-      <AppBar hiddenElements={[ID.LIST_DISPLAY]} />
+      <AppBar />
       <Grid //
         container
         direction="row"
@@ -48,7 +42,7 @@ const CompendiumTable = () => {
 
       <Grid size={12}>
         <table rules="none">
-          <CompendiumTableHeader columns={CC.columns} />
+          <CompendiumTableHeader />
           <tbody>
             {CC.displayUnits
               .filter((u) => u.multiStateOrderNumber < 2)

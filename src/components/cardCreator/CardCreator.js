@@ -1,5 +1,5 @@
 // react
-import React, { useState } from "react";
+import { useState } from "react";
 // material ui
 import { Box, Grid2 as Grid } from "@mui/material";
 // functions and components
@@ -19,11 +19,8 @@ import UnitAttributeCreator from "./components/UnitAttributeCreator";
 import UnitTypeSelector from "./components/UnitTypeSelector";
 import AppBar from "../shared/options/OptionsMenu";
 import CardPreview from "./components/CardPreview";
-import AppBarToggle from "../shared/AppBarToggle";
 //  contexts
 import CardCreationProvider from "../../contexts/cardCreationContext";
-// constants
-import { ID } from "../../constants/MenuAndDialogConstants";
 
 const CardCreator = () => {
   const [newFaction, setNewFaction] = useState(false);
@@ -122,20 +119,14 @@ const CardCreator = () => {
           display: "flex", //
         }}
       >
-        <AppBar hiddenElements={[ID.COMPENDIMUM_DROPDOWN, ID.LIST_DISPLAY]} />
+        <AppBar />
         <Box
           sx={{
             display: "flex",
             direction: "column",
             position: "fixed",
           }}
-        >
-          <AppBarToggle
-            iconSize="25em" //
-            bttnSize="2em"
-            margin="0.5em"
-          />
-        </Box>
+        ></Box>
         <Grid
           container
           alignItems="center"
