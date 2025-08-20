@@ -42,7 +42,11 @@ const CompendiumTable = () => {
           </Typography>
           <FactionAndUnitSelectors />
         </Grid>
-        <Grid>
+        <Grid
+          sx={{
+            padding: "0.5em",
+          }}
+        >
           <OptionsButton />
         </Grid>
       </Grid>
