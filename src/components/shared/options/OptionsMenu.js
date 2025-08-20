@@ -1,9 +1,8 @@
 // react
-import { useContext, Fragment, useState, forwardRef } from "react";
+import { useContext, useState, forwardRef } from "react";
 // material ui
 import { Grid2 as Grid, Dialog, AppBar, Toolbar, IconButton, Slide, Typography } from "@mui/material";
 // components and functions
-import { MenuContext } from "../../../contexts/MenuContext";
 import CancelIcon from "@mui/icons-material/Cancel";
 import TabButtons from "../TabButtons";
 import TabPanel from "../TabPanel";
@@ -12,8 +11,8 @@ import AppOptions from "./AppOptions";
 import { OPTIONS } from "../../../constants/textsAndMessages";
 import UserOptions from "./UserOptions";
 import CompendiumOptions from "./CompendiumOptions";
-// icons
-import SettingsIcon from "@mui/icons-material/Settings";
+// contexts
+import { MenuContext } from "../../../contexts/MenuContext";
 
 const Transition = forwardRef(function Transition(props, ref) {
   return (
@@ -27,10 +26,6 @@ const Transition = forwardRef(function Transition(props, ref) {
 
 const OptionsMenu = () => {
   const MC = useContext(MenuContext);
-
-  const handleClickOpen = () => {
-    MC.setOpenMenu(true);
-  };
 
   const handleClose = () => {
     MC.setOpenMenu(false);
@@ -53,56 +48,51 @@ const OptionsMenu = () => {
   ];
 
   return (
-    <Fragment>
-      <IconButton variant="outlined" onClick={handleClickOpen}>
-        <SettingsIcon />
-      </IconButton>
-      <Dialog
-        fullScreen
-        open={MC.openMenu}
-        onClose={handleClose}
-        sx={{ backgroundColor: "black" }}
-        slots={{
-          transition: Transition,
-        }}
+    <Dialog
+      fullScreen
+      open={MC.openMenu}
+      onClose={handleClose}
+      sx={{ backgroundColor: "black" }}
+      slots={{
+        transition: Transition,
+      }}
+    >
+      <AppBar sx={{ position: "relative" }}>
+        <Toolbar>
+          <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
+            <CancelIcon color="error" />
+          </IconButton>
+          <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+            {OPTIONS.OPTIONS_DIALOG_TITLE}
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <Grid
+        container //
+        direction="row"
+        sx={{ height: "100%" }}
       >
-        <AppBar sx={{ position: "relative" }}>
-          <Toolbar>
-            <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
-              <CancelIcon color="error" />
-            </IconButton>
-            <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
-              {OPTIONS.OPTIONS_DIALOG_TITLE}
-            </Typography>
-          </Toolbar>
-        </AppBar>
-        <Grid
-          container //
-          direction="row"
-          sx={{ height: "100%" }}
-        >
-          <Grid size={2}>
-            <TabButtons
-              direction="column"
-              handleTabChange={setTabValue} //
-              altPanels={TABS}
-              tabValue={tabValue}
-              showBottomBorder={false}
-            />
-          </Grid>
-          <Grid size={10}>
-            {panels.map((p, i) => (
-              <TabPanel
-                key={i}
-                panelNr={i} //
-                tabValue={tabValue}
-                content={p}
-              />
-            ))}
-          </Grid>
+        <Grid size={2}>
+          <TabButtons
+            direction="column"
+            handleTabChange={setTabValue} //
+            altPanels={TABS}
+            tabValue={tabValue}
+            showBottomBorder={false}
+          />
         </Grid>
-      </Dialog>
-    </Fragment>
+        <Grid size={10}>
+          {panels.map((p, i) => (
+            <TabPanel
+              key={i}
+              panelNr={i} //
+              tabValue={tabValue}
+              content={p}
+            />
+          ))}
+        </Grid>
+      </Grid>
+    </Dialog>
   );
 };
 
