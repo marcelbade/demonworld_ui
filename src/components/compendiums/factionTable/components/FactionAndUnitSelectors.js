@@ -135,18 +135,21 @@ const FactionAndUnitSelectors = () => {
   return (
     <>
       <SelectionInput
+        width={"20em"}
         alternatives={setFactionNamesOptions()}
         filterFunction={selectFaction}
         clearFunction={clearFaction}
         label={INPUT_TEXTS.SELECT_FACTION}
       />
       <SelectionInput
+        width={"20em"}
         alternatives={setSubFactionNamesOptions()}
         filterFunction={selectSubFaction}
         clearFunction={clearSubFaction}
         label={INPUT_TEXTS.SELECT_SUBFACTION}
       />
       <SelectionInput
+        width={"20em"}  
         alternatives={setUnitNamesOptions()}
         filterFunction={selectUnit}
         clearFunction={clearUnit}

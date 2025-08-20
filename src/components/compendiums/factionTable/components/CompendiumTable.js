@@ -12,6 +12,7 @@ import FactionAndUnitSelectors from "./FactionAndUnitSelectors";
 import { CompendiumContext } from "../../../../contexts/compendiumContext";
 // constants
 import { COMPENDIUM } from "../../../../constants/textsAndMessages";
+import OptionsButton from "../../../shared/options/OptionsButton";
 
 const CompendiumTable = () => {
   const CC = useContext(CompendiumContext);
@@ -19,11 +20,15 @@ const CompendiumTable = () => {
   return (
     <Grid container>
       <AppBar />
+
       <Grid //
         container
         direction="row"
+        size={12}
+        spacing={9}
+        justifyContent="space-between"
       >
-        <Grid size={8}>
+        <Grid size={4}>
           <Typography
             variant="h3"
             sx={{
@@ -36,6 +41,9 @@ const CompendiumTable = () => {
             {COMPENDIUM.TITLE}
           </Typography>
           <FactionAndUnitSelectors />
+        </Grid>
+        <Grid>
+          <OptionsButton />
         </Grid>
       </Grid>
 
