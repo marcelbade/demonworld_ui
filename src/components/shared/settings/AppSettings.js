@@ -2,11 +2,12 @@
 import { useTheme } from "@emotion/react";
 // material ui
 import { Grid2 as Grid, Typography } from "@mui/material";
-import CompendiumTableColOptions from "./CompendiumTableColOptions";
+// components and functions
+import LightSwitch from "../LightSwitch";
 // constants
 import { OPTIONS } from "../../../constants/textsAndMessages";
 
-const CompendiumOptions = () => {
+const AppSettings = () => {
   const theme = useTheme();
   return (
     <Grid
@@ -18,12 +19,12 @@ const CompendiumOptions = () => {
       }}
     >
       <Typography sx={theme.palette.options.title} variant="h6">
-        {OPTIONS.COMPENDIUM_ROWS_TITLE}
+        {OPTIONS.THEME_TITLE}
       </Typography>
-      <Typography variant="body1">{OPTIONS.COMPENDIUM_EXPLAINATION}</Typography>
-      <CompendiumTableColOptions />
+      <Typography variant="body1">{OPTIONS.LIGHT_SWITCH}</Typography>
+      <LightSwitch bttnSize="medium" />
     </Grid>
   );
 };
 
-export default CompendiumOptions;
+export default AppSettings;

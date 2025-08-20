@@ -7,7 +7,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 // contexts
 import { MenuContext } from "../../../contexts/MenuContext";
 
-const OptionsButton = () => {
+const SettingsButton = () => {
   const MC = useContext(MenuContext);
 
   const handleClickOpen = () => {
@@ -23,4 +23,4 @@ const OptionsButton = () => {
   );
 };
 
-export default OptionsButton;
+export default SettingsButton;

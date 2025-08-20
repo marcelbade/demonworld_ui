@@ -8,7 +8,7 @@ import { TournamentRulesContext } from "../../../contexts/tournamentRulesContext
 // constants
 import { GENERAL_ERRRORS, OPTIONS } from "../../../constants/textsAndMessages";
 
-const TournamentRules = () => {
+const TournamentSettings = () => {
   const theme = useTheme();
   const TC = useContext(TournamentRulesContext);
 
@@ -137,4 +137,4 @@ const TournamentRules = () => {
   );
 };
 
-export default TournamentRules;
+export default TournamentSettings;

@@ -6,11 +6,11 @@ import { Grid2 as Grid, Dialog, AppBar, Toolbar, IconButton, Slide, Typography }
 import CancelIcon from "@mui/icons-material/Cancel";
 import TabButtons from "../TabButtons";
 import TabPanel from "../TabPanel";
-import GameOptions from "./GameOptions";
-import AppOptions from "./AppOptions";
+import GameSettings from "./GameSettings";
+import AppSettings from "./AppSettings";
 import { OPTIONS } from "../../../constants/textsAndMessages";
-import UserOptions from "./UserOptions";
-import CompendiumOptions from "./CompendiumOptions";
+import UserSettings from "./UserSettings";
+import CompendiumSettings from "./CompendiumSettings";
 // contexts
 import { MenuContext } from "../../../contexts/MenuContext";
 
@@ -24,7 +24,7 @@ const Transition = forwardRef(function Transition(props, ref) {
   );
 });
 
-const OptionsMenu = () => {
+const SettingsMenu = () => {
   const MC = useContext(MenuContext);
 
   const handleClose = () => {
@@ -41,10 +41,10 @@ const OptionsMenu = () => {
   ];
 
   const panels = [
-    <GameOptions />, //
-    <CompendiumOptions />,
-    <AppOptions />,
-    <UserOptions />,
+    <GameSettings />, //
+    <CompendiumSettings />,
+    <AppSettings />,
+    <UserSettings />,
   ];
 
   return (
@@ -96,4 +96,4 @@ const OptionsMenu = () => {
   );
 };
 
-export default OptionsMenu;
+export default SettingsMenu;

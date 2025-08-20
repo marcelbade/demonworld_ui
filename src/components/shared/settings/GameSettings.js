@@ -6,9 +6,9 @@ import { Grid2 as Grid, Typography, Divider } from "@mui/material";
 import ListDisplaySwitch from "../ListDisplaySwitch";
 // constants
 import { OPTIONS } from "../../../constants/textsAndMessages";
-import TournamentRules from "./TournamentRules";
+import TournamentSettings from "./TournamentSettings";
 
-const GameOptions = () => {
+const GameSettings = () => {
   const theme = useTheme();
 
   return (
@@ -22,7 +22,7 @@ const GameOptions = () => {
         {OPTIONS.TOURNAMENT_RULES_TITLE}
       </Typography>
       <Typography variant="body1">{OPTIONS.EXPLAINATION_TOURNAMENT_RULES}</Typography>
-      <TournamentRules />
+      <TournamentSettings />
       <Divider sx={{ marginTop: "5em", width: "100%" }} />
       <Typography variant="h6">{OPTIONS.LIST_TOGGLE_TITLE}</Typography>
       <Typography variant="body1">{OPTIONS.EXPLAINATION_LIST_TOGGLE}</Typography>
@@ -31,4 +31,4 @@ const GameOptions = () => {
   );
 };
 
-export default GameOptions;
+export default GameSettings;

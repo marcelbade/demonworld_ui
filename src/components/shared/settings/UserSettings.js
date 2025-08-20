@@ -11,7 +11,7 @@ import useConfirmationDialogSettings from "../../../customHooks/UseConfirmationD
 // constants
 import { OPTIONS } from "../../../constants/textsAndMessages";
 
-const UserOptions = () => {
+const UserSettings = () => {
   const theme = useTheme();
   const UC = useContext(UserContext);
 
@@ -68,4 +68,4 @@ const UserOptions = () => {
   );
 };
 
-export default UserOptions;
+export default UserSettings;
