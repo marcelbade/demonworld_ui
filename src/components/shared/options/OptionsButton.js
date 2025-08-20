@@ -15,12 +15,7 @@ const OptionsButton = () => {
   };
 
   return (
-    <Grid
-      sx={{
-        marginTop: "0.5em",
-        marginRight: "0.5em",
-      }}
-    >
+    <Grid>
       <IconButton variant="outlined" onClick={handleClickOpen}>
         <SettingsIcon fontSize="large" />
       </IconButton>

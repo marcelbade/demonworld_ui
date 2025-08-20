@@ -16,6 +16,7 @@ import UserLogButton from "../Login/UserLogButton";
 // contexts
 import { UserContext } from "../../contexts/userContext";
 import UserAccountDrawer from "../Login/UserAccountDrawer";
+import OptionsButton from "../shared/options/OptionsButton";
 
 const LandingPage = () => {
   const UC = useContext(UserContext);
@@ -43,11 +44,11 @@ const LandingPage = () => {
         <Typography variant="h3">{LANDINGPAGE.TITLE}</Typography>
         <Grid
           container
-          justifyContent={"space-between"} //
-          size={0.75}
+          justifyContent="center" //
+          alignContent="center"
           paddingRight="2em"
         >
-          <LightSwitch iconSize={"large"} />
+          <OptionsButton />
           <UserLogButton
             iconSize={"large"} //
           />
