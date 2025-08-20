@@ -5,7 +5,6 @@ import { useHistory } from "react-router-dom";
 import { Grid2 as Grid, Button } from "@mui/material";
 // context
 import { ArmyContext } from "../../../../../contexts/armyContext";
-import { TournamentRulesContext } from "../../../../../contexts/tournamentRulesContext";
 import { SelectionContext } from "../../../../../contexts/selectionContext";
 import { UserContext } from "../../../../../contexts/userContext";
 // components and functions
@@ -22,7 +21,6 @@ import { PDF_URL } from "../../../../../constants/URLs";
 
 const OptionButtons = () => {
   const AC = useContext(ArmyContext);
-  const TC = useContext(TournamentRulesContext);
   const SEC = useContext(SelectionContext);
   const UC = useContext(UserContext);
 
@@ -199,6 +197,8 @@ const OptionButtons = () => {
         showArmyLoadPrompt={showArmyLoadDialog} //
         setShowArmyLoadPrompt={setShowArmyLoadDialog} //
       />
+
+      {/* draw all identical buttons dynamically */}
       {buttons.map((bttn, i) => (
         <Grid key={i}>
           <Button

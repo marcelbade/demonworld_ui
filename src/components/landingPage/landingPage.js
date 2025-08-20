@@ -10,13 +10,12 @@ import scrollIcon from "../../assets/icons/scroll.png";
 // functions and components
 import NaviButton from "./NaviButton";
 import { LANDINGPAGE } from "../../constants/textsAndMessages";
-import LightSwitch from "../shared/LightSwitch";
 import LoginDialog from "../Dialogs/LogInDialog/LogInDialog";
 import UserLogButton from "../Login/UserLogButton";
 // contexts
 import { UserContext } from "../../contexts/userContext";
 import UserAccountDrawer from "../Login/UserAccountDrawer";
-import OptionsButton from "../shared/options/OptionsButton";
+import SettingsButton from "../shared/settings/SettingsButton";
 
 const LandingPage = () => {
   const UC = useContext(UserContext);
@@ -48,7 +47,7 @@ const LandingPage = () => {
           alignContent="center"
           paddingRight="2em"
         >
-          <OptionsButton />
+          <SettingsButton />
           <UserLogButton
             iconSize={"large"} //
           />

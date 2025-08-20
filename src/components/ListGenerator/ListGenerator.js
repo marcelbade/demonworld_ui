@@ -8,7 +8,7 @@ import ArmyListBox from "./ArmyListView/ArmyListBox";
 import MenuBox from "./RightSideMenus/MenuBox";
 import ArmySelectionBox from "./ArmySelectorView/ArmySelectionBox";
 import ArmySelectorDropdown from "./ArmySelectorView/ArmySelectorDropdown";
-import AppBar from "../shared/options/OptionsMenu";
+import AppBar from "../shared/options/SettingsMenu";
 // context
 import { ArmyContext } from "../../contexts/armyContext";
 // constants

@@ -17,7 +17,7 @@ import SpecialRuleCreator from "./components/SpecialRuleCreator";
 import UnitMovementCreator from "./components/UnitMovementCreator";
 import UnitAttributeCreator from "./components/UnitAttributeCreator";
 import UnitTypeSelector from "./components/UnitTypeSelector";
-import AppBar from "../shared/options/OptionsMenu";
+import AppBar from "../shared/options/SettingsMenu";
 import CardPreview from "./components/CardPreview";
 //  contexts
 import CardCreationProvider from "../../contexts/cardCreationContext";

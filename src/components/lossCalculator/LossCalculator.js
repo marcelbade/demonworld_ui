@@ -8,7 +8,7 @@ import CreateListScreen from "./CreateListScreen";
 import LostPointDisplay from "./LostPointDisplay";
 import LostUnitList from "./LostUnitList/LostUnitList";
 import usePointCostCalculator from "../../customHooks/UsePointCostCalculator";
-import OptionsMenu from "../shared/options/OptionsMenu";
+import OptionsMenu from "../shared/options/SettingsMenu";
 // context
 import { LossCalcContext } from "../../contexts/LossCalculatorContext";
 
