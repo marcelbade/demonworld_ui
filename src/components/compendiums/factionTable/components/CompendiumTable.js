@@ -6,20 +6,20 @@ import { Grid2 as Grid, Typography } from "@mui/material";
 import CompendiumTableRow from "./CompendiumTableRow";
 import DetailedCardView from "./CardRow";
 import CompendiumTableHeader from "./CompendiumTableHeader";
-import AppBar from "../../../shared/options/SettingsMenu";
+import SettingsMenu from "../../../shared/settings/SettingsMenu";
 //icons
 import FactionAndUnitSelectors from "./FactionAndUnitSelectors";
 import { CompendiumContext } from "../../../../contexts/compendiumContext";
 // constants
 import { COMPENDIUM } from "../../../../constants/textsAndMessages";
-import OptionsButton from "../../../shared/options/SettingsButton";
+import OptionsButton from "../../../shared/settings/SettingsButton";
 
 const CompendiumTable = () => {
   const CC = useContext(CompendiumContext);
 
   return (
     <Grid container>
-      <AppBar />
+      <SettingsMenu />
 
       <Grid //
         container

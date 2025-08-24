@@ -5,7 +5,7 @@ import { Button, Grid2 as Grid } from "@mui/material";
 //  components and functions
 import NaviButton from "../landingPage/NaviButton";
 import LoginDialog from "../Dialogs/LogInDialog/LogInDialog";
-import OptionsMenu from "../shared/options/SettingsMenu";
+import OptionsMenu from "../shared/settings/SettingsMenu";
 // constants
 import { LOSS_CALCULATOR, OPTIONS } from "../../constants/textsAndMessages";
 import LoadArmyListPrompt from "../Dialogs/LoadArmyDialog/LoadArmyListDialog";

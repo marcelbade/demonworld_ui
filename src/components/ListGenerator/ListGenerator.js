@@ -8,7 +8,7 @@ import ArmyListBox from "./ArmyListView/ArmyListBox";
 import MenuBox from "./RightSideMenus/MenuBox";
 import ArmySelectionBox from "./ArmySelectorView/ArmySelectionBox";
 import ArmySelectorDropdown from "./ArmySelectorView/ArmySelectorDropdown";
-import AppBar from "../shared/options/SettingsMenu";
+import SettingsMenu from "../shared/settings/SettingsMenu";
 // context
 import { ArmyContext } from "../../contexts/armyContext";
 // constants
@@ -49,7 +49,7 @@ const ListGenerator = () => {
         <BackToSelectionButton />
         <DeleteArmyListButton />
       </Grid>
-      <AppBar />
+      <SettingsMenu />
       <Grid
         justifyContent="flex-start" //
         alignItems="center"

@@ -8,7 +8,7 @@ import CreateListScreen from "./CreateListScreen";
 import LostPointDisplay from "./LostPointDisplay";
 import LostUnitList from "./LostUnitList/LostUnitList";
 import usePointCostCalculator from "../../customHooks/UsePointCostCalculator";
-import OptionsMenu from "../shared/options/SettingsMenu";
+import SettingsMenu from "../shared/settings/SettingsMenu";
 // context
 import { LossCalcContext } from "../../contexts/LossCalculatorContext";
 
@@ -69,7 +69,7 @@ const LossCalculator = () => {
           position: "fixed",
         }}
       >
-        <OptionsMenu />
+        <SettingsMenu />
       </Grid>
       <Grid
         container //

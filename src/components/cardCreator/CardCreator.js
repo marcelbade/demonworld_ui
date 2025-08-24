@@ -17,7 +17,7 @@ import SpecialRuleCreator from "./components/SpecialRuleCreator";
 import UnitMovementCreator from "./components/UnitMovementCreator";
 import UnitAttributeCreator from "./components/UnitAttributeCreator";
 import UnitTypeSelector from "./components/UnitTypeSelector";
-import AppBar from "../shared/options/SettingsMenu";
+import SettingsMenu from "../shared/settings/SettingsMenu";
 import CardPreview from "./components/CardPreview";
 //  contexts
 import CardCreationProvider from "../../contexts/cardCreationContext";
@@ -119,7 +119,7 @@ const CardCreator = () => {
           display: "flex", //
         }}
       >
-        <AppBar />
+        <SettingsMenu />
         <Box
           sx={{
             display: "flex",
