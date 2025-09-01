@@ -42,7 +42,8 @@ const CreateListScreen = () => {
           relativeURL={"/ListGenerator"} //
           isIconButton={false}
           variant={"outlined"} //
-          text={LOSS_CALCULATOR.CREATE_LIST}
+          altText={LOSS_CALCULATOR.CREATE_LIST}
+          toolTipText={LOSS_CALCULATOR.CREATE_LIST}
           width={"30em"}
           height={"3em"}
         />
