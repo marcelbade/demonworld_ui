@@ -156,7 +156,8 @@ const LoginDialog = () => {
           relativeURL={"/addNewAccount"} //
           variant={"outlined"}
           isIconButton={false}
-          text={USER_AUTH.CREATE_NEW_ACCOUNT}
+          altText={USER_AUTH.CREATE_NEW_ACCOUNT}
+          toolTipText={USER_AUTH.CREATE_NEW_ACCOUNT}
           width={"3em"}
           height={"3em"}
         />
