@@ -113,6 +113,7 @@ const CreateNewAccount = () => {
           isCustomIcon={false}
           icon={ChevronLeft}
           altText={LANDINGPAGE.BACK_TO_LANDINGPAGE}
+          toolTipText={LANDINGPAGE.BACK_TO_LANDINGPAGE}
           width={"3em"}
           height={"3em"}
         />
