@@ -60,12 +60,13 @@ function App() {
   const [fetchedFactions, setFetchedFactions] = useState([]);
   const [fetchedItems, setFetchedItems] = useState([]);
 
-  // toggle top menu, confirmation Dialog
+  // toggle settings menu, confirmation Dialog, top menu bar
   const [openMenu, setOpenMenu] = useState(false);
   const [blockDialog, setblockDialog] = useState({
     showOverrideDialog: true,
     showDeletionDialog: true,
   });
+  const [openTopMenuDrawer, setOpenTopMenuDrawer] = useState(false); // ###
 
   // toggle app theme
   const [darkModeOff, setDarkModeOff] = useState(true);
@@ -231,8 +232,10 @@ function App() {
               value={{
                 openMenu: openMenu,
                 blockDialog: blockDialog,
+                openTopMenuDrawer: openTopMenuDrawer,
                 setOpenMenu: setOpenMenu,
                 setblockDialog: setblockDialog,
+                setOpenTopMenuDrawer: setOpenTopMenuDrawer,
               }}
             >
               <LightSwitchProvider
