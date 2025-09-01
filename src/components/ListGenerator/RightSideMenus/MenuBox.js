@@ -10,10 +10,13 @@ import CardViewBox from "./Menus/CardView/CardViewBox";
 // contexts
 import { SecondSubFactionContext } from "../../../contexts/secondSubFactionContext";
 import { RightMenuContext } from "../../../contexts/rightMenuContext";
+import { ArmyContext } from "../../../contexts/armyContext";
+import { NONE } from "../../../constants/factions";
 
 const MenuBox = () => {
   const SFC = useContext(SecondSubFactionContext);
   const RC = useContext(RightMenuContext);
+  const AC = useContext(ArmyContext);
 
   const components = [
     {
@@ -39,7 +42,7 @@ const MenuBox = () => {
   ];
 
   return components.map((c, i) =>
-    c.exists ? (
+    AC.selectedFactionName !== NONE && c.exists ? (
       <Drawer
         key={i}
         anchor={"right"} //
