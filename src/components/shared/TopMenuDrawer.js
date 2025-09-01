@@ -1,5 +1,5 @@
 // mui
-import { Box, Drawer, Grid2 as Grid, IconButton, Typography } from "@mui/material";
+import { Drawer, Grid2 as Grid, IconButton, Typography } from "@mui/material";
 // components and functions
 import SettingsButton from "./settings/SettingsButton";
 import SettingsMenu from "./settings/SettingsMenu";
@@ -34,7 +34,7 @@ import { MenuContext } from "../../contexts/MenuContext";
 const TopMenuDrawer = (props) => {
   const MC = useContext(MenuContext);
 
-  console.log("MC.openTopMenuDrawer>>>>>> >>",MC.openTopMenuDrawer)
+  console.log("MC.openTopMenuDrawer>>>>>> >>", MC.openTopMenuDrawer);
 
   return (
     <Drawer

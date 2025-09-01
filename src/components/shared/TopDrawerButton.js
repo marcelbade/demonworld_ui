@@ -1,7 +1,7 @@
 // react
 import { useContext } from "react";
 // mui
-import { Grid2 as Grid, Fab, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 // components and functions
 import { MenuContext } from "../../contexts/MenuContext";
 // icon
