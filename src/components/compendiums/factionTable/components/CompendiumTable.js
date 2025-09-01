@@ -1,26 +1,24 @@
 // React
 import { Fragment, useContext } from "react";
 // material ui
-import { Grid2 as Grid, Typography } from "@mui/material";
+import { Grid2 as Grid } from "@mui/material";
 // components & functions
 import CompendiumTableRow from "./CompendiumTableRow";
 import DetailedCardView from "./CardRow";
 import CompendiumTableHeader from "./CompendiumTableHeader";
-import SettingsMenu from "../../../shared/settings/SettingsMenu";
 //icons
 import FactionAndUnitSelectors from "./FactionAndUnitSelectors";
 import { CompendiumContext } from "../../../../contexts/compendiumContext";
 // constants
 import { COMPENDIUM } from "../../../../constants/textsAndMessages";
-import OptionsButton from "../../../shared/settings/SettingsButton";
+
+import TopMenuDrawer from "../../../shared/TopMenuDrawer";
 
 const CompendiumTable = () => {
   const CC = useContext(CompendiumContext);
 
   return (
     <Grid container>
-      <SettingsMenu />
-
       <Grid //
         container
         direction="row"
@@ -28,26 +26,10 @@ const CompendiumTable = () => {
         spacing={9}
         justifyContent="space-between"
       >
+        <TopMenuDrawer title={COMPENDIUM.TITLE} displayNaviBttn={true} />
+
         <Grid size={4}>
-          <Typography
-            variant="h3"
-            sx={{
-              marginLeft: "0.5em", //
-              marginTop: "0.5em",
-              marginBottom: "0.5em",
-              fontFamily: "NotMaryKate",
-            }}
-          >
-            {COMPENDIUM.TITLE}
-          </Typography>
           <FactionAndUnitSelectors />
-        </Grid>
-        <Grid
-          sx={{
-            padding: "0.5em",
-          }}
-        >
-          <OptionsButton />
         </Grid>
       </Grid>
 
