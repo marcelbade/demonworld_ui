@@ -9,6 +9,15 @@ import { USER_AUTH } from "../../constants/textsAndMessages";
 // contexts
 import { UserContext } from "../../contexts/userContext";
 
+/**
+ * This JSX component displays the login button. When clicked the login Dialog is displayed.
+ * While ther user is logged in, an avatar is displayed.
+ * @param {props}
+ * - buttonWidth
+ * - buttonHeight
+ * - iconSize
+ * @returns JSX
+ */
 const UserLogButton = (props) => {
   const UC = useContext(UserContext);
 
@@ -51,6 +60,7 @@ const UserLogButton = (props) => {
           sx={{
             width: props.buttonWidth,
             height: props.buttonHeight,
+             
           }}
           onClick={() => {
             displayLogInDialog();
