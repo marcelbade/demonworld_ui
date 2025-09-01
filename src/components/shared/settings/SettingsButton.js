@@ -1,7 +1,7 @@
 //  react
 import { useContext } from "react";
 // material ui
-import { Grid2 as Grid, IconButton } from "@mui/material";
+import { IconButton } from "@mui/material";
 // icons
 import SettingsIcon from "@mui/icons-material/Settings";
 // contexts
@@ -15,11 +15,9 @@ const SettingsButton = () => {
   };
 
   return (
-    <Grid>
-      <IconButton variant="outlined" onClick={handleClickOpen}>
-        <SettingsIcon fontSize="large" />
-      </IconButton>
-    </Grid>
+    <IconButton variant="outlined" onClick={handleClickOpen}>
+      <SettingsIcon fontSize="large" />
+    </IconButton>
   );
 };
 
