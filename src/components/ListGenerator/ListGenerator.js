@@ -1,20 +1,19 @@
 // react
 import { useContext } from "react";
 // material ui
-import { Grid2 as Grid, Box } from "@mui/material";
+import { Grid2 as Grid, Box, Stack } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components and functions
 import ArmyListBox from "./ArmyListView/ArmyListBox";
 import MenuBox from "./RightSideMenus/MenuBox";
 import ArmySelectionBox from "./ArmySelectorView/ArmySelectionBox";
 import ArmySelectorDropdown from "./ArmySelectorView/ArmySelectorDropdown";
-import SettingsMenu from "../shared/settings/SettingsMenu";
 // context
 import { ArmyContext } from "../../contexts/armyContext";
 // constants
 import { NONE } from "../../constants/factions";
-import BackToSelectionButton from "../shared/BackToSelectionButton";
-import DeleteArmyListButton from "../shared/DeleteArmyListButton";
+import TopMenuDrawer from "../shared/TopMenuDrawer";
+import TopDrawerButton from "../shared/TopDrawerButton";
 
 const ListGenerator = () => {
   const AC = useContext(ArmyContext);
@@ -28,57 +27,45 @@ const ListGenerator = () => {
     width: "30em",
   };
 
+  /**
+   * Functions conditionally returns different CSS stylings
+   * for the army selection dropdown. Ocne the an army is selected,
+   * a fade animation is added and executed.
+   *
+   * @returns CSS in form of a plain object.
+   */
   const setArmySelectorBoxStyle = () => {
     return AC.selectedFactionName === NONE //
       ? factionSelectorStyle
-      : { ...theme.palette.animation.fadeAway, ...factionSelectorStyle };
+      : { ...factionSelectorStyle, ...theme.palette.animation.fadeAway };
   };
 
   return (
-    <Grid container direction="row">
+    // display this first, if no army is selected
+    <>
       <Box sx={setArmySelectorBoxStyle()}>
         <ArmySelectorDropdown />
       </Box>
-      <Grid //
-        container
-        justifyContent="flex-start"
-        sx={{
-          position: "fixed",
-        }}
-      >
-        <BackToSelectionButton />
-        <DeleteArmyListButton />
-      </Grid>
-      <SettingsMenu />
+
+      {/* display after army was selected */}
+      <TopMenuDrawer
+        title={"AA"} //
+        drawerVariant="temporary" //
+        displayNaviBttn={true}
+        displayListBttns={true}
+      />
       <Grid
-        justifyContent="flex-start" //
-        alignItems="center"
-        container
-        direction="row"
-      ></Grid>
-      <Grid //
-        container
-        direction="row"
+        direction="column" //
+        alignContent="flex-start"
       >
-        <Grid //
-          size={3}
-          position={"fixed"}
-          marginTop={"5em"}
-        >
-          <ArmySelectionBox />
-        </Grid>
-        <Grid //
-          size={9}
-          sx={{
-            paddingLeft: "50em",
-            marginTop: "5em",
-          }}
-        >
-          {AC.selectedFactionName !== NONE ? <ArmyListBox /> : null}
-        </Grid>
+        <Box sx={{marginTop:"1em", marginBottom:"1em"}}>
+          <TopDrawerButton />
+        </Box>
+        <ArmySelectionBox />
       </Grid>
-      {AC.selectedFactionName !== NONE ? <MenuBox /> : null}
-    </Grid>
+      <ArmyListBox />
+      <MenuBox />
+    </>
   );
 };
 

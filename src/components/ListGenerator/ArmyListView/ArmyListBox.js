@@ -7,9 +7,12 @@ import ArmyListBoxFooter from "./ArmyList/ArmyListFooter/ArmyListBoxFooter";
 import { Grid2 as Grid } from "@mui/material";
 // context
 import { AlternativeListContext } from "../../../contexts/alternativeListContext";
+import { NONE } from "../../../constants/factions";
+import { ArmyContext } from "../../../contexts/armyContext";
 
 const ArmyListBox = () => {
   const ALC = useContext(AlternativeListContext);
+  const AC = useContext(ArmyContext);
 
   /**
    * Function checks if the user is done selecting an army,
@@ -22,7 +25,7 @@ const ArmyListBox = () => {
     return ALC.armyHasAlternativeLists ? ALC.altArmyListSelectionComplete : true;
   };
 
-  return isSelectionComplete() ? (
+  return isSelectionComplete() && AC.selectedFactionName !== NONE? (
     <Grid
       container //
       direction="column"
