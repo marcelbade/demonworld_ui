@@ -18,6 +18,9 @@ const darkTheme = createTheme({
         color: "white",
       },
     },
+    options: {
+      title: { marginTop: "1em" },
+    },
     statCards: {
       backGround: {
         backgroundColor: "#5f6a6a", //
