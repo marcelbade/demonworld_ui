@@ -1,5 +1,5 @@
 // React
-import React, { useContext, useState } from "react";
+import { useContext, useState } from "react";
 // Material UI
 import ListItem from "@mui/material/ListItem";
 import {  Grid2 as Grid } from "@mui/material";
