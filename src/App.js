@@ -66,7 +66,7 @@ function App() {
     showOverrideDialog: true,
     showDeletionDialog: true,
   });
-  const [openTopMenuDrawer, setOpenTopMenuDrawer] = useState(false); // ###
+  const [openTopMenuDrawer, setOpenTopMenuDrawer] = useState(false);
 
   // toggle app theme
   const [darkModeOff, setDarkModeOff] = useState(true);
