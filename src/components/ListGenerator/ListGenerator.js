@@ -12,8 +12,8 @@ import ArmySelectorDropdown from "./ArmySelectorView/ArmySelectorDropdown";
 import { ArmyContext } from "../../contexts/armyContext";
 // constants
 import { NONE } from "../../constants/factions";
-import TopMenuDrawer from "../shared/TopMenuDrawer";
 import TopDrawerButton from "../shared/TopDrawerButton";
+import CollapsableTopMenuDrawer from "../shared/CollapsableTopMenuDrawer";
 
 const ListGenerator = () => {
   const AC = useContext(ArmyContext);
@@ -46,25 +46,30 @@ const ListGenerator = () => {
       <Box sx={setArmySelectorBoxStyle()}>
         <ArmySelectorDropdown />
       </Box>
-
-      {/* display after army was selected */}
-      <TopMenuDrawer
-        title={"AA"} //
-        drawerVariant="temporary" //
-        displayNaviBttn={true}
-        displayListBttns={true}
-      />
+      {/* display after an army was selected */}
       <Grid
-        direction="column" //
-        alignContent="flex-start"
+        container
+        size={12} //
+        direction="column"
+        alignContent={"center"}
+        justifyContent={"center"}
       >
-        <Box sx={{marginTop:"1em", marginBottom:"1em"}}>
-          <TopDrawerButton />
-        </Box>
-        <ArmySelectionBox />
+        <CollapsableTopMenuDrawer
+          title={""} //
+          displayNaviBttn={true}
+          displayListBttns={true}
+        />
+        <TopDrawerButton />
       </Grid>
-      <ArmyListBox />
-      <MenuBox />
+
+      <Grid
+        container //
+        direction="row"
+      >
+        <ArmySelectionBox />
+        <ArmyListBox />
+        <MenuBox />
+      </Grid>
     </>
   );
 };
