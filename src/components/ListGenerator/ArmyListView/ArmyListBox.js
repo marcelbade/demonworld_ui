@@ -3,7 +3,7 @@ import { useContext } from "react";
 // components and functions
 import ArmyListBoxHeader from "./ArmyList/ArmyListHeader/ArmyListBoxHeader";
 import ArmyListBoxCenter from "./ArmyList/ArmyListCenter/ArmyListBoxCenter";
-import ArmyListBoxFooter from "./ArmyList/ArmyListFooter/ArmyListBoxFooter";
+// import ArmyListBoxFooter from "./ArmyList/ArmyListFooter/ArmyListBoxFooter";
 import { Grid2 as Grid } from "@mui/material";
 // context
 import { AlternativeListContext } from "../../../contexts/alternativeListContext";
@@ -25,7 +25,7 @@ const ArmyListBox = () => {
     return ALC.armyHasAlternativeLists ? ALC.altArmyListSelectionComplete : true;
   };
 
-  return isSelectionComplete() && AC.selectedFactionName !== NONE? (
+  return isSelectionComplete() && AC.selectedFactionName !== NONE ? (
     <Grid
       container //
       direction="column"
@@ -35,12 +35,8 @@ const ArmyListBox = () => {
         minWidth: "40em",
       }}
     >
-      <Grid>
-        <ArmyListBoxHeader />
-      </Grid>
-      <Grid>
-        <ArmyListBoxCenter />
-      </Grid>
+      <ArmyListBoxHeader />
+      <ArmyListBoxCenter />
     </Grid>
   ) : null;
 };
