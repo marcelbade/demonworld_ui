@@ -2,7 +2,7 @@
 import { useContext, useState } from "react";
 // Material UI
 import ListItem from "@mui/material/ListItem";
-import {  Grid2 as Grid } from "@mui/material";
+import { Grid2 as Grid } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components and functions
 import SubFactionUnitList from "./NestedUnitList/SubFactionUnitList";
@@ -35,10 +35,9 @@ const ArmyListSubFactionEntry = (props) => {
     return props.units.length !== 0 || !props.valid;
   };
 
-  return (
+  return displaySubFaction() ? (
     <ListItem //
       key="subfactionEntry"
-      sx={displaySubFaction() ? { display: "block" } : { display: "none" }}
     >
       <Grid
         container //
@@ -70,7 +69,7 @@ const ArmyListSubFactionEntry = (props) => {
         )}
       </Grid>
     </ListItem>
-  );
+  ) : null;
 };
 
 export default ArmyListSubFactionEntry;
