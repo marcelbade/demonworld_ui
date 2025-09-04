@@ -2,7 +2,7 @@
 import { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 // Material UI
-import { Grid2 as Grid, Button } from "@mui/material";
+import { Grid2 as Grid, Button, Divider } from "@mui/material";
 // context
 import { ArmyContext } from "../../../../../contexts/armyContext";
 import { SelectionContext } from "../../../../../contexts/selectionContext";
@@ -18,6 +18,7 @@ import ArmyListBoxFooter from "../../../ArmyListView/ArmyList/ArmyListFooter/Arm
 // constants
 import { OPTIONS, PDF } from "../../../../../constants/textsAndMessages";
 import { PDF_URL } from "../../../../../constants/URLs";
+import ArmyListBoxHeader from "../../../ArmyListView/ArmyList/ArmyListHeader/ArmyListBoxHeader";
 
 const OptionButtons = () => {
   const AC = useContext(ArmyContext);
@@ -177,11 +178,15 @@ const OptionButtons = () => {
       alignItems="center"
       spacing={4}
       sx={{
-        height: "100vh",
-        width: "30vw",
+        // height: "100vh",
+       width: "30vw",
         padding: "2em",
+        overflowY: "hidden",
+        overflowX: "hidden",
       }}
     >
+      <ArmyListBoxHeader />
+      <Divider sx={{ width: "100%" }} />
       <LoginDialog />
       <SelectPdfTypeDialog
         openPDfInNewTab={openPDfInNewTab} //
