@@ -18,8 +18,10 @@ const useArmyValidation = () => {
   const TC = useContext(TournamentRulesContext);
 
   /**
-   * Function checks whether the user finished selecting their faction
-   * before the validation logic is called.
+   * Function checks whether the user finished selecting their faction. It tets
+   * - if the faction was selected
+   * - if the faction has alternative army list options and if one has been selected
+   * If this is not the case, runValidation is not called and the function ends.
    * @param {[unitCard]} currentList
    * @param {int} currentTotalPointAllowance
    * @returns a function call: runValidation()
@@ -40,8 +42,8 @@ const useArmyValidation = () => {
 
   /**
    * Function validates the current list by generating the correct 
-   * validator for the faction and calling the validators
-   * test function to validate the list. 
+   * validator for the selected faction and calling the validator's
+   * test functions to validate the list. 
    * The results are passed to a function.
    * @param {[unitCard]} currentList
    * @param {number} currentTotalPointAllowance
@@ -49,11 +51,12 @@ const useArmyValidation = () => {
    * @returns a function call: collectValidatioResults()
 
    */
+  //TODO currentSubFactions === distinct subFactions
   const runValidation = (currentList, currentTotalPointAllowance, currentSubFactions) => {
     let validator = ruleValidation(AC.selectedFactionName);
 
     let validationResult = validator.testSubFactionRules({
-      // all available units - faction and ally
+      // all available units  === faction + ally 
       availableUnits: [...AC.listOfAllFactionUnits, ...AYC.listOfAlliedUnits],
       selectedUnits: currentList,
       totalPointsAllowance: currentTotalPointAllowance,
