@@ -1,7 +1,7 @@
 // React
 import { Fragment, useContext, useEffect } from "react";
 // material ui
-import { TextField, Grid2 as Grid } from "@mui/material";
+import { TextField, Grid2 as Grid, Stack } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components and functions
 import { ArmyContext } from "../../../../../contexts/armyContext";
@@ -99,12 +99,11 @@ const ArmyListBoxHeader = () => {
   ];
 
   return (
-    <Grid
-      container //
-      spacing={3}
-      alignItems="flex-start"
+    <Stack
+      direction="column"
       sx={{
         minWidth: "50em ",
+        alignItems: "center",
       }}
     >
       {inputElements.map((inputElmnt, i) => (
@@ -145,7 +144,7 @@ const ArmyListBoxHeader = () => {
           ) : null}
         </Grid>
       ))}
-    </Grid>
+    </Stack>
   );
 };
 
