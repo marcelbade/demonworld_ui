@@ -370,7 +370,7 @@ function App() {
                                       selectedAccessUser: selectedAccessUser,
                                       creationDate: creationDate,
                                       fetchedFactions: fetchedFactions,
-                                      subFactions: distinctSubFactions,
+                                      distinctSubFactions: distinctSubFactions, 
                                       listOfAllFactionUnits: listOfAllFactionUnits,
                                       subFactionDTOs: subFactionDTOs,
                                       isFetchedArmyList: isFetchedArmyList,
