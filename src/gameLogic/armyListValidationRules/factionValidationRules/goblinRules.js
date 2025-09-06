@@ -82,7 +82,7 @@ const GoblinRules = {
       validationData.availableUnits
     );
 
-    let hasNoCommander = globalRules.isArmyCommanderPresent(validationData.selectedUnits);
+    let hasNoCommander = globalRules.isArmyCommanderPresent(validationData.selectedUnits, validationData.availableUnits, rules);
 
     // tournament rules
     let maxCopies;
@@ -122,11 +122,8 @@ const GoblinRules = {
       ...isAboveCharLimit,
     ];
 
-    // result for sub factions below limit.
-    validationResults.subFactionBelowMinimum = isBelowSubFactionMin;
-
-    // result - is a commander present?
-    validationResults.commanderIsPresent = hasNoCommander;
+    // result for sub factions below limit, sub factions w. potential commander if none has been picked.
+    validationResults.invalidSubFactions = [...isBelowSubFactionMin, ...hasNoCommander];
 
     //  result - ally rules applied.
     validationResults.alliedUnitsBlockedbyRules = [

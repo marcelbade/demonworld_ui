@@ -59,63 +59,63 @@ const rules = [
 ];
 
 const NorwingerRules = {
-  testSubFactionRules: (data) => {
+  testSubFactionRules: (validationData) => {
     //  general rules
     let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(
-      data.selectedUnits, //
-      data.availableUnits,
-      data.totalPointsAllowance
+      validationData.selectedUnits, //
+      validationData.availableUnits,
+      validationData.totalPointsAllowance
     );
     let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(
       rules,
-      data.selectedUnits,
-      data.totalPointsAllowance,
-      data.subFactions
+      validationData.selectedUnits,
+      validationData.totalPointsAllowance,
+      validationData.subFactions
     );
     let isAboveSubFactionMax = globalRules.unitsAboveSubFactionMax(
       rules,
-      data.selectedUnits,
-      data.totalPointsAllowance,
-      data.availableUnits
+      validationData.selectedUnits,
+      validationData.totalPointsAllowance,
+      validationData.availableUnits
     );
-    let hasNoCommander = globalRules.isArmyCommanderPresent(data.selectedUnits);
-
+    let hasNoCommander = globalRules.isArmyCommanderPresent(validationData.selectedUnits, validationData.availableUnits, rules);
+    
     // tournament rules
     let maxCopies;
     let heroPointCap;
 
-    if (data.tournamentOverrideRules.enableOverride) {
-      maxCopies = data.tournamentOverrideRules.maxNumber;
-      heroPointCap = data.tournamentOverrideRules.maxHeroValue;
+    if (validationData.tournamentOverrideRules.enableOverride) {
+      maxCopies = validationData.tournamentOverrideRules.maxNumber;
+      heroPointCap = validationData.tournamentOverrideRules.maxHeroValue;
     } else {
       maxCopies = 2;
       // faction rule => 50% cap
       heroPointCap = 50;
     }
 
-    let testForMax2Result = globalRules.maximumCopiesOfUnit(data.selectedUnits, maxCopies);
+    let testForMax2Result = globalRules.maximumCopiesOfUnit(validationData.selectedUnits, maxCopies);
     let testForHeroCapResult = globalRules.belowMaxPercentageHeroes(
-      data.selectedUnits,
-      data.totalPointsAllowance,
-      data.availableUnits,
+      validationData.selectedUnits,
+      validationData.totalPointsAllowance,
+      validationData.availableUnits,
       heroPointCap
     );
 
     let isAboveCharLimit = globalRules.belowMaxPercentageHeroes(
-      data.selectedUnits,
-      data.totalPointsAllowance,
-      data.availableUnits,
+      validationData.selectedUnits,
+      validationData.totalPointsAllowance,
+      validationData.availableUnits,
       heroPointCap
     );
 
-    let hasDuplicateUniques = data.tournamentOverrideRules.uniquesOnlyOnce //
-      ? globalRules.noDuplicateUniques(data.selectedUnits)
+    let hasDuplicateUniques = validationData.tournamentOverrideRules.uniquesOnlyOnce //
+      ? globalRules.noDuplicateUniques(validationData.selectedUnits)
       : [];
 
     // special faction rule
-    let testForMountainKing = mountainKingRule(data.availableUnits, data.selectedUnits);
-    let testForGiantYeti = yetiRule(data.availableUnits, data.selectedUnits);
-    let testForNeander = neanderRule(data.availableUnits, data.selectedUnits);
+    let testForMountainKing = mountainKingRule(validationData.availableUnits, validationData.selectedUnits);
+    let testForGiantYeti = yetiRule(validationData.availableUnits, validationData.selectedUnits);
+    let testForNeander = neanderRule(validationData.availableUnits, validationData.selectedUnits);
 
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [
@@ -130,15 +130,14 @@ const NorwingerRules = {
       ...testForNeander,
     ];
     // result for sub factions below limit.
-    validationResults.subFactionBelowMinimum = isBelowSubFactionMin;
+    validationResults.invalidSubFactions = [...isBelowSubFactionMin, ...hasNoCommander];
 
-    // result - is a commander present?
-    validationResults.commanderIsPresent = hasNoCommander;
+     
 
     // Are there units that need to be removed from the list?
-    let testForKingRemoval = mountainKingRuleRemove(data.selectedUnits);
-    let testForYetiRemoval = yetiRuleRemove(data.selectedUnits);
-    let testForNeanderRemoval = neanderRuleRemove(data.selectedUnits);
+    let testForKingRemoval = mountainKingRuleRemove(validationData.selectedUnits);
+    let testForYetiRemoval = yetiRuleRemove(validationData.selectedUnits);
+    let testForNeanderRemoval = neanderRuleRemove(validationData.selectedUnits);
 
     validationResults.removeUnitsNoLongerValid = [
       ...testForKingRemoval, //

@@ -113,7 +113,7 @@ const EmpireRules = {
       validationData.totalPointsAllowance,
       validationData.availableUnits
     );
-    let hasNoCommander = globalRules.isArmyCommanderPresent(validationData.selectedUnits);
+    let hasNoCommander = globalRules.isArmyCommanderPresent(validationData.selectedUnits, validationData.availableUnits, rules);
 
     // tournament rules
     let maxCopies;
@@ -153,10 +153,9 @@ const EmpireRules = {
       ...isAboveSubFactionMax,
     ];
     // result for sub factions below limit.
-    validationResults.subFactionBelowMinimum = isBelowSubFactionMin;
+    validationResults.invalidSubFactions = [...isBelowSubFactionMin, ...hasNoCommander];
 
-    // result - is a commander present?
-    validationResults.commanderIsPresent = hasNoCommander;
+     
 
     //  result - ally rules applied.
     validationResults.alliedUnitsBlockedbyRules = [

@@ -1,24 +1,16 @@
 // React
-import { Fragment, useContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
 // material ui
 import { TextField, Grid2 as Grid, Stack } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components and functions
 import { ArmyContext } from "../../../../../contexts/armyContext";
-import ContextHelpButton from "../../../../shared/ContextHelpButton";
 // constants
-import { INPUT_TEXTS, PUSH_MESSAGE_TYPES, VALIDATION } from "../../../../../constants/textsAndMessages";
+import { INPUT_TEXTS } from "../../../../../constants/textsAndMessages";
 import { NONE } from "../../../../../constants/factions";
-// custom hooks
-import useArmyValidation from "../../../../../customHooks/UseArmyValidation";
-import { SelectionContext } from "../../../../../contexts/selectionContext";
 
 const ArmyListBoxHeader = () => {
   const AC = useContext(ArmyContext);
-  const SEC = useContext(SelectionContext);
-
-  // const VC = useContext(ValidationContext);
-  const validation = useArmyValidation();
 
   const theme = useTheme();
 
@@ -63,17 +55,6 @@ const ArmyListBoxHeader = () => {
     AC.setArmyName(`${AC.selectedFactionName} - ${dayOfMonth}.${month}.${year}`);
   };
 
-  /**
-   * Function checks, whether the list has an army commander (hero or leader with command >= 2).
-   * If not, the entire list is flagged as invalid.
-   * @param {[validationObject]} validation
-   * @returns true, if the list passed the test.
-   */
-  const isArmyCommanderMissing = (validation) => {
-    const result = validation.testArmySelectionAndRunValidation(SEC.selectedUnits, SEC.maxPointsAllowance);
-    return !result.commanderIsPresent;
-  };
-
   const inputElements = [
     {
       id: "teamName", //
@@ -114,10 +95,7 @@ const ArmyListBoxHeader = () => {
               paddingBottom: "1em",
               "& .MuiFormLabel-root": {
                 fontFamily: "NotMaryKate",
-                color: isArmyCommanderMissing(validation) //
-                  ? theme.palette.errorColor
-                  : theme.color,
-
+                color: theme.color,
                 pading: "50px",
                 width: "40em",
                 fontSize: "20px",
@@ -133,15 +111,6 @@ const ArmyListBoxHeader = () => {
             required
             variant="standard"
           />
-          {inputElmnt.value === AC.armyName ? (
-            <Fragment key={inputElmnt.value}>
-              <ContextHelpButton
-                isVisible={isArmyCommanderMissing(validation, inputElmnt.value)}
-                message={VALIDATION.NO_COMMANDER_WARNING} //
-                type={PUSH_MESSAGE_TYPES.ERROR}
-              />
-            </Fragment>
-          ) : null}
         </Grid>
       ))}
     </Stack>

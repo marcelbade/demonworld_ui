@@ -2,7 +2,6 @@ import { ISHTAK_TEXTS } from "../../../constants/textsAndMessages";
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
 
-
 const rules = [
   {
     subFaction: "humans",
@@ -103,10 +102,7 @@ const IshtakRules = {
       ...testForHeroCapResult,
     ];
     // result for sub factions below limit.
-    validationResults.subFactionBelowMinimum = isBelowSubFactionMin;
-
-    //Ishtak is the ONLY faction without the "two star commander" requirement - hence this validation must always return true.
-    validationResults.commanderIsPresent = true;
+    validationResults.invalidSubFactions = [...isBelowSubFactionMin];
 
     return validationResults;
   },

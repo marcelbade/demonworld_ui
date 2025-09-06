@@ -1,5 +1,5 @@
 // React
-import React, { useContext } from "react";
+import { useContext } from "react";
 // Material UI
 import List from "@mui/material/List";
 // components and functions
@@ -38,13 +38,11 @@ const ArmyListBoxCenter = () => {
    * @returns
    */
   const filterAndCreateSubFactionValidationObjectList = (subFactionDtoList) => {
-    let clonedSubFactionList = structuredClone(subFactionDtoList);
+    const validationResult = validation.testArmySelectionAndRunValidation(SEC.selectedUnits, SEC.maxPointsAllowance);
 
-    const testResult = validation.testArmySelectionAndRunValidation(SEC.selectedUnits, SEC.maxPointsAllowance);
-
-    return clonedSubFactionList
+    return subFactionDtoList
       .filter((subFactionDTO) => isSubFactionAlternativeAndSelected(subFactionDTO))
-      .map((subFactionDTO) => validation.createSubFactionResultObject(subFactionDTO.name, testResult));
+      .map((subFactionDTO) => validation.createSubFactionResultObject(subFactionDTO.name, validationResult));
   };
 
   return (

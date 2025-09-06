@@ -56,7 +56,7 @@ const useArmyValidation = () => {
     let validator = ruleValidation(AC.selectedFactionName);
 
     let validationResult = validator.testSubFactionRules({
-      // all available units  === faction + ally 
+      // all available units  === faction + ally
       availableUnits: [...AC.listOfAllFactionUnits, ...AYC.listOfAlliedUnits],
       selectedUnits: currentList,
       totalPointsAllowance: currentTotalPointAllowance,
@@ -79,11 +79,10 @@ const useArmyValidation = () => {
   const collectValidationResults = (currentList, result) => {
     const validationObj = {
       unitsBlockedbyRules: result.unitsBlockedbyRules,
-      subFactionBelowMinimum: result.subFactionBelowMinimum,
+      invalidSubFactions: result.invalidSubFactions,
       removeUnitsNoLongerValid: result.removeUnitsNoLongerValid,
       secondSubFactionMissing: result.secondSubFactionMissing,
       alliedUnitsBlockedbyRules: result.alliedUnitsBlockedbyRules,
-      commanderIsPresent: result.commanderIsPresent,  //TODO Remove
     };
 
     removeInvalidUnits(currentList, validationObj);
@@ -115,15 +114,23 @@ const useArmyValidation = () => {
    * @returns object containing the unit a flag and the error message if it is invalid.
    */
   const createSubFactionResultObject = (subFactionName, results) => {
-    let subFactionObjet = { subFactionName: subFactionName, valid: true, validationMessage: "" };
+    let subFactionObject = {
+      subFactionName: subFactionName, //
+      valid: true,
+      validationMessage: "",
+    };
 
-    results.subFactionBelowMinimum.forEach((sF) => {
-      if (sF.subFactionUnderMinimum.includes(subFactionName)) {
-        subFactionObjet = { subFactionName: subFactionName, valid: false, validationMessage: sF.message };
+    results.invalidSubFactions.forEach((sF) => {
+      if (sF.invalidSubFaction.includes(subFactionName)) {
+        subFactionObject = {
+          subFactionName: subFactionName, //
+          valid: false,
+          validationMessage: sF.message,
+        };
       }
-    }); // ###
+    });
 
-    return subFactionObjet;
+    return subFactionObject;
   };
 
   /**

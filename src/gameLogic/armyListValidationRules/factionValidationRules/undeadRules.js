@@ -106,10 +106,9 @@ const UndeadRules = {
       ...isAboveSubFactionMax,
     ];
     // result for sub factions below limit.
-    validationResults.subFactionBelowMinimum = isBelowSubFactionMin;
+    validationResults.invalidSubFactions = [...isBelowSubFactionMin, ...hasNoCommander];
 
-    // result - is a commander present?
-    validationResults.commanderIsPresent = hasNoCommander;
+     
 
     validationResults.alliedUnitsBlockedbyRules = hasBlockedAllies;
 

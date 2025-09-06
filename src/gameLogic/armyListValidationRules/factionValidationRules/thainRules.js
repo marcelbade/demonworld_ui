@@ -73,7 +73,7 @@ const ThainRules = {
       validationData.totalPointsAllowance,
       validationData.availableUnits
     );
-    let hasNoCommander = globalRules.isArmyCommanderPresent(validationData.selectedUnits);
+    let hasNoCommander = globalRules.isArmyCommanderPresent(validationData.selectedUnits, validationData.availableUnits, rules);
 
     // tournament rules
     let maxCopies;
@@ -121,10 +121,9 @@ const ThainRules = {
       ...testForVeteranRule,
     ];
     // result for sub factions below limit.
-    validationResults.subFactionBelowMinimum = isBelowSubFactionMin;
+    validationResults.invalidSubFactions = [...isBelowSubFactionMin, ...hasNoCommander];
 
-    // result - is a commander present?
-    validationResults.commanderIsPresent = hasNoCommander;
+     
 
     // result - is there a unit that needs a second subFaction?
     validationResults.secondSubFactionMissing = [

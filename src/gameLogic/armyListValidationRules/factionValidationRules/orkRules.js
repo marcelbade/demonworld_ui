@@ -3,7 +3,7 @@ import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
 //  constants
 import { ORK_CLANS_UNIT_MAPPING } from "../../../constants/factions";
-import { ORKS_TEXTS } from "../../../constants/textsAndMessages";
+import { ORKS_TEXTS, VALIDATION } from "../../../constants/textsAndMessages";
 
 const rules = [
   {
@@ -112,8 +112,15 @@ const OrkRules = {
       validationData.totalPointsAllowance,
       validationData.availableUnits
     );
-    let hasNoCommander = isOrkArmyCommanderPresent(validationData.selectedUnits, validationData.selectedAlternativeLists);
-    let availlableClanUnits = setUnitsForClans(validationData.availableUnits, validationData.selectedAlternativeLists);
+    let hasNoCommander = isOrkArmyCommanderPresent(
+      validationData.selectedUnits, //
+      validationData.availableUnits,
+      validationData.selectedAlternativeLists
+    );
+    let availlableClanUnits = setUnitsForClans(
+      validationData.availableUnits, //
+      validationData.selectedAlternativeLists
+    );
 
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [
@@ -128,10 +135,7 @@ const OrkRules = {
     ];
 
     // result for sub factions below limit.
-    validationResults.subFactionBelowMinimum = isBelowSubFactionMin;
-
-    // result - is a commander present?
-    validationResults.commanderIsPresent = hasNoCommander;
+    validationResults.invalidSubFactions = [...isBelowSubFactionMin, ...hasNoCommander];
 
     validationResults.removeUnitsNoLongerValid = [];
 
@@ -187,16 +191,15 @@ const switchBetweenAlternativeRules = (selectedAlternativeLists) => {
  * @param {unitCard} selectedUnits
  * @returns true, if either a 2 * commander (clans) or a 2* commander and a Clanngett hero is present.
  */
-const isOrkArmyCommanderPresent = (selectedUnits, selectedAlternativeLists) => {
-  if (!selectedAlternativeLists.includes("Clanngett")) {
-    return globalRules.isArmyCommanderPresent(selectedUnits);
+const isOrkArmyCommanderPresent = (selectedUnits, availableUnits, selectedAlternativeLists) => {
+  let result = globalRules.isArmyCommanderPresent(selectedUnits, availableUnits, rules);
+
+  if (selectedAlternativeLists.includes("Clanngett")) {
+    result.push({
+      invalidSubFaction: "Clanngett", //
+      message: VALIDATION.NO_COMMANDER_WARNING,
+    });
   }
-
-  const clangettHeroes = ["Trazzag", "Fherniak", "Ärrig", "Khazzar", "Nallian"];
-
-  const clanngettHeroPresent = selectedUnits.filter((u) => clangettHeroes.includes(u.unitName));
-  const potentialCommanders = selectedUnits.filter((u) => u.commandStars >= 2);
-  return clanngettHeroPresent.length > 0 && potentialCommanders.length > 0;
 };
 
 /**

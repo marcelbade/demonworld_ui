@@ -112,7 +112,7 @@ const globalRules = {
 
       const spentPoints = calculateCurrentlySpentPoints(selectedUnits, r.cardNames);
 
-      availableUnits
+      availableUnits //TODO forgot about this, test!:D
         // .filter((availableUnit) => r.cardNames.includes(availableUnit.subFaction) || r.cardNames.includes(availableUnit.faction))
         .filter((availableUnit) => unitBelongsToSubFaction(r.cardNames, availableUnit))
         .forEach((subFactionUnit) => {
@@ -136,7 +136,7 @@ const globalRules = {
    * @returns array consisting of objects. Every object contains a unit that must be blocked and an error message to
    * be displayed as a tool tip.
    */
-  unitsBelowSubfactionMinimum: (rules, selectedUnits, maxArmyPoints, subFactions) => {
+  unitsBelowSubfactionMinimum: (rules, selectedUnits, maxArmyPoints, distinctSubFactions) => {
     let result = [];
 
     rules
@@ -144,13 +144,15 @@ const globalRules = {
       .forEach((factionRule) => {
         const subFactionMin = maxArmyPoints * factionRule.min;
         const spentPoints = calculateCurrentlySpentPoints(selectedUnits, factionRule.cardNames);
-        // subFactions === current subfactions !
         if (
           spentPoints < subFactionMin &&
           !result.includes(factionRule.subFaction) &&
-          subFactions.some((sF) => factionRule.cardNames.includes(sF))
+          distinctSubFactions.some((currentSubFaction) => factionRule.cardNames.includes(currentSubFaction)) //
         ) {
-          result.push({ subFactionUnderMinimum: factionRule.cardNames, message: factionRule.error });
+          result.push({
+            invalidSubFaction: factionRule.cardNames, //
+            message: factionRule.error,
+          });
         }
       });
     return result;
@@ -161,9 +163,47 @@ const globalRules = {
    * @param {*} selectedUnits array of all selected unit objects
    * @returns boolean flag
    */
+  //TODO
   isArmyCommanderPresent: (selectedUnits) => {
     const potentialCommanders = selectedUnits.filter((selectedUnit) => selectedUnit.commandStars >= 2);
     return potentialCommanders.length > 0;
+  },
+ 
+  /**
+   *
+   * @param {*} selectedUnits
+   * @param {*} availableUnits
+   * @returns
+   */
+  isArmyCommanderPresent: (selectedUnits, availableUnits, rules) => {
+    let result = [];
+
+    const selectedCommanders = selectedUnits.filter((selectedUnit) => selectedUnit.commandStars >= 2);
+
+    if (selectedCommanders.length > 0) {
+      return []; // list already contains commander
+    }
+
+    let subFactionsWithCommanders = availableUnits //
+      .filter((availableUnit) => availableUnit.commandStars >= 2)
+      .map((availableCommander) => availableCommander.subFaction);
+
+    // remove duplicates!
+    subFactionsWithCommanders = [...new Set(subFactionsWithCommanders)];
+
+    subFactionsWithCommanders.forEach((subFaction) => {
+      // find card names !
+      rules.forEach((rule) =>
+        rule.cardNames.includes(subFaction)
+          ? result.push({
+              invalidSubFaction: rule.cardNames, //
+              message: VALIDATION.NO_COMMANDER_WARNING,
+            })
+          : null
+      );
+    });
+
+    return result;
   },
 };
 

@@ -96,7 +96,7 @@ const ElfRules = {
       validationData.totalPointsAllowance,
       validationData.availableUnits
     );
-    let hasNoCommander = globalRules.isArmyCommanderPresent(validationData.selectedUnits);
+    let hasNoCommander = globalRules.isArmyCommanderPresent(validationData.selectedUnits, validationData.availableUnits, rules);
 
     // tournament rules
     let maxCopies;
@@ -148,10 +148,9 @@ const ElfRules = {
       ...testForIlahRi,
     ];
     // Result for sub factions below limit.
-    validationResults.subFactionBelowMinimum = isBelowSubFactionMin;
+    validationResults.invalidSubFactions = [...isBelowSubFactionMin, ...hasNoCommander];
 
-    // Result - is a commander present?
-    validationResults.commanderIsPresent = hasNoCommander;
+     
 
     // Are there units that need to be removed from the list?
     validationResults.removeUnitsNoLongerValid = [
