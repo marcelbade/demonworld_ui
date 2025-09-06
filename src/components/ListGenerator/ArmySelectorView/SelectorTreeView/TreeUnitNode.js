@@ -85,7 +85,7 @@ const TreeUnitNode = (props) => {
         <ContextHelpButton
           isVisible={!props.isValidUnit}
           message={props.validationMessage} //
-          type={PUSH_MESSAGE_TYPES.ERROR}
+          type={PUSH_MESSAGE_TYPES.INFO}
         />
       </Stack>
       <Stack alignItems="center" direction="row">

@@ -1,11 +1,12 @@
-//  react
-import React from "react";
 //  material ui
 import { IconButton } from "@mui/material";
-// icons
-import HelpIcon from "@mui/icons-material/Help";
 //  components and functions
 import usePushMessages from "../../customHooks/UsePushMessages";
+// icons
+import HelpIcon from "@mui/icons-material/Help";
+import ErrorIcon from "@mui/icons-material/Error";
+// constants
+import { PUSH_MESSAGE_TYPES } from "../../constants/textsAndMessages";
 
 /**
  * Component displays an IconButton with a question mark. The Click action displays a notistack push message.
@@ -16,7 +17,7 @@ import usePushMessages from "../../customHooks/UsePushMessages";
  *  type: PUSH_MESSAGE_TYPES
  * @param {String } props
  * @returns
- */
+ */ 
 const ContextHelpButton = (props) => {
   const pushMessages = usePushMessages();
 
@@ -27,7 +28,7 @@ const ContextHelpButton = (props) => {
       }}
       size="large"
     >
-      <HelpIcon color="error" />
+      {props.type === PUSH_MESSAGE_TYPES.ERROR ? <ErrorIcon color="error" /> : <HelpIcon color="error" />}
     </IconButton>
   ) : null;
 };
