@@ -37,7 +37,7 @@ const useArmyValidation = () => {
       return;
     }
 
-    return runValidation(currentList, currentTotalPointAllowance, AC.subFactions);
+    return runValidation(currentList, currentTotalPointAllowance, AC.distinctSubFactions);
   };
 
   /**
@@ -47,12 +47,12 @@ const useArmyValidation = () => {
    * The results are passed to a function.
    * @param {[unitCard]} currentList
    * @param {number} currentTotalPointAllowance
-   * @param {[String]} currentSubFactions
+   * @param {[String]} distinctSubFactions
    * @returns a function call: collectValidatioResults()
 
    */
   //TODO currentSubFactions === distinct subFactions
-  const runValidation = (currentList, currentTotalPointAllowance, currentSubFactions) => {
+  const runValidation = (currentList, currentTotalPointAllowance, distinctSubFactions) => {
     let validator = ruleValidation(AC.selectedFactionName);
 
     let validationResult = validator.testSubFactionRules({
@@ -60,7 +60,7 @@ const useArmyValidation = () => {
       availableUnits: [...AC.listOfAllFactionUnits, ...AYC.listOfAlliedUnits],
       selectedUnits: currentList,
       totalPointsAllowance: currentTotalPointAllowance,
-      subFactions: currentSubFactions,
+      distinctSubFactions: distinctSubFactions,
       selectedAlternativeLists: ALC.selectedAlternativeLists,
       tournamentOverrideRules: TC.tournamentOverrideRules,
       listOfAlliedUnits: AYC.listOfAlliedUnits,
@@ -83,7 +83,7 @@ const useArmyValidation = () => {
       removeUnitsNoLongerValid: result.removeUnitsNoLongerValid,
       secondSubFactionMissing: result.secondSubFactionMissing,
       alliedUnitsBlockedbyRules: result.alliedUnitsBlockedbyRules,
-      commanderIsPresent: result.commanderIsPresent,
+      commanderIsPresent: result.commanderIsPresent,  //TODO Remove
     };
 
     removeInvalidUnits(currentList, validationObj);
@@ -121,7 +121,7 @@ const useArmyValidation = () => {
       if (sF.subFactionUnderMinimum.includes(subFactionName)) {
         subFactionObjet = { subFactionName: subFactionName, valid: false, validationMessage: sF.message };
       }
-    });
+    }); // ###
 
     return subFactionObjet;
   };
