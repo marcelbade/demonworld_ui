@@ -160,20 +160,11 @@ const globalRules = {
 
   /**
    * Test whether the army has a valid army commander in accordance w. the tournament rules.
-   * @param {*} selectedUnits array of all selected unit objects
-   * @returns boolean flag
-   */
-  //TODO
-  isArmyCommanderPresent: (selectedUnits) => {
-    const potentialCommanders = selectedUnits.filter((selectedUnit) => selectedUnit.commandStars >= 2);
-    return potentialCommanders.length > 0;
-  },
- 
-  /**
-   *
-   * @param {*} selectedUnits
-   * @param {*} availableUnits
-   * @returns
+   * @param {[unitCard]} selectedUnits
+   * @param {[unitCard]} availableUnits
+   * @param {[armyRule]} rules
+   * @returns an array of objects containing the name of the invalid sub Faction
+   * and the error message.
    */
   isArmyCommanderPresent: (selectedUnits, availableUnits, rules) => {
     let result = [];
