@@ -72,7 +72,7 @@ const OrkRules = {
       rules,
       validationData.selectedUnits,
       validationData.totalPointsAllowance,
-      validationData.subFactions
+      validationData.distinctSubFactions
     );
     let isAboveSubFactionMax = globalRules.unitsAboveSubFactionMax(
       rules,
@@ -153,7 +153,7 @@ const ORK_SUBFACTION_LIMITS = {
 };
 
 /**
- * Function changes the max. limits for the validationData.subFactions depending on which alternative army list has been selected.
+ * Function changes the max. limits for the validationData.distinctSubFactions depending on which alternative army list has been selected.
  */
 const switchBetweenAlternativeRules = (selectedAlternativeLists) => {
   //  validationData.selectedAlternativeLists  --> Clanngett, Steinclan,...

@@ -53,7 +53,7 @@ const LizardMenRules = {
       rules,
       validationData.selectedUnits,
       validationData.totalPointsAllowance,
-      validationData.subFactions
+      validationData.distinctSubFactions
     );
     let isAboveSubFactionMax = globalRules.unitsAboveSubFactionMax(
       rules,
