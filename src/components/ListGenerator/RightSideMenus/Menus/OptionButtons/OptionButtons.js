@@ -14,8 +14,10 @@ import LoginDialog from "../../../../Dialogs/LogInDialog/LogInDialog";
 import SelectPdfTypeDialog from "../../../../Dialogs/SelectPdfTypeDialog/SelectPdfTypeDialog";
 import StoreArmyListDialog from "../../../../Dialogs/StoreArmyListDialog/StoreArmyListDialog";
 import LoadArmyListDialog from "../../../../Dialogs/LoadArmyDialog/LoadArmyListDialog";
-import ArmyListBoxFooter from "../../../ArmyListView/ArmyList/ArmyListFooter/ArmyListBoxFooter";
+import ArmyAndScoutingPointDisplay from "../../../ArmyListView/ArmyList/ArmyListFooter/ArmyAndScoutingPointDisplay";
 import CustomIcon from "../../../../shared/CustomIcon";
+import BackToSelectionButton from "../../../../shared/BackToSelectionButton";
+import DeleteArmyListButton from "../../../../shared/DeleteArmyListButton";
 // icons
 import SaveIcon from "@mui/icons-material/Save";
 import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
@@ -40,7 +42,8 @@ const OptionButtons = () => {
   const [showArmyLoadDialog, setShowArmyLoadDialog] = useState(false);
   const [isExistingList, setIsExistingList] = useState(false);
 
-  const ICON_SIZE = "2.5em";
+  const ICON_SIZE_OPTIONS = "2.5em";
+  const ICON_SIZE_RESET_BUTTONS = "2em";
 
   /**
    * Function takes the current army list as an object, stores it in the history object and naviagat3s to the LossCalculator component.
@@ -140,7 +143,7 @@ const OptionButtons = () => {
       action: () => {
         setShowPdfTypeDialog(true);
       },
-      icon: <PictureAsPdfIcon sx={{ fontSize: ICON_SIZE }} />,
+      icon: <PictureAsPdfIcon sx={{ fontSize: ICON_SIZE_OPTIONS }} />,
       text: PDF.CREATE_PDF,
     },
 
@@ -151,7 +154,7 @@ const OptionButtons = () => {
         setIsExistingList(false);
         displayStoreArmyDialog();
       },
-      icon: <SaveIcon sx={{ fontSize: ICON_SIZE }} />,
+      icon: <SaveIcon sx={{ fontSize: ICON_SIZE_OPTIONS }} />,
       text: OPTIONS.STORE_LIST,
     },
     {
@@ -161,7 +164,7 @@ const OptionButtons = () => {
         setIsExistingList(true);
         displayStoreArmyDialog();
       },
-      icon: <UpdateIcon sx={{ fontSize: ICON_SIZE }} />,
+      icon: <UpdateIcon sx={{ fontSize: ICON_SIZE_OPTIONS }} />,
       text: OPTIONS.UPDATE_LIST,
     },
     {
@@ -170,7 +173,7 @@ const OptionButtons = () => {
       action: () => {
         showLoadListPrompt();
       },
-      icon: <SimCardDownloadIcon sx={{ fontSize: ICON_SIZE }} />,
+      icon: <SimCardDownloadIcon sx={{ fontSize: ICON_SIZE_OPTIONS }} />,
       text: OPTIONS.LOAD_LIST,
     },
 
@@ -224,12 +227,15 @@ const OptionButtons = () => {
         showArmyLoadPrompt={showArmyLoadDialog} //
         setShowArmyLoadPrompt={setShowArmyLoadDialog} //
       />
-
+      <Stack direction="row">
+        <BackToSelectionButton iconSize={ICON_SIZE_RESET_BUTTONS} />
+        <DeleteArmyListButton iconSize={ICON_SIZE_RESET_BUTTONS} />
+      </Stack>
       <Stack
         direction="row" //
         spacing={3}
         sx={{
-          marginTop: "5em", //
+          marginTop: "2em", //
           marginBottom: "5em",
         }}
       >
@@ -248,7 +254,7 @@ const OptionButtons = () => {
         ))}
       </Stack>
 
-      <ArmyListBoxFooter />
+      <ArmyAndScoutingPointDisplay />
     </Grid>
   );
 };
