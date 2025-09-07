@@ -240,14 +240,16 @@ const OptionButtons = () => {
         {/* draw all identical buttons dynamically */}
         {buttons.map((bttn, i) => (
           <Tooltip title={<Typography sx={{ fontSize: "20px" }}>{bttn.text}</Typography>}>
-            <IconButton
-              key={i}
-              disabled={bttn.disabled} //
-              onClick={bttn.action}
-              sx={{}}
-            >
-              {bttn.icon}
-            </IconButton>
+            <span>
+              <IconButton
+                key={i}
+                disabled={bttn.disabled} //
+                onClick={bttn.action}
+                sx={{}}
+              >
+                {bttn.icon}
+              </IconButton>
+            </span>
           </Tooltip>
         ))}
       </Stack>
