@@ -16,7 +16,7 @@ import useArmyValidation from "../../customHooks/UseArmyValidation";
  * @param {{*}} props
  * @returns JSX
  */
-const DeleteArmyListButton = () => {
+const DeleteArmyListButton = (props) => {
   const SEC = useContext(SelectionContext);
   const validation = useArmyValidation();
 
@@ -33,7 +33,7 @@ const DeleteArmyListButton = () => {
         }}
         size="large"
       >
-        <CancelIcon />
+        <CancelIcon  sx={{ fontSize: props.iconSize }}  />
       </IconButton>
     </Tooltip>
   );

@@ -1,5 +1,5 @@
 // React
-import React, { useContext } from "react";
+import { useContext } from "react";
 // Material UI
 import { IconButton, Tooltip, Typography } from "@mui/material";
 // context
@@ -25,7 +25,7 @@ const BackToSelectionButton = (props) => {
           AC.setSelectedFactionName(NONE);
         }}
       >
-        <ReplayIcon />
+        <ReplayIcon   sx={{ fontSize: props.iconSize }} />
       </IconButton>
     </Tooltip>
   );

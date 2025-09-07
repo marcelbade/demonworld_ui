@@ -6,8 +6,6 @@ import SettingsMenu from "./settings/SettingsMenu";
 import UserLogButton from "../Login/UserLogButton";
 import NaviButton from "../landingPage/NaviButton";
 import LoginDialog from "../Dialogs/LogInDialog/LogInDialog";
-import BackToSelectionButton from "./BackToSelectionButton";
-import DeleteArmyListButton from "./DeleteArmyListButton";
 // icons
 import { ChevronLeft } from "@mui/icons-material";
 // constants
@@ -62,12 +60,6 @@ const TopMenuDrawer = (props) => {
             toolTipText={LANDINGPAGE.BACK_TO_LANDINGPAGE}
             altText={LANDINGPAGE.BACK_TO_LANDINGPAGE}
           />
-        ) : null}
-        {props.displayListBttns ? (
-          <>
-            <BackToSelectionButton />
-            <DeleteArmyListButton />
-          </>
         ) : null}
         <Grid size={2}>
           <SettingsButton />
