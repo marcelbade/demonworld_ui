@@ -1,7 +1,7 @@
 // React
 import { useContext, useEffect } from "react";
 // material ui
-import { TextField, Grid2 as Grid, Stack } from "@mui/material";
+import { TextField, Grid2 as Grid, Stack, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components and functions
 import { ArmyContext } from "../../../../../contexts/armyContext";
@@ -9,7 +9,7 @@ import { ArmyContext } from "../../../../../contexts/armyContext";
 import { INPUT_TEXTS } from "../../../../../constants/textsAndMessages";
 import { NONE } from "../../../../../constants/factions";
 
-const ArmyListBoxHeader = () => {
+const ArmyMetaDataInput = () => {
   const AC = useContext(ArmyContext);
 
   const theme = useTheme();
@@ -88,7 +88,25 @@ const ArmyListBoxHeader = () => {
       }}
     >
       {inputElements.map((inputElmnt, i) => (
-        <Grid key={i}>
+        <Grid
+          key={i}
+          container //
+          direction="row"
+          alignItems="center"
+          justifyItems="flex-start"
+          spacing={5}
+          sx={{
+            width: "100%",
+          }}
+        >
+          <Grid
+            container
+            sx={{
+              width: "25%",
+            }}
+          >
+            <Typography variant="body1"> {inputElmnt.label}</Typography>
+          </Grid>
           <TextField
             sx={{
               paddingTop: "1em",
@@ -102,7 +120,7 @@ const ArmyListBoxHeader = () => {
               },
             }}
             id={inputElmnt.id}
-            label={inputElmnt.label}
+            label={""}
             value={inputElmnt.value}
             onClick={inputElmnt.onClick}
             onChange={inputElmnt.onChange}
@@ -117,4 +135,4 @@ const ArmyListBoxHeader = () => {
   );
 };
 
-export default ArmyListBoxHeader;
+export default ArmyMetaDataInput;

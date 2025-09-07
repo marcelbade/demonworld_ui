@@ -1,7 +1,6 @@
 // React
 import { useContext } from "react";
 // components and functions
-import ArmyListBoxHeader from "./ArmyList/ArmyListHeader/ArmyListBoxHeader";
 import ArmyListBoxCenter from "./ArmyList/ArmyListCenter/ArmyListBoxCenter";
 // import ArmyListBoxFooter from "./ArmyList/ArmyListFooter/ArmyListBoxFooter";
 import { Grid2 as Grid } from "@mui/material";
@@ -32,10 +31,13 @@ const ArmyListBox = () => {
       justifyContent="center"
       alignItems="center"
       sx={{
-        minWidth: "40em",
+        minWidth: "70em",
+        height: "75em",
+        overflowY: "auto",
+        overflowX:"hidden"
       }}
     >
-      <ArmyListBoxHeader />
+    
       <ArmyListBoxCenter />
     </Grid>
   ) : null;

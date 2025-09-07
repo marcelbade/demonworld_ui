@@ -2,7 +2,7 @@
 import { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 // Material UI
-import { Grid2 as Grid, Button, Divider } from "@mui/material";
+import { Grid2 as Grid, IconButton, Stack, Tooltip, Typography } from "@mui/material";
 // context
 import { ArmyContext } from "../../../../../contexts/armyContext";
 import { SelectionContext } from "../../../../../contexts/selectionContext";
@@ -15,10 +15,17 @@ import SelectPdfTypeDialog from "../../../../Dialogs/SelectPdfTypeDialog/SelectP
 import StoreArmyListDialog from "../../../../Dialogs/StoreArmyListDialog/StoreArmyListDialog";
 import LoadArmyListDialog from "../../../../Dialogs/LoadArmyDialog/LoadArmyListDialog";
 import ArmyListBoxFooter from "../../../ArmyListView/ArmyList/ArmyListFooter/ArmyListBoxFooter";
+import CustomIcon from "../../../../shared/CustomIcon";
+// icons
+import SaveIcon from "@mui/icons-material/Save";
+import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
+import UpdateIcon from "@mui/icons-material/Update";
+import SimCardDownloadIcon from "@mui/icons-material/SimCardDownload";
+import deathIcon from "../../../../../assets/icons/icons8-death-64.png";
 // constants
 import { OPTIONS, PDF } from "../../../../../constants/textsAndMessages";
 import { PDF_URL } from "../../../../../constants/URLs";
-import ArmyListBoxHeader from "../../../ArmyListView/ArmyList/ArmyListHeader/ArmyListBoxHeader";
+import ArmyMetaDataInput from "../../../ArmyListView/ArmyList/ArmyListHeader/ArmyMetaDataInput";
 
 const OptionButtons = () => {
   const AC = useContext(ArmyContext);
@@ -32,6 +39,8 @@ const OptionButtons = () => {
   const [showArmySaveDialog, setShowArmySaveDialog] = useState(false);
   const [showArmyLoadDialog, setShowArmyLoadDialog] = useState(false);
   const [isExistingList, setIsExistingList] = useState(false);
+
+  const ICON_SIZE = "2.5em";
 
   /**
    * Function takes the current army list as an object, stores it in the history object and naviagat3s to the LossCalculator component.
@@ -121,7 +130,7 @@ const OptionButtons = () => {
   };
 
   const showLoadListPrompt = () => {
-    setShowArmyLoadDialog(true);
+    UC.userLoggedIn ? setShowArmyLoadDialog(true) : UC.setDisplayLogInDialog(true);
   };
 
   const buttons = [
@@ -131,6 +140,7 @@ const OptionButtons = () => {
       action: () => {
         setShowPdfTypeDialog(true);
       },
+      icon: <PictureAsPdfIcon sx={{ fontSize: ICON_SIZE }} />,
       text: PDF.CREATE_PDF,
     },
 
@@ -141,6 +151,7 @@ const OptionButtons = () => {
         setIsExistingList(false);
         displayStoreArmyDialog();
       },
+      icon: <SaveIcon sx={{ fontSize: ICON_SIZE }} />,
       text: OPTIONS.STORE_LIST,
     },
     {
@@ -150,14 +161,16 @@ const OptionButtons = () => {
         setIsExistingList(true);
         displayStoreArmyDialog();
       },
+      icon: <UpdateIcon sx={{ fontSize: ICON_SIZE }} />,
       text: OPTIONS.UPDATE_LIST,
     },
     {
       // load army lists /delete army lists
-      disabled: !UC.userLoggedIn,
+      disabled: false,
       action: () => {
         showLoadListPrompt();
       },
+      icon: <SimCardDownloadIcon sx={{ fontSize: ICON_SIZE }} />,
       text: OPTIONS.LOAD_LIST,
     },
 
@@ -167,6 +180,16 @@ const OptionButtons = () => {
       action: () => {
         navigateToLossCalculator();
       },
+      icon: (
+        <CustomIcon
+          icon={deathIcon} //
+          altText={OPTIONS.TO_LOSS_CALCULATOR}
+          height={"80px"}
+          width={"80px"}
+          boxHeight={"80px"}
+          boxWidth={"80px"}
+        />
+      ),
       text: OPTIONS.TO_LOSS_CALCULATOR,
     },
   ];
@@ -175,18 +198,17 @@ const OptionButtons = () => {
     <Grid
       container
       direction="column"
-      alignItems="center"
+      alignItems="flex-start"
       spacing={4}
       sx={{
-        // height: "100vh",
-       width: "30vw",
+        width: "25vw",
         padding: "2em",
         overflowY: "hidden",
         overflowX: "hidden",
       }}
     >
-      <ArmyListBoxHeader />
-      <Divider sx={{ width: "100%" }} />
+      <ArmyMetaDataInput />
+
       <LoginDialog />
       <SelectPdfTypeDialog
         openPDfInNewTab={openPDfInNewTab} //
@@ -203,24 +225,30 @@ const OptionButtons = () => {
         setShowArmyLoadPrompt={setShowArmyLoadDialog} //
       />
 
-      {/* draw all identical buttons dynamically */}
-      {buttons.map((bttn, i) => (
-        <Grid key={i}>
-          <Button
-            variant="outlined" //
-            disabled={bttn.disabled}
-            onClick={bttn.action}
-            sx={{
-              borderRadius: "1em",
-            }}
-          >
-            {bttn.text}
-          </Button>
-        </Grid>
-      ))}
-      <Grid>
-        <ArmyListBoxFooter />
-      </Grid>
+      <Stack
+        direction="row" //
+        spacing={3}
+        sx={{
+          marginTop: "5em", //
+          marginBottom: "5em",
+        }}
+      >
+        {/* draw all identical buttons dynamically */}
+        {buttons.map((bttn, i) => (
+          <Tooltip title={<Typography sx={{ fontSize: "20px" }}>{bttn.text}</Typography>}>
+            <IconButton
+              key={i}
+              disabled={bttn.disabled} //
+              onClick={bttn.action}
+              sx={{}}
+            >
+              {bttn.icon}
+            </IconButton>
+          </Tooltip>
+        ))}
+      </Stack>
+
+      <ArmyListBoxFooter />
     </Grid>
   );
 };
