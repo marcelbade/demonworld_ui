@@ -24,10 +24,11 @@ const TreeSubFactionBranch = (props, { children }) => {
   const theme = useTheme();
 
   /**
-   * The following is a contreived hack to have a forceUpdate function in a functional
-   * component. ForceUpdate is a method in class component that immdiately forces a rerender.
-   * This is the ONLY WORKING SOLUTION that rerenders all treeView items and correctly shows
-   * disabled branches (see testForDisabledSubFaction).
+   * The following is a contreived hack to have a forceUpdate function in a
+   * functional component. ForceUpdate is a method in 
+   * class component that immdiately forces a rerender.
+   * This is the ONLY WORKING SOLUTION that rerenders all treeView 
+   * items and correctly show disabled branches (see testForDisabledSubFaction).
    * https://legacy.reactjs.org/docs/hooks-faq.html#is-there-something-like-forceupdate
    */
   const [, forceUpdate] = useReducer((x) => x + 1, 0);
