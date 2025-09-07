@@ -9,7 +9,7 @@ import usePointCostCalculator from "../../../../../customHooks/UsePointCostCalcu
 // constants
 import { GENERAL_ERRRORS, STATS, TEXTS, INPUT_TEXTS } from "../../../../../constants/textsAndMessages";
 
-const ArmyListBoxFooter = () => {
+const ArmyAndScoutingPointDisplay = () => {
   const SEC = useContext(SelectionContext);
 
   const validation = useArmyValidation();
@@ -79,4 +79,4 @@ const ArmyListBoxFooter = () => {
   );
 };
 
-export default ArmyListBoxFooter;
+export default ArmyAndScoutingPointDisplay;
