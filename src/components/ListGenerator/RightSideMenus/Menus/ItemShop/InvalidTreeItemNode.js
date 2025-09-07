@@ -46,7 +46,7 @@ const InvalidTreeItemNode = (props) => {
         <ContextHelpButton
           isVisible={true}
           message={props.message} //
-          type={PUSH_MESSAGE_TYPES.ERROR}
+          type={PUSH_MESSAGE_TYPES.INFO}
         />
       </Grid>
     </Grid>
