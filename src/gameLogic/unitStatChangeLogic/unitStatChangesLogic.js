@@ -38,7 +38,7 @@ export const setUnitStat = (unit, unitStatName) => {
   else if (unitStatName === RANGED_WEAPON_STATS) {
     return calculateRangeValue(unit);
   }
-  // add any bonus given by any other kind of item
+  // add any boni given by any other kind of item
   else {
     return addBonus(unit, unitStatName);
   }
