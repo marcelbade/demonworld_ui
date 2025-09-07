@@ -16,7 +16,6 @@ const useUnitEnricher = () => {
 
   const enrichUnit = (unit) => {
     unit = addUniqueIdToUnit(unit);
-
     return unit;
   };
 

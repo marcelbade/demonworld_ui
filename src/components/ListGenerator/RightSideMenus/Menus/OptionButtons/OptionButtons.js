@@ -79,19 +79,17 @@ const OptionButtons = () => {
 
     const allSelectedCards = addCardsForMultiStateUnits(selectedUnits);
 
-    AC.subFactionDTOs
-      .map((sF) => sF.name)
-      .forEach((name) => {
-        const subFactionUnits = allSelectedCards.filter((u) => u.subFaction === name);
-        list.push({
-          subFaction: name, //
-          units: subFactionUnits,
-          subFactionTotal: stats.currentTotal(subFactionUnits),
-          subFactionPercentage: stats.currentPercentage(subFactionUnits, SEC.maxPointsAllowance),
-          minSubFactionPercentage: stats.minAndMaxAllowance(AC.selectedFactionName, name).min,
-          maxSubFactionPercentage: stats.minAndMaxAllowance(AC.selectedFactionName, name).max,
-        });
+    AC.distinctSubFactions.forEach((distinctSubFaction) => {
+      const subFactionUnits = allSelectedCards.filter((u) => u.subFaction === distinctSubFaction);
+      list.push({
+        subFaction: distinctSubFaction, // TODO ###
+        units: subFactionUnits,
+        subFactionTotal: stats.currentTotal(subFactionUnits),
+        subFactionPercentage: stats.currentPercentage(subFactionUnits, SEC.maxPointsAllowance),
+        minSubFactionPercentage: stats.minAndMaxAllowance(AC.selectedFactionName, distinctSubFaction).min,
+        maxSubFactionPercentage: stats.minAndMaxAllowance(AC.selectedFactionName, distinctSubFaction).max,
       });
+    });
 
     return {
       playerName: AC.playerName,

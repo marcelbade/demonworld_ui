@@ -31,17 +31,13 @@ const UseArmyStateLoader = () => {
    */
   const setFactionProperties = (factionName) => {
     const factionObj = AC.fetchedFactions.find((f) => f.factionName === factionName);
-    // find speical units that are available to every faction
+    // find special units that are available to every faction
     const specials = AC.fetchedFactions.find((f) => f.factionName === SPECIAL);
-    const allSubFactions = [...factionObj.subFactions.map((sF) => sF.name)];
+    let allSubFactions = [...factionObj.subFactions.map((sF) => sF.name)];
     const allFactionUnits = captureAllFactionUnits(factionObj.subFactions, specials.subFactions);
 
-    AC.setSubFactionDTOs(factionObj.subFactions);
-    AC.setSelectedFactionName(factionObj.factionName);
-    AC.setDistinctSubFactions(allSubFactions);
-    AC.setListOfAllFactionUnits(allFactionUnits);
 
-    // faction has an ally?
+    // does the faction have an ally?
     if (factionObj.ally !== NO_ALLY) {
       const allAllySubFactions = [...factionObj.allySubFactions.map((sF) => sF.name)];
       const allAllyUnits = captureAllFactionUnits(factionObj.allySubFactions, []);
@@ -50,7 +46,14 @@ const UseArmyStateLoader = () => {
       AYC.setAllySubFactionDTOs(factionObj.allySubFactions);
       AYC.setDistinctAllySubFactions(allAllySubFactions);
       AYC.setListOfAlliedUnits(allAllyUnits);
+
+      allSubFactions = [...allSubFactions, factionObj.ally];
     }
+
+    AC.setSubFactionDTOs(factionObj.subFactions);
+    AC.setSelectedFactionName(factionObj.factionName);
+    AC.setListOfAllFactionUnits(allFactionUnits);
+    AC.setDistinctSubFactions(allSubFactions);
 
     if (factionObj.hasAlternativeLists) {
       ALC.setArmyHasAlternativeLists(factionObj.hasAlternativeLists);

@@ -16,9 +16,11 @@ import useArmyValidation from "../../../../customHooks/UseArmyValidation";
 import useRightSideMenuController from "../../../../customHooks/UseRightSideMenuController";
 import useUnitEnricher from "../../../../customHooks/UseUnitEnricher";
 import { renderDynamicIcons } from "../../../../util/utilityFunctions";
+import { AllyContext } from "../../../../contexts/allyContext";
 
 const TreeUnitNode = (props) => {
   const SEC = useContext(SelectionContext);
+  const AYC = useContext(AllyContext);
 
   const theme = useTheme();
   const validation = useArmyValidation();
@@ -40,11 +42,25 @@ const TreeUnitNode = (props) => {
   const addUnit = () => {
     let tempArray = [...SEC.selectedUnits];
 
-    tempArray.push(enrichUnit(props.unit));
+    tempArray.push(changeSubFactionIfAlly(enrichUnit(props.unit)));
     SEC.setSelectedUnits(tempArray);
 
     const validationResult = validation.testArmySelectionAndRunValidation(tempArray, SEC.maxPointsAllowance);
     validation.testForDisabledSubFaction(validationResult.unitsBlockedbyRules);
+  };
+
+  /**
+   * Function tests whether the unit is an allied unit.
+   * If so, the sub faction is replaced with the name of the allied faction.
+   * (Since all allied units are simply placed in a sub faction with that name.)
+   * @param {unitCard} unit
+   * @returns unitCard
+   */
+  const changeSubFactionIfAlly = (unit) => {
+    if (unit.faction === AYC.allyName) {
+      unit.subFaction = AYC.allyName;
+    }
+    return unit;
   };
 
   /**

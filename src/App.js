@@ -349,7 +349,7 @@ function App() {
                                   value={{
                                     // ALLY
                                     allyName: allyName,
-                                    allySubFactions: distinctAllySubFactions,
+                                    distinctAllySubFactions: distinctAllySubFactions,
                                     listOfAlliedUnits: listOfAlliedUnits,
                                     allySubFactionDTOs: allySubFactionDTOs,
                                     setAllyName: setAllyName,
