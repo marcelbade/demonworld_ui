@@ -19,11 +19,11 @@ import CustomIcon from "../../../../shared/CustomIcon";
 import BackToSelectionButton from "../../../../shared/BackToSelectionButton";
 import DeleteArmyListButton from "../../../../shared/DeleteArmyListButton";
 // icons
-import SaveIcon from "@mui/icons-material/Save";
-import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
-import UpdateIcon from "@mui/icons-material/Update";
-import SimCardDownloadIcon from "@mui/icons-material/SimCardDownload";
 import deathIcon from "../../../../../assets/icons/icons8-death-64.png";
+import listUpdateIcon from "../../../../../assets/icons/listUpdateIcon.svg";
+import customPdfIcon from "../../../../../assets/icons/customPDFIcon.svg";
+import customLoadIcon from "../../../../../assets/icons/customLoadIcon.svg";
+import customSaveIcon from "../../../../../assets/icons/customSaveIcon.svg";
 // constants
 import { OPTIONS, PDF } from "../../../../../constants/textsAndMessages";
 import { PDF_URL } from "../../../../../constants/URLs";
@@ -82,7 +82,7 @@ const OptionButtons = () => {
     AC.distinctSubFactions.forEach((distinctSubFaction) => {
       const subFactionUnits = allSelectedCards.filter((u) => u.subFaction === distinctSubFaction);
       list.push({
-        subFaction: distinctSubFaction, // TODO ###
+        subFaction: distinctSubFaction,
         units: subFactionUnits,
         subFactionTotal: stats.currentTotal(subFactionUnits),
         subFactionPercentage: stats.currentPercentage(subFactionUnits, SEC.maxPointsAllowance),
@@ -141,7 +141,16 @@ const OptionButtons = () => {
       action: () => {
         setShowPdfTypeDialog(true);
       },
-      icon: <PictureAsPdfIcon sx={{ fontSize: ICON_SIZE_OPTIONS }} />,
+      icon: (
+        <CustomIcon
+          icon={customPdfIcon} //
+          altText={OPTIONS.TO_LOSS_CALCULATOR}
+          height={"65px"}
+          width={"65px"}
+          boxHeight={"70px"}
+          boxWidth={"62px"}
+        />
+      ),
       text: PDF.CREATE_PDF,
     },
 
@@ -152,7 +161,16 @@ const OptionButtons = () => {
         setIsExistingList(false);
         displayStoreArmyDialog();
       },
-      icon: <SaveIcon sx={{ fontSize: ICON_SIZE_OPTIONS }} />,
+      icon: (
+        <CustomIcon
+          icon={customSaveIcon} //
+          altText={OPTIONS.TO_LOSS_CALCULATOR}
+          height={"55px"}
+          width={"55px"}
+          boxHeight={"60px"}
+          boxWidth={"60px"}
+        />
+      ),
       text: OPTIONS.STORE_LIST,
     },
     {
@@ -162,7 +180,16 @@ const OptionButtons = () => {
         setIsExistingList(true);
         displayStoreArmyDialog();
       },
-      icon: <UpdateIcon sx={{ fontSize: ICON_SIZE_OPTIONS }} />,
+      icon: (
+        <CustomIcon
+          icon={listUpdateIcon} //
+          altText={OPTIONS.TO_LOSS_CALCULATOR}
+          height={"65px"}
+          width={"65px"}
+          boxHeight={"70px"}
+          boxWidth={"70px"}
+        />
+      ),
       text: OPTIONS.UPDATE_LIST,
     },
     {
@@ -171,7 +198,16 @@ const OptionButtons = () => {
       action: () => {
         showLoadListPrompt();
       },
-      icon: <SimCardDownloadIcon sx={{ fontSize: ICON_SIZE_OPTIONS }} />,
+      icon: (
+        <CustomIcon
+          icon={customLoadIcon} //
+          altText={OPTIONS.TO_LOSS_CALCULATOR}
+          height={"65px"}
+          width={"65px"}
+          boxHeight={"70px"}
+          boxWidth={"70px"}
+        />
+      ),
       text: OPTIONS.LOAD_LIST,
     },
 
@@ -202,14 +238,62 @@ const OptionButtons = () => {
       alignItems="flex-start"
       spacing={4}
       sx={{
-        width: "25vw",
+        width: "20vw",
         padding: "2em",
         overflowY: "hidden",
         overflowX: "hidden",
       }}
     >
-      <ArmyMetaDataInput />
-
+      <Stack
+        direction="column" //
+        spacing={6}
+        sx={{
+          marginBottom: "5em",
+        }}
+      >
+        <ArmyMetaDataInput />
+        <ArmyAndScoutingPointDisplay />
+      </Stack>
+      <Grid
+        container //
+        direction="row"
+        spacing={10}
+      >
+        <Grid
+          container
+          direction="column" //
+          spacing={3}
+          sx={{
+            paddingTop: "0.5em",
+          }}
+        >
+          <BackToSelectionButton iconSize={ICON_SIZE_RESET_BUTTONS} />
+          <DeleteArmyListButton iconSize={ICON_SIZE_RESET_BUTTONS} />
+        </Grid>
+        <Grid
+          container
+          direction="column" //
+          justifyContent="center"
+          alignContent="center"
+          spacing={3}
+        >
+          {/* draw all identical buttons dynamically */}
+          {buttons.map((bttn, i) => (
+            <Tooltip title={<Typography sx={{ fontSize: "20px" }}>{bttn.text}</Typography>}>
+              <span>
+                <IconButton
+                  key={i}
+                  disabled={bttn.disabled} //
+                  onClick={bttn.action}
+                  sx={{}}
+                >
+                  {bttn.icon}
+                </IconButton>
+              </span>
+            </Tooltip>
+          ))}
+        </Grid>
+      </Grid>
       <LoginDialog />
       <SelectPdfTypeDialog
         openPDfInNewTab={openPDfInNewTab} //
@@ -225,38 +309,6 @@ const OptionButtons = () => {
         showArmyLoadPrompt={showArmyLoadDialog} //
         setShowArmyLoadPrompt={setShowArmyLoadDialog} //
       />
-      <Stack
-        direction="row" //
-        spacing={3}
-      >
-        <BackToSelectionButton iconSize={ICON_SIZE_RESET_BUTTONS} />
-        <DeleteArmyListButton iconSize={ICON_SIZE_RESET_BUTTONS} />
-      </Stack>
-      <Stack
-        direction="row" //
-        spacing={3}
-        sx={{
-          marginBottom: "5em",
-        }}
-      >
-        {/* draw all identical buttons dynamically */}
-        {buttons.map((bttn, i) => (
-          <Tooltip title={<Typography sx={{ fontSize: "20px" }}>{bttn.text}</Typography>}>
-            <span>
-              <IconButton
-                key={i}
-                disabled={bttn.disabled} //
-                onClick={bttn.action}
-                sx={{}}
-              >
-                {bttn.icon}
-              </IconButton>
-            </span>
-          </Tooltip>
-        ))}
-      </Stack>
-
-      <ArmyAndScoutingPointDisplay />
     </Grid>
   );
 };
