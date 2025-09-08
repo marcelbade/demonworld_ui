@@ -5,11 +5,13 @@ import { IconButton, Tooltip, Typography } from "@mui/material";
 // context
 import { SelectionContext } from "../../contexts/selectionContext";
 // icons
-import CancelIcon from "@mui/icons-material/Cancel";
+import deleteListIcon from "../../assets/icons/deleteListIcon.svg";
+
 // constants
 import { TOOLTIPS } from "../../constants/textsAndMessages";
 // custom hooks
 import useArmyValidation from "../../customHooks/UseArmyValidation";
+import CustomIcon from "./CustomIcon";
 
 /**
  * Function renders a button that deletes the entire army list.
@@ -33,7 +35,14 @@ const DeleteArmyListButton = (props) => {
         }}
         size="large"
       >
-        <CancelIcon  sx={{ fontSize: props.iconSize }}  />
+        <CustomIcon
+          icon={deleteListIcon} //
+          altText={TOOLTIPS.DELETE_ARMY_LIST}
+          height={"60px"}
+          width={"60px"}
+          boxHeight={"65px"}
+          boxWidth={"65px"}
+        />
       </IconButton>
     </Tooltip>
   );
