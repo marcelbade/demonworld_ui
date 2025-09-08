@@ -56,8 +56,9 @@ const ArmySelectorDropdown = () => {
 
   /**
    * Function triggers when user enters a value from the dropdown list.
-   * The Function simply wraps three function. The last one sets the flag for
-   * the right side menu to true so it opens slowly.
+   * The Function simply wraps three functions. 
+   * The last one sets the flag for the right side menu 
+   * to true so it opens slowly.
    * @param {String} value
    */
   const handleInput = (value) => {
