@@ -55,15 +55,7 @@ const ArmyAndScoutingPointDisplay = () => {
             id="totalPointValue"
             autoComplete="off"
             value={SEC.maxPointsAllowance}
-            InputProps={{
-              style: {
-                fontSize: "20px",
-                fontWeight: "bold",
-                pading: "50px",
-                width: "130px",
-              },
-              endAdornment: <InputAdornment position="end">{STATS.POINTS}</InputAdornment>,
-            }}
+            endAdornment={<InputAdornment position="end">{STATS.POINTS}</InputAdornment>} // TODO <- not displayed
             onChange={changeMaximumPointValue}
             required
             error={Boolean(errorMessage)}
