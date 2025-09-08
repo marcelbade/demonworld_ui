@@ -262,9 +262,9 @@ const OptionButtons = () => {
         <Grid
           container
           direction="column" //
-          spacing={3}
+          spacing={4}
           sx={{
-            paddingTop: "0.5em",
+            paddingTop: "0.7em",
           }}
         >
           <BackToSelectionButton iconSize={ICON_SIZE_RESET_BUTTONS} />
