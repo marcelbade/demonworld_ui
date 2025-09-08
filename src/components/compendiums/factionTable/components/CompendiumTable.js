@@ -1,7 +1,7 @@
 // React
-import { Fragment, useContext } from "react";
+import { Fragment, useContext, useEffect, useState } from "react";
 // material ui
-import { Grid2 as Grid } from "@mui/material";
+import { Grid2 as Grid, Pagination } from "@mui/material";
 // components & functions
 import CompendiumTableRow from "./CompendiumTableRow";
 import DetailedCardView from "./CardRow";
@@ -17,6 +17,35 @@ import TopMenuDrawer from "../../../shared/TopMenuDrawer";
 const CompendiumTable = () => {
   const CC = useContext(CompendiumContext);
 
+  const [numberOfPages, setNumberOfPages] = useState(0);
+  const [selectedPage, setSelectedPage] = useState(1);
+  const [slicedDisplayUnits, setSlicedDisplayUnits] = useState([]);
+
+  const ROWS_PER_PAGE = 20;
+
+  useEffect(() => {
+    calculateNumberOfPages(CC.displayUnits);
+  }, [CC.displayUnits]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    createSlicedData();
+  }, [numberOfPages, selectedPage]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const calculateNumberOfPages = (dataArray) => {
+    setNumberOfPages(Math.ceil(dataArray.length / ROWS_PER_PAGE));
+  };
+
+  const createSlicedData = () => {
+    const offset = (selectedPage - 1) * ROWS_PER_PAGE;
+    setSlicedDisplayUnits(CC.displayUnits.slice(offset, offset + ROWS_PER_PAGE));
+  };
+
+  const turnPage = (event, value) => {
+    console.log(value);
+
+    setSelectedPage(value);
+  };
+
   return (
     <Grid container>
       <Grid //
@@ -28,8 +57,20 @@ const CompendiumTable = () => {
       >
         <TopMenuDrawer title={COMPENDIUM.TITLE} displayNaviBttn={true} />
 
-        <Grid size={4}>
+        <Grid size={6}>
           <FactionAndUnitSelectors />
+          <Pagination
+            count={numberOfPages} //
+            page={selectedPage}
+            onChange={turnPage}
+            sx={{
+              "& .MuiButtonBase-root": {
+                height: "2em",
+                width: "2em",
+                fontSize: "20px",
+              },
+            }}
+          />
         </Grid>
       </Grid>
 
@@ -37,7 +78,7 @@ const CompendiumTable = () => {
         <table rules="none">
           <CompendiumTableHeader />
           <tbody>
-            {CC.displayUnits
+            {slicedDisplayUnits
               .filter((u) => u.multiStateOrderNumber < 2)
               .map((unit, i) => {
                 return (
