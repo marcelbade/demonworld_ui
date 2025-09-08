@@ -42,7 +42,7 @@ const OptionButtons = () => {
   const [showArmyLoadDialog, setShowArmyLoadDialog] = useState(false);
   const [isExistingList, setIsExistingList] = useState(false);
 
-  const ICON_SIZE_OPTIONS = "2.5em";
+ 
   const ICON_SIZE_RESET_BUTTONS = "1.75em";
 
   /**
