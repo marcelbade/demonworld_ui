@@ -36,19 +36,16 @@ const TopMenuDrawer = (props) => {
         height: "5em",
       }}
     >
-      <Grid size={4}>
-        <Typography variant="h3">{props.title}</Typography>
-      </Grid>
-      <Grid
-        size={4} //
-        justifyContent="flex-end"
-        alignContent="center"
-      ></Grid>
+      {props.displayPageTitle ? (
+        <Grid size={4}>
+          <Typography variant="h3">{props.title}</Typography>
+        </Grid>
+      ) : null}
       <Grid
         container
-        size={3} //
+        size={4} //
         direction="row"
-        justifyContent="flex-end"
+        justifyContent="center"
         alignItems="center"
       >
         <NavigationButton
@@ -60,18 +57,20 @@ const TopMenuDrawer = (props) => {
           toolTipText={LANDINGPAGE.BACK_TO_LANDINGPAGE}
           altText={LANDINGPAGE.BACK_TO_LANDINGPAGE}
         />
-        <Grid size={2}>
-          <SettingsButton />
-        </Grid>
-        <Grid size={2}>
-          <UserLogButton
-            buttonWidth={"2em"}
-            buttonHeight={"2em"}
-            iconSize={"large"} //
-          />
-        </Grid>
       </Grid>
-
+      <Grid
+        container //
+        justifyContent="end"
+        alignContent="center"
+        size={4}
+      >
+        <SettingsButton />
+        <UserLogButton
+          buttonWidth={"2em"}
+          buttonHeight={"2em"}
+          iconSize={"large"} //
+        />
+      </Grid>
       <LoginDialog />
       <SettingsMenu />
     </Grid>

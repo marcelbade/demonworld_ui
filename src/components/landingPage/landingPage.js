@@ -56,9 +56,10 @@ const LandingPage = () => {
       }}
     >
       <TopMenuDrawer
-        drawerVariant="permanent" //
+        displayPageTitle={true}
         title={LANDINGPAGE.TITLE}
-        displayNaviBttn={false}
+        drawerVariant="permanent" //
+        displayNaviBttn={true}
       />
 
       <Stack

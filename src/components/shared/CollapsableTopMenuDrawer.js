@@ -17,6 +17,7 @@ const CollapsableTopMenuDrawer = (props) => {
       direction="down"
     >
       <TopMenuDrawer
+        displayPageTitle={props.displayPageTitle}
         title={props.title} //
         drawerVariant="temporary" //
         displayNaviBttn={props.displayNaviBttn}

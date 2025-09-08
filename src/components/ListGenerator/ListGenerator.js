@@ -53,8 +53,13 @@ const ListGenerator = () => {
         direction="column"
         alignContent={"center"}
         justifyContent={"center"}
+        sx={{
+          overflowY: "hidden", //
+          overflowX: "hidden",
+        }}
       >
         <CollapsableTopMenuDrawer
+          displayPageTitle={false}
           title={""} //
           displayNaviBttn={true}
           displayListBttns={true}
