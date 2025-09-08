@@ -108,6 +108,7 @@ const CreateNewAccount = () => {
         }}
       >
         <NavigationButton
+          displayNavigatonBttn={true}
           relativeURL={"/"} //
           isIconButton={true}
           isCustomIcon={false}

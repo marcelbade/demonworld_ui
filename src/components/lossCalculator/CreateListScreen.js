@@ -39,6 +39,7 @@ const CreateListScreen = () => {
         spacing={8}
       >
         <NavigationButton
+          displayNavigatonBttn={true}
           relativeURL={"/ListGenerator"} //
           isIconButton={false}
           variant={"outlined"} //

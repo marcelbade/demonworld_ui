@@ -37,17 +37,8 @@ const NavigationButton = (props) => {
     });
   };
 
-  return (
-    <Grid
-      container //
-      alignContent="center"
-      justifyContent="center"
-      sx={{
-        // backgroundColor: "green",
-        width: props.boxWidth,
-        height: props.boxHeight,
-      }}
-    >
+  return props.displayNavigatonBttn ? (
+    <Grid>
       {props.isIconButton ? (
         <NaviIconButton
           toPage={toPage} //
@@ -72,7 +63,7 @@ const NavigationButton = (props) => {
         />
       )}
     </Grid>
-  );
+  ) : null;
 };
 
 export default NavigationButton;

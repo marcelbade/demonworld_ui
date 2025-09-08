@@ -153,6 +153,7 @@ const LoginDialog = () => {
         sx={{ marginBottom: "1em" }}
       >
         <NavigationButton
+          displayNavigatonBttn={true}
           relativeURL={"/addNewAccount"} //
           textButtonVariant={"outlined"}
           isIconButton={false}

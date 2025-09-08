@@ -74,6 +74,7 @@ const LandingPage = () => {
           n.display ? (
             <NavigationButton
               key={i}
+              displayNavigatonBttn={true}
               relativeURL={n.relativeURL} //
               isIconButton={true}
               isCustomIcon={true}

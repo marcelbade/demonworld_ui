@@ -51,16 +51,15 @@ const TopMenuDrawer = (props) => {
         justifyContent="flex-end"
         alignItems="center"
       >
-        {props.displayNaviBttn ? (
-          <NavigationButton
-            relativeURL={"/"} //
-            isIconButton={true}
-            isCustomIcon={false}
-            icon={<ChevronLeft />}
-            toolTipText={LANDINGPAGE.BACK_TO_LANDINGPAGE}
-            altText={LANDINGPAGE.BACK_TO_LANDINGPAGE}
-          />
-        ) : null}
+        <NavigationButton
+          displayNavigatonBttn={props.displayNaviBttn}
+          relativeURL={"/"} //
+          isIconButton={true}
+          isCustomIcon={false}
+          icon={<ChevronLeft />}
+          toolTipText={LANDINGPAGE.BACK_TO_LANDINGPAGE}
+          altText={LANDINGPAGE.BACK_TO_LANDINGPAGE}
+        />
         <Grid size={2}>
           <SettingsButton />
         </Grid>
