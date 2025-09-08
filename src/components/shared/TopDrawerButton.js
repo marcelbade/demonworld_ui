@@ -1,7 +1,7 @@
 // react
 import { useContext } from "react";
 // mui
-import { Grid2 } from "@mui/material";
+import { Grid2 as Grid } from "@mui/material";
 // components and functions
 import { MenuContext } from "../../contexts/MenuContext";
 // icon
@@ -12,7 +12,7 @@ const TopDrawerButton = () => {
   const MC = useContext(MenuContext);
 
   return (
-    <Grid2
+    <Grid
       container
       alignContent="center"
       justifyContent="center"
@@ -22,7 +22,8 @@ const TopDrawerButton = () => {
       sx={{
         backgroundColor: "darkgray",
         borderRadius: "0em 0em 10em 10em",
-        width:"30vw",
+        width: "30vw",
+        height:"5vh"
       }}
     >
       {MC.openTopMenuDrawer ? ( //
@@ -30,7 +31,7 @@ const TopDrawerButton = () => {
       ) : (
         <KeyboardDoubleArrowDownIcon fontSize="large" />
       )}
-    </Grid2>
+    </Grid>
   );
 };
 
