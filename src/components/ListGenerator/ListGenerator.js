@@ -41,22 +41,24 @@ const ListGenerator = () => {
   };
 
   return (
-    // display this first, if no army is selected
-    <>
-      <Box sx={setArmySelectorBoxStyle()}>
-        <ArmySelectorDropdown />
-      </Box>
-      {/* display after an army was selected */}
+    <Grid
+      container //
+      size={12}
+      direction="row"
+      alignContent="center"
+    
+    >
       <Grid
-        container
-        size={12} //
+        container //
+        size={4}
+      >
+        <ArmySelectionBox />
+      </Grid>
+      <Grid
+        container //
+        size={4}
         direction="column"
-        alignContent={"center"}
-        justifyContent={"center"}
-        sx={{
-          overflowY: "hidden", //
-          overflowX: "hidden",
-        }}
+        alignContent="center"
       >
         <CollapsableTopMenuDrawer
           displayPageTitle={false}
@@ -65,17 +67,14 @@ const ListGenerator = () => {
           displayListBttns={true}
         />
         <TopDrawerButton />
-      </Grid>
-
-      <Grid
-        container //
-        direction="row"
-      >
-        <ArmySelectionBox />
         <ArmyListBox />
-        <MenuBox />
       </Grid>
-    </>
+      <Box sx={setArmySelectorBoxStyle()}>
+        <ArmySelectorDropdown />
+      </Box>
+
+      <MenuBox />
+    </Grid>
   );
 };
 
