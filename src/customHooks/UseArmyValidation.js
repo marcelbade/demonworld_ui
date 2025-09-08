@@ -51,7 +51,6 @@ const useArmyValidation = () => {
    * @returns a function call: collectValidatioResults()
 
    */
-  //TODO currentSubFactions === distinct subFactions
   const runValidation = (currentList, currentTotalPointAllowance, distinctSubFactions) => {
     let validator = ruleValidation(AC.selectedFactionName);
 

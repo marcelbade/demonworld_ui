@@ -26,9 +26,6 @@ const LightSwitch = (props) => {
       direction="row"
       alignContent="center"
     >
-      {/* TODO turn the tool tip into normal text */}
-      {/* <Tooltip title={<Typography>{OPTIONS.LIGHT_SWITCH}</Typography>}>  */}
-
       <FormGroup>
         <FormControlLabel
           control={
