@@ -48,6 +48,9 @@ const MenuBox = () => {
         anchor={"right"} //
         variant="persistent"
         open={c.show}
+        sx={{
+          width: "100%",
+        }}
       >
         {c.element}
       </Drawer>
