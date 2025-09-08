@@ -43,7 +43,7 @@ const OptionButtons = () => {
   const [isExistingList, setIsExistingList] = useState(false);
 
   const ICON_SIZE_OPTIONS = "2.5em";
-  const ICON_SIZE_RESET_BUTTONS = "2em";
+  const ICON_SIZE_RESET_BUTTONS = "1.75em";
 
   /**
    * Function takes the current army list as an object, stores it in the history object and naviagat3s to the LossCalculator component.
@@ -225,7 +225,10 @@ const OptionButtons = () => {
         showArmyLoadPrompt={showArmyLoadDialog} //
         setShowArmyLoadPrompt={setShowArmyLoadDialog} //
       />
-      <Stack direction="row">
+      <Stack
+        direction="row" //
+        spacing={3}
+      >
         <BackToSelectionButton iconSize={ICON_SIZE_RESET_BUTTONS} />
         <DeleteArmyListButton iconSize={ICON_SIZE_RESET_BUTTONS} />
       </Stack>
@@ -233,7 +236,6 @@ const OptionButtons = () => {
         direction="row" //
         spacing={3}
         sx={{
-          marginTop: "2em", //
           marginBottom: "5em",
         }}
       >
