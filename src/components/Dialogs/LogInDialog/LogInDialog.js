@@ -14,7 +14,7 @@ import {
 // icons
 import CancelIcon from "@mui/icons-material/Cancel";
 // functions and components
-import NaviButton from "../../landingPage/NaviButton";
+import NavigationButton from "../../shared/navigation/NavigationButton";
 // contexts
 import { UserContext } from "../../../contexts/userContext";
 import { MenuContext } from "../../../contexts/MenuContext";
@@ -152,14 +152,11 @@ const LoginDialog = () => {
         justifyContent="space-around"
         sx={{ marginBottom: "1em" }}
       >
-        <NaviButton
+        <NavigationButton
           relativeURL={"/addNewAccount"} //
-          variant={"outlined"}
+          textButtonVariant={"outlined"}
           isIconButton={false}
           altText={USER_AUTH.CREATE_NEW_ACCOUNT}
-          toolTipText={USER_AUTH.CREATE_NEW_ACCOUNT}
-          width={"3em"}
-          height={"3em"}
         />
 
         <Button

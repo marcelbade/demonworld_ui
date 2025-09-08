@@ -6,8 +6,8 @@ import { TextField, Typography, Grid2 as Grid, Button, Box, IconButton } from "@
 // icons
 import { ChevronLeft } from "@mui/icons-material";
 // functions and components
-import NaviButton from "../landingPage/NaviButton";
 import { isThePasswordValid } from "./PasswordCriteriaCheck";
+import NavigationButton from "../shared/navigation/NavigationButton";
 // contexts
 import LightSwitch from "../shared/LightSwitch";
 // constants
@@ -107,7 +107,7 @@ const CreateNewAccount = () => {
           width: "100%",
         }}
       >
-        <NaviButton
+        <NavigationButton
           relativeURL={"/"} //
           isIconButton={true}
           isCustomIcon={false}

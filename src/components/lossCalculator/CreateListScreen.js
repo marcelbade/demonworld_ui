@@ -3,8 +3,8 @@ import { useContext, useState } from "react";
 //Material UI
 import { Button, Grid2 as Grid } from "@mui/material";
 //  components and functions
-import NaviButton from "../landingPage/NaviButton";
 import LoginDialog from "../Dialogs/LogInDialog/LogInDialog";
+import NavigationButton from "../shared/navigation/NavigationButton";
 import OptionsMenu from "../shared/settings/SettingsMenu";
 // constants
 import { LOSS_CALCULATOR, OPTIONS } from "../../constants/textsAndMessages";
@@ -38,7 +38,7 @@ const CreateListScreen = () => {
         justifyItems="center"
         spacing={8}
       >
-        <NaviButton
+        <NavigationButton
           relativeURL={"/ListGenerator"} //
           isIconButton={false}
           variant={"outlined"} //

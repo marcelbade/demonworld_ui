@@ -4,7 +4,7 @@ import { Grid2 as Grid, Typography } from "@mui/material";
 import SettingsButton from "./settings/SettingsButton";
 import SettingsMenu from "./settings/SettingsMenu";
 import UserLogButton from "../Login/UserLogButton";
-import NaviButton from "../landingPage/NaviButton";
+import NavigationButton from "./navigation/NavigationButton";
 import LoginDialog from "../Dialogs/LogInDialog/LogInDialog";
 // icons
 import { ChevronLeft } from "@mui/icons-material";
@@ -52,7 +52,7 @@ const TopMenuDrawer = (props) => {
         alignItems="center"
       >
         {props.displayNaviBttn ? (
-          <NaviButton
+          <NavigationButton
             relativeURL={"/"} //
             isIconButton={true}
             isCustomIcon={false}

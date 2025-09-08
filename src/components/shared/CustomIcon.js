@@ -1,9 +1,23 @@
 // React
-import React, { useContext } from "react";
+import { useContext } from "react";
 // components and functions
 import { LightSwitchContext } from "../../contexts/lightSwitchContext";
 import { Icon } from "@mui/material";
 
+/**
+ * Component renders a custom svg icon by wrapping an HTML <img> element
+ * in a material ui <Icon> component. Component toggles the svg color
+ * from white to black when the theme changes.
+ * PLEASE NOT: requires a context called LightSwitchContext to toggle the color.
+ * @param {*} props
+ *  - icon
+ *  - altText
+ *  - width
+ *  - seize
+ *  - boxWidth (NOTE: not)
+ *  - boxHeight
+ * @returns an Icon element with an svg icon.
+ */
 const CustomIcon = (props) => {
   const LC = useContext(LightSwitchContext);
 
@@ -16,7 +30,7 @@ const CustomIcon = (props) => {
   };
 
   /**
-   *Function toggles the color of the custom icons. 
+   *Function toggles the color of the custom icons.
    * All icons in the app are black.
    * When using dark mode, the color is inverted.
    * The Same is true for icons on a dark background.

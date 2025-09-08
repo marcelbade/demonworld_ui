@@ -8,7 +8,7 @@ import calculatorIcon from "../../assets/icons/icons8-calculator-64.png";
 import bookIcon from "../../assets/icons/icons8-book-64.png";
 import scrollIcon from "../../assets/icons/scroll.png";
 // functions and components
-import NaviButton from "./NaviButton";
+import NavigationButton from "../shared/navigation/NavigationButton";
 import UserAccountDrawer from "../Login/UserAccountDrawer";
 // contexts
 import { UserContext } from "../../contexts/userContext";
@@ -50,7 +50,6 @@ const LandingPage = () => {
     <Grid
       container //
       direction="column"
-      // spacing={10}
       sx={{
         width: "100vw", //
         height: "100vh",
@@ -73,13 +72,17 @@ const LandingPage = () => {
       >
         {naviButtons.map((n, i) =>
           n.display ? (
-            <NaviButton
+            <NavigationButton
               key={i}
               relativeURL={n.relativeURL} //
               isIconButton={true}
               isCustomIcon={true}
               icon={n.icon}
               toolTipText={n.text}
+              iconWidth="100px"
+              iconHeight="100px"
+              boxWidth="200px"
+              boxHeight="200px"
             />
           ) : null
         )}
