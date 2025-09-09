@@ -11,6 +11,7 @@ import {
 } from "../../../../util/utilityFunctions";
 import CardButton from "./CardButton";
 import RowLock from "./RowLock";
+// material ui 
 import { TableRow } from "@mui/material";
 // custom hook
 import useCompendiumTableControl from "../../../../customHooks/UseCompendiumTableControl";
@@ -75,7 +76,19 @@ const CompendiumTableRow = (props) => {
       }}
     >
       {compendiumTableControl.getAllTableColumns().map((col, i) => {
-        return col.displayed ? <td key={i}> {displayValue(col)} </td> : null;
+        return col.displayed ? (
+          <td
+            key={i}
+            style={{
+              minWidth: col.minColumnWidth,
+              width: col.columnWidth,
+              maxWidth: col.maxColumnWidth,
+              wordWrap: "break-word",
+            }}
+          >
+            {displayValue(col)}
+          </td>
+        ) : null;
       })}
     </TableRow>
   );

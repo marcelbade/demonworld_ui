@@ -19,7 +19,7 @@ const CompendiumTable = () => {
 
   const [numberOfPages, setNumberOfPages] = useState(0);
   const [selectedPage, setSelectedPage] = useState(1);
-  const [slicedDisplayUnits, setSlicedDisplayUnits] = useState([]);
+  const [singlePageData, setSinglePageData] = useState([]);
 
   const ROWS_PER_PAGE = 20;
 
@@ -28,21 +28,19 @@ const CompendiumTable = () => {
   }, [CC.displayUnits]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
-    createSlicedData();
+    createDataForPage();
   }, [numberOfPages, selectedPage]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const calculateNumberOfPages = (dataArray) => {
     setNumberOfPages(Math.ceil(dataArray.length / ROWS_PER_PAGE));
   };
 
-  const createSlicedData = () => {
+  const createDataForPage = () => {
     const offset = (selectedPage - 1) * ROWS_PER_PAGE;
-    setSlicedDisplayUnits(CC.displayUnits.slice(offset, offset + ROWS_PER_PAGE));
+    setSinglePageData(CC.displayUnits.slice(offset, offset + ROWS_PER_PAGE));
   };
 
-  const turnPage = (event, value) => {
-    console.log(value);
-
+  const turnPage = (event, value) => { // event is needed!
     setSelectedPage(value);
   };
 
@@ -94,7 +92,7 @@ const CompendiumTable = () => {
         <table rules="none">
           <CompendiumTableHeader />
           <tbody>
-            {slicedDisplayUnits
+            {singlePageData
               .filter((u) => u.multiStateOrderNumber < 2)
               .map((unit, i) => {
                 return (

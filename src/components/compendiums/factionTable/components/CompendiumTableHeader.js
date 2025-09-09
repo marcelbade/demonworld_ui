@@ -24,7 +24,10 @@ const CompendiumTableHeader = () => {
                 textAlign: "center",
                 color: "white",
                 borderColor: "black",
-                padding: "5px",
+                padding: "4px",
+                minWidth: "5px",
+                width: "2em",
+                maxWidth: "130px",
               }}
               key={i}
             >
