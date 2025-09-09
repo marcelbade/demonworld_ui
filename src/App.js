@@ -401,8 +401,7 @@ function App() {
                                             <Route path="/addNewAccount" component={CreateNewAccount} exact />
                                           </Switch>
                                         </Grid>
-                                      ) : // TODO: Loading animation
-                                      null}
+                                      ) : null}
                                     </CustomSnackBarProvider>
                                   </ArmyProvider>
                                 </AllyProvider>

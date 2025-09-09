@@ -7,7 +7,7 @@ import { RightMenuContext } from "../contexts/rightMenuContext";
 import { TournamentRulesContext } from "../contexts/tournamentRulesContext";
 // components and functions
 import { BUTTON_TEXTS } from "../constants/textsAndMessages";
-import { SUMMONED } from "../constants/unitTypes"; 
+import { SUMMONED } from "../constants/unitTypes";
 
 /**Function toggles the menus on the right side. It controls what menu
  * and what content for which unit is shown. In order to do this, the menus are
@@ -31,7 +31,6 @@ const UseRightSideMenuController = (unit, subFaction, bttnSelectorObj) => {
   const RC = useContext(RightMenuContext);
   const SFC = useContext(SecondSubFactionContext);
   const TC = useContext(TournamentRulesContext);
-
 
   // switch cases
   const UNIT_CARDS = "UNIT_CARDS";
@@ -141,20 +140,10 @@ const UseRightSideMenuController = (unit, subFaction, bttnSelectorObj) => {
    * These if-statements control, whether the options menu should be displayed
    * instead of the stat card preview, the item shop or the menu for the second sub faction.
    */
-  if (
-    // !TC.showTournamentRulesMenu && // TODO remove
-    !RC.statCardState.show &&
-    !RC.itemShopState.show &&
-    !RC.secondSubFactionMenuState.show
-  ) {
+  if (!RC.statCardState.show && !RC.itemShopState.show && !RC.secondSubFactionMenuState.show) {
     RC.setShowOptionButtons(true);
   }
-  if (
-    // TC.showTournamentRulesMenu || // TODO remove
-    RC.statCardState.show ||
-    RC.itemShopState.show ||
-    RC.secondSubFactionMenuState.show
-  ) {
+  if (RC.statCardState.show || RC.itemShopState.show || RC.secondSubFactionMenuState.show) {
     RC.setShowOptionButtons(false);
   }
 
