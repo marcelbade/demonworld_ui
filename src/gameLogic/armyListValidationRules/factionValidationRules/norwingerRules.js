@@ -70,7 +70,7 @@ const NorwingerRules = {
       rules,
       validationData.selectedUnits,
       validationData.totalPointsAllowance,
-      validationData.subFactions
+      validationData.distinctSubFactions
     );
     let isAboveSubFactionMax = globalRules.unitsAboveSubFactionMax(
       rules,
@@ -79,7 +79,7 @@ const NorwingerRules = {
       validationData.availableUnits
     );
     let hasNoCommander = globalRules.isArmyCommanderPresent(validationData.selectedUnits, validationData.availableUnits, rules);
-    
+
     // tournament rules
     let maxCopies;
     let heroPointCap;
@@ -131,8 +131,6 @@ const NorwingerRules = {
     ];
     // result for sub factions below limit.
     validationResults.invalidSubFactions = [...isBelowSubFactionMin, ...hasNoCommander];
-
-     
 
     // Are there units that need to be removed from the list?
     let testForKingRemoval = mountainKingRuleRemove(validationData.selectedUnits);
