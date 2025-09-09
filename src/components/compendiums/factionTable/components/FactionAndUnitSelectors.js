@@ -1,11 +1,12 @@
 //  React
-import React, { useContext } from "react";
+import { useContext } from "react";
 // components & functions
 import { CompendiumContext } from "../../../../contexts/compendiumContext";
 import SelectionInput from "../../../shared/selectionInput";
 //  Constants
 import { ALL_FACTIONS_ARRAY } from "../../../../constants/factions";
 import { INPUT_TEXTS } from "../../../../constants/textsAndMessages";
+import { Grid2 as Grid } from "@mui/material";
 
 const FactionAndUnitSelectors = () => {
   const CC = useContext(CompendiumContext);
@@ -133,7 +134,10 @@ const FactionAndUnitSelectors = () => {
   };
 
   return (
-    <>
+    <Grid
+      container //
+      direction="column"
+    >
       <SelectionInput
         width={"20em"}
         alternatives={setFactionNamesOptions()}
@@ -149,13 +153,13 @@ const FactionAndUnitSelectors = () => {
         label={INPUT_TEXTS.SELECT_SUBFACTION}
       />
       <SelectionInput
-        width={"20em"}  
+        width={"20em"}
         alternatives={setUnitNamesOptions()}
         filterFunction={selectUnit}
         clearFunction={clearUnit}
         label={INPUT_TEXTS.SELECT_UNIT}
       />
-    </>
+    </Grid>
   );
 };
 
