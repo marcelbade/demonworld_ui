@@ -59,7 +59,7 @@ const LandingPage = () => {
         displayPageTitle={true}
         title={LANDINGPAGE.TITLE}
         drawerVariant="permanent" //
-        displayNaviBttn={true}
+        displayNaviBttn={false}
       />
 
       <Stack
