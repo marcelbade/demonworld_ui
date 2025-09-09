@@ -1,5 +1,3 @@
-//  react
-import React from "react";
 // notistack
 import { SnackbarProvider } from "notistack";
 //Material UI
@@ -8,7 +6,7 @@ import { Fade } from "@mui/material";
 import CustomIcon from "./CustomIcon";
 import customStyledMessage from "../../AppTheme/notiStackTheme";
 // icons
-import SpellBookIcon from "../../assets/icons/spellbook-white.png";
+import SpellBookIcon from "../../assets/icons/spellbook-black.png";
 // constants
 import { TOOLTIPS } from "../../constants/textsAndMessages";
 
@@ -21,14 +19,17 @@ const CustomSnackBarProvider = (props) => {
       }}
       preventDuplicate
       maxSnack={3}
+      style={{
+        fontSize: "21px",
+      }}
       TransitionComponent={Fade}
       iconVariant={{
-        error: (
+        info: (
           <CustomIcon
             icon={SpellBookIcon} //
             altText={TOOLTIPS.RULE_BOOK_TEXT}
-            height={35}
-            width={35}
+            height={44}
+            width={44}
             boxHeight={45}
             boxWidth={45}
           />

@@ -21,7 +21,7 @@ const usePushMessages = () => {
    */
   const showSnackBar = (text, messageType) => {
     enqueueSnackbar(text, {
-      persist: messageType === PUSH_MESSAGE_TYPES.ERROR ? false : true,
+      persist: false,
       autoHideDuration: 3000,
       variant: messageType,
       action: () => (
