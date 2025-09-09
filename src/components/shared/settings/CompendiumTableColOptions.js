@@ -19,7 +19,7 @@ const CompendiumTableColOptions = () => {
         container
         direction="row"
       >
-        {CC.toggleGroups.map((group, i) => {
+        {CC.compendiumTableColumns.map((group, i) => {
           return (
             <Stack
               key={i}

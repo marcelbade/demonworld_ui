@@ -12,7 +12,7 @@ import LossCalculator from "./components/lossCalculator/LossCalculator";
 import PdfBox from "./components/PDFGenerator/PDFBox";
 import CardCreator from "./components/cardCreator/CardCreator";
 import CreateNewAccount from "./components/Login/CreateNewAccount";
-import { columnStateArray } from "./components/compendiums/factionTable/components/columnsStateArray";
+import { CompendiumTableStateArray } from "./components/compendiums/factionTable/components/compendiumTableStateArray";
 // context providers
 import AllyProvider from "./contexts/allyContext";
 import AlternativeListProvider from "./contexts/alternativeListContext";
@@ -165,7 +165,7 @@ function App() {
   const [displaySubFactions, setDisplaySubFactions] = useState([]);
   const [displayUnits, setDisplayUnits] = useState([]);
   const [selectedStatCards, setSelectedStatCards] = useState([]);
-  const [toggleGroups, setToggleGroups] = useState(columnStateArray);
+  const [compendiumTableColumns, setCompendiumTableColumns] = useState(CompendiumTableStateArray);
 
   useEffect(() => {
     fetchTableData();
@@ -249,7 +249,7 @@ function App() {
                     displayUnits: displayUnits,
                     displaySubFactions: displaySubFactions,
                     data: tableData,
-                    toggleGroups: toggleGroups,
+                    compendiumTableColumns: compendiumTableColumns,
                     selectedFaction: selectedCompendiumFaction,
                     selectedSubFaction: selectedSubFaction,
                     selectedStatCards: selectedStatCards,
@@ -259,7 +259,7 @@ function App() {
                     setDisplayUnits: setDisplayUnits,
                     setSelectedFaction: setSelectedCompendiumFaction,
                     setSelectedSubFaction: setSelectedSubFaction,
-                    setToggleGroups: setToggleGroups,
+                    setCompendiumTableColumns: setCompendiumTableColumns,
                     setSelectedStatCards: setSelectedStatCards,
                     setUnitData: setUnitData,
                   }}

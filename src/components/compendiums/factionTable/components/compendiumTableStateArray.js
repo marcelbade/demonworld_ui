@@ -1,10 +1,10 @@
 import { COMPENDIUM, CARD_TEXT } from "../../../../constants/textsAndMessages";
 
 /**
- * Since the state for the table is relatively large, it is put in its own file
+ * Since the state for the compendium table is relatively large, it is put in its own file
  */
 
-export const columnStateArray = [
+export const CompendiumTableStateArray = [
   // button
   {
     toggleGroup: "button",

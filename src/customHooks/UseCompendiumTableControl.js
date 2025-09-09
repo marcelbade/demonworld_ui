@@ -6,6 +6,8 @@ import { CompendiumContext } from "../contexts/compendiumContext";
 const useCompendiumTableControl = () => {
   const CC = useContext(CompendiumContext);
 
+
+  // Add the lock property to unitCard objects
   const addLock = (rawUnits) => {
     for (let i = 0; i < rawUnits.length; i++) {
       rawUnits[i] = { ...rawUnits[i], unitLocked: false };
@@ -21,7 +23,7 @@ const useCompendiumTableControl = () => {
    * @param {String} columnName
    */
   const toggleColumn = (columnName) => {
-    let tempArray = [...CC.toggleGroups];
+    let tempArray = [...CC.compendiumTableColumns];
 
     for (let i = 0; i < tempArray.length; i++) {
       const group = tempArray[i];
@@ -34,7 +36,7 @@ const useCompendiumTableControl = () => {
         }
       }
     }
-    CC.setToggleGroups(tempArray);
+    CC.setCompendiumTableColumns(tempArray);
   };
 
   /**
@@ -44,7 +46,7 @@ const useCompendiumTableControl = () => {
    * @param {[String]} columnGroup
    */
   const toggleGroupsOfColumns = (groupName) => {
-    let tempArray = [...CC.toggleGroups];
+    let tempArray = [...CC.compendiumTableColumns];
 
     for (let i = 0; i < tempArray.length; i++) {
       if (tempArray[i].toggleGroup === groupName) {
@@ -52,7 +54,7 @@ const useCompendiumTableControl = () => {
         tempArray[i].columns.forEach((c) => (c.displayed = tempArray[i].displayGroup));
       }
     }
-    CC.setToggleGroups(tempArray);
+    CC.setCompendiumTableColumns(tempArray);
   };
 
  
@@ -70,8 +72,11 @@ const useCompendiumTableControl = () => {
       : CC.setSelectedStatCards([...CC.selectedStatCards, id]);
   };
 
+  // return all table columns as a 1-d array
   const getAllTableColumns = () => {
-    const colGroups = CC.toggleGroups.map((group) => group.columns);
+    const colGroups = CC.compendiumTableColumns.map((group) => group.columns);
+
+    // turn 2d into 1d array
     return [].concat(...colGroups);
   };
 
