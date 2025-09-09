@@ -146,6 +146,7 @@ export const USER_AUTH = {
   LOGIN_PROMPT_TITLE: "Willkommen",
   LOGIN_USER: "Benutzername",
   EMAIL_USER: "E-Mail",
+  EMAIL_HELP_TEXT: "Die E-Mail-Adresse wird ausschließlich für das Zurücksetzen des Passworts benötigt.",
   LOGIN_PW: "Passwort eigeben",
   LOGIN_ACTION: "Einloggen",
   LOGIN_BUTTON: "Ins Konto einloggen",

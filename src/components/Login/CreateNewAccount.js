@@ -3,15 +3,14 @@ import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 // Material UI
 import { TextField, Typography, Grid2 as Grid, Button, Box, IconButton } from "@mui/material";
-// icons
-import { ChevronLeft } from "@mui/icons-material";
 // functions and components
 import { isThePasswordValid } from "./PasswordCriteriaCheck";
-import NavigationButton from "../shared/navigation/NavigationButton";
-// contexts
-import LightSwitch from "../shared/LightSwitch";
+import CollapsableTopMenuDrawer from "../shared/CollapsableTopMenuDrawer";
+import ContextHelpButton from "../shared/ContextHelpButton";
+
+import TopDrawerButton from "../shared/TopDrawerButton";
 // constants
-import { LANDINGPAGE, PASSWORDS, USER_AUTH } from "../../constants/textsAndMessages";
+import { PASSWORDS, PUSH_MESSAGE_TYPES, USER_AUTH } from "../../constants/textsAndMessages";
 import { ALL_USER_NAMES_URL, REGISTER_USER_URL } from "../../constants/URLs";
 // custom hooks
 import useAxios from "../../customHooks/UseAxios";
@@ -100,27 +99,29 @@ const CreateNewAccount = () => {
       }}
     >
       <Grid
+        container
+        direction="column"
+        alignItems="center"
+        sx={{
+          marginBottom: "1em",
+        }}
+      >
+        <CollapsableTopMenuDrawer
+          displayPageTitle={false}
+          title={""} //
+          displayNaviBttn={true}
+          displayListBttns={true}
+        />
+        <TopDrawerButton />
+      </Grid>
+      <Grid
         container //
         alignContent="space-between"
         justifyContent="space-between"
         sx={{
           width: "100%",
         }}
-      >
-        <NavigationButton
-          displayNavigatonBttn={true}
-          relativeURL={"/"} //
-          isIconButton={true}
-          isCustomIcon={false}
-          icon={ChevronLeft}
-          altText={LANDINGPAGE.BACK_TO_LANDINGPAGE}
-          toolTipText={LANDINGPAGE.BACK_TO_LANDINGPAGE}
-          width={"3em"}
-          height={"3em"}
-        />
-
-        <LightSwitch />
-      </Grid>
+      ></Grid>
 
       <Typography variant="h3">{USER_AUTH.LOGIN_PROMPT_TITLE}</Typography>
 
@@ -156,18 +157,29 @@ const CreateNewAccount = () => {
             error={isUserTaken}
             helperText={isUserTaken ? PASSWORDS.USER_NAME_ALREADY_TAKEN : null}
           />
-          <TextField
-            sx={{ width: INPUT_WIDTH, marginTop: MARGIN }}
-            autoFocus //
-            required
-            id="email"
-            name="email"
-            variant="outlined"
-            label={USER_AUTH.EMAIL_USER}
-            error={null}
-            helperText={null}
-          />
-
+          <Grid
+            container //
+            spacing={3}
+            direction="row"
+            alignItems="baseline"
+          >
+            <TextField
+              sx={{ width: INPUT_WIDTH, marginTop: MARGIN }}
+              autoFocus //
+              required
+              id="email"
+              name="email"
+              variant="outlined"
+              label={USER_AUTH.EMAIL_USER}
+              error={null}
+              helperText={null}
+            />
+            <ContextHelpButton
+              isVisible={true}
+              message={USER_AUTH.EMAIL_HELP_TEXT} //
+              type={PUSH_MESSAGE_TYPES.INFO}
+            />
+          </Grid>
           <Grid
             container //
             spacing={3}
