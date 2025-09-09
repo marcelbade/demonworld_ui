@@ -46,7 +46,7 @@ const OptionButtons = () => {
   const ICON_SIZE_RESET_BUTTONS = "1.75em";
 
   /**
-   * Function takes the current army list as an object, stores it in the history object and naviagat3s to the LossCalculator component.
+   * Function takes the current army list as an object, stores it in the history object and naviagates to the LossCalculator component.
    */
   const navigateToLossCalculator = () => {
     history.push({
