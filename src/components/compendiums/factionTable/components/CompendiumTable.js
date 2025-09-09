@@ -6,13 +6,13 @@ import { Grid2 as Grid, Pagination } from "@mui/material";
 import CompendiumTableRow from "./CompendiumTableRow";
 import DetailedCardView from "./CardRow";
 import CompendiumTableHeader from "./CompendiumTableHeader";
+import CollapsableTopMenuDrawer from "../../../shared/CollapsableTopMenuDrawer";
+import TopDrawerButton from "../../../shared/TopDrawerButton";
 //icons
 import FactionAndUnitSelectors from "./FactionAndUnitSelectors";
 import { CompendiumContext } from "../../../../contexts/compendiumContext";
 // constants
 import { COMPENDIUM } from "../../../../constants/textsAndMessages";
-
-import TopMenuDrawer from "../../../shared/TopMenuDrawer";
 
 const CompendiumTable = () => {
   const CC = useContext(CompendiumContext);
@@ -50,14 +50,29 @@ const CompendiumTable = () => {
     <Grid container>
       <Grid //
         container
-        direction="row"
+        direction="column"
         size={12}
-        spacing={9}
-        justifyContent="space-between"
       >
-        <TopMenuDrawer title={COMPENDIUM.TITLE} displayNaviBttn={true} />
-
-        <Grid size={6}>
+        <Grid
+          container //
+          direction="column"
+          alignItems="center"
+        >
+          <CollapsableTopMenuDrawer
+            displayPageTitle={true}
+            title={COMPENDIUM.TITLE} //
+            displayNaviBttn={true}
+            displayListBttns={true}
+          />
+          <TopDrawerButton />
+        </Grid>
+        <Grid
+          container //
+          direction="row"
+          justifyContent="space-between"
+          alignItems="end"
+          sx={{ paddingTop: "2em" }}
+        >
           <FactionAndUnitSelectors />
           <Pagination
             count={numberOfPages} //
@@ -68,6 +83,7 @@ const CompendiumTable = () => {
                 height: "2em",
                 width: "2em",
                 fontSize: "20px",
+                marginBottom: "1em",
               },
             }}
           />
