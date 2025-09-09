@@ -1,29 +1,52 @@
 // React
-import React, { useContext } from "react";
+import { useContext } from "react";
 //Material UI
-import { List } from "@mui/material";
+import { Grid2 as Grid, List, Typography } from "@mui/material";
 // components and functions
-import { LossCalcContext } from "../../../contexts/LossCalculatorContext";
 import LostUnitListElement from "./LostUnitListElement";
+// contexts
+import { LossCalcContext } from "../../../contexts/LossCalculatorContext";
 
 const LostUnitList = () => {
-  const calcContext = useContext(LossCalcContext);
+  const LC = useContext(LossCalcContext);
 
-  return (
-    <List>
-      {calcContext.list
-        .sort((a, b) => a.unitName > b.unitName)
-        .map((u, i) => {
-          return (
-            <LostUnitListElement
-              unit={u} //
-              index={i}
-              key={u.uniqueID}
-            />
-          );
-        })}
-    </List>
-  );
+ /**
+  * Function takes the current list of lost units, extracts 
+  * all sub faction names, removes duplicates 
+  * and returns them.
+  * @returns an array contain the distinct sub faction 
+  * names for the current list
+  */
+  const getSubFactionsFromList = () => {
+    return [...new Set(LC.list.map((u) => u.subFaction))];
+  };
+
+  return getSubFactionsFromList().map((subFaction) => {
+    return (
+      <Grid
+        container //
+        direction="column"
+        justifyItems="center"
+        alignItems="center"
+      >
+        <Typography variant="h6">{subFaction}</Typography>
+        <List>
+          {LC.list
+            .filter((unit) => unit.subFaction === subFaction)
+            .sort((a, b) => a.unitName > b.unitName)
+            .map((u, i) => {
+              return (
+                <LostUnitListElement
+                  unit={u} //
+                  index={i}
+                  key={u.uniqueID}
+                />
+              );
+            })}
+        </List>
+      </Grid>
+    );
+  });
 };
 
 export default LostUnitList;

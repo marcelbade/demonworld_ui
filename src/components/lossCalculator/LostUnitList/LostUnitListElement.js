@@ -12,7 +12,7 @@ import ListElementName from "./ListElementName";
 import TotalLossButton from "../LossCalcInputButtons/TotalLossButton";
 
 const LostUnitListElement = (props) => {
-  const calcContext = useContext(LossCalcContext);
+  const LC = useContext(LossCalcContext);
   const theme = useTheme();
 
   const STYLES = {
@@ -69,7 +69,7 @@ const LostUnitListElement = (props) => {
 
         <Grid size={1}>
           <Typography variant="h6" align="center">
-            {calcContext.unitPointsLost}
+            {LC.unitPointsLost}
           </Typography>
         </Grid>
         <Grid //

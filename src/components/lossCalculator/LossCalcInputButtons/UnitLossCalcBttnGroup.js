@@ -14,18 +14,18 @@ import { LossCalcContext } from "../../../contexts/LossCalculatorContext";
 import UnitLossCalculatorButton from "./UnitLossCalculatorButton";
 
 const UnitLossCalcBttnGroup = (props) => {
-  const calcContext = useContext(LossCalcContext);
+  const LC = useContext(LossCalcContext);
 
   /**
    * Function lets the user add lost elements.
    */
   const addLoss = () => {
-    let tempArray = [...calcContext.list];
+    let tempArray = [...LC.list];
 
     let unitIndex = tempArray.findIndex((u) => u.uniqueID === props.unit.uniqueID);
     ++tempArray[unitIndex].lossCounter;
 
-    calcContext.setList([...tempArray]);
+    LC.setList([...tempArray]);
   };
 
   const addFullUnit = () => {
@@ -38,12 +38,12 @@ const UnitLossCalcBttnGroup = (props) => {
    * Function lets the user subtract lost elements.
    */
   const subtractLoss = () => {
-    let tempArray = [...calcContext.list];
+    let tempArray = [...LC.list];
 
     let unitIndex = tempArray.findIndex((u) => u.uniqueID === props.unit.uniqueID);
     --tempArray[unitIndex].lossCounter;
 
-    calcContext.setList([...tempArray]);
+    LC.setList([...tempArray]);
   };
 
   const subtractFullUnit = () => {

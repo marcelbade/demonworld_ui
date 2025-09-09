@@ -9,19 +9,19 @@ import { LossCalcContext } from "../../../contexts/LossCalculatorContext";
 import skullsIcon from "../../../assets/icons/skulls.png";
 
 const TotalLossButton = (props) => {
-  const calcContext = useContext(LossCalcContext);
+  const LC = useContext(LossCalcContext);
 
   /**
    * Function immediately sets the number of lost elements or hitpoints to the maximum number possible.
    */
   const unitDestroyed = () => {
-    let tempArray = [...calcContext.list];
+    let tempArray = [...LC.list];
 
     let unitIndex = tempArray.findIndex((u) => u.uniqueID === props.unit.uniqueID);
     tempArray[unitIndex].lossCounter = props.unit.maxCounter;
     tempArray[unitIndex].unitDestroyed = true;
 
-    calcContext.setList([...tempArray]);
+    LC.setList([...tempArray]);
   };
 
   /**

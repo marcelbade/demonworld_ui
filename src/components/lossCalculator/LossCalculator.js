@@ -2,13 +2,14 @@
 import { useContext, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 // Material UI
-import { Grid2 as Grid } from "@mui/material";
+import { Box, Grid2 as Grid } from "@mui/material";
 // components and functions
 import CreateListScreen from "./CreateListScreen";
 import LostPointDisplay from "./LostPointDisplay";
 import LostUnitList from "./LostUnitList/LostUnitList";
 import usePointCostCalculator from "../../customHooks/UsePointCostCalculator";
-import SettingsMenu from "../shared/settings/SettingsMenu";
+import CollapsableTopMenuDrawer from "../shared/CollapsableTopMenuDrawer";
+import TopDrawerButton from "../shared/TopDrawerButton";
 // context
 import { LossCalcContext } from "../../contexts/LossCalculatorContext";
 
@@ -60,49 +61,46 @@ const LossCalculator = () => {
   return LC.list.length !== 0 ? (
     <Grid
       container
-      direction="row" //
+      size={12} //
       justifyContent="flex-start"
-      alignItems="flex-start"
+      alignContent="start"
+      width="100vw"
+      height="100vh"
     >
       <Grid
-        sx={{
-          position: "fixed",
-        }}
+        container //
+        direction="column"
+        justifyItems="start"
+        alignItems="center"
+        size={12}
       >
-        <SettingsMenu />
+        <CollapsableTopMenuDrawer
+          displayPageTitle={true}
+          title={""} //
+          displayNaviBttn={true}
+          displayListBttns={true}
+        />
+        <TopDrawerButton />
       </Grid>
       <Grid
         container //
-        size={10}
-        direction="column"
+        size={12}
         sx={{
-          marginLeft: "5em",
-          marginTop: "5em",
+          marginTop: "3em",
         }}
       >
         <LostUnitList list={LC.list} />
       </Grid>
-      <Grid
+      {/* -- outside the layout! -- */}
+      <Box
         sx={{
-          marginTop: "4em", //
-          marginLeft: "4em", //
           position: "fixed",
-          top: "10%",
-          left: "60%",
+          top: "15em",
+          right: "10em",
         }}
       >
         <LostPointDisplay totalPointsLost={LC.totalPointsLost} />
-      </Grid>
-      <Grid
-        container //
-        size={7}
-        justifyContent="flex-end"
-        alignItems="center"
-        sx={{
-          marginTop: "2em", //
-          paddingRight: "1em",
-        }}
-      ></Grid>
+      </Box>
     </Grid>
   ) : (
     <CreateListScreen />
