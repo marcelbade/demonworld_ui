@@ -1,5 +1,5 @@
 // React
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 // Material UI
 import { Avatar, IconButton, Tooltip, Typography } from "@mui/material";
 // icons
@@ -8,6 +8,7 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import { USER_AUTH } from "../../constants/textsAndMessages";
 // contexts
 import { UserContext } from "../../contexts/userContext";
+import { randomRgbValue } from "../../util/utilityFunctions";
 
 /**
  * This JSX component displays the login button. When clicked the login Dialog is displayed.
@@ -20,6 +21,11 @@ import { UserContext } from "../../contexts/userContext";
  */
 const UserLogButton = (props) => {
   const UC = useContext(UserContext);
+  const [rgbValue, setRgbValue] = useState("");
+
+  useEffect(() => {
+    setRgbValue(randomRgbValue());
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const displayLogInDialog = () => {
     UC.setDisplayLogInDialog(true);
@@ -47,7 +53,7 @@ const UserLogButton = (props) => {
         >
           <Avatar
             sx={{
-              backgroundColor: "green", //
+              backgroundColor: rgbValue, //
             }}
           >
             {UC.user.userName //
@@ -60,7 +66,6 @@ const UserLogButton = (props) => {
           sx={{
             width: props.buttonWidth,
             height: props.buttonHeight,
-             
           }}
           onClick={() => {
             displayLogInDialog();

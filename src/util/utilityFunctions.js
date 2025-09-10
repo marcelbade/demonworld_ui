@@ -202,3 +202,24 @@ export const renderDynamicIcons = (data) => {
 
   return result;
 };
+
+/**
+ * Function creates a string with a random RGB color value.
+ * @returns a string with the pattern "rgb(#1,#2,#3)"
+ */
+export const randomRgbValue = () => {
+  let values = [];
+
+  for (let i = 0; i <= 2; i++) {
+    values[i] = getRandomIntInclusive(1, 254);
+  }
+
+  return `rgb(${values[0]},${values[1]},${values[2]})`;
+};
+
+// create a random integer that lies min and max, inclusively.
+const getRandomIntInclusive = (min, max) => {
+  const minCeiled = Math.ceil(min);
+  const maxFloored = Math.floor(max);
+  return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled);
+};
