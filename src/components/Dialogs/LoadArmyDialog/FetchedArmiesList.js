@@ -113,7 +113,7 @@ const FetchedArmiesList = (props) => {
             <Tooltip title={<Typography sx={{ fontSize: "20px" }}>{ARMY_LIST.DELETE_LIST}</Typography>}>
               <IconButton
                 onClick={() => {
-                  props.deleteArmyListButton(l);
+                  props.deleteArmyFromDB(l);
                 }} //
               >
                 <DeleteIcon />

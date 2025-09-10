@@ -138,8 +138,8 @@ const LoadArmyListDialog = (props) => {
    * Async function deletes an army list from the DB
    * @param {*} listObj
    */
-  const deleteArmyListButton = (l) => {
-    setListToDelete(l);
+  const deleteArmyFromDB = (listObj) => {
+    setListToDelete(listObj);
 
     if (!MC.blockDialog.showDeletionDialog) {
       setShowConfirmationDialog(true);
@@ -236,7 +236,7 @@ const LoadArmyListDialog = (props) => {
           filteredFaction={filteredFaction} //
           filteredEvent={filteredEvent}
           loadListintoTool={loadListintoTool}
-          deleteArmyListButton={deleteArmyListButton}
+          deleteArmyFromDB={deleteArmyFromDB}
         />
       </Grid>
       <ConfirmationDialog
