@@ -8,7 +8,7 @@ import NavigationButton from "../shared/navigation/NavigationButton";
 import OptionsMenu from "../shared/settings/SettingsMenu";
 // constants
 import { LOSS_CALCULATOR, OPTIONS } from "../../constants/textsAndMessages";
-import LoadArmyListPrompt from "../Dialogs/LoadArmyDialog/LoadArmyListDialog";
+import LoadArmyListDialog from "../Dialogs/LoadArmyDialog/LoadArmyListDialog";
 // contexts
 import { LossCalcContext } from "../../contexts/LossCalculatorContext";
 
@@ -58,7 +58,7 @@ const CreateListScreen = () => {
           {OPTIONS.LOAD_LIST}
         </Button>
         <LoginDialog />
-        <LoadArmyListPrompt
+        <LoadArmyListDialog
           listSetter={LC.setList}
           showArmyLoadPrompt={showArmyLoadPrompt} //
           setShowArmyLoadPrompt={setShowArmyLoadPrompt} //
