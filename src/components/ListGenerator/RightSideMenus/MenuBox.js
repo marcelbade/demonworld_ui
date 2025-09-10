@@ -3,7 +3,7 @@ import { useContext } from "react";
 // Material UI
 import { Drawer } from "@mui/material";
 // components and functions
-import OptionButtons from "./Menus/OptionButtons/OptionButtons";
+import OptionButtonsPage from "./Menus/OptionButtons/OptionButtonsPage";
 import ItemShop from "./Menus/ItemShop/ItemShop";
 import SecondSubFactionMenu from "./Menus/SecondSubfactionMenu/SecondSubfactionMenu";
 import CardViewBox from "./Menus/CardView/CardViewBox";
@@ -22,7 +22,7 @@ const MenuBox = () => {
     {
       exists: true, //
       show: RC.showOptionButtons,
-      element: <OptionButtons />,
+      element: <OptionButtonsPage />,
     },
     {
       exists: true, //

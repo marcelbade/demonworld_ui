@@ -1,16 +1,13 @@
 //  material ui
-import { Button, Dialog, DialogTitle, Grid2 as Grid, IconButton, useTheme } from "@mui/material";
-import CancelIcon from "@mui/icons-material/Cancel";
+import { Button, Dialog, Grid2 as Grid } from "@mui/material";
 // functions and components
-import ContextHelpButton from "../../shared/ContextHelpButton";
 // constants
 import { PDF, PUSH_MESSAGE_TYPES } from "../../../constants/textsAndMessages";
+import CustomDialogTitle from "../components/CustomDialogTitle";
 
 const SelectPdfTypeDialog = (props) => {
-  const theme = useTheme();
-
   const handleClose = () => {
-    props.setShowPdfTypePrompt(false);
+    props.setShowPdfTypeDialog(false);
   };
 
   return (
@@ -24,26 +21,16 @@ const SelectPdfTypeDialog = (props) => {
           },
         },
       }}
-      open={props.showPdfTypePrompt} //
+      open={props.showPdfTypeDialog} //
       onClose={handleClose}
     >
-      <Grid
-        container //
-        justifyContent="center"
-        sx={theme.palette.dialogs.title}
-      >
-        <DialogTitle>{PDF.SELECT_PDF_TYPE}</DialogTitle>
-        <ContextHelpButton
-          isVisible={true}
-          message={PDF.PDF_CONTEXT_HELP} //
-          type={PUSH_MESSAGE_TYPES.INFO}
-        />
-        <IconButton
-          onClick={handleClose} //
-        >
-          <CancelIcon color="error" />
-        </IconButton>
-      </Grid>
+      <CustomDialogTitle
+        title={PDF.SELECT_PDF_TYPE}
+        handleClose={handleClose}
+        displayHelpBttn={true}
+        pushMessage={PDF.PDF_CONTEXT_HELP}
+        pushMessageType={PUSH_MESSAGE_TYPES.INFO}
+      />
       <Grid
         container //
         alignContent="center"
@@ -56,7 +43,7 @@ const SelectPdfTypeDialog = (props) => {
           variant="outlined"
           onClick={() => {
             props.openPDfInNewTab({ printDefaultList: true });
-            props.setShowPdfTypePrompt(false);
+            props.setShowPdfTypeDialog(false);
           }}
         >
           {PDF.CREATE_DEFAULT_LIST}
@@ -66,7 +53,7 @@ const SelectPdfTypeDialog = (props) => {
           variant="outlined"
           onClick={() => {
             props.openPDfInNewTab({ printDefaultList: false });
-            props.setShowPdfTypePrompt(false);
+            props.setShowPdfTypeDialog(false);
           }}
         >
           {PDF.CREATE_DETAILED_LIST}

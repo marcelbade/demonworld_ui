@@ -3,15 +3,15 @@ import { useContext } from "react";
 // Material UI
 import { IconButton, Tooltip, Typography } from "@mui/material";
 // context
-import { SelectionContext } from "../../contexts/selectionContext";
+import { SelectionContext } from "../../../../../../contexts/selectionContext";
 // icons
-import deleteListIcon from "../../assets/icons/deleteListIcon.svg";
+import deleteListIcon from "../../../../../../assets/icons/deleteListIcon.svg";
 
 // constants
-import { TOOLTIPS } from "../../constants/textsAndMessages";
+import { TOOLTIPS } from "../../../../../../constants/textsAndMessages";
 // custom hooks
-import useArmyValidation from "../../customHooks/UseArmyValidation";
-import CustomIcon from "./CustomIcon";
+import useArmyValidation from "../../../../../../customHooks/UseArmyValidation";
+import CustomIcon from "../../../../../shared/CustomIcon";
 
 /**
  * Function renders a button that deletes the entire army list.
@@ -22,17 +22,18 @@ const DeleteArmyListButton = (props) => {
   const SEC = useContext(SelectionContext);
   const validation = useArmyValidation();
 
+  const deleteList = () => {
+    SEC.setSelectedUnits([]);
+    // pass emtpy array since all units are removed from the list
+    const validationResult = validation.testArmySelectionAndRunValidation([], SEC.maxPointsAllowance);
+
+    validation.testForDisabledSubFaction(validationResult.unitsBlockedbyRules);
+  };
+
   return (
     <Tooltip title={<Typography>{TOOLTIPS.DELETE_ARMY_LIST}</Typography>}>
       <IconButton
-        variant="outlined"
-        onClick={() => {
-          SEC.setSelectedUnits([]);
-          // pass emtpy array since all units are removed from the list
-          const validationResult = validation.testArmySelectionAndRunValidation([], SEC.maxPointsAllowance);
-
-          validation.testForDisabledSubFaction(validationResult.unitsBlockedbyRules);
-        }}
+        onClick={() => deleteList()} //
         size="large"
       >
         <CustomIcon
