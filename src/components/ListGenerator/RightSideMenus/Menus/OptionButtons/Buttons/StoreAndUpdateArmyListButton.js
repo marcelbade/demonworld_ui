@@ -5,14 +5,17 @@ import { IconButton, Tooltip, Typography } from "@mui/material";
 // components and functions
 import CustomIcon from "../../../../../shared/CustomIcon";
 // context
+import { SelectionContext } from "../../../../../../contexts/selectionContext";
 import { UserContext } from "../../../../../../contexts/userContext";
 // icons
+import customSaveIcon from "../../../../../../assets/icons/customSaveIcon.svg";
 import listUpdateIcon from "../../../../../../assets/icons/listUpdateIcon.svg";
 // constants
 import { OPTIONS } from "../../../../../../constants/textsAndMessages";
 import StoreArmyListDialog from "../../../../../Dialogs/StoreArmyListDialog/StoreArmyListDialog";
 
-const UpdateArmyListButton = (props) => {
+const StoreAndUpdateArmyListButton = (props) => {
+  const SEC = useContext(SelectionContext);
   const UC = useContext(UserContext);
 
   const displayStoreArmyDialog = () => {
@@ -21,22 +24,34 @@ const UpdateArmyListButton = (props) => {
 
   return (
     <>
-      <Tooltip title={<Typography sx={{ fontSize: "20px" }}>{OPTIONS.UPDATE_LIST}</Typography>}>
+      <Tooltip
+        title={
+          <Typography sx={{ fontSize: "20px" }}>
+            {props.isUpdateSelected
+              ? OPTIONS.UPDATE_LIST //
+              : OPTIONS.STORE_LIST}
+          </Typography>
+        }
+      >
         <span>
           <IconButton
-            disabled={!UC.userLoggedIn} //
+            disabled={
+              props.isUpdateSelected
+                ? !UC.userLoggedIn //
+                : SEC.selectedUnits.length === 0
+            } //
             onClick={() => {
-              props.setIsExistingList(true);
+              props.setIsExistingList(!props.isUpdateSelected);
               displayStoreArmyDialog();
             }}
           >
             <CustomIcon
-              icon={listUpdateIcon} //
-              altText={OPTIONS.UPDATE_LIST}
-              height={"65px"}
-              width={"65px"}
-              boxHeight={"70px"}
-              boxWidth={"70px"}
+              icon={props.isUpdateSelected ? listUpdateIcon : customSaveIcon} //
+              altText={props.isUpdateSelected ? OPTIONS.UPDATE_LIST : OPTIONS.STORE_LIST}
+              height={"55px"}
+              width={"55px"}
+              boxHeight={"60px"}
+              boxWidth={"60px"}
             />
           </IconButton>
         </span>
@@ -50,4 +65,4 @@ const UpdateArmyListButton = (props) => {
   );
 };
 
-export default UpdateArmyListButton;
+export default StoreAndUpdateArmyListButton;

@@ -11,8 +11,7 @@ import DeleteArmyListButton from "./Buttons/DeleteArmyListButton";
 // constants
 import ArmyMetaDataInput from "../../../ArmyListView/ArmyList/ArmyListHeader/ArmyMetaDataInput";
 import CreatePdfButton from "./Buttons/CreatePdfButton";
-import StoreArmyListButton from "./Buttons/StoreArmyListButton";
-import UpdateArmyListButton from "./Buttons/UpdateArmyListButton";
+import StoreAndUpdateArmyListButton from "./Buttons/StoreAndUpdateArmyListButton";
 import LoadArmyButton from "./Buttons/LoadArmyButton";
 import LossCalculatorButton from "./Buttons/LossCalculatorButton";
 
@@ -61,18 +60,22 @@ const OptionButtonsPage = () => {
         >
           <CreatePdfButton />
           <LoadArmyButton />
-          <StoreArmyListButton
+          <StoreAndUpdateArmyListButton
+            isUpdateSelected={false}
             showArmySaveDialog={showArmySaveDialog}
             setShowArmySaveDialog={setShowArmySaveDialog}
             isExistingList={isExistingList} //
             setIsExistingList={setIsExistingList}
           />
-          <UpdateArmyListButton
+
+          <StoreAndUpdateArmyListButton
+            isUpdateSelected={true}
             showArmySaveDialog={showArmySaveDialog}
             setShowArmySaveDialog={setShowArmySaveDialog}
             isExistingList={isExistingList} //
             setIsExistingList={setIsExistingList}
           />
+
           <LossCalculatorButton />
         </Grid>
         <Grid
