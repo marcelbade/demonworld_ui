@@ -34,11 +34,9 @@ const UserLogButton = (props) => {
   return (
     <Tooltip
       title={
-        <Typography>
-          {UC.userLoggedIn //
-            ? USER_AUTH.LOGOUT_ACCOUNT
-            : USER_AUTH.LOGIN_BUTTON}
-        </Typography>
+        UC.userLoggedIn //
+          ? USER_AUTH.LOGOUT_ACCOUNT
+          : USER_AUTH.LOGIN_BUTTON
       }
     >
       {UC.userLoggedIn ? (

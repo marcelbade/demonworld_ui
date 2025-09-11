@@ -23,7 +23,7 @@ const LoadArmyButton = () => {
 
   return (
     <>
-      <Tooltip title={<Typography sx={{ fontSize: "20px" }}>{OPTIONS.LOAD_LIST}</Typography>}>
+      <Tooltip title={OPTIONS.LOAD_LIST}>
         <span>
           <IconButton
             disabled={false} //

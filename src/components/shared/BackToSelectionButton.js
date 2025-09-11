@@ -19,13 +19,13 @@ const BackToSelectionButton = (props) => {
   const AC = useContext(ArmyContext);
 
   return (
-    <Tooltip title={<Typography>{OPTIONS.CHANGE_SELECTED_FACTION}</Typography>}>
+    <Tooltip title={OPTIONS.CHANGE_SELECTED_FACTION}>
       <IconButton
         onClick={() => {
           AC.setSelectedFactionName(NONE);
         }}
       >
-        <ReplayIcon   sx={{ fontSize: props.iconSize }} />
+        <ReplayIcon sx={{ fontSize: props.iconSize }} />
       </IconButton>
     </Tooltip>
   );

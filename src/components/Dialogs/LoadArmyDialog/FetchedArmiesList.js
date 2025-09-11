@@ -100,7 +100,7 @@ const FetchedArmiesList = (props) => {
                 </React.Fragment>
               }
             />
-            <Tooltip title={<Typography sx={{ fontSize: "20px" }}>{ARMY_LIST.LOAD_LIST}</Typography>}>
+            <Tooltip title={ARMY_LIST.LOAD_LIST}>
               <IconButton
                 sx={{ marginRight: "3em" }} //
                 onClick={() => {
@@ -110,7 +110,7 @@ const FetchedArmiesList = (props) => {
                 <FileUploadIcon />
               </IconButton>
             </Tooltip>
-            <Tooltip title={<Typography sx={{ fontSize: "20px" }}>{ARMY_LIST.DELETE_LIST}</Typography>}>
+            <Tooltip title={ARMY_LIST.DELETE_LIST}>
               <IconButton
                 onClick={() => {
                   props.deleteArmyFromDB(l);

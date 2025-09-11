@@ -10,7 +10,7 @@ const NaviIconButton = (props) => {
   const BOX_SIZE = "135px";
 
   return (
-    <Tooltip title={<Typography sx={{ fontSize: "20px" }}>{props.toolTipText}</Typography>}>
+    <Tooltip title={props.toolTipText}>
       <IconButton
         onClick={() => {
           props.toPage(props.relativeURL);

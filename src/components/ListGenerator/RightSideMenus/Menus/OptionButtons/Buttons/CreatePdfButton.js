@@ -98,7 +98,7 @@ const CreatePdfButton = () => {
 
   return (
     <>
-      <Tooltip title={<Typography sx={{ fontSize: "20px" }}>{PDF.CREATE_PDF}</Typography>}>
+      <Tooltip title={PDF.CREATE_PDF}>
         <span>
           <IconButton
             disabled={SEC.selectedUnits.length === 0} //

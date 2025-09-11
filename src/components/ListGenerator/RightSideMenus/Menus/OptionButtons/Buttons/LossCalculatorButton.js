@@ -30,7 +30,7 @@ const LossCalculatorButton = () => {
   };
 
   return (
-    <Tooltip title={<Typography sx={{ fontSize: "20px" }}>{OPTIONS.TO_LOSS_CALCULATOR}</Typography>}>
+    <Tooltip title={OPTIONS.TO_LOSS_CALCULATOR}>
       <span>
         <IconButton
           disabled={SEC.selectedUnits.length === 0} //

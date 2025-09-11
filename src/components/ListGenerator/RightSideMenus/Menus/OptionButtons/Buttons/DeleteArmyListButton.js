@@ -31,7 +31,7 @@ const DeleteArmyListButton = (props) => {
   };
 
   return (
-    <Tooltip title={<Typography>{TOOLTIPS.DELETE_ARMY_LIST}</Typography>}>
+    <Tooltip title={TOOLTIPS.DELETE_ARMY_LIST}>
       <IconButton
         onClick={() => deleteList()} //
         size="large"

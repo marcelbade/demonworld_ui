@@ -205,9 +205,10 @@ const darkTheme = createTheme({
     },
     MuiTooltip: {
       styleOverrides: {
-        root: {
-          color: "red",
+        tooltip: {
           fontFamily: "jaapokkiRegular",
+          fontSize: "20px",
+          color: "white",
         },
       },
     },

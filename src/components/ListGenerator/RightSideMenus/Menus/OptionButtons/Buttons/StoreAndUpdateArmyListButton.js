@@ -26,11 +26,9 @@ const StoreAndUpdateArmyListButton = (props) => {
     <>
       <Tooltip
         title={
-          <Typography sx={{ fontSize: "20px" }}>
-            {props.isUpdateSelected
-              ? OPTIONS.UPDATE_LIST //
-              : OPTIONS.STORE_LIST}
-          </Typography>
+          props.isUpdateSelected
+            ? OPTIONS.UPDATE_LIST //
+            : OPTIONS.STORE_LIST
         }
       >
         <span>

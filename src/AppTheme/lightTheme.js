@@ -1,5 +1,6 @@
 import { createTheme } from "@mui/material/styles";
 import animationTheme from "./animationTheme";
+import { Typography } from "@mui/material";
 
 const lightTheme = createTheme({
   palette: {
@@ -200,9 +201,10 @@ const lightTheme = createTheme({
     },
     MuiTooltip: {
       styleOverrides: {
-        root: {
-          color: "red",
+        tooltip: {
           fontFamily: "jaapokkiRegular",
+          fontSize: "20px",
+          color: "white",
         },
       },
     },
