@@ -115,7 +115,7 @@ export const renderSpecialRules = (rule) => {
   const rulePreview = `${rule.slice(0, length)}${ellipsis}`;
 
   return (
-    <Tooltip title={<Typography>{rule === "-" ? COMPENDIUM.NO_SPECIAL_RULES : rule}</Typography>}>
+    <Tooltip title={rule === "-" ? COMPENDIUM.NO_SPECIAL_RULES : rule}>
       <Typography>{rule === "-" ? "-" : rulePreview}</Typography>
     </Tooltip>
   );
