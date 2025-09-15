@@ -1,10 +1,12 @@
+import { FONT_SIZE, FONT_TITLE, FONT_TEXT, BORDER_STYLES, BACKGROUND_COLOR } from "./styleValues";
+
 export const detailedStyles = {
   cardBox: {
     flexDirection: "column",
     marginLeft: 20,
     marginRight: 20,
-    fontFamily: "jaapokkiRegular",
-    fontSize: 10,
+    fontFamily: FONT_TEXT,
+    fontSize: FONT_SIZE,
     marginBottom: 10,
     width: "500px",
   },
@@ -23,14 +25,14 @@ export const detailedStyles = {
 
   headerRow: {
     width: "45%",
-    fontFamily: "notMaryKate",
+    fontFamily: FONT_TITLE,
     color: "red",
-    fontSize: 10,
+    fontSize: FONT_SIZE,
     alignItems: "center",
-    borderTop: "1px solid black",
-    borderLeft: "1px solid black",
-    borderRight: "1px solid black",
-    backgroundColor: "lightgrey",
+    borderTop: BORDER_STYLES,
+    borderLeft: BORDER_STYLES,
+    borderRight: BORDER_STYLES,
+    backgroundColor: BACKGROUND_COLOR,
   },
 
   commandAndMagicRow: {
@@ -54,9 +56,9 @@ export const detailedStyles = {
   headerBacksideSecondSubFaction: {
     display: "flex",
     width: "100%",
-    fontSize: 10,
+    fontSize: FONT_SIZE,
     color: "black",
-    fontFamily: "jaapokkiRegular",
+    fontFamily: FONT_TEXT,
     alignItems: "flex-start",
     flexDirection: "row",
   },
@@ -69,8 +71,8 @@ export const detailedStyles = {
   },
 
   headerPaddingRow: {
-    fontSize: 10,
-    fontFamily: "jaapokkiRegular",
+    fontSize: FONT_SIZE,
+    fontFamily: FONT_TEXT,
   },
 
   cardBlackRow: {
@@ -135,9 +137,9 @@ export const detailedStyles = {
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    borderLeft: "1px solid black",
-    borderRight: "1px solid black",
-    backgroundColor: "lightgrey",
+    borderLeft: BORDER_STYLES,
+    borderRight: BORDER_STYLES,
+    backgroundColor: BACKGROUND_COLOR,
   },
 
   cardCenterRightSide: {
@@ -147,9 +149,9 @@ export const detailedStyles = {
     alignItems: "center",
     width: "45%",
     height: "100%",
-    borderLeft: "1px solid black",
-    borderRight: "1px solid black",
-    backgroundColor: "lightgrey",
+    borderLeft: BORDER_STYLES,
+    borderRight: BORDER_STYLES,
+    backgroundColor: BACKGROUND_COLOR,
   },
 
   sizeArmorSkillBox: {
@@ -220,10 +222,10 @@ export const detailedStyles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    borderLeft: "1px solid black",
-    borderRight: "1px solid black",
-    borderBottom: "1px solid black",
-    backgroundColor: "lightgrey",
+    borderLeft: BORDER_STYLES,
+    borderRight: BORDER_STYLES,
+    borderBottom: BORDER_STYLES,
+    backgroundColor: BACKGROUND_COLOR,
   },
 
   tableRowDetailedList: {
@@ -231,21 +233,21 @@ export const detailedStyles = {
   },
 
   cell: {
-    backgroundColor: "lightgrey",
+    backgroundColor: BACKGROUND_COLOR,
     width: "45%",
-    fontFamily: "jaapokkiRegular",
+    fontFamily: FONT_TEXT,
     textAlign: "center",
-    borderRight: "1px solid black",
-    borderLeft: "1px solid black",
+    borderRight: BORDER_STYLES,
+    borderLeft: BORDER_STYLES,
   },
   whiteCell: {
     backgroundColor: "white",
     width: "10%",
   },
   emptyGreyCell: {
-    backgroundColor: "lightgrey",
+    backgroundColor: BACKGROUND_COLOR,
     width: "45%",
-    borderRight: "1px solid black",
-    borderLeft: "1px solid black",
+    borderRight: BORDER_STYLES,
+    borderLeft: BORDER_STYLES,
   },
 };

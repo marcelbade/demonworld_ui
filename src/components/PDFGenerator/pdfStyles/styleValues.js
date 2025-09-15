@@ -17,3 +17,11 @@ export const MARGIN_SUBFACTION_BLOCK = 10;
 export const FONT_SIZE_PAGE_TITLE = 17;
 export const FONT_SIZE_SUB_TITLE = 13;
 export const FONT_SIZE_TEXT = 10;
+
+
+// game cards  
+export const BACKGROUND_COLOR = "lightgrey";
+export const BORDER_STYLES = "1px solid black";
+export const FONT_SIZE = 10;
+export const FONT_TEXT = "jaapokkiRegular";
+export const FONT_TITLE = "notMaryKate";
