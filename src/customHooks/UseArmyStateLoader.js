@@ -6,8 +6,9 @@ import { AlternativeListContext } from "../contexts/alternativeListContext";
 import { AllyContext } from "../contexts/allyContext";
 import { SecondSubFactionContext } from "../contexts/secondSubFactionContext";
 // constants
-import { ARMIES_ADDITIONAL_SUBFACTIONS, ARMIES_ADDITIONAL_SUBFACTIONS_MAPPING, NO_ALLY, SPECIAL } from "../constants/factions";
+import { NO_ALLY, SPECIAL } from "../constants/factions";
 import useUnitEnricher from "./UseUnitEnricher";
+import { SECOND_SUBFACTIONS_CAPTIONS } from "../constants/textsAndMessages";
 
 /**
  * Custom hook supplies a single function that sets the entire state of the list generator. This encompasses:
@@ -31,11 +32,11 @@ const UseArmyStateLoader = () => {
    */
   const setFactionProperties = (factionName) => {
     const factionObj = AC.fetchedFactions.find((f) => f.factionName === factionName);
+
     // find special units that are available to every faction
     const specials = AC.fetchedFactions.find((f) => f.factionName === SPECIAL);
     let allSubFactions = [...factionObj.subFactions.map((sF) => sF.name)];
     const allFactionUnits = captureAllFactionUnits(factionObj.subFactions, specials.subFactions);
-
 
     // does the faction have an ally?
     if (factionObj.ally !== NO_ALLY) {
@@ -54,7 +55,7 @@ const UseArmyStateLoader = () => {
     AC.setSelectedFactionName(factionObj.factionName);
     AC.setListOfAllFactionUnits(allFactionUnits);
     AC.setDistinctSubFactions(allSubFactions);
-
+ 
     if (factionObj.hasAlternativeLists) {
       ALC.setArmyHasAlternativeLists(factionObj.hasAlternativeLists);
       ALC.setNumberOfAlternativeChoices(factionObj.numberOfAlternativeArmySelections);
@@ -62,14 +63,15 @@ const UseArmyStateLoader = () => {
       ALC.setAllyIsAlternativeOption(factionObj.allyIsAlternativeOption);
     }
 
-    if (ARMIES_ADDITIONAL_SUBFACTIONS.includes(factionObj.factionName)) {
-      const result = ARMIES_ADDITIONAL_SUBFACTIONS_MAPPING.filter((e) => e.army === factionObj.factionName);
-
+    if (factionObj.hasSecondSubFactions) {
       SFC.setHasAdditionalSubFaction(true);
 
-      SFC.setSecondSubfactionCaption(result[0].caption);
-      SFC.setExcemptSubFactions(result[0].excemptSubFactions);
-      SFC.setSecondSubFactionList(result[0].secondSubFactionList);
+      const secondSubFactionList = factionObj.secondSubFactionDTOS.map((dto) => dto.secondSubFaction);
+      SFC.setSecondSubFactionList(secondSubFactionList);
+
+      SFC.setExcemptSubFactions(factionObj.subFactionsIneligibleFor2ndSubFactions);
+
+      SFC.setSecondSubfactionCaption(SECOND_SUBFACTIONS_CAPTIONS[factionObj.factionName]);
     }
   };
 

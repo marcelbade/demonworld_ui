@@ -171,6 +171,13 @@ export const PASSWORDS = {
     "Ein gültiges Password besteht aus mindestens 8 Zeichen. Es muss Groß- und Kleinbuchstaben sowie mindestens 1 Zahl und ein Sonderzeichen enthalten.",
 };
 
+export const DELETE_ARMY_DIALOG = {
+  DIALOG_TITLE: "Soll die Liste wirklich gelöscht werden?",
+  CHECKBOX: "Diesen Dialog nicht mehr anzeigen.",
+  CONFIRMATION: "Liste löschen",
+  CANCEL: "Abbrechen",
+};
+
 export const LOAD_ARMY_LIST_DIALOG = {
   SHOW_ALL_FACTIONS: "Alle Fraktionen anzeigen",
   SHOW_EVERYTHING_REGARDLESS_OF_EVENT: "Alle Listen mit und ohne Events anzeigen",
@@ -605,7 +612,7 @@ export const THAIN_TEXTS = {
     MOUNTAIN_LION: "Berglöwenstamm",
     EAGLE: "Adlerstamm",
   },
-  SECOND_SUBFACTION_CAPTION: "Stamm Auswählen",
+
   SUB_FACTIONS: {
     CHURCH: "Dorga-Kirche",
     GIANT_ANIMALS: "Gar'Ydwen",
@@ -686,6 +693,10 @@ export const SPECIAL_TEXTS = {
 
 export const SPECIAL_ITEMS = {
   BRACELET_OF_TRANSFORMATION: "Reif der Verwandlung",
+};
+
+export const SECOND_SUBFACTIONS_CAPTIONS = {
+  Thain: "Stamm Auswählen",
 };
 
 export const CREATOR = {

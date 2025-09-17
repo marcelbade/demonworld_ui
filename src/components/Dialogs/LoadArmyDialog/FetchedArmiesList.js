@@ -1,5 +1,5 @@
 // react
-import React from "react";
+import React, { useContext } from "react";
 // material ui
 import {
   IconButton, //
@@ -14,16 +14,22 @@ import {
 // icons
 import DeleteIcon from "@mui/icons-material/Delete";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
+// context
+import { ColorContext } from "../../../contexts/colorContext";
 // constants
 import { NO_EVENT } from "../../../constants/eventConstants";
 import { ARMY_LIST, COMPENDIUM } from "../../../constants/textsAndMessages";
-import { FACTION_COLORS } from "../../../constants/factions";
 // hooks
 import usePointCostCalculator from "../../../customHooks/UsePointCostCalculator";
 
 const FetchedArmiesList = (props) => {
-  // color the list avatar
-  const factionColors = FACTION_COLORS();
+  const COC = useContext(ColorContext);
+
+  const getFactionColor = (factioName) => {
+    const factionColor = COC.factionColors.filter((color) => color.faction === factioName)[0];
+    
+    return `rgb(${factionColor.rgbA},${factionColor.rgbB},${factionColor.rgbC})`;
+  };
 
   const calculator = usePointCostCalculator();
 
@@ -80,7 +86,7 @@ const FetchedArmiesList = (props) => {
             <ListItemAvatar>
               <Avatar
                 sx={{
-                  backgroundColor: factionColors.get(l.faction), //
+                  backgroundColor: getFactionColor(l.faction), //
                 }}
               >
                 {l.faction.charAt(0).toUpperCase()}

@@ -21,6 +21,7 @@ export const DELETE_ARMY_LIST_URL = (userName, listId) => `${PREFIX_BE}/auth/arm
 export const FACTION_DTOS_URL = `${PREFIX_BE}/public/game/factionDTOs`;
 export const ITEM_DTOS_URL = `${PREFIX_BE}/public/game/itemDTOs`;
 export const ALL_UNITS_URL = `${PREFIX_BE}/public/game/allUnits`;
+export const ALL_FACTION_COLORS_URL = `${PREFIX_BE}/public/game/factionColors`;
 
 // events
 export const GET_EVENTS_URL = `${PREFIX_BE}/auth/event/allEvents`;

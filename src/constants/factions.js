@@ -49,25 +49,6 @@ export const ALL_FACTIONS_ARRAY = [
   UNDEAD,
 ];
 
-// ALL FACTIONS
-export const FACTION_COLORS = () => {
-  let factionColors = new Map();
-  factionColors.set(DARKELVES, "rgb(182, 61, 194)");
-  factionColors.set(DWARVES, "rgb(168, 124, 83)");
-  factionColors.set(ELVES, "rgb(35, 222, 212)");
-  factionColors.set(GOBLINS, "rgb(21, 194, 76)");
-  factionColors.set(LIZARDKIN, "rgb(199, 146, 117)");
-  factionColors.set(EMPIRE, "rgb(222, 35, 35)");
-  factionColors.set(ISHTAK, "rgb(93, 159, 181)");
-  factionColors.set(NORWINGER, "rgb(114, 179, 214)");
-  factionColors.set(ORKS, "rgb(162, 184, 82)");
-  factionColors.set(SOUTHERN_CITY_STATES, "rgb(240, 188, 37)");
-  factionColors.set(THAIN, "rgb(255, 138, 3)");
-  factionColors.set(UNDEAD, "rgb(46, 27, 6)");
-
-  return factionColors;
-};
-
 export const ALTERNATIVE_ARMY_SELECTION_TEXT = {
   [DWARVES]: [
     DWARF_TEXTS.SELECTION_TEXTS.FOURTY_PERCENT, //
@@ -76,23 +57,6 @@ export const ALTERNATIVE_ARMY_SELECTION_TEXT = {
   [EMPIRE]: [EMPIRE_TEXTS.SELECTION_TEXT],
   [ORKS]: [ORKS_TEXTS.SELECTION_TEXT],
 };
-
-// SECOND SUB_FACTION
-export const ARMIES_ADDITIONAL_SUBFACTIONS = [THAIN];
-export const ARMIES_ADDITIONAL_SUBFACTIONS_MAPPING = [
-  {
-    army: THAIN,
-    secondSubFactionList: [
-      THAIN_TEXTS.SECOND_SUBFACTIONS.BOAR,
-      THAIN_TEXTS.SECOND_SUBFACTIONS.BEAR,
-      THAIN_TEXTS.SECOND_SUBFACTIONS.EAGLE,
-      THAIN_TEXTS.SECOND_SUBFACTIONS.MOUNTAIN_LION,
-      THAIN_TEXTS.SECOND_SUBFACTIONS.WOLVE,
-    ],
-    excemptSubFactions: [THAIN_TEXTS.SUB_FACTIONS.CHURCH, THAIN_TEXTS.SUB_FACTIONS.GIANT_ANIMALS],
-    caption: THAIN_TEXTS.SECOND_SUBFACTION_CAPTION,
-  },
-];
 
 export const ARMIES_TWO_CHOICES_PER_ALTERNATIVE_LIST = [DWARVES];
 
@@ -104,6 +68,7 @@ export const THAIN_TRIBES = [
   THAIN_TEXTS.SECOND_SUBFACTIONS.MOUNTAIN_LION,
   THAIN_TEXTS.SECOND_SUBFACTIONS.WOLVE,
 ];
+
 export const EXCEMPT_FROM_TRIBES_RULE = [
   THAIN_TEXTS.EXCEMPT_UNITS.ANCESTOR_SPIRITS,
   THAIN_TEXTS.EXCEMPT_UNITS.BANNER_OF_THE_HIGH_KING,

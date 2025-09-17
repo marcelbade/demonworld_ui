@@ -4,7 +4,6 @@ import { useContext } from "react";
 import { ItemContext } from "../contexts/itemContext";
 import { SecondSubFactionContext } from "../contexts/secondSubFactionContext";
 import { RightMenuContext } from "../contexts/rightMenuContext";
-import { TournamentRulesContext } from "../contexts/tournamentRulesContext";
 // components and functions
 import { BUTTON_TEXTS } from "../constants/textsAndMessages";
 import { SUMMONED } from "../constants/unitTypes";
@@ -30,7 +29,6 @@ const UseRightSideMenuController = (unit, subFaction, bttnSelectorObj) => {
   const IC = useContext(ItemContext);
   const RC = useContext(RightMenuContext);
   const SFC = useContext(SecondSubFactionContext);
-  const TC = useContext(TournamentRulesContext);
 
   // switch cases
   const UNIT_CARDS = "UNIT_CARDS";
@@ -73,8 +71,10 @@ const UseRightSideMenuController = (unit, subFaction, bttnSelectorObj) => {
   /**
    * Function contains the button logic. The function has two parts: First, it checks
    * which button is clicked (card, shop or second faction) and initializes two objects:
-   * the state object receives the state of the menu and the setter item its setter function.
-   * In the second part it checks the current state of the menu to
+   * - the state object receives the state of the menu
+   * - the state object setter receives the setter function
+   *   for the object (useState setter).
+   * In the second part the function checks the current state of the menu to
    * execute one of 4 possible actions.
    * @param {unitCard} unit
    * @param {String} menu
@@ -105,7 +105,7 @@ const UseRightSideMenuController = (unit, subFaction, bttnSelectorObj) => {
         closeItemShop();
         break;
       default:
-        throw Error("rightMenuController function received invalid menu parameter: unknown menu name");
+        throw Error("rightMenuController function received an invalid menu parameter: unknown menu name");
     }
 
     // first click on a menu button (after loading the page)
@@ -194,7 +194,7 @@ const UseRightSideMenuController = (unit, subFaction, bttnSelectorObj) => {
     },
     {
       // tribe selection button (only Thain faction)
-      display: displayTribeSelectorButton() && bttnSelectorObj.secondSubFaction,
+      display: displayTribeSelectorButton() && bttnSelectorObj.secondSubFaction, // ###
       action: () => {
         IC.setUnitSelectedForShop(unit);
         rightMenuController(unit, SECOND_SUB_FACTION);
