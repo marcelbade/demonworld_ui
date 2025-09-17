@@ -14,6 +14,7 @@ import CreatePdfButton from "./Buttons/CreatePdfButton";
 import StoreAndUpdateArmyListButton from "./Buttons/StoreAndUpdateArmyListButton";
 import LoadArmyButton from "./Buttons/LoadArmyButton";
 import LossCalculatorButton from "./Buttons/LossCalculatorButton";
+import TextFileDownloadButton from "./Buttons/TextFileDownloadButton";
 
 const OptionButtonsPage = () => {
   const [showArmySaveDialog, setShowArmySaveDialog] = useState(false);
@@ -88,6 +89,7 @@ const OptionButtonsPage = () => {
         >
           <BackToSelectionButton iconSize={ICON_SIZE_RESET_BUTTONS} />
           <DeleteArmyListButton iconSize={ICON_SIZE_RESET_BUTTONS} />
+            <TextFileDownloadButton />
         </Grid>
         <Grid
           container

@@ -120,6 +120,7 @@ export const OPTIONS = {
   UPDATE_LIST: "Liste aktualisieren",
   TO_LOSS_CALCULATOR: "Zum Verlustrechner",
   CHANGE_SELECTED_FACTION: "Fraktion wechseln",
+  TEXTFILE_DOWNLOAD: "Textdatei erzeugen",
 };
 
 export const ARMY_LIST = {
