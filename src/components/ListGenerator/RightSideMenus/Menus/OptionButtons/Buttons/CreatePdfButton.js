@@ -1,7 +1,7 @@
 // react
 import { useContext, useState } from "react";
 // Material UI
-import { IconButton, Tooltip, Typography } from "@mui/material";
+import { IconButton, Tooltip } from "@mui/material";
 // components and functions
 import useSubFactionStats from "../../../../../../customHooks/UseSubFactionStats";
 import calculateScoutingFactor from "../../../../../../gameLogic/scoutFactorCalculator/scoutingFactorCalculator";
