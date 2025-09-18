@@ -13,7 +13,7 @@ import { SelectionContext } from "../../../../../../contexts/selectionContext";
 import downloadIcon from "../../../../../../assets/icons/downloadIcon.png";
 // constants
 import { OPTIONS, PDF } from "../../../../../../constants/textsAndMessages";
-import { TextFileGenerator } from "../../../../../../util/TextFileGenerator";
+import { simpleListTextFileGenerator } from "../../../../../../util/SimpleListTextFileGenerator";
 
 const TextFileDownloadButton = () => {
   const AC = useContext(ArmyContext);
@@ -70,7 +70,7 @@ const TextFileDownloadButton = () => {
       });
     });
 
-    const textFileData =  {
+    const textFileData = {
       playerName: AC.playerName,
       teamName: AC.teamName,
       armyName: AC.armyName,
@@ -79,15 +79,13 @@ const TextFileDownloadButton = () => {
       totalArmyPoints: SEC.maxPointsAllowance,
     };
 
- 
-
-    const blob = new Blob([ TextFileGenerator(textFileData)], { type: "text/txt" }); // MIME Type
+    const blob = new Blob([simpleListTextFileGenerator(textFileData)], { type: "text/txt" }); // MIME Type
     return URL.createObjectURL(blob);
   };
 
-  const downloadFile = () => {
+  const downloadListTextFile = () => {
     const link = document.createElement("a");
-    link.download = "user-info.txt";
+    link.download = `${AC.armyName}.txt`;
     link.href = createTextFileData();
     link.click();
   };
@@ -99,7 +97,7 @@ const TextFileDownloadButton = () => {
           <IconButton
             disabled={SEC.selectedUnits.length === 0} //
             onClick={() => {
-              downloadFile();
+              downloadListTextFile();
             }}
           >
             <CustomIcon
