@@ -1,13 +1,14 @@
 // React
-import React, { useContext } from "react";
+import { useContext } from "react";
 // Material UI
 import { ListItemText, List } from "@mui/material";
 // components and functions
 import useSubFactionStats from "../../../../../../customHooks/UseSubFactionStats";
-import { TEXTS } from "../../../../../../constants/textsAndMessages";
 // contexts
 import { ArmyContext } from "../../../../../../contexts/armyContext";
 import { SelectionContext } from "../../../../../../contexts/selectionContext";
+// constants
+import { STATS } from "../../../../../../constants/textsAndMessages";
 
 const ArmyListSubFactionFooter = (props) => {
   const AC = useContext(ArmyContext);
@@ -35,7 +36,7 @@ const ArmyListSubFactionFooter = (props) => {
       <ListItemText //
         sx={{ display: "flex", flexDirection: "column" }}
         key={props.subFaction}
-        primary={<span>{TEXTS.TOTAL}</span>}
+        primary={<span>{STATS.TOTAL}</span>}
       />
       <ListItemText
         sx={{ display: "flex", flexDirection: "column" }}

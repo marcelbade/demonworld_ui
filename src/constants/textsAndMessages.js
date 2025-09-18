@@ -224,18 +224,14 @@ export const INPUT_TEXTS = {
 
 export const STATS = {
   PERCENT: "Prozent",
-  SCOUT_FACTOR: "Spähfaktor",
+  SCOUTING_FACTOR: "Spähfaktor",
   POINTS: "Punkte",
+  TOTAL: "Gesamt",
 };
 
 export const BUTTON_TEXTS = {
   SHOW_ITEM_SHOP: "Gegenstände",
   PREVIEW_CARD: "Kartenvorschau",
-};
-
-export const TEXTS = {
-  SCOUTING_FACTOR: "Spähfaktor:",
-  TOTAL: "Gesamt",
 };
 
 export const VALIDATION = {

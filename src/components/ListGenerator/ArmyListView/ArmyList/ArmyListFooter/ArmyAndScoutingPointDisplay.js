@@ -7,7 +7,7 @@ import calculateScoutingFactor from "../../../../../gameLogic/scoutFactorCalcula
 import useArmyValidation from "../../../../../customHooks/UseArmyValidation";
 import usePointCostCalculator from "../../../../../customHooks/UsePointCostCalculator";
 // constants
-import { GENERAL_ERRRORS, STATS, TEXTS, INPUT_TEXTS } from "../../../../../constants/textsAndMessages";
+import { GENERAL_ERRRORS, STATS, INPUT_TEXTS } from "../../../../../constants/textsAndMessages";
 
 const ArmyAndScoutingPointDisplay = () => {
   const SEC = useContext(SelectionContext);
@@ -55,7 +55,7 @@ const ArmyAndScoutingPointDisplay = () => {
             id="totalPointValue"
             autoComplete="off"
             value={SEC.maxPointsAllowance}
-            endAdornment={<InputAdornment position="end">{STATS.POINTS}</InputAdornment>} // TODO <- not displayed
+            // endAdornment={<InputAdornment position="end">{STATS.POINTS}</InputAdornment>} // TODO <- not displayed
             onChange={changeMaximumPointValue}
             required
             error={Boolean(errorMessage)}
@@ -64,7 +64,7 @@ const ArmyAndScoutingPointDisplay = () => {
           />
         </Grid>
         <Typography variant="subtitle1">
-          {TEXTS.SCOUTING_FACTOR} {calculateScoutingFactor(SEC.selectedUnits ? SEC.selectedUnits : [])}
+          {STATS.SCOUTING_FACTOR} {calculateScoutingFactor(SEC.selectedUnits ? SEC.selectedUnits : [])}
         </Typography>
       </Grid>
     </Fragment>
