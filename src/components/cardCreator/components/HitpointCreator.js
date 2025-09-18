@@ -1,5 +1,5 @@
 // react
-import React, { useContext } from "react";
+import { useContext } from "react";
 // material ui
 import { useTheme } from "@emotion/react";
 import { Grid2 as Grid } from "@mui/material";
