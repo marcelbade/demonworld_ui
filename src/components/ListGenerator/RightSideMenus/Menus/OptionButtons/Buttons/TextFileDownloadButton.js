@@ -6,6 +6,8 @@ import { IconButton, Tooltip } from "@mui/material";
 import useSubFactionStats from "../../../../../../customHooks/UseSubFactionStats";
 import calculateScoutingFactor from "../../../../../../gameLogic/scoutFactorCalculator/scoutingFactorCalculator";
 import CustomIcon from "../../../../../shared/CustomIcon";
+import { simpleListTextFileGenerator } from "../../../../../../util/simpleListTextFileGenerator";
+import { statCardsTextFileGenerator } from "../../../../../../util/statCardsTextFileGenerator";
 // context
 import { ArmyContext } from "../../../../../../contexts/armyContext";
 import { SelectionContext } from "../../../../../../contexts/selectionContext";
@@ -13,7 +15,6 @@ import { SelectionContext } from "../../../../../../contexts/selectionContext";
 import downloadIcon from "../../../../../../assets/icons/downloadIcon.png";
 // constants
 import { OPTIONS, PDF } from "../../../../../../constants/textsAndMessages";
-import { simpleListTextFileGenerator } from "../../../../../../util/SimpleListTextFileGenerator";
 
 const TextFileDownloadButton = () => {
   const AC = useContext(ArmyContext);
@@ -79,7 +80,18 @@ const TextFileDownloadButton = () => {
       totalArmyPoints: SEC.maxPointsAllowance,
     };
 
-    const blob = new Blob([simpleListTextFileGenerator(textFileData)], { type: "text/txt" }); // MIME Type
+    // TODO: remove hard coding once the prototype stands!
+    let isSimpleFileSelected = false; 
+
+    const textGeneratorFunction = isSimpleFileSelected //
+      ? simpleListTextFileGenerator
+      : statCardsTextFileGenerator;
+
+    const blob = new Blob(
+      [textGeneratorFunction(textFileData)], //
+      { type: "text/txt" }
+    );
+
     return URL.createObjectURL(blob);
   };
 
