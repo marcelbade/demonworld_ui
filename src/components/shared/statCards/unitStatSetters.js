@@ -29,7 +29,7 @@ export const initiativeSetter = (unit) => {
  * @returns an array containing the final display values
  * for the unit's weapons.
  */
-export const meleeWeaponSetter = (unit) => {
+export const  meleeWeaponSetter = (unit) => {
   const weapon1Stat = setUnitStat(unit, WEAPON_1);
   const weapon2Stat = setUnitStat(unit, WEAPON_2);
 
