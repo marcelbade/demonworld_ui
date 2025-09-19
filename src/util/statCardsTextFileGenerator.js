@@ -1,10 +1,23 @@
 // functions and components
 
-import { addFooterLines, addHeaderLines, addAdjustablePadding, addSubfactionLine, drawLineWithChar } from "./sharedTextFileFunctions";
-import { numberOfElements, renderDynamicIcons } from "./utilityFunctions";
+import { RANGED_WEAPON_STATS, WEAPON_1, WEAPON_2, WEAPON_3 } from "../constants/stats";
+import { NO_RANGE_WEAPON } from "../constants/textsAndMessages";
+import { setUnitStat } from "../gameLogic/unitStatChangeLogic/unitStatChangesLogic";
+import {
+  addFooterLines,
+  addHeaderLines,
+  addAdjustablePadding,
+  addSubfactionLine,
+  drawLineWithChar,
+  addLeftPaddingToNumbers,
+} from "./sharedTextFileFunctions";
+import { numberOfElements, renderDynamicIcons, renderSpecialElements } from "./utilityFunctions";
 
 // width of one half of the old stat card
 const HALF_CARD_WIDTH = 43;
+const LINE_START = "| ";
+// const RIGHT_LINE_EDGE = " |";
+const LINE_END = `|\n`;
 
 /**
  * Function create an army list as a simple text file. file is written as a single
@@ -37,8 +50,8 @@ export const statCardsTextFileGenerator = (textFileData) => {
       }
 
       for (let k = 0; k < unit.equipment.length; k++) {
-        const item = unit.equipment[k];
-        // text = text + addItemLine(item); TODO : items
+        const item = unit.equipment[k]; // TODO : items
+        text = text + addItemCard(item);
       }
     }
   }
@@ -48,91 +61,208 @@ export const statCardsTextFileGenerator = (textFileData) => {
   return text;
 };
 
-// TODO ###
-// add a line with unit name and point cost w. adjustable patting.
+// create stat card
 const addUnitCard = (unit) => {
   return (
-    drawUpperEdge() + //
+    drawHorizontalCardEdge() + //
     drawNameAndSubFactionLine(unit) +
     drawSeparatorLine() +
-    drawMovementAndElements(unit) +
+    drawMovementFormationsAndElements(unit) +
     drawSeparatorLine() +
-    // center, most values //TODO
-    drawRangeWeaponLine(unit) +
-    drawFirstWeaponLine(unit) +
-    drawSecondWeaponLine(unit) +
-    drawThirdWeaponLine(unit) +
-    drawOverrunLine(unit) +
-    drawleftSeparatorLine() +
+    //  weapons
+    drawRangeWeaponLine(unit, 0) +
+    drawWeaponLine(unit, WEAPON_1, 1) +
+    drawWeaponLine(unit, WEAPON_2, 2) +
+    drawWeaponLine(unit, WEAPON_3, 3) +
+    // ini, size, moral, armor
+    drawleftSeparatorLine(unit, 4) +
+    drawIntiativeAndSizeLine(unit, 5) +
+    drawArmorLine(unit, 6) +
+    drawFearAndMoralLine(unit, 7) +
     //
     drawSeparatorLine() +
     drawHitPointsAndPointCost(unit) +
-    drawSeparatorLine()
+    drawHorizontalCardEdge() +
+    `\n\n\n`
   );
 };
 
-const drawUpperEdge = () => {
-  return ` ${drawLineWithChar("=", 87)} \n`;
+const addItemCard = (item) => {
+  const numberOfLines = Math.ceil(item.itemRules.length / 87);
+
+  let itemRuleText = "";
+  for (let i = 0; i < numberOfLines; i++) {
+    itemRuleText = "a:" + itemRuleText + specialRuleWriter(i, item.itemRules, 87) + LINE_END;
+  }
+
+  return (
+    drawHorizontalCardEdge() + // ###
+    drawItemName(item) +
+    `|` +
+    drawLineWithChar("-", 87) +
+    `|` +
+    `\n` +
+    `|` +
+    itemRuleText +
+    drawHorizontalCardEdge() //
+  );
+};
+
+const drawHorizontalCardEdge = () => {
+  return (
+    ` ` + //
+    drawLineWithChar("=", 87) +
+    ` \n`
+  );
 };
 
 const drawNameAndSubFactionLine = (unit) => {
   return (
-    `| ${unit.unitName}${addAdjustablePadding(42)}` + //
-    `|${addAdjustablePadding(42)}${unit.subFaction} |\n`
+    LINE_START +
+    `${unit.unitName}${addAdjustablePadding(42, unit.unitName.length)}` + //
+    `|` +
+    `${addAdjustablePadding(42, unit.subFaction.length)}${unit.subFaction} ` +
+    LINE_END
   );
 };
 
 const drawSeparatorLine = () => {
-  return `|${drawLineWithChar("-", HALF_CARD_WIDTH)}|${drawLineWithChar("-", HALF_CARD_WIDTH)}|\n`;
+  return `|${drawLineWithChar("-", HALF_CARD_WIDTH)}|${drawLineWithChar("-", HALF_CARD_WIDTH)}` + LINE_END;
 };
 
-const drawMovementAndElements = (unit) => {
+const drawMovementFormationsAndElements = (unit) => {
+  const formationsString = addClassicFormationStrings(unit);
+
+  const leftStateLine =
+    `B:${addLeftPaddingToNumbers(unit.move)}` + //
+    ` A:` +
+    `${addLeftPaddingToNumbers(unit.charge)}` +
+    ` P:` +
+    `${addLeftPaddingToNumbers(unit.skirmish)}` +
+    ` Manöver:` +
+    `${addLeftPaddingToNumbers(unit.hold_maneuvers)}`;
+
+  const overrunLine = unit.overRun > 0 ? `Überrennen:  ${unit.overRun}` : "";
+
+  const leftTextLength = leftStateLine.length + formationsString.length + overrunLine.length;
+  const rightTextLength = renderSpecialElements(unit).length + numberOfElements(unit).length;
+
+  const centerPadding = addAdjustablePadding(HALF_CARD_WIDTH - 1, leftTextLength);
+  const rightPadding = addAdjustablePadding(HALF_CARD_WIDTH - 2, rightTextLength);
+
   return (
-    `| B:${unit.move}` + //
-    `  A:${unit.charge}` +
-    `  P:${unit.skirmish}` +
-    `  Manöver: ${unit.hold_maneuvers}` +
-    `           ${addClassicFormationStrings(unit)}` +
-    ` | ${numberOfElements(unit)} |\n`
+    LINE_START +
+    leftStateLine +
+    centerPadding +
+    formationsString +
+    overrunLine +
+    `| ` +
+    renderSpecialElements(unit) +
+    rightPadding +
+    numberOfElements(unit) +
+    " " +
+    LINE_END
   );
 };
-
-`+`;
 
 const drawHitPointsAndPointCost = (unit) => {
   return (
-    `|${drawHP(unit)}|` + //
-    addAdjustablePadding(17, 0) +
+    LINE_START +
+    `${drawHP(unit)}|` + //
+    `${addAdjustablePadding(17, 0)}` +
     `${addLeftPaddingToNumbers(unit.points)} Punkte` +
-    `${addAdjustablePadding(16, 0)}|\n`
+    `${addAdjustablePadding(16, 0)}` +
+    LINE_END
   );
 };
 
-const drawRangeWeaponLine = (unit) => {
-  return `| Wurfspeer 4 Felder:5  6 Felder:3          |${specialRuleWriter(0, unit.specialRules)}|\n`;
+const drawRangeWeaponLine = (unit, specialRuleLine) => {
+  let rangedWeaponString = "";
+  const rangedWeapon = setUnitStat(unit, RANGED_WEAPON_STATS);
+
+  if (rangedWeapon.name !== NO_RANGE_WEAPON) {
+    rangedWeaponString = `${rangedWeapon.name} ${rangedWeapon.value}`;
+  }
+
+  return (
+    LINE_START + //
+    `${rangedWeaponString}` +
+    `${addAdjustablePadding(HALF_CARD_WIDTH - 1, rangedWeaponString.length)}` +
+    `|` +
+    `${specialRuleWriter(specialRuleLine, unit.specialRules, HALF_CARD_WIDTH)}` +
+    LINE_END
+  );
 };
 
-const drawFirstWeaponLine = (unit) => {
-  return `| Wurfspeer 4 Felder:5  6 Felder:3          |${specialRuleWriter(1, unit.specialRules)}|\n`;
+const drawWeaponLine = (unit, weapon, specialRuleLine) => {
+  let weaponStat = setUnitStat(unit, weapon);
+  let name = weaponStat.name;
+  let value = weaponStat.value;
+
+  if (weaponStat === undefined || name === undefined) {
+    weaponStat = addAdjustablePadding(43, 0);
+    name = "";
+    value = "";
+  }
+
+  const stringLength = name.length + `${value})`.length;
+
+  return (
+    LINE_START + //
+    `${name}` +
+    `${addLeftPaddingToNumbers(value)}` +
+    `${addAdjustablePadding(HALF_CARD_WIDTH - 1, stringLength)}` +
+    `|` +
+    `${specialRuleWriter(specialRuleLine, unit.specialRules, HALF_CARD_WIDTH)}` +
+    LINE_END
+  );
 };
 
-const drawSecondWeaponLine = (unit) => {
-  return `| Wurfspeer 4 Felder:5  6 Felder:3          |${specialRuleWriter(2, unit.specialRules)}|\n`;
+const drawleftSeparatorLine = (unit, specialRuleLine) => {
+  return `|${drawLineWithChar("-", 43)}|${specialRuleWriter(specialRuleLine, unit.specialRules, HALF_CARD_WIDTH)}|\n`;
 };
 
-const drawThirdWeaponLine = (unit) => {
-  return `| Wurfspeer 4 Felder:5  6 Felder:3          |${specialRuleWriter(3, unit.specialRules)}|\n`;
+const drawIntiativeAndSizeLine = (unit, specialRuleLine) => {
+  const STAT_LINE = `Initiative  ${unit.initiative} Größe ${unit.unitSize} Angriffsbonus:${unit.chargeBonus}`;
+
+  return (
+    LINE_START + //
+    STAT_LINE +
+    `${addAdjustablePadding(HALF_CARD_WIDTH - 1, STAT_LINE.length)}` +
+    `|${specialRuleWriter(specialRuleLine, unit.specialRules, HALF_CARD_WIDTH)}` +
+    LINE_END
+  );
 };
 
-const drawOverrunLine = (unit) => {
-  return `| Wurfspeer 4 Felder:5  6 Felder:3          |${specialRuleWriter(4, unit.specialRules)}|\n`;
+const drawArmorLine = (unit, specialRuleLine) => {
+  const STAT_LINE = `Panzerung  ${unit.armourRange} / ${unit.armourMelee}`;
+
+  return (
+    LINE_START + //
+    STAT_LINE +
+    `${addAdjustablePadding(HALF_CARD_WIDTH - 1, STAT_LINE.length)}` +
+    `|${specialRuleWriter(specialRuleLine, unit.specialRules, HALF_CARD_WIDTH)}` +
+    LINE_END
+  );
 };
 
-const drawleftSeparatorLine = (unit) => {
-  return `|${drawLineWithChar("-", 43)}|${specialRuleWriter(5, unit.specialRules)}|\n`;
-};
+const drawFearAndMoralLine = (unit, specialRuleLine) => {
+  const STAT_LINE =
+    `Furchtfaktor ` +
+    `${unit.fear}` +
+    `${addAdjustablePadding(11, 0)}` +
+    `Moral: ` +
+    `${addLeftPaddingToNumbers(unit.moral1)}/` +
+    `${addLeftPaddingToNumbers(unit.moral2)}`;
 
-// TODO  -> continue with initiative
+  return (
+    LINE_START + //
+    STAT_LINE +
+    addAdjustablePadding(HALF_CARD_WIDTH - 1, STAT_LINE.length) +
+    `|${specialRuleWriter(specialRuleLine, unit.specialRules, HALF_CARD_WIDTH)}` +
+    LINE_END
+  );
+};
 
 /**
  * Function draws the hp and centers them with padding
@@ -150,7 +280,7 @@ const drawHP = (unit) => {
 
   const padding = Math.floor((HALF_CARD_WIDTH - 2 * unit.hitpoints) / 2);
 
-  return `${padding} ${hp}${padding}`;
+  return `${addAdjustablePadding(padding, 0)} ${hp}${addAdjustablePadding(padding - 1, 0)}`;
 };
 
 /**
@@ -162,45 +292,88 @@ const drawHP = (unit) => {
 const addClassicFormationStrings = (unit) => {
   let result = "";
 
-  unit.squareFormation ? (result = result + "Ka") : null;
-  result.length > 0 ? (result = result + "/") : null;
-  unit.wedgeFormation ? (result = result + "Ke") : null;
-  result.length > 1 ? (result = result + "/") : null;
-  unit.skirmishFormation ? (result = result + "Pl") : null;
+  //TODO you cannot use tertiaries here :D
+
+  if (unit.squareFormation) {
+    result = result + "Ka";
+  }
+  if (result.length > 0) {
+    result = result + "/";
+  }
+
+  if (unit.wedgeFormation) {
+    result = result + "Ke";
+  }
+  if (result.length > 0) {
+    result = result + "/";
+  }
+
+  if (unit.skirmishFormation) {
+    result = result + "Pl";
+  }
+
+  // no trailing slash
+  if (result.slice(-1) === "/") {
+    result = result.slice(0, -1);
+  }
+  result = result + " ";
 
   return result;
 };
 
 /**
- * Function draws the unit's special rule, line by line. The text is split
- * in lines of 43 characters each (rounded up). Every function call returns
- * one line
+ * Function writes a unit's or item's special rule, line by line. The text is split
+ * into lines of wit a given width (rounded up). Every function call
+ * returns a single line. The line may be empty if the text is shorter than
+ * the number of lines needed to fill the card. If the special rule fits
+ * inside the first line, it is centered.
  * @param {int} lineNumber
  * @param {String} specialRule
  * @returns a string that represents one line of the special rule text,
- * offset by the line number, i.e., lineNumber = 2 starts printing at the
- * 44th character in the text and prints until the string length hits 43.
+ * offset by the line number, i.e., lineNumber = 1 starts printing at the
+ * n-th character in the text (with n being the given with)
+ * and prints until the string length hits 43.
  */
-const specialRuleWriter = (lineNumber, specialRule) => {
+const specialRuleWriter = (lineNumber, specialRule, width) => {
   let result = "";
+  let offset = 0;
+  result = specialRule;
 
-  const numberOfLines = Math.ceil(specialRule.length / HALF_CARD_WIDTH);
+  // if the special rule fits into a single line, center it
+  const isSingleLine = specialRule.length < width;
 
-  // remove everything left that's already been printed
-  if (lineNumber <= numberOfLines) {
-    const offset = lineNumber * HALF_CARD_WIDTH;
+  if (isSingleLine && lineNumber === 0) {
+    result =
+      addAdjustablePadding(21, specialRule.length / 2) + //
+      specialRule +
+      addAdjustablePadding(width / 2, specialRule.length / 2);
+
+    return result;
+  } else if (isSingleLine && lineNumber > 0) {
+    result = addAdjustablePadding(width, 0);
+    return result;
+  }
+
+  // for multi line text, remove everything left that's already been printed
+  offset = lineNumber * width;
+
+  if (offset > 0) {
     result = specialRule.slice(offset);
   }
 
-  // remove every right that doesn't fit inside the line
-  if (result.length > HALF_CARD_WIDTH) {
-    result = result.slice(0, 44);
+  // remove everything that doesn't fit inside the line
+  if (result.length > width) {
+    result = result.slice(0, width);
   }
 
-  // padd, if result smaller than line length
-  if (result.length < HALF_CARD_WIDTH) {
-    result = addAdjustablePadding(HALF_CARD_WIDTH, result);
+  // padd, if the result is smaller than line length
+  if (result.length < width) {
+    result = result + addAdjustablePadding(width, result.length);
   }
 
   return result;
+};
+
+const drawItemName = (item) => {
+  return LINE_START + item.itemName + addAdjustablePadding(86, item.itemName.length) + LINE_END;
 };
