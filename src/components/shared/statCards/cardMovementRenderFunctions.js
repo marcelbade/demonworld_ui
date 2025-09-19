@@ -44,7 +44,7 @@ export const renderUnitMovement = (unit) => {
 };
 
 /**
- * Function creates a String that contains the movement valu for large elements.
+ * Function creates a String that contains the movement value for large elements.
  * @param {unitCard} unit
  * @param {Boolean} stat
  * @returns a String as content for an HTML or pdf element.
