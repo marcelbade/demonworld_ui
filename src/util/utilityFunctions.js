@@ -25,6 +25,14 @@ export const isSubFactionAlternativeAndSelected = (subfactionDataObject) => {
   return true;
 };
 
+export const renderSpecialElements = (unit) => {
+  const LEADER = unit.leader ? `${CARD_TEXT.LEADER} ` : "";
+  const STANDARD_BEARER = unit.standardBearer ? `/ ${CARD_TEXT.STANDARD_BEARER}` : "";
+  const MUSICIAN = unit.musician ? `/ ${CARD_TEXT.MUSICIAN}` : "";
+
+  return `${LEADER}${STANDARD_BEARER}${MUSICIAN}`;
+};
+
 /**
  * Function checks if 2 arrays have elements in common.
  * @param {array} arr1

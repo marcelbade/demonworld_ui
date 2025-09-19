@@ -1,18 +1,11 @@
-// React
-import React from "react";
 // Material UI
 import { useTheme } from "@emotion/react";
 import { Grid2 as Grid, Typography } from "@mui/material";
-import { CARD_TEXT } from "../../../../../constants/textsAndMessages";
 //  components and functions
-import { numberOfElements } from "../../../../../util/utilityFunctions";
+import { numberOfElements, renderSpecialElements } from "../../../../../util/utilityFunctions";
 
 const CardBackUpperBlackStripe = (props) => {
   const theme = useTheme();
-
-  const LEADER = props.unit.leader ? `${CARD_TEXT.LEADER} ` : null;
-  const STANDARD_BEARER = props.unit.standardBearer ? `/ ${CARD_TEXT.STANDARD_BEARER}` : null;
-  const MUSICIAN = props.unit.musician ? `/ ${CARD_TEXT.MUSICIAN}` : null;
 
   return (
     <Grid
@@ -23,10 +16,10 @@ const CardBackUpperBlackStripe = (props) => {
     >
       {/* dont render element for giants & heroes so layout stays correct*/}
       {props.unit.numberOfElements > 1 ? (
-        <Typography variant="h6">
-          {LEADER}
-          {STANDARD_BEARER}
-          {MUSICIAN}
+        <Typography
+          variant="h6" //
+        >
+          {renderSpecialElements(props.unit)}
         </Typography>
       ) : null}
       <Typography variant="h6"> {numberOfElements(props.unit)} </Typography>
