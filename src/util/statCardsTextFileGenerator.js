@@ -92,7 +92,7 @@ const addItemCard = (item) => {
 
   let itemRuleText = "";
   for (let i = 0; i < numberOfLines; i++) {
-    itemRuleText = "a:" + itemRuleText + specialRuleWriter(i, item.itemRules, 87) + LINE_END;
+    itemRuleText = itemRuleText + specialRuleWriter(i, item.itemRules, 87) + LINE_END;
   }
 
   return (
