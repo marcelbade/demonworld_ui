@@ -182,10 +182,11 @@ const drawMovementFormationsAndElements = (unit) => {
 const drawHitPointsAndPointCost = (unit) => {
   return (
     LINE_START +
-    `${drawHP(unit)}|` + //
-    `${addAdjustablePadding(17, 0)}` +
+    drawHP(unit) +
+    `|` + //
+    addAdjustablePadding(17, 0) +
     `${addLeftPaddingToNumbers(unit.points)} Punkte` +
-    `${addAdjustablePadding(16, 0)}` +
+    addAdjustablePadding(16, 0) +
     LINE_END
   );
 };
@@ -201,33 +202,33 @@ const drawRangeWeaponLine = (unit, specialRuleLine) => {
   return (
     LINE_START + //
     `${rangedWeaponString}` +
-    `${addAdjustablePadding(HALF_CARD_WIDTH - 1, rangedWeaponString.length)}` +
+    addAdjustablePadding(HALF_CARD_WIDTH - 1, rangedWeaponString.length) +
     `|` +
-    `${specialRuleWriter(specialRuleLine, unit.specialRules, HALF_CARD_WIDTH)}` +
+    specialRuleWriter(specialRuleLine, unit.specialRules, HALF_CARD_WIDTH) +
     LINE_END
   );
 };
 
 const drawWeaponLine = (unit, weapon, specialRuleLine) => {
   let weaponStat = setUnitStat(unit, weapon);
-  let name = weaponStat.name;
-  let value = weaponStat.value;
+  let weaponName = weaponStat.name;
+  let weaponValue = weaponStat.value;
 
-  if (weaponStat === undefined || name === undefined) {
+  if (weaponStat === undefined || weaponName === undefined) {
     weaponStat = addAdjustablePadding(43, 0);
-    name = "";
-    value = "";
+    weaponName = "";
+    weaponValue = "";
   }
 
-  const stringLength = name.length + `${value})`.length;
+  const stringLength = weaponName.length + `${weaponValue})`.length;
 
   return (
     LINE_START + //
-    `${name}` +
-    `${addLeftPaddingToNumbers(value)}` +
-    `${addAdjustablePadding(HALF_CARD_WIDTH - 1, stringLength)}` +
+    `${weaponName}` +
+    addLeftPaddingToNumbers(weaponValue) +
+    addAdjustablePadding(HALF_CARD_WIDTH - 1, stringLength) +
     `|` +
-    `${specialRuleWriter(specialRuleLine, unit.specialRules, HALF_CARD_WIDTH)}` +
+    specialRuleWriter(specialRuleLine, unit.specialRules, HALF_CARD_WIDTH) +
     LINE_END
   );
 };
@@ -237,14 +238,14 @@ const drawleftSeparatorLine = (unit, specialRuleLine) => {
 };
 
 const drawIntiativeAndSizeLine = (unit, specialRuleLine) => {
-  const chargeBonusString = unit.chargeBonus > 0 ? `Angriffsbonus: ${chargeBonusSetter(unit)}` : "";
+  const chargeBonusString = unit.chargeBonus > 0 ? chargeBonusSetter(unit) : "";
 
   const STAT_LINE = `Initiative ${unit.initiative} Größe ${unit.unitSize} ${chargeBonusString}`;
 
   return (
     LINE_START + //
     STAT_LINE +
-    `${addAdjustablePadding(HALF_CARD_WIDTH - 1, STAT_LINE.length)}` +
+    addAdjustablePadding(HALF_CARD_WIDTH - 1, STAT_LINE.length) +
     `|${specialRuleWriter(specialRuleLine, unit.specialRules, HALF_CARD_WIDTH)}` +
     LINE_END
   );
@@ -273,10 +274,11 @@ const drawFearAndMoralLine = (unit, specialRuleLine) => {
   const STAT_LINE =
     `Furchtfaktor ` +
     `${unit.fear}` +
-    `${addAdjustablePadding(11, 0)}` +
+    addAdjustablePadding(11, 0) +
     `Moral: ` +
-    `${addLeftPaddingToNumbers(unit.moral1)}/` +
-    `${addLeftPaddingToNumbers(unit.moral2)}`;
+    addLeftPaddingToNumbers(unit.moral1) +
+    `/` +
+    addLeftPaddingToNumbers(unit.moral2);
 
   return (
     LINE_START + //
@@ -291,8 +293,7 @@ const drawFearAndMoralLine = (unit, specialRuleLine) => {
  * Function draws the hp and centers them with padding
  * on both sides.
  * @param {unitCard} unit
- * @returns a string containing a the unit's hp drawn as "[]"
- * , roughly centered.
+ * @returns a string containing a the unit's hp drawn as "[]", roughly centered.
  */
 const drawHP = (unit) => {
   const hp = renderDynamicIcons("[]", unit.hitpoints);

@@ -26,11 +26,13 @@ export const addSubfactionLine = (subFaction) => {
 };
 
 /**
- * Function adds padding to one digit numbers.
+ * Function turns numbers into string and adds padding if the number has only
+ * a single digit.
  * @param {int} number
  * @returns a number with a single white space added, in case it is single digit.
  */
 export const addLeftPaddingToNumbers = (number) => {
+  number = `${number}`;
   return number < 100 ? " " + number : number;
 };
 
@@ -39,10 +41,10 @@ export const addLeftPaddingToNumbers = (number) => {
  * to create a consistent text line length. The given padding size
  * is reduced by the wordlength, so that the resulting length is
  * always the same, no matter the length of the text.
- * 
+ *
  * @param {int} paddingSize
  * @param {int} textLength
- * @returns a string with with padding added at the end.
+ * @returns a string of white space.
  */
 export const addAdjustablePadding = (paddingSize, textLength) => {
   const adjustedPadding = paddingSize - textLength;
