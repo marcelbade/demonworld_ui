@@ -202,7 +202,7 @@ export const renderBooleanAsIcon = (numberOfElements, flag) => {
  * @param {*} iconString
  * @returns a string representing a unit stat as a number of icons.
  */
-export const renderDynamicIcons = (iconNumber, iconString) => {
+export const renderDynamicIcons = (iconString, iconNumber) => {
   let result = "";
 
   for (let i = 0; i < iconNumber; i++) {
