@@ -36,13 +36,16 @@ export const addLeftPaddingToNumbers = (number) => {
 
 /**
  * Function creates variable length white space in order
- * to create a consistent a text line length.
+ * to create a consistent text line length. The given padding size
+ * is reduced by the wordlength, so that the resulting length is
+ * always the same, no matter the length of the text.
+ * 
  * @param {int} paddingSize
- * @param {int} wordLength
+ * @param {int} textLength
  * @returns a string with with padding added at the end.
  */
-export const addAdjustablePadding = (paddingSize, wordLength) => {
-  const adjustedPadding = paddingSize - wordLength;
+export const addAdjustablePadding = (paddingSize, textLength) => {
+  const adjustedPadding = paddingSize - textLength;
 
   let padding = "";
   for (let i = 0; i < adjustedPadding; i++) {

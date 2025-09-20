@@ -3,6 +3,7 @@
 import { RANGED_WEAPON_STATS, WEAPON_1, WEAPON_2, WEAPON_3 } from "../constants/stats";
 import { NO_RANGE_WEAPON } from "../constants/textsAndMessages";
 import { setUnitStat } from "../gameLogic/unitStatChangeLogic/unitStatChangesLogic";
+import { chargeBonusSetter } from "../components/shared/statCards/unitStatSetters";
 import {
   addFooterLines,
   addHeaderLines,
@@ -117,11 +118,32 @@ const drawHorizontalCardEdge = () => {
 };
 
 const drawNameAndSubFactionLine = (unit) => {
+  let commandStars = renderDynamicIcons({
+    iconString: "*", //
+    iconNumber: unit.commandStars,
+    showIfNone: false,
+  });
+
+  let arcana = renderDynamicIcons({
+    iconString: "/", //
+    iconNumber: unit.magic,
+    showIfNone: false,
+  });
+
+  if (arcana.length > 0) {
+    commandStars = commandStars + "  ";
+  }
+
+  const leftLength = unit.unitName.length + commandStars.length + arcana.length;
+
+  const leftPadding = addAdjustablePadding((HALF_CARD_WIDTH - 1) / 2, leftLength / 2);
+  const leftLineString = unit.unitName + leftPadding + commandStars + arcana + leftPadding;
+
   return (
     LINE_START +
-    `${unit.unitName}${addAdjustablePadding(42, unit.unitName.length)}` + //
+    leftLineString + //
     `|` +
-    `${addAdjustablePadding(42, unit.subFaction.length)}${unit.subFaction} ` +
+    `${addAdjustablePadding(HALF_CARD_WIDTH - 1, unit.subFaction.length)}${unit.subFaction} ` +
     LINE_END
   );
 };
@@ -223,7 +245,9 @@ const drawleftSeparatorLine = (unit, specialRuleLine) => {
 };
 
 const drawIntiativeAndSizeLine = (unit, specialRuleLine) => {
-  const STAT_LINE = `Initiative  ${unit.initiative} Größe ${unit.unitSize} Angriffsbonus:${unit.chargeBonus}`;
+  const chargeBonusString = unit.chargeBonus > 0 ? `Angriffsbonus: ${chargeBonusSetter(unit)}` : "";
+
+  const STAT_LINE = `Initiative ${unit.initiative} Größe ${unit.unitSize} ${chargeBonusString}`;
 
   return (
     LINE_START + //
@@ -235,12 +259,19 @@ const drawIntiativeAndSizeLine = (unit, specialRuleLine) => {
 };
 
 const drawArmorLine = (unit, specialRuleLine) => {
-  const STAT_LINE = `Panzerung  ${unit.armourRange} / ${unit.armourMelee}`;
+  const skillPrefixString = unit.skillRange > 0 || unit.skillMelee > 0 ? "Kampfg." : "";
+  const rangeSkillString = unit.skillRange > 0 ? `Fern: ${unit.skillRange} ` : "";
+  const meleeSkillString = unit.skillMelee > 0 ? `Nah: ${unit.skillMelee} ` : "";
+
+  const skillString = skillPrefixString + rangeSkillString + meleeSkillString;
+
+  const armorString = `Panzerung  ${unit.armourRange} / ${unit.armourMelee}`;
 
   return (
     LINE_START + //
-    STAT_LINE +
-    `${addAdjustablePadding(HALF_CARD_WIDTH - 1, STAT_LINE.length)}` +
+    armorString +
+    `${addAdjustablePadding(HALF_CARD_WIDTH - 1, armorString.length + skillString.length)}` +
+    skillString +
     `|${specialRuleWriter(specialRuleLine, unit.specialRules, HALF_CARD_WIDTH)}` +
     LINE_END
   );
@@ -269,7 +300,7 @@ const drawFearAndMoralLine = (unit, specialRuleLine) => {
  * on both sides.
  * @param {unitCard} unit
  * @returns a string containing a the unit's hp drawn as "[]"
- * , roughy centered.
+ * , roughly centered.
  */
 const drawHP = (unit) => {
   const hp = renderDynamicIcons({
