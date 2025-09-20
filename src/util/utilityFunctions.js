@@ -198,14 +198,15 @@ export const renderBooleanAsIcon = (numberOfElements, flag) => {
  * - command stars
  * - magic markers
  * The icons are simply special characters.
- * @param {{iconString, numberOfIcons, showZeroMarker}} data
- * @returns a string with a number of symbols equal to the unit's stat.
+ * @param {*} iconNumber
+ * @param {*} iconString
+ * @returns a string representing a unit stat as a number of icons.
  */
-export const renderDynamicIcons = (data) => {
+export const renderDynamicIcons = (iconNumber, iconString) => {
   let result = "";
 
-  for (let i = 0; i < data.iconNumber; i++) {
-    result = result + data.iconString;
+  for (let i = 0; i < iconNumber; i++) {
+    result = result + iconString;
   }
 
   return result;

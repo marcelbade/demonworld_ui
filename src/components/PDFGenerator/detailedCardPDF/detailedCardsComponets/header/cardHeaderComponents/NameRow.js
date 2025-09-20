@@ -10,33 +10,53 @@ const NameRow = (props) => {
   const UNIT_NAME = props.unit.isMultiStateUnit ? props.unit.multiCardName : props.unit.unitName;
 
   return (
-    <View key={props.index} style={detailedStyles.headerRow}>
-      <View key={props.index} style={detailedStyles.paddingTopHeader}></View>
-      <View key={props.index} style={detailedStyles.commandAndMagicRow}>
-        <View key={props.index} style={detailedStyles.commandMagicContent}>
-          <Text key={props.index}>
-            {renderDynamicIcons({
-              iconString: "*",
-              iconNumber: props.unit.commandStars,
-              showIfNone: false,
-            })}
+    <View
+      key={props.index} //
+      style={detailedStyles.headerRow}
+    >
+      <View
+        key={props.index} //
+        style={detailedStyles.paddingTopHeader}
+      ></View>
+      <View
+        key={props.index} //
+        style={detailedStyles.commandAndMagicRow}
+      >
+        <View
+          key={props.index} //
+          style={detailedStyles.commandMagicContent}
+        >
+          <Text
+            key={props.index} //
+          >
+            {renderDynamicIcons("*", props.unit.commandStars)}
           </Text>
         </View>
-        <View key={props.index} style={detailedStyles.headerPaddingRow}>
+        <View
+          key={props.index} //
+          style={detailedStyles.headerPaddingRow}
+        >
           <Text key={props.index}> </Text>
         </View>
-        <View key={props.index} style={detailedStyles.commandMagicContent}>
-          <Text key={props.index}>
-            {renderDynamicIcons({
-              iconString: "/",
-              iconNumber: props.unit.magic,
-              showIfNone: false,
-            })}
+        <View
+          key={props.index} //
+          style={detailedStyles.commandMagicContent}
+        >
+          <Text
+            key={props.index} //
+          >
+            {renderDynamicIcons("/", props.unit.magic)}
           </Text>
         </View>
       </View>
-      <Text key={props.index}> {UNIT_NAME} </Text>
-      <Text key={props.index}> </Text>
+      <Text
+        key={props.index} //
+      >
+        {UNIT_NAME}
+      </Text>
+      <Text
+        key={props.index} //
+      ></Text>
     </View>
   );
 };

@@ -11,7 +11,7 @@ import {
 } from "../../../../util/utilityFunctions";
 import CardButton from "./CardButton";
 import RowLock from "./RowLock";
-// material ui 
+// material ui
 import { TableRow } from "@mui/material";
 // custom hook
 import useCompendiumTableControl from "../../../../customHooks/UseCompendiumTableControl";
@@ -41,17 +41,9 @@ const CompendiumTableRow = (props) => {
       case "weapon3":
         return `${props.unit.weapon3Name} ${props.unit.weapon3}`;
       case "commandStars":
-        return renderDynamicIcons({
-          iconString: "*", //
-          iconNumber: props.unit.commandStars,
-          showIfNone: true,
-        });
+        return renderDynamicIcons("*", props.unit.commandStars);
       case "magic":
-        return renderDynamicIcons({
-          iconString: "/", //
-          iconNumber: props.unit.magic,
-          showIfNone: true,
-        });
+        return renderDynamicIcons("/", props.unit.magic);
       case "specialRules":
         return renderSpecialRules(props.unit.specialRules);
       case "effectiveness_1":

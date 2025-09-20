@@ -118,17 +118,9 @@ const drawHorizontalCardEdge = () => {
 };
 
 const drawNameAndSubFactionLine = (unit) => {
-  let commandStars = renderDynamicIcons({
-    iconString: "*", //
-    iconNumber: unit.commandStars,
-    showIfNone: false,
-  });
+  let commandStars = renderDynamicIcons("*", unit.commandStars);
 
-  let arcana = renderDynamicIcons({
-    iconString: "/", //
-    iconNumber: unit.magic,
-    showIfNone: false,
-  });
+  let arcana = renderDynamicIcons("/", unit.magic);
 
   if (arcana.length > 0) {
     commandStars = commandStars + "  ";
@@ -303,11 +295,7 @@ const drawFearAndMoralLine = (unit, specialRuleLine) => {
  * , roughly centered.
  */
 const drawHP = (unit) => {
-  const hp = renderDynamicIcons({
-    iconString: "[]", //
-    iconNumber: unit.hitpoints,
-    showIfNone: false,
-  });
+  const hp = renderDynamicIcons("[]", unit.hitpoints);
 
   const padding = Math.floor((HALF_CARD_WIDTH - 2 * unit.hitpoints) / 2);
 

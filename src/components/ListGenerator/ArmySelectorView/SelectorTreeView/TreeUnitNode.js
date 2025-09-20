@@ -112,11 +112,7 @@ const TreeUnitNode = (props) => {
               marginRight: "1em",
             }}
           >
-            {renderDynamicIcons({
-              iconString: "*",
-              iconNumber: props.unit.commandStars,
-              showIfNone: false,
-            })}
+            {renderDynamicIcons("*", props.unit.commandStars)}
           </Typography>
         }
         {
@@ -125,11 +121,7 @@ const TreeUnitNode = (props) => {
               marginTop: "-0.8em", //
             }}
           >
-            {renderDynamicIcons({
-              iconString: "/",
-              iconNumber: props.unit.magic,
-              showIfNone: false,
-            })}
+            {renderDynamicIcons("/", props.unit.magic)}
           </Typography>
         }
       </Stack>

@@ -28,11 +28,7 @@ const CardFrontTitle = (props) => {
         variant="h4"
         align="center"
       >
-        {renderDynamicIcons({
-          iconString: "*",
-          iconNumber: props.unit.commandStars,
-          showIfNone: false,
-        })}
+        {renderDynamicIcons("*", props.unit.commandStars)}
       </Typography>
       <Typography
         variant="h4"
@@ -49,11 +45,7 @@ const CardFrontTitle = (props) => {
         variant="h6"
         align="center"
       >
-        {renderDynamicIcons({
-          iconString: "/",
-          iconNumber: props.unit.magic,
-          showIfNone: false,
-        })}
+        {renderDynamicIcons("/", props.unit.magic)}
       </Typography>
     </Grid>
   );

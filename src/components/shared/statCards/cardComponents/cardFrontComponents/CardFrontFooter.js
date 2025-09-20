@@ -9,11 +9,7 @@ import { renderDynamicIcons } from "../../../../../util/utilityFunctions";
 const CardFrontFooter = (props) => {
   const theme = useTheme();
 
-  const hitpoints = renderDynamicIcons({
-    iconString: "[ ]",
-    iconNumber: props.unit.hitpoints,
-    showIfNone: false,
-  });
+  const hitpoints = renderDynamicIcons("[ ]", props.unit.hitpoints);
 
   return (
     <Grid

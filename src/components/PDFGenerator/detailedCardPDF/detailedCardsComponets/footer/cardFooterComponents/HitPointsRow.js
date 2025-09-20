@@ -13,13 +13,7 @@ const HitPointsRow = (props) => {
       key={props.index} //
       style={detailedStyles.footerRow}
     >
-      <Text key={props.index}>
-        {renderDynamicIcons({
-          iconString: "[ ]",
-          iconNumber: props.hitPoints,
-          showIfNone: false,
-        })}
-      </Text>
+      <Text key={props.index}>{renderDynamicIcons("[ ]", props.hitPoints)}</Text>
     </View>
   );
 };
