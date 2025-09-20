@@ -323,10 +323,10 @@ const addClassicFormationStrings = (unit) => {
 
 /**
  * Function writes a unit's or item's special rule, line by line. The text is split
- * into lines of wit a given width (rounded up). Every function call
+ * into lines with a given width (rounded up). Every function call
  * returns a single line. The line may be empty if the text is shorter than
- * the number of lines needed to fill the card. If the special rule fits
- * inside the first line, it is centered.
+ * the number of lines needed to fill out the card. If the special rule fits
+ * inside the first line, it is centered (roughly, as the the widht is an odd number).
  * @param {int} lineNumber
  * @param {String} specialRule
  * @returns a string that represents one line of the special rule text,
@@ -364,6 +364,10 @@ const specialRuleWriter = (lineNumber, specialRule, width) => {
   // remove everything that doesn't fit inside the line
   if (result.length > width) {
     result = result.slice(0, width);
+    result = dontCutWords(result);
+
+    // if a word was cut, the string will be shorter
+    result = result + addAdjustablePadding(width, result);
   }
 
   // padd, if the result is smaller than line length
@@ -376,4 +380,35 @@ const specialRuleWriter = (lineNumber, specialRule, width) => {
 
 const drawItemName = (item) => {
   return LINE_START + item.itemName + addAdjustablePadding(86, item.itemName.length) + LINE_END;
+};
+/**
+ * Function makes sure that no word is cut off by a the end of the line.
+ * It tests if the last character in a a string is a letter. If not, the
+ * string is returend as is. Otherwise, the function shortens the string
+ * until it hits a character that is not a letter.
+ *
+ * @param {String} line
+ * @returns the same string, but possibly shortened
+ * until the last character is not a letter.
+ */
+const dontCutWords = (line) => {
+  if (!isLetter(line.charAt(line.length - 1))) {
+    return line;
+  }
+
+  while (isLetter(line.charAt(line.length - 1)) && line.length >= 1) {
+    line = line.slice(0, line.length - 1);
+  }
+  return line;
+};
+
+/**
+ * Function tests if the passed character is a letter by comparing the
+ * results of the toLowerCase and toUpperCase function.
+ *
+ * @param {String} c
+ * @returns true, if the character is a letter.
+ */
+const isLetter = (c) => {
+  return /[a-zA-Z]/.test(c);
 };
