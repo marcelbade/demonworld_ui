@@ -57,7 +57,7 @@ export const  meleeWeaponSetter = (unit) => {
 
 /**
  * Function calculates the charge bonus' display value for
- * the card preview and pdf.
+ * the card preview, pdf and text file.
  * @param {unitCard} unit
  * @returns the stat's value
  */
