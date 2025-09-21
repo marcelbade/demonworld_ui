@@ -319,6 +319,7 @@ export const CARD_TEXT = {
   SKIRMISH_FORMATION: "Pl",
   SQUARE_FORMATION: "Ka",
   WEDGE_FORMATION: "Ke",
+  SHIELD_WALL_FORMATION: "Sw",
   MAX_FIELDS_MOVE: (movementValue) => {
     return `maximal ${movementValue} Felder`;
   },

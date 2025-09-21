@@ -16,6 +16,7 @@ import CustomIcon from "../../../components/shared/CustomIcon";
 import wedgeFormationIcon from "../../../assets/icons/wedgeFormation.png";
 import skirmishFormationIcon from "../../../assets/icons/skirmishFormation.png";
 import squareFormationIcon from "../../../assets/icons/squareFormationWhite.png";
+import shieldWallIcon from "../../../assets/icons/icons8-shield-white.png";
 // functions and components
 import {
   renderManeuvers,
@@ -32,9 +33,11 @@ const CardFrontUpperBlackStripe = (props) => {
   const theme = useTheme();
 
   // icon sizes
-  const HEIGHT_WIDTH_ICON = "30px";
-  const HEIGHT_WIDTH_SQUARE_ICON = "45px";
-  const HEIGHT_WIDTH_SKIRMISH_ICON = "20px";
+  const SIZE_ICON = "30px";
+  const SIZE_SQUARE_ICON = "45px";
+  const SIZE_SKIRMISH_ICON = "20px";
+  const SIZE_SHIELD_ICON = "23px";
+
 
   return (
     <Grid //
@@ -78,8 +81,8 @@ const CardFrontUpperBlackStripe = (props) => {
             <CustomIcon
               icon={wedgeFormationIcon} //
               altText={CARD_TEXT.WEDGE_FORMATION}
-              height={HEIGHT_WIDTH_ICON}
-              width={HEIGHT_WIDTH_ICON}
+              height={SIZE_ICON}
+              width={SIZE_ICON}
               darkBackGround={true}
             />
           ) : null}
@@ -87,8 +90,8 @@ const CardFrontUpperBlackStripe = (props) => {
             <CustomIcon
               icon={skirmishFormationIcon} //
               altText={CARD_TEXT.SKIRMISH_FORMATION}
-              height={HEIGHT_WIDTH_SKIRMISH_ICON}
-              width={HEIGHT_WIDTH_SKIRMISH_ICON}
+              height={SIZE_SKIRMISH_ICON}
+              width={SIZE_SKIRMISH_ICON}
               darkBackGround={true}
             />
           ) : null}
@@ -96,9 +99,18 @@ const CardFrontUpperBlackStripe = (props) => {
             <CustomIcon
               icon={squareFormationIcon} //
               altText={CARD_TEXT.SQUARE_FORMATION}
-              height={HEIGHT_WIDTH_SQUARE_ICON}
-              width={HEIGHT_WIDTH_SQUARE_ICON}
+              height={SIZE_SQUARE_ICON}
+              width={SIZE_SQUARE_ICON}
               darkBackGround={true}
+            />
+          ) : null}
+          {props.unit.shieldWallFormation ? (
+            <CustomIcon
+              icon={shieldWallIcon} // ###
+              altText={CARD_TEXT.SHIELD_WALL_FORMATION}
+              height={SIZE_SHIELD_ICON}
+              width={SIZE_SHIELD_ICON}
+              darkBackGround={false}
             />
           ) : null}
           <Typography variant="h6" align="center">

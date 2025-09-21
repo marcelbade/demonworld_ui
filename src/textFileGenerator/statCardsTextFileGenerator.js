@@ -331,6 +331,14 @@ const addClassicFormationStrings = (unit) => {
     result = result + "Pl";
   }
 
+  if (result.length > 0) {
+    result = result + "/";
+  }
+
+  if (unit.shieldWallFormation) {
+    result = result + "Sw";
+  }
+
   // no trailing slash
   if (result.slice(-1) === "/") {
     result = result.slice(0, -1);

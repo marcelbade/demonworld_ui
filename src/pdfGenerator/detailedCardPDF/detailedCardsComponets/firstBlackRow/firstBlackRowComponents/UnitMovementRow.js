@@ -22,6 +22,7 @@ import {
 import squareFormationWhite from "../../../../../assets/icons/squareFormationWhite.png";
 import skirmishFormation from "../../../../../assets/icons/skirmishFormation.png";
 import wedgeFormation from "../../../../../assets/icons/wedgeFormation.png";
+import shieldWallFormation from "../../../../../assets/icons/icons8-shield-white.png";
 // styles
 import { detailedStyles } from "../../../../pdfStyles/detailedCardPdfStyles";
 
@@ -36,6 +37,10 @@ const UnitMovementRow = (props) => {
 
   const WEDGE_FORMATION = props.unit.wedgeFormation ? ( //
     <Image src={wedgeFormation} style={detailedStyles.wedgeIcon} />
+  ) : null;
+
+  const SHIELD_WALL_FORMATION = props.unit.shieldWallFormation ? ( //
+    <Image src={shieldWallFormation} style={detailedStyles.shieldWallFormationIcon} />
   ) : null;
 
   /**
@@ -76,10 +81,13 @@ const UnitMovementRow = (props) => {
           <Text style={detailedStyles.movementText} key={props.index}>
             {renderManeuvers(props.unit)}
           </Text>
-          {SKIRMISH_FORMATION}
-          {SQUARE_FORMATION}
-          {WEDGE_FORMATION}
-          {renderHorde(props.unit)}
+          <View style={detailedStyles.formations}>
+            {SKIRMISH_FORMATION} {/*###*/}
+            {SQUARE_FORMATION}
+            {WEDGE_FORMATION}
+            {SHIELD_WALL_FORMATION}
+            {renderHorde(props.unit)}
+          </View>
         </View>
       ) : null}
       {isSummonsWithMaxFields(props.unit) ? (

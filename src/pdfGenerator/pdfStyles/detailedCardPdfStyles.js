@@ -184,15 +184,29 @@ export const detailedStyles = {
 
   icon: {
     height: "10em",
+    width: "10em",
+    color: "white",
   },
 
   // wedge and square icons are smaller...
   wedgeIcon: {
-    height: "14em",
+    height: "30em",
+    width: "40em",
+    backgroundColor: "red",
+    color: "white",
   },
 
   squareFormationIcon: {
-    height: "20em",
+    height: "10em",
+    width: "10em",
+    backgroundColor: "red",
+    color: "white",
+  },
+
+  shieldWallFormationIcon: {
+    height: "10em",
+    width: "10em",
+    color: "white",
   },
 
   formations: {
