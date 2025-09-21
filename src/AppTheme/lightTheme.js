@@ -20,7 +20,7 @@ const lightTheme = createTheme({
     },
     statCards: {
       backGround: {
-        backgroundColor: "lightgrey", //
+        backgroundColor: "rgb(138, 158, 150)", //
       },
       cardTitle: {
         flexWrap: "nowrap",
