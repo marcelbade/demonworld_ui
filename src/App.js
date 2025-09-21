@@ -9,7 +9,7 @@ import landingPage from "./components/landingPage/landingPage";
 import CompendiumTable from "./components/compendiums/factionTable/components/CompendiumTable";
 import ListGenerator from "./components/ListGenerator/ListGenerator";
 import LossCalculator from "./components/lossCalculator/LossCalculator";
-import PdfBox from "./components/PDFGenerator/PDFBox";
+import PdfBox from "./pdfGenerator/PDFBox";
 import CardCreator from "./components/cardCreator/CardCreator";
 import CreateNewAccount from "./components/Login/CreateNewAccount";
 import { CompendiumTableStateArray } from "./components/compendiums/factionTable/components/compendiumTableStateArray";
