@@ -1,10 +1,9 @@
-import React from "react";
 // react-pdf
 import { Text, View } from "@react-pdf/renderer";
 // detailedStyles
 import { detailedStyles } from "../../../../pdfStyles/detailedCardPdfStyles";
 // components and functions
-import { initiativeSetter } from "../../../../../components/shared/statCards/unitStatSetters";
+import { initiativeSetter } from "../../../../../gameLogic/unitStatSetters";
 // constants
 import { CARD_TEXT } from "../../../../../constants/textsAndMessages";
 

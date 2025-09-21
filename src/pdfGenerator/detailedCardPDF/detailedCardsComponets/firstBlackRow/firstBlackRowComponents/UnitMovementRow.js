@@ -6,7 +6,7 @@ import {
   isHeroMageOrSingleSummon,
   isUnitOrSummonedUnit,
   isSummonsWithMaxFields,
-} from "../../../../../components/shared/statCards/unitMovementConditions";
+} from "../../../../../gameLogic/unitMovementConditions";
 import {
   renderManeuvers,
   renderHorde,

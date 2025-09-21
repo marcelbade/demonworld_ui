@@ -1,10 +1,8 @@
-// React
-import React from "react";
 // Material UI
 import { Grid2 as Grid, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components and functions
-import { initiativeSetter } from "../../../unitStatSetters";
+import { initiativeSetter } from "../../../../../../gameLogic/unitStatSetters";
 //constants
 import { CARD_TEXT } from "../../../../../../constants/textsAndMessages";
 

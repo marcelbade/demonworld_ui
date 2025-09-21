@@ -5,7 +5,7 @@ import { isSingleElementCard } from "../../../../../util/utilityFunctions";
 // styles
 import { detailedStyles } from "../../../../pdfStyles/detailedCardPdfStyles";
 // constants
-import { fearSetter, moralSetter } from "../../../../../components/shared/statCards/unitStatSetters";
+import { fearSetter, moralSetter } from "../../../../../gameLogic/unitStatSetters";
 
 const FearAndMoralRow = (props) => {
   return isSingleElementCard(props.unit) ? (

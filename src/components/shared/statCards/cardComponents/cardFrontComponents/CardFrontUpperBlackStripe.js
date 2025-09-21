@@ -1,16 +1,16 @@
 // React
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 // material ui
 import { Grid2 as Grid, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
-// constants 
+// constants
 import { CARD_TEXT } from "../../../../../constants/textsAndMessages";
 import {
   isGiantOrAutomaton,
   isHeroMageOrSingleSummon,
   isSummonsWithMaxFields,
   isUnitOrSummonedUnit,
-} from "../../../statCards/unitMovementConditions";
+} from "../../../../../gameLogic/unitMovementConditions";
 // icons
 import CustomIcon from "../../../CustomIcon";
 import wedgeFormationIcon from "../../../../../assets/icons/wedgeFormation.png";
@@ -33,7 +33,7 @@ const CardFrontUpperBlackStripe = (props) => {
 
   // icon sizes
   const HEIGHT_WIDTH_ICON = "30px";
-  const HEIGHT_WIDTH_SQUARE_ICON = "45px";  
+  const HEIGHT_WIDTH_SQUARE_ICON = "45px";
   const HEIGHT_WIDTH_SKIRMISH_ICON = "20px";
 
   return (

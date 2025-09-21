@@ -1,7 +1,7 @@
 // react-pdf
 import { Text, View } from "@react-pdf/renderer";
 // components & functions
-import { rangedWeaponSetter } from "../../../../../components/shared/statCards/unitStatSetters";
+import { rangedWeaponSetter } from "../../../../../gameLogic/unitStatSetters";
 // styles
 import { detailedStyles } from "../../../../pdfStyles/detailedCardPdfStyles";
 // constants

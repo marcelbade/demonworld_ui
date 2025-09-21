@@ -1,5 +1,5 @@
 // Reac
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 // react-pdf
 import { PDFViewer, Document, Page } from "@react-pdf/renderer";
 // components and functions
@@ -9,7 +9,8 @@ import DetailedCardPDF from "./detailedCardPDF/DetailedCardPDF";
 // styles
 import { commonStyles } from "./pdfStyles/commonStyles";
 
-// Create the PDF Document. The browser's pdf view will open in a new tab.
+// Shows the PDF inside the broswer, in a new tab. 
+// Uses the browser's build in PDF viewer to render the document.
 const PdfBox = () => {
   const [data, setData] = useState({
     list: [],

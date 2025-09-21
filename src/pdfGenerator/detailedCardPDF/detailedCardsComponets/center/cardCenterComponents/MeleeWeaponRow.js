@@ -3,7 +3,7 @@ import { Text, View } from "@react-pdf/renderer";
 // styles
 import { detailedStyles } from "../../../../pdfStyles/detailedCardPdfStyles";
 // contants
-import { meleeWeaponSetter } from "../../../../../components/shared/statCards/unitStatSetters";
+import { meleeWeaponSetter } from "../../../../../gameLogic/unitStatSetters";
 
 const MeleeWeaponRow = (props) => {
   const weapons = meleeWeaponSetter(props.unit);

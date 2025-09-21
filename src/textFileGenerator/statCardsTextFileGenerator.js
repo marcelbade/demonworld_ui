@@ -1,9 +1,8 @@
 // functions and components
-
 import { RANGED_WEAPON_STATS, WEAPON_1, WEAPON_2, WEAPON_3 } from "../constants/stats";
 import { NO_RANGE_WEAPON } from "../constants/textsAndMessages";
 import { setUnitStat } from "../gameLogic/unitStatChangeLogic/unitStatChangesLogic";
-import { chargeBonusSetter } from "../components/shared/statCards/unitStatSetters";
+import { chargeBonusSetter } from "../gameLogic/unitStatSetters";
 import {
   addFooterLines,
   addHeaderLines,
