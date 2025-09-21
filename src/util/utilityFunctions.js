@@ -1,5 +1,3 @@
-// React
-import React from "react";
 //Material UI
 import { Tooltip, Typography } from "@mui/material";
 //icons
