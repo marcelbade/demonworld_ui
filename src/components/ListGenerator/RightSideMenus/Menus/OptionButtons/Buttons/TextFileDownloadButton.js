@@ -12,7 +12,7 @@ import { statCardsTextFileGenerator } from "../../../../../../textFileGenerator/
 import { ArmyContext } from "../../../../../../contexts/armyContext";
 import { SelectionContext } from "../../../../../../contexts/selectionContext";
 // icons
-import downloadIcon from "../../../../../../assets/icons/downloadIcon.png";
+import txtFileIcon from "../../../../../../assets/icons/txtFileIcon.png";
 // constants
 import { OPTIONS, PDF } from "../../../../../../constants/textsAndMessages";
 
@@ -113,7 +113,7 @@ const TextFileDownloadButton = () => {
             }}
           >
             <CustomIcon
-              icon={downloadIcon} //
+              icon={txtFileIcon} //
               altText={OPTIONS.TEXTFILE_DOWNLOAD}
               height={"65px"}
               width={"65px"}
