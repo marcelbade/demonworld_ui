@@ -4,9 +4,9 @@ import React from "react";
 import { Grid2 as Grid, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components and functions
-import usePointCostCalculator from "../../../../../customHooks/UsePointCostCalculator";
+import usePointCostCalculator from "../../../customHooks/UsePointCostCalculator";
 // constants
-import { STATS } from "../../../../../constants/textsAndMessages";
+import { STATS } from "../../../constants/textsAndMessages";
 
 const CardBackLowerBlackStripe = (props) => {
   const calculator = usePointCostCalculator();

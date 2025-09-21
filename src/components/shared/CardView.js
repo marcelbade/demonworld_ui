@@ -3,7 +3,7 @@ import React, { Fragment, useEffect, useState } from "react";
 // material ui
 import { Grid2 as Grid } from "@mui/material";
 // components and functions
-import StatCard from "./statCards/StatCard";
+import StatCard from "../../htmlCardGenerator/StatCard";
 import StatCardCarousellButton from "./StatCardCarousellButton";
 
 const CardView = (props) => {

@@ -4,7 +4,7 @@ import React from "react";
 import { Grid2 as Grid, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components & functions
-import { renderDynamicIcons } from "../../../../../util/utilityFunctions";
+import { renderDynamicIcons } from "../../../util/utilityFunctions";
 
 const CardFrontFooter = (props) => {
   const theme = useTheme();

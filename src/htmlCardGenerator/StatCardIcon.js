@@ -3,8 +3,8 @@ import { Fragment } from "react";
 // Material UI
 import { Typography } from "@mui/material";
 // components & functions
-import { setUnitStat } from "../../../gameLogic/unitStatChangeLogic/unitStatChangesLogic";
-import CustomIcon from "../CustomIcon";
+import { setUnitStat } from "../gameLogic/unitStatChangeLogic/unitStatChangesLogic";
+import CustomIcon from "../components/shared/CustomIcon";
 
 /**
  * Functional JSX component that renders a unit stat as an icon

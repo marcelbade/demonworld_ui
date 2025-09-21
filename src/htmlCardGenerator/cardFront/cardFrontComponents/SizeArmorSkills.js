@@ -4,14 +4,14 @@ import { Grid2 as Grid, Typography } from "@mui/material";
 // Material UI
 import { useTheme } from "@emotion/react";
 // icons
-import rangeArmorIcon from "../../../../../../assets/icons/range-armor.png";
-import meleeArmorIcon from "../../../../../../assets/icons/melee-armor.png";
-import blackBowIcon from "../../../../../../assets/icons/bow2.png";
-import blackSwordIcon from "../../../../../../assets/icons/sword2.png";
+import rangeArmorIcon from "../../../assets/icons/range-armor.png";
+import meleeArmorIcon from "../../../assets/icons/melee-armor.png";
+import blackBowIcon from "../../../assets/icons/bow2.png";
+import blackSwordIcon from "../../../assets/icons/sword2.png";
 // constants
-import { ARMOUR_RANGE, ARMOUR_MELEE, SKILL_MELEE, SKILL_RANGE } from "../../../../../../constants/stats";
-import { ALTTEXT, CARD_TEXT } from "../../../../../../constants/textsAndMessages";
-import StatCardIcon from "../../../StatCardIcon";
+import { ARMOUR_RANGE, ARMOUR_MELEE, SKILL_MELEE, SKILL_RANGE } from "../../../constants/stats";
+import { ALTTEXT, CARD_TEXT } from "../../../constants/textsAndMessages";
+import StatCardIcon from "../../StatCardIcon";
 
 const SizeArmorSkills = (props) => {
   const theme = useTheme();

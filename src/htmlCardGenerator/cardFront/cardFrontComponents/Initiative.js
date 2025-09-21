@@ -2,9 +2,9 @@
 import { Grid2 as Grid, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components and functions
-import { initiativeSetter } from "../../../../../../gameLogic/unitStatSetters";
+import { initiativeSetter } from "../../../gameLogic/unitStatSetters";
 //constants
-import { CARD_TEXT } from "../../../../../../constants/textsAndMessages";
+import { CARD_TEXT } from "../../../constants/textsAndMessages";
 
 const Initiative = (props) => {
   const theme = useTheme();

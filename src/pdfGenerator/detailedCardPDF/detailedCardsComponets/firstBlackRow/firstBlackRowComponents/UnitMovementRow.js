@@ -16,7 +16,7 @@ import {
   renderMovementpoints,
   renderControlzone,
   renderUnitMovement,
-} from "./../../../../../components/shared/statCards/cardMovementRenderFunctions";
+} from "./../../../../../gameLogic/cardMovementRenderFunctions";
 
 // icons
 import squareFormationWhite from "../../../../../assets/icons/squareFormationWhite.png";

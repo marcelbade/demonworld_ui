@@ -4,18 +4,18 @@ import { Fragment } from "react";
 import { Grid2 as Grid, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // constants
-import { CARD_TEXT } from "../../../../../constants/textsAndMessages";
+import { CARD_TEXT } from "../../../constants/textsAndMessages";
 import {
   isGiantOrAutomaton,
   isHeroMageOrSingleSummon,
   isSummonsWithMaxFields,
   isUnitOrSummonedUnit,
-} from "../../../../../gameLogic/unitMovementConditions";
+} from "../../../gameLogic/unitMovementConditions";
 // icons
-import CustomIcon from "../../../CustomIcon";
-import wedgeFormationIcon from "../../../../../assets/icons/wedgeFormation.png";
-import skirmishFormationIcon from "../../../../../assets/icons/skirmishFormation.png";
-import squareFormationIcon from "../../../../../assets/icons/squareFormationWhite.png";
+import CustomIcon from "../../../components/shared/CustomIcon";
+import wedgeFormationIcon from "../../../assets/icons/wedgeFormation.png";
+import skirmishFormationIcon from "../../../assets/icons/skirmishFormation.png";
+import squareFormationIcon from "../../../assets/icons/squareFormationWhite.png";
 // functions and components
 import {
   renderManeuvers,
@@ -26,7 +26,7 @@ import {
   renderMovementpoints,
   renderControlzone,
   renderUnitMovement,
-} from "../../cardMovementRenderFunctions";
+} from "../../../gameLogic/cardMovementRenderFunctions";
 
 const CardFrontUpperBlackStripe = (props) => {
   const theme = useTheme();

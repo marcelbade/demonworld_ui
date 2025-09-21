@@ -1,8 +1,8 @@
 // Material UI
 import { Grid2 as Grid, Typography } from "@mui/material";
 // components & functions
-import { rangedWeaponSetter } from "../../../../../../gameLogic/unitStatSetters"; // constants
-import { NO_RANGE_WEAPON } from "../../../../../../constants/textsAndMessages";
+import { rangedWeaponSetter } from "../../../gameLogic/unitStatSetters"; // constants
+import { NO_RANGE_WEAPON } from "../../../constants/textsAndMessages";
 
 const RangedWeapon = (props) => {
   return props.unit.rangedWeapon !== NO_RANGE_WEAPON ? (

@@ -4,7 +4,7 @@ import React, { Fragment } from "react";
 import { useTheme } from "@emotion/react";
 import { Grid2 as Grid, Typography } from "@mui/material";
 // functions and modules
-import { COMPENDIUM } from "../../../../../constants/textsAndMessages";
+import { COMPENDIUM } from "../../../constants/textsAndMessages";
 
 const CardBackCenter = (props) => {
   const theme = useTheme();

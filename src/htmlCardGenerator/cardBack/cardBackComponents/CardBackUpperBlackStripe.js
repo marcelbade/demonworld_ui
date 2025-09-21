@@ -2,7 +2,7 @@
 import { useTheme } from "@emotion/react";
 import { Grid2 as Grid, Typography } from "@mui/material";
 //  components and functions
-import { numberOfElements, renderSpecialElements } from "../../../../../util/utilityFunctions";
+import { numberOfElements, renderSpecialElements } from "../../../util/utilityFunctions";
 
 const CardBackUpperBlackStripe = (props) => {
   const theme = useTheme();

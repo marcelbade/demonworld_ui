@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 // Material UI
 import { Grid2 as Grid } from "@mui/material";
 // components & functions
-import CardBack from "./cardComponents/CardBack";
-import CardFront from "./cardComponents/CardFront";
-import { isObjectEmtpy } from "../../../util/utilityFunctions";
+import CardBack from "./cardBack/CardBack";
+import CardFront from "./cardFront/CardFront";
+import { isObjectEmtpy } from "../util/utilityFunctions";
 
 /**
  * Wrapper Element. Allows for vertical or horizontal layout of the cards.

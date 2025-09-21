@@ -3,7 +3,7 @@ import React from "react";
 // material ui
 import { useTheme } from "@emotion/react";
 // components & functions
-import { renderDynamicIcons } from "../../../../../util/utilityFunctions";
+import { renderDynamicIcons } from "../../../util/utilityFunctions";
 import { Grid2 as Grid, Typography } from "@mui/material";
 
 /**

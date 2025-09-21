@@ -4,11 +4,11 @@ import { Fragment } from "react";
 import { Grid2 as Grid } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components & functions
-import RangedWeapon from "./CardFrontCenterComponents/RangedWeapon";
-import MeleeWeapons from "./CardFrontCenterComponents/MeleeWeapons";
-import Initiative from "./CardFrontCenterComponents/Initiative";
-import SizeArmorSkills from "./CardFrontCenterComponents/SizeArmorSkills";
-import ChargeBonus from "./CardFrontCenterComponents/ChargeBonus";
+import RangedWeapon from "./RangedWeapon";
+import MeleeWeapons from "./MeleeWeapons";
+import Initiative from "./Initiative";
+import SizeArmorSkills from "./SizeArmorSkills";
+import ChargeBonus from "./ChargeBonus";
 
 const CardFrontCenter = (props) => {
   const theme = useTheme();
