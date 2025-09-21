@@ -60,6 +60,7 @@ const OptionButtonsPage = () => {
           }}
         >
           <CreatePdfButton />
+          <TextFileDownloadButton />
           <LoadArmyButton />
           <StoreAndUpdateArmyListButton
             isUpdateSelected={false}
@@ -89,7 +90,6 @@ const OptionButtonsPage = () => {
         >
           <BackToSelectionButton iconSize={ICON_SIZE_RESET_BUTTONS} />
           <DeleteArmyListButton iconSize={ICON_SIZE_RESET_BUTTONS} />
-            <TextFileDownloadButton />
         </Grid>
         <Grid
           container

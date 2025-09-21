@@ -21,6 +21,8 @@ const TextFileDownloadButton = () => {
   const SEC = useContext(SelectionContext);
 
   const stats = useSubFactionStats();
+  const ICON_SIZE = "55px";
+  const ICON_BOX_SIZE = "60px";
 
   /**
    * Function adds the missing cards for multi state units to the array
@@ -81,7 +83,7 @@ const TextFileDownloadButton = () => {
     };
 
     // TODO: remove hard coding once the prototype stands!
-    let isSimpleFileSelected = false; 
+    let isSimpleFileSelected = false;
 
     const textGeneratorFunction = isSimpleFileSelected //
       ? simpleListTextFileGenerator
@@ -115,10 +117,10 @@ const TextFileDownloadButton = () => {
             <CustomIcon
               icon={txtFileIcon} //
               altText={OPTIONS.TEXTFILE_DOWNLOAD}
-              height={"65px"}
-              width={"65px"}
-              boxHeight={"70px"}
-              boxWidth={"62px"}
+              height={ICON_SIZE}
+              width={ICON_SIZE}
+              boxHeight={ICON_BOX_SIZE}
+              boxWidth={ICON_BOX_SIZE}
             />
           </IconButton>
         </span>
