@@ -12,7 +12,7 @@ import {
   drawLineWithChar,
   addLeftPaddingToNumbers,
 } from "./sharedTextFileFunctions";
-import { numberOfElements, renderDynamicIcons, renderSpecialElements } from "./utilityFunctions";
+import { numberOfElements, renderDynamicIcons, renderSpecialElements } from "../util/utilityFunctions";
 
 // width of one half of the old stat card
 const HALF_CARD_WIDTH = 43;

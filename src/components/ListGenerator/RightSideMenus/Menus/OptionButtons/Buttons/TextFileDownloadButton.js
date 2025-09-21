@@ -6,8 +6,8 @@ import { IconButton, Tooltip } from "@mui/material";
 import useSubFactionStats from "../../../../../../customHooks/UseSubFactionStats";
 import calculateScoutingFactor from "../../../../../../gameLogic/scoutFactorCalculator/scoutingFactorCalculator";
 import CustomIcon from "../../../../../shared/CustomIcon";
-import { simpleListTextFileGenerator } from "../../../../../../util/simpleListTextFileGenerator";
-import { statCardsTextFileGenerator } from "../../../../../../util/statCardsTextFileGenerator";
+import { simpleListTextFileGenerator } from "../../../../../../textFileGenerator/simpleListTextFileGenerator";
+import { statCardsTextFileGenerator } from "../../../../../../textFileGenerator/statCardsTextFileGenerator";
 // context
 import { ArmyContext } from "../../../../../../contexts/armyContext";
 import { SelectionContext } from "../../../../../../contexts/selectionContext";
