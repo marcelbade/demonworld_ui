@@ -1,4 +1,4 @@
-import { INPUT_TEXTS, STATS } from "../constants/textsAndMessages";
+import { INPUT_TEXTS, STATS } from "../../constants/textsAndMessages";
 
 /**
  * Function adds the lines containing the army's meta data

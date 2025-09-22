@@ -1,7 +1,7 @@
-import { addAdjustablePadding, drawLineWithChar } from "./sharedTextFileFunctions";
-import { specialRuleTextCreator } from "./specialRuleWriter";
-import { drawHorizontalCardEdge } from "./statCardFunctions";
-import { HALF_CARD_WIDTH, LINE_END, LINE_START } from "./TextFileGeneratorConstants";
+import { addAdjustablePadding, drawLineWithChar } from "./txtFileFunctions/sharedTextFileFunctions";
+import { specialRuleTextCreator } from "./txtFileFunctions/specialRuleWriter";
+import { drawHorizontalCardEdge } from "./txtFileFunctions/statCardFunctions";
+import { HALF_CARD_WIDTH, LINE_END, LINE_START } from "./textFileConstants/TextFileGeneratorConstants";
 
 export const addItemCard = (item) => {
   const lineArray = specialRuleTextCreator(item.itemRules, HALF_CARD_WIDTH * 2, false);

@@ -5,7 +5,7 @@ import {
   addLeftPaddingToNumbers,
   addAdjustablePadding,
   addSubfactionLine,
-} from "./sharedTextFileFunctions";
+} from "./txtFileFunctions/sharedTextFileFunctions";
 
 /**
  * Function create an army list as a simple text file. file is written as a single

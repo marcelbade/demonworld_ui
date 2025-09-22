@@ -1,12 +1,12 @@
 // functions and components
 import { addAdjustablePadding, drawLineWithChar, addLeftPaddingToNumbers } from "./sharedTextFileFunctions";
-import { RANGED_WEAPON_STATS } from "../constants/stats";
-import { NO_RANGE_WEAPON } from "../constants/textsAndMessages";
-import { setUnitStat } from "../gameLogic/unitStatChangeLogic/unitStatChangesLogic";
-import { chargeBonusSetter } from "../gameLogic/cardStatRenderFunctions/unitStatSetters";
-import { numberOfElements, renderDynamicIcons, renderSpecialElements } from "../util/utilityFunctions";
+import { RANGED_WEAPON_STATS } from "../../constants/stats";
+import { NO_RANGE_WEAPON } from "../../constants/textsAndMessages";
+import { setUnitStat } from "../../gameLogic/unitStatChangeLogic/unitStatChangesLogic";
+import { chargeBonusSetter } from "../../gameLogic/cardStatRenderFunctions/unitStatSetters";
+import { numberOfElements, renderDynamicIcons, renderSpecialElements } from "../../util/utilityFunctions";
 
-import { HALF_CARD_WIDTH, LINE_END, LINE_START } from "./TextFileGeneratorConstants";
+import { HALF_CARD_WIDTH, LINE_END, LINE_START } from "../textFileConstants/TextFileGeneratorConstants";
 
 export const drawHorizontalCardEdge = (width) => {
   return (

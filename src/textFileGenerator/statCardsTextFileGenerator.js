@@ -1,9 +1,9 @@
 // functions and components
 import { WEAPON_1, WEAPON_2, WEAPON_3 } from "../constants/stats";
-import { addItemCard } from "./itemCardWriter";
+import { addItemCard } from "./itemCardGenerator";
 
-import { addFooterLines, addHeaderLines, addSubfactionLine } from "./sharedTextFileFunctions";
-import { specialRuleTextCreator } from "./specialRuleWriter";
+import { addFooterLines, addHeaderLines, addSubfactionLine } from "./txtFileFunctions/sharedTextFileFunctions";
+import { specialRuleTextCreator } from "./txtFileFunctions/specialRuleWriter";
 
 import {
   drawHorizontalCardEdge,
@@ -17,9 +17,9 @@ import {
   drawArmorLine, //
   drawFearAndMoralLine,
   drawHitPointsAndPointCost,
-} from "./statCardFunctions";
+} from "./txtFileFunctions/statCardFunctions";
 
-import { HALF_CARD_WIDTH } from "./TextFileGeneratorConstants";
+import { HALF_CARD_WIDTH } from "./textFileConstants/TextFileGeneratorConstants";
 
 /**
  * Function create an army list as a simple text file. file is written as a single
