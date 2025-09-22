@@ -9,7 +9,6 @@ import {
   MORAL2,
 } from "../../constants/stats";
 import { setUnitStat } from "../unitStatChangeLogic/unitStatChangesLogic";
-
 import { CARD_TEXT } from "../../constants/textsAndMessages";
 
 /**
@@ -19,7 +18,7 @@ import { CARD_TEXT } from "../../constants/textsAndMessages";
  * @returns the stat's value.
  */
 export const initiativeSetter = (unit) => {
-  return setUnitStat(unit, INITIATIVE);
+  return `${CARD_TEXT.INITIATIVE} ${setUnitStat(unit, INITIATIVE)}`;
 };
 
 /**
@@ -29,7 +28,7 @@ export const initiativeSetter = (unit) => {
  * @returns an array containing the final display values
  * for the unit's weapons.
  */
-export const  meleeWeaponSetter = (unit) => {
+export const meleeWeaponSetter = (unit) => {
   const weapon1Stat = setUnitStat(unit, WEAPON_1);
   const weapon2Stat = setUnitStat(unit, WEAPON_2);
 

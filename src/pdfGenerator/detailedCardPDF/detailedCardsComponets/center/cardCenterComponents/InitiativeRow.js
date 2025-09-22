@@ -4,11 +4,9 @@ import { Text, View } from "@react-pdf/renderer";
 import { detailedStyles } from "../../../../pdfStyles/detailedCardPdfStyles";
 // components and functions
 import { initiativeSetter } from "../../../../../gameLogic/cardStatRenderFunctions/unitStatSetters";
-// constants
-import { CARD_TEXT } from "../../../../../constants/textsAndMessages";
 
 const InitiativeRow = (props) => {
-  const intiative = `${CARD_TEXT.INITIATIVE} ${initiativeSetter(props.unit)}`;
+  const intiative = initiativeSetter(props.unit);
 
   return (
     <View

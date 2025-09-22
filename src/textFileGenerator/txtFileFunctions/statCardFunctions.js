@@ -1,12 +1,30 @@
 // functions and components
 import { addAdjustablePadding, drawLineWithChar, addLeftPaddingToNumbers } from "./sharedTextFileFunctions";
-import { RANGED_WEAPON_STATS } from "../../constants/stats";
 import { NO_RANGE_WEAPON } from "../../constants/textsAndMessages";
 import { setUnitStat } from "../../gameLogic/unitStatChangeLogic/unitStatChangesLogic";
-import { chargeBonusSetter } from "../../gameLogic/cardStatRenderFunctions/unitStatSetters";
-import { numberOfElements, renderDynamicIcons, renderSpecialElements } from "../../util/utilityFunctions";
-
+import {
+  chargeBonusSetter,
+  initiativeSetter,
+  fearSetter, //
+  moralSetter,
+  rangedWeaponSetter,
+} from "../../gameLogic/cardStatRenderFunctions/unitStatSetters";
+import { isSingleElementCard, numberOfElements, renderDynamicIcons, renderSpecialElements } from "../../util/utilityFunctions";
 import { HALF_CARD_WIDTH, LINE_END, LINE_START } from "../textFileConstants/TextFileGeneratorConstants";
+import { CARD_TEXT } from "../../constants/textsAndMessages";
+import {
+  renderControlzone,
+  renderManeuvers,
+  renderMovementLargeElements,
+  renderMovementpoints,
+  renderOverrunValue,
+  renderUnitMovement,
+} from "../../gameLogic/cardStatRenderFunctions/movementStatSetters";
+import {
+  isGiantOrAutomaton,
+  isHeroMageOrSingleSummon,
+  isUnitOrSummonedUnit,
+} from "../../gameLogic/unitStatChangeLogic/unitMovementConditions";
 
 export const drawHorizontalCardEdge = (width) => {
   return (
@@ -24,15 +42,18 @@ export const drawleftSeparatorLine = (unit, specialRuleLine) => {
   return `|${drawLineWithChar("-", 43)}|${specialRuleLine}|\n`;
 };
 
+/**
+ * Function creates a string containing the fear and moral stats
+ * @param {*} unit
+ * @param {*} specialRuleLine
+ * @returns a string containing fear and (conditionally) moral.
+ */
 export const drawFearAndMoralLine = (unit, specialRuleLine) => {
-  const STAT_LINE =
-    `Furchtfaktor ` +
-    `${unit.fear}` +
-    addAdjustablePadding(11, 0) +
-    `Moral: ` +
-    addLeftPaddingToNumbers(unit.moral1) +
-    `/` +
-    addLeftPaddingToNumbers(unit.moral2);
+  isSingleElementCard(unit);
+
+  const STAT_LINE = isSingleElementCard(unit) //
+    ? fearSetter(unit)
+    : fearSetter(unit) + "  " + moralSetter(unit);
 
   return (
     LINE_START + //
@@ -43,6 +64,12 @@ export const drawFearAndMoralLine = (unit, specialRuleLine) => {
   );
 };
 
+/**
+ *
+ * @param {*} unit
+ * @param {*} specialRuleLine
+ * @returns
+ */
 export const drawArmorLine = (unit, specialRuleLine) => {
   const skillPrefixString = unit.skillRange > 0 || unit.skillMelee > 0 ? "Kampfg." : "";
   const rangeSkillString = unit.skillRange > 0 ? `Fern: ${unit.skillRange} ` : "";
@@ -89,15 +116,14 @@ export const drawWeaponLine = (unit, weapon, specialRuleLine) => {
 
 export const drawRangeWeaponLine = (unit, specialRuleLine) => {
   let rangedWeaponString = "";
-  const rangedWeapon = setUnitStat(unit, RANGED_WEAPON_STATS);
 
-  if (rangedWeapon.name !== NO_RANGE_WEAPON) {
-    rangedWeaponString = `${rangedWeapon.name} ${rangedWeapon.value}`;
+  if (unit.rangedWeapon !== NO_RANGE_WEAPON) {
+    rangedWeaponString = rangedWeaponSetter(unit);
   }
 
   return (
     LINE_START + //
-    `${rangedWeaponString}` +
+    rangedWeaponString +
     addAdjustablePadding(HALF_CARD_WIDTH - 1, rangedWeaponString.length) +
     `|` +
     specialRuleLine +
@@ -131,20 +157,21 @@ export const drawNameAndSubFactionLine = (unit) => {
 };
 
 export const drawMovementFormationsAndElements = (unit) => {
+  let leftStateLine = "";
+
+  if (isHeroMageOrSingleSummon(unit)) {
+    leftStateLine = renderMovementpoints(unit) + " " + renderControlzone(unit);
+  }
+  if (isGiantOrAutomaton(unit)) {
+    leftStateLine = renderMovementLargeElements(unit) + " " + renderOverrunValue(unit);
+  }
+  if (isUnitOrSummonedUnit(unit)) {
+    leftStateLine = renderUnitMovement(unit) + " " + renderManeuvers(unit);
+  }
+
   const formationsString = addClassicFormationStrings(unit);
 
-  const leftStateLine =
-    `B:${addLeftPaddingToNumbers(unit.move)}` + //
-    ` A:` +
-    `${addLeftPaddingToNumbers(unit.charge)}` +
-    ` P:` +
-    `${addLeftPaddingToNumbers(unit.skirmish)}` +
-    ` Manöver:` +
-    `${addLeftPaddingToNumbers(unit.hold_maneuvers)}`;
-
-  const overrunLine = unit.overRun > 0 ? `Überrennen:  ${unit.overRun}` : "";
-
-  const leftTextLength = leftStateLine.length + formationsString.length + overrunLine.length;
+  const leftTextLength = leftStateLine.length + formationsString.length;
   const rightTextLength = renderSpecialElements(unit).length + numberOfElements(unit).length;
 
   const centerPadding = addAdjustablePadding(HALF_CARD_WIDTH - 1, leftTextLength);
@@ -155,7 +182,6 @@ export const drawMovementFormationsAndElements = (unit) => {
     leftStateLine +
     centerPadding +
     formationsString +
-    overrunLine +
     `| ` +
     renderSpecialElements(unit) +
     rightPadding +
@@ -168,7 +194,7 @@ export const drawMovementFormationsAndElements = (unit) => {
 export const drawIntiativeAndSizeLine = (unit, specialRuleLine) => {
   const chargeBonusString = unit.chargeBonus > 0 ? chargeBonusSetter(unit) : "";
 
-  const STAT_LINE = `Initiative ${unit.initiative} Größe ${unit.unitSize} ${chargeBonusString}`;
+  const STAT_LINE = initiativeSetter(unit) + ` ${CARD_TEXT.SIZE}${unit.unitSize} ${chargeBonusString}`;
 
   let result =
     LINE_START + //
