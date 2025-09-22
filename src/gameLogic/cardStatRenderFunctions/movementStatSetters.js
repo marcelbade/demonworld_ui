@@ -1,8 +1,8 @@
 // constants
-import { CHARGE, MOVE, SKIRMISH, HOLD, OVERRUN } from "../constants/stats";
-import { CARD_TEXT } from "../constants/textsAndMessages";
+import { CHARGE, MOVE, SKIRMISH, HOLD, OVERRUN } from "../../constants/stats";
+import { CARD_TEXT } from "../../constants/textsAndMessages";
 // functions
-import { setUnitStat } from "./unitStatChangeLogic/unitStatChangesLogic";
+import { setUnitStat } from "../unitStatChangeLogic/unitStatChangesLogic";
 
 /**
  * Function creates a String that contains the movement value for heroes/mages/summons.

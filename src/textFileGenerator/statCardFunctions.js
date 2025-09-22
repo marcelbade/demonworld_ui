@@ -3,7 +3,7 @@ import { addAdjustablePadding, drawLineWithChar, addLeftPaddingToNumbers } from 
 import { RANGED_WEAPON_STATS } from "../constants/stats";
 import { NO_RANGE_WEAPON } from "../constants/textsAndMessages";
 import { setUnitStat } from "../gameLogic/unitStatChangeLogic/unitStatChangesLogic";
-import { chargeBonusSetter } from "../gameLogic/unitStatSetters";
+import { chargeBonusSetter } from "../gameLogic/cardStatRenderFunctions/unitStatSetters";
 import { numberOfElements, renderDynamicIcons, renderSpecialElements } from "../util/utilityFunctions";
 
 import { HALF_CARD_WIDTH, LINE_END, LINE_START } from "./TextFileGeneratorConstants";
@@ -73,6 +73,7 @@ export const drawWeaponLine = (unit, weapon, specialRuleLine) => {
     weaponValue = "";
   }
 
+  // turn weaponValue into as string to get the length
   const stringLength = weaponName.length + `${weaponValue})`.length;
 
   return (

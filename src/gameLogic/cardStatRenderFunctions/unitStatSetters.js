@@ -7,10 +7,10 @@ import {
   FEAR,
   MORAL1,
   MORAL2,
-} from "../constants/stats";
-import { setUnitStat } from "./unitStatChangeLogic/unitStatChangesLogic";
+} from "../../constants/stats";
+import { setUnitStat } from "../unitStatChangeLogic/unitStatChangesLogic";
 
-import { CARD_TEXT } from "../constants/textsAndMessages";
+import { CARD_TEXT } from "../../constants/textsAndMessages";
 
 /**
  * Function calculates the initiative stat's display value for the

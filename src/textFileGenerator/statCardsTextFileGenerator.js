@@ -52,7 +52,7 @@ export const statCardsTextFileGenerator = (textFileData) => {
       }
 
       for (let k = 0; k < unit.equipment.length; k++) {
-        const item = unit.equipment[k]; // TODO : items
+        const item = unit.equipment[k];
         text = text + addItemCard(item);
       }
     }

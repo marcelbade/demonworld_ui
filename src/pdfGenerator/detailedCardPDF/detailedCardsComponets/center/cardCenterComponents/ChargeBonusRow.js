@@ -4,7 +4,7 @@ import { Text, View } from "@react-pdf/renderer";
 // detailedStyles
 import { detailedStyles } from "../../../../pdfStyles/detailedCardPdfStyles";
 // components & functions
-import { chargeBonusSetter } from "../../../../../gameLogic/unitStatSetters";
+import { chargeBonusSetter } from "../../../../../gameLogic/cardStatRenderFunctions/unitStatSetters";
 
 const ChargeBonusRow = (props) => {
   return props.unit.chargeBonus > 0 ? (

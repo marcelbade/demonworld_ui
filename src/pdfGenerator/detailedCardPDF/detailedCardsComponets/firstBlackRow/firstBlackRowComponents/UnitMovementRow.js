@@ -6,7 +6,7 @@ import {
   isHeroMageOrSingleSummon,
   isUnitOrSummonedUnit,
   isSummonsWithMaxFields,
-} from "../../../../../gameLogic/unitMovementConditions";
+} from "../../../../../gameLogic/unitStatChangeLogic/unitMovementConditions";
 import {
   renderManeuvers,
   renderHorde,
@@ -16,7 +16,7 @@ import {
   renderMovementpoints,
   renderControlzone,
   renderUnitMovement,
-} from "./../../../../../gameLogic/cardMovementRenderFunctions";
+} from "./../../../../../gameLogic/cardStatRenderFunctions/movementStatSetters";
 
 // icons
 import squareFormationWhite from "../../../../../assets/icons/squareFormationWhite.png";

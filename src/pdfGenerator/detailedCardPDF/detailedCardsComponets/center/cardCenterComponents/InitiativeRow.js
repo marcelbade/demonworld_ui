@@ -3,7 +3,7 @@ import { Text, View } from "@react-pdf/renderer";
 // detailedStyles
 import { detailedStyles } from "../../../../pdfStyles/detailedCardPdfStyles";
 // components and functions
-import { initiativeSetter } from "../../../../../gameLogic/unitStatSetters";
+import { initiativeSetter } from "../../../../../gameLogic/cardStatRenderFunctions/unitStatSetters";
 // constants
 import { CARD_TEXT } from "../../../../../constants/textsAndMessages";
 

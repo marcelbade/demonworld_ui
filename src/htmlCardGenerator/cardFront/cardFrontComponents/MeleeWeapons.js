@@ -1,7 +1,7 @@
 // Material UI
 import { Grid2 as Grid, Typography } from "@mui/material";
 // components & functions
-import { meleeWeaponSetter } from "../../../gameLogic/unitStatSetters";
+import { meleeWeaponSetter } from "../../../gameLogic/cardStatRenderFunctions/unitStatSetters";
 
 const MeleeWeapons = (props) => {
   const weapons = meleeWeaponSetter(props.unit);

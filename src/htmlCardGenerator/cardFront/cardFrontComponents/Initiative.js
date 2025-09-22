@@ -2,7 +2,7 @@
 import { Grid2 as Grid, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components and functions
-import { initiativeSetter } from "../../../gameLogic/unitStatSetters";
+import { initiativeSetter } from "../../../gameLogic/cardStatRenderFunctions/unitStatSetters";
 //constants
 import { CARD_TEXT } from "../../../constants/textsAndMessages";
 

@@ -4,7 +4,7 @@ import { ITEM_TYPE_WEAPON, NOT_A_RANGE_WEAPON } from "../../constants/itemShopCo
 
 /**
  * Function calculates the new value for a unit's stat
- * after an item that permanently changes a stat was picked.
+ * after an item that permanently changes a stat was selected.
  * There are two use cases:
  * - weapons: change the weapon name recalculated the weapon#s attack value
  * - items: simply add a fixed bonus to astat

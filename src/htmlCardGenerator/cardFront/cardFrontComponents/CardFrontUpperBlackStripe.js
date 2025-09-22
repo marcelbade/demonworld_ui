@@ -10,7 +10,7 @@ import {
   isHeroMageOrSingleSummon,
   isSummonsWithMaxFields,
   isUnitOrSummonedUnit,
-} from "../../../gameLogic/unitMovementConditions";
+} from "../../../gameLogic/unitStatChangeLogic/unitMovementConditions";
 // icons
 import CustomIcon from "../../../components/shared/CustomIcon";
 import wedgeFormationIcon from "../../../assets/icons/wedgeFormation.png";
@@ -27,7 +27,7 @@ import {
   renderMovementpoints,
   renderControlzone,
   renderUnitMovement,
-} from "../../../gameLogic/cardMovementRenderFunctions";
+} from "../../../gameLogic/cardStatRenderFunctions/movementStatSetters";
 
 const CardFrontUpperBlackStripe = (props) => {
   const theme = useTheme();
