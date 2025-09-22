@@ -14,6 +14,7 @@ import { HALF_CARD_WIDTH, LINE_END, LINE_START } from "../textFileConstants/Text
 import { CARD_TEXT } from "../../constants/textsAndMessages";
 import {
   renderControlzone,
+  renderHorde,
   renderManeuvers,
   renderMovementLargeElements,
   renderMovementpoints,
@@ -172,7 +173,8 @@ export const drawMovementFormationsAndElements = (unit) => {
   // unlike the pdf and html cards, the old txt files had no "/" to separate values.
   leftStateLine = leftStateLine.replaceAll("/", "");
 
-  const formationsString = addClassicFormationStrings(unit);
+ 
+  const formationsString = addClassicFormationStrings(unit) + renderHorde(unit.horde) +" ";
 
   const leftTextLength = leftStateLine.length + formationsString.length;
   const rightTextLength = renderSpecialElements(unit).length + numberOfElements(unit).length;
