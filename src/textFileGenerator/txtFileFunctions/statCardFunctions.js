@@ -166,8 +166,11 @@ export const drawMovementFormationsAndElements = (unit) => {
     leftStateLine = renderMovementLargeElements(unit) + " " + renderOverrunValue(unit);
   }
   if (isUnitOrSummonedUnit(unit)) {
-    leftStateLine = renderUnitMovement(unit) + " " + renderManeuvers(unit);
+    leftStateLine = renderUnitMovement(unit) + "  " + renderManeuvers(unit);
   }
+
+  // unlike the pdf and html cards, the old txt files had no "/" to separate values.
+  leftStateLine = leftStateLine.replaceAll("/", "");
 
   const formationsString = addClassicFormationStrings(unit);
 

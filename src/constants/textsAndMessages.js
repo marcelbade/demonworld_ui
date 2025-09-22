@@ -306,7 +306,7 @@ export const CARD_TEXT = {
   INITIATIVE: "Initiative",
   LEADER: "Anführer",
   MOVEMENT_POINTS: " Bewegungspunkte",
-  MANEUVER: " Manöver",
+  MANEUVER: "Manöver",
   MOVE: "M",
   MORAL: "Moral",
   MUSICIAN: "Musiker",
