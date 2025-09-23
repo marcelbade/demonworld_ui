@@ -1,5 +1,5 @@
 // React
-import React, { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 //Material UI
 import { Grid2 as Grid } from "@mui/material";
 import { SimpleTreeView } from "@mui/x-tree-view/SimpleTreeView";
@@ -108,6 +108,7 @@ const ItemShopTree = () => {
       defaultcollapseicon={<ExpandMoreIcon />}
       defaultexpandicon={<ChevronRightIcon />}
       expanded={controller.expansionValue}
+      sx={{ paddingTop: "4em" }}
     >
       {filteredItemGroups.map((dto, i) => {
         return (

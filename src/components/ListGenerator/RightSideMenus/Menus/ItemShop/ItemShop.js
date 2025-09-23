@@ -1,5 +1,3 @@
-// React
-import React from "react";
 //Material UI
 import { Grid2 as Grid } from "@mui/material";
 // components and functions
@@ -16,13 +14,7 @@ const ItemShop = () => {
       }}
     >
       <ItemShopHeader />
-
-      <Grid //
-        justifyContent="flex-start"
-        sx={{ paddingLeft: "2em" }}
-      >
-        <ItemShopTree />
-      </Grid>
+      <ItemShopTree />
     </Grid>
   );
 };

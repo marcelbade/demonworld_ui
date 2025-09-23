@@ -1,5 +1,5 @@
 // React
-import React, { useContext } from "react";
+import { useContext } from "react";
 //Material UI
 import { Grid2 as Grid, Typography, IconButton } from "@mui/material";
 // icons
@@ -17,7 +17,13 @@ const ItemShopHeader = () => {
   };
 
   return (
-    <Grid container>
+    <Grid
+      container //
+      alignItems="center"
+      sx={{
+        position: "absolute",
+      }}
+    >
       <IconButton
         onClick={() => {
           closeShopPanel();
@@ -26,19 +32,14 @@ const ItemShopHeader = () => {
       >
         <CancelIcon />
       </IconButton>
-      <Grid //
-        container
-        direction="row"
-        justifyContent="center"
+
+      <Typography
+        variant="h5" //
+        align="center"
+        sx={{ marginLeft: "1em" }}
       >
-        <Typography
-          variant="h5"
-          align="center"
-         
-        >
-          {IC.unitSelectedForShop.unitName}
-        </Typography>
-      </Grid>
+        {IC.unitSelectedForShop.unitName}
+      </Typography>
     </Grid>
   );
 };
