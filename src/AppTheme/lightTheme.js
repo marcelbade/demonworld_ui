@@ -1,6 +1,5 @@
 import { createTheme } from "@mui/material/styles";
 import animationTheme from "./animationTheme";
-import { Typography } from "@mui/material";
 
 const lightTheme = createTheme({
   palette: {
