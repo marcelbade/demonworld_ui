@@ -69,7 +69,7 @@ const TreeUnitNode = (props) => {
    * @param {boolean} isBlocked
    * @returns true, if unit is a valid choice
    */
-  const displayValidNodeStyle = (isBlocked) => {
+  const switchNodeStyle = (isBlocked) => {
     const NAME_WIDTH = "65%";
     const NAME_HEIGHT = "50%";
     const style = { minWidth: NAME_WIDTH, NAME_HEIGHT };
@@ -80,7 +80,7 @@ const TreeUnitNode = (props) => {
   return (
     <Stack>
       <Stack alignItems="center" direction="row">
-        <Typography sx={displayValidNodeStyle(!props.isValidUnit)}>{props.unit.unitName}</Typography>
+        <Typography sx={switchNodeStyle(!props.isValidUnit)}>{props.unit.unitName}</Typography>
         {/* card preview button */}
         {sideMenuController.buttons.map((b, i) => {
           return (
@@ -125,7 +125,7 @@ const TreeUnitNode = (props) => {
           </Typography>
         }
       </Stack>
-      <Typography sx={displayValidNodeStyle(!props.isValidUnit)}>{props.unit.points}</Typography>
+      <Typography sx={switchNodeStyle(!props.isValidUnit)}>{props.unit.points}</Typography>
     </Stack>
   );
 };

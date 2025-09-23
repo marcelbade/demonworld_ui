@@ -1,4 +1,5 @@
 // React
+import { useTheme } from "@emotion/react";
 import { useState, useContext, useEffect } from "react";
 //Material UI
 import { Grid2 as Grid } from "@mui/material";
@@ -9,23 +10,24 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 // components and functions
 import { ItemContext } from "../../../../../contexts/itemContext";
-import useItemFilters from "../../../../../customHooks/UseItemFilters";
 import { isObjectEmtpy } from "../../../../../util/utilityFunctions";
 import TreeItemNode from "./TreeItemNode";
+// custom hooks
+import UseUnitEqipmentLimits from "../../../../../customHooks/UseUnitEquipmentLimits";
 import useTreeViewController from "../../../../../customHooks/UseTreeViewController";
-import InvalidTreeItemNode from "./InvalidTreeItemNode";
+import useItemFilters from "../../../../../customHooks/UseItemFilters";
 // constants
 import { ITEM_CATEGORY_NAME_MAPPING } from "../../../../../constants/itemShopConstants";
-import UseUnitEqipmentLimits from "../../../../../customHooks/UseUnitEquipmentLimits";
 
 const ItemShopTree = () => {
+  const theme = useTheme();
+
   const IC = useContext(ItemContext);
   const controller = useTreeViewController();
   const filter = useItemFilters();
   const equipmentLimits = UseUnitEqipmentLimits();
 
   const [filteredItemGroups, setFilteredItemGroups] = useState([]);
-  const [disabledCategories, setDisabledCategories] = useState([]);
 
   /**
    * Whenever the item shop is opened for a new unit, this resets the state. This involves two stweps:
@@ -42,36 +44,27 @@ const ItemShopTree = () => {
     }
 
     const tempArray = filter.filterItemTypesForUnit(IC.unitSelectedForShop, IC.fetchedItems.factionItems);
-
     setFilteredItemGroups(tempArray);
-    const numberOfCategories = tempArray.length;
-    setDisabledCategories(Array(numberOfCategories).fill(false));
-  }, [IC.unitSelectedForShop]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [IC.unitSelectedForShop.uniqueID]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
-   * Function tests wether all items of one type are blocked.
-   * If so, the branch (item category) is shown as disabled (greyed out).
-   * @param {item DTO} dto
-   * @returns true, if the node must be disabled.
+   * Function tests whether a branch in the tree (i.e., one item group) should
+   * be shown as empty (every item blocked).
+   * @param {object} dto
+   * @returns true, if the number of items in group is equal the number of blocked
+   * items in the group.
    */
-  const testForEmptyItemCategory = (dto, i) => {
-    let tempArray = [...disabledCategories];
-
-    const numberOfItems = dto.items.length;
-    let numberOfBlockedItems = 0;
-
+  const disableBranch = (dto) => {
+    let i = 0;
     dto.items.forEach((item) => {
-      if (
-        filter.filterIndividualItems(IC.unitSelectedForShop, item).isInvalidItem || //
-        equipmentLimits.disableItem(IC.unitSelectedForShop, item).disableButton
-      ) {
-        numberOfBlockedItems++;
+      const result = isItemBlocked(IC.unitSelectedForShop, item);
+
+      if (result.isBlocked) {
+        i++;
       }
     });
 
-    tempArray[i] = numberOfBlockedItems >= numberOfItems;
-
-    setDisabledCategories(tempArray);
+    return i === dto.items.length;
   };
 
   /**
@@ -112,23 +105,19 @@ const ItemShopTree = () => {
     >
       {filteredItemGroups.map((dto, i) => {
         return (
-          <TreeItem
-            itemId={`${i}`} //
-            label={ITEM_CATEGORY_NAME_MAPPING[dto.typeName]}
+          <TreeItem // item category
+            itemId={`${i}`}
+            label={ITEM_CATEGORY_NAME_MAPPING[dto.typeName]} // show the item categories in German
             key={i}
             onClick={() => controller.treeExpansionController([`${i}`])}
-            disabled={disabledCategories[i]}
+            sx={{
+              color: disableBranch(dto) ? theme.palette.disabled : null,
+            }}
           >
             {dto.items.map((item, j) => {
               const result = isItemBlocked(IC.unitSelectedForShop, item);
 
-              return result.isBlocked ? (
-                <InvalidTreeItemNode
-                  key={j} //
-                  item={item}
-                  message={result.message}
-                />
-              ) : (
+              return (
                 <Grid
                   key={j} //
                   container
@@ -137,7 +126,8 @@ const ItemShopTree = () => {
                     item={item} //
                     categoryNumber={i}
                     categoryObj={dto}
-                    testForEmptyItemCategory={testForEmptyItemCategory}
+                    isBlocked={result.isBlocked}
+                    blockMessage={result.message}
                   />
                 </Grid>
               );

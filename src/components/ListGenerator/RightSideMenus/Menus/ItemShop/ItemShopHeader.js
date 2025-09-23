@@ -20,9 +20,6 @@ const ItemShopHeader = () => {
     <Grid
       container //
       alignItems="center"
-      sx={{
-        position: "absolute",
-      }}
     >
       <IconButton
         onClick={() => {

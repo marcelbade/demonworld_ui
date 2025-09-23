@@ -11,7 +11,9 @@ import useSpecialItems from "../../../../../customHooks/UseSpecialItems";
 import SpellBookIcon from "../../../../../assets/icons/spellbook-black.png";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 // constants
-import { TOOLTIPS } from "../../../../../constants/textsAndMessages";
+import { PUSH_MESSAGE_TYPES, TOOLTIPS } from "../../../../../constants/textsAndMessages";
+import { useTheme } from "@emotion/react";
+import ContextHelpButton from "../../../../shared/ContextHelpButton";
 
 const TreeItemNode = (props) => {
   const IC = useContext(ItemContext);
@@ -19,6 +21,8 @@ const TreeItemNode = (props) => {
 
   const limiter = UseUnitEqipmentLimits();
   const special = useSpecialItems();
+
+  const theme = useTheme();
 
   /**
    * Add the item card object to the selected unit. This means:
@@ -70,53 +74,56 @@ const TreeItemNode = (props) => {
       }}
     >
       <AccordionSummary
-        expandIcon={
-          <CustomIcon //
-            icon={SpellBookIcon}
-            altText={TOOLTIPS.RULE_BOOK_TEXT}
-            height={35}
-            width={35}
-            boxHeight={45}
-            boxWidth={45}
-          />
-        } //
+        expandIcon={<AddCircleOutlineIcon />} //
         aria-controls="panel1a-content"
         id="shopItem"
       >
         <Grid
           container
           alignItems="center" //
-          justifyContent="flex-start"
+          justifyContent="center"
         >
-          <Grid
-            direction="row" //
-            size={{ xs: 10 }}
+          <IconButton
+            disabled={props.isBlocked}
+            onClick={(e) => {
+              addItemToUnit(props.item);
+              addItemToCentralList(props.item);
+              limiter.toggleUnitsItemTypeFlags(IC.unitSelectedForShop, props.item, true);
+              testForSpecialItems(props.item);
+              e.stopPropagation();
+            }}
           >
+            <AddCircleOutlineIcon />
+          </IconButton>
+
+          <Grid direction="column">
             <Typography
-              sx={{ minWidth: "12em" }} //
+              sx={{
+                minWidth: "12em", //
+                color: props.isBlocked ? theme.palette.disabled : null,
+              }}
               variant="body1"
             >
               {props.item.itemName}
             </Typography>
-          </Grid>
-          <Grid
-            direction="row" //
-            size={{ xs: 2 }}
-          >
-            <IconButton
-              onClick={(e) => {
-                addItemToUnit(props.item);
-                addItemToCentralList(props.item);
-                limiter.toggleUnitsItemTypeFlags(IC.unitSelectedForShop, props.item, true);
-                testForSpecialItems(props.item);
-                props.testForEmptyItemCategory(props.categoryObj, props.categoryNumber);
-                e.stopPropagation();
+            <Typography
+              variant="body1"
+              sx={{
+                minWidth: "12em", //
+                color: props.isBlocked ? theme.palette.disabled : null, //
               }}
             >
-              <AddCircleOutlineIcon />
-            </IconButton>
+              {props.item.points}
+            </Typography>
           </Grid>
-          <Typography variant="body1">{props.item.points}</Typography>
+
+          {props.isBlocked ? (
+            <ContextHelpButton
+              isVisible={true}
+              message={props.blockMessage} //
+              type={PUSH_MESSAGE_TYPES.INFO}
+            />
+          ) : null}
         </Grid>
       </AccordionSummary>
       <AccordionDetails>
