@@ -5,9 +5,10 @@ import { ITEM_LIMIT_MESSAGE } from "../constants/textsAndMessages";
 
 const UseUnitEquipmentLimits = () => {
   /**
-   * While useItemFilters makes sure that items that a unit can not equip 
-   * are either not shown or disabled, this logic implements item selection
-   * selection rules by toggling the item's corresponding add button on/off.
+   * While useItemFilters makes sure that items that a unit can never equip 
+   * are either not shown or disabled, this logic implements the games 
+   * item selection rules by toggling the item's corresponding 
+   * add button on/off.
    * The Rules are as follows:
    *  - Only generic items can be given to multiple units.
    *  - A hero, magicican or unit leader can only get ONE magical item.
