@@ -34,7 +34,7 @@ const ItemShopHeader = () => {
         <Typography
           variant="h5"
           align="center"
-          sx={{ width: "60%", fontWeight: "bold", borderBottom: "solid 4px black", marginBottom: "1em", fontFamily: "jaapokkiRegular" }}
+         
         >
           {IC.unitSelectedForShop.unitName}
         </Typography>

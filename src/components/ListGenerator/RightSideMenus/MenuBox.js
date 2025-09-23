@@ -49,7 +49,7 @@ const MenuBox = () => {
         variant="persistent"
         open={c.show}
         sx={{
-          width: "100%",
+          width: "150%",
         }}
       >
         {c.element}

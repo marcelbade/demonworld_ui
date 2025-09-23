@@ -62,8 +62,12 @@ const TreeItemNode = (props) => {
   return (
     <Accordion
       key={props.item.itemName} //
-      style={{ boxShadow: "none" }}
-      sx={{ width: "75%" }}
+      sx={{
+        boxShadow: "none", //
+        width: "75%",
+        overflowY: "auto",
+        overflowX: "auto",
+      }}
     >
       <AccordionSummary
         expandIcon={
@@ -118,7 +122,11 @@ const TreeItemNode = (props) => {
       <AccordionDetails>
         <Typography
           variant="body1" //
-          sx={{ width: "100%" }}
+          sx={{
+            width: "100%", //
+            overflowY: "auto",
+            overflowX: "auto",
+          }}
         >
           {props.item.itemRules}
         </Typography>
