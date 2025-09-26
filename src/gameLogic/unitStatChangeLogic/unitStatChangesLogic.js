@@ -117,7 +117,7 @@ const calculateMeleeValue = (unit, unitStatName) => {
   });
 
   if (isWeapon) {
-    // size bonus - capped at 4
+    // size bonus - capped at +4
     weaponStats.value = unit.unitSize <= MAX_SIZE ? (weaponStats.value += unit.unitSize) : (weaponStats.value += MAX_SIZE);
 
     // leader always has +1
@@ -130,7 +130,7 @@ const calculateMeleeValue = (unit, unitStatName) => {
     weaponStats.value = unit.closedOrder ? (weaponStats.value += BONUS) : weaponStats.value;
 
     // unit is equipped with a second hand weapon
-    weaponStats.value = unit.twoHandWeapons ? (weaponStats.value += BONUS) : weaponStats.value;
+    weaponStats.value = unit.hasTwoWeapons ? (weaponStats.value += BONUS) : weaponStats.value;
   }
 
   return weaponStats;
