@@ -5,13 +5,11 @@ import { Typography, IconButton, Accordion, AccordionSummary, AccordionDetails, 
 import { ItemContext } from "../../../../../contexts/itemContext";
 import { SelectionContext } from "../../../../../contexts/selectionContext";
 import UseUnitEqipmentLimits from "../../../../../customHooks/UseUnitEquipmentLimits";
-import CustomIcon from "../../../../shared/CustomIcon";
 import useSpecialItems from "../../../../../customHooks/UseSpecialItems";
 // icons
-import SpellBookIcon from "../../../../../assets/icons/spellbook-black.png";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 // constants
-import { PUSH_MESSAGE_TYPES, TOOLTIPS } from "../../../../../constants/textsAndMessages";
+import { PUSH_MESSAGE_TYPES } from "../../../../../constants/textsAndMessages";
 import { useTheme } from "@emotion/react";
 import ContextHelpButton from "../../../../shared/ContextHelpButton";
 
