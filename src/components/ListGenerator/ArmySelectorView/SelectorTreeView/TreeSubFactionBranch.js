@@ -25,9 +25,9 @@ const TreeSubFactionBranch = (props, { children }) => {
 
   /**
    * The following is a contreived hack to have a forceUpdate function in a
-   * functional component. ForceUpdate is a method in 
+   * functional component. ForceUpdate is a method in
    * class component that immdiately forces a rerender.
-   * This is the ONLY WORKING SOLUTION that rerenders all treeView 
+   * This is the ONLY WORKING SOLUTION that rerenders all treeView
    * items and correctly show disabled branches (see testForDisabledSubFaction).
    * https://legacy.reactjs.org/docs/hooks-faq.html#is-there-something-like-forceupdate
    */
@@ -40,11 +40,11 @@ const TreeSubFactionBranch = (props, { children }) => {
   /**
    * Function checks whether the tree displays the faction or the ally
    * and returns the correct DTOs.
-   * @returns an array of SubFaction DTOs that either 
+   * @returns an array of SubFaction DTOs that either
    * belong to the selected faction, or its ally.
    */
-  const displayEitherSubFactionOrAlly = () => {
-    return props.isFaction ? AC.subFactionDTOs : ALC.allySubFactionDTOs;
+  const displayEitherSubFactionOrAlly = (isFaction) => {
+    return isFaction ? AC.subFactionDTOs : ALC.allySubFactionDTOs;
   };
 
   /**
@@ -65,12 +65,12 @@ const TreeSubFactionBranch = (props, { children }) => {
   };
 
   /**
-   * Function sorts the units, makes sure that units with multiple 
+   * Function sorts the units, makes sure that units with multiple
    * unit stat cards are only displayed once in the tree and
    * validates every unit. Invalid units are displayed, but cannot be selected
-   * and gain a button that displays a message detailing why it is invalid.  
+   * and gain a button that displays a message detailing why it is invalid.
    * @param {[unitCard]} units -
-   * @returns an array of validation objects (see createValidationUnitObject function) 
+   * @returns an array of validation objects (see createValidationUnitObject function)
    */
   const sortFilterValidate = (units) => {
     return (
@@ -88,7 +88,7 @@ const TreeSubFactionBranch = (props, { children }) => {
     );
   };
 
-  return displayEitherSubFactionOrAlly().map((subFactionDTO, i) =>
+  return displayEitherSubFactionOrAlly(props.isFaction).map((subFactionDTO, i) =>
     isSubFactionAlternativeAndSelected(subFactionDTO) ? (
       <TreeItem
         itemId={`${i}`} //
