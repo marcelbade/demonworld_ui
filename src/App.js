@@ -12,6 +12,7 @@ import LossCalculator from "./components/lossCalculator/LossCalculator";
 import PdfBox from "./pdfGenerator/PDFBox";
 import CardCreator from "./components/cardCreator/CardCreator";
 import CreateNewAccount from "./components/Login/CreateNewAccount";
+import SpellCompendium from "./components/spellCompemdium/SpellCompendium";
 import { CompendiumTableStateArray } from "./components/compendiums/factionTable/components/compendiumTableStateArray";
 // context providers
 import AllyProvider from "./contexts/allyContext";
@@ -460,6 +461,7 @@ function App() {
                                                 <Route path="/PdfBox" component={PdfBox} />
                                                 <Route path="/cardCreator" component={CardCreator} exact />
                                                 <Route path="/addNewAccount" component={CreateNewAccount} exact />
+                                                <Route path="/spellCompendium" component={SpellCompendium} exact />
                                               </Switch>
                                             </Grid>
                                           ) : null}
