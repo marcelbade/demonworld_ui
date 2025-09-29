@@ -77,6 +77,7 @@ const FactionAndUnitSelectors = () => {
    */
   const selectFaction = (selectedFaction) => {
     CC.setSelectedFaction(CC.data.map((u) => u.faction).find((name) => name === selectedFaction));
+
     CC.setDisplayUnits(CC.data.filter((u) => u.faction.includes(selectedFaction) || u.unitLocked));
   };
 

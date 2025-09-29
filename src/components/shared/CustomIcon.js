@@ -57,7 +57,12 @@ const CustomIcon = (props) => {
   };
 
   return (
-    <Icon sx={{ ...toggleIconColor(), ...toggleCheckBoxIcon() }}>
+    <Icon
+      sx={{
+        ...toggleIconColor(), //
+        ...toggleCheckBoxIcon(),
+      }}
+    >
       <img
         src={props.icon} //
         width={props.width}

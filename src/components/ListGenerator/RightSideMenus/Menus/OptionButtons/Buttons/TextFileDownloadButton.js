@@ -53,7 +53,7 @@ const TextFileDownloadButton = () => {
 
   /**
    * Function creates the data structure for the PDF view.
-   * @returns an array of objects eacdh containing all data for one subFaction of the army list.
+   * @returns an array of objects each containing all data for one subFaction of the army list.
    */
   const createTextFileData = () => {
     let armyList = [];
