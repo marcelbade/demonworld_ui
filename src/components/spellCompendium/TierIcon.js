@@ -50,7 +50,6 @@ const TierIcon = (props) => {
       >
         {spellTierIsText(props.tier) ? "*" : props.tier}
       </Typography>
-      {spellTierIsText(props.tier) ? <Typography align="center">{props.tier}</Typography> : null}
     </Grid>
   );
 };

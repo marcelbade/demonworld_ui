@@ -33,6 +33,7 @@ const SpellCompendium = () => {
         size={2}
         sx={{
           backgroundColor: theme.palette.contrastedOptions, //
+          paddingTop: "2em",
           height: "100vh",
           position: "fixed",
           overflowY: "auto",
@@ -102,6 +103,17 @@ const SpellCompendium = () => {
           {selectedSpell.spellName}
         </Typography>
         <TierIcon tier={selectedSpell.spellTier} />
+
+        <Typography
+          variant="body1" //
+          align="center"
+          sx={{
+            width: "100%", //
+            paddingBottom: "3em",
+          }}
+        >
+          {spellTierIsText(selectedSpell.spellTier) ? selectedSpell.spellTier : " "}
+        </Typography>
 
         <SpellProperty title={"Ziel:"} content={selectedSpell.target} />
         <SpellProperty title={"Voraussetzung:"} content={selectedSpell.requirements} />
