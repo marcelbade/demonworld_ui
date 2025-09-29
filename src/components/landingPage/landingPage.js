@@ -44,6 +44,12 @@ const LandingPage = () => {
       icon: scrollIcon,
       display: UC.userLoggedIn,
     },
+    {
+      text: LANDINGPAGE.MAGIC, //
+      relativeURL: "/spellCompendium",
+      icon: scrollIcon,
+      display: true,
+    },
   ];
 
   return (
