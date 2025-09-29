@@ -180,6 +180,7 @@ export const DELETE_ARMY_DIALOG = {
 };
 
 export const SPELL_COMPENDIUM = {
+  SELECT_FACTION:"Wähle eine Fraktion",
   SHOW_ALL_FACTIONS: "Alle Fraktionen",
 };
 

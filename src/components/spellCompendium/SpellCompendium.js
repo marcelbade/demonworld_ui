@@ -7,7 +7,7 @@ import { SpellContext } from "../../contexts/spellContext";
 // custom components and functions
 import SpellProperty from "./SpellProperty";
 import SpellSelector from "./SpellSelector";
-import { spellTierIsText } from "./spellUtil";
+import { NO_SELECTION, spellTierIsText } from "./spellUtil";
 
 // icons
 import TierIcon from "./TierIcon";
@@ -21,7 +21,7 @@ const SpellCompendium = () => {
 
   const SC = useContext(SpellContext);
 
-  const [selectedSpell, setSelectedSpell] = useState({ spellTier: "" });
+  const [selectedSpell, setSelectedSpell] = useState(NO_SELECTION);
 
   return (
     <Grid
@@ -39,6 +39,7 @@ const SpellCompendium = () => {
         }}
       >
         <SpellSelector
+          setSelectedSpell={setSelectedSpell}
           allSpells={SC.allSpells} //
           selectedFactionForSpell={SC.selectedFactionForSpell} //
           setSelectedFactionForSpell={SC.setSelectedFactionForSpell}
