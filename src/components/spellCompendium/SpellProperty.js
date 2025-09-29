@@ -1,11 +1,33 @@
-import { Stack, Typography } from "@mui/material";
+import { Grid2 as Grid, Typography } from "@mui/material";
 
 const SpellProperty = (props) => {
   return (
-    <Stack direction="row" sx={{ paddingBottom: "2em" }}>
-      <Typography sx={{ minWidth: "30%", maxWidth: "30%" }}>{props.title}</Typography>
-      <Typography sx={{ minWidth: "80%", maxWidth: "20%" }}>{props.content}</Typography>
-    </Stack>
+    <Grid
+      container //
+      size={12}
+      direction="row"
+      sx={{ paddingBottom: "2em" }}
+    >
+      <Grid size={2}>
+        <Typography
+          sx={{
+            paddingLeft: "1em",
+          }}
+        >
+          {props.title}
+        </Typography>
+      </Grid>
+      <Grid size={10}>
+        <Typography
+          sx={{
+            paddingLeft: "1em",
+            paddingRight: "2em",
+          }}
+        >
+          {props.content}
+        </Typography>
+      </Grid>
+    </Grid>
   );
 };
 

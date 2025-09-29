@@ -1,6 +1,6 @@
 import { Grid2 as Grid } from "@mui/material";
 import { ALL_FACTIONS_ARRAY } from "../../constants/factions";
-import { INPUT_TEXTS, LOAD_ARMY_LIST_DIALOG } from "../../constants/textsAndMessages";
+import { LOAD_ARMY_LIST_DIALOG, SPELL_COMPENDIUM } from "../../constants/textsAndMessages";
 import SelectionInput from "../shared/selectionInput";
 
 const SpellSelector = (props) => {
@@ -9,7 +9,7 @@ const SpellSelector = (props) => {
    * @returns an array containing all faction names.
    */
   const setFactionNamesOptions = () => {
-    const FACTIONS = [...ALL_FACTIONS_ARRAY, LOAD_ARMY_LIST_DIALOG.SHOW_ALL_FACTIONS];
+    const FACTIONS = [...ALL_FACTIONS_ARRAY, SPELL_COMPENDIUM.SHOW_ALL_FACTIONS];
 
     return FACTIONS.sort();
   };
@@ -47,7 +47,7 @@ const SpellSelector = (props) => {
         alternatives={setFactionNamesOptions()}
         filterFunction={selectFaction}
         clearFunction={clearFaction}
-        label={INPUT_TEXTS.SELECT_FACTION}
+        label={SPELL_COMPENDIUM.SHOW_ALL_FACTIONS}
       />
     </Grid>
   );

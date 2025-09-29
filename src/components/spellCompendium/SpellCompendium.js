@@ -11,10 +11,14 @@ import { spellTierIsText } from "./spellUtil";
 
 // icons
 import TierIcon from "./TierIcon";
+import { useTheme } from "@emotion/react";
 
+// TODO: remove when done !
 // http://localhost:3000/spellCompendium
 
 const SpellCompendium = () => {
+  const theme = useTheme();
+
   const SC = useContext(SpellContext);
 
   const [selectedSpell, setSelectedSpell] = useState({ spellTier: "" });
@@ -25,7 +29,15 @@ const SpellCompendium = () => {
       direction="row"
       size={12}
     >
-      <Grid size={2}>
+      <Grid
+        size={2}
+        sx={{
+          backgroundColor: theme.palette.contrastedOptions, //
+          height: "100vh",
+          position: "fixed",
+          overflowY: "auto",
+        }}
+      >
         <SpellSelector
           allSpells={SC.allSpells} //
           selectedFactionForSpell={SC.selectedFactionForSpell} //
@@ -34,27 +46,29 @@ const SpellCompendium = () => {
           setDisplaySpells={SC.setDisplaySpells}
         />
         <List>
-          {SC.displaySpells.map((s) => (
-            <ListItemButton
-              onClick={() => {
-                setSelectedSpell(s);
-              }}
-            >
-              <ListItemText
-                sx={{ width: "7em", minWidth: "7em" }} //
-                primary={<Typography>{s.spellName}</Typography>}
-              />
-              <ListItemText
-                primary={
-                  <Typography>
-                    {spellTierIsText(s.spellTier) //
-                      ? "*"
-                      : s.spellTier}
-                  </Typography>
-                }
-              />
-            </ListItemButton>
-          ))}
+          {SC.displaySpells
+            .sort((a, b) => a.spellName > b.spellName)
+            .map((s) => (
+              <ListItemButton
+                onClick={() => {
+                  setSelectedSpell(s);
+                }}
+              >
+                <ListItemText
+                  sx={{ width: "8em", minWidth: "8em" }} //
+                  primary={<Typography>{s.spellName}</Typography>}
+                />
+                <ListItemText
+                  primary={
+                    <Typography>
+                      {spellTierIsText(s.spellTier) //
+                        ? "*"
+                        : s.spellTier}
+                    </Typography>
+                  }
+                />
+              </ListItemButton>
+            ))}
         </List>
       </Grid>
       <Grid

@@ -14,6 +14,11 @@ const lightTheme = createTheme({
         color: "white",
       },
     },
+    contrastedOptions: {
+      color: "white",
+      backgroundColor: "darkRed",
+    },
+
     options: {
       title: { marginTop: "1em" },
     },

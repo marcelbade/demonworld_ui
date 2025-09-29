@@ -179,6 +179,12 @@ export const DELETE_ARMY_DIALOG = {
   CANCEL: "Abbrechen",
 };
 
+export const SPELL_COMPENDIUM = {
+  SHOW_ALL_FACTIONS: "Alle Fraktionen",
+};
+
+
+
 export const LOAD_ARMY_LIST_DIALOG = {
   SHOW_ALL_FACTIONS: "Alle Fraktionen anzeigen",
   SHOW_EVERYTHING_REGARDLESS_OF_EVENT: "Alle Listen mit und ohne Events anzeigen",
