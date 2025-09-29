@@ -21,7 +21,7 @@ const SpellSelector = (props) => {
    * @param {[FactionObject]} selectedFaction
    */
   const selectFaction = (selectedFaction) => {
-    if (selectedFaction === LOAD_ARMY_LIST_DIALOG.SHOW_ALL_FACTIONS) {
+    if (selectedFaction === SPELL_COMPENDIUM.SHOW_ALL_FACTIONS) {
       props.setDisplaySpells(props.allSpells);
       return;
     }
