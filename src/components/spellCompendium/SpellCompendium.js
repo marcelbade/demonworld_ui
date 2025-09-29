@@ -57,6 +57,7 @@ const SpellCompendium = () => {
             height: "100%",
             position: "fixed",
             overflowY: "auto",
+            paddingBottom:"10em"
           }}
         >
           <List
@@ -67,11 +68,12 @@ const SpellCompendium = () => {
           >
             {SC.displaySpells
               .sort((a, b) => a.spellName > b.spellName)
-              .map((s) => (
+              .map((s, i) => (
                 <ListItemButton
                   onClick={() => {
                     setSelectedSpell(s);
                   }}
+                  key={i}
                 >
                   <ListItemText
                     sx={{ width: "8em", minWidth: "8em" }} //
