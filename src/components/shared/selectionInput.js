@@ -15,11 +15,16 @@ const SelectionInput = (props) => {
       multiple={props.allowsMultiple}
       disabled={props.disabled === undefined ? false : props.disabled}
       sx={{
+        color: props.textColor === null ? "theme.palette.color" : props.textColor,
         marginLeft: "2em",
         width: props.width === undefined ? null : props.width,
+        "& .MuiInput-input": {
+          color: props.textColor === null ? "theme.palette.color" : props.textColor,
+        },
+
         "& .MuiFormLabel-root": {
           fontFamily: "NotMaryKate",
-          color: "theme.palette.color",
+          color: props.textColor === null ? "theme.palette.color" : props.textColor,
           fontSize: props.isArmySelector ? "30px" : "15px",
         },
       }}
