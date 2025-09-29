@@ -1,17 +1,15 @@
 // react
 import { useContext, useState } from "react";
+import { useTheme } from "@emotion/react";
 // mui
-import { Grid2 as Grid, List, ListItemButton, ListItemText, Typography } from "@mui/material";
+import { Button, Grid2 as Grid, List, ListItemButton, ListItemText, TextField, Typography } from "@mui/material";
 // context
 import { SpellContext } from "../../contexts/spellContext";
 // custom components and functions
 import SpellProperty from "./SpellProperty";
 import SpellSelector from "./SpellSelector";
 import { NO_SELECTION, spellTierIsText } from "./spellUtil";
-
-// icons
 import TierIcon from "./TierIcon";
-import { useTheme } from "@emotion/react";
 import CollapsableTopMenuDrawer from "../shared/CollapsableTopMenuDrawer";
 import TopDrawerButton from "../shared/TopDrawerButton";
 
@@ -21,6 +19,19 @@ const SpellCompendium = () => {
   const SC = useContext(SpellContext);
 
   const [selectedSpell, setSelectedSpell] = useState(NO_SELECTION);
+  const [propertyToEdit, setPropertyToEdit] = useState(NO_SELECTION);
+
+  const editText = (event, propertyToEdit) => {
+    let newText = event.target.value;
+    const tempObj = { ...selectedSpell };
+
+    setSelectedSpell({
+      ...tempObj,
+      propertyToEdit: newText,
+    });
+  };
+
+  const saveChanges = () => {};
 
   return (
     <>
@@ -146,10 +157,58 @@ const SpellCompendium = () => {
             {spellTierIsText(selectedSpell.spellTier) ? selectedSpell.spellTier : " "}
           </Typography>
 
-          <SpellProperty title={"Ziel:"} content={selectedSpell.target} />
-          <SpellProperty title={"Voraussetzung:"} content={selectedSpell.requirements} />
-          <SpellProperty title={"Dauer:"} content={selectedSpell.duration} />
-          <SpellProperty title={"Auswirkungen:"} content={selectedSpell.effect} />
+          <SpellProperty
+            title={"Ziel:"} //
+            content={selectedSpell.target}
+            property={"target"}
+            setPropertyToEdit={setPropertyToEdit}
+          />
+          <SpellProperty
+            title={"Voraussetzung:"}
+            content={selectedSpell.requirements}
+            property={"requirements"}
+            setPropertyToEdit={setPropertyToEdit}
+          />
+          <SpellProperty
+            title={"Dauer:"} //
+            content={selectedSpell.duration}
+            property={"duration"}
+            setPropertyToEdit={setPropertyToEdit}
+          />
+          <SpellProperty
+            title={"Auswirkungen:"} //
+            content={selectedSpell.effect}
+            property={"effect"}
+            setPropertyToEdit={setPropertyToEdit}
+          />
+
+          {/* TODO ### */}
+          <Grid
+            container //
+            direction="column"
+            size={12}
+            spacing={2}
+            justifyContent="center"
+            alignContent="center"
+          >
+            <TextField
+              sx={{
+                width: "80%", //
+              }}
+              id="outlined-multiline-flexible" //
+              label="Multiline"
+              multiline
+              minRows={20}
+              maxRows={30}
+              value={selectedSpell[propertyToEdit]}
+              onChange={() => {
+                editText(propertyToEdit);
+              }}
+            />
+            <Button variant="outlined" onClick={saveChanges()}>
+              {"Speichern"}
+            </Button>
+          </Grid>
         </Grid>
       </Grid>
     </>

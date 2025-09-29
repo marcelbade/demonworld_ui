@@ -1,4 +1,6 @@
-import { Grid2 as Grid, Typography } from "@mui/material";
+import { Grid2 as Grid, IconButton, Typography } from "@mui/material";
+// icons
+import EditNoteIcon from "@mui/icons-material/EditNote";
 
 const SpellProperty = (props) => {
   return (
@@ -6,9 +8,25 @@ const SpellProperty = (props) => {
       container //
       size={12}
       direction="row"
-      sx={{ paddingBottom: "2em" }}
+      sx={{
+        paddingBottom: "2em", //
+        paddingLeft: "2em",
+      }}
+      alignItems="center"
     >
-      <Grid size={2}>
+      <IconButton
+        sx={{
+          height: "2em",
+          width: "2em",
+          backgroundColor: "darkred",
+        }}
+        onClick={() => {
+          props.setPropertyToEdit(props.property);
+        }}
+      >
+        <EditNoteIcon color="white" />
+      </IconButton>
+      <Grid size={1}>
         <Typography
           sx={{
             paddingLeft: "1em",
