@@ -15,9 +15,6 @@ import { useTheme } from "@emotion/react";
 import CollapsableTopMenuDrawer from "../shared/CollapsableTopMenuDrawer";
 import TopDrawerButton from "../shared/TopDrawerButton";
 
-// TODO: remove when done !
-// http://localhost:3000/spellCompendium
-
 const SpellCompendium = () => {
   const theme = useTheme();
 
@@ -57,7 +54,7 @@ const SpellCompendium = () => {
             height: "100%",
             position: "fixed",
             overflowY: "auto",
-            paddingBottom:"10em"
+            paddingBottom: "10em",
           }}
         >
           <List

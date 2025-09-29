@@ -9,7 +9,7 @@ export const spellTierIsText = (tier) => {
 
 // if no spell is selected, or a new faction is selectedi  the drop down, show this as the default:
 export const NO_SELECTION = {
-  faction: "-", //
+  faction: "", //
   spellName: "-",
   effect: "-",
   duration: "-",

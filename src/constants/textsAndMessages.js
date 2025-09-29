@@ -16,6 +16,7 @@ export const LANDINGPAGE = {
   LIST_GENERATOR: "Listengenerator",
   LOSS_CALCULATOR: "Verlustrechner",
   CARD_CREATOR: "Einheitengenerator",
+  MAGIC :"Magie", 
   BACK_TO_LANDINGPAGE: "Hauptseite",
 };
 
