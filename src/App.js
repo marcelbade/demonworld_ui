@@ -12,7 +12,7 @@ import LossCalculator from "./components/lossCalculator/LossCalculator";
 import PdfBox from "./pdfGenerator/PDFBox";
 import CardCreator from "./components/cardCreator/CardCreator";
 import CreateNewAccount from "./components/Login/CreateNewAccount";
-import SpellCompendium from "./components/spellCompemdium/SpellCompendium";
+import SpellCompendium from "./components/spellCompendium/SpellCompendium";
 import { CompendiumTableStateArray } from "./components/compendiums/factionTable/components/compendiumTableStateArray";
 // context providers
 import AllyProvider from "./contexts/allyContext";
@@ -155,7 +155,10 @@ function App() {
 
   // spells
   const [allSpells, setAllSpells] = useState([]);
+  const [displaySpells, setDisplaySpells] = useState([]);
+
   const [allFactionSpells, setAllFactionSpells] = useState([]);
+  const [selectedFactionForSpell, setSelectedFactionForSpell] = useState([]);
 
   // unit card view
   const [statCardState, setStatCardState] = useState({
@@ -258,10 +261,14 @@ function App() {
 
         <SpellProvider
           value={{
-            allFactionSpells: allFactionSpells,
             allSpells: allSpells,
-            setAllFactionSpells: setAllFactionSpells,
+            displaySpells: displaySpells,
+            allFactionSpells: allFactionSpells,
+            selectedFactionForSpell: selectedFactionForSpell,
             setAllSpells: setAllSpells,
+            setDisplaySpells: setDisplaySpells,
+            setAllFactionSpells: setAllFactionSpells,
+            setSelectedFactionForSpell: setSelectedFactionForSpell,
           }}
         >
           <ColorProvider
