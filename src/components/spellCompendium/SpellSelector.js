@@ -1,6 +1,6 @@
 import { Grid2 as Grid } from "@mui/material";
 import { ALL_FACTIONS_ARRAY } from "../../constants/factions";
-import { LOAD_ARMY_LIST_DIALOG, SPELL_COMPENDIUM } from "../../constants/textsAndMessages";
+import { SPELL_COMPENDIUM } from "../../constants/textsAndMessages";
 import SelectionInput from "../shared/selectionInput";
 import { NO_SELECTION } from "./spellUtil";
 

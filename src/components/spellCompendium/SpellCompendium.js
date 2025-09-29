@@ -1,20 +1,19 @@
 // react
 import { useContext, useState } from "react";
-import { useTheme } from "@emotion/react";
-// mui
-import { Button, Grid2 as Grid, List, ListItemButton, ListItemText, TextField, Typography } from "@mui/material";
+// material ui
+import { Button, Grid2 as Grid, TextField, Typography } from "@mui/material";
 // context
 import { SpellContext } from "../../contexts/spellContext";
 // custom components and functions
 import SpellProperty from "./SpellProperty";
-import SpellSelector from "./SpellSelector";
-import { NO_SELECTION, spellTierIsText } from "./spellUtil";
+ import { NO_SELECTION, spellTierIsText } from "./spellUtil";
 import TierIcon from "./TierIcon";
 import CollapsableTopMenuDrawer from "../shared/CollapsableTopMenuDrawer";
 import TopDrawerButton from "../shared/TopDrawerButton";
+import SpellList from "./SpellList";
 
 const SpellCompendium = () => {
-  const theme = useTheme();
+
 
   const SC = useContext(SpellContext);
 
@@ -40,66 +39,14 @@ const SpellCompendium = () => {
         direction="row"
         size={12}
       >
-        <Grid
-          size={2}
-          sx={{
-            paddingTop: "2em",
-            backgroundColor: theme.palette.contrastedOptions, //
-            position: "fixed",
-          }}
-        >
-          <SpellSelector
-            setSelectedSpell={setSelectedSpell}
-            allSpells={SC.allSpells} //
-            selectedFactionForSpell={SC.selectedFactionForSpell} //
-            setSelectedFactionForSpell={SC.setSelectedFactionForSpell}
-            displaySpells={SC.displaySpells}
-            setDisplaySpells={SC.setDisplaySpells}
-          />
-        </Grid>
-        <Grid
-          size={2}
-          sx={{
-            backgroundColor: theme.palette.contrastedOptions, //
-            top: "5em",
-            height: "100%",
-            position: "fixed",
-            overflowY: "auto",
-            paddingBottom: "10em",
-          }}
-        >
-          <List
-            sx={{
-              paddingTop: "4em",
-              overflowY: "auto",
-            }}
-          >
-            {SC.displaySpells
-              .sort((a, b) => a.spellName > b.spellName)
-              .map((s, i) => (
-                <ListItemButton
-                  onClick={() => {
-                    setSelectedSpell(s);
-                  }}
-                  key={i}
-                >
-                  <ListItemText
-                    sx={{ width: "8em", minWidth: "8em" }} //
-                    primary={<Typography>{s.spellName}</Typography>}
-                  />
-                  <ListItemText
-                    primary={
-                      <Typography>
-                        {spellTierIsText(s.spellTier) //
-                          ? "*"
-                          : s.spellTier}
-                      </Typography>
-                    }
-                  />
-                </ListItemButton>
-              ))}
-          </List>
-        </Grid>
+        <SpellList
+          setSelectedSpell={setSelectedSpell}
+          allSpells={SC.allSpells}
+          selectedFactionForSpell={SC.selectedFactionForSpell}
+          setSelectedFactionForSpell={SC.setSelectedFactionForSpell}
+          displaySpells={SC.displaySpells}
+          setDisplaySpells={SC.setDisplaySpells}
+        />
 
         <Grid
           container
