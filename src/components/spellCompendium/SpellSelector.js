@@ -11,7 +11,6 @@ const SpellSelector = (props) => {
    */
   const setFactionNamesOptions = () => {
     const FACTIONS = [...ALL_FACTIONS_ARRAY, SPELL_COMPENDIUM.SHOW_ALL_FACTIONS];
-
     return FACTIONS.sort();
   };
 
@@ -21,11 +20,15 @@ const SpellSelector = (props) => {
    * @param {[FactionObject]} selectedFaction
    */
   const selectFaction = (selectedFaction) => {
+    props.setSelectedFactionForSpell(selectedFaction);
     if (selectedFaction === SPELL_COMPENDIUM.SHOW_ALL_FACTIONS) {
       props.setDisplaySpells(props.allSpells);
       return;
     }
 
+    /**
+     *
+     */
     props.setDisplaySpells(props.allSpells.filter((s) => s.faction.includes(selectedFaction)));
     props.setSelectedSpell(NO_SELECTION);
   };

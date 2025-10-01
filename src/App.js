@@ -158,7 +158,7 @@ function App() {
   const [displaySpells, setDisplaySpells] = useState([]);
 
   const [allFactionSpells, setAllFactionSpells] = useState([]);
-  const [selectedFactionForSpell, setSelectedFactionForSpell] = useState([]);
+  const [selectedFactionForSpell, setSelectedFactionForSpell] = useState("");
 
   // unit card view
   const [statCardState, setStatCardState] = useState({

@@ -5,9 +5,6 @@ import { SPELL_COMPENDIUM } from "../../constants/textsAndMessages";
 //  custom hooks
 import useAxios from "../../customHooks/UseAxios";
 import { EDIT_SPELL_URL } from "../../constants/URLs";
-import { useContext } from "react";
-import { UserContext } from "../../contexts/userContext";
-import { Padding } from "@mui/icons-material";
 
 /**
  * Component renders a text area input field to edit spells if a
@@ -16,18 +13,16 @@ import { Padding } from "@mui/icons-material";
  * @returns a nested JSX element.
  */
 const EditSpells = (props) => {
-  const UC = useContext(UserContext);
-
   const callAxios = useAxios();
 
   const saveChanges = () => {
     callAxios.storeData(
       JSON.stringify({
-        ...UC.user.userName,
+        ...props.user.userName,
         ...props.selectedSpell,
       }),
       EDIT_SPELL_URL,
-      null,
+      updateSpellData,
       SPELL_COMPENDIUM.SUCCESS
     );
   };
@@ -42,7 +37,16 @@ const EditSpells = (props) => {
     });
   };
 
-  return UC.userLoggedIn && UC.user.isAdmin ? (
+  /**
+   * 
+   * @param {*} data 
+   */
+  const updateSpellData = (data) => {
+    props.setAllSpells(data);
+    props.setDisplaySpells(data.filter((d) => d.faction === props.selectedFactionForSpell));
+  };
+
+  return props.userLoggedIn && props.user.isAdmin ? (
     <Grid
       container //
       direction="column"
@@ -51,7 +55,6 @@ const EditSpells = (props) => {
       justifyContent="center"
       alignContent="center"
       sx={{
-        backgroundColor: "palegoldenrod", //
         "& .MuiOutlinedInput-input": { padding: "1em" },
       }}
     >
@@ -59,11 +62,12 @@ const EditSpells = (props) => {
         sx={{
           width: "80%", //
           topmargin: "30em",
+          "& .MuiInputBase-input": { fontFamily: "jaapokkiRegular" },
         }}
         id="outlined-multiline-flexible" //
         multiline
-        minRows={10}
-        maxRows={10}
+        minRows={8}
+        maxRows={8}
         value={props.selectedSpell[props.propertyToEdit]}
         onChange={(event) => {
           editText(event, props.propertyToEdit);

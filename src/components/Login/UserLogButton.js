@@ -1,7 +1,7 @@
 // React
 import { useContext, useEffect, useState } from "react";
 // Material UI
-import { Avatar, IconButton, Tooltip, Typography } from "@mui/material";
+import { Avatar, IconButton, Tooltip } from "@mui/material";
 // icons
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 // functions and components

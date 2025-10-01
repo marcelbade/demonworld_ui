@@ -5,9 +5,12 @@ import { Grid2 as Grid, List, ListItemButton, ListItemText, Typography } from "@
 import SpellSelector from "./SpellSelector";
 // custom components and functions
 import { spellTierIsText } from "./spellUtil";
+import { useEffect } from "react";
 
 const SpellList = (props) => {
   const theme = useTheme();
+
+  useEffect(() => {}, [JSON.stringify(props.displaySpells)]);
 
   return (
     <>
