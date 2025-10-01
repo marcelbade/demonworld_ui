@@ -1,44 +1,59 @@
 // react
 import { useContext, useState } from "react";
 // material ui
-import { Button, Grid2 as Grid, TextField, Typography } from "@mui/material";
+import { Grid2 as Grid } from "@mui/material";
 // context
 import { SpellContext } from "../../contexts/spellContext";
 // custom components and functions
 import SpellProperty from "./SpellProperty";
- import { NO_SELECTION, spellTierIsText } from "./spellUtil";
-import TierIcon from "./TierIcon";
-import CollapsableTopMenuDrawer from "../shared/CollapsableTopMenuDrawer";
-import TopDrawerButton from "../shared/TopDrawerButton";
+import { NO_SELECTION } from "./spellUtil";
 import SpellList from "./SpellList";
+import { SPELL_COMPENDIUM } from "../../constants/textsAndMessages";
+import EditSpells from "./EditSpells";
+import SpellHeader from "./SpellHeader";
 
 const SpellCompendium = () => {
-
-
   const SC = useContext(SpellContext);
 
   const [selectedSpell, setSelectedSpell] = useState(NO_SELECTION);
   const [propertyToEdit, setPropertyToEdit] = useState(NO_SELECTION);
+  const [currentEdit, setCurrentEdit] = useState({
+    target: false,
+    requirements: false,
+    effect: false,
+    duration: false,
+  });
 
-  const editText = (event, propertyToEdit) => {
-    let newText = event.target.value;
-    const tempObj = { ...selectedSpell };
+  const showActiveEdit = (property) => {
+    switch (property) {
+      case "target":
+        setCurrentEdit({ ...currentEdit, target: true, requirements: false, effect: false, duration: false });
+        break;
+      case "requirements":
+        setCurrentEdit({ ...currentEdit, target: false, requirements: true, effect: false, duration: false });
+        break;
+      case "effect":
+        setCurrentEdit({ ...currentEdit, target: false, requirements: false, effect: true, duration: false });
+        break;
+      case "duration":
+        setCurrentEdit({ ...currentEdit, target: false, requirements: false, effect: false, duration: true });
+        break;
 
-    setSelectedSpell({
-      ...tempObj,
-      propertyToEdit: newText,
-    });
+      default:
+        break;
+    }
   };
 
-  const saveChanges = () => {};
-
   return (
-    <>
-      <Grid
-        container //
-        direction="row"
-        size={12}
-      >
+    <Grid
+      container
+      size={12}
+      direction="row"
+      sx={{
+        height: "100%,",
+      }}
+    >
+      <Grid size={2}>
         <SpellList
           setSelectedSpell={setSelectedSpell}
           allSpells={SC.allSpells}
@@ -46,119 +61,62 @@ const SpellCompendium = () => {
           setSelectedFactionForSpell={SC.setSelectedFactionForSpell}
           displaySpells={SC.displaySpells}
           setDisplaySpells={SC.setDisplaySpells}
+          showActiveEdit={showActiveEdit}
+        />
+      </Grid>
+      <Grid
+        container //
+        direction="column"
+        size={10}
+        justifyItems="center"
+        alignItems="center"
+      >
+        <SpellHeader
+          faction={selectedSpell.faction} //
+          spellName={selectedSpell.spellName} //
+          spellTier={selectedSpell.spellTier}
         />
 
-        <Grid
-          container
-          size={10} //
-          sx={{
-            position: "fixed", //
-            left: "26.5em",
-          }}
-        >
-          <Grid
-            container //
-            direction="column"
-            alignItems="center"
-            size={12}
-          >
-            <CollapsableTopMenuDrawer
-              displayPageTitle={true}
-              title={""} //
-              displayNaviBttn={true}
-              displayListBttns={true}
-            />
-            <TopDrawerButton />
-          </Grid>
+        <SpellProperty
+          title={SPELL_COMPENDIUM.TARGET} //
+          content={selectedSpell.target}
+          property={"target"}
+          setPropertyToEdit={setPropertyToEdit}
+          showActiveEdit={showActiveEdit}
+          currentEdit={currentEdit}
+        />
+        <SpellProperty
+          title={SPELL_COMPENDIUM.REQUIREMENTS}
+          content={selectedSpell.requirements}
+          property={"requirements"}
+          setPropertyToEdit={setPropertyToEdit}
+          showActiveEdit={showActiveEdit}
+          currentEdit={currentEdit}
+        />
+        <SpellProperty
+          title={SPELL_COMPENDIUM.DURATION} //
+          content={selectedSpell.duration}
+          property={"duration"}
+          setPropertyToEdit={setPropertyToEdit}
+          showActiveEdit={showActiveEdit}
+          currentEdit={currentEdit}
+        />
+        <SpellProperty
+          title={SPELL_COMPENDIUM.EFFECT} //
+          content={selectedSpell.effect}
+          property={"effect"}
+          setPropertyToEdit={setPropertyToEdit}
+          showActiveEdit={showActiveEdit}
+          currentEdit={currentEdit}
+        />
 
-          <Typography
-            variant="h6" //
-            align="right"
-            sx={{
-              width: "100%", //
-              paddingRight: "5em",
-              paddingTop: "1em",
-            }}
-          >
-            {selectedSpell.faction}
-          </Typography>
-          <Typography
-            variant="h5" //
-            align="center"
-            sx={{
-              width: "100%", //
-            }}
-          >
-            {selectedSpell.spellName}
-          </Typography>
-          <TierIcon tier={selectedSpell.spellTier} />
-
-          <Typography
-            variant="body1" //
-            align="center"
-            sx={{
-              width: "100%", //
-              paddingBottom: "3em",
-            }}
-          >
-            {spellTierIsText(selectedSpell.spellTier) ? selectedSpell.spellTier : " "}
-          </Typography>
-
-          <SpellProperty
-            title={"Ziel:"} //
-            content={selectedSpell.target}
-            property={"target"}
-            setPropertyToEdit={setPropertyToEdit}
-          />
-          <SpellProperty
-            title={"Voraussetzung:"}
-            content={selectedSpell.requirements}
-            property={"requirements"}
-            setPropertyToEdit={setPropertyToEdit}
-          />
-          <SpellProperty
-            title={"Dauer:"} //
-            content={selectedSpell.duration}
-            property={"duration"}
-            setPropertyToEdit={setPropertyToEdit}
-          />
-          <SpellProperty
-            title={"Auswirkungen:"} //
-            content={selectedSpell.effect}
-            property={"effect"}
-            setPropertyToEdit={setPropertyToEdit}
-          />
-
-          {/* TODO ### */}
-          <Grid
-            container //
-            direction="column"
-            size={12}
-            spacing={2}
-            justifyContent="center"
-            alignContent="center"
-          >
-            <TextField
-              sx={{
-                width: "80%", //
-              }}
-              id="outlined-multiline-flexible" //
-              label="Multiline"
-              multiline
-              minRows={20}
-              maxRows={30}
-              value={selectedSpell[propertyToEdit]}
-              onChange={() => {
-                editText(propertyToEdit);
-              }}
-            />
-            <Button variant="outlined" onClick={saveChanges()}>
-              {"Speichern"}
-            </Button>
-          </Grid>
-        </Grid>
+        <EditSpells
+          selectedSpell={selectedSpell} //
+          propertyToEdit={propertyToEdit}
+          setSelectedSpell={setSelectedSpell}
+        />
       </Grid>
-    </>
+    </Grid>
   );
 };
 

@@ -16,7 +16,7 @@ export const LANDINGPAGE = {
   LIST_GENERATOR: "Listengenerator",
   LOSS_CALCULATOR: "Verlustrechner",
   CARD_CREATOR: "Einheitengenerator",
-  MAGIC :"Magie", 
+  MAGIC: "Magie",
   BACK_TO_LANDINGPAGE: "Hauptseite",
 };
 
@@ -181,11 +181,15 @@ export const DELETE_ARMY_DIALOG = {
 };
 
 export const SPELL_COMPENDIUM = {
-  SELECT_FACTION:"Wähle eine Fraktion",
+  SELECT_FACTION: "Wähle eine Fraktion",
   SHOW_ALL_FACTIONS: "Alle Fraktionen",
+  TARGET: "Ziel:",
+  REQUIREMENTS: "Voraussetzung:",
+  DURATION: "Dauer:",
+  EFFECT: "Auswirkungen:",
+  SAVE: "Speichern",
+  SUCCESS: "Änderungen erfolgreich gespeichert",
 };
-
-
 
 export const LOAD_ARMY_LIST_DIALOG = {
   SHOW_ALL_FACTIONS: "Alle Fraktionen anzeigen",
