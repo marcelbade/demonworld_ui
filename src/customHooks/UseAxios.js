@@ -50,7 +50,7 @@ const useAxios = () => {
       })
       .then((response) => {
         if (setter !== null) {
-          setter(response);
+          setter(response.data);
         }
         pushMessage.showSnackBar(successMessage, PUSH_MESSAGE_TYPES.SUCCESS);
       })

@@ -54,13 +54,13 @@ const LoginDialog = () => {
     );
   };
 
-  const loginUser = (response) => {
+  const loginUser = (data) => {
     UC.setUser({
       ...UC.user,
-      userName: response?.data?.userName,
-      isAdmin: response?.data?.isAdmin,
-      isOwner: response?.data?.isOwner,
-      token: response?.data?.token,
+      userName:  data?.userName,
+      isAdmin:  data?.isAdmin,
+      isOwner:  data?.isOwner,
+      token:  data?.token,
     });
 
     UC.setDisplayLogInDialog(false);
@@ -68,8 +68,8 @@ const LoginDialog = () => {
     UC.setUserLoggedIn(true);
     MC.setblockDialog({
       ...MC.blockDialog,
-      showOverrideDialog: response?.data?.displayOverrideConfirmation,
-      showDeletionDialog: response?.data?.displayDeleteConfirmation,
+      showOverrideDialog:  data?.displayOverrideConfirmation,
+      showDeletionDialog:  data?.displayDeleteConfirmation,
     });
   };
 
