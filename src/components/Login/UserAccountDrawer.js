@@ -20,7 +20,7 @@ const UserAccountDrawer = (props) => {
   const logOut = () => {
     UC.setUser({
       userName: "",
-      isAdmin: "",
+      isAdmin: false,
       isOwner: "",
       token: "",
     });

@@ -57,7 +57,7 @@ function App() {
   // user accounts
   const [user, setUser] = useState({
     userName: "",
-    isAdmin: "",
+    isAdmin: false,
     isOwner: "",
     token: "",
   });
