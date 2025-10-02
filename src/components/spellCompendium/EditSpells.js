@@ -38,19 +38,19 @@ const EditSpells = (props) => {
   };
 
   /**
-   * 
-   * @param {*} data 
+   *
+   * @param {*} data
    */
   const updateSpellData = (data) => {
     props.setAllSpells(data);
     props.setDisplaySpells(data.filter((d) => d.faction === props.selectedFactionForSpell));
   };
 
-  return props.userLoggedIn && props.user.isAdmin ? (
+  return (
     <Grid
       container //
       direction="column"
-      size={8}
+      size={12}
       spacing={2}
       justifyContent="center"
       alignContent="center"
@@ -68,7 +68,7 @@ const EditSpells = (props) => {
         multiline
         minRows={8}
         maxRows={8}
-        value={props.selectedSpell[props.propertyToEdit]}
+        value={props.content}
         onChange={(event) => {
           editText(event, props.propertyToEdit);
         }}
@@ -82,7 +82,7 @@ const EditSpells = (props) => {
         {SPELL_COMPENDIUM.SAVE}
       </Button>
     </Grid>
-  ) : null;
+  );
 };
 
 export default EditSpells;

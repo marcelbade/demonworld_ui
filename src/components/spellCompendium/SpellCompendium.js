@@ -1,5 +1,5 @@
 // react
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 // material ui
 import { Grid2 as Grid } from "@mui/material";
 // context
@@ -10,7 +10,6 @@ import SpellProperty from "./SpellProperty";
 import { NO_SELECTION } from "./spellUtil";
 import SpellList from "./SpellList";
 import { SPELL_COMPENDIUM } from "../../constants/textsAndMessages";
-import EditSpells from "./EditSpells";
 import SpellHeader from "./SpellHeader";
 
 const SpellCompendium = () => {
@@ -102,6 +101,45 @@ const SpellCompendium = () => {
     }
   };
 
+  const propertyTable = [
+    {
+      display: UC.userLoggedIn && UC.user.isAdmin,
+      title: SPELL_COMPENDIUM.SPELL_NAME,
+      content: selectedSpell.spellName,
+      property: "spellName",
+    },
+    {
+      display: UC.userLoggedIn && UC.user.isAdmin,
+      title: SPELL_COMPENDIUM.SPELL_TIER, //
+      content: selectedSpell.spellTier,
+      property: "spellTier",
+    },
+    {
+      display: true,
+      title: SPELL_COMPENDIUM.TARGET,
+      content: selectedSpell.target,
+      property: "target",
+    },
+    {
+      display: true,
+      title: SPELL_COMPENDIUM.REQUIREMENTS,
+      content: selectedSpell.requirements,
+      property: "requirements",
+    },
+    {
+      display: true,
+      title: SPELL_COMPENDIUM.DURATION,
+      content: selectedSpell.duration,
+      property: "duration",
+    },
+    {
+      display: true,
+      title: SPELL_COMPENDIUM.EFFECT,
+      content: selectedSpell.effect,
+      property: "effect",
+    },
+  ];
+
   return (
     <Grid
       container
@@ -134,69 +172,26 @@ const SpellCompendium = () => {
           spellName={selectedSpell.spellName} //
           spellTier={selectedSpell.spellTier}
         />
-        {UC.userLoggedIn && UC.user.isAdmin ? (
-          <SpellProperty
-            title={SPELL_COMPENDIUM.SPELL_NAME} //
-            content={selectedSpell.spellName}
-            property={"spellName"}
-            setPropertyToEdit={setPropertyToEdit}
-            showActiveEdit={showActiveEdit}
-            currentEdit={currentEdit}
-          />
-        ) : null}
-        {UC.userLoggedIn && UC.user.isAdmin ? (
-          <SpellProperty
-            title={SPELL_COMPENDIUM.SPELL_TIER} //
-            content={selectedSpell.spellTier}
-            property={"spellTier"}
-            setPropertyToEdit={setPropertyToEdit}
-            showActiveEdit={showActiveEdit}
-            currentEdit={currentEdit}
-          />
-        ) : null}
-        <SpellProperty
-          title={SPELL_COMPENDIUM.TARGET} //
-          content={selectedSpell.target}
-          property={"target"}
-          setPropertyToEdit={setPropertyToEdit}
-          showActiveEdit={showActiveEdit}
-          currentEdit={currentEdit}
-        />
-        <SpellProperty
-          title={SPELL_COMPENDIUM.REQUIREMENTS}
-          content={selectedSpell.requirements}
-          property={"requirements"}
-          setPropertyToEdit={setPropertyToEdit}
-          showActiveEdit={showActiveEdit}
-          currentEdit={currentEdit}
-        />
-        <SpellProperty
-          title={SPELL_COMPENDIUM.DURATION} //
-          content={selectedSpell.duration}
-          property={"duration"}
-          setPropertyToEdit={setPropertyToEdit}
-          showActiveEdit={showActiveEdit}
-          currentEdit={currentEdit}
-        />
-        <SpellProperty
-          title={SPELL_COMPENDIUM.EFFECT} //
-          content={selectedSpell.effect}
-          property={"effect"}
-          setPropertyToEdit={setPropertyToEdit}
-          showActiveEdit={showActiveEdit}
-          currentEdit={currentEdit}
-        />
 
-        <EditSpells
-          setAllSpells={SC.setAllSpells}
-          selectedSpell={selectedSpell} //
-          propertyToEdit={propertyToEdit}
-          setSelectedSpell={setSelectedSpell}
-          user={UC.user}
-          userLoggedIn={UC.userLoggedIn}
-          selectedFactionForSpell={SC.selectedFactionForSpell}
-          setDisplaySpells={SC.setDisplaySpells}
-        />
+        {propertyTable.map((p) => (
+          <SpellProperty
+            display={p.display}
+            title={p.title} //
+            content={p.content}
+            property={p.property}
+            selectedSpell={selectedSpell}
+            selectedFactionForSpell={SC.selectedFactionForSpell}
+            currentEdit={currentEdit}
+            user={UC.user}
+            userLoggedIn={UC.userLoggedIn}
+            propertyToEdit={propertyToEdit}
+            setAllSpells={SC.setAllSpells}
+            setDisplaySpells={SC.setDisplaySpells}
+            setPropertyToEdit={setPropertyToEdit}
+            setSelectedSpell={setSelectedSpell}
+            showActiveEdit={showActiveEdit}
+          />
+        ))}
       </Grid>
     </Grid>
   );

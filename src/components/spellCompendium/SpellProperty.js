@@ -1,9 +1,10 @@
-import { Grid2 as Grid, IconButton, Typography } from "@mui/material";
+import { Grid2 as Grid, Typography } from "@mui/material";
 // icons
-import EditNoteIcon from "@mui/icons-material/EditNote";
+import EditButton from "./EditButton";
+import EditSpells from "./EditSpells";
 
 const SpellProperty = (props) => {
-  return (
+  return props.display ? (
     <Grid
       container //
       size={12}
@@ -14,19 +15,13 @@ const SpellProperty = (props) => {
       }}
       alignItems="center"
     >
-      <IconButton
-        sx={{
-          height: "2em",
-          width: "2em",
-          border: props.currentEdit[props.property] ? "2px solid green" : "2px solid black",
-        }}
-        onClick={() => {
-          props.setPropertyToEdit(props.property);
-          props.showActiveEdit(props.property);
-        }}
-      >
-        <EditNoteIcon style={{ color: props.currentEdit[props.property] ? "green" : "black" }} />
-      </IconButton>
+      <EditButton
+        display={props.userLoggedIn && props.user.isAdmin} //
+        property={props.property}
+        setPropertyToEdit={props.setPropertyToEdit}
+        showActiveEdit={props.showActiveEdit}
+        currentEdit={props.currentEdit}
+      />
       <Grid size={1}>
         <Typography
           sx={{
@@ -37,25 +32,28 @@ const SpellProperty = (props) => {
         </Typography>
       </Grid>
       <Grid size={10}>
-        <Typography
-          sx={
-            props.currentEdit[props.property] //
-              ? {
-                  paddingLeft: "1em",
-                  paddingRight: "2em",
-                  border: "solid 3px green",
-                }
-              : {
-                  paddingLeft: "1em",
-                  paddingRight: "2em",
-                }
-          }
-        >
-          {props.content}
-        </Typography>
+        {props.userLoggedIn && //
+        props.user.isAdmin &&
+        props.property === props.propertyToEdit ? (
+          <EditSpells
+            property={props.property}
+            setAllSpells={props.setAllSpells}
+            selectedSpell={props.selectedSpell} //
+            propertyToEdit={props.propertyToEdit}
+            setSelectedSpell={props.setSelectedSpell}
+            user={props.user}
+            userLoggedIn={props.userLoggedIn}
+            selectedFactionForSpell={props.selectedFactionForSpell}
+            setDisplaySpells={props.setDisplaySpells}
+            //
+            content={props.content}
+          />
+        ) : (
+          <Typography>{props.content}</Typography>
+        )}
       </Grid>
     </Grid>
-  );
+  ) : null;
 };
 
 export default SpellProperty;
