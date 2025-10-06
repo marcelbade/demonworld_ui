@@ -1,13 +1,33 @@
 // react
+import { useContext } from "react";
 import { useTheme } from "@emotion/react";
 // material ui
-import { Grid2 as Grid, Typography } from "@mui/material";
+import { Grid2 as Grid, MenuItem, Select, Typography } from "@mui/material";
+// functions and components
 import CompendiumTableColOptions from "./CompendiumTableColOptions";
+// context
+import { CompendiumContext } from "../../../contexts/compendiumContext";
 // constants
-import { OPTIONS } from "../../../constants/textsAndMessages";
+import { COMPENDIUM, OPTIONS } from "../../../constants/textsAndMessages";
 
 const CompendiumSettings = () => {
+  const CC = useContext(CompendiumContext);
   const theme = useTheme();
+
+  const handleChange = (event) => {
+    CC.setRowNumber(event.target.value);
+  };
+
+  const fillArray = () => {
+    let result = [];
+    for (let i = 0; i <= 100; i++) {
+      if (i % 10 === 0) {
+        result.push(i);
+      }
+    }
+    return result;
+  };
+
   return (
     <Grid
       container
@@ -22,6 +42,26 @@ const CompendiumSettings = () => {
       </Typography>
       <Typography variant="body1">{OPTIONS.COMPENDIUM_EXPLAINATION}</Typography>
       <CompendiumTableColOptions />
+      <Grid
+        container //
+        direction="column"
+        sx={{ marginTop: "2em" }}
+      >
+        <Typography>{COMPENDIUM.NUMBER_OF_ROWS}</Typography>
+        <Typography color="error" >{COMPENDIUM.ROWS_WARNING}</Typography>
+        <Select
+          labelId="rowSelect" //
+          id="rowSelect"
+          value={CC.rowNumber}
+          label="Anzahl"
+          onChange={handleChange}
+          sx={{ width: "7em" }}
+        >
+          {fillArray().map((i) => (
+            <MenuItem value={i}>{i}</MenuItem>
+          ))}
+        </Select>
+      </Grid>
     </Grid>
   );
 };

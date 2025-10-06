@@ -21,8 +21,6 @@ const CompendiumTable = () => {
   const [selectedPage, setSelectedPage] = useState(1);
   const [singlePageData, setSinglePageData] = useState([]);
 
-  const ROWS_PER_PAGE = 20;
-
   useEffect(() => {
     calculateNumberOfPages(CC.displayUnits);
   }, [CC.displayUnits]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -32,15 +30,16 @@ const CompendiumTable = () => {
   }, [numberOfPages, selectedPage]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const calculateNumberOfPages = (dataArray) => {
-    setNumberOfPages(Math.ceil(dataArray.length / ROWS_PER_PAGE));
+    setNumberOfPages(Math.ceil(dataArray.length / CC.rowNumber));
   };
 
   const createDataForPage = () => {
-    const offset = (selectedPage - 1) * ROWS_PER_PAGE;
-    setSinglePageData(CC.displayUnits.slice(offset, offset + ROWS_PER_PAGE));
+    const offset = (selectedPage - 1) * CC.rowNumber;
+    setSinglePageData(CC.displayUnits.slice(offset, offset + CC.rowNumber));
   };
 
-  const turnPage = (event, value) => { // event is needed!
+  const turnPage = (event, value) => {
+    // event is needed!
     setSelectedPage(value);
   };
 

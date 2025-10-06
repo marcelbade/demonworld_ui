@@ -184,6 +184,7 @@ function App() {
   const [displayUnits, setDisplayUnits] = useState([]);
   const [selectedStatCards, setSelectedStatCards] = useState([]);
   const [compendiumTableColumns, setCompendiumTableColumns] = useState(CompendiumTableStateArray);
+  const [rowNumber, setRowNumber] = useState(20);
 
   useEffect(() => {
     fetchTableData();
@@ -323,6 +324,7 @@ function App() {
                         selectedSubFaction: selectedSubFaction,
                         selectedStatCards: selectedStatCards,
                         unitData: unitData,
+                        rowNumber: rowNumber,
                         setData: setTableData,
                         setDisplaySubFactions: setDisplaySubFactions,
                         setDisplayUnits: setDisplayUnits,
@@ -331,6 +333,7 @@ function App() {
                         setCompendiumTableColumns: setCompendiumTableColumns,
                         setSelectedStatCards: setSelectedStatCards,
                         setUnitData: setUnitData,
+                        setRowNumber: setRowNumber,
                       }}
                     >
                       <LossCalcProvider

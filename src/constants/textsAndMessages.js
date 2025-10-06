@@ -63,6 +63,8 @@ export const COMPENDIUM = {
   EFFECTIVENESS_1: "Effektivität 1",
   EFFECTIVENESS_2: "Effektivität 2",
   NO_SPECIAL_RULES: "Keine Sonderregeln",
+  NUMBER_OF_ROWS: "Anzahl der Zeilen pro Seite.",
+  ROWS_WARNING: " Achtung: mit Anzahl der Zeilen Steigt die Ladezeit.",
 };
 
 export const TOOLTIPS = {
