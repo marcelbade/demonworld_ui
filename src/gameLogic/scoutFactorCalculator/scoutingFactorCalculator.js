@@ -1,7 +1,7 @@
 /**
  * Function calculates the army's scouting factor (SF). The formula is:
  *
- * SF = number of cavalary elements + low flyer elements + high flyer elements
+ * SF = number of cavalry elements + low flyer elements + high flyer elements
  *
  * Low flyers and cavalary elements with a movement value >= 40,
  * as well as high flyers elements are multiplied by 2.
@@ -34,7 +34,11 @@ const calculateScoutingFactor = (selectedUnitList) => {
 
   const highFlyer =
     MULTIPLICATOR *
-    selectedUnitList.filter((unit) => unit.isHighFlyer === true).reduce((sum, { numberOfElements }) => sum + numberOfElements, 0);
+    selectedUnitList
+      .filter((unit) => unit.isHighFlyer === true) //
+      .reduce((sum, { numberOfElements }) => sum + numberOfElements, 0);
+
+  console.log(">>>>", cav + fastCav + lowFlyer + fastlowFlyer + highFlyer);
 
   return cav + fastCav + lowFlyer + fastlowFlyer + highFlyer;
 };
