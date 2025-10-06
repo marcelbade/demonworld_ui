@@ -173,8 +173,9 @@ const SpellCompendium = () => {
           spellTier={selectedSpell.spellTier}
         />
 
-        {propertyTable.map((p) => (
+        {propertyTable.map((p, i) => (
           <SpellProperty
+            key={i}
             display={p.display}
             title={p.title} //
             content={p.content}
