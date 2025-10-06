@@ -38,8 +38,6 @@ const calculateScoutingFactor = (selectedUnitList) => {
       .filter((unit) => unit.isHighFlyer === true) //
       .reduce((sum, { numberOfElements }) => sum + numberOfElements, 0);
 
-  console.log(">>>>", cav + fastCav + lowFlyer + fastlowFlyer + highFlyer);
-
   return cav + fastCav + lowFlyer + fastlowFlyer + highFlyer;
 };
 
