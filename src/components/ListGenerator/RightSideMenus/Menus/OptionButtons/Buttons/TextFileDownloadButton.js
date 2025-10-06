@@ -1,5 +1,5 @@
 // react
-import { useContext } from "react";
+import { useContext, useState } from "react";
 // Material UI
 import { IconButton, Tooltip } from "@mui/material";
 // components and functions
@@ -15,6 +15,8 @@ import { SelectionContext } from "../../../../../../contexts/selectionContext";
 import txtFileIcon from "../../../../../../assets/icons/txtFileIcon.png";
 // constants
 import { OPTIONS, PDF } from "../../../../../../constants/textsAndMessages";
+import SelectPrintTypeDialog from "../../../../../Dialogs/SelectPdfTypeDialog/SelectPrintTypeDialog";
+import { addCardsForMultiStateUnits } from "../../../../../../util/utilityFunctions";
 
 const TextFileDownloadButton = () => {
   const AC = useContext(ArmyContext);
@@ -24,42 +26,17 @@ const TextFileDownloadButton = () => {
   const ICON_SIZE = "55px";
   const ICON_BOX_SIZE = "60px";
 
-  /**
-   * Function adds the missing cards for multi state units to the array
-   * of selected cards.
-   * If a unit has multiple stat cards, then only one is displayed by the
-   * app and can be selected for the list.
-   * The function puts those card objects back to ensure that the
-   * detailed PDF contains all cards needed.
-   * @param {[unitCards]} selectedUnits
-   * @returns a unitCard array with the all cards for multi state units added.
-   */
-  const addCardsForMultiStateUnits = (selectedUnits) => {
-    selectedUnits.forEach((u) => {
-      if (u.isMultiStateUnit) {
-        const subFaction = AC.subFactionDTOs.find((sF) => sF.name === u.subFaction);
-        const cards = subFaction.units.filter(
-          (subFactionUnit) =>
-            subFactionUnit.unitName.includes(u.unitName) && //
-            subFactionUnit.multiStateOrderNumber > 1
-        );
-
-        cards.forEach((c) => selectedUnits.push(c));
-      }
-    });
-
-    return selectedUnits;
-  };
+  const [showListTypeDialog, setShowListTypeDialog] = useState(false);
 
   /**
    * Function creates the data structure for the PDF view.
    * @returns an array of objects each containing all data for one subFaction of the army list.
    */
-  const createTextFileData = () => {
+  const createTextFileData = (options) => {
     let armyList = [];
     let selectedUnits = [...SEC.selectedUnits];
 
-    const allSelectedCards = addCardsForMultiStateUnits(selectedUnits);
+    const allSelectedCards = addCardsForMultiStateUnits(selectedUnits, AC.subFactionDTOs);
 
     AC.distinctSubFactions.forEach((subFaction) => {
       const subFactionUnits = allSelectedCards.filter((u) => u.subFaction === subFaction);
@@ -82,10 +59,7 @@ const TextFileDownloadButton = () => {
       totalArmyPoints: SEC.maxPointsAllowance,
     };
 
-    // TODO: remove hard coding once the prototype stands!
-    let isSimpleFileSelected = false;
-
-    const textGeneratorFunction = isSimpleFileSelected //
+    const textGeneratorFunction = options.printDefaultList //
       ? simpleListTextFileGenerator
       : statCardsTextFileGenerator;
 
@@ -97,10 +71,10 @@ const TextFileDownloadButton = () => {
     return URL.createObjectURL(blob);
   };
 
-  const downloadListTextFile = () => {
+  const downloadListTextFile = (options) => {
     const link = document.createElement("a");
     link.download = `${AC.armyName}.txt`;
-    link.href = createTextFileData();
+    link.href = createTextFileData(options);
     link.click();
   };
 
@@ -111,7 +85,7 @@ const TextFileDownloadButton = () => {
           <IconButton
             disabled={SEC.selectedUnits.length === 0} //
             onClick={() => {
-              downloadListTextFile();
+              setShowListTypeDialog(true);
             }}
           >
             <CustomIcon
@@ -125,6 +99,11 @@ const TextFileDownloadButton = () => {
           </IconButton>
         </span>
       </Tooltip>
+      <SelectPrintTypeDialog
+        createPrintableFile={downloadListTextFile}
+        setShowPrintTypeDialog={setShowListTypeDialog}
+        showPdfTypeDialog={showListTypeDialog}
+      />
     </>
   );
 };

@@ -230,3 +230,32 @@ const getRandomIntInclusive = (min, max) => {
   const maxFloored = Math.floor(max);
   return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled);
 };
+
+
+
+  /**
+   * Function adds the missing cards for multi state units to the array
+   * of selected cards.
+   * If a unit has multiple stat cards, then only one is displayed by the
+   * app and can be selected for the list.
+   * The function puts those card objects back to ensure that the
+   * detailed PDF contains all cards needed.
+   * @param {[unitCards]} selectedUnits
+   * @returns a unitCard array with the all cards for multi state units added.
+   */
+  export const addCardsForMultiStateUnits = (selectedUnits, subFactionDTOs) => {
+    selectedUnits.forEach((u) => {
+      if (u.isMultiStateUnit) {
+        const subFaction = subFactionDTOs.find((sF) => sF.name === u.subFaction);
+        const cards = subFaction.units.filter(
+          (subFactionUnit) =>
+            subFactionUnit.unitName.includes(u.unitName) && //
+            subFactionUnit.multiStateOrderNumber > 1
+        );
+
+        cards.forEach((c) => selectedUnits.push(c));
+      }
+    });
+
+    return selectedUnits;
+  };

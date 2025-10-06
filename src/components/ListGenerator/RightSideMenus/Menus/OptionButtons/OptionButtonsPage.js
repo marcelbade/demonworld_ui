@@ -10,7 +10,7 @@ import BackToSelectionButton from "../../../../shared/BackToSelectionButton";
 import DeleteArmyListButton from "./Buttons/DeleteArmyListButton";
 // constants
 import ArmyMetaDataInput from "../../../ArmyListView/ArmyList/ArmyListHeader/ArmyMetaDataInput";
-import CreatePdfButton from "./Buttons/CreatePdfButton";
+import CreatePdfButton from "../../../../shared/CreatePdfButton";
 import StoreAndUpdateArmyListButton from "./Buttons/StoreAndUpdateArmyListButton";
 import LoadArmyButton from "./Buttons/LoadArmyButton";
 import LossCalculatorButton from "./Buttons/LossCalculatorButton";
@@ -18,7 +18,8 @@ import TextFileDownloadButton from "./Buttons/TextFileDownloadButton";
 
 const OptionButtonsPage = () => {
   const [showArmySaveDialog, setShowArmySaveDialog] = useState(false);
-  const [showDeleteArmyListDialog, SetShowDeleteArmyListDialog] = useState(false); //TODO new dialog, "really delete list?"
+  //TODO new dialog, "really delete list?"
+  // const [showDeleteArmyListDialog, SetShowDeleteArmyListDialog] = useState(false);
   const [isExistingList, setIsExistingList] = useState(false);
 
   const ICON_SIZE_RESET_BUTTONS = "1.75em";

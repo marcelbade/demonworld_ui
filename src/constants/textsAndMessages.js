@@ -72,10 +72,13 @@ export const TOOLTIPS = {
 
 export const PDF = {
   CREATE_PDF: "PDF Erzeugen ",
-  SELECT_PDF_TYPE: "Bitte Wähle den PDF Typ",
+};
+
+export const PRINTABLE_LIST = {
+  SELECT_LIST_TYPE: "Bitte Wähle die Art der Liste",
   CREATE_DEFAULT_LIST: "Einfache Liste Erzeugen",
   CREATE_DETAILED_LIST: "Armeekarten Erzeugen",
-  PDF_CONTEXT_HELP:
+  PRINT_CONTEXT_HELP:
     'Eine "einfache Liste" enthält nur die Namen der Einheiten, Gegenstände, sowie ihre Punktkosten und Prozentangaben.\n  "Armeekarten" generiert Karten für alle gewählten Einheiten, sowie die Punktkosten und Prozentangaben.',
 };
 

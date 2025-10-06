@@ -3,18 +3,19 @@ import { useContext, useState } from "react";
 // Material UI
 import { IconButton, Tooltip } from "@mui/material";
 // components and functions
-import useSubFactionStats from "../../../../../../customHooks/UseSubFactionStats";
-import calculateScoutingFactor from "../../../../../../gameLogic/scoutFactorCalculator/scoutingFactorCalculator";
-import SelectPdfTypeDialog from "../../../../../Dialogs/SelectPdfTypeDialog/SelectPdfTypeDialog";
-import CustomIcon from "../../../../../shared/CustomIcon";
+import useSubFactionStats from "../../customHooks/UseSubFactionStats";
+import calculateScoutingFactor from "../../gameLogic/scoutFactorCalculator/scoutingFactorCalculator";
+import SelectPrintTypeDialog from "../Dialogs/SelectPdfTypeDialog/SelectPrintTypeDialog";
+import CustomIcon from "./CustomIcon";
 // context
-import { ArmyContext } from "../../../../../../contexts/armyContext";
-import { SelectionContext } from "../../../../../../contexts/selectionContext";
+import { ArmyContext } from "../../contexts/armyContext";
+import { SelectionContext } from "../../contexts/selectionContext";
 // icons
-import customPdfIcon from "../../../../../../assets/icons/customPDFIcon.svg";
+import customPdfIcon from "../../assets/icons/customPDFIcon.svg";
 // constants
-import { OPTIONS, PDF } from "../../../../../../constants/textsAndMessages";
-import { PDF_URL } from "../../../../../../constants/URLs";
+import { OPTIONS, PDF } from "../../constants/textsAndMessages";
+import { PDF_URL } from "../../constants/URLs";
+import { addCardsForMultiStateUnits } from "../../util/utilityFunctions";
 
 const CreatePdfButton = () => {
   const AC = useContext(ArmyContext);
@@ -22,7 +23,7 @@ const CreatePdfButton = () => {
 
   const stats = useSubFactionStats();
 
-  const [showPdfTypeDialog, setShowPdfTypeDialog] = useState(false);
+  const [showListTypeDialog, setShowListTypeDialog] = useState(false);
 
   /**
    * Function opens the pdf generator in a
@@ -30,48 +31,21 @@ const CreatePdfButton = () => {
    */
   const openPDfInNewTab = (options) => {
     const URL = PDF_URL;
-    const transportObj = createPDFData(options);
+    const transportObj = createUnitListPDFData(options);
 
     window.localStorage.setItem("transportObj", JSON.stringify(transportObj));
     window.open(URL, "_blank", "noopener,noreferrer");
   };
 
   /**
-   * Function adds the missing cards for multi state units to the array
-   * of selected cards.
-   * If a unit has multiple stat cards, then only one is displayed by the
-   * app and can be selected for the list.
-   * The function puts those card objects back to ensure that the
-   * detailed PDF contains all cards needed.
-   * @param {[unitCards]} selectedUnits
-   * @returns a unitCard array with the all cards for multi state units added.
-   */
-  const addCardsForMultiStateUnits = (selectedUnits) => {
-    selectedUnits.forEach((u) => {
-      if (u.isMultiStateUnit) {
-        const subFaction = AC.subFactionDTOs.find((sF) => sF.name === u.subFaction);
-        const cards = subFaction.units.filter(
-          (subFactionUnit) =>
-            subFactionUnit.unitName.includes(u.unitName) && //
-            subFactionUnit.multiStateOrderNumber > 1
-        );
-
-        cards.forEach((c) => selectedUnits.push(c));
-      }
-    });
-
-    return selectedUnits;
-  };
-
-  /**
    * Function creates the data structure for the PDF view.
    * @returns an array of objects eacdh containing all data for one subFaction of the army list.
    */
-  const createPDFData = (options) => {
+  const createUnitListPDFData = (options) => {
     let list = [];
     let selectedUnits = [...SEC.selectedUnits];
 
-    const allSelectedCards = addCardsForMultiStateUnits(selectedUnits);
+    const allSelectedCards = addCardsForMultiStateUnits(selectedUnits, AC.subFactionDTOs);
 
     AC.distinctSubFactions.forEach((distinctSubFaction) => {
       const subFactionUnits = allSelectedCards.filter((u) => u.subFaction === distinctSubFaction);
@@ -103,7 +77,7 @@ const CreatePdfButton = () => {
           <IconButton
             disabled={SEC.selectedUnits.length === 0} //
             onClick={() => {
-              setShowPdfTypeDialog(true);
+              setShowListTypeDialog(true);
             }}
           >
             <CustomIcon
@@ -117,10 +91,10 @@ const CreatePdfButton = () => {
           </IconButton>
         </span>
       </Tooltip>
-      <SelectPdfTypeDialog
-        openPDfInNewTab={openPDfInNewTab} //
-        setShowPdfTypeDialog={setShowPdfTypeDialog}
-        showPdfTypeDialog={showPdfTypeDialog}
+      <SelectPrintTypeDialog
+        createPrintableFile={openPDfInNewTab}
+        setShowPrintTypeDialog={setShowListTypeDialog}
+        showPdfTypeDialog={showListTypeDialog}
       />
     </>
   );

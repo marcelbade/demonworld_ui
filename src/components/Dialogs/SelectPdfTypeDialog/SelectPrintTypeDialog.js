@@ -2,12 +2,23 @@
 import { Button, Dialog, Grid2 as Grid } from "@mui/material";
 // functions and components
 // constants
-import { PDF, PUSH_MESSAGE_TYPES } from "../../../constants/textsAndMessages";
+import { PRINTABLE_LIST, PUSH_MESSAGE_TYPES } from "../../../constants/textsAndMessages";
 import CustomDialogTitle from "../components/CustomDialogTitle";
 
-const SelectPdfTypeDialog = (props) => {
+/**
+ * Functional component renders a dialog asking the user to
+ * choose the type of list to print, default or detailed (all cards).
+ * NOTE: the createPrintableFile({printDefaultList: true}) props requires
+ * an object with the "printDefaultList" property.
+ * @param {object} props
+ *  - createPrintableFile
+ *  - showPdfTypeDialog
+ *  - setShowPrintTypeDialog
+ * @returns JSX element
+ */
+const SelectPrintTypeDialog = (props) => {
   const handleClose = () => {
-    props.setShowPdfTypeDialog(false);
+    props.setShowPrintTypeDialog(false);
   };
 
   return (
@@ -25,10 +36,10 @@ const SelectPdfTypeDialog = (props) => {
       onClose={handleClose}
     >
       <CustomDialogTitle
-        title={PDF.SELECT_PDF_TYPE}
+        title={PRINTABLE_LIST.SELECT_LIST_TYPE}
         handleClose={handleClose}
         displayHelpBttn={true}
-        pushMessage={PDF.PDF_CONTEXT_HELP}
+        pushMessage={PRINTABLE_LIST.PRINT_CONTEXT_HELP}
         pushMessageType={PUSH_MESSAGE_TYPES.INFO}
       />
       <Grid
@@ -42,25 +53,25 @@ const SelectPdfTypeDialog = (props) => {
         <Button
           variant="outlined"
           onClick={() => {
-            props.openPDfInNewTab({ printDefaultList: true });
-            props.setShowPdfTypeDialog(false);
+            props.createPrintableFile({ printDefaultList: true });
+            props.setShowPrintTypeDialog(false);
           }}
         >
-          {PDF.CREATE_DEFAULT_LIST}
+          {PRINTABLE_LIST.CREATE_DEFAULT_LIST}
         </Button>
 
         <Button
           variant="outlined"
           onClick={() => {
-            props.openPDfInNewTab({ printDefaultList: false });
-            props.setShowPdfTypeDialog(false);
+            props.createPrintableFile({ printDefaultList: false });
+            props.setShowPrintTypeDialog(false);
           }}
         >
-          {PDF.CREATE_DETAILED_LIST}
+          {PRINTABLE_LIST.CREATE_DETAILED_LIST}
         </Button>
       </Grid>
     </Dialog>
   );
 };
 
-export default SelectPdfTypeDialog;
+export default SelectPrintTypeDialog;
