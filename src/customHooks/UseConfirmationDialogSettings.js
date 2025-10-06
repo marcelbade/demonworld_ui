@@ -8,8 +8,14 @@ import { SET_OVERRIDE_DIALOG_URL, SET_DELETE_DIALOG_URL } from "../constants/URL
 import { CONFIRMATION_DIALOG } from "../constants/textsAndMessages";
 import { UserContext } from "../contexts/userContext";
 
+/**
+ * Custom hook stores and retrieves the user settings for the confirmation
+ * dialogs from the data base. The user can toggle in the settings & the dialog whether
+ * they want the UI to show a dialog asking them to confirm a choice. This hook contains the
+ * business logic to avoid duplicate code across the relevant components.
+ * @returns
+ */
 const useConfirmationDialogSettings = () => {
- 
   const UC = useContext(UserContext);
   const MC = useContext(MenuContext);
 

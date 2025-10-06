@@ -23,7 +23,11 @@ const ConfirmationDialog = (props) => {
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
-      <Grid container justifyContent="space-between" sx={theme.palette.dialogs.title}>
+      <Grid
+        container //
+        justifyContent="space-between"
+        sx={theme.palette.dialogs.title}
+      >
         <DialogTitle
           id="alert-dialog-title" //
         >
