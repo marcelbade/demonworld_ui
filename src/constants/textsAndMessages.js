@@ -262,6 +262,7 @@ export const VALIDATION = {
 };
 
 export const ITEM_LIMIT_MESSAGE = {
+  POINT_LIMIT: "Der Gegenstand ist zu teuer.",
   UNIQUE_ITEMS: `Einzigartige Gegenstände können nur einmal vergeben werden.`,
   SHIELD_ITEMS: `Nur eine Einheit mit Schild kann diesen Gegenstand erhalten.`,
   MOUNTED_ITEMS: `Nur eine berittene Einheit kann diesen Gegenstand erhalten.`,

@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { ItemContext } from "../contexts/itemContext";
 import { SelectionContext } from "../contexts/selectionContext";
 // functions and components
-import { do2ArraysHaveCommonElements } from "../util/utilityFunctions";
+import { calculateSpentPointsTotal, do2ArraysHaveCommonElements } from "../util/utilityFunctions";
 //constants
 import {
   ALL,
@@ -26,14 +26,18 @@ import {
 import { ITEM_LIMIT_MESSAGE } from "../constants/textsAndMessages";
 import { UNIT } from "../constants/unitTypes";
 
+/**
+ *
+ * @returns
+ */
 const useItemFilters = () => {
   const IC = useContext(ItemContext);
-  const SC = useContext(SelectionContext);
+  const SEC = useContext(SelectionContext);
 
   /**
-   * Function is a wrapper for the filter logic and calls the filtering functions.
+   * Function is a wrapper for the filter logic and calls the two filter functions.
    * First, the correct item list for the selected faction is returned,
-   * then item groups are removed.
+   * then invalid item groups are removed (i.e., ranged weapons are removed for units wthout the option).
    * @param {unitCard} selectedUnit
    * @param {[itemGroup]} listOfItemGroups
    * @returns a filtered array of items grouped by type. Filtered out are all item types
@@ -72,7 +76,7 @@ const useItemFilters = () => {
 
     itemTypeGroup = itemTypeGroup.filter((group) => group.typeName !== selectedUnit.prohibitedItemType);
 
-    // filter out fortifications if -> (A) it's not a unit (B) mounted (C) the limit for fortification has been reached.
+    // filter out fortifications if -> (A) it's not a unit (B) mounted.
     if (selectedUnit.unitType !== UNIT || selectedUnit.isMounted) {
       itemTypeGroup = itemTypeGroup.filter((group) => group.typeName !== ITEM_TYPE_FORTIFICATIONS);
     }
@@ -87,7 +91,7 @@ const useItemFilters = () => {
       itemTypeGroup = itemTypeGroup.filter((group) => group.typeName !== ITEM_TYPE_INSTRUMENT);
     }
 
-    // filter out almost everything, if the unit has no leader
+    // filter out equipment for unit leaders, if the unit has no leader
     if (!selectedUnit.leader && selectedUnit.unitType === UNIT) {
       itemTypeGroup = itemTypeGroup.filter(
         (group) =>
@@ -101,7 +105,7 @@ const useItemFilters = () => {
       );
     }
 
-    //filter out imps if the unit is a non-casters or a mounted magic users
+    //filter out imps ("Dämonlinge") if the unit is a non-caster, or has a mount
     if (selectedUnit.magic === 0 || selectedUnit.isMounted) {
       itemTypeGroup = itemTypeGroup.filter((group) => group.typeName !== ITEM_TYPE_IMP);
     }
@@ -256,6 +260,12 @@ const useItemFilters = () => {
           errorMessage: ITEM_LIMIT_MESSAGE.FORTIFICATIONS_ITEMS,
         };
       },
+      pointLimit: (data) => {
+        return {
+          isInvalidItem: isItemTooExpensive(data.item),
+          errorMessage: ITEM_LIMIT_MESSAGE.POINT_LIMIT,
+        };
+      },
     };
 
     let result = {
@@ -292,7 +302,20 @@ const useItemFilters = () => {
         pointSum += i.points;
       });
 
-    return pointSum + item.points <= SC.maxPointsAllowance * MAX_PERCENTAGE;
+    return pointSum + item.points <= SEC.maxPointsAllowance * MAX_PERCENTAGE;
+  };
+
+  /**
+   * Function tests if equipping the item would put the list above the max point limit.
+   * @param {itemCard} item
+   * @returns true, if equipping the item would exceed the point limit.
+   */
+  const isItemTooExpensive = (item) => {
+    if (item.points + calculateSpentPointsTotal(SEC.selectedUnits) > SEC.maxPointsAllowance) {
+      return true;
+    }
+
+    return false;
   };
 
   return {

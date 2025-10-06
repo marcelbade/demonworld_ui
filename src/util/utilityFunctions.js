@@ -259,3 +259,28 @@ const getRandomIntInclusive = (min, max) => {
 
     return selectedUnits;
   };
+
+  export const calculateSpentPointsTotal = (selectedUnits) => {
+  let actualValue = 0;
+
+  selectedUnits.forEach((selectedUnit) => {
+    actualValue += selectedUnit.points;
+
+    if (selectedUnit.equipment.length > 0) {
+      const equipmentTotal = calculateEquipmentCost(selectedUnit);
+      actualValue += equipmentTotal;
+    }
+  });
+
+  return actualValue;
+};
+
+const calculateEquipmentCost = (selectedUnit) => {
+  let sum = 0;
+
+  selectedUnit.equipment.forEach((item) => {
+    sum += item.points;
+  });
+
+  return sum;
+};
