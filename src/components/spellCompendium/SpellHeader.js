@@ -1,7 +1,7 @@
 // material ui
 import { Grid2 as Grid, Typography } from "@mui/material";
 // custom components and functions
-import {  spellTierIsText } from "./spellUtil";
+import { spellTierIsText } from "./spellUtil";
 import TierIcon from "./TierIcon";
 import CollapsableTopMenuDrawer from "../shared/CollapsableTopMenuDrawer";
 import TopDrawerButton from "../shared/TopDrawerButton";
@@ -23,18 +23,24 @@ const SpellHeader = (props) => {
         />
         <TopDrawerButton />
       </Grid>
-
-      <Typography
-        variant="h6" //
-        align="right"
-        sx={{
-          width: "100%", //
-          paddingRight: "5em",
-          paddingTop: "1em",
-        }}
+      <Grid
+        container //
+        direction="row"
+        justifyContent="space-between"
+        size={12}
       >
-        {props.faction}
-      </Typography>
+        <Typography
+          variant="h6" //
+          align="right"
+          sx={{
+            width: "100%", //
+            paddingRight: "5em",
+            paddingTop: "1em",
+          }}
+        >
+          {props.faction}
+        </Typography>
+      </Grid>
       <Typography
         variant="h5" //
         align="center"
