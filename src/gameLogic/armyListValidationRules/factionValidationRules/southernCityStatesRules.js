@@ -1,6 +1,7 @@
 // functions and components
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
+import { mercenaryValidationRules } from "../globalValidationRules/mercenaryValidationRules";
 // constants
 import { SOUTHERN_CITY_STATES_TEXTS, SUMMONS_TEXTS } from "../../../constants/textsAndMessages";
 import { MAGE, HERO, UNIT, GIANT } from "../../../constants/unitTypes";
@@ -73,6 +74,8 @@ const SouthernCityStatesRules = {
     );
     let hasNoCommander = globalRules.isArmyCommanderPresent(validationData.selectedUnits, validationData.availableUnits, rules);
 
+    let hasFireUnits = mercenaryValidationRules.containsfireUnits(validationData.selectedUnits, validationData.availableUnits);
+
     // tournament rules
     let maxCopies;
     let heroPointCap;
@@ -129,11 +132,10 @@ const SouthernCityStatesRules = {
       ...testForHeroMagicianTotal,
       ...testNorthernRegion,
       ...testSouthernthernRegion,
+      ...hasFireUnits,
     ];
     // result for sub factions below limit.
     validationResults.invalidSubFactions = [...isBelowSubFactionMin, ...hasNoCommander];
-
-     
 
     // Are there units that need to be removed from the list?
     let testNorthernRegionRemove = regionRuleRemove(

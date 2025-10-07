@@ -1,5 +1,5 @@
 import { HERO, MAGE } from "../../../constants/unitTypes";
-import { VALIDATION } from "../../../constants/textsAndMessages";
+import { GLOBAL_VALIDATION } from "../../../constants/textsAndMessages";
 
 const globalRules = {
   /**
@@ -19,7 +19,7 @@ const globalRules = {
 
     availableUnits.forEach((aU) => {
       if (aU.points + spentPoints > armyPointsAllowance) {
-        result.push({ unitBlockedbyRules: aU.unitName, message: VALIDATION.DONT_EXCEED_THE_POINT_ALLOWANCE_MESSAGE });
+        result.push({ unitBlockedbyRules: aU.unitName, message: GLOBAL_VALIDATION.DONT_EXCEED_THE_POINT_ALLOWANCE_MESSAGE });
       }
     });
 
@@ -38,7 +38,7 @@ const globalRules = {
     selectedUnits
       .filter((unit) => unit.uniqueUnit === true)
       .forEach((uniqueUnit) => {
-        result.push({ unitBlockedbyRules: uniqueUnit.unitName, message: VALIDATION.NO_DUPLICATE_UNIQUES_MESSAGE });
+        result.push({ unitBlockedbyRules: uniqueUnit.unitName, message: GLOBAL_VALIDATION.NO_DUPLICATE_UNIQUES_MESSAGE });
       });
 
     return result;
@@ -58,7 +58,7 @@ const globalRules = {
       const identicalUnits = selectedUnits.filter((u) => u.unitName === testedUnit.unitName);
 
       if (identicalUnits.length >= max) {
-        result.push({ unitBlockedbyRules: testedUnit.unitName, message: VALIDATION.MAXIMUM_OF_TWO_OF_EACH_MESSAGE });
+        result.push({ unitBlockedbyRules: testedUnit.unitName, message: GLOBAL_VALIDATION.MAXIMUM_OF_TWO_OF_EACH_MESSAGE });
       }
     }
     return result;
@@ -88,7 +88,7 @@ const globalRules = {
       .filter((unit) => unit.unitType === HERO || unit.unitType === MAGE)
       .forEach((hero) => {
         if (hero.points + heroTotal > max) {
-          result.push({ unitBlockedbyRules: hero.unitName, message: VALIDATION.MAXIMUM_OF_X_PERCENT_HEROES_MESSAGE(allowedPercentage) });
+          result.push({ unitBlockedbyRules: hero.unitName, message: GLOBAL_VALIDATION.MAXIMUM_OF_X_PERCENT_HEROES_MESSAGE(allowedPercentage) });
         }
       });
 
@@ -188,7 +188,7 @@ const globalRules = {
         rule.cardNames.includes(subFaction)
           ? result.push({
               invalidSubFaction: rule.cardNames, //
-              message: VALIDATION.NO_COMMANDER_WARNING,
+              message: GLOBAL_VALIDATION.NO_COMMANDER_WARNING,
             })
           : null
       );

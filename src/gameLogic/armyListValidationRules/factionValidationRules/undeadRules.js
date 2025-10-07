@@ -13,9 +13,12 @@ Tiermenschen aufzustellen. Allerdings können keine Schwarzmagier, Dämonen oder
 Eisriesen aufgestellt werden.
  * */
 
-import { UNDEAD_TEXTS } from "../../../constants/textsAndMessages";
+// functions and components
 import globalRules from "../globalValidationRules/globalValidationRules";
+import { mercenaryValidationRules } from "../globalValidationRules/mercenaryValidationRules";
 import validationResults from "./validationResultsObjectProvider";
+// constants
+import { UNDEAD_TEXTS } from "../../../constants/textsAndMessages";
 
 const rules = [
   {
@@ -66,15 +69,29 @@ const rules = [
 ];
 
 const UndeadRules = {
-  testSubFactionRules: (
-    validationData 
-  ) => {
+  testSubFactionRules: (validationData) => {
     //  general rules
-    let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(validationData.selectedUnits, validationData.availableUnits, validationData.totalPointsAllowance);
-    let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(rules, validationData.selectedUnits, validationData.totalPointsAllowance, validationData.distinctSubFactions);
-    let isAboveSubFactionMax = globalRules.unitsAboveSubFactionMax(rules, validationData.selectedUnits, validationData.totalPointsAllowance, validationData.availableUnits);
+    let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(
+      validationData.selectedUnits,
+      validationData.availableUnits,
+      validationData.totalPointsAllowance
+    );
+    let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(
+      rules,
+      validationData.selectedUnits,
+      validationData.totalPointsAllowance,
+      validationData.distinctSubFactions
+    );
+    let isAboveSubFactionMax = globalRules.unitsAboveSubFactionMax(
+      rules,
+      validationData.selectedUnits,
+      validationData.totalPointsAllowance,
+      validationData.availableUnits
+    );
     let hasNoCommander = isUndeadArmyCommanderPresent(validationData.selectedUnits);
     let hasBlockedAllies = validIshtakAllies(validationData.listOfAlliedUnits);
+
+    let hasFireUnits = mercenaryValidationRules.containsfireUnits(validationData.selectedUnits, validationData.availableUnits);
 
     // tournament rules
     let maxCopies;
@@ -90,7 +107,12 @@ const UndeadRules = {
     }
 
     let testForMax2Result = globalRules.maximumCopiesOfUnit(validationData.selectedUnits, maxCopies);
-    let testForHeroCapResult = globalRules.belowMaxPercentageHeroes(validationData.selectedUnits, validationData.totalPointsAllowance, validationData.availableUnits, heroPointCap);
+    let testForHeroCapResult = globalRules.belowMaxPercentageHeroes(
+      validationData.selectedUnits,
+      validationData.totalPointsAllowance,
+      validationData.availableUnits,
+      heroPointCap
+    );
 
     let hasDuplicateUniques = validationData.tournamentOverrideRules.uniquesOnlyOnce //
       ? globalRules.noDuplicateUniques(validationData.selectedUnits)
@@ -104,11 +126,10 @@ const UndeadRules = {
       ...testForHeroCapResult,
       ...testForMax2Result,
       ...isAboveSubFactionMax,
+      ...hasFireUnits,
     ];
     // result for sub factions below limit.
     validationResults.invalidSubFactions = [...isBelowSubFactionMin, ...hasNoCommander];
-
-     
 
     validationResults.alliedUnitsBlockedbyRules = hasBlockedAllies;
 

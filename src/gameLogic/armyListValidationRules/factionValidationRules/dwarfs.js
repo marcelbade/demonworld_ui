@@ -1,5 +1,6 @@
 // functions and components
 import validationResults from "./validationResultsObjectProvider";
+import { mercenaryValidationRules } from "../globalValidationRules/mercenaryValidationRules";
 // constants
 import { DWARF_TEXTS } from "../../../constants/textsAndMessages";
 import globalRules from "../globalValidationRules/globalValidationRules";
@@ -66,6 +67,8 @@ const DwarfRules = {
     );
     let hasNoCommander = globalRules.isArmyCommanderPresent(validationData.selectedUnits, validationData.availableUnits, rules);
 
+    let hasFireUnits = mercenaryValidationRules.containsfireUnits(validationData.selectedUnits, validationData.availableUnits);
+
     // tournament rules
     let maxCopies;
     let heroPointCap;
@@ -102,11 +105,12 @@ const DwarfRules = {
       ...testForHeroCapResult,
       ...testForMax2Result,
       ...isAboveSubFactionMax,
+      ...hasFireUnits,
     ];
     // result for sub factions below limit.
     validationResults.invalidSubFactions = [...isBelowSubFactionMin, ...hasNoCommander];
 
-     
+     console.log("validationResults >>>", validationResults);
 
     return validationResults;
   },

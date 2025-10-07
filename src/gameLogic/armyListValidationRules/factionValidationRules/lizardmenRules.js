@@ -1,6 +1,8 @@
-import { LIZARDMEN_TEXTS } from "../../../constants/textsAndMessages";
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
+import { mercenaryValidationRules } from "../globalValidationRules/mercenaryValidationRules";
+// constants
+import { LIZARDMEN_TEXTS } from "../../../constants/textsAndMessages";
 
 const rules = [
   {
@@ -63,6 +65,8 @@ const LizardMenRules = {
     );
     let hasNoCommander = globalRules.isArmyCommanderPresent(validationData.selectedUnits, validationData.availableUnits, rules);
 
+    let hasFireUnits = mercenaryValidationRules.containsfireUnits(validationData.selectedUnits, validationData.availableUnits);
+
     // tournament rules
     let maxCopies;
     let heroPointCap;
@@ -97,11 +101,10 @@ const LizardMenRules = {
       ...testForHeroCapResult,
       ...testForMax2Result,
       ...isAboveSubFactionMax,
+      ...hasFireUnits,
     ];
     // result for sub factions below limit.
     validationResults.invalidSubFactions = [...isBelowSubFactionMin, ...hasNoCommander];
-
-     
 
     return validationResults;
   },

@@ -1,6 +1,7 @@
 // components and functions
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
+import { mercenaryValidationRules } from "../globalValidationRules/mercenaryValidationRules";
 // contants
 import { DWARVES } from "../../../constants/factions";
 import { DWARF_TEXTS, EMPIRE_TEXTS } from "../../../constants/textsAndMessages";
@@ -115,6 +116,8 @@ const EmpireRules = {
     );
     let hasNoCommander = globalRules.isArmyCommanderPresent(validationData.selectedUnits, validationData.availableUnits, rules);
 
+    let hasFireUnits = mercenaryValidationRules.containsfireUnits(validationData.selectedUnits, validationData.availableUnits);
+
     // tournament rules
     let maxCopies;
     let heroPointCap;
@@ -151,11 +154,10 @@ const EmpireRules = {
       ...testForHeroCapResult,
       ...testForMax2Result,
       ...isAboveSubFactionMax,
+      ...hasFireUnits,
     ];
     // result for sub factions below limit.
     validationResults.invalidSubFactions = [...isBelowSubFactionMin, ...hasNoCommander];
-
-     
 
     //  result - ally rules applied.
     validationResults.alliedUnitsBlockedbyRules = [

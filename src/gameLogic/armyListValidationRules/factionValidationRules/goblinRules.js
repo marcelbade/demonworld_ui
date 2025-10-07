@@ -1,8 +1,10 @@
-import { ORK_CLANS_UNIT_MAPPING } from "../../../constants/factions";
-import { GOBLIN_TEXTS } from "../../../constants/textsAndMessages";
 import { isObjectEmtpy } from "../../../util/utilityFunctions";
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
+import { mercenaryValidationRules } from "../globalValidationRules/mercenaryValidationRules";
+// constants
+import { ORK_CLANS_UNIT_MAPPING } from "../../../constants/factions";
+import { GOBLIN_TEXTS } from "../../../constants/textsAndMessages";
 
 /**
  * A goblin army has only one special rule - the amounts spent on shamans and heroes cannot exceed 40%.
@@ -84,6 +86,8 @@ const GoblinRules = {
 
     let hasNoCommander = globalRules.isArmyCommanderPresent(validationData.selectedUnits, validationData.availableUnits, rules);
 
+    let hasFireUnits = mercenaryValidationRules.containsfireUnits(validationData.selectedUnits, validationData.availableUnits);
+
     // tournament rules
     let maxCopies;
     let heroPointCap;
@@ -120,6 +124,7 @@ const GoblinRules = {
       ...testForMaxCopiesResult,
       ...isAboveSubFactionMax,
       ...isAboveCharLimit,
+      ...hasFireUnits,
     ];
 
     // result for sub factions below limit, sub factions w. potential commander if none has been picked.

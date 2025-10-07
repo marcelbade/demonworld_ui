@@ -1,10 +1,9 @@
 // components and functions
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
+import { mercenaryValidationRules } from "../globalValidationRules/mercenaryValidationRules";
 // contants
 import { DARKELF_TEXTS, SUMMONS_TEXTS, UNIT_TYPES } from "../../../constants/textsAndMessages";
-
-
 
 const rules = [
   {
@@ -73,6 +72,8 @@ const DarkElveRules = {
     );
     let hasNoCommander = globalRules.isArmyCommanderPresent(validationData.selectedUnits, validationData.availableUnits, rules);
 
+    let hasFireUnits = mercenaryValidationRules.containsfireUnits(validationData.selectedUnits, validationData.availableUnits);
+
     // tournament rules
     let maxCopies;
     let heroPointCap;
@@ -87,7 +88,7 @@ const DarkElveRules = {
     }
 
     let testForMax2Result = globalRules.maximumCopiesOfUnit(validationData.selectedUnits, maxCopies);
-    
+
     let isAboveCharLimit = globalRules.belowMaxPercentageHeroes(
       validationData.selectedUnits,
       validationData.totalPointsAllowance,
@@ -162,11 +163,10 @@ const DarkElveRules = {
       ...testForMax2Result,
       ...isAboveSubFactionMax,
       ...isAboveCharLimit,
+      ...hasFireUnits,
     ];
     // result for sub factions below limit.
     validationResults.invalidSubFactions = [...isBelowSubFactionMin, ...hasNoCommander];
-
-     
 
     return validationResults;
   },

@@ -3,7 +3,7 @@ import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
 //  constants
 import { ORK_CLANS_UNIT_MAPPING } from "../../../constants/factions";
-import { ORKS_TEXTS, VALIDATION } from "../../../constants/textsAndMessages";
+import { GLOBAL_VALIDATION, ORKS_TEXTS } from "../../../constants/textsAndMessages";
 
 const rules = [
   {
@@ -197,7 +197,7 @@ const isOrkArmyCommanderPresent = (selectedUnits, availableUnits, selectedAltern
   if (selectedAlternativeLists.includes("Clanngett")) {
     result.push({
       invalidSubFaction: "Clanngett", //
-      message: VALIDATION.NO_COMMANDER_WARNING,
+      message: GLOBAL_VALIDATION.NO_COMMANDER_WARNING,
     });
   }
 };

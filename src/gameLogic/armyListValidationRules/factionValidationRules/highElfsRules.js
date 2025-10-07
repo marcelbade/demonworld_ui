@@ -1,6 +1,7 @@
 //  functions and components
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
+import { mercenaryValidationRules } from "../globalValidationRules/mercenaryValidationRules";
 //  constants
 import { ELF_TEXTS } from "../../../constants/textsAndMessages";
 import { GIANT, HERO, MAGE, UNIT } from "../../../constants/unitTypes";
@@ -98,6 +99,8 @@ const ElfRules = {
     );
     let hasNoCommander = globalRules.isArmyCommanderPresent(validationData.selectedUnits, validationData.availableUnits, rules);
 
+    let hasFireUnits = mercenaryValidationRules.containsfireUnits(validationData.selectedUnits, validationData.availableUnits);
+
     // tournament rules
     let maxCopies;
     let heroPointCap;
@@ -146,11 +149,10 @@ const ElfRules = {
       ...testForThanarilCovenUnits,
       ...testForEntsVsCentaurs,
       ...testForIlahRi,
+      ...hasFireUnits,
     ];
     // Result for sub factions below limit.
     validationResults.invalidSubFactions = [...isBelowSubFactionMin, ...hasNoCommander];
-
-     
 
     // Are there units that need to be removed from the list?
     validationResults.removeUnitsNoLongerValid = [

@@ -1,6 +1,8 @@
-import { ISHTAK_TEXTS } from "../../../constants/textsAndMessages";
 import globalRules from "../globalValidationRules/globalValidationRules";
+import { mercenaryValidationRules } from "../globalValidationRules/mercenaryValidationRules";
 import validationResults from "./validationResultsObjectProvider";
+// constants
+import { ISHTAK_TEXTS } from "../../../constants/textsAndMessages";
 
 const rules = [
   {
@@ -68,6 +70,8 @@ const IshtakRules = {
       validationData.availableUnits
     );
 
+    let hasFireUnits = mercenaryValidationRules.containsfireUnits(validationData.selectedUnits, validationData.availableUnits);
+
     // tournament rules
     let maxCopies;
     let heroPointCap;
@@ -100,6 +104,7 @@ const IshtakRules = {
       ...testForMax2Result,
       ...isAboveSubFactionMax,
       ...testForHeroCapResult,
+      ...hasFireUnits,
     ];
     // result for sub factions below limit.
     validationResults.invalidSubFactions = [...isBelowSubFactionMin];

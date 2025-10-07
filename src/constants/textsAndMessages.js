@@ -253,7 +253,7 @@ export const BUTTON_TEXTS = {
   PREVIEW_CARD: "Kartenvorschau",
 };
 
-export const VALIDATION = {
+export const GLOBAL_VALIDATION = {
   NO_COMMANDER_WARNING: `Die Armeeliste muss mindestens 1 Helden, Befehlshaber oder Magier mit 2 oder mehr ★ enthalten.`,
   NO_DUPLICATE_UNIQUES_MESSAGE: "Die Liste darf einzigartige Einheiten nur einmal enthalten.",
   MAXIMUM_OF_TWO_OF_EACH_MESSAGE: "Die Liste darf eine Einheit maximal 2x enthalten.",
@@ -261,6 +261,7 @@ export const VALIDATION = {
     return `Die Liste darf maximal ${percentage}% Charaktere und Helden enthalten.`;
   },
   DONT_EXCEED_THE_POINT_ALLOWANCE_MESSAGE: "Die Liste darf die maximale Punktzahl nicht überschreiten.",
+  MERCENARY_SUKARA_NO_FIRE: "Es können nur entweder Einheiten mit Feuerangriffen oder Sukara, die Wasserhexe gewählt werden.",
 };
 
 export const ITEM_LIMIT_MESSAGE = {
