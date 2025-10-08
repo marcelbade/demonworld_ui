@@ -1,5 +1,6 @@
 import { HERO, MAGE } from "../../../constants/unitTypes";
 import { GLOBAL_VALIDATION } from "../../../constants/textsAndMessages";
+import { calculateSpentPointsTotal } from "../../../util/utilityFunctions";
 
 const globalRules = {
   /**
@@ -78,17 +79,16 @@ const globalRules = {
     let max = armyPointsAllowance * (allowedPercentage / 100);
     let result = [];
 
-    selectedUnits
-      .filter((unit) => unit.unitType === HERO || unit.unitType === MAGE)
-      .forEach((unit) => {
-        heroTotal += unit.points;
-      });
+    heroTotal = calculateSpentPointsTotal(selectedUnits.filter((unit) => unit.unitType === HERO || unit.unitType === MAGE));
 
     availableUnits
       .filter((unit) => unit.unitType === HERO || unit.unitType === MAGE)
       .forEach((hero) => {
         if (hero.points + heroTotal > max) {
-          result.push({ unitBlockedbyRules: hero.unitName, message: GLOBAL_VALIDATION.MAXIMUM_OF_X_PERCENT_HEROES_MESSAGE(allowedPercentage) });
+          result.push({
+            unitBlockedbyRules: hero.unitName,
+            message: GLOBAL_VALIDATION.MAXIMUM_OF_X_PERCENT_HEROES_MESSAGE(allowedPercentage),
+          });
         }
       });
 

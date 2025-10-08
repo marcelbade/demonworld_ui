@@ -231,56 +231,62 @@ const getRandomIntInclusive = (min, max) => {
   return Math.floor(Math.random() * (maxFloored - minCeiled + 1) + minCeiled);
 };
 
+/**
+ * Function adds the missing cards for multi state units to the array
+ * of selected cards.
+ * If a unit has multiple stat cards, then only one is displayed by the
+ * app and can be selected for the list.
+ * The function puts those card objects back to ensure that the
+ * detailed PDF contains all cards needed.
+ * @param {[unitCards]} selectedUnits
+ * @returns a unitCard array with the all cards for multi state units added.
+ */
+export const addCardsForMultiStateUnits = (selectedUnits, subFactionDTOs) => {
+  selectedUnits.forEach((u) => {
+    if (u.isMultiStateUnit) {
+      const subFaction = subFactionDTOs.find((sF) => sF.name === u.subFaction);
+      const cards = subFaction.units.filter(
+        (subFactionUnit) =>
+          subFactionUnit.unitName.includes(u.unitName) && //
+          subFactionUnit.multiStateOrderNumber > 1
+      );
 
-
-  /**
-   * Function adds the missing cards for multi state units to the array
-   * of selected cards.
-   * If a unit has multiple stat cards, then only one is displayed by the
-   * app and can be selected for the list.
-   * The function puts those card objects back to ensure that the
-   * detailed PDF contains all cards needed.
-   * @param {[unitCards]} selectedUnits
-   * @returns a unitCard array with the all cards for multi state units added.
-   */
-  export const addCardsForMultiStateUnits = (selectedUnits, subFactionDTOs) => {
-    selectedUnits.forEach((u) => {
-      if (u.isMultiStateUnit) {
-        const subFaction = subFactionDTOs.find((sF) => sF.name === u.subFaction);
-        const cards = subFaction.units.filter(
-          (subFactionUnit) =>
-            subFactionUnit.unitName.includes(u.unitName) && //
-            subFactionUnit.multiStateOrderNumber > 1
-        );
-
-        cards.forEach((c) => selectedUnits.push(c));
-      }
-    });
-
-    return selectedUnits;
-  };
-
-  export const calculateSpentPointsTotal = (selectedUnits) => {
-  let actualValue = 0;
-
-  selectedUnits.forEach((selectedUnit) => {
-    actualValue += selectedUnit.points;
-
-    if (selectedUnit.equipment.length > 0) {
-      const equipmentTotal = calculateEquipmentCost(selectedUnit);
-      actualValue += equipmentTotal;
+      cards.forEach((c) => selectedUnits.push(c));
     }
   });
 
-  return actualValue;
+  return selectedUnits;
+};
+
+/**
+ * function calculates the total point cost (unit point cost +
+ * point cost for all equipped items of every unit) for the passed units.
+ * @param {[unitCard]} selectedUnits
+ * @returns the point cost
+ */
+export const calculateSpentPointsTotal = (selectedUnits) => {
+  let result = 0;
+
+  selectedUnits.forEach((selectedUnit) => {
+    result += selectedUnit.points;
+
+    const equipmentTotal = calculateEquipmentCost(selectedUnit);
+    result += equipmentTotal;
+  });
+
+  return result;
 };
 
 const calculateEquipmentCost = (selectedUnit) => {
-  let sum = 0;
+  let result = 0;
+
+  if (selectedUnit.equipment.length === 0) {
+    return result;
+  }
 
   selectedUnit.equipment.forEach((item) => {
-    sum += item.points;
+    result += item.points;
   });
 
-  return sum;
+  return result;
 };
