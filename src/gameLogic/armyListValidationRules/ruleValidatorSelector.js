@@ -3,7 +3,7 @@ import { DwarfRules } from "./factionValidationRules/dwarfs";
 import { ElfRules } from "./factionValidationRules/highElfsRules";
 import { EmpireRules } from "./factionValidationRules/empireRules";
 import { GoblinRules } from "./factionValidationRules/goblinRules";
-import { IshtakRules } from "./factionValidationRules/ishtakRules";
+import { IsthakRules  } from "./factionValidationRules/isthakRules";
 import { OrkRules } from "./factionValidationRules/orkRules";
 import { NorwingerRules } from "./factionValidationRules/norwingerRules";
 import { UndeadRules } from "./factionValidationRules/undeadRules";
@@ -17,7 +17,7 @@ import {
   ELF_TEXTS,
   EMPIRE_TEXTS,
   GOBLIN_TEXTS,
-  ISHTAK_TEXTS,
+  ISTHAK_TEXTS,
   LIZARDMEN_TEXTS,
   NORWINGER_TEXTS,
   ORKS_TEXTS,
@@ -41,12 +41,12 @@ export const ruleValidation = (faction) => {
       return DwarfRules;
     case ELF_TEXTS.FACTION_NAME:
       return ElfRules;
-    case EMPIRE_TEXTS.FACTION_NAME:
+    case EMPIRE_TEXTS.FACTION_NAME: 
       return EmpireRules;
     case GOBLIN_TEXTS.FACTION_NAME:
       return GoblinRules;
-    case ISHTAK_TEXTS.FACTION_NAME:
-      return IshtakRules;
+    case ISTHAK_TEXTS.FACTION_NAME:
+      return IsthakRules;
     case LIZARDMEN_TEXTS.FACTION_NAME:
       return LizardMenRules;
     case NORWINGER_TEXTS.FACTION_NAME:

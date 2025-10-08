@@ -89,7 +89,7 @@ const UndeadRules = {
       validationData.availableUnits
     );
     let hasNoCommander = isUndeadArmyCommanderPresent(validationData.selectedUnits);
-    let hasBlockedAllies = validIshtakAllies(validationData.listOfAlliedUnits);
+    let hasBlockedAllies = validIsthakAllies(validationData.listOfAlliedUnits);
 
     let hasFireUnits = mercenaryValidationRules.containsfireUnits(validationData.selectedUnits, validationData.availableUnits);
 
@@ -152,7 +152,7 @@ const isUndeadArmyCommanderPresent = (selectedUnits) => {
   return necromancerPresent.length > 0 || potentialCommanders.length > 0;
 };
 
-const validIshtakAllies = (listOfAlliedUnits) => {
+const validIsthakAllies = (listOfAlliedUnits) => {
   const permittedSubFactions = ["Eishexen", "Tiermenschen", "Menschen"];
   const blockedUnits = ["Drogador", "Xarator", "Masdra Draizar"];
   const result = [];

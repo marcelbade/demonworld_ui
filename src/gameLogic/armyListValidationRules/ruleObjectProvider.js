@@ -3,7 +3,7 @@ import { rules as DwarfRulesList } from "./factionValidationRules/dwarfs";
 import { rules as ElvenRulesList } from "./factionValidationRules/highElfsRules";
 import { rules as EmpireRulesList } from "./factionValidationRules/empireRules";
 import { rules as GoblinRulesList } from "./factionValidationRules/goblinRules";
-import { rules as IshtakRulesList } from "./factionValidationRules/ishtakRules";
+import { rules as IsthakRulesList } from "./factionValidationRules/isthakRules";
 import { rules as OrkRulesList } from "./factionValidationRules/orkRules";
 import { rules as NorwingerRulesList } from "./factionValidationRules/norwingerRules";
 import { rules as UndeadRulesList } from "./factionValidationRules/undeadRules";
@@ -26,8 +26,8 @@ export const ruleObjectProvider = (faction) => {
       return GoblinRulesList;
     case "Imperium":
       return EmpireRulesList;
-    case "Ishtak":
-      return IshtakRulesList;
+    case "Isthak":
+      return IsthakRulesList;
     case "Norwinger":
       return NorwingerRulesList;
     case "Orks":

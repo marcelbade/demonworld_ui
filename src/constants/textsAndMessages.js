@@ -504,8 +504,8 @@ export const GOBLIN_TEXTS = {
   },
 };
 
-export const ISHTAK_TEXTS = {
-  FACTION_NAME: "Ishtak",
+export const ISTHAK_TEXTS = {
+  FACTION_NAME: "Isthak",
   SUB_FACTION_RULES: {
     HUMANS: "Deine Armeeliste muss zu 10% bis 60% aus Menschen bestehen.",
     BEASTMEN: "Deine Armeeliste muss zu 10% bis 60% aus Tiermenschen bestehen.",

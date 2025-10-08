@@ -2,7 +2,7 @@ import globalRules from "../globalValidationRules/globalValidationRules";
 import { mercenaryValidationRules } from "../globalValidationRules/mercenaryValidationRules";
 import validationResults from "./validationResultsObjectProvider";
 // constants
-import { ISHTAK_TEXTS } from "../../../constants/textsAndMessages";
+import { ISTHAK_TEXTS } from "../../../constants/textsAndMessages";
 
 const rules = [
   {
@@ -10,46 +10,46 @@ const rules = [
     cardNames: ["Menschen"],
     min: 0.1,
     max: 0.6,
-    error: ISHTAK_TEXTS.SUB_FACTION_RULES.HUMANS,
+    error: ISTHAK_TEXTS.SUB_FACTION_RULES.HUMANS,
   },
   {
     subFaction: "beastmen",
     cardNames: ["Tiermenschen"],
     min: 0.1,
     max: 0.6,
-    error: ISHTAK_TEXTS.SUB_FACTION_RULES.BEASTMEN,
+    error: ISTHAK_TEXTS.SUB_FACTION_RULES.BEASTMEN,
   },
   {
     subFaction: "icewitches",
     cardNames: ["Eishexen"],
     min: 0.1,
     max: 0.6,
-    error: ISHTAK_TEXTS.SUB_FACTION_RULES.ICEWITCHES,
+    error: ISTHAK_TEXTS.SUB_FACTION_RULES.ICEWITCHES,
   },
   {
     subFaction: "demons",
     cardNames: ["Dämonen"],
     min: 0.0,
     max: 0.5,
-    error: ISHTAK_TEXTS.SUB_FACTION_RULES.DEMONS,
+    error: ISTHAK_TEXTS.SUB_FACTION_RULES.DEMONS,
   },
   {
     subFaction: "undead",
     cardNames: ["Untote"],
     min: 0.0,
     max: 0.5,
-    error: ISHTAK_TEXTS.SUB_FACTION_RULES.UNDEAD_TEXTS,
+    error: ISTHAK_TEXTS.SUB_FACTION_RULES.UNDEAD_TEXTS,
   },
   {
     subFaction: "icegiants",
     cardNames: ["Eisriesen"],
     min: 0.0,
     max: 0.3,
-    error: ISHTAK_TEXTS.SUB_FACTION_RULES.ICEGIANTS,
+    error: ISTHAK_TEXTS.SUB_FACTION_RULES.ICEGIANTS,
   },
 ];
 
-const IshtakRules = {
+const IsthakRules = {
   testSubFactionRules: (validationData) => {
     //  general rules
     let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(
@@ -113,4 +113,4 @@ const IshtakRules = {
   },
 };
 
-export { IshtakRules, rules };
+export { IsthakRules, rules };
