@@ -110,8 +110,6 @@ const DwarfRules = {
     // result for sub factions below limit.
     validationResults.invalidSubFactions = [...isBelowSubFactionMin, ...hasNoCommander];
 
-     console.log("validationResults >>>", validationResults);
-
     return validationResults;
   },
 };
