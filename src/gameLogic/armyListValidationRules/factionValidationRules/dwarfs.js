@@ -65,7 +65,11 @@ const DwarfRules = {
       validationData.totalPointsAllowance,
       validationData.availableUnits
     );
-    let hasNoCommander = globalRules.isArmyCommanderPresent(validationData.selectedUnits, validationData.availableUnits, rules);
+    let hasNoCommander = globalRules.isArmyCommanderPresent(
+      validationData.selectedUnits, //
+      validationData.availableUnits,
+      rules
+    );
 
     let hasFireUnits = mercenaryValidationRules.containsfireUnits(validationData.selectedUnits, validationData.availableUnits);
 
