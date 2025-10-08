@@ -27,8 +27,8 @@ import { ITEM_LIMIT_MESSAGE } from "../constants/textsAndMessages";
 import { UNIT } from "../constants/unitTypes";
 
 /**
- *
- * @returns
+ * custom hook that contains the item filter logic, i.e., this logic determines
+ * which items a unit can be equipped with.
  */
 const useItemFilters = () => {
   const IC = useContext(ItemContext);
@@ -216,13 +216,13 @@ const useItemFilters = () => {
         };
       },
 
-      // check if the item is limited ot a specific unit
+      // check if the item is limited to a specific unit
       unitItems: (data) => {
         return {
           isInvalidItem:
             data.item.limitedToUnit !== data.unit.unitName && //
-            !data.item.limitedToUnit === ALL,
-          errorMessage: ITEM_LIMIT_MESSAGE.UNIT_NAME_ITEMS(data.item.unitName),
+            data.item.limitedToUnit !== ALL,
+          errorMessage: ITEM_LIMIT_MESSAGE.UNIT_NAME_ITEMS(data.item.limitedToUnit),
         };
       },
 
@@ -264,6 +264,12 @@ const useItemFilters = () => {
         return {
           isInvalidItem: isItemTooExpensive(data.item),
           errorMessage: ITEM_LIMIT_MESSAGE.POINT_LIMIT,
+        };
+      },
+      subFaction: (data) => {
+        return {
+          isInvalidItem: data.unit.subfaction !== data.item.subfaction,
+          errorMessage: ITEM_LIMIT_MESSAGE.SUBFACTION(data.item.subfaction),
         };
       },
     };

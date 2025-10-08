@@ -274,6 +274,13 @@ export const ITEM_LIMIT_MESSAGE = {
   SPEAR_ITEMS: `Nur eine Einheit mit Speeren kann diesen Gegenstand erhalten.`,
   BOWS_ITEMS: `Nur eine Einheit mit einem Bogen kann diesen Gegenstand erhalten.`,
   CROSSBOWS_ITEMS: `Nur eine Einheit mit Armbrüsten kann diesen Gegenstand erhalten.`,
+  MULTIPLE_ELEMENTS_ITEMS: `Nur an eine Einheit mit mehreren Elementen kann diesen Gegenstand erhalten.`,
+  FORTIFICATIONS_ITEMS: `Die Liste darf max. 10% Befestigungen enthalten.`,
+  ONLY_ONE_ITEM_FOR_ALL_ELEMENTS: `Diese Einheit hat bereits einen Gegestand für alle Elemente erhalten.`,
+  ONLY_ONE_BANNER: `Diese Einheit hat bereits ein Banner erhalten.`,
+  ONLY_ONE_INSTRUMENT: `Diese Einheit hat bereits ein Instrument erhalten.`,
+  ONLY_ONE_FORTIFICATION: `Diese Einheit hat bereits eine Feldbefestigung erhalten.`,
+  ONLY_ONE_MAGICAL_ITEM: `Diese Einheit hat bereits einen magischen Gegenstand erhalten.`,
   UNIT_TYPE_ITEMS: (unitType) => {
     return unitType !== UNIT_TYPES.U
       ? `Eine ${UNIT_TYPES[unitType]} kann diesen Gegenstand nicht erhalten.`
@@ -288,14 +295,9 @@ export const ITEM_LIMIT_MESSAGE = {
   RANGE_ARMOR_ITEMS: (maxRangeArmor) => {
     return `Nur an eine Einheit mit einer Fernkampfpanzerung von max. ${maxRangeArmor} kann diesen Gegenstand erhalten.`;
   },
-  MULTIPLE_ELEMENTS_ITEMS: `Nur an eine Einheit mit mehreren Elementen kann diesen Gegenstand erhalten.`,
-  FORTIFICATIONS_ITEMS: `Die Liste darf max. 10% Befestigungen enthalten.`,
-  //
-  ONLY_ONE_ITEM_FOR_ALL_ELEMENTS: `Diese Einheit hat bereits einen Gegestand für alle Elemente erhalten.`,
-  ONLY_ONE_BANNER: `Diese Einheit hat bereits ein Banner erhalten.`,
-  ONLY_ONE_INSTRUMENT: `Diese Einheit hat bereits ein Instrument erhalten.`,
-  ONLY_ONE_FORTIFICATION: `Diese Einheit hat bereits eine Feldbefestigung erhalten.`,
-  ONLY_ONE_MAGICAL_ITEM: `Diese Einheit hat bereits einen magischen Gegenstand erhalten.`,
+  SUBFACTION: (subFaction) => {
+    return `Nur eine Einheit aus dem Kontingent ${subFaction} kann diesen Gegenstand erhalten.`;
+  },
 };
 
 export const NO_RANGE_WEAPON = "x";

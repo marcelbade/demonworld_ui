@@ -12,6 +12,7 @@ export const ITEM_TYPE_POTION = "potion";
 export const ITEM_TYPE_RINGSANDAMULETS = "ringsAndAmulets";
 export const ITEM_TYPE_WARPAINT = "warpaint";
 export const ITEM_TYPE_WEAPON = "weapon";
+export const ITEM_TYPE_CRYSTAL = "crystal";
 
 // Item can be used by any faction
 export const ALL = "*";
@@ -31,6 +32,7 @@ export const ITEM_CATEGORY_NAME_MAPPING = {
   ringsAndAmulets: "Ringe und Amulette",
   weapon: "Waffen",
   warpaint: "Kriegsbemalung",
+  crystal: "Magische Kristalle",
 };
 
 // Items that do are not a range weapon, have this string as value for "rangedAttackStats"
