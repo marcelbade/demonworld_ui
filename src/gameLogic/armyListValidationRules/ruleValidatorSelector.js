@@ -60,6 +60,6 @@ export const ruleValidation = (faction) => {
     case UNDEAD_TEXTS.FACTION_NAME:
       return UndeadRules;
     default:
-      throw new Error("ruleValidationSelector could not find validator for supplied faction.");
+      throw new Error("ruleValidationSelector could not find a validator for the passed faction.");
   }
 };
