@@ -471,7 +471,8 @@ export const EMPIRE_TEXTS = {
     WEST_MARCH: "Westmark",
   },
 
-  SELECTION_TEXT: "Wähle eine der Marken",
+  FIRST_SELECTION_TEXT: "Wähle eine der Marken",
+  SECOND_SELECTION_TEXT: "Wähle eine zweite, angrenzende Mark",
   SUB_FACTION_RULES: {
     IMPERIAL_ARMY: "Deine Armeeliste muss zu 10% bis 50% aus Einheiten des Kaiserheeres bestehen.",
     PROVINCIAL_ARMY: "Deine Armeeliste muss zu 20% bis 50% aus Einheiten des Provinzheeres bestehen.",
@@ -561,7 +562,9 @@ export const NORWINGER_TEXTS = {
 
 export const ORKS_TEXTS = {
   FACTION_NAME: "Orks",
-  SELECTION_TEXT: "Wähle einen der Clans oder Clanngett",
+  CLANNGETT_SF: "Clanngett",
+  FIRST_SELECTION_TEXT: "Wähle einen der Clans oder Clanngett",
+  SECOND_SELECTION_TEXT: "Wähle einen zweiten Clan",
   SUB_FACTION_RULES: {
     UNIT: "Deine Armeeliste muss zu mindestens 25% aus Einheiten bestehen.",
     CHARACTERS: "Deine Armeeliste darf zu höchstens 30% aus Helden bestehen.",
@@ -570,7 +573,9 @@ export const ORKS_TEXTS = {
     CLANTROOPS: (percentage) => {
       return `Deine Armeeliste darf zu höchstens ${percentage} Prozent aus Sondertruppen der Clans bestehen.`;
     },
-    CLANNGETT: "Deine Armeeliste darf zu höchstens 50% aus Einheiten Clanngetts bestehen.",
+    CLANNGETT_MAX: "Deine Armeeliste darf zu höchstens 50% aus Einheiten Clanngetts bestehen.",
+    CLANNGETT_COMMANDER:
+      "Deine Armeeliste muss einen von Clanngetts Stellvertreter und mindestens 1 Helden, Befehlshaber oder Magier mit 2 oder mehr ★ enthalten.",
     WIZARDS: "Deine Armeeliste darf zu höchstens 40% aus Zauberern bestehen.",
     GOBLIN_TEXTS: "Deine Armeeliste darf zu maximal zu 20% aus Goblins bestehen.",
     AVAILABLE_CLANUNITS: "Dieser Clan kann diese Einheit nicht auswählen.",
