@@ -47,6 +47,7 @@ const SpellHeader = (props) => {
         justifyContent="center"
         sx={{
           width: "100%",
+          marginBottom: "3em",
         }}
       >
         <Typography
@@ -66,7 +67,7 @@ const SpellHeader = (props) => {
             align="center"
             sx={{
               width: "100%", //
-              paddingBottom: "3em",
+              marginTop: "3em",
             }}
           >
             {props.spellTier}
