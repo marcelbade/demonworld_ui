@@ -16,89 +16,24 @@ const SpellCompendium = () => {
   const SC = useContext(SpellContext);
   const UC = useContext(UserContext);
 
-  const [selectedSpell, setSelectedSpell] = useState(NO_SELECTION);
-  const [propertyToEdit, setPropertyToEdit] = useState(NO_SELECTION);
-  const [currentEdit, setCurrentEdit] = useState({
+  const EDIT_PROPERTIES = {
     spellName: false,
     spellTier: false,
     target: false,
     requirements: false,
     effect: false,
     duration: false,
-  });
+  };
+
+  const [selectedSpell, setSelectedSpell] = useState(NO_SELECTION);
+  const [propertyToEdit, setPropertyToEdit] = useState(NO_SELECTION);
+  const [currentEdit, setCurrentEdit] = useState(EDIT_PROPERTIES);
 
   const showActiveEdit = (property) => {
-    switch (property) {
-      case "spellName":
-        setCurrentEdit({
-          ...currentEdit,
-          spellName: true,
-          spellTier: false,
-          target: false,
-          requirements: false,
-          effect: false,
-          duration: false,
-        });
-        break;
-      case "spellTier":
-        setCurrentEdit({
-          ...currentEdit,
-          spellName: false,
-          spellTier: true,
-          target: false,
-          requirements: false,
-          effect: false,
-          duration: false,
-        });
-        break;
-      case "target":
-        setCurrentEdit({
-          ...currentEdit,
-          spellName: false,
-          spellTier: false,
-          target: true,
-          requirements: false,
-          effect: false,
-          duration: false,
-        });
-        break;
-      case "requirements":
-        setCurrentEdit({
-          ...currentEdit,
-          spellName: false,
-          spellTier: false,
-          target: false,
-          requirements: true,
-          effect: false,
-          duration: false,
-        });
-        break;
-      case "effect":
-        setCurrentEdit({
-          ...currentEdit,
-          spellName: false,
-          spellTier: false,
-          target: false,
-          requirements: false,
-          effect: true,
-          duration: false,
-        });
-        break;
-      case "duration":
-        setCurrentEdit({
-          ...currentEdit,
-          spellName: false,
-          spellTier: false,
-          target: false,
-          requirements: false,
-          effect: false,
-          duration: true,
-        });
-        break;
-
-      default:
-        break;
-    }
+    setCurrentEdit({
+      ...EDIT_PROPERTIES,
+      [property]: true,
+    });
   };
 
   const propertyTable = [
