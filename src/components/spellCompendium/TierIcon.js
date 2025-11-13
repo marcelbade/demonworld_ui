@@ -1,5 +1,5 @@
 // material ui
-import { Grid2 as Grid, Icon, Typography } from "@mui/material";
+import { Avatar, Badge, Typography } from "@mui/material";
 // components and functions
 import { spellTierIsText } from "./spellUtil";
 // custom icons
@@ -14,43 +14,28 @@ import d20Icon from "../../assets/icons/d20.png";
  */
 const TierIcon = (props) => {
   return (
-    <Grid
-      sx={{
-        position: "relative",
-        width: "100%",
-        height: "10em",
-      }}
+    <Badge
+      overlap="circular"
+      anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
+      badgeContent={
+        <Typography
+          sx={{
+            color: "white", //
+            fontFamily: "notMaryKate",
+            paddingRight: "72px",
+            paddingBottom: "68px",
+          }}
+        >
+          {spellTierIsText(props.tier) ? "*" : props.tier}
+        </Typography>
+      }
     >
-      <Icon
-        sx={{
-          zIndex: "1",
-          width: "15em", //
-          height: "15em",
-          position: "absolute",
-          top: "1em",
-          right: "36.5em",
-        }}
-      >
-        <img
-          src={d20Icon} //
-          height={"30%"}
-          width={"30%"}
-          alt={"props.altText"}
-        />
-      </Icon>
-      <Typography
-        variant="h5"
-        sx={{
-          zIndex: "100",
-          color: "white",
-          position: "absolute",
-          top: "2.65em",
-          right: "43.75em",
-        }}
-      >
-        {spellTierIsText(props.tier) ? "*" : props.tier}
-      </Typography>
-    </Grid>
+      <Avatar
+        alt="Spellcost" //
+        src={d20Icon}
+        sx={{ width: 100, height: 100 }}
+      />
+    </Badge>
   );
 };
 

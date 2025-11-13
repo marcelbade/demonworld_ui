@@ -41,27 +41,38 @@ const SpellHeader = (props) => {
           {props.faction}
         </Typography>
       </Grid>
-      <Typography
-        variant="h5" //
-        align="center"
+      <Grid
+        container // ###
+        alignContent="center"
+        justifyContent="center"
         sx={{
-          width: "100%", //
+          width: "100%",
         }}
       >
-        {props.spellName}
-      </Typography>
-      <TierIcon tier={props.spellTier} />
+        <Typography
+          variant="h5" //
+          align="center"
+          sx={{
+            width: "100%", //
+          }}
+        >
+          {props.spellName}
+        </Typography>
+        <TierIcon tier={props.spellTier} />
 
-      <Typography
-        variant="body1" //
-        align="center"
-        sx={{
-          width: "100%", //
-          paddingBottom: "3em",
-        }}
-      >
-        {spellTierIsText(props.spellTier) ? props.spellTier : " "}
-      </Typography>
+        {spellTierIsText(props.spellTier) ? (
+          <Typography
+            variant="body1" //
+            align="center"
+            sx={{
+              width: "100%", //
+              paddingBottom: "3em",
+            }}
+          >
+            {props.spellTier}
+          </Typography>
+        ) : null}
+      </Grid>
     </>
   );
 };
