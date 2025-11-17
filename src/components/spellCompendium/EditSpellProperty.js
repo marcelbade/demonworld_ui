@@ -12,7 +12,7 @@ import { EDIT_SPELL_URL } from "../../constants/URLs";
  * @param {obj} props
  * @returns a nested JSX element.
  */
-const EditSpells = (props) => {
+const EditSpellProperty = (props) => {
   const callAxios = useAxios();
 
   const saveChanges = () => {
@@ -27,10 +27,15 @@ const EditSpells = (props) => {
     );
   };
 
-  const editText = (event, propertyToEdit) => {
+  /**
+   * Function changes the property text of a given spell.
+   * @param {object} event
+   * @param {String} property
+   */
+  const editPropertyText = (event, property) => {
     let newText = event.target.value;
     const tempObj = { ...props.selectedSpell };
-    tempObj[propertyToEdit] = newText;
+    tempObj[property] = newText;
 
     props.setSelectedSpell({
       ...tempObj,
@@ -38,7 +43,7 @@ const EditSpells = (props) => {
   };
 
   /**
-   *
+   * Function 
    * @param {*} data
    */
   const updateSpellData = (data) => {
@@ -70,7 +75,7 @@ const EditSpells = (props) => {
         maxRows={8}
         value={props.content}
         onChange={(event) => {
-          editText(event, props.propertyToEdit);
+          editPropertyText(event, props.property);
         }}
       />
       <Button
@@ -85,4 +90,4 @@ const EditSpells = (props) => {
   );
 };
 
-export default EditSpells;
+export default EditSpellProperty;

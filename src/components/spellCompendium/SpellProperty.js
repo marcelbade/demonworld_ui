@@ -1,9 +1,19 @@
 import { Grid2 as Grid, Typography } from "@mui/material";
 // icons
 import EditButton from "./EditButton";
-import EditSpells from "./EditSpells";
+import EditSpellProperty from "./EditSpellProperty";
+import { useState } from "react";
 
+/**
+ * Component renders the text discription one property of a spell (target, requirment, duration,...)
+ * as formatted text. If the user is logged in and has admin credentials, it instead displays the edit
+ * spell component.
+ * @param {object} props
+ * @returns a React component
+ */
 const SpellProperty = (props) => {
+  const [displayTextInputField, setDisplayTextInputField] = useState(false);
+
   return props.display ? (
     <Grid
       container //
@@ -17,11 +27,11 @@ const SpellProperty = (props) => {
     >
       <EditButton
         display={props.userLoggedIn && props.user.isAdmin} //
-        property={props.property}
-        setPropertyToEdit={props.setPropertyToEdit}
-        showActiveEdit={props.showActiveEdit}
-        currentEdit={props.currentEdit}
+        displayTextInputField={displayTextInputField}
+        setDisplayTextInputField={setDisplayTextInputField}
+        selectedSpell={props.selectedSpell}
       />
+
       <Grid size={1}>
         <Typography
           sx={{
@@ -32,17 +42,13 @@ const SpellProperty = (props) => {
         </Typography>
       </Grid>
       <Grid size={10}>
-        {props.userLoggedIn && //
-        props.user.isAdmin &&
-        props.property === props.propertyToEdit ? (
-          <EditSpells
+        {displayTextInputField ? (
+          <EditSpellProperty
             property={props.property}
             setAllSpells={props.setAllSpells}
             selectedSpell={props.selectedSpell} //
-            propertyToEdit={props.propertyToEdit}
             setSelectedSpell={props.setSelectedSpell}
             user={props.user}
-            userLoggedIn={props.userLoggedIn}
             selectedFactionForSpell={props.selectedFactionForSpell}
             setDisplaySpells={props.setDisplaySpells}
             //

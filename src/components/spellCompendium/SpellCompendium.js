@@ -16,34 +16,20 @@ const SpellCompendium = () => {
   const SC = useContext(SpellContext);
   const UC = useContext(UserContext);
 
-  const EDIT_PROPERTIES = {
-    spellName: false,
-    spellTier: false,
-    target: false,
-    requirements: false,
-    effect: false,
-    duration: false,
-  };
-
+  // select from spell from left menu
   const [selectedSpell, setSelectedSpell] = useState(NO_SELECTION);
-  const [propertyToEdit, setPropertyToEdit] = useState(NO_SELECTION);
-  const [currentEdit, setCurrentEdit] = useState(EDIT_PROPERTIES);
 
-  const showActiveEdit = (property) => {
-    setCurrentEdit({
-      ...EDIT_PROPERTIES,
-      [property]: true,
-    });
-  };
-
+  // data for rendering spell property components
   const propertyTable = [
     {
+      // only show to admins for editing
       display: UC.userLoggedIn && UC.user.isAdmin,
       title: SPELL_COMPENDIUM.SPELL_NAME,
       content: selectedSpell.spellName,
       property: "spellName",
     },
     {
+      // only show to admins for editing
       display: UC.userLoggedIn && UC.user.isAdmin,
       title: SPELL_COMPENDIUM.SPELL_TIER, //
       content: selectedSpell.spellTier,
@@ -92,7 +78,6 @@ const SpellCompendium = () => {
           setSelectedFactionForSpell={SC.setSelectedFactionForSpell}
           displaySpells={SC.displaySpells}
           setDisplaySpells={SC.setDisplaySpells}
-          showActiveEdit={showActiveEdit}
         />
       </Grid>
       <Grid
@@ -104,28 +89,26 @@ const SpellCompendium = () => {
       >
         <SpellHeader
           faction={selectedSpell.faction} //
-          spellName={selectedSpell.spellName} //
+          spellName={selectedSpell.spellName}
           spellTier={selectedSpell.spellTier}
         />
 
         {propertyTable.map((p, i) => (
           <SpellProperty
+            // component data
             key={i}
             display={p.display}
-            title={p.title} //
+            title={p.title}
             content={p.content}
             property={p.property}
+            // editable data
             selectedSpell={selectedSpell}
             selectedFactionForSpell={SC.selectedFactionForSpell}
-            currentEdit={currentEdit}
             user={UC.user}
             userLoggedIn={UC.userLoggedIn}
-            propertyToEdit={propertyToEdit}
             setAllSpells={SC.setAllSpells}
             setDisplaySpells={SC.setDisplaySpells}
-            setPropertyToEdit={setPropertyToEdit}
             setSelectedSpell={setSelectedSpell}
-            showActiveEdit={showActiveEdit}
           />
         ))}
       </Grid>
