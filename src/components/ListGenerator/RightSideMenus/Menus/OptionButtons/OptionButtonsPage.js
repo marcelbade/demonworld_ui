@@ -10,7 +10,7 @@ import BackToSelectionButton from "../../../../shared/BackToSelectionButton";
 import DeleteArmyListButton from "./Buttons/DeleteArmyListButton";
 // constants
 import ArmyMetaDataInput from "../../../ArmyListView/ArmyList/ArmyListHeader/ArmyMetaDataInput";
-import CreatePdfButton from "../../../../shared/CreatePdfButton";
+import CreateArmyListPdfButton from "./Buttons/CreateArmyListPdfButton";
 import StoreAndUpdateArmyListButton from "./Buttons/StoreAndUpdateArmyListButton";
 import LoadArmyButton from "./Buttons/LoadArmyButton";
 import LossCalculatorButton from "./Buttons/LossCalculatorButton";
@@ -60,7 +60,7 @@ const OptionButtonsPage = () => {
             paddingTop: "0.7em",
           }}
         >
-          <CreatePdfButton />
+          <CreateArmyListPdfButton />
           <TextFileDownloadButton />
           <LoadArmyButton />
           <StoreAndUpdateArmyListButton
