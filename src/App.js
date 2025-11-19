@@ -38,14 +38,7 @@ import darkTheme from "./AppTheme/darkTheme";
 import { ThemeProvider } from "@mui/material";
 // constants
 import { NONE, NO_ALLY } from "./constants/factions";
-import {
-  ALL_FACTION_COLORS_URL,
-  ALL_UNITS_URL,
-  FACTION_DTOS_URL,
-  FACTION_SPELL_DTO_URL,
-  ITEM_DTOS_URL,
-  SPELL_DTO_URL,
-} from "./constants/URLs";
+import { ALL_FACTION_COLORS_URL, ALL_UNITS_URL, FACTION_DTOS_URL, ITEM_DTOS_URL, SPELL_DTO_URL } from "./constants/URLs";
 // custom hooks
 import useAxios from "./customHooks/UseAxios";
 import useCompendiumTableControl from "./customHooks/UseCompendiumTableControl";
@@ -156,8 +149,6 @@ function App() {
   // spells
   const [allSpells, setAllSpells] = useState([]);
   const [displaySpells, setDisplaySpells] = useState([]);
-
-  const [allFactionSpells, setAllFactionSpells] = useState([]);
   const [selectedFactionForSpell, setSelectedFactionForSpell] = useState("");
 
   // unit card view
@@ -222,13 +213,6 @@ function App() {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
-   * fetch spells ordered by faction from the Back End via REST.
-   */
-  useEffect(() => {
-    fetchSpellByFactionData();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
-
-  /**
    * fetch faction colors from the Back End via REST.
    */
   useEffect(() => {
@@ -247,10 +231,6 @@ function App() {
     callAxios.fetchData(setAllSpells, SPELL_DTO_URL);
   };
 
-  const fetchSpellByFactionData = async () => {
-    callAxios.fetchData(setAllFactionSpells, FACTION_SPELL_DTO_URL);
-  };
-
   const fetchColorData = async () => {
     callAxios.fetchData(setFactionColors, ALL_FACTION_COLORS_URL);
   };
@@ -264,11 +244,9 @@ function App() {
           value={{
             allSpells: allSpells,
             displaySpells: displaySpells,
-            allFactionSpells: allFactionSpells,
             selectedFactionForSpell: selectedFactionForSpell,
             setAllSpells: setAllSpells,
             setDisplaySpells: setDisplaySpells,
-            setAllFactionSpells: setAllFactionSpells,
             setSelectedFactionForSpell: setSelectedFactionForSpell,
           }}
         >
