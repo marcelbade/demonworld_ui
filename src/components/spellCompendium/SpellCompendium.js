@@ -88,9 +88,8 @@ const SpellCompendium = () => {
         alignItems="center"
       >
         <SpellHeader
-          faction={selectedSpell.faction} //
-          spellName={selectedSpell.spellName}
-          spellTier={selectedSpell.spellTier}
+          selectedSpell={selectedSpell} //
+          displaySpells={SC.displaySpells}
         />
 
         {propertyTable.map((p, i) => (
