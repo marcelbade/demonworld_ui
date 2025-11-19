@@ -73,12 +73,12 @@ const CreateArmyListPdfButton = () => {
       toolTipTitle={PDF.CREATE_PDF} //
       disabledIf={SEC.selectedUnits.length === 0}
       openDialog={setShowListTypeDialog}
+       marginLeft={"0em"}
     >
       <SelectPrintTypeDialog
         createPrintableFile={openPDfInNewTab}
         setShowPrintTypeDialog={setShowListTypeDialog}
         showListTypeDialog={showListTypeDialog}
-        a={"aa"}
       />
     </CreatePdfButton>
   );
