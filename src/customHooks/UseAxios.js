@@ -37,7 +37,7 @@ const useAxios = () => {
    * If a useState setter function is supplied, the response value will
    * be passed to the function, as the new state value.
    * If the request is successfull (201), a toast message is displayed.
-   * If any error is returned, the error message is shown as toast message
+   * If any error is returned, the error message is also shown as a toast message
    * @param {String} data stringified JSON object
    * @param {String} url
    * @param {function} setter must be null if no setter function is passed
