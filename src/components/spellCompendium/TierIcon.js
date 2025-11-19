@@ -6,11 +6,10 @@ import { spellTierIsText } from "./spellUtil";
 import d20Icon from "../../assets/icons/d20.png";
 
 /**
- * Component renders an icon showing a spell's tier onb top of a D20.
- * To keep the position as-is. the parent element needs a
- * relative and the two child elements an absolute position.
+ * Component renders an icon showing a spell's tier on top of a D20.
+ * This is achieved by suing the MUI Avatar component. 
  * @param {object} props
- * @returns
+ * @returns a React  component
  */
 const TierIcon = (props) => {
   return (

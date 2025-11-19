@@ -15,6 +15,10 @@ import { EDIT_SPELL_URL } from "../../constants/URLs";
 const EditSpellProperty = (props) => {
   const callAxios = useAxios();
 
+  /**
+   * Async function stores a changed spell in the data base. If successful,
+   * the front end state is also updated.
+   */
   const saveChanges = () => {
     callAxios.storeData(
       JSON.stringify({
@@ -43,7 +47,7 @@ const EditSpellProperty = (props) => {
   };
 
   /**
-   * Function 
+   * Function is called if a spell has been successfully updated in the DB. Updates the FE state.
    * @param {*} data
    */
   const updateSpellData = (data) => {
