@@ -5,6 +5,7 @@ import { spellTierIsText } from "./spellUtil";
 import TierIcon from "./TierIcon";
 import CollapsableTopMenuDrawer from "../shared/CollapsableTopMenuDrawer";
 import TopDrawerButton from "../shared/TopDrawerButton";
+import CreateSpellListPdfButton from "./CreateSpellListPdfButton";
 
 const SpellHeader = (props) => {
   return (
@@ -16,8 +17,8 @@ const SpellHeader = (props) => {
         size={12}
       >
         <CollapsableTopMenuDrawer
-          displayPageTitle={true}
-          title={""} //
+          displayPageTitle={true} //
+          title={""}
           displayNaviBttn={true}
           displayListBttns={true}
         />
@@ -27,18 +28,23 @@ const SpellHeader = (props) => {
         container //
         direction="row"
         justifyContent="space-between"
+        alignItems="center"
         size={12}
       >
+        <CreateSpellListPdfButton
+          selectedSpell={props.selectedSpell} //
+          displaySpells={props.displaySpells}
+        />
         <Typography
           variant="h6" //
           align="right"
           sx={{
-            width: "100%", //
+            width: "25%", //
             paddingRight: "5em",
             paddingTop: "1em",
           }}
         >
-          {props.faction}
+          {props.selectedSpell.faction}
         </Typography>
       </Grid>
       <Grid
@@ -57,11 +63,11 @@ const SpellHeader = (props) => {
             width: "100%", //
           }}
         >
-          {props.spellName}
+          {props.selectedSpell.spellName}
         </Typography>
-        <TierIcon tier={props.spellTier} />
+        <TierIcon tier={props.selectedSpell.spellTier} />
 
-        {spellTierIsText(props.spellTier) ? (
+        {spellTierIsText(props.selectedSpell.spellTier) ? (
           <Typography
             variant="body1" //
             align="center"
@@ -70,7 +76,7 @@ const SpellHeader = (props) => {
               marginTop: "3em",
             }}
           >
-            {props.spellTier}
+            {props.selectedSpell.spellTier}
           </Typography>
         ) : null}
       </Grid>
