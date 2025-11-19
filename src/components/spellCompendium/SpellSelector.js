@@ -25,10 +25,7 @@ const SpellSelector = (props) => {
       props.setDisplaySpells(props.allSpells);
       return;
     }
-
-    /**
-     *
-     */
+    
     props.setDisplaySpells(props.allSpells.filter((s) => s.faction.includes(selectedFaction)));
     props.setSelectedSpell(NO_SELECTION);
   };
