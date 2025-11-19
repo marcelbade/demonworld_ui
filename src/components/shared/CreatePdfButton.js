@@ -6,10 +6,10 @@ import CustomIcon from "./CustomIcon";
 import customPdfIcon from "../../assets/icons/customPDFIcon.svg";
 
 /**
- * Function creates a nested JSX element that renders an icon button 
+ * Function creates a nested JSX element that renders an icon button
  * that renders a dialog box if clicked.
- * @param {object} props 
- *  - toolTipTitle: the String displayed as tooltip when hovering and 
+ * @param {object} props
+ *  - toolTipTitle: the String displayed as tooltip when hovering and
  *    as alt text for the icon
  *  - disabledIf: boolean, if true, disables button
  *  - openDialog: function for the icon button onClick event
@@ -23,10 +23,9 @@ const CreatePdfButton = (props) => {
           <IconButton
             disabled={props.disabledIf} //
             onClick={() => {
-               props.openDialog(true);
-
-              console.log("clicked")
+              props.openDialog(true);
             }}
+            sx={{marginLeft: props.marginLeft}}
           >
             <CustomIcon
               icon={customPdfIcon} //
