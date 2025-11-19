@@ -8,12 +8,7 @@ export const detailedStyles = {
     fontFamily: FONT_TEXT,
     fontSize: FONT_SIZE,
     marginBottom: 10,
-    width: "500px",
-  },
-
-  separator: {
-    backgroundColor: "white",
-    width: "10em",
+    width: "560px",
   },
 
   cardHeaderBox: {
