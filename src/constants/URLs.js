@@ -33,4 +33,4 @@ export const GET_EVENTS_URL = `${PREFIX_BE}/auth/event/allEvents`;
 export const CREATE_CUSTOM_UNIT_URL = `${PREFIX_BE}/auth/user/createCustomUnit`;
 
 // pdf
-export const PDF_URL = `${PREFIX_FE}/PdfBox`;
+export const PDF_URL = `${PREFIX_FE}/unitCardPdfBox`;

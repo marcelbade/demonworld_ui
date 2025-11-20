@@ -11,7 +11,7 @@ import { commonStyles } from "./pdfStyles/commonStyles";
 
 // Shows the PDF inside the broswer, in a new tab. 
 // Uses the browser's build in PDF viewer to render the document.
-const PdfBox = () => {
+const UnitCardPdfBox = () => {
   const [data, setData] = useState({
     list: [],
     armyName: [],
@@ -49,4 +49,4 @@ const PdfBox = () => {
   ) : null;
 };
 
-export default PdfBox;
+export default UnitCardPdfBox;
