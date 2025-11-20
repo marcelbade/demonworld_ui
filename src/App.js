@@ -10,6 +10,7 @@ import CompendiumTable from "./components/compendiums/factionTable/components/Co
 import ListGenerator from "./components/ListGenerator/ListGenerator";
 import LossCalculator from "./components/lossCalculator/LossCalculator";
 import UnitCardPdfBox from "./pdfGenerator/UnitCards/UnitCardPdfBox";
+import SpellCardPdfBox from "./pdfGenerator/SpellCards/SpellCardPdfBox";
 import CardCreator from "./components/cardCreator/CardCreator";
 import CreateNewAccount from "./components/Login/CreateNewAccount";
 import SpellCompendium from "./components/spellCompendium/SpellCompendium";
@@ -447,6 +448,7 @@ function App() {
                                                 <Route path="/listGenerator" component={ListGenerator} />
                                                 <Route path="/lossCalculator" component={LossCalculator} />
                                                 <Route path="/unitCardPdfBox" component={UnitCardPdfBox} />
+                                                <Route path="/spellCardPdfBox" component={SpellCardPdfBox} />
                                                 <Route path="/cardCreator" component={CardCreator} exact />
                                                 <Route path="/addNewAccount" component={CreateNewAccount} exact />
                                                 <Route path="/spellCompendium" component={SpellCompendium} exact />
