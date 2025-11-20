@@ -7,6 +7,18 @@ export const spellTierIsText = (tier) => {
   return /.*[a-zA-Z].*/.test(tier);
 };
 
+/**
+ * Function adds a booelan flag to an array of spell objects so  they can be selected for 
+ * printing via a checkbox.
+ * @param {[Spell]} spells 
+ * @returns 
+ */
+export const addBooleanForSelection = (spells) => {
+  return spells.map((s) => {
+    return { ...s, isSelectedForPrint: false };
+  });
+};
+
 // if no spell is selected, or a new faction is selectedi  the drop down, show this as the default:
 export const NO_SELECTION = {
   faction: "", //
@@ -17,5 +29,3 @@ export const NO_SELECTION = {
   target: "-",
   spellTier: "-",
 };
-
-

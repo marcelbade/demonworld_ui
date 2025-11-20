@@ -1,9 +1,5 @@
 // react
 import { useState } from "react";
-
-// components and functions
-// context
-
 // constants
 import { PDF } from "../../constants/textsAndMessages";
 import { PDF_URL } from "../../constants/URLs";
@@ -12,15 +8,14 @@ import CreatePdfButton from "../shared/CreatePdfButton";
 
 const CreateSpellListPdfButton = (props) => {
   const [showSpellDialog, setShowSpellDialog] = useState(false);
-  const [spellsSelectedForPrint, setSpellsSelectedForPrint] = useState([]);
 
   /**
    * Function opens the pdf generator in a
    * new tab and sends all data needed via the window object.
    */
-  const openPDfInNewTab = (options) => {
+  const openPDfInNewTab = () => {
     const URL = PDF_URL;
-    const transportObj = createSpellListData(options);
+    const transportObj = createSpellListData();
 
     window.localStorage.setItem("transportObj", JSON.stringify(transportObj));
     window.open(URL, "_blank", "noopener,noreferrer");
@@ -30,10 +25,8 @@ const CreateSpellListPdfButton = (props) => {
    * Function creates the data structure for the PDF view.
    * @returns an array of objects eacdh containing all data for one subFaction of the army list.
    */
-  const createSpellListData = (options) => {
-    // let list = [];
-
-    return {};
+  const createSpellListData = () => {
+    return props.displaySpells.filter((s) => s.isSelected === true);
   };
 
   return (
@@ -46,10 +39,8 @@ const CreateSpellListPdfButton = (props) => {
       <SelectSpellsDialog
         displaySpells={props.displaySpells}
         showListTypeDialog={showSpellDialog}
-        spellsSelectedForPrint={spellsSelectedForPrint}
         createPrintableFile={openPDfInNewTab}
         setShowPrintTypeDialog={setShowSpellDialog}
-        setSpellsSelectedForPrint={setSpellsSelectedForPrint}
       />
     </CreatePdfButton>
   );

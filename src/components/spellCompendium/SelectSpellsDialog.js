@@ -1,36 +1,14 @@
-import { Dialog, List, ListItemText, Typography, ListItem, FormGroup, FormControlLabel, Checkbox } from "@mui/material";
+import { Dialog, List, ListItemText, Typography, ListItem, FormGroup, FormControlLabel, Checkbox, Button } from "@mui/material";
 import { spellTierIsText } from "./spellUtil";
-import { AutoAwesomeMosaicOutlined } from "@mui/icons-material";
+import { SPELL_COMPENDIUM } from "../../constants/textsAndMessages";
 
 const SelectSpellsDialog = (props) => {
   const handleClose = () => {
     props.setShowPrintTypeDialog(false);
   };
 
-  const updatePrintList = (selectedSpell) => {
-    const tempArray = [...props.spellsSelectedForPrint];
-    let spellIsIncluded = false;
-
-    for (let i = 0; i < tempArray.length; i++) {
-      const spell = tempArray[i];
-
-      if (spell.spellName === selectedSpell.spellName) {
-        spellIsIncluded = true;
-        tempArray.splice(i, 1);
-      }
-    }
-
-    if (!spellIsIncluded) {
-      tempArray.push(selectedSpell);
-    }
-
-    props.setSpellsSelectedForPrint(tempArray);
-  };
-
-  const isInPrintlist = (spell) => {
-    console.log(AutoAwesomeMosaicOutlined);
-
-    return props.spellsSelectedForPrint.includes(spell);
+  const markForPrint = (selectedSpell) => {
+    selectedSpell.isSelected = true;
   };
 
   return (
@@ -64,11 +42,9 @@ const SelectSpellsDialog = (props) => {
                 <FormControlLabel
                   control={
                     <Checkbox
-                      checked={() => {
-                        isInPrintlist(s);
-                      }}
+                      checked={s.isSelected}
                       onChange={() => {
-                        updatePrintList(s);
+                        markForPrint(s);
                       }}
                     />
                   }
@@ -90,6 +66,12 @@ const SelectSpellsDialog = (props) => {
             </ListItem>
           ))}
       </List>
+      <Button
+        variant="outlined" //
+       onClick={props.createPrintableFile}
+      >
+            {SPELL_COMPENDIUM.PRINT_LIST} 
+      </Button>
     </Dialog>
   );
 };

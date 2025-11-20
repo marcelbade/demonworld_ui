@@ -47,7 +47,8 @@ const EditSpellProperty = (props) => {
   };
 
   /**
-   * Function is called if a spell has been successfully updated in the DB. Updates the FE state.
+   * Function is called if a spell has been successfully updated in the DB. 
+   * Updates the FE state.
    * @param {*} data
    */
   const updateSpellData = (data) => {

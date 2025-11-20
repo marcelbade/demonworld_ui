@@ -196,6 +196,7 @@ export const SPELL_COMPENDIUM = {
   EFFECT: "Auswirkungen:",
   SAVE: "Speichern",
   SUCCESS: "Änderungen erfolgreich gespeichert",
+  PRINT_LIST:"Liste Drucken",
 };
 
 export const LOAD_ARMY_LIST_DIALOG = {

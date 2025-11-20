@@ -1,7 +1,10 @@
+// mui
 import { Grid2 as Grid } from "@mui/material";
+// functions and components
+import SelectionInput from "../shared/selectionInput";
+// constants
 import { ALL_FACTIONS_ARRAY } from "../../constants/factions";
 import { SPELL_COMPENDIUM } from "../../constants/textsAndMessages";
-import SelectionInput from "../shared/selectionInput";
 import { NO_SELECTION } from "./spellUtil";
 
 const SpellSelector = (props) => {
@@ -25,7 +28,7 @@ const SpellSelector = (props) => {
       props.setDisplaySpells(props.allSpells);
       return;
     }
-    
+
     props.setDisplaySpells(props.allSpells.filter((s) => s.faction.includes(selectedFaction)));
     props.setSelectedSpell(NO_SELECTION);
   };
