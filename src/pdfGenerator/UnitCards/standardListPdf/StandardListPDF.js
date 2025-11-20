@@ -1,5 +1,3 @@
-// react
-import React from "react";
 // react-pdf
 import { View, Document, Font } from "@react-pdf/renderer";
 // fonts
@@ -7,7 +5,7 @@ import notMaryKate from "../../../assets/fonts/notMaryKate.ttf";
 // pdf components
 import Unit from "./standardListComponents/Unit";
 import Equipment from "./standardListComponents/Equipment";
- import SubfactionSubtitle from "../sharedPdfComponents/SubfactionSubtitle";
+import SubfactionSubtitle from "../sharedPdfComponents/SubfactionSubtitle";
 
 // Register font
 Font.register({ family: "notMaryKate", src: notMaryKate });

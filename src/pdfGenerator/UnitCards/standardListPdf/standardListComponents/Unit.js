@@ -3,13 +3,13 @@ import React from "react";
 // react-pdf
 import { Text, View, Document } from "@react-pdf/renderer";
 // styles
-import { commonStyles } from "../../pdfStyles/commonStyles";
+import { commonUnitStyles } from "../../pdfStyles/commonUnitStyles";
 import { listStyles } from "../../pdfStyles/listPdfStyles";
 
 const Unit = (props) => {
   return (
     <Document>
-      <View style={commonStyles.tableRow}>
+      <View style={commonUnitStyles.tableRow}>
         <View style={listStyles.tableColUnit}>
           <Text style={listStyles.tableCellUnit}>{props.unit.name}</Text>
         </View>

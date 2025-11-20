@@ -4,7 +4,7 @@ import React from "react";
 import { View } from "@react-pdf/renderer";
 // styles
 import { detailedStyles } from "../../../pdfStyles/detailedCardPdfStyles";
-import { commonStyles } from "../../../pdfStyles/commonStyles";
+import { commonUnitStyles } from "../../../pdfStyles/commonUnitStyles";
 
 // pdf components
 import RangedWeaponRow from "./cardCenterComponents/RangedWeaponRow";
@@ -16,7 +16,7 @@ import ChargeBonusRow from "./cardCenterComponents/ChargeBonusRow";
 
 const CardCenter = (props) => {
   return (
-    <View style={commonStyles.table}>
+    <View style={commonUnitStyles.table}>
       <View style={detailedStyles.tableRowDetailedList}>
         <View style={detailedStyles.cell}>
           <RangedWeaponRow

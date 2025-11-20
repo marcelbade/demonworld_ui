@@ -7,9 +7,9 @@ import {
   PADDING_PAGE_BOTTOM,
   MARGIN_SUBFACTION_BLOCK,
   CONTENT_WIDTH,
-} from "../pdfStyles/styleValues";
+} from "./styleValues";
 
-export const commonStyles = {
+export const commonUnitStyles = {
   viewport: {
     width: CONTENT_WIDTH,
     height: "100vh",

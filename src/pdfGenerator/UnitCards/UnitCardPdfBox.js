@@ -7,7 +7,9 @@ import TitleAndStats from "./sharedPdfComponents/TitleAndStats";
 import StandardListPDF from "./standardListPdf/StandardListPDF";
 import DetailedCardPDF from "./detailedCardPdf/DetailedCardPDF";
 // styles
-import { commonStyles } from "./pdfStyles/commonStyles";
+import { commonUnitStyles } from "./pdfStyles/commonUnitStyles";
+import { commonStyles } from "../commonPdfStyles/commonStyles";
+
 
 // Shows the PDF inside the broswer, in a new tab. 
 // Uses the browser's build in PDF viewer to render the document.
@@ -36,7 +38,7 @@ const UnitCardPdfBox = () => {
   return data.list.length > 0 ? (
     <PDFViewer style={commonStyles.viewport}>
       <Document>
-        <Page wrap={true} style={commonStyles.pageLayout}>
+        <Page wrap={true} style={commonUnitStyles.pageLayout}>
           <TitleAndStats data={data} />
           {data.options.printDefaultList ? ( //
             <StandardListPDF data={data} />

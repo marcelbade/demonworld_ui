@@ -4,7 +4,7 @@ import notMaryKate from "../../../assets/fonts/notMaryKate.ttf";
 // react-pdf
 import { Text, View, Document, Font } from "@react-pdf/renderer";
 // styles
-import { commonStyles } from "../pdfStyles/commonStyles";
+import { commonUnitStyles } from "../pdfStyles/commonUnitStyles";
 
 const SubfactionSubtitle = (props) => {
   // Register font
@@ -17,14 +17,14 @@ const SubfactionSubtitle = (props) => {
 
   return (
     <Document>
-      <View style={commonStyles.subFactionTitleBox}>
-        <View  style={commonStyles.subFactionNameBox}>
-          <Text style={commonStyles.subFactionTitleAndStats}>{props.data.subFaction}</Text>
+      <View style={commonUnitStyles.subFactionTitleBox}>
+        <View  style={commonUnitStyles.subFactionNameBox}>
+          <Text style={commonUnitStyles.subFactionTitleAndStats}>{props.data.subFaction}</Text>
         </View>
-        <View   style={commonStyles.subFactionStatBox}>
-          <Text style={commonStyles.subFactionTitleAndStats}>{props.data.subFactionTotal}</Text>
-          <Text style={commonStyles.subFactionTitleAndStats}>{`${props.data.subFactionPercentage}%`}</Text>
-          <Text style={commonStyles.subFactionTitleAndStats}>{renderMinMaxPercentageString()}</Text>
+        <View   style={commonUnitStyles.subFactionStatBox}>
+          <Text style={commonUnitStyles.subFactionTitleAndStats}>{props.data.subFactionTotal}</Text>
+          <Text style={commonUnitStyles.subFactionTitleAndStats}>{`${props.data.subFactionPercentage}%`}</Text>
+          <Text style={commonUnitStyles.subFactionTitleAndStats}>{renderMinMaxPercentageString()}</Text>
         </View>
       </View>
     </Document>
