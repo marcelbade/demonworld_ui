@@ -2,7 +2,10 @@ import {
   FONT_SIZE_PAGE_TITLE, //
   FONT_SIZE_SUB_TITLE,
   FONT_SIZE_TEXT,
-  MARGIN_LEFT,
+} from "../../commonPdfStyles/commonPdfStyleValues";
+
+import {
+  MARGIN_LEFT, //
   MARGIN_PAGE_TOP,
   PADDING_PAGE_BOTTOM,
   MARGIN_SUBFACTION_BLOCK,

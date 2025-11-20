@@ -1,4 +1,7 @@
-import { EQUIPMENT_MARGIN_LEFT, FONT_SIZE_TEXT } from "./styleValues";
+import { FONT_SIZE_TEXT } from "../../commonPdfStyles/commonPdfStyleValues";
+import { EQUIPMENT_MARGIN_LEFT,  } from "./styleValues";
+
+
 
 export const listStyles = {
   tableCol: {
