@@ -19,7 +19,24 @@ const SelectSpellsDialog = (props) => {
   };
 
   const checkAllBoxes = () => {
-    props.displaySpells.forEach((s) => (s.isSelected = !s.isSelected));
+    let allChecked =  false;
+
+    props.displaySpells.forEach((s) => {
+      if (s.isSelected) {
+        allChecked = true;
+      }
+    });
+
+    if (allChecked) {
+      props.displaySpells.forEach((s) => {
+        s.isSelected = false;
+      });
+    } else if (!allChecked) {
+      props.displaySpells.forEach((s) => {
+        s.isSelected = true;
+      });
+    }
+
     props.setDisplaySpells([...props.displaySpells]);
   };
 
@@ -35,11 +52,12 @@ const SelectSpellsDialog = (props) => {
         <FormControlLabel
           control={
             <Checkbox
-              checked={allBoxesChecked} 
+              checked={allBoxesChecked}
               onChange={() => {
-                checkAllBoxes();
                 setAllBoxesChecked((prevState) => !prevState);
+                checkAllBoxes();
               }}
+              sx={{ marginLeft: "16px" }}
             />
           }
         />
@@ -84,6 +102,11 @@ const SelectSpellsDialog = (props) => {
       <Button
         variant="outlined" //
         onClick={props.createPrintableFile}
+        sx={{
+          marginLeft: "10em", //
+          marginRight: "10em",
+          marginBottom: "5em",
+        }}
       >
         {SPELL_COMPENDIUM.PRINT_LIST}
       </Button>
