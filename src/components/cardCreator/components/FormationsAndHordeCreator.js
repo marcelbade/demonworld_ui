@@ -76,8 +76,7 @@ const FormationsAndHordeCreator = () => {
               <Checkbox
                 checked={!elmnt.value} //
                 onChange={elmnt.action}
-                inputProps={{ "aria-label": "controlled" }}
-                icon={
+                 icon={
                   <CustomIcon
                     icon={elmnt.icon} //
                     altText={CARD_TEXT.SQUARE_FORMATION}
