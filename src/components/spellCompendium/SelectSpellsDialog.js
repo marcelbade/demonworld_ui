@@ -7,16 +7,21 @@ import { SPELL_COMPENDIUM } from "../../constants/textsAndMessages";
 import { useState } from "react";
 
 const SelectSpellsDialog = (props) => {
+  const [allBoxesChecked, setAllBoxesChecked] = useState(false);
+
   const handleClose = () => {
     props.setShowPrintTypeDialog(false);
   };
 
   const markForPrint = (selectedSpell) => {
     selectedSpell.isSelected = !selectedSpell.isSelected;
-    props.setDisplaySpells([...props.displaySpells])
+    props.setDisplaySpells([...props.displaySpells]);
   };
 
-  const [test, setTest] = useState(false);
+  const checkAllBoxes = () => {
+    props.displaySpells.forEach((s) => (s.isSelected = !s.isSelected));
+    props.setDisplaySpells([...props.displaySpells]);
+  };
 
   return (
     <Dialog
@@ -30,9 +35,10 @@ const SelectSpellsDialog = (props) => {
         <FormControlLabel
           control={
             <Checkbox
-              checked={test} // TODO
+              checked={allBoxesChecked} 
               onChange={() => {
-                setTest((prevState) => !prevState);
+                checkAllBoxes();
+                setAllBoxesChecked((prevState) => !prevState);
               }}
             />
           }
