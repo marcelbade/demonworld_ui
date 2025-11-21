@@ -2,7 +2,7 @@
 import { useState } from "react";
 // constants
 import { PDF } from "../../constants/textsAndMessages";
-import { PDF_URL } from "../../constants/URLs";
+import { SPELL_CARD_PDF_URL } from "../../constants/URLs";
 import SelectSpellsDialog from "./SelectSpellsDialog";
 import CreatePdfButton from "../shared/CreatePdfButton";
 
@@ -14,7 +14,7 @@ const CreateSpellListPdfButton = (props) => {
    * new tab and sends all data needed via the window object.
    */
   const openPDfInNewTab = () => {
-    const URL = PDF_URL;
+    const URL = SPELL_CARD_PDF_URL;
     const transportObj = createSpellListData();
 
     window.localStorage.setItem("transportObj", JSON.stringify(transportObj));
@@ -26,7 +26,9 @@ const CreateSpellListPdfButton = (props) => {
    * @returns an array of objects eacdh containing all data for one subFaction of the army list.
    */
   const createSpellListData = () => {
-    return props.displaySpells.filter((s) => s.isSelected === true);
+    const list = props.displaySpells.filter((s) => s.isSelected === true);
+
+    return { list: list };
   };
 
   return (
@@ -38,6 +40,7 @@ const CreateSpellListPdfButton = (props) => {
     >
       <SelectSpellsDialog
         displaySpells={props.displaySpells}
+        setDisplaySpells={props.setDisplaySpells}
         showListTypeDialog={showSpellDialog}
         createPrintableFile={openPDfInNewTab}
         setShowPrintTypeDialog={setShowSpellDialog}

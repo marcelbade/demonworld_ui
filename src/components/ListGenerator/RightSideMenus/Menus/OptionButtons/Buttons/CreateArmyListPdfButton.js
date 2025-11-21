@@ -11,7 +11,7 @@ import { SelectionContext } from "../../../../../../contexts/selectionContext";
 
 // constants
 import { PDF } from "../../../../../../constants/textsAndMessages";
-import { PDF_URL } from "../../../../../../constants/URLs";
+import { UNIT_CARD_PDF_URL } from "../../../../../../constants/URLs";
 import { addCardsForMultiStateUnits } from "../../../../../../util/utilityFunctions";
 import CreatePdfButton from "../../../../../shared/CreatePdfButton";
 
@@ -28,7 +28,7 @@ const CreateArmyListPdfButton = () => {
    * new tab and sends all data needed via the window object.
    */
   const openPDfInNewTab = (options) => {
-    const URL = PDF_URL;
+    const URL = UNIT_CARD_PDF_URL;
     const transportObj = createUnitListPDFData(options);
 
     window.localStorage.setItem("transportObj", JSON.stringify(transportObj));

@@ -34,6 +34,7 @@ const SpellHeader = (props) => {
         <CreateSpellListPdfButton
           selectedSpell={props.selectedSpell} //
           displaySpells={props.displaySpells}
+          setDisplaySpells={props.setDisplaySpells}
         />
         <Typography
           variant="h6" //

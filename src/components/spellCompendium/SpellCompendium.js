@@ -90,6 +90,7 @@ const SpellCompendium = () => {
         <SpellHeader
           selectedSpell={selectedSpell} //
           displaySpells={SC.displaySpells}
+          setDisplaySpells={SC.setDisplaySpells}
         />
 
         {propertyTable.map((p, i) => (
