@@ -1,6 +1,10 @@
+// material ui
 import { Dialog, List, ListItemText, Typography, ListItem, FormGroup, FormControlLabel, Checkbox, Button } from "@mui/material";
+// components and functions
 import { spellTierIsText } from "./spellUtil";
+// constants
 import { SPELL_COMPENDIUM } from "../../constants/textsAndMessages";
+import { useState } from "react";
 
 const SelectSpellsDialog = (props) => {
   const handleClose = () => {
@@ -8,8 +12,11 @@ const SelectSpellsDialog = (props) => {
   };
 
   const markForPrint = (selectedSpell) => {
-    selectedSpell.isSelected = true;
+    selectedSpell.isSelected = !selectedSpell.isSelected;
+    props.setDisplaySpells([...props.displaySpells])
   };
+
+  const [test, setTest] = useState(false);
 
   return (
     <Dialog
@@ -23,8 +30,10 @@ const SelectSpellsDialog = (props) => {
         <FormControlLabel
           control={
             <Checkbox
-              checked={false} //
-              onChange={null}
+              checked={test} // TODO
+              onChange={() => {
+                setTest((prevState) => !prevState);
+              }}
             />
           }
         />
@@ -43,7 +52,7 @@ const SelectSpellsDialog = (props) => {
                   control={
                     <Checkbox
                       checked={s.isSelected}
-                      onChange={() => {
+                      onClick={() => {
                         markForPrint(s);
                       }}
                     />
@@ -68,9 +77,9 @@ const SelectSpellsDialog = (props) => {
       </List>
       <Button
         variant="outlined" //
-       onClick={props.createPrintableFile}
+        onClick={props.createPrintableFile}
       >
-            {SPELL_COMPENDIUM.PRINT_LIST} 
+        {SPELL_COMPENDIUM.PRINT_LIST}
       </Button>
     </Dialog>
   );
