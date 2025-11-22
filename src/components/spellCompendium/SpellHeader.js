@@ -66,7 +66,10 @@ const SpellHeader = (props) => {
         >
           {props.selectedSpell.spellName}
         </Typography>
-        <TierIcon tier={props.selectedSpell.spellTier} />
+        <TierIcon
+          tier={props.selectedSpell.spellTier} //
+          size = {100}
+        />
 
         {spellTierIsText(props.selectedSpell.spellTier) ? (
           <Typography

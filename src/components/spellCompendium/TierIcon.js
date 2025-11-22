@@ -7,8 +7,10 @@ import d20Icon from "../../assets/icons/d20.png";
 
 /**
  * Component renders an icon showing a spell's tier on top of a D20.
- * This is achieved by suing the MUI Avatar component. 
+ * This is achieved by suing the MUI Avatar component.
  * @param {object} props
+ *  - tier: integer, the spells tier / difficulty
+ *  . size: height and width of the icon (icon is a square)
  * @returns a React  component
  */
 const TierIcon = (props) => {
@@ -32,7 +34,7 @@ const TierIcon = (props) => {
       <Avatar
         alt="Spellcost" //
         src={d20Icon}
-        sx={{ width: 100, height: 100 }}
+        sx={{ width: props.size, height: props.size }}
       />
     </Badge>
   );
