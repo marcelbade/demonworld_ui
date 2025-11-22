@@ -59,6 +59,12 @@ const SpellCompendium = () => {
       content: selectedSpell.effect,
       property: "effect",
     },
+    {
+      display: true,
+      title: SPELL_COMPENDIUM.ABBREVIATED_EFFECT,
+      content: selectedSpell.abbreviatedEffect,
+      property: "abbreviatedEffect",
+    },
   ];
 
   return (
