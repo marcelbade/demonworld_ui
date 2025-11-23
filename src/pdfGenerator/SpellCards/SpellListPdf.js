@@ -10,6 +10,7 @@ Font.register({ family: "notMaryKate", src: notMaryKate });
 const SpellListPdf = (props) => {
   return (
     <Document>
+      <Text style={spellStyles.faction}>Spruchliste {props.data[0].faction}</Text>
       {props.data.map((s, i) => (
         <View key={i} wrap={false} >
           <Text style={spellStyles.title}>{s.spellName}</Text>

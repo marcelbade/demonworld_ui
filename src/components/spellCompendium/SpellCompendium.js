@@ -1,7 +1,7 @@
 // react
 import { useContext, useState } from "react";
 // material ui
-import { Grid2 as Grid } from "@mui/material";
+import { Grid2 as Grid, Typography } from "@mui/material";
 // context
 import { SpellContext } from "../../contexts/spellContext";
 import { UserContext } from "../../contexts/userContext";
@@ -99,24 +99,28 @@ const SpellCompendium = () => {
           setDisplaySpells={SC.setDisplaySpells}
         />
 
-        {propertyTable.map((p, i) => (
-          <SpellProperty
-            // component data
-            key={i}
-            display={p.display}
-            title={p.title}
-            content={p.content}
-            property={p.property}
-            // editable data
-            selectedSpell={selectedSpell}
-            selectedFactionForSpell={SC.selectedFactionForSpell}
-            user={UC.user}
-            userLoggedIn={UC.userLoggedIn}
-            setAllSpells={SC.setAllSpells}
-            setDisplaySpells={SC.setDisplaySpells}
-            setSelectedSpell={setSelectedSpell}
-          />
-        ))}
+        {selectedSpell.spellName !== "-" ? (
+          propertyTable.map((p, i) => (
+            <SpellProperty
+              // component data
+              key={i}
+              display={p.display}
+              title={p.title}
+              content={p.content}
+              property={p.property}
+              // editable data
+              selectedSpell={selectedSpell}
+              selectedFactionForSpell={SC.selectedFactionForSpell}
+              user={UC.user}
+              userLoggedIn={UC.userLoggedIn}
+              setAllSpells={SC.setAllSpells}
+              setDisplaySpells={SC.setDisplaySpells}
+              setSelectedSpell={setSelectedSpell}
+            />
+          ))
+        ) : (
+          <Typography variant="h5">{SPELL_COMPENDIUM.SELECT_A_SPELL}</Typography>
+        )}
       </Grid>
     </Grid>
   );

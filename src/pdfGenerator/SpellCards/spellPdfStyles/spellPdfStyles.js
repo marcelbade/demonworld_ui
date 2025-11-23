@@ -1,9 +1,17 @@
 import {
   FONT_SIZE_SPELL_TEXT, //
   FONT_SIZE_TEXT,
+  FONT_SIZE_PAGE_TITLE,
 } from "../../commonPdfStyles/commonPdfStyleValues";
 
 export const spellStyles = {
+  faction: {
+    marginTop: 5,
+    fontSize: FONT_SIZE_PAGE_TITLE,
+    fontFamily: "notMaryKate",
+    textAlign: "center",
+  },
+
   title: {
     fontFamily: "notMaryKate",
     fontSize: FONT_SIZE_TEXT,

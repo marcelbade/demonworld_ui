@@ -186,6 +186,7 @@ export const DELETE_ARMY_DIALOG = {
 };
 
 export const SPELL_COMPENDIUM = {
+  SELECT_A_SPELL: "Bitte Wähle einen Zauber aus",
   SELECT_FACTION: "Wähle eine Fraktion",
   SHOW_ALL_FACTIONS: "Alle Fraktionen",
   SPELL_NAME: "Name",
@@ -194,9 +195,17 @@ export const SPELL_COMPENDIUM = {
   REQUIREMENTS: "Voraussetzung:",
   DURATION: "Dauer:",
   EFFECT: "Auswirkungen:",
+  ABBREVIATED_EFFECT: "Auswirkungen (Verkürzt):",
   SAVE: "Speichern",
   SUCCESS: "Änderungen erfolgreich gespeichert",
-  PRINT_LIST:"Liste Drucken",
+  PRINT_LIST: "Liste Drucken",
+  // dialog options
+  PRINT_EFFECT: "Drucke den Effekt",
+  PRINT_DURATION: "Drucke die Dauer",
+  PRINT_REQUIREMENTS: "Drucke die Voraussetzung",
+  PRINT_ABBREVIATED_EFFECT: "Drucke die verkürzte Beschreibung des Effekts",
+  PRINT_TIER: "Drucke die Stufe des Zaubers",
+  PRINT_TARGET: "Drucke das Ziel des Zaubers",
 };
 
 export const LOAD_ARMY_LIST_DIALOG = {
