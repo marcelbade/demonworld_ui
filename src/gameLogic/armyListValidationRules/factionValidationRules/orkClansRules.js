@@ -2,16 +2,15 @@
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
 //  constants
-import { ORK_CLANS_UNIT_MAPPING } from "../../../constants/factions";
-import { GLOBAL_VALIDATION, ORKS_TEXTS } from "../../../constants/textsAndMessages";
+import { ORK_CLANS_TEXTS, ORKS_TEXTS } from "../../../constants/textsAndMessages";
 
 const rules = [
   {
     subFaction: "unit",
     cardNames: ["Einheit"],
-    min: 0.25,
+    min: 0.1,
     max: 1.0,
-    error: ORKS_TEXTS.SUB_FACTION_RULES.UNIT,
+    error: ORK_CLANS_TEXTS.SUB_FACTION_RULES.UNIT,
   },
   {
     subFaction: "characters",
@@ -37,16 +36,16 @@ const rules = [
   {
     subFaction: "clantroops",
     cardNames: ["Clanntruppen"],
-    min: 0.0,
-    max: 0.4,
-    error: "", // see below, set by switchBetweenAlternativeRules
+    min: 0.15,
+    max: 0.65,
+    error: "", // TODO change
   },
   {
     subFaction: "clanngett",
     cardNames: ["Clanngett"],
     min: 0.0,
     max: 0.5,
-    error: ORKS_TEXTS.SUB_FACTION_RULES.CLANNGETT,
+    error: ORKS_TEXTS.SUB_FACTION_RULES.CLANNGETT_MAX,
   },
   {
     subFaction: "wizards",
@@ -57,11 +56,8 @@ const rules = [
   },
 ];
 
-const OrkRules = {
+const OrkClansRules = {
   testSubFactionRules: (validationData) => {
-    // Switch between alternative ruule objects!
-    switchBetweenAlternativeRules(validationData.selectedAlternativeLists);
-
     //  general rules
     let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(
       validationData.selectedUnits,
@@ -79,6 +75,11 @@ const OrkRules = {
       validationData.selectedUnits,
       validationData.totalPointsAllowance,
       validationData.availableUnits
+    );
+    let hasNoCommander = globalRules.isArmyCommanderPresent(
+      validationData.selectedUnits, //
+      validationData.availableUnits,
+      rules
     );
 
     // tournament rules
@@ -112,15 +113,6 @@ const OrkRules = {
       validationData.totalPointsAllowance,
       validationData.availableUnits
     );
-    let hasNoCommander = isOrkArmyCommanderPresent(
-      validationData.selectedUnits, //
-      validationData.availableUnits,
-      validationData.selectedAlternativeLists
-    );
-    let availlableClanUnits = setUnitsForClans(
-      validationData.availableUnits, //
-      validationData.selectedAlternativeLists
-    );
 
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [
@@ -129,8 +121,6 @@ const OrkRules = {
       ...testForHeroCapResult,
       ...testForMax2Result,
       ...isAboveSubFactionMax,
-      ...availlableClanUnits,
-
       ...goblinsAboveMax,
     ];
 
@@ -141,87 +131,6 @@ const OrkRules = {
 
     return validationResults;
   },
-};
-
-const ORK_SUBFACTION_LIMITS = {
-  clanngett: [
-    { subFaction: "clanngett", limit: 0.5 },
-    { subFaction: "clantroops", limit: 0.4 },
-    { subFaction: "engines", limit: 0.3 },
-  ],
-  clantroops: [
-    { subFaction: "clanngett", limit: 0 },
-    { subFaction: "clantroops", limit: 0.5 },
-    { subFaction: "engines", limit: 0.2 },
-  ],
-};
-
-/**
- * Function changes the max. limits for the validationData.distinctSubFactions depending on which alternative army list has been selected.
- */
-const switchBetweenAlternativeRules = (selectedAlternativeLists) => {
-  //  validationData.selectedAlternativeLists  --> Clanngett, Steinclan,...
-  let mapperArray;
-  const CLANNGETT = "Clanngett";
-  const MAPPER_A = "clanngett";
-  const MAPPER_B = "clantroops";
-
-  if (selectedAlternativeLists.includes(CLANNGETT)) {
-    mapperArray = ORK_SUBFACTION_LIMITS[MAPPER_A];
-  } else {
-    mapperArray = ORK_SUBFACTION_LIMITS[MAPPER_B];
-  }
-
-  for (let i = 0; i < rules.length; i++) {
-    const rule = rules[i];
-    for (let j = 0; j < mapperArray.length; j++) {
-      const mapping = mapperArray[j];
-
-      if (rule.subFaction === mapping.subFaction) {
-        rule.max = mapping.limit;
-      }
-      if (rule.subFaction === "clantroops" && rule.subFaction === mapping.subFaction)
-        rule.error = ORKS_TEXTS.SUB_FACTION_RULES.CLANTROOPS(mapping.limit * 100);
-    }
-  }
-};
-
-/**
- * Function implements the rule that every Ork army needs a 2* commander. If it is a Clanngett list, it must also include at least one Clanngett hero.
- * @param {unitCard} selectedUnits
- * @returns true, if either a 2 * commander (clans) or a 2* commander and a Clanngett hero is present.
- */
-const isOrkArmyCommanderPresent = (selectedUnits, availableUnits, selectedAlternativeLists) => {
-  let result = globalRules.isArmyCommanderPresent(selectedUnits, availableUnits, rules);
-
-  if (selectedAlternativeLists.includes("Clanngett")) {
-    result.push({
-      invalidSubFaction: "Clanngett", //
-      message: GLOBAL_VALIDATION.NO_COMMANDER_WARNING,
-    });
-  }
-};
-
-/**
- * Functions implement the rule that each clan has only access to a small sub set of clan units.
- * All other units are blocked.
- * @param {[unitCard]} availableUnits
- * @param {String} selectedAlternativeLists
- * @returns an array of objects, each containing a blocked unit and an error message.
- */
-const setUnitsForClans = (availableUnits, selectedAlternativeLists) => {
-  let result = [];
-
-  if (selectedAlternativeLists[0] !== undefined) {
-    const selectedAlternative = selectedAlternativeLists[0];
-
-    availableUnits.forEach((u) => {
-      if (u.subFaction === "Clanntruppen" && !ORK_CLANS_UNIT_MAPPING[selectedAlternative].includes(u.unitName)) {
-        result.push({ unitBlockedbyRules: u.unitName, message: ORKS_TEXTS.SUB_FACTION_RULES.AVAILABLE_CLANUNITS });
-      }
-    });
-  }
-  return result;
 };
 
 /**
@@ -261,4 +170,4 @@ const checkForGoblinMax = (selectedUnits, totalPointsAllowance, availableUnits) 
   return result;
 };
 
-export { OrkRules, rules };
+export { OrkClansRules, rules };
