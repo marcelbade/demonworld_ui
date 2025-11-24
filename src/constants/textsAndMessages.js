@@ -509,7 +509,6 @@ export const GOBLIN_TEXTS = {
     GIANTINSECTS: "Deine Armeeliste darf maximal zu 40% aus Rieseninsekten bestehen.",
     INSECTRIDERS: "Deine Armeeliste darf maximal zu 40% aus Insektenreiter bestehen.",
     ORKS_TEXTS: "Deine Armeeliste darf zu maximal zu 20% aus Orks bestehen.",
-    NO_CLANNGETT: "Clanngett-Truppen dürfen nicht als Alliierte gewählt werden.",
     SINGLE_CLAN_ONLY: "Deine Armeeliste darf nur Clanntruppen eines Clans beinhalten",
   },
   ERRORS: {
@@ -570,11 +569,24 @@ export const NORWINGER_TEXTS = {
   },
 };
 
+export const ORK_CLANS_TEXTS = {
+  FACTION_NAME: "Ork Clans",
+  FIRST_SELECTION_TEXT: "Wähle den ersten Clan",
+  SECOND_SELECTION_TEXT: "Wähle den zweiten Clan",
+
+  SUB_FACTION_RULES: {
+    UNIT: "Deine Armeeliste muss zu mindestens 10% aus Grundtruppen bestehen.",
+  },
+};
+
+export const ORKS_OF_CLANNGETT_TEXTS = {
+  FACTION_NAME: "Orks des Clanngett",
+};
+
 export const ORKS_TEXTS = {
   FACTION_NAME: "Orks",
   CLANNGETT_SF: "Clanngett",
-  FIRST_SELECTION_TEXT: "Wähle einen der Clans oder Clanngett",
-  SECOND_SELECTION_TEXT: "Wähle einen zweiten Clan",
+
   SUB_FACTION_RULES: {
     UNIT: "Deine Armeeliste muss zu mindestens 25% aus Einheiten bestehen.",
     CHARACTERS: "Deine Armeeliste darf zu höchstens 30% aus Helden bestehen.",
