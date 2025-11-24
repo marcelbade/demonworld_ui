@@ -56,7 +56,7 @@ const rules = [
   {
     subFaction: "easternMarkSpecials",
     cardNames: ["Ostmark"],
-    min: 0.1,
+    min: 0.0,
     max: 0.5,
     error: EMPIRE_TEXTS.SUB_FACTION_RULES.EASTERN_MARK_SPECIALS,
   },
@@ -64,7 +64,7 @@ const rules = [
   {
     subFaction: "westernMarkSpecials",
     cardNames: ["Westmark"],
-    min: 0.1,
+    min: 0.0,
     max: 0.5,
     error: EMPIRE_TEXTS.SUB_FACTION_RULES.WESTERN_MARK_SPECIALS,
   },
@@ -72,7 +72,7 @@ const rules = [
   {
     subFaction: "southernMarkSpecials",
     cardNames: ["Südmark"],
-    min: 0.1,
+    min: 0.0,
     max: 0.5,
     error: EMPIRE_TEXTS.SUB_FACTION_RULES.SOUTHERN_MARK_SPECIALS,
   },
@@ -80,7 +80,7 @@ const rules = [
   {
     subFaction: "northernMarkSpecials",
     cardNames: ["Nordmark"],
-    min: 0.1,
+    min: 0.0,
     max: 0.5,
     error: EMPIRE_TEXTS.SUB_FACTION_RULES.NORTHERN_MARK_SPECIALS,
   },
