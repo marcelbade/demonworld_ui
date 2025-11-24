@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useReducer } from "react";
+import { useEffect, useContext, useReducer } from "react";
 // material ui
 import { useTheme } from "@emotion/react";
 import { TreeItem } from "@mui/x-tree-view/TreeItem";
@@ -67,8 +67,9 @@ const TreeSubFactionBranch = (props, { children }) => {
   /**
    * Function sorts the units, makes sure that units with multiple
    * unit stat cards are only displayed once in the tree and
-   * validates every unit. Invalid units are displayed, but cannot be selected
-   * and gain a button that displays a message detailing why it is invalid.
+   * validates every unit. Invalid units are displayed, but are greyed out
+   * , cannot be selected and gain a button
+   * that displays a message detailing why it is invalid.
    * @param {[unitCard]} units -
    * @returns an array of validation objects (see createValidationUnitObject function)
    */
