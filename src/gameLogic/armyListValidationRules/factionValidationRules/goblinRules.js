@@ -114,7 +114,6 @@ const GoblinRules = {
       ? globalRules.noDuplicateUniques(validationData.selectedUnits)
       : [];
 
-    let ClanngettTroops = blockClanngett(validationData.listOfAlliedUnits);
     let singleClanTroops = singleClanOnly(validationData.selectedUnits, validationData.listOfAlliedUnits);
 
     //result for maximum limits
@@ -131,36 +130,13 @@ const GoblinRules = {
     validationResults.invalidSubFactions = [...isBelowSubFactionMin, ...hasNoCommander];
 
     //  result - ally rules applied.
-    validationResults.alliedUnitsBlockedbyRules = [
-      ...ClanngettTroops, //
-      ...singleClanTroops,
-    ];
+    validationResults.alliedUnitsBlockedbyRules = [...singleClanTroops];
 
     return validationResults;
   },
 };
 
 // special faction rules
-
-/**
- * Function implements the rule that no Clanngett troops can be allies in a Goblin list.
- * @param {untiCards} availableAlliedUnits
- * @returns an array consisting of objects. Every object contains a unit that must
- * be blocked and an error message to be displayed as a tool tip.
- */
-const blockClanngett = (availableAlliedUnits) => {
-  const MESSAGE = GOBLIN_TEXTS.SUB_FACTION_RULES.NO_CLANNGETT;
-
-  let result = [];
-
-  const clanngettUnits = availableAlliedUnits.filter((u) => u.subFaction === "Clanngett");
-
-  clanngettUnits.forEach((u) => {
-    result.push({ unitBlockedbyRules: u.unitName, message: MESSAGE });
-  });
-
-  return result;
-};
 
 const singleClanOnly = (selectedUnits, availableAlliedUnits) => {
   let allowedClanUnits = [];
