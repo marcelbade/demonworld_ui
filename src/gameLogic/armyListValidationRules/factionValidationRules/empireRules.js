@@ -182,7 +182,11 @@ const blockZahra = (availableAlliedUnits) => {
   const zahraUnits = availableAlliedUnits.filter((u) => u.subFaction === DWARF_TEXTS.SF.ZAHRA);
 
   zahraUnits.forEach((u) => {
-    result.push({ unitBlockedbyRules: u.unitName, message: MESSAGE });
+    result.push({
+      unitBlockedbyRules: u.unitName, //
+      subFaction: u.subFaction,
+      message: MESSAGE,
+    });
   });
 
   return result;

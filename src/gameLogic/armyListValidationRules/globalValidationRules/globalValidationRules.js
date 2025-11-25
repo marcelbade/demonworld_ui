@@ -20,7 +20,11 @@ const globalRules = {
 
     availableUnits.forEach((aU) => {
       if (aU.points + spentPoints > armyPointsAllowance) {
-        result.push({ unitBlockedbyRules: aU.unitName, message: GLOBAL_VALIDATION.DONT_EXCEED_THE_POINT_ALLOWANCE_MESSAGE });
+        result.push({
+          unitBlockedbyRules: aU.unitName, //
+          subFaction: aU.subFaction,
+          message: GLOBAL_VALIDATION.DONT_EXCEED_THE_POINT_ALLOWANCE_MESSAGE,
+        });
       }
     });
 
@@ -39,7 +43,11 @@ const globalRules = {
     selectedUnits
       .filter((unit) => unit.uniqueUnit === true)
       .forEach((uniqueUnit) => {
-        result.push({ unitBlockedbyRules: uniqueUnit.unitName, message: GLOBAL_VALIDATION.NO_DUPLICATE_UNIQUES_MESSAGE });
+        result.push({
+          unitBlockedbyRules: uniqueUnit.unitName, //
+          subFaction: uniqueUnit.subFaction,
+          message: GLOBAL_VALIDATION.NO_DUPLICATE_UNIQUES_MESSAGE,
+        });
       });
 
     return result;
@@ -59,7 +67,11 @@ const globalRules = {
       const identicalUnits = selectedUnits.filter((u) => u.unitName === testedUnit.unitName);
 
       if (identicalUnits.length >= max) {
-        result.push({ unitBlockedbyRules: testedUnit.unitName, message: GLOBAL_VALIDATION.MAXIMUM_OF_TWO_OF_EACH_MESSAGE });
+        result.push({
+          unitBlockedbyRules: testedUnit.unitName, //
+          subFaction: testedUnit.subFaction,
+          message: GLOBAL_VALIDATION.MAXIMUM_OF_TWO_OF_EACH_MESSAGE,
+        });
       }
     }
     return result;
@@ -86,7 +98,8 @@ const globalRules = {
       .forEach((hero) => {
         if (hero.points + heroTotal > max) {
           result.push({
-            unitBlockedbyRules: hero.unitName,
+            unitBlockedbyRules: hero.unitName, //
+            subFaction: hero.subFaction,
             message: GLOBAL_VALIDATION.MAXIMUM_OF_X_PERCENT_HEROES_MESSAGE(allowedPercentage),
           });
         }
@@ -117,7 +130,11 @@ const globalRules = {
         .filter((availableUnit) => unitBelongsToSubFaction(r.cardNames, availableUnit))
         .forEach((subFactionUnit) => {
           if (subFactionUnit.points + spentPoints > subFactionMax) {
-            result.push({ unitBlockedbyRules: subFactionUnit.unitName, message: r.error });
+            result.push({
+              unitBlockedbyRules: subFactionUnit.unitName, //
+              subFaction: subFactionUnit.subFaction,
+              message: r.error,
+            });
           }
         });
     });

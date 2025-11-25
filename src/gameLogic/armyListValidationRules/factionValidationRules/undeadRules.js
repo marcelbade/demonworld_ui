@@ -162,7 +162,11 @@ const validIsthakAllies = (listOfAlliedUnits) => {
   );
 
   blockedAlliedUnits.forEach((aU) => {
-    result.push({ unitBlockedbyRules: aU.unitName, message: UNDEAD_TEXTS.ERRORS.ALLIES });
+    result.push({
+      unitBlockedbyRules: aU.unitName, //
+      subFaction: aU.subFaction,
+      message: UNDEAD_TEXTS.ERRORS.ALLIES,
+    });
   });
 
   return result;

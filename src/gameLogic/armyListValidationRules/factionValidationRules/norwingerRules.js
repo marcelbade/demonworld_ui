@@ -175,7 +175,11 @@ const neanderRule = (availableUnits, selectedUnits) => {
     availableUnits
       .filter((u) => u.unitName === NORWINGER_TEXTS.NEANDERS)
       .forEach((u) => {
-        result.push({ unitBlockedbyRules: u.unitName, message: MESSAGE });
+        result.push({
+          unitBlockedbyRules: u.unitName, //
+          subFaction: u.subFaction,
+          message: MESSAGE,
+        });
       });
   }
   return result;
@@ -232,7 +236,11 @@ const yetiRule = (availableUnits, selectedUnits) => {
     availableUnits
       .filter((u) => u.unitName === NORWINGER_TEXTS.GIANT_YETI)
       .forEach((u) => {
-        result.push({ unitBlockedbyRules: u.unitName, message: MESSAGE });
+        result.push({
+          unitBlockedbyRules: u.unitName, //
+          subFaction: u.subFaction,
+          message: MESSAGE,
+        });
       });
   }
   return result;
@@ -273,7 +281,11 @@ const mountainKingRule = (availableUnits, selectedUnits) => {
 
   if (!areAlliesPresent) {
     const foundUnit = availableUnits.find((u) => u.unitName === NORWINGER_TEXTS.MOUNTAIN_KING);
-    result.push({ unitBlockedbyRules: foundUnit.unitName, message: MESSAGE });
+    result.push({
+      unitBlockedbyRules: foundUnit.unitName, //
+      subFaction: foundUnit.subFaction,
+      message: MESSAGE,
+    });
   }
   return result;
 };

@@ -182,7 +182,11 @@ const brotherhoodOrOrder = (selectedUnits, availableUnits) => {
     availableUnits
       .filter((u) => u.subFaction === blockedFaction)
       .forEach((u) => {
-        result.push({ unitBlockedbyRules: u.unitName, message: MESSAGE });
+        result.push({
+          unitBlockedbyRules: u.unitName, //
+          subFaction: u.subFaction,
+          message: MESSAGE,
+        });
       });
   }
 
@@ -214,7 +218,11 @@ const totalPointsForMagiciansAndHeroes = (selectedUnits, availableUnits, totalPo
     .filter((u) => u.unitType === HERO || u.unitType === MAGE)
     .forEach((u) => {
       if (shamansAndHeroesTotal + u.points > max_percentage) {
-        result.push({ unitBlockedbyRules: u.unitName, message: MESSAGE });
+        result.push({
+          unitBlockedbyRules: u.unitName, //
+          subFaction: u.subFaction,
+          message: MESSAGE,
+        });
       }
     });
 
@@ -240,7 +248,11 @@ const regionRule = (province, selectedUnits, availableUnits) => {
     availableUnits
       .filter((u) => u.subFaction === province && (u.unitType === MAGE || u.unitType === HERO))
       .forEach((u) => {
-        result.push({ unitBlockedbyRules: u.unitName, message: MESSAGE });
+        result.push({
+          unitBlockedbyRules: u.unitName, //
+          subFaction: u.subFaction,
+          message: MESSAGE,
+        });
       });
   }
 

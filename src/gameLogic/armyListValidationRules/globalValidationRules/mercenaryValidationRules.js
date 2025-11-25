@@ -3,7 +3,8 @@ import { do2ArraysHaveCommonElements } from "../../../util/utilityFunctions";
 
 export const mercenaryValidationRules = {
   /**
-   * Function tests whether the selected units contain either the mercenary Sukara OR units w.
+   * Function tests whether the selected units contain
+   * either the mercenary Sukara OR units w.
    * fire attacks. A list cannot contain both at the same time.
    * @param {[unitCard]} selectedUnits
    * @param {[unitCard]} availableUnits
@@ -11,7 +12,7 @@ export const mercenaryValidationRules = {
    */
   containsfireUnits: (selectedUnits, availableUnits) => {
     const fireUnitNames = [
-      "Altar der Reinigenden Flamme", //
+      "Altar der Reinigenden Flamme", // TODO config file !!
       "Fahrende Festung (Flammenspeier)",
       "Kaiserlicher Drachenreiter",
       "Shiron Kybhar",
@@ -32,7 +33,8 @@ export const mercenaryValidationRules = {
 
     if (do2ArraysHaveCommonElements(selectedUnitNames, fireUnitNames) && availableUnitNames.includes(SUKARA)) {
       result.push({
-        unitBlockedbyRules: SUKARA,
+        unitBlockedbyRules: SUKARA, //
+        subFaction: null,
         message: GLOBAL_VALIDATION.MERCENARY_SUKARA_NO_FIRE,
       });
     }
@@ -40,7 +42,8 @@ export const mercenaryValidationRules = {
     if (selectedUnitNames.includes(SUKARA) && do2ArraysHaveCommonElements(availableUnitNames, fireUnitNames)) {
       fireUnitNames.forEach((name) => {
         result.push({
-          unitBlockedbyRules: name,
+          unitBlockedbyRules: name, //
+          subFaction: null,
           message: GLOBAL_VALIDATION.MERCENARY_SUKARA_NO_FIRE,
         });
       });

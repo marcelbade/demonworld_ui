@@ -243,7 +243,11 @@ const greatChampionRule = (selectedUnits) => {
 
   championTribeMapping.forEach((m) => {
     if (missingTribes.includes(m.tribe)) {
-      result.push({ unitBlockedbyRules: m.hero, message: MESSAGE });
+      result.push({
+        unitBlockedbyRules: m.hero, //
+        subFaction: m.subFaction,
+        message: MESSAGE,
+      });
     }
   });
 
@@ -295,7 +299,11 @@ const dorgaPriestRule = (selectedUnits, availableUnits) => {
     availableUnits
       .filter((u) => u.subFaction === "Dorga-Kirche" && u.unitType === MAGE)
       .forEach((u) => {
-        result.push({ unitBlockedbyRules: u.unitName, message: MESSAGE });
+        result.push({
+          unitBlockedbyRules: u.unitName, //
+          subFaction: u.subFaction,
+          message: MESSAGE,
+        });
       });
   }
 
@@ -341,7 +349,11 @@ const veteranRule = (selectedUnits, availableUnits) => {
   availableUnits
     .filter((u) => u.subFaction === "Veteranen der Stämme" && missingTribes.includes(u.secondSubFaction))
     .forEach((u) => {
-      result.push({ unitBlockedbyRules: u.unitName, message: MESSAGE });
+      result.push({
+        unitBlockedbyRules: u.unitName, //
+        subFaction: u.subFaction,
+        message: MESSAGE,
+      });
     });
 
   return result;

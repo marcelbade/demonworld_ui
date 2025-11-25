@@ -10,6 +10,10 @@ import { ruleValidation } from "../gameLogic/armyListValidationRules/ruleValidat
 // constants
 import { NONE } from "../constants/factions";
 
+/**
+ * Hook validates a unit list, i.e. blocks units from selection
+ * @returns an object containing validation functions.
+ */
 const useArmyValidation = () => {
   const AC = useContext(ArmyContext);
   const ALC = useContext(AlternativeListContext);
@@ -18,9 +22,10 @@ const useArmyValidation = () => {
   const TC = useContext(TournamentRulesContext);
 
   /**
-   * Function checks whether the user finished selecting their faction. It tets
+   * Function checks whether the user finished selecting their faction. It tests
    * - if the faction was selected
-   * - if the faction has alternative army list options and if one has been selected
+   * - if the faction has alternative army list options and if so, if
+   *   the selection is complete
    * If this is not the case, runValidation is not called and the function ends.
    * @param {[unitCard]} currentList
    * @param {int} currentTotalPointAllowance
@@ -31,9 +36,7 @@ const useArmyValidation = () => {
       AC.selectedFactionName !== NONE && //
       AC.selectedFactionName !== undefined;
 
-    const areNoAlternativesSelected = ALC.selectedAlternativeLists.length === 0;
-
-    if (!IsFactionSelected || (ALC.armyHasAlternativeLists && areNoAlternativesSelected)) {
+    if (!IsFactionSelected || (ALC.armyHasAlternativeLists && !ALC.altArmyListSelectionComplete)) {
       return;
     }
 
@@ -55,7 +58,7 @@ const useArmyValidation = () => {
     let validator = ruleValidation(AC.selectedFactionName);
 
     let validationResult = validator.testSubFactionRules({
-      // all available units  === faction + ally
+      // all available units === faction units + ally units
       availableUnits: [...AC.listOfAllFactionUnits, ...AYC.listOfAlliedUnits],
       selectedUnits: currentList,
       totalPointsAllowance: currentTotalPointAllowance,
@@ -152,13 +155,17 @@ const useArmyValidation = () => {
     }
 
     // gather validation results.
-    const factionBlockList = validationResult.unitsBlockedbyRules;
-    const alliedBlockList = validationResult.alliedUnitsBlockedbyRules;
-    const blockedUnits = [...factionBlockList, ...alliedBlockList];
+    const allBlockedUnits = [
+      ...validationResult.unitsBlockedbyRules, //
+      ...validationResult.alliedUnitsBlockedbyRules,
+    ];
 
     // test if unit is valid
-    blockedUnits.forEach((bU) => {
-      if (bU.unitBlockedbyRules === unit.unitName) {
+    allBlockedUnits.forEach((bU) => {
+      if (
+        bU.unitBlockedbyRules === unit.unitName && //
+        (bU.subFaction === unit.subFaction || bU.subFaction === null)
+      ) {
         unitObject = {
           unit: unit, //
           valid: false,

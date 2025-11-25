@@ -200,7 +200,11 @@ const checkForGoblinMax = (selectedUnits, totalPointsAllowance, availableUnits) 
     .filter((u) => goblinUnits.includes(u.unitName))
     .forEach((u) => {
       if (currentGoblinTotal + u.points > goblinPointAllowance) {
-        result.push({ unitBlockedbyRules: u.unitName, message: ORKS_TEXTS.SUB_FACTION_RULES.GOBLIN_TEXTS });
+        result.push({
+          unitBlockedbyRules: u.unitName, //
+          subFaction: u.subFaction,
+          message: ORKS_TEXTS.SUB_FACTION_RULES.GOBLIN_TEXTS,
+        });
       }
     });
 

@@ -154,7 +154,11 @@ const singleClanOnly = (selectedUnits, availableAlliedUnits) => {
 
     availableAlliedUnits.forEach((u) => {
       if (u.subFaction === "Clanntruppen" && !allowedClanUnits.includes(u.unitName)) {
-        result.push({ unitBlockedbyRules: u.unitName, message: GOBLIN_TEXTS.SUB_FACTION_RULES.SINGLE_CLAN_ONLY });
+        result.push({
+          unitBlockedbyRules: u.unitName, //
+          subFaction: u.subFaction,
+          message: GOBLIN_TEXTS.SUB_FACTION_RULES.SINGLE_CLAN_ONLY,
+        });
       }
     });
   }

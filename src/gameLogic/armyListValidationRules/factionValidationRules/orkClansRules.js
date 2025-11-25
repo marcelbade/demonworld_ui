@@ -107,12 +107,7 @@ const OrkClansRules = {
       ? globalRules.noDuplicateUniques(validationData.selectedUnits)
       : [];
 
-    // special faction rules
-    let goblinsAboveMax = checkForGoblinMax(
-      validationData.selectedUnits,
-      validationData.totalPointsAllowance,
-      validationData.availableUnits
-    );
+    let isAlreadyinListFromOtherClan = noIdenticalTroopFromTwoClans(validationData.availableUnits, validationData.selectedUnits);
 
     //result for maximum limits
     validationResults.unitsBlockedbyRules = [
@@ -121,7 +116,7 @@ const OrkClansRules = {
       ...testForHeroCapResult,
       ...testForMax2Result,
       ...isAboveSubFactionMax,
-      ...goblinsAboveMax,
+      ...isAlreadyinListFromOtherClan,
     ];
 
     // result for sub factions below limit.
@@ -134,40 +129,31 @@ const OrkClansRules = {
 };
 
 /**
- * Function implements the rule that Orks don't get allies, instead a fixed percentage of points casn be spent on Goblin units as part of the Clanngett troops.
- * @param {[unitCard]} selectedUnits
- * @param {Int} totalPointsAllowance
- * @param {[unitCard]} availableUnits
- * @returns
+ * Function implements the rule that if the same troop is present in both selected clans, it can only be
+ * selected from one clan. E.g., if both clans have archers, only archers from one clan can be added to the list.
+ * @param {*} availableUnits
+ * @param {*} selectedUnits
+ * @returns an array containing the blocked units and the error message.
  */
-const checkForGoblinMax = (selectedUnits, totalPointsAllowance, availableUnits) => {
-  const goblinUnits = [ORKS_TEXTS.GOBLIN_MERCENARIES.SPIDER_RIDERS, ORKS_TEXTS.GOBLIN_MERCENARIES.SPIDER_ARCHERS];
+const noIdenticalTroopFromTwoClans = (availableUnits, selectedUnits) => {
+  let blockedUnits = [];
 
-  const GOBLIN_MAX_PERCENTAGE = 0.2;
-  const goblinPointAllowance = totalPointsAllowance * GOBLIN_MAX_PERCENTAGE;
+  for (let i = 0; i < selectedUnits.length; i++) {
+    const selectedUnit = selectedUnits[i];
+    for (let j = 0; j < availableUnits.length; j++) {
+      const availableUnit = availableUnits[j];
 
-  let currentGoblinTotal = 0;
-  let result = [];
-
-  selectedUnits
-    .filter((u) => goblinUnits.includes(u.unitName))
-    .forEach((u) => {
-      currentGoblinTotal += u.points;
-      if (u.equipment.length > 0) {
-        const itemCost = u.equipment.reduce((sum, { points }) => sum + points, 0);
-        currentGoblinTotal += itemCost;
+      if (availableUnit.unitName === selectedUnit.unitName && availableUnit.subFaction !== selectedUnit.subFaction) {
+        blockedUnits.push({
+          unitBlockedbyRules: availableUnit.unitName, //
+          subFaction: availableUnit.subFaction,
+          message: ORK_CLANS_TEXTS.SUB_FACTION_RULES.NO_IDENTICAL_UNIT_FROM_2_CLANS,
+        });
       }
-    });
+    }
+  }
 
-  availableUnits
-    .filter((u) => goblinUnits.includes(u.unitName))
-    .forEach((u) => {
-      if (currentGoblinTotal + u.points > goblinPointAllowance) {
-        result.push({ unitBlockedbyRules: u.unitName, message: ORKS_TEXTS.SUB_FACTION_RULES.GOBLIN_TEXTS });
-      }
-    });
-
-  return result;
+  return blockedUnits;
 };
 
 export { OrkClansRules, rules };

@@ -187,7 +187,11 @@ const numberOfOldHeroes = (selectedUnits, availableUnits) => {
   availableUnits
     .filter((u) => u.subFaction === ELF_TEXTS.SF.OLD_HERO)
     .forEach((u) => {
-      result.push({ unitBlockedbyRules: u.unitName, message: MESSAGE });
+      result.push({
+        unitBlockedbyRules: u.unitName, //
+        subFaction: u.subFaction,
+        message: MESSAGE,
+      });
     });
 
   // unblock if condition is met
@@ -258,9 +262,17 @@ const OreaVanarRules = (selectedUnits) => {
 
   oreaVanarMapping.forEach((ovm) => {
     if (!selectedUnitNames.includes(ovm.school)) {
-      result.push({ unitBlockedbyRules: ovm.master, message: ELF_TEXTS.ERRORS.MASTERS_MESSAGE(ovm.school) });
+      result.push({
+        unitBlockedbyRules: ovm.master, //
+        subFaction: ovm.subFaction,
+        message: ELF_TEXTS.ERRORS.MASTERS_MESSAGE(ovm.school),
+      });
     } else {
-      result.push({ unitBlockedbyRules: ovm.school, message: ELF_TEXTS.ERRORS.SCHOOLS_MESSAGE });
+      result.push({
+        unitBlockedbyRules: ovm.school, //
+        subFaction: ovm.subFaction,
+        message: ELF_TEXTS.ERRORS.SCHOOLS_MESSAGE,
+      });
     }
   });
 
@@ -307,7 +319,10 @@ const heroesCovenantsMapping = [
 ];
 
 /**
- * Function calculates the number of units that are Thanariel Covens (Thanaril-Kriegerbünde). A player can freely pick the first unit of a coven. However, in order to pick additional units of a coven, the player must pick the corresponding hero first.
+ * Function calculates the max number of Thanariel Coven units
+ * (Thanaril-Kriegerbünde). A player can freely pick the first
+ * unit of a coven. However, in order to pick additional units of a coven,
+ * the player must pick the corresponding hero first.
  * @param {[unitCard]} selectedUnits
  * @param {[unitCard]} availableUnits
  * @returns array of objects containing a blocked unit and an error message.
@@ -329,10 +344,14 @@ const thanarilCovenRule = (selectedUnits) => {
     const mapping = heroesCovenantsMapping[i];
 
     for (let j = 0; j < selectedCovens.length; j++) {
-      const CovenUnit = selectedCovens[j];
+      const covenUnit = selectedCovens[j];
 
-      if (mapping.units.includes(CovenUnit) && !selectedCovenHeroes.includes(mapping.lord)) {
-        result.push({ unitBlockedbyRules: CovenUnit, message: message(mapping.lord) });
+      if (mapping.units.includes(covenUnit) && !selectedCovenHeroes.includes(mapping.lord)) {
+        result.push({
+          unitBlockedbyRules: covenUnit.unitName, //
+          subFaction: covenUnit.subFaction,
+          message: message(mapping.lord),
+        });
       }
     }
   }
@@ -383,7 +402,11 @@ const councilArmyRule = (selectedUnits, availableUnits) => {
     availableUnits
       .filter((u) => u.subFaction === "Ilah Ri" && (u.unitType === UNIT || u.unitType === GIANT))
       .forEach((u) => {
-        result.push({ unitBlockedbyRules: u.unitName, message: MESSAGE });
+        result.push({
+          unitBlockedbyRules: u.unitName, //
+          subFaction: u.subFaction,
+          message: MESSAGE,
+        });
       });
   }
   return result;
@@ -433,7 +456,11 @@ const entsOrCentaurs = (selectedUnits, availableUnits) => {
     availableUnits
       .filter((u) => u.subFaction === blockedFaction)
       .forEach((u) => {
-        result.push({ unitBlockedbyRules: u.unitName, message: MESSAGE });
+        result.push({
+          unitBlockedbyRules: u.unitName, //
+          subFaction: u.subFaction,
+          message: MESSAGE,
+        });
       });
   }
 
