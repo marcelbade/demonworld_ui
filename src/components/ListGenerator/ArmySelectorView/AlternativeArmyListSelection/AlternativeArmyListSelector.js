@@ -1,5 +1,5 @@
 // React
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 // components and functions
 import SelectionInput from "../../../shared/selectionInput";
 // context
@@ -13,7 +13,13 @@ const AlternativeArmyListSelector = () => {
   const AC = useContext(ArmyContext);
   const ALC = useContext(AlternativeListContext);
 
-  const [currentAlternativeLists, setCurrentAlternativeLists] = useState([]);
+  const [selectedAlternativeLists, setSelectedAlternativeLists] = useState([]);
+  const [currentAlternatives, setCurrentAlternatives] = useState(ALC.alternateListNames);
+
+  // page loads before the context, necessetating this:
+  useEffect(() => {
+    setCurrentAlternatives(ALC.alternateListNames);
+  }, [ALC.alternateListNames]);
 
   /**
    * Function is the onChange function for the SelectionInput.
@@ -42,10 +48,13 @@ const AlternativeArmyListSelector = () => {
   };
 
   const setOrkAlternatives = (clanName, iterator) => {
-    let tempArray = [...currentAlternativeLists];
+    let tempArray = [...selectedAlternativeLists];
     tempArray.push(clanName);
+    setSelectedAlternativeLists([...tempArray]);
 
-    setCurrentAlternativeLists([...tempArray]);
+    if (iterator === 0) {
+      setCurrentAlternatives(ALC.alternateListNames.filter((a) => a !== clanName));
+    }
 
     if (iterator === 1) {
       markChoicesAndCloseSelector(tempArray);
@@ -74,15 +83,15 @@ const AlternativeArmyListSelector = () => {
    */
   const setEmpireAlternatives = (marchName, iterator) => {
     const adjacentMarches = {
-      northAndSouth: ["Westmark", "Ostmark"],
-      eastAndWest: ["Nordmark", "Südmark"],
+      northAndSouth: [EMPIRE_TEXTS.SF.WEST_MARCH, EMPIRE_TEXTS.SF.EAST_MARCH],
+      eastAndWest: [EMPIRE_TEXTS.SF.NORTH_MARCH, EMPIRE_TEXTS.SF.SOUTH_MARCH],
     };
 
     if ((iterator === 0 && marchName === EMPIRE_TEXTS.SF.NORTH_MARCH) || marchName === EMPIRE_TEXTS.SF.SOUTH_MARCH) {
-      setCurrentAlternativeLists(adjacentMarches.northAndSouth);
+      setSelectedAlternativeLists(adjacentMarches.northAndSouth);
     }
     if ((iterator === 0 && marchName === EMPIRE_TEXTS.SF.WEST_MARCH) || marchName === EMPIRE_TEXTS.SF.EAST_MARCH) {
-      setCurrentAlternativeLists(adjacentMarches.eastAndWest);
+      setSelectedAlternativeLists(adjacentMarches.eastAndWest);
     }
     if (iterator === 1) {
       ALC.setAltArmyListSelectionComplete(true);
@@ -118,7 +127,7 @@ const AlternativeArmyListSelector = () => {
             width={"32em"}
             key={iterator}
             selectorNumber={iterator}
-            alternatives={ALC.alternateListNames}
+            alternatives={currentAlternatives}
             filterFunction={(value) => {
               selectOnInputChange(value, iterator);
             }}
