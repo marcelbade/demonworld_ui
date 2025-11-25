@@ -576,6 +576,7 @@ export const ORK_CLANS_TEXTS = {
 
   SUB_FACTION_RULES: {
     UNIT: "Deine Armeeliste muss zu mindestens 10% aus Grundtruppen bestehen.",
+    NO_IDENTICAL_UNIT_FROM_2_CLANS:"Gleiche Spezialtruppen der Clans können nur aus einem Clan heraus rekrutiert werden.",
   },
 };
 
