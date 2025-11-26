@@ -570,40 +570,40 @@ export const NORWINGER_TEXTS = {
 };
 
 export const ORK_CLANS_TEXTS = {
+  CLAN_SELECTION:{
+      
+  },  
   FACTION_NAME: "Ork Clans",
   FIRST_SELECTION_TEXT: "Wähle den ersten Clan",
   SECOND_SELECTION_TEXT: "Wähle den zweiten Clan",
 
   SUB_FACTION_RULES: {
     UNIT: "Deine Armeeliste muss zu mindestens 10% aus Grundtruppen bestehen.",
+    CHARACTERS: "Deine Armeeliste darf zu höchstens 30% aus Helden bestehen.",
+    ENGINES: "Deine Armeeliste darf zu höchstens 30% Geräten bestehen.",
+    GIANTS: "Deine Armeeliste darf zu höchstens 30% aus Giganten bestehen.",
+    CLAN_TROOPS: "Deine Armeeliste muss zu 15% bis 65% aus Clantruppen bestehen.",
     NO_IDENTICAL_UNIT_FROM_2_CLANS: "Gleiche Spezialtruppen der Clans können nur aus einem Clan heraus rekrutiert werden.",
+    CLANNGETT: "Deine Armeeliste darf zu höchstens 50% aus Clanngetttruppen bestehen.",
+    WIZARDS: "Deine Armeeliste darf zu höchstens 30% aus Zauberern bestehen.",
   },
 };
 
 export const ORKS_OF_CLANNGETT_TEXTS = {
   FACTION_NAME: "Orks des Clanngett",
-};
-
-export const ORKS_TEXTS = {
-  FACTION_NAME: "Orks",
-  CLANNGETT_SF: "Clanngett",
-
   SUB_FACTION_RULES: {
     UNIT: "Deine Armeeliste muss zu mindestens 25% aus Einheiten bestehen.",
     CHARACTERS: "Deine Armeeliste darf zu höchstens 30% aus Helden bestehen.",
-    GIANTS: "Deine Armeeliste darf zu höchstens 30% aus Geräten bestehen.",
-    ENGINES: "Deine Armeeliste darf zu höchstens 30% aus Sturmlords und Hexen bestehen.",
-    CLANTROOPS: (percentage) => {
-      return `Deine Armeeliste darf zu höchstens ${percentage} Prozent aus Sondertruppen der Clans bestehen.`;
-    },
-    CLANNGETT_MAX: "Deine Armeeliste darf zu höchstens 50% aus Einheiten Clanngetts bestehen.",
+    ENGINES: "Deine Armeeliste darf zu höchstens 30% Geräten bestehen.",
+    GIANTS: "Deine Armeeliste darf zu höchstens 30% aus Giganten bestehen.",
+    CLAN_TROOPS: "Deine Armeeliste darf zu höchstens 40% aus Clantruppen bestehen.",
+    CLANNGETT: "Deine Armeeliste darf zu höchstens 50% aus Clanngetttruppen bestehen.",
+    WIZARDS: "Deine Armeeliste darf zu höchstens 30% aus Zauberern bestehen.",
     CLANNGETT_COMMANDER:
       "Deine Armeeliste muss einen von Clanngetts Stellvertreter und mindestens 1 Helden, Befehlshaber oder Magier mit 2 oder mehr ★ enthalten.",
-    WIZARDS: "Deine Armeeliste darf zu höchstens 40% aus Zauberern bestehen.",
     GOBLIN_TEXTS: "Deine Armeeliste darf zu maximal zu 20% aus Goblins bestehen.",
-    AVAILABLE_CLANUNITS: "Dieser Clan kann diese Einheit nicht auswählen.",
   },
-  GOBLIN_MERCENARIES: {
+  GOBLIN_UNITS: {
     SPIDER_ARCHERS: "Goblin-Spinnenschützen",
     SPIDER_RIDERS: "Goblin-Spinnenreiter",
   },

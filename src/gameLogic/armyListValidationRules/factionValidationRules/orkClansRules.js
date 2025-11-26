@@ -2,7 +2,7 @@
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
 //  constants
-import { ORK_CLANS_TEXTS, ORKS_TEXTS } from "../../../constants/textsAndMessages";
+import { ORK_CLANS_TEXTS } from "../../../constants/textsAndMessages";
 
 const rules = [
   {
@@ -17,42 +17,42 @@ const rules = [
     cardNames: ["Helden / Befehlshaber"],
     min: 0.0,
     max: 0.3,
-    error: ORKS_TEXTS.SUB_FACTION_RULES.CHARACTERS,
+    error: ORK_CLANS_TEXTS.SUB_FACTION_RULES.CHARACTERS,
   },
   {
     subFaction: "engines",
     cardNames: ["Gerät"],
     min: 0.0,
     max: 0.3,
-    error: ORKS_TEXTS.SUB_FACTION_RULES.ENGINES,
+    error: ORK_CLANS_TEXTS.SUB_FACTION_RULES.ENGINES,
   },
   {
     subFaction: "giants",
     cardNames: ["Giganten"],
     min: 0.0,
     max: 0.3,
-    error: ORKS_TEXTS.SUB_FACTION_RULES.GIANTS,
+    error: ORK_CLANS_TEXTS.SUB_FACTION_RULES.GIANTS,
   },
   {
     subFaction: "clantroops",
     cardNames: ["Clanntruppen"],
     min: 0.15,
     max: 0.65,
-    error: "", // TODO change
+    error: ORK_CLANS_TEXTS.SUB_FACTION_RULES.CLAN_TROOPS,
   },
   {
     subFaction: "clanngett",
     cardNames: ["Clanngett"],
     min: 0.0,
     max: 0.5,
-    error: ORKS_TEXTS.SUB_FACTION_RULES.CLANNGETT_MAX,
+    error: ORK_CLANS_TEXTS.SUB_FACTION_RULES.CLANNGETT,
   },
   {
     subFaction: "wizards",
     cardNames: ["Zauberer"],
     min: 0.0,
     max: 0.3,
-    error: ORKS_TEXTS.SUB_FACTION_RULES.WIZARDS,
+    error: ORK_CLANS_TEXTS.SUB_FACTION_RULES.WIZARDS,
   },
 ];
 

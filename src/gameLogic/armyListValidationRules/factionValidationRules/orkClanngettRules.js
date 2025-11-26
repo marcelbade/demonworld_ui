@@ -2,60 +2,63 @@
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
 //  constants
-import { ORKS_TEXTS } from "../../../constants/textsAndMessages";
+import { ORKS_OF_CLANNGETT_TEXTS } from "../../../constants/textsAndMessages";
 import { do2ArraysHaveCommonElements } from "../../../util/utilityFunctions";
 
-const rules = [
-  {
-    subFaction: "unit",
-    cardNames: ["Einheit"],
-    min: 0.25,
-    max: 1.0,
-    error: ORKS_TEXTS.SUB_FACTION_RULES.UNIT,
-  },
-  {
-    subFaction: "characters",
-    cardNames: ["Helden / Befehlshaber"],
-    min: 0.0,
-    max: 0.3,
-    error: ORKS_TEXTS.SUB_FACTION_RULES.CHARACTERS,
-  },
-  {
-    subFaction: "engines",
-    cardNames: ["Gerät"],
-    min: 0.0,
-    max: 0.3,
-    error: ORKS_TEXTS.SUB_FACTION_RULES.ENGINES,
-  },
-  {
-    subFaction: "giants",
-    cardNames: ["Giganten"],
-    min: 0.0,
-    max: 0.3,
-    error: ORKS_TEXTS.SUB_FACTION_RULES.GIANTS,
-  },
-  {
-    subFaction: "clantroops",
-    cardNames: ["Clanntruppen"],
-    min: 0.0,
-    max: 0.4,
-    error: "", // TODO see below, set by
-  },
-  {
-    subFaction: "clanngett",
-    cardNames: ["Clanngett"],
-    min: 0.0,
-    max: 0.5,
-    error: ORKS_TEXTS.SUB_FACTION_RULES.CLANNGETT_MAX,
-  },
-  {
-    subFaction: "wizards",
-    cardNames: ["Zauberer"],
-    min: 0.0,
-    max: 0.3,
-    error: ORKS_TEXTS.SUB_FACTION_RULES.WIZARDS,
-  },
-];
+const rules = {
+  subFactionLimits: [
+    {
+      subFaction: "unit",
+      cardNames: ["Einheit"],
+      min: 0.25,
+      max: 1.0,
+      error: ORKS_OF_CLANNGETT_TEXTS.SUB_FACTION_RULES.UNIT,
+    },
+    {
+      subFaction: "characters",
+      cardNames: ["Helden / Befehlshaber"],
+      min: 0.0,
+      max: 0.3,
+      error: ORKS_OF_CLANNGETT_TEXTS.SUB_FACTION_RULES.CHARACTERS,
+    },
+    {
+      subFaction: "engines",
+      cardNames: ["Gerät"],
+      min: 0.0,
+      max: 0.3,
+      error: ORKS_OF_CLANNGETT_TEXTS.SUB_FACTION_RULES.ENGINES,
+    },
+    {
+      subFaction: "giants",
+      cardNames: ["Giganten"],
+      min: 0.0,
+      max: 0.3,
+      error: ORKS_OF_CLANNGETT_TEXTS.SUB_FACTION_RULES.GIANTS,
+    },
+    {
+      subFaction: "clantroops",
+      cardNames: ["Clanntruppen"],
+      min: 0.0,
+      max: 0.4,
+      error: ORKS_OF_CLANNGETT_TEXTS.SUB_FACTION_RULES.CLAN_TROOPS,
+    },
+    {
+      subFaction: "clanngett",
+      cardNames: ["Clanngett"],
+      min: 0.0,
+      max: 0.5,
+      error: ORKS_OF_CLANNGETT_TEXTS.SUB_FACTION_RULES.CLANNGETT_MAX,
+    },
+    {
+      subFaction: "wizards",
+      cardNames: ["Zauberer"],
+      min: 0.0,
+      max: 0.3,
+      error: ORKS_OF_CLANNGETT_TEXTS.SUB_FACTION_RULES.WIZARDS,
+    },
+  ],
+  clannGettCommanders: ["Trazzag", "Fherniak", "Ärrig", "Khazzar", "Nallian"],
+};
 
 const OrkClanngettRules = {
   testSubFactionRules: (validationData) => {
@@ -66,13 +69,13 @@ const OrkClanngettRules = {
       validationData.totalPointsAllowance
     );
     let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(
-      rules,
+      rules.subFactionLimits,
       validationData.selectedUnits,
       validationData.totalPointsAllowance,
       validationData.distinctSubFactions
     );
     let isAboveSubFactionMax = globalRules.unitsAboveSubFactionMax(
-      rules,
+      rules.subFactionLimits,
       validationData.selectedUnits,
       validationData.totalPointsAllowance,
       validationData.availableUnits
@@ -113,7 +116,7 @@ const OrkClanngettRules = {
       validationData.selectedUnits, //
       validationData.availableUnits,
       validationData.selectedAlternativeLists,
-      rules
+      rules.subFactionLimits
     );
 
     //result for maximum limits
@@ -141,25 +144,18 @@ const OrkClanngettRules = {
  * @param {unitCard} selectedUnits
  * @returns true, if either a 2 * commander (clans) or a 2* commander and a Clanngett hero is present.
  */
-const isOrkArmyCommanderPresent = (selectedUnits, availableUnits, selectedAlternativeLists, rules) => {
+const isOrkArmyCommanderPresent = (selectedUnits, availableUnits, selectedAlternativeLists, rulesSubfactionLimits) => {
   let result = [];
-  const clangett_heroes = [
-    "Trazzag", //
-    "Fherniak",
-    "Ärrig",
-    "Khazzar",
-    "Nallian",
-  ]; // TODO do not hard code
-  const hasClanngettHeroes = do2ArraysHaveCommonElements(selectedUnits, clangett_heroes);
+  const hasClanngettHeroes = do2ArraysHaveCommonElements(selectedUnits, rulesSubfactionLimits);
 
   if (selectedAlternativeLists.includes("Clanngett") && !hasClanngettHeroes) {
     result.push({
       invalidSubFaction: "Clanngett", //
-      message: ORKS_TEXTS.CLANNGETT_COMMANDER,
+      message: ORKS_OF_CLANNGETT_TEXTS.CLANNGETT_COMMANDER,
     });
   }
 
-  const globalResult = globalRules.isArmyCommanderPresent(selectedUnits, availableUnits, rules);
+  const globalResult = globalRules.isArmyCommanderPresent(selectedUnits, availableUnits, rulesSubfactionLimits);
 
   return [...result, ...globalResult];
 };
@@ -173,7 +169,10 @@ const isOrkArmyCommanderPresent = (selectedUnits, availableUnits, selectedAltern
  * @returns
  */
 const checkForGoblinMax = (selectedUnits, totalPointsAllowance, availableUnits) => {
-  const goblinUnits = [ORKS_TEXTS.GOBLIN_MERCENARIES.SPIDER_RIDERS, ORKS_TEXTS.GOBLIN_MERCENARIES.SPIDER_ARCHERS];
+  const goblinUnits = [
+    ORKS_OF_CLANNGETT_TEXTS.GOBLIN_UNITS.SPIDER_RIDERS, //
+    ORKS_OF_CLANNGETT_TEXTS.GOBLIN_UNITS.SPIDER_ARCHERS,
+  ];
 
   const GOBLIN_MAX_PERCENTAGE = 0.2;
   const goblinPointAllowance = totalPointsAllowance * GOBLIN_MAX_PERCENTAGE;
@@ -198,7 +197,7 @@ const checkForGoblinMax = (selectedUnits, totalPointsAllowance, availableUnits) 
         result.push({
           unitBlockedbyRules: u.unitName, //
           subFaction: u.subFaction,
-          message: ORKS_TEXTS.SUB_FACTION_RULES.GOBLIN_TEXTS,
+          message: ORKS_OF_CLANNGETT_TEXTS.SUB_FACTION_RULES.GOBLIN_TEXTS,
         });
       }
     });

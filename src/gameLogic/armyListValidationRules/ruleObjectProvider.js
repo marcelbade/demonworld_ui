@@ -49,7 +49,7 @@ export const ruleObjectProvider = (faction) => {
     case ORK_CLANS_TEXTS.FACTION_NAME:
       return OrkClanRulesList;
     case ORKS_OF_CLANNGETT_TEXTS.FACTION_NAME:
-      return OrkClanngettRulesList;
+      return OrkClanngettRulesList.subFactionLimits;
     case THAIN_TEXTS.FACTION_NAME:
       return ThainRulesList;
     case UNDEAD_TEXTS.FACTION_NAME:
