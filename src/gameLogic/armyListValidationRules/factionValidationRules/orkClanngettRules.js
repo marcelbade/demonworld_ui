@@ -8,7 +8,7 @@ import { do2ArraysHaveCommonElements } from "../../../util/utilityFunctions";
 const rules = [
   {
     subFaction: "unit",
-    cardNames: ["Einheit"], // TODO this needs to be reset to "Einheit in Clanarmee"  / "Einheit in Clanngett-Armee" !!
+    cardNames: ["Einheit"],
     min: 0.25,
     max: 1.0,
     error: ORKS_TEXTS.SUB_FACTION_RULES.UNIT,
@@ -39,7 +39,7 @@ const rules = [
     cardNames: ["Clanntruppen"],
     min: 0.0,
     max: 0.4,
-    error: "", // see below, set by switchBetweenAlternativeRules
+    error: "", // TODO see below, set by
   },
   {
     subFaction: "clanngett",
@@ -59,9 +59,6 @@ const rules = [
 
 const OrkClanngettRules = {
   testSubFactionRules: (validationData) => {
-    // Switch between alternative ruule objects!
-    switchBetweenAlternativeRules(validationData.selectedAlternativeLists, rules);
-
     //  general rules
     let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(
       validationData.selectedUnits,
@@ -140,21 +137,19 @@ const OrkClanngettRules = {
 };
 
 /**
- * Function changes the max. limits for the validationData.distinctSubFactions depending on which alternative army list has been selected.
- */
-const switchBetweenAlternativeRules = (selectedAlternativeLists, testSubFactionRules) => {
-  // console.log("a>A selectedAlternativeLists", selectedAlternativeLists);
-  // if
-};
-
-/**
  * Function implements the rule that every Ork army needs a 2* commander. If it is a Clanngett list, it must also include at least one Clanngett hero.
  * @param {unitCard} selectedUnits
  * @returns true, if either a 2 * commander (clans) or a 2* commander and a Clanngett hero is present.
  */
 const isOrkArmyCommanderPresent = (selectedUnits, availableUnits, selectedAlternativeLists, rules) => {
   let result = [];
-  const clangett_heroes = ["Trazzag", "Fherniak", "Ärrig", "Khazzar", "Nallian"]; // TODO do not hard code
+  const clangett_heroes = [
+    "Trazzag", //
+    "Fherniak",
+    "Ärrig",
+    "Khazzar",
+    "Nallian",
+  ]; // TODO do not hard code
   const hasClanngettHeroes = do2ArraysHaveCommonElements(selectedUnits, clangett_heroes);
 
   if (selectedAlternativeLists.includes("Clanngett") && !hasClanngettHeroes) {
