@@ -576,7 +576,7 @@ export const ORK_CLANS_TEXTS = {
 
   SUB_FACTION_RULES: {
     UNIT: "Deine Armeeliste muss zu mindestens 10% aus Grundtruppen bestehen.",
-    NO_IDENTICAL_UNIT_FROM_2_CLANS:"Gleiche Spezialtruppen der Clans können nur aus einem Clan heraus rekrutiert werden.",
+    NO_IDENTICAL_UNIT_FROM_2_CLANS: "Gleiche Spezialtruppen der Clans können nur aus einem Clan heraus rekrutiert werden.",
   },
 };
 
@@ -606,33 +606,6 @@ export const ORKS_TEXTS = {
   GOBLIN_MERCENARIES: {
     SPIDER_ARCHERS: "Goblin-Spinnenschützen",
     SPIDER_RIDERS: "Goblin-Spinnenreiter",
-  },
-  CLANS: {
-    ANIMAL: "Tierclan",
-    ARROW: "Pfeilclan",
-    BLOOD: "Blutclan",
-    CLANNGETT: "Clanngett",
-    ICE: "Eisclan",
-    IRON: "Eisenclan",
-    MOUNTAIN: "Bergclan",
-    STONE: "Steinclan",
-    WYVERN: "Wyvernclan",
-  },
-  CLAN_UNITS: {
-    BEAR_PACK: "Bärenmeute",
-    BEAR_RIDERS: "Bärenreiter",
-    CHARIOT: "Streitwagen",
-    DWARF_EATERS: "Zwergenfresser",
-    HARPYS: "Harpyien",
-    MINOTAURS: "Minotauren",
-    SNOW_OGRES: "Schnee-Oger",
-    THROIGAR: "Throigar",
-    TROLL_GUARD: "Troll-Garde",
-    WOLF_ARCHERS: "Wolfsschützen",
-    WOLF_PACK: "Wolfsmeute",
-    WOLF_RIDERS: "Wolfsreiter",
-    WYVERN_RIDER: "Wyvernreiter",
-    CROSS_BOW_MEN: "Armbrustschützen",
   },
 };
 

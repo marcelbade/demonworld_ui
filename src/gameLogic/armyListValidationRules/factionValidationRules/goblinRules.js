@@ -1,9 +1,7 @@
-import { isObjectEmtpy } from "../../../util/utilityFunctions";
 import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
 import { mercenaryValidationRules } from "../globalValidationRules/mercenaryValidationRules";
 // constants
-import { ORK_CLANS_UNIT_MAPPING } from "../../../constants/factions";
 import { GOBLIN_TEXTS } from "../../../constants/textsAndMessages";
 
 /**
@@ -136,32 +134,26 @@ const GoblinRules = {
   },
 };
 
-// special faction rules
-
 const singleClanOnly = (selectedUnits, availableAlliedUnits) => {
-  let allowedClanUnits = [];
   let result = [];
 
-  const firstFoundClanUnit = selectedUnits.find((u) => u.subFaction === "Clanntruppen");
-  const clanUnitWasFound = !isObjectEmtpy(firstFoundClanUnit);
-
-  if (clanUnitWasFound) {
-    for (const key of Object.keys(ORK_CLANS_UNIT_MAPPING)) {
-      if (ORK_CLANS_UNIT_MAPPING[key].includes(firstFoundClanUnit.unitName) && key !== "Clanngett") {
-        allowedClanUnits = [...allowedClanUnits, ...ORK_CLANS_UNIT_MAPPING[key]];
-      }
-    }
-
-    availableAlliedUnits.forEach((u) => {
-      if (u.subFaction === "Clanntruppen" && !allowedClanUnits.includes(u.unitName)) {
-        result.push({
-          unitBlockedbyRules: u.unitName, //
-          subFaction: u.subFaction,
-          message: GOBLIN_TEXTS.SUB_FACTION_RULES.SINGLE_CLAN_ONLY,
-        });
-      }
-    });
+  if (selectedUnits.length === 0) {
+    return result;
   }
+
+  //  TODO hard coded string
+  const selectedClanTroops = selectedUnits.filter((u) => u.secondSubFaction === "Clanntruppen");
+  const selectedClan = selectedClanTroops[0].subFaction;
+
+  result = availableAlliedUnits
+    .filter((u) => u.secondSubFaction === "Clanntruppen" && u.subFaction !== selectedClan)
+    .map((u) => {
+      return {
+        unitBlockedbyRules: u.unitName, //
+        subFaction: u.subFaction,
+        message: GOBLIN_TEXTS.SUB_FACTION_RULES.SINGLE_CLAN_ONLY,
+      };
+    });
 
   return result;
 };

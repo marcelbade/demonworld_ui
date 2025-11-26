@@ -28,8 +28,11 @@ const ArmyListBoxCenter = () => {
    * @returns
    */
   const filterUnitsForSubFaction = (subFaction) => {
-    SEC.selectedUnits.forEach((u) => (u.faction === AYC.allyName ? (u.subFaction = u.faction) : null));
-    return SEC.selectedUnits.filter((u) => u.subFaction === subFaction);
+    const tempArray = [...SEC.selectedUnits];
+
+    tempArray.forEach((u) => (u.faction === AYC.allyName ? (u.subFaction = u.faction) : null));
+
+    return tempArray.filter((u) => u.subFaction === subFaction);
   };
 
   /**
