@@ -1,5 +1,5 @@
 // React
-import  { Fragment, useContext } from "react";
+import { useContext } from "react";
 // Material UI
 import { List, ListItem, IconButton } from "@mui/material";
 // icons
@@ -106,7 +106,7 @@ const SubFactionUnitList = (props) => {
   };
 
   return (
-    <Fragment>
+    <>
       {props.subFactionUnits
         .sort((a, b) => a.unitName > b.unitName)
         .map((u) =>
@@ -149,7 +149,7 @@ const SubFactionUnitList = (props) => {
             </List>
           );
         })}
-    </Fragment>
+    </>
   );
 };
 
