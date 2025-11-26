@@ -20,19 +20,18 @@ const ArmyListBoxCenter = () => {
   const validation = useArmyValidation();
   const useAlly = UseDisplayAlly();
 
-  /**
-   * Filters the selected units by subFaction. If allied units have been selected,
-   * then their subFaction name is replaced with their faction name.
-   * @param {[unitCard Objects]} allSelectedUnits
-   * @param {String} subFaction
-   * @returns
-   */
+  // Filters the selected units by subFaction.
   const filterUnitsForSubFaction = (subFaction) => {
     const tempArray = [...SEC.selectedUnits];
 
-    tempArray.forEach((u) => (u.faction === AYC.allyName ? (u.subFaction = u.faction) : null));
-
     return tempArray.filter((u) => u.subFaction === subFaction);
+  };
+
+  // Filters the selected units by ally name.
+  const filterUnitsForAlly = (AllyName) => {
+    const tempArray = [...SEC.selectedUnits];
+
+    return tempArray.filter((u) => u.faction === AllyName);
   };
 
   /**
@@ -71,7 +70,7 @@ const ArmyListBoxCenter = () => {
           key={AYC.allyName} //
           subFaction={AYC.allyName}
           valid={true}
-          units={filterUnitsForSubFaction(AYC.allyName)}
+          units={filterUnitsForAlly(AYC.allyName)}
         />
       ) : null}
     </List>
