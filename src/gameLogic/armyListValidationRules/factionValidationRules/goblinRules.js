@@ -143,6 +143,11 @@ const singleClanOnly = (selectedUnits, availableAlliedUnits) => {
 
   //  TODO hard coded string
   const selectedClanTroops = selectedUnits.filter((u) => u.secondSubFaction === "Clanntruppen");
+
+  if (selectedClanTroops.length === 0 || undefined) {
+    return result;
+  }
+
   const selectedClan = selectedClanTroops[0].subFaction;
 
   result = availableAlliedUnits
