@@ -570,13 +570,11 @@ export const NORWINGER_TEXTS = {
 };
 
 export const ORK_CLANS_TEXTS = {
-  CLAN_SELECTION:{
-      
-  },  
   FACTION_NAME: "Ork Clans",
-  FIRST_SELECTION_TEXT: "Wähle den ersten Clan",
-  SECOND_SELECTION_TEXT: "Wähle den zweiten Clan",
-
+  CLAN_SELECTION: {
+    FIRST_SELECTION_TEXT: "Wähle den ersten Clan",
+    SECOND_SELECTION_TEXT: "Wähle den zweiten Clan",
+  },
   SUB_FACTION_RULES: {
     UNIT: "Deine Armeeliste muss zu mindestens 10% aus Grundtruppen bestehen.",
     CHARACTERS: "Deine Armeeliste darf zu höchstens 30% aus Helden bestehen.",

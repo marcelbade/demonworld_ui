@@ -14,11 +14,11 @@ const AlternativeArmyListSelector = () => {
   const ALC = useContext(AlternativeListContext);
 
   const [selectedAlternativeLists, setSelectedAlternativeLists] = useState([]);
-  const [currentAlternatives, setCurrentAlternatives] = useState(ALC.alternateListNames);
+  const [selectableAlternatives, setSelectableAlternatives] = useState(ALC.alternateListNames);
 
   // page loads before the context, necessetating this:
   useEffect(() => {
-    setCurrentAlternatives(ALC.alternateListNames);
+    setSelectableAlternatives(ALC.alternateListNames);
   }, [ALC.alternateListNames]);
 
   /**
@@ -53,7 +53,7 @@ const AlternativeArmyListSelector = () => {
     setSelectedAlternativeLists([...tempArray]);
 
     if (iterator === 0) {
-      setCurrentAlternatives(ALC.alternateListNames.filter((a) => a !== clanName));
+      setSelectableAlternatives(ALC.alternateListNames.filter((a) => a !== clanName));
     }
 
     if (iterator === 1) {
@@ -61,6 +61,11 @@ const AlternativeArmyListSelector = () => {
     }
   };
 
+  /**
+   * Function takes the selected alternative sub faction and searches the sub faction
+   * DTOs for them. When found, there are flagged as selected.
+   * @param {[String]} selectedAlternativeSubFactions
+   */
   const markChoicesAndCloseSelector = (selectedAlternativeSubFactions) => {
     let tempArray = [...AC.subFactionDTOs];
 
@@ -76,10 +81,10 @@ const AlternativeArmyListSelector = () => {
 
   /**
    * Function sets the alternative sub factions for the empire faction.
-   * The user must choose two marches with the added condition that only adjacent
-   * marches can be selected.
-   * @param {*} marchName
-   * @param {*} iterator
+   * The user must choose two marches with the added condition that the secon march
+   * must be adjacent to the first selected march.
+   * @param {String} marchName
+   * @param {integer} iterator
    */
   const setEmpireAlternatives = (marchName, iterator) => {
     const adjacentMarches = {
@@ -87,14 +92,17 @@ const AlternativeArmyListSelector = () => {
       eastAndWest: [EMPIRE_TEXTS.SF.NORTH_MARCH, EMPIRE_TEXTS.SF.SOUTH_MARCH],
     };
 
+    let tempArray = [...selectedAlternativeLists];
+    tempArray.push(marchName);
+    setSelectedAlternativeLists([...tempArray]);
+
     if ((iterator === 0 && marchName === EMPIRE_TEXTS.SF.NORTH_MARCH) || marchName === EMPIRE_TEXTS.SF.SOUTH_MARCH) {
-      setSelectedAlternativeLists(adjacentMarches.northAndSouth);
-    }
-    if ((iterator === 0 && marchName === EMPIRE_TEXTS.SF.WEST_MARCH) || marchName === EMPIRE_TEXTS.SF.EAST_MARCH) {
-      setSelectedAlternativeLists(adjacentMarches.eastAndWest);
+      setSelectableAlternatives(adjacentMarches.northAndSouth);
+    } else if ((iterator === 0 && marchName === EMPIRE_TEXTS.SF.WEST_MARCH) || marchName === EMPIRE_TEXTS.SF.EAST_MARCH) {
+      setSelectableAlternatives(adjacentMarches.eastAndWest);
     }
     if (iterator === 1) {
-      ALC.setAltArmyListSelectionComplete(true);
+      markChoicesAndCloseSelector(tempArray);
     }
   };
 
@@ -127,7 +135,7 @@ const AlternativeArmyListSelector = () => {
             width={"32em"}
             key={iterator}
             selectorNumber={iterator}
-            alternatives={currentAlternatives}
+            alternatives={selectableAlternatives}
             filterFunction={(value) => {
               selectOnInputChange(value, iterator);
             }}
