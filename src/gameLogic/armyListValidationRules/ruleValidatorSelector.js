@@ -1,5 +1,5 @@
-import { DarkElveRules } from "./factionValidationRules/darkElves";
-import { DwarfRules } from "./factionValidationRules/dwarfs";
+import { DarkElveRules } from "./factionValidationRules/darkElveRules";
+import { DwarfRules } from "./factionValidationRules/dwarfRules";
 import { ElfRules } from "./factionValidationRules/highElfsRules";
 import { EmpireRules } from "./factionValidationRules/empireRules";
 import { GoblinRules } from "./factionValidationRules/goblinRules";
