@@ -109,7 +109,19 @@ const AlternativeArmyListSelector = () => {
   /**
    *
    */
-  const setDwarvesAlternatives = () => {};
+  const setDwarvesAlternatives = (kingdom, iterator) => {
+    let tempArray = [...selectedAlternativeLists];
+    tempArray.push(kingdom);
+    setSelectedAlternativeLists([...tempArray]);
+
+    if (iterator === 0) {
+      setSelectableAlternatives(ALC.alternateListNames.filter((a) => a !== kingdom));
+    }
+
+    if (iterator === 1) {
+      markChoicesAndCloseSelector(tempArray);
+    }
+  };
 
   const clearAlternateList = () => {
     ALC.setSelectedAlternativeLists([]);
