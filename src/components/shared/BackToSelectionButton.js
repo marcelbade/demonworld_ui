@@ -6,6 +6,7 @@ import { IconButton, Tooltip } from "@mui/material";
 import ConfirmationDialog from "../Dialogs/ConfirmationDialog/ConfirmationDialog";
 // context
 import { ArmyContext } from "../../contexts/armyContext";
+import { SelectionContext } from "../../contexts/selectionContext";
 // icons
 import ReplayIcon from "@mui/icons-material/Replay";
 // constants
@@ -21,13 +22,18 @@ import useConfirmationDialogSettings from "../../customHooks/UseConfirmationDial
  */
 const BackToSelectionButton = (props) => {
   const AC = useContext(ArmyContext);
+  const SEC = useContext(SelectionContext);
 
   const dialogSettings = useConfirmationDialogSettings();
 
   const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
 
   const submit = () => {
-    setShowConfirmationDialog(true);
+    if (SEC.selectedUnits.length !== 0) {
+      setShowConfirmationDialog(true);
+    } else {
+      AC.setSelectedFactionName(NONE);
+    }
   };
 
   const BackToSelectionButton = () => {
