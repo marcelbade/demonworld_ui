@@ -3,7 +3,6 @@ import globalRules from "../globalValidationRules/globalValidationRules";
 import validationResults from "./validationResultsObjectProvider";
 import { mercenaryValidationRules } from "../globalValidationRules/mercenaryValidationRules";
 //  constants
-import { EXCEMPT_FROM_TRIBES_RULE, THAIN_TRIBES } from "../../../constants/factions";
 import { UNIT, MAGE } from "../../../constants/unitTypes";
 import { THAIN_TEXTS } from "../../../constants/textsAndMessages";
 
@@ -104,9 +103,9 @@ const ThainRules = {
       : [];
     // special faction rules
     dorgaVsShamans(validationData.selectedUnits, validationData.totalPointsAllowance);
-    let testForChampionRule = greatChampionRule(validationData.selectedUnits);
+    let testForChampionRule = greatChampionRule(validationData.selectedUnits, validationData.secondSubFactionList);
     let testForDorgaRule = dorgaPriestRule(validationData.selectedUnits, validationData.availableUnits);
-    let testForVeteranRule = veteranRule(validationData.selectedUnits, validationData.availableUnits);
+    let testForVeteranRule = veteranRule(validationData.selectedUnits, validationData.availableUnits, validationData.secondSubFactionList);
     let testForChurchRemoval = dorgaPriestRemove(validationData.selectedUnits, validationData.availableUnits);
     let testForVeteranRemoval = tribalVeteranRemove(validationData.selectedUnits, validationData.availableUnits);
     let testForChampionRemoval = greatChampionRemove(validationData.selectedUnits, validationData.availableUnits);
@@ -146,7 +145,7 @@ const ThainRules = {
 //SPECIAL FACTION RULES
 
 /**
- * Every Thain unit - with the exception of giant animals, Dorga Church units, Summons and the Banner of the High King must be assigned a tribe, i.e., the secondSubFaction attribute must be chagned to one of the values in the tribes list.
+ * Every Thain unit - with the exception of giant animals, Dorga Church units, Summons and the Banner of the High King must be assigned a tribe, i.e., the secondSubFaction attribute must be changed to one of the values in the tribes list.
  * @param {[unitCard]}  electedUnits
  * @returns an array with all units that still must be assigned a tribe (secondSubFaction).
  */
@@ -155,7 +154,7 @@ const allUnitsNeedTribes = (selectedUnits) => {
   const MESSAGE = THAIN_TEXTS.ERRORS.TRIBE_MESSAGE;
 
   selectedUnits
-    .filter((u) => !EXCEMPT_FROM_TRIBES_RULE.includes(u.unitName))
+    .filter((u) => u.isEligibleFor2ndSubFaction)
     .forEach((u) => {
       if (u.secondSubFaction === u.subFaction) {
         result.push({ unitWithOutSecondSubFaction: u.unitName, message: MESSAGE });
@@ -233,13 +232,13 @@ const championTribeMapping = [
  * @param {[unitCard]} selectedUnits
  * @returns array of objects containing a blocked unit and an error message.
  */
-const greatChampionRule = (selectedUnits) => {
+const greatChampionRule = (selectedUnits, secondSubFactionList) => {
   let result = [];
 
   const MESSAGE = THAIN_TEXTS.ERRORS.CHAMPION_MESSAGE;
 
-  let presentTribes = selectedUnits.filter((u) => THAIN_TRIBES.includes(u.secondSubFaction)).map((u) => u.secondSubFaction);
-  let missingTribes = THAIN_TRIBES.filter((u) => !presentTribes.includes(u));
+  let presentTribes = selectedUnits.filter((u) => secondSubFactionList.includes(u.secondSubFaction)).map((u) => u.secondSubFaction);
+  let missingTribes = secondSubFactionList.filter((u) => !presentTribes.includes(u));
 
   championTribeMapping.forEach((m) => {
     if (missingTribes.includes(m.tribe)) {
@@ -335,16 +334,16 @@ const dorgaPriestRemove = (selectedUnits) => {
  * @param {[unitCard]} selectedUnits
  * @returns array of objects containing a blocked unit and an error message.
  */
-const veteranRule = (selectedUnits, availableUnits) => {
+const veteranRule = (selectedUnits, availableUnits, secondSubFactionList) => {
   const MESSAGE = THAIN_TEXTS.ERRORS.VETERAN_MESSAGE;
 
   let result = [];
 
   let presentTribes = selectedUnits
-    .filter((u) => u.subFaction === "Stammeskrieger" && THAIN_TRIBES.includes(u.secondSubFaction))
+    .filter((u) => u.subFaction === "Stammeskrieger" && secondSubFactionList.includes(u.secondSubFaction))
     .map((u) => u.secondSubFaction);
 
-  let missingTribes = THAIN_TRIBES.filter((u) => !presentTribes.includes(u));
+  let missingTribes = secondSubFactionList.filter((u) => !presentTribes.includes(u));
 
   availableUnits
     .filter((u) => u.subFaction === "Veteranen der Stämme" && missingTribes.includes(u.secondSubFaction))
