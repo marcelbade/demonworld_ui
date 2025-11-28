@@ -377,6 +377,7 @@ export const SUMMONS_TEXTS = {
 };
 
 export const DARKELF_TEXTS = {
+  FACTION_NAME: "Dunkelelfen",
   SF: {
     WARRIORCASTE: "Kriegerkaste",
     NOBLECASTE: "Adelskaste",
@@ -418,6 +419,7 @@ export const DWARF_TEXTS = {
 };
 
 export const ELF_TEXTS = {
+  FACTION_NAME: "Elfen",
   ATHULAE: "Athulae der Pfeil",
   LAURELION: "Laurelion das Schwert",
   THINUVIEL: "Thinuviel die Geschwinde",
@@ -498,6 +500,7 @@ export const EMPIRE_TEXTS = {
 };
 
 export const GOBLIN_TEXTS = {
+  FACTION_NAME: "Goblins",
   SUB_FACTION_RULES: {
     INFANTRY: "Deine Armeeliste muss zu mindestens 30% aus Infanterie bestehen.",
     ENGINES: "Deine Armeeliste darf maximal zu 20% aus Geräten bestehen.",
@@ -514,6 +517,7 @@ export const GOBLIN_TEXTS = {
 };
 
 export const ISTHAK_TEXTS = {
+  FACTION_NAME: "Isthak",
   SUB_FACTION_RULES: {
     HUMANS: "Deine Armeeliste muss zu 10% bis 60% aus Menschen bestehen.",
     BEASTMEN: "Deine Armeeliste muss zu 10% bis 60% aus Tiermenschen bestehen.",
@@ -525,6 +529,7 @@ export const ISTHAK_TEXTS = {
 };
 
 export const LIZARDMEN_TEXTS = {
+  FACTION_NAME: "Echsenmenschen",
   SUB_FACTION_RULES: {
     BASICTROOPS: "Deine Armeeliste muss zu 20% und 50% aus Grundtruppen bestehen.",
     SPECIALISTS: "Deine Armeeliste darf maximal zu 40% aus spezialisierten Truppen bestehen.",
@@ -535,6 +540,7 @@ export const LIZARDMEN_TEXTS = {
 };
 
 export const NORWINGER_TEXTS = {
+  FACTION_NAME: "Norwinger",
   MOUNTAIN_KING: "Ungin Eisenbruch",
   YETIS: "Yetikrieger",
   GIANT_YETI: "Riesenyeti",
@@ -582,6 +588,7 @@ export const ORK_CLANS_TEXTS = {
 };
 
 export const ORKS_OF_CLANNGETT_TEXTS = {
+  FACTION_NAME: "Orks des Clanngett",
   SUB_FACTION_RULES: {
     UNIT: "Deine Armeeliste muss zu mindestens 25% aus Einheiten bestehen.",
     CHARACTERS: "Deine Armeeliste darf zu höchstens 30% aus Helden bestehen.",
@@ -656,6 +663,7 @@ export const THAIN_TEXTS = {
 };
 
 export const UNDEAD_TEXTS = {
+  FACTION_NAME: "Untote",
   SUB_FACTION_RULES: {
     LESSER_COVENANT: "Deine Armeeliste muss zu 20 bis 70% aus Einheiten des Großen Bundes bestehen.",
     GREATER_COVENANT: "Deine Armeeliste muss zu 15 bis 50% aus Einheiten des Großen Bundes bestehen.",
@@ -671,6 +679,7 @@ export const UNDEAD_TEXTS = {
   },
 };
 export const SOUTHERN_CITY_STATES_TEXTS = {
+  FACTION_NAME: "Südliche Stadtstaaten",
   SF: {
     PROVINCIAL: "Provinzheer",
     NORTH: "Truppen des Nordens",
