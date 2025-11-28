@@ -87,7 +87,7 @@ function App() {
   const [eventName, setEventName] = useState("");
   const [selectedAccessUser, setSelectedAccessUser] = useState([]);
   const [creationDate, setCreationDate] = useState(new Date());
-  const [factionColors, setFactionColors] = useState(new Date());
+  const [factionColors, setFactionColors] = useState("");
 
   // army list was loaded, i.e. fetched from DB
   const [isFetchedArmyList, setIsFetchedArmyList] = useState(false);
