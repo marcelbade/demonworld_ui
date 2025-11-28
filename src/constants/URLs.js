@@ -12,9 +12,7 @@ export const SET_OVERRIDE_DIALOG_URL = `${PREFIX_BE}/auth/user/setDisplayOverrid
 
 // army lists
 export const STORE_ARMY_LIST_URL = `${PREFIX_BE}/auth/armyLists/storeList`;
-
 export const RETRIEVE_ARMY_LISTS_URL = (user) => `${PREFIX_BE}/auth/armyLists/getListsForUser?userName=${user}`;
-
 export const DELETE_ARMY_LIST_URL = (userName, listId) => `${PREFIX_BE}/auth/armyLists/deleteList?userName=${userName}&listId=${listId}`;
 
 // game data
