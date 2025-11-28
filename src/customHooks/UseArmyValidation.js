@@ -1,12 +1,14 @@
 // React
 import { useContext } from "react";
 // components and functions
-import { ArmyContext } from "../contexts/armyContext";
-import { TournamentRulesContext } from "../contexts/tournamentRulesContext";
-import { SelectionContext } from "../contexts/selectionContext";
+import { ruleValidation } from "../gameLogic/armyListValidationRules/ruleValidatorSelector";
+//  context
 import { AllyContext } from "../contexts/allyContext";
 import { AlternativeListContext } from "../contexts/alternativeListContext";
-import { ruleValidation } from "../gameLogic/armyListValidationRules/ruleValidatorSelector";
+import { ArmyContext } from "../contexts/armyContext";
+import { SelectionContext } from "../contexts/selectionContext";
+import { SecondSubFactionContext } from "../contexts/secondSubFactionContext";
+import { TournamentRulesContext } from "../contexts/tournamentRulesContext";
 // constants
 import { NONE } from "../constants/factions";
 
@@ -19,6 +21,7 @@ const useArmyValidation = () => {
   const ALC = useContext(AlternativeListContext);
   const AYC = useContext(AllyContext);
   const SEC = useContext(SelectionContext);
+  const SFC = useContext(SecondSubFactionContext);
   const TC = useContext(TournamentRulesContext);
 
   /**
@@ -66,6 +69,7 @@ const useArmyValidation = () => {
       selectedAlternativeLists: ALC.selectedAlternativeLists,
       tournamentOverrideRules: TC.tournamentOverrideRules,
       listOfAlliedUnits: AYC.listOfAlliedUnits,
+      secondSubFactionList: SFC.secondSubFactionList,
     });
 
     return collectValidationResults(currentList, validationResult);
