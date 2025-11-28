@@ -7,17 +7,21 @@ import {
   MenuItem,
   Select,
 } from "@mui/material";
+// context
+import { GameDataContext } from "../../../contexts/gameDataContext";
 // constants
 import { LOAD_ARMY_LIST_DIALOG } from "../../../constants/textsAndMessages";
-import { ALL_FACTIONS_ARRAY } from "../../../constants/factions";
+import { useContext } from "react";
 
 const ListFactionFilter = (props) => {
   const theme = useTheme();
 
+  const GDC = useContext(GameDataContext);
+
   const createFactionSelectOptions = () => {
     const result = [];
     result.push(LOAD_ARMY_LIST_DIALOG.SHOW_ALL_FACTIONS);
-    ALL_FACTIONS_ARRAY.sort((a, b) => a > b).forEach((f) => result.push(f));
+    GDC.allFactionNames.sort((a, b) => a > b).forEach((f) => result.push(f));
 
     return result;
   };

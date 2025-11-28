@@ -31,7 +31,7 @@ import ItemProvider from "./contexts/itemContext";
 import SelectionProvider from "./contexts/selectionContext";
 import RightMenuProvider from "./contexts/rightMenuContext";
 import CompendiumProvider from "./contexts/compendiumContext";
-import ColorProvider from "./contexts/colorContext";
+import GameDataProvider from "./contexts/gameDataContext";
 import SpellProvider from "./contexts/spellContext";
 // theme
 import lightTheme from "./AppTheme/lightTheme";
@@ -39,7 +39,14 @@ import darkTheme from "./AppTheme/darkTheme";
 import { ThemeProvider } from "@mui/material";
 // constants
 import { NONE, NO_ALLY } from "./constants/factions";
-import { ALL_FACTION_COLORS_URL, ALL_UNITS_URL, FACTION_DTOS_URL, ITEM_DTOS_URL, SPELL_DTO_URL } from "./constants/URLs";
+import {
+  ALL_FACTION_COLORS_URL,
+  ALL_FACTION_NAMES_URL,
+  ALL_UNITS_URL,
+  FACTION_DTOS_URL,
+  ITEM_DTOS_URL,
+  SPELL_DTO_URL,
+} from "./constants/URLs";
 // custom hooks
 import useAxios from "./customHooks/UseAxios";
 import useCompendiumTableControl from "./customHooks/UseCompendiumTableControl";
@@ -78,7 +85,11 @@ function App() {
   // toggle list display
   const [simpleModeOn, setSimpleMode] = useState(false);
 
-  // army meta data
+  // general game data
+  const [factionColors, setFactionColors] = useState("");
+  const [allFactionNames, setAllFactionNames] = useState([]);
+
+  // faction meta data
   // DB primary key - do not initialize as a number to avoid write errors!
   const [armyID, setArmyID] = useState(null);
   const [teamName, setTeamName] = useState("");
@@ -87,7 +98,6 @@ function App() {
   const [eventName, setEventName] = useState("");
   const [selectedAccessUser, setSelectedAccessUser] = useState([]);
   const [creationDate, setCreationDate] = useState(new Date());
-  const [factionColors, setFactionColors] = useState("");
 
   // army list was loaded, i.e. fetched from DB
   const [isFetchedArmyList, setIsFetchedArmyList] = useState(false);
@@ -220,6 +230,13 @@ function App() {
     fetchColorData();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  /**
+   *fetch faction names from the Back End via REST.
+   */
+  useEffect(() => {
+    fetchFactionNameData();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
   const fetchFactionData = async () => {
     callAxios.fetchData(setFetchedFactions, FACTION_DTOS_URL);
   };
@@ -234,6 +251,10 @@ function App() {
 
   const fetchColorData = async () => {
     callAxios.fetchData(setFactionColors, ALL_FACTION_COLORS_URL);
+  };
+
+  const fetchFactionNameData = async () => {
+    callAxios.fetchData(setAllFactionNames, ALL_FACTION_NAMES_URL);
   };
 
   return (
@@ -251,10 +272,10 @@ function App() {
             setSelectedFactionForSpell: setSelectedFactionForSpell,
           }}
         >
-          <ColorProvider
+          <GameDataProvider
             value={{
+              allFactionNames: allFactionNames,
               factionColors: factionColors,
-              setFactionColors: setFactionColors,
             }}
           >
             <UserProvider
@@ -470,7 +491,7 @@ function App() {
                 </MenuProvider>
               </ListDisplayProvider>
             </UserProvider>
-          </ColorProvider>
+          </GameDataProvider>
         </SpellProvider>
       </ThemeProvider>
     </StyledEngineProvider>

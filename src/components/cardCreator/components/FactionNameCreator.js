@@ -9,8 +9,9 @@ import CreatorTextInput from "./CreatorTextInput";
 // contexts
 import { ArmyContext } from "../../../contexts/armyContext";
 import { CardCreationContext } from "../../../contexts/cardCreationContext";
+import { GameDataContext } from "../../../contexts/gameDataContext";
 // constants
-import { ALL_FACTIONS_ARRAY, NONE } from "../../../constants/factions";
+import { NONE } from "../../../constants/factions";
 import { CREATOR } from "../../../constants/textsAndMessages";
 
 const FactionNameCreator = () => {
@@ -18,20 +19,21 @@ const FactionNameCreator = () => {
 
   const AC = useContext(ArmyContext);
   const CCC = useContext(CardCreationContext);
+  const GDC = useContext(GameDataContext);
 
   const handleFactionInput = (name) => {
     CCC.setUnit({ ...CCC.unit, faction: name });
   };
 
   const clearFactionName = () => {
-    return ALL_FACTIONS_ARRAY.filter((f) => f !== CCC.factionName);
+    return GDC.allFactionNames.filter((f) => f !== CCC.factionName);
   };
 
   const setFactionList = () => {
     const resultingList =
       CCC.factionName !== NONE //
         ? clearFactionName()
-        : ALL_FACTIONS_ARRAY;
+        : GDC.allFactionNames;
 
     return resultingList;
   };

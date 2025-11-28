@@ -15,7 +15,7 @@ import {
 import DeleteIcon from "@mui/icons-material/Delete";
 import FileUploadIcon from "@mui/icons-material/FileUpload";
 // context
-import { ColorContext } from "../../../contexts/colorContext";
+import { GameDataContext } from "../../../contexts/gameDataContext";
 // constants
 import { NO_EVENT } from "../../../constants/eventConstants";
 import { ARMY_LIST, COMPENDIUM } from "../../../constants/textsAndMessages";
@@ -23,10 +23,10 @@ import { ARMY_LIST, COMPENDIUM } from "../../../constants/textsAndMessages";
 import usePointCostCalculator from "../../../customHooks/UsePointCostCalculator";
 
 const FetchedArmiesList = (props) => {
-  const COC = useContext(ColorContext);
+  const GDC = useContext(GameDataContext);
 
   const getFactionColor = (factioName) => {
-    const factionColor = COC.factionColors.filter((color) => color.faction === factioName)[0];
+    const factionColor = GDC.factionColors.filter((color) => color.faction === factioName)[0];
     
     return `rgb(${factionColor.rgbA},${factionColor.rgbB},${factionColor.rgbC})`;
   };

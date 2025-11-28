@@ -4,12 +4,13 @@ import { useContext } from "react";
 import { CompendiumContext } from "../../../../contexts/compendiumContext";
 import SelectionInput from "../../../shared/selectionInput";
 //  Constants
-import { ALL_FACTIONS_ARRAY } from "../../../../constants/factions";
 import { INPUT_TEXTS } from "../../../../constants/textsAndMessages";
 import { Grid2 as Grid } from "@mui/material";
+import { GameDataContext } from "../../../../contexts/gameDataContext";
 
 const FactionAndUnitSelectors = () => {
   const CC = useContext(CompendiumContext);
+  const GDC = useContext(GameDataContext);
 
   const noSelectedFaction = CC.selectedFaction === "";
   const noSelectedSubFaction = CC.selectedSubFaction === "";
@@ -21,7 +22,7 @@ const FactionAndUnitSelectors = () => {
    * @returns an array containing all faction names.
    */
   const setFactionNamesOptions = () => {
-    return ALL_FACTIONS_ARRAY.sort();
+    return GDC.allFactionNames.sort();
   };
 
   /**

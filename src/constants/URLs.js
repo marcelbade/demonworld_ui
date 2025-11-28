@@ -16,6 +16,7 @@ export const RETRIEVE_ARMY_LISTS_URL = (user) => `${PREFIX_BE}/auth/armyLists/ge
 export const DELETE_ARMY_LIST_URL = (userName, listId) => `${PREFIX_BE}/auth/armyLists/deleteList?userName=${userName}&listId=${listId}`;
 
 // game data
+export const ALL_FACTION_NAMES_URL = `${PREFIX_BE}/public/game/factionNames`;
 export const FACTION_DTOS_URL = `${PREFIX_BE}/public/game/factionDTOs`;
 export const ITEM_DTOS_URL = `${PREFIX_BE}/public/game/itemDTOs`;
 export const ALL_UNITS_URL = `${PREFIX_BE}/public/game/allUnits`;
