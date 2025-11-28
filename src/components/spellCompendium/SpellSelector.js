@@ -1,19 +1,24 @@
+// react
+import { useContext } from "react";
 // mui
 import { Grid2 as Grid } from "@mui/material";
 // functions and components
 import SelectionInput from "../shared/selectionInput";
+// context
+import { GameDataContext } from "../../contexts/gameDataContext";
 // constants
-import { ALL_FACTIONS_ARRAY } from "../../constants/factions";
 import { SPELL_COMPENDIUM } from "../../constants/textsAndMessages";
 import { NO_SELECTION } from "./spellUtil";
 
 const SpellSelector = (props) => {
+  const GDC = useContext(GameDataContext);
+
   /**
    * Function generates the options for the faction name selector.
    * @returns an array containing all faction names.
    */
   const setFactionNamesOptions = () => {
-    const FACTIONS = [...ALL_FACTIONS_ARRAY, SPELL_COMPENDIUM.SHOW_ALL_FACTIONS];
+    const FACTIONS = [...GDC.allFactionNames, SPELL_COMPENDIUM.SHOW_ALL_FACTIONS];
     return FACTIONS.sort();
   };
 
