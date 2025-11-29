@@ -252,6 +252,16 @@ const darkTheme = createTheme({
         },
       },
     },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          "& .MuiInputBase-input": { fontFamily: "jaapokkiRegular" },
+          "& .MuiFormLabel-root": {
+            fontFamily: "NotMaryKate",
+          },
+        },
+      },
+    },
   },
 });
 
