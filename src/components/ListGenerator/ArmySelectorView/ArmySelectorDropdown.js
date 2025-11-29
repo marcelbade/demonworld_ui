@@ -9,27 +9,28 @@ import useArmyValidation from "../../../customHooks/UseArmyValidation";
 import useRightSideMenuController from "../../../customHooks/UseRightSideMenuController";
 import UseArmyStateLoader from "../../../customHooks/UseArmyStateLoader";
 // context
-import { RightMenuContext } from "../../../contexts/rightMenuContext";
-import { SelectionContext } from "../../../contexts/selectionContext";
-import { AlternativeListContext } from "../../../contexts/alternativeListContext";
 import { AllyContext } from "../../../contexts/allyContext";
+import { AlternativeListContext } from "../../../contexts/alternativeListContext";
+import { GameDataContext } from "../../../contexts/gameDataContext";
 import { SecondSubFactionContext } from "../../../contexts/secondSubFactionContext";
+import { SelectionContext } from "../../../contexts/selectionContext";
+import { RightMenuContext } from "../../../contexts/rightMenuContext";
 // constants
 import {
-  ALL_FACTIONS_ARRAY,
-  NONE, //
   NO_ALLY,
+  NONE, //
 } from "../../../constants/factions";
 import { INPUT_TEXTS } from "../../../constants/textsAndMessages";
 
 const ArmySelectorDropdown = () => {
   const AC = useContext(ArmyContext);
-  const IC = useContext(ItemContext);
-  const RC = useContext(RightMenuContext);
-  const SEC = useContext(SelectionContext);
   const ALC = useContext(AlternativeListContext);
   const AYC = useContext(AllyContext);
+  const IC = useContext(ItemContext);
+  const GDC = useContext(GameDataContext);
+  const SEC = useContext(SelectionContext);
   const SFC = useContext(SecondSubFactionContext);
+  const RC = useContext(RightMenuContext);
 
   const validation = useArmyValidation();
   const stateLoader = UseArmyStateLoader();
@@ -56,8 +57,8 @@ const ArmySelectorDropdown = () => {
 
   /**
    * Function triggers when user enters a value from the dropdown list.
-   * The Function simply wraps three functions. 
-   * The last one sets the flag for the right side menu 
+   * The Function simply wraps three functions.
+   * The last one sets the flag for the right side menu
    * to true so it opens slowly.
    * @param {String} value
    */
@@ -105,7 +106,7 @@ const ArmySelectorDropdown = () => {
     const resultingList =
       AC.selectedFactionName !== NONE //
         ? currentFactionList()
-        : ALL_FACTIONS_ARRAY;
+        : GDC.allFactionNames;
 
     return resultingList;
   };
@@ -115,7 +116,7 @@ const ArmySelectorDropdown = () => {
    * @returns a filtered array of faction names.
    */
   const currentFactionList = () => {
-    return ALL_FACTIONS_ARRAY.filter((f) => f !== AC.selectedFactionName);
+    return GDC.allFactionNames.filter((f) => f !== AC.selectedFactionName);
   };
 
   return (
