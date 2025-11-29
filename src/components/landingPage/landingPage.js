@@ -7,6 +7,7 @@ import deathIcon from "../../assets/icons/icons8-death-64.png";
 import calculatorIcon from "../../assets/icons/icons8-calculator-64.png";
 import bookIcon from "../../assets/icons/icons8-book-64.png";
 import scrollIcon from "../../assets/icons/scroll.png";
+import spellbook from "../../assets/icons/spellbook.png";
 // functions and components
 import NavigationButton from "../shared/navigation/NavigationButton";
 import UserAccountDrawer from "../Login/UserAccountDrawer";
@@ -47,7 +48,7 @@ const LandingPage = () => {
     {
       text: LANDINGPAGE.MAGIC, //
       relativeURL: "/spellCompendium",
-      icon: scrollIcon,
+      icon: spellbook,
       display: true,
     },
   ];
