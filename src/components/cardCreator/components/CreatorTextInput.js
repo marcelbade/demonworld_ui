@@ -45,15 +45,6 @@ const CreatorTextInput = (props) => {
           props.backgroundColor === undefined //
             ? null
             : props.backgroundColor,
-
-        "& .MuiFormLabel-root": {
-          color: "black",
-          fontFamily: "notMaryKate",
-        },
-
-        "& .MuiFilledInput-root": {
-          background: "orange",
-        },
       }}
       InputProps={{
         //  descpription text or icon
@@ -79,13 +70,6 @@ const CreatorTextInput = (props) => {
             )}
           </InputAdornment>
         ),
-        // Style of text typed into field
-        style: {
-          fontFamily: "jaapokkiRegular",
-          fontSize: "20px",
-          color: props.valueColor === undefined ? "black" : props.valueColor,
-          width: props.width,
-        },
       }}
     />
   );

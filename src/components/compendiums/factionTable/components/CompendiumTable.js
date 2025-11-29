@@ -75,14 +75,6 @@ const CompendiumTable = () => {
             count={numberOfPages} //
             page={selectedPage}
             onChange={turnPage}
-            sx={{
-              "& .MuiButtonBase-root": {
-                height: "2em",
-                width: "2em",
-                fontSize: "20px",
-                marginBottom: "1em",
-              },
-            }}
           />
         </Grid>
       </Grid>

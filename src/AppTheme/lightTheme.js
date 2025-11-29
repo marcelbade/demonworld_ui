@@ -240,6 +240,29 @@ const lightTheme = createTheme({
         },
       },
     },
+    MuiPagination: {
+      styleOverrides: {
+        root: {
+          "& .MuiButtonBase-root": {
+            height: "2em",
+            width: "2em",
+            fontSize: "20px",
+            fontFamily: "jaapokkiRegular",
+            marginBottom: "1em",
+          },
+        },
+      },
+    },
+    MuiTextField: {
+      styleOverrides: {
+        root: {
+          "& .MuiInputBase-input": { fontFamily: "jaapokkiRegular" },
+          "& .MuiFormLabel-root": {
+            fontFamily: "NotMaryKate",
+          },
+        },
+      },
+    },
   },
 });
 

@@ -72,7 +72,6 @@ const EditSpellProperty = (props) => {
         sx={{
           width: "80%", //
           topmargin: "30em",
-          "& .MuiInputBase-input": { fontFamily: "jaapokkiRegular" },
         }}
         id="outlined-multiline-flexible" //
         multiline

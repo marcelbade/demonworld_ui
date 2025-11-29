@@ -104,20 +104,26 @@ const darkTheme = createTheme({
       styleOverrides: {
         button: {
           fontFamily: "jaapokkiRegular",
+          fontSize: "20px",
         },
         body1: {
           fontFamily: "jaapokkiRegular",
-        },
-        subtitle1: {
-          fontFamily: "jaapokkiRegular",
+          fontSize: "16px",
         },
         h5: {
           fontFamily: "NotMaryKate",
+          fontSize: "20px",
         },
         h6: {
           fontFamily: "NotMaryKate",
+          fontSize: "20px",
         },
         h3: {
+          fontFamily: "NotMaryKate",
+          fontSize: "20px",
+        },
+        subtitle1: {
+          fontSize: "20px",
           fontFamily: "NotMaryKate",
         },
       },
@@ -231,6 +237,18 @@ const darkTheme = createTheme({
         root: {
           display: "flex",
           justifyContent: "center",
+        },
+      },
+    },
+    MuiPagination: {
+      styleOverrides: {
+        root: {
+          "& .MuiButtonBase-root": {
+            height: "2em",
+            width: "2em",
+            fontSize: "20px",
+            marginBottom: "1em",
+          },
         },
       },
     },
