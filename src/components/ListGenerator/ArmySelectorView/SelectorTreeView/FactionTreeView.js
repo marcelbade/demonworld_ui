@@ -55,6 +55,7 @@ const FactionTreeView = () => {
    *   it was selected
    */
   const showTabBttns = () => {
+    // TODO refactor, embarrassing!
     let factionHasAlly = AYC.allyName !== NO_ALLY;
     let isAllySelected = true;
 
@@ -83,8 +84,11 @@ const FactionTreeView = () => {
         />
       ) : null}
       <Grid
-        container
-        direction="row" //
+        container //
+        direction="row"
+        sx={{
+          marginTop:"2em",
+        }}
       >
         <TabPanel
           panelNr={0}
