@@ -38,7 +38,6 @@ const ArmyListUnitEntry = (props) => {
                 variant="body1"
                 sx={{
                   color: theme.palette.errorColor,
-                  fontFamily: "jaapokkiRegular",
                 }}
               >
                 {UNIT}
