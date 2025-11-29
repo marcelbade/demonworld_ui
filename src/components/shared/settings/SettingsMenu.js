@@ -62,7 +62,11 @@ const SettingsMenu = () => {
           <IconButton edge="start" color="inherit" onClick={handleClose} aria-label="close">
             <CancelIcon color="error" />
           </IconButton>
-          <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+          <Typography
+            variant="h6"
+            sx={{ ml: 2, flex: 1 }} //
+            component="div"
+          >
             {OPTIONS.OPTIONS_DIALOG_TITLE}
           </Typography>
         </Toolbar>

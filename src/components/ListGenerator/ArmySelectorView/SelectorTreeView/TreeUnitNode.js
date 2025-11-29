@@ -65,7 +65,12 @@ const TreeUnitNode = (props) => {
   return (
     <Stack>
       <Stack alignItems="center" direction="row">
-        <Typography sx={switchNodeStyle(!props.isValidUnit)}>{props.unit.unitName}</Typography>
+        <Typography
+          variant="body1"
+          sx={switchNodeStyle(!props.isValidUnit)} //
+        >
+          {props.unit.unitName}
+        </Typography>
         {/* card preview button */}
         {sideMenuController.buttons.map((b, i) => {
           return (
@@ -92,6 +97,7 @@ const TreeUnitNode = (props) => {
       <Stack alignItems="center" direction="row">
         {
           <Typography
+            variant="body1"
             sx={{
               marginTop: "-0.8em",
               marginRight: "1em",
@@ -102,6 +108,7 @@ const TreeUnitNode = (props) => {
         }
         {
           <Typography
+            variant="body1"
             sx={{
               marginTop: "-0.8em", //
             }}
@@ -110,7 +117,12 @@ const TreeUnitNode = (props) => {
           </Typography>
         }
       </Stack>
-      <Typography sx={switchNodeStyle(!props.isValidUnit)}>{props.unit.points}</Typography>
+      <Typography
+        variant="body1" //
+        sx={switchNodeStyle(!props.isValidUnit)}
+      >
+        {props.unit.points}
+      </Typography>
     </Stack>
   );
 };

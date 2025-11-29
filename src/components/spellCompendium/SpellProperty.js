@@ -34,6 +34,7 @@ const SpellProperty = (props) => {
 
       <Grid size={1}>
         <Typography
+          variant="body1"
           sx={{
             paddingLeft: "1em",
           }}
@@ -55,7 +56,7 @@ const SpellProperty = (props) => {
             content={props.content}
           />
         ) : (
-          <Typography>{props.content}</Typography>
+          <Typography variant="body1">{props.content}</Typography>
         )}
       </Grid>
     </Grid>

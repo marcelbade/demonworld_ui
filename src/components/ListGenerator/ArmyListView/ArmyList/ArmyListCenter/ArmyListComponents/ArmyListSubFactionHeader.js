@@ -10,7 +10,11 @@ import { useTheme } from "@emotion/react";
 const ArmyListSubFactionHeader = (props) => {
   const theme = useTheme();
 
-  const STYLES = { width: "60%", borderBottom: "solid 4px black", marginBottom: "1em", fontSize: "20px" };
+  const STYLES = {
+    width: "60%", //
+    borderBottom: "solid 4px black",
+    marginBottom: "1em",
+  };
 
   const TITLE = props.subFaction;
 

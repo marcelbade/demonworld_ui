@@ -85,7 +85,7 @@ const TournamentSettings = () => {
           />
         </FormGroup>
       </FormControl>
-      <Typography>{OPTIONS.MAX_POINTS_FOR_HERO}</Typography>
+      <Typography variant="body1">{OPTIONS.MAX_POINTS_FOR_HERO}</Typography>
       <TextField
         id="maxHeroValue"
         name="maxHeroValue"
@@ -100,7 +100,12 @@ const TournamentSettings = () => {
         sx={{ width: "5%" }}
       />
 
-      <Typography sx={ENABLED_BTTN_TEXT}>{OPTIONS.HOW_MANY_TIMES}</Typography>
+      <Typography
+        variant="body1" //
+        sx={ENABLED_BTTN_TEXT}
+      >
+        {OPTIONS.HOW_MANY_TIMES}
+      </Typography>
       <TextField
         id="maxNumber"
         name="maxNumber"
@@ -117,7 +122,12 @@ const TournamentSettings = () => {
 
       <FormControl component="fieldset" variant="standard">
         <FormLabel sx={ENABLED_BTTN_TEXT} component="legend">
-          <Typography sx={ENABLED_BTTN_TEXT}>{OPTIONS.ENFORCE_UNIQUE_RULE} </Typography>
+          <Typography
+            variant="body1" //
+            sx={ENABLED_BTTN_TEXT}
+          >
+            {OPTIONS.ENFORCE_UNIQUE_RULE}{" "}
+          </Typography>
         </FormLabel>
         <FormGroup>
           <FormControlLabel

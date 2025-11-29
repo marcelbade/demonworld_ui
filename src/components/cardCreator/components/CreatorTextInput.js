@@ -1,11 +1,9 @@
-// react
-import React from "react";
 // material ui
 import { InputAdornment, TextField, Typography } from "@mui/material";
 // import { useTheme } from "@emotion/react";
 import CustomIcon from "../../shared/CustomIcon";
 
-const   CreatorTextInput = (props) => {
+const CreatorTextInput = (props) => {
   // const theme = useTheme();
 
   const ICON_SIZE = 25;

@@ -26,7 +26,10 @@ const UserSettings = () => {
         height: "100%",
       }}
     >
-      <Typography sx={theme.palette.options.title} variant="h6">
+      <Typography
+        variant="h6"
+        sx={theme.palette.options.title} //
+      >
         {OPTIONS.CONFIRMATION_TITLE}
       </Typography>
       <Typography variant="body1">{OPTIONS.CONFIRMATION_EXPLAINATION}</Typography>

@@ -16,8 +16,8 @@ const LostPointDisplay = (props) => {
       alignItems="center"
     >
       <Typography
-        sx={{ marginRight: "1em" }} //
         variant="h5"
+        sx={{ marginRight: "1em" }} //
       >
         {`${LOSS_CALCULATOR.LOST_POINTS} ${props.totalPointsLost.toFixed(2)}`}
       </Typography>

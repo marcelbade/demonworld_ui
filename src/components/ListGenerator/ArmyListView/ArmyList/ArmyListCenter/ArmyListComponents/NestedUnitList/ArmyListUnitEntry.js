@@ -27,7 +27,7 @@ const ArmyListUnitEntry = (props) => {
         key={props.unit.secondSubFaction}
         primary={
           props.isValid ? (
-            <Typography variant="button">{UNIT}</Typography>
+            <Typography variant="body1">{UNIT}</Typography>
           ) : (
             <Grid //
               container
@@ -35,7 +35,7 @@ const ArmyListUnitEntry = (props) => {
               alignItems="center"
             >
               <Typography
-                variant="button"
+                variant="body1"
                 sx={{
                   color: theme.palette.errorColor,
                   fontFamily: "jaapokkiRegular",
@@ -44,7 +44,7 @@ const ArmyListUnitEntry = (props) => {
                 {UNIT}
               </Typography>
               <ContextHelpButton
-                isVisible = {true}
+                isVisible={true}
                 message={props.validationMessage} //
                 type={PUSH_MESSAGE_TYPES.ERROR}
               />

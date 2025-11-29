@@ -1,7 +1,7 @@
 // Functions And Components
 import CustomIcon from "../CustomIcon";
 // Material UI
-import { IconButton, Tooltip, Typography } from "@mui/material";
+import { IconButton, Tooltip } from "@mui/material";
 // icons
 import { ChevronLeft } from "@mui/icons-material";
 
@@ -16,10 +16,6 @@ const NaviIconButton = (props) => {
           props.toPage(props.relativeURL);
           props.openMenu(false);
         }}
-        // sx={{
-        //   width: props.boxWidth, //
-        //   height: props.boxHeight,
-        // }}
       >
         {props.isCustomIcon ? (
           <CustomIcon

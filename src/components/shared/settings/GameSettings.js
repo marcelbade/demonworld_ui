@@ -18,7 +18,10 @@ const GameSettings = () => {
       alignContent="flex-start"
       spacing={2}
     >
-      <Typography sx={theme.palette.options.title} variant="h6">
+      <Typography
+        variant="h6"
+        sx={theme.palette.options.title} //
+      >
         {OPTIONS.TOURNAMENT_RULES_TITLE}
       </Typography>
       <Typography variant="body1">{OPTIONS.EXPLAINATION_TOURNAMENT_RULES}</Typography>

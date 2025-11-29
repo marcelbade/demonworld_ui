@@ -20,6 +20,7 @@ const TierIcon = (props) => {
       anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
       badgeContent={
         <Typography
+          variant="body1"
           sx={{
             color: "white", //
             fontFamily: "notMaryKate",

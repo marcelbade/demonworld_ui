@@ -24,8 +24,8 @@ const CardFrontTitle = (props) => {
       direction="row"
     >
       <Typography
-        sx={theme.palette.statCards.cardTitle} //
         variant="h4"
+        sx={theme.palette.statCards.cardTitle} //
         align="center"
       >
         {renderDynamicIcons("*", props.unit.commandStars)}
@@ -41,8 +41,8 @@ const CardFrontTitle = (props) => {
         {props.unit.isMultiStateUnit ? props.unit.multiCardName : props.unit.unitName}
       </Typography>
       <Typography
-        sx={theme.palette.cardTitle} //
         variant="h6"
+        sx={theme.palette.cardTitle} //
         align="center"
       >
         {renderDynamicIcons("/", props.unit.magic)}

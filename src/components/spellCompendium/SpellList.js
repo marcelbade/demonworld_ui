@@ -10,7 +10,10 @@ import { useEffect } from "react";
 const SpellList = (props) => {
   const theme = useTheme();
 
-  useEffect(() => {}, [JSON.stringify(props.displaySpells)]);
+  useEffect(
+    () => {}, //
+    [JSON.stringify(props.displaySpells)] // eslint-disable-line react-hooks/exhaustive-deps
+  ); 
 
   return (
     <>
@@ -59,11 +62,11 @@ const SpellList = (props) => {
               >
                 <ListItemText
                   sx={{ width: "8em", minWidth: "8em" }} //
-                  primary={<Typography>{s.spellName}</Typography>}
+                  primary={<Typography variant="body1">{s.spellName}</Typography>}
                 />
                 <ListItemText
                   primary={
-                    <Typography>
+                    <Typography variant="body1">
                       {spellTierIsText(s.spellTier) //
                         ? "*"
                         : s.spellTier}

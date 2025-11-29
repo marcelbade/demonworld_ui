@@ -5,7 +5,7 @@ import { PDFViewer, Document, Page } from "@react-pdf/renderer";
 // components
 import SpellListPdf from "./SpellListPdf";
 import { commonStyles } from "../commonPdfStyles/commonStyles";
- // components and functions
+// components and functions
 
 // styles
 
@@ -16,8 +16,6 @@ const SpellCardPdfBox = () => {
 
   useEffect(() => {
     const transportObj = JSON.parse(localStorage.getItem("transportObj"));
-
-    console.log("transportObj", transportObj);
 
     setData(transportObj.list);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps

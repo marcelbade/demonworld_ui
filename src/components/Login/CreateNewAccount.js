@@ -122,9 +122,7 @@ const CreateNewAccount = () => {
           width: "100%",
         }}
       ></Grid>
-
       <Typography variant="h3">{USER_AUTH.LOGIN_PROMPT_TITLE}</Typography>
-
       <Box
         component="form"
         onChange={validateInput}

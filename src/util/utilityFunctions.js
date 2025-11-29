@@ -122,7 +122,7 @@ export const renderSpecialRules = (rule) => {
 
   return (
     <Tooltip title={rule === "-" ? COMPENDIUM.NO_SPECIAL_RULES : rule}>
-      <Typography>{rule === "-" ? "-" : rulePreview}</Typography>
+      <Typography variant="body1">{rule === "-" ? "-" : rulePreview}</Typography>
     </Tooltip>
   );
 };

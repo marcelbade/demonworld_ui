@@ -37,7 +37,10 @@ const CompendiumSettings = () => {
         height: "100%",
       }}
     >
-      <Typography sx={theme.palette.options.title} variant="h6">
+      <Typography
+        variant="h6" //
+        sx={theme.palette.options.title}
+      >
         {OPTIONS.COMPENDIUM_ROWS_TITLE}
       </Typography>
       <Typography variant="body1">{OPTIONS.COMPENDIUM_EXPLAINATION}</Typography>
@@ -47,8 +50,17 @@ const CompendiumSettings = () => {
         direction="column"
         sx={{ marginTop: "2em" }}
       >
-        <Typography>{COMPENDIUM.NUMBER_OF_ROWS}</Typography>
-        <Typography color="error" >{COMPENDIUM.ROWS_WARNING}</Typography>
+        <Typography
+          variant="body1" //
+        >
+          {COMPENDIUM.NUMBER_OF_ROWS}
+        </Typography>
+        <Typography
+          variant="body1" //
+          color="error"
+        >
+          {COMPENDIUM.ROWS_WARNING}
+        </Typography>
         <Select
           labelId="rowSelect" //
           id="rowSelect"

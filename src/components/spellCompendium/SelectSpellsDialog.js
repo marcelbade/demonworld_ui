@@ -1,5 +1,16 @@
 // material ui
-import { Dialog, List, ListItemText, Typography, ListItem, FormGroup, FormControlLabel, Checkbox, Button } from "@mui/material";
+import {
+  Dialog,
+  List,
+  ListItemText,
+  Typography,
+  ListItem,
+  FormGroup,
+  FormControlLabel,
+  Checkbox,
+  Button,
+  Grid2 as Grid,
+} from "@mui/material";
 // components and functions
 import { spellTierIsText } from "./spellUtil";
 // constants
@@ -8,6 +19,14 @@ import { useState } from "react";
 
 const SelectSpellsDialog = (props) => {
   const [allBoxesChecked, setAllBoxesChecked] = useState(false);
+  // options
+  const [showEffectChecked, setShowEffectChecked] = useState(true);
+  const [showRequirementsChecked, setShowRequirementsChecked] = useState(true);
+  const [ShowDurationChecked, setShowDurationChecked] = useState(true);
+  const [showTierchecked, setShowTierchecked] = useState(true);
+  const [showTargetchecked, setShowTargetchecked] = useState(true);
+  // use abbreviated effect text?
+  const [showAbbreviationchecked, setShowAbbreviationchecked] = useState(false);
 
   const handleClose = () => {
     props.setShowPrintTypeDialog(false);
@@ -19,7 +38,7 @@ const SelectSpellsDialog = (props) => {
   };
 
   const checkAllBoxes = () => {
-    let allChecked =  false;
+    let allChecked = false;
 
     props.displaySpells.forEach((s) => {
       if (s.isSelected) {
@@ -40,76 +59,149 @@ const SelectSpellsDialog = (props) => {
     props.setDisplaySpells([...props.displaySpells]);
   };
 
+  const optionsTable = [
+    {
+      labelText: SPELL_COMPENDIUM.PRINT_ABBREVIATED_EFFECT,
+      checked: showAbbreviationchecked,
+      controlFunction: setShowAbbreviationchecked,
+    },
+    {
+      labelText: SPELL_COMPENDIUM.PRINT_EFFECT,
+      checked: showEffectChecked,
+      controlFunction: setShowEffectChecked,
+    },
+    {
+      labelText: SPELL_COMPENDIUM.PRINT_REQUIREMENTS,
+      checked: showRequirementsChecked,
+      controlFunction: setShowRequirementsChecked,
+    },
+    {
+      labelText: SPELL_COMPENDIUM.PRINT_DURATION,
+      checked: ShowDurationChecked,
+      controlFunction: setShowDurationChecked,
+    },
+    {
+      labelText: SPELL_COMPENDIUM.PRINT_TIER,
+      checked: showTierchecked,
+      controlFunction: setShowTierchecked,
+    },
+    {
+      labelText: SPELL_COMPENDIUM.PRINT_TARGET,
+      checked: showTargetchecked,
+      controlFunction: setShowTargetchecked,
+    },
+  ];
+
   return (
     <Dialog
       open={props.showListTypeDialog} //
       onClose={handleClose}
-      sx={{
-        minWidth: "100em",
-      }}
+      maxWidth="md"
+      fullWidth={true}
     >
-      <FormGroup>
-        <FormControlLabel
-          control={
-            <Checkbox
-              checked={allBoxesChecked}
-              onChange={() => {
-                setAllBoxesChecked((prevState) => !prevState);
-                checkAllBoxes();
-              }}
-              sx={{ marginLeft: "16px" }}
-            />
-          }
-        />
-      </FormGroup>
-      <Typography />
-
-      <List>
-        {props.displaySpells
-          .sort((a, b) => a.spellName > b.spellName)
-          .map((s, i) => (
-            <ListItem
-              key={i} //
-            >
-              <FormGroup>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      checked={s.isSelected}
-                      onClick={() => {
-                        markForPrint(s);
-                      }}
-                    />
-                  }
-                />
-              </FormGroup>
-              <ListItemText
-                sx={{ width: "8em", minWidth: "8em" }} //
-                primary={<Typography>{s.spellName}</Typography>}
-              />
-              <ListItemText
-                primary={
-                  <Typography>
-                    {spellTierIsText(s.spellTier) //
-                      ? "*"
-                      : s.spellTier}
-                  </Typography>
-                }
-              />
-            </ListItem>
-          ))}
-      </List>
-      <Button
-        variant="outlined" //
-        onClick={props.createPrintableFile}
-        sx={{
-          marginLeft: "10em", //
-          marginRight: "10em",
-          marginBottom: "5em",
-        }}
+      <FormControlLabel
+        sx={{ marginBottom: "2em", marginTop: "2em" }}
+        control={
+          <Checkbox
+            checked={allBoxesChecked}
+            onChange={() => {
+              setAllBoxesChecked((prevState) => !prevState);
+              checkAllBoxes();
+            }}
+            sx={{ marginLeft: "16px" }}
+          />
+        }
+        label={"Alles Drucken"}
+        labelPlacement="end"
+      />
+      <Grid
+        container //
+        direction="row"
       >
-        {SPELL_COMPENDIUM.PRINT_LIST}
-      </Button>
+        <Grid
+          size={6} //
+        >
+          <List>
+            {props.displaySpells
+              .sort((a, b) => a.spellName > b.spellName)
+              .map((s, i) => (
+                <ListItem
+                  key={i} //
+                >
+                  <FormGroup>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={s.isSelected}
+                          onClick={() => {
+                            markForPrint(s);
+                          }}
+                        />
+                      }
+                    />
+                  </FormGroup>
+                  <ListItemText
+                    sx={{ width: "8em", minWidth: "8em" }} //
+                    primary={<Typography variant="body1">{s.spellName}</Typography>}
+                  />
+                  <ListItemText
+                    primary={
+                      <Typography variant="body1">
+                        {spellTierIsText(s.spellTier) //
+                          ? "*"
+                          : s.spellTier}
+                      </Typography>
+                    }
+                  />
+                </ListItem>
+              ))}
+          </List>
+        </Grid>
+        <Grid
+          size={3} //
+          alignContent="start"
+          justifyContent="center"
+        >
+          {optionsTable.map((o) => (
+            <FormControlLabel
+              sx={{
+                ".MuiGrid-root": {
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                },
+                marginBottom: "1em",
+              }}
+              control={
+                <Checkbox
+                  checked={o.checked} //
+                  onChange={() => {
+                    o.controlFunction((prevState) => !prevState);
+                  }}
+                />
+              }
+              label={o.labelText}
+              labelPlacement="end"
+            />
+          ))}
+        </Grid>
+      </Grid>
+      <Grid
+        container //
+        width="100%"
+        height="6em"
+        justifyContent="center"
+      >
+        <Button
+          variant="outlined" //
+          onClick={() => {
+            props.createPrintableFile();
+            handleClose();
+          }}
+        >
+          {SPELL_COMPENDIUM.PRINT_LIST}
+        </Button>
+      </Grid>
     </Dialog>
   );
 };

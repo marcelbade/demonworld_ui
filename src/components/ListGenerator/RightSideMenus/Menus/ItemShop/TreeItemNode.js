@@ -96,11 +96,11 @@ const TreeItemNode = (props) => {
 
           <Grid direction="column">
             <Typography
+              variant="body1"
               sx={{
                 minWidth: "12em", //
                 color: props.isBlocked ? theme.palette.disabled : null,
               }}
-              variant="body1"
             >
               {props.item.itemName}
             </Typography>
