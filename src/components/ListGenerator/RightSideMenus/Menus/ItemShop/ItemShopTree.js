@@ -13,8 +13,8 @@ import { ItemContext } from "../../../../../contexts/itemContext";
 import { isObjectEmtpy } from "../../../../../util/utilityFunctions";
 import TreeItemNode from "./TreeItemNode";
 // custom hooks
-import UseUnitEqipmentLimits from "../../../../../customHooks/UseUnitEquipmentLimits";
 import useTreeViewController from "../../../../../customHooks/UseTreeViewController";
+import UseUnitEqipmentLimits from "../../../../../customHooks/UseUnitEquipmentLimits";
 import useItemFilters from "../../../../../customHooks/UseItemFilters";
 // constants
 import { ITEM_CATEGORY_NAME_MAPPING } from "../../../../../constants/itemShopConstants";
