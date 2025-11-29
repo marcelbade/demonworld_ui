@@ -5,10 +5,15 @@ import { useContext } from "react";
 //  hooks
 import usePushMessages from "./UsePushMessages";
 // constants
-import { axiosTexts, PUSH_MESSAGE_TYPES } from "../constants/textsAndMessages";
+import { AXIOS_TEXTS, PUSH_MESSAGE_TYPES } from "../constants/textsAndMessages";
 // contexts
 import { UserContext } from "../contexts/userContext";
 
+/**
+ * custom hook encapsules Axios logic to keep the code DRY and adds
+ * custom logic for setters and error handling
+ * @returns an object with functions that cover get, post, delete, put requests
+ */
 const useAxios = () => {
   const UC = useContext(UserContext);
 
@@ -29,7 +34,12 @@ const useAxios = () => {
       .then((response) => {
         setter(response.data);
       })
-      .catch((error) => pushMessage.showSnackBar(error, PUSH_MESSAGE_TYPES.ERROR));
+      .catch((error) =>
+        pushMessage.showSnackBar(
+          AXIOS_TEXTS.AXIOS_FATAL_ERROR(error.message), //
+          PUSH_MESSAGE_TYPES.ERROR
+        )
+      );
   };
 
   /**
@@ -54,7 +64,12 @@ const useAxios = () => {
         }
         pushMessage.showSnackBar(successMessage, PUSH_MESSAGE_TYPES.SUCCESS);
       })
-      .catch((error) => pushMessage.showSnackBar(error, PUSH_MESSAGE_TYPES.ERROR));
+      .catch((error) =>
+        pushMessage.showSnackBar(
+          AXIOS_TEXTS.AXIOS_FATAL_ERROR(error.message), //
+          PUSH_MESSAGE_TYPES.ERROR
+        )
+      );
   };
 
   const deleteProtectedData = (url) => {
@@ -64,9 +79,14 @@ const useAxios = () => {
         { headers: { Authorization: `Bearer ${UC.user.token}` } }
       )
       .then(() => {
-        pushMessage.showSnackBar(axiosTexts.DELETION_SUCCESFUL, PUSH_MESSAGE_TYPES.SUCCESS);
+        pushMessage.showSnackBar(AXIOS_TEXTS.DELETION_SUCCESFUL, PUSH_MESSAGE_TYPES.SUCCESS);
       })
-      .catch((error) => pushMessage.showSnackBar(error, PUSH_MESSAGE_TYPES.ERROR));
+      .catch((error) =>
+        pushMessage.showSnackBar(
+          AXIOS_TEXTS.AXIOS_FATAL_ERROR(error.message), //
+          PUSH_MESSAGE_TYPES.ERROR
+        )
+      );
   };
 
   const updateData = (data, url, successMessage) => {
@@ -77,7 +97,12 @@ const useAxios = () => {
       .then(() => {
         pushMessage.showSnackBar(successMessage, PUSH_MESSAGE_TYPES.SUCCESS);
       })
-      .catch((error) => pushMessage.showSnackBar(error, PUSH_MESSAGE_TYPES.ERROR));
+      .catch((error) =>
+        pushMessage.showSnackBar(
+          AXIOS_TEXTS.AXIOS_FATAL_ERROR(error.message), //
+          PUSH_MESSAGE_TYPES.ERROR
+        )
+        );
   };
 
   return {

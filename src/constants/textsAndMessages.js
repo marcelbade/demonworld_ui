@@ -1,5 +1,10 @@
-export const axiosTexts = {
+export const AXIOS_TEXTS = {
   DELETION_SUCCESFUL: "Löschen erfolgreich",
+ 
+
+  AXIOS_FATAL_ERROR: (axiosErrorMessage) => {
+    return `Leider konnte keine Verbindung zum Server aufgebaut werden. Bitte wende dich an die Support E-Mail im Impressum und gib an welche Funktion nicht funktioniert, sowie den folgenden Fehlercode: ${axiosErrorMessage}`;
+  },
 };
 
 export const ALTTEXT = {
@@ -395,7 +400,6 @@ export const DARKELF_TEXTS = {
     PRIEST_CASTE: "Deine Armee darf höchstens zu 40% aus Einheiten der Priesterkaste bestehen.",
     HEROES: "Deine Armee darf höchstens zu 40% aus Helden oder Befehlshabern bestehen.",
   },
-  ERRORS: {},
 };
 
 export const DWARF_TEXTS = {
@@ -511,7 +515,7 @@ export const GOBLIN_TEXTS = {
     ORKS_TEXTS: "Deine Armeeliste darf zu maximal zu 20% aus Orks bestehen.",
     SINGLE_CLAN_ONLY: "Deine Armeeliste darf nur Clanntruppen eines Clans beinhalten",
   },
-  ERRORS: {
+  ERRORS: { // TODO ???
     SHAMAN_AND_HEROES: "Deine Armeeliste darf maximal zu 40% aus Schamanen und Helden bestehen.",
   },
 };
@@ -617,7 +621,7 @@ export const THAIN_TEXTS = {
     GAR_Y_DWEN: "Deine Armeeliste darf zu höchstens 40% aus Gar'ydwen bestehen.",
     DORGA_CHURCH: "Deine Armeeliste darf zu höchstens 40% aus Einheiten der Dorga-Kirche bestehen.",
   },
-  ERRORS: {
+  ERRORS: { // TODO ????
     TRIBE_MESSAGE: "Du mußt der Einheit einen Stamm zuordnen.",
     CHAMPION_MESSAGE:
       "Der Groß-Champion eines Stammes kann nur aufgestellt werden, wenn vorher mindestens 1 Einheit des Stammes ausgewählt wurde.",
@@ -672,7 +676,7 @@ export const UNDEAD_TEXTS = {
     MAGICIAN: "Deine Armeeliste darf zu höchstens 40% aus Magiern bestehen.",
     ALLY: "Deine Armeeliste darf zu höchstens 20% aus Einheiten aus Alliierten bestehen.",
   },
-  ERRORS: {
+  ERRORS: { // ???
     UNDEAD_COMMANDER: "Deine Liste muss einen Nekromanten oder einen Helden oder Befehlshaber mit 2 oder mehr ★ enthalten.",
     MAX_LIMIT_CHARACTERS: "Die Armee darf zu max. 50% aus Helden, Befehlshaber und Magiern bestehen.",
     ALLIES: "Diese Einheit steht nicht als Alliierter zur Verfügung.",
@@ -696,7 +700,7 @@ export const SOUTHERN_CITY_STATES_TEXTS = {
     ORDER: "Deine Armeeliste darf zu höchstens 40% aus Truppen des Orden des wahren Glaubens bestehen.",
     BROTHERHOOD: "Deine Armeeliste darf zu höchstens 40% aus Truppen der Bruderschaft des Sandes bestehen.",
   },
-  ERRORS: {
+  ERRORS: { // TODO ???
     BROTHERHOOD_ORDER: "Die Armee kann entweder nur Truppen des Ordens des wahren Glaubens oder der Bruderschaft des Sands enthalten.",
     MAX_LIMIT_CHARACTERS: "Die Armee darf zu max. 40% aus Helden, Befehlshaber und Magiern bestehen:",
     REGION_HEROES: (province) => {
