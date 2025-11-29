@@ -19,9 +19,6 @@ const CustomSnackBarProvider = (props) => {
       }}
       preventDuplicate
       maxSnack={3}
-      style={{
-        fontSize: "21px",
-      }}
       TransitionComponent={Fade}
       iconVariant={{
         info: (
