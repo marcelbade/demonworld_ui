@@ -1,14 +1,15 @@
-
 // constants
 import { ITEM_TYPE_FORTIFICATIONS } from "../constants/itemShopConstants";
 import { ITEM_LIMIT_MESSAGE } from "../constants/textsAndMessages";
 
 const UseUnitEquipmentLimits = () => {
   /**
-   * While useItemFilters makes sure that items that a unit can never equip 
-   * are either not shown or disabled, this logic implements the games 
-   * item selection rules by toggling the item's corresponding 
-   * add button on/off.
+   * While useItemFilters makes sure that items that a unit can never equip
+   * are either not shown or disabled, this logic implements the games
+   * item selection rules by toggling an item's corresponding
+   * add button on/off whenever an item is added to a unit.
+   * i.e.: If a unit is equipped with a banner, all other banners are disabled 
+   * for that unit.
    * The Rules are as follows:
    *  - Only generic items can be given to multiple units.
    *  - A hero, magicican or unit leader can only get ONE magical item.
@@ -21,36 +22,40 @@ const UseUnitEquipmentLimits = () => {
    * In that case, the button will be disabled.
    */
   const disableItem = (unit, item) => {
- 
     let disable = {
       disableButton: false,
       errorMessage: "",
     };
 
+    // only one item, if it is equipped by all elements
     if (item.everyElement && unit.equipmentTypes.unit) {
       disable = {
         disableButton: true,
         errorMessage: ITEM_LIMIT_MESSAGE.ONLY_ONE_ITEM_FOR_ALL_ELEMENTS,
       };
     }
+    // only one banner per unit
     if (item.requiresBanner && unit.equipmentTypes.banner) {
       disable = {
         disableButton: true,
         errorMessage: ITEM_LIMIT_MESSAGE.ONLY_ONE_BANNER,
       };
     }
+     // only one instrument per unit 
     if (item.requiresMusician && unit.equipmentTypes.instrument) {
       disable = {
         disableButton: true,
         errorMessage: ITEM_LIMIT_MESSAGE.ONLY_ONE_INSTRUMENT,
       };
     }
+     // only one fortification per unit
     if (item.itemType === ITEM_TYPE_FORTIFICATIONS && unit.equipmentTypes.fortifications) {
       disable = {
         disableButton: true,
         errorMessage: ITEM_LIMIT_MESSAGE.ONLY_ONE_FORTIFICATION,
       };
     }
+    // only one magic item per unit
     if (isMagicItem(item) && unit.equipmentTypes.magicItem) {
       disable = {
         disableButton: true,
