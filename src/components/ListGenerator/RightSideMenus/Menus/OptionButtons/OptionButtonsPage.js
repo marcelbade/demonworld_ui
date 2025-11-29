@@ -18,8 +18,6 @@ import TextFileDownloadButton from "./Buttons/TextFileDownloadButton";
 
 const OptionButtonsPage = () => {
   const [showArmySaveDialog, setShowArmySaveDialog] = useState(false);
-  //TODO new dialog, "really delete list?"
-  // const [showDeleteArmyListDialog, SetShowDeleteArmyListDialog] = useState(false);
   const [isExistingList, setIsExistingList] = useState(false);
 
   const ICON_SIZE_RESET_BUTTONS = "1.75em";
