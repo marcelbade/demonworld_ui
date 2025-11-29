@@ -48,7 +48,7 @@ const ArmyAndScoutingPointDisplay = () => {
           container
           direction="row"
         >
-          <Typography variant="subtitle1">
+          <Typography variant="body1">
             {INPUT_TEXTS.TOTAL_POINTS} {netPoints} /
           </Typography>
           <TextField
@@ -63,7 +63,7 @@ const ArmyAndScoutingPointDisplay = () => {
             variant="standard"
           />
         </Grid>
-        <Typography variant="subtitle1">
+        <Typography variant="body1">
           {STATS.SCOUTING_FACTOR} {calculateScoutingFactor(SEC.selectedUnits ? SEC.selectedUnits : [])}
         </Typography>
       </Grid>
