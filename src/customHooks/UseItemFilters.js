@@ -76,22 +76,22 @@ const useItemFilters = () => {
 
     itemTypeGroup = itemTypeGroup.filter((group) => group.typeName !== selectedUnit.prohibitedItemType);
 
-    // filter out fortifications if -> (A) it's not a unit (B) mounted.
+    // filter out fortifications if -> it's NOT a unit or IS mounted.
     if (selectedUnit.unitType !== UNIT || selectedUnit.isMounted) {
       itemTypeGroup = itemTypeGroup.filter((group) => group.typeName !== ITEM_TYPE_FORTIFICATIONS);
     }
 
-    // filter out banners if there is no standard bearer
+    // filter out banners for units that do not have a standard bearer
     if (!selectedUnit.standardBearer) {
       itemTypeGroup = itemTypeGroup.filter((group) => group.typeName !== ITEM_TYPE_BANNER);
     }
 
-    // filter out instruments if there is no musician
+    // filter out instruments  for units that do not have a musician
     if (!selectedUnit.musician) {
       itemTypeGroup = itemTypeGroup.filter((group) => group.typeName !== ITEM_TYPE_INSTRUMENT);
     }
 
-    // filter out equipment for unit leaders, if the unit has no leader
+    // filter out equipment for unit leaders, if a unit has no leader
     if (!selectedUnit.leader && selectedUnit.unitType === UNIT) {
       itemTypeGroup = itemTypeGroup.filter(
         (group) =>
@@ -254,18 +254,21 @@ const useItemFilters = () => {
           errorMessage: ITEM_LIMIT_MESSAGE.MULTIPLE_ELEMENTS_ITEMS,
         };
       },
+      // filter fortifications if the army has reached the point limit
       fortifications: (data) => {
         return {
           isInvalidItem: !isTheListBelowFortificationsLimit(data.item),
           errorMessage: ITEM_LIMIT_MESSAGE.FORTIFICATIONS_ITEMS,
         };
       },
+      // filter items above the army's point limit
       pointLimit: (data) => {
         return {
           isInvalidItem: isItemTooExpensive(data.item),
           errorMessage: ITEM_LIMIT_MESSAGE.POINT_LIMIT,
         };
       },
+      // filter out items meant for a different sub faction
       subFaction: (data) => {
         return {
           isInvalidItem: data.unit.subfaction !== data.item.subfaction,
