@@ -1,7 +1,7 @@
 // React
 import { useContext } from "react";
 // Material UI
-import { Grid2 as Grid, useMediaQuery, useTheme } from "@mui/material";
+import { Grid2 as Grid } from "@mui/material";
 // icons
 import deathIcon from "../../assets/icons/icons8-death-64.png";
 import calculatorIcon from "../../assets/icons/icons8-calculator-64.png";
@@ -17,13 +17,12 @@ import { UserContext } from "../../contexts/userContext";
 // constants
 import { LANDINGPAGE } from "../../constants/textsAndMessages";
 import TopMenuDrawer from "../shared/TopMenuDrawer";
+import useCustomMediaQuery from "../../customHooks/UseCustomMediaQuery";
 
 const LandingPage = () => {
   const UC = useContext(UserContext);
 
-  const theme = useTheme();
-  const isSmallDisplay = useMediaQuery(theme.breakpoints.down("md"));
-  const isTinyDisplay = useMediaQuery(theme.breakpoints.down("sm"));
+  const displaySize = useCustomMediaQuery();
 
   const naviButtons = [
     {
@@ -73,7 +72,7 @@ const LandingPage = () => {
           title={null}
           hasLogo={true}
           // logoHeight="50%"
-          logoWidth={isTinyDisplay ? "250px" : "350px"}
+          logoWidth={displaySize.isTinyDisplay ? "250px" : "350px"}
           logo={logoRedIcon}
           drawerVariant="permanent" //
           displayNaviBttn={false}
@@ -95,7 +94,7 @@ const LandingPage = () => {
               key={i}
               displayNavigatonBttn={true}
               relativeURL={n.relativeURL} //
-              isIconButton={!isSmallDisplay}
+              isIconButton={!displaySize.isSmallDisplay}
               textButtonVariant="outlined"
               isCustomIcon={true}
               icon={n.icon}

@@ -105,7 +105,6 @@ const lightTheme = createTheme({
       styleOverrides: {
         button: {
           fontFamily: "jaapokkiRegular",
-          fontSize: "20px",
         },
         body1: {
           fontFamily: "jaapokkiRegular",
