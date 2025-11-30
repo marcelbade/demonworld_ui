@@ -69,7 +69,7 @@ const UserLogButton = (props) => {
             displayLogInDialog();
           }}
         >
-          <AccountCircleIcon fontSize={props.iconSize} />
+          <AccountCircleIcon fontSize={props.iconSize} style={{ color: "white" }} />
         </IconButton>
       )}
     </Tooltip>

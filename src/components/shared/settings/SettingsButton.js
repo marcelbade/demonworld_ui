@@ -16,7 +16,7 @@ const SettingsButton = () => {
 
   return (
     <IconButton variant="outlined" onClick={handleClickOpen}>
-      <SettingsIcon fontSize="large" />
+      <SettingsIcon fontSize="large" style={{ color: "white" }} />
     </IconButton>
   );
 };

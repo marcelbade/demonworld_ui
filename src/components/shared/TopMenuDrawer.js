@@ -31,16 +31,37 @@ const TopMenuDrawer = (props) => {
     <Grid
       container //
       size={12}
-      direction="row"
+      direction={{ xs: "column", sm: "column", md: "row", lg: "row", xl: "row" }}
+      alignContent={{ xs: "center", sm: "center", md: "", lg: "center" }}
+      alignItems={{ xs: "center", sm: "center", md: "", lg: "center" }}
       sx={{
-        height: "5em",
+        height: "10%",
+        width: "100%",
+        backgroundColor: "black",
       }}
     >
-      {props.displayPageTitle ? (
-        <Grid size={4}>
+      <Grid
+        size={4} //
+        sx={{
+          paddingTop: "1em",
+          paddingLeft: { md: "3em" },
+          backgroundColor: "black",
+          width: { xs: "100%", sm: "100%", md: "30%" },
+        }}
+      >
+        {props.displayPageTitle ? ( //
           <Typography variant="h3">{props.title}</Typography>
-        </Grid>
-      ) : null}
+        ) : null}
+        {props.hasLogo ? ( //
+          <img
+            src={props.logo} //
+            alt={props.title}
+            width={props.logoWidth}
+            height={props.logoHeight}
+          />
+        ) : null}
+      </Grid>
+
       <Grid
         container
         size={4} //
@@ -60,9 +81,17 @@ const TopMenuDrawer = (props) => {
       </Grid>
       <Grid
         container //
-        justifyContent="end"
-        alignContent="center"
+        direction={{ xs: "column-reverse", sm: "column", md: "row", lg: "row" }}
+        justifyContent={{ xs: "center", sm: "center", md: "end" }}
+        justifyItems={{ xs: "center", sm: "center", md: "end" }}
+        alignContent={{ xs: "center", sm: "center", md: "end" }}
         size={4}
+        spacing={{ md: 8, lg: 8 }}
+        sx={{
+          paddingTop: "1em",
+          paddingRight: { md: "3em" },
+          width: { xs: "100%", sm: "100%", md: "30%", lg: "30%" },
+        }}
       >
         <SettingsButton />
         <UserLogButton

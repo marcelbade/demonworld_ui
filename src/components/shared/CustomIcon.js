@@ -61,6 +61,8 @@ const CustomIcon = (props) => {
       sx={{
         ...toggleIconColor(), //
         ...toggleCheckBoxIcon(),
+        width: props.width,
+        height: props.height,
       }}
     >
       <img

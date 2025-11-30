@@ -47,7 +47,6 @@ const NavigationButton = (props) => {
           toolTipText={props.toolTipText}
           icon={props.icon}
           isCustomIcon={props.isCustomIcon}
-          altText={props.altText}
           iconWidth={props.iconWidth}
           iconHeight={props.iconHeight}
           boxWidth={props.boxWidth}
@@ -59,7 +58,7 @@ const NavigationButton = (props) => {
           openMenu={MC.setOpenMenu}
           relativeURL={props.relativeURL}
           textButtonVariant={props.textButtonVariant}
-          text={props.altText}
+          text={props.toolTipText}
         />
       )}
     </Grid>

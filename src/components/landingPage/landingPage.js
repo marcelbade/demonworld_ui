@@ -1,13 +1,14 @@
 // React
 import { useContext } from "react";
 // Material UI
-import { Grid2 as Grid, Stack } from "@mui/material";
+import { Grid2 as Grid, useMediaQuery, useTheme } from "@mui/material";
 // icons
 import deathIcon from "../../assets/icons/icons8-death-64.png";
 import calculatorIcon from "../../assets/icons/icons8-calculator-64.png";
 import bookIcon from "../../assets/icons/icons8-book-64.png";
 import scrollIcon from "../../assets/icons/scroll.png";
-import spellbook from "../../assets/icons/spellbook.png";
+import spellbookIcon from "../../assets/icons/spellbook.png";
+import logoRedIcon from "../../assets/icons/logo_red.png";
 // functions and components
 import NavigationButton from "../shared/navigation/NavigationButton";
 import UserAccountDrawer from "../Login/UserAccountDrawer";
@@ -19,6 +20,10 @@ import TopMenuDrawer from "../shared/TopMenuDrawer";
 
 const LandingPage = () => {
   const UC = useContext(UserContext);
+
+  const theme = useTheme();
+  const isSmallDisplay = useMediaQuery(theme.breakpoints.down("md"));
+  const isTinyDisplay = useMediaQuery(theme.breakpoints.down("sm"));
 
   const naviButtons = [
     {
@@ -48,7 +53,7 @@ const LandingPage = () => {
     {
       text: LANDINGPAGE.MAGIC, //
       relativeURL: "/spellCompendium",
-      icon: spellbook,
+      icon: spellbookIcon,
       display: true,
     },
   ];
@@ -58,24 +63,30 @@ const LandingPage = () => {
       container //
       direction="column"
       sx={{
-        width: "100vw", //
-        height: "100vh",
+        width: "100%", //
+        height: "100%",
       }}
     >
-      <TopMenuDrawer
-        displayPageTitle={true}
-        title={LANDINGPAGE.TITLE}
-        drawerVariant="permanent" //
-        displayNaviBttn={false}
-      />
-
-      <Stack
-        direction="row" //
-        spacing={20}
+      <Grid container>
+        <TopMenuDrawer
+          displayPageTitle={false}
+          title={null}
+          hasLogo={true}
+          // logoHeight="50%"
+          logoWidth={isTinyDisplay ? "250px" : "350px"}
+          logo={logoRedIcon}
+          drawerVariant="permanent" //
+          displayNaviBttn={false}
+        />
+      </Grid>
+      <Grid
+        container //
+        direction={{ xs: "column", sm: "column", md: "column", lg: "row" }}
+        alignContent="center"
+        justifyContent="center"
+        spacing={{ xs: 10, md: 30 }}
         sx={{
-          paddingTop: "20em",
-          justifyContent: "center",
-          alignContent: "center",
+          paddingTop: { xs: "5em", sm: "10em", md: "20em" },
         }}
       >
         {naviButtons.map((n, i) =>
@@ -84,7 +95,8 @@ const LandingPage = () => {
               key={i}
               displayNavigatonBttn={true}
               relativeURL={n.relativeURL} //
-              isIconButton={true}
+              isIconButton={!isSmallDisplay}
+              textButtonVariant="outlined"
               isCustomIcon={true}
               icon={n.icon}
               toolTipText={n.text}
@@ -95,8 +107,7 @@ const LandingPage = () => {
             />
           ) : null
         )}
-      </Stack>
-
+      </Grid>
       <UserAccountDrawer />
     </Grid>
   );
