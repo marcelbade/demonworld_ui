@@ -2,8 +2,9 @@ import { useTheme } from "@emotion/react";
 import { useMediaQuery } from "@mui/material";
 
 /**
- * Cusotm hook  uses useMediaQuery to return several functions that allow
- * the conditional rendering of components and variants.
+ * Custom hook uses useMediaQuery to return several functions that allow
+ * the conditional rendering of components and variants. Each function checks
+ * whether the display is a certain size and returns true, if that is the case.
  * @returns an object with the following functions:
  * - isLargeDisplay
  * - isMediumDisplay
