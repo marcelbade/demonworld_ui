@@ -1,6 +1,6 @@
 // React
 import { useState, useContext, Fragment } from "react";
-import { Typography, TextField, InputAdornment, Grid2 as Grid } from "@mui/material";
+import { Typography, TextField, Grid2 as Grid } from "@mui/material";
 // components and functions
 import { SelectionContext } from "../../../../../contexts/selectionContext";
 import calculateScoutingFactor from "../../../../../gameLogic/scoutFactorCalculator/scoutingFactorCalculator";
@@ -55,7 +55,6 @@ const ArmyAndScoutingPointDisplay = () => {
             id="totalPointValue"
             autoComplete="off"
             value={SEC.maxPointsAllowance}
-            // endAdornment={<InputAdornment position="end">{STATS.POINTS}</InputAdornment>} // TODO <- not displayed
             onChange={changeMaximumPointValue}
             required
             error={Boolean(errorMessage)}
