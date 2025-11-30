@@ -113,18 +113,20 @@ const lightTheme = createTheme({
         },
         h5: {
           fontFamily: "NotMaryKate",
-          fontSize: "20px",
         },
         h6: {
           fontFamily: "NotMaryKate",
-          fontSize: "20px",
         },
         h3: {
           fontFamily: "NotMaryKate",
-          fontSize: "20px",
+        },
+        h2: {
+          fontFamily: "NotMaryKate",
+        },
+        h1: {
+          fontFamily: "NotMaryKate",
         },
         subtitle1: {
-          fontSize: "20px",
           fontFamily: "NotMaryKate",
         },
       },
@@ -146,6 +148,7 @@ const lightTheme = createTheme({
           padding: "2em",
           height: "5em",
           fontFamily: "NotMaryKate",
+     
           ":hover": {
             color: "white", //
             backgroundColor: "darkRed",
