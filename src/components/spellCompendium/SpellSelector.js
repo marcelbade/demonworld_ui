@@ -1,7 +1,5 @@
 // react
 import { useContext } from "react";
-// mui
-import { Grid2 as Grid } from "@mui/material";
 // functions and components
 import SelectionInput from "../shared/selectionInput";
 // context
@@ -51,19 +49,14 @@ const SpellSelector = (props) => {
   };
 
   return (
-    <Grid
-      container //
-      direction="column"
-    >
-      <SelectionInput
-        textColor="white"
-        width={displaySize.isSmallDisplay ? "10em" : "20em"}
-        alternatives={setFactionNamesOptions()}
-        filterFunction={selectFaction}
-        clearFunction={clearFaction}
-        label={SPELL_COMPENDIUM.SELECT_FACTION}
-      />
-    </Grid>
+    <SelectionInput
+      textColor="white"
+      width={displaySize.isSmallDisplay ? "10em" : "14em"}
+      alternatives={setFactionNamesOptions()}
+      filterFunction={selectFaction}
+      clearFunction={clearFaction}
+      label={SPELL_COMPENDIUM.SELECT_FACTION}
+    />
   );
 };
 

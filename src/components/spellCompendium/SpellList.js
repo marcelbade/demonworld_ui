@@ -72,7 +72,6 @@ const SpellList = (props) => {
         displaySpells={props.displaySpells}
         setDisplaySpells={props.setDisplaySpells}
       />
-
       <List
         sx={{
           paddingTop: "4em",
@@ -80,7 +79,7 @@ const SpellList = (props) => {
         }}
       >
         {props.displaySpells
-          .sort((a, b) => a.spellName > b.spellName)
+          .sort((a, b) => a.spellName - b.spellName)
           .map((s, i) => (
             <ListItemButton
               onClick={() => {

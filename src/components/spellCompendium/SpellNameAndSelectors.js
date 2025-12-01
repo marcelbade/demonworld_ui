@@ -33,6 +33,9 @@ const SpellNameAndSelectors = (props) => {
         variant="h5" //
         align="center"
         width={{ xs: "60%", sm: "20%", md: "30%" }}
+        sx={{
+          wordWrap: "break-word",
+        }}
       >
         {carousel.currentDisplayedData[DISPLAYED_PROPERTY]}
       </Typography>

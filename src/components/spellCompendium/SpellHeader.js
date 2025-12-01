@@ -66,7 +66,7 @@ const SpellHeader = (props) => {
       >
         <Grid container size={12} alignContent="center" justifyContent="center">
           <SpellNameAndSelectors
-            display={props.selectedSpell !== NO_SELECTION}
+            display={props.selectedSpell.spellName !== ""}
             selectedSpell={props.selectedSpell} //
             setSelectedSpell={props.setSelectedSpell} //
             displaySpells={props.displaySpells}
@@ -75,7 +75,7 @@ const SpellHeader = (props) => {
         <Grid container size={12} alignContent="center" justifyContent="center">
           <SpellTierSymbol
             tier={props.selectedSpell.spellTier} //
-            display={props.selectedSpell !== NO_SELECTION}
+            display={props.selectedSpell.spellName !== ""}
             size={100}
           />
         </Grid>
