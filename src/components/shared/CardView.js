@@ -1,46 +1,16 @@
 // React
-import React, { Fragment, useEffect, useState } from "react";
+import { Fragment, useState } from "react";
 // material ui
 import { Grid2 as Grid } from "@mui/material";
 // components and functions
 import StatCard from "../../htmlCardGenerator/StatCard";
-import StatCardCarousellButton from "./StatCardCarousellButton";
+import CarousellButton from "./CarousellButton";
+import useCarouselButtons from "../../customHooks/UseCarouselButtons";
 
 const CardView = (props) => {
   const [localDisplayCard, setLocalDisplayCard] = useState({});
-  const [cardNumber, setCardNumber] = useState(0);
 
-  // rerender to correctly display the new unit, whenever the supplied unit changes.
-  useEffect(() => {
-    const temp = { ...props.unit };
-    setLocalDisplayCard(temp);
-  }, [JSON.stringify(props.unit)]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  /**
-   * Function allwos user to cycle through the multiple stat cards counter-clockwise.
-   */
-  const carouselForward = () => {
-    if (cardNumber < props.carouselCards.length - 1) {
-      setCardNumber(cardNumber + 1);
-      setLocalDisplayCard(props.carouselCards[cardNumber + 1]);
-    } else {
-      setCardNumber(0);
-      setLocalDisplayCard(props.carouselCards[0]);
-    }
-  };
-
-  /**
-   * Function allows user to cycle through the multiple stat cards clockwise.
-   */
-  const carouselBackward = () => {
-    if (cardNumber > 0) {
-      setCardNumber(cardNumber - 1);
-      setLocalDisplayCard(props.carouselCards[cardNumber - 1]);
-    } else {
-      setCardNumber(props.carouselCards.length - 1);
-      setLocalDisplayCard(props.carouselCards[props.carouselCards.length - 1]);
-    }
-  };
+  const carousel = useCarouselButtons(props.unit, setLocalDisplayCard, props.carouselCards);
 
   return (
     <Fragment>
@@ -54,9 +24,9 @@ const CardView = (props) => {
         maxHeight="60vh"
       >
         <Grid>
-          <StatCardCarousellButton
+          <CarousellButton
             display={props.isMultiStateCard} //
-            action={carouselBackward}
+            action={carousel.carouselBackward}
             side={"left"}
           />
         </Grid>
@@ -64,9 +34,9 @@ const CardView = (props) => {
           <StatCard unit={localDisplayCard} />
         </Grid>
         <Grid>
-          <StatCardCarousellButton
+          <CarousellButton
             display={props.isMultiStateCard} //
-            action={carouselForward}
+            action={carousel.carouselForward}
             side={"right"}
           />
         </Grid>

@@ -100,6 +100,7 @@ const SpellCompendium = () => {
         selectedSpell={selectedSpell} //
         displaySpells={SC.displaySpells}
         setDisplaySpells={SC.setDisplaySpells}
+        setSelectedSpell={setSelectedSpell}
         toggleDrawer={toggleDrawer}
       />
 

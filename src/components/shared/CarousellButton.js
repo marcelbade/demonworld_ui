@@ -5,7 +5,7 @@ import { IconButton } from "@mui/material";
 // icons
 import { ChevronLeft, ChevronRight } from "@mui/icons-material";
 
-const StatCardCarousellButton = (props) => {
+const CarousellButton = (props) => {
   const ICON_STYLE = { width: "2em", height: "2em" };
 
   return props.display ? (
@@ -24,4 +24,4 @@ const StatCardCarousellButton = (props) => {
   ) : null;
 };
 
-export default StatCardCarousellButton;
+export default CarousellButton;

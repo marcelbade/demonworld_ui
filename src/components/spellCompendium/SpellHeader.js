@@ -7,6 +7,7 @@ import TopDrawerButton from "../shared/TopDrawerButton";
 import SpellTierSymbol from "./SpellTierSymbol";
 //  icons
 import MenuIcon from "@mui/icons-material/Menu";
+import SpellNameAndSelectors from "./SpellNameAndSelectors";
 
 const SpellHeader = (props) => {
   return (
@@ -55,6 +56,7 @@ const SpellHeader = (props) => {
       </Grid>
       <Grid
         container // ###
+        direction="column"
         alignContent="center"
         justifyContent="center"
         sx={{
@@ -62,24 +64,21 @@ const SpellHeader = (props) => {
           marginBottom: "3em",
         }}
       >
-        <Typography
-          variant="h5" //
-          align="center"
-          sx={{
-            width: "100%", //
-            marginBottom: "2em",
-            color: "red",
-            padding: { xs: "1em", sm: "0em", md: "0em" }, // ###
-          }}
-        >
-          {props.selectedSpell.spellName}
-        </Typography>
-        <SpellTierSymbol
-          tier={props.selectedSpell.spellTier} //
-          display={props.selectedSpell !== NO_SELECTION}
-          size={100}
-        />
-
+        <Grid container size={12} alignContent="center" justifyContent="center">
+          <SpellNameAndSelectors
+            display={props.selectedSpell !== NO_SELECTION}
+            selectedSpell={props.selectedSpell} //
+            setSelectedSpell={props.setSelectedSpell} //
+            displaySpells={props.displaySpells}
+          />
+        </Grid>
+        <Grid container size={12} alignContent="center" justifyContent="center">
+          <SpellTierSymbol
+            tier={props.selectedSpell.spellTier} //
+            display={props.selectedSpell !== NO_SELECTION}
+            size={100}
+          />
+        </Grid>
         {spellTierIsText(props.selectedSpell.spellTier) ? (
           <Typography
             variant="body1" //
