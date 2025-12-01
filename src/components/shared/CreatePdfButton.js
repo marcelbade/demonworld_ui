@@ -3,7 +3,8 @@ import { IconButton, Tooltip } from "@mui/material";
 // components and functions
 import CustomIcon from "./CustomIcon";
 // icons
-import customPdfIcon from "../../assets/icons/customPDFIcon.svg";
+import customPdfIcon_black from "../../assets/icons/customPDFIcon.svg";
+import customPdfIcon_white from "../../assets/icons/customPDFIconWhite.png";
 
 /**
  * Function creates a nested JSX element that renders an icon button
@@ -25,10 +26,10 @@ const CreatePdfButton = (props) => {
             onClick={() => {
               props.openDialog(true);
             }}
-            sx={{marginLeft: props.marginLeft}}
+            sx={{ marginLeft: props.marginLeft }}
           >
             <CustomIcon
-              icon={customPdfIcon} //
+              icon={props.color === "white" ? customPdfIcon_white : customPdfIcon_black} //
               altText={props.toolTipTitle}
               height={"65px"}
               width={"65px"}

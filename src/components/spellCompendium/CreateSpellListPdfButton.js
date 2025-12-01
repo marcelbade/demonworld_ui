@@ -37,6 +37,7 @@ const CreateSpellListPdfButton = (props) => {
       disabledIf={false} // TODO parameterize!
       openDialog={setShowSpellDialog}
       marginLeft={"1em"}
+      color= {props.color}
     >
       <SelectSpellsDialog
         displaySpells={props.displaySpells}

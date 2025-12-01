@@ -33,24 +33,18 @@ const SpellHeader = (props) => {
         alignItems="center"
         size={12}
       >
-        {props.selectedSpell === !NO_SELECTION ? (
-          <CreateSpellListPdfButton
-            selectedSpell={props.selectedSpell} //
-            displaySpells={props.displaySpells}
-            setDisplaySpells={props.setDisplaySpells}
-          />
-        ) : null}
         <Typography
           variant="h6" //
           align="center"
           sx={{
             width: "25%", //
-            padding: "1.5em",
+            padding: "0.5em",
             color: "red",
           }}
         >
           {props.selectedSpell.faction}
         </Typography>
+
         <IconButton
           onClick={() => {
             props.toggleDrawer();

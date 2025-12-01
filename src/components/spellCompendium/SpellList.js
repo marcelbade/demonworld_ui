@@ -6,6 +6,7 @@ import { Drawer, List, ListItemButton, IconButton, ListItemText, Typography, Gri
 import SpellSelector from "./SpellSelector";
 // custom components and functions
 import { spellTierIsText } from "./spellUtil";
+import CreateSpellListPdfButton from "./CreateSpellListPdfButton";
 // icons
 import { ChevronLeft } from "@mui/icons-material";
 
@@ -44,6 +45,13 @@ const SpellList = (props) => {
             props.toggleDrawer();
           }}
         >
+          <CreateSpellListPdfButton
+            selectedSpell={props.selectedSpell} //
+            displaySpells={props.displaySpells}
+            setDisplaySpells={props.setDisplaySpells}
+            color="white"
+          />
+
           <ChevronLeft
             sx={{
               width: "3em", //

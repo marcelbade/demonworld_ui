@@ -86,6 +86,7 @@ const SpellCompendium = () => {
     >
       <SpellList
         allSpells={SC.allSpells}
+        selectedSpell={selectedSpell}
         selectedFactionForSpell={SC.selectedFactionForSpell}
         setSelectedFactionForSpell={SC.setSelectedFactionForSpell}
         displaySpells={SC.displaySpells}
