@@ -24,7 +24,7 @@ const SpellTierSymbol = (props) => {
           sx={{
             color: "white", //
             fontFamily: "notMaryKate",
-            fontSize:"2em",
+            fontSize: "2em",
             paddingRight: "73px",
             paddingBottom: "68px",
           }}
