@@ -20,7 +20,7 @@ const SpellList = (props) => {
 
   return (
     <Drawer
-      variant={"persistent"}
+      variant={"temporary"}
       open={props.openSpellList}
       onClose={() => {
         props.toggleDrawer();
@@ -37,8 +37,9 @@ const SpellList = (props) => {
     >
       <Grid
         container //
-        justifyContent="right"
-        justifyItems="right"
+        justifyContent="space-between"
+        justifyItems="space-between"
+        sx={{ marginBottom: "2em" }}
       >
         <IconButton
           onClick={() => {
@@ -57,6 +58,7 @@ const SpellList = (props) => {
               width: "3em", //
               height: "3em",
               color: "white",
+              marginLeft: "3em",
               marginRight: "1em",
             }}
           />

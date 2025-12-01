@@ -8,10 +8,10 @@ export const spellTierIsText = (tier) => {
 };
 
 /**
- * Function adds a booelan flag to an array of spell objects so  they can be selected for 
+ * Function adds a booelan flag to an array of spell objects so  they can be selected for
  * printing via a checkbox.
- * @param {[Spell]} spells 
- * @returns 
+ * @param {[Spell]} spells
+ * @returns
  */
 export const addBooleanForSelection = (spells) => {
   return spells.map((s) => {
@@ -22,10 +22,10 @@ export const addBooleanForSelection = (spells) => {
 // if no spell is selected, or a new faction is selectedi  the drop down, show this as the default:
 export const NO_SELECTION = {
   faction: "", //
-  spellName: "-",
-  effect: "-",
-  duration: "-",
-  requirements: "-",
-  target: "-",
-  spellTier: "-",
+  spellName: "",
+  effect: "",
+  duration: "",
+  requirements: "",
+  target: "",
+  spellTier: "",
 };

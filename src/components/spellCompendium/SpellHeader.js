@@ -4,7 +4,6 @@ import { Grid2 as Grid, IconButton, Typography } from "@mui/material";
 import { NO_SELECTION, spellTierIsText } from "./spellUtil";
 import CollapsableTopMenuDrawer from "../shared/CollapsableTopMenuDrawer";
 import TopDrawerButton from "../shared/TopDrawerButton";
-import CreateSpellListPdfButton from "./CreateSpellListPdfButton";
 import SpellTierSymbol from "./SpellTierSymbol";
 //  icons
 import MenuIcon from "@mui/icons-material/Menu";
@@ -16,7 +15,7 @@ const SpellHeader = (props) => {
         container //
         direction="column"
         alignItems="center"
-        size={12}
+        sx={{ width: "100%" }}
       >
         <CollapsableTopMenuDrawer
           displayPageTitle={true} //
@@ -70,7 +69,7 @@ const SpellHeader = (props) => {
             width: "100%", //
             marginBottom: "2em",
             color: "red",
-            padding: { xs: "1em", sm: "0em", md: "0em" },
+            padding: { xs: "1em", sm: "0em", md: "0em" }, // ###
           }}
         >
           {props.selectedSpell.spellName}

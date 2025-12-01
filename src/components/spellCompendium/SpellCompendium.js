@@ -96,39 +96,38 @@ const SpellCompendium = () => {
         toggleDrawer={toggleDrawer}
       />
 
-      <Grid
-        container //
-        direction="column"
-        justifyItems="center"
-        alignItems="center"
-      >
-        <SpellHeader
-          selectedSpell={selectedSpell} //
-          displaySpells={SC.displaySpells}
-          setDisplaySpells={SC.setDisplaySpells}
-          toggleDrawer={toggleDrawer}
-        />
+      <SpellHeader
+        selectedSpell={selectedSpell} //
+        displaySpells={SC.displaySpells}
+        setDisplaySpells={SC.setDisplaySpells}
+        toggleDrawer={toggleDrawer}
+      />
 
-        {selectedSpell !== NO_SELECTION ? (
-          propertyTable.map((p, i) => (
-            <SpellProperty
-              // component data
-              key={i}
-              display={p.display}
-              title={p.title}
-              content={p.content}
-              property={p.property}
-              // editable data
-              selectedSpell={selectedSpell}
-              selectedFactionForSpell={SC.selectedFactionForSpell}
-              user={UC.user}
-              userLoggedIn={UC.userLoggedIn}
-              setAllSpells={SC.setAllSpells}
-              setDisplaySpells={SC.setDisplaySpells}
-              setSelectedSpell={setSelectedSpell}
-            />
-          ))
-        ) : (
+      {selectedSpell !== NO_SELECTION ? (
+        propertyTable.map((p, i) => (
+          <SpellProperty
+            // component data
+            key={i}
+            display={p.display}
+            title={p.title}
+            content={p.content}
+            property={p.property}
+            // editable data
+            selectedSpell={selectedSpell}
+            selectedFactionForSpell={SC.selectedFactionForSpell}
+            user={UC.user}
+            userLoggedIn={UC.userLoggedIn}
+            setAllSpells={SC.setAllSpells}
+            setDisplaySpells={SC.setDisplaySpells}
+            setSelectedSpell={setSelectedSpell}
+          />
+        ))
+      ) : (
+        <Grid
+          size={12} //
+          container
+          justifyContent="center"
+        >
           <Button
             variant="outlined"
             onClick={() => {
@@ -137,8 +136,8 @@ const SpellCompendium = () => {
           >
             {SPELL_COMPENDIUM.SELECT_A_SPELL}
           </Button>
-        )}
-      </Grid>
+        </Grid>
+      )}
     </Grid>
   );
 };
