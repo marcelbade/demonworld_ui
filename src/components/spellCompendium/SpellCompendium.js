@@ -104,7 +104,7 @@ const SpellCompendium = () => {
         toggleDrawer={toggleDrawer}
       />
 
-      {selectedSpell !== NO_SELECTION ? (
+      {selectedSpell.spellName !== "" ? (
         propertyTable.map((p, i) => (
           <SpellProperty
             // component data
