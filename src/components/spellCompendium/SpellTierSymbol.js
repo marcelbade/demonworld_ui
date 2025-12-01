@@ -13,7 +13,7 @@ import d20Icon from "../../assets/icons/d20.png";
  *  . size: height and width of the icon (icon is a square)
  * @returns a React  component
  */
-const TierIcon = (props) => {
+const SpellTierSymbol = (props) => {
   return (
     <Badge
       overlap="circular"
@@ -41,4 +41,4 @@ const TierIcon = (props) => {
   );
 };
 
-export default TierIcon;
+export default SpellTierSymbol;
