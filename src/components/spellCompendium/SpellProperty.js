@@ -18,7 +18,7 @@ const SpellProperty = (props) => {
     <Grid
       container //
       size={12}
-      direction="row"
+      direction={{ xs: "column", sm: "column", md: "row", lg: "row" }}
       sx={{
         paddingBottom: "2em", //
         paddingLeft: "2em",
@@ -32,11 +32,17 @@ const SpellProperty = (props) => {
         selectedSpell={props.selectedSpell}
       />
 
-      <Grid size={1}>
+      <Grid
+        container //
+        size={2}
+        justifyContent="center"
+        justifyItems="center"
+      >
         <Typography
-          variant="body1"
+          variant="h6"
           sx={{
-            paddingLeft: "1em",
+            padding: "1em",
+            marginRight:"1em"
           }}
         >
           {props.title}
@@ -56,7 +62,12 @@ const SpellProperty = (props) => {
             content={props.content}
           />
         ) : (
-          <Typography variant="body1">{props.content}</Typography>
+          <Typography
+            variant="body1" //
+            sx={{ padding: "1em" }}
+          >
+            {props.content}
+          </Typography>
         )}
       </Grid>
     </Grid>

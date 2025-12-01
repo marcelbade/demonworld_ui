@@ -9,9 +9,12 @@ import { GameDataContext } from "../../contexts/gameDataContext";
 // constants
 import { SPELL_COMPENDIUM } from "../../constants/textsAndMessages";
 import { NO_SELECTION } from "./spellUtil";
+// custom hooks
+import useCustomMediaQuery from "../../customHooks/UseCustomMediaQuery";
 
 const SpellSelector = (props) => {
   const GDC = useContext(GameDataContext);
+  const displaySize = useCustomMediaQuery();
 
   /**
    * Function generates the options for the faction name selector.
@@ -54,7 +57,7 @@ const SpellSelector = (props) => {
     >
       <SelectionInput
         textColor="white"
-        width={"20em"}
+        width={displaySize.isSmallDisplay ? "10em" : "20em"}
         alternatives={setFactionNamesOptions()}
         filterFunction={selectFaction}
         clearFunction={clearFaction}

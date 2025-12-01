@@ -1,11 +1,13 @@
 // material ui
-import { Grid2 as Grid, Typography } from "@mui/material";
+import { Grid2 as Grid, IconButton, Typography } from "@mui/material";
 // custom components and functions
-import { spellTierIsText } from "./spellUtil";
-import TierIcon from "./TierIcon";
+import { NO_SELECTION, spellTierIsText } from "./spellUtil";
 import CollapsableTopMenuDrawer from "../shared/CollapsableTopMenuDrawer";
 import TopDrawerButton from "../shared/TopDrawerButton";
 import CreateSpellListPdfButton from "./CreateSpellListPdfButton";
+import SpellTierSymbol from "./SpellTierSymbol";
+//  icons
+import MenuIcon from "@mui/icons-material/Menu";
 
 const SpellHeader = (props) => {
   return (
@@ -31,22 +33,32 @@ const SpellHeader = (props) => {
         alignItems="center"
         size={12}
       >
-        <CreateSpellListPdfButton
-          selectedSpell={props.selectedSpell} //
-          displaySpells={props.displaySpells}
-          setDisplaySpells={props.setDisplaySpells}
-        />
+        {props.selectedSpell === !NO_SELECTION ? (
+          <CreateSpellListPdfButton
+            selectedSpell={props.selectedSpell} //
+            displaySpells={props.displaySpells}
+            setDisplaySpells={props.setDisplaySpells}
+          />
+        ) : null}
         <Typography
           variant="h6" //
-          align="right"
+          align="center"
           sx={{
             width: "25%", //
-            paddingRight: "5em",
-            paddingTop: "1em",
+            padding: "1.5em",
+            color: "red",
           }}
         >
           {props.selectedSpell.faction}
         </Typography>
+        <IconButton
+          onClick={() => {
+            props.toggleDrawer();
+          }}
+          sx={{ marginRight: { xs: "1em", sm: "1em", md: "3em" } }}
+        >
+          <MenuIcon fontSize="large" color="error" />
+        </IconButton>
       </Grid>
       <Grid
         container // ###
@@ -62,13 +74,17 @@ const SpellHeader = (props) => {
           align="center"
           sx={{
             width: "100%", //
+            marginBottom: "2em",
+            color: "red",
+            padding: { xs: "1em", sm: "0em", md: "0em" },
           }}
         >
           {props.selectedSpell.spellName}
         </Typography>
-        <TierIcon
+        <SpellTierSymbol
           tier={props.selectedSpell.spellTier} //
-          size = {100}
+          display={props.selectedSpell !== NO_SELECTION}
+          size={100}
         />
 
         {spellTierIsText(props.selectedSpell.spellTier) ? (

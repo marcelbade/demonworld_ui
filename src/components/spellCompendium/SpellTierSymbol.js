@@ -14,7 +14,7 @@ import d20Icon from "../../assets/icons/d20.png";
  * @returns a React  component
  */
 const SpellTierSymbol = (props) => {
-  return (
+  return props.display ? (
     <Badge
       overlap="circular"
       anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
@@ -24,7 +24,8 @@ const SpellTierSymbol = (props) => {
           sx={{
             color: "white", //
             fontFamily: "notMaryKate",
-            paddingRight: "72px",
+            fontSize:"2em",
+            paddingRight: "73px",
             paddingBottom: "68px",
           }}
         >
@@ -38,7 +39,7 @@ const SpellTierSymbol = (props) => {
         sx={{ width: props.size, height: props.size }}
       />
     </Badge>
-  );
+  ) : null;
 };
 
 export default SpellTierSymbol;

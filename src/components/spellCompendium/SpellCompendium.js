@@ -1,7 +1,7 @@
 // react
 import { useContext, useState } from "react";
 // material ui
-import { Grid2 as Grid, Typography } from "@mui/material";
+import { Button, Grid2 as Grid } from "@mui/material";
 // context
 import { SpellContext } from "../../contexts/spellContext";
 import { UserContext } from "../../contexts/userContext";
@@ -11,13 +11,21 @@ import { NO_SELECTION } from "./spellUtil";
 import SpellList from "./SpellList";
 import { SPELL_COMPENDIUM } from "../../constants/textsAndMessages";
 import SpellHeader from "./SpellHeader";
+// custom hooks
+// import useCustomMediaQuery from "../../customHooks/UseCustomMediaQuery";
 
 const SpellCompendium = () => {
   const SC = useContext(SpellContext);
   const UC = useContext(UserContext);
+  // const displaySize = useCustomMediaQuery();
 
   // select from spell from left menu
   const [selectedSpell, setSelectedSpell] = useState(NO_SELECTION);
+  const [openSpellList, setOpenSpellList] = useState(false);
+
+  const toggleDrawer = () => {
+    setOpenSpellList((prevState) => !prevState);
+  };
 
   // data for rendering spell property components
   const propertyTable = [
@@ -76,20 +84,20 @@ const SpellCompendium = () => {
         height: "100%,",
       }}
     >
-      <Grid size={2}>
-        <SpellList
-          setSelectedSpell={setSelectedSpell}
-          allSpells={SC.allSpells}
-          selectedFactionForSpell={SC.selectedFactionForSpell}
-          setSelectedFactionForSpell={SC.setSelectedFactionForSpell}
-          displaySpells={SC.displaySpells}
-          setDisplaySpells={SC.setDisplaySpells}
-        />
-      </Grid>
+      <SpellList
+        allSpells={SC.allSpells}
+        selectedFactionForSpell={SC.selectedFactionForSpell}
+        setSelectedFactionForSpell={SC.setSelectedFactionForSpell}
+        displaySpells={SC.displaySpells}
+        setDisplaySpells={SC.setDisplaySpells}
+        openSpellList={openSpellList}
+        setSelectedSpell={setSelectedSpell}
+        toggleDrawer={toggleDrawer}
+      />
+
       <Grid
         container //
         direction="column"
-        size={10}
         justifyItems="center"
         alignItems="center"
       >
@@ -97,9 +105,10 @@ const SpellCompendium = () => {
           selectedSpell={selectedSpell} //
           displaySpells={SC.displaySpells}
           setDisplaySpells={SC.setDisplaySpells}
+          toggleDrawer={toggleDrawer}
         />
 
-        {selectedSpell.spellName !== "-" ? (
+        {selectedSpell !== NO_SELECTION ? (
           propertyTable.map((p, i) => (
             <SpellProperty
               // component data
@@ -119,7 +128,14 @@ const SpellCompendium = () => {
             />
           ))
         ) : (
-          <Typography variant="h5">{SPELL_COMPENDIUM.SELECT_A_SPELL}</Typography>
+          <Button
+            variant="outlined"
+            onClick={() => {
+              toggleDrawer(true);
+            }}
+          >
+            {SPELL_COMPENDIUM.SELECT_A_SPELL}
+          </Button>
         )}
       </Grid>
     </Grid>
