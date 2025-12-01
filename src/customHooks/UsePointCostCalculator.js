@@ -59,7 +59,7 @@ const usePointCostCalculator = () => {
     unitList.forEach((u) => {
       const totalUnitCost = calculateUnitAndEveryElementItemCost(u);
 
-      sum += u.lossCounter * (totalUnitCost / u.maxCounter);
+      sum += u.lossCounter * (totalUnitCost / u.maxHitpointCounter);
 
       sum += calculateEquipmentPointCost(u.equipment, { filter: true });
     });

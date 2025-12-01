@@ -18,7 +18,7 @@ const TotalLossButton = (props) => {
     let tempArray = [...LC.list];
 
     let unitIndex = tempArray.findIndex((u) => u.uniqueID === props.unit.uniqueID);
-    tempArray[unitIndex].lossCounter = props.unit.maxCounter;
+    tempArray[unitIndex].lossCounter = props.unit.maxHitpointCounter;
     tempArray[unitIndex].unitDestroyed = true;
 
     LC.setList([...tempArray]);

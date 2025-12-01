@@ -54,7 +54,7 @@ const LossCalculator = () => {
    * @returns unitCard obj
    */
   const setUnitDestroyedFlag = (u) => {
-    u.unitDestroyed = u.lossCounter === u.maxCounter;
+    u.unitDestroyed = u.lossCounter === u.maxHitpointCounter;
     return u;
   };
 
