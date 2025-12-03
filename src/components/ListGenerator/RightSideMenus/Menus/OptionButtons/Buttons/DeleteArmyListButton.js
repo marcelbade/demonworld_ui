@@ -48,15 +48,14 @@ const DeleteArmyListButton = () => {
       <Tooltip title={TOOLTIPS.DELETE_ARMY_LIST}>
         <IconButton
           onClick={() => submit()} //
-          size="large"
         >
           <CustomIcon
             icon={deleteListIcon} //
             altText={TOOLTIPS.DELETE_ARMY_LIST}
-            height={"60px"}
-            width={"60px"}
-            boxHeight={"65px"}
-            boxWidth={"65px"}
+              height={"55px"}
+              width={"55px"}
+              boxHeight={"60px"}
+              boxWidth={"60px"}
           />
         </IconButton>
       </Tooltip>

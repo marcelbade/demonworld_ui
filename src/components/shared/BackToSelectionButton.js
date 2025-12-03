@@ -52,7 +52,9 @@ const BackToSelectionButton = (props) => {
             submit();
           }}
         >
-          <ReplayIcon sx={{ fontSize: props.iconSize }} />
+          <ReplayIcon sx={{ 
+            fontSize: props.iconSize 
+            }} />
         </IconButton>
       </Tooltip>
       <ConfirmationDialog
