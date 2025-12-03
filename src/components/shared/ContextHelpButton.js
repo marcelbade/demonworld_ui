@@ -23,6 +23,7 @@ const ContextHelpButton = (props) => {
 
   return props.isVisible ? (
     <IconButton
+    sx={{...props.css}}
       onClick={() => {
         pushMessages.showSnackBar(props.message, props.type);
       }}

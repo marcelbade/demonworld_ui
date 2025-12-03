@@ -8,10 +8,14 @@ const ListElementName = (props) => {
   const theme = useTheme();
 
   const STYLES = {
-    paddingLeft: "1em", //
+    padding: "1em", //
+    wordWrap: "break-word",
     display: "flex",
     justifyContent: "flex-start",
     alignItems: "center",
+    xs: "subtitle1",
+    sm: "subtitle1",
+    md: "h6",
   };
 
   const setStyles = () => {
@@ -27,9 +31,7 @@ const ListElementName = (props) => {
 
   return (
     <Grid>
-      <Typography variant="h6" sx={setStyles()}>
-        {props.unitName}
-      </Typography>
+      <Typography sx={setStyles()}>{props.unitName}</Typography>
     </Grid>
   );
 };

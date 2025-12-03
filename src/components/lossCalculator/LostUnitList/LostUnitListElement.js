@@ -19,7 +19,7 @@ const LostUnitListElement = (props) => {
     border: "solid 0.1em",
     borderColor: "black",
     borderRadius: "4px",
-    width: "100%",
+    
     height: "100%",
     paddingBottom: "0.5em",
   };
@@ -36,6 +36,7 @@ const LostUnitListElement = (props) => {
   return (
     <ListItem>
       <Grid
+      size={10}
         container //
         direction="row"
         alignItems="center"

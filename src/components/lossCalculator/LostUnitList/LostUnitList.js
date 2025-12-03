@@ -10,27 +10,26 @@ import { LossCalcContext } from "../../../contexts/LossCalculatorContext";
 const LostUnitList = () => {
   const LC = useContext(LossCalcContext);
 
- /**
-  * Function takes the current list of lost units, extracts 
-  * all sub faction names, removes duplicates 
-  * and returns them.
-  * @returns an array contain the distinct sub faction 
-  * names for the current list
-  */
+  /**
+   * Function takes the current list of lost units, extracts
+   * all sub faction names, removes duplicates
+   * and returns them.
+   * @returns an array contain the distinct sub faction
+   * names for the current list
+   */
   const getSubFactionsFromList = () => {
     return [...new Set(LC.list.map((u) => u.subFaction))];
   };
 
   return getSubFactionsFromList().map((subFaction) => {
     return (
-      <Grid
-        container //
-        direction="column"
-        justifyItems="center"
-        alignItems="center"
-      >
+      <Grid sx={{ paddingTop: "2em" }}>
         <Typography variant="h6">{subFaction}</Typography>
-        <List>
+        <List
+          sx={{
+            width: "25em",
+          }}
+        >
           {LC.list
             .filter((unit) => unit.subFaction === subFaction)
             .sort((a, b) => a.unitName > b.unitName)
