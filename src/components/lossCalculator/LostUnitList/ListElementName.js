@@ -18,20 +18,33 @@ const ListElementName = (props) => {
     md: "h6",
   };
 
+  /**
+   * Function conditionally sets the unit name style:
+   * the name is black if the unit suffered no losses, red w. losses
+   * and red and crossed out if destroyed.
+   * @returns an object with CSS values for Material UI.
+   */
   const setStyles = () => {
-    return props.unitDestroyed
-      ? {
-          ...STYLES,
-          color: theme.palette.errorColor,
-          textDecorationLine: "line-through",
-          textDecorationThickness: "0.1em",
-        }
-      : STYLES;
+    if (props.unit.lossCounter > 0 && !props.unit.unitDestroyed) {
+      return {
+        ...STYLES,
+        color: theme.palette.errorColor,
+      };
+    } else if (props.unit.unitDestroyed)
+      return {
+        ...STYLES,
+        color: theme.palette.errorColor,
+        textDecorationLine: "line-through",
+        textDecorationThickness: "0.1em",
+      };
+    else {
+      return STYLES;
+    }
   };
 
   return (
     <Grid>
-      <Typography sx={setStyles()}>{props.unitName}</Typography>
+      <Typography sx={setStyles()}>{props.unit.unitName}</Typography>
     </Grid>
   );
 };

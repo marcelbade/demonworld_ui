@@ -57,7 +57,7 @@ const UnitLossCalcBttnGroup = (props) => {
    * @returns true, if the numbe rof lost elements is equal to the maximum.
    */
   const notGreaterThanNumberOfIncrements = () => {
-    return props.unit.lossCounter === props.unit.maxCounter;
+    return props.unit.lossCounter === props.unit.maxHitpointCounter;
   };
 
   /**
@@ -66,7 +66,7 @@ const UnitLossCalcBttnGroup = (props) => {
    * @returns true, if the number of lost HP and elements is equal to the maximum.
    */
   const notGreaterThanNumberOfHitpoints = () => {
-    return props.unit.lossCounter + props.unit.hitpoints > props.unit.maxCounter;
+    return props.unit.lossCounter + props.unit.hitpoints > props.unit.maxHitpointCounter;
   };
 
   /**
