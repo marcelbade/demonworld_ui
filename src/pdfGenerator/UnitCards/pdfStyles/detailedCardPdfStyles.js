@@ -28,6 +28,7 @@ export const detailedStyles = {
     borderLeft: BORDER_STYLES,
     borderRight: BORDER_STYLES,
     backgroundColor: BACKGROUND_COLOR,
+      height:45
   },
 
   commandAndMagicRow: {
@@ -185,16 +186,14 @@ export const detailedStyles = {
 
   // wedge and square icons are smaller...
   wedgeIcon: {
-    height: "30em",
-    width: "40em",
-    backgroundColor: "red",
+    height: "14em",
+    width: "16em",
     color: "white",
   },
 
   squareFormationIcon: {
-    height: "10em",
-    width: "10em",
-    backgroundColor: "red",
+    height: "18em",
+    width: "16em",
     color: "white",
   },
 

@@ -21,7 +21,7 @@ import {
 // icons
 import squareFormationWhite from "../../../../../../assets/icons/squareFormationWhite.png";
 import skirmishFormation from "../../../../../../assets/icons/skirmishFormation.png";
-import wedgeFormation from "../../../../../../assets/icons/wedgeFormation.png";
+import wedgeFormation from "../../../../../../assets/icons/wedgeFormation_white.png";
 import shieldWallFormation from "../../../../../../assets/icons/icons8-shield-white.png";
 // styles
 import { detailedStyles } from "../../../../pdfStyles/detailedCardPdfStyles";

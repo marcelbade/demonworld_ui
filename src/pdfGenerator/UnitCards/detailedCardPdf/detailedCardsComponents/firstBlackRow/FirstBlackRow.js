@@ -1,5 +1,3 @@
-// react
-import React from "react";
 // react-pdf
 import { View } from "@react-pdf/renderer";
 // styles
