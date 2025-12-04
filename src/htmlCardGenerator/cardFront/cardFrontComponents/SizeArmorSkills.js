@@ -23,13 +23,22 @@ const SizeArmorSkills = (props) => {
       container
       alignItems="center"
       direction="row"
-      sx={{ ...theme.palette.statCards.backGround, flexWrap: "nowrap" }}
+      sx={{
+        ...theme.palette.statCards.backGround,
+        ...theme.palette.statCards.statPadding,
+        flexWrap: "nowrap",
+      }}
     >
       <Grid //
         container
         justifyContent="center"
       >
-        <Typography variant="h6">
+        <Typography
+          variant="h6"
+          sx={{
+            paddingRight: "0.5em",
+          }}
+        >
           {CARD_TEXT.SIZE} {props.unit.unitSize}
         </Typography>
       </Grid>
@@ -60,24 +69,20 @@ const SizeArmorSkills = (props) => {
           alignItems="center"
         >
           {props.unit.skillMelee !== 0 ? (
-            <Fragment>
-              <StatCardIcon
-                icon={blackSwordIcon} //
-                altText={ALTTEXT.MELEE_SKILL}
-                stat={SKILL_MELEE}
-                unit={props.unit}
-              />
-            </Fragment>
+            <StatCardIcon
+              icon={blackSwordIcon} //
+              altText={ALTTEXT.MELEE_SKILL}
+              stat={SKILL_MELEE}
+              unit={props.unit}
+            />
           ) : null}
           {props.unit.skillRange !== 0 ? (
-            <Fragment>
-              <StatCardIcon
-                icon={blackBowIcon} //
-                altText={ALTTEXT.RANGE_SKILL}
-                stat={SKILL_RANGE}
-                unit={props.unit}
-              />
-            </Fragment>
+            <StatCardIcon
+              icon={blackBowIcon} //
+              altText={ALTTEXT.RANGE_SKILL}
+              stat={SKILL_RANGE}
+              unit={props.unit}
+            />
           ) : null}
         </Grid>
       )}

@@ -9,7 +9,10 @@ const CardBackTitle = (props) => {
 
   return (
     <Grid
-      sx={theme.palette.statCards.backGround} //
+      sx={{
+        ...theme.palette.statCards.backGround, //
+        ...theme.palette.statCards.titlePadding,
+      }}
       container
       justifyContent="center"
     >

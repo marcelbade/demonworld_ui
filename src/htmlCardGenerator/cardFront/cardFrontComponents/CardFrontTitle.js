@@ -1,5 +1,3 @@
-// React
-import React from "react";
 // material ui
 import { useTheme } from "@emotion/react";
 // components & functions
@@ -18,7 +16,10 @@ const CardFrontTitle = (props) => {
 
   return (
     <Grid
-      sx={theme.palette.statCards.backGround} //
+      sx={{
+        ...theme.palette.statCards.backGround, //
+        ...theme.palette.statCards.titlePadding,
+      }}
       container
       justifyContent="space-around"
       direction="row"

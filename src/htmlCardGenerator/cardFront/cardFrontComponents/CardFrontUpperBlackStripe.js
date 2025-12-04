@@ -43,6 +43,7 @@ const CardFrontUpperBlackStripe = (props) => {
     <Grid //
       container
       justifyContent="space-around"
+      alignItems="center"
       sx={theme.palette.statCards.blackStripe}
     >
       {isHeroMageOrSingleSummon(props.unit) ? (
@@ -99,8 +100,8 @@ const CardFrontUpperBlackStripe = (props) => {
             <CustomIcon
               icon={squareFormationIcon} //
               altText={CARD_TEXT.SQUARE_FORMATION}
-              height={SIZE_SQUARE_ICON}
-              width={SIZE_SQUARE_ICON}
+              height={"45px"}
+              width={"40px"}
               darkBackGround={true}
             />
           ) : null}

@@ -23,6 +23,14 @@ const lightTheme = createTheme({
       title: { marginTop: "1em" },
     },
     statCards: {
+      titlePadding: {
+        paddingBottom: "0.5em",
+        paddingTop: "0.5em",
+      },
+      statPadding: {
+        paddingBottom: "0.5em",
+        paddingTop: "0.5em",
+      },
       backGround: {
         backgroundColor: "rgb(138, 158, 150)", //
       },
@@ -147,7 +155,7 @@ const lightTheme = createTheme({
           padding: "2em",
           height: "5em",
           fontFamily: "NotMaryKate",
-     
+
           ":hover": {
             color: "white", //
             backgroundColor: "darkRed",

@@ -12,7 +12,10 @@ const ChargeBonus = (props) => {
       container //
       direction="column"
       alignItems="center"
-      sx={theme.palette.statCards.backGround}
+      sx={{
+        ...theme.palette.statCards.statPadding,
+        ...theme.palette.statCards.backGround,
+      }}
     >
       <Typography variant="h6">{chargeBonusSetter(props.unit)}</Typography>
     </Grid>
