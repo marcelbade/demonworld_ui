@@ -141,7 +141,7 @@ const UndeadRules = {
 
 const isUndeadArmyCommanderPresent = (selectedUnits) => {
   const necromancers = [
-    "Xarta die Verderbte", //
+    "Xarta die Verderbte", // TODO no hard coded values
     "Sandaur der Perfide",
     "Jiitis Eishand",
     "Mad'Agonor",
@@ -153,7 +153,7 @@ const isUndeadArmyCommanderPresent = (selectedUnits) => {
 };
 
 const validIsthakAllies = (listOfAlliedUnits) => {
-  const permittedSubFactions = ["Eishexen", "Tiermenschen", "Menschen"];
+  const permittedSubFactions = ["Eishexen", "Tiermenschen", "Menschen"]; // TODO no hard coded values
   const blockedUnits = ["Drogador", "Xarator", "Masdra Draizar"];
   const result = [];
 

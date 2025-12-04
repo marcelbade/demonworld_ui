@@ -34,10 +34,8 @@ const CardFrontUpperBlackStripe = (props) => {
 
   // icon sizes
   const SIZE_ICON = "30px";
-  const SIZE_SQUARE_ICON = "45px";
   const SIZE_SKIRMISH_ICON = "20px";
   const SIZE_SHIELD_ICON = "23px";
-
 
   return (
     <Grid //

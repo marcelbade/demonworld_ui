@@ -1,5 +1,5 @@
 // react
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 // context
 import { ItemContext } from "../contexts/itemContext";
 import { SecondSubFactionContext } from "../contexts/secondSubFactionContext";
@@ -140,12 +140,15 @@ const UseRightSideMenuController = (unit, subFaction, bttnSelectorObj) => {
    * These if-statements control, whether the options menu should be displayed
    * instead of the stat card preview, the item shop or the menu for the second sub faction.
    */
-  if (!RC.statCardState.show && !RC.itemShopState.show && !RC.secondSubFactionMenuState.show) {
-    RC.setShowOptionButtons(true);
-  }
-  if (RC.statCardState.show || RC.itemShopState.show || RC.secondSubFactionMenuState.show) {
-    RC.setShowOptionButtons(false);
-  }
+
+  // useEffect(() => {
+    if (!RC.statCardState.show && !RC.itemShopState.show && !RC.secondSubFactionMenuState.show) {
+      // RC.setShowOptionButtons(true);   //  ### TODO
+    }
+    if (RC.statCardState.show || RC.itemShopState.show || RC.secondSubFactionMenuState.show) {
+      // RC.setShowOptionButtons(false);   //  ### TODO
+    }
+  // }, []);
 
   /**
    * Function implements an additional rule for the the thain faction:
@@ -176,7 +179,7 @@ const UseRightSideMenuController = (unit, subFaction, bttnSelectorObj) => {
       // item shop button
       display: testForSummons() && bttnSelectorObj.displayItemShop,
       action: () => {
-        IC.setUnitSelectedForShop(unit);
+         IC.setUnitSelectedForShop(unit);
         rightMenuController(unit, ITEMS);
       },
       text: BUTTON_TEXTS.SHOW_ITEM_SHOP,
@@ -196,7 +199,7 @@ const UseRightSideMenuController = (unit, subFaction, bttnSelectorObj) => {
       // tribe selection button (only Thain faction)
       display: displayTribeSelectorButton() && bttnSelectorObj.secondSubFaction, // ###
       action: () => {
-        IC.setUnitSelectedForShop(unit);
+         IC.setUnitSelectedForShop(unit);
         rightMenuController(unit, SECOND_SUB_FACTION);
       },
       text: SFC.secondSubfactionCaption,

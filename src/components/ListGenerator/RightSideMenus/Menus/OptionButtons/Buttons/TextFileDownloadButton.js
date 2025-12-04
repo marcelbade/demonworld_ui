@@ -99,11 +99,11 @@ const TextFileDownloadButton = () => {
           </IconButton>
         </span>
       </Tooltip>
-      <SelectPrintTypeDialog
+      {/* <SelectPrintTypeDialog // ### TODO
         createPrintableFile={downloadListTextFile}
         setShowPrintTypeDialog={setShowListTypeDialog}
         showPdfTypeDialog={showListTypeDialog}
-      />
+      /> */}
     </>
   );
 };

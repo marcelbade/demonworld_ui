@@ -242,6 +242,8 @@ const allowedNumberOldHeroes = (selectedUnits) => {
   return parseInt(countRelevantUnits / UNITS_PER_HERO);
 };
 
+
+// TODO no hard coding !
 const oreaVanarMapping = [
   { school: "Avandril Bellir", master: "Der Junge" },
   { school: "Galorea", master: "Die Wahrheit (Meisterin)" },
@@ -309,6 +311,8 @@ const removeOreaVanar = (selectedUnits) => {
   return result;
 };
 
+
+// TODO no hard coding!
 const heroesCovenantsMapping = [
   { lord: ELF_TEXTS.ATHULAE, units: [ELF_TEXTS.ARROW_LORDS] },
   { lord: ELF_TEXTS.LAURELION, units: [ELF_TEXTS.SWORD_MASTERS] },

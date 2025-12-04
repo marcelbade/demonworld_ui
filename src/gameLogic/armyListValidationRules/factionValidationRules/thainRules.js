@@ -174,7 +174,7 @@ const dorgaVsShamans = (selectedUnits, totalPointsAllowance) => {
   let netTotalChurch = 4;
   let netTotalShamans = 5;
 
-  let church = "Dorga-Kirche";
+  let church = "Dorga-Kirche"; // TODO no hard coding,  move to rules.
   let churchOpposite = "shamans";
   let shamans = "Schamane";
   let shamansOpposite = "dorgaChurch";
@@ -220,7 +220,7 @@ const decreaseAllowance = (increment, netTotal, subFaction, subFactionOpposite, 
 };
 
 const championTribeMapping = [
-  { tribe: "Eberstamm", hero: "Arr'ydwen der wilde Eber" },
+  { tribe: "Eberstamm", hero: "Arr'ydwen der wilde Eber" }, // TODO no hard coding,  move to rules.
   { tribe: "Bärenstamm", hero: "Bold'dyrr der einäugige Bär" },
   { tribe: "Wolfsstamm", hero: "Dargorkon'yaghar d. Winterwolf" },
   { tribe: "Berglöwenstamm", hero: "Muryan der Berglöwe" },
@@ -292,6 +292,7 @@ const dorgaPriestRule = (selectedUnits, availableUnits) => {
 
   const MESSAGE = THAIN_TEXTS.ERRORS.DORGA_MESSAGE;
 
+  // TODO no hard coding,  move to rules.
   let listHasDorgaUnit = selectedUnits.filter((u) => u.subFaction === "Dorga-Kirche" && u.unitType === UNIT).length > 0;
 
   if (!listHasDorgaUnit) {
@@ -317,6 +318,7 @@ const dorgaPriestRule = (selectedUnits, availableUnits) => {
 const dorgaPriestRemove = (selectedUnits) => {
   let result = [];
 
+  // TODO no hard coding,  move to rules.
   let isDorgaUnitPresent = selectedUnits.filter((u) => u.subFaction === "Dorga-Kirche" && u.unitType === UNIT).length > 0;
 
   if (!isDorgaUnitPresent) {
@@ -339,6 +341,7 @@ const veteranRule = (selectedUnits, availableUnits, secondSubFactionList) => {
 
   let result = [];
 
+  // TODO no hard coding,  move to rules.
   let presentTribes = selectedUnits
     .filter((u) => u.subFaction === "Stammeskrieger" && secondSubFactionList.includes(u.secondSubFaction))
     .map((u) => u.secondSubFaction);
@@ -365,6 +368,8 @@ const veteranRule = (selectedUnits, availableUnits, secondSubFactionList) => {
  */
 const tribalVeteranRemove = (selectedUnits) => {
   let result = [];
+
+  // TODO no hard coding,  move to rules.
 
   const presentTribes = selectedUnits
     .filter((u) => u.subFaction === "Stammeskrieger" && u.secondSubFaction !== "Stammeskrieger")
