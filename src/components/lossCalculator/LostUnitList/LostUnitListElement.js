@@ -51,7 +51,7 @@ const LostUnitListElement = (props) => {
         </Grid>
         <Grid
           container
-          size={6}
+          size={7}
           direction="row" //
           alignItems="center"
           justifyContent="center"
