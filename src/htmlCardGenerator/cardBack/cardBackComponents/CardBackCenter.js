@@ -17,7 +17,10 @@ const CardBackCenter = (props) => {
       <Typography
         variant="body1" //
         align="center"
-        sx={theme.palette.statCards.backGround}
+         sx={{
+         ...theme.palette.statCards.backGround,
+            padding:"1em",
+      }}
       >
         {specialRules}
         {hasEquipment

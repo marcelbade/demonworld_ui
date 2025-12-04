@@ -1,7 +1,5 @@
-// React
-import { Fragment } from "react";
 // Material UI
-import { Typography } from "@mui/material";
+import { Grid2 as Grid, Typography } from "@mui/material";
 // components & functions
 import { setUnitStat } from "../gameLogic/unitStatChangeLogic/unitStatChangesLogic";
 import CustomIcon from "../components/shared/CustomIcon";
@@ -25,7 +23,13 @@ const StatCardIcon = (props) => {
   const stat = setUnitStat(props.unit, props.stat);
 
   return (
-    <Fragment>
+    <Grid
+      container
+      alignContent="center"
+      sx={{
+        paddingRight: "0.5em",
+      }}
+    >
       <CustomIcon
         icon={props.icon} //
         altText={props.altText}
@@ -35,7 +39,7 @@ const StatCardIcon = (props) => {
         boxWidth={HEIGHT_WIDTH_BOX}
       />
       <Typography variant="h6">{stat}</Typography>
-    </Fragment>
+    </Grid>
   );
 };
 
