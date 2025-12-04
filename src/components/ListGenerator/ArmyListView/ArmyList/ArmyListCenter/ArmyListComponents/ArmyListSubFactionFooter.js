@@ -63,42 +63,51 @@ const ArmyListSubFactionFooter = (props) => {
         sx={{ display: "flex", flexDirection: "column" }}
         key={props.subFaction}
         primary={
-          <span sx={{ gap: "1em", display: "flex", flexDirection: "row" }}>
+          <span>
             <span>{displayCurrentTotal()}</span>
             <span> {displayCurrentPercentage()}</span>
           </span>
         }
+      />
+      <ListItemText
         secondary={
-          <Grid container direction="column">
-            <Grid container size={8} justifyContent="space-between">
-              <Typography
-                variant="caption text" //
-                align="left"
-              >
-                {`Minimum: ${MIN_PERCENTAGE} %`}
-              </Typography>
-              <Typography
-                variant="caption text" //
-                align="right"
-              >
-                {displayRemainder().tilMin}
-              </Typography>
-            </Grid>
-            <Grid container size={8} justifyContent="space-between">
-              <Typography
-                variant="caption text" //
-                align="left"
-              >
-                {`Maximum: ${MAX_PERCENTAGE} %`}
-              </Typography>
-              <Typography
-                variant="caption text" //
-                align="right"
-              >
-                {displayRemainder().tilMax}
-              </Typography>
-            </Grid>
-          </Grid>
+          <>
+            <Typography
+              variant="caption text" //
+              align="right"
+              sx={{
+                paddingRight: "4.3em", //
+              }}
+            >
+              {`Minimum: ${MIN_PERCENTAGE} %`}
+            </Typography>
+
+            <Typography
+              variant="caption text" //
+              align="right"
+            >
+              {displayRemainder().tilMin}
+            </Typography>
+          </>
+        }
+      />
+      <ListItemText
+        secondary={
+          <>
+            <Typography
+              variant="caption text" //
+              align="right"
+              sx={{ paddingRight: "4em" }}
+            >
+              {`Maximum: ${MAX_PERCENTAGE} %`}
+            </Typography>
+            <Typography
+              variant="caption text" //
+              align="right"
+            >
+              {displayRemainder().tilMax}
+            </Typography>
+          </>
         }
       />
     </List>
