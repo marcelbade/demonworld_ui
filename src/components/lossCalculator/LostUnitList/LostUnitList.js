@@ -21,9 +21,9 @@ const LostUnitList = () => {
     return [...new Set(LC.list.filter((u) => u.points > 0).map((u) => u.subFaction))];
   };
 
-  return getSubFactionsFromList().map((subFaction) => {
+  return getSubFactionsFromList().map((subFaction, i) => {
     return (
-      <Grid sx={{ paddingTop: "2em" }}>
+      <Grid sx={{ paddingTop: "2em" }} key={i}>
         <Typography variant="h6">{subFaction}</Typography>
         <List
           sx={{
@@ -38,7 +38,7 @@ const LostUnitList = () => {
                 <LostUnitListElement
                   unit={u} //
                   index={i}
-                  key={u.uniqueID}
+                  key={i}
                 />
               );
             })}
