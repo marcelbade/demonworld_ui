@@ -21,7 +21,6 @@ const SpellNameAndSelectors = (props) => {
         width: "100%",
         marginBottom: "2em",
         color: "red",
-        padding: { xs: "1em", sm: "0em", md: "0em" }, // ###
       }}
     >
       <CarousellButton
