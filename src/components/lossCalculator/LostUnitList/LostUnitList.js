@@ -18,7 +18,7 @@ const LostUnitList = () => {
    * names for the current list
    */
   const getSubFactionsFromList = () => {
-    return [...new Set(LC.list.map((u) => u.subFaction))];
+    return [...new Set(LC.list.filter((u) => u.points > 0).map((u) => u.subFaction))];
   };
 
   return getSubFactionsFromList().map((subFaction) => {
@@ -31,7 +31,7 @@ const LostUnitList = () => {
           }}
         >
           {LC.list
-            .filter((unit) => unit.subFaction === subFaction)
+            .filter((unit) => unit.subFaction === subFaction && unit.points > 0)
             .sort((a, b) => a.unitName > b.unitName)
             .map((u, i) => {
               return (
