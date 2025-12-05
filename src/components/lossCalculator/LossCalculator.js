@@ -12,6 +12,7 @@ import CollapsableTopMenuDrawer from "../shared/CollapsableTopMenuDrawer";
 import TopDrawerButton from "../shared/TopDrawerButton";
 // context
 import { LossCalcContext } from "../../contexts/LossCalculatorContext";
+import BackToTopContainer from "../shared/BackToTopContainer";
 
 const LossCalculator = () => {
   const location = useLocation();
@@ -59,40 +60,42 @@ const LossCalculator = () => {
   };
 
   return LC.list.length !== 0 ? (
-    <Grid
-      container //
-      width="100vw"
-      height="100vh"
-      direction={{ xs: "column", sm: "column", md: "row" }}
-    >
+    <BackToTopContainer>
       <Grid
         container //
-        direction="column"
-        justifyItems="start"
-        alignItems="center"
-        size={12}
+        width="100vw"
+        height="100vh"
+        direction={{ xs: "column", sm: "column", md: "row" }}
       >
-        <CollapsableTopMenuDrawer
-          displayPageTitle={true}
-          title={""} //
-          displayNaviBttn={true}
-          displayListBttns={true}
-        />
-        <TopDrawerButton />
+        <Grid
+          container //
+          direction="column"
+          justifyItems="start"
+          alignItems="center"
+          size={12}
+        >
+          <CollapsableTopMenuDrawer
+            displayPageTitle={true}
+            title={""} //
+            displayNaviBttn={true}
+            displayListBttns={true}
+          />
+          <TopDrawerButton />
+        </Grid>
+        <LostPointDisplay totalPointsLost={LC.totalPointsLost} />
+        <Grid
+          container //
+          size={12}
+          height="70%"
+          sx={{
+            paddingTop: "1em",
+            paddingLeft: "2em",
+          }}
+        >
+          <LostUnitList list={LC.list} />
+        </Grid>
       </Grid>
-      <LostPointDisplay totalPointsLost={LC.totalPointsLost} />
-      <Grid
-        container //
-        size={12}
-        height="70%"
-        sx={{
-          paddingTop: "1em",
-          paddingLeft: "2em",
-        }}
-      >
-        <LostUnitList list={LC.list} />
-      </Grid>
-    </Grid>
+    </BackToTopContainer>
   ) : (
     <CreateListScreen />
   );
