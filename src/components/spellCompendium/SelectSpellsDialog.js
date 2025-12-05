@@ -146,10 +146,10 @@ const SelectSpellsDialog = (props) => {
                   />
                   <ListItemText
                     primary={
-                      <Typography variant="body1">
-                        {spellTierIsText(s.spellTier) //
-                          ? "*"
-                          : s.spellTier}
+                      <Typography
+                        variant="body1" //
+                      >
+                        {spellTierIsText(s.spellTier) ? "*" : s.spellTier}
                       </Typography>
                     }
                   />
@@ -162,8 +162,9 @@ const SelectSpellsDialog = (props) => {
           alignContent="start"
           justifyContent="center"
         >
-          {optionsTable.map((o) => (
+          {optionsTable.map((o, i) => (
             <FormControlLabel
+              key={i}
               sx={{
                 ".MuiGrid-root": {
                   display: "flex",

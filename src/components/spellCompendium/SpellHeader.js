@@ -1,7 +1,7 @@
 // material ui
 import { Grid2 as Grid, IconButton, Typography } from "@mui/material";
 // custom components and functions
-import { NO_SELECTION, spellTierIsText } from "./spellUtil";
+import { spellTierIsText } from "./spellUtil";
 import CollapsableTopMenuDrawer from "../shared/CollapsableTopMenuDrawer";
 import TopDrawerButton from "../shared/TopDrawerButton";
 import SpellTierSymbol from "./SpellTierSymbol";
@@ -17,6 +17,7 @@ const SpellHeader = (props) => {
         direction="column"
         alignItems="center"
         sx={{ width: "100%" }}
+     
       >
         <CollapsableTopMenuDrawer
           displayPageTitle={true} //

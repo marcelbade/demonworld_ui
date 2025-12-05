@@ -1,0 +1,69 @@
+import { useEffect, useRef, useState } from "react";
+import useCustomMediaQuery from "../../customHooks/UseCustomMediaQuery";
+import { Fab, Grid2 as Grid } from "@mui/material";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+
+const BackToTopContainer = (props) => {
+  const headerRef = useRef(null);
+  const displaySize = useCustomMediaQuery();
+  const ROOT_MARGIN = "10em";
+
+  const [buttonOpacity, setButtonOpacity] = useState(0);
+
+  useEffect(() => {
+    const current = headerRef?.current;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setButtonOpacity(+!entry.isIntersecting);
+      },
+      { ROOT_MARGIN }
+    );
+    current && observer?.observe(current);
+
+    return () => current && observer.unobserve(current);
+  }, []);
+
+  const scrollCallback = () => {
+    headerRef.current.scrollIntoView({ behavior: "smooth" });
+  };
+
+  return (
+    <>
+      <Grid
+        container //
+        size={12}
+        sx={{
+          height: "0.5em", //
+        }}
+        ref={headerRef}
+      ></Grid>
+
+      {props.children}
+
+      <Grid
+        container //
+        justifyContent="end"
+        size={12}
+        sx={{
+          position: "fixed",
+          bottom: "5em",
+        }}
+      >
+        {displaySize.isSmallDisplay || displaySize.isTinyDisplay ? (
+          <Fab
+            onClick={scrollCallback}
+            sx={{
+              marginRight: "2em",
+              marginBottom: "3em",
+              opacity: buttonOpacity,
+            }}
+          >
+            <KeyboardArrowUpIcon />
+          </Fab>
+        ) : null}
+      </Grid>
+    </>
+  );
+};
+
+export default BackToTopContainer;
