@@ -1,9 +1,5 @@
-// react
-import { useContext } from "react";
 // functions and components
 import SelectionInput from "../shared/selectionInput";
-// context
-import { GameDataContext } from "../../contexts/gameDataContext";
 // constants
 import { SPELL_COMPENDIUM } from "../../constants/textsAndMessages";
 import { NO_SELECTION } from "./spellUtil";
@@ -11,15 +7,20 @@ import { NO_SELECTION } from "./spellUtil";
 import useCustomMediaQuery from "../../customHooks/UseCustomMediaQuery";
 
 const SpellSelector = (props) => {
-  const GDC = useContext(GameDataContext);
   const displaySize = useCustomMediaQuery();
+
+  /**
+   * Create a list of distinct faction names for the spells.
+   * Faction names include mercenary casters.
+   */
+  const distinctFactionNamesForSpells = new Set(props.allSpells.map((s) => s.faction));
 
   /**
    * Function generates the options for the faction name selector.
    * @returns an array containing all faction names.
    */
   const setFactionNamesOptions = () => {
-    const FACTIONS = [...GDC.allFactionNames, SPELL_COMPENDIUM.SHOW_ALL_FACTIONS];
+    const FACTIONS = [...distinctFactionNamesForSpells, SPELL_COMPENDIUM.SHOW_ALL_FACTIONS];
     return FACTIONS.sort();
   };
 
