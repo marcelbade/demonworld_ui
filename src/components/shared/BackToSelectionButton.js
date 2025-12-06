@@ -47,15 +47,19 @@ const BackToSelectionButton = (props) => {
   return (
     <>
       <Tooltip title={OPTIONS.CHANGE_SELECTED_FACTION}>
-        <IconButton
-          onClick={() => {
-            submit();
-          }}
-        >
-          <ReplayIcon sx={{ 
-            fontSize: props.iconSize 
-            }} />
-        </IconButton>
+        <span>
+          <IconButton
+            onClick={() => {
+              submit();
+            }}
+          >
+            <ReplayIcon
+              sx={{
+                fontSize: props.iconSize,
+              }}
+            />
+          </IconButton>
+        </span>
       </Tooltip>
       <ConfirmationDialog
         type={CONFIRMATION_DIALOG.DELETE}

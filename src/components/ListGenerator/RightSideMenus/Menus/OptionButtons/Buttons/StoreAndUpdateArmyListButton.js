@@ -1,7 +1,7 @@
 // react
 import { useContext } from "react";
 // Material UI
-import { IconButton, Tooltip, Typography } from "@mui/material";
+import { IconButton, Tooltip } from "@mui/material";
 // components and functions
 import CustomIcon from "../../../../../shared/CustomIcon";
 // context
@@ -17,6 +17,12 @@ import StoreArmyListDialog from "../../../../../Dialogs/StoreArmyListDialog/Stor
 const StoreAndUpdateArmyListButton = (props) => {
   const SEC = useContext(SelectionContext);
   const UC = useContext(UserContext);
+
+  const STORE_ICON_SIZE = "50px";
+  const STORE_ICON_BOX_SIZE = "55px";
+
+  const UPDATE_ICON_SIZE = "60px";
+  const UPDATE_ICON_BOX_SIZE = "65px";
 
   const displayStoreArmyDialog = () => {
     UC.userLoggedIn ? props.setShowArmySaveDialog(true) : UC.setDisplayLogInDialog(true);
@@ -46,10 +52,10 @@ const StoreAndUpdateArmyListButton = (props) => {
             <CustomIcon
               icon={props.isUpdateSelected ? listUpdateIcon : customSaveIcon} //
               altText={props.isUpdateSelected ? OPTIONS.UPDATE_LIST : OPTIONS.STORE_LIST}
-              height={"55px"}
-              width={"55px"}
-              boxHeight={"60px"}
-              boxWidth={"60px"}
+              height={props.isUpdateSelected ? UPDATE_ICON_SIZE : STORE_ICON_SIZE}
+              width={props.isUpdateSelected ? UPDATE_ICON_SIZE : STORE_ICON_SIZE}
+              boxHeight={props.isUpdateSelected ? UPDATE_ICON_BOX_SIZE : STORE_ICON_BOX_SIZE}
+              boxWidth={props.isUpdateSelected ? UPDATE_ICON_BOX_SIZE : STORE_ICON_BOX_SIZE}
             />
           </IconButton>
         </span>

@@ -46,18 +46,20 @@ const DeleteArmyListButton = () => {
   return (
     <>
       <Tooltip title={TOOLTIPS.DELETE_ARMY_LIST}>
-        <IconButton
-          onClick={() => submit()} //
-        >
-          <CustomIcon
-            icon={deleteListIcon} //
-            altText={TOOLTIPS.DELETE_ARMY_LIST}
+        <span>
+          <IconButton
+            onClick={() => submit()} //
+          >
+            <CustomIcon
+              icon={deleteListIcon} //
+              altText={TOOLTIPS.DELETE_ARMY_LIST}
               height={"55px"}
               width={"55px"}
               boxHeight={"60px"}
               boxWidth={"60px"}
-          />
-        </IconButton>
+            />
+          </IconButton>
+        </span>
       </Tooltip>
       <ConfirmationDialog
         type={CONFIRMATION_DIALOG.DELETE}

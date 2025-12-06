@@ -63,6 +63,7 @@ const CustomIcon = (props) => {
         ...toggleCheckBoxIcon(),
         width: props.width,
         height: props.height,
+        ...props.css,
       }}
     >
       <img

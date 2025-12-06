@@ -23,6 +23,9 @@ const CreateArmyListPdfButton = () => {
 
   const [showListTypeDialog, setShowListTypeDialog] = useState(false);
 
+  const ICON_SIZE = "60px";
+  const ICON_BOX_SIZE = "65px";
+
   /**
    * Function opens the pdf generator in a
    * new tab and sends all data needed via the window object.
@@ -73,7 +76,9 @@ const CreateArmyListPdfButton = () => {
       toolTipTitle={PDF.CREATE_PDF} //
       disabledIf={SEC.selectedUnits.length === 0}
       openDialog={setShowListTypeDialog}
-       marginLeft={"0em"}
+      marginLeft={"0em"}
+      size={ICON_SIZE}
+      boxSize={ICON_BOX_SIZE}
     >
       <SelectPrintTypeDialog
         createPrintableFile={openPDfInNewTab}

@@ -31,10 +31,10 @@ const CreatePdfButton = (props) => {
             <CustomIcon
               icon={props.color === "white" ? customPdfIcon_white : customPdfIcon_black} //
               altText={props.toolTipTitle}
-              height={"65px"}
-              width={"65px"}
-              boxHeight={"70px"}
-              boxWidth={"62px"}
+              height={props.size}
+              width={props.size}
+              boxHeight={props.boxSize}
+              boxWidth={props.boxSize}
             />
           </IconButton>
         </span>

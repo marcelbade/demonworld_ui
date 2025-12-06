@@ -23,83 +23,39 @@ const OptionButtonsPage = () => {
   const ICON_SIZE_RESET_BUTTONS = "1.75em";
 
   return (
-    <Grid
-      container
-      direction="column"
-      alignItems="flex-start"
-      spacing={4}
-      sx={{
-        width: "20vw",
-        padding: "2em",
-        overflowY: "hidden",
-        overflowX: "hidden",
-      }}
-    >
+    <>
       <Stack
         direction="column" //
         spacing={6}
-        sx={{
-          marginBottom: "5em",
-        }}
       >
         <ArmyMetaDataInput />
         <ArmyAndScoutingPointDisplay />
       </Stack>
-      <Grid
-        container //
-        direction="row"
-        spacing={10}
-      >
-        <Grid
-          container
-          direction="column" //
-          spacing={4}
-          sx={{
-            paddingTop: "0.7em",
-          }}
-        >
-          <CreateArmyListPdfButton />
-          <TextFileDownloadButton />
-          <LoadArmyButton />
-          <StoreAndUpdateArmyListButton
-            isUpdateSelected={false}
-            showArmySaveDialog={showArmySaveDialog}
-            setShowArmySaveDialog={setShowArmySaveDialog}
-            isExistingList={isExistingList} //
-            setIsExistingList={setIsExistingList}
-          />
-
-          <StoreAndUpdateArmyListButton
-            isUpdateSelected={true}
-            showArmySaveDialog={showArmySaveDialog}
-            setShowArmySaveDialog={setShowArmySaveDialog}
-            isExistingList={isExistingList} //
-            setIsExistingList={setIsExistingList}
-          />
-
-          <LossCalculatorButton />
-        </Grid>
-        <Grid
-          container
-          direction="column" //
-          spacing={4}
-          sx={{
-            paddingTop: "0.7em",
-          }}
-        >
-          <BackToSelectionButton iconSize={ICON_SIZE_RESET_BUTTONS} />
-          <DeleteArmyListButton iconSize={ICON_SIZE_RESET_BUTTONS} />
-        </Grid>
-        <Grid
-          container
-          direction="column" //
-          justifyContent="center"
-          alignContent="center"
-          spacing={3}
-        ></Grid>
-      </Grid>
+ 
+        <CreateArmyListPdfButton />
+        <TextFileDownloadButton />
+        <LoadArmyButton />
+        <StoreAndUpdateArmyListButton
+          isUpdateSelected={false}
+          showArmySaveDialog={showArmySaveDialog}
+          setShowArmySaveDialog={setShowArmySaveDialog}
+          isExistingList={isExistingList} //
+          setIsExistingList={setIsExistingList}
+        />
+        <StoreAndUpdateArmyListButton
+          isUpdateSelected={true}
+          showArmySaveDialog={showArmySaveDialog}
+          setShowArmySaveDialog={setShowArmySaveDialog}
+          isExistingList={isExistingList} //
+          setIsExistingList={setIsExistingList}
+        />
+        <LossCalculatorButton />
+        <BackToSelectionButton iconSize={ICON_SIZE_RESET_BUTTONS} />
+        <DeleteArmyListButton iconSize={ICON_SIZE_RESET_BUTTONS} />
+    
+ 
       <LoginDialog />
-    </Grid>
+    </>
   );
 };
 

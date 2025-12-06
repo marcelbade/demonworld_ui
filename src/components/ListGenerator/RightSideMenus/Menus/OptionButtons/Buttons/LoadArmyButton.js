@@ -15,6 +15,9 @@ import { OPTIONS } from "../../../../../../constants/textsAndMessages";
 const LoadArmyButton = () => {
   const UC = useContext(UserContext);
 
+  const ICON_SIZE = "55px";
+  const ICON_BOX_SIZE = "60px";
+
   const [showArmyLoadDialog, setShowArmyLoadDialog] = useState(false);
 
   const showLoadListPrompt = () => {
@@ -34,10 +37,10 @@ const LoadArmyButton = () => {
             <CustomIcon
               icon={customLoadIcon} //
               altText={OPTIONS.LOAD_LIST}
-              height={"65px"}
-              width={"65px"}
-              boxHeight={"70px"}
-              boxWidth={"70px"}
+              height={ICON_SIZE}
+              width={ICON_SIZE}
+              boxHeight={ICON_BOX_SIZE}
+              boxWidth={ICON_BOX_SIZE}
             />
           </IconButton>
         </span>
