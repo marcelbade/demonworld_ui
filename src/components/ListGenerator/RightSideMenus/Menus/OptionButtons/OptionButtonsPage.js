@@ -27,33 +27,69 @@ const OptionButtonsPage = () => {
       <Stack
         direction="column" //
         spacing={6}
+        sx={{ width: "32em" }}
       >
         <ArmyMetaDataInput />
         <ArmyAndScoutingPointDisplay />
       </Stack>
- 
-        <CreateArmyListPdfButton />
-        <TextFileDownloadButton />
-        <LoadArmyButton />
-        <StoreAndUpdateArmyListButton
-          isUpdateSelected={false}
-          showArmySaveDialog={showArmySaveDialog}
-          setShowArmySaveDialog={setShowArmySaveDialog}
-          isExistingList={isExistingList} //
-          setIsExistingList={setIsExistingList}
-        />
-        <StoreAndUpdateArmyListButton
-          isUpdateSelected={true}
-          showArmySaveDialog={showArmySaveDialog}
-          setShowArmySaveDialog={setShowArmySaveDialog}
-          isExistingList={isExistingList} //
-          setIsExistingList={setIsExistingList}
-        />
+
+      <Grid
+        container //
+        direction="column"
+        spacing={6}
+        sx={{ marginTop: "2em" }}
+      >
+        <Grid
+          container
+          direction="row"
+          spacing={7}
+          sx={{
+            alignItems: "center",
+            marginTop: "2em",
+          }}
+        >
+          <CreateArmyListPdfButton />
+          <TextFileDownloadButton />
+        </Grid>
+        <Grid
+          container //
+          direction="row"
+          spacing={7}
+          sx={{
+            alignItems: "center",
+            marginTop: "2em",
+          }}
+        >
+          <LoadArmyButton />
+          <StoreAndUpdateArmyListButton
+            isUpdateSelected={false}
+            showArmySaveDialog={showArmySaveDialog}
+            setShowArmySaveDialog={setShowArmySaveDialog}
+            isExistingList={isExistingList} //
+            setIsExistingList={setIsExistingList}
+          />
+          <StoreAndUpdateArmyListButton
+            isUpdateSelected={true}
+            showArmySaveDialog={showArmySaveDialog}
+            setShowArmySaveDialog={setShowArmySaveDialog}
+            isExistingList={isExistingList} //
+            setIsExistingList={setIsExistingList}
+          />
+        </Grid>
         <LossCalculatorButton />
-        <BackToSelectionButton iconSize={ICON_SIZE_RESET_BUTTONS} />
-        <DeleteArmyListButton iconSize={ICON_SIZE_RESET_BUTTONS} />
-    
- 
+        <Grid
+          container //
+          direction="row"
+          spacing={7}
+          sx={{
+            alignItems: "center",
+            marginTop: "2em",
+          }}
+        >
+          <BackToSelectionButton iconSize={ICON_SIZE_RESET_BUTTONS} />
+          <DeleteArmyListButton iconSize={ICON_SIZE_RESET_BUTTONS} />
+        </Grid>
+      </Grid>
       <LoginDialog />
     </>
   );
