@@ -467,7 +467,7 @@ function App() {
                                       >
                                         <CustomSnackBarProvider>
                                           {fetchedFactions && fetchedItems ? (
-                                            <Grid container>
+                                            <Grid>
                                               <Switch>
                                                 <Route path="/" component={landingPage} exact />
                                                 <Route path="/compendium" component={CompendiumTable} exact />
