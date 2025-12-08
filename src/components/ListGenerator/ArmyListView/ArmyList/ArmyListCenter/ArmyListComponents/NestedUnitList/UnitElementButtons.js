@@ -1,5 +1,3 @@
-// React
-import React from "react";
 // Material UI
 import { List } from "@mui/material";
 import { ListItemButton } from "@mui/material";
@@ -14,8 +12,6 @@ import useRightSideMenuController from "../../../../../../../customHooks/UseRigh
  * @returns JSX elemment
  */
 const UnitElementButtons = (props) => {
-  const ICON_SIZE = 25;
-
   const sideMenuController = useRightSideMenuController(
     props.unit, //
     props.subFaction,
