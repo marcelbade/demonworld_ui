@@ -31,8 +31,6 @@ const ArmyListBox = () => {
       justifyContent="center"
       alignItems="center"
       sx={{
-        minWidth: "70em",
-        height: "75em",
         overflowY: "auto",
         overflowX:"hidden"
       }}
