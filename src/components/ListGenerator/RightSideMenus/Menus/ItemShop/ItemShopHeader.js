@@ -6,15 +6,12 @@ import { Grid2 as Grid, Typography, IconButton } from "@mui/material";
 import CancelIcon from "@mui/icons-material/Cancel";
 // components and functions
 import { ItemContext } from "../../../../../contexts/itemContext";
-import { RightMenuContext } from "../../../../../contexts/rightMenuContext";
+// custom hooks
+import UseRightSideMenuController from "../../../../../customHooks/UseRightSideMenuController";
 
 const ItemShopHeader = () => {
   const IC = useContext(ItemContext);
-  const RC = useContext(RightMenuContext);
-
-  const closeShopPanel = () => {
-    RC.setItemShopState({ ...RC.itemShopState, show: false });
-  };
+  const sideMenuController = UseRightSideMenuController({}, "", {});
 
   return (
     <Grid
@@ -23,7 +20,7 @@ const ItemShopHeader = () => {
     >
       <IconButton
         onClick={() => {
-          closeShopPanel();
+          sideMenuController.closeItemShop();
         }}
         size="large"
       >
