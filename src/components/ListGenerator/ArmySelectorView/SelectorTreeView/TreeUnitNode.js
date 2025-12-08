@@ -4,7 +4,6 @@ import { Typography, IconButton, Stack } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // icons
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import PaymentIcon from "@mui/icons-material/Payment";
 // components and functions
 import ContextHelpButton from "../../../shared/ContextHelpButton";
 //constants
@@ -79,7 +78,7 @@ const TreeUnitNode = (props) => {
               key={i} //
               onClick={b.action}
             >
-              <PaymentIcon />
+              {b.icon}
             </IconButton>
           );
         })}

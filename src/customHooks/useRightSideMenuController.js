@@ -7,6 +7,9 @@ import { RightMenuContext } from "../contexts/rightMenuContext";
 // components and functions
 import { BUTTON_TEXTS } from "../constants/textsAndMessages";
 import { SUMMONED } from "../constants/unitTypes";
+import PaymentIcon from "@mui/icons-material/Payment";
+import ChestIcon from "../assets/icons/chest.svg";
+import CustomIcon from "../components/shared/CustomIcon";
 
 /**Custom hook controls the menus on the right side of the army list. It does two things:
  * Firstly, it controls what menu and what content for which unit is shown. In order to do this,
@@ -201,7 +204,7 @@ const UseRightSideMenuController = (unit, subFaction, bttnSelectorObj) => {
         rightMenuController(unit, ITEMS);
       },
       text: BUTTON_TEXTS.SHOW_ITEM_SHOP,
-      icon: null,
+      icon: <CustomIcon icon={ChestIcon} />,
     },
     {
       // stat card button
@@ -210,8 +213,7 @@ const UseRightSideMenuController = (unit, subFaction, bttnSelectorObj) => {
         rightMenuController(unit, UNIT_CARDS);
       },
       text: BUTTON_TEXTS.PREVIEW_CARD,
-      //  TODO  icon: cardIcon,
-      icon: null,
+      icon: <PaymentIcon />,
     },
     {
       // tribe selection button (only Thain faction)
@@ -230,7 +232,7 @@ const UseRightSideMenuController = (unit, subFaction, bttnSelectorObj) => {
       action: () => {
         rightMenuController({}, OPTION_BUTTONS);
       },
-      text: SFC.secondSubfactionCaption,
+      text: null, //TODO add text!
       icon: null,
     },
   ];

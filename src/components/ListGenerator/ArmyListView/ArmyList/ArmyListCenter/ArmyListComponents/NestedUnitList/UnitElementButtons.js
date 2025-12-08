@@ -32,7 +32,7 @@ const UnitElementButtons = (props) => {
             variant="outlined"
             onClick={b.action}
           >
-            {b.text}
+            {b.icon}
           </ListItemButton>
         );
       })}
