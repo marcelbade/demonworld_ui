@@ -10,7 +10,7 @@ const ItemShop = () => {
       container
       direction={{ xs: "column", sm: "column", md: "column", lg: "column", xl: "column" }} //
       sx={{
-        width: "50em", //
+        width: "32em", //
       }}
     >
       <ItemShopHeader />
