@@ -1,5 +1,5 @@
 // react
-import { useContext } from "react";
+import { useContext, useState } from "react";
 // material ui
 import { Grid2 as Grid, Box, IconButton } from "@mui/material";
 import { useTheme } from "@emotion/react";
@@ -16,10 +16,19 @@ import TopDrawerButton from "../shared/TopDrawerButton";
 import CollapsableTopMenuDrawer from "../shared/CollapsableTopMenuDrawer";
 //  icons
 import MenuIcon from "@mui/icons-material/Menu";
+import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
+// custom hooks
 import UseRightSideMenuController from "../../customHooks/UseRightSideMenuController";
+import BackToTopContainer from "../shared/BackToTopContainer";
 
 const ListGenerator = () => {
   const AC = useContext(ArmyContext);
+
+  const [openArmySelectionBox, setOpenArmySelectionBox] = useState(true);
+
+  const toggleUnitTree = () => {
+    setOpenArmySelectionBox((prevState) => !prevState);
+  };
 
   const theme = useTheme();
 
@@ -55,59 +64,69 @@ const ListGenerator = () => {
   };
 
   return (
-    <Grid
-      container //
-      size={12}
-      direction="row"
-    >
+    <BackToTopContainer>
       <Grid
         container //
-        size={4}
+        size={12}
+        direction="row"
       >
-        <ArmySelectionBox />
-      </Grid>
-      <Grid
-        container //
-        size={4}
-        direction="column"
-        alignContent="center"
-      >
-        <CollapsableTopMenuDrawer
-          displayPageTitle={false}
-          title={""} //
-          displayNaviBttn={true}
-          displayListBttns={true}
-        />
-        <TopDrawerButton />
-        <ArmyListBox />
-      </Grid>
-      <Box sx={setArmySelectorBoxStyle()}>
-        <ArmySelectorDropdown />
-      </Box>
+        <Grid
+          container //
+          size={3}
+        >
+          <ArmySelectionBox
+            openArmySelectionBox={openArmySelectionBox} //
+            toggleUnitTree={toggleUnitTree}
+          />
+        </Grid>
+        <Grid
+          container //
+          size={6}
+          direction="column"
+          alignContent="center"
+        >
+          {/* <CollapsableTopMenuDrawer
+            displayPageTitle={false}
+            title={""} //
+            displayNaviBttn={true}
+            displayListBttns={true}
+          />
+          <TopDrawerButton /> */}
+          <ArmyListBox />
+        </Grid>
+        <Box sx={setArmySelectorBoxStyle()}>
+          <ArmySelectorDropdown />
+        </Box>
 
-      <Grid
-        container
-        alignContent="start"
-        justifyContent="end"
-        sx={{
-          paddingRight: "4em",
-          paddingTop: "2em",
-        }}
-        size={4}
-      >
-        {sideMenuController.buttons.map((b, i) => {
-          return (
-            <IconButton
-              key={i} //
-              onClick={b.action}
-            >
-              <MenuIcon fontSize="large" color="error" />
-            </IconButton>
-          );
-        })}
+        <Grid
+          container
+          alignContent="start"
+          justifyContent="end"
+          spacing={5}
+          sx={{
+            paddingRight: "4em",
+            paddingTop: "2em",
+          }}
+          size={3}
+        >
+          <IconButton onClick={toggleUnitTree}>
+            <FormatListBulletedIcon fontSize="large" color="error" />
+          </IconButton>
+
+          {sideMenuController.buttons.map((b, i) => {
+            return (
+              <IconButton
+                key={i} //
+                onClick={b.action}
+              >
+                <MenuIcon fontSize="large" color="error" />
+              </IconButton>
+            );
+          })}
+        </Grid>
+        <MenuBox />
       </Grid>
-      <MenuBox />
-    </Grid>
+    </BackToTopContainer>
   );
 };
 
