@@ -3,6 +3,13 @@ import useCustomMediaQuery from "../../customHooks/UseCustomMediaQuery";
 import { Fab, Grid2 as Grid } from "@mui/material";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
+/**
+ * Higher order component that adds a "go back to the top floating" button to the UI if
+ * the the viewport is under a certain size (MUI breakpoint sm ws used). The button is
+ * a floating buton that appears once the topmost element is no longer in the viewport.
+ * @param {*} props
+ * @returns a JSX HOC
+ */
 const BackToTopContainer = (props) => {
   const headerRef = useRef(null);
   const displaySize = useCustomMediaQuery();
@@ -33,7 +40,7 @@ const BackToTopContainer = (props) => {
         container //
         size={12}
         sx={{
-          height: "0.5em", //
+          height: "0.5em",
         }}
         ref={headerRef}
       ></Grid>
@@ -43,10 +50,11 @@ const BackToTopContainer = (props) => {
       <Grid
         container //
         justifyContent="end"
-        size={12}
+    
         sx={{
           position: "fixed",
           bottom: "5em",
+          width: "100%",
         }}
       >
         {displaySize.isSmallDisplay || displaySize.isTinyDisplay ? (
