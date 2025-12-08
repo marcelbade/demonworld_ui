@@ -30,6 +30,7 @@ const TreeUnitNode = (props) => {
       displayCard: true,
       displayItemShop: false,
       secondSubFaction: false,
+      displayOptionButtons: false,
     }
   );
 

@@ -1,33 +1,55 @@
 // React
 import { useState } from "react";
 // Material UI
-import { Grid2 as Grid, Stack } from "@mui/material";
+import { Grid2 as Grid, IconButton, Stack } from "@mui/material";
 // context
 // components and functions
 import LoginDialog from "../../../../Dialogs/LogInDialog/LogInDialog";
 import ArmyAndScoutingPointDisplay from "../../../ArmyListView/ArmyList/ArmyListFooter/ArmyAndScoutingPointDisplay";
 import BackToSelectionButton from "../../../../shared/BackToSelectionButton";
 import DeleteArmyListButton from "./Buttons/DeleteArmyListButton";
-// constants
 import ArmyMetaDataInput from "../../../ArmyListView/ArmyList/ArmyListHeader/ArmyMetaDataInput";
 import CreateArmyListPdfButton from "./Buttons/CreateArmyListPdfButton";
 import StoreAndUpdateArmyListButton from "./Buttons/StoreAndUpdateArmyListButton";
 import LoadArmyButton from "./Buttons/LoadArmyButton";
 import LossCalculatorButton from "./Buttons/LossCalculatorButton";
 import TextFileDownloadButton from "./Buttons/TextFileDownloadButton";
+// custom hooks
+import UseRightSideMenuController from "../../../../../customHooks/UseRightSideMenuController";
+// icons
+import CancelIcon from "@mui/icons-material/Cancel";
 
 const OptionButtonsPage = () => {
-  const [showArmySaveDialog, setShowArmySaveDialog] = useState(false);
-  const [isExistingList, setIsExistingList] = useState(false);
+  const [showArmySaveDialog, setShowArmySaveDialog] = useState(false); // TODO move?
+  const [isExistingList, setIsExistingList] = useState(false); // TODO ditto!
+
+  const sideMenuController = UseRightSideMenuController({}, "", {});
 
   const ICON_SIZE_RESET_BUTTONS = "1.75em";
 
   return (
     <>
+      <Grid>
+        <IconButton
+          onClick={() => {
+            sideMenuController.closeOptionButtonMenu();
+          }}
+          size="large"
+          sx={{
+            marginTop: "0.5em",
+            marginBottom: "0.5em",
+          }}
+        >
+          <CancelIcon />
+        </IconButton>
+      </Grid>
       <Stack
         direction="column" //
         spacing={6}
-        sx={{ width: "32em" }}
+        sx={{
+          paddingLeft: "1em",
+          width: "32em",
+        }}
       >
         <ArmyMetaDataInput />
         <ArmyAndScoutingPointDisplay />

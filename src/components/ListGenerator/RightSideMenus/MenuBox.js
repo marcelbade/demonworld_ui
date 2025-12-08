@@ -21,7 +21,7 @@ const MenuBox = () => {
   const components = [
     {
       exists: true, //
-      show: RC.showOptionButtons,
+      show: RC.showOptionButtons.show,
       element: <OptionButtonsPage />,
     },
     {

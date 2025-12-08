@@ -168,10 +168,15 @@ function App() {
     lastclickedUnit: {},
     show: false,
   });
-  const [displayedCard, setDisplayedCard] = useState({});
 
   // right side options menu
-  const [showOptionButtons, setShowOptionButtons] = useState(false);
+  const [showOptionButtons, setShowOptionButtons] = useState({
+    clickedUnit: {},
+    lastclickedUnit: {},
+    show: false,
+  });
+
+  const [displayedCard, setDisplayedCard] = useState({});
 
   //loss calculator
   const [list, setList] = useState([]);

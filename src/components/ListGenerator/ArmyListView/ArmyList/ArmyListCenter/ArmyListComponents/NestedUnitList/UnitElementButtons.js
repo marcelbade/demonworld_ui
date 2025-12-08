@@ -23,6 +23,7 @@ const UnitElementButtons = (props) => {
       displayCard: true,
       displayItemShop: true,
       secondSubFaction: true,
+      displayOptionButtons: false,
     }
   );
 
