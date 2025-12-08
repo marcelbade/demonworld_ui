@@ -94,7 +94,7 @@ const TreeItemNode = (props) => {
             <AddCircleOutlineIcon />
           </IconButton>
 
-          <Grid direction="column">
+          <Grid>
             <Typography
               variant="body1"
               sx={{
