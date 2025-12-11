@@ -49,7 +49,9 @@ const MenuBox = () => {
         variant="persistent"
         open={c.show}
         sx={{
-          width: "150%",
+          "& .MuiPaper-root": {
+            width: "40em",
+          },
         }}
       >
         {c.element}
