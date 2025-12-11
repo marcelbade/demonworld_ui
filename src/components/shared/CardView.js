@@ -20,26 +20,24 @@ const CardView = (props) => {
         alignItems="center"
         justifyContent="center"
         alignContent="center"
-        minHeight="60vh"
-        maxHeight="60vh"
+        sx={{
+          width: "100%" ,// { xs: "5em", sm: "10em", md: "20em" },
+          backgroundColor: "red", //
+        }}
       >
-        <Grid>
-          <CarousellButton
-            display={props.isMultiStateCard} //
-            action={carousel.carouselBackward}
-            side={"left"}
-          />
-        </Grid>
-        <Grid>
-          <StatCard unit={localDisplayCard} />
-        </Grid>
-        <Grid>
-          <CarousellButton
-            display={props.isMultiStateCard} //
-            action={carousel.carouselForward}
-            side={"right"}
-          />
-        </Grid>
+        <CarousellButton
+          display={props.isMultiStateCard} //
+          action={carousel.carouselBackward}
+          side={"left"}
+        />
+
+        <StatCard unit={localDisplayCard} />
+
+        <CarousellButton
+          display={props.isMultiStateCard} //
+          action={carousel.carouselForward}
+          side={"right"}
+        />
       </Grid>
     </Fragment>
   );

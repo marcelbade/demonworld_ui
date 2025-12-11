@@ -32,7 +32,10 @@ const CardViewBox = () => {
       <Grid
         container //
         direction="column"
-        sx={{ height: "100vh", width: "38em", padding: "2em" }}
+        sx={{
+          height: "100vh", //
+          width: "100%",
+        }}
       >
         <Grid>
           <IconButton
@@ -40,7 +43,7 @@ const CardViewBox = () => {
               sideMenuController.closeCardDisplay();
             }}
             size="large"
-            sx={{paddingBottom:"2em"}}
+            sx={{ paddingBottom: "2em" }}
           >
             <CancelIcon />
           </IconButton>

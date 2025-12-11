@@ -14,11 +14,10 @@ import { isObjectEmtpy } from "../util/utilityFunctions";
  */
 const StatCard = (props) => {
   const CSS = {
-    width: "32em",
+    // width: "35em",
+    width: "35em",
     marginTop: "2em",
     border: "1px black solid",
-    marginLeft: "0.75em",
-    marginRight: "0.75em",
   };
 
   const [data, setData] = useState(props.unit);
@@ -28,7 +27,10 @@ const StatCard = (props) => {
   }, [props.unit]);
 
   return data === undefined || isObjectEmtpy(data) ? null : (
-    <Grid container direction="column">
+    <Grid
+      container //
+      direction="column"
+    >
       <Grid sx={CSS}>
         <CardFront unit={data} />
       </Grid>
