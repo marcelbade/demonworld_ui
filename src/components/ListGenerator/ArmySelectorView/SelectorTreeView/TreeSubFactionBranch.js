@@ -13,7 +13,7 @@ import { ArmyContext } from "../../../../contexts/armyContext.js";
 // icons
 import { SelectionContext } from "../../../../contexts/selectionContext.js";
 
-const TreeSubFactionBranch = (props, { children }) => {
+const TreeSubFactionBranch = (props) => {
   const AC = useContext(ArmyContext);
   const ALC = useContext(AllyContext);
   const SEC = useContext(SelectionContext);
@@ -24,9 +24,9 @@ const TreeSubFactionBranch = (props, { children }) => {
   const theme = useTheme();
 
   /**
-   * The following is a contreived hack to have a forceUpdate function in a
-   * functional component. ForceUpdate is a method in
-   * class component that immdiately forces a rerender.
+   * The following is a contreived hack to achieve a forceUpdate function in a
+   * functional React component.
+   * ForceUpdate is a method in class component that immdiately forces a rerender.
    * This is the ONLY WORKING SOLUTION that rerenders all treeView
    * items and correctly show disabled branches (see testForDisabledSubFaction).
    * https://legacy.reactjs.org/docs/hooks-faq.html#is-there-something-like-forceupdate
@@ -83,8 +83,8 @@ const TreeSubFactionBranch = (props, { children }) => {
         .map((u) =>
           validation.createValidationUnitObject(
             u, //
-            validation.testArmySelectionAndRunValidation(SEC.selectedUnits, SEC.maxPointsAllowance)
-          )
+            validation.testArmySelectionAndRunValidation(SEC.selectedUnits, SEC.maxPointsAllowance),
+          ),
         )
     );
   };
@@ -109,7 +109,7 @@ const TreeSubFactionBranch = (props, { children }) => {
           />
         ))}
       </TreeItem>
-    ) : null
+    ) : null,
   );
 };
 
