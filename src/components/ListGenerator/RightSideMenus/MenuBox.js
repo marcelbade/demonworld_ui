@@ -55,14 +55,13 @@ const MenuBox = () => {
         open={c.show}
         sx={{
           "& .MuiPaper-root": {
-            // width: "40em",
-            width: { xs: "15em", sm: "30em", md: "40em" },
+            width: { xs: "100%", sm: "30em", md: "40em" },
           },
         }}
       >
         {c.element}
       </Drawer>
-    ) : null
+    ) : null,
   );
 };
 

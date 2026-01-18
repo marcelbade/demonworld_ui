@@ -22,6 +22,10 @@ const TreeUnitNode = (props) => {
   const theme = useTheme();
   const validation = useArmyValidation();
   const enrichUnit = useUnitEnricher();
+
+  /**
+   * Create button for options menu using the custom controller
+   */
   const sideMenuController = useRightSideMenuController(
     props.unit, //
     props.unit.subFaction,
@@ -30,7 +34,7 @@ const TreeUnitNode = (props) => {
       displayItemShop: false,
       secondSubFaction: false,
       displayOptionButtons: false,
-    }
+    },
   );
 
   /**
@@ -56,50 +60,48 @@ const TreeUnitNode = (props) => {
    */
   const switchNodeStyle = (isBlocked) => {
     const NAME_WIDTH = "65%";
-    const NAME_HEIGHT = "50%";
-    const style = { minWidth: NAME_WIDTH, NAME_HEIGHT };
+    const style = { minWidth: NAME_WIDTH };
 
     return isBlocked ? { ...style, color: theme.palette.disabled } : style;
   };
 
   return (
-    <Stack>
-      <Stack alignItems="center" direction="row">
+    <>
+      <Stack direction={{ xs: "column", md: "row" }}>
         <Typography
           variant="body1"
           sx={switchNodeStyle(!props.isValidUnit)} //
         >
           {props.unit.unitName}
         </Typography>
-        {/* card preview button */}
-        {sideMenuController.buttons.map((b, i) => {
-          return (
-            <IconButton
-              key={i} //
-              onClick={b.action}
-            >
-              {b.icon}
-            </IconButton>
-          );
-        })}
-        <IconButton
-          onClick={addUnit} //
-          disabled={!props.isValidUnit}
-        >
-          <AddCircleOutlineIcon />
-        </IconButton>
-        <ContextHelpButton
-          isVisible={!props.isValidUnit}
-          message={props.validationMessage} //
-          type={PUSH_MESSAGE_TYPES.INFO}
-        />
+        <Stack alignItems="center" direction="row">
+          {/* card preview button */}
+          <IconButton
+            onClick={sideMenuController.buttons[0].action} //
+          >
+            {sideMenuController.buttons[0].icon}
+          </IconButton>
+          {/* add unit button */}
+          <IconButton
+            onClick={addUnit} //
+            disabled={!props.isValidUnit}
+          >
+            <AddCircleOutlineIcon />
+          </IconButton>
+          {/* error message button */}
+          <ContextHelpButton
+            isVisible={!props.isValidUnit}
+            message={props.validationMessage} //
+            type={PUSH_MESSAGE_TYPES.INFO}
+          />
+        </Stack>
       </Stack>
       <Stack alignItems="center" direction="row">
         {
           <Typography
             variant="body1"
             sx={{
-              marginTop: "-0.8em",
+              marginTop: { xs: "0", md: "-0.8em" },
               marginRight: "1em",
             }}
           >
@@ -107,23 +109,18 @@ const TreeUnitNode = (props) => {
           </Typography>
         }
         {
-          <Typography
-            variant="body1"
-            sx={{
-              marginTop: "-0.8em", //
-            }}
-          >
+          <Typography variant="body1" sx={{}}>
             {renderDynamicIcons("/", props.unit.magic)}
           </Typography>
         }
       </Stack>
       <Typography
         variant="body1" //
-        sx={switchNodeStyle(!props.isValidUnit)}
+        sx={{ ...switchNodeStyle(!props.isValidUnit), paddingBottom: "2em" }}
       >
         {props.unit.points}
       </Typography>
-    </Stack>
+    </>
   );
 };
 export default TreeUnitNode;
