@@ -13,6 +13,11 @@ import { RightMenuContext } from "../../../contexts/rightMenuContext";
 import { ArmyContext } from "../../../contexts/armyContext";
 import { NONE } from "../../../constants/factions";
 
+/**
+ * JSX component. Returns a drawer that contains the selected menu
+ * on the right side of the army list screen.
+ * @returns a JSX component.
+ */
 const MenuBox = () => {
   const SFC = useContext(SecondSubFactionContext);
   const RC = useContext(RightMenuContext);
@@ -50,7 +55,8 @@ const MenuBox = () => {
         open={c.show}
         sx={{
           "& .MuiPaper-root": {
-            width: "40em",
+            // width: "40em",
+            width: { xs: "15em", sm: "30em", md: "40em" },
           },
         }}
       >

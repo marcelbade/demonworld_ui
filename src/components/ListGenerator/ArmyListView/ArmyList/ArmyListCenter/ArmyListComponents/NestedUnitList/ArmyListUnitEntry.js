@@ -1,5 +1,5 @@
 // React
-import React, { Fragment } from "react";
+import { Fragment } from "react";
 // Material UI
 import { Grid2 as Grid, ListItemText, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
@@ -27,7 +27,15 @@ const ArmyListUnitEntry = (props) => {
         key={props.unit.secondSubFaction}
         primary={
           props.isValid ? (
-            <Typography variant="body1">{UNIT}</Typography>
+            <Typography
+              sx={{
+                wordWrap: "break-word",
+                padding: "0.5em",
+              }}
+              variant="body1"
+            >
+              {UNIT}
+            </Typography>
           ) : (
             <Grid //
               container

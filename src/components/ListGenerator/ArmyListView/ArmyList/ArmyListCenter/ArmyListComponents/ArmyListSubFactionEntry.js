@@ -46,7 +46,6 @@ const ArmyListSubFactionEntry = (props) => {
           ...(fadeAwayFlag //
             ? theme.palette.animation.fadeAway
             : theme.palette.animation.fadeIn),
-          minWidth: "30em",
         }}
       >
         {LDC.simpleModeOn ? null : (

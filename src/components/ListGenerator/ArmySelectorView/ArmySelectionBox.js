@@ -8,6 +8,14 @@ import FactionTreeView from "./SelectorTreeView/FactionTreeView";
 // icons
 import CancelIcon from "@mui/icons-material/Cancel";
 
+/**
+ * JSX element. Returns drawer containing all selectable army units
+ * (ad ally units, if applicable) as an ordered tree
+ * @param {*} props:
+ *    - openArmySelectionBox: true, if element is displayed
+ *    - toggleUnitTree: toggles openArmySelectionBox
+ * @returns a JSX element.
+ */
 const ArmySelectionBox = (props) => {
   const theme = useTheme();
 
@@ -22,7 +30,8 @@ const ArmySelectionBox = (props) => {
           backgroundColor: theme.palette.contrastedOptions, //
           position: "fixed",
           overflowY: "auto",
-          width: "28em",
+          height: "100%",
+          width: { xs: "20em", sm: "20em", md: "28em" },
         },
       }}
     >
@@ -31,9 +40,9 @@ const ArmySelectionBox = (props) => {
           onClick={props.toggleUnitTree}
           fontSize="large"
           sx={{
-            marginTop: "0.5em",
+            marginTop: { xs: "1em", sm: "1em", md: "0.5em" },
             marginBottom: "0.5em",
-            marginLeft:"16em"
+            marginLeft: { xs: "10em", sm: "10em", md: "16em" },
           }}
         >
           <CancelIcon />

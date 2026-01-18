@@ -80,13 +80,7 @@ const ArmyMetaDataInput = () => {
   ];
 
   return (
-    <Stack
-      direction="column"
-      sx={{
-        minWidth: "50em ",
-        alignItems: "center",
-      }}
-    >
+    <Stack direction="column">
       {inputElements.map((inputElmnt, i) => (
         <Grid
           key={i}

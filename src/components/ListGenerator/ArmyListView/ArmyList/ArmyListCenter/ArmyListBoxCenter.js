@@ -53,7 +53,7 @@ const ArmyListBoxCenter = () => {
         minHeight: "60em", //
       }}
     >
-      {/* show army entries */}
+      {/* display selected army units */}
       {filterAndCreateSubFactionValidationObjectList(AC.subFactionDTOs) //
         .map((validationObj, i) => (
           <ArmyListSubFactionEntry
@@ -64,7 +64,7 @@ const ArmyListBoxCenter = () => {
             units={filterUnitsForSubFaction(validationObj.subFactionName)}
           />
         ))}
-      {/* show ally entries */}
+      {/* display selected ally units */}
       {useAlly.showAlly(AC.selectedFactionName) ? (
         <ArmyListSubFactionEntry
           key={AYC.allyName} //

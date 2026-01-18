@@ -36,7 +36,7 @@ const ArmyListSubFactionFooter = (props) => {
       AC.selectedFactionName, //
       props.subFactionName,
       props.subFactionUnits,
-      SEC.maxPointsAllowance
+      SEC.maxPointsAllowance,
     );
 
     const remainingTilMin =
@@ -75,9 +75,6 @@ const ArmyListSubFactionFooter = (props) => {
             <Typography
               variant="caption text" //
               align="right"
-              sx={{
-                paddingRight: "4.3em", //
-              }}
             >
               {`Minimum: ${MIN_PERCENTAGE} %`}
             </Typography>
@@ -97,7 +94,6 @@ const ArmyListSubFactionFooter = (props) => {
             <Typography
               variant="caption text" //
               align="right"
-              sx={{ paddingRight: "4em" }}
             >
               {`Maximum: ${MAX_PERCENTAGE} %`}
             </Typography>

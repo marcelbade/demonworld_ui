@@ -19,6 +19,10 @@ import UseRightSideMenuController from "../../../../../customHooks/UseRightSideM
 // icons
 import CancelIcon from "@mui/icons-material/Cancel";
 
+/**
+ * JSX component. Returns the right side menu containing all option and the CRUD buttons for the army list screen.
+ * @returns a JSX componen.
+ */
 const OptionButtonsPage = () => {
   const [showArmySaveDialog, setShowArmySaveDialog] = useState(false); // TODO move?
   const [isExistingList, setIsExistingList] = useState(false); // TODO ditto!
@@ -28,7 +32,11 @@ const OptionButtonsPage = () => {
   const ICON_SIZE_RESET_BUTTONS = "1.75em";
 
   return (
-    <>
+    <Grid
+      sx={{
+        paddingLeft: "2em",
+      }}
+    >
       <Grid>
         <IconButton
           onClick={() => {
@@ -113,7 +121,7 @@ const OptionButtonsPage = () => {
         </Grid>
       </Grid>
       <LoginDialog />
-    </>
+    </Grid>
   );
 };
 

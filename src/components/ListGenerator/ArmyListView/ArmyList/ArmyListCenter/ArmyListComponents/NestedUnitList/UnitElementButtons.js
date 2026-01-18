@@ -31,6 +31,9 @@ const UnitElementButtons = (props) => {
             key={i} //
             variant="outlined"
             onClick={b.action}
+            sx={{
+              marginBottom: { xs: "2em", sm: "2em", md: "0em" },
+            }}
           >
             {b.icon}
           </ListItemButton>

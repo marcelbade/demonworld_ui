@@ -21,6 +21,12 @@ import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import UseRightSideMenuController from "../../customHooks/UseRightSideMenuController";
 import BackToTopContainer from "../shared/BackToTopContainer";
 
+/**
+ * JSX component returns List generator page. page contains all
+ * functionality to display, create, load, update and store army lists
+ * as well as print them as PDFs and txt files.
+ * @returns a JSX component.
+ */
 const ListGenerator = () => {
   const AC = useContext(ArmyContext);
 
@@ -32,6 +38,9 @@ const ListGenerator = () => {
 
   const theme = useTheme();
 
+  /**
+   * Create button for options menu using the custom controller
+   */
   const sideMenuController = UseRightSideMenuController(
     {}, //
     "",
@@ -40,15 +49,8 @@ const ListGenerator = () => {
       displayItemShop: false,
       secondSubFaction: false,
       displayOptionButtons: true,
-    }
+    },
   );
-
-  const factionSelectorStyle = {
-    position: "absolute", //
-    top: "30%",
-    left: "35%",
-    width: "30em",
-  };
 
   /**
    * Functions conditionally returns different CSS stylings
@@ -59,72 +61,64 @@ const ListGenerator = () => {
    */
   const setArmySelectorBoxStyle = () => {
     return AC.selectedFactionName === NONE //
-      ? factionSelectorStyle
-      : { ...factionSelectorStyle, ...theme.palette.animation.fadeAway };
+      ? {}
+      : { ...theme.palette.animation.fadeAway };
   };
 
   return (
     <BackToTopContainer>
+      {/* drawers */}
+
+      <ArmySelectionBox
+        openArmySelectionBox={openArmySelectionBox} //
+        toggleUnitTree={toggleUnitTree}
+      />
+      <MenuBox />
+      {/* page */}
       <Grid
         container //
-        size={12}
-        direction="row"
+        direction="column"
+        sx={
+          {
+            // width: "100%", //
+            // height: "100%",
+          }
+        }
       >
-        <Grid
-          container //
-          size={3}
-        >
-          <ArmySelectionBox
-            openArmySelectionBox={openArmySelectionBox} //
-            toggleUnitTree={toggleUnitTree}
-          />
-        </Grid>
-        <Grid
-          container //
-          size={6}
-          direction="column"
-          alignContent="center"
-        >
-          {/* <CollapsableTopMenuDrawer
-            displayPageTitle={false}
-            title={""} //
-            displayNaviBttn={true}
-            displayListBttns={true}
-          />
-          <TopDrawerButton /> */}
-          <ArmyListBox />
-        </Grid>
-        <Box sx={setArmySelectorBoxStyle()}>
-          <ArmySelectorDropdown />
-        </Box>
-
         <Grid
           container
           alignContent="start"
           justifyContent="end"
           spacing={5}
           sx={{
-            paddingRight: "4em",
-            paddingTop: "2em",
+            backgroundColor: "green",
           }}
-          size={3}
+          // size={12}
         >
+          {/* <CollapsableTopMenuDrawer // TODO
+            displayPageTitle={false}
+            title={""} //
+            displayNaviBttn={true}
+            displayListBttns={true}
+          />
+          <TopDrawerButton /> */}
           <IconButton onClick={toggleUnitTree}>
             <FormatListBulletedIcon fontSize="large" color="error" />
           </IconButton>
-
-          {sideMenuController.buttons.map((b, i) => {
-            return (
-              <IconButton
-                key={i} //
-                onClick={b.action}
-              >
-                <MenuIcon fontSize="large" color="error" />
-              </IconButton>
-            );
-          })}
+          <IconButton onClick={sideMenuController.buttons[0].action}>
+            <MenuIcon fontSize="large" color="error" />
+          </IconButton>
         </Grid>
-        <MenuBox />
+        <Grid
+          container //
+          direction="column"
+          alignContent="center"
+        >
+          <ArmyListBox />
+          <Box sx={setArmySelectorBoxStyle()}>
+            <ArmySelectorDropdown />
+          </Box>
+        </Grid>
       </Grid>
     </BackToTopContainer>
   );

@@ -16,7 +16,7 @@ import useArmyValidation from "../../../../../../../customHooks/UseArmyValidatio
 import useUnitEquipmentLimits from "../../../../../../../customHooks/UseUnitEquipmentLimits";
 import useSpecialItems from "../../../../../../../customHooks/UseSpecialItems";
 /**
- * The component creates the nested unit list for a single sub faction.
+ * JSX component returns the nested unit list for a single sub faction.
  * Every entry contains:
  *  - the unit name
  *  - points
@@ -112,12 +112,17 @@ const SubFactionUnitList = (props) => {
         .map((u) =>
           validation.createSecondSubFactionObject(
             u,
-            validation.testArmySelectionAndRunValidation(SEC.selectedUnits, SEC.maxPointsAllowance)
-          )
+            validation.testArmySelectionAndRunValidation(SEC.selectedUnits, SEC.maxPointsAllowance),
+          ),
         )
         .map((validationObj, i) => {
           return (
-            <List key={i}>
+            <List
+              key={i}
+              sx={{
+                width: { xs: "22em", sm: "22em", md: "15em" },
+              }}
+            >
               {/* unit entry w. buttons */}
               <ListItem>
                 <IconButton

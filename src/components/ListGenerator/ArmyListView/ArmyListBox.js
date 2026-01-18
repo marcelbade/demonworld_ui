@@ -9,6 +9,15 @@ import { AlternativeListContext } from "../../../contexts/alternativeListContext
 import { NONE } from "../../../constants/factions";
 import { ArmyContext } from "../../../contexts/armyContext";
 
+/**
+ * JSX component returns the army list, i.e. the center
+ * of the list generator page. Displays all selected units, items,
+ * and tribes (if applicable)
+ *
+ * @returns  a JSX component.
+ */
+
+// TODO: merge this with ArmyListBoxCenter
 const ArmyListBox = () => {
   const ALC = useContext(AlternativeListContext);
   const AC = useContext(ArmyContext);
@@ -31,11 +40,9 @@ const ArmyListBox = () => {
       justifyContent="center"
       alignItems="center"
       sx={{
-        overflowY: "auto",
-        overflowX:"hidden"
+        width: "100%",
       }}
     >
-    
       <ArmyListBoxCenter />
     </Grid>
   ) : null;
