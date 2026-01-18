@@ -3,7 +3,7 @@ import { useMediaQuery } from "@mui/material";
 
 /**
  * Custom hook uses useMediaQuery to return functions that allow
- * the conditional rendering of components.   
+ * the to render components dependent on the screen size and orientation.   
  * @returns an object with the following functions:
  * - isLargeDisplay
  * - isMediumDisplay
