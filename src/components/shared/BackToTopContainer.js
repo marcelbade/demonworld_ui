@@ -41,6 +41,7 @@ const BackToTopContainer = (props) => {
         size={12}
         sx={{
           height: "0.5em",
+          width: "100%",
         }}
         ref={headerRef}
       ></Grid>
@@ -50,7 +51,6 @@ const BackToTopContainer = (props) => {
       <Grid
         container //
         justifyContent="end"
-    
         sx={{
           position: "fixed",
           bottom: "5em",
