@@ -1,5 +1,5 @@
 // React
-import { Fragment, useState } from "react";
+import { useState } from "react";
 // material ui
 import { Grid2 as Grid } from "@mui/material";
 // components and functions
@@ -13,33 +13,30 @@ const CardView = (props) => {
   const carousel = useCarouselButtons(props.unit, setLocalDisplayCard, props.carouselCards);
 
   return (
-    <Fragment>
-      <Grid
-        container //
-        direction="row"
-        alignItems="center"
-        justifyContent="center"
-        alignContent="center"
-        sx={{
-          width: "100%" ,// { xs: "5em", sm: "10em", md: "20em" },
-          backgroundColor: "red", //
-        }}
-      >
-        <CarousellButton
-          display={props.isMultiStateCard} //
-          action={carousel.carouselBackward}
-          side={"left"}
-        />
+    <Grid
+      container //
+      direction="row"
+      alignItems="center"
+      justifyContent="center"
+      alignContent="center"
+      sx={{
+        width: "100%",
+      }}
+    >
+      <CarousellButton
+        display={props.isMultiStateCard} //
+        action={carousel.carouselBackward}
+        side={"left"}
+      />
 
-        <StatCard unit={localDisplayCard} />
+      <StatCard unit={localDisplayCard} />
 
-        <CarousellButton
-          display={props.isMultiStateCard} //
-          action={carousel.carouselForward}
-          side={"right"}
-        />
-      </Grid>
-    </Fragment>
+      <CarousellButton
+        display={props.isMultiStateCard} //
+        action={carousel.carouselForward}
+        side={"right"}
+      />
+    </Grid>
   );
 };
 

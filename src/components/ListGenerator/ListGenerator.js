@@ -68,7 +68,6 @@ const ListGenerator = () => {
   return (
     <BackToTopContainer>
       {/* drawers */}
-
       <ArmySelectionBox
         openArmySelectionBox={openArmySelectionBox} //
         toggleUnitTree={toggleUnitTree}
@@ -80,12 +79,10 @@ const ListGenerator = () => {
         direction="column"
       >
         <Grid
-          container
+          container //
           alignContent="start"
           justifyContent="end"
           spacing={5}
-
-          // size={12}
         >
           {/* <CollapsableTopMenuDrawer // TODO
             displayPageTitle={false}

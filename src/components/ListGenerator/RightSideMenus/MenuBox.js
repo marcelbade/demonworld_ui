@@ -1,7 +1,7 @@
 // React
 import { useContext } from "react";
 // Material UI
-import { Drawer } from "@mui/material";
+import { Drawer, Grid2 as Grid } from "@mui/material";
 // components and functions
 import OptionButtonsPage from "./Menus/OptionButtons/OptionButtonsPage";
 import ItemShop from "./Menus/ItemShop/ItemShop";
@@ -55,7 +55,7 @@ const MenuBox = () => {
         open={c.show}
         sx={{
           "& .MuiPaper-root": {
-            width: { xs: "100%", sm: "30em", md: "40em" },
+            width: { xs: "100%", sm: "100%", md: "40em" },
           },
         }}
       >

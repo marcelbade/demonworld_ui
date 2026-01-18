@@ -1,5 +1,3 @@
-// React
-import React from "react";
 // material ui
 import { IconButton } from "@mui/material";
 // icons

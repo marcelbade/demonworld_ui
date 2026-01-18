@@ -1,6 +1,6 @@
 // React
 import { useContext } from "react";
-import { Grid2 as Grid, IconButton, ThemeProvider, CssBaseline } from "@mui/material";
+import { Grid2 as Grid, IconButton, ThemeProvider, CssBaseline, Stack, Grid2 } from "@mui/material";
 // icons
 import CancelIcon from "@mui/icons-material/Cancel";
 // components and functions
@@ -30,33 +30,28 @@ const CardViewBox = () => {
     <ThemeProvider theme={LC.darkModeOff ? lightTheme : darkTheme}>
       <CssBaseline />
       <Grid
-        container //
-        direction="column"
         sx={{
           height: "100vh", //
           width: "100%",
         }}
       >
-        <Grid>
-          <IconButton
-            onClick={() => {
-              sideMenuController.closeCardDisplay();
-            }}
-            size="large"
-            sx={{ paddingBottom: "2em" }}
-          >
-            <CancelIcon />
-          </IconButton>
-        </Grid>
-        <Grid container>
-          {RC.statCardState.clickedUnit !== undefined ? (
-            <CardView
-              isMultiStateCard={RC.statCardState.clickedUnit?.isMultiStateUnit}
-              unit={RC.displayedCard}
-              carouselCards={allStateCards}
-            />
-          ) : null}
-        </Grid>
+        <IconButton
+          onClick={() => {
+            sideMenuController.closeCardDisplay();
+          }}
+          size="large"
+          sx={{ paddingBottom: "1em" }}
+        >
+          <CancelIcon />
+        </IconButton>
+
+        {RC.statCardState.clickedUnit !== undefined ? (
+          <CardView
+            isMultiStateCard={RC.statCardState.clickedUnit?.isMultiStateUnit}
+            unit={RC.displayedCard}
+            carouselCards={allStateCards}
+          />
+        ) : null}
       </Grid>
     </ThemeProvider>
   );

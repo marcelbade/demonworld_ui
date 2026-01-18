@@ -5,8 +5,8 @@ import { renderDynamicIcons } from "../../../util/utilityFunctions";
 import { Grid2 as Grid, Typography } from "@mui/material";
 
 /**
- * creates the card title. The name displayed is, by default, the unit's name.
- * However if the unit has multiple stat cards (isMultiStateUnit flag), the multiCardName
+ * Creates the card title. The name displayed is, by default, the unit's name.
+ * However if the unit has multiple stat cards (isMultiStateUnit flag == true), the multiCardName
  *  is protrayed, i.e., the name of one of the stat cards that belong to the unit.
  *  E.g.: "Riesenyeti"
  * @returns html element
