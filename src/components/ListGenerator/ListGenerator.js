@@ -78,21 +78,13 @@ const ListGenerator = () => {
       <Grid
         container //
         direction="column"
-        sx={
-          {
-            // width: "100%", //
-            // height: "100%",
-          }
-        }
       >
         <Grid
           container
           alignContent="start"
           justifyContent="end"
           spacing={5}
-          sx={{
-            backgroundColor: "green",
-          }}
+
           // size={12}
         >
           {/* <CollapsableTopMenuDrawer // TODO
