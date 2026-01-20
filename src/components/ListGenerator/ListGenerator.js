@@ -6,7 +6,7 @@ import { useTheme } from "@emotion/react";
 // components and functions
 import ArmyListBox from "./ArmyListView/ArmyListBox";
 import MenuBox from "./RightSideMenus/MenuBox";
-import ArmySelectionBox from "./ArmySelectorView/ArmySelectionBox";
+import ArmyListDrawer from "./ArmySelectorView/ArmyListDrawer";
 import ArmySelectorDropdown from "./ArmySelectorView/ArmySelectorDropdown";
 // context
 import { ArmyContext } from "../../contexts/armyContext";
@@ -52,6 +52,8 @@ const ListGenerator = () => {
     },
   );
 
+  console.log("sideMenuController.buttons[0].action", sideMenuController.buttons[0].action);
+
   /**
    * Functions conditionally returns different CSS stylings
    * for the army selection dropdown. Ocne the an army is selected,
@@ -60,15 +62,16 @@ const ListGenerator = () => {
    * @returns CSS in form of a plain object.
    */
   const setArmySelectorBoxStyle = () => {
+    const selectionWidth = { width: { xs: "75%", md: "25%" } };
     return AC.selectedFactionName === NONE //
-      ? {}
-      : { ...theme.palette.animation.fadeAway };
+      ? { ...selectionWidth }
+      : { ...selectionWidth, ...theme.palette.animation.fadeAway };
   };
 
   return (
     <BackToTopContainer>
       {/* drawers */}
-      <ArmySelectionBox
+      <ArmyListDrawer
         openArmySelectionBox={openArmySelectionBox} //
         toggleUnitTree={toggleUnitTree}
       />
@@ -101,7 +104,7 @@ const ListGenerator = () => {
         <Grid
           container //
           direction="column"
-          alignContent="center"
+          alignContent={{ xs: "flex-start", md: "center" }}
         >
           <ArmyListBox />
           <Box sx={setArmySelectorBoxStyle()}>
