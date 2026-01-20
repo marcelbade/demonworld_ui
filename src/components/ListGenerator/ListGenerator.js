@@ -52,8 +52,6 @@ const ListGenerator = () => {
     },
   );
 
-  console.log("sideMenuController.buttons[0].action", sideMenuController.buttons[0].action);
-
   /**
    * Functions conditionally returns different CSS stylings
    * for the army selection dropdown. Ocne the an army is selected,
