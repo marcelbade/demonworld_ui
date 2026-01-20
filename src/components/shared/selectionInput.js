@@ -1,5 +1,5 @@
 // material ui
-import { Autocomplete } from "@mui/material";
+import { Autocomplete, Typography } from "@mui/material";
 import { TextField } from "@mui/material";
 
 /**
@@ -34,14 +34,15 @@ const SelectionInput = (props) => {
 
         "& .MuiFormLabel-root": {
           fontFamily: "NotMaryKate",
+
           color:
             props.textColor === null //
               ? "theme.palette.color"
               : props.textColor,
-              
+
           fontSize: props.isArmySelector //
             ? "30px"
-            : "15px",
+            : "1em",
         },
       }}
       id="arymSelection"
