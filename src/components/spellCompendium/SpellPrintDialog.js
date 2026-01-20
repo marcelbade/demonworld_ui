@@ -17,7 +17,7 @@ import { spellTierIsText } from "./spellUtil";
 import { SPELL_COMPENDIUM } from "../../constants/textsAndMessages";
 import { useState } from "react";
 
-const SelectSpellsDialog = (props) => {
+const SpellPrintDialog = (props) => {
   const [allBoxesChecked, setAllBoxesChecked] = useState(false);
   // options
   const [showEffectChecked, setShowEffectChecked] = useState(true);
@@ -207,4 +207,4 @@ const SelectSpellsDialog = (props) => {
   );
 };
 
-export default SelectSpellsDialog;
+export default SpellPrintDialog;
