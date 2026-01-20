@@ -16,7 +16,7 @@ import CancelIcon from "@mui/icons-material/Cancel";
  *    - toggleUnitTree: toggles openArmySelectionBox
  * @returns a JSX element.
  */
-const ArmySelectionBox = (props) => {
+const ArmyListDrawer = (props) => {
   const theme = useTheme();
 
   return (
@@ -54,4 +54,4 @@ const ArmySelectionBox = (props) => {
   );
 };
 
-export default ArmySelectionBox;
+export default ArmyListDrawer;
