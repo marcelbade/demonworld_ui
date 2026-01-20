@@ -144,7 +144,7 @@ const AlternativeArmyListSelector = () => {
     ? [...Array(ALC.numberOfAlternativeChoices).keys()].map((iterator) => {
         return (
           <SelectionInput //
-            width={"32em"}
+            width={"85%"}
             key={iterator}
             selectorNumber={iterator}
             alternatives={selectableAlternatives}
