@@ -15,7 +15,7 @@ const SpellList = (props) => {
 
   useEffect(
     () => {}, //
-    [JSON.stringify(props.displaySpells)] // eslint-disable-line react-hooks/exhaustive-deps
+    [JSON.stringify(props.displaySpells)], // eslint-disable-line react-hooks/exhaustive-deps
   );
 
   return (
@@ -38,28 +38,27 @@ const SpellList = (props) => {
       <Grid
         container //
         justifyContent="space-between"
-        justifyItems="space-between"
-        sx={{ marginBottom: "2em" }}
+        alignItems="center"
+        sx={{ marginBottom: "2em", backgroundColor: "black" }}
       >
+        <CreateSpellListPdfButton
+          selectedSpell={props.selectedSpell} //
+          displaySpells={props.displaySpells}
+          setDisplaySpells={props.setDisplaySpells}
+          size="40px"
+          color="white"
+        />
+
         <IconButton
           onClick={() => {
             props.toggleDrawer();
           }}
         >
-          <CreateSpellListPdfButton
-            selectedSpell={props.selectedSpell} //
-            displaySpells={props.displaySpells}
-            setDisplaySpells={props.setDisplaySpells}
-            color="white"
-          />
-
           <ChevronLeft
             sx={{
               width: "3em", //
               height: "3em",
               color: "white",
-              marginLeft: "3em",
-              marginRight: "1em",
             }}
           />
         </IconButton>

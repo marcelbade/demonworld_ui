@@ -34,10 +34,11 @@ const CreateSpellListPdfButton = (props) => {
   return (
     <CreatePdfButton
       toolTipTitle={PDF.CREATE_PDF} // TODO replace!
-      disabledIf={false} // TODO parameterize!
+      disabledIf={false} // TODO remove hard coded value!
       openDialog={setShowSpellDialog}
       marginLeft={"1em"}
-      color= {props.color}
+      color={props.color}
+      size={props.size}
     >
       <SelectSpellsDialog
         displaySpells={props.displaySpells}
