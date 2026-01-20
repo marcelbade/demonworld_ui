@@ -3,7 +3,7 @@ import { useState } from "react";
 // constants
 import { PDF } from "../../constants/textsAndMessages";
 import { SPELL_CARD_PDF_URL } from "../../constants/URLs";
-import SelectSpellsDialog from "./SelectSpellsDialog";
+import SpellPrintDialog from "./SpellPrintDialog";
 import CreatePdfButton from "../shared/CreatePdfButton";
 
 const CreateSpellListPdfButton = (props) => {
@@ -40,7 +40,7 @@ const CreateSpellListPdfButton = (props) => {
       color={props.color}
       size={props.size}
     >
-      <SelectSpellsDialog
+      <SpellPrintDialog
         displaySpells={props.displaySpells}
         setDisplaySpells={props.setDisplaySpells}
         showListTypeDialog={showSpellDialog}
