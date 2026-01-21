@@ -8,6 +8,7 @@ import ArmyListBox from "./ArmyListView/ArmyListBox";
 import MenuBox from "./RightSideMenus/MenuBox";
 import ArmyListDrawer from "./ArmySelectorView/ArmyListDrawer";
 import ArmySelectorDropdown from "./ArmySelectorView/ArmySelectorDropdown";
+import BackToTopContainer from "../shared/BackToTopContainer";
 // context
 import { ArmyContext } from "../../contexts/armyContext";
 // constants
@@ -19,7 +20,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 // custom hooks
 import UseRightSideMenuController from "../../customHooks/UseRightSideMenuController";
-import BackToTopContainer from "../shared/BackToTopContainer";
 
 /**
  * JSX component returns List generator page. page contains all

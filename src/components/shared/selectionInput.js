@@ -1,5 +1,5 @@
 // material ui
-import { Autocomplete, Typography } from "@mui/material";
+import { Autocomplete } from "@mui/material";
 import { TextField } from "@mui/material";
 
 /**
