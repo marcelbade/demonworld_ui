@@ -39,7 +39,7 @@ const SpellList = (props) => {
         container //
         justifyContent="space-between"
         alignItems="center"
-        sx={{ marginBottom: "2em", backgroundColor: "black" }}
+        sx={{ marginBottom: "2em" }}
       >
         <CreateSpellListPdfButton
           selectedSpell={props.selectedSpell} //
