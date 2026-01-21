@@ -1,21 +1,24 @@
 // material ui
 import {
   Dialog,
-  List,
-  ListItemText,
-  Typography,
-  ListItem,
-  FormGroup,
   FormControlLabel,
   Checkbox,
   Button,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Typography,
   Grid2 as Grid,
+  Stack,
 } from "@mui/material";
 // components and functions
-import { spellTierIsText } from "./spellUtil";
+import BackToTopContainer from "../shared/BackToTopContainer";
 // constants
 import { SPELL_COMPENDIUM } from "../../constants/textsAndMessages";
 import { useState } from "react";
+import SpellPrintDialogList from "./SpellPrintDialogList";
+import SpellPrintDialogOptions from "./SpellPrintDialogOptions";
+import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
 
 const SpellPrintDialog = (props) => {
   const [allBoxesChecked, setAllBoxesChecked] = useState(false);
@@ -32,27 +35,14 @@ const SpellPrintDialog = (props) => {
     props.setShowPrintTypeDialog(false);
   };
 
-  const markForPrint = (selectedSpell) => {
-    selectedSpell.isSelected = !selectedSpell.isSelected;
-    props.setDisplaySpells([...props.displaySpells]);
-  };
-
   const checkAllBoxes = () => {
-    let allChecked = false;
-
-    props.displaySpells.forEach((s) => {
-      if (s.isSelected) {
-        allChecked = true;
-      }
-    });
-
-    if (allChecked) {
-      props.displaySpells.forEach((s) => {
-        s.isSelected = false;
-      });
-    } else if (!allChecked) {
+    if (!allBoxesChecked)
       props.displaySpells.forEach((s) => {
         s.isSelected = true;
+      });
+    else if (allBoxesChecked) {
+      props.displaySpells.forEach((s) => {
+        s.isSelected = false;
       });
     }
 
@@ -96,113 +86,78 @@ const SpellPrintDialog = (props) => {
     <Dialog
       open={props.showListTypeDialog} //
       onClose={handleClose}
-      maxWidth="md"
-      fullWidth={true}
     >
-      <FormControlLabel
-        sx={{ marginBottom: "2em", marginTop: "2em" }}
-        control={
-          <Checkbox
-            checked={allBoxesChecked}
-            onChange={() => {
-              setAllBoxesChecked((prevState) => !prevState);
-              checkAllBoxes();
-            }}
-            sx={{ marginLeft: "16px" }}
-          />
-        }
-        label={"Alles Drucken"}
-        labelPlacement="end"
-      />
-      <Grid
-        container //
-        direction="row"
-      >
-        <Grid
-          size={6} //
-        >
-          <List>
-            {props.displaySpells
-              .sort((a, b) => a.spellName > b.spellName)
-              .map((s, i) => (
-                <ListItem
-                  key={i} //
-                >
-                  <FormGroup>
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          checked={s.isSelected}
-                          onClick={() => {
-                            markForPrint(s);
-                          }}
-                        />
-                      }
-                    />
-                  </FormGroup>
-                  <ListItemText
-                    sx={{ width: "8em", minWidth: "8em" }} //
-                    primary={<Typography variant="body1">{s.spellName}</Typography>}
-                  />
-                  <ListItemText
-                    primary={
-                      <Typography
-                        variant="body1" //
-                      >
-                        {spellTierIsText(s.spellTier) ? "*" : s.spellTier}
-                      </Typography>
-                    }
-                  />
-                </ListItem>
-              ))}
-          </List>
-        </Grid>
-        <Grid
-          size={3} //
-          alignContent="start"
-          justifyContent="center"
-        >
-          {optionsTable.map((o, i) => (
-            <FormControlLabel
-              key={i}
-              sx={{
-                ".MuiGrid-root": {
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                },
-                marginBottom: "1em",
+      <BackToTopContainer>
+        <FormControlLabel
+          sx={{ marginBottom: "2em", marginTop: "2em" }}
+          control={
+            <Checkbox
+              checked={allBoxesChecked}
+              onChange={() => {
+                setAllBoxesChecked((prevState) => !prevState);
+                checkAllBoxes();
               }}
-              control={
-                <Checkbox
-                  checked={o.checked} //
-                  onChange={() => {
-                    o.controlFunction((prevState) => !prevState);
-                  }}
-                />
-              }
-              label={o.labelText}
-              labelPlacement="end"
+              sx={{ marginLeft: "16px" }}
             />
-          ))}
-        </Grid>
-      </Grid>
-      <Grid
-        container //
-        width="100%"
-        height="6em"
-        justifyContent="center"
-      >
-        <Button
-          variant="outlined" //
-          onClick={() => {
-            props.createPrintableFile();
-            handleClose();
+          }
+          label={"Alles Drucken"} // TODO
+          labelPlacement="end"
+        />
+
+        <Accordion
+          defaultExpanded
+          sx={{
+            boxShadow: "none", //
           }}
         >
-          {SPELL_COMPENDIUM.PRINT_LIST}
-        </Button>
-      </Grid>
+          <AccordionSummary>
+            <Stack direction="row">
+              <Typography>Sprüche</Typography>
+              <KeyboardArrowDown />
+            </Stack>
+          </AccordionSummary>
+          <AccordionDetails>
+            <SpellPrintDialogList
+              displaySpells={props.displaySpells} //
+              setDisplaySpells={props.setDisplaySpells}
+            />
+          </AccordionDetails>
+        </Accordion>
+        <Accordion
+          sx={{
+            boxShadow: "none", //
+          }}
+        >
+          <AccordionSummary>
+            <Stack direction="row">
+              <Typography>Optionen</Typography>
+              <KeyboardArrowDown />
+            </Stack>
+          </AccordionSummary>
+          <AccordionDetails>
+            <SpellPrintDialogOptions optionsTable={optionsTable} />
+          </AccordionDetails>
+        </Accordion>
+
+        <Grid
+          container
+          justifyContent="center"
+          sx={{
+            width: "100%", //
+            padding: "1em",
+          }}
+        >
+          <Button
+            variant="outlined" //
+            onClick={() => {
+              props.createPrintableFile();
+              handleClose();
+            }}
+          >
+            {SPELL_COMPENDIUM.PRINT_LIST}
+          </Button>
+        </Grid>
+      </BackToTopContainer>
     </Dialog>
   );
 };
