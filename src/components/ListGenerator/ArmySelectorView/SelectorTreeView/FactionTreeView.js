@@ -51,11 +51,10 @@ const FactionTreeView = () => {
    * @returns true, if
    * - the faction has an ally that is not also an
    *   alternative list
-   * - the faction has an ally it`s an alternative list and
+   * - the faction has an ally, it`s an alternative list and
    *   it was selected
    */
   const showTabBttns = () => {
-    // TODO refactor, embarrassing!
     let factionHasAlly = AYC.allyName !== NO_ALLY;
     let isAllySelected = true;
 
