@@ -14,7 +14,7 @@ import CancelIcon from "@mui/icons-material/Cancel";
 //  constants
 import { USER_AUTH } from "../../constants/textsAndMessages";
 
-const UserAccountDrawer = (props) => {
+const UserAccountDrawer = () => {
   const UC = useContext(UserContext);
 
   const logOut = () => {
