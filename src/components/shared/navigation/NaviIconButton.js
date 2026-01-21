@@ -27,7 +27,7 @@ const NaviIconButton = (props) => {
             boxHeight={props.boxHeight !== null ? props.iconHeight : BOX_SIZE}
           />
         ) : (
-          <ChevronLeft sx={{ fontSize: "50px" }} />
+          <ChevronLeft sx={{ fontSize: "50px", color: "white" }} />
         )}
       </IconButton>
     </Tooltip>

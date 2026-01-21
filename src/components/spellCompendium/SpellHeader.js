@@ -2,31 +2,14 @@
 import { Grid2 as Grid, IconButton, Typography } from "@mui/material";
 // custom components and functions
 import { spellTierIsText } from "./spellUtil";
-import CollapsableTopMenuDrawer from "../shared/CollapsableTopMenuDrawer";
-import TopDrawerButton from "../shared/TopDrawerButton";
 import SpellTierSymbol from "./SpellTierSymbol";
+import SpellNameAndSelectors from "./SpellNameAndSelectors";
 //  icons
 import MenuIcon from "@mui/icons-material/Menu";
-import SpellNameAndSelectors from "./SpellNameAndSelectors";
 
 const SpellHeader = (props) => {
   return (
     <>
-      <Grid
-        container //
-        direction="column"
-        alignItems="center"
-        sx={{ width: "100%" }}
-     
-      >
-        <CollapsableTopMenuDrawer
-          displayPageTitle={true} //
-          title={""}
-          displayNaviBttn={true}
-          displayListBttns={true}
-        />
-        <TopDrawerButton />
-      </Grid>
       <Grid
         container //
         direction="row"

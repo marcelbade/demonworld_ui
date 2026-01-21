@@ -12,13 +12,16 @@ const CollapsableTopMenuDrawer = (props) => {
 
   return (
     <Collapse
-      sx={{ width: "40vw" }} //
+      sx={{ width: "100vw" }} //
       in={MC.openTopMenuDrawer}
       direction="down"
     >
       <TopMenuDrawer
         displayPageTitle={props.displayPageTitle}
         title={props.title} //
+        logo={props.logo}
+        hasLogo={props.hasLogo}
+        logoWidth={props.logoWidth}
         drawerVariant="temporary" //
         displayNaviBttn={props.displayNaviBttn}
         displayListBttns={props.displayListBttns}

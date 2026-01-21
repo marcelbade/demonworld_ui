@@ -8,7 +8,7 @@ import calculatorIcon from "../../assets/icons/icons8-calculator-64.png";
 import bookIcon from "../../assets/icons/icons8-book-64.png";
 import scrollIcon from "../../assets/icons/scroll.png";
 import spellbookIcon from "../../assets/icons/spellbook.png";
-import logoRedIcon from "../../assets/icons/logo_red.png";
+import customRedGameIcon from "../../assets/icons/logo_red.png";
 // functions and components
 import NavigationButton from "../shared/navigation/NavigationButton";
 import UserAccountDrawer from "../Login/UserAccountDrawer";
@@ -68,13 +68,12 @@ const LandingPage = () => {
     >
       <Grid container>
         <TopMenuDrawer
-          displayPageTitle={false}
+          displayPageTitle={false} //
           title={null}
           hasLogo={true}
-          // logoHeight="50%"
           logoWidth={displaySize.isTinyDisplay ? "250px" : "350px"}
-          logo={logoRedIcon}
-          drawerVariant="permanent" //
+          logo={customRedGameIcon}
+          drawerVariant="permanent"
           displayNaviBttn={false}
         />
       </Grid>
@@ -104,7 +103,7 @@ const LandingPage = () => {
               boxWidth="200px"
               boxHeight="200px"
             />
-          ) : null
+          ) : null,
         )}
       </Grid>
       <UserAccountDrawer />

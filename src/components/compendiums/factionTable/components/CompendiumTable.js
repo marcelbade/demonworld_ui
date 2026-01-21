@@ -10,12 +10,14 @@ import CollapsableTopMenuDrawer from "../../../shared/CollapsableTopMenuDrawer";
 import TopDrawerButton from "../../../shared/TopDrawerButton";
 //icons
 import FactionAndUnitSelectors from "./FactionAndUnitSelectors";
+import customRedGameIcon from "../../../../assets/icons/logo_red.png";
 import { CompendiumContext } from "../../../../contexts/compendiumContext";
-// constants
-import { COMPENDIUM } from "../../../../constants/textsAndMessages";
+// custom hooks
+import useCustomMediaQuery from "../../../../customHooks/UseCustomMediaQuery";
 
 const CompendiumTable = () => {
   const CC = useContext(CompendiumContext);
+  const displaySize = useCustomMediaQuery();
 
   const [numberOfPages, setNumberOfPages] = useState(0);
   const [selectedPage, setSelectedPage] = useState(1);
@@ -56,10 +58,13 @@ const CompendiumTable = () => {
           alignItems="center"
         >
           <CollapsableTopMenuDrawer
-            displayPageTitle={true}
-            title={COMPENDIUM.TITLE} //
+            displayPageTitle={true} //
+            title={""}
+            logo={customRedGameIcon}
+            hasLogo={true}
             displayNaviBttn={true}
             displayListBttns={true}
+            logoWidth={displaySize.isTinyDisplay ? "250px" : "350px"}
           />
           <TopDrawerButton />
         </Grid>

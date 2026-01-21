@@ -18,8 +18,10 @@ import CollapsableTopMenuDrawer from "../shared/CollapsableTopMenuDrawer";
 //  icons
 import MenuIcon from "@mui/icons-material/Menu";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
+import customRedGameIcon from "../../assets/icons/logo_red.png";
 // custom hooks
 import UseRightSideMenuController from "../../customHooks/UseRightSideMenuController";
+import useCustomMediaQuery from "../../customHooks/UseCustomMediaQuery";
 
 /**
  * JSX component returns List generator page. page contains all
@@ -29,6 +31,8 @@ import UseRightSideMenuController from "../../customHooks/UseRightSideMenuContro
  */
 const ListGenerator = () => {
   const AC = useContext(ArmyContext);
+
+  const displaySize = useCustomMediaQuery();
 
   const [openArmySelectionBox, setOpenArmySelectionBox] = useState(true);
 
@@ -67,50 +71,63 @@ const ListGenerator = () => {
   };
 
   return (
-    <BackToTopContainer>
-      {/* drawers */}
-      <ArmyListDrawer
-        openArmySelectionBox={openArmySelectionBox} //
-        toggleUnitTree={toggleUnitTree}
-      />
-      <MenuBox />
-      {/* page */}
+    <>
       <Grid
         container //
-        direction="column"
+        direction="row"
+        justifyContent="center"
+        size={12}
       >
-        <Grid
-          container //
-          alignContent="start"
-          justifyContent="end"
-          spacing={5}
-        >
-          {/* <CollapsableTopMenuDrawer // TODO
-            displayPageTitle={false}
-            title={""} //
-            displayNaviBttn={true}
-            displayListBttns={true}
-          />
-          <TopDrawerButton /> */}
-          <IconButton onClick={toggleUnitTree}>
-            <FormatListBulletedIcon fontSize="large" color="error" />
-          </IconButton>
-          <IconButton onClick={sideMenuController.buttons[0].action}>
-            <MenuIcon fontSize="large" color="error" />
-          </IconButton>
-        </Grid>
+        <CollapsableTopMenuDrawer
+          displayPageTitle={true} //
+          title={""}
+          logo={customRedGameIcon}
+          hasLogo={true}
+          displayNaviBttn={true}
+          displayListBttns={true}
+          logoWidth={displaySize.isTinyDisplay ? "250px" : "350px"}
+        />
+        <TopDrawerButton />
+      </Grid>
+
+      <BackToTopContainer>
+        {/* drawers */}
+        <ArmyListDrawer
+          openArmySelectionBox={openArmySelectionBox} //
+          toggleUnitTree={toggleUnitTree}
+        />
+        <MenuBox />
+        {/* page */}
         <Grid
           container //
           direction="column"
-          alignContent={{ xs: "flex-start", md: "center" }}
         >
-          <ArmyListBox />
-          <Box sx={setArmySelectorBoxStyle()}>
-            <ArmySelectorDropdown />
-          </Box>
+          <Grid
+            container //
+            alignContent="start"
+            justifyContent="end"
+            spacing={5}
+          >
+            <IconButton onClick={toggleUnitTree}>
+              <FormatListBulletedIcon fontSize="large" color="error" />
+            </IconButton>
+            <IconButton onClick={sideMenuController.buttons[0].action}>
+              <MenuIcon fontSize="large" color="error" />
+            </IconButton>
+          </Grid>
+          <Grid
+            container //
+            direction="column"
+            alignContent={{ xs: "flex-start", md: "center" }}
+          >
+            <ArmyListBox />
+            <Box sx={setArmySelectorBoxStyle()}>
+              <ArmySelectorDropdown />
+            </Box>
+          </Grid>
         </Grid>
-      </Grid>
-    </BackToTopContainer>
+      </BackToTopContainer>
+    </>
   );
 };
 

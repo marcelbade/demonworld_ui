@@ -12,10 +12,18 @@ import SpellList from "./SpellList";
 import { SPELL_COMPENDIUM } from "../../constants/textsAndMessages";
 import SpellHeader from "./SpellHeader";
 import BackToTopContainer from "../shared/BackToTopContainer";
+import CollapsableTopMenuDrawer from "../shared/CollapsableTopMenuDrawer";
+import TopDrawerButton from "../shared/TopDrawerButton";
+// custom hooks
+import useCustomMediaQuery from "../../customHooks/UseCustomMediaQuery";
+// icons
+import customRedGameIcon from "../../assets/icons/logo_red.png";
 
 const SpellCompendium = () => {
   const SC = useContext(SpellContext);
   const UC = useContext(UserContext);
+
+  const displaySize = useCustomMediaQuery();
 
   // select from spell from left menu
   const [selectedSpell, setSelectedSpell] = useState(NO_SELECTION);
@@ -74,72 +82,91 @@ const SpellCompendium = () => {
   ];
 
   return (
-    <BackToTopContainer>
+    <>
       <Grid
-        container
-        size={12}
+        container //
         direction="row"
-        sx={{
-          height: "100%,",
-        }}
+        justifyContent="center"
+        size={12}
       >
-        <SpellList
-          allSpells={SC.allSpells}
-          selectedSpell={selectedSpell}
-          selectedFactionForSpell={SC.selectedFactionForSpell}
-          setSelectedFactionForSpell={SC.setSelectedFactionForSpell}
-          displaySpells={SC.displaySpells}
-          setDisplaySpells={SC.setDisplaySpells}
-          openSpellList={openSpellList}
-          setSelectedSpell={setSelectedSpell}
-          toggleDrawer={toggleDrawer}
+        <CollapsableTopMenuDrawer
+          displayPageTitle={true} //
+          title={""}
+          logo={customRedGameIcon}
+          hasLogo={true}
+          displayNaviBttn={true}
+          displayListBttns={true}
+          logoWidth={displaySize.isTinyDisplay ? "250px" : "350px"}
         />
-
-        <SpellHeader
-          selectedSpell={selectedSpell} //
-          displaySpells={SC.displaySpells}
-          setDisplaySpells={SC.setDisplaySpells}
-          setSelectedSpell={setSelectedSpell}
-          toggleDrawer={toggleDrawer}
-        />
-
-        {selectedSpell.spellName !== "" ? (
-          propertyTable.map((p, i) => (
-            <SpellProperty
-              // component data
-              key={i}
-              display={p.display}
-              title={p.title}
-              content={p.content}
-              property={p.property}
-              // editable data
-              selectedSpell={selectedSpell}
-              selectedFactionForSpell={SC.selectedFactionForSpell}
-              user={UC.user}
-              userLoggedIn={UC.userLoggedIn}
-              setAllSpells={SC.setAllSpells}
-              setDisplaySpells={SC.setDisplaySpells}
-              setSelectedSpell={setSelectedSpell}
-            />
-          ))
-        ) : (
-          <Grid
-            size={12} //
-            container
-            justifyContent="center"
-          >
-            <Button
-              variant="outlined"
-              onClick={() => {
-                toggleDrawer(true);
-              }}
-            >
-              {SPELL_COMPENDIUM.SELECT_A_SPELL}
-            </Button>
-          </Grid>
-        )}
+        <TopDrawerButton />
       </Grid>
-    </BackToTopContainer>
+      <BackToTopContainer>
+        <Grid
+          container
+          size={12}
+          direction="row"
+          sx={{
+            height: "100%,",
+          }}
+        >
+          <SpellList
+            allSpells={SC.allSpells}
+            selectedSpell={selectedSpell}
+            selectedFactionForSpell={SC.selectedFactionForSpell}
+            setSelectedFactionForSpell={SC.setSelectedFactionForSpell}
+            displaySpells={SC.displaySpells}
+            setDisplaySpells={SC.setDisplaySpells}
+            openSpellList={openSpellList}
+            setSelectedSpell={setSelectedSpell}
+            toggleDrawer={toggleDrawer}
+          />
+
+          <SpellHeader
+            selectedSpell={selectedSpell} //
+            displaySpells={SC.displaySpells}
+            setDisplaySpells={SC.setDisplaySpells}
+            setSelectedSpell={setSelectedSpell}
+            toggleDrawer={toggleDrawer}
+          />
+
+          {selectedSpell.spellName !== "" ? (
+            propertyTable.map((p, i) => (
+              <SpellProperty
+                // component data
+                key={i}
+                display={p.display}
+                title={p.title}
+                content={p.content}
+                property={p.property}
+                // editable data
+                selectedSpell={selectedSpell}
+                selectedFactionForSpell={SC.selectedFactionForSpell}
+                user={UC.user}
+                userLoggedIn={UC.userLoggedIn}
+                setAllSpells={SC.setAllSpells}
+                setDisplaySpells={SC.setDisplaySpells}
+                setSelectedSpell={setSelectedSpell}
+              />
+            ))
+          ) : (
+            <Grid
+              size={12} //
+              container
+              justifyContent="center"
+            >
+              <Button
+                variant="outlined"
+                onClick={() => {
+                  toggleDrawer(true);
+                }}
+              >
+                {SPELL_COMPENDIUM.SELECT_A_SPELL}
+              </Button>
+            </Grid>
+          )}
+        </Grid>
+      </BackToTopContainer>
+    </>
   );
 };
 

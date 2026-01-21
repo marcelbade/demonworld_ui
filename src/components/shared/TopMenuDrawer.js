@@ -35,7 +35,7 @@ const TopMenuDrawer = (props) => {
       alignContent={{ xs: "center", sm: "center", md: "", lg: "center" }}
       alignItems={{ xs: "center", sm: "center", md: "", lg: "center" }}
       sx={{
-        height: "10%",
+        height: "100%",
         width: "100%",
         backgroundColor: "black",
       }}
@@ -45,7 +45,6 @@ const TopMenuDrawer = (props) => {
         sx={{
           paddingTop: "1em",
           paddingLeft: { md: "3em" },
-          backgroundColor: "black",
           width: { xs: "100%", sm: "100%", md: "30%" },
         }}
       >
