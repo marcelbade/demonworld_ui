@@ -165,7 +165,7 @@ const SouthernCityStatesRules = {
  * @returns array of objects containing a blocked unit and an error message.
  */
 const brotherhoodOrOrder = (selectedUnits, availableUnits) => {
-  const MESSAGE = SOUTHERN_CITY_STATES_TEXTS.ERRORS.BROTHERHOOD_ORDER;
+  const MESSAGE = SOUTHERN_CITY_STATES_TEXTS.SF_RULES.BROTHERHOOD_ORDER;
 
   let FACTIONS = [
     SOUTHERN_CITY_STATES_TEXTS.SF.ORDER, //
@@ -202,7 +202,7 @@ const brotherhoodOrOrder = (selectedUnits, availableUnits) => {
  */
 const totalPointsForMagiciansAndHeroes = (selectedUnits, availableUnits, totalPointsAllowance) => {
   const MAGICIAN_AND_HEROES_LIMIT = 40;
-  const MESSAGE = SOUTHERN_CITY_STATES_TEXTS.ERRORS.MAX_LIMIT_CHARACTERS;
+  const MESSAGE = SOUTHERN_CITY_STATES_TEXTS.SF_RULES.MAX_LIMIT_CHARACTERS;
   const max_percentage = (totalPointsAllowance * MAGICIAN_AND_HEROES_LIMIT) / 100;
 
   let shamansAndHeroesTotal = 0;
@@ -239,7 +239,7 @@ const regionRule = (province, selectedUnits, availableUnits) => {
   // province  ==>  SOUTHERN_CITY_STATES_TEXTS.REGIONS
 
   let result = [];
-  const MESSAGE = SOUTHERN_CITY_STATES_TEXTS.ERRORS.REGION_HEROES(province);
+  const MESSAGE = SOUTHERN_CITY_STATES_TEXTS.SF_RULES.REGION_HEROES(province);
 
   let listHasProvincialUnits =
     selectedUnits.filter((u) => u.subFaction === province && (u.unitType === UNIT || u.unitType === GIANT)).length > 0;

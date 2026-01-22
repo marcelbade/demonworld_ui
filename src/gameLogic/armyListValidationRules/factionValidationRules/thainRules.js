@@ -151,7 +151,7 @@ const ThainRules = {
  */
 const allUnitsNeedTribes = (selectedUnits) => {
   let result = [];
-  const MESSAGE = THAIN_TEXTS.ERRORS.TRIBE_MESSAGE;
+  const MESSAGE = THAIN_TEXTS.SUB_FACTION_RULES.TRIBE_MESSAGE;
 
   selectedUnits
     .filter((u) => u.isEligibleFor2ndSubFaction)
@@ -234,7 +234,7 @@ const championTribeMapping = [
 const greatChampionRule = (selectedUnits, secondSubFactionList) => {
   let result = [];
 
-  const MESSAGE = THAIN_TEXTS.ERRORS.CHAMPION_MESSAGE;
+  const MESSAGE = THAIN_TEXTS.SUB_FACTION_RULES.CHAMPION_MESSAGE;
 
   let presentTribes = selectedUnits.filter((u) => secondSubFactionList.includes(u.secondSubFaction)).map((u) => u.secondSubFaction);
   let missingTribes = secondSubFactionList.filter((u) => !presentTribes.includes(u));
@@ -288,7 +288,7 @@ const greatChampionRemove = (selectedUnits) => {
  */
 const dorgaPriestRule = (selectedUnits, availableUnits) => {
   const CHURCH = THAIN_TEXTS.SUB_FACTIONS.CHURCH;
-  const MESSAGE = THAIN_TEXTS.ERRORS.DORGA_MESSAGE;
+  const MESSAGE = THAIN_TEXTS.SUB_FACTION_RULES.DORGA_MESSAGE;
 
   let result = [];
   let listHasDorgaUnit = selectedUnits.filter((u) => u.subFaction === CHURCH && u.unitType === UNIT).length > 0;
@@ -336,7 +336,7 @@ const dorgaPriestRemove = (selectedUnits) => {
  * @returns array of objects containing a blocked unit and an error message.
  */
 const veteranRule = (selectedUnits, availableUnits, secondSubFactionList) => {
-  const MESSAGE = THAIN_TEXTS.ERRORS.VETERAN_MESSAGE;
+  const MESSAGE = THAIN_TEXTS.SUB_FACTION_RULES.VETERAN_MESSAGE;
   const TRIBAL_WARRIORS = THAIN_TEXTS.SUB_FACTIONS.TRIBAL_WARRIORS;
   const TRIBAL_VETERANS = THAIN_TEXTS.SUB_FACTIONS.TRIBAL_VETERANS;
 

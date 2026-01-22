@@ -265,7 +265,7 @@ export const STATS = {
 export const BUTTON_TEXTS = {
   SHOW_ITEM_SHOP: "Gegenstände",
   PREVIEW_CARD: "Kartenvorschau",
-  OPTIONS:"Oprionen"
+  OPTIONS: "Oprionen",
 };
 
 export const GLOBAL_VALIDATION = {
@@ -631,9 +631,6 @@ export const THAIN_TEXTS = {
     GREATCHAMPIONS_HEROES_COMMANDERS: "Deine Armeeliste darf zu höchstens 30% aus Groß-Champions, Helden und Befehlshabern bestehen.",
     GAR_Y_DWEN: "Deine Armeeliste darf zu höchstens 40% aus Gar'ydwen bestehen.",
     DORGA_CHURCH: "Deine Armeeliste darf zu höchstens 40% aus Einheiten der Dorga-Kirche bestehen.",
-  },
-  ERRORS: {
-    // TODO ????
     TRIBE_MESSAGE: "Du mußt der Einheit einen Stamm zuordnen.",
     CHAMPION_MESSAGE:
       "Der Groß-Champion eines Stammes kann nur aufgestellt werden, wenn vorher mindestens 1 Einheit des Stammes ausgewählt wurde.",
@@ -723,9 +720,6 @@ export const SOUTHERN_CITY_STATES_TEXTS = {
     SOUTH: "Deine Armeeliste darf zu höchstens 50% aus Truppen des Südens bestehen.",
     ORDER: "Deine Armeeliste darf zu höchstens 40% aus Truppen des Orden des wahren Glaubens bestehen.",
     BROTHERHOOD: "Deine Armeeliste darf zu höchstens 40% aus Truppen der Bruderschaft des Sandes bestehen.",
-  },
-  ERRORS: {
-    // TODO ???
     BROTHERHOOD_ORDER: "Die Armee kann entweder nur Truppen des Ordens des wahren Glaubens oder der Bruderschaft des Sands enthalten.",
     MAX_LIMIT_CHARACTERS: "Die Armee darf zu max. 40% aus Helden, Befehlshaber und Magiern bestehen:",
     REGION_HEROES: (province) => {
