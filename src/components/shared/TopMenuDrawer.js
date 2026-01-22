@@ -31,9 +31,9 @@ const TopMenuDrawer = (props) => {
     <Grid
       container //
       size={12}
-      direction={{ xs: "column", sm: "column", md: "row", lg: "row", xl: "row" }}
-      alignContent={{ xs: "center", sm: "center", md: "", lg: "center" }}
-      alignItems={{ xs: "center", sm: "center", md: "", lg: "center" }}
+      direction={{ xs: "column", md: "row", lg: "row", xl: "row" }}
+      alignContent={{ xs: "center", lg: "center" }}
+      alignItems={{ xs: "center", lg: "center" }}
       sx={{
         height: "100%",
         width: "100%",
@@ -45,7 +45,7 @@ const TopMenuDrawer = (props) => {
         sx={{
           paddingTop: "1em",
           paddingLeft: { md: "3em" },
-          width: { xs: "100%", sm: "100%", md: "30%" },
+          width: { xs: "100%", md: "30%" },
         }}
       >
         {props.displayPageTitle ? ( //

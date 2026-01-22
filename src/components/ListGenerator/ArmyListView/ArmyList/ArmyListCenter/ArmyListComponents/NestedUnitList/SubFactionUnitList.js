@@ -120,7 +120,7 @@ const SubFactionUnitList = (props) => {
             <List
               key={i}
               sx={{
-                width: { xs: "22em", sm: "22em", md: "15em" },
+                width: { xs: "20em", md: "18em" },
               }}
             >
               {/* unit entry w. buttons */}

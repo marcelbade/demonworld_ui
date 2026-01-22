@@ -33,8 +33,8 @@ const CreateSpellListPdfButton = (props) => {
 
   return (
     <CreatePdfButton
-      toolTipTitle={PDF.CREATE_PDF} // TODO replace!
-      disabledIf={false} // TODO remove hard coded value!
+      toolTipTitle={PDF.CREATE_PDF}
+      disabledIf={false}
       openDialog={setShowSpellDialog}
       marginLeft={"1em"}
       color={props.color}

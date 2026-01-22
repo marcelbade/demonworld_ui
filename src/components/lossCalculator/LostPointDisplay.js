@@ -15,7 +15,7 @@ const LostPointDisplay = (props) => {
       size={12}
       sx={{
         paddingLeft: "2em", //
-        paddingTop: { xs: "2em", sm: "2em", md: "0em" },
+        paddingTop: { xs: "2em", md: "0em" },
       }}
     >
       <Typography

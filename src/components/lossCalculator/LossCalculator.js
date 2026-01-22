@@ -65,7 +65,7 @@ const LossCalculator = () => {
         container //
         width="100vw"
         height="100vh"
-        direction={{ xs: "column", sm: "column", md: "row" }}
+        direction={{ xs: "column", md: "row" }}
       >
         <Grid
           container //

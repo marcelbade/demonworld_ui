@@ -31,7 +31,7 @@ const ArmyListDrawer = (props) => {
           position: "fixed",
           overflowY: "auto",
           height: "100%",
-          width: { xs: "20em", sm: "20em", md: "28em" },
+          width: { xs: "20em", md: "28em" },
         },
       }}
     >
@@ -40,9 +40,9 @@ const ArmyListDrawer = (props) => {
           onClick={props.toggleUnitTree}
           fontSize="large"
           sx={{
-            marginTop: { xs: "1em", sm: "1em", md: "0.5em" },
+            marginTop: { xs: "1em", md: "0.5em" },
             marginBottom: "0.5em",
-            marginLeft: { xs: "10em", sm: "10em", md: "16em" },
+            marginLeft: { xs: "10em", md: "16em" },
           }}
         >
           <CancelIcon />
