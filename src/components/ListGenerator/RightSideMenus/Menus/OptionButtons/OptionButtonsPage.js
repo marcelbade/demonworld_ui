@@ -24,8 +24,8 @@ import CancelIcon from "@mui/icons-material/Cancel";
  * @returns a JSX componen.
  */
 const OptionButtonsPage = () => {
-  const [showArmySaveDialog, setShowArmySaveDialog] = useState(false); // TODO move?
-  const [isExistingList, setIsExistingList] = useState(false); // TODO ditto!
+  const [showArmySaveDialog, setShowArmySaveDialog] = useState(false);
+  const [isExistingList, setIsExistingList] = useState(false);
 
   const sideMenuController = UseRightSideMenuController({}, "", {});
 

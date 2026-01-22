@@ -20,7 +20,7 @@ const UnitElementButtons = (props) => {
       displayItemShop: true,
       secondSubFaction: true,
       displayOptionButtons: false,
-    }
+    },
   );
 
   return (
@@ -32,7 +32,7 @@ const UnitElementButtons = (props) => {
             variant="outlined"
             onClick={b.action}
             sx={{
-              marginBottom: { xs: "2em", sm: "2em", md: "0em" },
+              marginBottom: { xs: "2em", md: "0em" },
             }}
           >
             {b.icon}

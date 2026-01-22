@@ -18,7 +18,7 @@ const SpellProperty = (props) => {
     <Grid
       container //
       size={12}
-      direction={{ xs: "column", sm: "column", md: "row", lg: "row" }}
+      direction={{ xs: "column", md: "row" }}
       sx={{
         paddingBottom: "2em", //
         paddingLeft: "2em",
@@ -42,7 +42,7 @@ const SpellProperty = (props) => {
           variant="h6"
           sx={{
             padding: "1em",
-            marginRight:"1em"
+            marginRight: "1em",
           }}
         >
           {props.title}

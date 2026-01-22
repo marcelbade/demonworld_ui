@@ -31,7 +31,7 @@ const TopMenuDrawer = (props) => {
     <Grid
       container //
       size={12}
-      direction={{ xs: "column", md: "row", lg: "row", xl: "row" }}
+      direction={{ xs: "column", md: "row" }}
       alignContent={{ xs: "center", lg: "center" }}
       alignItems={{ xs: "center", lg: "center" }}
       sx={{
@@ -80,16 +80,16 @@ const TopMenuDrawer = (props) => {
       </Grid>
       <Grid
         container //
-        direction={{ xs: "column-reverse", sm: "column", md: "row", lg: "row" }}
-        justifyContent={{ xs: "center", sm: "center", md: "end" }}
-        justifyItems={{ xs: "center", sm: "center", md: "end" }}
-        alignContent={{ xs: "center", sm: "center", md: "end" }}
+        direction={{ xs: "column-reverse", sm: "column", md: "row" }}
+        justifyContent={{ xs: "center", md: "end" }}
+        justifyItems={{ xs: "center", md: "end" }}
+        alignContent={{ xs: "center", md: "end" }}
         size={4}
         spacing={{ md: 8, lg: 8 }}
         sx={{
           paddingTop: "1em",
           paddingRight: { md: "3em" },
-          width: { xs: "100%", sm: "100%", md: "30%", lg: "30%" },
+          width: { xs: "100%", md: "30%" },
         }}
       >
         <SettingsButton />
