@@ -33,7 +33,7 @@ const SpellHeader = (props) => {
           onClick={() => {
             props.toggleDrawer();
           }}
-          sx={{ marginRight: { xs: "1em", sm: "1em", md: "3em" } }}
+          sx={{ marginRight: { xs: "1em", md: "3em" } }}
         >
           <MenuIcon fontSize="large" color="error" />
         </IconButton>
