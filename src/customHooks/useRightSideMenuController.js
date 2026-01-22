@@ -197,7 +197,7 @@ const UseRightSideMenuController = (unit, subFaction, bttnSelectorObj) => {
   const buttons = [
     {
       // item shop button
-      //  added condition never shown for summons - see game rules
+      // added condition never shown for summons - see game rules
       display: testForSummons() && bttnSelectorObj.displayItemShop,
       action: () => {
         IC.setUnitSelectedForShop(unit);
@@ -232,7 +232,7 @@ const UseRightSideMenuController = (unit, subFaction, bttnSelectorObj) => {
       action: () => {
         rightMenuController({}, OPTION_BUTTONS);
       },
-      text: null, //TODO add text!
+      text: BUTTON_TEXTS.OPTIONS,
       icon: null,
     },
   ];

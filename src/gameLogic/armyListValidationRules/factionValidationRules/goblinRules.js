@@ -67,19 +67,19 @@ const GoblinRules = {
     let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(
       validationData.selectedUnits,
       validationData.availableUnits,
-      validationData.totalPointsAllowance
+      validationData.totalPointsAllowance,
     );
     let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(
       rules,
       validationData.selectedUnits,
       validationData.totalPointsAllowance,
-      validationData.distinctSubFactions
+      validationData.distinctSubFactions,
     );
     let isAboveSubFactionMax = globalRules.unitsAboveSubFactionMax(
       rules,
       validationData.selectedUnits,
       validationData.totalPointsAllowance,
-      validationData.availableUnits
+      validationData.availableUnits,
     );
 
     let hasNoCommander = globalRules.isArmyCommanderPresent(validationData.selectedUnits, validationData.availableUnits, rules);
@@ -105,7 +105,7 @@ const GoblinRules = {
       validationData.selectedUnits,
       validationData.totalPointsAllowance,
       validationData.availableUnits,
-      heroPointCap
+      heroPointCap,
     );
 
     let hasDuplicateUniques = validationData.tournamentOverrideRules.uniquesOnlyOnce //
@@ -135,14 +135,15 @@ const GoblinRules = {
 };
 
 const singleClanOnly = (selectedUnits, availableAlliedUnits) => {
+  const CLAN_TROOPS = GOBLIN_TEXTS.SUB_FACTION_RULES.CLAN_TROOPS;
+
   let result = [];
 
   if (selectedUnits.length === 0) {
     return result;
   }
 
-  //  TODO hard coded string
-  const selectedClanTroops = selectedUnits.filter((u) => u.secondSubFaction === "Clanntruppen");
+   const selectedClanTroops = selectedUnits.filter((u) => u.secondSubFaction === CLAN_TROOPS);
 
   if (selectedClanTroops.length === 0 || undefined) {
     return result;
@@ -151,7 +152,7 @@ const singleClanOnly = (selectedUnits, availableAlliedUnits) => {
   const selectedClan = selectedClanTroops[0].subFaction;
 
   result = availableAlliedUnits
-    .filter((u) => u.secondSubFaction === "Clanntruppen" && u.subFaction !== selectedClan)
+    .filter((u) => u.secondSubFaction === CLAN_TROOPS && u.subFaction !== selectedClan)
     .map((u) => {
       return {
         unitBlockedbyRules: u.unitName, //

@@ -1,6 +1,5 @@
 export const AXIOS_TEXTS = {
   DELETION_SUCCESFUL: "Löschen erfolgreich",
- 
 
   AXIOS_FATAL_ERROR: (axiosErrorMessage) => {
     return `Leider konnte keine Verbindung zum Server aufgebaut werden. Bitte wende dich an die Support E-Mail im Impressum und gib an welche Funktion nicht funktioniert, sowie den folgenden Fehlercode: ${axiosErrorMessage}`;
@@ -266,6 +265,7 @@ export const STATS = {
 export const BUTTON_TEXTS = {
   SHOW_ITEM_SHOP: "Gegenstände",
   PREVIEW_CARD: "Kartenvorschau",
+  OPTIONS:"Oprionen"
 };
 
 export const GLOBAL_VALIDATION = {
@@ -437,6 +437,7 @@ export const ELF_TEXTS = {
   PEGASI: "Pegasusreiter",
   BADGERS: "Dachsleute",
   UNICORN_RIDERS: "Einhorn-Elfenreiterinnen",
+
   SF: {
     THANARIEL_CLAN_TROOPS: "Thanaril",
     THANARIEL_COVENS: "Thanaril-Kriegerbünde",
@@ -473,6 +474,17 @@ export const ELF_TEXTS = {
     SCHOOLS_MESSAGE: "Jede Schule der Orea Vanar kann nur einmal aufgestellt werden.",
     OLD_HERO_MESSAGE:
       "Du darfst höchstens einen alten Helden pro aufgestellten 5 Einheiten der Thanaril (keine Kriegerbünde) und/oder der Ilah Ri aufstellen.",
+  },
+
+  SCHOOLS: {
+    AVANDRIL_BELLIR: "Avandril Bellir",
+    GALOREA: "Galorea",
+    TIL_DOLANDOR: "Til_Dolandor",
+  },
+  MASTERS: {
+    THE_YOUNG: "Der Junge",
+    THE_TRUTH: "Die Wahrheit (Meisterin)",
+    THE_ARTISAN: "Der Handwerker",
   },
 };
 
@@ -514,9 +526,8 @@ export const GOBLIN_TEXTS = {
     INSECTRIDERS: "Deine Armeeliste darf maximal zu 40% aus Insektenreiter bestehen.",
     ORKS_TEXTS: "Deine Armeeliste darf zu maximal zu 20% aus Orks bestehen.",
     SINGLE_CLAN_ONLY: "Deine Armeeliste darf nur Clanntruppen eines Clans beinhalten",
-  },
-  ERRORS: { // TODO ???
     SHAMAN_AND_HEROES: "Deine Armeeliste darf maximal zu 40% aus Schamanen und Helden bestehen.",
+    CLAN_TROOPS: "Clanntruppen",
   },
 };
 
@@ -621,7 +632,8 @@ export const THAIN_TEXTS = {
     GAR_Y_DWEN: "Deine Armeeliste darf zu höchstens 40% aus Gar'ydwen bestehen.",
     DORGA_CHURCH: "Deine Armeeliste darf zu höchstens 40% aus Einheiten der Dorga-Kirche bestehen.",
   },
-  ERRORS: { // TODO ????
+  ERRORS: {
+    // TODO ????
     TRIBE_MESSAGE: "Du mußt der Einheit einen Stamm zuordnen.",
     CHAMPION_MESSAGE:
       "Der Groß-Champion eines Stammes kann nur aufgestellt werden, wenn vorher mindestens 1 Einheit des Stammes ausgewählt wurde.",
@@ -637,9 +649,20 @@ export const THAIN_TEXTS = {
     EAGLE: "Adlerstamm",
   },
 
+  TRIBAL_CHAMPIONS: {
+    BOAR: "Arr'ydwen der wilde Eber",
+    BEAR: "Bold'dyrr der einäugige Bär",
+    WOLVE: "Dargorkon'yaghar d. Winterwolf",
+    MOUNTAIN_LION: "Muryan der Berglöwe",
+    EAGLE: "Har'anyrrd der Späher",
+  },
+
   SUB_FACTIONS: {
     CHURCH: "Dorga-Kirche",
     GIANT_ANIMALS: "Gar'Ydwen",
+    SHAMANS: "Schamane",
+    TRIBAL_WARRIORS: "Stammeskrieger",
+    TRIBAL_VETERANS: "Veteranen der Stämme",
   },
 
   EXCEMPT_UNITS: {
@@ -676,7 +699,8 @@ export const UNDEAD_TEXTS = {
     MAGICIAN: "Deine Armeeliste darf zu höchstens 40% aus Magiern bestehen.",
     ALLY: "Deine Armeeliste darf zu höchstens 20% aus Einheiten aus Alliierten bestehen.",
   },
-  ERRORS: { // ???
+  ERRORS: {
+    // ???
     UNDEAD_COMMANDER: "Deine Liste muss einen Nekromanten oder einen Helden oder Befehlshaber mit 2 oder mehr ★ enthalten.",
     MAX_LIMIT_CHARACTERS: "Die Armee darf zu max. 50% aus Helden, Befehlshaber und Magiern bestehen.",
     ALLIES: "Diese Einheit steht nicht als Alliierter zur Verfügung.",
@@ -700,7 +724,8 @@ export const SOUTHERN_CITY_STATES_TEXTS = {
     ORDER: "Deine Armeeliste darf zu höchstens 40% aus Truppen des Orden des wahren Glaubens bestehen.",
     BROTHERHOOD: "Deine Armeeliste darf zu höchstens 40% aus Truppen der Bruderschaft des Sandes bestehen.",
   },
-  ERRORS: { // TODO ???
+  ERRORS: {
+    // TODO ???
     BROTHERHOOD_ORDER: "Die Armee kann entweder nur Truppen des Ordens des wahren Glaubens oder der Bruderschaft des Sands enthalten.",
     MAX_LIMIT_CHARACTERS: "Die Armee darf zu max. 40% aus Helden, Befehlshaber und Magiern bestehen:",
     REGION_HEROES: (province) => {

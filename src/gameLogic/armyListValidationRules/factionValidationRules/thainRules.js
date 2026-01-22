@@ -59,19 +59,19 @@ const ThainRules = {
     let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(
       validationData.selectedUnits,
       validationData.availableUnits,
-      validationData.totalPointsAllowance
+      validationData.totalPointsAllowance,
     );
     let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(
       rules,
       validationData.selectedUnits,
       validationData.totalPointsAllowance,
-      validationData.distinctSubFactions
+      validationData.distinctSubFactions,
     );
     let isAboveSubFactionMax = globalRules.unitsAboveSubFactionMax(
       rules,
       validationData.selectedUnits,
       validationData.totalPointsAllowance,
-      validationData.availableUnits
+      validationData.availableUnits,
     );
     let hasNoCommander = globalRules.isArmyCommanderPresent(validationData.selectedUnits, validationData.availableUnits, rules);
 
@@ -95,7 +95,7 @@ const ThainRules = {
       validationData.selectedUnits,
       validationData.totalPointsAllowance,
       validationData.availableUnits,
-      heroPointCap
+      heroPointCap,
     );
 
     let hasDuplicateUniques = validationData.tournamentOverrideRules.uniquesOnlyOnce //
@@ -171,22 +171,21 @@ const allUnitsNeedTribes = (selectedUnits) => {
  */
 const dorgaVsShamans = (selectedUnits, totalPointsAllowance) => {
   let increment = 10;
-  let netTotalChurch = 4;
-  let netTotalShamans = 5;
-
-  let church = "Dorga-Kirche"; // TODO no hard coding,  move to rules.
-  let churchOpposite = "shamans";
-  let shamans = "Schamane";
-  let shamansOpposite = "dorgaChurch";
+  const NET_TOTAL_CHURCH = 4;
+  const NET_TOTAL_SHAMANS = 5;
+  const CHURCH = THAIN_TEXTS.SUB_FACTIONS.CHURCH;
+  const SHAMANS = THAIN_TEXTS.SUB_FACTIONS.SHAMANS;
+  const CHURCH_OPPOSITE = "shamans";
+  const SHAMANS_OPPOSITE = "dorgaChurch";
 
   // start at the end - with the last unit picked
   if (selectedUnits !== undefined && selectedUnits.length > 0) {
     for (let i = selectedUnits.length - 1; i >= 0; i--) {
-      if (church === selectedUnits[i].subFaction) {
-        decreaseAllowance(increment, netTotalChurch, church, churchOpposite, selectedUnits, totalPointsAllowance);
+      if (CHURCH === selectedUnits[i].subFaction) {
+        decreaseAllowance(increment, NET_TOTAL_CHURCH, CHURCH, CHURCH_OPPOSITE, selectedUnits, totalPointsAllowance);
       }
-      if (shamans === selectedUnits[i].subFaction) {
-        decreaseAllowance(increment, netTotalShamans, shamans, shamansOpposite, selectedUnits, totalPointsAllowance);
+      if (SHAMANS === selectedUnits[i].subFaction) {
+        decreaseAllowance(increment, NET_TOTAL_SHAMANS, SHAMANS, SHAMANS_OPPOSITE, selectedUnits, totalPointsAllowance);
       }
     }
   }
@@ -220,11 +219,11 @@ const decreaseAllowance = (increment, netTotal, subFaction, subFactionOpposite, 
 };
 
 const championTribeMapping = [
-  { tribe: "Eberstamm", hero: "Arr'ydwen der wilde Eber" }, // TODO no hard coding,  move to rules.
-  { tribe: "Bärenstamm", hero: "Bold'dyrr der einäugige Bär" },
-  { tribe: "Wolfsstamm", hero: "Dargorkon'yaghar d. Winterwolf" },
-  { tribe: "Berglöwenstamm", hero: "Muryan der Berglöwe" },
-  { tribe: "Adlerstamm", hero: "Har'anyrrd der Späher" },
+  { tribe: THAIN_TEXTS.SECOND_SUBFACTIONS.BOAR, hero: THAIN_TEXTS.TRIBAL_CHAMPIONS.BOAR },
+  { tribe: THAIN_TEXTS.SECOND_SUBFACTIONS.BEAR, hero: THAIN_TEXTS.TRIBAL_CHAMPIONS.BEAR },
+  { tribe: THAIN_TEXTS.SECOND_SUBFACTIONS.WOLVE, hero: THAIN_TEXTS.TRIBAL_CHAMPIONS.WOLVE },
+  { tribe: THAIN_TEXTS.SECOND_SUBFACTIONS.MOUNTAIN_LION, hero: THAIN_TEXTS.TRIBAL_CHAMPIONS.MOUNTAIN_LION },
+  { tribe: THAIN_TEXTS.SECOND_SUBFACTIONS.EAGLE, hero: THAIN_TEXTS.TRIBAL_CHAMPIONS.EAGLE },
 ];
 
 /**
@@ -288,16 +287,15 @@ const greatChampionRemove = (selectedUnits) => {
  * @returns array of objects containing a blocked unit and an error message.
  */
 const dorgaPriestRule = (selectedUnits, availableUnits) => {
-  let result = [];
-
+  const CHURCH = THAIN_TEXTS.SUB_FACTIONS.CHURCH;
   const MESSAGE = THAIN_TEXTS.ERRORS.DORGA_MESSAGE;
 
-  // TODO no hard coding,  move to rules.
-  let listHasDorgaUnit = selectedUnits.filter((u) => u.subFaction === "Dorga-Kirche" && u.unitType === UNIT).length > 0;
+  let result = [];
+  let listHasDorgaUnit = selectedUnits.filter((u) => u.subFaction === CHURCH && u.unitType === UNIT).length > 0;
 
   if (!listHasDorgaUnit) {
     availableUnits
-      .filter((u) => u.subFaction === "Dorga-Kirche" && u.unitType === MAGE)
+      .filter((u) => u.subFaction === CHURCH && u.unitType === MAGE)
       .forEach((u) => {
         result.push({
           unitBlockedbyRules: u.unitName, //
@@ -316,14 +314,15 @@ const dorgaPriestRule = (selectedUnits, availableUnits) => {
  * @returns an array of units that need to be removed from the army list automatically.
  */
 const dorgaPriestRemove = (selectedUnits) => {
+  const CHURCH = THAIN_TEXTS.SUB_FACTIONS.CHURCH;
+
   let result = [];
 
-  // TODO no hard coding,  move to rules.
-  let isDorgaUnitPresent = selectedUnits.filter((u) => u.subFaction === "Dorga-Kirche" && u.unitType === UNIT).length > 0;
+  let isDorgaUnitPresent = selectedUnits.filter((u) => u.subFaction === CHURCH && u.unitType === UNIT).length > 0;
 
   if (!isDorgaUnitPresent) {
     selectedUnits
-      .filter((u) => u.subFaction === "Dorga-Kirche")
+      .filter((u) => u.subFaction === CHURCH)
       .forEach((u) => {
         result.push(u.uniqueID);
       });
@@ -338,18 +337,19 @@ const dorgaPriestRemove = (selectedUnits) => {
  */
 const veteranRule = (selectedUnits, availableUnits, secondSubFactionList) => {
   const MESSAGE = THAIN_TEXTS.ERRORS.VETERAN_MESSAGE;
+  const TRIBAL_WARRIORS = THAIN_TEXTS.SUB_FACTIONS.TRIBAL_WARRIORS;
+  const TRIBAL_VETERANS = THAIN_TEXTS.SUB_FACTIONS.TRIBAL_VETERANS;
 
   let result = [];
 
-  // TODO no hard coding,  move to rules.
   let presentTribes = selectedUnits
-    .filter((u) => u.subFaction === "Stammeskrieger" && secondSubFactionList.includes(u.secondSubFaction))
+    .filter((u) => u.subFaction === TRIBAL_WARRIORS && secondSubFactionList.includes(u.secondSubFaction))
     .map((u) => u.secondSubFaction);
 
   let missingTribes = secondSubFactionList.filter((u) => !presentTribes.includes(u));
 
   availableUnits
-    .filter((u) => u.subFaction === "Veteranen der Stämme" && missingTribes.includes(u.secondSubFaction))
+    .filter((u) => u.subFaction === TRIBAL_VETERANS && missingTribes.includes(u.secondSubFaction))
     .forEach((u) => {
       result.push({
         unitBlockedbyRules: u.unitName, //
@@ -369,14 +369,15 @@ const veteranRule = (selectedUnits, availableUnits, secondSubFactionList) => {
 const tribalVeteranRemove = (selectedUnits) => {
   let result = [];
 
-  // TODO no hard coding,  move to rules.
+  const TRIBAL_WARRIORS = THAIN_TEXTS.SUB_FACTIONS.TRIBAL_WARRIORS;
+  const TRIBAL_VETERANS = THAIN_TEXTS.SUB_FACTIONS.TRIBAL_VETERANS;
 
   const presentTribes = selectedUnits
-    .filter((u) => u.subFaction === "Stammeskrieger" && u.secondSubFaction !== "Stammeskrieger")
+    .filter((u) => u.subFaction === TRIBAL_WARRIORS && u.secondSubFaction !== TRIBAL_WARRIORS)
     .map((u) => u.secondSubFaction);
 
   selectedUnits.forEach((u) => {
-    if (u.subFaction === "Veteranen der Stämme" && !presentTribes.includes(u.secondSubFaction)) {
+    if (u.subFaction === TRIBAL_VETERANS && !presentTribes.includes(u.secondSubFaction)) {
       result.push(u.uniqueID);
     }
   });

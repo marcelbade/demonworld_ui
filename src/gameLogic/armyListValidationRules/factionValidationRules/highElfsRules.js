@@ -83,19 +83,19 @@ const ElfRules = {
     let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(
       validationData.selectedUnits,
       validationData.availableUnits,
-      validationData.totalPointsAllowance
+      validationData.totalPointsAllowance,
     );
     let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(
       rules,
       validationData.selectedUnits,
       validationData.totalPointsAllowance,
-      validationData.distinctSubFactions
+      validationData.distinctSubFactions,
     );
     let isAboveSubFactionMax = globalRules.unitsAboveSubFactionMax(
       rules,
       validationData.selectedUnits,
       validationData.totalPointsAllowance,
-      validationData.availableUnits
+      validationData.availableUnits,
     );
     let hasNoCommander = globalRules.isArmyCommanderPresent(validationData.selectedUnits, validationData.availableUnits, rules);
 
@@ -119,7 +119,7 @@ const ElfRules = {
       validationData.selectedUnits,
       validationData.totalPointsAllowance,
       validationData.availableUnits,
-      heroPointCap
+      heroPointCap,
     );
 
     let hasDuplicateUniques = validationData.tournamentOverrideRules.uniquesOnlyOnce //
@@ -242,12 +242,10 @@ const allowedNumberOldHeroes = (selectedUnits) => {
   return parseInt(countRelevantUnits / UNITS_PER_HERO);
 };
 
-
-// TODO no hard coding !
 const oreaVanarMapping = [
-  { school: "Avandril Bellir", master: "Der Junge" },
-  { school: "Galorea", master: "Die Wahrheit (Meisterin)" },
-  { school: "Til Dolandor", master: "Der Handwerker" },
+  { school: ELF_TEXTS.SCHOOLS.AVANDRIL_BELLIR, master: ELF_TEXTS.MASTERS.THE_YOUNG },
+  { school: ELF_TEXTS.SCHOOLS.GALOREA, master: ELF_TEXTS.MASTERS.THE_TRUTH },
+  { school: ELF_TEXTS.SCHOOLS.TIL_DOLANDOR, master: ELF_TEXTS.MASTERS.THE_ARTISAN },
 ];
 
 /**
@@ -311,8 +309,6 @@ const removeOreaVanar = (selectedUnits) => {
   return result;
 };
 
-
-// TODO no hard coding!
 const heroesCovenantsMapping = [
   { lord: ELF_TEXTS.ATHULAE, units: [ELF_TEXTS.ARROW_LORDS] },
   { lord: ELF_TEXTS.LAURELION, units: [ELF_TEXTS.SWORD_MASTERS] },
