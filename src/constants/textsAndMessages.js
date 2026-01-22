@@ -695,14 +695,23 @@ export const UNDEAD_TEXTS = {
     HEROES: "Deine Armeeliste darf zu höchstens 40% aus Helden bestehen.",
     MAGICIAN: "Deine Armeeliste darf zu höchstens 40% aus Magiern bestehen.",
     ALLY: "Deine Armeeliste darf zu höchstens 20% aus Einheiten aus Alliierten bestehen.",
-  },
-  ERRORS: {
-    // ???
     UNDEAD_COMMANDER: "Deine Liste muss einen Nekromanten oder einen Helden oder Befehlshaber mit 2 oder mehr ★ enthalten.",
-    MAX_LIMIT_CHARACTERS: "Die Armee darf zu max. 50% aus Helden, Befehlshaber und Magiern bestehen.",
     ALLIES: "Diese Einheit steht nicht als Alliierter zur Verfügung.",
   },
+  SUBFACTIONS: {
+    ICEWITCHES: "Eishexen",
+    BEASTMEN: "Tiermenschen",
+    HUMANS: "Menschen",
+  },
+
+  NECROMANCERS: {
+    XARTA: "Xarta die Verderbte",
+    SANDAUR: "Sandaur der Perfide",
+    JIITIS: "Jiitis Eishand",
+    MAD_AGONOR: "Mad'Agonor",
+  },
 };
+
 export const SOUTHERN_CITY_STATES_TEXTS = {
   FACTION_NAME: "Südliche Stadtstaaten",
   SF: {

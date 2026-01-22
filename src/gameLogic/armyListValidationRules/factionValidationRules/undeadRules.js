@@ -74,19 +74,19 @@ const UndeadRules = {
     let isExceedingPointAllowance = globalRules.armyMustNotExceedMaxAllowance(
       validationData.selectedUnits,
       validationData.availableUnits,
-      validationData.totalPointsAllowance
+      validationData.totalPointsAllowance,
     );
     let isBelowSubFactionMin = globalRules.unitsBelowSubfactionMinimum(
       rules,
       validationData.selectedUnits,
       validationData.totalPointsAllowance,
-      validationData.distinctSubFactions
+      validationData.distinctSubFactions,
     );
     let isAboveSubFactionMax = globalRules.unitsAboveSubFactionMax(
       rules,
       validationData.selectedUnits,
       validationData.totalPointsAllowance,
-      validationData.availableUnits
+      validationData.availableUnits,
     );
     let hasNoCommander = isUndeadArmyCommanderPresent(validationData.selectedUnits);
     let hasBlockedAllies = validIsthakAllies(validationData.listOfAlliedUnits);
@@ -111,7 +111,7 @@ const UndeadRules = {
       validationData.selectedUnits,
       validationData.totalPointsAllowance,
       validationData.availableUnits,
-      heroPointCap
+      heroPointCap,
     );
 
     let hasDuplicateUniques = validationData.tournamentOverrideRules.uniquesOnlyOnce //
@@ -139,26 +139,55 @@ const UndeadRules = {
 
 //FACTION SPECIAL RULES
 
-const isUndeadArmyCommanderPresent = (selectedUnits) => {
+const isUndeadArmyCommanderPresent = (selectedUnits, availableUnits, rules) => {
+  let result = [];
+
   const necromancers = [
-    "Xarta die Verderbte", // TODO no hard coded values
-    "Sandaur der Perfide",
-    "Jiitis Eishand",
-    "Mad'Agonor",
+    UNDEAD_TEXTS.NECROMANCERS.JIITIS,
+    UNDEAD_TEXTS.NECROMANCERS.MAD_AGONOR,
+    UNDEAD_TEXTS.NECROMANCERS.SANDAUR,
+    UNDEAD_TEXTS.NECROMANCERS.XARTA,
   ];
 
-  const necromancerPresent = selectedUnits.filter((u) => necromancers.includes(u.unitName));
-  const potentialCommanders = selectedUnits.filter((u) => u.commandStars >= 2);
-  return necromancerPresent.length > 0 || potentialCommanders.length > 0;
+  const selectedCommanders = selectedUnits.filter((u) => u.commandStars >= 2 || necromancers.includes(u.unitName));
+
+  if (selectedCommanders.length > 0) {
+    return []; // list already contains commander
+  }
+
+  let subFactionsWithCommanders = availableUnits //
+    .filter((u) => u.commandStars >= 2 || necromancers.includes(u.unitName))
+    .map((availableCommander) => availableCommander.subFaction);
+
+  // remove duplicates!
+  subFactionsWithCommanders = [...new Set(subFactionsWithCommanders)];
+
+  subFactionsWithCommanders.forEach((subFaction) => {
+    // find card names !
+    rules.forEach((rule) =>
+      rule.cardNames.includes(subFaction)
+        ? result.push({
+            invalidSubFaction: rule.cardNames, //
+            message: UNDEAD_TEXTS.SUB_FACTION_RULES.UNDEAD_COMMANDER,
+          })
+        : null,
+    );
+  });
+
+  return result;
 };
 
 const validIsthakAllies = (listOfAlliedUnits) => {
-  const permittedSubFactions = ["Eishexen", "Tiermenschen", "Menschen"]; // TODO no hard coded values
-  const blockedUnits = ["Drogador", "Xarator", "Masdra Draizar"];
+  const permittedSubFactions = [
+    UNDEAD_TEXTS.SUBFACTIONS.BEASTMEN, //
+    UNDEAD_TEXTS.SUBFACTIONS.HUMANS,
+    UNDEAD_TEXTS.SUBFACTIONS.ICEWITCHES,
+  ];
+  const blockedUnits = ["Drogador", "Xarator", "Masdra Draizar"]; // TODO Config file?!
   const result = [];
 
   const blockedAlliedUnits = listOfAlliedUnits.filter(
-    (a) => !permittedSubFactions.includes(a.subFaction) || blockedUnits.includes(a.unitName)
+    (a) => !permittedSubFactions.includes(a.subFaction) || blockedUnits.includes(a.unitName),
   );
 
   blockedAlliedUnits.forEach((aU) => {
