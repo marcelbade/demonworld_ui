@@ -190,7 +190,7 @@ export const DELETE_ARMY_DIALOG = {
 };
 
 export const SPELL_COMPENDIUM = {
-  SELECT_A_SPELL: "Bitte Wähle einen Zauber aus",
+  SELECT_A_SPELL: "Bitte Wähle eine Fraktion und einen Zauber aus",
   SELECT_FACTION: "Wähle eine Fraktion",
   SHOW_ALL_FACTIONS: "Alle Fraktionen",
   SPELL_NAME: "Name",
