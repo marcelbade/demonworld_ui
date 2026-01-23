@@ -70,7 +70,9 @@ const CompendiumSettings = () => {
           sx={{ width: "7em" }}
         >
           {fillArray().map((i) => (
-            <MenuItem value={i}>{i}</MenuItem>
+            <MenuItem key={i} value={i}>
+              {i}
+            </MenuItem>
           ))}
         </Select>
       </Grid>
