@@ -211,6 +211,8 @@ export const SPELL_COMPENDIUM = {
   PRINT_ABBREVIATED_EFFECT: "Drucke die verkürzte Beschreibung des Effekts",
   PRINT_TIER: "Drucke die Stufe des Zaubers",
   PRINT_TARGET: "Drucke das Ziel des Zaubers",
+  PRINT_SPELLS: "Sprüche",
+  PRINT_OPTIONS: "Optionen",
 };
 
 export const LOAD_ARMY_LIST_DIALOG = {

@@ -112,7 +112,7 @@ const SpellPrintDialog = (props) => {
         >
           <AccordionSummary>
             <Stack direction="row">
-              <Typography>Sprüche</Typography>
+              <Typography>{SPELL_COMPENDIUM.PRINT_SPELLS}</Typography> 
               <KeyboardArrowDown />
             </Stack>
           </AccordionSummary>
@@ -130,7 +130,7 @@ const SpellPrintDialog = (props) => {
         >
           <AccordionSummary>
             <Stack direction="row">
-              <Typography>Optionen</Typography>
+              <Typography>{SPELL_COMPENDIUM.PRINT_OPTIONS}</Typography>
               <KeyboardArrowDown />
             </Stack>
           </AccordionSummary>
