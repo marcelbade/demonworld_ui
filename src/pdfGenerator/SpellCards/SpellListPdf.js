@@ -12,7 +12,7 @@ const SpellListPdf = (props) => {
     <Document>
       <Text style={spellStyles.faction}>Spruchliste {props.data[0].faction}</Text>
       {props.data.map((s, i) => (
-        <View key={i} wrap={false} >
+        <View key={i} wrap={false}>
           <Text style={spellStyles.title}>{s.spellName}</Text>
           <Text style={spellStyles.spellText}>{s.spellTier}</Text>
           <Text style={spellStyles.subTitle}>Effekt</Text>
