@@ -32,7 +32,6 @@ const EditButton = (props) => {
         toggleTextInputField();
       }}
     >
-      {/*  TODO color */}
       <EditNoteIcon style={{ color: `${setIconColor()}` }} />
     </IconButton>
   ) : null;
