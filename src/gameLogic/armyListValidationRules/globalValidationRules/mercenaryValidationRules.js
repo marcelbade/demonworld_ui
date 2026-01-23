@@ -3,8 +3,8 @@ import { do2ArraysHaveCommonElements } from "../../../util/utilityFunctions";
 
 export const mercenaryValidationRules = {
   /**
-   * Function tests whether the selected units contain
-   * either the mercenary Sukara OR units w.
+   * Function tests whether the list of selected units contains
+   * either the mercenary unit Sukara OR units w.
    * fire attacks. A list cannot contain both at the same time.
    * @param {[unitCard]} selectedUnits
    * @param {[unitCard]} availableUnits
@@ -12,7 +12,7 @@ export const mercenaryValidationRules = {
    */
   containsfireUnits: (selectedUnits, availableUnits) => {
     const fireUnitNames = [
-      "Altar der Reinigenden Flamme", // TODO config file !!
+      "Altar der Reinigenden Flamme", // TODO config file OR DB
       "Fahrende Festung (Flammenspeier)",
       "Kaiserlicher Drachenreiter",
       "Shiron Kybhar",
