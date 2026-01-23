@@ -11,7 +11,7 @@ import CustomDialogTitle from "../components/CustomDialogTitle";
  * NOTE: the createPrintableFile({printDefaultList: true}) props requires
  * an object with the "printDefaultList" property.
  * @param {object} props
- *  - createPrintableFile: function that creates a pdf and displays it in a new browser tab
+ *  - createPrintableFile: function that creates a pdf or txt and displays it in a new browser tab
  *  - showListTypeDialog: boolean, displays the dialog if true
  *  - setShowPrintTypeDialog : setter function, sets showListTypeDialog
  * @returns JSX element
