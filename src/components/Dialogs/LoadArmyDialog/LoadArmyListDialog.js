@@ -44,7 +44,6 @@ const LoadArmyListDialog = (props) => {
   const [allLists, setAllLists] = useState([]);
   const [filteredFaction, setFilteredFaction] = useState("");
   const [filteredEvent, setFilteredEvent] = useState("");
-  const [listToDelete, setListToDelete] = useState({});
   const [showConfirmationDialog, setShowConfirmationDialog] = useState(false);
 
   useEffect(() => {
@@ -112,7 +111,7 @@ const LoadArmyListDialog = (props) => {
   const showSuccessMessage = () => {
     pushMessages.showSnackBar(
       LOAD_ARMY_LIST_DIALOG.LOADED_LIST_SUCCESSFULLY, //
-      PUSH_MESSAGE_TYPES.SUCCESS
+      PUSH_MESSAGE_TYPES.SUCCESS,
     );
   };
 
@@ -139,20 +138,18 @@ const LoadArmyListDialog = (props) => {
    * @param {*} listObj
    */
   const deleteArmyFromDB = (listObj) => {
-    setListToDelete(listObj);
-
     if (!MC.blockDialog.showDeletionDialog) {
       setShowConfirmationDialog(true);
       return;
     }
 
-    deleteList();
+    deleteList(listObj);
   };
 
-  const deleteList = async () => {
-    sendData.deleteProtectedData(DELETE_ARMY_LIST_URL(listToDelete.userName, listToDelete.id));
+  const deleteList = async (listObj) => {
+    sendData.deleteProtectedData(DELETE_ARMY_LIST_URL(listObj.userName, listObj.id)); // ###
 
-    const result = allLists.filter((l) => l.id !== listToDelete.id);
+    const result = allLists.filter((l) => l.id !== listObj.id);
     setAllLists(result);
 
     closeConfirmationDialog();
