@@ -138,7 +138,7 @@ const LoadArmyListDialog = (props) => {
    * @param {*} listObj
    */
   const deleteArmyFromDB = (listObj) => {
-    if (!MC.blockDialog.showDeletionDialog) {
+    if (MC.blockDialog.showDeletionDialog) {
       setShowConfirmationDialog(true);
       return;
     }
