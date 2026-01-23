@@ -159,6 +159,7 @@ const SpellCompendium = () => {
                 onClick={() => {
                   toggleDrawer(true);
                 }}
+                sx={{ width: "25%" }}
               >
                 {SPELL_COMPENDIUM.SELECT_A_SPELL}
               </Button>
