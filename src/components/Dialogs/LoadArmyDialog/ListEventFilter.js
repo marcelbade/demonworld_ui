@@ -18,7 +18,7 @@ const ListEventFilter = (props) => {
         distinct.indexOf(e) !== -1 //
           ? distinct
           : [...distinct, e],
-      []
+      [],
     );
 
     return [
@@ -32,7 +32,7 @@ const ListEventFilter = (props) => {
       <InputLabel>{LOAD_ARMY_LIST_DIALOG.FILTER_FOR_EVENT}</InputLabel>
       <Select
         value={props.filteredEvent} //
-        defaultValue={props.filteredEvent}
+        defaultValue={""}
         onChange={props.handleFilteredEventInput}
         label="Event"
       >

@@ -45,7 +45,7 @@ const ListFactionFilter = (props) => {
       <InputLabel>{LOAD_ARMY_LIST_DIALOG.FILTER_FOR_FACTION}</InputLabel>
       <Select
         value={props.filteredFaction} //
-        defaultValue={props.filteredFaction} //
+        defaultValue={""} //
         onChange={props.handleFilteredFactionInput}
         label="Faction"
       >
