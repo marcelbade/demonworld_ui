@@ -100,7 +100,7 @@ const SpellPrintDialog = (props) => {
               sx={{ marginLeft: "16px" }}
             />
           }
-          label={"Alles Drucken"} // TODO
+          label={SPELL_COMPENDIUM.PRINT_EVERYTHING}
           labelPlacement="end"
         />
 

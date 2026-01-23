@@ -204,6 +204,7 @@ export const SPELL_COMPENDIUM = {
   SUCCESS: "Änderungen erfolgreich gespeichert",
   PRINT_LIST: "Liste Drucken",
   // dialog options
+  PRINT_EVERYTHING: "Alles Drucken",
   PRINT_EFFECT: "Drucke den Effekt",
   PRINT_DURATION: "Drucke die Dauer",
   PRINT_REQUIREMENTS: "Drucke die Voraussetzung",
