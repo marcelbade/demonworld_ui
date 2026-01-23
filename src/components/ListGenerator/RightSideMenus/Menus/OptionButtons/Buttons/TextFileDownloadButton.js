@@ -65,7 +65,7 @@ const TextFileDownloadButton = () => {
 
     const blob = new Blob(
       [textGeneratorFunction(textFileData)], //
-      { type: "text/txt" }
+      { type: "text/txt" },
     );
 
     return URL.createObjectURL(blob);
@@ -99,11 +99,11 @@ const TextFileDownloadButton = () => {
           </IconButton>
         </span>
       </Tooltip>
-      {/* <SelectPrintTypeDialog // ### TODO  
+      <SelectPrintTypeDialog
         createPrintableFile={downloadListTextFile}
         setShowPrintTypeDialog={setShowListTypeDialog}
-        showPdfTypeDialog={showListTypeDialog}
-      /> */}
+        showListTypeDialog={showListTypeDialog}
+      />
     </>
   );
 };
