@@ -1,3 +1,7 @@
+// no range weapon
+export const NO_RANGE_WEAPON = "x";
+
+
 // Item types. Used for filtering items in the shop
 export const ITEM_TYPE_ARMOR = "armor";
 export const ITEM_TYPE_BOWS = "arrowsAndBows";
@@ -35,7 +39,7 @@ export const ITEM_CATEGORY_NAME_MAPPING = {
   crystal: "Magische Kristalle",
 };
 
-// Items that do are not a range weapon, have this string as value for "rangedAttackStats"
+// Items that are not a range weapon, have this string as value for "rangedAttackStats"
 export const NOT_A_RANGE_WEAPON = " -- ";
 
 // List of all range weapons in the game that can use artefacts meant for bows.

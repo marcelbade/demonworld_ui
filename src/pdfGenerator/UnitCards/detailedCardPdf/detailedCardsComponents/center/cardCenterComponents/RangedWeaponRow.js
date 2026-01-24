@@ -4,9 +4,9 @@ import { Text, View } from "@react-pdf/renderer";
 import { rangedWeaponSetter } from "../../../../../../gameLogic/cardStatRenderFunctions/unitStatSetters";
 // styles
 import { detailedStyles } from "../../../../pdfStyles/detailedCardPdfStyles";
+import { NO_RANGE_WEAPON } from "../../../../../../constants/itemShopConstants";
 // constants
-import { NO_RANGE_WEAPON } from "../../../../../../constants/textsAndMessages";
-
+ 
 const RangedWeaponRow = (props) => {
   return props.unit.rangedWeapon !== NO_RANGE_WEAPON ? (
     <View

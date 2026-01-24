@@ -1,7 +1,6 @@
 // functions and components
 import { addAdjustablePadding, drawLineWithChar, addLeftPaddingToNumbers } from "./sharedTextFileFunctions";
-import { NO_RANGE_WEAPON } from "../../constants/textsAndMessages";
-import { setUnitStat } from "../../gameLogic/unitStatChangeLogic/unitStatChangesLogic";
+ import { setUnitStat } from "../../gameLogic/unitStatChangeLogic/unitStatChangesLogic";
 import {
   chargeBonusSetter,
   initiativeSetter,
@@ -26,6 +25,7 @@ import {
   isHeroMageOrSingleSummon,
   isUnitOrSummonedUnit,
 } from "../../gameLogic/unitStatChangeLogic/unitMovementConditions";
+import { NO_RANGE_WEAPON } from "../../constants/itemShopConstants";
 
 export const drawHorizontalCardEdge = (width) => {
   return (

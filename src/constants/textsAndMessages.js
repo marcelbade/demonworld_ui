@@ -318,7 +318,6 @@ export const ITEM_LIMIT_MESSAGE = {
   },
 };
 
-export const NO_RANGE_WEAPON = "x";
 
 export const LOSS_CALCULATOR = {
   CREATE_LIST: "Liste Erstellen",
