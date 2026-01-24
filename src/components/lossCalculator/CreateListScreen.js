@@ -5,7 +5,6 @@ import { Button, Grid2 as Grid } from "@mui/material";
 //  components and functions
 import LoginDialog from "../Dialogs/LogInDialog/LogInDialog";
 import NavigationButton from "../shared/navigation/NavigationButton";
-import OptionsMenu from "../shared/settings/SettingsMenu";
 import CollapsableTopMenuDrawer from "../shared/CollapsableTopMenuDrawer";
 import TopDrawerButton from "../shared/TopDrawerButton";
 // constants
@@ -13,6 +12,7 @@ import { LOSS_CALCULATOR, OPTIONS } from "../../constants/textsAndMessages";
 import LoadArmyListDialog from "../Dialogs/LoadArmyDialog/LoadArmyListDialog";
 // contexts
 import { LossCalcContext } from "../../contexts/LossCalculatorContext";
+import { UserContext } from "../../contexts/userContext";
 // icons
 import customRedGameIcon from "../../assets/icons/logo_red.png";
 // custom hooks
@@ -20,12 +20,14 @@ import useCustomMediaQuery from "../../customHooks/UseCustomMediaQuery";
 
 const CreateListScreen = () => {
   const LC = useContext(LossCalcContext);
+  const UC = useContext(UserContext);
+
   const displaySize = useCustomMediaQuery();
 
-  const [showArmyLoadPrompt, setShowArmyLoadPrompt] = useState(false);
+  const [showArmyLoadDialog, setShowArmyLoadDialog] = useState(false);
 
   const showLoadListPrompt = () => {
-    setShowArmyLoadPrompt(true);
+    UC.userLoggedIn ? setShowArmyLoadDialog(true) : UC.setDisplayLogInDialog(true);
   };
 
   return (
@@ -56,7 +58,7 @@ const CreateListScreen = () => {
         alignItems="center"
         justifyItems="center"
         spacing={8}
-        sx={{paddingTop:"5em"}}
+        sx={{ paddingTop: "5em" }}
       >
         <NavigationButton
           displayNavigatonBttn={true}
@@ -80,8 +82,8 @@ const CreateListScreen = () => {
         <LoginDialog />
         <LoadArmyListDialog
           listSetter={LC.setList}
-          showArmyLoadPrompt={showArmyLoadPrompt} //
-          setShowArmyLoadPrompt={setShowArmyLoadPrompt} //
+          showArmyLoadPrompt={showArmyLoadDialog} //
+          setShowArmyLoadPrompt={setShowArmyLoadDialog} //
         />
       </Grid>
     </Grid>
