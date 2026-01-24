@@ -13,12 +13,17 @@ import TopDrawerButton from "../shared/TopDrawerButton";
 // context
 import { LossCalcContext } from "../../contexts/LossCalculatorContext";
 import BackToTopContainer from "../shared/BackToTopContainer";
+// icons
+import customRedGameIcon from "../../assets/icons/logo_red.png";
+// custom hooks
+import useCustomMediaQuery from "../../customHooks/UseCustomMediaQuery";
 
 const LossCalculator = () => {
   const location = useLocation();
   const calculator = usePointCostCalculator();
 
   const LC = useContext(LossCalcContext);
+  const displaySize = useCustomMediaQuery();
 
   // Initializes the state by pulling the list from the history object. If none is present, an alternative UI is displayed
   useEffect(() => {
@@ -61,6 +66,16 @@ const LossCalculator = () => {
 
   return LC.list.length !== 0 ? (
     <BackToTopContainer>
+      <CollapsableTopMenuDrawer
+        displayPageTitle={true} //
+        title={""}
+        logo={customRedGameIcon}
+        hasLogo={true}
+        displayNaviBttn={true}
+        displayListBttns={true}
+        logoWidth={displaySize.isTinyDisplay ? "250px" : "350px"}
+      />
+      <TopDrawerButton />
       <Grid
         container //
         width="100vw"
