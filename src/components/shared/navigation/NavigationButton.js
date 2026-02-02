@@ -1,8 +1,5 @@
 // React
-import { useContext } from "react";
 import { useHistory } from "react-router-dom";
-// context
-import { MenuContext } from "../../../contexts/MenuContext";
 // Functions And Components
 import NaviTextButton from "./NaviTextButton";
 import NaviIconButton from "./NaviIconButton";
@@ -25,8 +22,6 @@ import { Grid2 as Grid } from "@mui/material";
 const NavigationButton = (props) => {
   const history = useHistory();
 
-  const MC = useContext(MenuContext);
-
   const toPage = (relativeURL) => {
     history.push({
       pathname: relativeURL,
@@ -35,6 +30,22 @@ const NavigationButton = (props) => {
         selectedArmy: [],
       },
     });
+
+    cleanUp();
+  };
+
+  const cleanUp = () => {
+    closeDialog();
+  };
+
+  /**
+   * Function takes the useState setter passed to the component and sets it to false,
+   * therebyclosing the dialog that used this button.
+   */
+  const closeDialog = () => {
+    if (props.closingFunction !== null) {
+      props.closingFunction(false);
+    }
   };
 
   return props.displayNavigatonBttn ? (
@@ -42,7 +53,6 @@ const NavigationButton = (props) => {
       {props.isIconButton ? (
         <NaviIconButton
           toPage={toPage} //
-          openMenu={MC.setOpenMenu}
           relativeURL={props.relativeURL}
           toolTipText={props.toolTipText}
           icon={props.icon}
@@ -55,7 +65,6 @@ const NavigationButton = (props) => {
       ) : (
         <NaviTextButton
           toPage={toPage} //
-          openMenu={MC.setOpenMenu}
           relativeURL={props.relativeURL}
           textButtonVariant={props.textButtonVariant}
           text={props.toolTipText}

@@ -14,7 +14,6 @@ const NaviIconButton = (props) => {
       <IconButton
         onClick={() => {
           props.toPage(props.relativeURL);
-          props.openMenu(false);
         }}
       >
         {props.isCustomIcon ? (

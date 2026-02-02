@@ -158,6 +158,8 @@ const LoginDialog = () => {
           textButtonVariant={"outlined"}
           isIconButton={false}
           toolTipText={USER_AUTH.CREATE_NEW_ACCOUNT}
+          openMenu = {UC.setDisplayLogInDialog}
+          closingFunction ={UC.setDisplayLogInDialog}
         />
 
         <Button
