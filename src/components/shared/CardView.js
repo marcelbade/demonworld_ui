@@ -16,9 +16,6 @@ const CardView = (props) => {
     <Grid
       container //
       direction="row"
-      alignItems="center"
-      justifyContent="center"
-      alignContent="center"
       sx={{
         width: "100%",
       }}

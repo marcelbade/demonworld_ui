@@ -11,14 +11,16 @@ import { Grid2 as Grid, Typography } from "@mui/material";
  *  E.g.: "Riesenyeti"
  * @returns html element
  */
-const CardFrontTitle = (props) => {
+const   CardFrontTitle = (props) => {
   const theme = useTheme();
 
   return (
     <Grid
+
       sx={{
         ...theme.palette.statCards.backGround, //
         ...theme.palette.statCards.titlePadding,
+        width:"100%"
       }}
       container
       justifyContent="space-around"

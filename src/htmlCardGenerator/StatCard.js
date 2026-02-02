@@ -14,8 +14,7 @@ import { isObjectEmtpy } from "../util/utilityFunctions";
  */
 const StatCard = (props) => {
   const CSS = {
-    // marginLeft:"0.25em",
-    width: "100%",
+    width: { xs: "25em", lg: "35em" },
     marginTop: "2em",
     border: "1px black solid",
   };
@@ -30,6 +29,7 @@ const StatCard = (props) => {
     <Grid
       container //
       direction="column"
+      alignItems="stretch"
     >
       <Grid sx={CSS}>
         <CardFront unit={data} />

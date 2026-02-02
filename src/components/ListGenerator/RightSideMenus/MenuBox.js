@@ -1,7 +1,7 @@
 // React
 import { useContext } from "react";
 // Material UI
-import { Drawer, Grid2 as Grid } from "@mui/material";
+import { Drawer } from "@mui/material";
 // components and functions
 import OptionButtonsPage from "./Menus/OptionButtons/OptionButtonsPage";
 import ItemShop from "./Menus/ItemShop/ItemShop";

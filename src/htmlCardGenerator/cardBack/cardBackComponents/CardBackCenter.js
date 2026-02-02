@@ -13,14 +13,14 @@ const CardBackCenter = (props) => {
   const hasEquipment = "equipment" in props.unit && props.unit.equipment.length !== 0;
 
   return (
-    <Grid>
+    <Grid alignItems="stretch">
       <Typography
         variant="body1" //
         align="center"
-         sx={{
-         ...theme.palette.statCards.backGround,
-            padding:"1em",
-      }}
+        sx={{
+          ...theme.palette.statCards.backGround,
+          padding: "1em",
+        }}
       >
         {specialRules}
         {hasEquipment

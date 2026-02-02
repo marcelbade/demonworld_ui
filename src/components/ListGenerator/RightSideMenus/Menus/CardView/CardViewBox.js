@@ -1,6 +1,6 @@
 // React
 import { useContext } from "react";
-import { Grid2 as Grid, IconButton, ThemeProvider, CssBaseline, Stack, Grid2 } from "@mui/material";
+import { Grid2 as Grid, IconButton, ThemeProvider, CssBaseline } from "@mui/material";
 // icons
 import CancelIcon from "@mui/icons-material/Cancel";
 // components and functions
@@ -33,6 +33,8 @@ const CardViewBox = () => {
         sx={{
           height: "100vh", //
           width: "100%",
+          paddingLeft: "1em",
+          paddingRight: "1em",
         }}
       >
         <IconButton
