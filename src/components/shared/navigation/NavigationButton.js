@@ -43,7 +43,7 @@ const NavigationButton = (props) => {
    * therebyclosing the dialog that used this button.
    */
   const closeDialog = () => {
-    if (props.closingFunction !== null) {
+    if (props.closingFunction !== null && typeof(props.closingFunction) === "function") {
       props.closingFunction(false);
     }
   };
