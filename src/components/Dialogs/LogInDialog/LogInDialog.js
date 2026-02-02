@@ -104,7 +104,7 @@ const LoginDialog = () => {
         justifyContent={"space-between"}
         sx={theme.palette.dialogs.title}
       >
-        <DialogTitle>{USER_AUTH.LOGIN_PROMPT_TITLE}</DialogTitle>
+        <DialogTitle>{USER_AUTH.LOGIN_DIALOG_TITLE}</DialogTitle>
         <IconButton
           sx={{ marginRight: "1em" }} //
           onClick={handleClose}
@@ -157,7 +157,7 @@ const LoginDialog = () => {
           relativeURL={"/addNewAccount"} //
           textButtonVariant={"outlined"}
           isIconButton={false}
-          altText={USER_AUTH.CREATE_NEW_ACCOUNT}
+          toolTipText={USER_AUTH.CREATE_NEW_ACCOUNT}
         />
 
         <Button
