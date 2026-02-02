@@ -55,7 +55,7 @@ const MenuBox = () => {
         open={c.show}
         sx={{
           "& .MuiPaper-root": {
-            width: { xs: "100%", sm: "100%", md: "40em" },
+            width: { xs: "100%", sm: "100%", md: "50em" },
           },
         }}
       >
