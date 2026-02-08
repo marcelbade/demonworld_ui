@@ -44,7 +44,7 @@ const CardViewBox = () => {
           size="large"
           sx={{ paddingBottom: "1em" }}
         >
-          <CancelIcon />
+          <CancelIcon fontSize="large" />
         </IconButton>
 
         {RC.statCardState.clickedUnit !== undefined ? (

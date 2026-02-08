@@ -48,7 +48,7 @@ const OptionButtonsPage = () => {
             marginBottom: "0.5em",
           }}
         >
-          <CancelIcon />
+          <CancelIcon fontSize="large" />
         </IconButton>
       </Grid>
       <Stack

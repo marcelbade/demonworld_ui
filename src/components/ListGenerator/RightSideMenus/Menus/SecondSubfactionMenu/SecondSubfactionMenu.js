@@ -11,7 +11,7 @@ import { SelectionContext } from "../../../../../contexts/selectionContext";
 import { LightSwitchContext } from "../../../../../contexts/lightSwitchContext";
 // custon hooks
 import useArmyValidation from "../../../../../customHooks/UseArmyValidation";
- 
+
 // theme
 import lightTheme from "../../../../../AppTheme/lightTheme";
 import darkTheme from "../../../../../AppTheme/darkTheme";
@@ -60,7 +60,7 @@ const SecondSubFactionMenu = () => {
             }}
             size="large"
           >
-            <CancelIcon />
+            <CancelIcon fontSize="large" />
           </IconButton>
         </Grid>
         <Grid //
@@ -102,7 +102,7 @@ const SecondSubFactionMenu = () => {
                     // immediately re-evaluate list so the unit is shown correctly
                     validation.testArmySelectionAndRunValidation(
                       SEC.selectedUnits, //
-                      SEC.maxPointsAllowance
+                      SEC.maxPointsAllowance,
                     );
                   }}
                 >

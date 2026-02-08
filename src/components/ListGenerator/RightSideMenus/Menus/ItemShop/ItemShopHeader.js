@@ -24,7 +24,7 @@ const ItemShopHeader = () => {
         }}
         size="large"
       >
-        <CancelIcon />
+        <CancelIcon fontSize="large" />
       </IconButton>
 
       <Typography

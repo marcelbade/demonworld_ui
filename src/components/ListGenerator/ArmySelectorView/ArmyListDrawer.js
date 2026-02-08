@@ -25,13 +25,14 @@ const ArmyListDrawer = (props) => {
       variant="persistent"
       open={props.openArmySelectionBox}
       sx={{
+        width: { xs: "100%", md: "25em" },
         "& .MuiPaper-root": {
           paddingTop: "0.5em",
           backgroundColor: theme.palette.contrastedOptions, //
           position: "fixed",
           overflowY: "auto",
           height: "100%",
-          width: { xs: "20em", md: "28em" },
+     
         },
       }}
     >
@@ -42,10 +43,10 @@ const ArmyListDrawer = (props) => {
           sx={{
             marginTop: { xs: "1em", md: "0.5em" },
             marginBottom: "0.5em",
-            marginLeft: { xs: "10em", md: "16em" },
+            marginLeft: { xs: "10em", md: "20em" },
           }}
         >
-          <CancelIcon />
+          <CancelIcon fontSize="large" />
         </IconButton>
       </span>
       <AlternativeArmyListSelector />
