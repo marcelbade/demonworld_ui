@@ -1,7 +1,7 @@
 // react
 import { useContext, useState } from "react";
 // material ui
-import { Grid2 as Grid, Box, IconButton } from "@mui/material";
+import { Grid2 as Grid, Box, IconButton, Stack } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components and functions
 import ArmyListBox from "./ArmyListView/ArmyListBox";
@@ -102,11 +102,9 @@ const ListGenerator = () => {
           container //
           direction="column"
         >
-          <Grid
-            container //
-            alignContent="start"
-            justifyContent="end"
-            spacing={5}
+          <Stack
+            direction="row" //
+            sx={{ position: "fixed", right: "5em" }}
           >
             <IconButton onClick={toggleUnitTree}>
               <FormatListBulletedIcon fontSize="large" color="error" />
@@ -114,7 +112,7 @@ const ListGenerator = () => {
             <IconButton onClick={sideMenuController.buttons[0].action}>
               <MenuIcon fontSize="large" color="error" />
             </IconButton>
-          </Grid>
+          </Stack>
           <Grid
             container //
             direction="column"

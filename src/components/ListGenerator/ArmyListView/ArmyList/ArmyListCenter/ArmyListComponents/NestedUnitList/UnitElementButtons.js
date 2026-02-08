@@ -1,5 +1,5 @@
 // Material UI
-import { List } from "@mui/material";
+import { List, Tooltip } from "@mui/material";
 import { ListItemButton } from "@mui/material";
 // custom hooks
 import useRightSideMenuController from "../../../../../../../customHooks/UseRightSideMenuController";
@@ -27,16 +27,18 @@ const UnitElementButtons = (props) => {
     <List key={props.unit.uniqueID}>
       {sideMenuController.buttons.map((b, i) => {
         return (
-          <ListItemButton
-            key={i} //
-            variant="outlined"
-            onClick={b.action}
-            sx={{
-              marginBottom: { xs: "2em", md: "0em" },
-            }}
-          >
-            {b.icon}
-          </ListItemButton>
+          <Tooltip title={b.text}>
+            <ListItemButton
+              key={i} //
+              variant="outlined"
+              onClick={b.action}
+              sx={{
+                marginBottom: { xs: "2em", md: "0em" },
+              }}
+            >
+              {b.icon}
+            </ListItemButton>
+          </Tooltip>
         );
       })}
     </List>
