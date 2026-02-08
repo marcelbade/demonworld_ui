@@ -1,5 +1,5 @@
 // react
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 // material ui
 import { Grid2 as Grid, Box, IconButton, Stack } from "@mui/material";
 import { useTheme } from "@emotion/react";
@@ -30,11 +30,16 @@ import useCustomMediaQuery from "../../customHooks/UseCustomMediaQuery";
  * @returns a JSX component.
  */
 const ListGenerator = () => {
+  const [openArmySelectionBox, setOpenArmySelectionBox] = useState(false);
   const AC = useContext(ArmyContext);
 
   const displaySize = useCustomMediaQuery();
 
-  const [openArmySelectionBox, setOpenArmySelectionBox] = useState(false);
+  useEffect(() => {
+    if (AC.selectedFactionName !== NONE) {
+      setOpenArmySelectionBox(true);
+    }
+  }, [AC.selectedFactionName]);
 
   const toggleUnitTree = () => {
     setOpenArmySelectionBox((prevState) => !prevState);
@@ -117,6 +122,9 @@ const ListGenerator = () => {
             container //
             direction="column"
             alignContent={{ xs: "flex-start", md: "center" }}
+            sx={{
+              marginTop: "2em",
+            }}
           >
             <ArmyListBox />
             <Box sx={setArmySelectorBoxStyle()}>
