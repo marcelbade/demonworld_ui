@@ -34,7 +34,7 @@ const ListGenerator = () => {
 
   const displaySize = useCustomMediaQuery();
 
-  const [openArmySelectionBox, setOpenArmySelectionBox] = useState(true);
+  const [openArmySelectionBox, setOpenArmySelectionBox] = useState(false);
 
   const toggleUnitTree = () => {
     setOpenArmySelectionBox((prevState) => !prevState);
