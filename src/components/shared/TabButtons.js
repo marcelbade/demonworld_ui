@@ -1,5 +1,5 @@
 // material ui
-import { Button, Stack } from "@mui/material";
+import { Button, Stack, Typography } from "@mui/material";
 
 const TabButtons = (props) => {
   /**
@@ -14,20 +14,24 @@ const TabButtons = (props) => {
     return tab === index //
       ? {
           backgroundColor: "lightgrey", //
-          borderBottom: props.showBottomBorder ? "solid 0.1em black" : null,
-          borderRadius: 0,
-          width: "70%",
+          // borderBottom: props.showBottomBorder ? "solid 0.1em black" : null,
+          // borderRadius: 0,
+          width: "60%",
+          "&:hover": {
+            backgroundColor: "lightgrey",
+          },
         }
-      : { width: "70%" };
+      : {
+          width: "60%",
+          "&:hover": {
+            backgroundColor: "lightgrey",
+          },
+        };
   };
 
   return (
     <Stack
       direction={props.direction} //
-      sx={{
-        justifyContent: "center",
-        alignItems: "center",
-      }}
     >
       {props.altPanels.map((panel, i) => (
         <Button
@@ -37,7 +41,9 @@ const TabButtons = (props) => {
             props.handleTabChange(i);
           }}
         >
-          {panel}
+          <Typography align="center" sx={{ width: "100%" }}>
+            {panel}
+          </Typography>
         </Button>
       ))}
     </Stack>

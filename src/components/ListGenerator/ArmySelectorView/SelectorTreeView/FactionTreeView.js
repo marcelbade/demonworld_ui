@@ -75,7 +75,7 @@ const FactionTreeView = () => {
     >
       {showTabBttns() ? (
         <TabButtons
-          direction="row"
+          direction={{ xs: "column", md: "row" }}
           handleTabChange={setTabValue} //
           altPanels={[CREATOR.FACTION_NAME, CREATOR.ALLY]}
           tabValue={tabValue}
@@ -86,7 +86,7 @@ const FactionTreeView = () => {
         container //
         direction="row"
         sx={{
-          marginTop:"2em",
+          marginTop: "2em",
         }}
       >
         <TabPanel

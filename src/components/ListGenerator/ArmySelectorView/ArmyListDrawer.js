@@ -25,30 +25,29 @@ const ArmyListDrawer = (props) => {
       variant="persistent"
       open={props.openArmySelectionBox}
       sx={{
-        width: { xs: "100%", md: "25em" },
         "& .MuiPaper-root": {
           paddingTop: "0.5em",
           backgroundColor: theme.palette.contrastedOptions, //
-          position: "fixed",
-          overflowY: "auto",
+
+          width: { xs: "100%", md: "40em" },
           height: "100%",
-     
+          overflowY: { xs: "auto", md: "hidden" },
+          overflowX: "clip",
         },
       }}
     >
-      <span>
-        <IconButton
-          onClick={props.toggleUnitTree}
-          fontSize="large"
-          sx={{
-            marginTop: { xs: "1em", md: "0.5em" },
-            marginBottom: "0.5em",
-            marginLeft: { xs: "10em", md: "20em" },
-          }}
-        >
-          <CancelIcon fontSize="large" />
-        </IconButton>
-      </span>
+      <IconButton
+        onClick={props.toggleUnitTree}
+        fontSize="large"
+        sx={{
+          marginTop: { xs: "1em", md: "0.5em" },
+          marginBottom: "0.5em",
+          marginLeft: { xs: "10em", md: "20em" },
+        }}
+      >
+        <CancelIcon fontSize="large" />
+      </IconButton>
+
       <AlternativeArmyListSelector />
       <FactionTreeView />
     </Drawer>
