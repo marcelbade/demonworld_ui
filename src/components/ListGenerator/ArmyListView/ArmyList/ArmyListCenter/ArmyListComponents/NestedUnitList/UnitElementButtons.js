@@ -27,7 +27,7 @@ const UnitElementButtons = (props) => {
     <List key={props.unit.uniqueID}>
       {sideMenuController.buttons.map((b, i) => {
         return (
-          <Tooltip title={b.text}>
+          <Tooltip title={b.text} key={i}>
             <ListItemButton
               key={i} //
               variant="outlined"
