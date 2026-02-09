@@ -9,6 +9,7 @@ import MenuBox from "./RightSideMenus/MenuBox";
 import ArmyListDrawer from "./ArmySelectorView/ArmyListDrawer";
 import ArmySelectorDropdown from "./ArmySelectorView/ArmySelectorDropdown";
 import BackToTopContainer from "../shared/BackToTopContainer";
+import UserAccountDialog from "../Login/UserAccountDialog";
 // context
 import { ArmyContext } from "../../contexts/armyContext";
 // constants
@@ -133,6 +134,7 @@ const ListGenerator = () => {
           </Grid>
         </Grid>
       </BackToTopContainer>
+      <UserAccountDialog />
     </>
   );
 };

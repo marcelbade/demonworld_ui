@@ -15,6 +15,11 @@ import CancelIcon from "@mui/icons-material/Cancel";
 //  constants
 import { USER_AUTH } from "../../constants/textsAndMessages";
 
+/**
+ * JSX component creates a dialog containing user account actions:
+ * logout, change account, change pw
+ * @returns a JSX component.
+ */
 const UserAccountDialog = () => {
   const UC = useContext(UserContext);
   const theme = useTheme();
@@ -86,7 +91,7 @@ const UserAccountDialog = () => {
         alignItems="center"
         justifyItems="center"
         sx={{
-          paddingTop:"2em",
+          paddingTop: "2em",
           width: "100%",
         }}
       >

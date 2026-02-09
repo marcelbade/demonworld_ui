@@ -10,6 +10,7 @@ import LostUnitList from "./LostUnitList/LostUnitList";
 import usePointCostCalculator from "../../customHooks/UsePointCostCalculator";
 import CollapsableTopMenuDrawer from "../shared/CollapsableTopMenuDrawer";
 import TopDrawerButton from "../shared/TopDrawerButton";
+import UserAccountDialog from "../Login/UserAccountDialog";
 // context
 import { LossCalcContext } from "../../contexts/LossCalculatorContext";
 import BackToTopContainer from "../shared/BackToTopContainer";
@@ -111,6 +112,7 @@ const LossCalculator = () => {
           </Grid>
         </Grid>
       </BackToTopContainer>
+      <UserAccountDialog />
     </>
   ) : (
     <CreateListScreen />

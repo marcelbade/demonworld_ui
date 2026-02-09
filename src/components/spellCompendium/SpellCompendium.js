@@ -14,6 +14,7 @@ import SpellHeader from "./SpellHeader";
 import BackToTopContainer from "../shared/BackToTopContainer";
 import CollapsableTopMenuDrawer from "../shared/CollapsableTopMenuDrawer";
 import TopDrawerButton from "../shared/TopDrawerButton";
+import UserAccountDialog from "../Login/UserAccountDialog";
 // custom hooks
 import useCustomMediaQuery from "../../customHooks/UseCustomMediaQuery";
 // icons
@@ -167,6 +168,7 @@ const SpellCompendium = () => {
           )}
         </Grid>
       </BackToTopContainer>
+      <UserAccountDialog />
     </>
   );
 };

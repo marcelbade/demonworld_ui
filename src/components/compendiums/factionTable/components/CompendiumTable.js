@@ -8,6 +8,7 @@ import DetailedCardView from "./CardRow";
 import CompendiumTableHeader from "./CompendiumTableHeader";
 import CollapsableTopMenuDrawer from "../../../shared/CollapsableTopMenuDrawer";
 import TopDrawerButton from "../../../shared/TopDrawerButton";
+import UserAccountDialog from "../../../Login/UserAccountDialog";
 //icons
 import FactionAndUnitSelectors from "./FactionAndUnitSelectors";
 import customRedGameIcon from "../../../../assets/icons/logo_red.png";
@@ -108,6 +109,7 @@ const CompendiumTable = () => {
           </tbody>
         </table>
       </Grid>
+      <UserAccountDialog />
     </Grid>
   );
 };
