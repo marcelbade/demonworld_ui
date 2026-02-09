@@ -3,6 +3,7 @@ const PREFIX_FE = "http://localhost:3000";
 
 // users
 export const LOGIN_USER_URL = `${PREFIX_BE}/public/user/login`;
+export const LOGOUT_USER_URL = `${PREFIX_BE}//auth/user/logout`;
 export const REGISTER_USER_URL = `${PREFIX_BE}/public/user/register`;
 export const ALL_USER_NAMES_URL = `${PREFIX_BE}/public/user/allUserNames`;
 
