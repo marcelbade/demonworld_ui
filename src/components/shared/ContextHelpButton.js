@@ -1,6 +1,6 @@
-//  material ui
+// material ui
 import { IconButton } from "@mui/material";
-//  components and functions
+// custom hooks
 import usePushMessages from "../../customHooks/UsePushMessages";
 // icons
 import HelpIcon from "@mui/icons-material/Help";
@@ -9,7 +9,8 @@ import ErrorIcon from "@mui/icons-material/Error";
 import { PUSH_MESSAGE_TYPES } from "../../constants/textsAndMessages";
 
 /**
- * Component displays an IconButton with a question mark. The Click action displays a notistack push message.
+ * Component displays an IconButton with a question mark.
+ * The Click action displays a notistack push message.
  * The type attribute controls message's color (green|blue|red).
  * API:
  *  isVisible: boolean
@@ -17,13 +18,13 @@ import { PUSH_MESSAGE_TYPES } from "../../constants/textsAndMessages";
  *  type: PUSH_MESSAGE_TYPES
  * @param {String } props
  * @returns
- */ 
+ */
 const ContextHelpButton = (props) => {
   const pushMessages = usePushMessages();
 
   return props.isVisible ? (
     <IconButton
-    sx={{...props.css}}
+      sx={{ ...props.css }}
       onClick={() => {
         pushMessages.showSnackBar(props.message, props.type);
       }}
