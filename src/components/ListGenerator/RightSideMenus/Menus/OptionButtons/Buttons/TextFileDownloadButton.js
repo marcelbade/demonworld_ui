@@ -3,7 +3,6 @@ import { useContext, useState } from "react";
 // Material UI
 import { IconButton, Tooltip } from "@mui/material";
 // components and functions
-import useSubFactionStats from "../../../../../../customHooks/UseSubFactionStats";
 import calculateScoutingFactor from "../../../../../../gameLogic/scoutFactorCalculator/scoutingFactorCalculator";
 import CustomIcon from "../../../../../shared/CustomIcon";
 import { simpleListTextFileGenerator } from "../../../../../../textFileGenerator/simpleListTextFileGenerator";
@@ -14,9 +13,12 @@ import { SelectionContext } from "../../../../../../contexts/selectionContext";
 // icons
 import txtFileIcon from "../../../../../../assets/icons/txtFileIcon.png";
 // constants
-import { OPTIONS, PDF } from "../../../../../../constants/textsAndMessages";
+import { OPTIONS } from "../../../../../../constants/textsAndMessages";
 import SelectPrintTypeDialog from "../../../../../Dialogs/SelectPdfTypeDialog/SelectPrintTypeDialog";
 import { addCardsForMultiStateUnits } from "../../../../../../util/utilityFunctions";
+// custom hooks
+import useSubFactionStats from "../../../../../../customHooks/UseSubFactionStats";
+import useTestListButton from "../../../../../../customHooks/UseTestListButton";
 
 const TextFileDownloadButton = () => {
   const AC = useContext(ArmyContext);
@@ -27,6 +29,12 @@ const TextFileDownloadButton = () => {
   const ICON_BOX_SIZE = "60px";
 
   const [showListTypeDialog, setShowListTypeDialog] = useState(false);
+
+  const testButtonCondition = useTestListButton({
+    errorMessage: OPTIONS.NO_LIST,
+    action: setShowListTypeDialog,
+    actionParameter: true,
+  });
 
   /**
    * Function creates the data structure for the PDF view.
@@ -71,6 +79,10 @@ const TextFileDownloadButton = () => {
     return URL.createObjectURL(blob);
   };
 
+  /**
+   * Create the link and start the download.
+   * @param {*} options
+   */
   const downloadListTextFile = (options) => {
     const link = document.createElement("a");
     link.download = `${AC.armyName}.txt`;
@@ -80,12 +92,11 @@ const TextFileDownloadButton = () => {
 
   return (
     <>
-      <Tooltip title={PDF.TEXTFILE_DOWNLOAD}>
+      <Tooltip title={OPTIONS.TEXTFILE_DOWNLOAD}>
         <span>
           <IconButton
-            disabled={SEC.selectedUnits.length === 0} //
             onClick={() => {
-              setShowListTypeDialog(true);
+              testButtonCondition.test();
             }}
           >
             <CustomIcon

@@ -1,19 +1,18 @@
 // react
 import { useContext, useState } from "react";
-
 // components and functions
-import useSubFactionStats from "../../../../../../customHooks/UseSubFactionStats";
 import calculateScoutingFactor from "../../../../../../gameLogic/scoutFactorCalculator/scoutingFactorCalculator";
 import SelectPrintTypeDialog from "../../../../../Dialogs/SelectPdfTypeDialog/SelectPrintTypeDialog";
 // context
 import { ArmyContext } from "../../../../../../contexts/armyContext";
 import { SelectionContext } from "../../../../../../contexts/selectionContext";
-
 // constants
 import { PDF } from "../../../../../../constants/textsAndMessages";
 import { UNIT_CARD_PDF_URL } from "../../../../../../constants/URLs";
 import { addCardsForMultiStateUnits } from "../../../../../../util/utilityFunctions";
 import CreatePdfButton from "../../../../../shared/CreatePdfButton";
+// custom hooks
+import useSubFactionStats from "../../../../../../customHooks/UseSubFactionStats";
 
 const CreateArmyListPdfButton = () => {
   const AC = useContext(ArmyContext);
@@ -74,7 +73,6 @@ const CreateArmyListPdfButton = () => {
   return (
     <CreatePdfButton
       toolTipTitle={PDF.CREATE_PDF} //
-      disabledIf={SEC.selectedUnits.length === 0}
       openDialog={setShowListTypeDialog}
       marginLeft={"0em"}
       size={ICON_SIZE}

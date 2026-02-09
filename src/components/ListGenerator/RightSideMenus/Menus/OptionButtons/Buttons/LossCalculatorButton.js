@@ -5,6 +5,8 @@ import { useHistory } from "react-router-dom";
 import { IconButton, Tooltip } from "@mui/material";
 // components and functions
 import CustomIcon from "../../../../../shared/CustomIcon";
+// custom hooks
+import useTestListButton from "../../../../../../customHooks/UseTestListButton";
 // context
 import { SelectionContext } from "../../../../../../contexts/selectionContext";
 // icons
@@ -32,13 +34,17 @@ const LossCalculatorButton = () => {
     });
   };
 
+  const testButtonCondition = useTestListButton({
+    errorMessage: OPTIONS.NO_LIST,
+    action: navigateToLossCalculator,
+  });
+
   return (
     <Tooltip title={OPTIONS.TO_LOSS_CALCULATOR}>
       <span>
         <IconButton
-          disabled={SEC.selectedUnits.length === 0} //
           onClick={() => {
-            navigateToLossCalculator();
+            testButtonCondition.test();
           }}
         >
           <CustomIcon

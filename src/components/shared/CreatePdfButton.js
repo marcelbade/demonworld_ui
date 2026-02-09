@@ -5,6 +5,10 @@ import CustomIcon from "./CustomIcon";
 // icons
 import customPdfIcon_black from "../../assets/icons/customPDFIcon.svg";
 import customPdfIcon_white from "../../assets/icons/customPDFIconWhite.png";
+// custom hooks
+import useTestListButton from "../../customHooks/UseTestListButton";
+// constants
+import { OPTIONS } from "../../constants/textsAndMessages";
 
 /**
  * Function creates a nested JSX element that renders an icon button
@@ -17,14 +21,20 @@ import customPdfIcon_white from "../../assets/icons/customPDFIconWhite.png";
  * @returns a nested React element.
  */
 const CreatePdfButton = (props) => {
+  
+  const testButtonCondition = useTestListButton({
+    errorMessage: OPTIONS.NO_LIST,
+    action: props.openDialog,
+    actionParameter: true,
+  });
+
   return (
     <>
       <Tooltip title={props.toolTipTitle}>
         <span>
           <IconButton
-            disabled={props.disabledIf} //
             onClick={() => {
-              props.openDialog(true);
+              testButtonCondition.test();
             }}
             sx={{ marginLeft: props.marginLeft }}
           >

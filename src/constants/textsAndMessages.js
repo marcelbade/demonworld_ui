@@ -129,8 +129,11 @@ export const OPTIONS = {
   LOAD_LIST: "Liste Laden",
   UPDATE_LIST: "Liste aktualisieren",
   TO_LOSS_CALCULATOR: "Zum Verlustrechner",
+  NO_LIST:"Deine Armeeliste ist leer.",
   CHANGE_SELECTED_FACTION: "Fraktion wechseln",
   TEXTFILE_DOWNLOAD: "Textdatei erzeugen",
+
+
 };
 
 export const ARMY_LIST = {
