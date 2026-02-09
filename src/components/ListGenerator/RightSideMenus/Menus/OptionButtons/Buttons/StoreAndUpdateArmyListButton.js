@@ -13,6 +13,7 @@ import listUpdateIcon from "../../../../../../assets/icons/listUpdateIcon.svg";
 // constants
 import { OPTIONS } from "../../../../../../constants/textsAndMessages";
 import StoreArmyListDialog from "../../../../../Dialogs/StoreArmyListDialog/StoreArmyListDialog";
+import useTestForLogIn from "../../../../../../customHooks/UseTestForLogIn";
 
 const StoreAndUpdateArmyListButton = (props) => {
   const SEC = useContext(SelectionContext);
@@ -24,8 +25,10 @@ const StoreAndUpdateArmyListButton = (props) => {
   const UPDATE_ICON_SIZE = "60px";
   const UPDATE_ICON_BOX_SIZE = "65px";
 
+  const showLogInDialog = useTestForLogIn(props.setShowArmySaveDialog);
+
   const displayStoreArmyDialog = () => {
-    UC.userLoggedIn ? props.setShowArmySaveDialog(true) : UC.setDisplayLogInDialog(true);
+    showLogInDialog.test();
   };
 
   return (
