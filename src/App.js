@@ -64,7 +64,7 @@ function App() {
   });
   const [userLoggedIn, setUserLoggedIn] = useState(false);
   const [displayLogInDialog, setDisplayLogInDialog] = useState(false);
-  const [showUserAvatarDrawer, setShowUserAvatarDrawer] = useState(false);
+  const [showUserAvatarDialog, setShowUserAvatarDialog] = useState(false);
   const [showPasswordReset, setShowPasswordReset] = useState(false);
 
   // intialize local states
@@ -288,12 +288,12 @@ function App() {
                 user: user,
                 userLoggedIn: userLoggedIn,
                 displayLogInDialog: displayLogInDialog,
-                showUserAvatarDrawer: showUserAvatarDrawer,
+                showUserAvatarDialog: showUserAvatarDialog,
                 showPasswordReset: showPasswordReset,
                 setUser: setUser,
                 setUserLoggedIn: setUserLoggedIn,
                 setDisplayLogInDialog: setDisplayLogInDialog,
-                setShowUserAvatarDrawer: setShowUserAvatarDrawer,
+                setShowUserAvatarDialog: setShowUserAvatarDialog,
                 setShowPasswordReset: setShowPasswordReset,
               }}
             >

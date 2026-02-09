@@ -11,7 +11,7 @@ import spellbookIcon from "../../assets/icons/spellbook.png";
 import customRedGameIcon from "../../assets/icons/logo_red.png";
 // functions and components
 import NavigationButton from "../shared/navigation/NavigationButton";
-import UserAccountDrawer from "../Login/UserAccountDrawer";
+import UserAccountDialog from "../Login/UserAccountDialog";
 // contexts
 import { UserContext } from "../../contexts/userContext";
 // constants
@@ -106,7 +106,7 @@ const LandingPage = () => {
           ) : null,
         )}
       </Grid>
-      <UserAccountDrawer />
+      <UserAccountDialog />
     </Grid>
   );
 };

@@ -46,7 +46,7 @@ const UserLogButton = (props) => {
             height: props.buttonHeight,
           }}
           onClick={() => {
-            UC.setShowUserAvatarDrawer(true);
+            UC.setShowUserAvatarDialog(true);
           }}
         >
           <Avatar
