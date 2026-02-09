@@ -65,7 +65,7 @@ function App() {
   const [userLoggedIn, setUserLoggedIn] = useState(false);
   const [displayLogInDialog, setDisplayLogInDialog] = useState(false);
   const [showUserAvatarDialog, setShowUserAvatarDialog] = useState(false);
-  const [showPasswordReset, setShowPasswordReset] = useState(false);
+  const [showPasswordChangeDialog, setShowPasswordChangeDialog] = useState(false);
 
   // intialize local states
   const [fetchedFactions, setFetchedFactions] = useState([]);
@@ -289,12 +289,12 @@ function App() {
                 userLoggedIn: userLoggedIn,
                 displayLogInDialog: displayLogInDialog,
                 showUserAvatarDialog: showUserAvatarDialog,
-                showPasswordReset: showPasswordReset,
+                showPasswordChangeDialog: showPasswordChangeDialog,
                 setUser: setUser,
                 setUserLoggedIn: setUserLoggedIn,
                 setDisplayLogInDialog: setDisplayLogInDialog,
                 setShowUserAvatarDialog: setShowUserAvatarDialog,
-                setShowPasswordReset: setShowPasswordReset,
+                setShowPasswordChangeDialog: setShowPasswordChangeDialog,
               }}
             >
               <ListDisplayProvider

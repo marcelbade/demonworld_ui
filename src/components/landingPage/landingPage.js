@@ -18,6 +18,7 @@ import { UserContext } from "../../contexts/userContext";
 import { LANDINGPAGE } from "../../constants/textsAndMessages";
 import TopMenuDrawer from "../shared/TopMenuDrawer";
 import useCustomMediaQuery from "../../customHooks/UseCustomMediaQuery";
+import ChangePasswordsDialog from "../Dialogs/ChangePasswordsDialog/ChangePasswordsDialog";
 
 const LandingPage = () => {
   const UC = useContext(UserContext);
@@ -107,6 +108,7 @@ const LandingPage = () => {
         )}
       </Grid>
       <UserAccountDialog />
+      <ChangePasswordsDialog/>
     </Grid>
   );
 };

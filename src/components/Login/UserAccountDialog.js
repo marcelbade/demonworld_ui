@@ -42,7 +42,7 @@ const UserAccountDialog = () => {
   };
 
   const changePassword = () => {
-    UC.setShowPasswordReset(true);
+    UC.setShowPasswordChangeDialog(true);  
   };
 
   // buttons generated via table-driven function
