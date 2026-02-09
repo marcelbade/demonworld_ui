@@ -65,52 +65,53 @@ const LossCalculator = () => {
   };
 
   return LC.list.length !== 0 ? (
-    <BackToTopContainer>
-      <CollapsableTopMenuDrawer
-        displayPageTitle={true} //
-        title={""}
-        logo={customRedGameIcon}
-        hasLogo={true}
-        displayNaviBttn={true}
-        displayListBttns={true}
-        logoWidth={displaySize.isTinyDisplay ? "250px" : "350px"}
-      />
-      <TopDrawerButton />
+    <>
       <Grid
         container //
-        width="100vw"
-        height="100vh"
-        direction={{ xs: "column", md: "row" }}
+        direction="row"
+        justifyContent="center"
+        size={12}
       >
-        <Grid
-          container //
-          direction="column"
-          justifyItems="start"
-          alignItems="center"
-          size={12}
-        >
-          <CollapsableTopMenuDrawer
-            displayPageTitle={true}
-            title={""} //
-            displayNaviBttn={true}
-            displayListBttns={true}
-          />
-          <TopDrawerButton />
-        </Grid>
-        <LostPointDisplay totalPointsLost={LC.totalPointsLost} />
-        <Grid
-          container //
-          size={12}
-          height="70%"
-          sx={{
-            paddingTop: "1em",
-            paddingLeft: "2em",
-          }}
-        >
-          <LostUnitList list={LC.list} />
-        </Grid>
+        <CollapsableTopMenuDrawer
+          displayPageTitle={true} //
+          title={""}
+          logo={customRedGameIcon}
+          hasLogo={true}
+          displayNaviBttn={true}
+          displayListBttns={true}
+          logoWidth={displaySize.isTinyDisplay ? "250px" : "350px"}
+        />
+        <TopDrawerButton />
       </Grid>
-    </BackToTopContainer>
+      <BackToTopContainer>
+        <Grid
+          container //
+          width="100vw"
+          height="100vh"
+          direction={{ xs: "column", md: "row" }}
+        >
+          <Grid
+            container //
+            direction="column"
+            justifyItems="start"
+            alignItems="center"
+            size={12}
+          ></Grid>
+          <LostPointDisplay totalPointsLost={LC.totalPointsLost} />
+          <Grid
+            container //
+            size={12}
+            height="70%"
+            sx={{
+              paddingTop: "1em",
+              paddingLeft: "2em",
+            }}
+          >
+            <LostUnitList list={LC.list} />
+          </Grid>
+        </Grid>
+      </BackToTopContainer>
+    </>
   ) : (
     <CreateListScreen />
   );
