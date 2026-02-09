@@ -35,7 +35,9 @@ const ConfirmationDialog = (props) => {
         </DialogTitle>
         <IconButton
           sx={{ marginRight: "0.5em" }}
-          onClick={props.closeDialog} //
+          onClick={() => {
+            props.closeDialog();
+          }} //
         >
           <Cancel color="error" />
         </IconButton>
@@ -50,7 +52,10 @@ const ConfirmationDialog = (props) => {
       <DialogActions>
         <Button
           variant="outlined"
-          onClick={props.confirmAndExecute} //
+          onClick={() => {
+            props.confirmAndExecute();
+            props.closeDialog();
+          }} //
         >
           {props.type.CONFIRM}
         </Button>
