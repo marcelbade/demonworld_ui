@@ -10,8 +10,8 @@ import { AXIOS_TEXTS, PUSH_MESSAGE_TYPES } from "../constants/textsAndMessages";
 import { UserContext } from "../contexts/userContext";
 
 /**
- * custom hook encapsules Axios logic to keep the code DRY and adds
- * custom logic for setters and error handling
+ * custom hook that encapsules Axios logic to keep the code DRY and add
+ * custom logic for setters and error handling.
  * @returns an object with functions that cover get, post, delete, put requests
  */
 const useAxios = () => {
@@ -37,8 +37,8 @@ const useAxios = () => {
       .catch((error) =>
         pushMessage.showSnackBar(
           AXIOS_TEXTS.AXIOS_FATAL_ERROR(error.message), //
-          PUSH_MESSAGE_TYPES.ERROR
-        )
+          PUSH_MESSAGE_TYPES.ERROR,
+        ),
       );
   };
 
@@ -53,10 +53,13 @@ const useAxios = () => {
    * @param {function} setter must be null if no setter function is passed
    * @param {String} successMessage
    */
-  const storeData = (data, url, setter, successMessage) => {
+  const sendData = (data, url, setter, successMessage) => {
     axios
       .post(url, data, {
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${UC.user.token}` },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${UC.user.token}`,
+        },
       })
       .then((response) => {
         if (setter !== null) {
@@ -67,8 +70,8 @@ const useAxios = () => {
       .catch((error) =>
         pushMessage.showSnackBar(
           AXIOS_TEXTS.AXIOS_FATAL_ERROR(error.message), //
-          PUSH_MESSAGE_TYPES.ERROR
-        )
+          PUSH_MESSAGE_TYPES.ERROR,
+        ),
       );
   };
 
@@ -76,7 +79,7 @@ const useAxios = () => {
     axios
       .delete(
         url, //
-        { headers: { Authorization: `Bearer ${UC.user.token}` } }
+        { headers: { Authorization: `Bearer ${UC.user.token}` } },
       )
       .then(() => {
         pushMessage.showSnackBar(AXIOS_TEXTS.DELETION_SUCCESFUL, PUSH_MESSAGE_TYPES.SUCCESS);
@@ -84,8 +87,8 @@ const useAxios = () => {
       .catch((error) =>
         pushMessage.showSnackBar(
           AXIOS_TEXTS.AXIOS_FATAL_ERROR(error.message), //
-          PUSH_MESSAGE_TYPES.ERROR
-        )
+          PUSH_MESSAGE_TYPES.ERROR,
+        ),
       );
   };
 
@@ -100,15 +103,15 @@ const useAxios = () => {
       .catch((error) =>
         pushMessage.showSnackBar(
           AXIOS_TEXTS.AXIOS_FATAL_ERROR(error.message), //
-          PUSH_MESSAGE_TYPES.ERROR
-        )
-        );
+          PUSH_MESSAGE_TYPES.ERROR,
+        ),
+      );
   };
 
   return {
     fetchData,
     fetchProtectedData,
-    storeData,
+    sendData: sendData,
     deleteProtectedData,
     updateData,
   };
