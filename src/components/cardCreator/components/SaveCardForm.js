@@ -15,7 +15,7 @@ const SaveCardForm = () => {
   const callAxios = useAxios();
 
   const saveCard = async () => {
-    callAxios.storeData(
+    callAxios.sendData(
       JSON.stringify(CCC.unit), //
       CREATE_CUSTOM_UNIT_URL,
       null,

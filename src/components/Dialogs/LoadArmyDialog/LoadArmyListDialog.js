@@ -36,7 +36,7 @@ const LoadArmyListDialog = (props) => {
 
   const theme = useTheme();
 
-  const sendData = useAxios();
+  const callAxios = useAxios();
   const pushMessages = usePushMessages();
   const stateLoader = UseArmyStateLoader();
   const dialogSettings = useConfirmationDialogSettings();
@@ -59,7 +59,7 @@ const LoadArmyListDialog = (props) => {
    * - or have the user listed as having access
    */
   const fetchLists = async () => {
-    sendData.fetchProtectedData(setAllLists, RETRIEVE_ARMY_LISTS_URL(UC.user.userName));
+    callAxios.fetchProtectedData(setAllLists, RETRIEVE_ARMY_LISTS_URL(UC.user.userName));
   };
 
   /**
@@ -147,7 +147,7 @@ const LoadArmyListDialog = (props) => {
   };
 
   const deleteList = async (listObj) => {
-    sendData.deleteProtectedData(DELETE_ARMY_LIST_URL(listObj.userName, listObj.id)); // ###
+    callAxios.deleteProtectedData(DELETE_ARMY_LIST_URL(listObj.userName, listObj.id)); // ###
 
     const result = allLists.filter((l) => l.id !== listObj.id);
     setAllLists(result);

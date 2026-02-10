@@ -43,7 +43,7 @@ const LoginDialog = () => {
 
     const formData = new FormData(event.currentTarget);
 
-    callAxios.storeData(
+    callAxios.sendData(
       JSON.stringify({
         userName: formData.get("name"),
         password: formData.get("pw"),

@@ -20,7 +20,7 @@ const EditSpellProperty = (props) => {
    * the front end state is also updated.
    */
   const saveChanges = () => {
-    callAxios.storeData(
+    callAxios.sendData(
       JSON.stringify({
         ...props.user.userName,
         ...props.selectedSpell,

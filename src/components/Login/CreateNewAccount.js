@@ -65,7 +65,7 @@ const CreateNewAccount = () => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
 
-    callAxios.storeData(
+    callAxios.sendData(
       JSON.stringify({
         userName: formData.get("userName"),
         emailAddress: formData.get("email"),

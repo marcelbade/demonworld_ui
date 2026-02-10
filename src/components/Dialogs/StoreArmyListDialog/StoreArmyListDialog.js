@@ -112,7 +112,7 @@ const StoreArmyListDialog = (props) => {
    * If the id property is not null, the matching army list in the DB is updated.
    */
   const storeList = async () => {
-    callAxios.storeData(
+    callAxios.sendData(
       JSON.stringify({
         id: props.isExistingList ? AC.armyID : null,
         userName: AC.playerName,

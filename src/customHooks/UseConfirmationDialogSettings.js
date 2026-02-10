@@ -40,7 +40,7 @@ const useConfirmationDialogSettings = () => {
   };
 
   const storeOverrideDialogSetting = () => {
-    callAxios.storeData(
+    callAxios.sendData(
       JSON.stringify({
         userName: UC.user.userName,
         displayOverrideConfirmation: !MC.blockDialog.showOverrideDialog,
@@ -52,7 +52,7 @@ const useConfirmationDialogSettings = () => {
   };
 
   const storeDeletionDialogSetting = () => {
-    callAxios.storeData(
+    callAxios.sendData(
       JSON.stringify({
         userName: UC.user.userName,
         displayDeletionConfirmation: !MC.blockDialog.showDeletionDialog,
