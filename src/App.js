@@ -59,8 +59,9 @@ function App() {
   const [user, setUser] = useState({
     userName: "",
     isAdmin: false,
-    isOwner: "",
+    isOwner: false,
     token: "",
+    email: "",
   });
   const [userLoggedIn, setUserLoggedIn] = useState(false);
   const [displayLogInDialog, setDisplayLogInDialog] = useState(false);
