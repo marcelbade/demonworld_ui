@@ -1,5 +1,3 @@
-import { LOGOUT_USER_URL } from "./URLs";
-
 export const AXIOS_TEXTS = {
   DELETION_SUCCESFUL: "Löschen erfolgreich",
 
@@ -179,7 +177,6 @@ export const USER_AUTH = {
   OLD_PW: "Bitte altes Passwort eingeben",
   NEW_PW: "Bitte neues Passwort eingeben",
   REPEAT_NEW_PW: "Bitte neues Passwort wiederholen",
-
 };
 
 export const PASSWORDS = {
