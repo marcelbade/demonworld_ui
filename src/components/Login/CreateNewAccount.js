@@ -53,7 +53,7 @@ const CreateNewAccount = () => {
     setIsUserTaken(
       allUserNames //
         .map((name) => name.toLowerCase())
-        .includes(event.target.value) && userName.length !== 0
+        .includes(event.target.value) && userName.length !== 0,
     );
 
     setIsPasswordInvalid(!isThePasswordValid(event.target.value) && pw.length !== 0);
@@ -73,7 +73,8 @@ const CreateNewAccount = () => {
       }),
       REGISTER_USER_URL,
       null,
-      USER_AUTH.ACCOUNT_CREATED
+      null,
+      USER_AUTH.ACCOUNT_CREATED,
     );
     history.push({
       pathname: "/",
