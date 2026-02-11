@@ -1,16 +1,21 @@
 // react
 import { useContext, useState } from "react";
 // material ui
-import { Dialog, Grid2 as Grid, TextField } from "@mui/material";
+import { Dialog, Grid2 as Grid, Stack, TextField } from "@mui/material";
 // constants
 import { USER_AUTH } from "../../../constants/textsAndMessages";
 // contexts
 import { UserContext } from "../../../contexts/userContext";
 
-const ChangePasswordsDialog = (props) => {
+const ChangePasswordsDialog = () => {
   const UC = useContext(UserContext);
 
   const [passwordsNotIdentical, setPasswordsNotIdentical] = useState(false);
+  const [isPasswordValid, setIsPasswordValid] = useState(false);
+  const [oldPW, setOldPW] = useState(""); // TODO
+  const [newPW, setNewPW] = useState("");
+  const [repeatedNewPW, setRepeatedNewPW] = useState("");
+  const [inputUserNameError, setInputUserNameError] = useState(""); // TODO
 
   const inputs = [
     {
@@ -44,16 +49,36 @@ const ChangePasswordsDialog = (props) => {
 
     // setIsOldPasswordWrong( UC.user.);
 
-    setIsPasswordInvalid(!isThePasswordValid(event.target.value) && pw.length !== 0);
+    setIsPasswordValid(!isPasswordValid(event.target.value) && pw.length !== 0);
 
     setPasswordsNotIdentical(pw !== pwRepeated && pw.length !== 0 && pwRepeated.length !== 0);
   };
 
+  const handleClose = () => {
+    UC.setShowPasswordChangeDialog(false);
+  };
+
   return (
-    <Dialog>
-      <Grid direction="column" spacing={4}>
+    <Dialog
+      open={UC.showPasswordChangeDialog} //
+      onClose={handleClose}
+      sx={{
+        "& .MuiDialog-container": {
+          "& .MuiPaper-root": {
+            minWidth: "50em",
+            height: "25em",
+          },
+        },
+      }}
+    >
+      <Stack direction="column" alignItems="center">
         {inputs.map((i) => (
           <TextField
+            sx={{
+              paddingTop: "4em",
+              width: "25em",
+            }}
+            key={i}
             onChange={i.onChangeFunction}
             type="password"
             required
@@ -65,7 +90,7 @@ const ChangePasswordsDialog = (props) => {
             helperText={inputUserNameError ? i.helperText : null}
           />
         ))}
-      </Grid>
+      </Stack>
     </Dialog>
   );
 };
