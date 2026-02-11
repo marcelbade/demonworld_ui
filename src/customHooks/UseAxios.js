@@ -44,16 +44,19 @@ const useAxios = () => {
 
   /**
    * Function calls the Axios POST method to send data to the BE.
-   * If a useState setter function is supplied, the response value will
-   * be passed to the function, as the new state value.
-   * If the request is successfull (201), a toast message is displayed.
-   * If any error is returned, the error message is also shown as a toast message
+   * If a useState setter function is supplied, the response.data value will
+   * be passed to that function, as the new state value. If there are additional side effects,
+   * they can be passed as functions and will be called after the setter.
+   * Note that setter and side effects are only called if the request is successful.
+   * If the request is successful (201), a toast message is displayed.
+   * If any error is returned, the error message is shown as a toast message instead.
    * @param {String} data stringified JSON object
-   * @param {String} url
+   * @param {String} url string
    * @param {function} setter must be null if no setter function is passed
-   * @param {String} successMessage
+   * @param {function} sideEffect must be null if no function is passed
+   * @param {String} successMessage string
    */
-  const sendData = (data, url, setter, successMessage) => {
+  const sendData = (data, url, setter, sideEffects, successMessage) => {
     axios
       .post(url, data, {
         headers: {
@@ -65,6 +68,10 @@ const useAxios = () => {
         if (setter !== null) {
           setter(response.data);
         }
+        if (sideEffects !== null) {
+          sideEffects();
+        }
+
         pushMessage.showSnackBar(successMessage, PUSH_MESSAGE_TYPES.SUCCESS);
       })
       .catch((error) =>

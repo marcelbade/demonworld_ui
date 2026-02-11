@@ -50,17 +50,18 @@ const LoginDialog = () => {
       }),
       LOGIN_USER_URL,
       loginUser,
-      USER_AUTH.LOGIN_SUCCESSFULL
+      null,
+      USER_AUTH.LOGIN_SUCCESSFULL,
     );
   };
 
   const loginUser = (data) => {
     UC.setUser({
       ...UC.user,
-      userName:  data?.userName,
-      isAdmin:  data?.isAdmin,
-      isOwner:  data?.isOwner,
-      token:  data?.token,
+      userName: data?.userName,
+      isAdmin: data?.isAdmin,
+      isOwner: data?.isOwner,
+      token: data?.token,
     });
 
     UC.setDisplayLogInDialog(false);
@@ -68,8 +69,8 @@ const LoginDialog = () => {
     UC.setUserLoggedIn(true);
     MC.setblockDialog({
       ...MC.blockDialog,
-      showOverrideDialog:  data?.displayOverrideConfirmation,
-      showDeletionDialog:  data?.displayDeleteConfirmation,
+      showOverrideDialog: data?.displayOverrideConfirmation,
+      showDeletionDialog: data?.displayDeleteConfirmation,
     });
   };
 
@@ -158,8 +159,8 @@ const LoginDialog = () => {
           textButtonVariant={"outlined"}
           isIconButton={false}
           toolTipText={USER_AUTH.CREATE_NEW_ACCOUNT}
-          openMenu = {UC.setDisplayLogInDialog}
-          closingFunction ={UC.setDisplayLogInDialog}
+          openMenu={UC.setDisplayLogInDialog}
+          closingFunction={UC.setDisplayLogInDialog}
         />
 
         <Button

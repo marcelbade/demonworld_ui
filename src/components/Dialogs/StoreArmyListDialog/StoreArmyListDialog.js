@@ -126,7 +126,8 @@ const StoreArmyListDialog = (props) => {
       }),
       STORE_ARMY_LIST_URL,
       null,
-      ARMY_LIST.LIST_CREATED
+      null,
+      ARMY_LIST.LIST_CREATED,
     );
 
     cleanup();
