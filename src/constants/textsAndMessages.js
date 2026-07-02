@@ -765,7 +765,7 @@ export const CREATOR = {
   UNIT_NAME: "Name:",
   IS_UNIQUE: "Einheit ist einzigartig.",
   IS_CAVALERY: "Einheit ist beritten.",
-  HAS_SHIELD: "Einheit besitzt Schilde.",
+  HAS_SHIELD: "Einheit besitzt (ein) Schild(e).",
   HAS_SHIELD_HERO: "Einheit besitzt ein Schild.",
   CLOSED_FORMATION: "Einheit kämpft in geschlossener Formation.",
   LEADER_CLOSED_FORMATION: "Anführer kämpft in geschlossener Formation.",
