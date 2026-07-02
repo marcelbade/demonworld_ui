@@ -8,7 +8,7 @@ import { CardCreationContext } from "../../../contexts/cardCreationContext";
 import CustomIcon from "../../shared/CustomIcon";
 import wedgeFormationIcon from "../../../assets/icons/wedgeFormation.png";
 import skirmishFormationIcon from "../../../assets/icons/skirmishFormation.png";
-import squareFormationIcon from "../../../assets/icons/squareFormationWhite.png";
+import squareFormationIcon from "../../../assets/icons/squareFormation.png";
 // constants
 import { CARD_TEXT, COMPENDIUM } from "../../../constants/textsAndMessages";
 

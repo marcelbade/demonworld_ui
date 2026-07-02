@@ -4,7 +4,6 @@ import { IconButton, Tooltip } from "@mui/material";
 import CustomIcon from "./CustomIcon";
 // icons
 import customPdfIcon_black from "../../assets/icons/customPDFIcon.svg";
-import customPdfIcon_white from "../../assets/icons/customPDFIconWhite.png";
 // custom hooks
 import useTestListButton from "../../customHooks/UseTestListButton";
 // constants
@@ -21,7 +20,6 @@ import { OPTIONS } from "../../constants/textsAndMessages";
  * @returns a nested React element.
  */
 const CreatePdfButton = (props) => {
-  
   const testButtonCondition = useTestListButton({
     errorMessage: OPTIONS.NO_LIST,
     action: props.openDialog,
@@ -39,7 +37,7 @@ const CreatePdfButton = (props) => {
             sx={{ marginLeft: props.marginLeft }}
           >
             <CustomIcon
-              icon={props.color === "white" ? customPdfIcon_white : customPdfIcon_black} //
+              icon={customPdfIcon_black} //
               altText={props.toolTipTitle}
               height={props.size}
               width={props.size}

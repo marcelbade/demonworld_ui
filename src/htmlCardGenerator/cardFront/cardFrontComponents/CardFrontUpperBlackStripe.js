@@ -15,7 +15,7 @@ import {
 import CustomIcon from "../../../components/shared/CustomIcon";
 import wedgeFormationIcon from "../../../assets/icons/wedgeFormation.png";
 import skirmishFormationIcon from "../../../assets/icons/skirmishFormation.png";
-import squareFormationIcon from "../../../assets/icons/squareFormationWhite.png";
+import squareFormationIcon from "../../../assets/icons/squareFormation.png";
 import shieldWallIcon from "../../../assets/icons/icons8-shield-white.png";
 // functions and components
 import {

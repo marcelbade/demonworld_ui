@@ -19,7 +19,7 @@ import {
 } from "./../../../../../../gameLogic/cardStatRenderFunctions/movementStatSetters";
 
 // icons
-import squareFormationWhite from "../../../../../../assets/icons/squareFormationWhite.png";
+import squareFormationWhite from "../../../../../../assets/icons/squareFormation.png";
 import skirmishFormation from "../../../../../../assets/icons/skirmishFormation.png";
 import wedgeFormation from "../../../../../../assets/icons/wedgeFormation_white.png";
 import shieldWallFormation from "../../../../../../assets/icons/icons8-shield-white.png";
