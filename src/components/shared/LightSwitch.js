@@ -8,7 +8,6 @@ import { LightSwitchContext } from "../../contexts/lightSwitchContext";
 import BrightnessHighIcon from "@mui/icons-material/BrightnessHigh";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 // constants
-// import { OPTIONS } from "../../constants/textsAndMessages";
 
 const LightSwitch = (props) => {
   const LC = useContext(LightSwitchContext);
