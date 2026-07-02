@@ -75,7 +75,7 @@ const FactionNameCreator = () => {
   };
 
   const isNewFaction = () => {
-    CCC.setNewFaction((prevState) => !prevState);
+    CCC.setIsNewFaction((prevState) => !prevState);
   };
 
   return (
@@ -94,7 +94,7 @@ const FactionNameCreator = () => {
           <FormControlLabel
             control={
               <Checkbox
-                checked={CCC.newFaction} //
+                checked={CCC.isNewFaction} //
                 onChange={isNewFaction}
                 sx={theme.palette.cardCreator.checkbox}
               />
@@ -110,7 +110,7 @@ const FactionNameCreator = () => {
         width="50em"
         justifyContent="center"
       >
-        {CCC.newFaction ? (
+        {CCC.isNewFaction ? (
           <Fragment>
             <CreatorTextInput
               id={"factionName"} //

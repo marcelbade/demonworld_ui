@@ -23,7 +23,7 @@ import CardPreview from "./components/CardPreview";
 import CardCreationProvider from "../../contexts/cardCreationContext";
 
 const CardCreator = () => {
-  const [newFaction, setNewFaction] = useState(false);
+  const [isNewFaction, setIsNewFaction] = useState(false);
   const [hasRangedWeapon, setHasRangedWeapon] = useState(false);
   const [hasRangedSkill, setHasRangedSkill] = useState(false);
   const [hasMeleeSkill, setHasMeleeSkill] = useState(false);
@@ -94,8 +94,8 @@ const CardCreator = () => {
         unit: unit,
         setUnit: setUnit,
         //
-        newFaction: newFaction,
-        setNewFaction: setNewFaction,
+        isNewFaction: isNewFaction,
+        setIsNewFaction: setIsNewFaction,
         //
         hasRangedWeapon: hasRangedWeapon,
         setHasRangedWeapon: setHasRangedWeapon,
@@ -108,6 +108,7 @@ const CardCreator = () => {
         //
         neverImpetuous: neverImpetuous,
         setNeverImpetuous: setNeverImpetuous,
+        //
         isFearless: isFearless,
         setIsFearless: setIsFearless,
       }}
