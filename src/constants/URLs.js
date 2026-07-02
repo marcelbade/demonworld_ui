@@ -23,8 +23,9 @@ export const ITEM_DTOS_URL = `${PREFIX_BE}/public/game/itemDTOs`;
 export const ALL_UNITS_URL = `${PREFIX_BE}/public/game/allUnits`;
 export const SPELL_DTO_URL = `${PREFIX_BE}/public/game/allSpells`;
 export const EDIT_SPELL_URL = `${PREFIX_BE}/auth/spells/editSpell`;
-
 export const ALL_FACTION_COLORS_URL = `${PREFIX_BE}/public/game/factionColors`;
+export const MOST_COMMON_UNIT_TYPE_FOR_SUBFACTION =  `${PREFIX_BE}/public/game/mostCommonUnitType`;
+
 
 // events
 export const GET_EVENTS_URL = `${PREFIX_BE}/auth/event/allEvents`;
