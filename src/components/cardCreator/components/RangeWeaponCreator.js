@@ -12,6 +12,8 @@ import { CardCreationContext } from "../../../contexts/cardCreationContext";
 import blackBowIcon from "../../../assets/icons/bow2.png";
 
 const RangeWeaponCreator = () => {
+  const ICON_SIZE = "40em";
+
   const theme = useTheme();
 
   const CCC = useContext(CardCreationContext);
@@ -108,20 +110,24 @@ const RangeWeaponCreator = () => {
               onChange={unitHasRangeSkill}
               sx={{
                 marginTop: "0.5em",
+                marginLeft: "1.5em",
+                marginRight: "1em",
+                height: "2em",
+                width: "2em",
               }}
               icon={
                 <CustomIcon
                   icon={blackBowIcon} //
-                  height={"20em"}
-                  width={"20em"}
+                  height={ICON_SIZE}
+                  width={ICON_SIZE}
                 />
               }
               checkedIcon={
                 <CustomIcon
                   icon={blackBowIcon} //
                   checkedBoxIcon={true}
-                  height={"20em"}
-                  width={"20em"}
+                  height={ICON_SIZE}
+                  width={ICON_SIZE}
                 />
               }
             />

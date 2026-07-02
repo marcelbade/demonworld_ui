@@ -15,7 +15,7 @@ import { CREATOR } from "../../../constants/textsAndMessages";
 const MeleeWeaponCreator = () => {
   const theme = useTheme();
 
-  const ICON_SIZE = "20em";
+  const ICON_SIZE = "40em";
 
   const CCC = useContext(CardCreationContext);
 
@@ -145,7 +145,10 @@ const MeleeWeaponCreator = () => {
           onChange={unitHasMeleeSkill}
           inputProps={{ "aria-label": "controlled" }}
           sx={{
-            marginTop: "0.5em",
+            marginTop: "1.5em",
+            marginRight: "1em",
+            height: "2em",
+            width: "2em",
           }}
           icon={
             <CustomIcon
