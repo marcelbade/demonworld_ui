@@ -9,11 +9,11 @@ import CreatorTextInput from "./CreatorTextInput";
 import { CardCreationContext } from "../../../contexts/cardCreationContext";
 // constants
 import { CREATOR } from "../../../constants/textsAndMessages";
-import { GIANT, HERO, MAGE, UNIT } from "../../../constants/unitTypes";
+import { GIANT, HERO, MAGE, SUMMONED, UNIT } from "../../../constants/unitTypes";
 
 const UnitAttributeCreator = () => {
-  const theme = useTheme();
   const CCC = useContext(CardCreationContext);
+  const theme = useTheme();
 
   const changeIsUnique = () => {
     CCC.setUnit({ ...CCC.unit, uniqueUnit: !CCC.unit.uniqueUnit });
@@ -74,7 +74,7 @@ const UnitAttributeCreator = () => {
       value: CCC.unit.unitIsClosedOrder,
       action: changeInClosedFormation,
       name: CREATOR.CLOSED_FORMATION,
-      disable: false,
+      disable: CCC.unit.unitType !== UNIT,
     },
     {
       value: CCC.unit.leaderIsClosedOrder,
