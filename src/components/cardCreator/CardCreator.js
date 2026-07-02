@@ -17,17 +17,22 @@ import SpecialRuleCreator from "./components/SpecialRuleCreator";
 import UnitMovementCreator from "./components/UnitMovementCreator";
 import UnitAttributeCreator from "./components/UnitAttributeCreator";
 import UnitTypeSelector from "./components/UnitTypeSelector";
-import SettingsMenu from "../shared/settings/SettingsMenu";
 import CardPreview from "./components/CardPreview";
+import CollapsableTopMenuDrawer from "../shared/CollapsableTopMenuDrawer";
 //  contexts
 import CardCreationProvider from "../../contexts/cardCreationContext";
 // custom hooks
 import useAxios from "../../customHooks/UseAxios";
+import useCustomMediaQuery from "../../customHooks/UseCustomMediaQuery";
 // contants
 import { MOST_COMMON_UNIT_TYPE_FOR_SUBFACTION } from "../../constants/URLs";
+import TopDrawerButton from "../shared/TopDrawerButton";
+// icons
+import customRedGameIcon from "../../assets/icons/logo_red.png";
 
 const CardCreator = () => {
   const callAxios = useAxios();
+  const displaySize = useCustomMediaQuery();
 
   const [isNewFaction, setIsNewFaction] = useState(false);
   const [hasRangedWeapon, setHasRangedWeapon] = useState(false);
@@ -129,75 +134,63 @@ const CardCreator = () => {
         setIsFearless: setIsFearless,
       }}
     >
-      <Box
-        sx={{
-          width: "100%",
-          height: "100%",
-          display: "flex", //
-        }}
-      >
-        <SettingsMenu />
-        <Box
-          sx={{
-            display: "flex",
-            direction: "column",
-            position: "fixed",
-          }}
-        ></Box>
+      <Grid container>
+        <Grid
+          container //
+          direction="column"
+          alignItems="center"
+          sx={{position:"fixed"}}
+        >
+          <CollapsableTopMenuDrawer
+            displayPageTitle={true} //
+            title={""}
+            logo={customRedGameIcon}
+            hasLogo={true}
+            displayNaviBttn={true}
+            displayListBttns={true}
+            logoWidth={displaySize.isTinyDisplay ? "250px" : "350px"}
+          />
+          <TopDrawerButton />
+        </Grid>
         <Grid
           container
           alignItems="center"
           justifyContent="center"
           sx={{
-            height: "50%",
             width: "50%",
             marginLeft: "5em",
-            marginTop: "3em",
-          }}
+            marginTop: "8em",
+           }}
         >
-          <Grid
-            container //
-            direction="row"
-          >
-            <Grid
-              container //
-              direction="column"
-              alignItems="center"
-              justifyContent="center"
-              sx={{
-                width: "max-content",
-              }}
-            >
-              <FactionNameCreator />
-              <NameCreator />
-              <UnitTypeSelector />
-              <SpecialElementsCreator />
-              <UnitAttributeCreator />
-              <UnitMovementCreator />
-              <RangeWeaponCreator />
-              <MeleeWeaponCreator />
-              <SizeAndSkillCreator />
-              <FearAndMoralCreator />
-              <HitpointCreator />
-              <SpecialRuleCreator />
-              <PointCostCreator />
-            </Grid>
-          </Grid>
+          <FactionNameCreator />
+          <NameCreator />
+          <UnitTypeSelector />
+          <SpecialElementsCreator />
+          <UnitAttributeCreator />
+          <UnitMovementCreator />
+          <RangeWeaponCreator />
+          <MeleeWeaponCreator />
+          <SizeAndSkillCreator />
+          <FearAndMoralCreator />
+          <HitpointCreator />
+          <SpecialRuleCreator />
+          <PointCostCreator />
         </Grid>
-        <Box
+
+        <Grid
           sx={{
-            display: "flex",
+            marginTop: "3em",
             flexDirection: "column",
             width: "35%",
             position: "fixed",
-            top: "5%",
+            top: "5em",
             left: "60%",
           }}
         >
           <CardPreview />
           <SaveCardForm />
-        </Box>
-      </Box>
+        </Grid>
+      </Grid>
     </CardCreationProvider>
   );
 };
