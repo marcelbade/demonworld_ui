@@ -1,5 +1,5 @@
 // react
-import { useState } from "react";
+import { useEffect, useState } from "react";
 // material ui
 import { Box, Grid2 as Grid } from "@mui/material";
 // functions and components
@@ -21,8 +21,14 @@ import SettingsMenu from "../shared/settings/SettingsMenu";
 import CardPreview from "./components/CardPreview";
 //  contexts
 import CardCreationProvider from "../../contexts/cardCreationContext";
+// custom hooks
+import useAxios from "../../customHooks/UseAxios";
+// contants
+import { MOST_COMMON_UNIT_TYPE_FOR_SUBFACTION } from "../../constants/URLs";
 
 const CardCreator = () => {
+  const callAxios = useAxios();
+
   const [isNewFaction, setIsNewFaction] = useState(false);
   const [hasRangedWeapon, setHasRangedWeapon] = useState(false);
   const [hasRangedSkill, setHasRangedSkill] = useState(false);
@@ -87,6 +93,16 @@ const CardCreator = () => {
     unitType: "U",
     equipment: [],
   });
+
+  const setUnitType = (newType) => {
+    setUnit({ ...unit, unitType: newType });
+  };
+
+  useEffect(() => {
+    if (unit.faction !== "" && unit.subFaction !== "") {
+      callAxios.fetchData(setUnitType, MOST_COMMON_UNIT_TYPE_FOR_SUBFACTION(unit.faction, unit.subFaction));
+    }
+  }, [unit.faction, unit.subFaction]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <CardCreationProvider

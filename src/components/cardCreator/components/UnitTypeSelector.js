@@ -15,11 +15,12 @@ const UnitTypeSelector = () => {
 
   /**
    * function sets the unit type of the new / edited unit.
-   * NOTE: if the selected type is not unit (i.e. more than 1 element)
+   * NOTE: if the selected unit type is not "unit" (i.e. there is more than 1 element)
    * all relevant fields must be reset.
    * @param {Obj} event
    */
   const handleChange = (event) => {
+    event.persist();
     CCC.setUnit({ ...CCC.unit, unitType: event.target.value });
 
     if (event.target.value !== UNIT) {
@@ -49,9 +50,9 @@ const UnitTypeSelector = () => {
         <RadioGroup //
           row
           name="unit-type-radio-group"
-          value={CCC.unitType}
+          value={CCC.unit.unitType}
           onChange={handleChange}
-          defaultValue={UNIT}
+          // defaultValue={CCC.unit.unitType}
           sx={{
             color: theme.palette.cardCreator.checkbox.color,
             "&.Mui-checked": {

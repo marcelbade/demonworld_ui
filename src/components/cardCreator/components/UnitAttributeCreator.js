@@ -9,7 +9,7 @@ import CreatorTextInput from "./CreatorTextInput";
 import { CardCreationContext } from "../../../contexts/cardCreationContext";
 // constants
 import { CREATOR } from "../../../constants/textsAndMessages";
-import { GIANT, HERO, MAGE, SUMMONED, UNIT } from "../../../constants/unitTypes";
+import { GIANT, HERO, MAGE, UNIT } from "../../../constants/unitTypes";
 
 const UnitAttributeCreator = () => {
   const CCC = useContext(CardCreationContext);
