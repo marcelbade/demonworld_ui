@@ -13,7 +13,7 @@ import blackBowIcon from "../../../assets/icons/bow2.png";
 import { CREATOR } from "../../../constants/textsAndMessages";
 
 const RangeWeaponCreator = () => {
-  const ICON_SIZE = "40em";
+  const ICON_SIZE = "100%";
 
   const theme = useTheme();
 
@@ -113,8 +113,8 @@ const RangeWeaponCreator = () => {
                 marginTop: "0.5em",
                 marginLeft: "1.5em",
                 marginRight: "1em",
-                height: "2em",
-                width: "2em",
+                height: "3em",
+                width: "3em",
               }}
               icon={
                 <CustomIcon
