@@ -10,6 +10,7 @@ import CustomIcon from "../../shared/CustomIcon";
 import { CardCreationContext } from "../../../contexts/cardCreationContext";
 // icons
 import blackBowIcon from "../../../assets/icons/bow2.png";
+import { CREATOR } from "../../../constants/textsAndMessages";
 
 const RangeWeaponCreator = () => {
   const ICON_SIZE = "40em";
@@ -73,7 +74,7 @@ const RangeWeaponCreator = () => {
                 sx={theme.palette.cardCreator.checkbox}
               />
             }
-            label={"Einheit hat eine Fernkampfwaffe"}
+            label={CREATOR.UNIT_HAS_RANGE_WEAPON}
             labelPlacement="start"
           />
         </FormGroup>
@@ -90,7 +91,7 @@ const RangeWeaponCreator = () => {
             value={CCC.rangedWeaponName}
             onClick={deleteRangedWeaponName}
             onChange={changeRangedWeaponName}
-            label={"Fernkampfwaffe:"}
+            label={CREATOR.RANGE_WEAPON}
           />
 
           <CreatorTextInput
@@ -98,7 +99,7 @@ const RangeWeaponCreator = () => {
             value={CCC.rangedAttackStats}
             onClick={deleteRangedAttackStats}
             onChange={changeRangedAttackStats}
-            label={"Fernkampfwert:"}
+            label={CREATOR.RANGE_VALUE}
           />
           <Grid
             container //
