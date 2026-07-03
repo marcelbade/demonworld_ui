@@ -4,8 +4,6 @@ import React, { Fragment, useContext } from "react";
 import { useTheme } from "@emotion/react";
 import { Grid2 as Grid, Typography, FormControlLabel, Checkbox } from "@mui/material";
 import CreatorTextInput from "./CreatorTextInput";
-// components and functions
-import FormationsAndHordeCreator from "./FormationsAndHordeCreator";
 // contexts
 import { CardCreationContext } from "../../../contexts/cardCreationContext";
 // constants
@@ -121,7 +119,8 @@ const UnitMovementCreator = () => {
       direction="column"
       sx={theme.palette.cardCreator.box}
     >
-      {CCC.unit.unitType === UNIT ? <FormationsAndHordeCreator /> : null}
+      {/* CURRENT BUG! - add fade in and out! */}
+
       <Grid
         container //
         direction="row"

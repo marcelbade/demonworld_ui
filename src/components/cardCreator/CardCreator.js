@@ -1,7 +1,7 @@
 // react
 import { useEffect, useState } from "react";
 // material ui
-import { Box, Grid2 as Grid } from "@mui/material";
+import { Grid2 as Grid } from "@mui/material";
 // functions and components
 import SaveCardForm from "./components/SaveCardForm";
 import FactionNameCreator from "./components/FactionNameCreator";
@@ -14,6 +14,7 @@ import RangeWeaponCreator from "./components/RangeWeaponCreator";
 import SizeAndSkillCreator from "./components/SizeAndSkillCreator";
 import SpecialElementsCreator from "./components/SpecialElementsCreator";
 import SpecialRuleCreator from "./components/SpecialRuleCreator";
+import FormationsAndHordeCreator from "./components/FormationsAndHordeCreator";
 import UnitMovementCreator from "./components/UnitMovementCreator";
 import UnitAttributeCreator from "./components/UnitAttributeCreator";
 import UnitTypeSelector from "./components/UnitTypeSelector";
@@ -139,7 +140,7 @@ const CardCreator = () => {
           container //
           direction="column"
           alignItems="center"
-          sx={{position:"fixed"}}
+          sx={{ position: "fixed" }}
         >
           <CollapsableTopMenuDrawer
             displayPageTitle={true} //
@@ -160,13 +161,14 @@ const CardCreator = () => {
             width: "50%",
             marginLeft: "5em",
             marginTop: "8em",
-           }}
+          }}
         >
           <FactionNameCreator />
           <NameCreator />
           <UnitTypeSelector />
           <SpecialElementsCreator />
           <UnitAttributeCreator />
+          <FormationsAndHordeCreator />
           <UnitMovementCreator />
           <RangeWeaponCreator />
           <MeleeWeaponCreator />
