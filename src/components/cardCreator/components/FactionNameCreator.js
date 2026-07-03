@@ -1,5 +1,5 @@
 // react
-import { Fragment, useContext } from "react";
+import { useContext } from "react";
 import { useTheme } from "@emotion/react";
 // material ui
 import { FormGroup, Grid2 as Grid, FormControlLabel, Checkbox } from "@mui/material";
@@ -11,7 +11,6 @@ import { ArmyContext } from "../../../contexts/armyContext";
 import { CardCreationContext } from "../../../contexts/cardCreationContext";
 import { GameDataContext } from "../../../contexts/gameDataContext";
 // constants
-import { NONE } from "../../../constants/factions";
 import { CREATOR } from "../../../constants/textsAndMessages";
 
 const FactionNameCreator = () => {
@@ -21,32 +20,42 @@ const FactionNameCreator = () => {
   const CCC = useContext(CardCreationContext);
   const GDC = useContext(GameDataContext);
 
-  const handleFactionInput = (name) => {
-    CCC.setUnit({ ...CCC.unit, faction: name });
-  };
-
-  const clearFactionName = () => {
-    return GDC.allFactionNames.filter((f) => f !== CCC.factionName);
-  };
-
+  /**
+   * Function sets the list of available faction names. If no selection has happened, it shows all names.
+   * If a faction has already been selected, clearFactionName() is called.
+   * @returns an array of Strings
+   */
   const setFactionList = () => {
     const resultingList =
-      CCC.factionName !== NONE //
-        ? clearFactionName()
-        : GDC.allFactionNames;
+      CCC.unit.faction === "" || CCC.unit.faction === undefined //
+        ? GDC.allFactionNames
+        : clearFactionName();
 
     return resultingList;
   };
 
-  const handleSubFactionInput = (name) => {
-    CCC.setUnit({ ...CCC.unit, subFaction: name });
+  /**
+   * Function sets faction attribute of the state when user makes a selection.
+   * @param {String} name selected faction name.
+   */
+  const handleFactionInput = (name) => {
+    CCC.setUnit({ ...CCC.unit, faction: name });
   };
 
-  const clearSubFactionName = () => {
-    const faction = AC.fetchedFactions.filter((f) => f.factionName === CCC.unit.faction);
-    return faction.subFactions.map((sF) => sF.name);
+  /**
+   * Function sets the content of the dropdown menu when the user
+   * decides to change their selection. Shows all factions minus the currently selected one.
+   * @returns array of Strings
+   */
+  const clearFactionName = () => {
+    return GDC.allFactionNames.filter((f) => f !== CCC.unit.faction);
   };
 
+  /**
+   * Function sets the list of available sub faction names. If no selection has happened, it shows all names.
+   * If a faction has already been selected, clearSubFactionName() is called.
+   * @returns an array of Strings
+   */
   const setSubFactionList = () => {
     if (CCC.unit.faction !== "") {
       return AC.fetchedFactions
@@ -58,23 +67,59 @@ const FactionNameCreator = () => {
     }
   };
 
+  /**
+   * Function sets sub faction attribute of the state when user makes a selection.
+   * @param {String} name selected sub faction name.
+   */
+  const handleSubFactionInput = (name) => {
+    CCC.setUnit({ ...CCC.unit, subFaction: name });
+  };
+
+  /**
+   * Function sets the content of the dropdown menu when the user
+   * decides to change their selection. Shows all factions minus the currently selected one.
+   * @returns array of Strings
+   */
+  const clearSubFactionName = () => {
+    const faction = AC.fetchedFactions.filter((f) => f.factionName === CCC.unit.faction);
+    return faction.subFactions.map((sF) => sF.name);
+  };
+
+  /**
+   * Function deletes current selection.
+   */
   const deleteFactionName = () => {
     CCC.setUnit({ ...CCC.unit, faction: "" });
   };
 
+  /**
+   * Function changes current selection.
+   * @param {object} event
+   */
   const changeFactionName = (event) => {
     CCC.setUnit({ ...CCC.unit, faction: event.target.value });
   };
 
+  /**
+   * Function deletes current selection.
+   */
   const deleteSubFactionName = () => {
     CCC.setUnit({ ...CCC.unit, subFaction: "" });
   };
 
+  /**
+   * Function changes current selection.
+   * @param {object} event
+   */
   const changeSubFactionName = (event) => {
     CCC.setUnit({ ...CCC.unit, subFaction: event.target.value });
   };
 
-  const isNewFaction = () => {
+  /**
+   * Function sets flag that switches between faction + sub faction selection
+   * and creating a new faction.
+   */
+  const toggleNewFaction = () => {
     CCC.setIsNewFaction((prevState) => !prevState);
   };
 
@@ -95,7 +140,7 @@ const FactionNameCreator = () => {
             control={
               <Checkbox
                 checked={CCC.isNewFaction} //
-                onChange={isNewFaction}
+                onChange={toggleNewFaction}
                 sx={theme.palette.cardCreator.checkbox}
               />
             }
@@ -111,7 +156,16 @@ const FactionNameCreator = () => {
         justifyContent="center"
       >
         {CCC.isNewFaction ? (
-          <Fragment>
+          <Grid
+            container
+            direction={"row"}
+            sx={{
+              paddingBottom: "2em",
+              ...(CCC.isNewFaction //
+                ? theme.palette.animation.fadeIn
+                : null),
+            }}
+          >
             <CreatorTextInput
               id={"factionName"} //
               value={CCC.unit.factionName}
@@ -128,9 +182,19 @@ const FactionNameCreator = () => {
               onChange={changeSubFactionName}
               label={CREATOR.SUBFACTION_NAME}
             />
-          </Fragment>
+          </Grid>
         ) : (
-          <Fragment>
+          // <Fade in={!CCC.isNewFaction}>
+
+          <Grid
+            container
+            direction={"row"}
+            // sx={{
+            //   ...(!CCC.isNewFaction //
+            //     ? theme.palette.animation.fadeIn
+            //     : null),
+            // }}
+          >
             <Grid>
               <SelectionInput
                 isArmySelector={false}
@@ -151,7 +215,9 @@ const FactionNameCreator = () => {
                 width={"20em"}
               />
             </Grid>
-          </Fragment>
+          </Grid>
+
+          // </Fade>
         )}
       </Grid>
     </Grid>
