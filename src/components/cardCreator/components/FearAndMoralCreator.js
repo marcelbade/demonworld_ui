@@ -11,7 +11,7 @@ import { UNIT } from "../../../constants/unitTypes";
 // constants
 import { CARD_TEXT, CREATOR } from "../../../constants/textsAndMessages";
 
-const FearAndMoralCreator = () => {
+const   FearAndMoralCreator = () => {
   const theme = useTheme();
 
   const CCC = useContext(CardCreationContext);
