@@ -70,7 +70,7 @@ const ListGenerator = () => {
    * @returns CSS in form of a plain object.
    */
   const setArmySelectorBoxStyle = () => {
-    const selectionWidth = { width: { xs: "75%", md: "25%" } };
+    const selectionWidth = { width: { xs: "75%", md: "100%" } };
     return AC.selectedFactionName === NONE //
       ? { ...selectionWidth }
       : { ...selectionWidth, ...theme.palette.animation.fadeAway };
@@ -105,7 +105,8 @@ const ListGenerator = () => {
         {/* page */}
         <Grid
           container //
-          sx={{ direction: "column" }}
+          direction="column"
+          sx={{ alignItems: "center" }}
         >
           <Stack
             direction="row" //
@@ -120,8 +121,9 @@ const ListGenerator = () => {
           </Stack>
           <Grid
             container //
+            size={3}
+            direction="column"
             sx={{
-              direction: "column",
               alignContent: { xs: "flex-start", md: "center" },
               marginTop: "2em",
             }}

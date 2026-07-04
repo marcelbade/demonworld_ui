@@ -83,9 +83,7 @@ const TopMenuDrawer = (props) => {
         sx={{
           direction: { xs: "column-reverse", sm: "column", md: "row" },
           justifyContent: { xs: "center", md: "end" },
-          justifyItems: { xs: "center", md: "end" },
-          alignContent: { xs: "center", md: "end" },
-          paddingTop: "1em",
+          alignContent: { xs: "center", md: "center" },
           paddingRight: { md: "3em" },
           width: { xs: "100%", md: "30%" },
         }}
