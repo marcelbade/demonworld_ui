@@ -30,7 +30,7 @@ const useAxios = () => {
 
   const fetchProtectedData = (setter, url) => {
     axios
-      .get(url, { headers: { Authorization: `Bearer ${UC.user.token}` } })
+      .get(url, { headers: { Authorization: `Bearer ${UC.user.token}` } }, { withCredentials: true })
       .then((response) => {
         setter(response.data);
       })
@@ -49,14 +49,14 @@ const useAxios = () => {
    * they can be passed as functions and will be called after the setter.
    * Note that setter and side effects are only called if the request is successful.
    * If the request is successful (201), a toast message is displayed.
-   * If any error is returned, the error message is shown as a toast message instead.
+   * If ANY error is returned, the error message is displayed as a toast message instead.
    * @param {String} data stringified JSON object
    * @param {String} url string
    * @param {function} setter must be null if no setter function is passed
    * @param {function} sideEffect must be null if no function is passed
    * @param {String} successMessage string
    */
-  const sendData = (data, url, setter, sideEffects, successMessage) => {
+  const sendData = (data, url, setter, sideEffect, successMessage) => {
     axios
       .post(url, data, {
         headers: {
@@ -68,8 +68,8 @@ const useAxios = () => {
         if (setter !== null) {
           setter(response.data);
         }
-        if (sideEffects !== null) {
-          sideEffects();
+        if (sideEffect !== null) {
+          sideEffect();
         }
 
         pushMessage.showSnackBar(successMessage, PUSH_MESSAGE_TYPES.SUCCESS);

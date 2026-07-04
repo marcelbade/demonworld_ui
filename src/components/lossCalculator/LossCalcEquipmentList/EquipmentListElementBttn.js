@@ -5,8 +5,8 @@ import { IconButton } from "@mui/material";
 // components and functions
 import { LossCalcContext } from "../../../contexts/LossCalculatorContext";
 // icons
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
+import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
+import RemoveCircleOutlinedIcon from "@mui/icons-material/RemoveCircleOutlined";
 
 const EquipmentListElementBttn = (props) => {
   const LC = useContext(LossCalcContext);
@@ -38,7 +38,7 @@ const EquipmentListElementBttn = (props) => {
         setItemIsLostFlag(props.unit, props.itemName, !props.isItemLost);
       }}
     >
-      {props.isItemLost ? <RemoveCircleOutlineIcon /> : <AddCircleOutlineIcon />}
+      {props.isItemLost ? <RemoveCircleOutlinedIcon /> : <AddCircleOutlinedIcon />}
     </IconButton>
   );
 };

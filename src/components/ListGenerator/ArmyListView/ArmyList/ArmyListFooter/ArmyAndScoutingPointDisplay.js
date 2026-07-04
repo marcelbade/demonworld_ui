@@ -1,6 +1,6 @@
 // React
 import { useState, useContext, Fragment } from "react";
-import { Typography, TextField, Grid2 as Grid } from "@mui/material";
+import { Typography, TextField, Grid } from "@mui/material";
 // components and functions
 import { SelectionContext } from "../../../../../contexts/selectionContext";
 import calculateScoutingFactor from "../../../../../gameLogic/scoutFactorCalculator/scoutingFactorCalculator";

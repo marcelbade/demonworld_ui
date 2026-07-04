@@ -1,7 +1,7 @@
 // react
 import { useTheme } from "@emotion/react";
 // material ui
-import { Grid2 as Grid, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 // components and functions
 import LightSwitch from "../LightSwitch";
 // constants

@@ -1,6 +1,6 @@
 // React
 import { useContext } from "react";
-import { Grid2 as Grid, IconButton, ThemeProvider, CssBaseline } from "@mui/material";
+import { Grid, IconButton, ThemeProvider, CssBaseline } from "@mui/material";
 // icons
 import CancelIcon from "@mui/icons-material/Cancel";
 // components and functions

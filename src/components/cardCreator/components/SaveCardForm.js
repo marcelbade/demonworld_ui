@@ -1,7 +1,7 @@
 // react
 import { useContext } from "react";
 // material ui
-import { Button, Grid2 as Grid } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 // contexts
 import { CardCreationContext } from "../../../contexts/cardCreationContext";
 // custom hooks

@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 // Material UI
-import { TextField, Typography, Grid2 as Grid, Button, Box, IconButton } from "@mui/material";
+import { TextField, Typography, Grid, Button, Box, IconButton } from "@mui/material";
 // functions and components
 import { isThePasswordValid } from "./PasswordCriteriaCheck";
 import CollapsableTopMenuDrawer from "../shared/CollapsableTopMenuDrawer";

@@ -2,7 +2,7 @@
 import React, { Fragment, useContext } from "react";
 // material ui
 import { useTheme } from "@emotion/react";
-import { Grid2 as Grid, Typography, FormControlLabel, Checkbox } from "@mui/material";
+import { Grid, Typography, FormControlLabel, Checkbox } from "@mui/material";
 import CreatorTextInput from "./CreatorTextInput";
 // contexts
 import { CardCreationContext } from "../../../contexts/cardCreationContext";

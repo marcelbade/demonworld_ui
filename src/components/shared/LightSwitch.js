@@ -1,7 +1,7 @@
 // React
 import { useContext } from "react";
 // Material UI
-import { Grid2 as Grid, FormGroup, FormControlLabel, Switch } from "@mui/material";
+import { Grid, FormGroup, FormControlLabel, Switch } from "@mui/material";
 // components and functions
 import { LightSwitchContext } from "../../contexts/lightSwitchContext";
 // icons

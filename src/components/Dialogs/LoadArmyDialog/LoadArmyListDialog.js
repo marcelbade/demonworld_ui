@@ -4,7 +4,7 @@ import { useContext, useState, useEffect } from "react";
 import {
   Dialog, //
   IconButton,
-  Grid2 as Grid,
+  Grid,
   useTheme,
 } from "@mui/material";
 // icons

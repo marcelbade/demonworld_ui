@@ -1,7 +1,7 @@
 // react
 import { useContext, useState, forwardRef } from "react";
 // material ui
-import { Grid2 as Grid, Dialog, AppBar, Toolbar, IconButton, Slide, Typography } from "@mui/material";
+import { Grid, Dialog, AppBar, Toolbar, IconButton, Slide, Typography } from "@mui/material";
 // components and functions
 import CancelIcon from "@mui/icons-material/Cancel";
 import TabButtons from "../TabButtons";

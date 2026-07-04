@@ -1,7 +1,7 @@
 // React
 import { useState } from "react";
 // Material UI
-import { Grid2 as Grid, IconButton, Stack } from "@mui/material";
+import { Grid, IconButton, Stack } from "@mui/material";
 // context
 // components and functions
 import LoginDialog from "../../../../Dialogs/LogInDialog/LogInDialog";

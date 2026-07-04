@@ -1,5 +1,5 @@
 // material ui
-import { Button, Grid2 as Grid, TextField } from "@mui/material";
+import { Button, Grid, TextField } from "@mui/material";
 // constants
 import { SPELL_COMPENDIUM } from "../../constants/textsAndMessages";
 //  custom hooks

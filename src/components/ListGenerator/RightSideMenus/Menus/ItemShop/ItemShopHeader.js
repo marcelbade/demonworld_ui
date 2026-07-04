@@ -1,7 +1,7 @@
 // React
 import { useContext } from "react";
 //Material UI
-import { Grid2 as Grid, Typography, IconButton } from "@mui/material";
+import { Grid, Typography, IconButton } from "@mui/material";
 // icons
 import CancelIcon from "@mui/icons-material/Cancel";
 // components and functions

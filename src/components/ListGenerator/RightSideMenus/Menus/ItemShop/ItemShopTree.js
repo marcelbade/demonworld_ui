@@ -2,7 +2,7 @@
 import { useTheme } from "@emotion/react";
 import { useState, useContext, useEffect } from "react";
 //Material UI
-import { Grid2 as Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import { SimpleTreeView } from "@mui/x-tree-view/SimpleTreeView";
 import { TreeItem } from "@mui/x-tree-view/TreeItem";
 // icons

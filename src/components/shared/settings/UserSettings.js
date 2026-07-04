@@ -2,7 +2,7 @@
 import { useContext } from "react";
 import { useTheme } from "@emotion/react";
 // material ui
-import { Grid2 as Grid, Switch, FormGroup, FormControlLabel, Typography } from "@mui/material";
+import { Grid, Switch, FormGroup, FormControlLabel, Typography } from "@mui/material";
 // components and functions
 import UserLogButton from "../../Login/UserLogButton";
 // contexts

@@ -1,7 +1,7 @@
 // react
 import { useEffect, useState } from "react";
 // material ui
-import { Grid2 as Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 // functions and components
 import SaveCardForm from "./components/SaveCardForm";
 import FactionNameCreator from "./components/FactionNameCreator";

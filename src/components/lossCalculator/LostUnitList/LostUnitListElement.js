@@ -1,7 +1,7 @@
 // React
 import React, { useContext } from "react";
 //Material UI
-import { Typography, Grid2 as Grid } from "@mui/material";
+import { Typography, Grid } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components and functions
 import { LossCalcContext } from "../../../contexts/LossCalculatorContext";

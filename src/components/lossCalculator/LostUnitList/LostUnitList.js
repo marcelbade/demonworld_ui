@@ -1,7 +1,7 @@
 // React
 import { useContext } from "react";
 //Material UI
-import { Grid2 as Grid, List, Typography } from "@mui/material";
+import { Grid, List, Typography } from "@mui/material";
 // components and functions
 import LostUnitListElement from "./LostUnitListElement";
 // contexts

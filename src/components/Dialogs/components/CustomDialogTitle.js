@@ -1,5 +1,5 @@
 //  material ui
-import { DialogTitle, Grid2 as Grid, IconButton, useTheme } from "@mui/material";
+import { DialogTitle, Grid, IconButton, useTheme } from "@mui/material";
 // functions and components
 import ContextHelpButton from "../../shared/ContextHelpButton";
 // icon

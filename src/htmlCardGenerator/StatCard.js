@@ -1,7 +1,7 @@
 // react
 import { useEffect, useState } from "react";
 // Material UI
-import { Grid2 as Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 // components & functions
 import CardBack from "./cardBack/CardBack";
 import CardFront from "./cardFront/CardFront";

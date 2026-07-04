@@ -1,5 +1,5 @@
 // React
-import { Grid2 as Grid, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 // Material UI
 import { useTheme } from "@emotion/react";
 // icons

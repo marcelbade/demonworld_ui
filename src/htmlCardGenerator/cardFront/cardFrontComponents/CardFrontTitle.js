@@ -2,7 +2,7 @@
 import { useTheme } from "@emotion/react";
 // components & functions
 import { renderDynamicIcons } from "../../../util/utilityFunctions";
-import { Grid2 as Grid, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 
 /**
  * Creates the card title. The name displayed is, by default, the unit's name.

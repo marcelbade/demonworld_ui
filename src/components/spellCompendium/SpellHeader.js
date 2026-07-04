@@ -1,5 +1,5 @@
 // material ui
-import { Grid2 as Grid, IconButton, Typography } from "@mui/material";
+import { Grid, IconButton, Typography } from "@mui/material";
 // custom components and functions
 import { spellTierIsText } from "./spellUtil";
 import SpellTierSymbol from "./SpellTierSymbol";

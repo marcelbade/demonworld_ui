@@ -2,7 +2,7 @@
 import { useContext, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 // Material UI
-import { Grid2 as Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 // components and functions
 import CreateListScreen from "./CreateListScreen";
 import LostPointDisplay from "./LostPointDisplay";

@@ -8,7 +8,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  Grid2 as Grid,
+  Grid,
   IconButton,
   useTheme,
 } from "@mui/material";

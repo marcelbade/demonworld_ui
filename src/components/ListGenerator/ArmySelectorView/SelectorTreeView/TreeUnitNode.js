@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { Typography, IconButton, Stack } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // icons
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
 // components and functions
 import ContextHelpButton from "../../../shared/ContextHelpButton";
 //constants
@@ -86,7 +86,7 @@ const TreeUnitNode = (props) => {
             onClick={addUnit} //
             disabled={!props.isValidUnit}
           >
-            <AddCircleOutlineIcon />
+            <AddCircleOutlinedIcon />
           </IconButton>
           {/* error message button */}
           <ContextHelpButton

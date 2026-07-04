@@ -1,5 +1,5 @@
 // React
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 // Material UI
 import { Avatar, IconButton, Tooltip } from "@mui/material";
 // icons
@@ -23,14 +23,20 @@ const UserLogButton = (props) => {
   const UC = useContext(UserContext);
   const [rgbValue, setRgbValue] = useState("");
 
+  const loggedUserRef = useRef(UC.user.userName);
+
   useEffect(() => {
     setRgbValue(randomRgbValue());
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  useEffect(() => {
+    loggedUserRef.current = UC.user.userName;
+  }, [UC.userLoggedIn]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const displayLogInDialog = () => {
     UC.setDisplayLogInDialog(true);
   };
-
+ 
   return (
     <Tooltip
       title={
@@ -54,9 +60,7 @@ const UserLogButton = (props) => {
               backgroundColor: rgbValue, //
             }}
           >
-            {UC.user.userName //
-              .charAt(0)
-              .toUpperCase()}
+            {loggedUserRef.current.charAt(0).toUpperCase()}
           </Avatar>
         </IconButton>
       ) : (

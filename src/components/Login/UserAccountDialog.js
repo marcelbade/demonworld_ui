@@ -2,7 +2,7 @@
 import { useContext } from "react";
 // mui
 import {
-  Grid2 as Grid, //
+  Grid, //
   IconButton,
   Button,
   Dialog,
@@ -14,6 +14,8 @@ import { UserContext } from "../../contexts/userContext";
 import CancelIcon from "@mui/icons-material/Cancel";
 //  constants
 import { USER_AUTH } from "../../constants/textsAndMessages";
+import useAxios from "../../customHooks/UseAxios";
+import { LOGOUT_USER_URL } from "../../constants/URLs";
 
 /**
  * JSX component creates a dialog containing user account actions:
@@ -22,17 +24,29 @@ import { USER_AUTH } from "../../constants/textsAndMessages";
  */
 const UserAccountDialog = () => {
   const UC = useContext(UserContext);
+
+  const callAxios = useAxios();
+
   const theme = useTheme();
 
+  /**
+   * Function logs out the user and resets the user state.
+   */
   const logOut = () => {
-    UC.setUser({
-      userName: "",
-      isAdmin: false,
-      isOwner: "",
-      token: "",
-    });
+    callAxios.sendData(
+      "", //
+      LOGOUT_USER_URL,
+      UC.setUser,
+      logOutSideEffects,
+      USER_AUTH.LOGOUT_SUCCESFUL,
+    );
+  };
+
+
+  const logOutSideEffects = () => {
     UC.setUserLoggedIn(false);
     UC.setShowUserAvatarDialog(false);
+    
   };
 
   //TODO finish logout
@@ -42,7 +56,8 @@ const UserAccountDialog = () => {
   };
 
   const changePassword = () => {
-    UC.setShowPasswordChangeDialog(true);  
+    UC.setShowPasswordChangeDialog(true);
+    UC.setShowUserAvatarDialog(false);
   };
 
   // buttons generated via table-driven function

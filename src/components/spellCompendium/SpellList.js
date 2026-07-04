@@ -2,7 +2,7 @@
 import { useTheme } from "@emotion/react";
 import { useEffect } from "react";
 // material ui
-import { Drawer, List, ListItemButton, IconButton, ListItemText, Typography, Grid2 as Grid } from "@mui/material";
+import { Drawer, List, ListItemButton, IconButton, ListItemText, Typography, Grid } from "@mui/material";
 import SpellSelector from "./SpellSelector";
 // custom components and functions
 import { spellTierIsText } from "./spellUtil";

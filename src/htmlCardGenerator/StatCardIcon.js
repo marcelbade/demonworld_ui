@@ -1,5 +1,5 @@
 // Material UI
-import { Grid2 as Grid, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 // components & functions
 import { setUnitStat } from "../gameLogic/unitStatChangeLogic/unitStatChangesLogic";
 import CustomIcon from "../components/shared/CustomIcon";

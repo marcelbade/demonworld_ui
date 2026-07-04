@@ -1,7 +1,7 @@
 // React
 import { Fragment } from "react";
 // Material UI
-import { Grid2 as Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components & functions
 import RangedWeapon from "./RangedWeapon";

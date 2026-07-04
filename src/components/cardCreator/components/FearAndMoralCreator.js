@@ -2,7 +2,7 @@
 import React, { useContext } from "react";
 // material ui
 import { useTheme } from "@emotion/react";
-import { Checkbox, FormControlLabel, Grid2 as Grid } from "@mui/material";
+import { Checkbox, FormControlLabel, Grid } from "@mui/material";
 // components and functions
 import CreatorTextInput from "./CreatorTextInput";
 // contexts

@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 // Functions And Components
 import NaviTextButton from "./NaviTextButton";
 import NaviIconButton from "./NaviIconButton";
-import { Grid2 as Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 
 /**
  * This JSX component displays a navigation button. To account for all use cases, the

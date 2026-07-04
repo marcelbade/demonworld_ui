@@ -1,7 +1,7 @@
 //Material UI
 import { Tooltip, Typography } from "@mui/material";
 //icons
-import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import CheckCircleOutlinedIcon from "@mui/icons-material/CheckCircleOutlined";
 import CancelIcon from "@mui/icons-material/Cancel";
 // constants
 import { COMPENDIUM, UNIT_TYPES } from "../constants/textsAndMessages";
@@ -186,7 +186,7 @@ export const renderBooleanAsIcon = (numberOfElements, flag) => {
     return "-";
   }
 
-  return flag ? <CheckCircleOutlineIcon /> : <CancelIcon />;
+  return flag ? <CheckCircleOutlinedIcon /> : <CancelIcon />;
 };
 
 /**

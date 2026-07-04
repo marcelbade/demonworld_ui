@@ -2,7 +2,7 @@
 import React, { useContext } from "react";
 // material ui
 import { useTheme } from "@emotion/react";
-import { Grid2 as Grid, FormControlLabel, FormLabel, FormControl, RadioGroup, Radio } from "@mui/material";
+import { Grid, FormControlLabel, FormLabel, FormControl, RadioGroup, Radio } from "@mui/material";
 // contexts
 import { CardCreationContext } from "../../../contexts/cardCreationContext";
 import { CREATOR } from "../../../constants/textsAndMessages";
@@ -20,8 +20,9 @@ const UnitTypeSelector = () => {
    * @param {Obj} event
    */
   const handleChange = (event) => {
-    event.persist();
     CCC.setUnit({ ...CCC.unit, unitType: event.target.value });
+
+    console.log("event.target.value >> !!!!" + event.target.value); // remove
 
     if (event.target.value !== UNIT) {
       CCC.setUnit({
@@ -52,7 +53,6 @@ const UnitTypeSelector = () => {
           name="unit-type-radio-group"
           value={CCC.unit.unitType}
           onChange={handleChange}
-          // defaultValue={CCC.unit.unitType}
           sx={{
             color: theme.palette.cardCreator.checkbox.color,
             "&.Mui-checked": {

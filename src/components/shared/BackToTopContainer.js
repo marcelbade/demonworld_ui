@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import useCustomMediaQuery from "../../customHooks/UseCustomMediaQuery";
-import { Fab, Grid2 as Grid } from "@mui/material";
+import { Fab, Grid } from "@mui/material";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 
 /**

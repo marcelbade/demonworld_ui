@@ -1,7 +1,7 @@
 // react
 import React, { useContext } from "react";
 // material ui
-import { Checkbox, FormControlLabel, FormGroup, Grid2 as Grid, Button, useTheme, Tooltip } from "@mui/material";
+import { Checkbox, FormControlLabel, FormGroup, Grid, Button, useTheme, Tooltip } from "@mui/material";
 // contexts
 import { CardCreationContext } from "../../../contexts/cardCreationContext";
 // icons

@@ -129,11 +129,9 @@ export const OPTIONS = {
   LOAD_LIST: "Liste Laden",
   UPDATE_LIST: "Liste aktualisieren",
   TO_LOSS_CALCULATOR: "Zum Verlustrechner",
-  NO_LIST:"Deine Armeeliste ist leer.",
+  NO_LIST: "Deine Armeeliste ist leer.",
   CHANGE_SELECTED_FACTION: "Fraktion wechseln",
   TEXTFILE_DOWNLOAD: "Textdatei erzeugen",
-
-
 };
 
 export const ARMY_LIST = {
@@ -165,7 +163,7 @@ export const USER_AUTH = {
   LOGIN_ACTION: "Einloggen",
   LOGIN_BUTTON: "Ins Konto einloggen",
   LOGOUT_ACCOUNT: "Aus dem Konto ausloggen",
-  LOGOUT_SUCCESFUL:"Nutzer erfolgreich ausgeloggt.",
+  LOGOUT_SUCCESFUL: "Nutzer erfolgreich ausgeloggt.",
   REPEAT_LOGIN_PW: "Passwort wiederholen",
   CREATE_NEW_ACCOUNT: "Neues Konto Anlegen",
   ACCOUNT_CREATED: "Konto erfolgreich erstellt.",
@@ -321,7 +319,6 @@ export const ITEM_LIMIT_MESSAGE = {
     return `Nur eine Einheit aus dem Kontingent ${subFaction} kann diesen Gegenstand erhalten.`;
   },
 };
-
 
 export const LOSS_CALCULATOR = {
   CREATE_LIST: "Liste Erstellen",
@@ -766,11 +763,17 @@ export const CREATOR = {
   IS_UNIQUE: "Einheit ist einzigartig.",
   IS_CAVALERY: "Einheit ist beritten.",
   HAS_SHIELD: "Einheit besitzt (ein) Schild(e).",
+  UNIT_HAS_RANGE_WEAPON: "Einheit hat eine Fernkampfwaffe",
+  RANGE_WEAPON: "Fernkampfwaffe:",
+  RANGE_VALUE: "Fernkampfwert:",
   HAS_SHIELD_HERO: "Einheit besitzt ein Schild.",
   CLOSED_FORMATION: "Einheit kämpft in geschlossener Formation.",
   LEADER_CLOSED_FORMATION: "Anführer kämpft in geschlossener Formation.",
   IS_LOW_FLYER: "Einheit kann niedgrig fliegen.",
   IS_HIGH_FLYER: "Einheit kann hoch fliegen.",
+  SQUARE_FORMATION: "Einheit kann Karreeformation bilden.",
+  WEDGE_FORMATION: "Einheit kann Keilformation bilden.",
+  SKIRMISH_FORMATION: "Einheit kann Plänklerformation bilden.",
   MOVE: "Bewegung:",
   CHARGE: "Angriff:",
   SKIRMISH: "Plänkeln:",

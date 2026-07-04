@@ -2,7 +2,7 @@
 import React, { useContext } from "react";
 // material ui
 import { useTheme } from "@emotion/react";
-import { Grid2 as Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 // components and functions
 import CreatorTextInput from "./CreatorTextInput";
 // contexts
@@ -35,7 +35,7 @@ const SpecialRuleCreator = () => {
         onClick={deleteSpecialRule}
         onChange={changeSpecialRule}
         label={CREATOR.SPECIALRULE}
-        width={"max-content"}
+        width={"100%"}
         maxRows={5}
       />
     </Grid>

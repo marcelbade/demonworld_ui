@@ -1,7 +1,7 @@
 // react
 import { useContext, useEffect, useState } from "react";
 // material ui
-import { Grid2 as Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 // context
 import { ArmyContext } from "../../../../contexts/armyContext";
 import { AlternativeListContext } from "../../../../contexts/alternativeListContext";

@@ -5,7 +5,7 @@ import { CompendiumContext } from "../../../../contexts/compendiumContext";
 import SelectionInput from "../../../shared/selectionInput";
 //  Constants
 import { INPUT_TEXTS } from "../../../../constants/textsAndMessages";
-import { Grid2 as Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 import { GameDataContext } from "../../../../contexts/gameDataContext";
 
 const FactionAndUnitSelectors = () => {

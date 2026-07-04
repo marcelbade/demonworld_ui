@@ -1,7 +1,7 @@
 // React
 import { Fragment, useContext, useEffect, useState } from "react";
 // material ui
-import { Grid2 as Grid, Pagination } from "@mui/material";
+import { Grid, Pagination } from "@mui/material";
 // components & functions
 import CompendiumTableRow from "./CompendiumTableRow";
 import DetailedCardView from "./CardRow";

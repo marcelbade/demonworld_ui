@@ -1,7 +1,7 @@
 // React
 import { Fragment } from "react";
 // material ui
-import { Grid2 as Grid, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // constants
 import { CARD_TEXT } from "../../../constants/textsAndMessages";

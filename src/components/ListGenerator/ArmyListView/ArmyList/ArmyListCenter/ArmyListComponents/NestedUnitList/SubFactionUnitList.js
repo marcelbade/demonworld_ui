@@ -3,7 +3,7 @@ import { useContext } from "react";
 // Material UI
 import { List, ListItem, IconButton } from "@mui/material";
 // icons
-import RemoveCircleOutline from "@mui/icons-material/RemoveCircleOutline";
+import RemoveCircleOutlined from "@mui/icons-material/RemoveCircleOutlined";
 // components and functions
 import EquipmentList from "./EquipmentList";
 import UnitElementButtons from "./UnitElementButtons";
@@ -132,7 +132,7 @@ const SubFactionUnitList = (props) => {
                     props.fadeOutFunc();
                   }}
                 >
-                  <RemoveCircleOutline />
+                  <RemoveCircleOutlined />
                 </IconButton>
                 <ArmyListUnitEntry
                   unit={validationObj.unit}

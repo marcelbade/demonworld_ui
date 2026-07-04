@@ -1,5 +1,5 @@
 //  material ui
-import { Button, Dialog, Grid2 as Grid } from "@mui/material";
+import { Button, Dialog, Grid } from "@mui/material";
 // functions and components
 // constants
 import { PRINTABLE_LIST, PUSH_MESSAGE_TYPES } from "../../../constants/textsAndMessages";

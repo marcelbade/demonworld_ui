@@ -3,7 +3,7 @@ import React from "react";
 // Material UI
 import { List, ListItemText, ListItem, IconButton } from "@mui/material";
 // icons
-import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
+import RemoveCircleOutlinedIcon from "@mui/icons-material/RemoveCircleOutlined";
 
 const EquipmentList = (props) => {
   /**
@@ -40,7 +40,7 @@ const EquipmentList = (props) => {
                     props.removeItemButtonHandler(props.unit, e, i);
                   }}
                 >
-                  <RemoveCircleOutlineIcon />
+                  <RemoveCircleOutlinedIcon />
                 </IconButton>
                 <ListItemText primary={<span>{e.itemName}</span>} secondary={<span>{e.points}</span>} />
               </ListItem>

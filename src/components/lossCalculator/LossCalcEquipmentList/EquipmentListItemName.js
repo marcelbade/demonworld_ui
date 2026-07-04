@@ -1,7 +1,7 @@
 // React
 import React from "react";
 //Material UI
-import { Grid2 as Grid, ListItemText } from "@mui/material";
+import { Grid, ListItemText } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // component and functions
 import ContextHelpButton from "../../shared/ContextHelpButton";

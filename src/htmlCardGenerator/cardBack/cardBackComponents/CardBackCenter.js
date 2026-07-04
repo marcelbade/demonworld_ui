@@ -2,7 +2,7 @@
 import React, { Fragment } from "react";
 // Material UI
 import { useTheme } from "@emotion/react";
-import { Grid2 as Grid, Typography } from "@mui/material";
+import { Grid, TextField, Typography } from "@mui/material";
 // functions and modules
 import { COMPENDIUM } from "../../../constants/textsAndMessages";
 
@@ -14,13 +14,30 @@ const CardBackCenter = (props) => {
 
   return (
     <Grid alignItems="stretch">
-      <Typography
-        variant="body1" //
-        align="center"
-        sx={{
-          ...theme.palette.statCards.backGround,
-          padding: "1em",
+      <TextField
+        // multiline
+        variant="standard"
+        disabled={true}
+        // variant="body1" //
+        value={specialRules}
+        // align="center"
+
+        slotProps={{
+          input: {
+            backgroundColor: "blue",
+            color: "primary",
+          },
         }}
+
+        // sx={{
+        //   ...theme.palette.statCards.backGround,
+        //   padding: "1em",
+        //   width: "100%",
+        // // input: { color: 'red' } ,
+        //   root: {
+        //     "& .Mui-disabled-root": { color: "black" },
+        //   },
+        // }}
       >
         {specialRules}
         {hasEquipment
@@ -32,7 +49,7 @@ const CardBackCenter = (props) => {
               );
             })
           : null}
-      </Typography>
+      </TextField>
     </Grid>
   );
 };

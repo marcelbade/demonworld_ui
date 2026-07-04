@@ -1,5 +1,5 @@
 //Material UI
-import { Grid2 as Grid, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 // functions and components
 import ContextHelpButton from "../shared/ContextHelpButton";
 // constants

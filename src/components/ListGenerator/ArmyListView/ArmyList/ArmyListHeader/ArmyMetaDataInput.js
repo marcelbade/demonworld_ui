@@ -1,7 +1,7 @@
 // React
 import { useContext, useEffect } from "react";
 // material ui
-import { TextField, Grid2 as Grid, Stack, Typography } from "@mui/material";
+import { TextField, Grid, Stack, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components and functions
 import { ArmyContext } from "../../../../../contexts/armyContext";

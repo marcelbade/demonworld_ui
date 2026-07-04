@@ -1,7 +1,7 @@
 // React
 import { useContext } from "react";
 // Material UI
-import { Grid2 as Grid } from "@mui/material";
+import { Grid } from "@mui/material";
 // icons
 import deathIcon from "../../assets/icons/icons8-death-64.png";
 import calculatorIcon from "../../assets/icons/icons8-calculator-64.png";

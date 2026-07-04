@@ -1,13 +1,13 @@
 import { useContext } from "react";
 // material ui
-import { Typography, IconButton, Accordion, AccordionSummary, AccordionDetails, Grid2 as Grid } from "@mui/material";
+import { Typography, IconButton, Accordion, AccordionSummary, AccordionDetails, Grid } from "@mui/material";
 // components and functions
 import { ItemContext } from "../../../../../contexts/itemContext";
 import { SelectionContext } from "../../../../../contexts/selectionContext";
 import UseUnitEqipmentLimits from "../../../../../customHooks/UseUnitEquipmentLimits";
 import useSpecialItems from "../../../../../customHooks/UseSpecialItems";
 // icons
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
+import AddCircleOutlinedIcon from "@mui/icons-material/AddCircleOutlined";
 // constants
 import { PUSH_MESSAGE_TYPES } from "../../../../../constants/textsAndMessages";
 import { useTheme } from "@emotion/react";
@@ -72,7 +72,7 @@ const TreeItemNode = (props) => {
       }}
     >
       <AccordionSummary
-        expandIcon={<AddCircleOutlineIcon />} //
+        expandIcon={<AddCircleOutlinedIcon />} //
         aria-controls="panel1a-content"
         id="shopItem"
       >
@@ -91,7 +91,7 @@ const TreeItemNode = (props) => {
               e.stopPropagation();
             }}
           >
-            <AddCircleOutlineIcon />
+            <AddCircleOutlinedIcon />
           </IconButton>
 
           <Grid>

@@ -8,7 +8,7 @@ import {
   DialogTitle, //
   TextField,
   IconButton,
-  Grid2 as Grid,
+  Grid,
   useTheme,
 } from "@mui/material";
 // icons

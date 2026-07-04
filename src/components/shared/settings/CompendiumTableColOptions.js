@@ -1,7 +1,7 @@
 // react
 import { useContext } from "react";
 // mui
-import { FormGroup, Stack, Grid2 as Grid, Checkbox } from "@mui/material";
+import { FormGroup, Stack, Grid, Checkbox } from "@mui/material";
 // contexts
 import { CompendiumContext } from "../../../contexts/compendiumContext";
 // components and functions

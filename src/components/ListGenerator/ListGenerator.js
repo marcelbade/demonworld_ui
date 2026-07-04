@@ -1,7 +1,7 @@
 // react
 import { useContext, useEffect, useState } from "react";
 // material ui
-import { Grid2 as Grid, Box, IconButton, Stack } from "@mui/material";
+import { Grid, Box, IconButton, Stack } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components and functions
 import ArmyListBox from "./ArmyListView/ArmyListBox";

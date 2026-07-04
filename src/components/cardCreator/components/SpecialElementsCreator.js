@@ -2,7 +2,7 @@
 import React, { useContext } from "react";
 // material ui
 import { useTheme } from "@emotion/react";
-import { Checkbox, FormControlLabel, Grid2 as Grid } from "@mui/material";
+import { Checkbox, FormControlLabel, Grid } from "@mui/material";
 import CreatorTextInput from "./CreatorTextInput";
 // contexts
 import { CardCreationContext } from "../../../contexts/cardCreationContext";
@@ -72,10 +72,18 @@ const SpecialElementsCreator = () => {
         />
       </Grid>
 
-      {CCC.unit.unitType === UNIT
-        ? elements.map((elmnt, i) => (
-            <Grid key={i}>
+      {/* // CURRENT BUG!  */}
+      <Grid
+        sx={{
+          ...(CCC.unit.unitType !== "U" //
+            ? theme.palette.animation.fadeAway
+            : theme.palette.animation.fadeIn),
+        }}
+      >
+        {CCC.unit.unitType === UNIT
+          ? elements.map((elmnt, i) => (
               <FormControlLabel
+                key={i}
                 control={
                   <Checkbox
                     checked={elmnt.value} //
@@ -86,9 +94,9 @@ const SpecialElementsCreator = () => {
                 label={elmnt.name}
                 labelPlacement="start"
               />
-            </Grid>
-          ))
-        : null}
+            ))
+          : null}
+      </Grid>
     </Grid>
   );
 };

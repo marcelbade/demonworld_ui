@@ -1,7 +1,7 @@
 // React
 import { useContext } from "react";
 //Material UI
-import { Button, Grid2 as Grid, ButtonGroup, Typography, IconButton, ThemeProvider, CssBaseline } from "@mui/material";
+import { Button, Grid, ButtonGroup, Typography, IconButton, ThemeProvider, CssBaseline } from "@mui/material";
 // icons
 import CancelIcon from "@mui/icons-material/Cancel";
 // components and functions

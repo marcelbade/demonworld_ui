@@ -1,7 +1,7 @@
 // React
 import { useContext } from "react";
 // components and functions
-import { Grid2 as Grid, List } from "@mui/material";
+import { Grid, List } from "@mui/material";
 import { isSubFactionAlternativeAndSelected } from "../../../util/utilityFunctions";
 import ArmyListSubFactionEntry from "./ArmyList/ArmyListCenter/ArmyListComponents/ArmyListSubFactionEntry";
 // context

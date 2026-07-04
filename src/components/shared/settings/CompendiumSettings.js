@@ -2,7 +2,7 @@
 import { useContext } from "react";
 import { useTheme } from "@emotion/react";
 // material ui
-import { Grid2 as Grid, MenuItem, Select, Typography } from "@mui/material";
+import { Grid, MenuItem, Select, Typography } from "@mui/material";
 // functions and components
 import CompendiumTableColOptions from "./CompendiumTableColOptions";
 // context

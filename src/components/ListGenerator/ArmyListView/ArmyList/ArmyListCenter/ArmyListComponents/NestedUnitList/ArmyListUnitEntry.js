@@ -1,7 +1,7 @@
 // React
 import { Fragment } from "react";
 // Material UI
-import { Grid2 as Grid, ListItemText, Typography } from "@mui/material";
+import { Grid, ListItemText, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components and functions
 import ContextHelpButton from "../../../../../../shared/ContextHelpButton";

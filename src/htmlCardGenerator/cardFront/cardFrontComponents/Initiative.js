@@ -1,5 +1,5 @@
 // Material UI
-import { Grid2 as Grid, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { useTheme } from "@emotion/react";
 // components and functions
 import { initiativeSetter } from "../../../gameLogic/cardStatRenderFunctions/unitStatSetters";

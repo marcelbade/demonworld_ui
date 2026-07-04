@@ -8,7 +8,7 @@ import {
   AccordionSummary,
   AccordionDetails,
   Typography,
-  Grid2 as Grid,
+  Grid,
   Stack,
 } from "@mui/material";
 // components and functions
