@@ -10,7 +10,7 @@ import CancelIcon from "@mui/icons-material/Cancel";
 
 /**
  * JSX element. Returns drawer containing all selectable army units
- * (ad ally units, if applicable) as an ordered tree
+ * (and ally units, if applicable) as an ordered tree
  * @param {*} props:
  *    - openArmySelectionBox: true, if element is displayed
  *    - toggleUnitTree: toggles openArmySelectionBox
@@ -27,6 +27,7 @@ const ArmyListDrawer = (props) => {
       sx={{
         "& .MuiPaper-root": {
           paddingTop: "0.5em",
+          paddingLeft: "1em",
           backgroundColor: theme.palette.contrastedOptions, //
 
           width: { xs: "100%", md: "40em" },
