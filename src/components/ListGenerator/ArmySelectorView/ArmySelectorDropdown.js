@@ -121,7 +121,6 @@ const ArmySelectorDropdown = () => {
 
   return (
     <SelectionInput //
-      width={"100%"}
       isArmySelector={true}
       filterFunction={handleInput}
       clearFunction={clearFactionName}
