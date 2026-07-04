@@ -112,7 +112,7 @@ const SpellPrintDialog = (props) => {
         >
           <AccordionSummary>
             <Stack direction="row">
-              <Typography>{SPELL_COMPENDIUM.PRINT_SPELLS}</Typography> 
+              <Typography>{SPELL_COMPENDIUM.PRINT_SPELLS}</Typography>
               <KeyboardArrowDown />
             </Stack>
           </AccordionSummary>
@@ -141,8 +141,8 @@ const SpellPrintDialog = (props) => {
 
         <Grid
           container
-          justifyContent="center"
           sx={{
+            justifyContent: "center",
             width: "100%", //
             padding: "1em",
           }}

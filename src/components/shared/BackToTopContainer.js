@@ -50,8 +50,8 @@ const BackToTopContainer = (props) => {
 
       <Grid
         container //
-        justifyContent="end"
         sx={{
+          justifyContent:"end",
           position: "fixed",
           bottom: "5em",
           width: "100%",

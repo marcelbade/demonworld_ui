@@ -12,10 +12,8 @@ const SpellHeader = (props) => {
     <>
       <Grid
         container //
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
         size={12}
+        sx={{ direction: "row", justifyContent: "space-between", alignItems: "center" }}
       >
         <Typography
           variant="h6" //
@@ -40,15 +38,15 @@ const SpellHeader = (props) => {
       </Grid>
       <Grid
         container // ###
-        direction="column"
-        alignContent="center"
-        justifyContent="center"
         sx={{
+          direction: "column",
+          alignContent: "center",
+          justifyContent: "center",
           width: "100%",
           marginBottom: "3em",
         }}
       >
-        <Grid container size={12} alignContent="center" justifyContent="center">
+        <Grid container size={12} sx={{ alignContent: "center", justifyContent: "center" }}>
           <SpellNameAndSelectors
             display={props.selectedSpell.spellName !== ""}
             selectedSpell={props.selectedSpell} //
@@ -56,7 +54,7 @@ const SpellHeader = (props) => {
             displaySpells={props.displaySpells}
           />
         </Grid>
-        <Grid container size={12} alignContent="center" justifyContent="center">
+        <Grid container size={12} sx={{ alignContent: "center", justifyContent: "center" }}>
           <SpellTierSymbol
             tier={props.selectedSpell.spellTier} //
             display={props.selectedSpell.spellName !== ""}

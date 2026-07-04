@@ -30,8 +30,7 @@ const EquipmentListItemName = (props) => {
   return props.notSingleElementItem ? (
     <Grid //
       container
-      direction="row"
-      justifyContent="flex-start"
+      sx={{ direction: "row", justifyContent: "flex-start" }}
     >
       <ListItemText
         primary={<span>{props.itemName}</span>} //

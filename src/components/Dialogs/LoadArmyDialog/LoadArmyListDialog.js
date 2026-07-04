@@ -191,9 +191,7 @@ const LoadArmyListDialog = (props) => {
     >
       <Grid
         container //
-        direction="row"
-        justifyContent="flex-end"
-        sx={theme.palette.dialogs.title}
+        sx={{ direction: "row", justifyContent: "flex-end", ...theme.palette.dialogs.title }}
       >
         <IconButton
           sx={{ marginRight: "1em" }} //
@@ -207,9 +205,9 @@ const LoadArmyListDialog = (props) => {
       <Grid
         container
         spacing={1}
-        direction="row"
-        justifyContent="space-around"
         sx={{
+          direction: "row",
+          justifyContent: "space-around",
           width: "100%",
           height: "100%",
         }}
@@ -226,7 +224,7 @@ const LoadArmyListDialog = (props) => {
       <Grid
         container
         alignContent="center" //
-        justifyContent="center"
+        sx={{ justifyContent: "center" }}
       >
         <FetchedArmiesList
           allLists={allLists}

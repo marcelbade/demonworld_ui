@@ -35,8 +35,7 @@ const SpellProperty = (props) => {
       <Grid
         container //
         size={2}
-        justifyContent="center"
-        justifyItems="center"
+        sx={{ justifyContent: "center", justifyItems: "center" }}
       >
         <Typography
           variant="h6"

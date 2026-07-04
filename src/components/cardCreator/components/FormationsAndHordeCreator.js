@@ -78,9 +78,9 @@ const FormationsAndHordeCreator = () => {
     <Grid
       container //
       alignItems="center"
-      justifyContent="center"
       direction="row"
       sx={{
+        justifyContent: "center",
         ...theme.palette.cardCreator.box,
       }}
     >

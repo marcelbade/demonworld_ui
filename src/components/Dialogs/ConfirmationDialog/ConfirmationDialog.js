@@ -25,8 +25,7 @@ const ConfirmationDialog = (props) => {
     >
       <Grid
         container //
-        justifyContent="space-between"
-        sx={theme.palette.dialogs.title}
+        sx={{ justifyContent: "space-between", ...theme.palette.dialogs.title }}
       >
         <DialogTitle
           id="alert-dialog-title" //

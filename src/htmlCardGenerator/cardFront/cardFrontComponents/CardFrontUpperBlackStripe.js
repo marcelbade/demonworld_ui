@@ -40,9 +40,7 @@ const CardFrontUpperBlackStripe = (props) => {
   return (
     <Grid //
       container
-      justifyContent="space-around"
-      alignItems="center"
-      sx={theme.palette.statCards.blackStripe}
+      sx={{ justifyContent: "space-around", alignItems: "center", ...theme.palette.statCards.blackStripe }}
     >
       {isHeroMageOrSingleSummon(props.unit) ? (
         <Fragment>

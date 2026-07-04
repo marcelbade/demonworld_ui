@@ -78,8 +78,10 @@ const TreeItemNode = (props) => {
       >
         <Grid
           container
-          alignItems="center" //
-          justifyContent="center"
+          sx={{
+            alignItems: "center", //
+            justifyContent: "center",
+          }}
         >
           <IconButton
             disabled={props.isBlocked}

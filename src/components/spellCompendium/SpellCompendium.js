@@ -86,9 +86,8 @@ const SpellCompendium = () => {
     <>
       <Grid
         container //
-        direction="row"
-        justifyContent="center"
         size={12}
+        sx={{ direction: "row", justifyContent: "center" }}
       >
         <CollapsableTopMenuDrawer
           displayPageTitle={true} //
@@ -153,7 +152,7 @@ const SpellCompendium = () => {
             <Grid
               size={12} //
               container
-              justifyContent="center"
+              sx={{ justifyContent: "center" }}
             >
               <Button
                 variant="outlined"

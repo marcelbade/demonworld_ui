@@ -12,9 +12,9 @@ const CardBackTitle = (props) => {
       sx={{
         ...theme.palette.statCards.backGround, //
         ...theme.palette.statCards.titlePadding,
+        justifyContent: "center",
       }}
       container
-      justifyContent="center"
     >
       <Typography variant="h6" align="center" sx={theme.palette.statCards.cardTitle}>
         {props.unit.faction}

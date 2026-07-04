@@ -14,16 +14,16 @@ const TopDrawerButton = () => {
   return (
     <Grid
       container
-      alignContent="center"
-      justifyContent="center"
       onClick={() => {
         MC.setOpenTopMenuDrawer((prevState) => !prevState);
       }}
       sx={{
+        alignContent: "center",
+        justifyContent: "center",
         backgroundColor: "darkgray",
         borderRadius: "0em 0em 10em 10em",
         width: "30vw",
-        height:"3vh"
+        height: "3vh",
       }}
     >
       {MC.openTopMenuDrawer ? ( //

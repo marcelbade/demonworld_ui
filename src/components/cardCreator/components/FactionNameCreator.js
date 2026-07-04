@@ -132,8 +132,10 @@ const FactionNameCreator = () => {
     >
       <Grid
         container //
-        justifyContent="flex-start"
-        sx={{ width: "100%" }}
+        sx={{
+          justifyContent: "flex-start",
+          width: "100%",
+        }}
       >
         <FormGroup>
           <FormControlLabel
@@ -153,7 +155,9 @@ const FactionNameCreator = () => {
         container //
         direction="row"
         width="50em"
-        justifyContent="center"
+        sx={{
+          justifyContent: "center",
+        }}
       >
         {CCC.isNewFaction ? (
           <Grid

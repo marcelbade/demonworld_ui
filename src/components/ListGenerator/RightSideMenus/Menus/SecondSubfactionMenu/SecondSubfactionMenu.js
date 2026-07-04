@@ -65,8 +65,7 @@ const SecondSubFactionMenu = () => {
         </Grid>
         <Grid //
           container
-          direction="row"
-          justifyContent="center"
+          sx={{ direction: "row", justifyContent: "center" }}
         >
           <Grid size={9}>
             <Typography
@@ -80,8 +79,7 @@ const SecondSubFactionMenu = () => {
         </Grid>
         <Grid //
           container
-          direction="row"
-          justifyContent="center"
+          sx={{ direction: "row", justifyContent: "center" }}
         >
           <ButtonGroup size="large" orientation="vertical">
             {SFC.secondSubFactionList.map((ssf, i) => {

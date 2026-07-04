@@ -26,11 +26,13 @@ const SaveCardForm = () => {
 
   return (
     <Grid
-      sx={{ backgroundColor: "red" }}
+      sx={{
+        alignItems: "center",
+        alignContent: "center",
+        justifyContent: "center",
+        backgroundColor: "red",
+      }}
       container //
-      alignItems={"center"}
-      alignContent={"center"}
-      justifyContent={"center"}
     >
       <Button
         variant="outlined" //

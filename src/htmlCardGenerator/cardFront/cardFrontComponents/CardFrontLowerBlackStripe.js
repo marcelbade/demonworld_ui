@@ -21,9 +21,7 @@ const CardFrontLowerBlackStripe = (props) => {
   ) : (
     <Grid
       container //
-      direction="row"
-      justifyContent="space-around"
-      sx={theme.palette.statCards.blackStripe}
+      sx={{ direction: "row", justifyContent: "space-around", ...theme.palette.statCards.blackStripe }}
     >
       <Typography variant="h6"> {fearSetter(props.unit)}</Typography>
       <Typography variant="h6">{moralSetter(props.unit)}</Typography>

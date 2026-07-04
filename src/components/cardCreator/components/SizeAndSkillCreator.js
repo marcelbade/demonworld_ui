@@ -11,7 +11,6 @@ import rangeArmorIcon from "../../../assets/icons/range-armor.png";
 import meleeArmorIcon from "../../../assets/icons/melee-armor.png";
 
 const SizeAndSkillCreator = () => {
-
   const theme = useTheme();
 
   const CCC = useContext(CardCreationContext);
@@ -54,8 +53,7 @@ const SizeAndSkillCreator = () => {
       container //
       direction="row"
       alignItems="center"
-      justifyContent="space-around"
-      sx={theme.palette.cardCreator.box}
+      sx={{ justifyContent: "space-around", ...theme.palette.cardCreator.box }}
     >
       {inputElements.map((input, i) => (
         <CreatorTextInput

@@ -80,8 +80,7 @@ const ListGenerator = () => {
     <>
       <Grid
         container //
-        direction="row"
-        justifyContent="center"
+        sx={{ direction: "row", justifyContent: "center" }}
         size={12}
       >
         <CollapsableTopMenuDrawer
@@ -106,7 +105,7 @@ const ListGenerator = () => {
         {/* page */}
         <Grid
           container //
-          direction="column"
+          sx={{ direction: "column" }}
         >
           <Stack
             direction="row" //
@@ -121,9 +120,9 @@ const ListGenerator = () => {
           </Stack>
           <Grid
             container //
-            direction="column"
-            alignContent={{ xs: "flex-start", md: "center" }}
             sx={{
+              direction: "column",
+              alignContent: { xs: "flex-start", md: "center" },
               marginTop: "2em",
             }}
           >

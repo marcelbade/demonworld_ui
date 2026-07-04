@@ -99,17 +99,21 @@ const UnitAttributeCreator = () => {
   return (
     <Grid
       container
-      direction="column"
-      alignItems="flex-start" //
-      justifyContent="center"
-      sx={theme.palette.cardCreator.box}
+      sx={{
+        direction: "column", // CURRENT BUG - TEST THIS
+        alignItems: "flex-start", //
+        justifyContent: "center",
+        ...theme.palette.cardCreator.box,
+      }}
     >
       <Grid
         container //
-        direction="row"
-        alignItems="center"
-        justifyContent="space-around"
-        marginBottom="2em"
+        sx={{
+          direction: "row", //
+          alignItems: "center",
+          justifyContent: "space-around",
+          marginBottom: "2em",
+        }}
       >
         {CCC.unit.unitType === MAGE || CCC.unit.unitType === HERO ? (
           <CreatorTextInput

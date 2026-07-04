@@ -114,18 +114,22 @@ const UnitMovementCreator = () => {
   return (
     <Grid
       container //
-      alignItems="center" //
-      justifyContent="center"
-      direction="column"
-      sx={theme.palette.cardCreator.box}
+      sx={{
+        direction: "column",
+        alignItems: "center", //
+        justifyContent: "center",
+        ...theme.palette.cardCreator.box,
+      }}
     >
       {/* CURRENT BUG! - add fade in and out! */}
 
       <Grid
         container //
-        direction="row"
-        alignItems="center" //
-        justifyContent="center"
+        sx={{
+          direction: "row",
+          alignItems: "center", //
+          justifyContent: "center",
+        }}
       >
         {inputElements
           .filter((input) => input.display)

@@ -69,9 +69,8 @@ const LossCalculator = () => {
     <>
       <Grid
         container //
-        direction="row"
-        justifyContent="center"
         size={12}
+        sx={{ direction: "row", justifyContent: "center" }}
       >
         <CollapsableTopMenuDrawer
           displayPageTitle={true} //
@@ -93,10 +92,8 @@ const LossCalculator = () => {
         >
           <Grid
             container //
-            direction="column"
-            justifyItems="start"
-            alignItems="center"
             size={12}
+            sx={{ direction: "column", justifyItems: "start", alignItems: "center" }}
           ></Grid>
           <LostPointDisplay totalPointsLost={LC.totalPointsLost} />
           <Grid

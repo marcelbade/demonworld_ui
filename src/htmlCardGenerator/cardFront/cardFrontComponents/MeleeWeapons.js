@@ -15,8 +15,8 @@ const MeleeWeapons = (props) => {
         return (
           <Grid //
             container
-            justifyContent="center"
             key={i}
+            sx={{ justifyContent: "center" }}
           >
             <Typography variant="h6">{w.weaponString}</Typography>
           </Grid>

@@ -117,9 +117,9 @@ const CreateNewAccount = () => {
       </Grid>
       <Grid
         container //
-        alignContent="space-between"
-        justifyContent="space-between"
         sx={{
+          alignContent: "space-between",
+          justifyContent: "space-between",
           width: "100%",
         }}
       ></Grid>
@@ -140,8 +140,8 @@ const CreateNewAccount = () => {
       >
         <Grid
           container //
-          direction={"column"}
           sx={{
+            direction: "column",
             marginLeft: "6em",
           }}
         >
@@ -159,8 +159,7 @@ const CreateNewAccount = () => {
           <Grid
             container //
             spacing={3}
-            direction="row"
-            alignItems="baseline"
+            sx={{ direction: "row", alignItems: "baseline" }}
           >
             <TextField
               sx={{ width: INPUT_WIDTH, marginTop: MARGIN }}
@@ -182,8 +181,7 @@ const CreateNewAccount = () => {
           <Grid
             container //
             spacing={3}
-            direction="row"
-            alignItems="baseline"
+            sx={{ direction: "row", alignItems: "baseline" }}
           >
             <TextField
               sx={{ width: INPUT_WIDTH, marginTop: MARGIN }}
@@ -210,8 +208,7 @@ const CreateNewAccount = () => {
           <Grid
             container //
             spacing={3}
-            direction="row"
-            alignItems="baseline"
+            sx={{ direction: "row", alignItems: "baseline" }}
           >
             <TextField
               sx={{ width: INPUT_WIDTH, marginTop: MARGIN }}

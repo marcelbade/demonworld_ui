@@ -80,11 +80,11 @@ const LandingPage = () => {
       </Grid>
       <Grid
         container //
-        direction={{ xs: "column", sm: "column", md: "column", lg: "row" }}
-        alignContent="center"
-        justifyContent="center"
         spacing={{ xs: 10, md: 30 }}
         sx={{
+          direction: { xs: "column", sm: "column", md: "column", lg: "row" },
+          alignContent: "center",
+          justifyContent: "center",
           paddingTop: { xs: "5em", sm: "10em", md: "20em" },
         }}
       >
@@ -108,7 +108,7 @@ const LandingPage = () => {
         )}
       </Grid>
       <UserAccountDialog />
-      <ChangePasswordsDialog/>
+      <ChangePasswordsDialog />
     </Grid>
   );
 };

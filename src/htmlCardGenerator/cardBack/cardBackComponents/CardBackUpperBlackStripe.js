@@ -10,9 +10,7 @@ const CardBackUpperBlackStripe = (props) => {
   return (
     <Grid
       container //
-      direction="row"
-      sx={theme.palette.statCards.blackStripe}
-      justifyContent="space-around"
+      sx={{ direction: "row", justifyContent: "space-around", ...theme.palette.statCards.blackStripe }}
     >
       {/* dont render element for giants & heroes so layout stays correct*/}
       {props.unit.numberOfElements > 1 ? (

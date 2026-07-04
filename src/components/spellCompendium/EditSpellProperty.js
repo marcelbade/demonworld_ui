@@ -27,7 +27,7 @@ const EditSpellProperty = (props) => {
       }),
       EDIT_SPELL_URL,
       updateSpellData,
-      SPELL_COMPENDIUM.SUCCESS
+      SPELL_COMPENDIUM.SUCCESS,
     );
   };
 
@@ -47,7 +47,7 @@ const EditSpellProperty = (props) => {
   };
 
   /**
-   * Function is called if a spell has been successfully updated in the DB. 
+   * Function is called if a spell has been successfully updated in the DB.
    * Updates the FE state.
    * @param {*} data
    */
@@ -59,12 +59,12 @@ const EditSpellProperty = (props) => {
   return (
     <Grid
       container //
-      direction="column"
       size={12}
       spacing={2}
-      justifyContent="center"
-      alignContent="center"
       sx={{
+        direction: "column",
+        justifyContent: "center",
+        alignContent: "center",
         "& .MuiOutlinedInput-input": { padding: "1em" },
       }}
     >

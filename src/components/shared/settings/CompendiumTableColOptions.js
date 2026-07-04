@@ -17,7 +17,7 @@ const CompendiumTableColOptions = () => {
       <Grid
         spacing={3} //
         container
-        direction="row"
+        sx={{ direction: "row" }}
       >
         {CC.compendiumTableColumns.map((group, i) => {
           return (
@@ -37,8 +37,8 @@ const CompendiumTableColOptions = () => {
               {/* grid element is needed to prevent the border to appear inside the checkbox, every time the mouse hovers over it.*/}
               <Grid
                 container
-                justifyContent="center"
                 sx={{
+                  justifyContent: "center",
                   position: "relative",
                   bottom: "2.3em",
                   left: "3.7em",

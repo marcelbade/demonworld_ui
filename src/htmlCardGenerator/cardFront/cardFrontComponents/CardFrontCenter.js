@@ -17,8 +17,7 @@ const CardFrontCenter = (props) => {
     <Fragment>
       <Grid //
         container
-        justifyContent="center"
-        sx={theme.palette.statCards.backGround}
+        sx={{ justifyContent: "center", ...theme.palette.statCards.backGround }}
       >
         <RangedWeapon unit={props.unit} />
       </Grid>

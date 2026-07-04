@@ -102,8 +102,7 @@ const LoginDialog = () => {
       <Grid
         container //
         direction={"row"}
-        justifyContent={"space-between"}
-        sx={theme.palette.dialogs.title}
+        sx={{justifyContent:"space-between", ...theme.palette.dialogs.title}}
       >
         <DialogTitle>{USER_AUTH.LOGIN_DIALOG_TITLE}</DialogTitle>
         <IconButton
@@ -116,7 +115,7 @@ const LoginDialog = () => {
       <DialogContent>
         <Grid //
           container
-          direction={"column"}
+          sx={{  direction:"column"}}
         >
           <TextField
             onChange={() => {
@@ -149,9 +148,9 @@ const LoginDialog = () => {
       </DialogContent>
       <Grid //
         container
-        alignContent="center"
-        justifyContent="space-around"
-        sx={{ marginBottom: "1em" }}
+   
+    
+        sx={{       alignContent:"center",  justifyContent:"space-around", marginBottom: "1em" }}
       >
         <NavigationButton
           displayNavigatonBttn={true}

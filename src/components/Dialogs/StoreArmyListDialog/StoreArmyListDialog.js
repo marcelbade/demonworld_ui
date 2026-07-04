@@ -213,9 +213,7 @@ const StoreArmyListDialog = (props) => {
     >
       <Grid
         container //
-        direction={"row"}
-        justifyContent={"space-between"}
-        sx={theme.palette.dialogs.title}
+        sx={{ direction: "row", justifyContent: "space-between", ...theme.palette.dialogs.title }}
       >
         <DialogTitle>
           {AC.isExistingList //
@@ -351,8 +349,7 @@ const StoreArmyListDialog = (props) => {
       </DialogContent>
       <Grid //
         container
-        alignItems="center"
-        justifyContent="space-between"
+        sx={{ alignItems: "center", justifyContent: "space-between" }}
       ></Grid>
       <ConfirmationDialog
         type={CONFIRMATION_DIALOG.OVERRIDE}

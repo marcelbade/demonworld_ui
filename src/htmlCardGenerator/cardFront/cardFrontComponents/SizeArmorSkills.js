@@ -20,9 +20,9 @@ const SizeArmorSkills = (props) => {
   return (
     <Grid //
       container
-      alignItems="center"
-      direction="row"
       sx={{
+        alignItems: "center",
+        direction: "row",
         ...theme.palette.statCards.backGround,
         ...theme.palette.statCards.statPadding,
         flexWrap: "nowrap",
@@ -30,7 +30,7 @@ const SizeArmorSkills = (props) => {
     >
       <Grid //
         container
-        justifyContent="center"
+        sx={{ justifyContent: "center" }}
       >
         <Typography
           variant="h6"
@@ -43,9 +43,7 @@ const SizeArmorSkills = (props) => {
       </Grid>
       <Grid //
         container
-        direction="row"
-        alignItems="center"
-        justifyContent="center"
+        sx={{ direction: "row", alignItems: "center", justifyContent: "center" }}
       >
         <StatCardIcon
           icon={rangeArmorIcon} //
@@ -63,9 +61,7 @@ const SizeArmorSkills = (props) => {
       {unitHasNoSkills ? null : (
         <Grid //
           container
-          justifyContent="center"
-          direction="row" //
-          alignItems="center"
+          sx={{ direction: "row", alignItems: "center", justifyContent: "center" }}
         >
           {props.unit.skillMelee !== 0 ? (
             <StatCardIcon

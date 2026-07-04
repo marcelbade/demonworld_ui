@@ -27,8 +27,10 @@ const HitpointCreator = () => {
       container //
       direction="row"
       alignItems="center"
-      justifyContent="space-evenly"
-      sx={theme.palette.cardCreator.box}
+      sx={{
+        justifyContent: "space-evenly",
+        ...theme.palette.cardCreator.box,
+      }}
     >
       <CreatorTextInput
         id={"Hitpoints"} //

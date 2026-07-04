@@ -54,9 +54,9 @@ const RangeWeaponCreator = () => {
   return (
     <Grid
       container
-      justifyContent="flex-start" //
       direction="column"
       sx={{
+        justifyContent: "flex-start",
         width: "50em",
       }}
     >

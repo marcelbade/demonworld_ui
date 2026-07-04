@@ -11,20 +11,19 @@ import { Grid, Typography } from "@mui/material";
  *  E.g.: "Riesenyeti"
  * @returns html element
  */
-const   CardFrontTitle = (props) => {
+const CardFrontTitle = (props) => {
   const theme = useTheme();
 
   return (
     <Grid
-
       sx={{
+        justifyContent: "space-around",
+        direction: "row",
         ...theme.palette.statCards.backGround, //
         ...theme.palette.statCards.titlePadding,
-        width:"100%"
+        width: "100%",
       }}
       container
-      justifyContent="space-around"
-      direction="row"
     >
       <Typography
         variant="h4"

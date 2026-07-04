@@ -61,8 +61,7 @@ const UserSettings = () => {
   ) : (
     <Grid
       container //
-      justifyContent="center"
-      alignContent="center"
+      sx={{ justifyContent: "center", alignContent: "center" }}
     >
       <UserLogButton
         iconSize={"large"} //

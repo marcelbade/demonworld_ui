@@ -42,11 +42,9 @@ const UserAccountDialog = () => {
     );
   };
 
-
   const logOutSideEffects = () => {
     UC.setUserLoggedIn(false);
     UC.setShowUserAvatarDialog(false);
-    
   };
 
   //TODO finish logout
@@ -87,8 +85,10 @@ const UserAccountDialog = () => {
       <Grid
         container //
         direction={"row"}
-        justifyContent={"space-between"}
-        sx={theme.palette.dialogs.title}
+        sx={{
+          justifyContent: "space-between",
+          ...theme.palette.dialogs.title,
+        }}
       >
         <IconButton
           sx={{ marginRight: "1em" }} //
@@ -102,10 +102,10 @@ const UserAccountDialog = () => {
       <Grid
         spacing={3}
         container
-        flexDirection="column"
-        alignItems="center"
-        justifyItems="center"
         sx={{
+          flexDirection: "column",
+          alignItems: "center",
+          justifyItems: "center",
           paddingTop: "2em",
           width: "100%",
         }}

@@ -64,9 +64,7 @@ const TopMenuDrawer = (props) => {
       <Grid
         container
         size={4} //
-        direction="row"
-        justifyContent="center"
-        alignItems="center"
+        sx={{ direction: "row", justifyContent: "center", alignItems: "center" }}
       >
         <NavigationButton
           displayNavigatonBttn={props.displayNaviBttn}
@@ -80,13 +78,13 @@ const TopMenuDrawer = (props) => {
       </Grid>
       <Grid
         container //
-        direction={{ xs: "column-reverse", sm: "column", md: "row" }}
-        justifyContent={{ xs: "center", md: "end" }}
-        justifyItems={{ xs: "center", md: "end" }}
-        alignContent={{ xs: "center", md: "end" }}
         size={4}
         spacing={{ md: 8, lg: 8 }}
         sx={{
+          direction: { xs: "column-reverse", sm: "column", md: "row" },
+          justifyContent: { xs: "center", md: "end" },
+          justifyItems: { xs: "center", md: "end" },
+          alignContent: { xs: "center", md: "end" },
           paddingTop: "1em",
           paddingRight: { md: "3em" },
           width: { xs: "100%", md: "30%" },

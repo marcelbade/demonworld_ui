@@ -57,8 +57,7 @@ const SpecialElementsCreator = () => {
       container //
       direction="row"
       alignItems="center"
-      justifyContent="space-around"
-      sx={theme.palette.cardCreator.box}
+      sx={{ justifyContent: "space-around", ...theme.palette.cardCreator.box }}
     >
       <Grid>
         <CreatorTextInput

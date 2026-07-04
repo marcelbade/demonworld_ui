@@ -14,11 +14,11 @@ const CardFrontFooter = (props) => {
   return (
     <Grid
       container //
-      justifyContent="center"
-      direction="row"
       sx={{
-        ...theme.palette.statCards.backGround,
+        justifyContent: "center",
+        direction: "row",
         height: "2.5em",
+        ...theme.palette.statCards.backGround,
       }}
     >
       <Typography variant="h6">{hitpoints}</Typography>

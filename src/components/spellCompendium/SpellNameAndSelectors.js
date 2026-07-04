@@ -14,10 +14,10 @@ const SpellNameAndSelectors = (props) => {
   return props.display ? (
     <Grid
       container
-      direction="row"
-      alignItems="center"
-      justifyContent="center"
       sx={{
+        direction: "row",
+        alignItems: "center",
+        justifyContent: "center",
         width: "100%",
         marginBottom: "2em",
         color: "red",

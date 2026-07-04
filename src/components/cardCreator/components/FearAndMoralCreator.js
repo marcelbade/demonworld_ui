@@ -11,7 +11,7 @@ import { UNIT } from "../../../constants/unitTypes";
 // constants
 import { CARD_TEXT, CREATOR } from "../../../constants/textsAndMessages";
 
-const   FearAndMoralCreator = () => {
+const FearAndMoralCreator = () => {
   const theme = useTheme();
 
   const CCC = useContext(CardCreationContext);
@@ -55,8 +55,10 @@ const   FearAndMoralCreator = () => {
       container //
       direction="column"
       alignItems="center"
-      justifyContent="space-evenly"
-      sx={theme.palette.cardCreator.box}
+      sx={{
+        justifyContent: "space-evenly",
+        ...theme.palette.cardCreator.box,
+      }}
     >
       <Grid
         container //

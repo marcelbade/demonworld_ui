@@ -39,10 +39,12 @@ const UnitTypeSelector = () => {
   return (
     <Grid
       container //
-      alignItems="center" //
-      justifyContent="center"
-      direction="column"
-      sx={theme.palette.cardCreator.box}
+      sx={{
+        alignItems: "center", //
+        justifyContent: "center",
+        direction: "column",
+        ...theme.palette.cardCreator.box,
+      }}
     >
       <FormControl variant="outlined">
         <FormLabel sx={{ fontFamily: "NotMaryKate" }} id="unitTypeLabel">

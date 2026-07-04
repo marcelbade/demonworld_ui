@@ -38,10 +38,7 @@ const LostUnitListElement = (props) => {
       <Grid
         size={10}
         container //
-        direction="row"
-        alignItems="center"
-        justifyContent="center"
-        sx={setStyles()}
+        sx={{ direction: "row", alignItems: "center", justifyContent: "center", ...setStyles() }}
       >
         <Grid container size={12} direction="column">
           <ListElementName //
@@ -52,17 +49,18 @@ const LostUnitListElement = (props) => {
         <Grid
           container
           size={7}
-          direction="row" //
-          alignItems="center"
-          justifyContent="center"
+          sx={{
+            direction: "row", //
+            alignItems: "center",
+            justifyContent: "center",
+          }}
         >
           <UnitLossCalcBttnGroup unit={props.unit} />
         </Grid>
         <Grid
           container
           size={2} //
-          alignItems="center"
-          justifyContent="center"
+          sx={{ alignItems: "center", justifyContent: "center" }}
         >
           <TotalLossButton unit={props.unit} />
         </Grid>
@@ -74,10 +72,12 @@ const LostUnitListElement = (props) => {
         </Grid>
         <Grid //
           size={1}
-          direction="column"
           container
-          justifyContent="flex-end"
-          alignItems="flex-end"
+          sx={{
+            direction: "column", //
+            justifyContent: "flex-end",
+            alignItems: "flex-end",
+          }}
         ></Grid>
       </Grid>
     </ListItem>

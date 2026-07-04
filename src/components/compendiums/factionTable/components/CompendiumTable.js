@@ -72,9 +72,8 @@ const CompendiumTable = () => {
         <Grid
           container //
           direction="row"
-          justifyContent="space-between"
           alignItems="end"
-          sx={{ paddingTop: "2em" }}
+          sx={{ justifyContent: "space-between", paddingTop: "2em" }}
         >
           <FactionAndUnitSelectors />
           <Pagination

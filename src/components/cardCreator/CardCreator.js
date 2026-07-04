@@ -155,9 +155,9 @@ const CardCreator = () => {
         </Grid>
         <Grid
           container
-          alignItems="center"
-          justifyContent="center"
           sx={{
+            alignItems:"center",
+            justifyContent:"center",
             width: "50%",
             marginLeft: "5em",
             marginTop: "8em",

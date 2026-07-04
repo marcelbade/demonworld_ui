@@ -11,7 +11,7 @@ import { ArmyContext } from "../../../contexts/armyContext";
 import { SelectionContext } from "../../../contexts/selectionContext";
 // custom hooks
 import useArmyValidation from "../../../customHooks/UseArmyValidation";
-import UseDisplayAlly    from "../../../customHooks/UseDisplayAlly";
+import UseDisplayAlly from "../../../customHooks/UseDisplayAlly";
 // constants
 import { NONE } from "../../../constants/factions";
 
@@ -23,7 +23,7 @@ import { NONE } from "../../../constants/factions";
  * @returns  a JSX component.
  */
 
- const ArmyListBox = () => {
+const ArmyListBox = () => {
   const AC = useContext(ArmyContext);
   const ALC = useContext(AlternativeListContext);
   const AYC = useContext(AllyContext);
@@ -73,10 +73,10 @@ import { NONE } from "../../../constants/factions";
   return isSelectionComplete() && AC.selectedFactionName !== NONE ? (
     <Grid
       container //
-      direction="column"
-      justifyContent="center"
       alignItems="center"
       sx={{
+        direction: "column",
+        justifyContent: "center",
         width: "100%",
       }}
     >

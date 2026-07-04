@@ -11,8 +11,7 @@ const CustomDialogTitle = (props) => {
   return (
     <Grid
       container //
-      justifyContent="center"
-      sx={theme.palette.dialogs.title}
+      sx={{ justifyContent: "center", ...theme.palette.dialogs.title }}
     >
       <DialogTitle>{props.title}</DialogTitle>
       <ContextHelpButton

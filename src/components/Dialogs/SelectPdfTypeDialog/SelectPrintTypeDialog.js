@@ -45,8 +45,8 @@ const SelectPrintTypeDialog = (props) => {
       <Grid
         container //
         alignContent="center"
-        justifyContent="space-around"
         sx={{
+          justifyContent: "space-around",
           marginTop: "2em",
         }}
       >
