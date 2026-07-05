@@ -23,7 +23,7 @@ const SpellProperty = (props) => {
         paddingBottom: "2em", //
         paddingLeft: "2em",
       }}
-      alignItems="center"
+    
     >
       <EditButton
         display={props.userLoggedIn && props.user.isAdmin} //
