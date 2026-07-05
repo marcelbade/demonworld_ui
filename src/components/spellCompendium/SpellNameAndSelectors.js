@@ -28,16 +28,18 @@ const SpellNameAndSelectors = (props) => {
         action={carousel.carouselBackward}
         side={"left"}
       />
-      <Typography
-        variant="h5" //
-        align="center"
-        width={{ xs: "60%", sm: "20%", md: "30%" }}
-        sx={{
-          wordWrap: "break-word",
-        }}
-      >
-        {carousel.currentDisplayedData[DISPLAYED_PROPERTY]}
-      </Typography>
+      <Grid  size={3} >
+        <Typography
+          variant="h5" //
+          align="center"
+          width={{ xs: "60%", sm: "20%", md: "30%" }}
+          sx={{
+            wordWrap: "break-word",
+          }}
+        >
+          {carousel.currentDisplayedData[DISPLAYED_PROPERTY]}
+        </Typography>
+      </Grid>
       <CarousellButton
         display={true} //
         action={carousel.carouselForward}
