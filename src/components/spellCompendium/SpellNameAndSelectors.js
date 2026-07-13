@@ -5,11 +5,20 @@ import { Grid, Typography } from "@mui/material";
 //  icons
 import CarousellButton from "../shared/CarousellButton";
 import useCarouselButtons from "../../customHooks/UseCarouselButtons";
+import { useKeybindings } from "../../customHooks/UseKeyBinding";
 
 const SpellNameAndSelectors = (props) => {
+  const DISPLAYED_PROPERTY = "spellName";
+
   const carousel = useCarouselButtons(props.selectedSpell, props.setSelectedSpell, props.displaySpells);
 
-  const DISPLAYED_PROPERTY = "spellName";
+  useKeybindings(
+    [
+      { boundKeys: ["ArrowLeft"], boundFunction: carousel.carouselBackward },
+      { boundKeys: ["ArrowRight"], boundFunction: carousel.carouselForward },
+    ],
+    props.selectedSpell,
+  );
 
   return props.display ? (
     <Grid
@@ -28,7 +37,7 @@ const SpellNameAndSelectors = (props) => {
         action={carousel.carouselBackward}
         side={"left"}
       />
-      <Grid  size={3} >
+      <Grid size={3}>
         <Typography
           variant="h5" //
           align="center"
