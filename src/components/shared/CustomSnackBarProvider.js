@@ -10,6 +10,17 @@ import SpellBookIcon from "../../assets/icons/spellbook-black.png";
 // constants
 import { TOOLTIPS } from "../../constants/textsAndMessages";
 
+/**
+ * Element is a custom implementation of the Material UI
+ * Snackbar Provider. In addition to providing data for any toast messages
+ * it:
+ * - applies custom styling & icons
+ * - adds a transition 
+ * - limits the max numbers of toast 
+ *   messages to be displayed at the same time
+ * @param {*} props 
+ * @returns 
+ */
 const CustomSnackBarProvider = (props) => {
   return (
     <SnackbarProvider
