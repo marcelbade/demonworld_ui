@@ -4,9 +4,10 @@ import usePushMessages from "./UsePushMessages";
 import { PUSH_MESSAGE_TYPES } from "../constants/textsAndMessages";
 
 /**
- * Custom hook that tests if the user has made an selection If not,
- * the button's action is blocked and a toast message with an error
- * is shown instead.
+ * Custom hook that tests if the user has made an selection.
+ * 
+ * If not, the button's action is blocked and a 
+ * toast message with an error is shown instead.
  * @param {object} data an object containg the following properties:
  *  - selectionData: an array containing the selection
  *  - errorMessage: String that contains the error to be displayed
