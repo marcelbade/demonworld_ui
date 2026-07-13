@@ -35,6 +35,7 @@ const LossCalculatorButton = () => {
   };
 
   const testButtonCondition = useTestListButton({
+    selectionData: SEC.selectedUnits,
     errorMessage: OPTIONS.NO_LIST,
     action: navigateToLossCalculator,
   });

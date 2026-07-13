@@ -31,6 +31,7 @@ const TextFileDownloadButton = () => {
   const [showListTypeDialog, setShowListTypeDialog] = useState(false);
 
   const testButtonCondition = useTestListButton({
+    selectionData: SEC.selectedUnits,
     errorMessage: OPTIONS.NO_LIST,
     action: setShowListTypeDialog,
     actionParameter: true,

@@ -72,6 +72,7 @@ const CreateArmyListPdfButton = () => {
 
   return (
     <CreatePdfButton
+      data={SEC.selectedUnits}
       toolTipTitle={PDF.CREATE_PDF} //
       openDialog={setShowListTypeDialog}
       marginLeft={"0em"}

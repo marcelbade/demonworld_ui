@@ -3,17 +3,19 @@ import { useContext } from "react";
 // Material UI
 import { IconButton, Tooltip } from "@mui/material";
 // components and functions
-import CustomIcon from "../../../../../shared/CustomIcon";
+import StoreArmyListDialog from "../../../../../Dialogs/StoreArmyListDialog/StoreArmyListDialog";
 // context
 import { SelectionContext } from "../../../../../../contexts/selectionContext";
 import { UserContext } from "../../../../../../contexts/userContext";
 // icons
+import CustomIcon from "../../../../../shared/CustomIcon";
 import customSaveIcon from "../../../../../../assets/icons/customSaveIcon.svg";
 import listUpdateIcon from "../../../../../../assets/icons/listUpdateIcon.svg";
 // constants
 import { OPTIONS } from "../../../../../../constants/textsAndMessages";
-import StoreArmyListDialog from "../../../../../Dialogs/StoreArmyListDialog/StoreArmyListDialog";
+// custom hooks
 import useTestForLogIn from "../../../../../../customHooks/UseTestForLogIn";
+import useTestListButton from "../../../../../../customHooks/UseTestListButton";
 
 const StoreAndUpdateArmyListButton = (props) => {
   const SEC = useContext(SelectionContext);
@@ -30,6 +32,18 @@ const StoreAndUpdateArmyListButton = (props) => {
   const displayStoreArmyDialog = () => {
     showLogInDialog.test();
   };
+
+  const buttonAction = (isSelected) => {
+    props.setIsExistingList(isSelected);
+    displayStoreArmyDialog();
+  };
+
+  const testButtonCondition = useTestListButton({
+    selectionData: SEC.selectedUnits,
+    errorMessage: OPTIONS.NO_LIST,
+    action: buttonAction,
+    actionParameter: !props.isUpdateSelected,
+  });
 
   return (
     <>
@@ -48,8 +62,7 @@ const StoreAndUpdateArmyListButton = (props) => {
                 : SEC.selectedUnits.length === 0
             } //
             onClick={() => {
-              props.setIsExistingList(!props.isUpdateSelected);
-              displayStoreArmyDialog();
+              buttonAction(!props.isUpdateSelected);
             }}
           >
             <CustomIcon
