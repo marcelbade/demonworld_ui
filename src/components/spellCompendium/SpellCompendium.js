@@ -19,6 +19,7 @@ import UserAccountDialog from "../Login/UserAccountDialog";
 import useCustomMediaQuery from "../../customHooks/UseCustomMediaQuery";
 // icons
 import customRedGameIcon from "../../assets/icons/logo_red.png";
+import { useKeybindings } from "../../customHooks/UseKeyBinding";
 
 const SpellCompendium = () => {
   const SC = useContext(SpellContext);
@@ -30,9 +31,15 @@ const SpellCompendium = () => {
   const [selectedSpell, setSelectedSpell] = useState(NO_SELECTION);
   const [openSpellList, setOpenSpellList] = useState(false);
 
+  // Toggles drawer with spell list.
   const toggleDrawer = () => {
     setOpenSpellList((prevState) => !prevState);
   };
+
+  useKeybindings(
+    [{ boundKeys: ["Tab"], boundFunction: toggleDrawer }], //
+    openSpellList,
+  );
 
   // data for rendering spell property components
   const propertyTable = [

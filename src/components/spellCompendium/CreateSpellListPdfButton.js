@@ -33,6 +33,7 @@ const CreateSpellListPdfButton = (props) => {
 
   return (
     <CreatePdfButton
+      data={props.displaySpells}
       toolTipTitle={PDF.CREATE_PDF}
       disabledIf={false}
       openDialog={setShowSpellDialog}

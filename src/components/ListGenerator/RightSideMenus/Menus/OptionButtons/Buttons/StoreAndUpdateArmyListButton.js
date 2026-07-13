@@ -62,7 +62,7 @@ const StoreAndUpdateArmyListButton = (props) => {
                 : SEC.selectedUnits.length === 0
             } //
             onClick={() => {
-              buttonAction(!props.isUpdateSelected);
+              testButtonCondition.test();
             }}
           >
             <CustomIcon
