@@ -61,7 +61,7 @@ const LandingPage = () => {
   return (
     <Grid
       container //
-      direction="column"
+      direction={{ xs: "column" }}
       sx={{
         width: "100%", //
         height: "100%",
