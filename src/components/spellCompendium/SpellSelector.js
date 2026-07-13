@@ -52,7 +52,7 @@ const SpellSelector = (props) => {
   return (
     <SelectionInput
       textColor="white"
-      width={displaySize.isSmallDisplay ? "10em" : "14em"}
+      width={displaySize.isSmallDisplay ? "10em" : "20em"}
       alternatives={setFactionNamesOptions()}
       filterFunction={selectFaction}
       clearFunction={clearFaction}

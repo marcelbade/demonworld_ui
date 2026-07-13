@@ -31,7 +31,7 @@ const SpellList = (props) => {
           backgroundColor: theme.palette.contrastedOptions, //
           position: "fixed",
           overflowY: "auto",
-          width: "20em",
+          width: "25em",
         },
       }}
     >
