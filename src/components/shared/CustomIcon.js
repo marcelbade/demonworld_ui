@@ -49,7 +49,10 @@ const CustomIcon = (props) => {
       : STYLES;
   };
 
-  //TODO comment missing :D
+  /**
+   * Function sets CSS for Check box icons.
+   * @returns plain Object with CSS.
+   */
   const toggleCheckBoxIcon = () => {
     return props.checkedBoxIcon
       ? {
