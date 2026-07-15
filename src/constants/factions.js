@@ -6,7 +6,7 @@ import {
 } from "./textsAndMessages";
 
 // SINGLE FACTIONS
-export const DWARVES = DWARF_TEXTS.FACTION_NAME;  // TODO Necessary??
+export const DWARVES = DWARF_TEXTS.FACTION_NAME;  
 export const SPECIAL = SPECIAL_TEXTS.FACTION_NAME;
 export const EMPIRE = EMPIRE_TEXTS.FACTION_NAME;
 export const ORK_CLANS = ORK_CLANS_TEXTS.FACTION_NAME;
