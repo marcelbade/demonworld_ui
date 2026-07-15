@@ -27,10 +27,10 @@ const SaveCardForm = () => {
   return (
     <Grid
       sx={{
+        marginTop:"3em",
         alignItems: "center",
         alignContent: "center",
         justifyContent: "center",
-        backgroundColor: "red",
       }}
       container //
     >

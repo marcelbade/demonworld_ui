@@ -1,28 +1,25 @@
 // react
-import { Fragment, useContext } from "react";
+import { useContext } from "react";
 // material ui
-import { Divider } from "@mui/material";
-// components and functions
-import CardFront from "../../../htmlCardGenerator/cardFront/CardFront";
-import CardBack from "../../../htmlCardGenerator/cardBack/CardBack";
+import { Grid } from "@mui/material";
 // providers and contexts
 import { CardCreationContext } from "../../../contexts/cardCreationContext";
+import StatCard from "../../../htmlCardGenerator/StatCard";
 
 const CardPreview = () => {
   const CCC = useContext(CardCreationContext);
 
   return (
-    <Fragment>
-      {CCC.unit !== undefined ? <CardFront unit={CCC.unit} /> : null}
-
-      <Divider
-        sx={{
-          width: "45%",
-          paddingTop: "4em",
-        }}
-      />
-      {CCC.unit !== undefined ? <CardBack unit={CCC.unit} /> : null}
-    </Fragment>
+    <Grid
+      container //
+      direction="row"
+      sx={{
+        justifyContent: "center",
+        width: "100%",
+      }}
+    >
+      <StatCard unit={CCC.unit} width_xs={"55em"} width_lg={"55em"} />
+    </Grid>
   );
 };
 

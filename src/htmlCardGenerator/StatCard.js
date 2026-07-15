@@ -14,7 +14,7 @@ import { isObjectEmtpy } from "../util/utilityFunctions";
  */
 const StatCard = (props) => {
   const CSS = {
-    width: { xs: "25em", lg: "35em" },
+    width: { xs: props.width_xs , lg: props.width_lg },
     marginTop: "2em",
     border: "1px black solid",
   };
