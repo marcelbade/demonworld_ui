@@ -1,7 +1,7 @@
 // react
 import { useContext, useState } from "react";
 // material ui
-import { Dialog, Grid, Stack, TextField } from "@mui/material";
+import { Dialog,   Stack, TextField } from "@mui/material";
 // constants
 import { USER_AUTH } from "../../../constants/textsAndMessages";
 // contexts
