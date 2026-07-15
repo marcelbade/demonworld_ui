@@ -139,8 +139,10 @@ const CardCreator = () => {
         <Grid
           container //
           direction="column"
-          alignItems="center"
-          sx={{ position: "fixed" }}
+          sx={{
+            alignItems: "center", //
+            position: "fixed",
+          }}
         >
           <CollapsableTopMenuDrawer
             displayPageTitle={true} //
@@ -156,8 +158,8 @@ const CardCreator = () => {
         <Grid
           container
           sx={{
-            alignItems:"center",
-            justifyContent:"center",
+            alignItems: "center",
+            justifyContent: "center",
             width: "50%",
             marginLeft: "5em",
             marginTop: "8em",

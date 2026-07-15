@@ -134,7 +134,7 @@ const FactionNameCreator = () => {
         container //
         sx={{
           justifyContent: "flex-start",
-          width: "100%",
+          width: "50em",
         }}
       >
         <FormGroup>
@@ -154,7 +154,6 @@ const FactionNameCreator = () => {
       <Grid
         container //
         direction="row"
-        width="50em"
         sx={{
           justifyContent: "center",
         }}
@@ -177,6 +176,7 @@ const FactionNameCreator = () => {
               onChange={changeFactionName}
               label={CREATOR.FACTION_NAME}
               marginSides="1em"
+              width={"20em"}
             />
 
             <CreatorTextInput
@@ -185,20 +185,11 @@ const FactionNameCreator = () => {
               onClick={deleteSubFactionName}
               onChange={changeSubFactionName}
               label={CREATOR.SUBFACTION_NAME}
+              width={"20em"}
             />
           </Grid>
         ) : (
-          // <Fade in={!CCC.isNewFaction}>
-
-          <Grid
-            container
-            direction={"row"}
-            // sx={{
-            //   ...(!CCC.isNewFaction //
-            //     ? theme.palette.animation.fadeIn
-            //     : null),
-            // }}
-          >
+          <Grid container direction={"row"}>
             <Grid>
               <SelectionInput
                 isArmySelector={false}
@@ -220,8 +211,6 @@ const FactionNameCreator = () => {
               />
             </Grid>
           </Grid>
-
-          // </Fade>
         )}
       </Grid>
     </Grid>
