@@ -17,6 +17,7 @@ const CardView = (props) => {
       container //
       direction="row"
       sx={{
+        justifyContent: "center",
         width: "100%",
       }}
     >
@@ -26,7 +27,11 @@ const CardView = (props) => {
         side={"left"}
       />
 
-      <StatCard unit={localDisplayCard} />
+      <StatCard
+        unit={localDisplayCard} //
+        width_xs={"5em"}
+        width_lg={"35em"}
+      />
 
       <CarousellButton
         display={props.isMultiStateCard} //
