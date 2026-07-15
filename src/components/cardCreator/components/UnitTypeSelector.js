@@ -22,8 +22,6 @@ const UnitTypeSelector = () => {
   const handleChange = (event) => {
     CCC.setUnit({ ...CCC.unit, unitType: event.target.value });
 
-    console.log("event.target.value >> !!!!" + event.target.value); // remove
-
     if (event.target.value !== UNIT) {
       CCC.setUnit({
         ...CCC.unit,
@@ -32,6 +30,12 @@ const UnitTypeSelector = () => {
         leader: false,
         standardBearer: false,
         musician: false,
+      });
+    } else if (event.target.value === UNIT) {
+      CCC.setUnit({
+        ...CCC.unit,
+        numberOfElements: 10,
+        unitType: event.target.value,
       });
     }
   };
