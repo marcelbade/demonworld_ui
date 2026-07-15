@@ -1,7 +1,7 @@
 // React
 import { useContext } from "react";
 // Material UI
-import { ListItemText, List, Typography, Grid } from "@mui/material";
+import { ListItemText, List, Typography } from "@mui/material";
 // components and functions
 import useSubFactionStats from "../../../../../../customHooks/UseSubFactionStats";
 // contexts
