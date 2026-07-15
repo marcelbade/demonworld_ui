@@ -1,17 +1,3 @@
-/*  
- *
- *Eine Armee der Untoten darf nicht mehr als 50% der Gesamtpunktzahl für
-Helden, Befehlshaber und Magier ausgeben. Sie muss mindestens einen
-Totenbeschwörer oder einen ** Befehlshaber enthalten.
-
-Für die Rekrutierung isthakischer Alliierter können nur Rekrutierungskarten
-aus dem Armeebuch Isthak aus den Kategorien Menschen (aber keine
-Schwarzmagier), Tiermenschen und Eishexen aufgestellt werden. Die
-Rekrutierungsregeln aus dem Armeebuch Isthak gelten dabei nicht. Es ist zum
-Beispiel erlaubt, ausschließlich Einheiten und Charaktere der Eishexen oder der
-Tiermenschen aufzustellen. Allerdings können keine Schwarzmagier, Dämonen oder
-Eisriesen aufgestellt werden.
- * */
 
 // functions and components
 import globalRules from "../globalValidationRules/globalValidationRules";
