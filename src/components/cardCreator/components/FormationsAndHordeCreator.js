@@ -11,11 +11,15 @@ import skirmishFormationIcon from "../../../assets/icons/skirmishFormation.png";
 import squareFormationIcon from "../../../assets/icons/squareFormation.png";
 import hordeIcon from "../../../assets/icons/horde.png";
 // constants
-import { CARD_TEXT, COMPENDIUM, CREATOR } from "../../../constants/textsAndMessages";
+import { CARD_TEXT, CREATOR, PUSH_MESSAGE_TYPES } from "../../../constants/textsAndMessages";
 import { UNIT } from "../../../constants/unitTypes";
+// custom hooks
+import usePushMessages from "../../../customHooks/UsePushMessages";
 
 const FormationsAndHordeCreator = () => {
   const theme = useTheme();
+
+  const pushMessages = usePushMessages();
 
   const CCC = useContext(CardCreationContext);
 
@@ -33,6 +37,20 @@ const FormationsAndHordeCreator = () => {
 
   const changeHorde = () => {
     CCC.setUnit({ ...CCC.unit, horde: !CCC.unit.horde });
+  };
+
+  /**
+   *
+   * @param {boolean} isDisabled
+   * @param {String} message
+   * @returns
+   */
+  const displayErrorIfDisabled = (isDisabled, message) => {
+    if (!isDisabled) {
+      return;
+    }
+
+    pushMessages.showSnackBar(message, PUSH_MESSAGE_TYPES.ERROR);
   };
 
   // icon sizes
@@ -57,6 +75,7 @@ const FormationsAndHordeCreator = () => {
       width: WIDTH_WEDGE_ICON,
       label: CREATOR.WEDGE_FORMATION,
       disabled: CCC.unit.horde,
+      disabledMessage: CREATOR.NO_FORMATION_FOR_HORDES,
     },
     {
       value: CCC.unit.skirmishFormation,
@@ -66,6 +85,7 @@ const FormationsAndHordeCreator = () => {
       width: WIDTH_SKIRMISH_ICON,
       label: CREATOR.SKIRMISH_FORMATION,
       disabled: CCC.unit.horde,
+      disabledMessage: CREATOR.NO_FORMATION_FOR_HORDES,
     },
     {
       value: CCC.unit.squareFormation,
@@ -75,6 +95,7 @@ const FormationsAndHordeCreator = () => {
       width: WIDTH_SQUARE_ICON,
       label: CREATOR.SQUARE_FORMATION,
       disabled: CCC.unit.horde,
+      disabledMessage: CREATOR.NO_FORMATION_FOR_HORDES,
     },
     {
       value: CCC.unit.horde,
@@ -84,6 +105,7 @@ const FormationsAndHordeCreator = () => {
       width: WIDTH_HORDE_ICON,
       label: CREATOR.IS_HORDE,
       disabled: CCC.unit.wedgeFormation || CCC.unit.skirmishFormation || CCC.unit.squareFormation,
+      disabledMessage: CREATOR.NO_HORDES_WHEN_FORMATIONS,
     },
   ];
 
@@ -99,35 +121,41 @@ const FormationsAndHordeCreator = () => {
     >
       {elements.map((elmnt, i) => (
         <Tooltip title={elmnt.label}>
-          <FormGroup key={i}>
-            <FormControlLabel
-              control={
-                <Checkbox
-                  disabled={elmnt.disabled}
-                  checked={!elmnt.value} //
-                  onChange={elmnt.action}
-                  sx={{ width: "4em", height: "4em" }}
-                  icon={
-                    <CustomIcon
-                      icon={elmnt.icon} //
-                      altText={CARD_TEXT.SQUARE_FORMATION}
-                      height={elmnt.height}
-                      width={elmnt.width}
-                    />
-                  }
-                  checkedIcon={
-                    <CustomIcon
-                      icon={elmnt.icon} //
-                      altText={CARD_TEXT.SQUARE_FORMATION}
-                      height={elmnt.height}
-                      width={elmnt.width}
-                      checkedBoxIcon={true}
-                    />
-                  }
-                />
-              }
-            />
-          </FormGroup>
+          <div
+            onClick={() => {
+              displayErrorIfDisabled(elmnt.disabled, elmnt.disabledMessage);
+            }}
+          >
+            <FormGroup key={i}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    disabled={elmnt.disabled}
+                    checked={!elmnt.value} //
+                    onChange={elmnt.action}
+                    sx={{ width: "4em", height: "4em" }}
+                    icon={
+                      <CustomIcon
+                        icon={elmnt.icon} //
+                        altText={CARD_TEXT.SQUARE_FORMATION}
+                        height={elmnt.height}
+                        width={elmnt.width}
+                      />
+                    }
+                    checkedIcon={
+                      <CustomIcon
+                        icon={elmnt.icon} //
+                        altText={CARD_TEXT.SQUARE_FORMATION}
+                        height={elmnt.height}
+                        width={elmnt.width}
+                        checkedBoxIcon={true}
+                      />
+                    }
+                  />
+                }
+              />
+            </FormGroup>
+          </div>
         </Tooltip>
       ))}
     </Grid>
