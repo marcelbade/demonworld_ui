@@ -130,6 +130,7 @@ export const OPTIONS = {
   UPDATE_LIST: "Liste aktualisieren",
   TO_LOSS_CALCULATOR: "Zum Verlustrechner",
   NO_LIST: "Deine Armeeliste ist leer.",
+  NO_SPELLS: "Es würden keine Zauber ausgewählt",
   CHANGE_SELECTED_FACTION: "Fraktion wechseln",
   TEXTFILE_DOWNLOAD: "Textdatei erzeugen",
 };
@@ -774,6 +775,7 @@ export const CREATOR = {
   SQUARE_FORMATION: "Einheit kann Karreeformation bilden.",
   WEDGE_FORMATION: "Einheit kann Keilformation bilden.",
   SKIRMISH_FORMATION: "Einheit kann Plänklerformation bilden.",
+  IS_HORDE:"Einheit ist eine Horde.",
   MOVE: "Bewegung:",
   CHARGE: "Angriff:",
   SKIRMISH: "Plänkeln:",

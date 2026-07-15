@@ -1,7 +1,7 @@
 // react
 import React, { useContext } from "react";
 // material ui
-import { Checkbox, FormControlLabel, FormGroup, Grid, Button, useTheme, Tooltip } from "@mui/material";
+import { Checkbox, FormControlLabel, FormGroup, Grid, useTheme, Tooltip } from "@mui/material";
 // contexts
 import { CardCreationContext } from "../../../contexts/cardCreationContext";
 // icons
@@ -9,6 +9,7 @@ import CustomIcon from "../../shared/CustomIcon";
 import wedgeFormationIcon from "../../../assets/icons/wedgeFormation.png";
 import skirmishFormationIcon from "../../../assets/icons/skirmishFormation.png";
 import squareFormationIcon from "../../../assets/icons/squareFormation.png";
+import hordeIcon from "../../../assets/icons/horde.png";
 // constants
 import { CARD_TEXT, COMPENDIUM, CREATOR } from "../../../constants/textsAndMessages";
 import { UNIT } from "../../../constants/unitTypes";
@@ -43,34 +44,46 @@ const FormationsAndHordeCreator = () => {
   //
   const HEIGHT_SKIRMISH_ICON = "20px";
   const WIDTH_SKIRMISH_ICON = "20px";
+  //
+  const HEIGHT_HORDE_ICON = "135%";
+  const WIDTH_HORDE_ICON = "170%";
 
   const elements = [
     {
       value: CCC.unit.wedgeFormation,
       action: changeWedge,
-      name: COMPENDIUM.WEDGEFORMATION,
       icon: wedgeFormationIcon,
       height: HEIGHT_WEDGE_ICON,
       width: WIDTH_WEDGE_ICON,
       label: CREATOR.WEDGE_FORMATION,
+      disabled: CCC.unit.horde,
     },
     {
       value: CCC.unit.skirmishFormation,
       action: changeSkirmish,
-      name: COMPENDIUM.SKIRMISHFORMATION,
       icon: skirmishFormationIcon,
       height: HEIGHT_SKIRMISH_ICON,
       width: WIDTH_SKIRMISH_ICON,
       label: CREATOR.SKIRMISH_FORMATION,
+      disabled: CCC.unit.horde,
     },
     {
       value: CCC.unit.squareFormation,
       action: changeSquare,
-      name: COMPENDIUM.SQUAREFORMATION,
       icon: squareFormationIcon,
       height: HEIGHT_SQUARE_ICON,
       width: WIDTH_SQUARE_ICON,
       label: CREATOR.SQUARE_FORMATION,
+      disabled: CCC.unit.horde,
+    },
+    {
+      value: CCC.unit.horde,
+      action: changeHorde,
+      icon: hordeIcon,
+      height: HEIGHT_HORDE_ICON,
+      width: WIDTH_HORDE_ICON,
+      label: CREATOR.IS_HORDE,
+      disabled: CCC.unit.wedgeFormation || CCC.unit.skirmishFormation || CCC.unit.squareFormation,
     },
   ];
 
@@ -90,7 +103,7 @@ const FormationsAndHordeCreator = () => {
             <FormControlLabel
               control={
                 <Checkbox
-                  disabled={CCC.unit.horde}
+                  disabled={elmnt.disabled}
                   checked={!elmnt.value} //
                   onChange={elmnt.action}
                   sx={{ width: "4em", height: "4em" }}
@@ -117,15 +130,6 @@ const FormationsAndHordeCreator = () => {
           </FormGroup>
         </Tooltip>
       ))}
-      <Button
-        variant="outlined"
-        disabled={CCC.unit.wedgeFormation || CCC.unit.skirmishFormation || CCC.unit.squareFormation}
-        onClick={() => {
-          changeHorde();
-        }}
-      >
-        {COMPENDIUM.HORDE}
-      </Button>
     </Grid>
   ) : null;
 };
