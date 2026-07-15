@@ -11,8 +11,8 @@ const ChargeBonus = (props) => {
     <Grid
       container //
       direction="column"
-      alignItems="center"
       sx={{
+        alignItems: "center",
         ...theme.palette.statCards.statPadding,
         ...theme.palette.statCards.backGround,
       }}

@@ -13,8 +13,8 @@ const Initiative = (props) => {
     <Grid
       container //
       direction="column"
-      alignItems="center"
       sx={{
+        alignContent: "center",
         ...theme.palette.statCards.statPadding,
         ...theme.palette.statCards.backGround,
       }}

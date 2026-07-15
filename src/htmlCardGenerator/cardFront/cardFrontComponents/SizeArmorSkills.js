@@ -20,9 +20,9 @@ const SizeArmorSkills = (props) => {
   return (
     <Grid //
       container
+      direction="row"
       sx={{
-        alignItems: "center",
-        direction: "row",
+        justifyContent: "center",
         ...theme.palette.statCards.backGround,
         ...theme.palette.statCards.statPadding,
         flexWrap: "nowrap",
