@@ -35,10 +35,8 @@ const CreateSpellListPdfButton = (props) => {
     <CreatePdfButton
       data={props.displaySpells}
       toolTipTitle={PDF.CREATE_PDF}
-      disabledIf={false}
       openDialog={setShowSpellDialog}
       marginLeft={"1em"}
-      color={props.color}
       size={props.size}
     >
       <SpellPrintDialog
