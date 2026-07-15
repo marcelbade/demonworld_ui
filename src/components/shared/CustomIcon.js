@@ -30,13 +30,16 @@ const CustomIcon = (props) => {
   };
 
   /**
-   *Function toggles the color of the custom icons.
-   * All icons in the app are black.
-   * When using dark mode, the color is inverted.
-   * The Same is true for icons on a dark background.
-   * @returns a plain js objkect containing css attributes.
+   * Function checks the color of the icon.If the icon is white, nothing happens.
+   * If it is black, the color of the icon is toggled to white when the user
+   * switches to a dark theme.
+   * @returns a plain js object containing css attributes.
    */
   const toggleIconColor = () => {
+    if (props.defaultIconColor === "white") {
+      return;
+    }
+
     return !LC.darkModeOff || props.darkBackGround
       ? {
           ...STYLES,
@@ -46,6 +49,7 @@ const CustomIcon = (props) => {
       : STYLES;
   };
 
+  //TODO comment missing :D
   const toggleCheckBoxIcon = () => {
     return props.checkedBoxIcon
       ? {

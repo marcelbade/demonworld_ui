@@ -38,6 +38,7 @@ const CreateSpellListPdfButton = (props) => {
       openDialog={setShowSpellDialog}
       marginLeft={"1em"}
       size={props.size}
+      defaultIconColor={"white"}
     >
       <SpellPrintDialog
         displaySpells={props.displaySpells}
