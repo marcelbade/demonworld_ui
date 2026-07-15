@@ -137,9 +137,18 @@ const UnitAttributeCreator = () => {
           />
         ) : null}
       </Grid>
-      {elements.map((elmnt, i) => (
-        <Grid key={i}>
+      <Grid
+        container
+        sx={{
+          justifyContent: "center",
+        }}
+      >
+        {elements.map((elmnt, i) => (
           <FormControlLabel
+            sx={{
+              width: "75%",
+            }}
+            key={i}
             control={
               <Checkbox
                 checked={elmnt.value} //
@@ -151,8 +160,8 @@ const UnitAttributeCreator = () => {
             }
             label={elmnt.name}
           />
-        </Grid>
-      ))}
+        ))}
+      </Grid>
     </Grid>
   );
 };
