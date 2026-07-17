@@ -9,7 +9,7 @@ const MeleeWeapons = (props) => {
   return (
     <Grid //
       container
-      direction="column"
+      direction={{ xs: "column" }}
     >
       {weapons.map((w, i) => {
         return (

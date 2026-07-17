@@ -27,7 +27,7 @@ const FetchedArmiesList = (props) => {
 
   const getFactionColor = (factioName) => {
     const factionColor = GDC.factionColors.filter((color) => color.faction === factioName)[0];
-    
+
     return `rgb(${factionColor.rgbA},${factionColor.rgbB},${factionColor.rgbC})`;
   };
 
@@ -76,8 +76,8 @@ const FetchedArmiesList = (props) => {
         .map((l, i) => (
           <ListItem
             key={i} //
-            alignItems="flex-start"
             sx={{
+              alignItems: "flex-start",
               border: "solid 1px black", //
               borderRadius: "8px",
               marginTop: "0.5em ",

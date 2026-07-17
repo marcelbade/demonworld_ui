@@ -12,7 +12,7 @@ const Initiative = (props) => {
   return (
     <Grid
       container //
-      direction="column"
+      direction={{ xs: "column" }}
       sx={{
         alignContent: "center",
         ...theme.palette.statCards.statPadding,

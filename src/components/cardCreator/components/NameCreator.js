@@ -25,8 +25,11 @@ const NameCreator = () => {
   return (
     <Grid
       container
-      alignItems="center" //
-      sx={{ justifyContent: "center", ...theme.palette.cardCreator.box }}
+      sx={{
+        alignItems: "center", //
+        justifyContent: "center",
+        ...theme.palette.cardCreator.box,
+      }}
     >
       <CreatorTextInput
         id={"name"} //

@@ -126,9 +126,11 @@ const FactionNameCreator = () => {
   return (
     <Grid
       container //
-      alignItems="center"
-      direction="column"
-      sx={theme.palette.cardCreator.name}
+      direction={{ xs: "column" }}
+      sx={{
+        ...theme.palette.cardCreator.name,
+        alignItems: "center",
+      }}
     >
       <Grid
         container //
@@ -153,7 +155,7 @@ const FactionNameCreator = () => {
       </Grid>
       <Grid
         container //
-        direction="row"
+        direction={{ xs: "row" }}
         sx={{
           justifyContent: "center",
         }}
@@ -161,7 +163,7 @@ const FactionNameCreator = () => {
         {CCC.isNewFaction ? (
           <Grid
             container
-            direction={"row"}
+            direction={{ xs: "row" }}
             sx={{
               paddingBottom: "2em",
               ...(CCC.isNewFaction //
@@ -189,7 +191,7 @@ const FactionNameCreator = () => {
             />
           </Grid>
         ) : (
-          <Grid container direction={"row"}>
+          <Grid container direction={{ xs: "row" }}>
             <Grid>
               <SelectionInput
                 isArmySelector={false}

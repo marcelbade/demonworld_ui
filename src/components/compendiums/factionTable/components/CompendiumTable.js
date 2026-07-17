@@ -50,13 +50,13 @@ const CompendiumTable = () => {
     <Grid container>
       <Grid //
         container
-        direction="column"
+        direction={{ xs: "column" }}
         size={12}
       >
         <Grid
           container //
-          direction="column"
-          alignItems="center"
+          direction={{ xs: "column" }}
+          sx={{ alignItems: "center" }}
         >
           <CollapsableTopMenuDrawer
             displayPageTitle={true} //
@@ -71,9 +71,12 @@ const CompendiumTable = () => {
         </Grid>
         <Grid
           container //
-          direction="row"
-          alignItems="end"
-          sx={{ justifyContent: "space-between", paddingTop: "2em" }}
+          direction={{ xs: "row" }}
+          sx={{
+            alignItems: "end", //
+            justifyContent: "space-between",
+            paddingTop: "2em",
+          }}
         >
           <FactionAndUnitSelectors />
           <Pagination

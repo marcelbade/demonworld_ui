@@ -54,7 +54,7 @@ const RangeWeaponCreator = () => {
   return (
     <Grid
       container
-      direction="column"
+      direction={{ xs: "column" }}
       sx={{
         justifyContent: "flex-start",
         width: "50em",
@@ -83,7 +83,7 @@ const RangeWeaponCreator = () => {
       {CCC.hasRangedWeapon ? (
         <Grid
           container //
-          direction="row"
+          direction={{ xs: "row" }}
           sx={theme.palette.cardCreator.box}
         >
           <CreatorTextInput
@@ -103,8 +103,8 @@ const RangeWeaponCreator = () => {
           />
           <Grid
             container //
-            direction="row"
-            alignItems="center"
+            direction={{ xs: "row" }}
+            sx={{ alignItems: "center" }}
           >
             <Checkbox
               checked={!CCC.hasRangedSkill} //

@@ -53,16 +53,16 @@ const FearAndMoralCreator = () => {
   return (
     <Grid
       container //
-      direction="column"
-      alignItems="center"
+      direction={{ xs: "column" }}
       sx={{
+        alignItems: "center",
         justifyContent: "space-evenly",
         ...theme.palette.cardCreator.box,
       }}
     >
       <Grid
         container //
-        direction="column"
+        direction={{ xs: "column" }}
       >
         <Grid>
           <FormControlLabel
@@ -90,7 +90,7 @@ const FearAndMoralCreator = () => {
       </Grid>
       <Grid
         container //
-        direction="row"
+        direction={{ xs: "row" }}
       >
         <CreatorTextInput
           id={"Fear"} //
@@ -102,7 +102,7 @@ const FearAndMoralCreator = () => {
         {CCC.unit.unitType === UNIT ? (
           <Grid
             container
-            direction="row"
+            direction={{ xs: "row" }}
             sx={{
               width: "max-content",
             }}

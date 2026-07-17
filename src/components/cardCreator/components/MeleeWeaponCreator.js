@@ -60,7 +60,6 @@ const MeleeWeaponCreator = () => {
 
   const elmnts = [
     {
-      direction: "row",
       nameTitle: CREATOR.MELEE_WEAPON_1,
       valueTitle: CREATOR.MELEE_VALUE_1,
       name: CCC.unit.weapon1Name,
@@ -70,7 +69,6 @@ const MeleeWeaponCreator = () => {
     },
 
     {
-      direction: "row",
       nameTitle: CREATOR.MELEE_WEAPON_2,
       valueTitle: CREATOR.MELEE_VALUE_2,
       name: CCC.unit.weapon2Name,
@@ -79,7 +77,6 @@ const MeleeWeaponCreator = () => {
       valueFunc: changeWeapon2,
     },
     {
-      direction: "row",
       nameTitle: CREATOR.MELEE_WEAPON_3,
       valueTitle: CREATOR.MELEE_VALUE_3,
       name: CCC.unit.weapon3Name,
@@ -90,10 +87,14 @@ const MeleeWeaponCreator = () => {
   ];
 
   return (
-    <Grid container direction="column" sx={theme.palette.cardCreator.box}>
+    <Grid
+      container //
+      direction={{ xs: "column" }}
+      sx={theme.palette.cardCreator.box}
+    >
       <Grid
         container //
-        direction="row"
+        direction={{ xs: "row" }}
         sx={{
           marginBottom: "3em",
         }}
@@ -115,7 +116,7 @@ const MeleeWeaponCreator = () => {
       {elmnts.map((e, i) => (
         <Grid
           container //
-          direction={e.direction}
+          direction={{ xs: "row" }}
           key={i}
         >
           <CreatorTextInput
@@ -135,7 +136,7 @@ const MeleeWeaponCreator = () => {
 
       <Grid //
         container
-        direction="row"
+        direction={{ xs: "row" }}
         sx={{
           marginTop: "1em",
         }}
@@ -143,7 +144,7 @@ const MeleeWeaponCreator = () => {
         <Checkbox
           checked={!CCC.hasMeleeSkill} //
           onChange={unitHasMeleeSkill}
-          inputProps={{ "aria-label": "controlled" }}
+          inputprops={{ "aria-label": "controlled" }}
           sx={{
             marginTop: "1.5em",
             marginRight: "1em",

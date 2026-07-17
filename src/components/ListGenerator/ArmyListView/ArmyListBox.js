@@ -73,9 +73,9 @@ const ArmyListBox = () => {
   return isSelectionComplete() && AC.selectedFactionName !== NONE ? (
     <Grid
       container //
-      alignItems="center"
+      direction={{ xs: "column" }}
       sx={{
-        direction: "column",
+        alignItems: "center",
         justifyContent: "center",
         width: "100%",
       }}

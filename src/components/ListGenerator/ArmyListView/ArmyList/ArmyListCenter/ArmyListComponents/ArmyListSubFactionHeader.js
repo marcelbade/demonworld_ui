@@ -21,8 +21,8 @@ const ArmyListSubFactionHeader = (props) => {
   return (
     <Grid
       container //
-      direction="row"
-      alignItems="center"
+      direction={{ xs: "row" }}
+      sx={{ alignItems: "center" }}
     >
       <Typography
         key={props.subFaction} //

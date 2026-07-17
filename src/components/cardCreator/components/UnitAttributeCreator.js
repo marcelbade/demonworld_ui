@@ -99,8 +99,8 @@ const UnitAttributeCreator = () => {
   return (
     <Grid
       container
+      direction={{ xs: "column" }}
       sx={{
-        direction: "column", // CURRENT BUG - TEST THIS
         alignItems: "flex-start", //
         justifyContent: "center",
         ...theme.palette.cardCreator.box,
@@ -153,7 +153,7 @@ const UnitAttributeCreator = () => {
               <Checkbox
                 checked={elmnt.value} //
                 onChange={elmnt.action}
-                inputProps={{ "aria-label": "controlled" }}
+                inputprops={{ "aria-label": "controlled" }}
                 disabled={elmnt.disable}
                 sx={theme.palette.cardCreator.checkbox}
               />

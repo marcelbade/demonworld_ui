@@ -14,7 +14,7 @@ import { isObjectEmtpy } from "../util/utilityFunctions";
  */
 const StatCard = (props) => {
   const CSS = {
-    width: { xs: props.width_xs , lg: props.width_lg },
+    width: { xs: props.width_xs, lg: props.width_lg },
     marginTop: "2em",
     border: "1px black solid",
   };
@@ -28,8 +28,8 @@ const StatCard = (props) => {
   return data === undefined || isObjectEmtpy(data) ? null : (
     <Grid
       container //
-      direction="column"
-      alignItems="stretch"
+      direction={{ xs: "column" }}
+      sx={{ alignItems: "stretch" }}
     >
       <Grid sx={CSS}>
         <CardFront unit={data} />

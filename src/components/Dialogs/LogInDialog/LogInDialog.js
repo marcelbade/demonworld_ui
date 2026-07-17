@@ -101,7 +101,7 @@ const LoginDialog = () => {
     >
       <Grid
         container //
-        direction={"row"}
+        direction="row"
         sx={{
           justifyContent: "space-between", //
           ...theme.palette.dialogs.title,
@@ -118,7 +118,7 @@ const LoginDialog = () => {
       <DialogContent>
         <Grid //
           container
-          direction="column"
+          direction={{xs:"column"}}
         >
           <TextField
             onChange={() => {

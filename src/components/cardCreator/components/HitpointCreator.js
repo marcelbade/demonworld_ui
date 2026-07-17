@@ -26,8 +26,8 @@ const HitpointCreator = () => {
     <Grid
       container //
       direction="row"
-      alignItems="center"
       sx={{
+        alignItems: "center", //
         justifyContent: "space-evenly",
         ...theme.palette.cardCreator.box,
       }}

@@ -25,8 +25,8 @@ const StatCardIcon = (props) => {
   return (
     <Grid
       container
-      alignContent="center"
       sx={{
+        alignContent:"center",
         paddingRight: "0.5em",
       }}
     >

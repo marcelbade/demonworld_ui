@@ -112,15 +112,15 @@ const FormationsAndHordeCreator = () => {
   return CCC.unit.unitType === UNIT ? (
     <Grid
       container //
-      alignItems="center"
       direction="row"
       sx={{
+        alignItems: "center",
         justifyContent: "center",
         ...theme.palette.cardCreator.box,
       }}
     >
       {elements.map((elmnt, i) => (
-        <Tooltip title={elmnt.label}>
+        <Tooltip title={elmnt.label} key={i}>
           <div
             onClick={() => {
               displayErrorIfDisabled(elmnt.disabled, elmnt.disabledMessage);

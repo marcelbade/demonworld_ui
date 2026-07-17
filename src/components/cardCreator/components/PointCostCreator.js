@@ -25,9 +25,12 @@ const PointCostCreator = () => {
   return (
     <Grid //
       container
-      direction="row"
-      alignItems="center"
-      sx={{ justifyContent: "space-evenly", ...theme.palette.cardCreator.box }}
+      sx={{
+        alignItems: "center",
+        direction: "row", //
+        justifyContent: "space-evenly",
+        ...theme.palette.cardCreator.box,
+      }}
     >
       <CreatorTextInput
         id={"PointCost"} //

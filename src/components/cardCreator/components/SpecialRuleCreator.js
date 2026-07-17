@@ -21,8 +21,11 @@ const SpecialRuleCreator = () => {
   return (
     <Grid
       container //
-      alignItems="center"
-      sx={{ justifyContent: "flex-start", ...theme.palette.cardCreator.box }}
+      sx={{
+        alignItems: "center", //
+        justifyContent: "flex-start",
+        ...theme.palette.cardCreator.box,
+      }}
     >
       <CreatorTextInput
         id={"specialRule"} //

@@ -43,7 +43,7 @@ const CreatorTextInput = (props) => {
             ? null
             : props.backgroundColor,
       }}
-      InputProps={{
+      inputprops={{
         //  descpription text or icon
         startAdornment: (
           <InputAdornment

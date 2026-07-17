@@ -43,10 +43,10 @@ const UnitTypeSelector = () => {
   return (
     <Grid
       container //
+      direction={{ xs: "column" }}
       sx={{
         alignItems: "center", //
         justifyContent: "center",
-        direction: "column",
         ...theme.palette.cardCreator.box,
       }}
     >

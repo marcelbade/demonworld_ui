@@ -17,8 +17,8 @@ const CardFrontCenter = (props) => {
     <Fragment>
       <Grid //
         container
-        justifyContent="center"
         sx={{
+          justifyContent: "center",
           ...theme.palette.statCards.backGround,
         }}
       >
@@ -26,7 +26,7 @@ const CardFrontCenter = (props) => {
       </Grid>
       <Grid
         container
-        direction="column"
+        direction={{ xs: "column" }}
         sx={{
           ...theme.palette.statCards.statPadding,
           ...theme.palette.statCards.backGround,

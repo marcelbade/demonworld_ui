@@ -77,7 +77,9 @@ const TreeUnitNode = (props) => {
         <Stack alignItems="center" direction="row">
           {/* card preview button */}
           <IconButton
-            onClick={()=>{sideMenuController.buttons[0].action()  }} //
+            onClick={() => {
+              sideMenuController.buttons[0].action();
+            }} //
           >
             {sideMenuController.buttons[0].icon}
           </IconButton>

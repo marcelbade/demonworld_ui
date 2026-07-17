@@ -114,8 +114,8 @@ const UnitMovementCreator = () => {
   return (
     <Grid
       container //
+      direction={{ xs: "column" }}
       sx={{
-        direction: "column",
         alignItems: "center", //
         justifyContent: "center",
         ...theme.palette.cardCreator.box,
@@ -125,8 +125,8 @@ const UnitMovementCreator = () => {
 
       <Grid
         container //
+        direction={{ xs: "row" }}
         sx={{
-          direction: "row",
           alignItems: "center", //
           justifyContent: "center",
         }}

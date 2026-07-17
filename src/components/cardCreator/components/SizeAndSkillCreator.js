@@ -52,8 +52,11 @@ const SizeAndSkillCreator = () => {
     <Grid
       container //
       direction="row"
-      alignItems="center"
-      sx={{ justifyContent: "space-around", ...theme.palette.cardCreator.box }}
+      sx={{
+        alignItems: "center",
+        justifyContent: "space-around",
+        ...theme.palette.cardCreator.box,
+      }}
     >
       {inputElements.map((input, i) => (
         <CreatorTextInput

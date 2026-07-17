@@ -275,8 +275,8 @@ const StoreArmyListDialog = (props) => {
             container //
             size={12}
             item
-            flexDirection="row"
-            alignItems="center"
+            direction={{ xs: "row" }}
+            sx={{ alignItems: "center" }}
           >
             <Grid size={10}>
               <FormControlLabel
@@ -310,8 +310,8 @@ const StoreArmyListDialog = (props) => {
             container //
             item
             size={12}
-            flexDirection="row"
-            alignItems="center"
+            direction={{ xs: "row" }}
+            sx={{ alignItems: "center" }}
           >
             <Grid size={10}>
               <FormControlLabel

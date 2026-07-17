@@ -39,8 +39,8 @@ const ArmyListUnitEntry = (props) => {
           ) : (
             <Grid //
               container
-              direction="row"
-              alignItems="center"
+              direction={{ xs: "row" }}
+              sx={{ alignItems: "center" }}
             >
               <Typography
                 variant="body1"
