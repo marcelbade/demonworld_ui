@@ -14,9 +14,18 @@ const TitleAndStats = (props) => {
     <Document>
       <View style={commonUnitStyles.armyStatsBox}>
         <Text style={commonUnitStyles.armyStats}>{`${INPUT_TEXTS.PLAYER_NAME}: ${props.data.playerName}`} </Text>
-        <Text style={commonUnitStyles.armyStats}>{`${INPUT_TEXTS.TEAM_NAME}: ${props.data.teamName}`} </Text>
-        <Text style={commonUnitStyles.armyStats}>{`${STATS.POINTS}: ${props.data.totalArmyPoints}`} </Text>
-        <Text style={commonUnitStyles.armyStats}>{`${STATS.SCOUTING_FACTOR}: ${props.data.scoutingFactor}`} </Text>
+
+        {props.data.teamName === null ? null : (
+          <Text style={commonUnitStyles.armyStats}>{`${INPUT_TEXTS.TEAM_NAME}: ${props.data.teamName}`} </Text>
+        )}
+
+        {props.data.totalArmyPoints === null ? null : (
+          <Text style={commonUnitStyles.armyStats}>{`${STATS.POINTS}: ${props.data.totalArmyPoints}`} </Text>
+        )}
+
+        {props.data.scoutingFactor === null ? null : (
+          <Text style={commonUnitStyles.armyStats}>{`${STATS.SCOUTING_FACTOR}: ${props.data.scoutingFactor}`} </Text>
+        )}
       </View>
     </Document>
   );
