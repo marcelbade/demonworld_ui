@@ -20,6 +20,9 @@ import UnitAttributeCreator from "./components/UnitAttributeCreator";
 import UnitTypeSelector from "./components/UnitTypeSelector";
 import CardPreview from "./components/CardPreview";
 import CollapsableTopMenuDrawer from "../shared/CollapsableTopMenuDrawer";
+import CreateCustomCardPdf from "./components/CreateCustomCardPdf";
+import IsMultiCardToggle from "./components/IsMultiCardToggle";
+import MultiCardCreator from "./components/MultiCardCreator";
 //  contexts
 import CardCreationProvider from "../../contexts/cardCreationContext";
 // custom hooks
@@ -98,7 +101,10 @@ const CardCreator = () => {
     uniqueUnit: false,
     unitType: "U",
     equipment: [],
+    isAdditionalUnitCard: false,
   });
+
+  const [additionalUnitCards, setAdditionalUnitCards] = useState([]);
 
   const setUnitType = (newType) => {
     setUnit({ ...unit, unitType: newType });
@@ -115,6 +121,9 @@ const CardCreator = () => {
       value={{
         unit: unit,
         setUnit: setUnit,
+        //
+        additionalUnitCards: additionalUnitCards,
+        setAdditionalUnitCards: setAdditionalUnitCards,
         //
         isNewFaction: isNewFaction,
         setIsNewFaction: setIsNewFaction,
@@ -138,9 +147,9 @@ const CardCreator = () => {
       <Grid container>
         <Grid
           container //
-          direction="column"
+          direction={{ xs: "column" }}
           sx={{
-            alignItems: "center", //
+            alignItems: { xs: "center" }, //
             position: "fixed",
           }}
         >
@@ -168,6 +177,8 @@ const CardCreator = () => {
           <FactionNameCreator />
           <NameCreator />
           <UnitTypeSelector />
+          <IsMultiCardToggle />
+          <MultiCardCreator />
           <SpecialElementsCreator />
           <UnitAttributeCreator />
           <FormationsAndHordeCreator />
@@ -184,7 +195,7 @@ const CardCreator = () => {
         <Grid
           sx={{
             marginTop: "3em",
-            flexDirection: "column",
+            direction: "column",
             width: "35%",
             position: "fixed",
             top: "5em",
@@ -193,6 +204,7 @@ const CardCreator = () => {
         >
           <CardPreview />
           <SaveCardForm />
+          <CreateCustomCardPdf />
         </Grid>
       </Grid>
     </CardCreationProvider>

@@ -16,6 +16,7 @@ const StatCard = (props) => {
   const CSS = {
     width: { xs: props.width_xs, lg: props.width_lg },
     marginTop: "2em",
+    margin: "1em",
     border: "1px black solid",
   };
 

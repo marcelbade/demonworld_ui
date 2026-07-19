@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 
 /**
- * Custom hook encapsules logic and state for any carousel buttons in the app.
- * Carousel buttons allow the user to cycle through a list. THis hook is meant to be used with the
- * <CarousellButton> component.
+ * Custom hook encapsules logic and state for any carousel buttons in the app to keep it DRY.
+ * Carousel buttons allow the user to cycle through a list, displaying one element at a time. 
+ * This hook is meant to be used with the CarousellButton component.
  * @param {object} currentDisplayedElement - selected list element that is displayed
  * @param {function} setDisplayData - setter for the selected list element
- * @param {[object]} displayDataList - array of elements to cycle trough
+ * @param {[object]} displayDataList - the array to be cycled trough
  * @returns
  */
 const useCarouselButtons = (currentDisplayedElement, setDisplayData, displayDataList) => {

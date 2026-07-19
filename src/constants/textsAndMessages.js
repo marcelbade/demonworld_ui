@@ -764,6 +764,7 @@ export const CREATOR = {
   IS_UNIQUE: "Einheit ist einzigartig.",
   IS_CAVALERY: "Einheit ist beritten.",
   HAS_SHIELD: "Einheit besitzt (ein) Schild(e).",
+  UNIT_IS_MULTICARD: "Einheit kann sich verwandeln",
   UNIT_HAS_RANGE_WEAPON: "Einheit hat eine Fernkampfwaffe",
   RANGE_WEAPON: "Fernkampfwaffe:",
   RANGE_VALUE: "Fernkampfwert:",
