@@ -15,7 +15,7 @@ import { CREATOR } from "../../../constants/textsAndMessages";
 const MeleeWeaponCreator = () => {
   const theme = useTheme();
 
-  const ICON_SIZE = "40em";
+  const ICON_SIZE = "100%";
 
   const CCC = useContext(CardCreationContext);
 
@@ -138,6 +138,7 @@ const MeleeWeaponCreator = () => {
         container
         direction={{ xs: "row" }}
         sx={{
+          alignItems:"center",
           marginTop: "1em",
         }}
       >
@@ -148,8 +149,8 @@ const MeleeWeaponCreator = () => {
           sx={{
             marginTop: "1.5em",
             marginRight: "1em",
-            height: "2em",
-            width: "2em",
+            height: "3em",
+            width: "3em",
           }}
           icon={
             <CustomIcon
