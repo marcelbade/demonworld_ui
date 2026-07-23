@@ -22,10 +22,17 @@ const NameCreator = () => {
     CCC.setUnitCards(tempArray);
   };
 
+  /**
+   * Function changes the unitName for ALL unitcards belonging to
+   * the created unit. Is called by the onChange event.
+   * @param {object} event
+   */
   const changeName = (event) => {
     let tempArray = [...CCC.unitCards];
 
-    tempArray[0].unitName = event.target.value;
+    for (let i = 0; i < tempArray.length; i++) {
+      tempArray[i].unitName = event.target.value;
+    }
 
     CCC.setUnitCards(tempArray);
   };

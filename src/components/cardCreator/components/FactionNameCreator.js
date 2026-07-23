@@ -105,13 +105,16 @@ const FactionNameCreator = () => {
   };
 
   /**
-   * Function changes current selection.
+   * Function changes the faction for ALL unitcards belonging to
+   * the created unit. Is called by the onChange event.
    * @param {object} event
    */
   const changeFactionName = (event) => {
     let tempArray = [...CCC.unitCards];
 
-    tempArray[0].faction = event.target.value;
+    for (let i = 0; i < tempArray.length; i++) {
+      tempArray[i].faction = event.target.value;
+    }
 
     CCC.setUnitCards(tempArray);
   };
@@ -127,13 +130,16 @@ const FactionNameCreator = () => {
   };
 
   /**
-   * Function changes current selection.
+   * Function changes the sub faction for ALL unitcards belonging to
+   * the created unit. Is called by the onChange event.
    * @param {object} event
    */
   const changeSubFactionName = (event) => {
     let tempArray = [...CCC.unitCards];
 
-    tempArray[0].subFaction = event.target.value;
+    for (let i = 0; i < tempArray.length; i++) {
+      tempArray[i].subFaction = event.target.value;
+    }
 
     CCC.setUnitCards(tempArray);
   };

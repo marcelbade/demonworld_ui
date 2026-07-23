@@ -14,10 +14,17 @@ const SpecialRuleCreator = () => {
 
   const CCC = useContext(CardCreationContext);
 
+  /**
+   * Function changes the special rule for ALL unitcards belonging to
+   * the created unit. Is called by the onChange event.
+   * @param {object} event
+   */
   const changeSpecialRule = (event) => {
     let tempArray = [...CCC.unitCards];
 
-    tempArray[0].specialRules = event.target.value;
+    for (let i = 0; i < tempArray.length; i++) {
+      tempArray[i].specialRules = event.target.value;
+    }
 
     CCC.setUnitCards(tempArray);
   };

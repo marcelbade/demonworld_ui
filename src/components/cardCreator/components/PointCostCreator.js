@@ -22,11 +22,17 @@ const PointCostCreator = () => {
     CCC.setUnitCards(tempArray);
   };
 
+  /**
+   * Function changes the point cost for ALL unitcards belonging to
+   * the created unit. Is called by the onChange event.
+   * @param {object} event
+   */
   const changePointCost = (event) => {
     let tempArray = [...CCC.unitCards];
 
-    tempArray[0].points = event.target.value;
-
+    for (let i = 0; i < tempArray.length; i++) {
+      tempArray[i].points = event.target.value;
+    }
     CCC.setUnitCards(tempArray);
   };
 
