@@ -11,7 +11,7 @@ import MeleeWeaponCreator from "./components/MeleeWeaponCreator";
 import NameCreator from "./components/NameCreator";
 import PointCostCreator from "./components/PointCostCreator";
 import RangeWeaponCreator from "./components/RangeWeaponCreator";
-import SizeAndArmorCreator from "./components/SizeAndSkillCreator";
+import SizeAndArmorCreator from "./components/SizeAndArmorCreator";
 import SpecialElementsCreator from "./components/SpecialElementsCreator";
 import SpecialRuleCreator from "./components/SpecialRuleCreator";
 import FormationsAndHordeCreator from "./components/FormationsAndHordeCreator";
