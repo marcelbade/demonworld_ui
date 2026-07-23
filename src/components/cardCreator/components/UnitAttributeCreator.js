@@ -16,83 +16,119 @@ const UnitAttributeCreator = () => {
   const theme = useTheme();
 
   const changeIsUnique = () => {
-    CCC.setUnit({ ...CCC.unit, uniqueUnit: !CCC.unit.uniqueUnit });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].uniqueUnit = !CCC.unitCards[CCC.displayedElement].uniqueUnit;
+
+    CCC.setUnitCards(tempArray);
   };
 
   const changeIsMounted = () => {
-    CCC.setUnit({ ...CCC.unit, isMounted: !CCC.unit.isMounted });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].isMounted = !CCC.unitCards[CCC.displayedElement].isMounted;
+
+    CCC.setUnitCards(tempArray);
   };
 
   const changeHasShield = () => {
-    CCC.setUnit({ ...CCC.unit, hasShield: !CCC.unit.hasShield });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].hasShield = !CCC.unitCards[CCC.displayedElement].hasShield;
+
+    CCC.setUnitCards(tempArray);
   };
 
   const changeInClosedFormation = () => {
-    CCC.setUnit({ ...CCC.unit, unitIsClosedOrder: !CCC.unit.unitIsClosedOrder });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].unitIsClosedOrder = !CCC.unitCards[CCC.displayedElement].unitIsClosedOrder;
+
+    CCC.setUnitCards(tempArray);
   };
 
   const changeLeaderInClosedFormation = () => {
-    CCC.setUnit({ ...CCC.unit, leaderIsClosedOrder: !CCC.unit.leaderIsClosedOrder });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].leaderIsClosedOrder = !CCC.unitCards[CCC.displayedElement].leaderIsClosedOrder;
+
+    CCC.setUnitCards(tempArray);
   };
 
   const changeIsLowFLyer = () => {
-    CCC.setUnit({ ...CCC.unit, isLowFlyer: !CCC.unit.isLowFlyer });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].isLowFlyer = !CCC.unitCards[CCC.displayedElement].isLowFlyer;
+
+    CCC.setUnitCards(tempArray);
   };
 
   const changeIsHighFlyer = () => {
-    CCC.setUnit({ ...CCC.unit, isHighFlyer: !CCC.unit.isHighFlyer });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].isHighFlyer = !CCC.unitCards[CCC.displayedElement].isHighFlyer;
+
+    CCC.setUnitCards(tempArray);
   };
 
   const changeCommandStars = (event) => {
-    CCC.setUnit({ ...CCC.unit, commandStars: event.target.value });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].commandStars = event.target.value;
+
+    CCC.setUnitCards(tempArray);
   };
 
   const changeMagic = (event) => {
-    CCC.setUnit({ ...CCC.unit, magic: event.target.value });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].magic = event.target.value;
+
+    CCC.setUnitCards(tempArray);
   };
 
   const elements = [
     {
-      value: CCC.unit.uniqueUnit,
+      value: CCC.unitCards[CCC.displayedElement].uniqueUnit,
       action: changeIsUnique,
       name: CREATOR.IS_UNIQUE,
       disable: false,
     },
     {
-      value: CCC.unit.isMounted,
+      value: CCC.unitCards[CCC.displayedElement].isMounted,
       action: changeIsMounted,
       name: CREATOR.IS_CAVALERY,
       disable: false,
     },
     {
-      value: CCC.unit.hasShield,
+      value: CCC.unitCards[CCC.displayedElement].hasShield,
       action: changeHasShield,
-      name: CCC.unit.unitType === UNIT ? CREATOR.HAS_SHIELD : CREATOR.HAS_SHIELD_HERO,
-      disable: CCC.unit.unitType === GIANT,
+      name: CCC.unitCards[CCC.displayedElement].unitType === UNIT ? CREATOR.HAS_SHIELD : CREATOR.HAS_SHIELD_HERO,
+      disable: CCC.unitCards[CCC.displayedElement].unitType === GIANT,
     },
     {
-      value: CCC.unit.unitIsClosedOrder,
+      value: CCC.unitCards[CCC.displayedElement].unitIsClosedOrder,
       action: changeInClosedFormation,
       name: CREATOR.CLOSED_FORMATION,
-      disable: CCC.unit.unitType !== UNIT,
+      disable: CCC.unitCards[CCC.displayedElement].unitType !== UNIT,
     },
     {
-      value: CCC.unit.leaderIsClosedOrder,
+      value: CCC.unitCards[CCC.displayedElement].leaderIsClosedOrder,
       action: changeLeaderInClosedFormation,
       name: CREATOR.LEADER_CLOSED_FORMATION,
-      disable: CCC.unit.unitType !== UNIT || CCC.unit.unitIsClosedOrder,
+      disable: CCC.unitCards[CCC.displayedElement].unitType !== UNIT || CCC.unitCards[CCC.displayedElement].unitIsClosedOrder,
     },
     {
-      value: CCC.unit.isLowFlyer,
+      value: CCC.unitCards[CCC.displayedElement].isLowFlyer,
       action: changeIsLowFLyer,
       name: CREATOR.IS_LOW_FLYER,
-      disable: CCC.unit.isHighFlyer,
+      disable: CCC.unitCards[CCC.displayedElement].isHighFlyer,
     },
     {
-      value: CCC.unit.isHighFlyer,
+      value: CCC.unitCards[CCC.displayedElement].isHighFlyer,
       action: changeIsHighFlyer,
       name: CREATOR.IS_HIGH_FLYER,
-      disable: CCC.unit.isLowFlyer,
+      disable: CCC.unitCards[CCC.displayedElement].isLowFlyer,
     },
   ];
 
@@ -104,6 +140,7 @@ const UnitAttributeCreator = () => {
         alignItems: "flex-start", //
         justifyContent: "center",
         ...theme.palette.cardCreator.box,
+        backgroundColor: CCC.unitCards[CCC.displayedElement].color,
       }}
     >
       <Grid
@@ -115,10 +152,10 @@ const UnitAttributeCreator = () => {
           marginBottom: "2em",
         }}
       >
-        {CCC.unit.unitType === MAGE || CCC.unit.unitType === HERO ? (
+        {CCC.unitCards[CCC.displayedElement].unitType === MAGE || CCC.unitCards[CCC.displayedElement].unitType === HERO ? (
           <CreatorTextInput
             id={"name"} //
-            value={CCC.unit.commandStars}
+            value={CCC.unitCards[CCC.displayedElement].commandStars}
             onChange={changeCommandStars}
             label={"Sterne:"}
             width="7em"
@@ -126,7 +163,7 @@ const UnitAttributeCreator = () => {
             type="number"
           />
         ) : null}
-        {CCC.unit.unitType === MAGE ? (
+        {CCC.unitCards[CCC.displayedElement].unitType === MAGE ? (
           <CreatorTextInput
             id={"name"} //
             value={CCC.magic}

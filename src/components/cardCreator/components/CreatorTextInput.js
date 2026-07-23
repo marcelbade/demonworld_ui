@@ -3,8 +3,6 @@ import { InputAdornment, TextField, Typography } from "@mui/material";
 import CustomIcon from "../../shared/CustomIcon";
 
 const CreatorTextInput = (props) => {
-  const ICON_SIZE = 25;
-
   return (
     <TextField
       id={props.id}
@@ -59,10 +57,10 @@ const CreatorTextInput = (props) => {
               <CustomIcon //
                 icon={props.statIcon}
                 altText={props.adornment}
-                height={ICON_SIZE}
-                width={ICON_SIZE}
-                boxHeight={ICON_SIZE}
-                boxWidth={ICON_SIZE}
+                height={"100%"}
+                width={"100%"}
+                boxHeight={"30em"}
+                boxWidth={"30em"}
               />
             )}
           </InputAdornment>

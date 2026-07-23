@@ -20,24 +20,22 @@ const UnitTypeSelector = () => {
    * @param {Obj} event
    */
   const handleChange = (event) => {
-    CCC.setUnit({ ...CCC.unit, unitType: event.target.value });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[0].unitType = event.target.value;
 
     if (event.target.value !== UNIT) {
-      CCC.setUnit({
-        ...CCC.unit,
-        numberOfElements: 1,
-        unitType: event.target.value,
-        leader: false,
-        standardBearer: false,
-        musician: false,
-      });
+      tempArray[0].numberOfElements = 1;
+
+      tempArray[0].leader = false;
+      tempArray[0].standardBearer = false;
+      tempArray[0].musician = false;
     } else if (event.target.value === UNIT) {
-      CCC.setUnit({
-        ...CCC.unit,
-        numberOfElements: 10,
-        unitType: event.target.value,
-      });
+      tempArray[0].numberOfElements = 10;
+      tempArray[0].unitType = event.target.value;
     }
+
+    CCC.setUnitCards(tempArray);
   };
 
   return (
@@ -57,7 +55,7 @@ const UnitTypeSelector = () => {
         <RadioGroup //
           row
           name="unit-type-radio-group"
-          value={CCC.unit.unitType}
+          value={CCC.unitCards[0].unitType}
           onChange={handleChange}
           sx={{
             color: theme.palette.cardCreator.checkbox.color,

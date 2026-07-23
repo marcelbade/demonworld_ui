@@ -11,7 +11,7 @@ import MeleeWeaponCreator from "./components/MeleeWeaponCreator";
 import NameCreator from "./components/NameCreator";
 import PointCostCreator from "./components/PointCostCreator";
 import RangeWeaponCreator from "./components/RangeWeaponCreator";
-import SizeAndSkillCreator from "./components/SizeAndSkillCreator";
+import SizeAndArmorCreator from "./components/SizeAndSkillCreator";
 import SpecialElementsCreator from "./components/SpecialElementsCreator";
 import SpecialRuleCreator from "./components/SpecialRuleCreator";
 import FormationsAndHordeCreator from "./components/FormationsAndHordeCreator";
@@ -23,6 +23,7 @@ import CollapsableTopMenuDrawer from "../shared/CollapsableTopMenuDrawer";
 import CreateCustomCardPdf from "./components/CreateCustomCardPdf";
 import IsMultiCardToggle from "./components/IsMultiCardToggle";
 import MultiCardCreator from "./components/MultiCardCreator";
+import TopDrawerButton from "../shared/TopDrawerButton";
 //  contexts
 import CardCreationProvider from "../../contexts/cardCreationContext";
 // custom hooks
@@ -30,13 +31,15 @@ import useAxios from "../../customHooks/UseAxios";
 import useCustomMediaQuery from "../../customHooks/UseCustomMediaQuery";
 // contants
 import { MOST_COMMON_UNIT_TYPE_FOR_SUBFACTION } from "../../constants/URLs";
-import TopDrawerButton from "../shared/TopDrawerButton";
+import { unitBluePrint } from "./unitBluePrint";
 // icons
 import customRedGameIcon from "../../assets/icons/logo_red.png";
 
 const CardCreator = () => {
   const callAxios = useAxios();
   const displaySize = useCustomMediaQuery();
+
+  const [unitCards, setUnitCards] = useState([{ ...unitBluePrint }]);
 
   const [isNewFaction, setIsNewFaction] = useState(false);
   const [hasRangedWeapon, setHasRangedWeapon] = useState(false);
@@ -45,85 +48,28 @@ const CardCreator = () => {
   const [isFearless, setIsFearless] = useState(false);
   const [neverImpetuous, setNeverImpetuous] = useState(false);
 
-  const [unit, setUnit] = useState({
-    faction: "",
-    subFaction: "",
-    unitName: "",
-    move: 16,
-    charge: 16,
-    skirmish: 12,
-    hold_maneuvers: 1,
-    squareFormation: false,
-    skirmishFormation: false,
-    wedgeFormation: false,
-    horde: false,
-    skillRange: 0,
-    rangedAttackStats: "",
-    rangedWeapon: "x",
-    initiative: 2,
-    chargeBonus: 0,
-    skillMelee: 0,
-    weapon1Name: "Nahkampfangriff",
-    weapon1: 10,
-    weapon2Name: "",
-    weapon2: 0,
-    weapon3Name: "",
-    weapon3: 0,
-    unitSize: 2,
-    armourRange: 1,
-    armourMelee: 1,
-    fear: 2,
-    moral1: 4,
-    moral2: 12,
-    leader: false,
-    standardBearer: false,
-    musician: false,
-    specialRules: "",
-    numberOfElements: 10,
-    hitpoints: 1,
-    points: 170,
-    secondSubFaction: "",
-    hasShield: false,
-    isHighFlyer: false,
-    isLowFlyer: false,
-    isMounted: false,
-    isMultiStateUnit: false,
-    unitIsClosedOrder: false,
-    leaderIsClosedOrder: false,
-    maxFieldsMove: false,
-    multiCardName: "",
-    multiStateOrderNumber: 0,
-    belongsToUnit: "NONE",
-    commandStars: 0,
-    magic: 0,
-    controlZone: 0,
-    overRun: 0,
-    uniqueUnit: false,
-    unitType: "U",
-    equipment: [],
-    isAdditionalUnitCard: false,
-  });
-
-  const [additionalUnitCards, setAdditionalUnitCards] = useState([]);
+  const [displayedCard, setDisplayedCard] = useState({}); // TODO needed??
+  const [displayedElement, setDisplayedElement] = useState(0);
 
   const setUnitType = (newType) => {
-    setUnit({ ...unit, unitType: newType });
+    let tempArray = [...unitCards];
+
+    tempArray[0].unitType = newType;
+
+    setUnitCards(tempArray);
   };
 
   useEffect(() => {
-    if (unit.faction !== "" && unit.subFaction !== "") {
-      callAxios.fetchData(setUnitType, MOST_COMMON_UNIT_TYPE_FOR_SUBFACTION(unit.faction, unit.subFaction));
+    if (unitCards[0].faction !== "" && unitCards[0].subFaction !== "") {
+      callAxios.fetchData(setUnitType, MOST_COMMON_UNIT_TYPE_FOR_SUBFACTION(unitCards[0].faction, unitCards[0].subFaction));
     }
-  }, [unit.faction, unit.subFaction]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [unitCards[0].faction, unitCards[0].subFaction]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <CardCreationProvider
       value={{
-        unit: unit,
-        setUnit: setUnit,
-        //
-        additionalUnitCards: additionalUnitCards,
-        setAdditionalUnitCards: setAdditionalUnitCards,
+        unitCards: unitCards,
+        setUnitCards: setUnitCards,
         //
         isNewFaction: isNewFaction,
         setIsNewFaction: setIsNewFaction,
@@ -137,11 +83,17 @@ const CardCreator = () => {
         hasMeleeSkill: hasMeleeSkill,
         setHasMeleeSkill: setHasMeleeSkill,
         //
+        isFearless: isFearless,
+        setIsFearless: setIsFearless,
+        //
         neverImpetuous: neverImpetuous,
         setNeverImpetuous: setNeverImpetuous,
         //
-        isFearless: isFearless,
-        setIsFearless: setIsFearless,
+        displayedCard: displayedCard,
+        setDisplayedCard: setDisplayedCard,
+        //
+        displayedElement: displayedElement,
+        setDisplayedElement: setDisplayedElement,
       }}
     >
       <Grid container>
@@ -185,7 +137,7 @@ const CardCreator = () => {
           <UnitMovementCreator />
           <RangeWeaponCreator />
           <MeleeWeaponCreator />
-          <SizeAndSkillCreator />
+          <SizeAndArmorCreator />
           <FearAndMoralCreator />
           <HitpointCreator />
           <SpecialRuleCreator />

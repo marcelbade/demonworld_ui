@@ -16,7 +16,7 @@ const SaveCardForm = () => {
 
   const saveCard = async () => {
     callAxios.sendData(
-      JSON.stringify(CCC.unit), //
+      JSON.stringify(CCC.unitCards[0]), //TODO
       CREATE_CUSTOM_UNIT_URL,
       null,
       null,
@@ -27,7 +27,7 @@ const SaveCardForm = () => {
   return (
     <Grid
       sx={{
-        marginTop:"3em",
+        marginTop: "3em",
         alignItems: "center",
         alignContent: "center",
         justifyContent: "center",

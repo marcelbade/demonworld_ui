@@ -48,6 +48,7 @@ const useCarouselButtons = (currentDisplayedElement, setDisplayData, displayData
     carouselBackward: carouselBackward,
     carouselForward: carouselForward,
     currentDisplayedData: currentDisplayedElement,
+    elementNumber: elementNumber,
   };
 };
 

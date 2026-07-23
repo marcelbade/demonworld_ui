@@ -15,11 +15,19 @@ const NameCreator = () => {
   const theme = useTheme();
 
   const deleteName = () => {
-    CCC.setUnit({ ...CCC.unit, unitName: "" });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[0].faction = "";
+
+    CCC.setUnitCards(tempArray);
   };
 
   const changeName = (event) => {
-    CCC.setUnit({ ...CCC.unit, unitName: event.target.value });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[0].unitName = event.target.value;
+
+    CCC.setUnitCards(tempArray);
   };
 
   return (
@@ -33,7 +41,7 @@ const NameCreator = () => {
     >
       <CreatorTextInput
         id={"name"} //
-        value={CCC.unitName}
+        value={CCC.unitCards[0].unitName}
         onClick={deleteName}
         onChange={changeName}
         label={CREATOR.UNIT_NAME}

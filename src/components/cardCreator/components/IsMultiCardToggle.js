@@ -19,7 +19,11 @@ const IsMultiCardToggle = () => {
   const CCC = useContext(CardCreationContext);
 
   const unitIsMultiCard = () => {
-    CCC.setUnit({ ...CCC.unit, isMultiStateUnit: !CCC.unit.isMultiStateUnit });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[0].isMultiStateUnit = !tempArray[0].isMultiStateUnit;
+
+    CCC.setUnitCards(tempArray);
   };
 
   return (
@@ -39,7 +43,7 @@ const IsMultiCardToggle = () => {
         <FormControlLabel
           control={
             <Checkbox
-              checked={CCC.unit.isMultiStateUnit} //
+              checked={CCC.unitCards[0].isMultiStateUnit} //
               onChange={unitIsMultiCard}
               sx={theme.palette.cardCreator.checkbox}
             />

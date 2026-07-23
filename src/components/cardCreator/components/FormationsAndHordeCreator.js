@@ -24,19 +24,35 @@ const FormationsAndHordeCreator = () => {
   const CCC = useContext(CardCreationContext);
 
   const changeWedge = () => {
-    CCC.setUnit({ ...CCC.unit, wedgeFormation: !CCC.unit.wedgeFormation });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].wedgeFormation = !CCC.unitCards[CCC.displayedElement].wedgeFormation;
+
+    CCC.setUnitCards(tempArray);
   };
 
   const changeSkirmish = () => {
-    CCC.setUnit({ ...CCC.unit, skirmishFormation: !CCC.unit.skirmishFormation });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].skirmishFormation = !CCC.unitCards[CCC.displayedElement].skirmishFormation;
+
+    CCC.setUnitCards(tempArray);
   };
 
   const changeSquare = () => {
-    CCC.setUnit({ ...CCC.unit, squareFormation: !CCC.unit.squareFormation });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].squareFormation = !CCC.unitCards[CCC.displayedElement].squareFormation;
+
+    CCC.setUnitCards(tempArray);
   };
 
   const changeHorde = () => {
-    CCC.setUnit({ ...CCC.unit, horde: !CCC.unit.horde });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].horde = !CCC.unitCards[CCC.displayedElement].horde;
+
+    CCC.setUnitCards(tempArray);
   };
 
   /**
@@ -68,48 +84,51 @@ const FormationsAndHordeCreator = () => {
 
   const elements = [
     {
-      value: CCC.unit.wedgeFormation,
+      value: CCC.unitCards[CCC.displayedElement].wedgeFormation,
       action: changeWedge,
       icon: wedgeFormationIcon,
       height: HEIGHT_WEDGE_ICON,
       width: WIDTH_WEDGE_ICON,
       label: CREATOR.WEDGE_FORMATION,
-      disabled: CCC.unit.horde,
+      disabled: CCC.unitCards[CCC.displayedElement].horde,
       disabledMessage: CREATOR.NO_FORMATION_FOR_HORDES,
     },
     {
-      value: CCC.unit.skirmishFormation,
+      value: CCC.unitCards[CCC.displayedElement].skirmishFormation,
       action: changeSkirmish,
       icon: skirmishFormationIcon,
       height: HEIGHT_SKIRMISH_ICON,
       width: WIDTH_SKIRMISH_ICON,
       label: CREATOR.SKIRMISH_FORMATION,
-      disabled: CCC.unit.horde,
+      disabled: CCC.unitCards[CCC.displayedElement].horde,
       disabledMessage: CREATOR.NO_FORMATION_FOR_HORDES,
     },
     {
-      value: CCC.unit.squareFormation,
+      value: CCC.unitCards[CCC.displayedElement].squareFormation,
       action: changeSquare,
       icon: squareFormationIcon,
       height: HEIGHT_SQUARE_ICON,
       width: WIDTH_SQUARE_ICON,
       label: CREATOR.SQUARE_FORMATION,
-      disabled: CCC.unit.horde,
+      disabled: CCC.unitCards[CCC.displayedElement].horde,
       disabledMessage: CREATOR.NO_FORMATION_FOR_HORDES,
     },
     {
-      value: CCC.unit.horde,
+      value: CCC.unitCards[CCC.displayedElement].horde,
       action: changeHorde,
       icon: hordeIcon,
       height: HEIGHT_HORDE_ICON,
       width: WIDTH_HORDE_ICON,
       label: CREATOR.IS_HORDE,
-      disabled: CCC.unit.wedgeFormation || CCC.unit.skirmishFormation || CCC.unit.squareFormation,
+      disabled:
+        CCC.unitCards[CCC.displayedElement].wedgeFormation ||
+        CCC.unitCards[CCC.displayedElement].skirmishFormation ||
+        CCC.unitCards[CCC.displayedElement].squareFormation,
       disabledMessage: CREATOR.NO_HORDES_WHEN_FORMATIONS,
     },
   ];
 
-  return CCC.unit.unitType === UNIT ? (
+  return CCC.unitCards[CCC.displayedElement].unitType === UNIT ? (
     <Grid
       container //
       direction="row"
@@ -117,6 +136,7 @@ const FormationsAndHordeCreator = () => {
         alignItems: "center",
         justifyContent: "center",
         ...theme.palette.cardCreator.box,
+        backgroundColor: CCC.unitCards[CCC.displayedElement].color,
       }}
     >
       {elements.map((elmnt, i) => (

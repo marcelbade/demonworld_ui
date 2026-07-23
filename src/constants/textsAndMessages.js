@@ -761,6 +761,7 @@ export const CREATOR = {
   SUBFACTION_NAME: "Teilfraktion",
   ALLY: "Allierter",
   UNIT_NAME: "Name:",
+  ADD_MULTICARD:"FÜge eine Karte hinzu",
   IS_UNIQUE: "Einheit ist einzigartig.",
   IS_CAVALERY: "Einheit ist beritten.",
   HAS_SHIELD: "Einheit besitzt (ein) Schild(e).",

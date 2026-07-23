@@ -3,46 +3,61 @@ import React, { useContext } from "react";
 // material ui
 import { useTheme } from "@emotion/react";
 import CreatorTextInput from "./CreatorTextInput";
-import { Grid } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 // contexts
 import { CardCreationContext } from "../../../contexts/cardCreationContext";
 // icons
 import rangeArmorIcon from "../../../assets/icons/range-armor.png";
 import meleeArmorIcon from "../../../assets/icons/melee-armor.png";
+import CustomIcon from "../../shared/CustomIcon";
+import { Stack } from "@mui/system";
 
-const SizeAndSkillCreator = () => {
+const SizeAndArmorCreator = () => {
   const theme = useTheme();
 
   const CCC = useContext(CardCreationContext);
 
   const changeSize = (event) => {
-    CCC.setUnit({ ...CCC.unit, unitSize: event.target.value });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].unitSize = event.target.value;
+
+    CCC.setUnitCards(tempArray);
   };
 
   const changeRangeArmor = (event) => {
-    CCC.setUnit({ ...CCC.unit, armourRange: event.target.value });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].armourRange = event.target.value;
+
+    CCC.setUnitCards(tempArray);
   };
 
   const changeMeleeArmor = (event) => {
-    CCC.setUnit({ ...CCC.unit, armourMelee: event.target.value });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].armourMelee = event.target.value;
+
+    CCC.setUnitCards(tempArray);
   };
 
   const inputElements = [
     {
       label: "",
-      value: CCC.unit.unitSize,
+      value: CCC.unitCards[CCC.displayedElement].unitSize,
       onChange: changeSize,
-      statName: "Größe:",
+      statName: "Größe:", // TODO
+      icon: null,
     },
     {
       label: "",
-      value: CCC.unit.armourRange,
+      value: CCC.unitCards[CCC.displayedElement].armourRange,
       onChange: changeRangeArmor,
       icon: rangeArmorIcon,
     },
     {
       label: "",
-      value: CCC.unit.armourMelee,
+      value: CCC.unitCards[CCC.displayedElement].armourMelee,
       onChange: changeMeleeArmor,
       icon: meleeArmorIcon,
     },
@@ -56,21 +71,39 @@ const SizeAndSkillCreator = () => {
         alignItems: "center",
         justifyContent: "space-around",
         ...theme.palette.cardCreator.box,
+        backgroundColor: CCC.unitCards[CCC.displayedElement].color,
       }}
     >
       {inputElements.map((input, i) => (
-        <CreatorTextInput
+        <Stack
           key={i}
-          id={input.value.toString()} //
-          value={input.value}
-          onChange={input.onChange}
-          label={input.statName}
-          statIcon={input.icon}
-          width="5em"
-        />
+          direction={"row"} //
+          sx={{ alignItems: "center" }}
+        >
+          {input.icon === null ? (
+            <Typography
+              sx={{ marginRight: "1em" }} //
+            >
+              {input.statName}
+            </Typography>
+          ) : (
+            <CustomIcon
+              icon={input.icon} //
+              width={"50%"} //
+              height={"50%"} //
+            />
+          )}
+          <CreatorTextInput
+            key={i}
+            id={input.value.toString()} //
+            value={input.value}
+            onChange={input.onChange}
+            width="5em"
+          />
+        </Stack>
       ))}
     </Grid>
   );
 };
 
-export default SizeAndSkillCreator;
+export default SizeAndArmorCreator;

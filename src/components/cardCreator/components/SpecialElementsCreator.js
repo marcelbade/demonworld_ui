@@ -15,23 +15,43 @@ const SpecialElementsCreator = () => {
   const CCC = useContext(CardCreationContext);
 
   const changeLeader = () => {
-    CCC.setUnit({ ...CCC.unit, leader: !CCC.unit.leader });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].leader = !CCC.unitCards[CCC.displayedElement].leader;
+
+    CCC.setUnitCards(tempArray);
   };
 
   const changeStandardBearer = () => {
-    CCC.setUnit({ ...CCC.unit, standardBearer: !CCC.unit.standardBearer });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].standardBearer = !CCC.unitCards[CCC.displayedElement].standardBearer;
+
+    CCC.setUnitCards(tempArray);
   };
 
   const changeMusician = () => {
-    CCC.setUnit({ ...CCC.unit, musician: !CCC.unit.musician });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].musician = !CCC.unitCards[CCC.displayedElement].musician;
+
+    CCC.setUnitCards(tempArray);
   };
 
   const deleteNumberOfElements = () => {
-    CCC.setUnit({ ...CCC.unit, numberOfElements: 0 });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].numberOfElements = 0;
+
+    CCC.setUnitCards(tempArray);
   };
 
   const changeNumberOfElements = (event) => {
-    CCC.setUnit({ ...CCC.unit, numberOfElements: event.target.value });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].numberOfElements = event.target.value;
+
+    CCC.setUnitCards(tempArray);
   };
 
   const elements = [
@@ -60,15 +80,17 @@ const SpecialElementsCreator = () => {
         justifyContent: "space-around", //
         alignItems: "center",
         ...theme.palette.cardCreator.box,
+        borderColor: CCC.unitCards[CCC.displayedElement].color,
+        backgroundColor: CCC.unitCards[CCC.displayedElement].color,
       }}
     >
       <Grid>
         <CreatorTextInput
           id={"elementNumber"}
-          value={CCC.unit.numberOfElements}
+          value={CCC.unitCards[CCC.displayedElement].numberOfElements}
           onClick={deleteNumberOfElements}
           onChange={changeNumberOfElements}
-          disabled={CCC.unit.unitType !== UNIT}
+          disabled={CCC.unitCards[CCC.displayedElement].unitType !== UNIT}
           label={CREATOR.ELEMENTS}
           width="10em"
         />
@@ -77,12 +99,12 @@ const SpecialElementsCreator = () => {
       {/* // CURRENT BUG!  */}
       <Grid
         sx={{
-          ...(CCC.unit.unitType !== "U" //
+          ...(CCC.unitCards[CCC.displayedElement].unitType !== "U" //
             ? theme.palette.animation.fadeAway
             : theme.palette.animation.fadeIn),
         }}
       >
-        {CCC.unit.unitType === UNIT
+        {CCC.unitCards[CCC.displayedElement].unitType === UNIT
           ? elements.map((elmnt, i) => (
               <FormControlLabel
                 key={i}

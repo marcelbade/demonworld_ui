@@ -20,27 +20,51 @@ const RangeWeaponCreator = () => {
   const CCC = useContext(CardCreationContext);
 
   const deleteRangedWeaponName = () => {
-    CCC.setUnit({ ...CCC.unit, rangedWeapon: "x" });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].rangedWeapon = "x";
+
+    CCC.setUnitCards(tempArray);
   };
 
   const changeRangedWeaponName = (event) => {
-    CCC.setUnit({ ...CCC.unit, rangedWeapon: event.target.value });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].rangedWeapon = event.target.value;
+
+    CCC.setUnitCards(tempArray);
   };
 
   const deleteRangedAttackStats = () => {
-    CCC.setUnit({ ...CCC.unit, rangedAttackStats: "" });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].rangedAttackStats = "";
+
+    CCC.setUnitCards(tempArray);
   };
 
   const changeRangedAttackStats = (event) => {
-    CCC.setUnit({ ...CCC.unit, rangedAttackStats: event.target.value });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].rangedAttackStats = event.target.value;
+
+    CCC.setUnitCards(tempArray);
   };
 
   const deleteRangeSkill = () => {
-    CCC.setUnit({ ...CCC.unit, skillRange: "" });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].skillRange = "";
+
+    CCC.setUnitCards(tempArray);
   };
 
   const changeRangeSkill = (event) => {
-    CCC.setUnit({ ...CCC.unit, skillRange: event.target.value });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].skillRange = event.target.value;
+
+    CCC.setUnitCards(tempArray);
   };
 
   const unitHasRangeWeapon = () => {
@@ -58,6 +82,7 @@ const RangeWeaponCreator = () => {
       sx={{
         justifyContent: "flex-start",
         width: "50em",
+        backgroundColor: CCC.unitCards[CCC.displayedElement].color,
       }}
     >
       <Grid>

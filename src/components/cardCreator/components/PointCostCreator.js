@@ -15,11 +15,19 @@ const PointCostCreator = () => {
   const CCC = useContext(CardCreationContext);
 
   const deletePointCost = () => {
-    CCC.setUnit({ ...CCC.unit, points: "" });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[0].points = "";
+
+    CCC.setUnitCards(tempArray);
   };
 
   const changePointCost = (event) => {
-    CCC.setUnit({ ...CCC.unit, points: event.target.value });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[0].points = event.target.value;
+
+    CCC.setUnitCards(tempArray);
   };
 
   return (
@@ -34,7 +42,7 @@ const PointCostCreator = () => {
     >
       <CreatorTextInput
         id={"PointCost"} //
-        value={CCC.points}
+        value={CCC.unitCards[0].points}
         onClick={deletePointCost}
         onChange={changePointCost}
         label={CREATOR.POINTCOST}

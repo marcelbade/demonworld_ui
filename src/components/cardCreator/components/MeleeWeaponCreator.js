@@ -20,26 +20,51 @@ const MeleeWeaponCreator = () => {
   const CCC = useContext(CardCreationContext);
 
   const changeMeleeWeapon1Name = (event) => {
-    CCC.setUnit({ ...CCC.unit, weapon1Name: event.target.value });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].weapon1Name = event.target.value;
+
+    CCC.setUnitCards(tempArray);
   };
 
   const changeWeapon1 = (event) => {
-    CCC.setUnit({ ...CCC.unit, weapon1: event.target.value });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].weapon1 = event.target.value;
+
+    CCC.setUnitCards(tempArray);
   };
 
   const changeMeleeWeapon2Name = (event) => {
-    CCC.setUnit({ ...CCC.unit, weapon2Name: event.target.value });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].weapon2Name = event.target.value;
+
+    CCC.setUnitCards(tempArray);
   };
 
   const changeWeapon2 = (event) => {
-    CCC.setUnit({ ...CCC.unit, weapon2: event.target.value });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].weapon2 = event.target.value;
+
+    CCC.setUnitCards(tempArray);
   };
+
   const changeMeleeWeapon3Name = (event) => {
-    CCC.setUnit({ ...CCC.unit, weapon3Name: event.target.value });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].weapon3Name = event.target.value;
+
+    CCC.setUnitCards(tempArray);
   };
 
   const changeWeapon3 = (event) => {
-    CCC.setUnit({ ...CCC.unit, weapon3: event.target.value });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].weapon3 = event.target.value;
+
+    CCC.setUnitCards(tempArray);
   };
 
   const unitHasMeleeSkill = () => {
@@ -47,23 +72,35 @@ const MeleeWeaponCreator = () => {
   };
 
   const changeSkillMelee = (event) => {
-    CCC.setUnit({ ...CCC.unit, skillMelee: event.target.value });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].skillMelee = event.target.value;
+
+    CCC.setUnitCards(tempArray);
   };
 
   const changeChargeBonus = (event) => {
-    CCC.setUnit({ ...CCC.unit, chargeBonus: event.target.value });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].chargeBonus = event.target.value;
+
+    CCC.setUnitCards(tempArray);
   };
 
   const changeInitiative = (event) => {
-    CCC.setUnit({ ...CCC.unit, initiative: event.target.value });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].initiative = event.target.value;
+
+    CCC.setUnitCards(tempArray);
   };
 
   const elmnts = [
     {
       nameTitle: CREATOR.MELEE_WEAPON_1,
       valueTitle: CREATOR.MELEE_VALUE_1,
-      name: CCC.unit.weapon1Name,
-      value: CCC.unit.weapon1,
+      name: CCC.unitCards[CCC.displayedElement].weapon1Name,
+      value: CCC.unitCards[CCC.displayedElement].weapon1,
       nameFunc: changeMeleeWeapon1Name,
       valueFunc: changeWeapon1,
     },
@@ -71,16 +108,16 @@ const MeleeWeaponCreator = () => {
     {
       nameTitle: CREATOR.MELEE_WEAPON_2,
       valueTitle: CREATOR.MELEE_VALUE_2,
-      name: CCC.unit.weapon2Name,
-      value: CCC.unit.weapon2,
+      name: CCC.unitCards[CCC.displayedElement].weapon2Name,
+      value: CCC.unitCards[CCC.displayedElement].weapon2,
       nameFunc: changeMeleeWeapon2Name,
       valueFunc: changeWeapon2,
     },
     {
       nameTitle: CREATOR.MELEE_WEAPON_3,
       valueTitle: CREATOR.MELEE_VALUE_3,
-      name: CCC.unit.weapon3Name,
-      value: CCC.unit.weapon3,
+      name: CCC.unitCards[CCC.displayedElement].weapon3Name,
+      value: CCC.unitCards[CCC.displayedElement].weapon3,
       nameFunc: changeMeleeWeapon3Name,
       valueFunc: changeWeapon3,
     },
@@ -90,7 +127,10 @@ const MeleeWeaponCreator = () => {
     <Grid
       container //
       direction={{ xs: "column" }}
-      sx={theme.palette.cardCreator.box}
+      sx={{
+        ...theme.palette.cardCreator.box, //
+        backgroundColor: CCC.unitCards[CCC.displayedElement].color,
+      }}
     >
       <Grid
         container //
@@ -101,13 +141,13 @@ const MeleeWeaponCreator = () => {
       >
         <CreatorTextInput
           id={CREATOR.INITIATIVE} //
-          value={CCC.unit.initiative}
+          value={CCC.unitCards[CCC.displayedElement].initiative}
           onChange={changeInitiative}
           label={CREATOR.INITIATIVE}
         />
         <CreatorTextInput
           id={CREATOR.CHARGE_BONUS} //
-          value={CCC.unit.chargeBonus}
+          value={CCC.unitCards[CCC.displayedElement].chargeBonus}
           onChange={changeChargeBonus}
           label={CREATOR.CHARGE_BONUS}
         />
@@ -138,7 +178,7 @@ const MeleeWeaponCreator = () => {
         container
         direction={{ xs: "row" }}
         sx={{
-          alignItems:"center",
+          alignItems: "center",
           marginTop: "1em",
         }}
       >
@@ -172,8 +212,8 @@ const MeleeWeaponCreator = () => {
         />
 
         <CreatorTextInput
-          id={CCC.unit.skillMelee.toString()} //
-          value={CCC.unit.skillMelee}
+          id={CCC.unitCards[CCC.displayedElement].skillMelee.toString()} //
+          value={CCC.unitCards[CCC.displayedElement].skillMelee}
           onChange={changeSkillMelee}
           disabled={!CCC.hasMeleeSkill}
           width="3em"

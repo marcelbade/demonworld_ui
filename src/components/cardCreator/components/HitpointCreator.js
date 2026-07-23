@@ -15,11 +15,19 @@ const HitpointCreator = () => {
   const CCC = useContext(CardCreationContext);
 
   const deleteHitpoints = () => {
-    CCC.setUnit({ ...CCC.unit, hitpoints: 0 });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].hitpoints = 0;
+
+    CCC.setUnitCards(tempArray);
   };
 
   const changeHitpoints = (event) => {
-    CCC.setUnit({ ...CCC.unit, hitpoints: event.target.value });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].hitpoints = event.target.value;
+
+    CCC.setUnitCards(tempArray);
   };
 
   return (
@@ -30,11 +38,12 @@ const HitpointCreator = () => {
         alignItems: "center", //
         justifyContent: "space-evenly",
         ...theme.palette.cardCreator.box,
+        backgroundColor: CCC.unitCards[CCC.displayedElement].color,
       }}
     >
       <CreatorTextInput
         id={"Hitpoints"} //
-        value={CCC.unit.hitpoints}
+        value={CCC.unitCards[CCC.displayedElement].hitpoints}
         onClick={deleteHitpoints}
         onChange={changeHitpoints}
         label={CREATOR.HITPOINTS}

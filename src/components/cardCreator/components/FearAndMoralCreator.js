@@ -7,7 +7,7 @@ import { Checkbox, FormControlLabel, Grid } from "@mui/material";
 import CreatorTextInput from "./CreatorTextInput";
 // contexts
 import { CardCreationContext } from "../../../contexts/cardCreationContext";
-import { UNIT } from "../../../constants/unitTypes";
+import { HERO, MAGE, UNIT } from "../../../constants/unitTypes";
 // constants
 import { CARD_TEXT, CREATOR } from "../../../constants/textsAndMessages";
 
@@ -20,34 +20,55 @@ const FearAndMoralCreator = () => {
     const DEFAULT_VALUE = 4;
 
     CCC.setIsFearless((prevState) => !prevState);
-    CCC.setUnit({ ...CCC.unit, moral1: 0 });
+
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].moral1 = 0;
 
     if (CCC.isFearless) {
-      CCC.setUnit({ ...CCC.unit, moral1: DEFAULT_VALUE });
+      tempArray[CCC.displayedElement].moral1 = DEFAULT_VALUE;
     }
+
+    CCC.setUnitCards(tempArray);
   };
 
   const setUnitImpetuous = () => {
     const DEFAULT_VALUE = 12;
 
     CCC.setNeverImpetuous((prevState) => !prevState);
-    CCC.setUnit({ ...CCC.unit, moral2: 0 });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].moral2 = 0;
 
     if (CCC.neverImpetuous) {
-      CCC.setUnit({ ...CCC.unit, moral2: DEFAULT_VALUE });
+      tempArray[CCC.displayedElement].moral2 = DEFAULT_VALUE;
     }
+
+    CCC.setUnitCards(tempArray);
   };
 
   const changeFear = (event) => {
-    CCC.setUnit({ ...CCC.unit, fear: event.target.value });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].fear = event.target.value;
+
+    CCC.setUnitCards(tempArray);
   };
 
   const changeMoral1 = (event) => {
-    CCC.setUnit({ ...CCC.unit, moral1: event.target.value });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].moral1 = event.target.value;
+
+    CCC.setUnitCards(tempArray);
   };
 
   const changeMoral2 = (event) => {
-    CCC.setUnit({ ...CCC.unit, moral2: event.target.value });
+    let tempArray = [...CCC.unitCards];
+
+    tempArray[CCC.displayedElement].moral2 = event.target.value;
+
+    CCC.setUnitCards(tempArray);
   };
 
   return (
@@ -58,48 +79,51 @@ const FearAndMoralCreator = () => {
         alignItems: "center",
         justifyContent: "space-evenly",
         ...theme.palette.cardCreator.box,
+        backgroundColor: CCC.unitCards[CCC.displayedElement].color,
       }}
     >
-      <Grid
-        container //
-        direction={{ xs: "column" }}
-      >
-        <Grid>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={CCC.isFearless} //
-                onChange={setUnitFearless}
-                sx={theme.palette.cardCreator.checkbox}
-              />
-            }
-            label={CARD_TEXT.UNIT_IS_FEARLESS}
-          />
+      {CCC.unitCards[CCC.displayedElement].unitType === HERO || CCC.unitCards[CCC.displayedElement].unitType === MAGE ? null : (
+        <Grid
+          container //
+          direction={{ xs: "column" }}
+        >
+          <Grid>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={CCC.isFearless} //
+                  onChange={setUnitFearless}
+                  sx={theme.palette.cardCreator.checkbox}
+                />
+              }
+              label={CARD_TEXT.UNIT_IS_FEARLESS}
+            />
+          </Grid>
+          <Grid>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={CCC.neverImpetuous} //
+                  onChange={setUnitImpetuous}
+                />
+              }
+              label={CARD_TEXT.UNIT_IS_IMPETUOUS}
+            />
+          </Grid>
         </Grid>
-        <Grid>
-          <FormControlLabel
-            control={
-              <Checkbox
-                checked={CCC.neverImpetuous} //
-                onChange={setUnitImpetuous}
-              />
-            }
-            label={CARD_TEXT.UNIT_IS_IMPETUOUS}
-          />
-        </Grid>
-      </Grid>
+      )}
       <Grid
         container //
         direction={{ xs: "row" }}
       >
         <CreatorTextInput
           id={"Fear"} //
-          value={CCC.unit.fear}
+          value={CCC.unitCards[CCC.displayedElement].fear}
           onChange={changeFear}
           label={CREATOR.FEAR}
           width={"7em"}
         />
-        {CCC.unit.unitType === UNIT ? (
+        {CCC.unitCards[CCC.displayedElement].unitType === UNIT ? (
           <Grid
             container
             direction={{ xs: "row" }}
@@ -109,7 +133,7 @@ const FearAndMoralCreator = () => {
           >
             <CreatorTextInput
               id={"moral1"} //
-              value={CCC.unit.moral1}
+              value={CCC.unitCards[CCC.displayedElement].moral1}
               onChange={changeMoral1}
               label={CREATOR.MORAL1}
               width={"9em"}
@@ -117,7 +141,7 @@ const FearAndMoralCreator = () => {
             />
             <CreatorTextInput
               id={"moral2"} //
-              value={CCC.unit.moral2}
+              value={CCC.unitCards[CCC.displayedElement].moral2}
               onChange={changeMoral2}
               label={CREATOR.MORAL2}
               width={"9em"}
